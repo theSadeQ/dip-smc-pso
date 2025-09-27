@@ -177,6 +177,7 @@ class STASMCConfig(_BaseControllerConfig):
     max_force: Optional[float] = Field(None, gt=0.0)
     damping_gain: Optional[float] = Field(None, ge=0.0)
     dt: Optional[float] = Field(None, gt=0.0)
+    boundary_layer: Optional[float] = Field(None, gt=0.0)
 
 class AdaptiveSMCConfig(_BaseControllerConfig):
     """Configuration for Adaptive Sliding Mode Controller."""
