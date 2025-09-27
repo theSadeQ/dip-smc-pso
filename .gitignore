@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cache directories
+.benchmarks/
+.numba_cache/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+
+# Environment and configs
+.env
+.venv
+venv/
+ENV/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+
+# Large project directories (for clean GitHub setup)
+SubAgent/
+envs/
+DIP_SMC_PSO/
+.validation_reports/
+problem-tracking/
+prompt/
+
+# Keep only essentials for GitHub issues setup
+!.github/
+!CLAUDE.md
+!README.md
