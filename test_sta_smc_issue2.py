@@ -24,7 +24,7 @@ def test_sta_smc_with_optimized_gains():
         from src.controllers.smc.sta_smc import SuperTwistingSMC
 
         # Optimized gains from Issue #2 resolution (updated parameters)
-        optimized_gains = [8.0, 4.0, 12.0, 6.0, 1.2, 0.8]
+        optimized_gains = [8.0, 4.0, 12.0, 6.0, 4.85, 3.43]
         print(f"Using optimized gains: {optimized_gains}")
 
         # Create controller with optimized gains
@@ -89,7 +89,7 @@ def compare_with_problematic_gains():
 
     # Original problematic gains mentioned in config comments
     original_gains = [15.0, 8.0, 12.0, 6.0, 20.0, 4.0]
-    optimized_gains = [8.0, 4.0, 12.0, 6.0, 1.2, 0.8]
+    optimized_gains = [8.0, 4.0, 12.0, 6.0, 4.85, 3.43]
 
     print(f"Original gains:  {original_gains}")
     print(f"Optimized gains: {optimized_gains}")

@@ -24,8 +24,8 @@ controller_defaults:
     - 4.0    # K2: Algorithmic gain (reduced from 8.0 for Issue #2 resolution)
     - 12.0   # k1: Surface gain (maintained for proper scaling)
     - 6.0    # k2: Surface gain (maintained for proper scaling)
-    - 1.2    # λ1: Surface coefficient (reduced from 20.0 for Issue #2 overshoot fix)
-    - 0.8    # λ2: Surface coefficient (reduced from 4.0 for Issue #2 overshoot fix)
+    - 4.85   # λ1: Surface coefficient (optimized for ζ=0.7 target damping)
+    - 3.43   # λ2: Surface coefficient (optimized for ζ=0.7 target damping)
   adaptive_smc:
     gains:
     - 10.0
@@ -54,8 +54,8 @@ controllers:
     - 4.0    # K2: Algorithmic gain (reduced from 8.0 for Issue #2 resolution)
     - 12.0   # k1: Surface gain (maintained for proper scaling)
     - 6.0    # k2: Surface gain (maintained for proper scaling)
-    - 1.2    # λ1: Surface coefficient (reduced from 20.0 for Issue #2 overshoot fix)
-    - 0.8    # λ2: Surface coefficient (reduced from 4.0 for Issue #2 overshoot fix)
+    - 4.85   # λ1: Surface coefficient (optimized for ζ=0.7 target damping)
+    - 3.43   # λ2: Surface coefficient (optimized for ζ=0.7 target damping)
     damping_gain: 0.0
     max_force: 150.0
     dt: 0.001
