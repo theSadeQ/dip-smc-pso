@@ -144,7 +144,8 @@ class TestResidualGeneration:
         fdi.check(0.0, state1, 0.0, 0.01, dynamics)
 
         # Small error in first state should be amplified by weight
-        state2 = np.array([0.1, 0.0, 0.0, 0.0])  # Only first state has error
+        # Note: dynamics adds 0.01 to all states, so we need measurement > 0.11 to get error > 0.1
+        state2 = np.array([0.111, 0.01, 0.01, 0.01])  # Compensate for dynamics prediction + small margin
         status, residual = fdi.check(0.01, state2, 0.0, 0.01, dynamics)
 
         # Residual should be dominated by weighted first state
