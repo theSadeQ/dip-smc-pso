@@ -23,6 +23,7 @@ from ...core import (
 )
 from .config import FullDIPConfig
 from .physics import FullFidelityPhysicsComputer
+from src.utils.config_compatibility import AttributeDictionary, ensure_dict_access
 
 
 class FullDIPDynamics(BaseDynamicsModel):
@@ -60,8 +61,15 @@ class FullDIPDynamics(BaseDynamicsModel):
                 self.config = FullDIPConfig.create_default()
         elif isinstance(config, FullDIPConfig):
             self.config = config
+        elif isinstance(config, AttributeDictionary):
+            # Convert AttributeDictionary to dict and create FullDIPConfig
+            config_dict = ensure_dict_access(config)
+            if config_dict:
+                self.config = FullDIPConfig.from_dict(config_dict)
+            else:
+                self.config = FullDIPConfig.create_default()
         else:
-            raise ValueError(f"config must be FullDIPConfig or dict, got {type(config)}")
+            raise ValueError(f"config must be FullDIPConfig, dict, or AttributeDictionary, got {type(config)}")
 
         self.enable_monitoring = enable_monitoring
         self.enable_validation = enable_validation
