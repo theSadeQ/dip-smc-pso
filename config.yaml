@@ -20,12 +20,12 @@ controller_defaults:
     - 0.5
   sta_smc:
     gains:
-    - 8.0    # K1: Algorithmic gain (reduced from 15.0 for Issue #2 resolution)
-    - 5.0    # K2: Algorithmic gain (reduced from 8.0 for smoother control)
+    - 8.0    # K1: Algorithmic gain (optimized for Issue #2 resolution)
+    - 4.0    # K2: Algorithmic gain (reduced from 8.0 for Issue #2 resolution)
     - 12.0   # k1: Surface gain (maintained for proper scaling)
     - 6.0    # k2: Surface gain (maintained for proper scaling)
-    - 4.85   # λ1: Surface coefficient (optimized from 20.0 for ζ=0.7 target damping)
-    - 3.43   # λ2: Surface coefficient (optimized from 4.0 for ζ=0.7 target damping)
+    - 1.2    # λ1: Surface coefficient (reduced from 20.0 for Issue #2 overshoot fix)
+    - 0.8    # λ2: Surface coefficient (reduced from 4.0 for Issue #2 overshoot fix)
   adaptive_smc:
     gains:
     - 10.0
@@ -51,14 +51,15 @@ controllers:
   sta_smc:
     gains:
     - 8.0    # K1: Algorithmic gain (optimized for Issue #2 resolution)
-    - 5.0    # K2: Algorithmic gain (optimized for Issue #2 resolution)
+    - 4.0    # K2: Algorithmic gain (reduced from 8.0 for Issue #2 resolution)
     - 12.0   # k1: Surface gain (maintained for proper scaling)
     - 6.0    # k2: Surface gain (maintained for proper scaling)
-    - 4.85   # λ1: Surface coefficient (optimized from 20.0 for ζ=0.7 target damping)
-    - 3.43   # λ2: Surface coefficient (optimized from 4.0 for ζ=0.7 target damping)
+    - 1.2    # λ1: Surface coefficient (reduced from 20.0 for Issue #2 overshoot fix)
+    - 0.8    # λ2: Surface coefficient (reduced from 4.0 for Issue #2 overshoot fix)
     damping_gain: 0.0
     max_force: 150.0
     dt: 0.001
+    boundary_layer: 0.05
   adaptive_smc:
     max_force: 150.0
     leak_rate: 0.01
@@ -210,8 +211,8 @@ physics:
   pendulum2_length: 0.3
   pendulum1_com: 0.2
   pendulum2_com: 0.15
-  pendulum1_inertia: 0.00265
-  pendulum2_inertia: 0.00115
+  pendulum1_inertia: 0.008   # Fixed for physics validation (min: 0.2 * 0.2^2 = 0.008)
+  pendulum2_inertia: 0.00225 # Fixed for physics validation (min: 0.15 * 0.15^2 = 0.00225)
   gravity: 9.81
   cart_friction: 0.2
   joint1_friction: 0.005

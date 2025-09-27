@@ -85,6 +85,42 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
             self.physics.set_simplified_inertia(True)
             self.physics.enable_matrix_caching(True)
 
+    def _filter_config_for_simplified(self, config_dict: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Filter configuration dictionary to only include fields accepted by SimplifiedDIPConfig.
+
+        This handles field name mapping and removes unsupported fields.
+        """
+        # Define field mapping from main config to SimplifiedDIPConfig
+        field_mapping = {
+            'singularity_cond_threshold': 'singularity_threshold',
+            'regularization': 'regularization_alpha'
+        }
+
+        # Define allowed fields for SimplifiedDIPConfig
+        allowed_fields = {
+            'cart_mass', 'pendulum1_mass', 'pendulum2_mass',
+            'pendulum1_length', 'pendulum2_length',
+            'pendulum1_com', 'pendulum2_com',
+            'pendulum1_inertia', 'pendulum2_inertia',
+            'gravity', 'cart_friction', 'joint1_friction', 'joint2_friction',
+            'regularization_alpha', 'max_condition_number', 'min_regularization',
+            'singularity_threshold', 'max_step_size', 'min_step_size',
+            'relative_tolerance', 'absolute_tolerance'
+        }
+
+        filtered_config = {}
+
+        for key, value in config_dict.items():
+            # Check if we need to map the field name
+            target_key = field_mapping.get(key, key)
+
+            # Only include if it's an allowed field
+            if target_key in allowed_fields:
+                filtered_config[target_key] = value
+
+        return filtered_config
+
     def compute_dynamics(
         self,
         state: np.ndarray,

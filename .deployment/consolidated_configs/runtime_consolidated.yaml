@@ -23,12 +23,12 @@ config:
       - 0.5
     sta_smc:
       gains:
-      - 4.0
-      - 4.0
-      - 4.0
-      - 0.4
-      - 0.4
-      - 0.4
+      - 8.0    # K1: Algorithmic gain (optimized for Issue #2 resolution)
+      - 4.0    # K2: Algorithmic gain (reduced from 8.0 for Issue #2 resolution)
+      - 12.0   # k1: Surface gain (maintained for proper scaling)
+      - 6.0    # k2: Surface gain (maintained for proper scaling)
+      - 1.2    # λ1: Surface coefficient (reduced from 20.0 for Issue #2 overshoot fix)
+      - 0.8    # λ2: Surface coefficient (reduced from 4.0 for Issue #2 overshoot fix)
   controllers:
     adaptive_smc:
       K_max: 100.0
