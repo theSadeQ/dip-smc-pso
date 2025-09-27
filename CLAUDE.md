@@ -1,10 +1,104 @@
-# CLAUDE.md — Team Memory & Project Conventions (Combined)
+# CLAUDE.md — Team Memory & Project Conventions
 
-> This file unifies the content previously split across **CLAUDE.md** and **.CLAUDE.md**. Keep exactly one copy in the repo. If you prefer a clean root, store it as **.CLAUDE.md**.
+> This file contains project-specific instructions for Claude Code operations and automatic repository management.
 
 ------
 
-## 1) Project Overview
+## 1) Repository Information
+
+**Primary Repository**: https://github.com/theSadeQ/dip-smc-pso.git
+**Branch Strategy**: Main branch deployment
+**Working Directory**: D:\Projects\main
+
+------
+
+## 2) Automatic Repository Management
+
+### 2.1 Auto-Update Policy
+
+**MANDATORY**: After ANY changes to the repository content, Claude MUST automatically:
+
+1. **Stage all changes**: `git add .`
+2. **Commit with descriptive message**: Following the established pattern
+3. **Push to main branch**: `git push origin main`
+
+### 2.2 Commit Message Format
+
+```
+<Action>: <Brief description>
+
+- <Detailed change 1>
+- <Detailed change 2>
+- <Additional context if needed>
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+### 2.3 Repository Address Verification
+
+Before any git operations, verify the remote repository:
+```bash
+git remote -v
+# Expected output:
+# origin	https://github.com/theSadeQ/dip-smc-pso.git (fetch)
+# origin	https://github.com/theSadeQ/dip-smc-pso.git (push)
+```
+
+If the remote is incorrect, update it:
+```bash
+git remote set-url origin https://github.com/theSadeQ/dip-smc-pso.git
+```
+
+### 2.4 Trigger Conditions
+
+Claude MUST automatically update the repository when:
+- Any source code files are modified
+- Configuration files are changed
+- Documentation is updated
+- New files are added
+- Test files are modified
+- Any project structure changes occur
+
+### 2.5 Update Sequence
+
+```bash
+# 1. Verify repository state
+git status
+git remote -v
+
+# 2. Stage all changes
+git add .
+
+# 3. Commit with descriptive message
+git commit -m "$(cat <<'EOF'
+<Descriptive title>
+
+- <Change 1>
+- <Change 2>
+- <Additional context>
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+EOF
+)"
+
+# 4. Push to main branch
+git push origin main
+```
+
+### 2.6 Error Handling
+
+If git operations fail:
+1. Report the error to the user
+2. Provide suggested resolution steps
+3. Do not proceed with further operations until resolved
+
+------
+
+## 3) Project Overview
 
 **Double‑Inverted Pendulum Sliding Mode Control with PSO Optimization**
 
@@ -449,3 +543,6 @@ This **headless CI coordinator** approach ensures consistent, high-quality resul
 
 - Keep this file authoritative for style, testing, and operational posture.
 - Treat it as versioned team memory; update via PRs with a short change log.
+- **CRITICAL**: All git operations must target: https://github.com/theSadeQ/dip-smc-pso.git
+- **MANDATORY**: Automatic updates are REQUIRED for all repository changes
+- Maintain clean, professional commit messages following the established pattern
