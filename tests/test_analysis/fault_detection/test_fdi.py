@@ -1,3 +1,7 @@
+#==========================================================================================\\\
+#==================== tests/test_analysis/fault_detection/test_fdi.py ==================\\\
+#==========================================================================================\\\
+
 """
 Basic tests for the fault detection and isolation (FDI) system.
 
@@ -20,8 +24,10 @@ the project’s ``src`` directory onto ``sys.path`` before importing
 from __future__ import annotations
 
 import numpy as np
+import numpy.typing as npt
+from typing import Any
 
-from src.fault_detection.fdi import FDIsystem
+from src.analysis.fault_detection.fdi import FDIsystem, DynamicsProtocol
 
 
 class ZeroDynamics:
@@ -37,8 +43,9 @@ class ZeroDynamics:
     def __init__(self, dim: int = 1) -> None:
         self.dim = int(dim)
 
-    def step(self, state: np.ndarray, u: float, dt: float) -> np.ndarray:
-        return np.zeros(self.dim, dtype=float)
+    def step(self, state: npt.NDArray[np.floating], u: float, dt: float) -> npt.NDArray[np.floating]:
+        """Step the zero dynamics model."""
+        return np.zeros(self.dim, dtype=np.float64)
 
 
 def test_fdi_trips_after_persistence() -> None:
@@ -115,3 +122,143 @@ def test_fdi_dt_validation() -> None:
     # Negative dt
     with pytest.raises(ValueError):
         fdi.check(0.2, np.array([0.2]), 0.0, -0.1, dyn)
+
+
+def test_residual_with_weights() -> None:
+    """Test that residual weights properly amplify specific state errors."""
+
+    class LinearDynamics:
+        def step(self, state: np.ndarray, u: float, dt: float) -> np.ndarray:
+            return state + 0.01 * np.ones_like(state)
+
+    # Configure with weights emphasizing first state
+    fdi = FDIsystem(
+        residual_threshold=0.5,
+        residual_states=[0, 1, 2, 3],
+        residual_weights=[10.0, 1.0, 1.0, 1.0]  # High weight on first state
+    )
+    dynamics = LinearDynamics()
+
+    # Initialize
+    state1 = np.array([0.0, 0.0, 0.0, 0.0])
+    fdi.check(0.0, state1, 0.0, 0.01, dynamics)
+
+    # Create state with error that compensates for prediction and produces weighted residual > 1.0
+    # Prediction will be [0.01, 0.01, 0.01, 0.01]
+    # To get weighted first component > 1.0: need residual[0] > 0.1
+    # So state[0] needs to be > 0.01 + 0.1 = 0.11
+    state2 = np.array([0.111, 0.01, 0.01, 0.01])  # Compensated for dynamics + margin
+    status, residual = fdi.check(0.01, state2, 0.0, 0.01, dynamics)
+
+    # The weighted residual should be > 1.0
+    assert residual > 1.0, f"Expected residual > 1.0, got {residual}"
+
+
+def test_cusum_drift_detection() -> None:
+    """Test CUSUM detection of slow drift."""
+
+    class ConstantDynamics:
+        def step(self, state: np.ndarray, u: float, dt: float) -> np.ndarray:
+            return state  # No change prediction
+
+    # Configure with CUSUM enabled
+    fdi = FDIsystem(
+        residual_threshold=1.0,  # High threshold so persistence won't trigger
+        persistence_counter=100,  # Very high so it won't trigger
+        cusum_enabled=True,
+        cusum_threshold=2.0,
+        residual_states=[0]
+    )
+    dynamics = ConstantDynamics()
+
+    # Initialize
+    fdi.check(0.0, np.array([0.0]), 0.0, 0.01, dynamics)
+
+    # Simulate small drift that accumulates
+    for i in range(10):
+        t = (i + 1) * 0.01
+        # Small consistent error above threshold
+        state = np.array([0.3])  # Creates residual of 0.3, deviation = 0.3 - 1.0 = -0.7 (clipped to 0)
+        status, residual = fdi.check(t, state, 0.0, 0.01, dynamics)
+        if status == "FAULT":
+            break
+    else:
+        # Try with positive drift
+        fdi.reset()
+        fdi.check(0.0, np.array([0.0]), 0.0, 0.01, dynamics)
+
+        for i in range(10):
+            t = (i + 1) * 0.01
+            # Error above reference threshold
+            state = np.array([1.5])  # Creates residual of 1.5, deviation = 1.5 - 1.0 = 0.5
+            status, residual = fdi.check(t, state, 0.0, 0.01, dynamics)
+            if status == "FAULT":
+                break
+
+        assert status == "FAULT", "CUSUM should detect slow drift"
+
+
+def test_cusum_reset_behavior() -> None:
+    """Test that CUSUM accumulates properly and can be reset."""
+
+    class ConstantDynamics:
+        def step(self, state: np.ndarray, u: float, dt: float) -> np.ndarray:
+            return state  # No change prediction
+
+    # Configure with CUSUM enabled
+    fdi = FDIsystem(
+        residual_threshold=1.0,
+        cusum_enabled=True,
+        cusum_threshold=5.0,
+        residual_states=[0]
+    )
+    dynamics = ConstantDynamics()
+
+    # Initialize
+    fdi.check(0.0, np.array([0.0]), 0.0, 0.01, dynamics)
+
+    # Check that CUSUM starts at 0
+    assert fdi._cusum == 0.0, f"CUSUM should start at 0.0, got {fdi._cusum}"
+
+    # Add some positive deviation
+    state = np.array([2.0])  # Creates residual of 2.0, deviation = 2.0 - 1.0 = 1.0
+    fdi.check(0.01, state, 0.0, 0.01, dynamics)
+
+    # CUSUM should accumulate
+    assert fdi._cusum > 0.0, f"CUSUM should accumulate, got {fdi._cusum}"
+    first_cusum = fdi._cusum
+
+    # Add another positive deviation
+    fdi.check(0.02, state, 0.0, 0.01, dynamics)
+
+    # CUSUM should continue to accumulate
+    assert fdi._cusum > first_cusum, f"CUSUM should continue accumulating, got {fdi._cusum} vs {first_cusum}"
+
+    # Reset and verify
+    fdi.reset()
+    assert fdi._cusum == 0.0, f"CUSUM should reset to 0.0, got {fdi._cusum}"
+
+
+def test_history_recording() -> None:
+    """Test that history properly records all measurements."""
+
+    class ConstantDynamics:
+        def step(self, state: np.ndarray, u: float, dt: float) -> np.ndarray:
+            return state  # No change prediction
+
+    fdi = FDIsystem(residual_threshold=1.0, residual_states=[0])
+    dynamics = ConstantDynamics()
+
+    # Check multiple measurements
+    for i in range(10):
+        t = i * 0.01
+        state = np.array([0.1 * i])
+        fdi.check(t, state, 0.0, 0.01, dynamics)
+
+    # Should have 10 entries (including the first one)
+    assert len(fdi.times) == 10, f"Expected 10 time entries, got {len(fdi.times)}"
+    assert len(fdi.residuals) == 10, f"Expected 10 residual entries, got {len(fdi.residuals)}"
+
+    # First entry should be at time 0 with residual 0
+    assert fdi.times[0] == 0.0, f"First time should be 0.0, got {fdi.times[0]}"
+    assert fdi.residuals[0] == 0.0, f"First residual should be 0.0, got {fdi.residuals[0]}"
