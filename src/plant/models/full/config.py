@@ -340,5 +340,24 @@ class FullDIPConfig:
 
     @classmethod
     def from_dict(cls, config_dict: dict) -> 'FullDIPConfig':
-        """Create configuration from dictionary."""
-        return cls(**config_dict)
+        """Create configuration from dictionary with parameter mapping."""
+        # Create a copy to avoid modifying the original
+        mapped_config = config_dict.copy()
+
+        # Handle parameter name mappings
+        parameter_mappings = {
+            'cart_friction': 'cart_viscous_friction',
+            'joint1_friction': 'joint1_viscous_friction',
+            'joint2_friction': 'joint2_viscous_friction',
+            'regularization': 'regularization_alpha'
+        }
+
+        for old_name, new_name in parameter_mappings.items():
+            if old_name in mapped_config and new_name not in mapped_config:
+                mapped_config[new_name] = mapped_config.pop(old_name)
+
+        # Filter out any parameters that don't exist in the dataclass
+        valid_params = {field.name for field in cls.__dataclass_fields__.values()}
+        filtered_config = {k: v for k, v in mapped_config.items() if k in valid_params}
+
+        return cls(**filtered_config)

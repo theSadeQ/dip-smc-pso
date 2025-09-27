@@ -59,8 +59,17 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
                 self.config = SimplifiedDIPConfig.create_default()
         elif isinstance(config, SimplifiedDIPConfig):
             self.config = config
+        elif hasattr(config, 'to_dict'):
+            # Handle AttributeDictionary and similar objects
+            dict_config = config.to_dict()
+            if dict_config:
+                # Filter dict to only include fields that SimplifiedDIPConfig accepts
+                filtered_config = self._filter_config_for_simplified(dict_config)
+                self.config = SimplifiedDIPConfig.from_dict(filtered_config)
+            else:
+                self.config = SimplifiedDIPConfig.create_default()
         else:
-            raise ValueError(f"config must be SimplifiedDIPConfig or dict, got {type(config)}")
+            raise ValueError(f"config must be SimplifiedDIPConfig, dict, or have to_dict() method, got {type(config)}")
 
         # Initialize base class
         super().__init__(self.config)
