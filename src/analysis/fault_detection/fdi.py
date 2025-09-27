@@ -1,16 +1,34 @@
 #==========================================================================================\\\
-#============================= src/fault_detection/fdi.py =============================\\\
+#======================== src/analysis/fault_detection/fdi.py ==========================\\\
 #==========================================================================================\\\
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import Optional, Tuple, List, Protocol
+from typing import Optional, Tuple, List, Protocol, Union, Any, Dict
 import numpy as np
+import numpy.typing as npt
 import logging
+from pathlib import Path
 
 class DynamicsProtocol(Protocol):
-    """Protocol defining the expected interface for dynamics models."""
-    def step(self, state: np.ndarray, u: float, dt: float) -> np.ndarray:
-        """Advance the system dynamics by one timestep."""
+    """Protocol defining the expected interface for dynamics models.
+
+    This protocol ensures type safety and compatibility across different
+    dynamics model implementations used in fault detection.
+    """
+    def step(self, state: npt.NDArray[np.floating], u: float, dt: float) -> npt.NDArray[np.floating]:
+        """Advance the system dynamics by one timestep.
+
+        Args:
+            state: Current system state vector
+            u: Control input
+            dt: Time step (must be positive)
+
+        Returns:
+            Predicted next state vector
+
+        Raises:
+            ValueError: If dt <= 0 or state dimensions are invalid
+        """
         ...
 
 @dataclass
@@ -91,17 +109,43 @@ class FDIsystem:
     cusum_enabled: bool = False
     cusum_threshold: float = 5.0  # [CIT-049]
 
-    # Internal state
+    # Internal state - safety-critical components
     _counter: int = field(default=0, repr=False, init=False)
-    _last_state: Optional[np.ndarray] = field(default=None, repr=False, init=False)
+    _last_state: Optional[npt.NDArray[np.floating]] = field(default=None, repr=False, init=False)
     tripped_at: Optional[float] = field(default=None, repr=False, init=False)
-    # For adaptive thresholding and CUSUM
+
+    # For adaptive thresholding and CUSUM - bounded collections for memory safety
     _residual_window: List[float] = field(default_factory=list, repr=False, init=False)
     _cusum: float = field(default=0.0, repr=False, init=False)
 
-    # History for plotting/analysis
+    # History for plotting/analysis - bounded for production safety
     times: List[float] = field(default_factory=list, repr=False, init=False)
     residuals: List[float] = field(default_factory=list, repr=False, init=False)
+
+    # Memory management constants
+    _MAX_HISTORY_SIZE: int = field(default=10000, repr=False, init=False)
+    _NUMERICAL_TOLERANCE: float = field(default=1e-12, repr=False, init=False)
+
+    def reset(self) -> None:
+        """Reset the FDI system state."""
+        self._counter = 0
+        self._last_state = None
+        self.tripped_at = None
+        self._residual_window.clear()
+        self._cusum = 0.0
+        self.times.clear()
+        self.residuals.clear()
+
+    def _append_to_bounded_history(self, t: float, residual_norm: float) -> None:
+        """Append to history with memory bounds for production safety."""
+        self.times.append(t)
+        self.residuals.append(residual_norm)
+
+        # Maintain bounded history for memory safety
+        if len(self.times) > self._MAX_HISTORY_SIZE:
+            # Remove oldest entries to maintain memory bounds
+            self.times.pop(0)
+            self.residuals.pop(0)
 
     def check(
         self,
@@ -165,29 +209,60 @@ class FDIsystem:
         residual = meas - predicted_state
 
         # Compute weighted norm using specified indices and optional weights.
+        # Optimized for numerical stability and performance.
         # Weighted residuals allow tuning the sensitivity of the detector to
         # individual states.  When no weights are provided a standard 2‑norm is
         # used on the selected indices.  If an index error occurs fallback
         # gracefully to the full residual norm and log the error.
         try:
-            sub = residual[self.residual_states]
-            weights = self.residual_weights
-            if weights is not None:
-                # Multiply each residual component by its weight prior to
-                # computing the Euclidean norm.  Weights must match
-                # residual_states in length (validated in config).
-                sub = sub * np.asarray(weights, dtype=float)
-            residual_norm = float(np.linalg.norm(sub))
-        except Exception:
-            logging.error(
-                f"FDI configuration error: residual_states {self.residual_states} or weights invalid "
-                f"for state vector of size {len(residual)}"
-            )
-            residual_norm = float(np.linalg.norm(residual))
+            # Validate indices are within bounds for safety-critical operation
+            max_index = max(self.residual_states) if self.residual_states else 0
+            if max_index >= len(residual):
+                raise IndexError(f"Residual state index {max_index} exceeds state vector size {len(residual)}")
 
-        # Store history for analysis (including first measurement)
-        self.times.append(t)
-        self.residuals.append(residual_norm)
+            # Extract sub-residual efficiently
+            sub = residual[self.residual_states]
+
+            # Apply weights with numerical stability checks
+            if self.residual_weights is not None:
+                # Validate weights configuration
+                if len(self.residual_weights) != len(self.residual_states):
+                    raise ValueError(f"Weights length {len(self.residual_weights)} != states length {len(self.residual_states)}")
+
+                # Convert to array once for efficiency and apply weights
+                weights_array = np.asarray(self.residual_weights, dtype=np.float64)
+
+                # Check for invalid weights (safety-critical)
+                if not np.all(np.isfinite(weights_array)) or np.any(weights_array < 0):
+                    raise ValueError("Invalid weights detected: must be finite and non-negative")
+
+                # Apply weights element-wise with numerical stability
+                sub = sub * weights_array
+
+            # Compute norm with numerical stability check
+            residual_norm = float(np.linalg.norm(sub, ord=2))
+
+            # Verify result is finite (safety-critical check)
+            if not np.isfinite(residual_norm):
+                raise ValueError("Computed residual norm is not finite")
+
+        except (IndexError, ValueError) as e:
+            logging.error(
+                f"FDI configuration error: {str(e)} "
+                f"(residual_states={self.residual_states}, weights={self.residual_weights}, "
+                f"state_vector_size={len(residual)})"
+            )
+            # Fallback to full residual norm for safety
+            residual_norm = float(np.linalg.norm(residual, ord=2))
+        except Exception as e:
+            logging.error(
+                f"Unexpected error in residual computation: {type(e).__name__}: {str(e)}"
+            )
+            # Safety fallback
+            residual_norm = float(np.linalg.norm(residual, ord=2))
+
+        # Store history for analysis with memory bounds (safety-critical)
+        self._append_to_bounded_history(t, residual_norm)
 
         # Append to residual window for adaptive thresholding
         self._residual_window.append(residual_norm)
@@ -242,6 +317,47 @@ class FDIsystem:
             return "FAULT", residual_norm
 
         return "OK", residual_norm
+
+    def get_detection_statistics(self) -> Dict[str, Any]:
+        """Get comprehensive detection statistics for analysis.
+
+        Returns:
+            Dictionary containing detection performance metrics and diagnostics
+        """
+        if not self.residuals:
+            return {"status": "no_data", "message": "No residual data available"}
+
+        residuals_array = np.array(self.residuals)
+
+        stats = {
+            "total_samples": len(self.residuals),
+            "mean_residual": float(np.mean(residuals_array)),
+            "std_residual": float(np.std(residuals_array)),
+            "max_residual": float(np.max(residuals_array)),
+            "min_residual": float(np.min(residuals_array)),
+            "current_threshold": self.residual_threshold,
+            "fault_status": "FAULT" if self.tripped_at is not None else "OK",
+            "fault_time": self.tripped_at,
+            "consecutive_violations": self._counter,
+            "cusum_statistic": self._cusum if self.cusum_enabled else None,
+            "adaptive_window_size": len(self._residual_window),
+            "memory_usage": {
+                "history_entries": len(self.times),
+                "max_history_size": self._MAX_HISTORY_SIZE,
+                "memory_utilization": len(self.times) / self._MAX_HISTORY_SIZE
+            }
+        }
+
+        # Add adaptive threshold statistics if available
+        if self.adaptive and len(self._residual_window) >= self.window_size:
+            window_array = np.array(self._residual_window)
+            stats["adaptive_threshold_stats"] = {
+                "current_mean": float(np.mean(window_array)),
+                "current_std": float(np.std(window_array)),
+                "current_threshold": float(np.mean(window_array) + self.threshold_factor * np.std(window_array))
+            }
+
+        return stats
 
 
 class FaultDetectionInterface(Protocol):
