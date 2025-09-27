@@ -1,125 +1,248 @@
-# Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO
+# Double-Inverted Pendulum Sliding Mode Control with PSO Optimization
 
-[![Validate ResearchPlanSpec](https://github.com/theSadeQ/DIP_SMC_PSO/actions/workflows/validate.yml/badge.svg)](https://github.com/theSadeQ/DIP_SMC_PSO/actions/workflows/validate.yml)
+[![Build Status](https://github.com/theSadeQ/dip-smc-pso/workflows/CI/badge.svg)](https://github.com/theSadeQ/dip-smc-pso/actions)
+[![Documentation](https://readthedocs.org/projects/dip-smc-pso/badge/?version=latest)](https://dip-smc-pso.readthedocs.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
-## How to validate a ResearchPlan JSON
-
-Run the validator locally:
-
-```bash
-python repo_validate.py plans/my_plan.json
-```
-
-**Exit codes:** 0 = no errors; 1 = validation errors present.
-
-**Output:** machine-readable JSON report with `errors[]` and `warnings[]`.
-
-### Schema version policy
-
-Plans should include a schema version marker:
-
-```json
-{ "metadata": { "schema_version": "1.0", "...": "..." }, ... }
-```
-
-Currently missing or non-1.x versions produce a **WARNING** (accepted).
-To enforce as errors later, set:
-
-```bash
-SCHEMA_VERSION_ENFORCE=error python repo_validate.py plans/my_plan.json
-```
-
-or use CLI flag:
-
-```bash
-python repo_validate.py --schema-version-enforce error plans/my_plan.json
-```
-
-### Performance limits
-
-For safety and resource management:
-
-```bash
-# Set file size limit (default: 2MB) and timeout (default: 10s)
-python repo_validate.py --max-bytes 1000000 --timeout-s 5 plans/my_plan.json
-
-# Disable JSON Schema validation for faster processing
-python repo_validate.py --jsonschema-off plans/my_plan.json
-```
-
-Keep examples in this README in sync with actual CLI output.
-
----
-
-This project provides a comprehensive Python-based simulation environment for designing, tuning, and analyzing advanced sliding mode controllers (SMC) for a double-inverted pendulum on a cart. It features multiple controller types, automated gain tuning via Particle Swarm Optimization (PSO), and both command-line and interactive web-based interfaces.
+A comprehensive Python framework for simulating, controlling, and analyzing a double-inverted pendulum (DIP) system using advanced sliding mode control (SMC) techniques with Particle Swarm Optimization (PSO). This project provides a complete ecosystem for control systems research, education, and industrial applications.
 
 ## Key Features
 
--   **Advanced Controllers:** Implements three variants of Sliding Mode Control:
-    -   **Classical SMC:** With a boundary layer for chattering reduction.
-    -   **Super-Twisting SMC (STA):** A second-order SMC for continuous control and chattering elimination.
-    -   **Adaptive SMC:** An adaptive controller that tunes its gains online to handle uncertainties.
--   **Automated Gain Tuning:** Utilizes Particle Swarm Optimization (PSO) to automatically find optimal controller gains based on a multi-objective cost function.
--   **Dual Dynamics Models:** Includes both a simplified nonlinear model for rapid iteration and a full, high-fidelity nonlinear model for accurate final validation.
--   **Command-Line Interface:** A powerful CLI (`simulate.py`) allows for running simulations, launching PSO optimizations, and saving/loading gains from the terminal.
--   **Interactive Web Application:** A Streamlit-based dashboard (`streamlit_app.py`) provides an interactive way to run simulations, tune controllers, and visualize results in real-time.
+### Advanced Control Systems
+- **Multiple SMC Variants**: Classical SMC, Super-Twisting (STA), Adaptive SMC, Hybrid Adaptive STA-SMC
+- **Model Predictive Control (MPC)**: Experimental MPC implementation with constraint handling
+- **Swing-Up Controllers**: Specialized controllers for large-angle stabilization
+- **Controller Factory**: Extensible factory pattern for easy controller instantiation
 
-### New in Step 3
+### Intelligent Optimization
+- **PSO Optimization**: Multi-objective particle swarm optimization for gain tuning
+- **Convergence Analysis**: Advanced convergence detection and validation
+- **Parameter Bounds**: Intelligent constraint handling for realistic control parameters
+- **Multi-Algorithm Support**: Framework for additional optimization algorithms
 
-The latest iteration of the project introduces several improvements aimed at increasing robustness, physical realism and reproducibility:
+### Plant Models & Dynamics
+- **Simplified Dynamics**: Fast linearized model for rapid prototyping
+- **Full Nonlinear Model**: High-fidelity dynamics with coupling effects
+- **Low-Rank Approximation**: Computationally efficient reduced-order model
+- **Numerical Stability**: Robust handling of ill-conditioned dynamics
 
-- **Strict configuration validation:** All physical parameters (masses, lengths, inertias) must be strictly positive and friction coefficients non‑negative.  The simulation horizon must be at least one integration step (`duration ≥ dt`), and the diagonal regularization used in the dynamics model is enforced to be strictly positive.
-- **Deprecated API removal:** The global function `set_allow_unknown_config()` has been removed in favor of explicit per‑call control through the `allow_unknown` argument to `load_config()`; passing the deprecated function now raises a `RuntimeError`.
-- **Numerical stability detection:** The simulation runner raises a `NumericalInstabilityError` when the dynamics become ill‑conditioned, rather than propagating NaN values.  This makes failure modes explicit and easier to handle programmatically.
-- **Continuous switching guidance:** The `saturate()` helper emits a warning when the linear switching method is used, encouraging the smoother hyperbolic‑tangent approximation to reduce chattering.  The boundary‑layer width (`epsilon`) should be chosen relative to measurement noise amplitude for a balance between robustness and steady‑state accuracy.
-- **Moderate equivalent‑control saturation:** The model‑based equivalent control in the hybrid controller is now clamped to ±10×`max_force`.  This prevents the feedforward term from saturating the actuator before the adaptive sliding components engage.
-- **Network integrity for HIL:** UDP communication between the plant server and controller client now includes sequence numbers and CRC‑32 checksums on every packet.  This enables detection of dropped, duplicate or corrupted packets and ensures that only fresh, verified measurements are used.
-- **Reproducible noise injection:** The HIL plant server uses a per‑instance `numpy.random.Generator` seeded via the configuration’s `global_seed` to generate sensor noise.  Supplying a seed yields repeatable simulations; omitting it produces fresh noise sequences every run.
--   **Comprehensive Test Suite:** Includes a full suite of pytest unit and integration tests to ensure the correctness and robustness of all components.
+### High-Performance Simulation
+- **Vectorized Batch Simulation**: Numba-accelerated parallel execution
+- **Multiple Integrators**: Adaptive and fixed-step integration schemes
+- **Safety Guards**: Comprehensive constraint monitoring and violation detection
+- **Real-Time Capabilities**: Hardware-in-the-loop (HIL) simulation support
 
-## Getting Started
+### Analysis & Visualization
+- **Fault Detection**: Advanced FDI (Fault Detection and Isolation) system
+- **Performance Metrics**: Lyapunov stability, settling time, overshoot analysis
+- **Statistical Validation**: Monte Carlo analysis, confidence intervals
+- **Interactive Dashboards**: Real-time plotting and parameter adjustment
 
-Follow these steps to set up and run the project on your local machine.
+### Development & Production
+- **Comprehensive Testing**: Unit, integration, property-based, and benchmark tests
+- **Type Safety**: Full type hint coverage with mypy validation
+- **Configuration Management**: YAML-based configuration with validation
+- **Documentation**: Complete Sphinx documentation with examples
 
-### 1. Prerequisites
+## Architecture Overview
 
--   Python 3.9 or newer
--   `pip` for package management
-
-### 2. Installation
-
-First, clone the repository to your local machine:
-
-```bash
-git clone <your-repository-url>
-cd <repository-directory-name>
+```
+DIP SMC PSO Framework
+├── Controllers/           # Control algorithms and factory
+│   ├── SMC Variants       # Classical, STA, Adaptive, Hybrid
+│   ├── MPC Controller     # Model Predictive Control
+│   └── Specialized        # Swing-up and custom controllers
+├── Plant Models/          # System dynamics
+│   ├── Simplified         # Linearized for fast iteration
+│   ├── Full Nonlinear     # High-fidelity physics
+│   └── Low-Rank           # Efficient approximation
+├── Core Engine/           # Simulation infrastructure
+│   ├── Simulation Runner  # Main execution engine
+│   ├── Vector Simulation  # Batch/parallel processing
+│   └── Safety Guards      # Constraint monitoring
+├── Optimization/          # Parameter tuning
+│   ├── PSO Algorithm      # Particle swarm optimization
+│   ├── Objectives         # Multi-objective cost functions
+│   └── Convergence        # Analysis and validation
+├── Analysis/              # Performance evaluation
+│   ├── Fault Detection    # FDI system
+│   ├── Statistics         # Monte Carlo, confidence intervals
+│   └── Visualization      # Plots and animations
+├── Interfaces/            # External connectivity
+│   ├── HIL Support        # Hardware-in-the-loop
+│   ├── Network Protocols  # UDP, TCP, WebSocket
+│   └── Data Exchange      # Serialization and streaming
+└── Utils/                 # Supporting tools
+    ├── Configuration      # YAML validation
+    ├── Monitoring         # Performance tracking
+    └── Development        # Testing and debugging
 ```
 
-Next, install the required Python dependencies from the `requirements.txt` file:
+## Quick Start
+
+### Prerequisites
+- **Python 3.9+** (recommended: 3.11)
+- **Git** for version control
+- **Optional**: CUDA-capable GPU for accelerated simulations
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/theSadeQ/dip-smc-pso.git
+cd dip-smc-pso
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Verify installation
+python simulate.py --help
+```
+
+### First Simulation
+
+```bash
+# Run a basic classical SMC simulation
+python simulate.py --ctrl classical_smc --plot
+
+# Launch the interactive web interface
+streamlit run streamlit_app.py
+```
+
+## Usage Guide
+
+### Command-Line Interface (CLI)
+
+#### Basic Simulations
+```bash
+# Classical SMC with plotting
+python simulate.py --ctrl classical_smc --plot
+
+# Super-Twisting SMC with full dynamics
+python simulate.py --ctrl sta_smc --dynamics full --plot
+
+# Adaptive SMC with disturbances
+python simulate.py --ctrl adaptive_smc --disturbance --plot
+```
+
+#### PSO Optimization
+```bash
+# Optimize classical SMC gains
+python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json
+
+# Optimize with custom parameters
+python simulate.py --ctrl sta_smc --run-pso --particles 50 --generations 100
+
+# Load pre-optimized gains
+python simulate.py --load gains_classical.json --plot
+```
+
+#### Hardware-in-the-Loop (HIL)
+```bash
+# Start HIL plant server
+python simulate.py --run-hil-server --port 8888
+
+# Run HIL controller client
+python simulate.py --run-hil --host localhost --port 8888
+```
+
+#### Batch Analysis
+```bash
+# Monte Carlo analysis
+python simulate.py --ctrl classical_smc --monte-carlo --runs 1000
+
+# Statistical validation
+python simulate.py --ctrl sta_smc --statistical-analysis
+```
+
+### Interactive Web Application
+
+Launch the Streamlit dashboard for real-time interaction:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+**Features:**
+- Real-time parameter tuning
+- Live performance metrics
+- Animation visualization
+- Comparative analysis
+- Configuration export/import
+
+### Configuration Management
+
+```bash
+# Use custom configuration
+python simulate.py --config custom_config.yaml
+
+# Print current configuration
+python simulate.py --print-config
+
+# Validate configuration
+python simulate.py --validate-config
+```
+
+## Project Structure
+
+```
+dip-smc-pso/
+├── simulate.py              # Main CLI application
+├── streamlit_app.py         # Web dashboard
+├── config.yaml              # Main configuration
+├── requirements.txt         # Python dependencies
+├── src/                     # Source code
+│   ├── controllers/         # Control algorithms
+│   │   ├── smc/             # SMC implementations
+│   │   ├── mpc/             # Model predictive control
+│   │   ├── specialized/     # Custom controllers
+│   │   └── factory.py       # Controller factory
+│   ├── plant/               # Plant models
+│   │   ├── models/          # Dynamics implementations
+│   │   └── configurations/  # Model parameters
+│   ├── core/                # Simulation engine
+│   │   ├── simulation_runner.py
+│   │   ├── vector_sim.py    # Batch simulation
+│   │   └── safety_guards.py
+│   ├── optimization/        # Parameter optimization
+│   │   ├── algorithms/      # PSO and others
+│   │   ├── objectives/      # Cost functions
+│   │   └── results/         # Analysis tools
+│   ├── analysis/            # Performance analysis
+│   │   ├── fault_detection/ # FDI system
+│   │   ├── validation/      # Statistical tests
+│   │   └── visualization/   # Plotting tools
+│   ├── interfaces/          # External interfaces
+│   │   ├── hil/            # Hardware-in-the-loop
+│   │   ├── network/        # Communication protocols
+│   │   └── monitoring/     # Performance monitoring
+│   └── utils/               # Utilities
+│       ├── validation/      # Parameter validation
+│       ├── reproducibility/ # Seed management
+│       └── types/          # Type definitions
+├── tests/                   # Test suite
+│   ├── test_controllers/    # Controller tests
+│   ├── test_plant/         # Plant model tests
+│   ├── test_simulation/    # Simulation tests
+│   └── test_integration/   # End-to-end tests
+├── docs/                    # Documentation
+│   ├── reference/          # API documentation
+│   ├── guides/             # User guides
+│   └── theory/            # Mathematical background
+├── notebooks/               # Jupyter analysis notebooks
+├── benchmarks/              # Performance benchmarks
+├── config/                  # Configuration schemas
+└── .dev_tools/              # Development utilities
 ```
 
 ## Testing
 
-This project includes a comprehensive and high-performance test suite to ensure correctness, stability, and scientific validity.
+### Coverage Requirements
 
-### Running the Tests
+**MANDATORY TESTING POLICY**: All new code MUST include comprehensive testing:
 
-To run the complete test suite, execute the main test runner script from the root of the project:
-
-```bash
-python run_tests.py
-```
-
-This script will execute the full `pytest` suite located in the `tests/` directory. This includes the model comparison test, which checks for behavioral consistency between the simplified and full dynamics models.
-
-### Test Coverage Requirements
-
-**MANDATORY TESTING POLICY**: All new code MUST include comprehensive testing before implementation:
-
-#### **Coverage Targets**
+#### Coverage Targets
 - **Overall Project**: Minimum 85% test coverage
 - **Critical Components**: Minimum 95% test coverage
   - Controllers (base classes, SMC algorithms, MPC)
@@ -130,30 +253,26 @@ This script will execute the full `pytest` suite located in the `tests/` directo
   - Simulation numerical stability
   - Plant physical constraint validation
 
-#### **Test Development Workflow**
+#### Test Development Workflow
 1. **BEFORE coding**: Write test specifications
 2. **DURING coding**: Implement tests alongside code
 3. **AFTER coding**: Validate 100% of new functionality is tested
 4. **CONTINUOUS**: Maintain and update tests for changes
 
-#### **Test Quality Standards**
-- Every new `.py` file MUST have corresponding `test_*.py` file
-- Every public function/method MUST have dedicated test cases
-- Critical algorithms MUST have mathematical property validation
-- Performance-critical code MUST have benchmark tests
-- Error conditions MUST have dedicated failure mode tests
+### Running Tests
 
-### Test Suite Architecture
+```bash
+# Full test suite
+python -m pytest
 
-The test suite is built for speed, robustness, and comprehensive coverage. Key features include:
+# Specific test categories
+pytest tests/test_controllers/     # Controller tests
+pytest tests/test_integration/     # Integration tests
+pytest --benchmark-only            # Performance benchmarks
 
--   **Modular Test Organization**: Tests are organized by component with single-responsibility test files
--   **Mock-Based Testing**: Tests work with both implemented and unimplemented modules using mock classes
--   **Mathematical Validation**: Theoretical properties are tested (linearity, stability, convergence)
--   **Numba Acceleration:** Core simulations are executed using a custom, Numba-accelerated batch simulation engine (`src/core/vector_sim.py`) for maximum performance.
--   **Batch Testing:** Many tests run simulations in large batches with randomized initial conditions to ensure controllers are robust.
--   **Coverage:** The suite includes unit tests for individual components, integration tests for system-wide behavior, and scientific validation tests for principles like Lyapunov stability and chattering reduction.
--   **Error Handling**: Comprehensive edge case testing including NaN, infinite, and boundary conditions
+# Coverage analysis
+pytest --cov=src --cov-report=html
+```
 
 ### Test Structure
 
@@ -171,134 +290,182 @@ tests/
 └── test_*.py                   # Component-specific test suites
 ```
 
-### CI lanes & selectors
-
-```bash
-pytest -q -k "full_dynamics"
-python dev/runner.py c1-02
-python dev/runner.py c1-03
-```
-
-## Usage
-
-You can interact with the simulation environment in two primary ways: through the command-line interface or the interactive web application.
-
-### Command-Line Interface (CLI)
-
-The `simulate.py` script is the main entry point for command-line operations.
-
-To run a basic simulation with the classical controller and plot the results:
-
-```bash
-python simulate.py --ctrl classical --plot
-```
-
-To run a PSO optimization for the Super-Twisting controller:
-
-```bash
-python simulate.py --ctrl sta --save tuned_sta_gains.json
-```
-
-## Documentation
-
-- Browse docs locally: open `docs/_build/html/index.html` after building.
-- Build docs: `sphinx-build -b html docs docs/_build/html`
-- Key sections: `docs/reference/index.md`, `docs/guides/getting-started.md`
-
-To run a simulation using pre-tuned gains and the full dynamics model:
-
-```bash
-python simulate.py --load tuned_sta_gains.json --full-dynamics --plot
-```
-
-For a full list of commands and options, run:
-
-```bash
-python simulate.py --help
-```
-
-### Interactive Web Application
-
-For a more visual and interactive experience, you can launch the Streamlit dashboard.
-
-To start the web application:
-
-```bash
-streamlit run streamlit_app.py
-```
-
-This will open a new tab in your web browser where you can select different controllers, run simulations, and view plots of the results interactively.
-
-## Project Structure
-
-The project is organized into several key directories:
-
--   `src/`: Contains all the main source code, including controllers and the core dynamics engine.
--   `tests/`: The Pytest test suite.
--   `.scripts/`: Standalone scripts for tasks like re-optimization.
--   `docs/`: Detailed project documentation.
-
-For a complete overview of the project's layout, please see the Project Structure Documentation.
-
-## Performance Benchmarks (pytest-benchmark)
+## Performance Benchmarks
 
 This project includes automated performance tests powered by **pytest-benchmark**.
 
-### How to run
-- Run only the benchmarks (recommended for CI comparisons):
-  ```bash
-  pytest --benchmark-only --benchmark-autosave
-  ```
-- Or run the full suite including benchmarks:
-  ```bash
-  pytest
-  ```
-
-### What gets measured
-- **Controller microbenchmarks**: `compute_control` for each controller type (`classical_smc`, `sta_smc`, `adaptive_smc`) on a fixed state, to capture pure control-law overhead.
-- **End-to-end throughput**: Batch simulation for 50 particles over 1.0s of sim time using the Numba vectorized engine.
-
-### Comparing runs & catching regressions
-Each run is saved under `.benchmarks/` when using `--benchmark-autosave`. To compare against the latest saved baseline and **fail on regressions** (e.g., if mean time grows by ≥5%), use:
-
+### Running Benchmarks
 ```bash
-pytest --benchmark-only --benchmark-compare        --benchmark-compare-fail=mean:5%
+# Run only benchmarks
+pytest --benchmark-only --benchmark-autosave
+
+# Compare against baseline and fail on regressions
+pytest --benchmark-only --benchmark-compare --benchmark-compare-fail=mean:5%
 ```
 
-You can adjust the threshold as needed (e.g., `median:3%`, `max:10%`).
+### What Gets Measured
+- **Controller microbenchmarks**: `compute_control` for each controller type
+- **End-to-end throughput**: Batch simulation for 50 particles over 1.0s
+- **Memory usage**: Peak memory consumption during simulations
+- **Integration accuracy**: Numerical error accumulation
 
-### Configuration
-Benchmarks honor `config.yaml` values (e.g., `simulation.dt`, `controllers.*.max_force`, and whether to use the full dynamics). For quicker local runs, you can reduce workload via test fixtures (see `tests/conftest.py`).
+## Development & Contributing
 
-Results include min/median/mean/stddev and number of rounds/iterations, enabling data-driven decisions about performance trade-offs.
-
-## ResearchPlan Validation
-
-This project includes a comprehensive validation system for ResearchPlan JSON specifications.
-
-### Validate a ResearchPlan file
+### Code Quality
 
 ```bash
-python repo_validate.py fixtures/valid_plan.json
-python repo_validate.py fixtures/invalid_plan.json
+# Type checking
+mypy src/
+
+# Code formatting
+black src/ tests/
+
+# Linting
+ruff src/ tests/
+
+# Pre-commit hooks
+pre-commit install
+pre-commit run --all-files
 ```
 
-### Using Make (if available)
+### Documentation
 
 ```bash
-# Validate default fixture
-make validate
+# Build documentation
+sphinx-build -b html docs docs/_build/html
 
-# Validate specific file
-make validate FILE=fixtures/invalid_plan.json
-
-# Run all validation tests
-make test-validation
+# Serve locally
+python -m http.server -d docs/_build/html
 ```
 
-### Exit Codes
+### Performance Profiling
 
-- **Exit 0**: Validation passed (no errors)
-- **Exit 1**: Validation failed (has errors)
+```bash
+# Benchmark specific components
+pytest tests/test_benchmarks/ --benchmark-only
 
-The validator generates machine-readable JSON reports with detailed error messages, field locations, and severity levels. See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete validation documentation and error model.
+# Profile memory usage
+python -m memory_profiler simulate.py --ctrl classical_smc
+
+# Generate performance report
+python .dev_tools/performance_audit.py
+```
+
+## Configuration Reference
+
+The system uses YAML configuration with comprehensive validation:
+
+```yaml
+# config.yaml
+physics:
+  cart_mass: 1.0        # Cart mass (kg)
+  pole1_mass: 0.1       # First pole mass (kg)
+  pole2_mass: 0.1       # Second pole mass (kg)
+  pole1_length: 0.5     # First pole length (m)
+  pole2_length: 0.5     # Second pole length (m)
+
+controllers:
+  classical_smc:
+    k1: 50.0            # Sliding surface gain 1
+    k2: 25.0            # Sliding surface gain 2
+    epsilon: 0.1        # Boundary layer width
+    max_force: 10.0     # Maximum control force (N)
+
+simulation:
+  dt: 0.01              # Integration step (s)
+  duration: 10.0        # Simulation time (s)
+  initial_state: [0, 0, 0.1, 0, 0.1, 0]  # [x, ẋ, θ₁, θ̇₁, θ₂, θ̇₂]
+
+optimization:
+  pso:
+    particles: 30       # Number of particles
+    generations: 50     # Number of generations
+    w: 0.729           # Inertia weight
+    c1: 1.494          # Cognitive coefficient
+    c2: 1.494          # Social coefficient
+```
+
+## Research Applications
+
+### Control Theory Research
+- **Lyapunov Stability Analysis**: Automated stability verification
+- **Chattering Reduction**: Boundary layer and higher-order SMC
+- **Robustness Testing**: Monte Carlo uncertainty analysis
+- **Adaptive Control**: Online parameter estimation
+
+### Educational Use
+- **Interactive Simulations**: Real-time parameter exploration
+- **Visualization Tools**: Phase portraits, control effort plots
+- **Comparative Studies**: Multiple controller performance
+- **Mathematical Validation**: Theoretical property verification
+
+### Industrial Applications
+- **Hardware-in-the-Loop**: Real-time system integration
+- **Fault Detection**: Automated anomaly detection
+- **Parameter Optimization**: Automated gain tuning
+- **Performance Monitoring**: Continuous system health assessment
+
+## Performance Features
+
+- **Numba Acceleration**: JIT compilation for critical loops
+- **Vectorized Operations**: Parallel batch simulations
+- **Memory Efficiency**: Optimized data structures
+- **Benchmark Suite**: Automated performance regression detection
+
+## Safety & Reliability
+
+- **Numerical Stability**: Robust handling of ill-conditioned dynamics
+- **Constraint Monitoring**: Real-time safety boundary enforcement
+- **Error Recovery**: Graceful degradation mechanisms
+- **Input Validation**: Comprehensive parameter checking
+
+## Production Readiness
+
+**Current Status: 6.1/10** (Single-threaded operation recommended)
+
+### Verified Components
+- **Dependency Safety**: numpy 2.0 compatibility verified
+- **Memory Safety**: Bounded collections with cleanup mechanisms
+- **Single Point of Failure**: DI/factory registry with resilient config
+- **Configuration Validation**: Strict YAML schema validation
+
+### Known Limitations
+- **Thread Safety**: Multi-threaded operation not recommended
+- **Production Deployment**: Requires single-threaded configuration
+
+### Validation Commands
+```bash
+python scripts/verify_dependencies.py
+python scripts/test_memory_leak_fixes.py
+python scripts/test_spof_fixes.py
+```
+
+## License & Citation
+
+```
+MIT License - see LICENSE file for details
+```
+
+**Citation:**
+```bibtex
+@software{dip_smc_pso,
+  title={Double-Inverted Pendulum Sliding Mode Control with PSO Optimization},
+  author={Your Name},
+  url={https://github.com/theSadeQ/dip-smc-pso},
+  year={2024}
+}
+```
+
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
+
+## Support
+
+- **Documentation**: [Read the Docs](https://dip-smc-pso.readthedocs.io/)
+- **Issues**: [GitHub Issues](https://github.com/theSadeQ/dip-smc-pso/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/theSadeQ/dip-smc-pso/discussions)
+
+---
+
+**Built for the control systems community**
