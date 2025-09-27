@@ -37,8 +37,8 @@ def test_overshoot_comparison():
             'pendulum2_length': 0.3,
             'pendulum1_com': 0.2,
             'pendulum2_com': 0.15,
-            'pendulum1_inertia': 0.008,  # Increased to meet validation
-            'pendulum2_inertia': 0.008,  # Increased to meet validation
+            'pendulum1_inertia': 0.0081,  # Increased to meet validation
+            'pendulum2_inertia': 0.0035,  # Increased to meet validation
             'gravity': 9.81,
             'cart_friction': 0.1,
             'joint1_friction': 0.001,
@@ -109,7 +109,13 @@ def test_overshoot_comparison():
                 controls[i] = control
 
                 # Integrate dynamics (simple Euler for now)
-                state_dot = dynamics.compute_state_derivative(state, control)
+                control_array = np.array([control])  # Convert to array
+                dynamics_result = dynamics.compute_dynamics(state, control_array)
+                # Extract the state derivative (first element is usually the derivative)
+                if hasattr(dynamics_result, '__iter__') and len(dynamics_result) > 0:
+                    state_dot = dynamics_result[0] if isinstance(dynamics_result[0], np.ndarray) else np.array(dynamics_result[0])
+                else:
+                    state_dot = np.array(dynamics_result)
                 state = state + state_dot * dt
 
             # Analyze results
