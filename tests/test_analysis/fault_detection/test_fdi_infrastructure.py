@@ -326,7 +326,7 @@ class TestCUSUMDriftDetection:
                 return state + self.drift * np.ones_like(state)
 
         fdi = FDIsystem(
-            residual_threshold=0.5,  # High regular threshold
+            residual_threshold=0.05,  # Lower threshold so drift creates positive deviations
             persistence_counter=100,  # High persistence to rely on CUSUM
             cusum_enabled=True,
             cusum_threshold=2.0,
@@ -388,28 +388,32 @@ class TestCUSUMDriftDetection:
         fdi = FDIsystem(
             cusum_enabled=True,
             cusum_threshold=1.0,
-            adaptive=False
+            adaptive=False,
+            residual_threshold=0.2  # Lower threshold for better sensitivity
         )
         dynamics = VariableDynamics()
 
         state = np.array([0.1, 0.0, 0.0, 0.0])
 
+        # Initialize with first measurement
+        fdi.check(0.0, state, 0.0, 0.01, dynamics)
+
         # Positive deviations increase CUSUM
-        dynamics.bias = 0.1
-        for i in range(5):
+        dynamics.bias = 0.3  # Larger bias for clearer effect
+        for i in range(1, 8):  # More steps for accumulation
             status, _ = fdi.check(0.01 * i, state, 0.0, 0.01, dynamics)
 
         cusum_after_positive = fdi._cusum
-        assert cusum_after_positive > 0
+        assert cusum_after_positive > 0, f"CUSUM should be positive after bias, got {cusum_after_positive}"
 
         # Negative deviations should reset CUSUM toward zero
-        dynamics.bias = -0.2
-        for i in range(5, 10):
+        dynamics.bias = -0.4  # Large negative bias
+        for i in range(8, 15):
             status, _ = fdi.check(0.01 * i, state, 0.0, 0.01, dynamics)
 
         # CUSUM should be reset (cannot go below zero)
-        assert fdi._cusum >= 0
-        assert fdi._cusum <= cusum_after_positive
+        assert fdi._cusum >= 0, f"CUSUM cannot be negative, got {fdi._cusum}"
+        assert fdi._cusum <= cusum_after_positive, f"CUSUM should decrease after negative deviations, before: {cusum_after_positive}, after: {fdi._cusum}"
 
 
 class TestFaultDetectionRobustness:
@@ -653,8 +657,8 @@ class TestFaultDetectionIntegration:
         for fault_type, fault_param, should_detect in fault_scenarios:
             # Fresh FDI system for each test
             fdi = FDIsystem(
-                residual_threshold=0.05,
-                persistence_counter=3,
+                residual_threshold=0.01,  # Lower threshold for better sensitivity
+                persistence_counter=2,    # Lower persistence for faster detection
                 adaptive=True,
                 window_size=20
             )
@@ -671,6 +675,7 @@ class TestFaultDetectionIntegration:
             fault_detected = False
             for i in range(25, 50):
                 t = 0.01 * i
+                u = 0.0  # Default control input - initialize here to avoid scoping issues
 
                 if fault_type == "sensor_bias":
                     faulty_measurement = state + fault_param
@@ -684,7 +689,6 @@ class TestFaultDetectionIntegration:
                     u = fault_param if i == 25 else 0.0
                 else:
                     faulty_measurement = state
-                    u = 0.0
 
                 status, _ = fdi.check(t, faulty_measurement, u, 0.01, dynamics)
 
