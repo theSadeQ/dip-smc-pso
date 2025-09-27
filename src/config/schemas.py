@@ -402,3 +402,46 @@ class FDIConfig(StrictModel):
             if any((ww is None or ww < 0.0) for ww in w):
                 raise ValueError("residual_weights must contain non-negative numbers")
         return self
+
+
+# ------------------------------------------------------------------------------
+# Stability Monitoring (Issue #1 Resolution)
+# ------------------------------------------------------------------------------
+class LDRConfig(StrictModel):
+    """Lyapunov Decrease Ratio monitoring configuration."""
+    threshold: float = Field(0.95, ge=0.0, le=1.0)
+    window_ms: float = Field(300.0, gt=0.0)
+    transient_time: float = Field(1.0, ge=0.0)
+
+
+class SaturationConfig(StrictModel):
+    """Saturation monitoring configuration."""
+    duty_threshold: float = Field(0.2, ge=0.0, le=1.0)
+    rate_hit_threshold: float = Field(0.01, ge=0.0, le=1.0)
+    max_continuous_ms: float = Field(200.0, gt=0.0)
+    window_ms: float = Field(1000.0, gt=0.0)
+    transient_time: float = Field(1.0, ge=0.0)
+
+
+class ConditioningConfig(StrictModel):
+    """Dynamics conditioning monitoring configuration."""
+    median_threshold: float = Field(1e7, gt=0.0)
+    spike_threshold: float = Field(1e9, gt=0.0)
+    fallback_threshold: int = Field(3, ge=0)
+    window_ms: float = Field(1000.0, gt=0.0)
+
+
+class DiagnosticsConfig(StrictModel):
+    """Diagnostic checklist configuration."""
+    auto_classify: bool = True
+    store_history: bool = True
+    max_history: int = Field(1000, ge=0)
+
+
+class StabilityMonitoringConfig(StrictModel):
+    """Stability monitoring configuration for Issue #1 resolution."""
+    enabled: bool = True
+    ldr: LDRConfig = Field(default_factory=LDRConfig)
+    saturation: SaturationConfig = Field(default_factory=SaturationConfig)
+    conditioning: ConditioningConfig = Field(default_factory=ConditioningConfig)
+    diagnostics: DiagnosticsConfig = Field(default_factory=DiagnosticsConfig)
