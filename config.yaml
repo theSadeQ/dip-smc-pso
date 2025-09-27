@@ -307,3 +307,50 @@ hil:
   controller_port: 9001
   extra_latency_ms: 0.0
   sensor_noise_std: 0.0
+
+# Stability monitoring configuration for Issue #1 resolution
+# Implements LDR, saturation, and conditioning monitoring as per resolution plan
+stability_monitoring:
+  enabled: true
+
+  # Lyapunov Decrease Ratio (LDR) monitoring
+  ldr:
+    # LDR threshold: alert when LDR < 95% (as specified in resolution)
+    threshold: 0.95
+    # Rolling window size in milliseconds (200-500ms recommended)
+    window_ms: 300.0
+    # Transient period to ignore in seconds
+    transient_time: 1.0
+
+  # Actuator saturation and rate-limit monitoring
+  saturation:
+    # Saturation duty threshold: alert when duty > 20% (as specified)
+    duty_threshold: 0.2
+    # Rate-limit hit threshold: alert when rate hits > 1%
+    rate_hit_threshold: 0.01
+    # Maximum continuous saturation time in milliseconds
+    max_continuous_ms: 200.0
+    # Rolling window for statistics
+    window_ms: 1000.0
+    # Transient period to ignore
+    transient_time: 1.0
+
+  # Dynamics conditioning monitoring
+  conditioning:
+    # Median condition number threshold: κ(M(q)) < 1e7
+    median_threshold: 10000000.0
+    # 99th percentile threshold: κ(M(q)) < 1e9
+    spike_threshold: 1000000000.0
+    # Maximum fallback inversions per episode
+    fallback_threshold: 3
+    # Rolling window for statistics
+    window_ms: 1000.0
+
+  # Diagnostic checklist configuration
+  diagnostics:
+    # Enable automatic diagnostic classification
+    auto_classify: true
+    # Store diagnostic history
+    store_history: true
+    # Maximum history entries to keep
+    max_history: 1000

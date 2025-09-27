@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 from .schemas import (
     ControllersConfig, PhysicsConfig, PhysicsUncertaintySchema, SimulationConfig,
     VerificationConfig, CostFunctionConfig, SensorsConfig, HILConfig, FDIConfig,
-    PermissiveControllerConfig, redact_value, PSOConfig
+    PermissiveControllerConfig, redact_value, PSOConfig, StabilityMonitoringConfig
 )
 from src.utils import set_global_seed
 
@@ -88,6 +88,7 @@ class ConfigSchema(BaseSettings):
     sensors: SensorsConfig
     hil: HILConfig
     fdi: FDIConfig | None = None
+    stability_monitoring: StabilityMonitoringConfig | None = None
 
     model_config = SettingsConfigDict(
         env_file=".env",
