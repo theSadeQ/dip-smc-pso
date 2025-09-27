@@ -136,6 +136,9 @@ class FDIsystem:
 
         if self._last_state is None:
             self._last_state = meas.copy()
+            # Store history for first measurement
+            self.times.append(t)
+            self.residuals.append(0.0)
             return "OK", 0.0
 
         # One-step prediction using the dynamics model
@@ -182,7 +185,7 @@ class FDIsystem:
             )
             residual_norm = float(np.linalg.norm(residual))
 
-        # Store history for analysis
+        # Store history for analysis (including first measurement)
         self.times.append(t)
         self.residuals.append(residual_norm)
 
