@@ -123,8 +123,8 @@ def main():
             'label': 'ORIGINAL (Problematic)'
         },
         {
-            'gains': [8.0, 4.0, 12.0, 6.0, 1.2, 0.8],    # Current config
-            'label': 'ISSUE #2 FIX (λ₁=1.2, λ₂=0.8)'
+            'gains': [8.0, 4.0, 12.0, 6.0, 4.85, 3.43],    # Current config
+            'label': 'ISSUE #2 FIX (lambda1=4.85, lambda2=3.43)'
         },
         {
             'gains': [77.62, 44.45, 17.31, 14.25, 18.66, 9.76],  # PSO optimized
@@ -188,21 +188,21 @@ def main():
     config_consistent = len(all_results) == 3
 
     if all_tests_passed and pso_working and config_consistent:
-        print("🎉 ISSUE #2 COMPLETELY RESOLVED!")
-        print("   ✅ All controller configurations functional")
-        print("   ✅ PSO optimization working and validated")
-        print("   ✅ Configuration synchronization complete")
-        print("   ✅ Physics validation fixes applied")
-        print("   ✅ Quantitative performance improvements verified")
+        print("ISSUE #2 COMPLETELY RESOLVED!")
+        print("   [PASS] All controller configurations functional")
+        print("   [PASS] PSO optimization working and validated")
+        print("   [PASS] Configuration synchronization complete")
+        print("   [PASS] Physics validation fixes applied")
+        print("   [PASS] Quantitative performance improvements verified")
         return 0
     else:
-        print("⚠️ ISSUE #2 PARTIALLY RESOLVED")
+        print("ISSUE #2 PARTIALLY RESOLVED")
         if not all_tests_passed:
-            print("   ❌ Some controller configurations still problematic")
+            print("   [FAIL] Some controller configurations still problematic")
         if not pso_working:
-            print("   ❌ PSO optimization validation failed")
+            print("   [FAIL] PSO optimization validation failed")
         if not config_consistent:
-            print("   ❌ Configuration consistency issues remain")
+            print("   [FAIL] Configuration consistency issues remain")
         return 1
 
 if __name__ == "__main__":
