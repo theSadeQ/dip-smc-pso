@@ -455,7 +455,14 @@ def create_smc_for_pso(
     )
 
     # Wrap controller for PSO-friendly interface
-    return PSOControllerWrapper(controller)
+    wrapper = PSOControllerWrapper(controller)
+
+    # Add PSO-required attributes to the wrapper
+    spec = SMCFactory.get_gain_specification(smc_type)
+    wrapper.n_gains = spec.n_gains
+    wrapper.controller_type = smc_type.value if isinstance(smc_type, SMCType) else str(smc_type)
+
+    return wrapper
 
 def get_gain_bounds_for_pso(smc_type: Union[SMCType, str]) -> tuple[List[float], List[float]]:
     """Get PSO optimization bounds for SMC controller gains."""
