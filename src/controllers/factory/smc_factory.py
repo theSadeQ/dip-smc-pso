@@ -84,6 +84,69 @@ class SMCProtocol(Protocol):
         """Return controller gains."""
         ...
 
+
+class PSOControllerWrapper:
+    """PSO-friendly wrapper that simplifies the control interface."""
+
+    def __init__(self, controller: SMCProtocol):
+        self.controller = controller
+        self._history = {}     # Empty dict as default
+
+        # Initialize appropriate state_vars based on controller type
+        controller_name = type(controller).__name__
+        if 'SuperTwisting' in controller_name or 'STA' in controller_name:
+            # STA-SMC expects (z, sigma) tuple
+            self._state_vars = (0.0, 0.0)  # Initial (z=0, sigma=0)
+        elif 'Hybrid' in controller_name:
+            # Hybrid controller may have complex state requirements
+            self._state_vars = None  # Will be handled specially
+        else:
+            # Classical and Adaptive SMC typically use empty tuple
+            self._state_vars = ()
+
+    def compute_control(self, state: np.ndarray, state_vars=None, history=None):
+        """
+        Flexible compute_control interface supporting both patterns:
+        1. compute_control(state) - PSO-friendly simplified interface
+        2. compute_control(state, state_vars, history) - Full interface
+        """
+        # Use provided parameters or defaults
+        final_state_vars = state_vars if state_vars is not None else self._state_vars
+        final_history = history if history is not None else self._history
+
+        result = self.controller.compute_control(state, final_state_vars, final_history)
+
+        # For simplified interface (PSO usage), return numpy array
+        if state_vars is None and history is None:
+            # Extract control value from result - handle different output types
+            if hasattr(result, 'u'):
+                control_value = result.u
+            elif hasattr(result, 'control'):
+                control_value = result.control
+            elif isinstance(result, dict) and 'u' in result:
+                control_value = result['u']
+            elif isinstance(result, dict) and 'control' in result:
+                control_value = result['control']
+            else:
+                # Fallback: assume result is the control value
+                control_value = result
+
+            # Ensure numpy array output
+            if isinstance(control_value, (int, float)):
+                return np.array([control_value])
+            elif isinstance(control_value, np.ndarray):
+                return control_value.flatten()
+            else:
+                return np.array([float(control_value)])
+        else:
+            # For full interface, return original result
+            return result
+
+    @property
+    def gains(self) -> List[float]:
+        """Return controller gains."""
+        return self.controller.gains
+
 # ============================================================================
 # CLEAN PARAMETER CONFIGURATION
 # ============================================================================
@@ -353,12 +416,16 @@ class SMCFactory:
 def create_smc_for_pso(
     smc_type: Union[SMCType, str],
     gains: Union[List[float], np.ndarray],
-    max_force: float = 100.0,
+    dynamics_model_or_max_force: Union[Any, float] = 100.0,
     dt: float = 0.01,
     dynamics_model: Optional[Any] = None
-) -> SMCProtocol:
+) -> PSOControllerWrapper:
     """
     Convenience function optimized for PSO parameter tuning.
+
+    Supports both calling patterns:
+    1. create_smc_for_pso(smc_type, gains, max_force, dt, dynamics_model)
+    2. create_smc_for_pso(smc_type, gains, dynamics_model)
 
     Usage:
         # In PSO fitness function
@@ -366,18 +433,37 @@ def create_smc_for_pso(
         performance = evaluate_controller(controller, test_scenarios)
         return performance
     """
-    return SMCFactory.create_from_gains(
+    # Handle different calling patterns
+    if isinstance(dynamics_model_or_max_force, (int, float)):
+        # Pattern 1: max_force provided as third argument
+        max_force = float(dynamics_model_or_max_force)
+        final_dynamics_model = dynamics_model
+    else:
+        # Pattern 2: dynamics_model provided as third argument
+        max_force = 100.0  # Use default
+        final_dynamics_model = dynamics_model_or_max_force
+
+    controller = SMCFactory.create_from_gains(
         smc_type=smc_type,
         gains=gains,
         max_force=max_force,
         dt=dt,
-        dynamics_model=dynamics_model
+        dynamics_model=final_dynamics_model
     )
 
-def get_gain_bounds_for_pso(smc_type: Union[SMCType, str]) -> List[tuple[float, float]]:
+    # Wrap controller for PSO-friendly interface
+    return PSOControllerWrapper(controller)
+
+def get_gain_bounds_for_pso(smc_type: Union[SMCType, str]) -> tuple[List[float], List[float]]:
     """Get PSO optimization bounds for SMC controller gains."""
     spec = SMCFactory.get_gain_specification(smc_type)
-    return spec.gain_bounds
+    bounds = spec.gain_bounds
+
+    # Convert to PSO format: (lower_bounds, upper_bounds)
+    lower_bounds = [bound[0] for bound in bounds]
+    upper_bounds = [bound[1] for bound in bounds]
+
+    return (lower_bounds, upper_bounds)
 
 def validate_smc_gains(smc_type: Union[SMCType, str], gains: Union[List[float], np.ndarray]) -> bool:
     """Validate that gains are appropriate for the SMC controller type."""
@@ -414,6 +500,9 @@ __all__ = [
 
     # Factory
     "SMCFactory",
+
+    # PSO wrapper
+    "PSOControllerWrapper",
 
     # PSO convenience functions
     "create_smc_for_pso",

@@ -5,7 +5,8 @@
 """Professional optimization algorithms for control engineering applications."""
 
 # Swarm Intelligence Algorithms
-from .swarm.pso import ParticleSwarmOptimizer, PSOTuner
+from .swarm.pso import ParticleSwarmOptimizer
+from .pso_optimizer import PSOTuner  # High-performance legacy PSO tuner
 # from .swarm.aco import AntColonyOptimization  # Module not implemented yet
 
 # Evolutionary Algorithms

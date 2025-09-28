@@ -361,7 +361,7 @@ class ParticleSwarmOptimizer(PopulationBasedOptimizer):
         }
 
 
-# Import and re-export the original PSOTuner for backward compatibility
-from ..pso_optimizer import PSOTuner
+# NOTE: PSOTuner is available via src.optimization.algorithms.pso_optimizer
+# This module focuses on the modern ParticleSwarmOptimizer implementation
 
-__all__ = ["ParticleSwarmOptimizer", "PSOTuner"]
+__all__ = ["ParticleSwarmOptimizer"]

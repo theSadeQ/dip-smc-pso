@@ -48,6 +48,7 @@ controllers:
   classical_smc:
     max_force: 150.0
     boundary_layer: 0.02
+    dt: 0.001
   sta_smc:
     gains:
     - 8.0    # K1: Algorithmic gain (optimized for Issue #2 resolution)
@@ -135,20 +136,22 @@ pso:
   # cost landscape is highly multimodal.
   n_particles: 20
   bounds:
-    min:
-    - 1.0
-    - 1.0
-    - 1.0
-    - 1.0
-    - 5.0
-    - 0.1
-    max:
-    - 100.0
-    - 100.0
-    - 20.0
-    - 20.0
-    - 150.0
-    - 10.0
+    # Default bounds (used for classical_smc and sta_smc - 6 parameters)
+    min: [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
+    max: [100.0, 100.0, 20.0, 20.0, 150.0, 10.0]
+    # Controller-specific bounds for different types
+    classical_smc:
+      min: [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
+      max: [100.0, 100.0, 20.0, 20.0, 150.0, 10.0]
+    sta_smc:
+      min: [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
+      max: [100.0, 100.0, 20.0, 20.0, 150.0, 10.0]
+    adaptive_smc:
+      min: [1.0, 1.0, 1.0, 1.0, 0.1]
+      max: [100.0, 100.0, 20.0, 20.0, 10.0]
+    hybrid_adaptive_sta_smc:
+      min: [1.0, 1.0, 1.0, 1.0]
+      max: [100.0, 100.0, 20.0, 20.0]
   # Set inertia weight within [0.4,0.9] and balance cognitive/social
   # acceleration coefficients.  A balanced choice c1≈c2≈2.0 encourages
   # exploration without divergence【360839346985391†L94-L100】.
