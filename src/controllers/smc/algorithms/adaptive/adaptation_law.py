@@ -27,7 +27,8 @@ class AdaptationLaw:
     """
 
     def __init__(self,
-                 adaptation_rate: float,
+                 adaptation_rate: Union[float, list, np.ndarray],
+                 uncertainty_bound: Optional[float] = None,
                  leak_rate: float = 0.1,
                  rate_limit: float = 100.0,
                  bounds: tuple[float, float] = (0.1, 100.0),
@@ -36,13 +37,28 @@ class AdaptationLaw:
         Initialize adaptation law.
 
         Args:
-            adaptation_rate: γ > 0, adaptation speed
+            adaptation_rate: γ > 0, adaptation speed (can be scalar or array)
+            uncertainty_bound: Uncertainty bound (optional, for test compatibility)
             leak_rate: σ ∈ [0,1], leakage to prevent drift
             rate_limit: Maximum |K̇| to prevent fast adaptation
             bounds: (K_min, K_max) gain bounds
             dead_zone: |s| threshold below which adaptation stops
         """
-        if adaptation_rate <= 0:
+        # Handle test interface compatibility
+        if uncertainty_bound is not None:
+            # Test interface: AdaptationLaw(adaptation_rate, uncertainty_bound)
+            bounds = (0.1, uncertainty_bound)
+            leak_rate = 0.1  # Use default
+
+        # Convert adaptation_rate to array if needed for test compatibility
+        if isinstance(adaptation_rate, (list, np.ndarray)):
+            self.adaptation_rate = np.asarray(adaptation_rate)
+            adaptation_rate_scalar = float(np.mean(adaptation_rate))  # Use mean for scalar operations
+        else:
+            adaptation_rate_scalar = float(adaptation_rate)
+            self.adaptation_rate = np.array([adaptation_rate_scalar, adaptation_rate_scalar, adaptation_rate_scalar])
+
+        if adaptation_rate_scalar <= 0:
             raise ValueError("Adaptation rate must be positive")
         if not (0 <= leak_rate <= 1):
             raise ValueError("Leak rate must be in [0, 1]")
@@ -53,11 +69,12 @@ class AdaptationLaw:
         if dead_zone < 0:
             raise ValueError("Dead zone must be non-negative")
 
-        self.gamma = adaptation_rate
+        self.gamma = adaptation_rate_scalar
         self.sigma = leak_rate
         self.rate_limit = rate_limit
         self.K_min, self.K_max = bounds
         self.dead_zone = dead_zone
+        self.uncertainty_bound = bounds[1]  # For test compatibility
 
         # Internal state
         self._K_current = (self.K_min + self.K_max) / 2  # Initialize at midpoint

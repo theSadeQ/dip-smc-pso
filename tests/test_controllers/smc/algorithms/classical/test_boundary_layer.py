@@ -87,8 +87,13 @@ class TestBoundaryLayerBehavior:
 
     def test_control_continuity_across_boundary(self, classical_smc_config):
         """Test control continuity as state crosses boundary layer."""
-        config = classical_smc_config
-        config.boundary_layer = 0.1
+        from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
+        config = ClassicalSMCConfig(
+            gains=classical_smc_config.gains,
+            max_force=classical_smc_config.max_force,
+            dt=classical_smc_config.dt,
+            boundary_layer=0.1
+        )
         controller = ModularClassicalSMC(config=config)
 
         # States just inside and outside boundary layer
