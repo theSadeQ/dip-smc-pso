@@ -98,8 +98,8 @@ class PSOControllerWrapper:
             # STA-SMC expects (z, sigma) tuple
             self._state_vars = (0.0, 0.0)  # Initial (z=0, sigma=0)
         elif 'Hybrid' in controller_name:
-            # Hybrid controller may have complex state requirements
-            self._state_vars = None  # Will be handled specially
+            # Hybrid controller expects (k1_prev, k2_prev, u_int_prev) tuple
+            self._state_vars = (self.controller.k1_init, self.controller.k2_init, 0.0)
         else:
             # Classical and Adaptive SMC typically use empty tuple
             self._state_vars = ()

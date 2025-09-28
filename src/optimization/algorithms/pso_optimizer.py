@@ -89,12 +89,12 @@ def _seeded_global_numpy(seed: int | None):
     except Exception:
         state = None
     try:
-        _np.random.seed(int(seed))
+        np.random.seed(int(seed))
         yield
     finally:
         if state is not None:
             try:
-                _np.random.set_state(state)
+                np.random.set_state(state)
             except Exception:
                 pass
 
@@ -241,9 +241,7 @@ class PSOTuner:
                 else:
                     gains_list = getattr(baseline, "gains", None)
             if gains_list is not None and isinstance(gains_list, (list, tuple)) and len(gains_list) > 0:
-                # Local import to avoid circular dependency
-                import numpy as _np
-                baseline_particles = _np.asarray(gains_list, dtype=float).reshape(1, -1)
+                baseline_particles = np.asarray(gains_list, dtype=float).reshape(1, -1)
                 try:
                     baseline_ctrl = controller_factory(baseline_particles[0])
                     u_max_val = float(getattr(baseline_ctrl, "max_force", 150.0))
@@ -260,21 +258,21 @@ class PSOTuner:
                     t, x_b, u_b, sigma_b = res[0]
                 else:
                     t, x_b, u_b, sigma_b = res
-                x_b = _np.asarray(x_b, dtype=float)
-                u_b = _np.asarray(u_b, dtype=float)
-                sigma_b = _np.asarray(sigma_b, dtype=float)
-                dt_arr = _np.diff(t)[None, :]
+                x_b = np.asarray(x_b, dtype=float)
+                u_b = np.asarray(u_b, dtype=float)
+                sigma_b = np.asarray(sigma_b, dtype=float)
+                dt_arr = np.diff(t)[None, :]
                 if dt_arr.size == 0:
-                    dt_arr = _np.array([[self.sim_cfg.dt]])
+                    dt_arr = np.array([[self.sim_cfg.dt]])
                 N = dt_arr.shape[1]
-                time_mask = _np.ones((1, N), dtype=bool)
+                time_mask = np.ones((1, N), dtype=bool)
                 ise_base = float(
-                    _np.sum((x_b[:, :-1, :3] ** 2 * dt_arr[:, :, None]) * time_mask[:, :, None], axis=(1, 2))[0]
+                    np.sum((x_b[:, :-1, :3] ** 2 * dt_arr[:, :, None]) * time_mask[:, :, None], axis=(1, 2))[0]
                 )
-                u_sq_base = float(_np.sum((u_b ** 2 * dt_arr) * time_mask, axis=1)[0])
-                du = _np.diff(u_b, axis=1, prepend=u_b[:, 0:1])
-                du_sq_base = float(_np.sum((du ** 2 * dt_arr) * time_mask, axis=1)[0])
-                sigma_sq_base = float(_np.sum((sigma_b ** 2 * dt_arr) * time_mask, axis=1)[0])
+                u_sq_base = float(np.sum((u_b ** 2 * dt_arr) * time_mask, axis=1)[0])
+                du = np.diff(u_b, axis=1, prepend=u_b[:, 0:1])
+                du_sq_base = float(np.sum((du ** 2 * dt_arr) * time_mask, axis=1)[0])
+                sigma_sq_base = float(np.sum((sigma_b ** 2 * dt_arr) * time_mask, axis=1)[0])
                 self.norm_ise = max(ise_base, 1e-12)
                 self.norm_u = max(u_sq_base, 1e-12)
                 self.norm_du = max(du_sq_base, 1e-12)

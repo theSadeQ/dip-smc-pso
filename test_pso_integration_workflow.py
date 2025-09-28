@@ -129,9 +129,9 @@ def test_pso_fitness_function():
     for i, gains in enumerate(test_gains):
         cost = fitness_function(gains)
         costs.append(cost)
-        print(f"✓ Gains {i+1}: {gains} -> Cost: {cost:.4f}")
+        print(f"+ Gains {i+1}: {gains} -> Cost: {cost:.4f}")
 
-    print(f"✓ Fitness function working - cost range: {min(costs):.4f} to {max(costs):.4f}")
+    print(f"+ Fitness function working - cost range: {min(costs):.4f} to {max(costs):.4f}")
     return fitness_function
 
 
@@ -162,7 +162,7 @@ def test_multiple_smc_types():
         # Test validation
         is_valid = validate_smc_gains(smc_type, gains)
 
-        print(f"✓ {smc_type.value}: Controller OK, Control: {control[0]:.4f}, Bounds: {len(bounds[0])} gains, Valid: {is_valid}")
+        print(f"+ {smc_type.value}: Controller OK, Control: {control[0]:.4f}, Bounds: {len(bounds[0])} gains, Valid: {is_valid}")
 
     return True
 
@@ -194,7 +194,7 @@ def main():
         return True
 
     except Exception as e:
-        print(f"\n❌ PSO Integration Test Failed: {e}")
+        print(f"\nERROR: PSO Integration Test Failed: {e}")
         import traceback
         traceback.print_exc()
         return False
