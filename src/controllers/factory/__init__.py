@@ -17,6 +17,9 @@ Recommended Usage:
     from controllers.factory import create_controller_legacy
 """
 
+# Standard library imports
+from typing import Dict, List, Any
+
 # Export the clean SMC factory as primary interface
 from .smc_factory import (
     # Core types
@@ -72,13 +75,13 @@ if os.path.exists(factory_py_path):
 
     except Exception as e:
         # Fallback if the factory.py module can't be loaded
-        def list_available_controllers():
+        def list_available_controllers() -> List[str]:
             """Fallback function when factory.py is not available."""
             return ['classical_smc', 'sta_smc', 'adaptive_smc', 'hybrid_adaptive_sta_smc']
 
-        def get_default_gains(controller_type: str):
+        def get_default_gains(controller_type: str) -> List[float]:
             """Fallback function when factory.py is not available."""
-            defaults = {
+            defaults: Dict[str, List[float]] = {
                 'classical_smc': [5.0, 5.0, 5.0, 0.5, 0.5, 0.5],
                 'sta_smc': [4.0, 4.0, 4.0, 0.4, 0.4, 0.4],
                 'adaptive_smc': [10.0, 8.0, 5.0, 4.0, 1.0],
@@ -156,7 +159,7 @@ def apply_deprecation_mapping(controller_type: str, params: dict = None, allow_u
     return processed_params
 
 
-def _as_dict(obj):
+def _as_dict(obj: Any) -> Dict[str, Any]:
     """
     Convert an object to dictionary representation.
 

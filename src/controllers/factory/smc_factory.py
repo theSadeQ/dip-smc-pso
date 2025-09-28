@@ -1,5 +1,5 @@
 #==========================================================================================\\\
-#============================ src/controllers/smc_factory.py ===========================\\\
+#====================== src/controllers/factory/smc_factory.py =======================\\\
 #==========================================================================================\\\
 
 """
@@ -19,10 +19,13 @@ Design Principles:
 - Minimal: No unnecessary complexity
 """
 
+# Standard library imports
 from __future__ import annotations
+from dataclasses import dataclass
 from enum import Enum
 from typing import Protocol, Union, List, Optional, Type, Dict, Any, Tuple
-from dataclasses import dataclass
+
+# Third-party imports
 import numpy as np
 
 # Import the 4 core SMC controllers

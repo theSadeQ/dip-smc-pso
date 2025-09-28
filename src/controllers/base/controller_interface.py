@@ -82,7 +82,7 @@ class ControllerInterface(ABC):
 
         # Return control and basic info
         info = {
-            'saturated': abs(control) >= self.max_force,
+            'saturated': bool(abs(control) >= self.max_force),
             'control_raw': control
         }
 

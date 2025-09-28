@@ -855,8 +855,11 @@ def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_
     config = SMCConfig(gains=gains, max_force=max_force, dt=dt, **kwargs)
     controller = SMCFactory.create_controller(smc_type, config)
 
+    # Use the correct expected gain count for this controller type
+    expected_n_gains = get_expected_gain_count(smc_type)
+
     # Wrap the controller with PSO-compatible interface
-    wrapper = PSOControllerWrapper(controller, len(gains), smc_type.value)
+    wrapper = PSOControllerWrapper(controller, expected_n_gains, smc_type.value)
     return wrapper
 
 
