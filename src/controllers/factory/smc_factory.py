@@ -41,16 +41,16 @@ except ImportError:
     except ImportError:
         # Final fallback - define dummy classes for demo
         class ClassicalSMC:
-            def __init__(self, **kwargs):
+            def __init__(self, **kwargs: Any) -> None:
                 self.gains = kwargs.get('gains', [])
         class AdaptiveSMC:
-            def __init__(self, **kwargs):
+            def __init__(self, **kwargs: Any) -> None:
                 self.gains = kwargs.get('gains', [])
         class SuperTwistingSMC:
-            def __init__(self, **kwargs):
+            def __init__(self, **kwargs: Any) -> None:
                 self.gains = kwargs.get('gains', [])
         class HybridAdaptiveSTASMC:
-            def __init__(self, **kwargs):
+            def __init__(self, **kwargs: Any) -> None:
                 self.gains = kwargs.get('gains', [])
 
 # ============================================================================
@@ -186,7 +186,7 @@ class SMCConfig:
     gamma1: float = 0.5
     gamma2: float = 0.3
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate SMC configuration parameters."""
         if not self.gains or len(self.gains) == 0:
             raise ValueError("SMC gains cannot be empty")

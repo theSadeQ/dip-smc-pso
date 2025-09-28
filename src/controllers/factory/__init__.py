@@ -90,32 +90,70 @@ if os.path.exists(factory_py_path):
         create_controller_new = create_controller
 
 # Add missing deprecation mapping function for backward compatibility
-def apply_deprecation_mapping(controller_type: str) -> str:
+def apply_deprecation_mapping(controller_type: str, params: dict = None, allow_unknown: bool = True) -> dict:
     """
-    Apply deprecation mapping for controller types.
+    Apply deprecation mapping for controller parameters.
 
-    This function handles mapping of deprecated controller type names
+    This function handles mapping of deprecated parameter names
     to their current equivalents for backward compatibility.
 
     Args:
         controller_type: The controller type string to map
+        params: Parameters dictionary to process (optional)
+        allow_unknown: Whether to allow unknown parameters (ignored)
 
     Returns:
-        Mapped controller type string
+        Processed parameters dictionary with deprecation mappings applied
     """
-    # Define deprecation mappings
-    deprecation_map = {
-        'smc_classical': 'classical_smc',
-        'smc_sta': 'sta_smc',
-        'smc_adaptive': 'adaptive_smc',
-        'smc_sliding': 'sliding_smc',
-        'mpc': 'mpc_controller',
-        'lqr': 'lqr_controller',
-        'pid': 'pid_controller'
+    import warnings
+
+    if params is None:
+        params = {}
+
+    # Make a copy to avoid modifying the original
+    processed_params = params.copy()
+
+    # Define parameter deprecation mappings by controller type
+    deprecation_mappings = {
+        'hybrid_adaptive_sta_smc': {
+            'use_equivalent': 'enable_equivalent'
+        },
+        'classical_smc': {
+            'boundary_thickness': 'boundary_layer',
+            'force_saturation': 'max_force'
+        },
+        'sta_smc': {
+            'twisting_gain1': 'K1',
+            'twisting_gain2': 'K2'
+        },
+        'adaptive_smc': {
+            'adaptation_rate': 'gamma',
+            'leakage_rate': 'leak_rate'
+        }
     }
 
-    # Return mapped type or original if no mapping exists
-    return deprecation_map.get(controller_type, controller_type)
+    # Apply mappings for this controller type
+    if controller_type in deprecation_mappings:
+        controller_mappings = deprecation_mappings[controller_type]
+
+        for old_param, new_param in controller_mappings.items():
+            if old_param in processed_params:
+                # Issue deprecation warning
+                warnings.warn(
+                    f"Parameter '{old_param}' for {controller_type} is deprecated. "
+                    f"Use '{new_param}' instead.",
+                    DeprecationWarning,
+                    stacklevel=3
+                )
+
+                # Map the parameter if new one doesn't already exist
+                if new_param not in processed_params:
+                    processed_params[new_param] = processed_params[old_param]
+
+                # Remove the old parameter
+                del processed_params[old_param]
+
+    return processed_params
 
 # Clean public API - prioritize new SMC factory
 __all__ = [

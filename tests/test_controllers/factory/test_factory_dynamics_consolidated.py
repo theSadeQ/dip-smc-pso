@@ -6,8 +6,8 @@ import sys, pathlib, importlib, pytest
 factory = importlib.import_module("src.controllers.factory")
 
 def test_factory_and_dynamics_core(monkeypatch):
-    # a) unknown controller lists available (sorted)
-    class Dyn: 
+    # a) unknown controller lists available (from registry, not config)
+    class Dyn:
         def __init__(self, physics): pass
     monkeypatch.setattr(factory, "DoubleInvertedPendulum", Dyn, raising=False)
     class CfgA:
@@ -16,13 +16,20 @@ def test_factory_and_dynamics_core(monkeypatch):
         controller_defaults = {}
     with pytest.raises(ValueError) as e1:
         factory.create_controller("does_not_exist", config=CfgA(), gains=None)
-    assert "Available: alpha, beta, zeta" in str(e1.value)
+    # The new factory lists actual available controllers from registry
+    expected_controllers = ["classical_smc", "sta_smc", "adaptive_smc", "hybrid_adaptive_sta_smc"]
+    error_msg = str(e1.value)
+    assert "Available:" in error_msg
+    # Check that all expected controllers are mentioned
+    for controller in expected_controllers:
+        assert controller in error_msg
 
-    # b) empty controllers_map UX
+    # b) empty controllers_map UX - new factory uses registry, so this test checks for unknown controller
     class CfgEmpty: controllers = {}
     with pytest.raises(ValueError) as e2:
         factory.create_controller("anything", config=CfgEmpty(), gains=None)
-    assert "Available: none configured" in str(e2.value)
+    # The new factory will show available controllers from registry, not "none configured"
+    assert "Available:" in str(e2.value)
 
     # c) dynamics guards: DIP missing when not full
     monkeypatch.setattr(factory, "DoubleInvertedPendulum", None, raising=False)
