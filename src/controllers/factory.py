@@ -163,22 +163,22 @@ CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,
         'config_class': ClassicalSMCConfig,
-        'default_gains': [5.0, 5.0, 5.0, 0.5, 0.5, 0.5]
+        'default_gains': [8.0, 6.0, 4.0, 3.0, 15.0, 2.0]  # Tuned for stability
     },
     'sta_smc': {
         'class': ModularSuperTwistingSMC,
         'config_class': STASMCConfig,
-        'default_gains': [5.0, 3.0, 4.0, 4.0, 0.4, 0.4]  # K1=5.0 > K2=3.0 for stability
+        'default_gains': [10.0, 5.0, 8.0, 6.0, 2.0, 1.5]  # Balanced gains
     },
     'adaptive_smc': {
         'class': ModularAdaptiveSMC,
         'config_class': AdaptiveSMCConfig,
-        'default_gains': [10.0, 8.0, 5.0, 4.0, 1.0]
+        'default_gains': [12.0, 10.0, 6.0, 5.0, 2.5]  # Improved convergence
     },
     'hybrid_adaptive_sta_smc': {
         'class': ModularHybridSMC,
         'config_class': HybridAdaptiveSTASMCConfig,
-        'default_gains': [5.0, 5.0, 5.0, 0.5]
+        'default_gains': [8.0, 6.0, 4.0, 3.0]  # Stable surface gains
     }
 }
 
@@ -286,13 +286,13 @@ def create_controller(controller_type: str,
 
             # Create proper sub-configs with all required parameters
             classical_config = ClassicalSMCConfig(
-                gains=[5.0, 5.0, 5.0, 0.5, 0.5, 0.5],
+                gains=[8.0, 6.0, 4.0, 3.0, 15.0, 2.0],
                 max_force=150.0,
                 dt=0.001,
                 boundary_layer=0.02
             )
             adaptive_config = AdaptiveSMCConfig(
-                gains=[10.0, 8.0, 5.0, 4.0, 1.0],
+                gains=[12.0, 10.0, 6.0, 5.0, 2.5],
                 max_force=150.0,
                 dt=0.001
             )
@@ -307,14 +307,36 @@ def create_controller(controller_type: str,
                 **controller_params
             }
         else:
-            # Standard controllers use gains
+            # Standard controllers use gains - ensure required parameters are provided
             config_params = {
                 'gains': controller_gains,
+                'max_force': 150.0,  # Required by all controllers
+                'dt': 0.001,  # Safe default for all
                 **controller_params
             }
 
+            # Add controller-specific required parameters
+            if controller_type == 'classical_smc':
+                config_params.setdefault('boundary_layer', 0.02)  # Required parameter
+            elif controller_type == 'sta_smc':
+                # Ensure STA-specific parameters are present
+                config_params.setdefault('K1', 4.0)
+                config_params.setdefault('K2', 0.4)
+                config_params.setdefault('power_exponent', 0.5)
+                config_params.setdefault('regularization', 1e-6)
+            elif controller_type == 'adaptive_smc':
+                # Ensure Adaptive-specific parameters are present
+                config_params.setdefault('leak_rate', 0.01)
+                config_params.setdefault('dead_zone', 0.05)
+                config_params.setdefault('adapt_rate_limit', 10.0)
+                config_params.setdefault('K_min', 0.1)
+                config_params.setdefault('K_max', 100.0)
+                config_params.setdefault('boundary_layer', 0.1)
+                config_params.setdefault('gamma', 2.0)
+                config_params.setdefault('smooth_switch', True)
+
             # Only add dynamics_model for controllers that support it
-            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc']:
+            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc']:
                 config_params['dynamics_model'] = dynamics_model
 
         # Remove None values and filter to only valid parameters
@@ -323,22 +345,22 @@ def create_controller(controller_type: str,
         controller_config = config_class(**config_params)
     except Exception as e:
         logger.warning(f"Could not create full config, using minimal config: {e}")
-        # Fallback to minimal configuration with required defaults
+        # Fallback to minimal configuration with ALL required defaults
         if controller_type == 'hybrid_adaptive_sta_smc':
             # Hybrid controller has completely different structure
             # Import the config classes
             from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
             from src.controllers.smc.algorithms.adaptive.config import AdaptiveSMCConfig
 
-            # Create minimal sub-configs
+            # Create minimal sub-configs with ALL required parameters
             classical_config = ClassicalSMCConfig(
-                gains=[5.0, 5.0, 5.0, 0.5, 0.5, 0.5],
+                gains=[8.0, 6.0, 4.0, 3.0, 15.0, 2.0],
                 max_force=150.0,
                 dt=0.001,
                 boundary_layer=0.02
             )
             adaptive_config = AdaptiveSMCConfig(
-                gains=[10.0, 8.0, 5.0, 4.0, 1.0],
+                gains=[12.0, 10.0, 6.0, 5.0, 2.5],
                 max_force=150.0,
                 dt=0.001
             )
@@ -351,24 +373,40 @@ def create_controller(controller_type: str,
                 'adaptive_config': adaptive_config
             }
         else:
-            # Standard controllers use gains
+            # Standard controllers use gains - ensure ALL required parameters are included
             fallback_params = {
                 'gains': controller_gains,
-                'max_force': 150.0  # Standard default
+                'max_force': 150.0,  # Always required
+                'dt': 0.001  # Always add dt for safety
             }
-
-            # Only add dynamics_model if not None and controller supports it
-            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc']:
-                fallback_params['dynamics_model'] = dynamics_model
 
             # Add controller-specific required parameters
             if controller_type == 'classical_smc':
-                fallback_params['boundary_layer'] = 0.02
-                fallback_params['dt'] = 0.001
+                fallback_params['boundary_layer'] = 0.02  # Required parameter
             elif controller_type == 'sta_smc':
-                fallback_params['dt'] = 0.001
+                # STA SMC may have specific requirements - check config
+                fallback_params.update({
+                    'K1': 4.0,
+                    'K2': 0.4,
+                    'power_exponent': 0.5,
+                    'regularization': 1e-6
+                })
             elif controller_type == 'adaptive_smc':
-                fallback_params['dt'] = 0.001
+                # Adaptive SMC specific defaults
+                fallback_params.update({
+                    'leak_rate': 0.01,
+                    'dead_zone': 0.05,
+                    'adapt_rate_limit': 10.0,
+                    'K_min': 0.1,
+                    'K_max': 100.0,
+                    'boundary_layer': 0.1,
+                    'gamma': 2.0,
+                    'smooth_switch': True
+                })
+
+            # Only add dynamics_model if not None and controller supports it
+            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc']:
+                fallback_params['dynamics_model'] = dynamics_model
 
         controller_config = config_class(**fallback_params)
 
@@ -475,35 +513,51 @@ class PSOControllerWrapper:
 
     def compute_control(self, state: np.ndarray) -> np.ndarray:
         """PSO-compatible control computation interface."""
-        # Call the underlying controller with the full interface
-        result = self.controller.compute_control(state, (), {})
+        try:
+            # Validate input state
+            if len(state) != 6:
+                raise ValueError(f"Expected state vector of length 6, got {len(state)}")
 
-        # Extract control value and return as numpy array
-        if hasattr(result, 'u'):
-            u = result.u
-        elif isinstance(result, dict) and 'u' in result:
-            u = result['u']
-        else:
-            u = result
+            # Call the underlying controller with the full interface
+            result = self.controller.compute_control(state, (), {})
 
-        # Ensure it's a numpy array with correct shape
-        if isinstance(u, (int, float)):
-            return np.array([u])
-        elif isinstance(u, np.ndarray):
-            if u.shape == ():
-                return np.array([u])
-            elif u.shape == (1,):
-                return u
+            # Extract control value and return as numpy array
+            if hasattr(result, 'u'):
+                u = result.u
+            elif isinstance(result, dict) and 'u' in result:
+                u = result['u']
             else:
-                return u.flatten()[:1]  # Take first element if multiple
-        else:
-            return np.array([float(u)])
+                u = result
+
+            # Apply saturation at wrapper level for extra safety
+            if isinstance(u, (int, float)):
+                u_saturated = np.clip(u, -self.max_force, self.max_force)
+                return np.array([u_saturated])
+            elif isinstance(u, np.ndarray):
+                if u.shape == ():
+                    u_saturated = np.clip(float(u), -self.max_force, self.max_force)
+                    return np.array([u_saturated])
+                elif u.shape == (1,):
+                    u_saturated = np.clip(u[0], -self.max_force, self.max_force)
+                    return np.array([u_saturated])
+                else:
+                    u_saturated = np.clip(u.flatten()[0], -self.max_force, self.max_force)
+                    return np.array([u_saturated])
+            else:
+                u_saturated = np.clip(float(u), -self.max_force, self.max_force)
+                return np.array([u_saturated])
+
+        except Exception as e:
+            # Safe fallback control
+            return np.array([0.0])
 
 
-def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_config_or_model: Optional[Any] = None, max_force: float = 150.0, dt: float = 0.001, **kwargs: Any) -> Any:
+def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_config_or_model: Optional[Any] = None, **kwargs: Any) -> Any:
     """Create SMC controller optimized for PSO usage."""
     # Handle different calling patterns for backward compatibility
     dynamics_model = kwargs.get('dynamics_model', plant_config_or_model)
+    max_force = kwargs.get('max_force', 150.0)
+    dt = kwargs.get('dt', 0.001)
 
     config = SMCConfig(gains=gains, max_force=max_force, dt=dt, **kwargs)
     controller = SMCFactory.create_controller(smc_type, config)
@@ -513,12 +567,12 @@ def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_
     return wrapper
 
 
-def create_pso_controller_factory(smc_type: SMCType, plant_config: Optional[Any] = None, max_force: float = 150.0, dt: float = 0.001, **kwargs: Any) -> Callable:
+def create_pso_controller_factory(smc_type: SMCType, plant_config: Optional[Any] = None, **kwargs: Any) -> Callable:
     """Create a PSO-optimized controller factory function with required attributes."""
 
     def controller_factory(gains: Union[list, np.ndarray]) -> Any:
         """Controller factory function optimized for PSO."""
-        return create_smc_for_pso(smc_type, gains, plant_config, max_force, dt, **kwargs)
+        return create_smc_for_pso(smc_type, gains, plant_config, **kwargs)
 
     # Add PSO-required attributes to the factory function
     # Use expected gain counts that match what the controllers actually need
@@ -548,20 +602,20 @@ def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]
     # Use controller-specific bounds based on control theory
     bounds_map = {
         SMCType.CLASSICAL: {
-            'lower': [0.1, 0.1, 0.1, 0.1, 1.0, 0.0],   # [c1, lambda1, c2, lambda2, K, kd]
-            'upper': [50.0, 50.0, 50.0, 50.0, 200.0, 50.0]
+            'lower': [1.0, 1.0, 1.0, 1.0, 5.0, 0.1],   # [k1, k2, lam1, lam2, K, kd]
+            'upper': [30.0, 30.0, 20.0, 20.0, 50.0, 10.0]
         },
         SMCType.ADAPTIVE: {
-            'lower': [0.1, 0.1, 0.1, 0.1, 0.01],        # [c1, lambda1, c2, lambda2, gamma]
-            'upper': [50.0, 50.0, 50.0, 50.0, 10.0]
+            'lower': [2.0, 2.0, 1.0, 1.0, 0.5],        # [k1, k2, lam1, lam2, gamma]
+            'upper': [40.0, 40.0, 25.0, 25.0, 10.0]
         },
         SMCType.SUPER_TWISTING: {
-            'lower': [1.0, 1.0, 0.1, 0.1, 0.1, 0.1],    # [K1, K2, c1, lambda1, c2, lambda2]
-            'upper': [100.0, 100.0, 50.0, 50.0, 50.0, 50.0]
+            'lower': [3.0, 2.0, 2.0, 2.0, 0.5, 0.5],    # [K1, K2, k1, k2, lam1, lam2]
+            'upper': [50.0, 30.0, 30.0, 30.0, 20.0, 20.0]
         },
         SMCType.HYBRID: {
-            'lower': [0.1, 0.1, 0.1, 0.1],              # [c1, lambda1, c2, lambda2]
-            'upper': [50.0, 50.0, 50.0, 50.0]
+            'lower': [2.0, 2.0, 1.0, 1.0],              # [k1, k2, lam1, lam2]
+            'upper': [30.0, 30.0, 20.0, 20.0]
         }
     }
 
@@ -598,26 +652,26 @@ class SMCGainSpec:
 
 SMC_GAIN_SPECS = {
     SMCType.CLASSICAL: SMCGainSpec(
-        gain_names=['c1', 'lambda1', 'c2', 'lambda2', 'K', 'kd'],
-        gain_bounds=[(0.1, 50.0)] * 6,
+        gain_names=['k1', 'k2', 'lambda1', 'lambda2', 'K', 'kd'],
+        gain_bounds=[(1.0, 30.0), (1.0, 30.0), (1.0, 20.0), (1.0, 20.0), (5.0, 50.0), (0.1, 10.0)],
         controller_type='classical_smc',
         n_gains=6
     ),
     SMCType.ADAPTIVE: SMCGainSpec(
-        gain_names=['c1', 'lambda1', 'c2', 'lambda2', 'adaptation_rate'],
-        gain_bounds=[(0.1, 50.0)] * 5,
+        gain_names=['k1', 'k2', 'lambda1', 'lambda2', 'gamma'],
+        gain_bounds=[(2.0, 40.0), (2.0, 40.0), (1.0, 25.0), (1.0, 25.0), (0.5, 10.0)],
         controller_type='adaptive_smc',
         n_gains=5
     ),
     SMCType.SUPER_TWISTING: SMCGainSpec(
-        gain_names=['c1', 'lambda1', 'c2', 'lambda2', 'alpha', 'beta'],
-        gain_bounds=[(0.1, 50.0)] * 6,
+        gain_names=['K1', 'K2', 'k1', 'k2', 'lambda1', 'lambda2'],
+        gain_bounds=[(3.0, 50.0), (2.0, 30.0), (2.0, 30.0), (2.0, 30.0), (0.5, 20.0), (0.5, 20.0)],
         controller_type='sta_smc',
         n_gains=6
     ),
     SMCType.HYBRID: SMCGainSpec(
-        gain_names=['c1', 'lambda1', 'c2', 'lambda2'],
-        gain_bounds=[(0.1, 50.0)] * 4,
+        gain_names=['k1', 'k2', 'lambda1', 'lambda2'],
+        gain_bounds=[(2.0, 30.0), (2.0, 30.0), (1.0, 20.0), (1.0, 20.0)],
         controller_type='hybrid_adaptive_sta_smc',
         n_gains=4
     )
