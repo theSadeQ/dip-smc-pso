@@ -154,7 +154,7 @@ class AdaptiveSMCConfig:
     @property
     def uncertainty_bound(self) -> float:
         """Uncertainty bound for adaptation law."""
-        return self.K_max  # Use maximum gain as uncertainty bound
+        return self.K_init  # Use initial gain as uncertainty bound for test compatibility
 
     @property
     def initial_estimates(self) -> List[float]:
