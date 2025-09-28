@@ -57,13 +57,12 @@ def _create_fast_config(dst_config: Path):
             'pendulum2_length': 0.3,
             'pendulum1_com': 0.2,
             'pendulum2_com': 0.15,
-            'pendulum1_inertia': 0.00265,
-            'pendulum2_inertia': 0.00115,
+            'pendulum1_inertia': 0.0081,  # Fixed: above minimum physical bound (0.008)
+            'pendulum2_inertia': 0.0034,  # Fixed: above minimum physical bound
             'gravity': 9.81,
             'cart_friction': 0.2,
             'joint1_friction': 0.005,
-            'joint2_friction': 0.004,
-            'singularity_cond_threshold': 1e8
+            'joint2_friction': 0.004
         },
         'physics_uncertainty': {
             'n_evals': 1,

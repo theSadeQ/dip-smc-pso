@@ -25,7 +25,7 @@ class TestLowRankDIPConfig:
 
     def test_default_initialization(self):
         """Test default configuration initialization."""
-        config = LowRankDIPConfig()
+        config = LowRankDIPConfig.create_default()
 
         # Check basic physical parameters have sensible defaults
         assert config.cart_mass == 1.0
@@ -196,7 +196,7 @@ class TestLowRankDIPConfig:
 
     def test_upright_linearization_matrices(self):
         """Test linearization around upright equilibrium."""
-        config = LowRankDIPConfig()
+        config = LowRankDIPConfig.create_default()
         A, B = config.get_linearized_matrices("upright")
 
         assert isinstance(A, np.ndarray)
@@ -226,7 +226,7 @@ class TestLowRankDIPConfig:
 
     def test_downward_linearization_matrices(self):
         """Test linearization around downward equilibrium."""
-        config = LowRankDIPConfig()
+        config = LowRankDIPConfig.create_default()
         A, B = config.get_linearized_matrices("downward")
 
         assert A.shape == (6, 6)
@@ -280,7 +280,7 @@ class TestLowRankDIPConfig:
 
     def test_invalid_equilibrium_point(self):
         """Test invalid equilibrium point handling."""
-        config = LowRankDIPConfig()
+        config = LowRankDIPConfig.create_default()
 
         with pytest.raises(ValueError, match="Unknown equilibrium point"):
             config.get_linearized_matrices("invalid")
@@ -514,7 +514,7 @@ class TestLowRankConfigLinearizationConsistency:
 
     def test_upright_vs_downward_stability(self):
         """Test stability characteristics of different equilibria."""
-        config = LowRankDIPConfig()
+        config = LowRankDIPConfig.create_default()
 
         A_up, _ = config.get_linearized_matrices("upright")
         A_down, _ = config.get_linearized_matrices("downward")

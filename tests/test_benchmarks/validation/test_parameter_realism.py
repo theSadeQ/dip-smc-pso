@@ -307,7 +307,7 @@ class EngineeringParameterValidator:
                 'joint1_friction': 0.002,  # Precision bearings
                 'pendulum2_mass': 0.12,
                 'pendulum2_length': 0.35,
-                'pendulum2_inertia': 0.005,
+                'pendulum2_inertia': 0.008,
                 'joint2_friction': 0.001,
                 'gravity': 9.81,
                 'max_force': 50.0
@@ -873,11 +873,13 @@ class TestParameterRealism:
 
         # Test that system is controllable (not completely unstable)
         test_state = np.array([0.0, 0.1, 0.1, 0.0, 0.0, 0.0])  # Small angles
-        test_control = 1.0
+        test_control = np.array([1.0])
 
-        state_dot = dynamics.compute_dynamics(test_state, test_control)
+        result = dynamics.compute_dynamics(test_state, test_control)
 
         # System should respond to control input
+        assert result.success, "Dynamics computation should succeed"
+        state_dot = result.state_derivative
         assert np.any(np.abs(state_dot) > 1e-6), "System should respond to control input"
         assert np.all(np.isfinite(state_dot)), "System dynamics should be numerically stable"
 

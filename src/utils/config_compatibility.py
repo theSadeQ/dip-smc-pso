@@ -209,6 +209,17 @@ def wrap_physics_config(physics_config: Union[Dict[str, Any], Any]) -> Any:
         'max_condition_number': 1e12,
         'min_regularization': 1e-10,
         'use_fixed_regularization': False,
+        # Required physics parameters with sensible defaults
+        'cart_mass': 1.0,
+        'pendulum1_mass': 0.1,
+        'pendulum2_mass': 0.1,
+        'pendulum1_length': 0.5,
+        'pendulum2_length': 0.5,
+        'pendulum1_com': 0.25,  # Half of pendulum1_length
+        'pendulum2_com': 0.25,  # Half of pendulum2_length
+        'pendulum1_inertia': 0.02,
+        'pendulum2_inertia': 0.02,
+        'gravity': 9.81,
         # Additional parameters needed for full dynamics validation
         'cart_position_limits': (-5.0, 5.0),  # meters
         'cart_velocity_limit': 10.0,  # m/s

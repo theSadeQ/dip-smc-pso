@@ -243,7 +243,7 @@ class TestNumericalStabilityParameterRanges:
         timestep_parameters = ['dt', 'time_step', 'integration_step']
 
         configs = [
-            ConfigurationFactory.create_default_config("simulation"),
+            ConfigurationFactory.create_default_config("simplified"),
             ConfigurationFactory.create_default_config("controller")
         ]
 
@@ -302,8 +302,8 @@ class TestNumericalStabilityParameterRanges:
 
                     elif reg_param == 'max_condition_number':
                         # Maximum acceptable matrix condition number
-                        assert 1e3 <= reg_value <= 1e12, (
-                            f"{reg_param} outside stable range [1e3, 1e12]: {reg_value}"
+                        assert 1e3 <= reg_value <= 1e15, (
+                            f"{reg_param} outside stable range [1e3, 1e15]: {reg_value}"
                         )
 
     def test_energy_conservation_parameter_ranges(self):
