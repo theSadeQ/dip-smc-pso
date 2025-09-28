@@ -530,7 +530,7 @@ class TestAdvancedFactoryIntegration:
 
         controller = create_smc_for_pso(
             SMCType.CLASSICAL,
-            [20.0, 10.0, 15.0, 7.0],  # Robust high gains
+            [20.0, 10.0, 15.0, 7.0, 25.0, 5.0],  # 6 gains for robust classical SMC
             self.plant_config
         )
 
@@ -604,7 +604,7 @@ class TestAdvancedFactoryIntegration:
         """Test controller consistency over multiple time steps."""
         controller = create_smc_for_pso(
             SMCType.CLASSICAL,
-            [12.0, 7.0, 10.0, 4.0],
+            [12.0, 7.0, 10.0, 4.0, 18.0, 3.0],  # 6 gains for classical SMC
             self.plant_config
         )
 
@@ -637,9 +637,9 @@ class TestAdvancedFactoryIntegration:
         invalid_test_cases = [
             {'gains': [], 'description': 'empty gains'},
             {'gains': [10.0, 5.0], 'description': 'too few gains'},
-            {'gains': [np.nan, 5.0, 8.0, 3.0], 'description': 'NaN gain'},
-            {'gains': [np.inf, 5.0, 8.0, 3.0], 'description': 'infinite gain'},
-            {'gains': [-10.0, 5.0, 8.0, 3.0], 'description': 'negative gain'}
+            {'gains': [np.nan, 5.0, 8.0, 3.0, 15.0, 2.0], 'description': 'NaN gain'},
+            {'gains': [np.inf, 5.0, 8.0, 3.0, 15.0, 2.0], 'description': 'infinite gain'},
+            {'gains': [-10.0, 5.0, 8.0, 3.0, 15.0, 2.0], 'description': 'negative gain'}
         ]
 
         for test_case in invalid_test_cases:
