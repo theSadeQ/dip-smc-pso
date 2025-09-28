@@ -90,6 +90,8 @@ class TestPSOTuner:
         config.pso.c1 = 1.5
         config.pso.c2 = 1.5
         config.pso.iters = 3
+        # Disable weight scheduling for simpler testing
+        config.pso.w_schedule = None
         # Set deprecated fields to None to avoid validation errors
         config.pso.n_processes = None
         config.pso.hyper_trials = None
@@ -232,6 +234,8 @@ class TestPSOTuner:
         mock_optimizer.optimize.return_value = (1.5, np.array([5, 5, 5, 2, 20, 1]))
         mock_optimizer.cost_history = [2.0, 1.8, 1.5]
         mock_optimizer.pos_history = [np.array([5, 5, 5, 2, 20, 1])]
+        # Make options property support item assignment for weight scheduling
+        mock_optimizer.options = {}
         mock_pso_class.return_value = mock_optimizer
 
         mock_simulate.return_value = (
