@@ -54,7 +54,7 @@ from src.controllers.smc.core import (
 
 
 @dataclass
-class TestSystemState:
+class SystemStateForTesting:  # Renamed to avoid pytest collection
     """Test system state for SMC testing."""
     position: np.ndarray
     velocity: np.ndarray

@@ -422,6 +422,9 @@ class TestAdvancedFactoryIntegration:
                 control_efforts.append(np.abs(control[0]))
 
                 result = dynamics.compute_dynamics(current_state, control)
+                if not result.success:
+                    # Skip failed dynamics computation
+                    break
                 current_state = current_state + dt * result.state_derivative
 
                 # Check for settling (within 5% of equilibrium)

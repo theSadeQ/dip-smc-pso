@@ -31,7 +31,7 @@ from src.analysis.validation.metrics import (
 from src.analysis.validation.statistical_tests import (
     StatisticalTestSuite,
     StatisticalTestConfig,
-    TestType,
+    TestType as StatTestType,  # Alias to avoid pytest collection
     AlternativeHypothesis,
     create_statistical_test_suite
 )
