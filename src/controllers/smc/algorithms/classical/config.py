@@ -72,11 +72,17 @@ class ClassicalSMCConfig:
         if any(g < 1e-12 for g in [k1, k2, lam1, lam2]):
             raise ValueError("Surface gains are too small (minimum: 1e-12) which may cause numerical instability")
 
+        # Check for extremely large gains that might cause numerical issues
+        if any(g > 1e5 for g in [k1, k2, lam1, lam2]):
+            raise ValueError("Surface gains are too large (maximum: 1e5) which may cause numerical instability")
+
         # Switching gain must be positive for reaching condition
         if K <= 0:
             raise ValueError("Switching gain K must be positive")
         if K < 1e-12:
             raise ValueError("Switching gain K is too small (minimum: 1e-12) which may cause numerical instability")
+        if K > 1e5:
+            raise ValueError("Switching gain K is too large (maximum: 1e5) which may cause numerical instability")
 
         # Derivative gain must be non-negative
         if kd < 0:

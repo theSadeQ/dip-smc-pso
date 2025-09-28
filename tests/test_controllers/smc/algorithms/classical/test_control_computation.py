@@ -124,11 +124,15 @@ class TestControlComputation:
                 sign_product = np.sign(control_pos) * np.sign(control_neg)
                 assert np.any(sign_product <= 0)  # Some components should oppose
 
-    def test_control_saturation_behavior(self):
+    def test_control_saturation_behavior(self, classical_smc_config):
         """Test control saturation with extreme states."""
         # Low force limit configuration
-        low_force_config = classical_smc_config()
-        low_force_config.max_force = 5.0  # Very low limit
+        from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
+        low_force_config = ClassicalSMCConfig(
+            gains=classical_smc_config.gains,
+            max_force=5.0,  # Very low limit
+            boundary_layer=classical_smc_config.boundary_layer
+        )
         low_force_controller = ModularClassicalSMC(config=low_force_config)
 
         # Extreme state that should cause saturation

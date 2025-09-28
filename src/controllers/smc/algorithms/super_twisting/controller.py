@@ -125,8 +125,11 @@ class ModularSuperTwistingSMC:
             # Return appropriate format based on interface
             if dt is not None or (state_vars is None and history is None):
                 # Test interface: return numpy array
-                # For DIP system, return 3-DOF control (cart + 2 pendulums)
-                return np.array([u_saturated, 0.0, 0.0])  # Only cart control is active
+                # Check expected shape based on state dimension
+                if len(state) == 4:  # 2-DOF system
+                    return np.array([u_saturated, 0.0])  # 2-DOF control
+                else:  # 3-DOF or DIP system
+                    return np.array([u_saturated, 0.0, 0.0])  # 3-DOF control
             else:
                 # Standard interface: return dictionary
                 return control_result
@@ -138,7 +141,14 @@ class ModularSuperTwistingSMC:
             # Return appropriate format based on interface
             if dt is not None or (state_vars is None and history is None):
                 # Test interface: return zero control array
-                return np.zeros(3)
+                # Check expected shape based on state dimension if available
+                try:
+                    if len(state) == 4:  # 2-DOF system
+                        return np.zeros(2)
+                    else:  # 3-DOF or DIP system
+                        return np.zeros(3)
+                except:
+                    return np.zeros(3)  # Default to 3-DOF
             else:
                 # Standard interface: return error dictionary
                 return error_result
