@@ -88,6 +88,9 @@ except ImportError:
         def compute(self, sigma):
             """Switching function computation."""
             if self.method == 'tanh':
+                if self.boundary_layer == 0.0:
+                    # Fall back to sign function for zero boundary layer
+                    return np.sign(sigma)
                 return np.tanh(sigma / self.boundary_layer)
             elif self.method == 'sign':
                 return np.sign(sigma)
