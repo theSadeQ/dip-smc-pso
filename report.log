@@ -22401,3 +22401,57 @@
 2025-09-28 09:54:53,388 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
 2025-09-28 09:54:53,440 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
 2025-09-28 09:54:53,496 - project.config - INFO - Configuration loaded from sources: ENV > .env > D:\Projects\main\config.yaml
+2025-09-28 09:59:30,845 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
+2025-09-28 09:59:30,906 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
+2025-09-28 09:59:30,974 - project.config - INFO - Configuration loaded from sources: ENV > .env > D:\Projects\main\config.yaml
+2025-09-28 09:59:59,907 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
+2025-09-28 09:59:59,950 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
+2025-09-28 09:59:59,989 - project.config - INFO - Configuration loaded from sources: ENV > .env > D:\Projects\main\config.yaml
+2025-09-28 10:00:10,179 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
+2025-09-28 10:00:10,230 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
+2025-09-28 10:00:22,344 - project.config - INFO - Configuration loaded from sources: ENV > .env > config.yaml
+2025-09-28 10:00:22,392 - project.config - INFO - Configuration loaded from sources: ENV > .env > config.yaml
+2025-09-28 10:00:25,945 - factory_module - INFO - Created classical_smc controller with gains: [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]
+2025-09-28 10:00:25,946 - ModularClassicalSMC - ERROR - Control computation failed: State must have at least 6 elements for double-inverted pendulum
+2025-09-28 10:00:25,980 - factory_module - INFO - Created sta_smc controller with gains: [15.0, 8.0, 12.0, 5.0, 20.0, 3.0]
+2025-09-28 10:00:25,980 - ModularSuperTwistingSMC - ERROR - Super-Twisting control computation failed: State must have at least 6 elements for double-inverted pendulum
+2025-09-28 10:00:25,981 - ModularSuperTwistingSMC - ERROR - Super-Twisting control computation failed: State must have at least 6 elements for double-inverted pendulum
+2025-09-28 10:00:34,685 - src.optimization.algorithms.pso_optimizer - WARNING - n_particles=5 is outside the recommended range [10,50] for PSO
+2025-09-28 10:00:34,691 - pyswarms.single.global_best - INFO - Optimize for 3 iters with {'c1': 2.0, 'c2': 2.0, 'w': 0.7}
+2025-09-28 10:00:34,702 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,703 - factory_module - INFO - Created classical_smc controller with gains: [77.62164880704037, 44.448965535453176, 17.313360478316266, 14.249992552127914, 18.655715443709184, 9.758661281203883]
+2025-09-28 10:00:34,704 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,705 - factory_module - INFO - Created classical_smc controller with gains: [77.62164880704037, 44.448965535453176, 17.313360478316266, 14.249992552127914, 18.655715443709184, 9.758661281203883]
+2025-09-28 10:00:34,705 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,706 - factory_module - INFO - Created classical_smc controller with gains: [76.35283049704495, 78.82036622241843, 3.434159020835372, 9.557332820015775, 58.76571351372428, 9.274973389601158]
+2025-09-28 10:00:34,706 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,706 - factory_module - INFO - Created classical_smc controller with gains: [64.74264688798579, 82.45339971381216, 9.424869777719291, 5.317535713910761, 85.41479411729604, 0.7317908354313357]
+2025-09-28 10:00:34,706 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,707 - factory_module - INFO - Created classical_smc controller with gains: [82.93548602726563, 63.53477551308442, 15.403667061622103, 7.735993394467499, 145.75121353726098, 8.941899101089756]
+2025-09-28 10:00:34,707 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,707 - factory_module - INFO - Created classical_smc controller with gains: [78.05996621030242, 20.26923207734479, 9.86769907081365, 1.8322715499573468, 27.371976349794434, 6.862184637100301]
+2025-09-28 10:00:34,711 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,711 - factory_module - INFO - Created classical_smc controller with gains: [78.04693020337137, 44.56833242203428, 17.358896593405962, 14.914212428205246, 19.331657866861377, 0.4245394248854065]
+2025-09-28 10:00:34,713 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,713 - factory_module - INFO - Created classical_smc controller with gains: [78.04693020337137, 44.56833242203428, 17.358896593405962, 14.914212428205246, 19.331657866861377, 0.4245394248854065]
+2025-09-28 10:00:34,714 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,714 - factory_module - INFO - Created classical_smc controller with gains: [77.89256610577749, 49.498369397993145, 4.6187165013029565, 10.878035075416689, 56.32989112364151, 0.33724524671544953]
+2025-09-28 10:00:34,716 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,716 - factory_module - INFO - Created classical_smc controller with gains: [72.86390141986304, 44.43404128044434, 4.924675144318446, 10.234885466909079, 30.839420180094336, 4.836362935823894]
+2025-09-28 10:00:34,717 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,717 - factory_module - INFO - Created classical_smc controller with gains: [80.88659080738864, 60.72572576977723, 17.189049185271276, 10.378977029559305, 55.08809039458578, 0.988362572404489]
+2025-09-28 10:00:34,718 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,719 - factory_module - INFO - Created classical_smc controller with gains: [77.92323241593003, 63.05791362183065, 2.897384156760417, 6.603009430861401, 11.844081242206217, 0.3143002824088782]
+2025-09-28 10:00:34,720 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,721 - factory_module - INFO - Created classical_smc controller with gains: [76.88531145907187, 44.38077047144769, 17.348614689155358, 14.582760486561146, 18.164189558222375, 3.412753215608053]
+2025-09-28 10:00:34,722 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,723 - factory_module - INFO - Created classical_smc controller with gains: [76.88531145907187, 44.38077047144769, 17.348614689155358, 14.582760486561146, 18.164189558222375, 3.412753215608053]
+2025-09-28 10:00:34,723 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,724 - factory_module - INFO - Created classical_smc controller with gains: [76.08714181099373, 71.75820042389783, 11.464884374289152, 15.364465548019297, 28.946440876894957, 6.995546585603153]
+2025-09-28 10:00:34,724 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,725 - factory_module - INFO - Created classical_smc controller with gains: [82.63021392897322, 43.508306881386574, 6.79823637976142, 17.206084514809362, 41.44646358370014, 0.8045789068902319]
+2025-09-28 10:00:34,725 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,726 - factory_module - INFO - Created classical_smc controller with gains: [80.67618511725156, 44.983313848639725, 15.170602085021036, 11.026576085709893, 87.97457661977731, 1.2098514674923089]
+2025-09-28 10:00:34,726 - factory_module - WARNING - Could not create full config, using minimal config: Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]
+2025-09-28 10:00:34,727 - factory_module - INFO - Created classical_smc controller with gains: [77.51626632606545, 83.36375136524629, 1.7369585976621664, 11.060943562501421, 15.334592023958647, 8.907465764274635]
+2025-09-28 10:00:34,728 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.0, best pos: [77.62164881 44.44896554 17.31336048 14.24999255 18.65571544  9.75866128]

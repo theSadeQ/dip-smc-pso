@@ -42,6 +42,11 @@ class TestControllerFactoryInterfaceCompatibility:
         Addresses: AttributeError: 'dict' object has no attribute issues.
         """
         for controller_type in self.controller_types:
+            # Skip controllers that are not available (like MPC without dependencies)
+            controller_info = CONTROLLER_REGISTRY.get(controller_type, {})
+            if controller_info.get('class') is None:
+                continue
+
             # Test with None config
             controller = create_controller(controller_type, config=None)
             assert controller is not None, f"Factory failed for {controller_type} with None config"
@@ -89,6 +94,10 @@ class TestControllerFactoryInterfaceCompatibility:
         Prevents factory crashes on edge cases.
         """
         for controller_type in self.controller_types:
+            # Skip controllers that are not available (like MPC without dependencies)
+            controller_info = CONTROLLER_REGISTRY.get(controller_type, {})
+            if controller_info.get('class') is None:
+                continue
             # Test with invalid gains (should handle gracefully)
             invalid_gains_cases = [
                 [],  # Empty gains
