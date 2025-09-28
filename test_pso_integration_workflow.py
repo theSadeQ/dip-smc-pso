@@ -13,14 +13,15 @@ Tests:
 4. End-to-end PSO optimization workflow
 """
 
+from typing import List, Callable, Tuple, Any
 import numpy as np
 from src.controllers.factory import (
-    SMCType, create_smc_for_pso, get_gain_bounds_for_pso, validate_smc_gains
+    SMCType, create_smc_for_pso, get_gain_bounds_for_pso, validate_smc_gains, PSOControllerWrapper
 )
 from src.plant.configurations import ConfigurationFactory
 
 
-def test_pso_controller_creation():
+def test_pso_controller_creation() -> PSOControllerWrapper:
     """Test PSO controller creation and basic functionality."""
     print("=== Testing PSO Controller Creation ===")
 
@@ -44,7 +45,7 @@ def test_pso_controller_creation():
     return controller
 
 
-def test_gain_bounds():
+def test_gain_bounds() -> Tuple[List[float], List[float]]:
     """Test gain bounds retrieval for PSO."""
     print("\n=== Testing Gain Bounds Retrieval ===")
 
@@ -65,7 +66,7 @@ def test_gain_bounds():
     return bounds
 
 
-def test_gain_validation():
+def test_gain_validation() -> bool:
     """Test gain validation."""
     print("\n=== Testing Gain Validation ===")
 
@@ -84,13 +85,13 @@ def test_gain_validation():
     return True
 
 
-def test_pso_fitness_function():
+def test_pso_fitness_function() -> Callable[[List[float]], float]:
     """Test a simplified PSO fitness function."""
     print("\n=== Testing PSO Fitness Function ===")
 
     plant_config = ConfigurationFactory.create_default_config("simplified")
 
-    def fitness_function(gains):
+    def fitness_function(gains: List[float]) -> float:
         """Simplified fitness function for PSO testing."""
         try:
             # Create controller
@@ -135,7 +136,7 @@ def test_pso_fitness_function():
     return fitness_function
 
 
-def test_multiple_smc_types():
+def test_multiple_smc_types() -> bool:
     """Test PSO integration with multiple SMC types."""
     print("\n=== Testing Multiple SMC Types ===")
 
@@ -167,7 +168,7 @@ def test_multiple_smc_types():
     return True
 
 
-def main():
+def main() -> bool:
     """Run all PSO integration tests."""
     print("PSO OPTIMIZATION ENGINEER - INTEGRATION VALIDATION")
     print("=" * 60)

@@ -21,7 +21,7 @@ Design Principles:
 
 from __future__ import annotations
 from enum import Enum
-from typing import Protocol, Union, List, Optional, Type, Dict, Any
+from typing import Protocol, Union, List, Optional, Type, Dict, Any, Tuple
 from dataclasses import dataclass
 import numpy as np
 
@@ -127,6 +127,9 @@ class PSOControllerWrapper:
                 control_value = result['u']
             elif isinstance(result, dict) and 'control' in result:
                 control_value = result['control']
+            elif isinstance(result, tuple) and len(result) > 0:
+                # Handle tuple returns (like early return from Hybrid controller)
+                control_value = result[0]  # First element should be control value
             else:
                 # Fallback: assume result is the control value
                 control_value = result

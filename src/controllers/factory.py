@@ -21,25 +21,45 @@ except ImportError:
     except ImportError:
         # Fallback for legacy import paths
         try:
-            from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics as DoubleInvertedPendulum
+            from src.plant.models.simplified.dynamics import (
+                SimplifiedDIPDynamics as DoubleInvertedPendulum
+            )
         except ImportError:
-            raise ImportError("Could not import DoubleInvertedPendulum from any expected location")
+            raise ImportError(
+                "Could not import DoubleInvertedPendulum from any expected location"
+            )
 
 # Import controller implementations
-from src.controllers.smc.algorithms.classical.controller import ModularClassicalSMC
-from src.controllers.smc.algorithms.super_twisting.controller import ModularSuperTwistingSMC
-from src.controllers.smc.algorithms.adaptive.controller import ModularAdaptiveSMC
-from src.controllers.smc.algorithms.hybrid.controller import ModularHybridSMC
+from src.controllers.smc.algorithms.classical.controller import (
+    ModularClassicalSMC
+)
+from src.controllers.smc.algorithms.super_twisting.controller import (
+    ModularSuperTwistingSMC
+)
+from src.controllers.smc.algorithms.adaptive.controller import (
+    ModularAdaptiveSMC
+)
+from src.controllers.smc.algorithms.hybrid.controller import (
+    ModularHybridSMC
+)
 
 # Import enums needed for configuration
 from src.controllers.smc.algorithms.hybrid.config import HybridMode
 
 # Import configuration classes
 try:
-    from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
-    from src.controllers.smc.algorithms.super_twisting.config import SuperTwistingSMCConfig as STASMCConfig
-    from src.controllers.smc.algorithms.adaptive.config import AdaptiveSMCConfig
-    from src.controllers.smc.algorithms.hybrid.config import HybridSMCConfig as HybridAdaptiveSTASMCConfig
+    from src.controllers.smc.algorithms.classical.config import (
+        ClassicalSMCConfig
+    )
+    from src.controllers.smc.algorithms.super_twisting.config import (
+        SuperTwistingSMCConfig as STASMCConfig
+    )
+    from src.controllers.smc.algorithms.adaptive.config import (
+        AdaptiveSMCConfig
+    )
+    from src.controllers.smc.algorithms.hybrid.config import (
+        HybridSMCConfig as HybridAdaptiveSTASMCConfig
+    )
 except ImportError:
     # Create minimal config classes if the full ones don't exist
     from dataclasses import dataclass
