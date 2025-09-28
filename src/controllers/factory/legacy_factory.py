@@ -1,10 +1,19 @@
-#==========================================================================================\\
-#===================== src/controllers/factory/legacy_factory.py ========================\\
-#==========================================================================================\\
+#==========================================================================================\\\
+#==================== src/controllers/factory/legacy_factory.py =====================\\\
+#==========================================================================================\\\
 
 """Controller factory with Pydantic v2 config alignment and robust error handling."""
 
+# Standard library imports
+import logging
+import math
+import threading
+import warnings
+from collections.abc import MutableMapping
 from typing import Optional, List, Any, Dict, Callable, Union, Type, Mapping
+
+# Third-party imports
+import numpy as np
 
 # Exported public API
 __all__ = [
@@ -19,12 +28,6 @@ __all__ = [
     "ConfigValueError",
     "UnknownConfigKeyError"
 ]
-import numpy as np
-import math
-import logging
-import warnings
-import threading
-from collections.abc import MutableMapping
 # --- module logger (module-level; safe even if logging configured elsewhere) ---
 logger = logging.getLogger("project.factory")
 if not logger.handlers:
@@ -163,7 +166,7 @@ DEPRECATED_PARAM_MAP: Dict[str, Dict[str, str]] = {
 }
 
 # ---------- DRY import helper ----------
-def _try_import(primary_mod: str, fallback_mod: str, attr: str):
+def _try_import(primary_mod: str, fallback_mod: str, attr: str) -> Any:
     """Try importing ``attr`` from ``primary_mod`` then ``fallback_mod``."""
     try:
         mod = __import__(primary_mod, fromlist=[attr])
@@ -691,7 +694,7 @@ def _legacy_create_controller(
         raise FactoryConfigurationError(f"Controller '{ctrl_name}' is not a recognized type.")
 
 # Individual controller builders (legacy)
-def _build_classical_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt, shared_max_force, allow_unknown):
+def _build_classical_smc(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, gains: List[float], dynamics_model: Optional[Any], shared_dt: float, shared_max_force: float, allow_unknown: bool) -> Any:
     if ClassicalSMC is None:
         raise ImportError(
             "Controller 'classical_smc' is unavailable (import error). Ensure required modules are importable."
@@ -738,7 +741,7 @@ def _build_classical_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shar
     
     return instance
 
-def _build_sta_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt, shared_max_force, allow_unknown):
+def _build_sta_smc(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, gains: List[float], dynamics_model: Optional[Any], shared_dt: float, shared_max_force: float, allow_unknown: bool) -> Any:
     if SuperTwistingSMC is None:
         raise ImportError(
             "Controller 'sta_smc' is unavailable (import error). Ensure required modules are importable."
@@ -788,7 +791,7 @@ def _build_sta_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt,
     
     return instance
 
-def _build_adaptive_smc(key, ctrl_cfg_dict, config, gains, shared_dt, shared_max_force, allow_unknown):
+def _build_adaptive_smc(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, gains: List[float], shared_dt: float, shared_max_force: float, allow_unknown: bool) -> Any:
     if AdaptiveSMC is None:
         raise ImportError(
             "Controller 'adaptive_smc' is unavailable (import error). Ensure required modules are importable."
@@ -823,7 +826,7 @@ def _build_adaptive_smc(key, ctrl_cfg_dict, config, gains, shared_dt, shared_max
     
     return instance
 
-def _build_swing_up_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt, shared_max_force, allow_unknown):
+def _build_swing_up_smc(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, gains: List[float], dynamics_model: Optional[Any], shared_dt: float, shared_max_force: float, allow_unknown: bool) -> Any:
     if SwingUpSMC is None:
         raise ImportError(
             "Controller 'swing_up_smc' is unavailable (import error). Ensure required modules are importable."
@@ -876,7 +879,7 @@ def _build_swing_up_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, share
     
     return instance
 
-def _build_hybrid_adaptive_sta_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt, shared_max_force, allow_unknown):
+def _build_hybrid_adaptive_sta_smc(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, gains: List[float], dynamics_model: Optional[Any], shared_dt: float, shared_max_force: float, allow_unknown: bool) -> Any:
     if HybridAdaptiveSTASMC is None:
         raise ImportError(
             "Controller 'hybrid_adaptive_sta_smc' is unavailable (import error)."
@@ -936,7 +939,7 @@ def _build_hybrid_adaptive_sta_smc(key, ctrl_cfg_dict, config, gains, dynamics_m
     
     return instance
 
-def _build_mpc_controller(key, ctrl_cfg_dict, config, gains, shared_dt, shared_max_force, allow_unknown):
+def _build_mpc_controller(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, gains: List[float], shared_dt: float, shared_max_force: float, allow_unknown: bool) -> Any:
     if MPCController is None:
         raise ImportError(
             "Controller 'mpc_controller' is unavailable (missing optional dependency)."

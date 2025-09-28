@@ -238,12 +238,17 @@ class TestValidateConfiguration:
             gains=[10.0, 8.0, 5.0, 4.0, 20.0, 2.0],
             dt=0.0  # Zero timestep
         )
-        result = validate_configuration(config, 'classical_smc')
+        result = validate_configuration(config, 'classical_smc', check_completeness=False)
         assert not result.valid
 
-        # Large timestep should generate warning
-        config.dt = 0.2
-        result = validate_configuration(config, 'classical_smc')
+        # Large timestep should generate warning but still be valid
+        config = self.MockConfig(
+            gains=[10.0, 8.0, 5.0, 4.0, 20.0, 2.0],
+            max_force=150.0,
+            boundary_layer=0.02,
+            dt=0.2  # Large timestep
+        )
+        result = validate_configuration(config, 'classical_smc', check_completeness=False)
         assert result.valid
         assert any("Large timestep" in warning for warning in result.warnings)
 

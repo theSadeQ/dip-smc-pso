@@ -42,7 +42,7 @@ class ControllerDeprecationWarner:
     backward compatibility during transition periods.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.logger = logging.getLogger(__name__)
         self._deprecation_mappings = self._initialize_deprecation_mappings()
 
