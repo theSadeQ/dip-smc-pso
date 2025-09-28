@@ -106,6 +106,9 @@ class ModularHybridSMC:
         self.control_history = []
         self.switching_history = []
 
+        # Current mode for compatibility with tests (Control Systems Specialist interface fix)
+        self._current_mode = config.hybrid_mode
+
     def _initialize_controllers(self) -> None:
         """Initialize individual SMC controllers based on hybrid mode."""
         active_controllers = self.config.get_active_controllers()
