@@ -196,8 +196,8 @@ class TestFactoryRobustness:
 
     def test_factory_handles_extreme_gains(self):
         """Test factory with extreme gain values."""
-        # Very small gains
-        small_gains = [0.01, 0.01, 0.01, 0.01]
+        # Very small gains (6 gains for classical SMC)
+        small_gains = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
         controller = create_smc_for_pso(
             SMCType.CLASSICAL,
             small_gains,
@@ -205,8 +205,8 @@ class TestFactoryRobustness:
         )
         assert controller is not None
 
-        # Large gains
-        large_gains = [100.0, 100.0, 100.0, 100.0]
+        # Large gains (6 gains for classical SMC)
+        large_gains = [100.0, 100.0, 100.0, 100.0, 100.0, 100.0]
         controller = create_smc_for_pso(
             SMCType.CLASSICAL,
             large_gains,
@@ -254,7 +254,7 @@ class TestFactoryRobustness:
         initial_objects = len(gc.get_objects())
 
         # Create many controllers
-        gains = [10.0, 5.0, 8.0, 3.0]
+        gains = [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]  # 6 gains for classical SMC
         controllers = []
 
         for _ in range(50):
@@ -292,7 +292,7 @@ class TestFactoryIntegration:
         dynamics = SimplifiedDIPDynamics(self.plant_config)
         controller = create_smc_for_pso(
             SMCType.CLASSICAL,
-            [10.0, 5.0, 8.0, 3.0],
+            [10.0, 5.0, 8.0, 3.0, 15.0, 2.0],  # 6 gains for classical SMC
             self.plant_config
         )
 
@@ -312,8 +312,8 @@ class TestFactoryIntegration:
     def test_multiple_controller_types(self):
         """Test creating multiple controller types."""
         controller_configs = [
-            (SMCType.CLASSICAL, [10.0, 5.0, 8.0, 3.0]),
-            (SMCType.ADAPTIVE, [10.0, 5.0, 8.0, 3.0, 2.0, 1.5]),
+            (SMCType.CLASSICAL, [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]),  # 6 gains for classical SMC
+            (SMCType.ADAPTIVE, [10.0, 5.0, 8.0, 3.0, 2.0]),  # 5 gains for adaptive SMC
         ]
 
         controllers = []
@@ -346,11 +346,11 @@ class TestAdvancedFactoryIntegration:
         }
         self.controller_specs = {
             SMCType.CLASSICAL: {
-                'gains': [15.0, 8.0, 12.0, 5.0],
+                'gains': [15.0, 8.0, 12.0, 5.0, 20.0, 3.0],  # 6 gains for classical SMC
                 'description': 'Classical sliding mode controller'
             },
             SMCType.ADAPTIVE: {
-                'gains': [15.0, 8.0, 12.0, 5.0, 2.5, 1.8],
+                'gains': [15.0, 8.0, 12.0, 5.0, 2.5],  # 5 gains for adaptive SMC
                 'description': 'Adaptive sliding mode controller'
             }
         }
@@ -443,7 +443,7 @@ class TestAdvancedFactoryIntegration:
 
     def test_gain_sensitivity_analysis(self):
         """Test controller sensitivity to gain variations."""
-        base_gains = [15.0, 8.0, 12.0, 5.0]
+        base_gains = [15.0, 8.0, 12.0, 5.0, 20.0, 3.0]  # 6 gains for classical SMC
         gain_variations = [0.5, 0.8, 1.0, 1.2, 1.5]  # Scaling factors
 
         performance_results = []
