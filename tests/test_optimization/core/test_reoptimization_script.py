@@ -1,3 +1,7 @@
+#=======================================================================================\\\
+#============== tests/test_optimization/core/test_reoptimization_script.py ==============\\\
+#=======================================================================================\\\
+
 """
 Script-level test for scripts/reoptimize_controllers.py.
 Skips gracefully if the script isn't present.

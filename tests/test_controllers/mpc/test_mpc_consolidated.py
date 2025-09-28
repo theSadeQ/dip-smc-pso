@@ -1,3 +1,7 @@
+#=======================================================================================\\\
+#================== tests/test_controllers/mpc/test_mpc_consolidated.py =================\\\
+#=======================================================================================\\\
+
 import sys, pathlib, importlib, pytest
 
 factory = importlib.import_module("src.controllers.factory")

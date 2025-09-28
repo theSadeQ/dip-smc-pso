@@ -1,6 +1,7 @@
-#==========================================================================================\\\
-#================= src/interfaces/data_exchange/factory_resilient.py ====================\\\
-#==========================================================================================\\\
+#=======================================================================================\\\
+#=================== src/interfaces/data_exchange/factory_resilient.py ==================\\\
+#=======================================================================================\\\
+
 """
 RESILIENT Factory for serializers and data exchange components.
 This is a production-hardened version that eliminates Single Points of Failure (SPOFs)

@@ -1,6 +1,7 @@
-#==========================================================================================\\
-#======== tests/test_controllers/smc/algorithms/classical/test_modular_controller.py ====\\
-#==========================================================================================\\
+#=======================================================================================\\\
+#====== tests/test_controllers/smc/algorithms/classical/test_modular_controller.py ======\\\
+#=======================================================================================\\\
+
 """
 Tests for Modular Classical SMC Controller.
 SINGLE JOB: Test only modular classical SMC controller integration and interfaces.

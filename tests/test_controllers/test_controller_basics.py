@@ -1,6 +1,7 @@
-#==========================================================================================\\
-#=================== tests/test_controllers/test_controller_basics.py ===================\\
-#==========================================================================================\\
+#=======================================================================================\\\
+#=================== tests/test_controllers/test_controller_basics.py ===================\\\
+#=======================================================================================\\\
+
 """
 Basic sanity tests for the core controllers and the factory.
 
@@ -45,9 +46,9 @@ def test_sta_smc_state_vars_signature() -> None:
 @pytest.mark.parametrize(
     "ctrl_name, expected_class, gains",
     [
-        ("classical_smc", ClassicalSMC, [1, 1, 1, 1, 1, 1]),
-        ("sta_smc", SuperTwistingSMC, [1, 1, 1, 1, 1, 1]),
-        ("adaptive_smc", AdaptiveSMC, [1, 1, 1, 1, 1, 1, 1]),
+        ("classical_smc", ClassicalSMC, [1, 1, 1, 1, 1, 1]),           # 6 gains
+        ("sta_smc", SuperTwistingSMC, [2, 1, 1, 1, 1, 1]),             # 6 gains, K1=2 > K2=1
+        ("adaptive_smc", AdaptiveSMC, [1, 1, 1, 1, 1]),                # 5 gains
     ],
 )
 def test_create_controller_types(ctrl_name, expected_class, gains) -> None:

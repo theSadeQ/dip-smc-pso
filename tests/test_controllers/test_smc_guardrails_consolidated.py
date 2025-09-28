@@ -1,3 +1,7 @@
+#=======================================================================================\\\
+#============== tests/test_controllers/test_smc_guardrails_consolidated.py ==============\\\
+#=======================================================================================\\\
+
 import sys, pathlib, importlib, numpy as np, pytest
 
 factory = importlib.import_module("src.controllers.factory")

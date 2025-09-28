@@ -1,6 +1,7 @@
-#==========================================================================================\\\
-#=========== src/interfaces/monitoring/metrics_collector_deadlock_free.py ==============\\\
-#==========================================================================================\\\
+#=======================================================================================\\\
+#============= src/interfaces/monitoring/metrics_collector_deadlock_free.py =============\\\
+#=======================================================================================\\\
+
 """
 DEADLOCK-FREE Metrics Collection System - Production Ready
 This version eliminates the deadlock issues found in the previous thread-safe implementation

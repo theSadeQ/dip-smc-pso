@@ -1,3 +1,7 @@
+#=======================================================================================\\\
+#===================== tests/test_plant/core/test_dynamics_extra.py =====================\\\
+#=======================================================================================\\\
+
 """Additional invariants for the high‑fidelity dynamics model.
 
 This module contains supplementary tests for the full double inverted
