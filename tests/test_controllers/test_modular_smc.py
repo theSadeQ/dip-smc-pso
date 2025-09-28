@@ -184,10 +184,11 @@ class TestModularAdaptiveSMC:
 
     def test_uncertainty_estimator(self, config: AdaptiveSMCConfig):
         """Test uncertainty estimation component."""
-        estimator = UncertaintyEstimator(config.initial_estimates)
+        estimator = UncertaintyEstimator(window_size=50, initial_estimate=1.0)
 
         # Test initial state
-        assert estimator.current_estimates.shape == (3,)
+        assert isinstance(estimator.eta_hat, float)
+        assert estimator.eta_hat > 0
 
         # Test update
         sliding_surface = np.array([0.1, 0.2, 0.3])
@@ -212,14 +213,14 @@ class TestModularAdaptiveSMC:
         state = np.array([0.1, 0.2, 0.3, 0.1, 0.1, 0.1])
 
         # Get initial estimates
-        initial_estimates = controller.uncertainty_estimator.current_estimates.copy()
+        initial_estimates = controller._uncertainty_estimator.current_estimates.copy()
 
         # Run several control steps
         for _ in range(10):
             controller.compute_control(state, dt=0.01)
 
         # Estimates should have changed
-        final_estimates = controller.uncertainty_estimator.current_estimates
+        final_estimates = controller._uncertainty_estimator.current_estimates
         assert not np.allclose(initial_estimates, final_estimates)
 
 
@@ -247,10 +248,12 @@ class TestModularSuperTwistingSMC:
 
     def test_twisting_algorithm_initialization(self, config: SuperTwistingSMCConfig):
         """Test Super-Twisting algorithm component initialization."""
-        algorithm = SuperTwistingAlgorithm(config.alpha, config.beta)
+        # Extract K1 and K2 from gains array [K1, K2, k1, k2, lam1, lam2]
+        K1, K2 = config.gains[0], config.gains[1]
+        algorithm = SuperTwistingAlgorithm(K1, K2)
 
-        assert algorithm.alpha.shape == (3,)
-        assert algorithm.beta.shape == (3,)
+        assert algorithm.K1 > 0
+        assert algorithm.K2 > 0
 
     def test_super_twisting_control_computation(self, controller: ModularSuperTwistingSMC):
         """Test Super-Twisting control computation."""
@@ -294,14 +297,12 @@ class TestModularHybridSMC:
             K_init=10.0
         )
         return HybridSMCConfig(
+            hybrid_mode=HybridMode.CLASSICAL_ADAPTIVE,
+            dt=0.01,
+            max_force=50.0,
             classical_config=classical_config,
             adaptive_config=adaptive_config,
-            hybrid_mode=HybridMode.CLASSICAL_ADAPTIVE,
-            switching_thresholds={
-                SwitchingCriterion.TRACKING_ERROR: 0.1,
-                SwitchingCriterion.SURFACE_MAGNITUDE: 0.05,
-                SwitchingCriterion.CONTROL_EFFORT: 30.0
-            },
+            switching_thresholds=[0.1, 1.0],  # Use list instead of dict
             hysteresis_margin=0.02
         )
 
@@ -444,7 +445,7 @@ class TestComponentIntegration:
         """Test sliding surface integrates with controllers."""
         from src.controllers.smc.core import LinearSlidingSurface
 
-        lambda_gain = np.array([1.0, 1.0, 1.0])
+        lambda_gain = np.array([1.0, 1.0, 1.0, 1.0])  # Need 4 gains [k1, k2, lam1, lam2]
         surface = LinearSlidingSurface(lambda_gain)
 
         state = np.array([0.1, 0.2, 0.3, 0.1, 0.1, 0.1])
@@ -458,12 +459,12 @@ class TestComponentIntegration:
         from src.controllers.smc.core import validate_smc_gains
 
         # Valid gains should pass
-        valid_gains = np.array([1.0, 2.0, 3.0])
-        assert validate_smc_gains(valid_gains)
+        valid_gains = np.array([1.0, 2.0, 3.0, 4.0])  # Need 4 gains for classical SMC
+        assert validate_smc_gains(valid_gains, controller_type="classical")
 
         # Invalid gains should fail
-        invalid_gains = np.array([-1.0, 2.0, 3.0])
-        assert not validate_smc_gains(invalid_gains)
+        invalid_gains = np.array([-1.0, 2.0, 3.0, 4.0])  # Negative gain should fail
+        assert not validate_smc_gains(invalid_gains, controller_type="classical")
 
     def test_control_bounds_integration(self):
         """Test control bounds work across all controllers."""
@@ -511,7 +512,7 @@ class TestModularSMCProperties:
             boundary_layer=0.1
         )
         dynamics = MockDynamics(n_dof=n_dof)
-        controller = ModularClassicalSMC(config=config, dynamics=dynamics)
+        controller = ModularClassicalSMC(config=config)
 
         # Test control computation for 2-DOF system
         state = np.concatenate([0.1 * np.ones(n_dof), 0.1 * np.ones(n_dof)])

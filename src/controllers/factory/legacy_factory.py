@@ -940,9 +940,18 @@ def _build_hybrid_adaptive_sta_smc(key: str, ctrl_cfg_dict: Dict[str, Any], conf
     return instance
 
 def _build_mpc_controller(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, gains: List[float], shared_dt: float, shared_max_force: float, allow_unknown: bool) -> Any:
-    if MPCController is None:
+    # Check for dynamically available MPCController (handles monkeypatch scenarios)
+    current_mpc_controller = MPCController
+    if current_mpc_controller is None:
+        # Check if MPCController has been monkeypatched in globals
+        import sys
+        current_module = sys.modules[__name__]
+        if hasattr(current_module, 'MPCController') and getattr(current_module, 'MPCController') is not None:
+            current_mpc_controller = getattr(current_module, 'MPCController')
+
+    if current_mpc_controller is None:
         raise ImportError(
-            "Controller 'mpc_controller' is unavailable (missing optional dependency)."
+            "MPC controller missing optional dependency"
         )
     
     allowed = {
@@ -1042,7 +1051,7 @@ def _build_mpc_controller(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, 
                 f"controllers.{key}: fallback_pd_kp/kd must be numeric; using default PD gains."
             )
     
-    instance = MPCController(**mpc_kwargs)
+    instance = current_mpc_controller(**mpc_kwargs)
     
     if allow_unknown and unknown_keys:
         instance.unknown_params = {k: ctrl_cfg_dict[k] for k in unknown_keys}

@@ -323,3 +323,111 @@ def run_simulation(
         except Exception:
             pass
     return t_arr, x_arr, u_arr
+
+
+class SimulationRunner:
+    """
+    Object-oriented wrapper around the run_simulation function.
+
+    This class provides compatibility with test cases that expect a
+    SimulationRunner class interface while maintaining the functional API.
+    """
+
+    def __init__(self, dynamics_model: Any, dt: float = 0.01, max_time: float = 10.0):
+        """
+        Initialize simulation runner.
+
+        Parameters
+        ----------
+        dynamics_model : Any
+            Object providing a step(state, u, dt) method
+        dt : float, default=0.01
+            Integration timestep in seconds
+        max_time : float, default=10.0
+            Maximum simulation time in seconds
+        """
+        self.dynamics_model = dynamics_model
+        self.dt = dt
+        self.max_time = max_time
+        self.current_time = 0.0
+        self.step_count = 0
+        self.simulation_history = []
+
+    def run_simulation(
+        self,
+        initial_state: np.ndarray,
+        controller: Optional[Any] = None,
+        reference: Optional[np.ndarray] = None,
+        **kwargs: Any
+    ) -> dict[str, Any]:
+        """
+        Run simulation using the functional API.
+
+        Parameters
+        ----------
+        initial_state : array-like
+            Initial state vector
+        controller : Any, optional
+            Controller object
+        reference : array-like, optional
+            Reference trajectory (currently unused)
+        **kwargs : dict
+            Additional arguments passed to run_simulation
+
+        Returns
+        -------
+        dict
+            Simulation results with keys: 'success', 'states', 'controls',
+            'time', 'final_state', 'step_count'
+        """
+        try:
+            # Use the functional run_simulation API
+            sim_time = kwargs.get('sim_time', self.max_time)
+            dt = kwargs.get('dt', self.dt)
+
+            if controller is None:
+                # Create a simple zero controller for testing
+                class ZeroController:
+                    def compute_control(self, state: np.ndarray, *args, **kwargs) -> float:
+                        return 0.0
+                    def __call__(self, t: float, state: np.ndarray) -> float:
+                        return 0.0
+                controller = ZeroController()
+
+            t_arr, x_arr, u_arr = run_simulation(
+                controller=controller,
+                dynamics_model=self.dynamics_model,
+                sim_time=sim_time,
+                dt=dt,
+                initial_state=initial_state,
+                **kwargs
+            )
+
+            self.simulation_history.append({
+                'time': t_arr,
+                'states': x_arr,
+                'controls': u_arr
+            })
+
+            self.current_time = t_arr[-1] if len(t_arr) > 0 else 0.0
+            self.step_count = len(t_arr) - 1 if len(t_arr) > 0 else 0
+
+            return {
+                'success': True,
+                'states': x_arr,
+                'controls': u_arr,
+                'time': t_arr,
+                'final_state': x_arr[-1] if len(x_arr) > 0 else initial_state,
+                'step_count': self.step_count
+            }
+
+        except Exception as e:
+            return {
+                'success': False,
+                'error': str(e),
+                'states': np.array([initial_state]),
+                'controls': np.array([]),
+                'time': np.array([0.0]),
+                'final_state': initial_state,
+                'step_count': 0
+            }

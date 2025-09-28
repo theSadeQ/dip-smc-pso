@@ -62,8 +62,13 @@ if os.path.exists(factory_py_path):
     try:
         spec.loader.exec_module(factory_module)
 
+        # Force reload if the module is already in sys.modules to ensure latest version
+        if 'factory_module' in sys.modules:
+            importlib.reload(factory_module)
+
         # Export the functions from factory.py module
         list_available_controllers = factory_module.list_available_controllers
+        list_all_controllers = factory_module.list_all_controllers
         get_default_gains = factory_module.get_default_gains
         CONTROLLER_REGISTRY = factory_module.CONTROLLER_REGISTRY
         create_controller_new = factory_module.create_controller
@@ -222,6 +227,7 @@ __all__ = [
 
     # New factory.py functions for test compatibility
     "list_available_controllers",
+    "list_all_controllers",
     "get_default_gains",
     "CONTROLLER_REGISTRY",
     "create_controller_new",
