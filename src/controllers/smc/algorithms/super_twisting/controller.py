@@ -245,6 +245,46 @@ class ModularSuperTwistingSMC:
         """Return controller gains [K1, K2, k1, k2, λ1, λ2]."""
         return list(self.config.gains)
 
+    def validate_gains(self, gains_b: "np.ndarray") -> "np.ndarray":
+        """
+        Vectorized feasibility check for super‑twisting SMC gains.
+
+        The algorithmic gains ``K1`` and ``K2`` must be strictly positive and
+        satisfy K1 > K2 for stability and finite‑time convergence. When
+        a six‑element gain vector is provided the sliding‑surface gains
+        ``k1``, ``k2`` and the lambda parameters ``lam1``, ``lam2`` must also
+        be positive.
+
+        Parameters
+        ----------
+        gains_b : np.ndarray
+            Array of shape (B, D) containing candidate gain vectors.  The
+            first two columns correspond to ``K1`` and ``K2``; if ``D`` ≥ 6
+            then columns 3–6 correspond to ``k1``, ``k2``, ``lam1`` and
+            ``lam2`` respectively.
+
+        Returns
+        -------
+        np.ndarray
+            Boolean mask of shape (B,) indicating which rows satisfy the
+            positivity and stability constraints.
+        """
+        import numpy as _np
+        if gains_b.ndim != 2 or gains_b.shape[1] < 2:
+            return _np.ones(gains_b.shape[0], dtype=bool)
+        # Always require K1 and K2 to be positive AND K1 > K2 for stability
+        k1 = gains_b[:, 0].astype(float)
+        k2 = gains_b[:, 1].astype(float)
+        valid = (k1 > 0.0) & (k2 > 0.0) & (k1 > k2)
+        # If sliding surface parameters are provided, require them to be positive
+        if gains_b.shape[1] >= 6:
+            surf_k1 = gains_b[:, 2].astype(float)
+            surf_k2 = gains_b[:, 3].astype(float)
+            lam1 = gains_b[:, 4].astype(float)
+            lam2 = gains_b[:, 5].astype(float)
+            valid = valid & (surf_k1 > 0.0) & (surf_k2 > 0.0) & (lam1 > 0.0) & (lam2 > 0.0)
+        return valid
+
     def get_twisting_gains(self) -> tuple[float, float]:
         """Get Super-Twisting gains (K1, K2)."""
         return self.config.get_twisting_gains()

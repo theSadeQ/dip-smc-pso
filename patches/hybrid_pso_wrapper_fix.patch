@@ -1,0 +1,32 @@
+--- a/src/controllers/factory.py
++++ b/src/controllers/factory.py
+@@ -940,7 +940,17 @@ class PSOControllerWrapper:
+             # Call the underlying controller with the full interface
+             result = self.controller.compute_control(state, (), {})
+
+-            # Extract control value and return as numpy array
++            # Enhanced error handling for hybrid controllers
++            if result is None:
++                # Safe fallback for hybrid controllers that may return None
++                return np.array([0.0])
++
++            # Handle tuple returns from hybrid controllers
++            if isinstance(result, tuple) and len(result) > 0:
++                u = result[0] if result[0] is not None else 0.0
++                u_saturated = np.clip(float(u), -self.max_force, self.max_force)
++                return np.array([u_saturated])
++
+             if hasattr(result, 'u'):
+                 u = result.u
+             elif isinstance(result, dict) and 'u' in result:
+@@ -948,6 +958,10 @@ class PSOControllerWrapper:
+             else:
+                 u = result
+
++            # Additional None check before float conversion
++            if u is None:
++                return np.array([0.0])
++
+             # Apply saturation at wrapper level for extra safety
+             if isinstance(u, (int, float)):
+                 u_saturated = np.clip(u, -self.max_force, self.max_force)
