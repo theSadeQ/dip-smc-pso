@@ -128,13 +128,13 @@ def physics_params(physics_cfg):
 def dynamics(physics_cfg):
     """Provide simplified DIP dynamics for tests."""
     from src.core.dynamics import DIPDynamics
-    return DIPDynamics(params=physics_cfg)
+    return DIPDynamics(config=physics_cfg)
 
 @pytest.fixture(scope="session")
 def full_dynamics(physics_cfg):
     """Provide full DIP dynamics for tests."""
     from src.core.dynamics_full import FullDIPDynamics
-    return FullDIPDynamics(params=physics_cfg)
+    return FullDIPDynamics(config=physics_cfg)
 
 # Some tests mark usefixtures("long_simulation_config") as a toggle only.
 # Provide a no-op fixture to satisfy those references without altering config.
