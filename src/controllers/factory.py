@@ -504,15 +504,22 @@ def get_expected_gain_count(smc_type: SMCType) -> int:
     return expected_counts.get(smc_type, 6)
 
 
-def get_gain_bounds_for_pso(smc_type: SMCType) -> List[Tuple[float, float]]:
-    """Get PSO gain bounds for a controller type."""
-    bounds_map = {
-        SMCType.CLASSICAL: [(0.1, 50.0)] * 6,  # 6 gains for classical
-        SMCType.ADAPTIVE: [(0.1, 50.0)] * 5,   # 5 gains for adaptive
-        SMCType.SUPER_TWISTING: [(0.1, 50.0)] * 6,  # 6 gains for STA
-        SMCType.HYBRID: [(0.1, 50.0)] * 4,     # 4 gains for hybrid
+def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]]:
+    """Get PSO gain bounds for a controller type.
+
+    Returns:
+        Tuple of (lower_bounds, upper_bounds) lists
+    """
+    bounds_specs = {
+        SMCType.CLASSICAL: 6,  # 6 gains for classical
+        SMCType.ADAPTIVE: 5,   # 5 gains for adaptive
+        SMCType.SUPER_TWISTING: 6,  # 6 gains for STA
+        SMCType.HYBRID: 4,     # 4 gains for hybrid
     }
-    return bounds_map.get(smc_type, [(0.1, 50.0)] * 6)
+    n_gains = bounds_specs.get(smc_type, 6)
+    lower_bounds = [0.1] * n_gains
+    upper_bounds = [50.0] * n_gains
+    return (lower_bounds, upper_bounds)
 
 
 def validate_smc_gains(smc_type: SMCType, gains: Union[list, np.ndarray]) -> bool:
