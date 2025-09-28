@@ -30,7 +30,7 @@ class TestLowRankDIPDynamics:
     @pytest.fixture
     def default_config(self):
         """Create default low-rank DIP configuration."""
-        return LowRankDIPConfig()
+        return LowRankDIPConfig.create_default()
 
     @pytest.fixture
     def fast_prototype_config(self):

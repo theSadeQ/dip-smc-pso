@@ -72,18 +72,8 @@ class TestFullDIPDynamicsImplementation:
     @pytest.fixture
     def config(self):
         """Create valid configuration for full DIP dynamics."""
-        config = FullDIPConfig()
-        # Set reasonable physical parameters
-        config.cart_mass = 1.0
-        config.pendulum1_mass = 0.5
-        config.pendulum2_mass = 0.3
-        config.pendulum1_length = 0.5
-        config.pendulum2_length = 0.3
-        config.pendulum1_com = 0.25  # Center of mass at half length
-        config.pendulum2_com = 0.15
-        config.pendulum1_inertia = 0.01
-        config.pendulum2_inertia = 0.005
-        config.gravity = 9.81
+        config = FullDIPConfig.create_default()
+        # Configuration already has reasonable physical parameters
         return config
 
     @pytest.fixture
@@ -120,7 +110,7 @@ class TestFullDIPDynamicsInterface:
     @pytest.fixture
     def config(self):
         """Create mock configuration."""
-        return FullDIPConfig()
+        return FullDIPConfig.create_default()
 
     @pytest.fixture
     def dynamics(self, config):
@@ -162,7 +152,7 @@ class TestFullDIPDynamicsConfiguration:
 
     def test_config_physical_parameters(self):
         """Test that configuration contains all required physical parameters."""
-        config = FullDIPConfig()
+        config = FullDIPConfig.create_default()
 
         # Mass parameters
         assert hasattr(config, 'cart_mass')
@@ -184,7 +174,7 @@ class TestFullDIPDynamicsConfiguration:
 
     def test_config_constraint_parameters(self):
         """Test that configuration contains constraint parameters."""
-        config = FullDIPConfig()
+        config = FullDIPConfig.create_default()
 
         assert hasattr(config, 'cart_position_limits')
         assert hasattr(config, 'joint1_angle_limits')
@@ -194,19 +184,19 @@ class TestFullDIPDynamicsConfiguration:
 
     def test_config_numerical_parameters(self):
         """Test that configuration contains numerical stability parameters."""
-        config = FullDIPConfig()
+        config = FullDIPConfig.create_default()
 
         assert hasattr(config, 'max_condition_number')
 
     def test_config_wind_model_parameters(self):
         """Test that configuration contains wind model parameters."""
-        config = FullDIPConfig()
+        config = FullDIPConfig.create_default()
 
         assert hasattr(config, 'wind_model_enabled')
 
     def test_config_default_values_reasonable(self):
         """Test that default configuration values are physically reasonable."""
-        config = FullDIPConfig()
+        config = FullDIPConfig.create_default()
 
         # Masses should be positive
         assert config.cart_mass > 0
@@ -237,7 +227,7 @@ class TestFullDIPDynamicsStateValidation:
     @pytest.fixture
     def config(self):
         """Create configuration with defined limits."""
-        config = FullDIPConfig()
+        config = FullDIPConfig.create_default()
         config.cart_position_limits = (-2.0, 2.0)
         config.cart_velocity_limit = 5.0
         config.joint_velocity_limits = 10.0

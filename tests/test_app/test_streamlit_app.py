@@ -90,6 +90,7 @@ def make_fake_streamlit():
     st.success = lambda *args, **kwargs: None
     st.error = lambda *args, **kwargs: None
     st.warning = lambda *args, **kwargs: None
+    st.info = lambda *args, **kwargs: None  # Fix: Add missing info method
     # FIX: Return a list of MockColumn objects that support the `with` statement.
     st.columns = lambda n: [MockColumn() for _ in range(n)]
     
@@ -231,9 +232,13 @@ def install_fake_modules(monkeypatch):
     pso_mod.PSOTuner = PSOTuner
     sys.modules["src.optimizer.pso_optimizer"] = pso_mod
 
+    # Mock the complete utils package and visualization subpackage
+    utils_mod = types.ModuleType("src.utils")
+    sys.modules["src.utils"] = utils_mod
+
     viz_mod = types.ModuleType("src.utils.visualization")
     class Visualizer:
-        def __init__(self, model): 
+        def __init__(self, model):
             import matplotlib.pyplot as plt
             self.fig, self.ax = plt.subplots()
             # Store model reference (DisturbedDynamics will forward attribute access)
@@ -242,6 +247,7 @@ def install_fake_modules(monkeypatch):
             self.ani = object()
             return self.ani
     viz_mod.Visualizer = Visualizer
+    utils_mod.Visualizer = Visualizer  # Also make it available directly from utils
     sys.modules["src.utils.visualization"] = viz_mod
 
     # Mock the DisturbedDynamics class since streamlit_app defines it
@@ -270,16 +276,35 @@ def install_fake_modules(monkeypatch):
             # This is crucial for Visualizer to access L1, l1, l2, etc.
             return getattr(self.base_model, name)
     
-    # Inject our DisturbedDynamics mock into streamlit_app's namespace
-    import streamlit_app
-    streamlit_app.DisturbedDynamics = DisturbedDynamics
+    # Don't import streamlit_app here - let the test function handle it
+    # to avoid import order issues
 
 def test_app_import_and_main(monkeypatch):
+    # Install fake modules BEFORE importing streamlit_app
     install_fake_modules(monkeypatch)
     # Ensure CSS loader doesn't try filesystem
     import streamlit_app
     importlib.reload(streamlit_app)
     streamlit_app.load_css = lambda *args, **kwargs: None
+
+    # Inject our DisturbedDynamics mock into streamlit_app's namespace
+    class DisturbedDynamics:
+        def __init__(self, base_model, disturbance_func=None):
+            self.base_model = base_model
+            self.disturbance_func = disturbance_func
+            self.t = 0.0
+
+        def step(self, state, u, dt):
+            if self.disturbance_func:
+                d = self.disturbance_func(self.t)
+                u = u + d
+            self.t += dt
+            return self.base_model.step(state, u, dt)
+
+        def __getattr__(self, name):
+            return getattr(self.base_model, name)
+
+    streamlit_app.DisturbedDynamics = DisturbedDynamics
 
     # Replace file open inside load_translations
     monkeypatch.setattr(streamlit_app, "open", lambda *args, **kwargs: io.StringIO("English: {}\n"), raising=False)
