@@ -319,10 +319,7 @@ class TestModularHybridSMC:
 
     def test_switching_logic_initialization(self, config: HybridSMCConfig):
         """Test switching logic component initialization."""
-        switching_logic = HybridSwitchingLogic(
-            config.switching_thresholds,
-            config.hysteresis_margin
-        )
+        switching_logic = HybridSwitchingLogic(config)
 
         assert switching_logic.thresholds is not None
         assert switching_logic.hysteresis_margin == 0.02
