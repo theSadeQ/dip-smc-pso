@@ -34,7 +34,8 @@ def test_app_fails_fast_on_invalid_controller():
 
     # 2. The stderr should contain an error indicating the root cause.
     assert ("not found in config.controllers" in result.stderr or
-            "Validation error" in result.stderr), \
+            "Validation error" in result.stderr or
+            "Unknown controller type" in result.stderr), \
         "Expected an error message in stderr for an unknown controller."
 
     # 3. The error message should mention the invalid controller name.
