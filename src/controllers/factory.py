@@ -521,6 +521,7 @@ def create_pso_controller_factory(smc_type: SMCType, plant_config: Optional[Any]
         return create_smc_for_pso(smc_type, gains, plant_config, max_force, dt, **kwargs)
 
     # Add PSO-required attributes to the factory function
+    # Use expected gain counts that match what the controllers actually need
     controller_factory.n_gains = get_expected_gain_count(smc_type)
     controller_factory.controller_type = smc_type.value
 
@@ -544,16 +545,34 @@ def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]
     Returns:
         Tuple of (lower_bounds, upper_bounds) lists
     """
-    bounds_specs = {
-        SMCType.CLASSICAL: 6,  # 6 gains for classical
-        SMCType.ADAPTIVE: 5,   # 5 gains for adaptive
-        SMCType.SUPER_TWISTING: 6,  # 6 gains for STA
-        SMCType.HYBRID: 4,     # 4 gains for hybrid
+    # Use controller-specific bounds based on control theory
+    bounds_map = {
+        SMCType.CLASSICAL: {
+            'lower': [0.1, 0.1, 0.1, 0.1, 1.0, 0.0],   # [c1, lambda1, c2, lambda2, K, kd]
+            'upper': [50.0, 50.0, 50.0, 50.0, 200.0, 50.0]
+        },
+        SMCType.ADAPTIVE: {
+            'lower': [0.1, 0.1, 0.1, 0.1, 0.01],        # [c1, lambda1, c2, lambda2, gamma]
+            'upper': [50.0, 50.0, 50.0, 50.0, 10.0]
+        },
+        SMCType.SUPER_TWISTING: {
+            'lower': [1.0, 1.0, 0.1, 0.1, 0.1, 0.1],    # [K1, K2, c1, lambda1, c2, lambda2]
+            'upper': [100.0, 100.0, 50.0, 50.0, 50.0, 50.0]
+        },
+        SMCType.HYBRID: {
+            'lower': [0.1, 0.1, 0.1, 0.1],              # [c1, lambda1, c2, lambda2]
+            'upper': [50.0, 50.0, 50.0, 50.0]
+        }
     }
-    n_gains = bounds_specs.get(smc_type, 6)
-    lower_bounds = [0.1] * n_gains
-    upper_bounds = [50.0] * n_gains
-    return (lower_bounds, upper_bounds)
+
+    if smc_type in bounds_map:
+        return (bounds_map[smc_type]['lower'], bounds_map[smc_type]['upper'])
+    else:
+        # Fallback to default 6-gain bounds
+        n_gains = 6
+        lower_bounds = [0.1] * n_gains
+        upper_bounds = [50.0] * n_gains
+        return (lower_bounds, upper_bounds)
 
 
 def validate_smc_gains(smc_type: SMCType, gains: Union[list, np.ndarray]) -> bool:
