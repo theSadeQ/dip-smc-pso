@@ -168,7 +168,7 @@ def benchmark_controller_performance():
 
         print(f"Duration: {duration:.4f} seconds")
         print(f"Computations per second: {n_computations / duration:.0f}")
-        print(f"Average computation time: {duration / n_computations * 1e6:.2f} μs")
+        print(f"Average computation time: {duration / n_computations * 1e6:.2f} microseconds")
 
     avg_computation_time = np.mean(computation_times)
     print(f"\nOverall average computation rate: {n_computations / avg_computation_time:.0f} Hz")

@@ -142,9 +142,14 @@ class AdaptiveSMCConfig:
         return self.gains[4]
 
     @property
-    def adaptation_rate(self) -> List[float]:
-        """Adaptation rate as array for compatibility."""
-        return [self.gamma, self.gamma, self.gamma]  # 3-DOF system
+    def adaptation_rate(self) -> float:
+        """Adaptation rate for compatibility."""
+        return self.gamma
+
+    @property
+    def adaptation_rate_array(self) -> List[float]:
+        """Adaptation rate as array for 3-DOF system."""
+        return [self.gamma, self.gamma, self.gamma]
 
     @property
     def uncertainty_bound(self) -> float:
