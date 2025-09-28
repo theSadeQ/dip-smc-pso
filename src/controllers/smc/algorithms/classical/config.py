@@ -12,6 +12,7 @@ Replaces parameter validation scattered throughout the original 458-line control
 from typing import List, Optional, Literal
 from dataclasses import dataclass, field
 from pydantic import BaseModel, Field, validator
+import numpy as np
 
 
 @dataclass(frozen=True)
@@ -25,13 +26,13 @@ class ClassicalSMCConfig:
     - Derivative gain kd must be non-negative for damping
     """
 
-    # Required parameters
-    dt: float = field()                                    # Control timestep
+    # Required parameters (no defaults)
     gains: List[float] = field()                           # [k1, k2, lam1, lam2, K, kd]
     max_force: float = field()                             # Control saturation limit
-
-    # Boundary layer parameters
     boundary_layer: float = field()                        # Chattering reduction thickness
+
+    # Optional parameters (with defaults)
+    dt: float = field(default=0.01)                       # Control timestep with default
     boundary_layer_slope: float = field(default=0.0)      # Adaptive boundary layer slope
 
     # Switching function
@@ -54,15 +55,28 @@ class ClassicalSMCConfig:
         if len(self.gains) != 6:
             raise ValueError("Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]")
 
+        # Check for NaN or infinite values first
+        if not all(np.isfinite(g) for g in self.gains):
+            invalid_indices = [i for i, g in enumerate(self.gains) if not np.isfinite(g)]
+            gain_names = ['k1', 'k2', 'lam1', 'lam2', 'K', 'kd']
+            invalid_names = [gain_names[i] for i in invalid_indices]
+            raise ValueError(f"Gains contain NaN or infinite values: {invalid_names}")
+
         k1, k2, lam1, lam2, K, kd = self.gains
 
         # Surface gains must be positive for Hurwitz stability
         if any(g <= 0 for g in [k1, k2, lam1, lam2]):
             raise ValueError("Surface gains [k1, k2, λ1, λ2] must be positive for stability")
 
+        # Check for very small gains that might cause numerical issues
+        if any(g < 1e-12 for g in [k1, k2, lam1, lam2]):
+            raise ValueError("Surface gains are too small (minimum: 1e-12) which may cause numerical instability")
+
         # Switching gain must be positive for reaching condition
         if K <= 0:
             raise ValueError("Switching gain K must be positive")
+        if K < 1e-12:
+            raise ValueError("Switching gain K is too small (minimum: 1e-12) which may cause numerical instability")
 
         # Derivative gain must be non-negative
         if kd < 0:
@@ -70,14 +84,31 @@ class ClassicalSMCConfig:
 
     def _validate_parameters(self) -> None:
         """Validate other configuration parameters."""
+        # Check for NaN/infinite values in critical parameters
+        params_to_check = {
+            'max_force': self.max_force,
+            'dt': self.dt,
+            'boundary_layer': self.boundary_layer,
+            'boundary_layer_slope': self.boundary_layer_slope,
+            'regularization': self.regularization
+        }
+
+        for name, value in params_to_check.items():
+            if not np.isfinite(value):
+                raise ValueError(f"Parameter '{name}' contains NaN or infinite value: {value}")
+
         if self.max_force <= 0:
             raise ValueError("max_force must be positive")
 
         if self.dt <= 0:
             raise ValueError("dt must be positive")
+        if self.dt < 1e-6:
+            raise ValueError("dt is too small (minimum: 1e-6) which may cause numerical instability")
 
         if self.boundary_layer <= 0:
             raise ValueError("boundary_layer must be positive")
+        if self.boundary_layer < 1e-12:
+            raise ValueError("boundary_layer is too small (minimum: 1e-12) which may cause division by zero")
 
         if self.boundary_layer_slope < 0:
             raise ValueError("boundary_layer_slope must be non-negative")
@@ -85,8 +116,11 @@ class ClassicalSMCConfig:
         if self.regularization <= 0:
             raise ValueError("regularization must be positive")
 
-        if self.controllability_threshold is not None and self.controllability_threshold <= 0:
-            raise ValueError("controllability_threshold must be positive when specified")
+        if self.controllability_threshold is not None:
+            if not np.isfinite(self.controllability_threshold):
+                raise ValueError("controllability_threshold contains NaN or infinite value")
+            if self.controllability_threshold <= 0:
+                raise ValueError("controllability_threshold must be positive when specified")
 
     @property
     def k1(self) -> float:

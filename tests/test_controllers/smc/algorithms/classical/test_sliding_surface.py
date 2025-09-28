@@ -16,6 +16,7 @@ import pytest
 
 from tests.test_controllers.smc.test_fixtures import MockDynamics, classical_smc_config
 from src.controllers.smc.algorithms import ModularClassicalSMC
+from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
 
 
 class TestSlidingSurfaceComputation:
@@ -124,18 +125,24 @@ class TestSlidingSurfaceComputation:
         if isinstance(surface_pos, (int, float)) and isinstance(surface_neg, (int, float)):
             assert np.sign(surface_pos) == -np.sign(surface_neg) or (surface_pos == 0 and surface_neg == 0)
 
-    def test_surface_gain_sensitivity(self):
+    def test_surface_gain_sensitivity(self, classical_smc_config):
         """Test surface sensitivity to gain changes."""
         dynamics = MockDynamics()
 
-        # Low gain configuration
-        low_gain_config = classical_smc_config()
-        low_gain_config.gains = [0.5, 0.5, 0.5, 0.5, 5.0, 0.25]
+        # Low gain configuration - create new config since dataclass is frozen
+        low_gain_config = ClassicalSMCConfig(
+            gains=[0.5, 0.5, 0.5, 0.5, 5.0, 0.25],
+            max_force=classical_smc_config.max_force,
+            boundary_layer=classical_smc_config.boundary_layer
+        )
         low_controller = ModularClassicalSMC(config=low_gain_config)
 
-        # High gain configuration
-        high_gain_config = classical_smc_config()
-        high_gain_config.gains = [2.0, 2.0, 2.0, 2.0, 20.0, 1.0]
+        # High gain configuration - create new config since dataclass is frozen
+        high_gain_config = ClassicalSMCConfig(
+            gains=[2.0, 2.0, 2.0, 2.0, 20.0, 1.0],
+            max_force=classical_smc_config.max_force,
+            boundary_layer=classical_smc_config.boundary_layer
+        )
         high_controller = ModularClassicalSMC(config=high_gain_config)
 
         state = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1])

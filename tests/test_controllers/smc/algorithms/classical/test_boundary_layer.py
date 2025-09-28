@@ -23,33 +23,52 @@ class TestBoundaryLayerBehavior:
 
     def test_smooth_control_inside_boundary_layer(self):
         """Test that control is smooth inside the boundary layer."""
-        # Create configuration with specific boundary layer
-        config = classical_smc_config()
-        config.boundary_layer = 0.1
+        # Import ClassicalSMCConfig to create configuration with specific boundary layer
+        from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
+
+        config = ClassicalSMCConfig(
+            gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0],
+            max_force=100.0,
+            dt=0.01,
+            boundary_layer=0.1
+        )
         controller = ModularClassicalSMC(config=config)
 
         # State very close to sliding surface
         near_surface_state = np.array([0.01, 0.01, 0.01, 0.0, 0.0, 0.0])
 
         result = controller.compute_control(near_surface_state, {}, {})
-        control = result.get('control', result.get('u'))
+        control = result.get('control_output', result.get('control', result.get('u')))
 
         if control is not None:
             # Control should be smooth (not switching/saturated) in boundary layer
-            assert np.all(np.abs(control) < 40.0)  # Should not saturate
+            if isinstance(control, np.ndarray):
+                assert np.all(np.abs(control) < 40.0)  # Should not saturate
+            else:
+                assert abs(control) < 40.0
 
-    def test_boundary_layer_thickness_effect(self):
+    def test_boundary_layer_thickness_effect(self, classical_smc_config):
         """Test that boundary layer thickness affects control smoothness."""
+        from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
+
         dynamics = MockDynamics()
 
         # Thin boundary layer
-        thin_config = classical_smc_config()
-        thin_config.boundary_layer = 0.01
+        thin_config = ClassicalSMCConfig(
+            gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0],
+            max_force=100.0,
+            dt=0.01,
+            boundary_layer=0.01
+        )
         thin_controller = ModularClassicalSMC(config=thin_config)
 
         # Thick boundary layer
-        thick_config = classical_smc_config()
-        thick_config.boundary_layer = 0.5
+        thick_config = ClassicalSMCConfig(
+            gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0],
+            max_force=100.0,
+            dt=0.01,
+            boundary_layer=0.1
+        )
         thick_controller = ModularClassicalSMC(config=thick_config)
 
         # State at moderate distance from surface
@@ -66,9 +85,9 @@ class TestBoundaryLayerBehavior:
             # when the state is within the thick boundary but outside the thin one
             assert np.any(np.abs(control_thick) <= np.abs(control_thin) * 1.1)
 
-    def test_control_continuity_across_boundary(self):
+    def test_control_continuity_across_boundary(self, classical_smc_config):
         """Test control continuity as state crosses boundary layer."""
-        config = classical_smc_config()
+        config = classical_smc_config
         config.boundary_layer = 0.1
         controller = ModularClassicalSMC(config=config)
 
@@ -91,9 +110,9 @@ class TestBoundaryLayerBehavior:
             control_diff = np.abs(control_outside - control_inside)
             assert np.all(control_diff < 100.0)  # No extreme discontinuities
 
-    def test_chattering_reduction_with_noise(self):
+    def test_chattering_reduction_with_noise(self, classical_smc_config):
         """Test chattering reduction with noisy states."""
-        config = classical_smc_config()
+        config = classical_smc_config
         config.boundary_layer = 0.1
         controller = ModularClassicalSMC(config=config)
 
@@ -119,30 +138,42 @@ class TestBoundaryLayerBehavior:
             control_std = np.std(controls, axis=0)
             assert np.all(control_std < 5.0)  # Limited variation
 
-    def test_boundary_layer_parameter_validation(self):
+    def test_boundary_layer_parameter_validation(self, classical_smc_config):
         """Test boundary layer parameter validation."""
         # Zero boundary layer should be rejected or handled specially
         with pytest.raises((ValueError, AssertionError)):
-            config = classical_smc_config()
+            config = classical_smc_config
             config.boundary_layer = 0.0
             ModularClassicalSMC(config=config)
 
         # Negative boundary layer should be rejected
         with pytest.raises((ValueError, AssertionError)):
-            config = classical_smc_config()
+            config = classical_smc_config
             config.boundary_layer = -0.1
             ModularClassicalSMC(config=config)
 
-    def test_boundary_layer_scaling_with_gains(self):
+    def test_boundary_layer_scaling_with_gains(self, classical_smc_config):
         """Test that boundary layer effectiveness scales with controller gains."""
         # High gain configuration
-        high_gain_config = classical_smc_config()
+        from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
+        high_gain_config = ClassicalSMCConfig(
+            gains=[10.0, 10.0, 10.0, 10.0, 100.0, 5.0],
+            max_force=100.0,
+            dt=0.01,
+            boundary_layer=0.1
+        )
         high_gain_config.gains = [10.0, 10.0, 10.0, 10.0, 100.0, 5.0]
         high_gain_config.boundary_layer = 0.1
         high_controller = ModularClassicalSMC(config=high_gain_config)
 
         # Low gain configuration
-        low_gain_config = classical_smc_config()
+        from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
+        low_gain_config = ClassicalSMCConfig(
+            gains=[1.0, 1.0, 1.0, 1.0, 10.0, 0.5],
+            max_force=100.0,
+            dt=0.01,
+            boundary_layer=0.1
+        )
         low_gain_config.gains = [1.0, 1.0, 1.0, 1.0, 10.0, 0.5]
         low_gain_config.boundary_layer = 0.1
         low_controller = ModularClassicalSMC(config=low_gain_config)
@@ -161,15 +192,27 @@ class TestBoundaryLayerBehavior:
             # even within boundary layer
             assert np.any(np.abs(control_high) >= np.abs(control_low) * 0.8)
 
-    def test_boundary_layer_vs_switching_control(self):
+    def test_boundary_layer_vs_switching_control(self, classical_smc_config):
         """Test difference between boundary layer and pure switching control."""
         # Very thin boundary layer (nearly switching)
-        switching_config = classical_smc_config()
+        from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
+        switching_config = ClassicalSMCConfig(
+            gains=classical_smc_config.gains,
+            max_force=classical_smc_config.max_force,
+            dt=classical_smc_config.dt,
+            boundary_layer=1e-6
+        )
         switching_config.boundary_layer = 1e-6
         switching_controller = ModularClassicalSMC(config=switching_config)
 
         # Thick boundary layer (smooth)
-        smooth_config = classical_smc_config()
+        from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
+        smooth_config = ClassicalSMCConfig(
+            gains=classical_smc_config.gains,
+            max_force=classical_smc_config.max_force,
+            dt=classical_smc_config.dt,
+            boundary_layer=0.2
+        )
         smooth_config.boundary_layer = 0.2
         smooth_controller = ModularClassicalSMC(config=smooth_config)
 
@@ -186,9 +229,9 @@ class TestBoundaryLayerBehavior:
             # Smooth controller should have smaller control effort for this state
             assert np.any(np.abs(control_smooth) <= np.abs(control_switching))
 
-    def test_boundary_layer_energy_considerations(self):
+    def test_boundary_layer_energy_considerations(self, classical_smc_config):
         """Test that boundary layer reduces high-frequency control energy."""
-        config = classical_smc_config()
+        config = classical_smc_config
         config.boundary_layer = 0.1
         controller = ModularClassicalSMC(config=config)
 
