@@ -166,7 +166,9 @@ def test_pso_fitness_penalises_nan(monkeypatch):
         x_b[0, 2, 0] = np.nan
         return t, x_b, u_b, sigma_b
 
-    monkeypatch.setattr(pso_mod, "simulate_system_batch", fake_simulate_system_batch, raising=True)
+    # Monkeypatch simulate_system_batch in the PSO optimizer module where it's used
+    import src.optimization.algorithms.pso_optimizer as pso_optimizer_mod
+    monkeypatch.setattr(pso_optimizer_mod, "simulate_system_batch", fake_simulate_system_batch, raising=True)
 
     # Create a minimal dummy configuration object for the PSO tuner.  The PSOTuner
     # only accesses the ``physics``, ``simulation``, ``cost_function``, and
