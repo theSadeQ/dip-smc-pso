@@ -67,7 +67,7 @@ class PSOOptimizationBenchmark:
 
     def _test_controller_creation(self) -> None:
         """Test PSO controller creation for all SMC types."""
-        print("📊 Testing PSO Controller Creation...")
+        print("Testing PSO Controller Creation...")
 
         test_gains = {
             SMCType.CLASSICAL: [10.0, 5.0, 8.0, 3.0, 15.0, 2.0],
@@ -96,7 +96,7 @@ class PSOOptimizationBenchmark:
                     execution_time=time.time() - start_time
                 ))
 
-                status = "✅ PASS" if success else "❌ FAIL"
+                status = "[PASS]" if success else "[FAIL]"
                 print(f"  {smc_type.value:20} {status}")
 
             except Exception as e:
@@ -133,7 +133,7 @@ class PSOOptimizationBenchmark:
                     bounds_valid=success
                 ))
 
-                status = "✅ PASS" if success else "❌ FAIL"
+                status = "[PASS]" if success else "[FAIL]"
                 bounds_info = f"({len(bounds[0])} gains)" if success else "Invalid"
                 print(f"  {smc_type.value:20} {status} {bounds_info}")
 
@@ -186,7 +186,7 @@ class PSOOptimizationBenchmark:
                     gains_valid=success
                 ))
 
-                status = "✅ PASS" if success else "❌ FAIL"
+                status = "[PASS]" if success else "[FAIL]"
                 validation_info = f"(Valid: {valid_result}, Invalid: {invalid_result})"
                 print(f"  {smc_type.value:20} {status} {validation_info}")
 
@@ -242,7 +242,7 @@ class PSOOptimizationBenchmark:
                     cost_achieved=float(total_cost)
                 ))
 
-                status = "✅ PASS" if success else "❌ FAIL"
+                status = "[PASS]" if success else "[FAIL]"
                 cost_info = f"(Cost: {total_cost:.4f})" if success else "Invalid"
                 print(f"  {smc_type.value:20} {status} {cost_info}")
 

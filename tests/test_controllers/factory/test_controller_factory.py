@@ -580,14 +580,14 @@ class TestAdvancedFactoryIntegration:
 
     def test_saturation_and_constraint_handling(self):
         """Test controller behavior with control saturation and constraints."""
-        # Create controller with low force limit
-        low_force_config = SMCConfig(
-            gains=[30.0, 20.0, 25.0, 15.0],  # High gains
+        # Create controller with low force limit and correct gain count
+        controller = create_smc_for_pso(
+            SMCType.CLASSICAL,
+            [30.0, 20.0, 25.0, 15.0, 35.0, 10.0],  # 6 gains for classical SMC with high values
+            self.plant_config,
             max_force=5.0,  # Low saturation limit
             dt=0.01
         )
-
-        controller = SMCFactory.create(low_force_config)
 
         # Test with states that would normally require high control effort
         extreme_state = np.array([0.0, 1.5, 1.2, 0.0, 2.0, 1.8])  # Large angles and velocities
@@ -643,8 +643,7 @@ class TestAdvancedFactoryIntegration:
         ]
 
         for test_case in invalid_test_cases:
-            with pytest.raises((ValueError, TypeError, KeyError),
-                             message=f"Should reject {test_case['description']}"):
+            with pytest.raises((ValueError, TypeError, KeyError)):
                 create_smc_for_pso(
                     SMCType.CLASSICAL,
                     test_case['gains'],
@@ -652,7 +651,7 @@ class TestAdvancedFactoryIntegration:
                 )
 
         # Test recovery with valid gains after invalid attempts
-        valid_gains = [10.0, 5.0, 8.0, 3.0]
+        valid_gains = [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]  # 6 gains for classical SMC
         controller = create_smc_for_pso(SMCType.CLASSICAL, valid_gains, self.plant_config)
         assert controller is not None, "Factory should recover after invalid attempts"
 
@@ -680,9 +679,10 @@ class TestAdvancedFactoryIntegration:
         # Create many controllers with different configurations
         for i in range(20):
             for smc_type in [SMCType.CLASSICAL, SMCType.ADAPTIVE]:
-                gains = [10.0 + i, 5.0 + i/2, 8.0 + i/3, 3.0 + i/4]
-                if smc_type == SMCType.ADAPTIVE:
-                    gains.extend([2.0 + i/5, 1.5 + i/6])
+                if smc_type == SMCType.CLASSICAL:
+                    gains = [10.0 + i, 5.0 + i/2, 8.0 + i/3, 3.0 + i/4, 15.0 + i/5, 2.0 + i/6]  # 6 gains
+                else:  # ADAPTIVE
+                    gains = [10.0 + i, 5.0 + i/2, 8.0 + i/3, 3.0 + i/4, 2.0 + i/5]  # 5 gains
 
                 controller = create_smc_for_pso(smc_type, gains, self.plant_config)
                 controllers.append(controller)
