@@ -52,13 +52,19 @@ def test_sta_smc_state_vars_signature() -> None:
 )
 def test_create_controller_types(ctrl_name, expected_class, gains) -> None:
     """create_controller should return the correct class for known names."""
-    ctrl = create_controller(
-        ctrl_name,
-        gains=gains,
-        max_force=10.0,
-        boundary_layer=0.05,
-        dt=0.01,
-    )
+    # Create a simple config object with the necessary parameters
+    class SimpleConfig:
+        def __init__(self):
+            self.controllers = {
+                ctrl_name: {
+                    'max_force': 10.0,
+                    'boundary_layer': 0.05,
+                    'dt': 0.01
+                }
+            }
+
+    config = SimpleConfig()
+    ctrl = create_controller(ctrl_name, config=config, gains=gains)
     assert isinstance(ctrl, expected_class)
 
 

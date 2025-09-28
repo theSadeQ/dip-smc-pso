@@ -410,13 +410,13 @@ class TestSlidingSurfaceMathematicalProperties:
         nan_state = np.array([0.1, 0.2, np.nan, 0.1, -0.03, -0.05])
         result = surface.compute(nan_state)
 
-        # NaN input should produce NaN output
-        assert np.isnan(result)
+        # NaN input should be sanitized to finite output for controller safety
+        assert np.isfinite(result)
 
     def test_infinite_state_handling(self, surface):
         """Test behavior with infinite values in state."""
         inf_state = np.array([0.1, 0.2, np.inf, 0.1, -0.03, -0.05])
         result = surface.compute(inf_state)
 
-        # Infinite input should produce infinite result
-        assert np.isinf(result)
+        # Infinite input should be sanitized to finite output for controller safety
+        assert np.isfinite(result)

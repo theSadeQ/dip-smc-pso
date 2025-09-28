@@ -184,14 +184,14 @@ class TestConcreteControllerBase:
         control, info = controller.step(boundary_state)
 
         assert control == controller.max_force
-        assert info['saturated'] == True
+        assert info['saturated'] is True
 
         # Test exactly at negative boundary
         boundary_state = np.array([20.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         control, info = controller.step(boundary_state)
 
         assert control == -controller.max_force
-        assert info['saturated'] == True
+        assert info['saturated'] is True
 
     def test_reset_functionality(self, controller, test_state):
         """Test controller reset functionality."""
