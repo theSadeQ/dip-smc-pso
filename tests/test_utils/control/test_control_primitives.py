@@ -1,6 +1,12 @@
-# tests/test_utils/test_control_primitives.py
+#==========================================================================================\\\
+#============== tests/test_utils/control/test_control_primitives.py =====================\\\
+#==========================================================================================\\\
+
+"""Tests for control utility primitives and saturation functions."""
+
 import numpy as np
 import pytest
+
 from src.utils import saturate
 
 def test_saturate_tanh():

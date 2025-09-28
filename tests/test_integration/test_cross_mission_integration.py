@@ -44,10 +44,17 @@ sys.path.append(str(Path(__file__).parent.parent))
 # Import core system components
 try:
     from production_core.config import ProductionConfig
+    PRODUCTION_CORE_AVAILABLE = True
+except ImportError as e:
+    PRODUCTION_CORE_AVAILABLE = False
+    # Suppress warning during test collection
+    pass
+
+try:
     from src.core.simulation_context import SimulationContext
     from src.utils.config_compatibility import wrap_physics_config
 except ImportError as e:
-    warnings.warn(f"Production components not available: {e}")
+    warnings.warn(f"Core components not available: {e}")
 
 # Import mission-specific components
 mission_components = {}
