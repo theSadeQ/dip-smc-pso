@@ -330,11 +330,8 @@ class ModularHybridSMC:
 
     @property
     def gains(self) -> List[float]:
-        """Return gains from currently active controller."""
-        active_controller_name = self.switching_logic.get_current_controller()
-        if active_controller_name in self.controllers:
-            return list(self.controllers[active_controller_name].gains)
-        return []
+        """Return hybrid controller surface gains [k1, k2, λ1, λ2]."""
+        return list(self.config.gains)
 
     def get_active_controller_name(self) -> str:
         """Get name of currently active controller."""

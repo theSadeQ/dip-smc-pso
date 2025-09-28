@@ -308,6 +308,39 @@ class HybridAdaptiveSTASMC:
             )
 
     # ------------------------- API -------------------------
+    def validate_gains(self, gains_b: "np.ndarray") -> "np.ndarray":
+        """
+        Vectorized feasibility check for hybrid adaptive STA-SMC gains.
+
+        The sliding surface gains ``c1``, ``c2`` and slope parameters
+        ``λ1``, ``λ2`` must be strictly positive to define a valid
+        Lyapunov surface and ensure stability.
+
+        Parameters
+        ----------
+        gains_b : np.ndarray
+            Array of shape (B, 4) containing candidate gain vectors
+            corresponding to ``[c1, λ1, c2, λ2]``.
+
+        Returns
+        -------
+        np.ndarray
+            Boolean mask of shape (B,) indicating which rows satisfy the
+            positivity constraints.
+        """
+        import numpy as _np
+        if gains_b.ndim != 2 or gains_b.shape[1] < 4:
+            return _np.ones(gains_b.shape[0], dtype=bool)
+
+        # Require all sliding surface parameters to be positive
+        c1 = gains_b[:, 0].astype(float)
+        lam1 = gains_b[:, 1].astype(float)
+        c2 = gains_b[:, 2].astype(float)
+        lam2 = gains_b[:, 3].astype(float)
+
+        valid = (c1 > 0.0) & (lam1 > 0.0) & (c2 > 0.0) & (lam2 > 0.0)
+        return valid
+
     @property
     def gains(self) -> List[float]:
         return list(self._gains)
