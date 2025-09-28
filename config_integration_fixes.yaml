@@ -1,0 +1,101 @@
+# Configuration Integration Fixes for GitHub Issue #8
+# These fixes resolve the critical configuration mismatches identified
+
+# ========================================
+# FIXED CONTROLLER CONFIGURATIONS
+# ========================================
+
+controllers:
+  # FIX 1: Classical SMC - Add default gains (was empty array)
+  classical_smc:
+    gains: [5.0, 5.0, 5.0, 0.5, 0.5, 0.5]  # Added 6 required gains
+    max_force: 150.0
+    boundary_layer: 0.02
+    dt: 0.001
+    rate_weight: null
+    use_adaptive_boundary: null
+
+  # FIX 2: STA SMC - Already working (keep as reference)
+  sta_smc:
+    gains: [8.0, 4.0, 12.0, 6.0, 4.85, 3.43]
+    max_force: 150.0
+    damping_gain: 0.0
+    dt: 0.001
+    boundary_layer: 0.05
+
+  # FIX 3: Adaptive SMC - Add default gains and remove unsupported parameters
+  adaptive_smc:
+    gains: [10.0, 8.0, 5.0, 4.0, 1.0]  # Added 5 required gains
+    max_force: 150.0
+    # REMOVED: dynamics_model (not supported by AdaptiveSMCConfig)
+    leak_rate: 0.01
+    dead_zone: 0.05
+    adapt_rate_limit: 10.0
+    K_min: 0.1
+    K_max: 100.0
+    dt: 0.001
+    smooth_switch: true
+    boundary_layer: 0.1
+
+  # FIX 4: Swing-up SMC - Add default gains
+  swing_up_smc:
+    gains: [5.0, 5.0, 5.0, 0.5, 0.5, 0.5]  # Added default gains
+    max_force: 150.0
+    stabilizing_controller: classical_smc
+    energy_gain: 50.0
+    switch_energy_factor: 0.95
+    switch_angle_tolerance: 0.35
+    exit_energy_factor: 0.9
+    reentry_angle_tolerance: 0.4
+
+  # FIX 5: Hybrid Adaptive STA-SMC - Fix parameter names and add gains
+  hybrid_adaptive_sta_smc:
+    gains: [5.0, 5.0, 5.0, 0.5]  # Added 4 required gains
+    max_force: 150.0
+    dt: 0.001
+    # RENAMED: k1_init -> k1_initial, k2_init -> k2_initial (if needed by constructor)
+    k1_initial: 4.0  # Fixed parameter name
+    k2_initial: 0.4  # Fixed parameter name
+    gamma1: 2.0
+    gamma2: 0.5
+    dead_zone: 0.05
+    enable_equivalent: false
+    damping_gain: 3.0
+    adapt_rate_limit: 5.0
+    sat_soft_width: 0.05
+    cart_gain: 0.5
+    cart_lambda: 1.0
+    cart_p_gain: 80.0
+    cart_p_lambda: 2.0
+
+  # FIX 6: MPC Controller - Ensure proper structure
+  mpc_controller:
+    gains: []  # MPC may not use traditional gains
+    max_force: 150.0
+    prediction_horizon: 10
+    control_horizon: 5
+    q_weights: [1.0, 1.0, 1.0, 1.0, 0.1, 0.1]
+    r_weight: 0.01
+
+# ========================================
+# VALIDATION NOTES
+# ========================================
+
+# 1. All controllers now have non-empty gains arrays where required
+# 2. Removed unsupported parameters that cause constructor failures
+# 3. Fixed parameter name mismatches
+# 4. Maintained backward compatibility with existing working configurations
+
+# ========================================
+# INTEGRATION TEST COMMANDS
+# ========================================
+
+# Test each controller after applying fixes:
+# python simulate.py --controller classical_smc --duration 1.0
+# python simulate.py --controller sta_smc --duration 1.0
+# python simulate.py --controller adaptive_smc --duration 1.0
+# python simulate.py --controller hybrid_adaptive_sta_smc --duration 1.0
+
+# Test PSO optimization:
+# python simulate.py --controller classical_smc --run-pso --duration 1.0
+# python simulate.py --controller adaptive_smc --run-pso --duration 1.0

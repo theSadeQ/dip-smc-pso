@@ -1,6 +1,7 @@
-#==========================================================================================\\\
-#==================== src/interfaces/network/websocket_interface.py ====================\\\
-#==========================================================================================\\\
+#=======================================================================================\\\
+#===================== src/interfaces/network/websocket_interface.py ====================\\\
+#=======================================================================================\\\
+
 """
 WebSocket communication interface for real-time control system communication.
 This module provides WebSocket-based communication with features like real-time

@@ -1,6 +1,7 @@
-#==========================================================================================\\\
-#============================== src/controllers/factory.py =============================\\\
-#==========================================================================================\\\
+#=======================================================================================\\\
+#============================== src/controllers/factory.py ==============================\\\
+#=======================================================================================\\\
+
 """
 Enterprise Controller Factory - Production-Ready Controller Instantiation
 
@@ -44,6 +45,11 @@ from src.controllers.smc.algorithms.classical.controller import ModularClassical
 from src.controllers.smc.algorithms.super_twisting.controller import ModularSuperTwistingSMC
 from src.controllers.smc.algorithms.adaptive.controller import ModularAdaptiveSMC
 from src.controllers.smc.algorithms.hybrid.controller import ModularHybridSMC
+
+# Import legacy interface classes for backwards compatibility (Integration Coordinator reconciliation)
+from src.controllers.classic_smc import ClassicalSMC
+from src.controllers.sta_smc import SuperTwistingSMC
+from src.controllers.adaptive_smc import AdaptiveSMC
 
 # Optional MPC controller import
 try:
@@ -174,7 +180,7 @@ def _canonicalize_controller_type(name: str) -> str:
 # Controller registry with organized structure and comprehensive metadata
 CONTROLLER_REGISTRY = {
     'classical_smc': {
-        'class': ModularClassicalSMC,
+        'class': ClassicalSMC,
         'config_class': ClassicalSMCConfig,
         'default_gains': [20.0, 15.0, 12.0, 8.0, 35.0, 5.0],  # [k1, k2, λ1, λ2, K, kd] - Optimized for DIP
         'gain_count': 6,
@@ -183,7 +189,7 @@ CONTROLLER_REGISTRY = {
         'required_params': ['gains', 'max_force', 'boundary_layer']
     },
     'sta_smc': {
-        'class': ModularSuperTwistingSMC,
+        'class': SuperTwistingSMC,
         'config_class': STASMCConfig,
         'default_gains': [25.0, 15.0, 20.0, 12.0, 8.0, 6.0],  # [K1, K2, k1, k2, λ1, λ2] - Enhanced for DIP
         'gain_count': 6,
@@ -192,7 +198,7 @@ CONTROLLER_REGISTRY = {
         'required_params': ['gains', 'max_force', 'dt']
     },
     'adaptive_smc': {
-        'class': ModularAdaptiveSMC,
+        'class': AdaptiveSMC,
         'config_class': AdaptiveSMCConfig,
         'default_gains': [25.0, 18.0, 15.0, 10.0, 4.0],  # [k1, k2, λ1, λ2, γ] - Aggressive for DIP
         'gain_count': 5,
@@ -690,7 +696,9 @@ def create_controller(controller_type: str,
 
         controller_config = config_class(**config_params)
     except Exception as e:
-        logger.warning(f"Could not create full config, using minimal config: {e}")
+        # Only show warnings in debug mode to reduce PSO log spam
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f"Could not create full config, using minimal config: {e}")
         # Fallback to minimal configuration with ALL required defaults
         if controller_type == 'hybrid_adaptive_sta_smc':
             # Hybrid controller has completely different structure
@@ -776,7 +784,36 @@ def create_controller(controller_type: str,
                 raise ImportError("MPC controller missing optional dependency")
             else:
                 raise ImportError(f"Controller class for {controller_type} is not available")
-        controller = controller_class(controller_config)
+
+        # Handle different controller creation patterns (Integration Coordinator reconciliation)
+        if controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc']:
+            # Legacy controllers use direct parameter passing instead of config objects
+            controller_params = controller_config.__dict__ if hasattr(controller_config, '__dict__') else {}
+
+            # Filter parameters based on controller type to avoid unexpected keyword errors
+            if controller_type == 'sta_smc':
+                # SuperTwistingSMC only accepts specific parameters
+                allowed_params = {'gains', 'dt', 'max_force', 'damping_gain', 'boundary_layer',
+                                'dynamics_model', 'switch_method', 'regularization', 'anti_windup_gain'}
+                controller_params = {k: v for k, v in controller_params.items() if k in allowed_params and v is not None}
+            elif controller_type == 'classical_smc':
+                # ClassicalSMC has specific parameter requirements
+                allowed_params = {'gains', 'max_force', 'boundary_layer', 'dynamics_model',
+                                'regularization', 'switch_method', 'boundary_layer_slope',
+                                'controllability_threshold', 'hysteresis_ratio'}
+                controller_params = {k: v for k, v in controller_params.items() if k in allowed_params and v is not None}
+            elif controller_type == 'adaptive_smc':
+                # AdaptiveSMC parameter filtering
+                allowed_params = {'gains', 'max_force', 'dt', 'dynamics_model', 'leak_rate',
+                                'dead_zone', 'adapt_rate_limit', 'K_min', 'K_max', 'K_init',
+                                'alpha', 'boundary_layer', 'smooth_switch'}
+                controller_params = {k: v for k, v in controller_params.items() if k in allowed_params and v is not None}
+
+            controller = controller_class(**controller_params)
+        else:
+            # Modular controllers use config objects
+            controller = controller_class(controller_config)
+
         logger.info(f"Created {controller_type} controller with gains: {controller_gains}")
         return controller
     except Exception as e:

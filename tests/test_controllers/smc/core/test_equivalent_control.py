@@ -1,6 +1,7 @@
-#==========================================================================================\\
-#============= tests/test_controllers/smc/core/test_equivalent_control.py ================\\
-#==========================================================================================\\
+#=======================================================================================\\\
+#============== tests/test_controllers/smc/core/test_equivalent_control.py ==============\\\
+#=======================================================================================\\\
+
 """
 Tests for Equivalent Control Computation.
 SINGLE JOB: Test only equivalent control mathematical computation and error handling.

@@ -1,6 +1,7 @@
-#==========================================================================================\\\
-#============== src/interfaces/monitoring/metrics_collector_threadsafe.py ===============\\\
-#==========================================================================================\\\
+#=======================================================================================\\\
+#=============== src/interfaces/monitoring/metrics_collector_threadsafe.py ==============\\\
+#=======================================================================================\\\
+
 """
 THREAD-SAFE Metrics Collection System - Race Condition Fixes Applied
 This is a production-hardened version that addresses all thread safety issues

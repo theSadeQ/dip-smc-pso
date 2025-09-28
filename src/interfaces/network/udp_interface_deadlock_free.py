@@ -1,6 +1,7 @@
-#==========================================================================================\\\
-#================= src/interfaces/network/udp_interface_deadlock_free.py ===============\\\
-#==========================================================================================\\\
+#=======================================================================================\\\
+#================= src/interfaces/network/udp_interface_deadlock_free.py ================\\\
+#=======================================================================================\\\
+
 """
 DEADLOCK-FREE UDP communication interface for real-time control systems.
 This version eliminates all deadlock risks found in the thread-safe implementation
