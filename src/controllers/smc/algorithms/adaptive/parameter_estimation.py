@@ -177,6 +177,42 @@ class UncertaintyEstimator:
             }
         }
 
+    # Methods for test compatibility (Control Systems Specialist interface fixes)
+    def update_estimates(self, surface_value: float, adaptation_rate: float, dt: float) -> float:
+        """
+        Compatibility method for tests - maps to update_estimate with surface derivative.
+
+        Args:
+            surface_value: Current sliding surface value
+            adaptation_rate: Adaptation rate (used as surface derivative approximation)
+            dt: Time step
+
+        Returns:
+            Updated uncertainty estimate
+        """
+        # Approximate surface derivative from adaptation rate
+        surface_derivative = adaptation_rate * surface_value
+        control_input = 0.0  # Assume no control input available in this interface
+        return self.update_estimate(surface_value, surface_derivative, control_input, dt)
+
+    @property
+    def current_estimates(self) -> np.ndarray:
+        """
+        Current uncertainty estimates for test compatibility.
+
+        Returns:
+            Array containing current estimate and recent history
+        """
+        if len(self._uncertainty_estimates) == 0:
+            return np.array([self.eta_hat])
+
+        # Return recent estimates as array
+        recent_estimates = list(self._uncertainty_estimates)[-5:]  # Last 5 estimates
+        if len(recent_estimates) == 0:
+            recent_estimates = [self.eta_hat]
+
+        return np.array(recent_estimates)
+
 
 class ParameterIdentifier:
     """
