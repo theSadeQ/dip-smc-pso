@@ -74,10 +74,10 @@ except ImportError:
         regularization: float = 1e-6
         dynamics_model: Any = None
 
-        def get_surface_gains(self):
+        def get_surface_gains(self) -> List[float]:
             return self.gains[:4] if len(self.gains) >= 4 else self.gains
 
-        def get_effective_controllability_threshold(self):
+        def get_effective_controllability_threshold(self) -> float:
             return self.regularization
 
     @dataclass
@@ -93,10 +93,10 @@ except ImportError:
         power_exponent: float = 0.5
         regularization: float = 1e-6
 
-        def get_surface_gains(self):
+        def get_surface_gains(self) -> List[float]:
             return self.gains[:4] if len(self.gains) >= 4 else self.gains
 
-        def get_effective_anti_windup_gain(self):
+        def get_effective_anti_windup_gain(self) -> float:
             return self.damping_gain
 
     @dataclass
@@ -310,9 +310,12 @@ def create_controller(controller_type: str,
             # Standard controllers use gains
             config_params = {
                 'gains': controller_gains,
-                'dynamics_model': dynamics_model,
                 **controller_params
             }
+
+            # Only add dynamics_model for controllers that support it
+            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc']:
+                config_params['dynamics_model'] = dynamics_model
 
         # Remove None values and filter to only valid parameters
         config_params = {k: v for k, v in config_params.items() if v is not None}
@@ -456,7 +459,7 @@ class SMCFactory:
     """Factory class for creating SMC controllers."""
 
     @staticmethod
-    def create_controller(smc_type: SMCType, config: SMCConfig):
+    def create_controller(smc_type: SMCType, config: SMCConfig) -> Any:
         """Create controller using SMCType enum."""
         return create_controller(smc_type.value, config, config.gains)
 

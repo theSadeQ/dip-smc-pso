@@ -104,7 +104,7 @@ class PSOControllerWrapper:
             # Classical and Adaptive SMC typically use empty tuple
             self._state_vars = ()
 
-    def compute_control(self, state: np.ndarray, state_vars=None, history=None):
+    def compute_control(self, state: np.ndarray, state_vars: Optional[Any] = None, history: Optional[Dict[str, Any]] = None) -> Union[np.ndarray, Any]:
         """
         Flexible compute_control interface supporting both patterns:
         1. compute_control(state) - PSO-friendly simplified interface

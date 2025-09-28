@@ -172,6 +172,8 @@ class ClassicalSMCConfig(_BaseControllerConfig):
     max_force: Optional[float] = Field(None, gt=0.0)
     boundary_layer: Optional[float] = Field(None, gt=0.0)
     dt: Optional[float] = Field(None, gt=0.0)
+    rate_weight: Optional[float] = Field(None, ge=0.0)
+    use_adaptive_boundary: Optional[bool] = None
 
 class STASMCConfig(_BaseControllerConfig):
     """Configuration for Super-Twisting Algorithm Sliding Mode Controller."""
