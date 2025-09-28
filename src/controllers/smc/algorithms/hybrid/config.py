@@ -55,6 +55,10 @@ class HybridSMCConfig:
     dt: float = field()                                        # Control timestep
     max_force: float = field()                                 # Control saturation limit
 
+    # PSO Integration: Surface gains for sliding mode design [c1, λ1, c2, λ2]
+    # These parameters define the sliding surface dynamics for convergence control
+    gains: List[float] = field(default_factory=lambda: [18.0, 12.0, 10.0, 8.0])
+
     # Controller configurations
     classical_config: Optional[ClassicalSMCConfig] = field(default=None)
     adaptive_config: Optional[AdaptiveSMCConfig] = field(default=None)
@@ -89,10 +93,48 @@ class HybridSMCConfig:
 
     def __post_init__(self):
         """Validate configuration after creation."""
+        self._validate_gains()
         self._validate_hybrid_mode()
         self._validate_switching_parameters()
         self._validate_controller_configs()
         self._validate_performance_parameters()
+
+    def _validate_gains(self) -> None:
+        """Validate sliding surface gains for PSO integration."""
+        if not isinstance(self.gains, (list, tuple)):
+            raise TypeError("gains must be a list or tuple")
+
+        if len(self.gains) != 4:
+            raise ValueError("Hybrid controller requires exactly 4 surface gains [c1, λ1, c2, λ2]")
+
+        import numpy as np
+        for i, gain in enumerate(self.gains):
+            if not isinstance(gain, (int, float)):
+                raise TypeError(f"gain[{i}] must be a number, got {type(gain)}")
+            if not np.isfinite(gain):
+                raise ValueError(f"gain[{i}] must be finite, got {gain}")
+            if gain <= 0:
+                raise ValueError(f"gain[{i}] must be positive for stability, got {gain}")
+
+        # Additional stability requirements for sliding surface design
+        c1, lambda1, c2, lambda2 = self.gains
+
+        # Check sliding surface coefficient ratios for good conditioning
+        if lambda1 / c1 > 50.0:
+            raise ValueError(f"λ1/c1 ratio ({lambda1/c1:.2f}) too large - may cause numerical issues")
+        if lambda2 / c2 > 50.0:
+            raise ValueError(f"λ2/c2 ratio ({lambda2/c2:.2f}) too large - may cause numerical issues")
+
+        # Check for balanced surface design (optional warning)
+        ratio_balance = (lambda1 / c1) / (lambda2 / c2) if c2 != 0 and lambda2 != 0 else 1.0
+        if ratio_balance > 10.0 or ratio_balance < 0.1:
+            import warnings
+            warnings.warn(f"Unbalanced surface design: λ1/c1 vs λ2/c2 ratio = {ratio_balance:.2f}", UserWarning)
+
+    @property
+    def surface_gains(self) -> List[float]:
+        """Surface parameters for sliding mode design [c1, λ1, c2, λ2]."""
+        return list(self.gains)
 
     def _validate_hybrid_mode(self) -> None:
         """Validate hybrid mode and required controller configurations."""
@@ -243,6 +285,7 @@ class HybridSMCConfig:
             'hybrid_mode': self.hybrid_mode.value,
             'dt': self.dt,
             'max_force': self.max_force,
+            'gains': list(self.gains),  # Include surface gains for PSO integration
             'switching_criterion': self.switching_criterion.value,
             'switching_thresholds': list(self.switching_thresholds),
             'hysteresis_margin': self.hysteresis_margin,

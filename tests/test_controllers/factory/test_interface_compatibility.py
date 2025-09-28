@@ -128,10 +128,13 @@ class TestControllerFactoryInterfaceCompatibility:
         registry_types = list(CONTROLLER_REGISTRY.keys())
         available_types = list_available_controllers()
 
-        # All registry types should be available
+        # Only available registry types should be in available list
+        # (Controllers with class=None are registered but not available)
         for controller_type in registry_types:
-            assert controller_type in available_types, \
-                f"Controller type {controller_type} in registry but not available"
+            controller_info = CONTROLLER_REGISTRY[controller_type]
+            if controller_info.get('class') is not None:
+                assert controller_type in available_types, \
+                    f"Controller type {controller_type} has class but not available"
 
         # All available types should be in registry
         for controller_type in available_types:
