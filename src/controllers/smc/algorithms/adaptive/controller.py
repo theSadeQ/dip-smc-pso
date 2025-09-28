@@ -220,10 +220,8 @@ class ModularAdaptiveSMC:
 
     @property
     def gains(self) -> List[float]:
-        """Return controller gains (including current adaptive gain)."""
-        static_gains = list(self.config.gains)
-        current_adaptive_gain = self._adaptation.get_current_gain()
-        return static_gains + [current_adaptive_gain]
+        """Return controller gains (static configuration gains only)."""
+        return list(self.config.gains)
 
     def get_adaptive_gain(self) -> float:
         """Get current adaptive gain value."""

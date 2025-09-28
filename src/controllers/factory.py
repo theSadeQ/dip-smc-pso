@@ -925,6 +925,26 @@ class PSOControllerWrapper:
                         valid_mask[i] = False
                         continue
 
+                elif self.controller_type == 'sta_smc':
+                    # Super-Twisting SMC: K1 > K2 stability constraint required
+                    K1, K2 = gains[0], gains[1]
+                    if K1 <= K2:  # Must have K1 > K2 for stability
+                        valid_mask[i] = False
+                        continue
+                    # Additional surface parameter checks for 6-gain version
+                    if len(gains) == 6:
+                        k1, k2, lam1, lam2 = gains[2], gains[3], gains[4], gains[5]
+                        if any(param <= 0 for param in [k1, k2, lam1, lam2]):
+                            valid_mask[i] = False
+                            continue
+
+                elif self.controller_type == 'hybrid_adaptive_sta_smc':
+                    # Hybrid SMC: validate sliding surface parameters
+                    c1, lam1, c2, lam2 = gains
+                    if any(param <= 0 for param in [c1, lam1, c2, lam2]):
+                        valid_mask[i] = False
+                        continue
+
             except Exception:
                 valid_mask[i] = False
 
@@ -1041,8 +1061,9 @@ def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]
             'upper': [40.0, 40.0, 25.0, 25.0, 10.0]
         },
         SMCType.SUPER_TWISTING: {
-            'lower': [3.0, 2.0, 2.0, 2.0, 0.5, 0.5],    # [K1, K2, k1, k2, lam1, lam2]
-            'upper': [50.0, 30.0, 30.0, 30.0, 20.0, 20.0]
+            # K1 > K2 constraint: K1 in [2.0, 50.0], K2 in [1.0, 49.0] ensures K1 > K2
+            'lower': [2.0, 1.0, 2.0, 2.0, 0.5, 0.5],    # [K1, K2, k1, k2, lam1, lam2]
+            'upper': [50.0, 49.0, 30.0, 30.0, 20.0, 20.0]
         },
         SMCType.HYBRID: {
             'lower': [2.0, 2.0, 1.0, 1.0],              # [k1, k2, lam1, lam2]

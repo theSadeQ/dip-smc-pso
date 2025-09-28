@@ -388,7 +388,8 @@ class SuperTwistingSMC:
         Vectorized feasibility check for super‑twisting SMC gains.
 
         The algorithmic gains ``K1`` and ``K2`` must be strictly positive to
-        ensure finite‑time convergence of the super‑twisting algorithm.  When
+        ensure finite‑time convergence of the super‑twisting algorithm. Additionally,
+        for stability, K1 > K2 is required per super-twisting theory. When
         a six‑element gain vector is provided the sliding‑surface gains
         ``k1``, ``k2`` and the lambda parameters ``lam1``, ``lam2`` must also
         be positive.  Positive sliding‑surface coefficients are required
@@ -407,15 +408,15 @@ class SuperTwistingSMC:
         -------
         np.ndarray
             Boolean mask of shape (B,) indicating which rows satisfy the
-            positivity constraints.
+            positivity and stability constraints.
         """
         import numpy as _np
         if gains_b.ndim != 2 or gains_b.shape[1] < 2:
             return _np.ones(gains_b.shape[0], dtype=bool)
-        # Always require K1 and K2 to be positive
+        # Always require K1 and K2 to be positive AND K1 > K2 for stability
         k1 = gains_b[:, 0].astype(float)
         k2 = gains_b[:, 1].astype(float)
-        valid = (k1 > 0.0) & (k2 > 0.0)
+        valid = (k1 > 0.0) & (k2 > 0.0) & (k1 > k2)
         # If sliding surface parameters are provided, require them to be positive
         if gains_b.shape[1] >= 6:
             surf_k1 = gains_b[:, 2].astype(float)
