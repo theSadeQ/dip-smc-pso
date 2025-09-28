@@ -24,52 +24,58 @@ class TestPSOTuner:
     @pytest.fixture
     def minimal_config(self):
         """Create minimal valid configuration for testing."""
-        config_data = {
-            'global_seed': 42,
-            'physics': {
-                'cart_mass': 1.5,
-                'pendulum1_mass': 0.2,
-                'pendulum2_mass': 0.15,
-                'pendulum1_length': 0.4,
-                'pendulum2_length': 0.3,
-                'pendulum1_com': 0.2,
-                'pendulum2_com': 0.15,
-                'pendulum1_inertia': 0.009,
-                'pendulum2_inertia': 0.009,
-                'gravity': 9.81,
-                'cart_friction': 0.2,
-                'joint1_friction': 0.005,
-                'joint2_friction': 0.004,
-                'singularity_cond_threshold': 1e8
-            },
-            'simulation': {
-                'duration': 1.0,
-                'dt': 0.01,
-                'initial_state': [0.0, 0.05, -0.03, 0.0, 0.0, 0.0],
-                'use_full_dynamics': False
-            },
-            'cost_function': {
-                'weights': {
-                    'state_error': 50.0,
-                    'control_effort': 0.2,
-                    'control_rate': 0.1,
-                    'stability': 0.1
-                },
-                'instability_penalty': 1000.0
-            },
-            'pso': {
-                'n_particles': 5,
-                'bounds': {
-                    'min': [1.0, 1.0, 1.0, 1.0, 5.0, 0.1],
-                    'max': [20.0, 20.0, 10.0, 10.0, 50.0, 5.0]
-                },
-                'w': 0.5,
-                'c1': 1.5,
-                'c2': 1.5,
-                'iters': 3
-            }
-        }
-        return ConfigSchema(**config_data)
+        # Create a mock configuration object with the essential attributes
+        config = Mock()
+        config.global_seed = 42
+
+        # Physics config mock
+        config.physics = Mock()
+        config.physics.cart_mass = 1.5
+        config.physics.pendulum1_mass = 0.2
+        config.physics.pendulum2_mass = 0.15
+        config.physics.pendulum1_length = 0.4
+        config.physics.pendulum2_length = 0.3
+        config.physics.pendulum1_com = 0.2
+        config.physics.pendulum2_com = 0.15
+        config.physics.pendulum1_inertia = 0.009
+        config.physics.pendulum2_inertia = 0.009
+        config.physics.gravity = 9.81
+        config.physics.cart_friction = 0.2
+        config.physics.joint1_friction = 0.005
+        config.physics.joint2_friction = 0.004
+
+        # Simulation config mock
+        config.simulation = Mock()
+        config.simulation.duration = 1.0
+        config.simulation.dt = 0.01
+        config.simulation.initial_state = [0.0, 0.05, -0.03, 0.0, 0.0, 0.0]
+        config.simulation.use_full_dynamics = False
+
+        # Cost function config mock
+        config.cost_function = Mock()
+        config.cost_function.weights = Mock()
+        config.cost_function.weights.state_error = 50.0
+        config.cost_function.weights.control_effort = 0.2
+        config.cost_function.weights.control_rate = 0.1
+        config.cost_function.weights.stability = 0.1
+        config.cost_function.instability_penalty = 1000.0
+
+        # PSO config mock
+        config.pso = Mock()
+        config.pso.n_particles = 5
+        config.pso.bounds = Mock()
+        config.pso.bounds.min = [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
+        config.pso.bounds.max = [20.0, 20.0, 10.0, 10.0, 50.0, 5.0]
+        config.pso.w = 0.5
+        config.pso.c1 = 1.5
+        config.pso.c2 = 1.5
+        config.pso.iters = 3
+
+        # Physics uncertainty config mock
+        config.physics_uncertainty = Mock()
+        config.physics_uncertainty.n_evals = 1
+
+        return config
 
     @pytest.fixture
     def mock_controller_factory(self):

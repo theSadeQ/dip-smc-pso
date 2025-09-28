@@ -223,7 +223,7 @@ class TestControllerFactoryInterfaceCompatibility:
                 np.array(default_gains),  # NumPy array
                 tuple(default_gains),  # Tuple
                 [float(g) for g in default_gains],  # Float list
-                [int(g) for g in default_gains if g == int(g)],  # Int list (if applicable)
+[int(g) if g == int(g) else g for g in default_gains],  # Int list (preserve fractional)
             ]
 
             for gains in gains_variants:
