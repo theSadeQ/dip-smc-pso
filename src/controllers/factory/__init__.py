@@ -155,6 +155,33 @@ def apply_deprecation_mapping(controller_type: str, params: dict = None, allow_u
 
     return processed_params
 
+
+def _as_dict(obj):
+    """
+    Convert an object to dictionary representation.
+
+    Handles objects with model_dump() method (like Pydantic models)
+    and regular objects with __dict__.
+
+    Args:
+        obj: Object to convert to dictionary
+
+    Returns:
+        Dictionary representation of the object
+    """
+    if hasattr(obj, 'model_dump'):
+        # Pydantic v2 style
+        return obj.model_dump(exclude_unset=True)
+    elif hasattr(obj, 'dict'):
+        # Pydantic v1 style
+        return obj.dict(exclude_unset=True)
+    elif hasattr(obj, '__dict__'):
+        # Regular object
+        return obj.__dict__
+    else:
+        # Fallback to the object itself if it's already dict-like
+        return dict(obj) if hasattr(obj, 'keys') else {}
+
 # Clean public API - prioritize new SMC factory
 __all__ = [
     # ========================================
@@ -188,6 +215,7 @@ __all__ = [
     "build_all_legacy",
     "_canonical",                 # For test compatibility
     "apply_deprecation_mapping",  # Deprecation mapping function
+    "_as_dict",                   # Object to dict conversion function
 
     # New factory.py functions for test compatibility
     "list_available_controllers",

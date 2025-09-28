@@ -59,6 +59,12 @@ class TestPSOTuner:
         config.cost_function.weights.control_rate = 0.1
         config.cost_function.weights.stability = 0.1
         config.cost_function.instability_penalty = 1000.0
+        # Add norms for PSO optimizer
+        config.cost_function.norms = Mock()
+        config.cost_function.norms.state_error = 1.0
+        config.cost_function.norms.control_effort = 1.0
+        config.cost_function.norms.control_rate = 1.0
+        config.cost_function.norms.sliding = 1.0
 
         # PSO config mock
         config.pso = Mock()
@@ -66,10 +72,29 @@ class TestPSOTuner:
         config.pso.bounds = Mock()
         config.pso.bounds.min = [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
         config.pso.bounds.max = [20.0, 20.0, 10.0, 10.0, 50.0, 5.0]
+
+        # Add controller-specific bounds for proper PSO-factory integration
+        config.pso.bounds.classical_smc = Mock()
+        config.pso.bounds.classical_smc.min = [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
+        config.pso.bounds.classical_smc.max = [30.0, 30.0, 20.0, 20.0, 50.0, 10.0]
+
+        config.pso.bounds.adaptive_smc = Mock()
+        config.pso.bounds.adaptive_smc.min = [2.0, 2.0, 1.0, 1.0, 0.5]
+        config.pso.bounds.adaptive_smc.max = [40.0, 40.0, 25.0, 25.0, 10.0]
+
+        config.pso.bounds.sta_smc = Mock()
+        config.pso.bounds.sta_smc.min = [3.0, 2.0, 2.0, 2.0, 0.5, 0.5]
+        config.pso.bounds.sta_smc.max = [50.0, 30.0, 30.0, 30.0, 20.0, 20.0]
+
         config.pso.w = 0.5
         config.pso.c1 = 1.5
         config.pso.c2 = 1.5
         config.pso.iters = 3
+        # Set deprecated fields to None to avoid validation errors
+        config.pso.n_processes = None
+        config.pso.hyper_trials = None
+        config.pso.hyper_search = None
+        config.pso.study_timeout = None
 
         # Physics uncertainty config mock
         config.physics_uncertainty = Mock()
