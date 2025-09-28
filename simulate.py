@@ -421,6 +421,7 @@ def _run_pso(args: Args) -> int:
         'hybrid_adaptive_sta_smc': 4,
     }
     controller_factory.n_gains = n_gains_map.get(ctrl_name, 6)
+    controller_factory.controller_type = ctrl_name
 
     #
     # The previous implementation adjusted the PSO workload based on the presence of

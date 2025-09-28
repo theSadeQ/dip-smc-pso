@@ -1,6 +1,6 @@
-#==========================================================================================\\
-#============================ src/optimizer/pso_optimizer.py ============================\\
-#==========================================================================================\\
+#==========================================================================================\\\
+#==================== src/optimization/algorithms/pso_optimizer.py ====================\\\
+#==========================================================================================\\\
 """
 Particle Swarm Optimisation (PSO) tuner for sliding-mode controllers.
 
@@ -18,17 +18,20 @@ design-review report.
 
 from __future__ import annotations
 
-from pathlib import Path
-import numpy as np
+# Standard library imports
 import logging
-from typing import Callable, Dict, Optional, Any, Iterable, Union
 from contextlib import contextmanager
-import numpy as _np
+from pathlib import Path
+from typing import Any, Callable, Dict, Iterable, Optional, Union
 
-from src.config import load_config, ConfigSchema
+# Third-party imports
+import numpy as np
+
+# Local project imports
+from src.config import ConfigSchema, load_config
 from src.utils.seed import create_rng
-from ...simulation.engines.vector_sim import simulate_system_batch
 from ...plant.models.dynamics import DIPParams
+from ...simulation.engines.vector_sim import simulate_system_batch
 
 # ---------------------------------------------------------------------------
 # Module-level configuration
@@ -82,7 +85,7 @@ def _seeded_global_numpy(seed: int | None):
         return
     state = None
     try:
-        state = _np.random.get_state()
+        state = np.random.get_state()
     except Exception:
         state = None
     try:
@@ -643,21 +646,45 @@ class PSOTuner:
         """
         from pyswarms.single import GlobalBestPSO
         pso_cfg = self.cfg.pso
-        min_list = list(pso_cfg.bounds.min)
-        max_list = list(pso_cfg.bounds.max)
-        if len(min_list) != len(max_list):
-            raise ValueError(
-                f"PSO bounds min/max lengths differ: {len(min_list)} != {len(max_list)}"
-            )
+
+        # Get expected dimensions from controller factory
         expected_dims = getattr(self.controller_factory, "n_gains", None)
         if expected_dims is None:
             raise ValueError(
                 "Controller factory must define a class attribute 'n_gains' to specify the expected dimensionality of the gain vector."
             )
-        if len(min_list) < expected_dims:
+
+        # Determine controller type to select appropriate bounds
+        controller_type = getattr(self.controller_factory, "controller_type", "classical_smc")
+
+        # Get controller-specific bounds if available, otherwise use default bounds
+        bounds_config = pso_cfg.bounds
+        if hasattr(bounds_config, controller_type):
+            controller_bounds = getattr(bounds_config, controller_type)
+            min_list = list(controller_bounds.min)
+            max_list = list(controller_bounds.max)
+        else:
+            # Fallback to default bounds
+            min_list = list(bounds_config.min)
+            max_list = list(bounds_config.max)
+
+        if len(min_list) != len(max_list):
             raise ValueError(
-                f"PSO bounds underspecified: controller expects {expected_dims} gains, but bounds provide only {len(min_list)}."
+                f"PSO bounds min/max lengths differ: {len(min_list)} != {len(max_list)}"
             )
+
+        # Validate bounds length matches expected dimensions
+        if len(min_list) != expected_dims:
+            # Try to adjust bounds to match expected dimensions
+            if len(min_list) > expected_dims:
+                # Truncate bounds
+                min_list = min_list[:expected_dims]
+                max_list = max_list[:expected_dims]
+            else:
+                # Extend bounds with reasonable defaults
+                while len(min_list) < expected_dims:
+                    min_list.append(0.1)
+                    max_list.append(50.0)
         pso_options = {
             'c1': pso_cfg.c1,
             'c2': pso_cfg.c2,

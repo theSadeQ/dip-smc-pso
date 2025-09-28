@@ -8,7 +8,7 @@ This module provides a factory pattern for instantiating different types
 of controllers with proper configuration and parameter management.
 """
 
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 import numpy as np
 import logging
 
@@ -390,23 +390,23 @@ def get_default_gains(controller_type: str) -> list:
 
 
 # Backwards compatibility aliases
-def create_classical_smc_controller(config=None, gains=None):
+def create_classical_smc_controller(config: Optional[Any] = None, gains: Optional[Union[list, np.ndarray]] = None) -> Any:
     """Create classical SMC controller (backwards compatibility)."""
     return create_controller('classical_smc', config, gains)
 
 
-def create_sta_smc_controller(config=None, gains=None):
+def create_sta_smc_controller(config: Optional[Any] = None, gains: Optional[Union[list, np.ndarray]] = None) -> Any:
     """Create super-twisting SMC controller (backwards compatibility)."""
     return create_controller('sta_smc', config, gains)
 
 
-def create_adaptive_smc_controller(config=None, gains=None):
+def create_adaptive_smc_controller(config: Optional[Any] = None, gains: Optional[Union[list, np.ndarray]] = None) -> Any:
     """Create adaptive SMC controller (backwards compatibility)."""
     return create_controller('adaptive_smc', config, gains)
 
 
 # Additional backwards compatibility for the existing __init__.py
-def create_controller_legacy(controller_type: str, config=None, gains=None):
+def create_controller_legacy(controller_type: str, config: Optional[Any] = None, gains: Optional[Union[list, np.ndarray]] = None) -> Any:
     """Legacy factory function (backwards compatibility)."""
     return create_controller(controller_type, config, gains)
 
@@ -441,13 +441,16 @@ class SMCFactory:
         return create_controller(smc_type.value, config, config.gains)
 
 
-def create_smc_for_pso(smc_type: SMCType, gains, max_force=150.0, dt=0.001, **kwargs):
+def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_config_or_model: Optional[Any] = None, max_force: float = 150.0, dt: float = 0.001, **kwargs: Any) -> Any:
     """Create SMC controller optimized for PSO usage."""
+    # Handle different calling patterns for backward compatibility
+    dynamics_model = kwargs.get('dynamics_model', plant_config_or_model)
+
     config = SMCConfig(gains=gains, max_force=max_force, dt=dt, **kwargs)
     return SMCFactory.create_controller(smc_type, config)
 
 
-def get_gain_bounds_for_pso(smc_type: SMCType):
+def get_gain_bounds_for_pso(smc_type: SMCType) -> List[Tuple[float, float]]:
     """Get PSO gain bounds for a controller type."""
     bounds_map = {
         SMCType.CLASSICAL: [(0.1, 50.0)] * 6,  # 6 gains for classical
@@ -458,7 +461,7 @@ def get_gain_bounds_for_pso(smc_type: SMCType):
     return bounds_map.get(smc_type, [(0.1, 50.0)] * 6)
 
 
-def validate_smc_gains(smc_type: SMCType, gains):
+def validate_smc_gains(smc_type: SMCType, gains: Union[list, np.ndarray]) -> bool:
     """Validate gains for a controller type."""
     expected_lengths = {
         SMCType.CLASSICAL: 6,

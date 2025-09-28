@@ -148,7 +148,7 @@ class TestPSOIntegration:
 
     def test_create_smc_for_pso(self):
         """Test PSO-specific controller creation."""
-        gains = [10.0, 5.0, 8.0, 3.0]
+        gains = [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]  # 6 gains for classical SMC: [k1, k2, lam1, lam2, K, kd]
 
         controller = create_smc_for_pso(
             SMCType.CLASSICAL,
@@ -158,10 +158,11 @@ class TestPSOIntegration:
 
         assert controller is not None
 
-        # Test control computation
+        # Test control computation with PSO wrapper interface
         state = np.array([0.1, 0.2, 0.3, 0.0, 0.0, 0.0])
         control = controller.compute_control(state)
         assert isinstance(control, np.ndarray)
+        assert control.shape == (1,)
 
     def test_get_gain_bounds_for_pso(self):
         """Test getting gain bounds for PSO optimization."""
@@ -171,17 +172,18 @@ class TestPSOIntegration:
         assert len(bounds) == 2  # (lower_bounds, upper_bounds)
 
         lower_bounds, upper_bounds = bounds
-        assert len(lower_bounds) == len(upper_bounds)
+        assert len(lower_bounds) == 6  # 6 gains for classical SMC
+        assert len(upper_bounds) == 6
         assert all(l < u for l, u in zip(lower_bounds, upper_bounds))
 
     def test_validate_smc_gains(self):
         """Test gain validation."""
         # Valid gains should pass
-        valid_gains = [10.0, 5.0, 8.0, 3.0]
+        valid_gains = [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]  # 6 gains for classical SMC
         assert validate_smc_gains(SMCType.CLASSICAL, valid_gains)
 
         # Invalid gains should fail
-        invalid_gains = [-1.0, 5.0, 8.0, 3.0]  # Negative gain
+        invalid_gains = [-1.0, 5.0, 8.0, 3.0, 15.0, 2.0]  # Negative gain
         assert not validate_smc_gains(SMCType.CLASSICAL, invalid_gains)
 
 

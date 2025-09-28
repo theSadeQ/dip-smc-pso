@@ -171,6 +171,7 @@ class ClassicalSMCConfig(_BaseControllerConfig):
     """Configuration for Classical Sliding Mode Controller."""
     max_force: Optional[float] = Field(None, gt=0.0)
     boundary_layer: Optional[float] = Field(None, gt=0.0)
+    dt: Optional[float] = Field(None, gt=0.0)
 
 class STASMCConfig(_BaseControllerConfig):
     """Configuration for Super-Twisting Algorithm Sliding Mode Controller."""
@@ -300,9 +301,19 @@ class PSOBounds(StrictModel):
     min: List[float]
     max: List[float]
 
+class PSOBoundsWithControllers(StrictModel):
+    # Default bounds for all controllers
+    min: List[float]
+    max: List[float]
+    # Controller-specific bounds (optional)
+    classical_smc: Optional[PSOBounds] = None
+    sta_smc: Optional[PSOBounds] = None
+    adaptive_smc: Optional[PSOBounds] = None
+    hybrid_adaptive_sta_smc: Optional[PSOBounds] = None
+
 class PSOConfig(StrictModel):
     n_particles: int = Field(100, ge=1)
-    bounds: PSOBounds
+    bounds: PSOBoundsWithControllers
     w: float = Field(0.5, ge=0.0)
     c1: float = Field(1.5, ge=0.0)
     c2: float = Field(1.5, ge=0.0)
