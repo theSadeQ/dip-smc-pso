@@ -593,23 +593,17 @@ class TestPSOTunerProperties:
 
         @dataclass
         class MockWeights:
-            position: float = 1.0
-            velocity: float = 0.1
-            angle1: float = 10.0
-            angle2: float = 10.0
-            anglerate1: float = 0.1
-            anglerate2: float = 0.1
-            control_effort: float = 0.01
+            state_error: float = 50.0
+            control_effort: float = 0.2
+            control_rate: float = 0.1
+            stability: float = 0.1
 
         @dataclass
         class MockNorms:
-            position: float = 1.0
-            velocity: float = 1.0
-            angle1: float = 3.14159
-            angle2: float = 3.14159
-            anglerate1: float = 5.0
-            anglerate2: float = 5.0
-            control: float = 20.0
+            state_error: float = 1.0
+            control_effort: float = 1.0
+            control_rate: float = 1.0
+            sliding: float = 1.0
 
         @dataclass
         class MockCostFunction:
@@ -708,6 +702,11 @@ class TestPSOTunerProperties:
             mock_controller.controller_type = controller_type
             mock_controller.compute_control = Mock(return_value=np.array([0.0]))
             return mock_controller
+
+        # Add required attributes to the factory function for PSO compatibility
+        factory.n_gains = 6
+        factory.controller_type = "classical_smc"
+        factory.max_force = 150.0
         return factory
 
     def test_deterministic_behavior(self, minimal_config, mock_controller_factory):
@@ -748,7 +747,14 @@ class TestPSOTunerProperties:
         # Test invalid parameters (negative values, etc.)
         invalid_particles = np.array([[-1, -1, -1, -1, -1, -1]])
 
-        with patch('src.optimization.algorithms.pso_optimizer.simulate_system_batch'):
+        with patch('src.optimization.algorithms.pso_optimizer.simulate_system_batch') as mock_sim:
+            # Mock must return 4-tuple: (time, states, controls, sigma)
+            mock_sim.return_value = (
+                np.linspace(0, 1, 101),  # time
+                np.random.random((1, 101, 6)),  # states
+                np.random.random((1, 101)),  # controls
+                np.random.random((1, 101))   # sigma
+            )
             fitness = tuner._fitness(invalid_particles)
             # Should handle gracefully, potentially with high penalty
             assert np.all(np.isfinite(fitness))
