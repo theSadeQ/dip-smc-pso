@@ -1,6 +1,6 @@
-#==========================================================================================\\\
+#======================================================================================\\\
 #==================== src/optimization/algorithms/pso_optimizer.py ====================\\\
-#==========================================================================================\\\
+#======================================================================================\\\
 """
 Particle Swarm Optimisation (PSO) tuner for sliding-mode controllers.
 
@@ -414,14 +414,17 @@ class PSOTuner:
         ise = np.sum((x_b[:, :-1, :] ** 2 * dt_b[:, :, None]) * time_mask[:, :, None], axis=(1, 2))  # [CIT-068]
         ise_n = self._normalise(ise, self.norm_ise)
         # Control effort  # [CIT-068]
-        u_sq = np.sum((u_b ** 2 * dt_b) * time_mask, axis=1)  # [CIT-068]
+        u_b_trunc = u_b[:, :N] if u_b.shape[1] > N else u_b  # Ensure shape compatibility
+        u_sq = np.sum((u_b_trunc ** 2 * dt_b) * time_mask, axis=1)  # [CIT-068]
         u_n = self._normalise(u_sq, self.norm_u)
         # Control slew  # [CIT-068]
         du = np.diff(u_b, axis=1, prepend=u_b[:, 0:1])  # [CIT-068]
-        du_sq = np.sum((du ** 2 * dt_b) * time_mask, axis=1)  # [CIT-068]
+        du_trunc = du[:, :N] if du.shape[1] > N else du  # Ensure shape compatibility
+        du_sq = np.sum((du_trunc ** 2 * dt_b) * time_mask, axis=1)  # [CIT-068]
         du_n = self._normalise(du_sq, self.norm_du)
         # Sliding variable energy  # [CIT-068]
-        sigma_sq = np.sum((sigma_b ** 2 * dt_b) * time_mask, axis=1)  # [CIT-068]
+        sigma_b_trunc = sigma_b[:, :N] if sigma_b.shape[1] > N else sigma_b  # Ensure shape compatibility
+        sigma_sq = np.sum((sigma_b_trunc ** 2 * dt_b) * time_mask, axis=1)  # [CIT-068]
         sigma_n = self._normalise(sigma_sq, self.norm_sigma)
         # Graded penalty for early failure
         failure_t = np.clip((failure_steps - 1) * dt_const, 0, self.sim_cfg.duration)

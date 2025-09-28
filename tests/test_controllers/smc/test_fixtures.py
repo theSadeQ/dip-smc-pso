@@ -35,18 +35,9 @@ from src.controllers.smc.algorithms import (
     HybridMode, SwitchingCriterion
 )
 
-# Test imports for core components
-from src.controllers.smc.core import (
-    LinearSlidingSurface,
-    SwitchingFunction,
-    EquivalentControl,
-    validate_smc_gains,
-    SMCGainValidator
-)
-
 
 @dataclass
-class TestSystemState:
+class SystemStateFixture:
     """Test system state for SMC testing."""
     position: np.ndarray
     velocity: np.ndarray
@@ -79,7 +70,7 @@ def mock_dynamics():
 @pytest.fixture
 def test_state():
     """Fixture providing test system state."""
-    return TestSystemState(
+    return SystemStateFixture(
         position=np.array([0.1, 0.05, 0.02]),
         velocity=np.array([0.2, -0.1, 0.15])
     )
@@ -89,10 +80,10 @@ def test_state():
 def classical_smc_config():
     """Fixture providing classical SMC configuration."""
     return ClassicalSMCConfig(
-        sliding_gains=np.array([5.0, 3.0, 4.0]),
-        switching_gains=np.array([10.0, 8.0, 12.0]),
-        boundary_layer_thickness=0.1,
-        enable_chattering_reduction=True
+        gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0],  # [k1, k2, lam1, lam2, K, kd]
+        max_force=100.0,
+        dt=0.01,
+        boundary_layer=0.1
     )
 
 
@@ -100,11 +91,12 @@ def classical_smc_config():
 def adaptive_smc_config():
     """Fixture providing adaptive SMC configuration."""
     return AdaptiveSMCConfig(
-        sliding_gains=np.array([5.0, 3.0, 4.0]),
-        initial_adaptation_gains=np.array([1.0, 1.0, 1.0]),
-        adaptation_rate=0.5,
-        uncertainty_bound=2.0,
-        enable_parameter_projection=True
+        gains=[5.0, 3.0, 4.0, 2.0, 0.5],  # [k1, k2, lam1, lam2, gamma]
+        max_force=100.0,
+        dt=0.01,
+        K_init=10.0,
+        K_min=0.1,
+        K_max=100.0
     )
 
 
@@ -112,21 +104,35 @@ def adaptive_smc_config():
 def super_twisting_config():
     """Fixture providing super-twisting SMC configuration."""
     return SuperTwistingSMCConfig(
-        alpha=np.array([2.0, 2.0, 2.0]),
-        beta=np.array([1.0, 1.0, 1.0]),
-        lambda_gain=np.array([5.0, 5.0, 5.0]),
-        enable_finite_time_convergence=True
+        gains=[2.5, 1.5, 5.0, 3.0, 4.0, 2.0],  # [K1, K2, k1, k2, lam1, lam2] with K1 > K2
+        max_force=100.0,
+        dt=0.01
     )
 
 
 @pytest.fixture
 def hybrid_smc_config():
     """Fixture providing hybrid SMC configuration."""
+    classical_config = ClassicalSMCConfig(
+        gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0],
+        max_force=100.0,
+        dt=0.01,
+        boundary_layer=0.01
+    )
+    adaptive_config = AdaptiveSMCConfig(
+        gains=[5.0, 3.0, 4.0, 2.0, 0.5],
+        max_force=100.0,
+        dt=0.01
+    )
+
+    from src.controllers.smc.algorithms.hybrid.config import HybridMode
+
     return HybridSMCConfig(
-        switching_thresholds={'position': 0.1, 'velocity': 0.2},
-        mode_timeouts={'classical': 5.0, 'adaptive': 10.0},
-        enable_mode_memory=True,
-        stability_margin=0.05
+        hybrid_mode=HybridMode.CLASSICAL_ADAPTIVE,
+        dt=0.01,
+        max_force=100.0,
+        classical_config=classical_config,
+        adaptive_config=adaptive_config
     )
 
 

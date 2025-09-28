@@ -40,8 +40,15 @@ class BoundaryLayer:
             slope: Adaptive slope coefficient α ≥ 0 for ε_eff = ε + α|ṡ|
             switch_method: Switching function type ("tanh", "linear", "sign")
         """
+        # Enhanced mathematical validation
+        if not np.isfinite(thickness):
+            raise ValueError("Boundary layer thickness must be finite")
         if thickness <= 0:
             raise ValueError("Boundary layer thickness must be positive")
+        if thickness < 1e-12:
+            raise ValueError("Boundary layer thickness too small (minimum: 1e-12)")
+        if not np.isfinite(slope):
+            raise ValueError("Boundary layer slope must be finite")
         if slope < 0:
             raise ValueError("Boundary layer slope must be non-negative")
 
@@ -62,11 +69,23 @@ class BoundaryLayer:
         Returns:
             Effective boundary layer thickness
         """
+        # Handle invalid surface derivative
+        if not np.isfinite(surface_derivative):
+            surface_derivative = 0.0
+
         if self.slope == 0.0:
             return self.base_thickness
 
         adaptive_component = self.slope * abs(surface_derivative)
-        return self.base_thickness + adaptive_component
+
+        # Mathematical safety: ensure finite result
+        if not np.isfinite(adaptive_component):
+            adaptive_component = 0.0
+
+        effective_thickness = self.base_thickness + adaptive_component
+
+        # Ensure minimum thickness to prevent division by zero
+        return max(effective_thickness, 1e-12)
 
     def apply_to_surface(self, surface_value: float,
                         surface_derivative: float = 0.0) -> float:
@@ -80,7 +99,18 @@ class BoundaryLayer:
         Returns:
             Switching function output ∈ [-1, 1]
         """
+        # Validate inputs for mathematical safety
+        if not np.isfinite(surface_value):
+            return 0.0  # Safe fallback for invalid input
+        if not np.isfinite(surface_derivative):
+            surface_derivative = 0.0  # Use zero derivative if invalid
+
         effective_epsilon = self.get_effective_thickness(surface_derivative)
+
+        # Ensure effective epsilon is never zero
+        if effective_epsilon <= 0:
+            effective_epsilon = max(self.base_thickness, 1e-12)
+
         return self.switching_func.compute(surface_value, effective_epsilon)
 
     def compute_switching_control(self, surface_value: float,

@@ -77,11 +77,22 @@ class LinearSlidingSurface(SlidingSurface):
 
     def _validate_gains(self) -> None:
         """Validate that surface gains satisfy stability requirements."""
+        # Check for finite values
+        if not np.all(np.isfinite(self.gains)):
+            invalid_indices = np.where(~np.isfinite(self.gains))[0]
+            raise ValueError(f"Sliding surface gains contain NaN or infinite values at indices: {invalid_indices}")
+
         if len(self.gains) >= 4:
             # First 4 gains must be positive for Hurwitz stability
             if any(g <= 0 for g in self.gains[:4]):
                 raise ValueError(
                     "Sliding surface gains [k1, k2, lam1, lam2] must be positive for stability"
+                )
+
+            # Check for very small gains that might cause numerical issues
+            if any(g < 1e-12 for g in self.gains[:4]):
+                raise ValueError(
+                    "Sliding surface gains are too small (minimum: 1e-12) which may cause numerical instability"
                 )
 
     def compute(self, state: np.ndarray) -> float:
@@ -97,6 +108,11 @@ class LinearSlidingSurface(SlidingSurface):
         if len(state) < 6:
             raise ValueError("State must have at least 6 elements for double-inverted pendulum")
 
+        # Validate state input
+        if not np.all(np.isfinite(state)):
+            # Replace non-finite values with zeros for safe computation
+            state = np.where(np.isfinite(state), state, 0.0)
+
         # Extract joint angles and velocities (reference is upright: theta=0)
         theta1 = state[2]      # Joint 1 angle error
         theta1_dot = state[3]  # Joint 1 velocity error
@@ -106,6 +122,10 @@ class LinearSlidingSurface(SlidingSurface):
         # Linear sliding surface: s = λ₁ė₁ + c₁e₁ + λ₂ė₂ + c₂e₂
         s = (self.lam1 * theta1_dot + self.k1 * theta1 +
              self.lam2 * theta2_dot + self.k2 * theta2)
+
+        # Ensure finite result
+        if not np.isfinite(s):
+            return 0.0  # Safe fallback for numerical issues
 
         return float(s)
 

@@ -77,6 +77,12 @@ class SwitchingFunction:
         Returns:
             Switching function output in range [-1, 1]
         """
+        # Mathematical safety validation
+        if not np.isfinite(surface_value):
+            return 0.0  # Safe fallback for invalid input
+        if not np.isfinite(boundary_layer) or boundary_layer <= 0:
+            boundary_layer = 1e-12  # Use minimal positive value to prevent division by zero
+
         return self._switch_func(surface_value, boundary_layer)
 
     def _tanh_switching(self, s: float, epsilon: float) -> float:
@@ -91,9 +97,16 @@ class SwitchingFunction:
         - Good balance between smoothness and approximation quality
         - Preserves nonzero slope at origin
         """
+        # Enhanced mathematical safety
         if epsilon <= 0:
             return np.sign(s)
-        return np.tanh(s / epsilon)
+
+        # Prevent numerical overflow in tanh computation
+        ratio = s / epsilon
+        if abs(ratio) > 700:  # tanh(700) ≈ 1, tanh(-700) ≈ -1
+            return np.sign(s)
+
+        return np.tanh(ratio)
 
     def _linear_switching(self, s: float, epsilon: float) -> float:
         """
@@ -107,9 +120,16 @@ class SwitchingFunction:
         - Linear in boundary layer, constant outside
         - Can cause degraded robustness near origin (zero slope outside boundary)
         """
+        # Enhanced mathematical safety
         if epsilon <= 0:
             return np.sign(s)
-        return np.clip(s / epsilon, -1, 1)
+
+        # Safe division with overflow check
+        ratio = s / epsilon
+        if not np.isfinite(ratio):
+            return np.sign(s)
+
+        return np.clip(ratio, -1, 1)
 
     def _sign_switching(self, s: float, epsilon: float) -> float:
         """
@@ -137,9 +157,22 @@ class SwitchingFunction:
         - Similar to tanh but different curvature
         - Good for specific applications requiring sigmoid characteristics
         """
+        # Enhanced mathematical safety
         if epsilon <= 0:
             return np.sign(s)
-        return 2.0 / (1.0 + np.exp(-2.0 * s / epsilon)) - 1.0
+
+        # Prevent numerical overflow in exponential
+        ratio = -2.0 * s / epsilon
+        if ratio > 700:  # exp(700) overflows
+            return -1.0
+        elif ratio < -700:  # exp(-700) underflows
+            return 1.0
+
+        exp_term = np.exp(ratio)
+        if not np.isfinite(exp_term):
+            return np.sign(s)
+
+        return 2.0 / (1.0 + exp_term) - 1.0
 
     def get_derivative(self, surface_value: float, boundary_layer: float) -> float:
         """

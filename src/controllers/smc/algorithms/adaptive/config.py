@@ -11,6 +11,7 @@ Replaces parameter validation from the original 427-line monolithic controller.
 
 from typing import List, Optional
 from dataclasses import dataclass, field
+import numpy as np
 
 
 @dataclass(frozen=True)
@@ -53,15 +54,28 @@ class AdaptiveSMCConfig:
         if len(self.gains) != 5:
             raise ValueError("Adaptive SMC requires exactly 5 gains: [k1, k2, lam1, lam2, gamma]")
 
+        # Check for NaN or infinite values first
+        if not all(np.isfinite(g) for g in self.gains):
+            invalid_indices = [i for i, g in enumerate(self.gains) if not np.isfinite(g)]
+            gain_names = ['k1', 'k2', 'lam1', 'lam2', 'gamma']
+            invalid_names = [gain_names[i] for i in invalid_indices]
+            raise ValueError(f"Gains contain NaN or infinite values: {invalid_names}")
+
         k1, k2, lam1, lam2, gamma = self.gains
 
         # Surface gains must be positive for Hurwitz stability
         if any(g <= 0 for g in [k1, k2, lam1, lam2]):
             raise ValueError("Surface gains [k1, k2, λ1, λ2] must be positive for stability")
 
+        # Check for very small gains that might cause numerical issues
+        if any(g < 1e-12 for g in [k1, k2, lam1, lam2]):
+            raise ValueError("Surface gains are too small (minimum: 1e-12) which may cause numerical instability")
+
         # Adaptation rate must be positive
         if gamma <= 0:
             raise ValueError("Adaptation rate γ must be positive")
+        if gamma < 1e-12:
+            raise ValueError("Adaptation rate γ is too small (minimum: 1e-12) which may cause numerical instability")
 
         # Warn if adaptation rate is too large
         if gamma > 1.0:
@@ -126,6 +140,21 @@ class AdaptiveSMCConfig:
     def gamma(self) -> float:
         """Adaptation rate (γ)."""
         return self.gains[4]
+
+    @property
+    def adaptation_rate(self) -> List[float]:
+        """Adaptation rate as array for compatibility."""
+        return [self.gamma, self.gamma, self.gamma]  # 3-DOF system
+
+    @property
+    def uncertainty_bound(self) -> float:
+        """Uncertainty bound for adaptation law."""
+        return self.K_max  # Use maximum gain as uncertainty bound
+
+    @property
+    def initial_estimates(self) -> List[float]:
+        """Initial uncertainty estimates."""
+        return [self.K_init, self.K_init, self.K_init]  # 3-DOF system
 
     def get_surface_gains(self) -> List[float]:
         """Get sliding surface gains [k1, k2, λ1, λ2]."""
