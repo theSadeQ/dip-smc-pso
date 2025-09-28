@@ -26,7 +26,8 @@ from .smc_factory import (
     SMCProtocol,
     SMCFactory,
 
-    # PSO convenience functions
+    # PSO wrapper and convenience functions
+    PSOControllerWrapper,
     create_smc_for_pso,
     get_gain_bounds_for_pso,
     validate_smc_gains,
@@ -130,6 +131,7 @@ __all__ = [
     "create_smc_for_pso",
     "get_gain_bounds_for_pso",
     "validate_smc_gains",
+    "PSOControllerWrapper",
 
     # Specifications
     "SMC_GAIN_SPECS",
