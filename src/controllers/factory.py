@@ -27,6 +27,14 @@ from src.controllers.smc.algorithms.super_twisting.controller import ModularSupe
 from src.controllers.smc.algorithms.adaptive.controller import ModularAdaptiveSMC
 from src.controllers.smc.algorithms.hybrid.controller import ModularHybridSMC
 
+# Optional MPC controller import
+try:
+    from src.controllers.mpc.controller import MPCController
+    MPC_AVAILABLE = True
+except ImportError:
+    MPCController = None
+    MPC_AVAILABLE = False
+
 # Local imports - Configuration classes
 from src.controllers.smc.algorithms.hybrid.config import HybridMode
 
@@ -124,6 +132,28 @@ CONTROLLER_REGISTRY = {
         'required_params': ['classical_config', 'adaptive_config', 'hybrid_mode']
     }
 }
+
+# Add MPC controller to registry if available
+if MPC_AVAILABLE:
+    # Create a minimal config class for MPC
+    class MPCConfig:
+        def __init__(self, horizon=10, q_x=1.0, q_theta=1.0, r_u=0.1, **kwargs):
+            self.horizon = horizon
+            self.q_x = q_x
+            self.q_theta = q_theta
+            self.r_u = r_u
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+
+    CONTROLLER_REGISTRY['mpc_controller'] = {
+        'class': MPCController,
+        'config_class': MPCConfig,
+        'default_gains': [],  # MPC doesn't use traditional gains
+        'gain_count': 0,
+        'description': 'Model predictive controller',
+        'supports_dynamics': True,
+        'required_params': ['horizon', 'q_x', 'q_theta', 'r_u']
+    }
 
 
 # =============================================================================
@@ -454,8 +484,21 @@ def create_controller(controller_type: str,
                 config_params.setdefault('boundary_layer', 0.01)
                 config_params.setdefault('smooth_switch', True)
 
+            # Add controller type specific handling
+            if controller_type == 'mpc_controller':
+                # MPC controller has different parameters
+                if not MPC_AVAILABLE:
+                    raise ImportError("MPC controller is not available. Check dependencies.")
+                config_params.setdefault('horizon', 10)
+                config_params.setdefault('q_x', 1.0)
+                config_params.setdefault('q_theta', 1.0)
+                config_params.setdefault('r_u', 0.1)
+                # MPC doesn't use gains in the traditional sense
+                if 'gains' in config_params:
+                    del config_params['gains']
+
             # Only add dynamics_model for controllers that support it
-            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc']:
+            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc', 'mpc_controller']:
                 config_params['dynamics_model'] = dynamics_model
 
         # Remove None values and filter to only valid parameters
@@ -493,11 +536,21 @@ def create_controller(controller_type: str,
             }
         else:
             # Standard controllers use gains - ensure ALL required parameters are included
-            fallback_params = {
-                'gains': controller_gains,
-                'max_force': 150.0,  # Always required
-                'dt': 0.001  # Always add dt for safety
-            }
+            if controller_type == 'mpc_controller':
+                # MPC fallback config
+                fallback_params = {
+                    'horizon': 10,
+                    'q_x': 1.0,
+                    'q_theta': 1.0,
+                    'r_u': 0.1
+                }
+            else:
+                # SMC controllers use gains
+                fallback_params = {
+                    'gains': controller_gains,
+                    'max_force': 150.0,  # Always required
+                    'dt': 0.001  # Always add dt for safety
+                }
 
             # Add controller-specific required parameters
             if controller_type == 'classical_smc':
@@ -527,7 +580,7 @@ def create_controller(controller_type: str,
                 })
 
             # Only add dynamics_model if not None and controller supports it
-            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc']:
+            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc', 'mpc_controller']:
                 fallback_params['dynamics_model'] = dynamics_model
 
         controller_config = config_class(**fallback_params)
@@ -633,6 +686,46 @@ class PSOControllerWrapper:
         self.controller_type = controller_type
         self.max_force = getattr(controller, 'max_force', 150.0)
 
+    def validate_gains(self, particles: np.ndarray) -> np.ndarray:
+        """Validate gain particles for PSO optimization."""
+        if particles.ndim == 1:
+            particles = particles.reshape(1, -1)
+
+        valid_mask = np.ones(particles.shape[0], dtype=bool)
+
+        # Check each particle
+        for i, gains in enumerate(particles):
+            try:
+                # Check basic validity
+                if len(gains) != self.n_gains:
+                    valid_mask[i] = False
+                    continue
+
+                # Check for finite and positive values
+                if not all(np.isfinite(g) and g > 0 for g in gains):
+                    valid_mask[i] = False
+                    continue
+
+                # Controller-specific validation
+                if self.controller_type == 'classical_smc':
+                    # Additional checks for classical SMC stability
+                    k1, k2, lam1, lam2, K, kd = gains
+                    if K > 100 or lam1/k1 > 20 or lam2/k2 > 20:
+                        valid_mask[i] = False
+                        continue
+
+                elif self.controller_type == 'adaptive_smc':
+                    # Additional checks for adaptive SMC
+                    k1, k2, lam1, lam2, gamma = gains
+                    if gamma > 20 or gamma < 0.1:
+                        valid_mask[i] = False
+                        continue
+
+            except Exception:
+                valid_mask[i] = False
+
+        return valid_mask
+
     def compute_control(self, state: np.ndarray) -> np.ndarray:
         """PSO-compatible control computation interface."""
         try:
@@ -678,6 +771,7 @@ def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_
     """Create SMC controller optimized for PSO usage."""
     # Handle different calling patterns for backward compatibility
     dynamics_model = kwargs.get('dynamics_model', plant_config_or_model)
+    # Extract configuration parameters from kwargs
     max_force = kwargs.get('max_force', 150.0)
     dt = kwargs.get('dt', 0.001)
 
@@ -700,6 +794,7 @@ def create_pso_controller_factory(smc_type: SMCType, plant_config: Optional[Any]
     # Use expected gain counts that match what the controllers actually need
     controller_factory.n_gains = get_expected_gain_count(smc_type)
     controller_factory.controller_type = smc_type.value
+    controller_factory.max_force = kwargs.get('max_force', 150.0)
 
     return controller_factory
 
