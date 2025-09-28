@@ -648,12 +648,51 @@ class PSOTuner:
         # Get expected dimensions from controller factory
         expected_dims = getattr(self.controller_factory, "n_gains", None)
         if expected_dims is None:
-            raise ValueError(
-                "Controller factory must define a class attribute 'n_gains' to specify the expected dimensionality of the gain vector."
-            )
+            # Try to create a test controller to infer dimensions
+            try:
+                # Use default gains to create a test controller and infer dimensions
+                test_gains_configs = {
+                    'classical_smc': [10.0, 5.0, 8.0, 3.0, 15.0, 2.0],  # 6 gains
+                    'adaptive_smc': [10.0, 5.0, 8.0, 3.0, 2.0],  # 5 gains
+                    'sta_smc': [5.0, 3.0, 4.0, 4.0, 0.4, 0.4],  # 6 gains
+                    'hybrid_adaptive_sta_smc': [5.0, 5.0, 5.0, 0.5]  # 4 gains
+                }
+
+                # Try to determine controller type and appropriate test gains
+                controller_type_hint = getattr(self.controller_factory, "controller_type", None)
+
+                if controller_type_hint and controller_type_hint in test_gains_configs:
+                    test_gains = test_gains_configs[controller_type_hint]
+                else:
+                    # Try classical_smc as default
+                    test_gains = test_gains_configs['classical_smc']
+
+                # Create test controller to infer dimensions
+                test_controller = self.controller_factory(test_gains)
+
+                # Try to get n_gains from the controller instance
+                if hasattr(test_controller, 'n_gains'):
+                    expected_dims = test_controller.n_gains
+                elif hasattr(test_controller, 'config') and hasattr(test_controller.config, 'gains'):
+                    expected_dims = len(test_controller.config.gains)
+                else:
+                    expected_dims = len(test_gains)
+
+            except Exception:
+                # Fallback to default dimensions
+                expected_dims = 6  # Classical SMC default
 
         # Determine controller type to select appropriate bounds
-        controller_type = getattr(self.controller_factory, "controller_type", "classical_smc")
+        controller_type = getattr(self.controller_factory, "controller_type", None)
+
+        # If no controller type from factory, try to infer from a test controller
+        if controller_type is None:
+            try:
+                test_gains = [10.0, 5.0, 8.0, 3.0, 15.0, 2.0][:expected_dims]
+                test_controller = self.controller_factory(test_gains)
+                controller_type = getattr(test_controller, 'controller_type', 'classical_smc')
+            except Exception:
+                controller_type = 'classical_smc'  # Default fallback
 
         # Get controller-specific bounds if available, otherwise use default bounds
         bounds_config = pso_cfg.bounds

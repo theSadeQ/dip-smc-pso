@@ -8,7 +8,7 @@ This module provides a factory pattern for instantiating different types
 of controllers with proper configuration and parameter management.
 """
 
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 import numpy as np
 import logging
 
@@ -470,7 +470,38 @@ def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_
     dynamics_model = kwargs.get('dynamics_model', plant_config_or_model)
 
     config = SMCConfig(gains=gains, max_force=max_force, dt=dt, **kwargs)
-    return SMCFactory.create_controller(smc_type, config)
+    controller = SMCFactory.create_controller(smc_type, config)
+
+    # Add PSO-required attributes to the controller
+    controller.n_gains = len(gains)
+    controller.controller_type = smc_type.value
+
+    return controller
+
+
+def create_pso_controller_factory(smc_type: SMCType, plant_config: Optional[Any] = None, max_force: float = 150.0, dt: float = 0.001, **kwargs: Any) -> Callable:
+    """Create a PSO-optimized controller factory function with required attributes."""
+
+    def controller_factory(gains: Union[list, np.ndarray]) -> Any:
+        """Controller factory function optimized for PSO."""
+        return create_smc_for_pso(smc_type, gains, plant_config, max_force, dt, **kwargs)
+
+    # Add PSO-required attributes to the factory function
+    controller_factory.n_gains = get_expected_gain_count(smc_type)
+    controller_factory.controller_type = smc_type.value
+
+    return controller_factory
+
+
+def get_expected_gain_count(smc_type: SMCType) -> int:
+    """Get expected number of gains for a controller type."""
+    expected_counts = {
+        SMCType.CLASSICAL: 6,
+        SMCType.ADAPTIVE: 5,
+        SMCType.SUPER_TWISTING: 6,
+        SMCType.HYBRID: 4,
+    }
+    return expected_counts.get(smc_type, 6)
 
 
 def get_gain_bounds_for_pso(smc_type: SMCType) -> List[Tuple[float, float]]:
@@ -496,30 +527,38 @@ def validate_smc_gains(smc_type: SMCType, gains: Union[list, np.ndarray]) -> boo
     return len(gains) == expected_len and all(isinstance(g, (int, float)) and g > 0 for g in gains)
 
 
-# SMC Gain specifications
+# SMC Gain specifications - create spec objects with the expected interface
+class SMCGainSpec:
+    """SMC gain specification with expected interface."""
+    def __init__(self, gain_names: List[str], gain_bounds: List[Tuple[float, float]], controller_type: str, n_gains: int):
+        self.gain_names = gain_names
+        self.gain_bounds = gain_bounds
+        self.controller_type = controller_type
+        self.n_gains = n_gains
+
 SMC_GAIN_SPECS = {
-    SMCType.CLASSICAL: {
-        'count': 6,
-        'names': ['c1', 'lambda1', 'c2', 'lambda2', 'K', 'kd'],
-        'bounds': [(0.1, 50.0)] * 6,
-        'description': 'Classical SMC with sliding surface and switching gains'
-    },
-    SMCType.ADAPTIVE: {
-        'count': 5,
-        'names': ['c1', 'lambda1', 'c2', 'lambda2', 'adaptation_rate'],
-        'bounds': [(0.1, 50.0)] * 5,
-        'description': 'Adaptive SMC with parameter adaptation'
-    },
-    SMCType.SUPER_TWISTING: {
-        'count': 6,
-        'names': ['c1', 'lambda1', 'c2', 'lambda2', 'alpha', 'beta'],
-        'bounds': [(0.1, 50.0)] * 6,
-        'description': 'Super-twisting SMC with second-order sliding mode'
-    },
-    SMCType.HYBRID: {
-        'count': 4,
-        'names': ['c1', 'lambda1', 'c2', 'lambda2'],
-        'bounds': [(0.1, 50.0)] * 4,
-        'description': 'Hybrid adaptive super-twisting SMC'
-    }
+    SMCType.CLASSICAL: SMCGainSpec(
+        gain_names=['c1', 'lambda1', 'c2', 'lambda2', 'K', 'kd'],
+        gain_bounds=[(0.1, 50.0)] * 6,
+        controller_type='classical_smc',
+        n_gains=6
+    ),
+    SMCType.ADAPTIVE: SMCGainSpec(
+        gain_names=['c1', 'lambda1', 'c2', 'lambda2', 'adaptation_rate'],
+        gain_bounds=[(0.1, 50.0)] * 5,
+        controller_type='adaptive_smc',
+        n_gains=5
+    ),
+    SMCType.SUPER_TWISTING: SMCGainSpec(
+        gain_names=['c1', 'lambda1', 'c2', 'lambda2', 'alpha', 'beta'],
+        gain_bounds=[(0.1, 50.0)] * 6,
+        controller_type='sta_smc',
+        n_gains=6
+    ),
+    SMCType.HYBRID: SMCGainSpec(
+        gain_names=['c1', 'lambda1', 'c2', 'lambda2'],
+        gain_bounds=[(0.1, 50.0)] * 4,
+        controller_type='hybrid_adaptive_sta_smc',
+        n_gains=4
+    )
 }

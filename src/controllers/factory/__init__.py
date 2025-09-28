@@ -66,6 +66,9 @@ if os.path.exists(factory_py_path):
         create_controller_new = factory_module.create_controller
         # Override the legacy create_controller with the new one
         create_controller = factory_module.create_controller
+        # Export PSO-specific functions
+        create_pso_controller_factory = factory_module.create_pso_controller_factory
+        get_expected_gain_count = factory_module.get_expected_gain_count
 
     except Exception as e:
         # Fallback if the factory.py module can't be loaded
@@ -153,6 +156,8 @@ __all__ = [
     "get_default_gains",
     "CONTROLLER_REGISTRY",
     "create_controller_new",
+    "create_pso_controller_factory",
+    "get_expected_gain_count",
 
     # Exception types
     "FactoryConfigurationError",
