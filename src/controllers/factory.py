@@ -223,6 +223,21 @@ if MPC_AVAILABLE:
         'supports_dynamics': True,
         'required_params': ['horizon', 'q_x', 'q_theta', 'r_u']
     }
+else:
+    # Add placeholder entry when MPC is not available for proper error handling
+    class UnavailableMPCConfig:
+        def __init__(self, **kwargs: Any) -> None:
+            pass
+
+    CONTROLLER_REGISTRY['mpc_controller'] = {
+        'class': None,
+        'config_class': UnavailableMPCConfig,
+        'default_gains': [],
+        'gain_count': 0,
+        'description': 'Model predictive controller (unavailable)',
+        'supports_dynamics': True,
+        'required_params': ['horizon', 'q_x', 'q_theta', 'r_u']
+    }
 
 
 # =============================================================================
@@ -564,7 +579,7 @@ def create_controller(controller_type: str,
             # Add controller type specific handling
             if controller_type == 'mpc_controller':
                 # MPC controller has different parameters
-                if not MPC_AVAILABLE:
+                if controller_info['class'] is None:
                     raise ImportError("MPC controller is not available. Check dependencies.")
                 config_params.setdefault('horizon', 10)
                 config_params.setdefault('q_x', 1.0)
@@ -664,6 +679,8 @@ def create_controller(controller_type: str,
 
     # Create and return controller instance
     try:
+        if controller_class is None:
+            raise ImportError(f"Controller class for {controller_type} is not available")
         controller = controller_class(controller_config)
         logger.info(f"Created {controller_type} controller with gains: {controller_gains}")
         return controller

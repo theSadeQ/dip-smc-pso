@@ -62,7 +62,7 @@ class ConcreteTestController(ControllerInterface):
         control_raw = self.compute_control(state, reference)
         # Simple saturation
         control = max(-self.max_force, min(self.max_force, control_raw))
-        saturated = abs(control_raw) > self.max_force
+        saturated = bool(abs(control_raw) > self.max_force)
 
         return control, {
             'control_raw': control_raw,
