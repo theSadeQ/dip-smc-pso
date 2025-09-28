@@ -464,6 +464,42 @@ class SMCFactory:
         return create_controller(smc_type.value, config, config.gains)
 
 
+class PSOControllerWrapper:
+    """Wrapper for SMC controllers to provide PSO-compatible interface."""
+
+    def __init__(self, controller, n_gains: int, controller_type: str):
+        self.controller = controller
+        self.n_gains = n_gains
+        self.controller_type = controller_type
+        self.max_force = getattr(controller, 'max_force', 150.0)
+
+    def compute_control(self, state: np.ndarray) -> np.ndarray:
+        """PSO-compatible control computation interface."""
+        # Call the underlying controller with the full interface
+        result = self.controller.compute_control(state, (), {})
+
+        # Extract control value and return as numpy array
+        if hasattr(result, 'u'):
+            u = result.u
+        elif isinstance(result, dict) and 'u' in result:
+            u = result['u']
+        else:
+            u = result
+
+        # Ensure it's a numpy array with correct shape
+        if isinstance(u, (int, float)):
+            return np.array([u])
+        elif isinstance(u, np.ndarray):
+            if u.shape == ():
+                return np.array([u])
+            elif u.shape == (1,):
+                return u
+            else:
+                return u.flatten()[:1]  # Take first element if multiple
+        else:
+            return np.array([float(u)])
+
+
 def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_config_or_model: Optional[Any] = None, max_force: float = 150.0, dt: float = 0.001, **kwargs: Any) -> Any:
     """Create SMC controller optimized for PSO usage."""
     # Handle different calling patterns for backward compatibility
@@ -472,11 +508,9 @@ def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_
     config = SMCConfig(gains=gains, max_force=max_force, dt=dt, **kwargs)
     controller = SMCFactory.create_controller(smc_type, config)
 
-    # Add PSO-required attributes to the controller
-    controller.n_gains = len(gains)
-    controller.controller_type = smc_type.value
-
-    return controller
+    # Wrap the controller with PSO-compatible interface
+    wrapper = PSOControllerWrapper(controller, len(gains), smc_type.value)
+    return wrapper
 
 
 def create_pso_controller_factory(smc_type: SMCType, plant_config: Optional[Any] = None, max_force: float = 150.0, dt: float = 0.001, **kwargs: Any) -> Callable:
