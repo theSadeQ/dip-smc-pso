@@ -1,0 +1,184 @@
+diff --git a/tests/test_controllers/smc/core/test_enhanced_validation.py b/tests/test_controllers/smc/core/test_enhanced_validation.py
+new file mode 100644
+index 0000000..1234567
+--- /dev/null
++++ b/tests/test_controllers/smc/core/test_enhanced_validation.py
+@@ -0,0 +1,89 @@
++#======================================================================================\\\
++#============ tests/test_controllers/smc/core/test_enhanced_validation.py ============\\\
++#======================================================================================\\\
++
++"""
++Enhanced SMC Core Validation Tests for Critical Coverage.
++
++This module provides comprehensive testing for SMC core components to achieve
++≥95% coverage for critical control system components.
++"""
++
++import pytest
++import numpy as np
++from unittest.mock import Mock, patch
++
++from src.controllers.smc.core.sliding_surface import SlidingSurface
++from src.controllers.smc.core.equivalent_control import EquivalentControl
++from src.controllers.smc.core.gain_validation import SMCGainValidator
++
++
++class TestSMCCoreEnhancedValidation:
++    """Enhanced validation tests for SMC core components."""
++
++    def test_sliding_surface_boundary_conditions(self):
++        """Test sliding surface at system boundaries."""
++        surface = SlidingSurface(gains=[1.0, 2.0])
++
++        # Test with zero state
++        zero_state = np.zeros(4)
++        result = surface.compute(zero_state)
++        assert np.isfinite(result).all()
++
++        # Test with large state values
++        large_state = np.array([1e6, 1e6, 1e6, 1e6])
++        result = surface.compute(large_state)
++        assert np.isfinite(result).all()
++
++    def test_equivalent_control_edge_cases(self):
++        """Test equivalent control at edge cases."""
++        eq_control = EquivalentControl()
++
++        # Test with singular matrix case
++        singular_state = np.array([0.0, 0.0, 0.0, 0.0])
++        with pytest.raises(ValueError, match="singular"):
++            eq_control.compute(singular_state)
++
++    def test_gain_validator_comprehensive(self):
++        """Comprehensive gain validation test coverage."""
++        validator = SMCGainValidator()
++
++        # Test all controller types
++        controller_types = ['classical_smc', 'sta_smc', 'adaptive_smc', 'hybrid_adaptive_sta_smc']
++
++        for ctrl_type in controller_types:
++            # Valid gains
++            valid_gains = [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]
++            result = validator.validate_gains(ctrl_type, valid_gains)
++            assert result['valid'] is True
++
++            # Invalid gains (negative)
++            invalid_gains = [-10.0, 5.0, 8.0, 3.0, 15.0, 2.0]
++            result = validator.validate_gains(ctrl_type, invalid_gains)
++            assert result['valid'] is False
++            assert 'errors' in result
+
+diff --git a/tests/test_controllers/factory/test_critical_error_paths.py b/tests/test_controllers/factory/test_critical_error_paths.py
+new file mode 100644
+index 0000000..2345678
+--- /dev/null
++++ b/tests/test_controllers/factory/test_critical_error_paths.py
+@@ -0,0 +1,67 @@
++#======================================================================================\\\
++#========== tests/test_controllers/factory/test_critical_error_paths.py =============\\\
++#======================================================================================\\\
++
++"""
++Critical Error Path Tests for Controller Factory.
++
++This module tests error handling paths in the controller factory to achieve
++100% coverage for safety-critical factory components.
++"""
++
++import pytest
++from unittest.mock import patch, Mock
++
++from src.controllers.factory import ControllerFactory, create_controller
++from src.config import ConfigSchema
++
++
++class TestFactoryCriticalErrorPaths:
++    """Test critical error paths in controller factory."""
++
++    def test_invalid_controller_type_error(self):
++        """Test factory behavior with invalid controller type."""
++        factory = ControllerFactory()
++
++        with pytest.raises(ValueError, match="Unknown controller type"):
++            factory.create_controller("invalid_controller", config=Mock(), gains=None)
++
++    def test_missing_required_gains_error(self):
++        """Test factory behavior with missing required gains."""
++        factory = ControllerFactory()
++        config = Mock()
++
++        with pytest.raises(ValueError, match="gains are required"):
++            factory.create_controller("classical_smc", config=config, gains=None)
++
++    def test_config_validation_error(self):
++        """Test factory behavior with invalid configuration."""
++        factory = ControllerFactory()
++
++        # Mock invalid config
++        invalid_config = Mock()
++        invalid_config.validate.side_effect = ValueError("Invalid config")
++
++        with pytest.raises(ValueError, match="Invalid config"):
++            factory.create_controller("classical_smc", config=invalid_config, gains=[1,2,3,4,5,6])
+
+diff --git a/tests/test_core/test_simulation_engine_coverage.py b/tests/test_core/test_simulation_engine_coverage.py
+new file mode 100644
+index 0000000..3456789
+--- /dev/null
++++ b/tests/test_core/test_simulation_engine_coverage.py
+@@ -0,0 +1,78 @@
++#======================================================================================\\\
++#=============== tests/test_core/test_simulation_engine_coverage.py ==================\\\
++#======================================================================================\\\
++
++"""
++Simulation Engine Coverage Enhancement Tests.
++
++This module provides comprehensive testing for core simulation engine components
++to achieve ≥95% coverage for critical simulation functionality.
++"""
++
++import pytest
++import numpy as np
++from unittest.mock import Mock, patch
++
++from src.core.simulation_runner import SimulationRunner
++from src.core.dynamics import DynamicsModel
++
++
++class TestSimulationEngineCoverage:
++    """Enhanced coverage tests for simulation engine."""
++
++    def test_simulation_runner_error_recovery(self):
++        """Test simulation runner error recovery mechanisms."""
++        runner = SimulationRunner()
++
++        # Mock controller that raises exception
++        failing_controller = Mock()
++        failing_controller.compute_control.side_effect = RuntimeError("Controller failed")
++
++        with pytest.raises(RuntimeError, match="Controller failed"):
++            runner.run_simulation(
++                controller=failing_controller,
++                dynamics=Mock(),
++                initial_state=np.zeros(4),
++                time_span=(0, 1),
++                dt=0.01
++            )
++
++    def test_dynamics_model_boundary_conditions(self):
++        """Test dynamics model at boundary conditions."""
++        dynamics = DynamicsModel()
++
++        # Test with extreme state values
++        extreme_state = np.array([1e6, 1e6, 1e6, 1e6])
++        extreme_control = np.array([100.0])
++
++        # Should handle gracefully or raise appropriate error
++        try:
++            result = dynamics.compute_dynamics(extreme_state, extreme_control, 0.0)
++            assert np.isfinite(result).all()
++        except ValueError:
++            # Acceptable to raise ValueError for extreme inputs
++            pass
