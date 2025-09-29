@@ -1,16 +1,21 @@
-#=======================================================================================\\\
-#=================================== tests/conftest.py ==================================\\\
-#=======================================================================================\\\
+#======================================================================================\\\
+#================================= tests/conftest.py ==================================\\\
+#======================================================================================\\\
 
 """
 c5u-mpl enforcement: headless Matplotlib tests with Agg backend and show-ban.
 This file MUST be imported before any test that imports matplotlib.pyplot.
 """
 import os
-import warnings
-import matplotlib
 import sys
+import warnings
 from pathlib import Path
+
+# Filter NumPy reload warnings that cause test infrastructure issues
+warnings.filterwarnings("ignore", message=".*The NumPy module was reloaded.*", category=UserWarning)
+
+# Import matplotlib only after warning filters are set
+import matplotlib
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"

@@ -1,5 +1,13 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(gh issue view:*)",
+      "Read(//d/**)",
+      "Bash(python:*)",
+      "Bash(python -m pytest tests/ --cov=src/controllers --cov-report=json:controller_coverage_report.json --tb=short -q)",
+      "Bash(pytest:*)",
+      "Bash(grep:*)"
+    ],
     "additionalDirectories": [
       "D:\\Projects"
     ]

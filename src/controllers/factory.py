@@ -1,6 +1,6 @@
-#=======================================================================================\\\
-#============================== src/controllers/factory.py ==============================\\\
-#=======================================================================================\\\
+#======================================================================================\\\
+#============================= src/controllers/factory.py =============================\\\
+#======================================================================================\\\
 
 """
 Enterprise Controller Factory - Production-Ready Controller Instantiation
@@ -962,9 +962,16 @@ class PSOControllerWrapper:
                 u = np.asarray([u] if np.isscalar(u) else u, dtype=np.float64)
 
                 # Get state derivative from dynamics
-                state_dot = self.dynamics_model.compute_dynamics(state, u)
+                dynamics_result = self.dynamics_model.compute_dynamics(state, u)
+
+                # Extract state derivative from result
+                if hasattr(dynamics_result, 'state_derivative'):
+                    state_dot = dynamics_result.state_derivative
+                else:
+                    state_dot = dynamics_result
 
                 # Simple Euler integration (sufficient for PSO fitness evaluation)
+                state_dot = np.asarray(state_dot, dtype=np.float64)
                 next_state = state + state_dot * dt
 
                 # Ensure result is properly shaped and finite

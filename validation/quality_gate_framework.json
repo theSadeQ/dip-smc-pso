@@ -1,0 +1,220 @@
+{
+  "quality_gate_framework": {
+    "metadata": {
+      "version": "1.0.0",
+      "created_by": "Ultimate Orchestrator",
+      "timestamp": "2025-09-29T08:30:00Z",
+      "compliance_targets": {
+        "safety_critical": "100%",
+        "critical_components": ">=95%",
+        "general_components": ">=85%"
+      }
+    },
+
+    "coverage_classification": {
+      "safety_critical_100_percent": {
+        "modules": [
+          "src/controllers/smc/core/switching_functions.py",
+          "src/controllers/smc/core/sliding_surface.py",
+          "src/controllers/smc/core/equivalent_control.py",
+          "src/controllers/smc/core/gain_validation.py",
+          "src/controllers/base/control_primitives.py",
+          "src/core/safety_guards.py"
+        ],
+        "justification": "Mathematical correctness critical for system stability",
+        "validation_requirements": [
+          "Line coverage: 100%",
+          "Branch coverage: 100%",
+          "Edge case testing: Complete",
+          "Mathematical property validation: Required"
+        ]
+      },
+
+      "critical_95_percent": {
+        "modules": [
+          "src/controllers/factory/smc_factory.py",
+          "src/controllers/factory/pso_integration.py",
+          "src/controllers/smc/algorithms/*/controller.py",
+          "src/optimizer/pso_optimizer.py",
+          "src/core/simulation_runner.py",
+          "src/core/dynamics.py",
+          "src/core/dynamics_full.py"
+        ],
+        "justification": "Core system functionality and algorithm implementation",
+        "validation_requirements": [
+          "Line coverage: >=95%",
+          "Integration testing: Required",
+          "Performance benchmarks: Operational"
+        ]
+      },
+
+      "general_85_percent": {
+        "modules": [
+          "src/config/*.py",
+          "src/utils/*.py",
+          "src/analysis/*.py",
+          "src/interfaces/*.py",
+          "src/fault_detection/*.py"
+        ],
+        "justification": "Supporting infrastructure and utility functions",
+        "validation_requirements": [
+          "Line coverage: >=85%",
+          "Unit testing: Required",
+          "Configuration validation: Required"
+        ]
+      }
+    },
+
+    "independent_validation_paths": {
+      "coverage_validation": {
+        "tool": "pytest-cov",
+        "command": "python -m pytest tests/ --cov=src --cov-report=json --cov-fail-under=85",
+        "failure_tolerance": "Continue on individual test failures",
+        "output_format": "JSON with detailed line coverage"
+      },
+
+      "theoretical_property_validation": {
+        "target_modules": [
+          "src/controllers/smc/core/",
+          "src/optimizer/pso_optimizer.py"
+        ],
+        "validation_types": [
+          "Mathematical convergence properties",
+          "Lyapunov stability verification",
+          "Control law correctness"
+        ],
+        "independent_execution": "Separate from integration tests"
+      },
+
+      "performance_benchmark_validation": {
+        "tool": "pytest-benchmark",
+        "command": "python -m pytest tests/ --benchmark-only --benchmark-json=benchmark_results.json",
+        "regression_threshold": "5% performance degradation",
+        "independent_execution": "Isolated from coverage collection"
+      },
+
+      "compliance_validation": {
+        "ascii_header_compliance": "90-character width with centered file paths",
+        "type_annotation_coverage": ">=95% for critical components",
+        "documentation_coverage": ">=95% for public APIs",
+        "configuration_schema_validation": "Strict YAML validation"
+      }
+    },
+
+    "quality_gates": {
+      "gate_1_infrastructure": {
+        "name": "Test Infrastructure Health",
+        "requirements": [
+          "Test collection: 1252+ tests collectible",
+          "No BOM encoding errors",
+          "Coverage collection operational",
+          "Pytest configuration valid"
+        ],
+        "blocking": true,
+        "validation_command": "python -m pytest --collect-only -q"
+      },
+
+      "gate_2_safety_critical": {
+        "name": "Safety-Critical Coverage",
+        "requirements": [
+          "Switching functions: 100% coverage",
+          "Sliding surface: 100% coverage",
+          "Control primitives: 100% coverage",
+          "Safety guards: 100% coverage"
+        ],
+        "blocking": true,
+        "validation_command": "python -m pytest tests/test_controllers/smc/core/ --cov=src/controllers/smc/core --cov-fail-under=100"
+      },
+
+      "gate_3_critical_components": {
+        "name": "Critical Component Coverage",
+        "requirements": [
+          "Controller factory: >=95% coverage",
+          "PSO optimizer: >=95% coverage",
+          "Simulation runner: >=95% coverage",
+          "Dynamics models: >=95% coverage"
+        ],
+        "blocking": true,
+        "validation_command": "python -m pytest tests/test_controllers/factory/ tests/test_optimization/ tests/test_simulation/core/ --cov=src/controllers/factory --cov=src/optimizer --cov=src/core --cov-fail-under=95"
+      },
+
+      "gate_4_overall_coverage": {
+        "name": "Overall System Coverage",
+        "requirements": [
+          "Total line coverage: >=85%",
+          "Module coverage distribution: Balanced",
+          "No uncovered safety-critical paths"
+        ],
+        "blocking": false,
+        "validation_command": "python -m pytest tests/ --cov=src --cov-report=json --cov-fail-under=85"
+      },
+
+      "gate_5_theoretical_validation": {
+        "name": "Mathematical Property Validation",
+        "requirements": [
+          "Lyapunov stability tests: Passing",
+          "Convergence property tests: Passing",
+          "Control law correctness: Verified"
+        ],
+        "blocking": false,
+        "validation_command": "python -m pytest tests/test_physics/ tests/test_analysis/performance/ -k 'lyapunov or stability or convergence'"
+      },
+
+      "gate_6_performance_validation": {
+        "name": "Performance Benchmark Validation",
+        "requirements": [
+          "Simulation throughput: Within 5% of baseline",
+          "Memory usage: Within bounds",
+          "Real-time constraints: Met"
+        ],
+        "blocking": false,
+        "validation_command": "python -m pytest tests/test_benchmarks/ --benchmark-only"
+      }
+    },
+
+    "failure_tolerance_strategy": {
+      "coverage_collection": {
+        "approach": "Continue collection on test failures",
+        "implementation": "Use --cov-continue-on-error flag",
+        "reporting": "Report partial coverage with gap identification"
+      },
+
+      "quality_gate_independence": {
+        "approach": "Independent validation paths",
+        "implementation": "Separate test runs for different validation types",
+        "cascade_prevention": "Gate failures don't block subsequent gates"
+      },
+
+      "partial_compliance_reporting": {
+        "approach": "Granular compliance status",
+        "implementation": "Component-level pass/fail with specific gap reporting",
+        "actionable_output": "Specific files and line numbers requiring attention"
+      }
+    },
+
+    "validation_commands": {
+      "comprehensive_validation": "python scripts/run_quality_gates.py",
+      "coverage_only": "python -m pytest tests/ --cov=src --cov-report=json --cov-report=html",
+      "safety_critical_only": "python -m pytest tests/test_controllers/smc/core/ --cov=src/controllers/smc/core --cov-fail-under=100",
+      "critical_components_only": "python -m pytest tests/test_controllers/factory/ tests/test_optimization/ --cov=src/controllers/factory --cov=src/optimizer --cov-fail-under=95",
+      "theoretical_validation_only": "python -m pytest tests/test_physics/ tests/test_analysis/performance/ -k 'stability'",
+      "benchmark_validation_only": "python -m pytest tests/test_benchmarks/ --benchmark-only"
+    },
+
+    "reporting_framework": {
+      "format": "JSON with structured compliance data",
+      "location": "validation/quality_gate_results.json",
+      "fields": [
+        "gate_id",
+        "gate_name",
+        "status",
+        "coverage_percentage",
+        "requirements_met",
+        "requirements_failed",
+        "specific_gaps",
+        "recommendations"
+      ],
+      "update_frequency": "On-demand and CI integration"
+    }
+  }
+}
