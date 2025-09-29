@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-09-29T12:00:00Z",
+  "agent": "integration_coordinator_rainbow",
+  "controller_status": {
+    "src/controllers/classical_smc.py": {
+      "exists": false,
+      "critical_missing": true
+    },
+    "src/controllers/sta_smc.py": {
+      "exists": true,
+      "size_bytes": 777,
+      "has_class_definition": false,
+      "has_compute_control": false
+    },
+    "src/controllers/adaptive_smc.py": {
+      "exists": true,
+      "size_bytes": 772,
+      "has_class_definition": false,
+      "has_compute_control": false
+    },
+    "src/controllers/hybrid_adaptive_sta_smc.py": {
+      "exists": false,
+      "critical_missing": true
+    }
+  },
+  "pso_status": {
+    "exists": true,
+    "operational": true
+  },
+  "simulation_status": {
+    "exists": true,
+    "operational": true
+  },
+  "overall_health": "functional_with_gaps"
+}
