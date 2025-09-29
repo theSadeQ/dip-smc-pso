@@ -175,11 +175,26 @@ class ModularHybridSMC:
                             'array_mode': True  # Flag to indicate conversion from array
                         }
                     elif isinstance(result, dict):
-                        # Use dictionary directly
-                        normalized_result = result
+                        # Use dictionary directly, but ensure it has required keys
+                        normalized_result = {
+                            'u': result.get('u', 0.0),
+                            'surface_value': result.get('surface_value', 0.0),
+                            'surface_derivative': result.get('surface_derivative', 0.0),
+                            'controller_type': result.get('controller_type', controller_name),
+                            **result  # Include all original fields
+                        }
                     else:
-                        # Fallback for unexpected types
-                        u_value = float(result) if hasattr(result, '__float__') else 0.0
+                        # Fallback for unexpected types (floats, tuples, etc.)
+                        try:
+                            if hasattr(result, '__iter__') and not isinstance(result, str):
+                                # Tuple, list or other iterable
+                                u_value = float(result[0]) if len(result) > 0 else 0.0
+                            else:
+                                # Scalar value
+                                u_value = float(result)
+                        except (TypeError, ValueError, IndexError):
+                            u_value = 0.0
+
                         normalized_result = {
                             'u': u_value,
                             'surface_value': 0.0,
@@ -210,7 +225,8 @@ class ModularHybridSMC:
             active_controller_name = self.switching_logic.get_current_controller()
             if active_controller_name in all_control_results:
                 active_result = all_control_results[active_controller_name]
-                u_active = active_result.get('u', 0.0)
+                # Safe access since we normalized the result above
+                u_active = active_result['u']
             else:
                 self.logger.error(f"Active controller {active_controller_name} not available")
                 u_active = 0.0
@@ -236,7 +252,7 @@ class ModularHybridSMC:
                 'u_final': u_saturated,
                 'u_raw': u_active,
                 'switched': switched,
-                'all_results': {name: result.get('u', 0.0) for name, result in all_control_results.items()}
+                'all_results': {name: result['u'] for name, result in all_control_results.items()}
             })
 
             # Limit history size
@@ -289,22 +305,22 @@ class ModularHybridSMC:
             } if switching_decision else None,
 
             # Active controller details
-            'active_controller_output': active_result.get('u', 0.0),
-            'surface_value': active_result.get('surface_value', 0.0),
-            'surface_derivative': active_result.get('surface_derivative', 0.0),
+            'active_controller_output': active_result['u'],
+            'surface_value': active_result['surface_value'],
+            'surface_derivative': active_result['surface_derivative'],
 
             # All controller outputs (for comparison)
-            'all_controller_outputs': {name: result.get('u', 0.0) for name, result in all_results.items()},
-            'all_surface_values': {name: result.get('surface_value', 0.0) for name, result in all_results.items()},
+            'all_controller_outputs': {name: result['u'] for name, result in all_results.items()},
+            'all_surface_values': {name: result['surface_value'] for name, result in all_results.items()},
 
             # Performance metrics
             'control_effort': abs(u_final),
-            'surface_magnitude': abs(active_result.get('surface_value', 0.0)),
+            'surface_magnitude': abs(active_result['surface_value']),
             'tracking_error': self._compute_tracking_error(state),
 
             # Transition smoothing
             'transition_filtering_active': self.transition_filter is not None,
-            'control_before_filtering': active_result.get('u', 0.0),
+            'control_before_filtering': active_result['u'],
 
             # Hybrid system status
             'controller_type': 'hybrid_smc',
