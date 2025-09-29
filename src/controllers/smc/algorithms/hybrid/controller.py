@@ -158,8 +158,37 @@ class ModularHybridSMC:
             all_control_results = {}
             for controller_name, controller in self.controllers.items():
                 try:
-                    result = controller.compute_control(state, state_vars, history)
-                    all_control_results[controller_name] = result
+                    # Force standard interface by providing non-None state_vars and history
+                    safe_state_vars = state_vars if state_vars is not None else {}
+                    safe_history = history if history is not None else {}
+                    result = controller.compute_control(state, safe_state_vars, safe_history)
+
+                    # Handle both return types: numpy array or dictionary
+                    if isinstance(result, np.ndarray):
+                        # Convert numpy array to dictionary format
+                        u_value = float(result[0]) if len(result) > 0 else 0.0
+                        normalized_result = {
+                            'u': u_value,
+                            'surface_value': 0.0,  # Default values since not available from array
+                            'surface_derivative': 0.0,
+                            'controller_type': controller_name,
+                            'array_mode': True  # Flag to indicate conversion from array
+                        }
+                    elif isinstance(result, dict):
+                        # Use dictionary directly
+                        normalized_result = result
+                    else:
+                        # Fallback for unexpected types
+                        u_value = float(result) if hasattr(result, '__float__') else 0.0
+                        normalized_result = {
+                            'u': u_value,
+                            'surface_value': 0.0,
+                            'surface_derivative': 0.0,
+                            'controller_type': controller_name,
+                            'fallback_mode': True
+                        }
+
+                    all_control_results[controller_name] = normalized_result
                 except Exception as e:
                     self.logger.warning(f"Controller {controller_name} failed: {e}")
                     all_control_results[controller_name] = {'u': 0.0, 'error': str(e)}
@@ -508,7 +537,7 @@ class ModularHybridSMC:
 
         return performance_stats
 
-    def tune_switching_parameters(self, **kwargs) -> None:
+    def tune_switching_parameters(self, **kwargs: Any) -> None:
         """
         Tune switching parameters during runtime.
 

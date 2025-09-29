@@ -688,7 +688,7 @@ def create_controller(controller_type: str,
                     del config_params['gains']
 
             # Only add dynamics_model for controllers that support it
-            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc', 'mpc_controller']:
+            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'mpc_controller']:
                 config_params['dynamics_model'] = dynamics_model
 
         # Remove None values and filter to only valid parameters
@@ -772,7 +772,7 @@ def create_controller(controller_type: str,
                 })
 
             # Only add dynamics_model if not None and controller supports it
-            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc', 'mpc_controller']:
+            if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'mpc_controller']:
                 fallback_params['dynamics_model'] = dynamics_model
 
         controller_config = config_class(**fallback_params)
