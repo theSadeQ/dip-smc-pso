@@ -1,0 +1,374 @@
+--- a/tests/conftest.py
++++ b/tests/conftest.py
+@@ -176,3 +176,51 @@ def make_hybrid():
+         )
+
+     return _make
++
++
++@pytest.fixture
++def test_config():
++    """Comprehensive test configuration for PSO optimization tests."""
++    return {
++        'physics': {
++            'cart_mass': 1.0,
++            'pendulum1_mass': 0.1,
++            'pendulum2_mass': 0.1,
++            'pendulum1_length': 0.5,
++            'pendulum2_length': 0.5,
++            'gravity': 9.81,
++            'cart_friction': 0.1,
++            'pendulum1_friction': 0.01,
++            'pendulum2_friction': 0.01
++        },
++        'simulation': {
++            'dt': 0.01,
++            'duration': 5.0,
++            'initial_state': [0.0, 0.1, -0.05, 0.0, 0.0, 0.0]
++        },
++        'pso': {
++            'n_particles': 10,
++            'max_iter': 5,
++            'c1': 0.5,
++            'c2': 0.3,
++            'w': 0.9,
++            'velocity_clamp': None,
++            'w_schedule': None
++        },
++        'cost_function': {
++            'weights': {
++                'ise': 1.0,
++                'u': 0.01,
++                'du': 0.001,
++                'sigma': 0.1
++            }
++        },
++        'global_seed': 42
++    }
++
++
++@pytest.fixture
++def mock_controller_factory():
++    """Mock controller factory for deterministic testing."""
++    def _factory(gains):
++        from unittest.mock import MagicMock
++        controller = MagicMock()
++        controller.max_force = 150.0
++        controller.n_gains = len(gains)
++        controller.validate_gains = MagicMock(return_value=True)
++        controller.compute_control = MagicMock(return_value=0.0)
++        return controller
++    return _factory
+
+
+--- a/tests/test_optimization/algorithms/test_pso_optimizer.py
++++ b/tests/test_optimization/algorithms/test_pso_optimizer.py
+@@ -22,6 +22,7 @@ from unittest.mock import patch, MagicMock
+ import pytest
+ import numpy as np
+ import tempfile
++import numpy.random
+ from pathlib import Path
+ from src.optimization.algorithms.pso_optimizer import PSOTuner, _normalise
+ from src.config import load_config
+@@ -30,13 +31,27 @@ from src.config import load_config
+ class TestPSOTuner:
+     """Test suite for PSOTuner class."""
+
++    @pytest.fixture(autouse=True)
++    def setup_deterministic_tests(self):
++        """Ensure deterministic behavior for all PSO tests."""
++        # Set global seed for reproducibility
++        np.random.seed(42)
++        # Store original state
++        self._original_state = np.random.get_state()
++        yield
++        # Restore original state
++        np.random.set_state(self._original_state)
++
+     @pytest.fixture
+     def mock_controller_factory(self):
+         """Create a mock controller factory for testing."""
+         def factory(gains):
+-            controller = MagicMock()
+-            controller.max_force = 150.0
+-            return controller
++            mock_controller = MagicMock()
++            mock_controller.max_force = 150.0
++            mock_controller.n_gains = len(gains) if hasattr(gains, '__len__') else 6
++            mock_controller.validate_gains = MagicMock(return_value=True)
++            mock_controller.compute_control = MagicMock(return_value=0.0)
++            return mock_controller
+         return factory
+
+     @pytest.fixture
+@@ -86,6 +101,7 @@ class TestPSOTuner:
+
+     def test_pso_tuner_initialization_with_seed(self, test_config, mock_controller_factory):
+         """Test PSO tuner initialization with explicit seed."""
++        np.random.seed(12345)  # Explicit deterministic seed
+         tuner = PSOTuner(
+             controller_factory=mock_controller_factory,
+             config=test_config,
+@@ -93,6 +109,7 @@ class TestPSOTuner:
+         )
+         assert tuner.seed == 12345
+         assert tuner.rng is not None
++        assert isinstance(tuner.rng, np.random.Generator)
+
+     def test_pso_tuner_initialization_with_rng(self, test_config, mock_controller_factory):
+         """Test PSO tuner initialization with external RNG."""
+@@ -182,6 +199,32 @@ class TestPSOTuner:
+         result = _normalise(values, 1e-15)
+         assert np.array_equal(result, values)
+
++    def test_deterministic_optimization_reproducibility(self, test_config, mock_controller_factory):
++        """Test that PSO optimization is reproducible with fixed seeds."""
++        # First run with seed
++        tuner1 = PSOTuner(
++            controller_factory=mock_controller_factory,
++            config=test_config,
++            seed=42
++        )
++
++        # Mock the fitness function to return predictable values
++        with patch.object(tuner1, '_fitness') as mock_fitness:
++            mock_fitness.side_effect = lambda particles: np.random.rand(len(particles))
++
++            result1 = tuner1.optimise(iters_override=3, n_particles_override=5)
++
++        # Second run with same seed
++        tuner2 = PSOTuner(
++            controller_factory=mock_controller_factory,
++            config=test_config,
++            seed=42
++        )
++
++        with patch.object(tuner2, '_fitness') as mock_fitness:
++            mock_fitness.side_effect = lambda particles: np.random.rand(len(particles))
++
++            result2 = tuner2.optimise(iters_override=3, n_particles_override=5)
++
++        # Results should be identical with same seed
++        assert np.allclose(result1['best_pos'], result2['best_pos'], rtol=1e-10)
+
+
+--- a/tests/test_optimization/test_pso_convergence_comprehensive.py
++++ b/tests/test_optimization/test_pso_convergence_comprehensive.py
+@@ -21,6 +21,7 @@ Comprehensive PSO convergence validation and analysis tests.
+ import pytest
+ import numpy as np
+ import tempfile
++import numpy.random
+ from pathlib import Path
+ from unittest.mock import patch, MagicMock
+
+@@ -35,6 +36,16 @@ from src.optimization.validation.pso_bounds_validator import PSOBoundsValidator
+ class TestPSOConvergenceValidation:
+     """Comprehensive PSO convergence validation tests."""
+
++    @pytest.fixture(autouse=True)
++    def setup_deterministic_tests(self):
++        """Ensure deterministic behavior for all convergence tests."""
++        np.random.seed(42)
++        self._original_state = np.random.get_state()
++        yield
++        np.random.set_state(self._original_state)
++
++    @pytest.fixture
++    def deterministic_seed(self):
++        """Provide deterministic seed for tests."""
++        return 42
++
+     @pytest.fixture
+     def mock_controller_factory(self):
+         """Create a mock controller factory for testing."""
+@@ -42,6 +53,8 @@ class TestPSOConvergenceValidation:
+             mock_controller = MagicMock()
+             mock_controller.max_force = 150.0
+             mock_controller.n_gains = len(gains) if hasattr(gains, '__len__') else 6
++            mock_controller.validate_gains = MagicMock(return_value=True)
++            mock_controller.compute_control = MagicMock(return_value=0.0)
+             return mock_controller
+         return factory
+
+
+--- a/tests/test_optimization/test_pso_integration_e2e.py
++++ b/tests/test_optimization/test_pso_integration_e2e.py
+@@ -21,6 +21,7 @@ Test Coverage:
+ import pytest
+ import numpy as np
+ import tempfile
++import numpy.random
+ import json
+ from pathlib import Path
+ from typing import Dict, List, Any, Optional
+@@ -37,46 +38,23 @@ from src.config import load_config
+ class TestPSOEndToEndIntegration:
+     """Comprehensive end-to-end PSO integration tests."""
+
+-    @pytest.fixture
+-    def test_config(self):
+-        """Create test configuration for PSO optimization."""
+-        return {
+-            'physics': {
+-                'cart_mass': 1.0,
+-                'pendulum1_mass': 0.1,
+-                'pendulum2_mass': 0.1,
+-                'pendulum1_length': 0.5,
+-                'pendulum2_length': 0.5,
+-                'gravity': 9.81,
+-                'cart_friction': 0.1,
+-                'pendulum1_friction': 0.01,
+-                'pendulum2_friction': 0.01
+-            },
+-            'simulation': {
+-                'dt': 0.01,
+-                'duration': 5.0,
+-                'initial_state': [0.0, 0.1, -0.05, 0.0, 0.0, 0.0]
+-            },
+-            'pso': {
+-                'n_particles': 10,
+-                'max_iter': 5,
+-                'c1': 0.5,
+-                'c2': 0.3,
+-                'w': 0.9
+-            },
+-            'cost_function': {
+-                'weights': {
+-                    'ise': 1.0,
+-                    'u': 0.01,
+-                    'du': 0.001,
+-                    'sigma': 0.1
+-                }
+-            }
+-        }
++    @pytest.fixture(autouse=True)
++    def setup_deterministic_tests(self):
++        """Ensure deterministic behavior for all E2E tests."""
++        np.random.seed(42)
++        self._original_state = np.random.get_state()
++        yield
++        np.random.set_state(self._original_state)
+
+     @pytest.fixture
+     def mock_controller_factory(self):
+         """Create a mock controller factory for testing."""
+         def factory(gains):
+-            return MagicMock(max_force=150.0)
++            mock_controller = MagicMock()
++            mock_controller.max_force = 150.0
++            mock_controller.n_gains = len(gains) if hasattr(gains, '__len__') else 6
++            mock_controller.validate_gains = MagicMock(return_value=True)
++            return mock_controller
+         return factory
+
+     def test_complete_pso_workflow(self, test_config, mock_controller_factory):
+
+
+--- a/tests/test_optimization/test_pso_safety_critical.py
++++ b/tests/test_optimization/test_pso_safety_critical.py
+@@ -20,6 +20,7 @@ Safety-critical PSO optimization validation tests.
+ import pytest
+ import numpy as np
+ import tempfile
++import numpy.random
+ from pathlib import Path
+ from unittest.mock import patch, MagicMock
+
+@@ -33,6 +34,15 @@ from src.optimization.validation.pso_bounds_validator import PSOBoundsValidator
+ class TestPSOSafetyCritical:
+     """Safety-critical PSO optimization validation."""
+
++    @pytest.fixture(autouse=True)
++    def setup_deterministic_tests(self):
++        """Ensure deterministic behavior for safety-critical tests."""
++        np.random.seed(42)
++        self._original_state = np.random.get_state()
++        yield
++        np.random.set_state(self._original_state)
++
+     @pytest.fixture
+     def mock_controller_factory(self):
+         """Create a mock controller factory for testing."""
+
+
+--- a/tests/test_optimization/test_optimization_framework.py
++++ b/tests/test_optimization/test_optimization_framework.py
+@@ -21,6 +21,7 @@ Comprehensive optimization framework testing covering all components.
+ import pytest
+ import numpy as np
+ import tempfile
++import numpy.random
+ from pathlib import Path
+ from typing import Dict, List, Any, Optional
+ from unittest.mock import patch, MagicMock
+@@ -42,6 +43,15 @@ from src.optimization.results.convergence import ConvergenceAnalyzer
+ class TestOptimizationFramework:
+     """Comprehensive optimization framework validation tests."""
+
++    @pytest.fixture(autouse=True)
++    def setup_deterministic_tests(self):
++        """Ensure deterministic behavior for framework tests."""
++        np.random.seed(42)
++        self._original_state = np.random.get_state()
++        yield
++        np.random.set_state(self._original_state)
++
+     @pytest.fixture
+     def mock_controller_factory(self):
+         """Create a mock controller factory for testing."""
+
+
+--- a/tests/test_optimization/test_pso_convergence_validation.py
++++ b/tests/test_optimization/test_pso_convergence_validation.py
+@@ -21,6 +21,7 @@ PSO convergence detection and validation tests.
+ import pytest
+ import numpy as np
+ import tempfile
++import numpy.random
+ from pathlib import Path
+ from unittest.mock import patch, MagicMock
+
+@@ -35,6 +36,15 @@ from src.optimization.validation.enhanced_convergence_analyzer import Enhanced
+ class TestPSOConvergenceDetection:
+     """PSO convergence detection and validation tests."""
+
++    @pytest.fixture(autouse=True)
++    def setup_deterministic_tests(self):
++        """Ensure deterministic behavior for convergence validation tests."""
++        np.random.seed(42)
++        self._original_state = np.random.get_state()
++        yield
++        np.random.set_state(self._original_state)
++
+     @pytest.fixture
+     def mock_controller_factory(self):
+         """Create a mock controller factory for testing."""
+
+
+--- a/tests/test_optimization/test_multi_objective_pso.py
++++ b/tests/test_optimization/test_multi_objective_pso.py
+@@ -21,6 +21,7 @@ Multi-objective PSO optimization validation tests.
+ import pytest
+ import numpy as np
+ import tempfile
++import numpy.random
+ from pathlib import Path
+ from typing import Dict, List, Any, Optional
+ from unittest.mock import patch, MagicMock
+@@ -35,6 +36,15 @@ from src.optimization.algorithms.multi_objective_pso import MultiObjectivePSO,
+ class TestMultiObjectivePSO:
+     """Multi-objective PSO optimization validation tests."""
+
++    @pytest.fixture(autouse=True)
++    def setup_deterministic_tests(self):
++        """Ensure deterministic behavior for multi-objective tests."""
++        np.random.seed(42)
++        self._original_state = np.random.get_state()
++        yield
++        np.random.set_state(self._original_state)
++
+     @pytest.fixture
+     def test_config(self):
+         """Create test configuration for multi-objective PSO."""

@@ -196,3 +196,58 @@ def make_hybrid():
         )
 
     return _make
+
+
+@pytest.fixture
+def test_config():
+    """Comprehensive test configuration for PSO optimization tests."""
+    return {
+        "physics": {
+            "cart_mass": 1.0,
+            "pendulum1_mass": 0.1,
+            "pendulum2_mass": 0.1,
+            "pendulum1_length": 0.5,
+            "pendulum2_length": 0.5,
+            "gravity": 9.81,
+            "cart_friction": 0.1,
+            "pendulum1_friction": 0.01,
+            "pendulum2_friction": 0.01
+        },
+        "simulation": {
+            "dt": 0.01,
+            "duration": 5.0,
+            "initial_state": [0.0, 0.1, -0.05, 0.0, 0.0, 0.0]
+        },
+        "pso": {
+            "n_particles": 10,
+            "max_iter": 5,
+            "c1": 0.5,
+            "c2": 0.3,
+            "w": 0.9,
+            "velocity_clamp": None,
+            "w_schedule": None
+        },
+        "cost_function": {
+            "weights": {
+                "ise": 1.0,
+                "u": 0.01,
+                "du": 0.001,
+                "sigma": 0.1
+            }
+        },
+        "global_seed": 42
+    }
+
+
+@pytest.fixture
+def mock_controller_factory():
+    """Mock controller factory for deterministic testing."""
+    def _factory(gains):
+        from unittest.mock import MagicMock
+        controller = MagicMock()
+        controller.max_force = 150.0
+        controller.n_gains = len(gains) if hasattr(gains, "__len__") else 6
+        controller.validate_gains = MagicMock(return_value=True)
+        controller.compute_control = MagicMock(return_value=0.0)
+        return controller
+    return _factory
