@@ -1,0 +1,44 @@
+{
+  "summary": "26 tests, 1 failed, 2 skipped",
+  "status": "failed",
+  "stats": {
+    "tests": 26,
+    "passed": 23,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 2,
+    "xfail": 0,
+    "xpass": 0,
+    "duration_seconds": 10.276
+  },
+  "artifacts": {
+    "junit_xml": "reports/junit.xml",
+    "raw_log": "reports/pytest.log",
+    "coverage_xml": null
+  },
+  "slow_tests": [
+    {
+      "nodeid": "tests.config_validation.test_config_validation.TestUnknownKeyValidation::test_single_unknown_key_physics",
+      "duration_seconds": 0.083
+    },
+    {
+      "nodeid": "tests.config_validation.test_config_validation.TestPositiveValidation::test_full_config_loads",
+      "duration_seconds": 0.074
+    }
+  ],
+  "failures": [
+    {
+      "nodeid": "tests.test_analysis.fault_detection.test_fdi_infrastructure.TestThresholdAdaptation::test_fixed_threshold_operation",
+      "file": "test_fdi_infrastructure.py",
+      "line": 199,
+      "short_message": "AssertionError: assert 'FAULT' == 'OK'\n  \n  - OK\n  + FAULT",
+      "category": "logic regression",
+      "first_user_frame": "test_fdi_infrastructure.py:199",
+      "hint_md": "- Check FDI threshold configuration in fault detection system\n- Verify test random seed for reproducible noise generation"
+    }
+  ],
+  "followups": [
+    "Re-run locally: pytest -k 'test_fixed_threshold_operation' -vv",
+    "Check FDI system configuration and random seed"
+  ]
+}
