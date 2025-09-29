@@ -241,6 +241,7 @@ streamlit run streamlit_app.py
 - Type hints everywhere; clear, example‑rich docstrings.
 - ASCII header format for Python files (≈90 chars width).
 - Explicit error types; avoid broad excepts.
+- Use informal, conversational comments that explain the "why" behind the code, similar to the style in `requirements.txt`.
 
 ### 6.2 Adding New Controllers
 

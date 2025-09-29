@@ -1,0 +1,865 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-8.3.5, pluggy-1.6.0
+benchmark: 5.1.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: D:\Projects\main
+configfile: pytest.ini
+plugins: anyio-4.10.0, hypothesis-6.139.2, benchmark-5.1.0, cov-7.0.0
+collected 1255 items / 2 skipped
+
+tests\config_validation\test_config_validation.py ........               [  0%]
+tests\test_analysis\fault_detection\test_fdi.py ........                 [  1%]
+tests\test_analysis\fault_detection\test_fdi_infrastructure.py .......F. [  1%]
+..............                                                           [  3%]
+tests\test_analysis\infrastructure\test_analysis_chain.py ..........     [  3%]
+tests\test_analysis\performance\test_lyapunov.py F                       [  3%]
+tests\test_analysis\performance\test_performance_analysis.py ........F.. [  4%]
+.F....F..                                                                [  5%]
+tests\test_app\test_cli.py ..........                                    [  6%]
+tests\test_app\test_cli_save_gains.py .                                  [  6%]
+tests\test_app\test_data_export.py ...                                   [  6%]
+tests\test_app\test_streamlit_app.py .                                   [  6%]
+tests\test_app\test_streamlit_disturbance.py .                           [  6%]
+tests\test_app\test_streamlit_metrics.py ..                              [  7%]
+tests\test_app\test_ui.py ..                                             [  7%]
+tests\test_app\test_visualization.py .                                   [  7%]
+tests\test_benchmarks\core\test_benchmark_interfaces.py FEFFFF           [  7%]
+tests\test_benchmarks\core\test_compute_speed.py FFF.FF.FF.              [  8%]
+tests\test_benchmarks\core\test_integration_accuracy.py F..FFFF.         [  9%]
+tests\test_benchmarks\core\test_memory_usage.py FFFFFFFFFFF              [ 10%]
+tests\test_benchmarks\core\test_modular_framework.py FFFFFFFF            [ 10%]
+tests\test_benchmarks\core\test_performance.py ..FFFFFFF                 [ 11%]
+tests\test_benchmarks\core\test_simulation_throughput.py FF.....sssss    [ 12%]
+tests\test_benchmarks\performance\test_performance_benchmarks_deep.py .. [ 12%]
+FF...FF.FF.FF.                                                           [ 13%]
+tests\test_benchmarks\performance\test_regression_detection.py F...FFF.  [ 14%]
+tests\test_benchmarks\statistics\test_statistical_benchmarks.py F        [ 14%]
+tests\test_benchmarks\validation\test_parameter_realism.py ..........    [ 15%]
+tests\test_config\test_compatibility_validation.py ..F..........         [ 16%]
+tests\test_config\test_config.py .......                                 [ 16%]
+tests\test_config\test_numeric_validation.py ..FF.F.                     [ 17%]
+tests\test_config\test_parameter_validation.py ...............           [ 18%]
+tests\test_config\test_settings_precedence.py FF.                        [ 18%]
+tests\test_config\test_string_validation.py .F.F.                        [ 19%]
+tests\test_config\test_unknown_key_validation.py .....                   [ 19%]
+tests\test_config\test_unknown_params_modes.py .F                        [ 19%]
+tests\test_controllers\base\test_control_primitives.py ................. [ 21%]
+............................                                             [ 23%]
+tests\test_controllers\base\test_controller_interface.py ............... [ 24%]
+.........                                                                [ 25%]
+tests\test_controllers\factory\core\test_validation.py ................. [ 26%]
+.......................                                                  [ 28%]
+tests\test_controllers\factory\test_controller_factory.py .............. [ 29%]
+.......................F..                                               [ 31%]
+tests\test_controllers\factory\test_factory_deprecations.py ..           [ 31%]
+tests\test_controllers\factory\test_factory_dynamics_consolidated.py .   [ 31%]
+tests\test_controllers\factory\test_factory_shared_params.py ......      [ 32%]
+tests\test_controllers\factory\test_interface_compatibility.py ......... [ 32%]
+....                                                                     [ 33%]
+tests\test_controllers\mpc\test_mpc_consolidated.py F                    [ 33%]
+tests\test_controllers\mpc\test_mpc_controller.py ..                     [ 33%]
+tests\test_controllers\smc\algorithms\adaptive\test_modular_adaptive_smc.py . [ 33%]
+...........                                                              [ 34%]
+tests\test_controllers\smc\algorithms\classical\test_boundary_layer.py . [ 34%]
+.......                                                                  [ 35%]
+tests\test_controllers\smc\algorithms\classical\test_config_validation.py . [ 35%]
+........                                                                 [ 35%]
+tests\test_controllers\smc\algorithms\classical\test_control_computation.py . [ 35%]
+........                                                                 [ 36%]
+tests\test_controllers\smc\algorithms\classical\test_modular_controller.py . [ 36%]
+........s                                                                [ 37%]
+tests\test_controllers\smc\algorithms\classical\test_sliding_surface.py . [ 37%]
+.......                                                                  [ 38%]
+tests\test_controllers\smc\classical\test_classical_smc.py ss........... [ 39%]
+.............                                                            [ 40%]
+tests\test_controllers\smc\core\test_equivalent_control.py ............. [ 41%]
+...                                                                      [ 41%]
+tests\test_controllers\smc\core\test_sliding_surface.py ................ [ 42%]
+.......................                                                  [ 44%]
+tests\test_controllers\smc\core\test_switching_functions.py ............ [ 45%]
+.......................................                                  [ 48%]
+tests\test_controllers\smc\test_module_structure.py ..F..ssss            [ 49%]
+tests\test_controllers\specialized\test_swing_up_smc.py ...              [ 49%]
+tests\test_controllers\test_controller_basics.py .....                   [ 49%]
+tests\test_controllers\test_modular_smc.py .....F.....F.......F..F...... [ 52%]
+                                                                         [ 52%]
+tests\test_controllers\test_smc_guardrails_consolidated.py F             [ 52%]
+tests\test_integration\test_cross_mission_integration.py .........       [ 52%]
+tests\test_integration\test_end_to_end\test_integration_end_to_end_deep.py . [ 53%]
+F.F...F..                                                                [ 53%]
+tests\test_integration\test_end_to_end_validation.py ........            [ 54%]
+tests\test_integration\test_error_recovery\test_error_recovery_deep.py . [ 54%]
+....F..F.F...                                                            [ 55%]
+tests\test_integration\test_integration_regression_detection.py ........ [ 56%]
+F                                                                        [ 56%]
+tests\test_integration\test_memory_management\test_memory_resource_deep.py F [ 56%]
+FFFFF..FFFF                                                              [ 57%]
+tests\test_integration\test_numerical_stability\test_numerical_stability_deep.py F [ 57%]
+..F.FF.FFF.F...                                                          [ 58%]
+tests\test_integration\test_production_readiness.py .........            [ 59%]
+tests\test_integration\test_property_based\test_property_based.py FFF    [ 59%]
+tests\test_integration\test_property_based\test_property_based_deep.py F [ 59%]
+FFFFFFFFFFFFFFFFFFFFF                                                    [ 61%]
+tests\test_integration\test_statistical_analysis\test_statistical_monte_carlo_deep.py F [ 61%]
+F.F.F..F...                                                              [ 62%]
+tests\test_integration\test_thread_safety\test_concurrent_thread_safety_deep.py . [ 62%]
+.....FF                                                                  [ 62%]
+tests\test_interfaces\test_method_signatures.py .F..F...                 [ 63%]
+tests\test_interfaces\test_parameter_compatibility.py .F.F.....          [ 64%]
+tests\test_optimization\algorithms\test_pso_optimizer.py ..........s..   [ 65%]
+tests\test_optimization\core\test_cli_determinism.py .                   [ 65%]
+tests\test_optimization\core\test_reoptimization_script.py s             [ 65%]
+tests\test_optimization\test_pso_integration_e2e.py FFFFFFFFFFFFFF.EEEE  [ 66%]
+tests\test_physics\test_energy_conservation_bounds.py FFFFF.             [ 67%]
+tests\test_physics\test_integration_stability.py FFFFF.                  [ 67%]
+tests\test_physics\test_mathematical_properties.py .F.FF.F               [ 68%]
+tests\test_physics\test_parameter_realism.py FFFFF.                      [ 68%]
+tests\test_plant\configurations\test_factory.py ...                      [ 69%]
+tests\test_plant\core\test_dynamics.py .FFFF..FF.                        [ 69%]
+tests\test_plant\core\test_dynamics_extra.py FFFFFF                      [ 70%]
+tests\test_plant\core\test_inertia_matrix.py sssssssssssss               [ 71%]
+tests\test_plant\core\test_singularity_detection.py sssssss              [ 71%]
+tests\test_plant\dynamics\test_interface_consistency.py F......          [ 72%]
+tests\test_plant\models\full\test_full_dynamics.py ...........EEEEE      [ 73%]
+tests\test_plant\models\lowrank\test_lowrank_config.py F....F........... [ 75%]
+..Fs.                                                                    [ 75%]
+tests\test_plant\models\lowrank\test_lowrank_dynamics.py ............F.. [ 76%]
+.......s.                                                                [ 77%]
+tests\test_plant\models\lowrank\test_lowrank_physics.py ..........F..FF. [ 78%]
+E.s.                                                                     [ 79%]
+tests\test_plant\models\simplified\test_dynamics.py ...........s.        [ 80%]
+tests\test_plant\physics\test_computation_accuracy.py ......             [ 80%]
+tests\test_simulation\core\test_simulation.py ........                   [ 81%]
+tests\test_simulation\core\test_simulation_integration.py F........FF..F [ 82%]
+FFF.s.sFFFF                                                              [ 83%]
+tests\test_simulation\core\test_stateful_simulation.py .                 [ 83%]
+tests\test_simulation\engines\test_simulation_runner.py s...........F... [ 84%]
+....                                                                     [ 84%]
+tests\test_simulation\engines\test_vector_sim.py ..................Fs.   [ 86%]
+tests\test_simulation\safety\test_safety_guards.py ..................... [ 88%]
+..FFFF....F......s.                                                      [ 89%]
+tests\test_simulation\safety\test_vector_sim_guards.py FFF..             [ 90%]
+tests\test_simulation\vector\test_vector_simulation_robustness.py .....F [ 90%]
+........F......F...F..                                                   [ 92%]
+tests\test_utils\analysis\test_control_analysis_module.py FF             [ 92%]
+tests\test_utils\control\test_control_primitives.py ...                  [ 92%]
+tests\test_utils\control\test_control_primitives_consolidated.py .       [ 92%]
+tests\test_utils\monitoring\test_latency_and_logging.py .F               [ 92%]
+tests\test_utils\monitoring\test_stability_monitoring.py ..F             [ 93%]
+tests\test_utils\platform\test_cross_platform_compatibility.py ......... [ 93%]
+........s.......s....                                                    [ 95%]
+tests\test_utils\reproducibility\test_determinism.py .                   [ 95%]
+tests\test_utils\test_development\test_logging_no_basicconfig.py F       [ 95%]
+tests\test_utils\type_system\test_type_validation.py ................... [ 97%]
+..F..                                                                    [ 97%]
+tests\test_utils\validation\test_validation_framework.py ............... [ 98%]
+..F.........                                                             [ 99%]
+tests\test_utils\visualization\test_mpl_enforcement.py ..                [100%]
+
+=================================== ERRORS ====================================
+_ ERROR at setup of TestBenchmarkInterfaceCompatibility.test_realistic_parameter_bounds_validation _
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\runner.py:341: in from_call
+    result: TResult | None = func()
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\runner.py:242: in <lambda>
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pluggy\_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\unraisableexception.py:85: in unraisable_exception_runtest_hook
+    warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))
+E   pytest.PytestUnraisableExceptionWarning: Exception ignored in: <function Animation.__del__ at 0x00000207FAE91620>
+E   
+E   Traceback (most recent call last):
+E     File "C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\matplotlib\animation.py", line 908, in __del__
+E       warnings.warn(
+E   UserWarning: Animation was deleted without rendering anything. This is most likely not intended. To prevent deletion, assign the Animation to a variable, e.g. `anim`, that exists until you output the Animation using `plt.show()` or `anim.save()`.
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+___ ERROR at setup of TestPSOSystemIntegration.test_memory_usage_monitoring ___
+file D:\Projects\main\tests\test_optimization\test_pso_integration_e2e.py, line 452
+      def test_memory_usage_monitoring(self, test_config, mock_controller_factory):
+E       fixture 'test_config' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, benchmark, benchmark_weave, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, config, cov, doctest_namespace, dynamics, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, full_dynamics, initial_state, long_simulation_config, make_hybrid, monkeypatch, no_cover, physics_cfg, physics_params, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+D:\Projects\main\tests\test_optimization\test_pso_integration_e2e.py:452
+_ ERROR at setup of TestPSOProductionReadiness.test_concurrent_optimization_safety _
+file D:\Projects\main\tests\test_optimization\test_pso_integration_e2e.py, line 478
+      def test_concurrent_optimization_safety(self, test_config):
+E       fixture 'test_config' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, benchmark, benchmark_weave, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, config, cov, doctest_namespace, dynamics, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, full_dynamics, initial_state, long_simulation_config, make_hybrid, monkeypatch, no_cover, physics_cfg, physics_params, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+D:\Projects\main\tests\test_optimization\test_pso_integration_e2e.py:478
+_ ERROR at setup of TestPSOProductionReadiness.test_large_scale_optimization __
+file D:\Projects\main\tests\test_optimization\test_pso_integration_e2e.py, line 523
+      def test_large_scale_optimization(self, mock_controller_factory):
+E       fixture 'mock_controller_factory' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, benchmark, benchmark_weave, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, config, cov, doctest_namespace, dynamics, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, full_dynamics, initial_state, long_simulation_config, make_hybrid, monkeypatch, no_cover, physics_cfg, physics_params, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+D:\Projects\main\tests\test_optimization\test_pso_integration_e2e.py:523
+__ ERROR at setup of TestPSOProductionReadiness.test_stability_under_stress ___
+file D:\Projects\main\tests\test_optimization\test_pso_integration_e2e.py, line 552
+      def test_stability_under_stress(self, test_config, mock_controller_factory):
+E       fixture 'test_config' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, benchmark, benchmark_weave, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, config, cov, doctest_namespace, dynamics, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, full_dynamics, initial_state, long_simulation_config, make_hybrid, monkeypatch, no_cover, physics_cfg, physics_params, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+D:\Projects\main\tests\test_optimization\test_pso_integration_e2e.py:552
+_ ERROR at setup of TestFullDIPDynamicsStateValidation.test_state_dimensions __
+tests\test_plant\models\full\test_full_dynamics.py:231: in config
+    config.cart_position_limits = (-2.0, 2.0)
+<string>:4: in __setattr__
+    ???
+E   dataclasses.FrozenInstanceError: cannot assign to field 'cart_position_limits'
+_ ERROR at setup of TestFullDIPDynamicsStateValidation.test_state_format_requirements _
+tests\test_plant\models\full\test_full_dynamics.py:231: in config
+    config.cart_position_limits = (-2.0, 2.0)
+<string>:4: in __setattr__
+    ???
+E   dataclasses.FrozenInstanceError: cannot assign to field 'cart_position_limits'
+_ ERROR at setup of TestFullDIPDynamicsStateValidation.test_state_finite_values _
+tests\test_plant\models\full\test_full_dynamics.py:231: in config
+    config.cart_position_limits = (-2.0, 2.0)
+<string>:4: in __setattr__
+    ???
+E   dataclasses.FrozenInstanceError: cannot assign to field 'cart_position_limits'
+_ ERROR at setup of TestFullDIPDynamicsStateValidation.test_state_constraint_checking _
+tests\test_plant\models\full\test_full_dynamics.py:231: in config
+    config.cart_position_limits = (-2.0, 2.0)
+<string>:4: in __setattr__
+    ???
+E   dataclasses.FrozenInstanceError: cannot assign to field 'cart_position_limits'
+_ ERROR at setup of TestFullDIPDynamicsStateValidation.test_state_velocity_limits _
+tests\test_plant\models\full\test_full_dynamics.py:231: in config
+    config.cart_position_limits = (-2.0, 2.0)
+<string>:4: in __setattr__
+    ???
+E   dataclasses.FrozenInstanceError: cannot assign to field 'cart_position_limits'
+_ ERROR at setup of TestLowRankPhysicsPerformance.test_computation_speed_comparison _
+file D:\Projects\main\tests\test_plant\models\lowrank\test_lowrank_physics.py, line 424
+      def test_computation_speed_comparison(self, test_states):
+E       fixture 'test_states' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, benchmark, benchmark_weave, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, config, cov, doctest_namespace, dynamics, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, full_dynamics, initial_state, long_simulation_config, make_hybrid, monkeypatch, no_cover, physics_cfg, physics_params, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+D:\Projects\main\tests\test_plant\models\lowrank\test_lowrank_physics.py:424
+================================== FAILURES ===================================
+___________ TestThresholdAdaptation.test_fixed_threshold_operation ____________
+tests\test_analysis\fault_detection\test_fdi_infrastructure.py:199: in test_fixed_threshold_operation
+    assert status == "OK"
+E   AssertionError: assert 'FAULT' == 'OK'
+E     
+E     - OK
+E     + FAULT
+_________________________ test_lyapunov_decrease_sta __________________________
+tests\test_analysis\performance\test_lyapunov.py:87: in test_lyapunov_decrease_sta
+    assert np.all(V_history[:, -1] < 1e-6), (
+E   IndexError: index -1 is out of bounds for axis 1 with size 0
+_____ TestPerformanceAnalysisAccuracy.test_stability_analysis_validation ______
+tests\test_analysis\performance\test_performance_analysis.py:379: in test_stability_analysis_validation
+    assert stability_metrics_stable['stability_margin'] > 0.5
+E   assert 0.3090169943749474 > 0.5
+_________ TestPerformanceAnalysisEdgeCases.test_nan_and_inf_handling __________
+tests\test_analysis\performance\test_performance_analysis.py:463: in test_nan_and_inf_handling
+    assert np.isfinite(stability_metrics['max_deviation'])
+E   AssertionError: assert np.False_
+E    +  where np.False_ = <ufunc 'isfinite'>(nan)
+E    +    where <ufunc 'isfinite'> = np.isfinite
+__ TestPerformanceAnalysisIntegration.test_complete_control_system_analysis ___
+tests\test_analysis\performance\test_performance_analysis.py:562: in test_complete_control_system_analysis
+    assert control_perf['settling_time'] < 5.0  # Should settle within simulation time
+E   assert 5.0 < 5.0
+_ TestBenchmarkInterfaceCompatibility.test_all_controller_types_have_compatible_interfaces _
+tests\test_benchmarks\core\test_benchmark_interfaces.py:504: in test_all_controller_types_have_compatible_interfaces
+    assert success_rate >= 90.0, f"Interface compatibility success rate {success_rate:.1f}% < 90%. Failures: {failures}"
+E   AssertionError: Interface compatibility success rate 0.0% < 90%. Failures: ["classical_smc-SimplifiedDIP: ['Dynamics missing required method: state_dim', 'Dynamics missing required method: control_dim']", "classical_smc-FullDIP: ['Dynamics missing required method: state_dim', 'Dynamics missing required method: control_dim']", "adaptive_smc-SimplifiedDIP: ['Dynamics missing required method: state_dim', 'Dynamics missing required method: control_dim']", "adaptive_smc-FullDIP: ['Dynamics missing required method: state_dim', 'Dynamics missing required method: control_dim']", "sta_smc-SimplifiedDIP: ['Dynamics missing required method: state_dim', 'Dynamics missing required method: control_dim']", "sta_smc-FullDIP: ['Dynamics missing required method: state_dim', 'Dynamics missing required method: control_dim']", "hybrid_adaptive_sta_smc-SimplifiedDIP: ['Dynamics missing required method: state_dim', 'Dynamics missing required method: control_dim']", "hybrid_adaptive_sta_smc-FullDIP: ['Dynamics missing required method: state_dim', 'Dynamics missing required method: control_dim']"]
+E   assert 0.0 >= 90.0
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+_ TestBenchmarkInterfaceCompatibility.test_cross_component_integration_workflows _
+tests\test_benchmarks\core\test_benchmark_interfaces.py:533: in test_cross_component_integration_workflows
+    assert workflow_success_rate >= 90.0, f"Workflow success rate {workflow_success_rate:.1f}% < 90%. Failures: {failed_workflows}"
+E   AssertionError: Workflow success rate 0.0% < 90%. Failures: ['classical_smc_workflow: ["Workflow execution failed: \'float\' object has no attribute \'copy\'"]', 'adaptive_smc_workflow: ["Workflow execution failed: can\'t multiply sequence by non-int of type \'float\'"]', 'sta_smc_workflow: ["Workflow execution failed: \'float\' object has no attribute \'copy\'"]', 'hybrid_adaptive_sta_smc_workflow: ["Workflow execution failed: \'float\' object has no attribute \'copy\'"]']
+E   assert 0.0 >= 90.0
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+_ TestBenchmarkInterfaceCompatibility.test_performance_baseline_establishment _
+tests\test_benchmarks\core\test_benchmark_interfaces.py:547: in test_performance_baseline_establishment
+    assert len(performance_data) > 0, "No performance baseline data collected"
+E   AssertionError: No performance baseline data collected
+E   assert 0 > 0
+E    +  where 0 = len({})
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+__ TestBenchmarkInterfaceCompatibility.test_benchmark_framework_integration ___
+tests\test_benchmarks\core\test_benchmark_interfaces.py:580: in test_benchmark_framework_integration
+    assert hasattr(dynamics, 'state_dim'), "Dynamics missing state_dim property"
+E   AssertionError: Dynamics missing state_dim property
+E   assert False
+E    +  where False = hasattr(<src.plant.models.simplified.dynamics.SimplifiedDIPDynamics object at 0x00000207BD3C3140>, 'state_dim')
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+___ TestBenchmarkInterfaceCompatibility.test_benchmark_success_rate_target ____
+tests\test_benchmarks\core\test_benchmark_interfaces.py:603: in test_benchmark_success_rate_target
+    assert success_rate >= 90.0, f"Benchmark success rate {success_rate}% did not meet 90%+ target"
+E   AssertionError: Benchmark success rate 0.0% did not meet 90%+ target
+E   assert 0.0 >= 90.0
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+________________ test_controller_compute_speed[classical_smc] _________________
+tests\test_benchmarks\core\test_compute_speed.py:77: in test_controller_compute_speed
+    assert 'u' in result or 'control' in result
+E   AssertionError: assert ('u' in ClassicalSMCOutput(u=-53.2, state=(), history={'sigma': [3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3...53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2]}) or 'control' in ClassicalSMCOutput(u=-53.2, state=(), history={'sigma': [3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3...53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2]}))
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+___________________ test_controller_compute_speed[sta_smc] ____________________
+src\controllers\smc\sta_smc.py:350: in compute_control
+    z, _ = state_vars
+E   ValueError: not enough values to unpack (expected 2, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_compute_speed.py:74: in test_controller_compute_speed
+    result = benchmark(compute_step)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:156: in __call__
+    return self._raw(function_to_benchmark, *args, **kwargs)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:180: in _raw
+    duration, iterations, loops_range = self._calibrate_timer(runner)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:318: in _calibrate_timer
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_compute_speed.py:72: in compute_step
+    return controller.compute_control(state, prev_control, history)
+src\controllers\smc\sta_smc.py:355: in compute_control
+    z = float(state_vars) if state_vars is not None else 0.0
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+_________________ test_controller_compute_speed[adaptive_smc] _________________
+src\controllers\smc\adaptive_smc.py:318: in compute_control
+    prev_K, last_u, time_in_sliding = state_vars  # type: ignore[misc]
+E   ValueError: not enough values to unpack (expected 3, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_compute_speed.py:74: in test_controller_compute_speed
+    result = benchmark(compute_step)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:156: in __call__
+    return self._raw(function_to_benchmark, *args, **kwargs)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:180: in _raw
+    duration, iterations, loops_range = self._calibrate_timer(runner)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:318: in _calibrate_timer
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_compute_speed.py:72: in compute_step
+    return controller.compute_control(state, prev_control, history)
+src\controllers\smc\adaptive_smc.py:340: in compute_control
+    prev_K = float(state_vars) if state_vars is not None else self.K_init
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+_________________ test_controller_speed_consistency[sta_smc] __________________
+src\controllers\smc\sta_smc.py:350: in compute_control
+    z, _ = state_vars
+E   ValueError: not enough values to unpack (expected 2, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_compute_speed.py:106: in test_controller_speed_consistency
+    controller.compute_control(state, prev_control, history)
+src\controllers\smc\sta_smc.py:355: in compute_control
+    z = float(state_vars) if state_vars is not None else 0.0
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+_______________ test_controller_speed_consistency[adaptive_smc] _______________
+src\controllers\smc\adaptive_smc.py:318: in compute_control
+    prev_K, last_u, time_in_sliding = state_vars  # type: ignore[misc]
+E   ValueError: not enough values to unpack (expected 3, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_compute_speed.py:106: in test_controller_speed_consistency
+    controller.compute_control(state, prev_control, history)
+src\controllers\smc\adaptive_smc.py:340: in compute_control
+    prev_K = float(state_vars) if state_vars is not None else self.K_init
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+_______________ test_controller_speed_regression[classical_smc] _______________
+tests\test_benchmarks\core\test_compute_speed.py:197: in test_controller_speed_regression
+    control = result.get('u', result.get('control'))
+E   AttributeError: 'ClassicalSMCOutput' object has no attribute 'get'
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+__________________ test_controller_speed_regression[sta_smc] __________________
+src\controllers\smc\sta_smc.py:350: in compute_control
+    z, _ = state_vars
+E   ValueError: not enough values to unpack (expected 2, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_compute_speed.py:180: in test_controller_speed_regression
+    result = controller.compute_control(state, np.array([0.0]), {})
+src\controllers\smc\sta_smc.py:355: in compute_control
+    z = float(state_vars) if state_vars is not None else 0.0
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+________________________ test_rk4_reduces_euler_drift _________________________
+tests\test_benchmarks\core\test_integration_accuracy.py:39: in test_rk4_reduces_euler_drift
+    res_euler = integration_benchmark.euler_integrate(sim_time=5.0, dt=0.01, use_controller=False)
+benchmarks\benchmark\integration_benchmark.py:111: in euler_integrate
+    result = self.euler_integrator.integrate(self.x0, sim_time, dt, controller)
+benchmarks\integration\numerical_methods.py:111: in integrate
+    state_dot = self._compute_derivative(states[i], u)
+benchmarks\integration\numerical_methods.py:126: in _compute_derivative
+    raise RuntimeError(f"Dynamics computation failed: {reason}")
+E   RuntimeError: Dynamics computation failed: Dynamics computation failed: State vector was modified during sanitization
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+________________________ test_method_accuracy_analysis ________________________
+tests\test_benchmarks\core\test_integration_accuracy.py:108: in test_method_accuracy_analysis
+    accuracy_results = integration_benchmark.analyze_method_accuracy(
+benchmarks\benchmark\integration_benchmark.py:240: in analyze_method_accuracy
+    result = method_map[method_name](sim_time, dt, use_controller=False)
+benchmarks\benchmark\integration_benchmark.py:133: in rk4_integrate
+    result = self.rk4_integrator.integrate(self.x0, sim_time, dt, controller)
+benchmarks\integration\numerical_methods.py:161: in integrate
+    k4 = self._compute_derivative(states[i] + dt * k3, u)
+benchmarks\integration\numerical_methods.py:176: in _compute_derivative
+    raise RuntimeError(f"Dynamics computation failed: {reason}")
+E   RuntimeError: Dynamics computation failed: Dynamics computation failed: State vector was modified during sanitization
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+_________________ test_conservation_validation_comprehensive __________________
+tests\test_benchmarks\core\test_integration_accuracy.py:142: in test_conservation_validation_comprehensive
+    validation_results = integration_benchmark.validate_conservation_laws(
+benchmarks\benchmark\integration_benchmark.py:332: in validate_conservation_laws
+    result = integrator.integrate(self.x0, analysis_time, analysis_dt, controller=None)
+benchmarks\integration\numerical_methods.py:111: in integrate
+    state_dot = self._compute_derivative(states[i], u)
+benchmarks\integration\numerical_methods.py:126: in _compute_derivative
+    raise RuntimeError(f"Dynamics computation failed: {reason}")
+E   RuntimeError: Dynamics computation failed: Dynamics computation failed: State vector was modified during sanitization
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+__________________ test_integration_method_execution[Euler] ___________________
+tests\test_benchmarks\core\test_integration_accuracy.py:176: in test_integration_method_execution
+    result = integration_benchmark.euler_integrate(sim_time=1.0, dt=0.01)
+benchmarks\benchmark\integration_benchmark.py:111: in euler_integrate
+    result = self.euler_integrator.integrate(self.x0, sim_time, dt, controller)
+benchmarks\integration\numerical_methods.py:99: in integrate
+    last_u, = controller.initialize_state()
+E   ValueError: not enough values to unpack (expected 1, got 0)
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+___________________ test_integration_method_execution[RK4] ____________________
+tests\test_benchmarks\core\test_integration_accuracy.py:178: in test_integration_method_execution
+    result = integration_benchmark.rk4_integrate(sim_time=1.0, dt=0.01)
+benchmarks\benchmark\integration_benchmark.py:133: in rk4_integrate
+    result = self.rk4_integrator.integrate(self.x0, sim_time, dt, controller)
+benchmarks\integration\numerical_methods.py:146: in integrate
+    last_u, = controller.initialize_state()
+E   ValueError: not enough values to unpack (expected 1, got 0)
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+__________ test_controller_memory_allocation_per_call[classical_smc] __________
+tests\test_benchmarks\core\test_memory_usage.py:66: in test_controller_memory_allocation_per_call
+    assert 'u' in result or 'control' in result, f"Missing control at iteration {i}"
+E   AssertionError: Missing control at iteration 0
+E   assert ('u' in ClassicalSMCOutput(u=-53.2, state=(), history={'sigma': [3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3...53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2]}) or 'control' in ClassicalSMCOutput(u=-53.2, state=(), history={'sigma': [3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3...53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2, -53.2]}))
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+_____________ test_controller_memory_allocation_per_call[sta_smc] _____________
+src\controllers\smc\sta_smc.py:350: in compute_control
+    z, _ = state_vars
+E   ValueError: not enough values to unpack (expected 2, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:59: in test_controller_memory_allocation_per_call
+    result = controller.compute_control(state, prev_control, history)
+src\controllers\smc\sta_smc.py:355: in compute_control
+    z = float(state_vars) if state_vars is not None else 0.0
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+__________ test_controller_memory_allocation_per_call[adaptive_smc] ___________
+src\controllers\smc\adaptive_smc.py:318: in compute_control
+    prev_K, last_u, time_in_sliding = state_vars  # type: ignore[misc]
+E   ValueError: not enough values to unpack (expected 3, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:59: in test_controller_memory_allocation_per_call
+    result = controller.compute_control(state, prev_control, history)
+src\controllers\smc\adaptive_smc.py:340: in compute_control
+    prev_K = float(state_vars) if state_vars is not None else self.K_init
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+_______________ test_controller_no_memory_leaks[classical_smc] ________________
+tests\test_benchmarks\core\test_memory_usage.py:93: in test_controller_no_memory_leaks
+    control = result.get('u', result.get('control'))
+E   AttributeError: 'ClassicalSMCOutput' object has no attribute 'get'
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:107: in test_controller_no_memory_leaks
+    pytest.fail(f"Controller failed at iteration {iteration}: {e}")
+E   Failed: Controller failed at iteration 0: 'ClassicalSMCOutput' object has no attribute 'get'
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+__________________ test_controller_no_memory_leaks[sta_smc] ___________________
+src\controllers\smc\sta_smc.py:350: in compute_control
+    z, _ = state_vars
+E   ValueError: not enough values to unpack (expected 2, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:92: in test_controller_no_memory_leaks
+    result = controller.compute_control(state, prev_control, history)
+src\controllers\smc\sta_smc.py:355: in compute_control
+    z = float(state_vars) if state_vars is not None else 0.0
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:107: in test_controller_no_memory_leaks
+    pytest.fail(f"Controller failed at iteration {iteration}: {e}")
+E   Failed: Controller failed at iteration 0: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+________________ test_controller_no_memory_leaks[adaptive_smc] ________________
+src\controllers\smc\adaptive_smc.py:318: in compute_control
+    prev_K, last_u, time_in_sliding = state_vars  # type: ignore[misc]
+E   ValueError: not enough values to unpack (expected 3, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:92: in test_controller_no_memory_leaks
+    result = controller.compute_control(state, prev_control, history)
+src\controllers\smc\adaptive_smc.py:340: in compute_control
+    prev_K = float(state_vars) if state_vars is not None else self.K_init
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:107: in test_controller_no_memory_leaks
+    pytest.fail(f"Controller failed at iteration {iteration}: {e}")
+E   Failed: Controller failed at iteration 0: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+____________________ test_controller_memory_usage_scaling _____________________
+tests\test_benchmarks\core\test_memory_usage.py:138: in test_controller_memory_usage_scaling
+    control = result.get('u', result.get('control'))
+E   AttributeError: 'ClassicalSMCOutput' object has no attribute 'get'
+______________ test_controller_memory_efficiency[classical_smc] _______________
+tests\test_benchmarks\core\test_memory_usage.py:167: in test_controller_memory_efficiency
+    control = result.get('u', result.get('control'))
+E   AttributeError: 'ClassicalSMCOutput' object has no attribute 'get'
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+_________________ test_controller_memory_efficiency[sta_smc] __________________
+src\controllers\smc\sta_smc.py:350: in compute_control
+    z, _ = state_vars
+E   ValueError: not enough values to unpack (expected 2, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:166: in test_controller_memory_efficiency
+    result = controller.compute_control(test_state, np.array([0.0]), {})
+src\controllers\smc\sta_smc.py:355: in compute_control
+    z = float(state_vars) if state_vars is not None else 0.0
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+___________________ test_adaptive_controller_memory_growth ____________________
+src\controllers\smc\adaptive_smc.py:318: in compute_control
+    prev_K, last_u, time_in_sliding = state_vars  # type: ignore[misc]
+E   ValueError: not enough values to unpack (expected 3, got 1)
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_memory_usage.py:200: in test_adaptive_controller_memory_growth
+    result = controller.compute_control(disturbed_state, np.array([0.0]), {})
+src\controllers\smc\adaptive_smc.py:340: in compute_control
+    prev_K = float(state_vars) if state_vars is not None else self.K_init
+E   DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+__________________ test_controller_history_memory_management __________________
+tests\test_benchmarks\core\test_memory_usage.py:235: in test_controller_history_memory_management
+    control = result.get('u', result.get('control'))
+E   AttributeError: 'ClassicalSMCOutput' object has no attribute 'get'
+____________________ test_comprehensive_method_comparison _____________________
+src\utils\config_compatibility.py:41: in __getattr__
+    return self._data[name]
+E   KeyError: 'copy'
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_modular_framework.py:42: in test_comprehensive_method_comparison
+    results = integration_benchmark.comprehensive_comparison(test_scenarios)
+benchmarks\benchmark\integration_benchmark.py:195: in comprehensive_comparison
+    comparator = IntegrationMethodComparator(self.physics)
+benchmarks\comparison\method_comparison.py:71: in __init__
+    self.physics = physics_params.copy()
+src\utils\config_compatibility.py:43: in __getattr__
+    raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+E   AttributeError: 'AttributeDictionary' object has no attribute 'copy'
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+_________________________ test_performance_profiling __________________________
+tests\test_benchmarks\core\test_modular_framework.py:81: in test_performance_profiling
+    profile = integration_benchmark.profile_performance(
+benchmarks\benchmark\integration_benchmark.py:281: in profile_performance
+    result_dict = self.euler_integrate(sim_time, dt, use_controller=False)
+benchmarks\benchmark\integration_benchmark.py:111: in euler_integrate
+    result = self.euler_integrator.integrate(self.x0, sim_time, dt, controller)
+benchmarks\integration\numerical_methods.py:111: in integrate
+    state_dot = self._compute_derivative(states[i], u)
+benchmarks\integration\numerical_methods.py:126: in _compute_derivative
+    raise RuntimeError(f"Dynamics computation failed: {reason}")
+E   RuntimeError: Dynamics computation failed: Dynamics computation failed: State vector was modified during sanitization
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+____________________ test_default_comprehensive_comparison ____________________
+src\utils\config_compatibility.py:41: in __getattr__
+    return self._data[name]
+E   KeyError: 'copy'
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_modular_framework.py:114: in test_default_comprehensive_comparison
+    results = integration_benchmark.comprehensive_comparison()
+benchmarks\benchmark\integration_benchmark.py:195: in comprehensive_comparison
+    comparator = IntegrationMethodComparator(self.physics)
+benchmarks\comparison\method_comparison.py:71: in __init__
+    self.physics = physics_params.copy()
+src\utils\config_compatibility.py:43: in __getattr__
+    raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+E   AttributeError: 'AttributeDictionary' object has no attribute 'copy'
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+_____________________ test_enhanced_analysis_integration ______________________
+tests\test_benchmarks\core\test_modular_framework.py:138: in test_enhanced_analysis_integration
+    accuracy_results = integration_benchmark.analyze_method_accuracy(
+benchmarks\benchmark\integration_benchmark.py:240: in analyze_method_accuracy
+    result = method_map[method_name](sim_time, dt, use_controller=False)
+benchmarks\benchmark\integration_benchmark.py:133: in rk4_integrate
+    result = self.rk4_integrator.integrate(self.x0, sim_time, dt, controller)
+benchmarks\integration\numerical_methods.py:161: in integrate
+    k4 = self._compute_derivative(states[i] + dt * k3, u)
+benchmarks\integration\numerical_methods.py:176: in _compute_derivative
+    raise RuntimeError(f"Dynamics computation failed: {reason}")
+E   RuntimeError: Dynamics computation failed: Dynamics computation failed: State vector was modified during sanitization
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+____________________ test_conservation_validation_methods _____________________
+tests\test_benchmarks\core\test_modular_framework.py:184: in test_conservation_validation_methods
+    validation_results = integration_benchmark.validate_conservation_laws(
+benchmarks\benchmark\integration_benchmark.py:332: in validate_conservation_laws
+    result = integrator.integrate(self.x0, analysis_time, analysis_dt, controller=None)
+benchmarks\integration\numerical_methods.py:111: in integrate
+    state_dot = self._compute_derivative(states[i], u)
+benchmarks\integration\numerical_methods.py:126: in _compute_derivative
+    raise RuntimeError(f"Dynamics computation failed: {reason}")
+E   RuntimeError: Dynamics computation failed: Dynamics computation failed: State vector was modified during sanitization
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+_________________ test_custom_scenario_creation[small_angles] _________________
+src\utils\config_compatibility.py:41: in __getattr__
+    return self._data[name]
+E   KeyError: 'copy'
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_modular_framework.py:230: in test_custom_scenario_creation
+    results = integration_benchmark.comprehensive_comparison([scenario])
+benchmarks\benchmark\integration_benchmark.py:195: in comprehensive_comparison
+    comparator = IntegrationMethodComparator(self.physics)
+benchmarks\comparison\method_comparison.py:71: in __init__
+    self.physics = physics_params.copy()
+src\utils\config_compatibility.py:43: in __getattr__
+    raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+E   AttributeError: 'AttributeDictionary' object has no attribute 'copy'
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+_________________ test_custom_scenario_creation[high_energy] __________________
+src\utils\config_compatibility.py:41: in __getattr__
+    return self._data[name]
+E   KeyError: 'copy'
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_modular_framework.py:230: in test_custom_scenario_creation
+    results = integration_benchmark.comprehensive_comparison([scenario])
+benchmarks\benchmark\integration_benchmark.py:195: in comprehensive_comparison
+    comparator = IntegrationMethodComparator(self.physics)
+benchmarks\comparison\method_comparison.py:71: in __init__
+    self.physics = physics_params.copy()
+src\utils\config_compatibility.py:43: in __getattr__
+    raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+E   AttributeError: 'AttributeDictionary' object has no attribute 'copy'
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+______________________ test_modular_component_isolation _______________________
+tests\test_benchmarks\core\test_modular_framework.py:251: in test_modular_component_isolation
+    euler_result = integration_benchmark.euler_integrator.integrate(
+benchmarks\integration\numerical_methods.py:111: in integrate
+    state_dot = self._compute_derivative(states[i], u)
+benchmarks\integration\numerical_methods.py:126: in _compute_derivative
+    raise RuntimeError(f"Dynamics computation failed: {reason}")
+E   RuntimeError: Dynamics computation failed: Dynamics computation failed: State vector was modified during sanitization
+----------------------------- Captured log setup ------------------------------
+INFO     project.config:loader.py:166 Configuration loaded from sources: ENV > .env > config.yaml
+_________________ test_controller_compute_speed[adaptive_smc] _________________
+tests\test_benchmarks\core\test_performance.py:83: in test_controller_compute_speed
+    controller = create_controller(ctrl_name, gains=gains, config=config)
+src\controllers\factory.py:565: in create_controller
+    raise e
+src\controllers\factory.py:549: in create_controller
+    _validate_controller_gains(controller_gains, controller_info, controller_type)
+src\controllers\factory.py:386: in _validate_controller_gains
+    raise ValueError(
+E   ValueError: Controller 'Adaptive sliding mode controller with parameter estimation' requires 5 gains, got 8
+_______________ test_full_simulation_throughput[classical_smc] ________________
+tests\test_benchmarks\core\test_performance.py:164: in test_full_simulation_throughput
+    result = benchmark(_call)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:156: in __call__
+    return self._raw(function_to_benchmark, *args, **kwargs)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:180: in _raw
+    duration, iterations, loops_range = self._calibrate_timer(runner)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:318: in _calibrate_timer
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_performance.py:162: in _call
+    u_max=float(getattr(config.controllers[ctrl_name], "max_force", 150.0)),
+E   TypeError: 'types.SimpleNamespace' object is not subscriptable
+__________________ test_full_simulation_throughput[sta_smc] ___________________
+tests\test_benchmarks\core\test_performance.py:164: in test_full_simulation_throughput
+    result = benchmark(_call)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:156: in __call__
+    return self._raw(function_to_benchmark, *args, **kwargs)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:180: in _raw
+    duration, iterations, loops_range = self._calibrate_timer(runner)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:318: in _calibrate_timer
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_performance.py:162: in _call
+    u_max=float(getattr(config.controllers[ctrl_name], "max_force", 150.0)),
+E   TypeError: 'types.SimpleNamespace' object is not subscriptable
+________________ test_full_simulation_throughput[adaptive_smc] ________________
+tests\test_benchmarks\core\test_performance.py:164: in test_full_simulation_throughput
+    result = benchmark(_call)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:156: in __call__
+    return self._raw(function_to_benchmark, *args, **kwargs)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:180: in _raw
+    duration, iterations, loops_range = self._calibrate_timer(runner)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:318: in _calibrate_timer
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_performance.py:162: in _call
+    u_max=float(getattr(config.controllers[ctrl_name], "max_force", 150.0)),
+E   TypeError: 'types.SimpleNamespace' object is not subscriptable
+_______________________ test_classical_smc_convergence ________________________
+tests\test_benchmarks\core\test_performance.py:267: in test_classical_smc_convergence
+    result = benchmark.pedantic(
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:167: in pedantic
+    return self._raw_pedantic(
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:256: in _raw_pedantic
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_performance.py:259: in _batch_convergence_time
+    rms_per_batch = np.sqrt(np.mean(controls_b**2, axis=1))
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\numpy\_core\fromnumeric.py:3860: in mean
+    return _methods._mean(a, axis=axis, dtype=dtype,
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\numpy\_core\_methods.py:125: in _mean
+    warnings.warn("Mean of empty slice.", RuntimeWarning, stacklevel=2)
+E   RuntimeWarning: Mean of empty slice.
+_______________________ test_sta_smc_convergence[False] _______________________
+tests\test_benchmarks\core\test_performance.py:288: in test_sta_smc_convergence
+    result = benchmark.pedantic(
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:167: in pedantic
+    return self._raw_pedantic(
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:256: in _raw_pedantic
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_performance.py:259: in _batch_convergence_time
+    rms_per_batch = np.sqrt(np.mean(controls_b**2, axis=1))
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\numpy\_core\fromnumeric.py:3860: in mean
+    return _methods._mean(a, axis=axis, dtype=dtype,
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\numpy\_core\_methods.py:125: in _mean
+    warnings.warn("Mean of empty slice.", RuntimeWarning, stacklevel=2)
+E   RuntimeWarning: Mean of empty slice.
+_______________________ test_sta_smc_convergence[True] ________________________
+tests\test_benchmarks\core\test_performance.py:194: in controller_factory
+    kwargs_controller['dynamics_model'] = DoubleInvertedPendulum(physics_params)
+src\plant\models\simplified\dynamics.py:57: in __init__
+    self.config = SimplifiedDIPConfig.from_dict(config)
+src\plant\models\simplified\config.py:294: in from_dict
+    return cls(**config_dict)
+E   TypeError: SimplifiedDIPConfig.__init__() got an unexpected keyword argument 'singularity_cond_threshold'
+
+During handling of the above exception, another exception occurred:
+tests\test_benchmarks\core\test_performance.py:288: in test_sta_smc_convergence
+    result = benchmark.pedantic(
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:167: in pedantic
+    return self._raw_pedantic(
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:256: in _raw_pedantic
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_performance.py:232: in _batch_convergence_time
+    t, states_b, controls_b, sigma_b = simulate_system_batch(
+src\simulation\engines\vector_sim.py:343: in simulate_system_batch
+    ctrl = controller_factory(part_arr[j])
+tests\test_benchmarks\core\test_performance.py:194: in controller_factory
+    kwargs_controller['dynamics_model'] = DoubleInvertedPendulum(physics_params)
+src\plant\models\simplified\dynamics.py:57: in __init__
+    self.config = SimplifiedDIPConfig.from_dict(config)
+src\plant\models\simplified\config.py:294: in from_dict
+    return cls(**config_dict)
+E   TypeError: SimplifiedDIPConfig.__init__() got an unexpected keyword argument 'singularity_cond_threshold'
+_______________ test_full_simulation_throughput[classical_smc] ________________
+tests\test_benchmarks\core\test_simulation_throughput.py:88: in test_full_simulation_throughput
+    result = benchmark(run_simulation)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:156: in __call__
+    return self._raw(function_to_benchmark, *args, **kwargs)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:180: in _raw
+    duration, iterations, loops_range = self._calibrate_timer(runner)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:318: in _calibrate_timer
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_simulation_throughput.py:72: in run_simulation
+    return simulate_system_batch(
+E   TypeError: simulate_system_batch() missing 3 required keyword-only arguments: 'controller_factory', 'particles', and 'sim_time'
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.SimpleNamespace' is not iterable
+__________________ test_full_simulation_throughput[sta_smc] ___________________
+tests\test_benchmarks\core\test_simulation_throughput.py:88: in test_full_simulation_throughput
+    result = benchmark(run_simulation)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:156: in __call__
+    return self._raw(function_to_benchmark, *args, **kwargs)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:180: in _raw
+    duration, iterations, loops_range = self._calibrate_timer(runner)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:318: in _calibrate_timer
+    duration = runner(loops_range)
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\fixture.py:109: in runner
+    function_to_benchmark(*args, **kwargs)
+tests\test_benchmarks\core\test_simulation_throughput.py:72: in run_simulation
+    return simulate_system_batch(
+E   TypeError: simulate_system_batch() missing 3 required keyword-only arguments: 'controller_factory', 'particles', and 'sim_time'
+------------------------------ Captured log call ------------------------------
+WARNING  factory_module:factory.py:579 Could not create dynamics model: config must be SimplifiedDIPConfig, dict, or have to_dict()/model_dump()/dict() method, got <class 'types.SimpleNamespace'>
+WARNING  factory_module:factory.py:599 Could not extract controller parameters: argument of type 'types.Si

@@ -1,6 +1,6 @@
-#=======================================================================================\\\
-#== .../test_integration/test_statistical_analysis/test_statistical_monte_carlo_deep.py =\\\
-#=======================================================================================\\\
+#======================================================================================\\\
+# tests/test_integration/test_statistical_analysis/test_statistical_monte_carlo_deep.py \\
+#======================================================================================\\\
 
 """
 Deep Statistical Validation and Monte Carlo Analysis Tests.

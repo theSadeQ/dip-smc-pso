@@ -1,3 +1,7 @@
+#======================================================================================\\\
+#============================= docs/_ext/traceability.py ==============================\\\
+#======================================================================================\\\
+
 """Sphinx extension to generate a simple Requirements Traceability page.
 
 Reads a CSV file at docs/traceability/requirements.csv and generates

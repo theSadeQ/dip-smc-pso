@@ -26,7 +26,7 @@ ERROR_HANDLING:
 
 PSO_INTEGRATION:
   ✓ PASSED
-    PSO integration passed: 2/4
+    PSO integration passed: 3/4
 
 PARAMETER_VALIDATION:
   ✓ PASSED
@@ -36,7 +36,9 @@ STABILITY_ANALYSIS:
     Stability assessed for: ['classical_smc', 'sta_smc', 'adaptive_smc', 'hybrid_adaptive_sta_smc']
 
 PERFORMANCE RECOMMENDATIONS:
-  ✓ All controllers meet real-time performance requirements (<1ms)
+  Performance concerns:
+    - sta_smc: 365.392ms computation time
+    - adaptive_smc: 1.002ms computation time
 
 STABILITY STATUS:
   ✓ All controllers show stable behavior within tested ranges
