@@ -676,9 +676,6 @@ def create_controller(controller_type: str,
                 if controller_info['class'] is None:
                     raise ImportError("MPC controller missing optional dependency")
 
-                # MPC Parameter validation
-                _validate_mpc_parameters(config_params, controller_params)
-
                 config_params.setdefault('horizon', 10)
                 config_params.setdefault('q_x', 1.0)
                 config_params.setdefault('q_theta', 1.0)
@@ -687,6 +684,7 @@ def create_controller(controller_type: str,
                 if 'gains' in config_params:
                     del config_params['gains']
 
+
             # Only add dynamics_model for controllers that support it
             if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'mpc_controller']:
                 config_params['dynamics_model'] = dynamics_model
@@ -694,6 +692,11 @@ def create_controller(controller_type: str,
         # Remove None values and filter to only valid parameters
         config_params = {k: v for k, v in config_params.items() if v is not None}
 
+    # MPC Parameter validation (must be outside config creation try-catch to propagate errors)
+    if controller_type == 'mpc_controller':
+        _validate_mpc_parameters(config_params, controller_params)
+
+    try:
         controller_config = config_class(**config_params)
     except Exception as e:
         # Only show warnings in debug mode to reduce PSO log spam
