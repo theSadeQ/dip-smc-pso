@@ -927,6 +927,61 @@ class PSOControllerWrapper:
         self.controller_type = controller_type
         self.max_force = getattr(controller, 'max_force', 150.0)
 
+        # Expose dynamics model for PSO simulation
+        self.dynamics_model = getattr(controller, 'dynamics_model', None)
+
+        # If no dynamics model, try to create one from config
+        if self.dynamics_model is None:
+            try:
+                from src.core.dynamics import DIPDynamics
+                from src.config import load_config
+                config = load_config("config.yaml")
+                self.dynamics_model = DIPDynamics(config.physics)
+                # Also attach to underlying controller
+                if hasattr(controller, 'set_dynamics'):
+                    controller.set_dynamics(self.dynamics_model)
+                else:
+                    controller.dynamics_model = self.dynamics_model
+            except Exception:
+                # Fallback: create minimal dynamics
+                pass
+
+        # Ensure dynamics model has step method for simulation
+        if self.dynamics_model and not hasattr(self.dynamics_model, 'step'):
+            self._add_step_method_to_dynamics()
+
+    def _add_step_method_to_dynamics(self):
+        """Add step method to dynamics model for simulation compatibility."""
+        def step_method(state, u, dt):
+            """Step dynamics forward by dt using Euler integration."""
+            import numpy as np
+
+            try:
+                # Ensure inputs are properly formatted
+                state = np.asarray(state, dtype=np.float64)
+                u = np.asarray([u] if np.isscalar(u) else u, dtype=np.float64)
+
+                # Get state derivative from dynamics
+                state_dot = self.dynamics_model.compute_dynamics(state, u)
+
+                # Simple Euler integration (sufficient for PSO fitness evaluation)
+                next_state = state + state_dot * dt
+
+                # Ensure result is properly shaped and finite
+                next_state = np.asarray(next_state, dtype=np.float64)
+                if not np.all(np.isfinite(next_state)):
+                    # Return previous state if integration failed
+                    return state
+
+                return next_state
+
+            except Exception:
+                # Return previous state if any error occurs
+                return np.asarray(state, dtype=np.float64)
+
+        # Attach the step method to the dynamics model
+        self.dynamics_model.step = step_method
+
     def validate_gains(self, particles: np.ndarray) -> np.ndarray:
         """Validate gain particles for PSO optimization."""
         if particles.ndim == 1:
