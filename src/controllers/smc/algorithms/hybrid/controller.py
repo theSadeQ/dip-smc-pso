@@ -127,6 +127,16 @@ class ModularHybridSMC:
 
         self.logger.info(f"Initialized hybrid SMC with controllers: {list(self.controllers.keys())}")
 
+    @property
+    def current_mode(self) -> "HybridMode":
+        """Get current hybrid mode for test compatibility."""
+        return self._current_mode
+
+    @current_mode.setter
+    def current_mode(self, mode: "HybridMode") -> None:
+        """Set current hybrid mode for test compatibility."""
+        self._current_mode = mode
+
     def compute_control(self, state: np.ndarray, state_vars: Any = None, history: Dict[str, Any] = None, dt: float = None) -> Union[Dict[str, Any], np.ndarray]:
         """
         Compute hybrid SMC control law.

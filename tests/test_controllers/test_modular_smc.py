@@ -456,12 +456,12 @@ class TestComponentIntegration:
         """Test gain validation integrates across components."""
         from src.controllers.smc.core import validate_smc_gains
 
-        # Valid gains should pass
-        valid_gains = np.array([1.0, 2.0, 3.0, 4.0])  # Need 4 gains for classical SMC
+        # Valid gains should pass (classical SMC needs 6 gains)
+        valid_gains = np.array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0])  # Need 6 gains for classical SMC
         assert validate_smc_gains(valid_gains, controller_type="classical")
 
         # Invalid gains should fail
-        invalid_gains = np.array([-1.0, 2.0, 3.0, 4.0])  # Negative gain should fail
+        invalid_gains = np.array([-1.0, 2.0, 3.0, 4.0, 5.0, 6.0])  # Negative gain should fail
         assert not validate_smc_gains(invalid_gains, controller_type="classical")
 
     def test_control_bounds_integration(self):
