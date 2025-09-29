@@ -1,12 +1,13 @@
-#=======================================================================================\\\
+#==========================================================================================\\\
 #==================== src/controllers/smc/hybrid_adaptive_sta_smc.py ====================\\\
-#=======================================================================================\\\
+#==========================================================================================\\\
 
 from __future__ import annotations
 from typing import Dict, Tuple, Any, List, Optional
-# Import from new organized structure
-from ...utils import HybridSTAOutput
+
 import numpy as np
+
+from ...utils import HybridSTAOutput
 
 # Changed: migrate from deprecated 'use_equivalent' to 'enable_equivalent'; added
 # DeprecationWarning handling when the alias is provided and allow overriding
@@ -489,7 +490,7 @@ class HybridAdaptiveSTASMC:
 
         # Defensive: if sensor provided a bad vector, do no harm.
         if not np.all(np.isfinite(state)):
-            return 0.0, (self.k1_init, self.k2_init, 0.0), (history or self.initialize_history())
+            return HybridSTAOutput(0.0, (self.k1_init, self.k2_init, 0.0), (history or self.initialize_history()), 0.0)
 
         # Unpack internal vars
         try:
