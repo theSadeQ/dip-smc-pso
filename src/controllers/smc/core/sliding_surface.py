@@ -129,6 +129,18 @@ class LinearSlidingSurface(SlidingSurface):
 
         return float(s)
 
+    def compute_surface(self, state: np.ndarray) -> float:
+        """
+        Compatibility method for test interface - alias for compute().
+
+        Args:
+            state: State vector
+
+        Returns:
+            Sliding surface value
+        """
+        return self.compute(state)
+
     def compute_derivative(self, state: np.ndarray, state_dot: np.ndarray) -> float:
         """
         Compute sliding surface derivative ds/dt.
