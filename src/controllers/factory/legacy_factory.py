@@ -1178,6 +1178,12 @@ def create_controller(name: str, /, **kwargs: Any) -> Any:
             gains=gains,
             allow_unknown=True
         )
+    except ImportError:
+        # Re-raise ImportError for missing dependencies
+        raise
+    except ConfigValueError:
+        # Re-raise ConfigValueError for validation errors
+        raise
     except Exception:
         # If all else fails, raise error for unknown controller
         raise ValueError(f"Controller '{name}' is not a recognized type")
