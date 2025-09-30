@@ -104,10 +104,7 @@ def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
 
         # Compute control
         try:
-            if controller_type == "hybrid_adaptive_sta_smc":
-                result = controller.compute_control(state, last_control)
-            else:
-                result = controller.compute_control(state, state_vars, history)
+            result = controller.compute_control(state, state_vars, history)
 
             # Extract control value
             if hasattr(result, 'u'):
