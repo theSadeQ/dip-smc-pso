@@ -756,13 +756,11 @@ class TestChatteringReductionEffectiveness:
         dynamics = DoubleInvertedPendulum(config=physics_config)
 
         # Create controller with optimized boundary layer settings
-        controller_config = getattr(config.controllers, controller_type, None)
-        if controller_config is None:
-            pytest.skip(f"Controller {controller_type} not configured")
-
+        # CRITICAL FIX: Pass full config object so factory can extract Issue #12 changes
+        # from config.controllers.{controller_type}, not just the controller_config alone
         controller = create_controller(
             controller_type=controller_type,
-            config=controller_config
+            config=config  # Full ConfigSchema with .controllers attribute
         )
 
         # Simulation parameters
