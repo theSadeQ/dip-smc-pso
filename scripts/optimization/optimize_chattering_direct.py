@@ -9,10 +9,16 @@ Implements custom fitness function with explicit chattering penalty without
 relying on PSOTuner's complex cost normalization that causes cost=0.0 issues.
 """
 
+import sys
+from pathlib import Path
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
 import argparse
 import json
 import logging
-from pathlib import Path
 from typing import Dict, Any, Tuple
 import time
 
