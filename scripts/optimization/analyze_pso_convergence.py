@@ -178,7 +178,7 @@ def plot_convergence_curves(results: Dict[str, Dict], output_dir: Path):
 
     output_file = output_dir / 'pso_convergence_curves.png'
     plt.savefig(output_file, dpi=300, bbox_inches='tight')
-    print(f"✓ Saved convergence curves: {output_file}")
+    print(f"[OK] Saved convergence curves: {output_file}")
     plt.close()
 
 
@@ -242,10 +242,10 @@ def generate_convergence_report(results: Dict[str, Dict], output_dir: Path):
     md_content += "- **PSO Configuration**: 30 particles, 150 iterations, seed=42\n\n"
 
     output_file = output_dir / 'pso_convergence_report.md'
-    with open(output_file, 'w') as f:
+    with open(output_file, 'w', encoding='utf-8') as f:
         f.write(md_content)
 
-    print(f"✓ Saved convergence report: {output_file}")
+    print(f"[OK] Saved convergence report: {output_file}")
 
 
 def main():
@@ -283,7 +283,7 @@ def main():
     plot_convergence_curves(results, args.output_dir)
     generate_convergence_report(results, args.output_dir)
 
-    print(f"\n✅ Convergence analysis complete! Output saved to: {args.output_dir}")
+    print(f"\n[SUCCESS] Convergence analysis complete! Output saved to: {args.output_dir}")
 
     # Print summary to terminal
     print("\n" + "="*70)
@@ -291,7 +291,7 @@ def main():
     print("="*70)
     for ctrl_name, data in results.items():
         if data['status'] != 'NO_DATA':
-            status_icon = "✅" if data['final_cost'] and data['final_cost'] < 2.0 else "❌"
+            status_icon = "[PASS]" if data['final_cost'] and data['final_cost'] < 2.0 else "[FAIL]"
             print(f"{status_icon} {ctrl_name:25s}: final_cost={data['final_cost']:.2f}, converged_at={data['converged_at']}")
 
 
