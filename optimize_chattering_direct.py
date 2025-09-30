@@ -50,21 +50,31 @@ def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
 
     # Create controller with candidate gains
     try:
+        # Create a modified config with the new gains
+        # We need to update BOTH controller_defaults AND controllers sections
+        # because factory's _resolve_controller_gains checks both
         temp_config = config.model_copy(deep=True)
 
-        # Update gains in config
+        # Update in controller_defaults (factory fallback)
         if hasattr(temp_config.controller_defaults, controller_type):
-            setattr(getattr(temp_config.controller_defaults, controller_type), 'gains', gains.tolist())
+            default_ctrl_config = getattr(temp_config.controller_defaults, controller_type)
+            updated_default = default_ctrl_config.model_copy(update={'gains': gains.tolist()})
+            setattr(temp_config.controller_defaults, controller_type, updated_default)
+
+        # Update in controllers (primary source)
         if hasattr(temp_config.controllers, controller_type):
-            ctrl_cfg = getattr(temp_config.controllers, controller_type)
-            if hasattr(ctrl_cfg, 'gains'):
-                ctrl_cfg.gains = gains.tolist()
+            ctrl_config = getattr(temp_config.controllers, controller_type)
+            updated_ctrl = ctrl_config.model_copy(update={'gains': gains.tolist()})
+            setattr(temp_config.controllers, controller_type, updated_ctrl)
 
         controller = create_controller(controller_type=controller_type, config=temp_config)
     except Exception as e:
-        logger.debug(f"Controller creation failed: {e}")
+        logger.error(f"Controller creation failed with gains {gains}: {e}")
+        import traceback
+        traceback.print_exc()
         return {'fitness': 1e6, 'tracking_error_rms': 1e6, 'chattering_index': 1e6,
-                'control_effort_rms': 1e6, 'smoothness_index': 0.0}
+                'control_effort_rms': 1e6, 'smoothness_index': 0.0,
+                'time_domain_index': 1e6, 'freq_domain_index': 1.0}
 
     # Initialize controller state
     if hasattr(controller, 'initialize_state'):
@@ -137,7 +147,8 @@ def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
 
     if simulation_failed or len(control_history) < n_steps // 2:
         return {'fitness': 1e6, 'tracking_error_rms': 1e6, 'chattering_index': 1e6,
-                'control_effort_rms': 1e6, 'smoothness_index': 0.0}
+                'control_effort_rms': 1e6, 'smoothness_index': 0.0,
+                'time_domain_index': 1e6, 'freq_domain_index': 1.0}
 
     # Convert to arrays
     state_traj = np.array(state_trajectory)
