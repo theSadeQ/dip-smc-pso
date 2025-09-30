@@ -121,6 +121,9 @@ def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
                     state_vars = result[1]
                 if len(result) > 2:
                     history = result[2]
+            elif isinstance(result, np.ndarray):
+                # Handle numpy array output (e.g., ModularHybridSMC returns [control, 0, 0])
+                control_output = float(result.flat[0]) if result.size > 0 else 0.0
             else:
                 control_output = float(result)
 
