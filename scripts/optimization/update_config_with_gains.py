@@ -20,7 +20,7 @@ def load_optimized_gains():
     gains_data = {}
 
     for ctrl in controllers:
-        json_file = Path(f'gains_{ctrl}_chattering.json') / f'gains_{ctrl}_chattering.json'
+        json_file = Path(f'gains_{ctrl}_chattering.json')
 
         if not json_file.exists():
             print(f"Warning: {json_file} not found, skipping {ctrl}")
@@ -30,8 +30,9 @@ def load_optimized_gains():
             with open(json_file) as f:
                 data = json.load(f)
 
-            gains = data.get('optimized_gains')
-            chattering = data.get('chattering_index')
+            gains = data.get('gains')
+            metrics = data.get('metrics', {})
+            chattering = metrics.get('chattering_index')
 
             if gains:
                 gains_data[ctrl] = {
@@ -71,25 +72,35 @@ def update_config(gains_data, dry_run=False):
     with open(config_file) as f:
         config = yaml.safe_load(f)
 
-    # Update gains
+    # Update gains in both controllers and controller_defaults
     if 'controllers' not in config:
         config['controllers'] = {}
+    if 'controller_defaults' not in config:
+        config['controller_defaults'] = {}
 
     updated_count = 0
     for ctrl, data in gains_data.items():
+        # Update controllers section
         if ctrl not in config['controllers']:
             config['controllers'][ctrl] = {}
 
-        # Store old gains for comparison
-        old_gains = config['controllers'][ctrl].get('gains', [])
+        # Update controller_defaults section
+        if ctrl not in config['controller_defaults']:
+            config['controller_defaults'][ctrl] = {}
 
-        # Update with new gains
+        # Store old gains for comparison
+        old_gains_ctrl = config['controllers'][ctrl].get('gains', [])
+        old_gains_default = config['controller_defaults'][ctrl].get('gains', [])
+
+        # Update with new gains (both locations)
         config['controllers'][ctrl]['gains'] = data['gains']
+        config['controller_defaults'][ctrl]['gains'] = data['gains']
 
         print(f"\n{ctrl}:")
-        print(f"  Old gains: {old_gains}")
-        print(f"  New gains: {data['gains']}")
-        print(f"  Chattering: {data['chattering']:.3f}")
+        print(f"  Old gains (controllers): {old_gains_ctrl}")
+        print(f"  Old gains (defaults):    {old_gains_default}")
+        print(f"  New gains:               {data['gains']}")
+        print(f"  Chattering index:        {data['chattering']:.3f}")
 
         updated_count += 1
 
