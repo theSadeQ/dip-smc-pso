@@ -448,7 +448,96 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 **Hidden Dirs (acceptable):**
 - `.archive/`, `.test_artifacts/`, `.dev_tools/`, `.build/`, `.cache/`
 
-### 10.7 After Moving/Consolidation — Update References
+### 10.7 Long-Running Optimization Processes (PSO)
+
+**Best practices for managing multi-hour PSO optimization runs:**
+
+#### Before Starting PSO
+
+1. **Verify Configuration**
+   - Check fitness function aligns with optimization goal
+   - Verify parameter bounds are reasonable
+   - Set appropriate iteration count and swarm size
+
+2. **Prepare Monitoring**
+   - Set up log directory: `logs/`
+   - Create monitoring scripts ready
+   - Document expected completion time
+
+3. **Session Continuity**
+   - Create comprehensive handoff documentation
+   - Document current state and next steps
+   - Prepare automation for when PSO completes
+
+#### During PSO Execution
+
+1. **Monitoring Tools**
+   ```bash
+   # Quick status check
+   python scripts/optimization/check_pso_completion.py
+
+   # Live dashboard
+   python scripts/optimization/watch_pso.py
+
+   # Automated monitoring
+   python scripts/optimization/monitor_and_validate.py --auto-update-config
+   ```
+
+2. **Progress Tracking**
+   - Monitor log files: `tail -f logs/pso_*.log`
+   - Check iteration progress and convergence
+   - Verify no errors or instability
+
+3. **Resource Management**
+   - PSO logs actively written (don't move/edit)
+   - Leave processes undisturbed
+   - Prepare validation scripts in parallel
+
+#### After PSO Completion
+
+1. **Immediate Actions**
+   - Run validation: `python scripts/optimization/validate_and_summarize.py`
+   - Review results JSON files
+   - Check acceptance criteria
+
+2. **Decision Point**
+   - **If PASS:** Update config, test, commit, close issue
+   - **If FAIL:** Analyze failure, re-run with corrected parameters
+
+3. **Cleanup**
+   - Move logs to organized directories
+   - Archive optimization artifacts
+   - Update documentation with results
+
+#### Automation Templates
+
+**Example: End-to-End PSO Workflow**
+```python
+# scripts/optimization/monitor_and_validate.py pattern:
+# 1. Monitor PSO logs for completion
+# 2. Auto-trigger validation when done
+# 3. Update config if validation passes
+# 4. Provide clear next steps
+```
+
+**Example: Validation Pipeline**
+```python
+# scripts/optimization/validate_and_summarize.py pattern:
+# 1. Load optimized gains from JSON
+# 2. Re-simulate with exact PSO metrics
+# 3. Compare against acceptance criteria
+# 4. Generate comprehensive summary JSON
+```
+
+#### Lessons Learned (Issue #12)
+
+1. **Fitness Function Matters:** Ensure fitness directly optimizes target metric
+2. **Document Expected Outcomes:** Predict likely results based on fitness design
+3. **Prepare Alternative Paths:** Have corrected scripts ready if validation fails
+4. **Full Automation:** Create end-to-end workflows for reproducibility
+5. **Comprehensive Handoff:** Document state for session continuity
+
+### 10.8 After Moving/Consolidation — Update References
 
 1. Search & replace hardcoded paths.
 2. Update README and diagrams.
