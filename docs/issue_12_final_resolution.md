@@ -73,14 +73,16 @@ elif isinstance(result, np.ndarray):
 
 ### Controllers Optimized
 
-| Controller | Iterations | Best Fitness | Converged | ETA |
-|------------|------------|--------------|-----------|-----|
+| Controller | Iterations | Best Fitness | Converged | Status |
+|------------|------------|--------------|-----------|--------|
 | classical_smc | 150/150 | 533 | ✅ @iter 43 | COMPLETE |
-| adaptive_smc | 150/150 | 1 | ✅ @iter 5 | COMPLETE |
-| sta_smc | 150/150 | 2 | ✅ @iter 5 | COMPLETE |
-| hybrid | 150/150 | FAILED | ❌ API bug | N/A |
+| adaptive_smc | 109/150 | 1610 | ✅ @iter ~5 | RUNNING (72.7%) |
+| sta_smc | 112/150 | 1970 | ✅ @iter ~5 | RUNNING (74.7%) |
+| hybrid | API mismatch | N/A | ❌ | Fixed for future |
 
-**Note:** Fitness values are NOT chattering indices! See Discovery #1.
+**CRITICAL NOTE:** Fitness values are NOT chattering indices! See Discovery #1.
+- Low fitness = Good tracking, NOT low chattering
+- Actual chattering values need validation after PSO completes
 
 ### Optimized Gains
 
