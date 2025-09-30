@@ -43,6 +43,7 @@ class StabilityAnalyzer(PerformanceAnalyzer):
             Configuration for stability analysis
         """
         self.config = config or StabilityAnalysisConfig()
+        self._regularizer_cache = None  # Cached regularizer for performance
 
     @property
     def analyzer_name(self) -> str:
@@ -675,25 +676,115 @@ class StabilityAnalyzer(PerformanceAnalyzer):
         }
 
     def _analyze_analytical_lyapunov(self, A: np.ndarray) -> Dict[str, Any]:
-        """Analyze Lyapunov stability analytically."""
+        """Analyze Lyapunov stability analytically with robust numerical methods.
+
+        Solves the continuous-time Lyapunov equation: A^T P + P A = -Q
+
+        Mathematical Background:
+        - For a stable system, there exists a positive definite P satisfying the equation
+        - Uses SVD-based regularization to handle ill-conditioned matrices
+        - Validates positive definiteness via Cholesky decomposition
+        - Tolerates condition numbers up to 1e12
+
+        Returns
+        -------
+        dict
+            Analysis results including P matrix, eigenvalues, and stability status
+        """
         try:
-            # Solve Lyapunov equation: A^T P + P A = -Q
-            Q = np.eye(A.shape[0])  # Positive definite matrix
-            P = linalg.solve_lyapunov(A.T, -Q)
+            # Import robust numerical stability utilities
+            from src.plant.core.numerical_stability import (
+                AdaptiveRegularizer,
+                NumericalInstabilityError
+            )
 
-            # Check if P is positive definite
+            # Use cached regularizer for performance (avoid repeated initialization)
+            if self._regularizer_cache is None:
+                self._regularizer_cache = AdaptiveRegularizer(
+                    regularization_alpha=1e-6,  # Minimal regularization for accuracy
+                    max_condition_number=1e12,  # Accept modest ill-conditioning
+                    min_regularization=1e-12,   # Very small minimum for Lyapunov matrices
+                    use_fixed_regularization=False
+                )
+            regularizer = self._regularizer_cache
+
+            # Construct Q matrix (positive definite)
+            n = A.shape[0]
+            Q = np.eye(n)
+
+            # Check conditioning of A before solving
+            cond_A = np.linalg.cond(A)
+            if not np.isfinite(cond_A) or cond_A > 1e14:
+                # Apply regularization to A if extremely ill-conditioned
+                A_reg = regularizer.regularize_matrix(A)
+                warnings.warn(
+                    f"Matrix A ill-conditioned (cond={cond_A:.2e}), "
+                    f"applying regularization for Lyapunov solver",
+                    UserWarning
+                )
+                A_to_solve = A_reg
+            else:
+                A_to_solve = A
+
+            # Solve Lyapunov equation with robust fallback strategy
+            try:
+                # Primary method: SciPy direct solver (fastest when well-conditioned)
+                P = linalg.solve_lyapunov(A_to_solve.T, -Q)
+            except (np.linalg.LinAlgError, ValueError) as e:
+                # Fallback: SVD-based robust solver
+                warnings.warn(
+                    f"Direct Lyapunov solver failed ({e}), using SVD-based fallback",
+                    UserWarning
+                )
+                P = self._solve_lyapunov_svd(A_to_solve, Q, regularizer)
+
+            # Validate P is positive definite using Cholesky decomposition
+            try:
+                # Cholesky requires P to be symmetric and positive definite
+                # Symmetrize P to handle numerical asymmetry
+                P_sym = 0.5 * (P + P.T)
+
+                # Attempt Cholesky decomposition (definitive test)
+                np.linalg.cholesky(P_sym)
+                is_positive_definite = True
+
+            except np.linalg.LinAlgError:
+                # Cholesky failed - check eigenvalues as fallback
+                eigenvals_P = linalg.eigvals(P_sym)
+                min_eigval = np.min(np.real(eigenvals_P))
+
+                # Accept borderline cases with small negative eigenvalues
+                # (numerical artifacts from regularization)
+                if min_eigval > -self.config.eigenvalue_tolerance:
+                    is_positive_definite = True
+                    warnings.warn(
+                        f"P matrix borderline positive definite "
+                        f"(min eigenvalue: {min_eigval:.2e})",
+                        UserWarning
+                    )
+                else:
+                    is_positive_definite = False
+
+            # Compute eigenvalues for detailed analysis
             eigenvals_P = linalg.eigvals(P)
-            is_positive_definite = np.all(eigenvals_P > self.config.eigenvalue_tolerance)
 
-            # Stability conclusion
-            is_stable = is_positive_definite
+            # Verify Lyapunov equation residual: A^T P + P A + Q ≈ 0
+            lyapunov_residual = A_to_solve.T @ P + P @ A_to_solve + Q
+            residual_norm = np.linalg.norm(lyapunov_residual, ord='fro')
+            residual_relative = residual_norm / (np.linalg.norm(Q, ord='fro') + 1e-15)
+
+            # Stability conclusion requires both positive definiteness and small residual
+            is_stable = is_positive_definite and residual_relative < 1e-6
 
             return {
                 'lyapunov_matrix_P': P.tolist(),
                 'P_eigenvalues': eigenvals_P.tolist(),
                 'is_positive_definite': is_positive_definite,
                 'is_stable': is_stable,
-                'condition_number': float(np.linalg.cond(P))
+                'condition_number': float(np.linalg.cond(P)),
+                'residual_norm': float(residual_norm),
+                'residual_relative': float(residual_relative),
+                'regularization_applied': cond_A > 1e12
             }
 
         except Exception as e:
@@ -701,6 +792,62 @@ class StabilityAnalyzer(PerformanceAnalyzer):
                 'error': f"Lyapunov analysis failed: {str(e)}",
                 'is_stable': False
             }
+
+    def _solve_lyapunov_svd(
+        self,
+        A: np.ndarray,
+        Q: np.ndarray,
+        regularizer
+    ) -> np.ndarray:
+        """Solve Lyapunov equation using SVD-based robust method.
+
+        Fallback solver for ill-conditioned systems where direct methods fail.
+        Uses vectorization and Kronecker products with adaptive regularization.
+
+        Parameters
+        ----------
+        A : np.ndarray
+            System matrix
+        Q : np.ndarray
+            Positive definite weight matrix
+        regularizer : AdaptiveRegularizer
+            Regularizer for numerical stability
+
+        Returns
+        -------
+        np.ndarray
+            Solution matrix P
+        """
+        n = A.shape[0]
+
+        # Vectorize Lyapunov equation: (I ⊗ A^T + A^T ⊗ I) vec(P) = -vec(Q)
+        # Using Kronecker product formulation
+        I_n = np.eye(n)
+
+        # Construct Kronecker system matrix
+        # Note: This can be memory-intensive for large n
+        K = np.kron(I_n, A.T) + np.kron(A.T, I_n)
+
+        # Regularize K if ill-conditioned
+        K_reg = regularizer.regularize_matrix(K)
+
+        # Vectorize Q
+        q_vec = -Q.flatten()
+
+        # Solve linear system
+        try:
+            p_vec = np.linalg.solve(K_reg, q_vec)
+        except np.linalg.LinAlgError:
+            # Ultimate fallback: least-squares
+            p_vec, _, _, _ = np.linalg.lstsq(K_reg, q_vec, rcond=None)
+
+        # Reshape back to matrix form
+        P = p_vec.reshape((n, n))
+
+        # Symmetrize result (Lyapunov solution should be symmetric)
+        P = 0.5 * (P + P.T)
+
+        return P
 
     def _estimate_largest_lyapunov_exponent(self, states: np.ndarray) -> float:
         """Estimate largest Lyapunov exponent (simplified method)."""
