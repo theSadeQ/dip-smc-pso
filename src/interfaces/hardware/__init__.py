@@ -9,7 +9,7 @@ device drivers, sensor/actuator interfaces, data acquisition systems, and
 industrial communication protocols for control engineering applications.
 """
 
-from .device_drivers import DeviceDriver, BaseDevice, DeviceManager
+from .device_drivers import DeviceDriver, BaseDevice, DeviceManager, DeviceStatus
 from .sensors import SensorInterface, AnalogSensor, DigitalSensor, IMUSensor
 from .actuators import ActuatorInterface, ServoActuator, StepperMotor, PneumaticActuator
 from .daq_systems import DAQInterface, NIDAQInterface, AdcInterface
@@ -18,7 +18,7 @@ from .factory import HardwareInterfaceFactory
 
 __all__ = [
     # Core device framework
-    'DeviceDriver', 'BaseDevice', 'DeviceManager',
+    'DeviceDriver', 'BaseDevice', 'DeviceManager', 'DeviceStatus',
 
     # Sensor interfaces
     'SensorInterface', 'AnalogSensor', 'DigitalSensor', 'IMUSensor',

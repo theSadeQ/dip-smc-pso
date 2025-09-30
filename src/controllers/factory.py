@@ -692,6 +692,10 @@ def create_controller(controller_type: str,
         # Remove None values and filter to only valid parameters
         config_params = {k: v for k, v in config_params.items() if v is not None}
 
+    except Exception as e:
+        logger.error(f"Failed to build config parameters: {e}")
+        raise FactoryConfigurationError(f"Configuration building failed: {e}")
+
     # MPC Parameter validation (must be outside config creation try-catch to propagate errors)
     if controller_type == 'mpc_controller':
         _validate_mpc_parameters(config_params, controller_params)

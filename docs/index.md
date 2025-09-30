@@ -41,46 +41,40 @@ streamlit run streamlit_app.py
 
 ```{toctree}
 :maxdepth: 2
-:caption: 📚 Core Documentation
+:caption: 📚 Getting Started
 
-README
-theory_overview
-architecture
-plant_model
+README.md
+theory_overview.md
+architecture.md
+plant_model.md
+hil_quickstart.md
+streamlit_dashboard_guide.md
 ```
 
 ```{toctree}
 :maxdepth: 2
-:caption: 🎮 Control Systems
+:caption: 🎮 Control Systems & Optimization
 
 reference/controllers/index
 reference/optimizer/index
-analysis_plan
+analysis_plan.md
+benchmarks_methodology.md
 ```
 
 ```{toctree}
 :maxdepth: 2
 :caption: 🧪 Development & Testing
 
-TESTING
-test_protocols
-use_cases
-context
+TESTING.md
+test_protocols.md
+use_cases.md
+context.md
+fault_detection_guide.md
 ```
 
 ```{toctree}
 :maxdepth: 2
-:caption: 📋 Quick Guides
-
-hil_quickstart
-streamlit_dashboard_guide
-benchmarks_methodology
-fault_detection_guide
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📊 Research Presentation
+:caption: 📊 Research & Theory
 
 presentation/index
 presentation/introduction
@@ -96,6 +90,15 @@ presentation/results-discussion
 
 ```{toctree}
 :maxdepth: 2
+:caption: 📖 API Reference & Examples
+
+api/index
+examples/index
+traceability/index
+```
+
+```{toctree}
+:maxdepth: 2
 :caption: 🔧 Project Management
 
 CONTRIBUTING
@@ -103,13 +106,6 @@ RELEASE_CHECKLIST
 CHANGELOG
 symbols
 results_readme
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📖 API Reference
-
-api/index
 ```
 
 ## Mathematical Foundation
@@ -199,28 +195,3 @@ Bibliography coming soon - citations system is being configured.
 ## Project Links
 
 
-```{toctree}
-:maxdepth: 2
-:caption: Reference
-
-guides/getting-started
-how-to/testing-and-benchmarks
-reference/index
-```
-```{toctree}
-:maxdepth: 1
-:caption: Examples & Traceability
-
-examples/index
-traceability/index
-```
-### Core Documentation
-- 📚 [Theory Overview](theory_overview.md)
-- 🎮 [Controller Documentation](controllers/index.md)
-- 📖 [API Reference](api/index.md)
-- 🔬 [Examples](examples/index.md)
-
-### Quick Guides
-- 🔗 [Hardware-in-the-Loop (HIL) Quickstart](hil_quickstart.md)
-- 📊 [Benchmarks & Methodology](benchmarks_methodology.md)
-- 🛡️ [Fault Detection & Isolation Guide](fault_detection_guide.md)

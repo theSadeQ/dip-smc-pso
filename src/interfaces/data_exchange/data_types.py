@@ -89,11 +89,11 @@ class MessageMetadata:
 @dataclass
 class SerializableData:
     """Base class for serializable data structures."""
-    data: Any
     schema_version: str = "1.0"
     data_type: str = "generic"
     created_at: float = field(default_factory=time.time)
     metadata: Dict[str, Any] = field(default_factory=dict)
+    data: Any = None
 
     def validate(self) -> bool:
         """Validate data structure."""
@@ -353,7 +353,7 @@ class DataPacket:
 @dataclass
 class ControlMessage(SerializableData):
     """Control message for system commands."""
-    command: str
+    command: str = ""
     parameters: Dict[str, Any] = field(default_factory=dict)
     target: str = "system"
     timeout: Optional[float] = None
@@ -366,7 +366,7 @@ class ControlMessage(SerializableData):
 @dataclass
 class StatusMessage(SerializableData):
     """Status message for system state reporting."""
-    status: str
+    status: str = ""
     details: Dict[str, Any] = field(default_factory=dict)
     error_code: Optional[int] = None
     error_message: Optional[str] = None
@@ -383,7 +383,7 @@ class StatusMessage(SerializableData):
 @dataclass
 class TelemetryMessage(SerializableData):
     """Telemetry message for sensor data and measurements."""
-    sensor_id: str
+    sensor_id: str = ""
     measurements: Dict[str, Union[float, int, str]] = field(default_factory=dict)
     units: Dict[str, str] = field(default_factory=dict)
     quality: Dict[str, float] = field(default_factory=dict)
@@ -404,7 +404,7 @@ class TelemetryMessage(SerializableData):
 @dataclass
 class ConfigurationMessage(SerializableData):
     """Configuration message for system settings."""
-    config_section: str
+    config_section: str = ""
     parameters: Dict[str, Any] = field(default_factory=dict)
     operation: str = "update"  # update, get, delete
 
