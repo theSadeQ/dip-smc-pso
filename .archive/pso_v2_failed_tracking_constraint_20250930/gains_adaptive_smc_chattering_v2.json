@@ -1,0 +1,25 @@
+{
+  "controller": "adaptive_smc",
+  "gains": [
+    6.892352014557559,
+    3.303252866896102,
+    9.015514935163939,
+    0.5071147674344676,
+    2.2516193174616195
+  ],
+  "metrics": {
+    "fitness": 2120.4956570646355,
+    "tracking_error_rms": 1.9246206424804895,
+    "chattering_index": 295.87501458414636,
+    "time_domain_index": 422.5776869403413,
+    "freq_domain_index": 0.23544575302484957,
+    "control_effort_rms": 81.20578164723422
+  },
+  "pso_config": {
+    "n_particles": 30,
+    "iters": 150,
+    "seed": 42,
+    "fitness_function": "chattering_index + tracking_penalty"
+  },
+  "elapsed_time": 6499.617961883545
+}
