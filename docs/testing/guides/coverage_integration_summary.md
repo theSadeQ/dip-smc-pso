@@ -1,6 +1,12 @@
 #==========================================================================================\\\
-#=============== docs/testing/coverage_integration_summary.md ============================\\\
+#============== docs/testing/guides/coverage_integration_summary.md ===================\\\
 #==========================================================================================\\\
+
+<!-- Navigation Breadcrumb -->
+**📍 Location**: [Testing Root](../) → [Guides](./) → Coverage Integration Summary
+**📚 Related**: [Runbook](coverage_quality_gates_runbook.md) | [Local Dev Guide](coverage_local_development_guide.md) | [Troubleshooting](coverage_quality_gates_troubleshooting.md)
+
+---
 
 # Coverage Quality Gates Integration Summary
 **Issue #9 - Complete Coverage Infrastructure Documentation Integration**
