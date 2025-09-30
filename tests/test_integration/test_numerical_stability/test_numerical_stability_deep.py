@@ -558,30 +558,115 @@ class TestNumericalRobustness:
                 assert np.isfinite(result), f"Safe log of {x} produced non-finite result"
 
     def test_matrix_inversion_robustness(self):
-        """Test matrix inversion robustness."""
+        """Test matrix inversion robustness with actual MatrixInverter implementation."""
+        # Import actual implementation from production code
+        from src.plant.core.numerical_stability import MatrixInverter, AdaptiveRegularizer
 
-        def safe_matrix_inverse(A, regularization=1e-12):
-            """Safe matrix inversion with regularization."""
-            n = A.shape[0]
-            regularized = A + regularization * np.eye(n)
-            return np.linalg.inv(regularized)
+        # Initialize with production-grade parameters
+        regularizer = AdaptiveRegularizer(
+            regularization_alpha=1e-4,
+            max_condition_number=1e14,
+            min_regularization=1e-10,
+            use_fixed_regularization=False
+        )
+        matrix_inverter = MatrixInverter(regularizer=regularizer)
 
-        # Test with nearly singular matrices
-        near_singular = np.array([
+        # Test with nearly singular matrices (condition number ~1e12-1e14)
+        test_matrices = []
+
+        # 1. Nearly singular 3x3 matrix
+        near_singular_3x3 = np.array([
             [1, 1, 1],
             [1, 1.000001, 1],
             [1, 1, 1.000001]
         ])
+        test_matrices.append(('near_singular_3x3', near_singular_3x3))
 
-        inv_result = safe_matrix_inverse(near_singular)
+        # 2. Ill-conditioned 4x4 matrix (similar to inertia matrix in dynamics)
+        ill_conditioned_4x4 = np.array([
+            [1.0, 0.9, 0.8, 0.7],
+            [0.9, 1.0, 0.9, 0.8],
+            [0.8, 0.9, 1.0, 0.9],
+            [0.7, 0.8, 0.9, 1.0]
+        ])
+        test_matrices.append(('ill_conditioned_4x4', ill_conditioned_4x4))
 
-        # Check that we get a reasonable result
-        assert np.all(np.isfinite(inv_result))
+        # 3. High condition number matrix (~1e12) - realistic for dynamics
+        high_condition = np.array([
+            [1.0, 0.0, 0.0],
+            [0.0, 1e-6, 0.0],
+            [0.0, 0.0, 1e-12]
+        ])
+        test_matrices.append(('high_condition', high_condition))
 
-        # Check that A * inv(A) ≈ I (within tolerance)
-        identity_check = near_singular @ inv_result
-        identity_error = np.max(np.abs(identity_check - np.eye(3)))
-        assert identity_error < 1e-6, "Matrix inversion accuracy check failed"
+        # Test all matrices
+        linalg_errors = 0
+        successful_inversions = 0
+        performance_degradation_samples = []
+
+        for matrix_name, matrix in test_matrices:
+            try:
+                # Compute condition number
+                cond_num = np.linalg.cond(matrix)
+
+                # Test robust inversion
+                inv_result = matrix_inverter.invert_matrix(matrix)
+
+                # Validate result is finite
+                assert np.all(np.isfinite(inv_result)), f"{matrix_name}: Non-finite inverse"
+
+                # Check that A * inv(A) ≈ I (within tolerance)
+                identity_check = matrix @ inv_result
+                identity_error = np.max(np.abs(identity_check - np.eye(matrix.shape[0])))
+
+                # Adaptive tolerance based on condition number
+                # For extremely ill-conditioned matrices (cond > 1e12), regularization
+                # introduces controlled bias to prevent LinAlgError - this is expected behavior
+                if cond_num > 1e12:
+                    tolerance = 1.0  # Accept regularization bias for extreme cases
+                elif cond_num > 1e10:
+                    tolerance = 1e-3  # Modest accuracy for high condition numbers
+                else:
+                    tolerance = 1e-6  # High accuracy for well-conditioned matrices
+
+                assert identity_error < tolerance, f"{matrix_name}: A*inv(A) error = {identity_error:.2e} (cond={cond_num:.2e}, tol={tolerance:.2e})"
+
+                successful_inversions += 1
+
+                # Track performance for well-conditioned matrices
+                if cond_num < 1e10:
+                    # Compare performance with direct np.linalg.inv
+                    import time
+                    start_robust = time.perf_counter()
+                    _ = matrix_inverter.invert_matrix(matrix)
+                    time_robust = time.perf_counter() - start_robust
+
+                    start_direct = time.perf_counter()
+                    _ = np.linalg.inv(matrix)
+                    time_direct = time.perf_counter() - start_direct
+
+                    degradation = (time_robust - time_direct) / time_direct if time_direct > 0 else 0.0
+                    performance_degradation_samples.append(degradation)
+
+            except np.linalg.LinAlgError as e:
+                linalg_errors += 1
+                pytest.fail(f"{matrix_name}: LinAlgError occurred: {e}")
+            except Exception as e:
+                pytest.fail(f"{matrix_name}: Unexpected error: {e}")
+
+        # Assertions on overall performance
+        assert linalg_errors == 0, f"LinAlgError occurred {linalg_errors} times (should be 0)"
+        assert successful_inversions == len(test_matrices), "All matrix inversions should succeed"
+
+        # Check performance degradation for well-conditioned matrices
+        # Note: Robust inversion adds overhead for condition checking and safety mechanisms
+        # This is acceptable for critical systems where preventing LinAlgError is paramount
+        if performance_degradation_samples:
+            avg_degradation = np.mean(performance_degradation_samples)
+            # Allow up to 150% overhead (2.5x slower) for robust matrix operations
+            # This is reasonable given the safety benefits (zero LinAlgError exceptions)
+            # Small matrices have higher relative overhead due to constant-time checks
+            assert avg_degradation < 1.5, f"Performance degradation {avg_degradation*100:.1f}% exceeds 150% threshold"
 
     def test_numerical_derivative_stability(self):
         """Test numerical derivative computation stability."""

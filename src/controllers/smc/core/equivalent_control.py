@@ -20,6 +20,9 @@ import numpy as np
 import logging
 from abc import ABC, abstractmethod
 
+# Import robust matrix inversion infrastructure
+from src.plant.core.numerical_stability import MatrixInverter, AdaptiveRegularizer
+
 
 class EquivalentControl:
     """
@@ -51,6 +54,15 @@ class EquivalentControl:
         # Setup logging
         self.logger = logging.getLogger(self.__class__.__name__)
 
+        # Initialize robust matrix inversion infrastructure
+        self.adaptive_regularizer = AdaptiveRegularizer(
+            regularization_alpha=regularization,
+            max_condition_number=1e14,
+            min_regularization=regularization,
+            use_fixed_regularization=False
+        )
+        self.matrix_inverter = MatrixInverter(regularizer=self.adaptive_regularizer)
+
     def compute(self, state: np.ndarray, sliding_surface,
                 surface_derivative: Optional[float] = None) -> float:
         """
@@ -77,9 +89,8 @@ class EquivalentControl:
             # Get surface gradient L from sliding surface
             L = self._get_surface_gradient(sliding_surface)
 
-            # Compute controllability matrix LM^{-1}B
-            M_reg = self._regularize_matrix(M)
-            M_inv = np.linalg.inv(M_reg)
+            # Compute controllability matrix LM^{-1}B using robust inversion
+            M_inv = self.matrix_inverter.invert_matrix(M)
             LM_inv_B = L @ M_inv @ self.B
 
             # Check controllability
@@ -204,17 +215,16 @@ class EquivalentControl:
                 return result
 
             L = self._get_surface_gradient(sliding_surface)
-            M_reg = self._regularize_matrix(M)
 
             # Compute condition number
-            result['condition_number'] = np.linalg.cond(M_reg)
+            result['condition_number'] = np.linalg.cond(M)
 
             # Check rank
-            rank = np.linalg.matrix_rank(M_reg)
-            result['rank_deficient'] = rank < M_reg.shape[0]
+            rank = np.linalg.matrix_rank(M)
+            result['rank_deficient'] = rank < M.shape[0]
 
-            # Compute controllability measure
-            M_inv = np.linalg.inv(M_reg)
+            # Compute controllability measure using robust inversion
+            M_inv = self.matrix_inverter.invert_matrix(M)
             LM_inv_B = L @ M_inv @ self.B
             result['LM_inv_B'] = float(LM_inv_B)
 
