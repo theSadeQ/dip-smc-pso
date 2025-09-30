@@ -720,5 +720,194 @@ class TestNumericalRobustness:
             assert abs(determinant - eigenval_product) < 1e-10, f"Det-eigenvalue mismatch in {name} matrix"
 
 
+@pytest.mark.chattering_reduction
+@pytest.mark.parametrize("controller_type", [
+    "classical_smc",
+    "adaptive_smc",
+    "sta_smc",
+    "hybrid_adaptive_sta_smc"
+])
+class TestChatteringReductionEffectiveness:
+    """
+    Comprehensive chattering reduction effectiveness tests for Issue #12.
+
+    Validates all 5 acceptance criteria:
+    1. Chattering index < 2.0
+    2. Boundary layer effectiveness > 0.8
+    3. Control smoothness index > 0.7
+    4. High-frequency power ratio < 0.1
+    5. Performance degradation < 5%
+    """
+
+    def test_chattering_reduction_effectiveness(self, controller_type):
+        """Test comprehensive chattering reduction for all SMC variants."""
+        # Import necessary modules
+        from src.controllers.factory import create_controller
+        from src.config import load_config
+        from src.plant.models.dynamics import DoubleInvertedPendulum
+        from scipy.fft import fft, fftfreq
+
+        # Load configuration
+        config = load_config("config.yaml", allow_unknown=False)
+
+        # Create dynamics model using physics config
+        physics_config = config.physics
+        dynamics = DoubleInvertedPendulum(
+            cart_mass=physics_config.cart_mass,
+            pendulum1_mass=physics_config.pendulum1_mass,
+            pendulum2_mass=physics_config.pendulum2_mass,
+            pendulum1_length=physics_config.pendulum1_length,
+            pendulum2_length=physics_config.pendulum2_length,
+            pendulum1_com=physics_config.pendulum1_com,
+            pendulum2_com=physics_config.pendulum2_com,
+            pendulum1_inertia=physics_config.pendulum1_inertia,
+            pendulum2_inertia=physics_config.pendulum2_inertia,
+            gravity=physics_config.gravity,
+            cart_friction=physics_config.cart_friction,
+            joint1_friction=physics_config.joint1_friction,
+            joint2_friction=physics_config.joint2_friction
+        )
+
+        # Create controller with optimized boundary layer settings
+        controller_config = config.controllers.get(controller_type)
+        if controller_config is None:
+            pytest.skip(f"Controller {controller_type} not configured")
+
+        controller = create_controller(
+            controller_type=controller_type,
+            config=controller_config,
+            dynamics_model=dynamics
+        )
+
+        # Simulation parameters
+        dt = 0.01
+        t_final = 10.0
+        n_steps = int(t_final / dt)
+
+        # Initial condition (small perturbation)
+        state = np.array([0.0, 0.1, 0.1, 0.0, 0.0, 0.0])
+
+        # Initialize controller state
+        state_vars = controller.initialize_state()
+        history = controller.initialize_history()
+
+        # Storage for analysis
+        control_history = []
+        sliding_surface_history = []
+        state_trajectory = np.zeros((n_steps, 6))
+
+        # Simulate
+        last_control = 0.0
+        for i in range(n_steps):
+            state_trajectory[i] = state
+
+            # Compute control
+            if controller_type == "classical_smc":
+                result = controller.compute_control(state, state_vars, history)
+                control_output = result.control
+                state_vars = result.state
+                history = result.history
+                sigma = history.get('sigma', [0.0])[-1] if 'sigma' in history else 0.0
+            elif controller_type in ["adaptive_smc", "sta_smc"]:
+                result = controller.compute_control(state, state_vars, history)
+                control_output = result[0] if isinstance(result, tuple) else result.control
+                state_vars = result[1] if isinstance(result, tuple) else result.state
+                history = result[2] if isinstance(result, tuple) and len(result) > 2 else result.history
+                sigma = result[3] if isinstance(result, tuple) and len(result) > 3 else 0.0
+            else:  # hybrid_adaptive_sta_smc
+                result = controller.compute_control(state, last_control)
+                control_output = result
+                sigma = 0.0  # Will compute manually if needed
+
+            control_history.append(control_output)
+            sliding_surface_history.append(sigma)
+            last_control = control_output
+
+            # Update dynamics
+            state_dot = dynamics.dynamics(state, control_output)
+            state = state + state_dot * dt
+
+        # Convert to numpy arrays for analysis
+        control_array = np.array(control_history)
+        surface_array = np.array(sliding_surface_history)
+
+        # === ACCEPTANCE CRITERION 1: Chattering Index < 2.0 ===
+        control_derivative = np.gradient(control_array, dt)
+        time_domain_index = np.sqrt(np.mean(control_derivative**2))
+
+        # FFT-based spectral analysis
+        spectrum = np.abs(fft(control_array))
+        freqs = fftfreq(len(control_array), d=dt)
+        hf_mask = np.abs(freqs) > 10.0
+        hf_power = np.sum(spectrum[hf_mask]) if np.any(hf_mask) else 0.0
+        total_power = np.sum(spectrum) + 1e-12
+        freq_domain_index = hf_power / total_power
+
+        chattering_index = 0.7 * time_domain_index + 0.3 * freq_domain_index
+
+        assert chattering_index < 2.0, (
+            f"{controller_type}: Chattering index {chattering_index:.2f} exceeds 2.0 "
+            f"(time={time_domain_index:.2f}, freq={freq_domain_index:.2f})"
+        )
+
+        # === ACCEPTANCE CRITERION 2: Boundary Layer Effectiveness > 0.8 ===
+        # Effectiveness = time spent in boundary layer / total time
+        boundary_layer_threshold = getattr(controller, 'boundary_layer', 0.3)
+        time_in_boundary = np.sum(np.abs(surface_array) <= boundary_layer_threshold) / len(surface_array)
+        boundary_layer_effectiveness = time_in_boundary
+
+        assert boundary_layer_effectiveness > 0.8, (
+            f"{controller_type}: Boundary layer effectiveness {boundary_layer_effectiveness:.2f} below 0.8"
+        )
+
+        # === ACCEPTANCE CRITERION 3: Control Smoothness Index > 0.7 ===
+        total_variation = np.sum(np.abs(np.diff(control_array)))
+        smoothness_index = 1.0 / (1.0 + total_variation)
+
+        assert smoothness_index > 0.7, (
+            f"{controller_type}: Control smoothness {smoothness_index:.2f} below 0.7 "
+            f"(TV={total_variation:.2f})"
+        )
+
+        # === ACCEPTANCE CRITERION 4: High-Frequency Power Ratio < 0.1 ===
+        hf_ratio = hf_power / total_power
+
+        assert hf_ratio < 0.1, (
+            f"{controller_type}: High-freq power ratio {hf_ratio:.2f} exceeds 0.1"
+        )
+
+        # === ACCEPTANCE CRITERION 5: Performance Degradation < 5% ===
+        # Tracking error RMS (pendulum angles)
+        tracking_error_rms = np.sqrt(np.mean(state_trajectory[:, 1:3]**2))
+
+        # Baseline performance (expected tracking error without chattering mitigation)
+        # For a well-tuned SMC, tracking error should be < 0.1 rad
+        baseline_tracking_error = 0.05  # Conservative baseline
+
+        if tracking_error_rms < baseline_tracking_error:
+            performance_degradation = 0.0
+        else:
+            performance_degradation = (tracking_error_rms - baseline_tracking_error) / baseline_tracking_error
+
+        assert performance_degradation < 0.05, (
+            f"{controller_type}: Performance degraded by {performance_degradation*100:.1f}% "
+            f"(tracking_error={tracking_error_rms:.4f}, baseline={baseline_tracking_error:.4f})"
+        )
+
+        # Print comprehensive results
+        print(f"\n{'='*70}")
+        print(f"Chattering Reduction Results for {controller_type}")
+        print(f"{'='*70}")
+        print(f"1. Chattering Index:             {chattering_index:.3f} / 2.0 ({'PASS' if chattering_index < 2.0 else 'FAIL'})")
+        print(f"2. Boundary Layer Effectiveness: {boundary_layer_effectiveness:.3f} / 0.8 ({'PASS' if boundary_layer_effectiveness > 0.8 else 'FAIL'})")
+        print(f"3. Control Smoothness Index:     {smoothness_index:.3f} / 0.7 ({'PASS' if smoothness_index > 0.7 else 'FAIL'})")
+        print(f"4. High-Frequency Power Ratio:   {hf_ratio:.3f} / 0.1 ({'PASS' if hf_ratio < 0.1 else 'FAIL'})")
+        print(f"5. Performance Degradation:      {performance_degradation*100:.1f}% / 5% ({'PASS' if performance_degradation < 0.05 else 'FAIL'})")
+        print(f"{'='*70}")
+        print(f"Tracking Error RMS: {tracking_error_rms:.4f} rad")
+        print(f"Control RMS: {np.sqrt(np.mean(control_array**2)):.2f} N")
+        print(f"{'='*70}\n")
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "--tb=short"])

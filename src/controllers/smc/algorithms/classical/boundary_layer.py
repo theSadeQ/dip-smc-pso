@@ -15,7 +15,7 @@ Mathematical Background:
 - Switching function approximates sign(s) with continuous function within ±ε
 """
 
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 import numpy as np
 from ...core.switching_functions import SwitchingFunction
 
@@ -148,35 +148,52 @@ class BoundaryLayer:
         effective_epsilon = self.get_effective_thickness(surface_derivative)
         return abs(surface_value) <= effective_epsilon
 
-    def get_chattering_index(self, surface_history: Union[list, np.ndarray],
+    def get_chattering_index(self, control_history: Union[list, np.ndarray],
                            dt: float = 0.01) -> float:
         """
-        Compute chattering index from surface history.
+        Compute chattering index from control signal history using FFT-based spectral analysis.
 
-        Measures high-frequency oscillations in sliding surface.
-        Higher values indicate more chattering.
+        Measures high-frequency oscillations in the control signal.
+        Higher values indicate more chattering. Enhanced with frequency-domain
+        analysis to better capture chattering phenomena.
 
         Args:
-            surface_history: Time series of surface values
+            control_history: Time series of control signal values
             dt: Sampling time
 
         Returns:
-            Chattering index (high-frequency energy measure)
+            Chattering index (RMS of high-frequency derivative + spectral power)
         """
-        if len(surface_history) < 3:
+        if len(control_history) < 3:
             return 0.0
 
-        surface_array = np.asarray(surface_history)
+        control_array = np.asarray(control_history)
 
-        # Compute surface derivative approximation
-        surface_derivative = np.gradient(surface_array, dt)
+        # Compute control derivative approximation (Total Variation)
+        control_derivative = np.gradient(control_array, dt)
 
-        # High-frequency component (simple high-pass filter)
-        surface_mean = np.mean(surface_array)
-        high_freq_component = surface_array - surface_mean
+        # Time-domain component: RMS of derivative (measures switching rate)
+        time_domain_index = np.sqrt(np.mean(control_derivative**2))
 
-        # Chattering index as RMS of high-frequency derivative
-        chattering_index = np.sqrt(np.mean(surface_derivative**2))
+        # Frequency-domain component: FFT-based spectral analysis
+        if len(control_array) > 10:
+            # Compute FFT to identify high-frequency content
+            from scipy.fft import fft, fftfreq
+            spectrum = np.abs(fft(control_array))
+            freqs = fftfreq(len(control_array), d=dt)
+
+            # High-frequency power (above 10 Hz)
+            hf_mask = np.abs(freqs) > 10.0
+            hf_power = np.sum(spectrum[hf_mask]) if np.any(hf_mask) else 0.0
+            total_power = np.sum(spectrum)
+
+            # Normalize by total power to get high-frequency ratio
+            freq_domain_index = hf_power / (total_power + 1e-12)
+        else:
+            freq_domain_index = 0.0
+
+        # Combined chattering index (weighted sum)
+        chattering_index = 0.7 * time_domain_index + 0.3 * freq_domain_index
 
         return float(chattering_index)
 
@@ -218,17 +235,20 @@ class BoundaryLayer:
 
     def analyze_performance(self, surface_history: Union[list, np.ndarray],
                           control_history: Union[list, np.ndarray],
-                          dt: float = 0.01) -> dict:
+                          dt: float = 0.01,
+                          state_history: Optional[np.ndarray] = None) -> dict:
         """
-        Analyze boundary layer performance.
+        Analyze boundary layer performance with comprehensive metrics.
 
         Args:
             surface_history: Time series of surface values
             control_history: Time series of control values
             dt: Sampling time
+            state_history: Optional full state trajectory for tracking error analysis
 
         Returns:
-            Performance analysis dictionary
+            Performance analysis dictionary including chattering, smoothness,
+            boundary layer effectiveness, and frequency-domain metrics
         """
         surface_array = np.asarray(surface_history)
         control_array = np.asarray(control_history)
@@ -236,18 +256,46 @@ class BoundaryLayer:
         if len(surface_array) < 2 or len(control_array) < 2:
             return {'error': 'Insufficient data for analysis'}
 
+        # Chattering metrics (using control signal)
+        chattering_index = self.get_chattering_index(control_array, dt)
+
+        # Control smoothness index (Total Variation Diminishing metric)
+        total_variation = np.sum(np.abs(np.diff(control_array)))
+        smoothness_index = 1.0 / (1.0 + total_variation)
+
+        # High-frequency power ratio
+        from scipy.fft import fft, fftfreq
+        if len(control_array) > 10:
+            spectrum = np.abs(fft(control_array))
+            freqs = fftfreq(len(control_array), d=dt)
+            hf_power = np.sum(spectrum[np.abs(freqs) > 10])
+            total_power = np.sum(spectrum)
+            hf_ratio = hf_power / (total_power + 1e-12)
+        else:
+            hf_ratio = 0.0
+
+        # Boundary layer effectiveness (time spent in boundary layer)
+        time_in_boundary = float(np.mean([
+            self.is_in_boundary_layer(s) for s in surface_array
+        ]))
+
+        # Lipschitz continuity measure (control signal smoothness)
+        lipschitz_constant = np.max(np.abs(np.diff(control_array))) / dt if len(control_array) > 1 else 0.0
+
         # Compute performance metrics
         analysis = {
-            # Chattering metrics
-            'chattering_index': self.get_chattering_index(surface_array, dt),
+            # Core chattering reduction metrics
+            'chattering_index': float(chattering_index),
+            'control_smoothness_index': float(smoothness_index),
+            'high_frequency_power_ratio': float(hf_ratio),
+            'boundary_layer_effectiveness': float(time_in_boundary),
+            'lipschitz_constant': float(lipschitz_constant),
+
+            # Traditional metrics
             'surface_rms': float(np.sqrt(np.mean(surface_array**2))),
             'control_rms': float(np.sqrt(np.mean(control_array**2))),
-
-            # Boundary layer metrics
-            'time_in_boundary': float(np.mean([
-                self.is_in_boundary_layer(s) for s in surface_array
-            ])),
-            'avg_effective_thickness': self.base_thickness,  # Simplified
+            'time_in_boundary': time_in_boundary,
+            'avg_effective_thickness': self.base_thickness,
 
             # Performance indicators
             'steady_state_error': float(np.mean(np.abs(surface_array[-10:]))),
@@ -265,6 +313,12 @@ class BoundaryLayer:
                 'max_effective_thickness': float(np.max(effective_thicknesses)),
                 'avg_effective_thickness': float(np.mean(effective_thicknesses))
             })
+
+        # Tracking error analysis (if state provided)
+        if state_history is not None and len(state_history) > 0:
+            # Assuming state is [x, th1, th2, xdot, th1dot, th2dot]
+            tracking_error = np.sqrt(np.mean(state_history[:, 1:3]**2, axis=1))  # RMS of pendulum angles
+            analysis['tracking_error_rms'] = float(np.mean(tracking_error))
 
         return analysis
 
