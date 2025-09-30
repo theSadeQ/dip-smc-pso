@@ -1,0 +1,29 @@
+{
+  "controller_type": "classical_smc",
+  "gains": [
+    77.62164880704037,
+    44.448965535453176,
+    17.313360478316266,
+    14.249992552127914,
+    18.655715443709184,
+    9.758661281203883
+  ],
+  "validation_metrics": {
+    "chattering_index": 342.2545184957476,
+    "time_domain_index": 488.8196377219287,
+    "freq_domain_index": 0.2692403013251382,
+    "tracking_error_rms": 0.5435868702294125,
+    "control_effort_rms": 34.2409508114568,
+    "boundary_layer_effectiveness": 0.947,
+    "control_smoothness": 0.003974938880330342,
+    "hf_power_ratio": 0.2692403013251382,
+    "performance_degradation": 9.87173740458825
+  },
+  "acceptance_criteria": {
+    "chattering_index": false,
+    "boundary_layer_effectiveness": true,
+    "control_smoothness": false,
+    "hf_power_ratio": false,
+    "performance_degradation": false
+  }
+}
