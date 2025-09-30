@@ -23,7 +23,7 @@ from .data_types import (
     MessageHeader, MessageMetadata
 )
 from .factory import SerializerFactory, create_serializer
-from .performance import PerformanceSerializer, SerializationMetrics
+
 from .streaming import StreamingSerializer, DataStream, StreamConfig
 
 __all__ = [

@@ -2,6 +2,8 @@
 #===================== src/interfaces/hardware/serial_devices.py ======================\\\
 #======================================================================================\\\
 
+from __future__ import annotations
+
 """
 Serial communication device interfaces for control systems.
 This module provides standardized interfaces for serial communication

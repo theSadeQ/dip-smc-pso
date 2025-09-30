@@ -34,10 +34,10 @@ from .data_exchange import (
     JSONSerializer, MessagePackSerializer, PickleSerializer,
     BinarySerializer, CompressionSerializer,
     # Data types and schemas
-    DataPacket, MessagePacket, SensorPacket, ControlPacket,
+    DataPacket,
     DataSchema, SchemaValidator, ValidationError,
     # Factory and performance
-    SerializerFactory, PerformanceProfiler, StreamingSerializer
+    SerializerFactory, StreamingSerializer
 )
 
 # Monitoring and Diagnostics - Complete system
@@ -46,40 +46,41 @@ from .monitoring import (
     HealthStatus, HealthCheck, ComponentHealth,
     HealthMonitor, SystemHealthMonitor,
     # Metrics collection
-    MetricType, MetricValue, MetricsCollector,
-    PerformanceMetrics, SystemMetrics,
+    MetricType, Metric, MetricsCollector,
+    PerformanceMonitor, SystemMetricsCollector,
     # Diagnostics and alerting
-    DiagnosticEngine, DiagnosticResult, SystemDiagnostics,
+    DiagnosticEngine, DiagnosticResult,
     AlertManager, Alert, AlertRule, AlertLevel,
-    NotificationHandler, EmailNotificationHandler,
+    EmailNotificationHandler, LogNotificationHandler,
     # Dashboard
-    DashboardServer, MetricsSeries, ChartConfig
+    DashboardServer, MetricSeries, ChartConfig
 )
 
 # Hardware Abstraction - Basic hardware interfaces
 from .hardware import (
     # Device management
-    DeviceInterface, DeviceStatus, DeviceType,
-    HardwareManager, DeviceRegistry,
+    DeviceDriver, DeviceStatus, BaseDevice,
+    DeviceManager, HardwareInterfaceFactory,
     # Drivers and interfaces
-    SerialDevice, DAQSystem, SensorInterface,
-    ActuatorInterface, DeviceDriver
+    SerialDevice, DAQInterface, SensorInterface,
+    ActuatorInterface, AnalogSensor, DigitalSensor
 )
 
 # Network Interfaces - Basic networking
 from .network import (
     # Core interfaces
-    NetworkInterface, ConnectionStatus,
     TCPInterface, UDPInterface, WebSocketInterface,
+    HTTPInterface, NetworkInterfaceFactory,
     # Message handling
-    MessageQueue, NetworkMessage,
-    # Factory
-    NetworkFactory
+    MessageQueueInterface, ZeroMQInterface, RabbitMQInterface,
+    # Servers and clients
+    TCPServer, UDPServer, WebSocketServer
 )
 
 # Core interfaces and protocols
 from .core import (
-    DataTypes, ProtocolInterface, CommunicationProtocol
+    CommunicationProtocol, MessageProtocol, ConnectionProtocol,
+    InterfaceType, Message, ConnectionInfo, InterfaceConfig
 )
 
 __version__ = "1.0.0"
@@ -98,34 +99,35 @@ __all__ = [
     'SerializationFormat', 'SerializerInterface', 'SerializationError',
     'JSONSerializer', 'MessagePackSerializer', 'PickleSerializer',
     'BinarySerializer', 'CompressionSerializer',
-    'DataPacket', 'MessagePacket', 'SensorPacket', 'ControlPacket',
+    'DataPacket',
     'DataSchema', 'SchemaValidator', 'ValidationError',
-    'SerializerFactory', 'PerformanceProfiler', 'StreamingSerializer',
+    'SerializerFactory', 'StreamingSerializer',
 
     # Monitoring and Diagnostics
     'HealthStatus', 'HealthCheck', 'ComponentHealth',
     'HealthMonitor', 'SystemHealthMonitor',
-    'MetricType', 'MetricValue', 'MetricsCollector',
-    'PerformanceMetrics', 'SystemMetrics',
-    'DiagnosticEngine', 'DiagnosticResult', 'SystemDiagnostics',
+    'MetricType', 'Metric', 'MetricsCollector',
+    'PerformanceMonitor', 'SystemMetricsCollector',
+    'DiagnosticEngine', 'DiagnosticResult', 'TroubleshootingAssistant',
     'AlertManager', 'Alert', 'AlertRule', 'AlertLevel',
-    'NotificationHandler', 'EmailNotificationHandler',
-    'DashboardServer', 'MetricsSeries', 'ChartConfig',
+    'EmailNotificationHandler', 'LogNotificationHandler',
+    'DashboardServer', 'MetricSeries', 'ChartConfig',
 
     # Hardware Abstraction
-    'DeviceInterface', 'DeviceStatus', 'DeviceType',
-    'HardwareManager', 'DeviceRegistry',
-    'SerialDevice', 'DAQSystem', 'SensorInterface',
-    'ActuatorInterface', 'DeviceDriver',
+    'DeviceDriver', 'DeviceStatus', 'BaseDevice',
+    'DeviceManager', 'HardwareInterfaceFactory',
+    'SerialDevice', 'DAQInterface', 'SensorInterface',
+    'ActuatorInterface', 'AnalogSensor', 'DigitalSensor',
 
     # Network Interfaces
-    'NetworkInterface', 'ConnectionStatus',
     'TCPInterface', 'UDPInterface', 'WebSocketInterface',
-    'MessageQueue', 'NetworkMessage',
-    'NetworkFactory',
+    'HTTPInterface', 'NetworkInterfaceFactory',
+    'MessageQueueInterface', 'ZeroMQInterface', 'RabbitMQInterface',
+    'TCPServer', 'UDPServer', 'WebSocketServer',
 
     # Core interfaces
-    'DataTypes', 'ProtocolInterface', 'CommunicationProtocol',
+    'CommunicationProtocol', 'MessageProtocol', 'ConnectionProtocol',
+    'InterfaceType', 'Message', 'ConnectionInfo', 'InterfaceConfig',
 ]
 
 

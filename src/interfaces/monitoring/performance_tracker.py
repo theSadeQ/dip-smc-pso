@@ -18,8 +18,8 @@ import logging
 import statistics
 from collections import deque, defaultdict
 
-from .serializers import SerializerInterface, SerializationFormat
-from .data_types import SerializableData
+from src.interfaces.data_exchange.serializers import SerializerInterface, SerializationFormat
+from src.interfaces.data_exchange.data_types import SerializableData
 
 
 class MetricType(Enum):

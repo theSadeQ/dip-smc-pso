@@ -111,20 +111,20 @@ bibtex_default_style = 'unsrt'  # Basic unsorted style for compatibility
 # Auto-section labeling for stable cross-references
 autosectionlabel_prefix_document = True
 
-# Autodoc configuration (temporarily disabled)
-# autodoc_default_options = {
-#     'members': True,
-#     'member-order': 'bysource',
-#     'special-members': '__init__',
-#     'undoc-members': True,
-#     'exclude-members': '__weakref__'
-# }
-# autodoc_typehints = 'description'
-# autodoc_typehints_description_target = 'documented'
+# Autodoc configuration - generates API docs from source code
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'undoc-members': True,
+    'exclude-members': '__weakref__'
+}
+autodoc_typehints = 'description'
+autodoc_typehints_description_target = 'documented'
 
-# Autosummary configuration (temporarily disabled)
-# autosummary_generate = True
-# autosummary_imported_members = True
+# Autosummary configuration - generates summary tables
+autosummary_generate = True
+autosummary_imported_members = True
 
 # Intersphinx mapping for external documentation
 intersphinx_mapping = {
