@@ -1,0 +1,45 @@
+{
+  "campaign_config": {
+    "n_particles": 3,
+    "iters": 2,
+    "seed": 42,
+    "controllers_optimized": [
+      "classical_smc"
+    ]
+  },
+  "results": [
+    {
+      "controller_type": "classical_smc",
+      "best_gains": [
+        31.156763148163698,
+        10.669539286632004,
+        14.00042750373098,
+        9.362897381052425,
+        22.69554405249293,
+        5.002251410101574
+      ],
+      "best_cost": 1000000.0,
+      "cost_history": [
+        1000000.0,
+        1000000.0
+      ],
+      "validation_metrics": {
+        "fitness": 1000000.0,
+        "tracking_error_rms": 1000000.0,
+        "chattering_index": 1000000.0,
+        "control_effort_rms": 1000000.0,
+        "smoothness_index": 0.0,
+        "time_domain_index": 1000000.0,
+        "freq_domain_index": 1.0
+      },
+      "acceptance_criteria": {
+        "chattering_index": false,
+        "tracking_error": false,
+        "control_smoothness": false,
+        "hf_power_ratio": false
+      },
+      "criteria_passed": 0,
+      "optimization_time_seconds": 5.067723512649536
+    }
+  ]
+}

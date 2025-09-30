@@ -386,7 +386,69 @@ find . -name "__pycache__" | wc -l            # target = 0
 find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 ```
 
-### 10.6 After Moving/Consolidation — Update References
+### 10.6 Session Artifact Management (MANDATORY)
+
+**Rules for EVERY session to maintain clean root directory:**
+
+#### File Placement Rules
+
+1. **Logs** → `logs/` directory
+   - Format: `{script}_{timestamp}.log`
+   - Examples: `pso_classical_20250930.log`, `pytest_run_20250930.log`
+   - NEVER leave `.log` files in root
+
+2. **Test Artifacts** → `.test_artifacts/` (auto-cleanup)
+   - Use for temporary test runs
+   - Examples: `.test_artifacts/pso_test_run/`, `.test_artifacts/validation_debug/`
+   - Clean up before session ends
+
+3. **Optimization Results** → Structured directories with timestamps
+   - Use: `optimization_results/{controller}_{date}/`
+   - Examples: `optimization_results/classical_smc_20250930/`
+   - Include metadata JSON files
+
+4. **Documentation** → `docs/` or `.archive/`
+   - NEVER create `.md` files in root except README.md, CHANGELOG.md, CLAUDE.md
+   - Analysis reports → `docs/analysis/`
+   - Historical docs → `.archive/docs_{date}/`
+
+5. **Scripts** → `scripts/` with subdirectories
+   - Optimization scripts → `scripts/optimization/`
+   - Analysis scripts → `scripts/analysis/`
+   - Utility scripts → `scripts/utils/`
+
+#### Before Session Ends Checklist
+
+- [ ] Move all logs to `logs/` directory
+- [ ] Delete or archive test artifacts
+- [ ] Organize optimization results into timestamped directories
+- [ ] Move any root-level scripts to appropriate `scripts/` subdirectory
+- [ ] Archive temporary documentation files
+- [ ] Verify root item count: `ls | wc -l` (target: ≤12 visible)
+- [ ] Clean caches: `find . -name "__pycache__" -type d -exec rm -rf {} +`
+
+#### File Naming Conventions
+
+- Logs: `{purpose}_{YYYYMMDD}_HHMMSS.log`
+- Optimization dirs: `optimization_results/{controller}_{YYYYMMDD}/`
+- Test artifacts: `.test_artifacts/{purpose}_{iteration}/`
+- Archived docs: `.archive/{category}_{YYYYMMDD}/`
+
+#### Acceptable Root Items (≤12 visible)
+
+**Core Files (6):**
+- `simulate.py`, `streamlit_app.py`, `config.yaml`
+- `requirements.txt`, `README.md`, `CHANGELOG.md`
+
+**Core Dirs (6):**
+- `src/`, `tests/`, `docs/`, `notebooks/`, `benchmarks/`, `scripts/`
+
+**Total:** 12 items (target achieved)
+
+**Hidden Dirs (acceptable):**
+- `.archive/`, `.test_artifacts/`, `.dev_tools/`, `.build/`, `.cache/`
+
+### 10.7 After Moving/Consolidation — Update References
 
 1. Search & replace hardcoded paths.
 2. Update README and diagrams.
