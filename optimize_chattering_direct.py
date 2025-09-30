@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 
 def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
-                         dynamics, dt: float = 0.01, t_final: float = 10.0) -> Dict[str, float]:
+                         dynamics, dt: float = 0.01, t_final: float = 15.0) -> Dict[str, float]:
     """
     Simulate controller and compute comprehensive metrics.
 
@@ -45,7 +45,7 @@ def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
     - smoothness_index: Control smoothness (1 / (1 + TV))
     - fitness: Overall fitness value for PSO
     """
-    initial_state = np.array([0.0, 0.1, 0.1, 0.0, 0.0, 0.0])
+    initial_state = np.array([0.0, 0.02, 0.02, 0.0, 0.0, 0.0])
     n_steps = int(t_final / dt)
 
     # Create controller with candidate gains
@@ -131,6 +131,10 @@ def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
 
         # Update dynamics
         control_array = np.array([control_output])
+
+        # Sanitize state before dynamics computation to handle boundary violations gracefully
+        state = dynamics.sanitize_state(state)
+
         dynamics_result = dynamics.compute_dynamics(state, control_array)
 
         if dynamics_result.success:

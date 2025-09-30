@@ -138,22 +138,27 @@ pso:
   iters: 50                # Adequate convergence budget for 6D parameter space
   bounds:
     # Default bounds (used for classical_smc and sta_smc - 6 parameters)
-    min: [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
-    max: [100.0, 100.0, 20.0, 20.0, 150.0, 10.0]
+    # Narrowed from wide ranges to more conservative values around fallback gains [5,5,5,0.5,0.5,0.5]
+    # to reduce unstable gain combinations during PSO exploration (Issue #12 fix)
+    min: [2.0, 2.0, 2.0, 0.2, 2.0, 0.05]
+    max: [30.0, 30.0, 10.0, 5.0, 50.0, 3.0]
     # Controller-specific bounds for different types
     classical_smc:
-      min: [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
-      max: [100.0, 100.0, 20.0, 20.0, 150.0, 10.0]
+      min: [2.0, 2.0, 2.0, 0.2, 2.0, 0.05]
+      max: [30.0, 30.0, 10.0, 5.0, 50.0, 3.0]
     sta_smc:
-      # K1 > K2 constraint: K1 in [2.0, 100.0], K2 in [1.0, 99.0] ensures K1 > K2
-      min: [2.0, 1.0, 1.0, 1.0, 5.0, 0.1]
-      max: [100.0, 99.0, 20.0, 20.0, 150.0, 10.0]
+      # K1 > K2 constraint: K1 in [2.0, 30.0], K2 in [1.0, 29.0] ensures K1 > K2
+      # Narrowed bounds for stability (Issue #12 fix)
+      min: [2.0, 1.0, 2.0, 0.2, 2.0, 0.05]
+      max: [30.0, 29.0, 10.0, 5.0, 50.0, 3.0]
     adaptive_smc:
-      min: [1.0, 1.0, 1.0, 1.0, 0.1]
-      max: [100.0, 100.0, 20.0, 20.0, 10.0]
+      # Narrowed bounds for stability (Issue #12 fix)
+      min: [2.0, 2.0, 2.0, 0.2, 0.05]
+      max: [30.0, 30.0, 10.0, 5.0, 3.0]
     hybrid_adaptive_sta_smc:
-      min: [1.0, 1.0, 1.0, 1.0]
-      max: [100.0, 100.0, 20.0, 20.0]
+      # Narrowed bounds for stability (Issue #12 fix)
+      min: [2.0, 2.0, 2.0, 0.2]
+      max: [30.0, 30.0, 10.0, 5.0]
   # Set inertia weight within [0.4,0.9] and balance cognitive/social
   # acceleration coefficients.  A balanced choice c1≈c2≈2.0 encourages
   # exploration without divergence【360839346985391†L94-L100】.
