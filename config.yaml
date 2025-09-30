@@ -134,7 +134,8 @@ pso:
   # optimisation problems【360839346985391†L34-L39】.  Using a smaller swarm reduces
   # computational cost and improves reproducibility.  Increase only if the
   # cost landscape is highly multimodal.
-  n_particles: 20
+  n_particles: 30          # Increased from 20 for better exploration (fixes cost=0.0 issue)
+  iters: 50                # Adequate convergence budget for 6D parameter space
   bounds:
     # Default bounds (used for classical_smc and sta_smc - 6 parameters)
     min: [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
@@ -291,18 +292,23 @@ verification:
     steady_error: 0.01
 cost_function:
   weights:
-    state_error: 50.0
-    control_effort: 0.2
-    control_rate: 0.1
+    state_error: 1.0       # Reduced from 50.0 to fix cost=0.0 issue
+    control_effort: 0.1    # Balanced weights for proper multi-objective optimization
+    control_rate: 0.01
     stability: 0.1
-  baseline:
-    gains:
-    - 50
-    - 100
-    - 10
-    - 8
-    - 5
-    - 4
+  # baseline:                # REMOVED: Caused excessive normalization → cost=0.0
+  #   gains:                 # Root cause documented in docs/testing/reports/2025-09-30/pso_fitness_investigation.md
+  #   - 50
+  #   - 100
+  #   - 10
+  #   - 8
+  #   - 5
+  #   - 4
+  norms:                     # Explicit normalization constants for proper cost scaling
+    state_error: 10.0        # Typical ISE for unstable system over 5s horizon
+    control_effort: 100.0    # Approximates u_max^2 * duration for saturated control
+    control_rate: 1000.0     # Typical control slew rate squared
+    sliding: 1.0             # Typical sliding variable magnitude
   instability_penalty: 1000.0
   # Combine mean and max costs using configurable weights.  The PSO tuner
   # aggregates per‑particle costs as ``combine_weights.mean * mean(costs) +

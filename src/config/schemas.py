@@ -345,7 +345,8 @@ class CombineWeights(StrictModel):
 
 class CostFunctionConfig(StrictModel):
     weights: CostFunctionWeights
-    baseline: Dict[str, Any]
+    baseline: Optional[Dict[str, Any]] = None  # Optional: legacy baseline normalization
+    norms: Optional[Dict[str, float]] = None   # Optional: explicit normalization constants
     instability_penalty: float = Field(1000.0, ge=0.0)
     combine_weights: CombineWeights = CombineWeights()
     normalization_threshold: float = Field(1e-12, ge=0.0)
