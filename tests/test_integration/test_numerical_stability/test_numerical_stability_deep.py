@@ -751,32 +751,18 @@ class TestChatteringReductionEffectiveness:
         config = load_config("config.yaml", allow_unknown=False)
 
         # Create dynamics model using physics config
+        # SimplifiedDIPDynamics accepts the PhysicsConfig object directly
         physics_config = config.physics
-        dynamics = DoubleInvertedPendulum(
-            cart_mass=physics_config.cart_mass,
-            pendulum1_mass=physics_config.pendulum1_mass,
-            pendulum2_mass=physics_config.pendulum2_mass,
-            pendulum1_length=physics_config.pendulum1_length,
-            pendulum2_length=physics_config.pendulum2_length,
-            pendulum1_com=physics_config.pendulum1_com,
-            pendulum2_com=physics_config.pendulum2_com,
-            pendulum1_inertia=physics_config.pendulum1_inertia,
-            pendulum2_inertia=physics_config.pendulum2_inertia,
-            gravity=physics_config.gravity,
-            cart_friction=physics_config.cart_friction,
-            joint1_friction=physics_config.joint1_friction,
-            joint2_friction=physics_config.joint2_friction
-        )
+        dynamics = DoubleInvertedPendulum(config=physics_config)
 
         # Create controller with optimized boundary layer settings
-        controller_config = config.controllers.get(controller_type)
+        controller_config = getattr(config.controllers, controller_type, None)
         if controller_config is None:
             pytest.skip(f"Controller {controller_type} not configured")
 
         controller = create_controller(
             controller_type=controller_type,
-            config=controller_config,
-            dynamics_model=dynamics
+            config=controller_config
         )
 
         # Simulation parameters
@@ -787,9 +773,16 @@ class TestChatteringReductionEffectiveness:
         # Initial condition (small perturbation)
         state = np.array([0.0, 0.1, 0.1, 0.0, 0.0, 0.0])
 
-        # Initialize controller state
-        state_vars = controller.initialize_state()
-        history = controller.initialize_history()
+        # Initialize controller state (handle different controller interfaces)
+        if hasattr(controller, 'initialize_state'):
+            state_vars = controller.initialize_state()
+        else:
+            state_vars = ()
+
+        if hasattr(controller, 'initialize_history'):
+            history = controller.initialize_history()
+        else:
+            history = {}
 
         # Storage for analysis
         control_history = []
@@ -801,31 +794,51 @@ class TestChatteringReductionEffectiveness:
         for i in range(n_steps):
             state_trajectory[i] = state
 
-            # Compute control
-            if controller_type == "classical_smc":
-                result = controller.compute_control(state, state_vars, history)
+            # Compute control - unified handling for all controller types
+            result = controller.compute_control(state, state_vars, history) if controller_type != "hybrid_adaptive_sta_smc" \
+                     else controller.compute_control(state, last_control)
+
+            # Extract control value (handle different output structures)
+            if hasattr(result, 'u'):  # ClassicalSMCOutput, STASMCOutput
+                control_output = result.u
+                state_vars = getattr(result, 'state', state_vars)
+                history = getattr(result, 'history', history)
+            elif hasattr(result, 'control'):  # Generic output
                 control_output = result.control
-                state_vars = result.state
-                history = result.history
-                sigma = history.get('sigma', [0.0])[-1] if 'sigma' in history else 0.0
-            elif controller_type in ["adaptive_smc", "sta_smc"]:
-                result = controller.compute_control(state, state_vars, history)
-                control_output = result[0] if isinstance(result, tuple) else result.control
-                state_vars = result[1] if isinstance(result, tuple) else result.state
-                history = result[2] if isinstance(result, tuple) and len(result) > 2 else result.history
-                sigma = result[3] if isinstance(result, tuple) and len(result) > 3 else 0.0
-            else:  # hybrid_adaptive_sta_smc
-                result = controller.compute_control(state, last_control)
-                control_output = result
-                sigma = 0.0  # Will compute manually if needed
+                state_vars = getattr(result, 'state', state_vars)
+                history = getattr(result, 'history', history)
+            elif isinstance(result, (int, float, np.floating, np.integer)):  # Direct scalar
+                control_output = float(result)
+            elif isinstance(result, tuple):  # Tuple output (some controllers)
+                control_output = float(result[0])
+                if len(result) > 1:
+                    state_vars = result[1]
+                if len(result) > 2:
+                    history = result[2]
+            else:
+                control_output = float(result)
+
+            # Extract sliding surface value for metrics
+            if isinstance(history, dict) and 'sigma' in history:
+                sigma_list = history['sigma']
+                sigma = sigma_list[-1] if isinstance(sigma_list, list) and len(sigma_list) > 0 else 0.0
+            else:
+                sigma = 0.0
 
             control_history.append(control_output)
             sliding_surface_history.append(sigma)
             last_control = control_output
 
-            # Update dynamics
-            state_dot = dynamics.dynamics(state, control_output)
-            state = state + state_dot * dt
+            # Update dynamics (control_input must be numpy array)
+            control_array = np.array([control_output]) if isinstance(control_output, (int, float)) else control_output
+            dynamics_result = dynamics.compute_dynamics(state, control_array)
+            if dynamics_result.success:
+                state_dot = dynamics_result.state_derivative
+                state = state + state_dot * dt
+            else:
+                # If dynamics computation fails, stop simulation
+                print(f"Dynamics computation failed at step {i}: {dynamics_result.info}")
+                break
 
         # Convert to numpy arrays for analysis
         control_array = np.array(control_history)
