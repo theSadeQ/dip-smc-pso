@@ -218,10 +218,17 @@ class PSOTuner:
         # Normalisation constants for state error, control effort, control rate and sliding variable
         norms = getattr(self.cost_cfg, "norms", None)
         if norms is not None:
-            self.norm_ise = float(getattr(norms, "state_error", 1.0))
-            self.norm_u = float(getattr(norms, "control_effort", 1.0))
-            self.norm_du = float(getattr(norms, "control_rate", 1.0))
-            self.norm_sigma = float(getattr(norms, "sliding", 1.0))
+            # Handle both dict (from YAML) and object (from Pydantic) forms
+            if isinstance(norms, dict):
+                self.norm_ise = float(norms.get("state_error", 1.0))
+                self.norm_u = float(norms.get("control_effort", 1.0))
+                self.norm_du = float(norms.get("control_rate", 1.0))
+                self.norm_sigma = float(norms.get("sliding", 1.0))
+            else:
+                self.norm_ise = float(getattr(norms, "state_error", 1.0))
+                self.norm_u = float(getattr(norms, "control_effort", 1.0))
+                self.norm_du = float(getattr(norms, "control_rate", 1.0))
+                self.norm_sigma = float(getattr(norms, "sliding", 1.0))
         else:
             self.norm_ise = self.norm_u = self.norm_du = self.norm_sigma = 1.0
 
@@ -427,6 +434,31 @@ class PSOTuner:
         sigma_b_trunc = sigma_b[:, :N] if sigma_b.shape[1] > N else sigma_b  # Ensure shape compatibility
         sigma_sq = np.sum((sigma_b_trunc ** 2 * dt_b) * time_mask, axis=1)  # [CIT-068]
         sigma_n = self._normalise(sigma_sq, self.norm_sigma)
+
+        # Diagnostic logging for PSO cost components
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug("=" * 80)
+            logger.debug("PSO Cost Component Analysis (Batch Statistics)")
+            logger.debug("=" * 80)
+            logger.debug(f"Batch size: {len(ise)}")
+            logger.debug(f"\nRaw Cost Components:")
+            logger.debug(f"  ISE        : mean={np.mean(ise):.4e}, std={np.std(ise):.4e}, min={np.min(ise):.4e}, max={np.max(ise):.4e}")
+            logger.debug(f"  U²         : mean={np.mean(u_sq):.4e}, std={np.std(u_sq):.4e}, min={np.min(u_sq):.4e}, max={np.max(u_sq):.4e}")
+            logger.debug(f"  (ΔU)²      : mean={np.mean(du_sq):.4e}, std={np.std(du_sq):.4e}, min={np.min(du_sq):.4e}, max={np.max(du_sq):.4e}")
+            logger.debug(f"  σ²         : mean={np.mean(sigma_sq):.4e}, std={np.std(sigma_sq):.4e}, min={np.min(sigma_sq):.4e}, max={np.max(sigma_sq):.4e}")
+            logger.debug(f"\nNormalized Costs:")
+            logger.debug(f"  ISE_norm   : mean={np.mean(ise_n):.4e}, std={np.std(ise_n):.4e}, min={np.min(ise_n):.4e}, max={np.max(ise_n):.4e}")
+            logger.debug(f"  U_norm     : mean={np.mean(u_n):.4e}, std={np.std(u_n):.4e}, min={np.min(u_n):.4e}, max={np.max(u_n):.4e}")
+            logger.debug(f"  DU_norm    : mean={np.mean(du_n):.4e}, std={np.std(du_n):.4e}, min={np.min(du_n):.4e}, max={np.max(du_n):.4e}")
+            logger.debug(f"  σ_norm     : mean={np.mean(sigma_n):.4e}, std={np.std(sigma_n):.4e}, min={np.min(sigma_n):.4e}, max={np.max(sigma_n):.4e}")
+            logger.debug(f"\nWeighted Cost Contributions:")
+            logger.debug(f"  w_state × ISE_n : mean={np.mean(self.weights.state_error * ise_n):.4e}")
+            logger.debug(f"  w_ctrl  × U_n   : mean={np.mean(self.weights.control_effort * u_n):.4e}")
+            logger.debug(f"  w_rate  × DU_n  : mean={np.mean(self.weights.control_rate * du_n):.4e}")
+            logger.debug(f"  w_stab  × σ_n   : mean={np.mean(self.weights.stability * sigma_n):.4e}")
+            logger.debug(f"\nNormalization Constants:")
+            logger.debug(f"  norm_ise={self.norm_ise:.4e}, norm_u={self.norm_u:.4e}, norm_du={self.norm_du:.4e}, norm_sigma={self.norm_sigma:.4e}")
+
         # Graded penalty for early failure
         failure_t = np.clip((failure_steps - 1) * dt_const, 0, self.sim_cfg.duration)
         penalty = self.weights.stability * ((self.sim_cfg.duration - failure_t) / self.sim_cfg.duration) * self.instability_penalty
