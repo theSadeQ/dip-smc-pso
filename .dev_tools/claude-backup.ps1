@@ -291,6 +291,12 @@ function Test-TokenThreshold {
 try {
     Write-Log "=== Claude Code Auto-Backup Script ===" -Level Info
 
+    # Ensure we're in the correct working directory (fixes Task Scheduler issue)
+    if (Test-Path $DEFAULT_REPO_ROOT) {
+        Set-Location $DEFAULT_REPO_ROOT
+        Write-Log "Working directory set to: $DEFAULT_REPO_ROOT" -Level Info
+    }
+
     # Determine repository root
     $repoRoot = Get-RepoRoot
     Write-Log "Repository root: $repoRoot" -Level Info
