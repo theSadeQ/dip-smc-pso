@@ -1,32 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(gh issue view:*)",
-      "Read(//d/**)",
-      "Bash(python:*)",
-      "Bash(python -m pytest tests/ --cov=src/controllers --cov-report=json:controller_coverage_report.json --tb=short -q)",
-      "Bash(pytest:*)",
-      "Bash(grep:*)",
-      "Bash(find:*)",
-      "Bash(dir:*)",
-      "Bash(ls:*)",
-      "Bash(tree:*)",
-      "Bash(git rev-parse HEAD)",
-      "Bash(git rev-parse origin/main)",
-      "Bash(gh issue:*)",
-      "Bash(git -C D:Projectsmain remote -v)",
-      "Bash(git log:*)",
-      "WebFetch(domain:github.com)",
-      "Bash(Get-ChildItem -Path \"D:\\Projects\\main\\src\\utils\" -Directory -Name)",
-      "Bash(Select-String -Pattern \"warning|PytestUnknownMarkWarning\")",
-      "Bash(Select-Object -First 20)",
-      "Bash(Get-Content pytest.ini -ErrorAction SilentlyContinue)",
-      "Bash(Get-Content \"D:\\Projects\\main\\.pytest.ini\" -ErrorAction SilentlyContinue)",
-      "Bash(Select-String -Path \"D:\\Projects\\main\\tests\\conftest.py\" -Pattern \"pytest_configure|filterwarnings|warning\" -Context 2,2)",
-      "Bash(Select-String -Pattern \"warning|Warning|PytestUnknownMarkWarning\")"
+      "Bash(Select-Object -First 10 Name, LastWriteTime)"
     ],
     "additionalDirectories": [
       "D:\\Projects"
-    ]
+    ],
+    "deny": [],
+    "ask": []
   }
 }
