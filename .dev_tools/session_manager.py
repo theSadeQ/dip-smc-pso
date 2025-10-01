@@ -114,6 +114,10 @@ def has_recent_session(threshold_hours: int = AUTO_LOAD_THRESHOLD_HOURS) -> bool
         ... else:
         ...     print("Starting fresh session...")
     """
+    # If auto-save is disabled, don't auto-load sessions
+    if not SESSION_AUTO_SAVE_ENABLED:
+        return False
+
     state = load_session()
     if not state:
         return False
