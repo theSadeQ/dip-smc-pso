@@ -34,7 +34,7 @@ class EquivalentControl:
 
     def __init__(self,
                  dynamics_model: Optional[Any] = None,
-                 regularization: float = 1e-6,
+                 regularization: float = 1e-10,
                  regularization_alpha: float = 1e-4,
                  min_regularization: float = 1e-10,
                  max_condition_number: float = 1e14,
