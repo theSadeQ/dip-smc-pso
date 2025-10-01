@@ -38,8 +38,11 @@ class ClassicalSMCConfig:
     # Switching function
     switch_method: Literal["tanh", "linear", "sign"] = field(default="tanh")
 
-    # Numerical parameters
-    regularization: float = field(default=1e-10)           # Matrix regularization
+    # Numerical stability parameters (standardized with AdaptiveRegularizer)
+    regularization_alpha: float = field(default=1e-4)      # Base regularization scaling factor
+    min_regularization: float = field(default=1e-10)       # Minimum regularization
+    max_condition_number: float = field(default=1e14)      # Maximum acceptable condition number
+    use_adaptive_regularization: bool = field(default=True) # Use adaptive vs fixed regularization
     controllability_threshold: Optional[float] = field(default=None)  # Equivalent control threshold
 
     # Optional dynamics model
@@ -96,7 +99,9 @@ class ClassicalSMCConfig:
             'dt': self.dt,
             'boundary_layer': self.boundary_layer,
             'boundary_layer_slope': self.boundary_layer_slope,
-            'regularization': self.regularization
+            'regularization_alpha': self.regularization_alpha,
+            'min_regularization': self.min_regularization,
+            'max_condition_number': self.max_condition_number
         }
 
         for name, value in params_to_check.items():
@@ -119,8 +124,13 @@ class ClassicalSMCConfig:
         if self.boundary_layer_slope < 0:
             raise ValueError("boundary_layer_slope must be non-negative")
 
-        if self.regularization <= 0:
-            raise ValueError("regularization must be positive")
+        # Validate regularization parameters
+        if self.regularization_alpha <= 0:
+            raise ValueError("regularization_alpha must be positive")
+        if self.min_regularization <= 0:
+            raise ValueError("min_regularization must be positive")
+        if self.max_condition_number <= 0:
+            raise ValueError("max_condition_number must be positive")
 
         if self.controllability_threshold is not None:
             if not np.isfinite(self.controllability_threshold):
@@ -178,7 +188,10 @@ class ClassicalSMCConfig:
             'boundary_layer': self.boundary_layer,
             'boundary_layer_slope': self.boundary_layer_slope,
             'switch_method': self.switch_method,
-            'regularization': self.regularization,
+            'regularization_alpha': self.regularization_alpha,
+            'min_regularization': self.min_regularization,
+            'max_condition_number': self.max_condition_number,
+            'use_adaptive_regularization': self.use_adaptive_regularization,
             'controllability_threshold': self.controllability_threshold
         }
 

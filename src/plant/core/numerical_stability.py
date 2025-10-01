@@ -125,7 +125,19 @@ class AdaptiveRegularizer:
         return regularized
 
     def _apply_adaptive_regularization(self, matrix: np.ndarray) -> np.ndarray:
-        """Apply adaptive regularization based on matrix conditioning."""
+        """
+        Apply adaptive regularization based on matrix conditioning.
+
+        Enhanced for Issue #14: Handles extreme singular value ratios (1e-8 to 2e-9)
+        with automatic triggers for condition numbers > 1e12.
+
+        Mathematical Strategy:
+        - Compute SVD to extract singular values
+        - Detect extreme ill-conditioning via singular value ratio
+        - Scale regularization aggressively for ratios < 1e-8
+        - Automatic triggering when cond(M) > 1e12
+        - Maintain accuracy for well-conditioned matrices
+        """
         try:
             # Compute singular value decomposition
             U, s, Vt = np.linalg.svd(matrix)
@@ -134,31 +146,73 @@ class AdaptiveRegularizer:
             if not np.all(np.isfinite(s)) or s.size == 0:
                 raise NumericalInstabilityError("Invalid singular values in matrix")
 
-            # Compute condition number
+            # Compute condition number and singular value ratio
             if s[-1] <= 0:
                 cond_num = np.inf
+                sv_ratio = 0.0
             else:
                 cond_num = s[0] / s[-1]
+                sv_ratio = s[-1] / s[0]
 
-            # Determine adaptive regularization
-            if cond_num > self.max_cond:
-                # Increase regularization for poor conditioning
+            # === ENHANCED ADAPTIVE REGULARIZATION (Issue #14) ===
+
+            # Automatic trigger for extreme ill-conditioning
+            if cond_num > self.max_cond or sv_ratio < 1e-8:
+                # Extreme ill-conditioning - aggressive regularization required
+                # Scale regularization by condition number magnitude
+                if sv_ratio < 2e-9:
+                    # Most extreme case (singular value ratio ~ 2e-9)
+                    # Use maximum regularization to prevent LinAlgError
+                    reg_scale = max(
+                        self.alpha * s[0] * 1e5,  # Scale up by 100000x
+                        self.min_reg * (cond_num / self.max_cond) * 1e2
+                    )
+                elif sv_ratio < 1e-8:
+                    # Very extreme case (singular value ratio ~ 1e-8)
+                    # Aggressive regularization with quadratic scaling
+                    reg_scale = max(
+                        self.alpha * s[0] * 1e4,  # Scale up by 10000x
+                        self.min_reg * (cond_num / self.max_cond) * 10
+                    )
+                elif cond_num > self.max_cond:
+                    # High condition number but moderate singular value ratio
+                    # Standard aggressive regularization
+                    reg_scale = max(
+                        self.alpha * s[0] * (cond_num / self.max_cond),
+                        self.min_reg * np.sqrt(cond_num)
+                    )
+                else:
+                    # Fallback for edge cases
+                    reg_scale = max(self.alpha * s[0], self.min_reg)
+
+            elif sv_ratio < 1e-6:
+                # Moderate ill-conditioning (singular value ratio ~ 1e-6)
+                # Medium regularization with linear scaling
                 reg_scale = max(
-                    self.alpha * s[0],
+                    self.alpha * s[0] * 1e2,  # Scale up by 100x
                     self.min_reg * (cond_num / self.max_cond)
                 )
+
+            elif cond_num > 1e10:
+                # Approaching threshold - preventive regularization
+                reg_scale = max(
+                    self.alpha * s[0] * 10,  # Scale up by 10x
+                    self.min_reg * (cond_num / 1e10)
+                )
+
             else:
-                # Use base regularization for good conditioning
+                # Well-conditioned matrix - use base regularization
                 reg_scale = max(self.alpha * s[0], self.min_reg)
 
             # Apply regularization
             regularized = matrix + reg_scale * np.eye(matrix.shape[0])
 
-            # Verify improved conditioning
+            # Verify improved conditioning (issue warning but don't fail)
             if not self.check_conditioning(regularized):
                 warnings.warn(
                     f"Matrix conditioning remains poor after regularization "
-                    f"(condition number: {cond_num:.2e})",
+                    f"(condition number: {cond_num:.2e}, sv_ratio: {sv_ratio:.2e}, "
+                    f"reg_scale: {reg_scale:.2e})",
                     UserWarning
                 )
 
