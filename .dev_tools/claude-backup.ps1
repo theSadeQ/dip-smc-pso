@@ -291,6 +291,20 @@ function Test-TokenThreshold {
 try {
     Write-Log "=== Claude Code Auto-Backup Script ===" -Level Info
 
+    # Ensure Git is in PATH (fixes Task Scheduler issue)
+    $gitPaths = @(
+        "C:\Program Files\Git\cmd",
+        "C:\Program Files (x86)\Git\cmd",
+        "C:\Git\cmd"
+    )
+    foreach ($gitPath in $gitPaths) {
+        if (Test-Path $gitPath) {
+            $env:PATH = "$gitPath;$env:PATH"
+            Write-Log "Added Git to PATH: $gitPath" -Level Info
+            break
+        }
+    }
+
     # Ensure we're in the correct working directory (fixes Task Scheduler issue)
     if (Test-Path $DEFAULT_REPO_ROOT) {
         Set-Location $DEFAULT_REPO_ROOT
