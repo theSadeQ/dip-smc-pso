@@ -6,6 +6,7 @@ from __future__ import annotations
 from typing import Dict, Tuple, Any, List, Optional
 
 import numpy as np
+import weakref
 
 from ...utils import HybridSTAOutput
 
@@ -291,8 +292,11 @@ class HybridAdaptiveSTASMC:
         self.adaptation_sat_threshold = max(0.0, float(adaptation_sat_threshold))
         self.taper_eps = max(1e-9, float(taper_eps))
 
-        # For optional equivalent control
-        self.dyn: Optional[Any] = dynamics_model
+        # For optional equivalent control - use weakref to break circular references
+        if dynamics_model is not None:
+            self._dynamics_ref = weakref.ref(dynamics_model)
+        else:
+            self._dynamics_ref = lambda: None
 
         # ---- Additional validations (F‑4.HybridController.4 / RC‑04) ----
         # Ensure the soft saturation width is at least as large as the dead zone.
@@ -351,6 +355,21 @@ class HybridAdaptiveSTASMC:
     @property
     def gains(self) -> List[float]:
         return list(self._gains)
+
+    @property
+    def dyn(self):
+        """Access dynamics model via weakref."""
+        if self._dynamics_ref is not None:
+            return self._dynamics_ref()
+        return None
+
+    @dyn.setter
+    def dyn(self, value):
+        """Set dynamics model using weakref."""
+        if value is not None:
+            self._dynamics_ref = weakref.ref(value)
+        else:
+            self._dynamics_ref = lambda: None
 
     def set_dynamics(self, dynamics_model: Any) -> None:
         """Attach dynamics model providing _compute_physics_matrices(state)->(M,C,G)."""
@@ -702,5 +721,22 @@ class HybridAdaptiveSTASMC:
         any cached data to facilitate garbage collection and prevent
         memory leaks during repeated controller instantiation.
         """
-        # Clear dynamics model reference
-        self.dyn = None
+        # Nullify dynamics reference
+        if hasattr(self, '_dynamics_ref'):
+            self._dynamics_ref = lambda: None
+
+        # Clear any cached large arrays (future-proofing)
+        for attr in ['_state_buffer', '_control_buffer', '_history_buffer']:
+            if hasattr(self, attr):
+                setattr(self, attr, None)
+
+    def __del__(self) -> None:
+        """Destructor for automatic cleanup.
+
+        Ensures cleanup is called when the controller is garbage collected.
+        Catches all exceptions to prevent errors during finalization.
+        """
+        try:
+            self.cleanup()
+        except Exception:
+            pass  # Prevent exceptions during cleanup
