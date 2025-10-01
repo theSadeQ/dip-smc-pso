@@ -1,0 +1,11 @@
+--- a/src/analysis/fault_detection/fdi.py
++++ b/src/analysis/fault_detection/fdi.py
+@@ -117,7 +117,7 @@ class FDIsystem:
+       the control command path; external supervisors decide safe-state actions.  # [CIT-064]
+     """
+
+-    residual_threshold: float = 0.5  # [CIT-048]
++    residual_threshold: float = 0.150  # [CIT-048] Calibrated from Issue #18
+     persistence_counter: int = 10  # [CIT-048]
+     use_ekf_residual: bool = False
+     residual_states: List[int] = field(default_factory=lambda: [0, 1, 2])
