@@ -590,7 +590,7 @@ class TestMemoryOptimization:
                     if block is not None:
                         allocated_blocks.append(block)
                         # Use the block
-                        np.random.randn(*block.shape, out=block)
+                        block[:] = np.random.randn(*block.shape)
 
                 # Deallocate phase
                 if cycle % 5 == 4:
