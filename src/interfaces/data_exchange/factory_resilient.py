@@ -168,7 +168,7 @@ class ResilientSerializerFactory:
     def get_statistics(self) -> Dict[str, Any]:
         """Get factory statistics."""
         with self._stats_lock:
-            stats = self._stats.copy()
+            stats = self._stats
 
         with self._cache_lock:
             stats['cached_serializers'] = len(self._serializer_cache)

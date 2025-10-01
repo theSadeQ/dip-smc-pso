@@ -174,7 +174,7 @@ class HTTPInterface(CommunicationProtocol):
 
     def get_statistics(self) -> Dict[str, Any]:
         """Get HTTP communication statistics."""
-        stats = self._stats.copy()
+        stats = self._stats
         stats['connection_state'] = self._connection_state.value
         stats['is_server'] = self._app is not None
         stats['registered_routes'] = len(self._routes)

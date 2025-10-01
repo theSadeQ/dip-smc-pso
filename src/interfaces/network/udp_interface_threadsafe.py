@@ -231,7 +231,7 @@ class ThreadSafeUDPInterface(CommunicationProtocol):
     def get_statistics(self) -> Dict[str, Any]:
         """Get UDP communication statistics safely."""
         with self._stats_lock:
-            stats = self._stats.copy()
+            stats = self._stats
 
         with self._state_lock:
             stats['connection_state'] = self._connection_state.value

@@ -106,8 +106,8 @@ class LowRankDIPDynamics(BaseDynamicsModel):
         if not self._validate_inputs(state, control_input):
             return self._create_failure_result(
                 "Invalid inputs",
-                state=state.copy(),
-                control_input=control_input.copy(),
+                state=state,
+                control_input=control_input,
                 time=time
             )
 
@@ -129,8 +129,8 @@ class LowRankDIPDynamics(BaseDynamicsModel):
             if not self.physics.validate_computation(sanitized_state, state_derivative):
                 return self._create_failure_result(
                     "Invalid state derivative computed",
-                    state=sanitized_state.copy(),
-                    control_input=control_input.copy(),
+                    state=sanitized_state,
+                    control_input=control_input,
                     time=time
                 )
 
@@ -144,8 +144,8 @@ class LowRankDIPDynamics(BaseDynamicsModel):
 
             return self._create_success_result(
                 state_derivative,
-                state=sanitized_state.copy(),
-                control_input=control_input.copy(),
+                state=sanitized_state,
+                control_input=control_input,
                 time=time,
                 **diagnostics
             )
@@ -154,8 +154,8 @@ class LowRankDIPDynamics(BaseDynamicsModel):
             self._record_failed_computation()
             return self._create_failure_result(
                 f"Numerical instability: {e}",
-                state=state.copy(),
-                control_input=control_input.copy(),
+                state=state,
+                control_input=control_input,
                 time=time,
                 error_type="numerical_instability"
             )
@@ -164,8 +164,8 @@ class LowRankDIPDynamics(BaseDynamicsModel):
             self._record_failed_computation()
             return self._create_failure_result(
                 f"Dynamics computation failed: {e}",
-                state=state.copy(),
-                control_input=control_input.copy(),
+                state=state,
+                control_input=control_input,
                 time=time,
                 error_type="computation_error"
             )
@@ -269,7 +269,7 @@ class LowRankDIPDynamics(BaseDynamicsModel):
 
     def get_computation_statistics(self) -> Dict[str, Any]:
         """Get computation performance statistics."""
-        stats = self.computation_stats.copy()
+        stats = self.computation_stats
         if stats['total_computations'] > 0:
             stats['success_rate'] = stats['successful_computations'] / stats['total_computations']
             stats['failure_rate'] = stats['failed_computations'] / stats['total_computations']

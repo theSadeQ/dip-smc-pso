@@ -116,7 +116,7 @@ class DeadlineMissHandler:
 
     def get_statistics(self) -> Dict[str, Any]:
         """Get deadline miss statistics."""
-        stats = self._statistics.copy()
+        stats = self._statistics
         if stats['total_deadlines'] > 0:
             stats['miss_rate'] = stats['missed_deadlines'] / stats['total_deadlines']
         else:
@@ -251,7 +251,7 @@ class RealTimeScheduler:
 
     def get_timing_statistics(self) -> Dict[str, Any]:
         """Get timing performance statistics."""
-        stats = self._performance_stats.copy()
+        stats = self._performance_stats
 
         if stats['iterations'] > 0:
             stats['avg_jitter'] = stats['total_jitter'] / stats['iterations']

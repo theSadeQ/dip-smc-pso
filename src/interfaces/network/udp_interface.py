@@ -186,7 +186,7 @@ class UDPInterface(CommunicationProtocol):
 
     def get_statistics(self) -> Dict[str, Any]:
         """Get UDP communication statistics."""
-        stats = self._stats.copy()
+        stats = self._stats
         stats['connection_state'] = self._connection_state.value
         stats['sequence_number'] = self._sequence_number
         stats['expected_sequence'] = self._expected_sequence
