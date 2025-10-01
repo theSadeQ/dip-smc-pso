@@ -222,7 +222,7 @@ class WebSocketInterface(CommunicationProtocol):
 
     def get_statistics(self) -> Dict[str, Any]:
         """Get WebSocket communication statistics."""
-        stats = self._stats.copy()
+        stats = self._stats
         stats['connection_state'] = self._connection_state.value
         stats['connected_clients'] = len(self._clients)
         stats['is_server'] = self._server is not None

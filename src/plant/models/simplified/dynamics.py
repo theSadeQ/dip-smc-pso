@@ -161,14 +161,14 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
         if not self.validate_state(state):
             return self._create_failure_result(
                 "Invalid state vector",
-                state=state.copy(),
+                state=state,
                 time=time
             )
 
         if not self._validate_control_input(control_input):
             return self._create_failure_result(
                 "Invalid control input",
-                control_input=control_input.copy(),
+                control_input=control_input,
                 time=time
             )
 
@@ -186,8 +186,8 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
             if not self._validate_state_derivative(state_derivative):
                 return self._create_failure_result(
                     "Invalid state derivative computed",
-                    state=state.copy(),
-                    control_input=control_input.copy(),
+                    state=state,
+                    control_input=control_input,
                     time=time
                 )
 
@@ -197,8 +197,8 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
 
             return self._create_success_result(
                 state_derivative,
-                state=sanitized_state.copy(),
-                control_input=control_input.copy(),
+                state=sanitized_state,
+                control_input=control_input,
                 time=time,
                 total_energy=self.physics.compute_total_energy(sanitized_state),
                 kinetic_energy=self.physics.compute_kinetic_energy(sanitized_state),
@@ -212,8 +212,8 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
 
             return self._create_failure_result(
                 f"Numerical instability: {e}",
-                state=state.copy(),
-                control_input=control_input.copy(),
+                state=state,
+                control_input=control_input,
                 time=time,
                 error_type="numerical_instability"
             )
@@ -225,8 +225,8 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
 
             return self._create_failure_result(
                 f"Dynamics computation failed: {e}",
-                state=state.copy(),
-                control_input=control_input.copy(),
+                state=state,
+                control_input=control_input,
                 time=time,
                 error_type="computation_error"
             )

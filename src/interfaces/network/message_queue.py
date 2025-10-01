@@ -187,7 +187,7 @@ class ZeroMQInterface(MessageQueueInterface):
 
     def get_statistics(self) -> Dict[str, Any]:
         """Get ZeroMQ communication statistics."""
-        stats = self._stats.copy()
+        stats = self._stats
         stats['connection_state'] = self._connection_state.value
         stats['active_sockets'] = len(self._sockets)
         stats['socket_names'] = list(self._sockets.keys())
@@ -597,7 +597,7 @@ class RabbitMQInterface(MessageQueueInterface):
 
     def get_statistics(self) -> Dict[str, Any]:
         """Get RabbitMQ communication statistics."""
-        stats = self._stats.copy()
+        stats = self._stats
         stats['connection_state'] = self._connection_state.value
         stats['active_queues'] = len(self._queues)
         stats['active_exchanges'] = len(self._exchanges)

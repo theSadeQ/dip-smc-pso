@@ -150,7 +150,7 @@ class FaultInjector:
     @property
     def statistics(self) -> Dict[str, Any]:
         """Get fault injection statistics."""
-        stats = self._stats.copy()
+        stats = self._stats
         stats['fault_types_used'] = list(stats['fault_types_used'])
         return stats
 

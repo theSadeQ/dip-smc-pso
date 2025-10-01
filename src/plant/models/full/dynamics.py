@@ -116,8 +116,8 @@ class FullDIPDynamics(BaseDynamicsModel):
         if not self._validate_inputs(state, control_input):
             return self._create_failure_result(
                 "Invalid inputs",
-                state=state.copy(),
-                control_input=control_input.copy(),
+                state=state,
+                control_input=control_input,
                 time=time
             )
 
@@ -128,8 +128,8 @@ class FullDIPDynamics(BaseDynamicsModel):
                 if not self._check_physical_constraints(sanitized_state):
                     return self._create_failure_result(
                         "Physical constraints violated",
-                        state=state.copy(),
-                        control_input=control_input.copy(),
+                        state=state,
+                        control_input=control_input,
                         time=time
                     )
             else:
@@ -149,8 +149,8 @@ class FullDIPDynamics(BaseDynamicsModel):
             if not self._validate_state_derivative(state_derivative):
                 return self._create_failure_result(
                     "Invalid state derivative computed",
-                    state=sanitized_state.copy(),
-                    control_input=control_input.copy(),
+                    state=sanitized_state,
+                    control_input=control_input,
                     time=time
                 )
 
@@ -163,8 +163,8 @@ class FullDIPDynamics(BaseDynamicsModel):
 
             return self._create_success_result(
                 state_derivative,
-                state=sanitized_state.copy(),
-                control_input=control_input.copy(),
+                state=sanitized_state,
+                control_input=control_input,
                 time=time,
                 wind_velocity=wind_velocity.copy() if wind_velocity is not None else None,
                 **diagnostics
@@ -176,8 +176,8 @@ class FullDIPDynamics(BaseDynamicsModel):
 
             return self._create_failure_result(
                 f"Numerical instability: {e}",
-                state=state.copy(),
-                control_input=control_input.copy(),
+                state=state,
+                control_input=control_input,
                 time=time,
                 error_type="numerical_instability"
             )
@@ -188,8 +188,8 @@ class FullDIPDynamics(BaseDynamicsModel):
 
             return self._create_failure_result(
                 f"Dynamics computation failed: {e}",
-                state=state.copy(),
-                control_input=control_input.copy(),
+                state=state,
+                control_input=control_input,
                 time=time,
                 error_type="computation_error"
             )
@@ -289,7 +289,7 @@ class FullDIPDynamics(BaseDynamicsModel):
 
     def get_integration_statistics(self) -> Dict[str, Any]:
         """Get integration performance statistics."""
-        stats = self.integration_stats.copy()
+        stats = self.integration_stats
         if stats['total_steps'] > 0:
             stats['success_rate'] = stats['successful_steps'] / stats['total_steps']
             stats['rejection_rate'] = stats['rejected_steps'] / stats['total_steps']
@@ -388,7 +388,7 @@ class FullDIPDynamics(BaseDynamicsModel):
                 diagnostics['derivative_consistency_error'] = derivative_error
 
         # Store for next iteration
-        self._last_state = state.copy()
+        self._last_state = state
         self._last_time = time
 
         return diagnostics

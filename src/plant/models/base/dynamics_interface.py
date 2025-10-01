@@ -292,7 +292,7 @@ class LinearDynamicsModel(BaseDynamicsModel):
             return self._create_success_result(
                 state_derivative,
                 time=time,
-                control_input=control_input.copy(),
+                control_input=control_input,
                 **kwargs
             )
 
