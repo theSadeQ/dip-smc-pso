@@ -461,3 +461,48 @@ class StabilityMonitoringConfig(StrictModel):
     saturation: SaturationConfig = Field(default_factory=SaturationConfig)
     conditioning: ConditioningConfig = Field(default_factory=ConditioningConfig)
     diagnostics: DiagnosticsConfig = Field(default_factory=DiagnosticsConfig)
+
+# ------------------------------------------------------------------------------
+# Fault Detection (Issue #18 Resolution - Threshold Calibration)
+# ------------------------------------------------------------------------------
+class FaultDetectionConfig(StrictModel):
+    """Fault Detection and Isolation (FDI) configuration - Issue #18 resolution."""
+
+    residual_threshold: float = Field(
+        default=0.150,
+        ge=0.0,
+        description="Statistically calibrated threshold (P99 percentile)"
+    )
+    hysteresis_enabled: bool = Field(
+        default=True,
+        description="Enable hysteresis to prevent threshold oscillation"
+    )
+    hysteresis_upper: float = Field(
+        default=0.165,
+        ge=0.0,
+        description="Upper bound triggers fault (threshold * 1.1)"
+    )
+    hysteresis_lower: float = Field(
+        default=0.135,
+        ge=0.0,
+        description="Lower bound for recovery (threshold * 0.9)"
+    )
+    persistence_counter: int = Field(
+        default=10,
+        ge=1,
+        description="Consecutive violations required to trigger fault"
+    )
+    adaptive: bool = Field(
+        default=False,
+        description="Use adaptive threshold (vs fixed)"
+    )
+    window_size: int = Field(
+        default=50,
+        ge=1,
+        description="Window size for adaptive mode"
+    )
+    threshold_factor: float = Field(
+        default=3.0,
+        ge=0.0,
+        description="N-sigma rule for adaptive mode"
+    )
