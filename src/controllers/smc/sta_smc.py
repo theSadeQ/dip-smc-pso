@@ -250,8 +250,11 @@ class SuperTwistingSMC:
             raise ValueError("SuperTwistingSMC requires 2 or 6 gains")
 
 
-        # Store parameters from arguments
-        self.dyn = dynamics_model
+        # Store parameters from arguments using weakref to break circular references
+        if dynamics_model is not None:
+            self._dynamics_ref = weakref.ref(dynamics_model)
+        else:
+            self._dynamics_ref = lambda: None
         # Validate core parameters using the shared utility.  These
         # validations enforce positivity or non‑negativity with
         # consistent error messages across controllers.  See
@@ -441,6 +444,22 @@ class SuperTwistingSMC:
         instantiation without risk of mutating the internal state.
         """
         return list(self._gains)
+
+    @property
+    def dyn(self):
+        """Access dynamics model via weakref."""
+        if self._dynamics_ref is not None:
+            return self._dynamics_ref()
+        return None
+
+    @dyn.setter
+    def dyn(self, value):
+        """Set dynamics model using weakref."""
+        if value is not None:
+            self._dynamics_ref = weakref.ref(value)
+        else:
+            self._dynamics_ref = lambda: None
+
     # ---------------- Utilities -------------------
 
     def reset(self) -> None:
@@ -462,11 +481,26 @@ class SuperTwistingSMC:
         any cached data to facilitate garbage collection and prevent
         memory leaks during repeated controller instantiation.
         """
-        # Clear dynamics model reference
-        self.dyn = None
+        # Nullify dynamics reference
+        if hasattr(self, '_dynamics_ref'):
+            self._dynamics_ref = lambda: None
+
         # Clear cached vectors
-        self.L = None  # type: ignore
-        self.B = None  # type: ignore
+        if hasattr(self, 'L'):
+            self.L = None
+        if hasattr(self, 'B'):
+            self.B = None
+
+    def __del__(self) -> None:
+        """Destructor for automatic cleanup.
+
+        Ensures cleanup is called when the controller is garbage collected.
+        Catches all exceptions to prevent errors during finalization.
+        """
+        try:
+            self.cleanup()
+        except Exception:
+            pass  # Prevent exceptions during cleanup
 
     def set_dynamics(self, dynamics_model) -> None:
         """Attach dynamics model if available (used by u_eq if implemented)."""
