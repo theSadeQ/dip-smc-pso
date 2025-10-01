@@ -1,0 +1,497 @@
+{
+  "test_execution_summary": {
+    "total_tests": 672,
+    "passed": 584,
+    "failed": 67,
+    "errors": 13,
+    "skipped": 8,
+    "pass_rate": "86.9%",
+    "coverage": {
+      "controllers": "51%",
+      "simulation": "29%",
+      "integration": "~90%",
+      "overall_target": "85-95%"
+    }
+  },
+  "critical_issues": [
+    {
+      "id": "CRIT-001",
+      "title": "HybridAdaptiveSTASMC API Incompatibility",
+      "severity": "CRITICAL",
+      "priority": 1,
+      "tests_affected": 26,
+      "error_type": "TypeError: got an unexpected keyword argument 'surface_gains'",
+      "root_cause": "Test fixtures use old API with 'surface_gains', 'cart_gains', 'adaptation_gains' parameters, but __init__ signature changed to unified 'gains' parameter",
+      "files_affected": [
+        "tests/test_controllers/smc/test_hybrid_adaptive_sta_smc.py",
+        "src/controllers/smc/hybrid_adaptive_sta_smc.py"
+      ],
+      "fix_strategy": {
+        "approach": "Update all test fixtures to use new API",
+        "steps": [
+          "Read current HybridAdaptiveSTASMC.__init__ signature",
+          "Determine how gains are decomposed internally",
+          "Update all 26 test fixtures with correct parameters",
+          "Verify compute_control interface matches tests",
+          "Run validation suite"
+        ],
+        "estimated_effort_hours": 4,
+        "difficulty": "Medium"
+      },
+      "tests": [
+        "test_basic_initialization",
+        "test_initialization_with_surface_gains",
+        "test_initialization_with_cart_gains",
+        "test_initialization_with_adaptation_params",
+        "test_initialization_with_boundary_params",
+        "test_initialization_with_surface_type",
+        "test_invalid_surface_gains",
+        "test_invalid_adaptation_gains",
+        "test_boundary_layer_validation",
+        "test_compute_control_equilibrium",
+        "test_compute_control_perturbed",
+        "test_compute_control_large_error",
+        "test_compute_control_history_tracking",
+        "test_control_continuity",
+        "test_adaptation_mechanism",
+        "test_equivalent_control_toggle",
+        "test_cart_control_toggle",
+        "test_relative_vs_absolute_surface",
+        "test_sliding_surface_linearity",
+        "test_lyapunov_stability_requirements",
+        "test_finite_time_convergence_property",
+        "test_chattering_reduction",
+        "test_zero_state",
+        "test_large_state",
+        "test_invalid_state_dimension",
+        "test_nan_state"
+      ]
+    },
+    {
+      "id": "CRIT-002",
+      "title": "Configuration Schema Missing fault_detection",
+      "severity": "CRITICAL",
+      "priority": 2,
+      "tests_affected": 3,
+      "error_type": "pydantic_core.ValidationError: Extra inputs are not permitted",
+      "root_cause": "config.yaml contains fault_detection section (added for Issue #18) but ConfigSchema doesn't define this field. Pydantic strict mode rejects unknown fields.",
+      "files_affected": [
+        "config.yaml",
+        "src/config/schema.py",
+        "tests/integration/test_pso_controller_integration.py"
+      ],
+      "fix_strategy": {
+        "approach": "Add fault_detection schema to ConfigSchema",
+        "steps": [
+          "Read src/config/schema.py to understand structure",
+          "Create FaultDetectionConfig class with all fields",
+          "Add fault_detection: Optional[FaultDetectionConfig] to ConfigSchema",
+          "Validate against config.yaml",
+          "Run integration tests"
+        ],
+        "estimated_effort_hours": 0.5,
+        "difficulty": "Easy"
+      },
+      "tests": [
+        "test_controller_type_bounds_mapping",
+        "test_pso_tuner_with_all_controllers",
+        "test_pso_optimization_workflow"
+      ],
+      "quick_win": true
+    },
+    {
+      "id": "CRIT-003",
+      "title": "Missing dip_lowrank Module",
+      "severity": "CRITICAL",
+      "priority": 3,
+      "tests_affected": 6,
+      "error_type": "ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'",
+      "root_cause": "simulation_runner.py references dip_lowrank module that doesn't exist. Either never implemented or removed during refactoring.",
+      "files_affected": [
+        "src/simulation/engines/simulation_runner.py",
+        "src/plant/models/lowrank/ (missing dip_lowrank.py)"
+      ],
+      "fix_strategy": {
+        "approach": "Create stub dip_lowrank.py or refactor to use simplified fallback",
+        "steps": [
+          "Option A: Implement src/plant/models/lowrank/dip_lowrank.py with same interface as full/simplified",
+          "Option B: Update _load_lowrank_step() to fallback to simplified",
+          "Add tests for lowrank pathway",
+          "Validate step function interface consistency"
+        ],
+        "estimated_effort_hours": 1.5,
+        "difficulty": "Medium"
+      },
+      "tests": [
+        "test_step_function_dispatch",
+        "test_step_function_with_different_inputs",
+        "test_simulate_bounds_guard_raises",
+        "test_simulate_energy_guard_raises",
+        "test_simulate_nan_guard_raises",
+        "test_safety_guard_integration"
+      ]
+    }
+  ],
+  "high_priority_issues": [
+    {
+      "id": "HIGH-001",
+      "title": "Simulation Not Progressing (Returns Only Initial State)",
+      "severity": "HIGH",
+      "priority": 4,
+      "tests_affected": 11,
+      "error_type": "AssertionError: len(t_arr) == 1 instead of expected steps",
+      "root_cause": "Mock dynamics models not implementing proper state propagation. Simulation runner receives same state back and may early-exit or return immediately.",
+      "files_affected": [
+        "tests/test_simulation/core/test_simulation_integration.py",
+        "MockDynamicsModel implementations"
+      ],
+      "fix_strategy": {
+        "approach": "Fix MockDynamicsModel.step() to return modified state",
+        "steps": [
+          "Inspect MockDynamicsModel.step() implementation",
+          "Ensure it returns state + delta, not same state",
+          "Add assertions in simulation runner for state propagation",
+          "Add debug logging for early-exit paths",
+          "Verify dt values are non-zero"
+        ],
+        "estimated_effort_hours": 2.5,
+        "difficulty": "Medium"
+      },
+      "tests": [
+        "test_basic_simulation_workflow",
+        "test_fallback_controller_activation",
+        "test_euler_integration_compatibility",
+        "test_integrator_statistics_tracking",
+        "test_simulation_performance_scaling",
+        "test_extreme_initial_conditions",
+        "test_very_small_timesteps",
+        "test_very_large_timesteps",
+        "test_random_parameters_robustness",
+        "test_invalid_initial_state",
+        "test_bounds_guard_performance"
+      ]
+    },
+    {
+      "id": "HIGH-002",
+      "title": "Mock Configuration Type Errors in Safety Guards",
+      "severity": "HIGH",
+      "priority": 5,
+      "tests_affected": 4,
+      "error_type": "TypeError: argument of type 'Mock' is not iterable",
+      "root_cause": "Tests use Mock() objects where code expects dicts or structured configs. Mock doesn't support 'in' operator.",
+      "files_affected": [
+        "tests/test_simulation/safety/test_safety_guards.py",
+        "src/simulation/safety/guards.py"
+      ],
+      "fix_strategy": {
+        "approach": "Replace Mock() with proper dict/config fixtures",
+        "steps": [
+          "Identify all Mock() usages in safety guard tests",
+          "Replace with dict fixtures matching expected structure",
+          "Verify guards.py handles None/missing configs gracefully",
+          "Run safety guard test suite"
+        ],
+        "estimated_effort_hours": 1,
+        "difficulty": "Easy"
+      },
+      "tests": [
+        "test_apply_safety_guards_minimal_config",
+        "test_apply_safety_guards_with_energy_limits",
+        "test_apply_safety_guards_with_state_bounds",
+        "test_create_default_guards_minimal"
+      ],
+      "quick_win": true
+    }
+  ],
+  "medium_priority_issues": [
+    {
+      "id": "MED-001",
+      "title": "Gain Validation API Changes",
+      "severity": "MEDIUM",
+      "priority": 6,
+      "tests_affected": 6,
+      "error_type": "Various assertion failures",
+      "root_cause": "Test expectations don't match updated validation logic",
+      "files_affected": [
+        "tests/test_controllers/smc/core/test_gain_validation.py",
+        "src/controllers/smc/core/gain_validation.py"
+      ],
+      "fix_strategy": {
+        "approach": "Update test expectations to match current behavior",
+        "steps": [
+          "Review current validation logic",
+          "Update test assertions for correct behavior",
+          "Verify exception types are correct",
+          "Document expected behavior in docstrings"
+        ],
+        "estimated_effort_hours": 2,
+        "difficulty": "Easy"
+      },
+      "tests": [
+        "test_validate_gains_classical_valid",
+        "test_validate_gains_classical_invalid",
+        "test_validate_gains_string_controller_type",
+        "test_validate_gains_wrong_length",
+        "test_get_recommended_ranges_invalid_type",
+        "test_update_bounds_invalid_controller"
+      ]
+    },
+    {
+      "id": "MED-002",
+      "title": "Switching Function Behavioral Changes",
+      "severity": "MEDIUM",
+      "priority": 7,
+      "tests_affected": 4,
+      "error_type": "Assertion failures on convenience functions",
+      "root_cause": "Convenience function signatures or return values changed",
+      "files_affected": [
+        "tests/test_controllers/smc/core/test_switching_functions.py",
+        "src/controllers/smc/core/switching_functions.py"
+      ],
+      "fix_strategy": {
+        "approach": "Update tests to match current function behavior",
+        "steps": [
+          "Verify actual function signatures",
+          "Update test assertions",
+          "Check if deprecation warnings needed",
+          "Run switching function test suite"
+        ],
+        "estimated_effort_hours": 1.5,
+        "difficulty": "Easy"
+      },
+      "tests": [
+        "test_tanh_switching_basic",
+        "test_tanh_switching_function",
+        "test_sign_switching_function",
+        "test_sign_switching_ignores_epsilon"
+      ]
+    },
+    {
+      "id": "MED-003",
+      "title": "EquivalentControl Missing regularization Attribute",
+      "severity": "MEDIUM",
+      "priority": 8,
+      "tests_affected": 2,
+      "error_type": "AttributeError: no attribute 'regularization'",
+      "root_cause": "Test expects regularization attribute but __init__ doesn't define it",
+      "files_affected": [
+        "tests/test_controllers/smc/core/test_equivalent_control.py",
+        "src/controllers/smc/core/equivalent_control.py"
+      ],
+      "fix_strategy": {
+        "approach": "Add self.regularization attribute to __init__",
+        "steps": [
+          "Read EquivalentControl.__init__",
+          "Add self.regularization = regularization parameter",
+          "Verify parameter is used in compute logic",
+          "Run equivalent control tests"
+        ],
+        "estimated_effort_hours": 0.5,
+        "difficulty": "Easy"
+      },
+      "tests": [
+        "test_initialization_default_parameters",
+        "test_initialization_custom_parameters"
+      ],
+      "quick_win": true
+    },
+    {
+      "id": "MED-004",
+      "title": "Modular SMC Integration Issues",
+      "severity": "MEDIUM",
+      "priority": 9,
+      "tests_affected": 4,
+      "error_type": "Various integration failures",
+      "root_cause": "Component interface changes between modules",
+      "files_affected": [
+        "tests/test_controllers/test_modular_smc.py",
+        "src/controllers/smc/ (various modules)"
+      ],
+      "fix_strategy": {
+        "approach": "Update test fixtures to match current module interfaces",
+        "steps": [
+          "Review modular SMC architecture",
+          "Update test fixtures for current interfaces",
+          "Verify component composition works",
+          "Run modular SMC test suite"
+        ],
+        "estimated_effort_hours": 2.5,
+        "difficulty": "Medium"
+      },
+      "tests": [
+        "test_uncertainty_estimator",
+        "test_switching_logic_initialization",
+        "test_sliding_surface_integration",
+        "test_controller_scalability[2]"
+      ]
+    }
+  ],
+  "low_priority_issues": [
+    {
+      "id": "LOW-001",
+      "title": "MPC Controller Optional Dependencies",
+      "severity": "LOW",
+      "priority": 10,
+      "tests_affected": 2,
+      "error_type": "Import errors for optional MPC dependencies",
+      "root_cause": "MPC requires cvxpy or similar optimization libraries not installed",
+      "files_affected": [
+        "tests/test_controllers/mpc/"
+      ],
+      "fix_strategy": {
+        "approach": "Add @pytest.mark.skipif decorators",
+        "steps": [
+          "Add skip markers for missing dependencies",
+          "Document optional dependencies in requirements",
+          "Consider adding mock MPC for testing"
+        ],
+        "estimated_effort_hours": 0.5,
+        "difficulty": "Easy"
+      },
+      "tests": [
+        "test_mpc_optional_dep_and_param_validation",
+        "test_mpc_controller_instantiation_and_control"
+      ],
+      "quick_win": true
+    },
+    {
+      "id": "LOW-002",
+      "title": "Memory Efficiency Test Threshold Too Strict",
+      "severity": "LOW",
+      "priority": 11,
+      "tests_affected": 1,
+      "error_type": "AssertionError: 1028 < 500",
+      "root_cause": "Observed object growth 1028, threshold set at 500",
+      "files_affected": [
+        "tests/test_simulation/engines/test_vector_sim.py"
+      ],
+      "fix_strategy": {
+        "approach": "Increase threshold or investigate if growth is acceptable",
+        "steps": [
+          "Profile memory usage to confirm 1028 is normal",
+          "Increase threshold to 1500 (2x observed)",
+          "Add gc.collect() in test",
+          "Monitor for actual leaks"
+        ],
+        "estimated_effort_hours": 0.5,
+        "difficulty": "Easy"
+      },
+      "tests": [
+        "test_memory_efficiency"
+      ],
+      "quick_win": true
+    }
+  ],
+  "quick_wins": {
+    "total_tests_fixed": 12,
+    "total_effort_hours": 3,
+    "items": [
+      {
+        "id": "CRIT-002",
+        "title": "Add fault_detection schema",
+        "tests_fixed": 3,
+        "effort_hours": 0.5
+      },
+      {
+        "id": "MED-003",
+        "title": "Add EquivalentControl.regularization",
+        "tests_fixed": 2,
+        "effort_hours": 0.5
+      },
+      {
+        "id": "HIGH-002",
+        "title": "Fix mock config fixtures",
+        "tests_fixed": 4,
+        "effort_hours": 1
+      },
+      {
+        "id": "LOW-001",
+        "title": "Add MPC skip markers",
+        "tests_fixed": 2,
+        "effort_hours": 0.5
+      },
+      {
+        "id": "LOW-002",
+        "title": "Adjust memory threshold",
+        "tests_fixed": 1,
+        "effort_hours": 0.5
+      }
+    ]
+  },
+  "effort_summary": {
+    "critical_blockers": {
+      "tests_fixed": 35,
+      "effort_hours": 6,
+      "effort_days": 0.75
+    },
+    "high_priority": {
+      "tests_fixed": 15,
+      "effort_hours": 3.5,
+      "effort_days": 0.44
+    },
+    "medium_priority": {
+      "tests_fixed": 16,
+      "effort_hours": 6.5,
+      "effort_days": 0.81
+    },
+    "low_priority": {
+      "tests_fixed": 3,
+      "effort_hours": 1,
+      "effort_days": 0.13
+    },
+    "total": {
+      "tests_fixed": 69,
+      "effort_hours": 17,
+      "effort_days": 2.13
+    }
+  },
+  "recommended_sequence": [
+    {
+      "session": 1,
+      "title": "Quick Wins Session",
+      "duration_hours": 3,
+      "issues": ["CRIT-002", "MED-003", "HIGH-002", "LOW-001", "LOW-002"],
+      "tests_fixed": 12,
+      "immediate_impact": "Unblocks integration tests, fixes easy wins"
+    },
+    {
+      "session": 2,
+      "title": "Critical Blockers Session",
+      "duration_hours": 6,
+      "issues": ["CRIT-001", "CRIT-003"],
+      "tests_fixed": 32,
+      "immediate_impact": "Restores all HybridAdaptiveSTASMC tests, unblocks simulation routing"
+    },
+    {
+      "session": 3,
+      "title": "Simulation Fixes Session",
+      "duration_hours": 3.5,
+      "issues": ["HIGH-001"],
+      "tests_fixed": 11,
+      "immediate_impact": "Fixes simulation workflow and robustness tests"
+    },
+    {
+      "session": 4,
+      "title": "Medium Priority Cleanup",
+      "duration_hours": 6.5,
+      "issues": ["MED-001", "MED-002", "MED-004"],
+      "tests_fixed": 14,
+      "immediate_impact": "Updates test expectations, completes validation fixes"
+    }
+  ],
+  "acceptance_criteria": {
+    "tests_passing": "≥95%",
+    "coverage_controllers": "≥85%",
+    "coverage_simulation": "≥85%",
+    "coverage_integration": "≥90%",
+    "no_critical_failures": true,
+    "no_blocking_errors": true,
+    "documentation_updated": true
+  },
+  "next_steps": [
+    "Execute Quick Wins Session (3 hours) → +12 tests",
+    "Begin HybridAdaptiveSTASMC API fix → +26 tests",
+    "Implement dip_lowrank stub → +6 tests",
+    "Schedule follow-up session for simulation fixes"
+  ]
+}
