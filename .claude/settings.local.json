@@ -22,7 +22,8 @@
       "Bash(Select-Object -First 20)",
       "Bash(Get-Content pytest.ini -ErrorAction SilentlyContinue)",
       "Bash(Get-Content \"D:\\Projects\\main\\.pytest.ini\" -ErrorAction SilentlyContinue)",
-      "Bash(Select-String -Path \"D:\\Projects\\main\\tests\\conftest.py\" -Pattern \"pytest_configure|filterwarnings|warning\" -Context 2,2)"
+      "Bash(Select-String -Path \"D:\\Projects\\main\\tests\\conftest.py\" -Pattern \"pytest_configure|filterwarnings|warning\" -Context 2,2)",
+      "Bash(Select-String -Pattern \"warning|Warning|PytestUnknownMarkWarning\")"
     ],
     "additionalDirectories": [
       "D:\\Projects"
