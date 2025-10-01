@@ -1,0 +1,620 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-8.3.5, pluggy-1.6.0 -- C:\Program Files\Python312\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default'
+benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: D:\Projects\main
+configfile: .pytest.ini
+plugins: anyio-4.10.0, hypothesis-6.139.2, benchmark-4.0.0, cov-7.0.0
+collecting ... collected 29 items
+
+tests/integration/test_controller_instantiation.py::test_controller_instantiation PASSED [  3%]
+tests/integration/test_controller_instantiation.py::test_pso_integration PASSED [  6%]
+tests/integration/test_legacy_factory_integration.py::test_legacy_factory_imports PASSED [ 10%]
+tests/integration/test_legacy_factory_integration.py::test_controller_name_normalization PASSED [ 13%]
+tests/integration/test_legacy_factory_integration.py::test_deprecation_mapping PASSED [ 17%]
+tests/integration/test_legacy_factory_integration.py::test_legacy_controller_creation PASSED [ 20%]
+tests/integration/test_legacy_factory_integration.py::test_factory_compatibility PASSED [ 24%]
+tests/integration/test_legacy_factory_integration.py::test_migration_path PASSED [ 27%]
+tests/integration/test_overshoot_comparison.py::test_overshoot_comparison PASSED [ 31%]
+tests/integration/test_pso_controller_integration.py::test_controller_type_bounds_mapping FAILED [ 34%]
+tests/integration/test_pso_controller_integration.py::test_pso_tuner_with_all_controllers FAILED [ 37%]
+tests/integration/test_pso_controller_integration.py::test_controller_factory_validation PASSED [ 41%]
+tests/integration/test_pso_controller_integration.py::test_pso_optimization_workflow FAILED [ 44%]
+tests/integration/test_pso_integration.py::test_pso_configuration_compatibility PASSED [ 48%]
+tests/integration/test_pso_integration.py::test_pso_optimizer_initialization PASSED [ 51%]
+tests/integration/test_pso_integration.py::test_fitness_function PASSED  [ 55%]
+tests/integration/test_pso_integration.py::test_mini_optimization PASSED [ 58%]
+tests/integration/test_pso_integration.py::test_optimized_controller_validation PASSED [ 62%]
+tests/integration/test_pso_integration_workflow.py::test_pso_controller_creation PASSED [ 65%]
+tests/integration/test_pso_integration_workflow.py::test_gain_bounds PASSED [ 68%]
+tests/integration/test_pso_integration_workflow.py::test_gain_validation PASSED [ 72%]
+tests/integration/test_pso_integration_workflow.py::test_pso_fitness_function PASSED [ 75%]
+tests/integration/test_pso_integration_workflow.py::test_multiple_smc_types PASSED [ 79%]
+tests/integration/test_simulation_integration.py::test_factory_simulation_integration PASSED [ 82%]
+tests/integration/test_simulation_integration.py::test_real_simulation_runner PASSED [ 86%]
+tests/integration/test_simulation_integration.py::test_pso_simulation_integration PASSED [ 89%]
+tests/integration/test_sta_smc_issue2.py::test_sta_smc_with_optimized_gains PASSED [ 93%]
+tests/integration/test_sta_smc_issue2_fixed.py::test_sta_smc_with_optimized_gains PASSED [ 96%]
+tests/integration/test_sta_smc_issue2_fixed.py::test_configuration_compatibility PASSED [100%]
+
+================================== FAILURES ===================================
+_____________________ test_controller_type_bounds_mapping _____________________
+src\config\loader.py:165: in load_config
+    cfg = ConfigSchema()
+        allow_unknown = False
+        err        = {'input': "{'residual_threshold': 0.15, 'hysteresis_enabled': True, "
+          "'hysteresis_upper': 0.165, 'hysteresis_lower': 0.135, "
+          "'persistence_counter': 10, 'adaptive': False, 'window_size': 50, "
+          "'threshold_factor': 3.0}",
+ 'loc': ('fault_detection',),
+ 'msg': 'Extra inputs are not permitted',
+ 'type': 'extra_forbidden',
+ 'url': 'https://errors.pydantic.dev/2.11/v/extra_forbidden'}
+        error_messages = ['  - fault_detection: Extra inputs are not permitted']
+        file_path  = WindowsPath('config.yaml')
+        loc        = 'fault_detection'
+        msg        = 'Extra inputs are not permitted'
+        path       = 'config.yaml'
+        previous_allow = False
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pydantic_settings\main.py:188: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 1 validation error for ConfigSchema
+E   fault_detection
+E     Extra inputs are not permitted [type=extra_forbidden, input_value={'residual_threshold': 0....'threshold_factor': 3.0}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+        __class__  = <class 'pydantic_settings.main.BaseSettings'>
+        __pydantic_self__ = ConfigSchema()
+        _case_sensitive = None
+        _cli_avoid_json = None
+        _cli_enforce_required = None
+        _cli_exit_on_error = None
+        _cli_flag_prefix_char = None
+        _cli_hide_none_type = None
+        _cli_ignore_unknown_args = None
+        _cli_implicit_flags = None
+        _cli_kebab_case = None
+        _cli_parse_args = None
+        _cli_parse_none_str = None
+        _cli_prefix = None
+        _cli_prog_name = None
+        _cli_settings_source = None
+        _cli_shortcuts = None
+        _cli_use_class_docs_for_groups = None
+        _env_file  = WindowsPath('.')
+        _env_file_encoding = None
+        _env_ignore_empty = None
+        _env_nested_delimiter = None
+        _env_nested_max_split = None
+        _env_parse_enums = None
+        _env_parse_none_str = None
+        _env_prefix = None
+        _nested_model_default_partial_update = None
+        _secrets_dir = None
+        values     = {}
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_pso_controller_integration.py:28: in test_controller_type_bounds_mapping
+    config = load_config("config.yaml")
+src\config\loader.py:211: in load_config
+    raise InvalidConfigurationError(
+E   src.config.loader.InvalidConfigurationError: Configuration validation failed:
+E     - fault_detection: Extra inputs are not permitted
+        allow_unknown = False
+        err        = {'input': "{'residual_threshold': 0.15, 'hysteresis_enabled': True, "
+          "'hysteresis_upper': 0.165, 'hysteresis_lower': 0.135, "
+          "'persistence_counter': 10, 'adaptive': False, 'window_size': 50, "
+          "'threshold_factor': 3.0}",
+ 'loc': ('fault_detection',),
+ 'msg': 'Extra inputs are not permitted',
+ 'type': 'extra_forbidden',
+ 'url': 'https://errors.pydantic.dev/2.11/v/extra_forbidden'}
+        error_messages = ['  - fault_detection: Extra inputs are not permitted']
+        file_path  = WindowsPath('config.yaml')
+        loc        = 'fault_detection'
+        msg        = 'Extra inputs are not permitted'
+        path       = 'config.yaml'
+        previous_allow = False
+---------------------------- Captured stdout call -----------------------------
+=== Testing Controller Type Bounds Mapping ===
+------------------------------ Captured log call ------------------------------
+ERROR    project.config:loader.py:206 Validation error at fault_detection: Extra inputs are not permitted
+_____________________ test_pso_tuner_with_all_controllers _____________________
+src\config\loader.py:165: in load_config
+    cfg = ConfigSchema()
+        allow_unknown = False
+        err        = {'input': "{'residual_threshold': 0.15, 'hysteresis_enabled': True, "
+          "'hysteresis_upper': 0.165, 'hysteresis_lower': 0.135, "
+          "'persistence_counter': 10, 'adaptive': False, 'window_size': 50, "
+          "'threshold_factor': 3.0}",
+ 'loc': ('fault_detection',),
+ 'msg': 'Extra inputs are not permitted',
+ 'type': 'extra_forbidden',
+ 'url': 'https://errors.pydantic.dev/2.11/v/extra_forbidden'}
+        error_messages = ['  - fault_detection: Extra inputs are not permitted']
+        file_path  = WindowsPath('config.yaml')
+        loc        = 'fault_detection'
+        msg        = 'Extra inputs are not permitted'
+        path       = 'config.yaml'
+        previous_allow = False
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pydantic_settings\main.py:188: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 1 validation error for ConfigSchema
+E   fault_detection
+E     Extra inputs are not permitted [type=extra_forbidden, input_value={'residual_threshold': 0....'threshold_factor': 3.0}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+        __class__  = <class 'pydantic_settings.main.BaseSettings'>
+        __pydantic_self__ = ConfigSchema()
+        _case_sensitive = None
+        _cli_avoid_json = None
+        _cli_enforce_required = None
+        _cli_exit_on_error = None
+        _cli_flag_prefix_char = None
+        _cli_hide_none_type = None
+        _cli_ignore_unknown_args = None
+        _cli_implicit_flags = None
+        _cli_kebab_case = None
+        _cli_parse_args = None
+        _cli_parse_none_str = None
+        _cli_prefix = None
+        _cli_prog_name = None
+        _cli_settings_source = None
+        _cli_shortcuts = None
+        _cli_use_class_docs_for_groups = None
+        _env_file  = WindowsPath('.')
+        _env_file_encoding = None
+        _env_ignore_empty = None
+        _env_nested_delimiter = None
+        _env_nested_max_split = None
+        _env_parse_enums = None
+        _env_parse_none_str = None
+        _env_prefix = None
+        _nested_model_default_partial_update = None
+        _secrets_dir = None
+        values     = {}
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_pso_controller_integration.py:74: in test_pso_tuner_with_all_controllers
+    config = load_config("config.yaml")
+src\config\loader.py:211: in load_config
+    raise InvalidConfigurationError(
+E   src.config.loader.InvalidConfigurationError: Configuration validation failed:
+E     - fault_detection: Extra inputs are not permitted
+        allow_unknown = False
+        err        = {'input': "{'residual_threshold': 0.15, 'hysteresis_enabled': True, "
+          "'hysteresis_upper': 0.165, 'hysteresis_lower': 0.135, "
+          "'persistence_counter': 10, 'adaptive': False, 'window_size': 50, "
+          "'threshold_factor': 3.0}",
+ 'loc': ('fault_detection',),
+ 'msg': 'Extra inputs are not permitted',
+ 'type': 'extra_forbidden',
+ 'url': 'https://errors.pydantic.dev/2.11/v/extra_forbidden'}
+        error_messages = ['  - fault_detection: Extra inputs are not permitted']
+        file_path  = WindowsPath('config.yaml')
+        loc        = 'fault_detection'
+        msg        = 'Extra inputs are not permitted'
+        path       = 'config.yaml'
+        previous_allow = False
+---------------------------- Captured stdout call -----------------------------
+
+=== Testing PSO Tuner with All Controllers ===
+------------------------------ Captured log call ------------------------------
+ERROR    project.config:loader.py:206 Validation error at fault_detection: Extra inputs are not permitted
+_______________________ test_pso_optimization_workflow ________________________
+src\config\loader.py:165: in load_config
+    cfg = ConfigSchema()
+        allow_unknown = False
+        err        = {'input': "{'residual_threshold': 0.15, 'hysteresis_enabled': True, "
+          "'hysteresis_upper': 0.165, 'hysteresis_lower': 0.135, "
+          "'persistence_counter': 10, 'adaptive': False, 'window_size': 50, "
+          "'threshold_factor': 3.0}",
+ 'loc': ('fault_detection',),
+ 'msg': 'Extra inputs are not permitted',
+ 'type': 'extra_forbidden',
+ 'url': 'https://errors.pydantic.dev/2.11/v/extra_forbidden'}
+        error_messages = ['  - fault_detection: Extra inputs are not permitted']
+        file_path  = WindowsPath('config.yaml')
+        loc        = 'fault_detection'
+        msg        = 'Extra inputs are not permitted'
+        path       = 'config.yaml'
+        previous_allow = False
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pydantic_settings\main.py:188: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 1 validation error for ConfigSchema
+E   fault_detection
+E     Extra inputs are not permitted [type=extra_forbidden, input_value={'residual_threshold': 0....'threshold_factor': 3.0}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+        __class__  = <class 'pydantic_settings.main.BaseSettings'>
+        __pydantic_self__ = ConfigSchema()
+        _case_sensitive = None
+        _cli_avoid_json = None
+        _cli_enforce_required = None
+        _cli_exit_on_error = None
+        _cli_flag_prefix_char = None
+        _cli_hide_none_type = None
+        _cli_ignore_unknown_args = None
+        _cli_implicit_flags = None
+        _cli_kebab_case = None
+        _cli_parse_args = None
+        _cli_parse_none_str = None
+        _cli_prefix = None
+        _cli_prog_name = None
+        _cli_settings_source = None
+        _cli_shortcuts = None
+        _cli_use_class_docs_for_groups = None
+        _env_file  = WindowsPath('.')
+        _env_file_encoding = None
+        _env_ignore_empty = None
+        _env_nested_delimiter = None
+        _env_nested_max_split = None
+        _env_parse_enums = None
+        _env_parse_none_str = None
+        _env_prefix = None
+        _nested_model_default_partial_update = None
+        _secrets_dir = None
+        values     = {}
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_pso_controller_integration.py:194: in test_pso_optimization_workflow
+    config = load_config("config.yaml")
+src\config\loader.py:211: in load_config
+    raise InvalidConfigurationError(
+E   src.config.loader.InvalidConfigurationError: Configuration validation failed:
+E     - fault_detection: Extra inputs are not permitted
+        allow_unknown = False
+        err        = {'input': "{'residual_threshold': 0.15, 'hysteresis_enabled': True, "
+          "'hysteresis_upper': 0.165, 'hysteresis_lower': 0.135, "
+          "'persistence_counter': 10, 'adaptive': False, 'window_size': 50, "
+          "'threshold_factor': 3.0}",
+ 'loc': ('fault_detection',),
+ 'msg': 'Extra inputs are not permitted',
+ 'type': 'extra_forbidden',
+ 'url': 'https://errors.pydantic.dev/2.11/v/extra_forbidden'}
+        error_messages = ['  - fault_detection: Extra inputs are not permitted']
+        file_path  = WindowsPath('config.yaml')
+        loc        = 'fault_detection'
+        msg        = 'Extra inputs are not permitted'
+        path       = 'config.yaml'
+        previous_allow = False
+---------------------------- Captured stdout call -----------------------------
+
+=== Testing PSO Optimization Workflow ===
+------------------------------ Captured log call ------------------------------
+ERROR    project.config:loader.py:206 Validation error at fault_detection: Extra inputs are not permitted
+============================== warnings summary ===============================
+tests/integration/test_controller_instantiation.py::test_controller_instantiation
+tests/integration/test_pso_controller_integration.py::test_controller_factory_validation
+tests/integration/test_simulation_integration.py::test_factory_simulation_integration
+  D:\Projects\main\src\controllers\smc\algorithms\adaptive\config.py:83: UserWarning: Large adaptation rate may cause instability
+    warnings.warn("Large adaptation rate may cause instability", UserWarning)
+
+tests/integration/test_controller_instantiation.py::test_controller_instantiation
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_controller_instantiation.py::test_controller_instantiation returned {'controllers_tested': ['classical_smc', 'adaptive_smc', 'sta_smc', 'hybrid_adaptive_sta_smc'], 'successful': ['classical_smc', 'adaptive_smc', 'sta_smc', 'hybrid_adaptive_sta_smc'], 'failed': [], 'error_details': {}, 'total_score': 4, 'max_score': 4}, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_controller_instantiation.py::test_pso_integration
+tests/integration/test_overshoot_comparison.py::test_overshoot_comparison
+tests/integration/test_overshoot_comparison.py::test_overshoot_comparison
+tests/integration/test_sta_smc_issue2.py::test_sta_smc_with_optimized_gains
+tests/integration/test_sta_smc_issue2_fixed.py::test_sta_smc_with_optimized_gains
+  D:\\Projects\\main\\src\\utils\\control\\saturation.py:69: RuntimeWarning: The 'linear' switching method implements a piecewise\u2011linear saturation, which approximates the sign function poorly near zero and can degrade chattering performance. Consider using 'tanh' for smoother control.\n    warnings.warn(
+
+tests/integration/test_controller_instantiation.py::test_pso_integration
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_controller_instantiation.py::test_pso_integration returned {'controllers_tested': ['classical_smc', 'adaptive_smc', 'sta_smc', 'hybrid_adaptive_sta_smc'], 'successful': ['classical_smc', 'adaptive_smc', 'sta_smc', 'hybrid_adaptive_sta_smc'], 'failed': [], 'error_details': {}, 'total_score': 4, 'max_score': 4}, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_legacy_factory_integration.py::test_legacy_factory_imports
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_legacy_factory_integration.py::test_legacy_factory_imports returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_legacy_factory_integration.py::test_controller_name_normalization
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_legacy_factory_integration.py::test_controller_name_normalization returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_legacy_factory_integration.py::test_deprecation_mapping
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_legacy_factory_integration.py::test_deprecation_mapping returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_legacy_factory_integration.py::test_legacy_controller_creation
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_legacy_factory_integration.py::test_legacy_controller_creation returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_legacy_factory_integration.py::test_factory_compatibility
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_legacy_factory_integration.py::test_factory_compatibility returned False, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_legacy_factory_integration.py::test_migration_path
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_legacy_factory_integration.py::test_migration_path returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_overshoot_comparison.py::test_overshoot_comparison
+  D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization
+    warnings.warn("State vector was modified during sanitization", UserWarning)
+
+tests/integration/test_overshoot_comparison.py::test_overshoot_comparison
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_overshoot_comparison.py::test_overshoot_comparison returned (False, {'error': 'operands could not be broadcast together with shapes (6,) (0,) '}), which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_controller_integration.py::test_controller_factory_validation
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_controller_integration.py::test_controller_factory_validation returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration.py::test_pso_configuration_compatibility
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration.py::test_pso_configuration_compatibility returned False, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration.py::test_pso_optimizer_initialization
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration.py::test_pso_optimizer_initialization returned False, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration.py::test_fitness_function
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration.py::test_fitness_function returned False, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration.py::test_mini_optimization
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration.py::test_mini_optimization returned False, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration.py::test_optimized_controller_validation
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration.py::test_optimized_controller_validation returned False, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration_workflow.py::test_pso_controller_creation
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration_workflow.py::test_pso_controller_creation returned <src.controllers.factory.smc_factory.PSOControllerWrapper object at 0x00000150E5EA4440>, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration_workflow.py::test_gain_bounds
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration_workflow.py::test_gain_bounds returned ([0.1, 0.1, 0.1, 0.1, 1.0, 0.0], [50.0, 50.0, 50.0, 50.0, 200.0, 50.0]), which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration_workflow.py::test_gain_validation
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration_workflow.py::test_gain_validation returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration_workflow.py::test_pso_fitness_function
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration_workflow.py::test_pso_fitness_function returned <function test_pso_fitness_function.<locals>.fitness_function at 0x00000150E60F3880>, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_pso_integration_workflow.py::test_multiple_smc_types
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_pso_integration_workflow.py::test_multiple_smc_types returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_simulation_integration.py::test_factory_simulation_integration
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_simulation_integration.py::test_factory_simulation_integration returned {'classical_smc': {'status': 'success', 'final_state': array([0.05      , 0.        , 0.11006263, 0.01952625, 0.05504424,
+         0.00921791]), 'max_control': 0.0, 'rms_error': 0.2780416569731932, 'sim_data': {'time': array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1 ,
+         0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2 , 0.21,
+         0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3 , 0.31, 0.32,
+         0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4 , 0.41, 0.42, 0.43,
+         0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5 , 0.51, 0.52, 0.53, 0.54,
+         0.55, 0.56, 0.57, 0.58, 0.59, 0.6 , 0.61, 0.62, 0.63, 0.64, 0.65,
+         0.66, 0.67, 0.68, 0.69, 0.7 , 0.71, 0.72, 0.73, 0.74, 0.75, 0.76,
+         0.77, 0.78, 0.79, 0.8 , 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87,
+         0.88, 0.89, 0.9 , 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98,
+         0.99, 1.  , 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
+         1.1 , 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.2 ,
+         1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29, 1.3 , 1.31,
+         1.32, 1.33, 1.34, 1.35, 1.36, 1.37, 1.38, 1.39, 1.4 , 1.41, 1.42,
+         1.43, 1.44, 1.45, 1.46, 1.47, 1.48, 1.49, 1.5 , 1.51, 1.52, 1.53,
+         1.54, 1.55, 1.56, 1.57, 1.58, 1.59, 1.6 , 1.61, 1.62, 1.63, 1.64,
+         1.65, 1.66, 1.67, 1.68, 1.69, 1.7 , 1.71, 1.72, 1.73, 1.74, 1.75,
+         1.76, 1.77, 1.78, 1.79, 1.8 , 1.81, 1.82, 1.83, 1.84, 1.85, 1.86,
+         1.87, 1.88, 1.89, 1.9 , 1.91, 1.92, 1.93, 1.94, 1.95, 1.96, 1.97,
+         1.98, 1.99]), 'states': array([[ 0.05      ,  0.        ,  0.1       ,  0.        ,  0.05      ,
+           0.        ],
+         [ 0.05      ,  0.        ,  0.1       , -0.00979366,  0.05      ,
+          -0.00490296],
+         [ 0.05      ,  0.        ,  0.09990206, -0.01958732,  0.04995097,
+          -0.00980591],
+         ...,
+         [ 0.05      ,  0.        ,  0.10935013,  0.04097798,  0.05469859,
+           0.01996397],
+         [ 0.05      ,  0.        ,  0.10975991,  0.03027209,  0.05489823,
+           0.01460072],
+         [ 0.05      ,  0.        ,  0.11006263,  0.01952625,  0.05504424,
+           0.00921791]]), 'controls': array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), 'success': True}}, 'sta_smc': {'status': 'success', 'final_state': array([0.05      , 0.        , 0.11006263, 0.01952625, 0.05504424,
+         0.00921791]), 'max_control': 0.0, 'rms_error': 0.2780416569731932, 'sim_data': {'time': array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1 ,
+         0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2 , 0.21,
+         0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3 , 0.31, 0.32,
+         0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4 , 0.41, 0.42, 0.43,
+         0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5 , 0.51, 0.52, 0.53, 0.54,
+         0.55, 0.56, 0.57, 0.58, 0.59, 0.6 , 0.61, 0.62, 0.63, 0.64, 0.65,
+         0.66, 0.67, 0.68, 0.69, 0.7 , 0.71, 0.72, 0.73, 0.74, 0.75, 0.76,
+         0.77, 0.78, 0.79, 0.8 , 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87,
+         0.88, 0.89, 0.9 , 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98,
+         0.99, 1.  , 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
+         1.1 , 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.2 ,
+         1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29, 1.3 , 1.31,
+         1.32, 1.33, 1.34, 1.35, 1.36, 1.37, 1.38, 1.39, 1.4 , 1.41, 1.42,
+         1.43, 1.44, 1.45, 1.46, 1.47, 1.48, 1.49, 1.5 , 1.51, 1.52, 1.53,
+         1.54, 1.55, 1.56, 1.57, 1.58, 1.59, 1.6 , 1.61, 1.62, 1.63, 1.64,
+         1.65, 1.66, 1.67, 1.68, 1.69, 1.7 , 1.71, 1.72, 1.73, 1.74, 1.75,
+         1.76, 1.77, 1.78, 1.79, 1.8 , 1.81, 1.82, 1.83, 1.84, 1.85, 1.86,
+         1.87, 1.88, 1.89, 1.9 , 1.91, 1.92, 1.93, 1.94, 1.95, 1.96, 1.97,
+         1.98, 1.99]), 'states': array([[ 0.05      ,  0.        ,  0.1       ,  0.        ,  0.05      ,
+           0.        ],
+         [ 0.05      ,  0.        ,  0.1       , -0.00979366,  0.05      ,
+          -0.00490296],
+         [ 0.05      ,  0.        ,  0.09990206, -0.01958732,  0.04995097,
+          -0.00980591],
+         ...,
+         [ 0.05      ,  0.        ,  0.10935013,  0.04097798,  0.05469859,
+           0.01996397],
+         [ 0.05      ,  0.        ,  0.10975991,  0.03027209,  0.05489823,
+           0.01460072],
+         [ 0.05      ,  0.        ,  0.11006263,  0.01952625,  0.05504424,
+           0.00921791]]), 'controls': array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), 'success': True}}, 'adaptive_smc': {'status': 'success', 'final_state': array([0.05      , 0.        , 0.11006263, 0.01952625, 0.05504424,
+         0.00921791]), 'max_control': 0.0, 'rms_error': 0.2780416569731932, 'sim_data': {'time': array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1 ,
+         0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2 , 0.21,
+         0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3 , 0.31, 0.32,
+         0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4 , 0.41, 0.42, 0.43,
+         0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5 , 0.51, 0.52, 0.53, 0.54,
+         0.55, 0.56, 0.57, 0.58, 0.59, 0.6 , 0.61, 0.62, 0.63, 0.64, 0.65,
+         0.66, 0.67, 0.68, 0.69, 0.7 , 0.71, 0.72, 0.73, 0.74, 0.75, 0.76,
+         0.77, 0.78, 0.79, 0.8 , 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87,
+         0.88, 0.89, 0.9 , 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98,
+         0.99, 1.  , 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
+         1.1 , 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.2 ,
+         1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29, 1.3 , 1.31,
+         1.32, 1.33, 1.34, 1.35, 1.36, 1.37, 1.38, 1.39, 1.4 , 1.41, 1.42,
+         1.43, 1.44, 1.45, 1.46, 1.47, 1.48, 1.49, 1.5 , 1.51, 1.52, 1.53,
+         1.54, 1.55, 1.56, 1.57, 1.58, 1.59, 1.6 , 1.61, 1.62, 1.63, 1.64,
+         1.65, 1.66, 1.67, 1.68, 1.69, 1.7 , 1.71, 1.72, 1.73, 1.74, 1.75,
+         1.76, 1.77, 1.78, 1.79, 1.8 , 1.81, 1.82, 1.83, 1.84, 1.85, 1.86,
+         1.87, 1.88, 1.89, 1.9 , 1.91, 1.92, 1.93, 1.94, 1.95, 1.96, 1.97,
+         1.98, 1.99]), 'states': array([[ 0.05      ,  0.        ,  0.1       ,  0.        ,  0.05      ,
+           0.        ],
+         [ 0.05      ,  0.        ,  0.1       , -0.00979366,  0.05      ,
+          -0.00490296],
+         [ 0.05      ,  0.        ,  0.09990206, -0.01958732,  0.04995097,
+          -0.00980591],
+         ...,
+         [ 0.05      ,  0.        ,  0.10935013,  0.04097798,  0.05469859,
+           0.01996397],
+         [ 0.05      ,  0.        ,  0.10975991,  0.03027209,  0.05489823,
+           0.01460072],
+         [ 0.05      ,  0.        ,  0.11006263,  0.01952625,  0.05504424,
+           0.00921791]]), 'controls': array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), 'success': True}}, 'hybrid_adaptive_sta_smc': {'status': 'success', 'final_state': array([-2.91691649, -3.52211679,  0.23394008,  0.00475792,  0.17894645,
+          0.0037449 ]), 'max_control': 25.51156042354772, 'rms_error': 2.2218119016943874, 'sim_data': {'time': array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1 ,
+         0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2 , 0.21,
+         0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3 , 0.31, 0.32,
+         0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4 , 0.41, 0.42, 0.43,
+         0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5 , 0.51, 0.52, 0.53, 0.54,
+         0.55, 0.56, 0.57, 0.58, 0.59, 0.6 , 0.61, 0.62, 0.63, 0.64, 0.65,
+         0.66, 0.67, 0.68, 0.69, 0.7 , 0.71, 0.72, 0.73, 0.74, 0.75, 0.76,
+         0.77, 0.78, 0.79, 0.8 , 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87,
+         0.88, 0.89, 0.9 , 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98,
+         0.99, 1.  , 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
+         1.1 , 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.2 ,
+         1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29, 1.3 , 1.31,
+         1.32, 1.33, 1.34, 1.35, 1.36, 1.37, 1.38, 1.39, 1.4 , 1.41, 1.42,
+         1.43, 1.44, 1.45, 1.46, 1.47, 1.48, 1.49, 1.5 , 1.51, 1.52, 1.53,
+         1.54, 1.55, 1.56, 1.57, 1.58, 1.59, 1.6 , 1.61, 1.62, 1.63, 1.64,
+         1.65, 1.66, 1.67, 1.68, 1.69, 1.7 , 1.71, 1.72, 1.73, 1.74, 1.75,
+         1.76, 1.77, 1.78, 1.79, 1.8 , 1.81, 1.82, 1.83, 1.84, 1.85, 1.86,
+         1.87, 1.88, 1.89, 1.9 , 1.91, 1.92, 1.93, 1.94, 1.95, 1.96, 1.97,
+         1.98, 1.99]), 'states': array([[ 5.00000000e-02,  0.00000000e+00,  1.00000000e-01,
+           0.00000000e+00,  5.00000000e-02,  0.00000000e+00],
+         [ 5.00000000e-02, -6.86274510e-04,  1.00000000e-01,
+          -9.11081218e-03,  5.00000000e-02, -4.21753966e-03],
+         [ 4.99931373e-02, -2.05939364e-03,  9.99088919e-02,
+          -1.75382111e-02,  4.99578246e-02, -7.74909307e-03],
+         ...,
+         [-2.84723605e+00, -3.47135199e+00,  2.33903943e-01,
+           8.50986935e-04,  1.79097221e-01, -1.12679804e-02],
+         [-2.88194957e+00, -3.49669143e+00,  2.33912453e-01,
+           2.76309543e-03,  1.78984541e-01, -3.80950610e-03],
+         [-2.91691649e+00, -3.52211679e+00,  2.33940084e-01,
+           4.75792262e-03,  1.78946446e-01,  3.74490192e-03]]), 'controls': array([ -0.68627451,  -1.37311913,  -2.05918065,  -2.74312017,
+          -3.42361676,  -4.09937099,  -4.76910836,  -5.43158259,
+          -6.0855789 ,  -6.72991704,  -7.36345424,  -7.98508809,
+          -8.59375912,  -9.18845339,  -9.76820484, -10.33209746,
+         -10.87926737, -11.40890465, -11.92025506, -12.41262152,
+         -12.88536551, -13.33790814, -13.76973121, -14.18037791,
+         -14.5694535 , -14.9366257 , -15.28162492, -15.60424433,
+         -15.90433975, -16.18182931, -16.43669304, -16.66897215,
+         -16.87876828, -17.06624249, -17.23161414, -17.3751596 ,
+         -17.49721081, -17.59815371, -17.67842651, -17.73851787,
+         -17.7789649 , -17.8003511 , -17.80330418, -17.78849371,
+         -17.75662879, -17.70845556, -17.64475462, -17.56633844,
+         -17.47404865, -17.36875336, -17.2513443 , -17.12273405,
+         -16.9838532 , -16.83564749, -16.67907491, -16.51510285,
+         -16.34470524, -16.16885969, -15.98854466, -15.80473668,
+         -15.6184076 , -15.43052187, -15.2420339 , -15.05388547,
+         -14.8670032 , -14.68229615, -14.50065339, -14.32294181,
+         -14.15000389, -13.98265564, -13.82168461, -13.66784805,
+         -13.52187114, -13.38444539, -13.25622705, -13.13783578,
+         -13.02985337, -12.93282254, -12.84724601, -12.77358554,
+         -12.7122612 , -12.66365072, -12.62808901, -12.60586777,
+         -12.59723525, -12.6023961 , -12.62151143, -12.65469886,
+         -12.70203282, -12.76354487, -12.83922421, -12.92901824,
+         -13.03283325, -13.15053522, -13.28195075, -13.42686797,
+         -13.5850377 , -13.75617461, -13.93995844, -19.82139559,
+         -19.82335637, -19.82723949, -19.83300726, -19.84062272,
+         -19.85004964, -19.8612525 , -19.87419648, -19.88884744,
+         -19.90517192, -19.92313709, -19.94271078, -19.96386147,
+         -19.98655821, -20.01077071, -20.03646924, -20.06362466,
+         -20.0922084 , -20.12219246, -20.15354939, -20.18625225,
+         -20.22027467, -20.25559077, -20.29217518, -20.33000303,
+         -20.36904994, -20.40929201, -20.45070581, -20.49326835,
+         -20.53695712, -20.58175003, -20.62762544, -20.67456211,
+         -20.72253923, -20.77153642, -20.82153365, -20.87251134,
+         -20.92445025, -20.97733153, -21.03113671, -21.08584766,
+         -21.14144664, -21.19791623, -21.25523935, -21.31339928,
+         -21.3723796 , -21.43216423, -21.49273739, -21.55408363,
+         -21.61618779, -21.679035  , -21.7426107 , -21.8069006 ,
+         -21.87189069, -21.93756726, -22.00391684, -22.07092622,
+         -22.13858248, -22.20687294, -22.27578515, -22.34530692,
+         -22.41542631, -22.48613159, -22.55741127, -22.6292541 ,
+         -22.70164903, -22.77458524, -22.84805211, -22.92203924,
+         -22.99653642, -23.07153366, -23.14702115, -23.22298927,
+         -23.29942861, -23.37632993, -23.45368415, -23.53148242,
+         -23.60971601, -23.68837639, -23.7674552 , -23.84694423,
+         -23.92683543, -24.00712092, -24.08779298, -24.16884401,
+         -24.25026659, -24.33205343, -24.4141974 , -24.49669148,
+         -24.57952881, -24.66270267, -24.74620645, -24.83003369,
+         -24.91417804, -24.99863329, -25.08339333, -25.1684522 ,
+         -25.25380403, -25.33944308, -25.42536372, -25.51156042]), 'success': True}}}, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_simulation_integration.py::test_real_simulation_runner
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_simulation_integration.py::test_real_simulation_runner returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_simulation_integration.py::test_pso_simulation_integration
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_simulation_integration.py::test_pso_simulation_integration returned True, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_sta_smc_issue2.py::test_sta_smc_with_optimized_gains
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_sta_smc_issue2.py::test_sta_smc_with_optimized_gains returned (True, {'controller_created': True, 'control_computation_success': True, 'gains': [8.0, 4.0, 12.0, 6.0, 4.85, 3.43], 'damping_ratios': {'zeta1': 0.7000372013924212, 'zeta2': 0.7001458181455251}, 'target_achieved': True}), which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_sta_smc_issue2_fixed.py::test_sta_smc_with_optimized_gains
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_sta_smc_issue2_fixed.py::test_sta_smc_with_optimized_gains returned (True, {'controller_created': True, 'control_computation_success': True, 'gains': [8.0, 4.0, 12.0, 6.0, 1.2, 0.8], 'damping_ratios': {'zeta1': 0.17320508075688773, 'zeta2': 0.16329931618554522}, 'target_achieved': False}), which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+tests/integration/test_sta_smc_issue2_fixed.py::test_configuration_compatibility
+  C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:163: PytestReturnNotNoneWarning: Expected None, but tests/integration/test_sta_smc_issue2_fixed.py::test_configuration_compatibility returned False, which will be an error in a future version of pytest.  Did you mean to use `assert` instead of `return`?
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_pso_controller_integration.py::test_controller_type_bounds_mapping - src.config.loader.InvalidConfigurationError: Configuration validation failed:
+  - fault_detection: Extra inputs are not permitted
+FAILED tests/integration/test_pso_controller_integration.py::test_pso_tuner_with_all_controllers - src.config.loader.InvalidConfigurationError: Configuration validation failed:
+  - fault_detection: Extra inputs are not permitted
+FAILED tests/integration/test_pso_controller_integration.py::test_pso_optimization_workflow - src.config.loader.InvalidConfigurationError: Configuration validation failed:
+  - fault_detection: Extra inputs are not permitted
+================== 3 failed, 26 passed, 35 warnings in 9.75s ==================
