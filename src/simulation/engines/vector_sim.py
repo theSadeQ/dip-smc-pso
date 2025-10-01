@@ -108,6 +108,7 @@ def simulate(
     True
     """
     # Convert state to array and normalise batch dimension
+    # MEMORY OPTIMIZATION: asarray creates view when input is already ndarray with correct dtype
     x = np.asarray(initial_state, dtype=float)
     # Determine if batch: ndim > 1 implies (B, D)
     batch_mode = x.ndim > 1
@@ -117,6 +118,7 @@ def simulate(
         x_b = x
 
     # Convert controls to array and infer horizon
+    # MEMORY OPTIMIZATION: asarray creates view when input is already ndarray with correct dtype
     u = np.asarray(control_inputs, dtype=float)
     # If horizon is not provided, infer from the length of u along its first time axis
     if horizon is None:
@@ -326,6 +328,7 @@ def simulate_system_batch(
     """
     import numpy as _np  # local import to avoid polluting namespace
     # Convert particles to array
+    # MEMORY OPTIMIZATION: asarray creates view when input is already ndarray with correct dtype
     part_arr = _np.asarray(particles, dtype=float)
     if part_arr.ndim == 1:
         part_arr = part_arr[_np.newaxis, :]
@@ -355,11 +358,14 @@ def simulate_system_batch(
                 state_dim = 6  # fall back to DIP dimension
         init_b = _np.zeros((B, state_dim), dtype=float)
     else:
+        # MEMORY OPTIMIZATION: asarray creates view when input is already ndarray with correct dtype
         init = _np.asarray(initial_state, dtype=float)
         if init.ndim == 1:
             # broadcast across batch
+            # MEMORY OPTIMIZATION: Must copy broadcast_to result (returns view that needs writeable buffer)
             init_b = _np.broadcast_to(init, (B, init.shape[0])).copy()
         else:
+            # MEMORY OPTIMIZATION: Copy only when necessary (will be written to)
             init_b = init.copy()
     # Preallocate outputs
     t_arr = _np.zeros(H + 1, dtype=float)
@@ -476,6 +482,7 @@ def simulate_system_batch(
             if x_next is None:
                 early_stop = True
                 break
+            # MEMORY OPTIMIZATION: asarray creates view when input is already ndarray with correct dtype
             x_next_arr = _np.asarray(x_next, dtype=float).reshape(-1)
             if not _np.all(_np.isfinite(x_next_arr)):
                 early_stop = True
