@@ -351,6 +351,35 @@ python -m memory_profiler simulate.py --ctrl classical_smc
 python .dev_tools/performance_audit.py
 ```
 
+### Automated Checkpoints
+
+The repository includes an automated Git backup system that creates restore points every 1 minute:
+
+```powershell
+# Manual checkpoint (Windows)
+powershell -NoProfile -ExecutionPolicy Bypass -File .\.dev_tools\claude-backup.ps1 -Checkpoint
+```
+
+**Features:**
+- Automatic commits every 1 minute via Task Scheduler
+- Timestamped commit messages with session context
+- Respects `.gitignore` (no unwanted files committed)
+- Logging to `.dev_tools/backup/backup.log`
+
+**Setup Task Scheduler:**
+```batch
+schtasks /Create ^
+ /TN "ClaudeCode-AutoBackup" ^
+ /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:\Projects\main\.dev_tools\claude-backup.ps1" ^
+ /SC MINUTE ^
+ /MO 1 ^
+ /RL LIMITED ^
+ /F ^
+ /RU "%USERNAME%"
+```
+
+See [docs/claude-backup.md](docs/claude-backup.md) for full documentation.
+
 ## Configuration Reference
 
 The system uses YAML configuration with comprehensive validation:
