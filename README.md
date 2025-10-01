@@ -380,6 +380,25 @@ schtasks /Create ^
 
 See [docs/claude-backup.md](docs/claude-backup.md) for full documentation.
 
+### Account Switching (Zero-Effort Session Continuity)
+
+Hit token limits? Switch Claude Code accounts effortlessly:
+
+```
+1. Account A hits token limit
+2. Switch to Account B
+3. Say: "continue" or "hi"
+4. Claude auto-loads context and resumes
+```
+
+**How it works:**
+- Session state automatically saved to `.dev_tools/session_state.json`
+- Committed every 1 minute with automated backups
+- Claude checks for recent session on startup
+- Zero manual handoff prompt writing required
+
+**See:** [docs/session-continuity.md](docs/session-continuity.md) for details.
+
 ## Configuration Reference
 
 The system uses YAML configuration with comprehensive validation:
