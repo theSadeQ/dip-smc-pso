@@ -281,6 +281,11 @@ class HybridAdaptiveSTASMC:
         self.k2_max = require_positive(k2_max, "k2_max")
         self.u_int_max = require_positive(u_int_max, "u_int_max")
 
+        # CRITICAL VALIDATION (Issue #13): dt must be > EPSILON_DIV to prevent division by zero
+        # in gain leak rate limiter (lines 570-571)
+        if self.dt <= 1e-12:
+            raise ValueError(f"dt={self.dt} too small for safe division (must be > 1e-12)")
+
         # Initialize numerical safety and self-tapering parameters
         self.gain_leak = max(0.0, float(gain_leak))
         self.adaptation_sat_threshold = max(0.0, float(adaptation_sat_threshold))

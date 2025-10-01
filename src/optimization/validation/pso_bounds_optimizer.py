@@ -31,6 +31,7 @@ from src.controllers.factory import SMCType, create_smc_for_pso, get_gain_bounds
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.config import load_config
 from src.utils.seed import set_global_seed
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 class BoundsOptimizationStrategy(Enum):
@@ -446,7 +447,8 @@ class PSOBoundsOptimizer:
                 # Extract performance metrics
                 cost_history = result.get('history', {}).get('cost', [])
                 if len(cost_history) >= 2:
-                    convergence_rate = (cost_history[0] - cost_history[-1]) / max(cost_history[0], 1e-6)
+                    # Issue #13: Standardized division protection
+                    convergence_rate = (cost_history[0] - cost_history[-1]) / max(cost_history[0], EPSILON_DIV)
                     convergence_rates.append(max(0.0, convergence_rate))
                     final_costs.append(result['best_cost'])
                     success_count += 1
@@ -550,16 +552,17 @@ class PSOBoundsOptimizer:
             return 1.0  # No improvement data available
 
         # Calculate improvement in key metrics
+        # Issue #13: Standardized division protection
         convergence_improvement = (
-            optimal_performance['convergence_rate'] / max(original_performance['convergence_rate'], 1e-6)
+            optimal_performance['convergence_rate'] / max(original_performance['convergence_rate'], EPSILON_DIV)
         )
 
         cost_improvement = (
-            original_performance['final_cost'] / max(optimal_performance['final_cost'], 1e-6)
+            original_performance['final_cost'] / max(optimal_performance['final_cost'], EPSILON_DIV)
         )
 
         success_improvement = (
-            optimal_performance['success_rate'] / max(original_performance['success_rate'], 1e-6)
+            optimal_performance['success_rate'] / max(original_performance['success_rate'], EPSILON_DIV)
         )
 
         # Geometric mean of improvements
@@ -592,7 +595,8 @@ class PSOBoundsOptimizer:
             # Check bounds are not too extreme
             bounds_reasonable = True
             for i, (l_opt, u_opt, l_orig, u_orig) in enumerate(zip(lower_opt, upper_opt, lower_orig, upper_orig)):
-                expansion_factor = (u_opt - l_opt) / max(u_orig - l_orig, 1e-6)
+                # Issue #13: Standardized division protection
+                expansion_factor = (u_opt - l_opt) / max(u_orig - l_orig, EPSILON_DIV)
                 if expansion_factor > self.max_bounds_expansion or expansion_factor < self.min_bounds_contraction:
                     bounds_reasonable = False
                     break
@@ -609,13 +613,14 @@ class PSOBoundsOptimizer:
                 )
 
                 # Calculate improvements
+                # Issue #13: Standardized division protection
                 convergence_improvement = (
                     optimized_performance['convergence_rate'] - original_performance['convergence_rate']
-                ) / max(original_performance['convergence_rate'], 1e-6)
+                ) / max(original_performance['convergence_rate'], EPSILON_DIV)
 
                 performance_improvement = (
                     original_performance['final_cost'] - optimized_performance['final_cost']
-                ) / max(original_performance['final_cost'], 1e-6)
+                ) / max(original_performance['final_cost'], EPSILON_DIV)
 
                 validation_metrics['convergence_improvement'] = convergence_improvement
                 validation_metrics['performance_improvement'] = performance_improvement

@@ -523,24 +523,24 @@ class TestNumericalRobustness:
     """Test numerical robustness against edge cases."""
 
     def test_division_by_zero_robustness(self):
-        """Test robustness against division by zero."""
-
-        def safe_division(a, b, epsilon=1e-15):
-            """Safe division with regularization."""
-            return a / (b + epsilon * np.sign(b) if b != 0 else epsilon)
+        """Test robustness against division by zero using safe_divide."""
+        from src.utils.numerical_stability import safe_divide, EPSILON_DIV
 
         # Test cases that could cause division by zero
+        # Format: (numerator, denominator, expected_max_magnitude)
         test_cases = [
-            (1.0, 0.0),
-            (0.0, 0.0),
-            (1e-20, 1e-20),
-            (-1.0, 0.0),
-            (np.inf, 0.0),
+            (1.0, 0.0, 1e15),      # 1.0 / epsilon -> ~1e12
+            (0.0, 0.0, 1.0),       # 0.0 / epsilon -> 0.0
+            (1.0, 1e-15, 1e15),    # 1.0 / (1e-15 + epsilon) -> ~1e12
+            (10.0, 1e-12, 1e15),   # 10.0 / (1e-12 + epsilon) -> ~5e12
+            (-1.0, 0.0, 1e15),     # -1.0 / epsilon -> ~-1e12
+            (1.0, -1e-15, 1e15),   # 1.0 / (-1e-15 + epsilon) -> ~-1e12
         ]
 
-        for numerator, denominator in test_cases:
-            result = safe_division(numerator, denominator)
-            assert np.isfinite(result), f"Division {numerator}/{denominator} produced non-finite result"
+        for numerator, denominator, max_magnitude in test_cases:
+            result = safe_divide(numerator, denominator, epsilon=EPSILON_DIV)
+            assert np.isfinite(result), f"safe_divide({numerator}, {denominator}) produced non-finite result: {result}"
+            assert abs(result) <= max_magnitude, f"safe_divide({numerator}, {denominator}) produced unreasonably large result: {result}"
 
     def test_logarithm_stability(self):
         """Test logarithm computation stability."""

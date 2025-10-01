@@ -30,6 +30,7 @@ from dataclasses import dataclass
 import warnings
 
 from src.config import ConfigSchema
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 @dataclass
@@ -336,7 +337,8 @@ class PSOBoundsValidator:
                                        bounds_max: List[float]) -> float:
         """Estimate convergence difficulty based on bounds width."""
         ranges = [b_max - b_min for b_min, b_max in zip(bounds_min, bounds_max)]
-        normalized_ranges = [r / (abs(b_min) + abs(b_max) + 1e-6)
+        # Issue #13: Standardized division protection
+        normalized_ranges = [r / (abs(b_min) + abs(b_max) + EPSILON_DIV)
                            for r, b_min, b_max in zip(ranges, bounds_min, bounds_max)]
 
         # Return mean normalized range as difficulty metric (0-1 scale)
