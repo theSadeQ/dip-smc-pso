@@ -34,6 +34,7 @@ from typing import Dict, List, Optional, Any
 # Configuration
 SESSION_FILE = Path(__file__).parent / "session_state.json"
 AUTO_LOAD_THRESHOLD_HOURS = 24
+SESSION_AUTO_SAVE_ENABLED = False  # Set to True to enable auto-save session functionality
 
 
 def load_session() -> Optional[Dict[str, Any]]:
@@ -73,6 +74,10 @@ def save_session(state: Dict[str, Any]) -> bool:
         >>> state['context']['current_task'] = "New task"
         >>> save_session(state)
     """
+    # Check if auto-save is enabled
+    if not SESSION_AUTO_SAVE_ENABLED:
+        return False
+
     try:
         # Update timestamp
         state['last_updated'] = datetime.now().isoformat(timespec='seconds')
