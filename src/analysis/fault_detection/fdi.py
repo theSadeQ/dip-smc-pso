@@ -114,7 +114,7 @@ class FDIsystem:
       the control command path; external supervisors decide safe-state actions.  # [CIT-064]
     """
 
-    residual_threshold: float = 0.5  # [CIT-048]
+    residual_threshold: float = 0.150  # [HIGH-001] Statistically calibrated (mean=0.103, std=0.044, p99=0.219)
     persistence_counter: int = 10  # [CIT-048]
     use_ekf_residual: bool = False
     residual_states: List[int] = field(default_factory=lambda: [0, 1, 2])
@@ -127,8 +127,8 @@ class FDIsystem:
 
     # Hysteresis mechanism for threshold oscillation prevention [Issue #18]
     hysteresis_enabled: bool = False
-    hysteresis_upper: float = 0.154  # Upper threshold (triggers fault detection)
-    hysteresis_lower: float = 0.126  # Lower threshold (for potential recovery)
+    hysteresis_upper: float = 0.165  # [HIGH-001] Upper threshold = 0.150 * 1.1 (10% deadband)
+    hysteresis_lower: float = 0.135  # [HIGH-001] Lower threshold = 0.150 * 0.9 (10% deadband)
 
     # Internal state - safety-critical components
     _counter: int = field(default=0, repr=False, init=False)
