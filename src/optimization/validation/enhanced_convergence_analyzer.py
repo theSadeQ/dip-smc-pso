@@ -32,6 +32,7 @@ import warnings
 from src.controllers.factory import SMCType
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.config import load_config
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 class ConvergenceStatus(Enum):
@@ -381,7 +382,8 @@ class EnhancedConvergenceAnalyzer:
         initial_fitness = recent_fitness[0]
         final_fitness = recent_fitness[-1]
 
-        if abs(initial_fitness) < 1e-10:
+        # Issue #13: Standardized division protection
+        if abs(initial_fitness) < EPSILON_DIV:
             return 0.0
 
         improvement_rate = (initial_fitness - final_fitness) / abs(initial_fitness)
@@ -398,7 +400,8 @@ class EnhancedConvergenceAnalyzer:
         mean_fitness = np.mean(recent_fitness)
         std_fitness = np.std(recent_fitness)
 
-        if abs(mean_fitness) < 1e-10:
+        # Issue #13: Standardized division protection
+        if abs(mean_fitness) < EPSILON_DIV:
             cv = 0.0
         else:
             cv = std_fitness / abs(mean_fitness)
@@ -417,7 +420,8 @@ class EnhancedConvergenceAnalyzer:
         initial_diversity = np.mean(self.diversity_history[:3])
         recent_diversity = np.mean(self.diversity_history[-3:])
 
-        if initial_diversity < 1e-10:
+        # Issue #13: Standardized division protection
+        if initial_diversity < EPSILON_DIV:
             return 0.0
 
         diversity_retention = recent_diversity / initial_diversity
@@ -442,8 +446,8 @@ class EnhancedConvergenceAnalyzer:
 
             # Linearize by taking log of (fitness - min_fitness + epsilon)
             min_fitness = min(recent_fitness)
-            epsilon = 1e-6
-            log_fitness = np.log(np.array(recent_fitness) - min_fitness + epsilon)
+            # Issue #13: Standardized division protection for log domain
+            log_fitness = np.log(np.array(recent_fitness) - min_fitness + EPSILON_DIV)
 
             # Linear regression on log scale
             coeffs = np.polyfit(iterations, log_fitness, 1)

@@ -111,6 +111,10 @@ def _numeric_linearize_continuous(
     for i in range(n):
         # Perturbation proportional to the magnitude of x_eq[i] or unity
         delta = max(eps, 1e-4 * max(abs(x_eq[i]), 1.0))
+
+        # CRITICAL VALIDATION (Issue #13): Clamp perturbation to prevent division by zero
+        delta = max(delta, 1e-12)
+
         dx = np.zeros(n, dtype=float)
         dx[i] = delta
         f_plus = _call_f(dyn, x_eq + dx, u_eq)
@@ -118,6 +122,9 @@ def _numeric_linearize_continuous(
         A[:, i] = (f_plus - f_minus) / (2.0 * delta)
     # Single‑input system: adaptive perturbation for input
     du = max(eps, 1e-4 * max(abs(u_eq), 1.0))
+
+    # CRITICAL VALIDATION (Issue #13): Clamp control perturbation to prevent division by zero
+    du = max(du, 1e-12)
     f_plus = _call_f(dyn, x_eq, u_eq + du)
     f_minus = _call_f(dyn, x_eq, u_eq - du)
     B = ((f_plus - f_minus) / (2.0 * du)).reshape(n, 1)

@@ -155,6 +155,16 @@ class LowRankDIPConfig(BaseDIPConfig):
 
     def _get_upright_linearization(self) -> Tuple[np.ndarray, np.ndarray]:
         """Get linearization around upright equilibrium."""
+        # CRITICAL VALIDATION (Issue #13): Physical parameters must be > EPSILON_DIV
+        # to prevent division by zero in state matrix computation (lines 169, 175, 180, 184)
+        if any(param <= 1e-12 for param in [self.cart_mass, self.pendulum1_mass, self.pendulum2_mass,
+                                              self.pendulum1_length, self.pendulum2_length]):
+            raise ValueError(
+                f"Physical parameters too small for safe division (must be > 1e-12): "
+                f"cart_mass={self.cart_mass}, m1={self.pendulum1_mass}, m2={self.pendulum2_mass}, "
+                f"L1={self.pendulum1_length}, L2={self.pendulum2_length}"
+            )
+
         # State: [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]
         A = np.zeros((6, 6))
         B = np.zeros((6, 1))
