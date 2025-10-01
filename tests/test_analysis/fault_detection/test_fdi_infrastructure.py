@@ -182,7 +182,7 @@ class TestThresholdAdaptation:
                 return state  # No change - perfect prediction possible
 
         fdi = FDIsystem(
-            residual_threshold=0.1,
+            residual_threshold=0.150,  # [HIGH-001] Updated to statistically calibrated value
             persistence_counter=3,
             adaptive=False  # Use fixed threshold
         )
