@@ -1,0 +1,42 @@
+{
+  "issue": "#16",
+  "issue_title": "CRIT-007: Inefficient NumPy Array Handling",
+  "github_url": "https://github.com/theSadeQ/dip-smc-pso/issues/16",
+  "acceptance_criteria": {
+    "memory_overhead_target": 1.2,
+    "memory_overhead_unit": "x baseline",
+    "view_percentage_target": 85,
+    "view_percentage_unit": "% of array operations",
+    "performance_tolerance": 5,
+    "performance_tolerance_unit": "% degradation allowed"
+  },
+  "baseline_measurements": {
+    "current_memory_overhead": 2.3,
+    "copy_count": 248,
+    "files_with_copies": 73
+  },
+  "test_validation": {
+    "test_file": "tests/test_integration/test_memory_management/test_memory_resource_deep.py",
+    "test_method": "test_numpy_memory_optimization",
+    "test_lines": "526-558"
+  },
+  "target_improvements": {
+    "memory_reduction_percent": 47.8,
+    "copy_reduction_target": 211,
+    "view_conversion_count": 211
+  },
+  "files_mentioned_in_issue": [
+    "src/simulation/engines/simulation_runner.py",
+    "src/simulation/engines/vector_sim.py",
+    "src/controllers/smc/classic_smc.py",
+    "src/controllers/smc/adaptive_smc.py",
+    "src/controllers/smc/sta_smc.py",
+    "src/controllers/smc/hybrid_adaptive_sta_smc.py"
+  ],
+  "quality_gates": {
+    "test_must_pass": true,
+    "no_performance_regression": true,
+    "all_acceptance_criteria_met": true,
+    "code_review_approved": true
+  }
+}

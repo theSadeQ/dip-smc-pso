@@ -546,7 +546,7 @@ class TestMemoryOptimization:
             temp_data = np.zeros((50, 50))
 
             for i in range(100):
-                np.random.randn(50, 50, out=temp_data)  # In-place generation
+                temp_data[:] = np.random.randn(50, 50)  # In-place assignment
                 np.matmul(temp_data, temp_data.T, out=efficient_results[i])  # In-place multiplication
 
             efficient_snapshot = profiler.take_snapshot()
