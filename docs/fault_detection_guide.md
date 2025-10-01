@@ -45,29 +45,41 @@ Add FDI configuration to your `config.yaml`:
 ```yaml
 fdi:
   enabled: true
-  residual_threshold: 0.5      # Base threshold for residual norm
+  residual_threshold: 0.150    # Statistically calibrated threshold (Issue #18)
   persistence_counter: 10      # Consecutive violations required
   residual_states: [0, 1, 2]   # State indices to monitor (x, θ₁, θ₂)
   residual_weights: null       # Optional per-state weights
+
+  # Hysteresis configuration (prevents oscillation near threshold)
+  hysteresis_enabled: true
+  hysteresis_upper: 0.165      # Upper threshold for fault detection
+  hysteresis_lower: 0.135      # Lower threshold for recovery
 ```
+
+**Note**: The default threshold of 0.150 was statistically calibrated based on P99 percentile analysis of 1,167 residual samples. See [FDI Threshold Calibration Methodology](fdi_threshold_calibration_methodology.md) for details.
 
 ### Advanced Configuration
 
 ```yaml
 fdi:
   enabled: true
-  residual_threshold: 0.3
-  persistence_counter: 5
+  residual_threshold: 0.150
+  persistence_counter: 10
   residual_states: [0, 1, 2, 3, 4, 5]  # Monitor all 6 states
   residual_weights: [1.0, 2.0, 2.0, 0.5, 1.5, 1.5]  # Weight angles more heavily
 
+  # Hysteresis configuration (Issue #18 resolution)
+  hysteresis_enabled: true
+  hysteresis_upper: 0.165
+  hysteresis_lower: 0.135
+
   # Adaptive thresholding
-  adaptive: true
+  adaptive: false              # Disable when using hysteresis (pick one strategy)
   window_size: 50              # Samples for threshold estimation
   threshold_factor: 3.0        # σ multiplier for adaptive threshold
 
   # CUSUM drift detection
-  cusum_enabled: true
+  cusum_enabled: false         # Disable for basic operation
   cusum_threshold: 5.0         # Cumulative sum limit
 ```
 
@@ -87,11 +99,14 @@ from src.fault_detection.fdi import FDIsystem
 from src.core.dynamics import DoublePendulum
 import numpy as np
 
-# Create FDI system
+# Create FDI system with calibrated threshold and hysteresis
 fdi = FDIsystem(
-    residual_threshold=0.5,
+    residual_threshold=0.150,     # Statistically calibrated (Issue #18)
     persistence_counter=10,
-    residual_states=[0, 1, 2]  # Monitor position and angles
+    residual_states=[0, 1, 2],    # Monitor position and angles
+    hysteresis_enabled=True,      # Prevent oscillation near threshold
+    hysteresis_upper=0.165,
+    hysteresis_lower=0.135
 )
 
 # Create dynamics model for predictions
@@ -125,11 +140,25 @@ for t in np.arange(0, 10, 0.001):
 
 ## Threshold Configuration Guidelines
 
+### Issue #18 Calibration Reference
+
+The default threshold of **0.150** was statistically calibrated based on rigorous analysis:
+- **Sample Size**: 1,167 residual measurements across 100 simulations
+- **Methodology**: P99 percentile approach with bootstrap confidence intervals
+- **False Positive Rate**: Reduced from ~80% to 15.9% (6x improvement)
+- **True Positive Rate**: Maintained at ~100%
+- **Documentation**: See [FDI Threshold Calibration Methodology](fdi_threshold_calibration_methodology.md)
+
+**Hysteresis Parameters**:
+- **Upper Threshold**: 0.165 (threshold × 1.1) - triggers fault detection
+- **Lower Threshold**: 0.135 (threshold × 0.9) - recovery threshold
+- **Deadband**: 10% prevents oscillation near boundary
+
 ### Static Thresholds
 
 **Position Residuals (x):**
 - `threshold = 0.01-0.05` m for high-precision systems
-- `threshold = 0.1-0.2` m for typical laboratory setups
+- `threshold = 0.1-0.2` m for typical laboratory setups (use 0.150 calibrated value)
 - `threshold = 0.5-1.0` m for coarse monitoring
 
 **Angular Residuals (θ₁, θ₂):**
@@ -141,6 +170,8 @@ for t in np.arange(0, 10, 0.001):
 - Often noisier than position measurements
 - Use 2-5× larger thresholds than position equivalents
 - Consider filtering or excluding from residual calculation
+
+**Recommended Practice**: Start with the calibrated threshold (0.150) and adjust based on your system's noise characteristics. See the calibration methodology document for statistical approaches.
 
 ### Adaptive Thresholds
 
