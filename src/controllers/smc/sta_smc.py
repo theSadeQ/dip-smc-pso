@@ -7,6 +7,7 @@
 # gain‑positivity section citing super‑twisting literature; these changes address F‑4.SMCDesign.2 / RC‑04.
 from __future__ import annotations
 import logging
+import weakref
 # ---------------------------------------------------------------------------
 # Optional numba import
 #
@@ -453,6 +454,19 @@ class SuperTwistingSMC:
         # Reset integral state (z) to zero
         # This is the main internal state for the super-twisting algorithm
         pass  # The controller gets z from state_vars parameter, no persistent internal state
+
+    def cleanup(self) -> None:
+        """Clean up controller resources (Issue #15).
+
+        Explicitly releases references to dynamics model and clears
+        any cached data to facilitate garbage collection and prevent
+        memory leaks during repeated controller instantiation.
+        """
+        # Clear dynamics model reference
+        self.dyn = None
+        # Clear cached vectors
+        self.L = None  # type: ignore
+        self.B = None  # type: ignore
 
     def set_dynamics(self, dynamics_model) -> None:
         """Attach dynamics model if available (used by u_eq if implemented)."""
