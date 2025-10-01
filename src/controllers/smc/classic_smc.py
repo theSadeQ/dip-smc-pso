@@ -7,6 +7,7 @@
 
 import numpy as np
 import logging
+import weakref
 # Import from new organized structure
 from ...utils import saturate
 from ...utils import ClassicalSMCOutput
@@ -176,7 +177,13 @@ class ClassicalSMC:
         self.K = require_positive(self.K, "K")
         # Allow derivative gain to be zero but not negative
         self.kd = require_positive(self.kd, "kd", allow_zero=True)
-        self.dyn = dynamics_model
+
+        # Use weakref for dynamics model to break circular references
+        if dynamics_model is not None:
+            self._dynamics_ref = weakref.ref(dynamics_model)
+        else:
+            self._dynamics_ref = lambda: None
+
         self.regularization = float(regularization)
         # Switching function selection
         sm = str(switch_method).lower().strip()
@@ -244,9 +251,24 @@ class ClassicalSMC:
         This property exposes the six control gains in the canonical order
         ``[k1, k2, lam1, lam2, K, kd]`` for external introspection.  The
         returned list is a shallow copy to prevent accidental mutation of
-        the controller’s internal parameters.
+        the controller's internal parameters.
         """
         return list(self._gains)
+
+    @property
+    def dyn(self):
+        """Access dynamics model via weakref."""
+        if self._dynamics_ref is not None:
+            return self._dynamics_ref()
+        return None
+
+    @dyn.setter
+    def dyn(self, value):
+        """Set dynamics model using weakref."""
+        if value is not None:
+            self._dynamics_ref = weakref.ref(value)
+        else:
+            self._dynamics_ref = lambda: None
 
     def initialize_state(self) -> tuple:
         """No internal state for classical SMC; returns an empty tuple."""
@@ -472,5 +494,38 @@ class ClassicalSMC:
         """
         # Classical SMC is stateless - no internal state to reset
         pass
+
+    def cleanup(self) -> None:
+        """Explicit memory cleanup to prevent leaks.
+
+        Clears large NumPy arrays and breaks circular references to allow
+        proper garbage collection. Should be called when the controller is
+        no longer needed.
+        """
+        # Nullify dynamics reference
+        if hasattr(self, '_dynamics_ref'):
+            self._dynamics_ref = lambda: None
+
+        # Clear any cached large arrays (future-proofing)
+        for attr in ['_state_buffer', '_control_buffer', '_surface_buffer']:
+            if hasattr(self, attr):
+                setattr(self, attr, None)
+
+        # Clear internal arrays
+        if hasattr(self, 'L'):
+            self.L = None
+        if hasattr(self, 'B'):
+            self.B = None
+
+    def __del__(self) -> None:
+        """Destructor for automatic cleanup.
+
+        Ensures cleanup is called when the controller is garbage collected.
+        Catches all exceptions to prevent errors during finalization.
+        """
+        try:
+            self.cleanup()
+        except Exception:
+            pass  # Prevent exceptions during cleanup
 
 #=======================================================================================\\\

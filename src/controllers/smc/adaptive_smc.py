@@ -60,6 +60,7 @@ alpha : float, optional
 """
 
 import numpy as np
+import weakref
 from typing import Dict, Tuple, Optional, List
 
 # ---------------------------------------------------------------------------
@@ -438,4 +439,27 @@ class AdaptiveSMC:
         # so we don't maintain persistent internal state here.
         # This method ensures interface compliance.
         pass
+
+    def cleanup(self) -> None:
+        """Clean up controller resources (Issue #15).
+
+        Explicitly releases any cached data to facilitate garbage
+        collection and prevent memory leaks during repeated
+        controller instantiation.
+        """
+        # AdaptiveSMC has no persistent internal state to clean
+        # This method is provided for interface compliance
+        pass
+
+    def __del__(self) -> None:
+        """Destructor for automatic cleanup.
+
+        Ensures cleanup is called when the controller is garbage collected.
+        Catches all exceptions to prevent errors during finalization.
+        """
+        try:
+            self.cleanup()
+        except Exception:
+            pass  # Prevent exceptions during cleanup
+
 #===========================================================================================================\\\

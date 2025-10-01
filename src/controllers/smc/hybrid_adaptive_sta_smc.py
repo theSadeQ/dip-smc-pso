@@ -694,3 +694,13 @@ class HybridAdaptiveSTASMC:
         # so we don't maintain persistent internal state here.
         # This method ensures interface compliance.
         pass
+
+    def cleanup(self) -> None:
+        """Clean up controller resources (Issue #15).
+
+        Explicitly releases references to dynamics model and clears
+        any cached data to facilitate garbage collection and prevent
+        memory leaks during repeated controller instantiation.
+        """
+        # Clear dynamics model reference
+        self.dyn = None

@@ -640,5 +640,225 @@ class TestMemoryOptimization:
         assert sparsity > 0.8, "Matrix should be sufficiently sparse for this test"
 
 
+@pytest.mark.memory
+@pytest.mark.slow
+def test_smc_memory_leak_detection():
+    """Test for memory leaks in real SMC controllers (Issue #15)."""
+    import sys
+    import os
+    # Add project root to path for imports
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
+
+    from src.controllers.smc.classic_smc import ClassicalSMC
+    from src.controllers.smc.adaptive_smc import AdaptiveSMC
+    from src.controllers.smc.sta_smc import SuperTwistingSMC
+    from src.controllers.smc.hybrid_adaptive_sta_smc import HybridAdaptiveSTASMC
+
+    profiler = MemoryProfiler()
+
+    # Test all 4 controller types
+    controller_configs = [
+        ("classical", ClassicalSMC, {
+            'gains': [5.0, 5.0, 5.0, 0.5, 0.5, 0.5],
+            'max_force': 100.0,
+            'boundary_layer': 0.01
+        }),
+        ("adaptive", AdaptiveSMC, {
+            'gains': [10.0, 8.0, 15.0, 12.0, 0.5],
+            'max_force': 100.0,
+            'dt': 0.01,
+            'leak_rate': 0.01,
+            'dead_zone': 0.05,
+            'adapt_rate_limit': 10.0,
+            'K_min': 0.1,
+            'K_max': 100.0,
+            'smooth_switch': True,
+            'boundary_layer': 0.1
+        }),
+        ("sta", SuperTwistingSMC, {
+            'gains': [25.0, 10.0, 15.0, 12.0, 20.0, 15.0],
+            'max_force': 100.0,
+            'dt': 0.01
+        }),
+        ("hybrid", HybridAdaptiveSTASMC, {
+            'gains': [15.0, 12.0, 18.0, 15.0],
+            'max_force': 100.0,
+            'dt': 0.01,
+            'k1_init': 4.0,
+            'k2_init': 0.4,
+            'gamma1': 0.5,
+            'gamma2': 0.05,
+            'dead_zone': 0.02
+        })
+    ]
+
+    results = {}
+
+    for name, ControllerClass, config in controller_configs:
+        with profiler.profile_memory():
+            # Issue #15: Test 1000 instantiations
+            controllers = []
+            for i in range(1000):
+                if i % 100 == 0:
+                    profiler.take_snapshot()
+
+                # Create controller
+                controller = ControllerClass(**config)
+
+                # Simulate usage
+                state = np.random.randn(6)
+                state_vars = controller.initialize_state()
+                history = controller.initialize_history()
+                _ = controller.compute_control(state, state_vars, history)
+
+                # Explicit cleanup every 100 iterations
+                if i % 100 == 99:
+                    controller.cleanup()
+                    del controller
+                    gc.collect()
+                else:
+                    controllers.append(controller)
+
+            # Final cleanup
+            for c in controllers:
+                c.cleanup()
+            controllers.clear()
+            gc.collect()
+
+        # Analyze results
+        stats = profiler.final_stats
+        growth_analysis = profiler.analyze_memory_growth()
+
+        results[name] = {
+            "growth_mb": stats["growth_mb"],
+            "growth_per_1000": stats["growth_mb"],  # Full 1000 iterations
+            "monotonic": growth_analysis.get("monotonic_growth", False)
+        }
+
+        # Issue #15 Acceptance Criterion: < 1MB per 1000 instantiations
+        assert stats["growth_mb"] < 1.0, (
+            f"{name} controller exceeds memory growth limit: "
+            f"{stats['growth_mb']:.2f} MB (limit: 1.0 MB)"
+        )
+
+    return results
+
+
+@pytest.mark.memory
+@pytest.mark.stress
+@pytest.mark.timeout(28800)  # 8 hours
+def test_smc_8hour_continuous_operation():
+    """
+    Issue #15: Validate no memory leaks in 8-hour continuous operation.
+    WARNING: This test runs for 8 hours. Use pytest -m stress to run.
+    """
+    import sys
+    import os
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
+
+    from src.controllers.smc.hybrid_adaptive_sta_smc import HybridAdaptiveSTASMC
+
+    profiler = MemoryProfiler()
+
+    start_time = time.time()
+    duration_hours = 8
+    duration_seconds = duration_hours * 3600
+
+    with profiler.profile_memory():
+        controller = HybridAdaptiveSTASMC(
+            gains=[15.0, 12.0, 18.0, 15.0],
+            max_force=100.0,
+            dt=0.01,
+            k1_init=4.0,
+            k2_init=0.4,
+            gamma1=0.5,
+            gamma2=0.05,
+            dead_zone=0.02
+        )
+
+        iteration = 0
+        while (time.time() - start_time) < duration_seconds:
+            # Simulate control loop at 10ms
+            state = np.random.randn(6)
+            state_vars = controller.initialize_state()
+            history = controller.initialize_history()
+            _ = controller.compute_control(state, state_vars, history)
+
+            # Memory snapshot every 10 minutes
+            if iteration % 60000 == 0:  # 10 min at 10ms = 60k iterations
+                snapshot = profiler.take_snapshot()
+                print(f"Hour {(time.time()-start_time)/3600:.1f}: {snapshot.rss_mb:.1f} MB")
+
+            # Explicit cleanup every hour
+            if iteration % 360000 == 0:  # 1 hour
+                controller.cleanup()
+                gc.collect()
+
+            iteration += 1
+            time.sleep(0.01)  # 10ms control loop
+
+        controller.cleanup()
+
+    # Validation
+    stats = profiler.final_stats
+    growth_analysis = profiler.analyze_memory_growth()
+
+    # Issue #15: No memory leaks (allow 10MB tolerance for 8h)
+    assert stats["growth_mb"] < 10.0, (
+        f"Memory leak detected in 8h operation: {stats['growth_mb']:.2f} MB growth"
+    )
+
+    # Should see periodic drops due to cleanup
+    assert not growth_analysis["monotonic_growth"], (
+        "Memory should stabilize with periodic cleanup, not grow monotonically"
+    )
+
+
+@pytest.mark.integration
+def test_cleanup_integration_all_controllers():
+    """Integration test: Verify cleanup() works across all controllers."""
+    import sys
+    import os
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
+
+    from src.controllers.smc.classic_smc import ClassicalSMC
+    from src.controllers.smc.adaptive_smc import AdaptiveSMC
+    from src.controllers.smc.sta_smc import SuperTwistingSMC
+    from src.controllers.smc.hybrid_adaptive_sta_smc import HybridAdaptiveSTASMC
+
+    controllers = [
+        ClassicalSMC(gains=[5.0, 5.0, 5.0, 0.5, 0.5, 0.5], max_force=100, boundary_layer=0.01),
+        AdaptiveSMC(
+            gains=[10.0, 8.0, 15.0, 12.0, 0.5],
+            max_force=100, dt=0.01, leak_rate=0.01, dead_zone=0.05,
+            adapt_rate_limit=10.0, K_min=0.1, K_max=100.0,
+            smooth_switch=True, boundary_layer=0.1
+        ),
+        SuperTwistingSMC(gains=[25.0, 10.0, 15.0, 12.0, 20.0, 15.0], max_force=100, dt=0.01),
+        HybridAdaptiveSTASMC(
+            gains=[15.0, 12.0, 18.0, 15.0], max_force=100, dt=0.01,
+            k1_init=4.0, k2_init=0.4, gamma1=0.5, gamma2=0.05, dead_zone=0.02
+        )
+    ]
+
+    # All should have cleanup method
+    for controller in controllers:
+        assert hasattr(controller, 'cleanup'), f"{type(controller).__name__} missing cleanup()"
+        assert callable(controller.cleanup), f"{type(controller).__name__}.cleanup not callable"
+
+    # Cleanup should not raise exceptions
+    for controller in controllers:
+        try:
+            controller.cleanup()
+        except Exception as e:
+            pytest.fail(f"{type(controller).__name__}.cleanup() raised: {e}")
+
+    # Deletion should work without errors
+    for controller in controllers:
+        del controller
+
+    gc.collect()
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "--tb=short"])
