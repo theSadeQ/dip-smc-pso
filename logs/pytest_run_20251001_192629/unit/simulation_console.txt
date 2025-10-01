@@ -1,0 +1,1316 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-8.3.5, pluggy-1.6.0 -- C:\Program Files\Python312\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default'
+benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: D:\Projects\main
+configfile: .pytest.ini
+plugins: anyio-4.10.0, hypothesis-6.139.2, benchmark-4.0.0, cov-7.0.0
+collecting ... collected 148 items
+
+tests/test_simulation/core/test_simulation.py::test_run_simulation_shapes PASSED [  0%]
+tests/test_simulation/core/test_simulation.py::test_simulation_halts_on_nan PASSED [  1%]
+tests/test_simulation/core/test_simulation.py::test_simulation_halts_on_exception PASSED [  2%]
+tests/test_simulation/core/test_simulation.py::test_simulation_duration_accuracy[0.95-0.1] PASSED [  2%]
+tests/test_simulation/core/test_simulation.py::test_simulation_duration_accuracy[1.04-0.1] PASSED [  3%]
+tests/test_simulation/core/test_simulation.py::test_simulation_duration_accuracy[0.3-0.1] PASSED [  4%]
+tests/test_simulation/core/test_simulation.py::test_simulation_duration_accuracy[1.0-0.3] PASSED [  4%]
+tests/test_simulation/core/test_simulation.py::test_simulation_duration_accuracy[0.1-0.01] PASSED [  5%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationIntegrationBasic::test_basic_simulation_workflow FAILED [  6%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationIntegrationBasic::test_controller_with_compute_control PASSED [  6%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationIntegrationBasic::test_control_saturation PASSED [  7%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationIntegrationBasic::test_different_state_dimensions PASSED [  8%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationErrorHandling::test_controller_failure_handling PASSED [  8%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationErrorHandling::test_dynamics_failure_handling PASSED [  9%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationErrorHandling::test_nan_detection_handling PASSED [ 10%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationErrorHandling::test_invalid_inputs_handling PASSED [ 10%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationErrorHandling::test_zero_simulation_time PASSED [ 11%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationErrorHandling::test_fallback_controller_activation FAILED [ 12%]
+tests/test_simulation/core/test_simulation_integration.py::TestIntegratorCompatibility::test_euler_integration_compatibility FAILED [ 12%]
+tests/test_simulation/core/test_simulation_integration.py::TestIntegratorCompatibility::test_rk4_integration_compatibility PASSED [ 13%]
+tests/test_simulation/core/test_simulation_integration.py::TestIntegratorCompatibility::test_adaptive_integration_compatibility PASSED [ 14%]
+tests/test_simulation/core/test_simulation_integration.py::TestIntegratorCompatibility::test_integrator_statistics_tracking FAILED [ 14%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationStepRouter::test_step_function_dispatch FAILED [ 15%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationStepRouter::test_step_function_with_different_inputs FAILED [ 16%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationPerformance::test_simulation_performance_scaling FAILED [ 16%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationPerformance::test_memory_usage_stability PASSED [ 17%]
+tests/test_simulation/core/test_simulation_integration.py::TestRealControllerIntegration::test_classical_smc_integration SKIPPEDrray([0.]))) [ 18%]
+tests/test_simulation/core/test_simulation_integration.py::TestRealControllerIntegration::test_sta_smc_integration PASSED [ 18%]
+tests/test_simulation/core/test_simulation_integration.py::TestRealPlantIntegration::test_dip_dynamics_integration SKIPPED [ 19%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationRobustness::test_extreme_initial_conditions FAILED [ 20%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationRobustness::test_very_small_timesteps FAILED [ 20%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationRobustness::test_very_large_timesteps FAILED [ 21%]
+tests/test_simulation/core/test_simulation_integration.py::TestSimulationRobustness::test_random_parameters_robustness FAILED [ 22%]
+tests/test_simulation/core/test_stateful_simulation.py::test_stateful_controller_persists_state_and_history_is_exposed PASSED [ 22%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerImplementation::test_initialization SKIPPED [ 23%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerInterface::test_initialization_creates_required_attributes PASSED [ 24%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerInterface::test_default_parameters PASSED [ 25%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerInterface::test_parameter_validation PASSED [ 25%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerInterface::test_simulation_state_tracking PASSED [ 26%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerExecution::test_run_simulation_basic PASSED [ 27%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerExecution::test_run_simulation_with_controller PASSED [ 27%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerExecution::test_run_simulation_with_reference PASSED [ 28%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerExecution::test_simulation_result_structure PASSED [ 29%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerTimeIntegration::test_time_step_calculation PASSED [ 29%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerTimeIntegration::test_time_progression PASSED [ 30%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerTimeIntegration::test_integration_accuracy PASSED [ 31%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerErrorHandling::test_invalid_initial_state FAILED [ 31%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerErrorHandling::test_dynamics_failure_handling PASSED [ 32%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerErrorHandling::test_extreme_parameters PASSED [ 33%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerErrorHandling::test_nan_inf_state_handling PASSED [ 33%]
+tests/test_simulation/engines/test_simulation_runner.py::TestVectorSimulation::test_vector_simulation_initialization PASSED [ 34%]
+tests/test_simulation/engines/test_simulation_runner.py::TestVectorSimulation::test_vector_simulation_interface PASSED [ 35%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationInterface::test_interface_exists PASSED [ 35%]
+tests/test_simulation/engines/test_simulation_runner.py::TestSimulationInterface::test_interface_structure PASSED [ 36%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationBasic::test_scalar_simulation PASSED [ 37%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationBasic::test_batch_simulation PASSED [ 37%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationBasic::test_horizon_inference PASSED [ 38%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationBasic::test_scalar_control_input PASSED [ 39%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationBasic::test_time_offset PASSED [ 39%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationEarlyStopping::test_early_stopping_scalar PASSED [ 40%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationEarlyStopping::test_early_stopping_batch PASSED [ 41%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationEarlyStopping::test_no_early_stopping PASSED [ 41%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationSafetyGuards::test_energy_limits_scalar PASSED [ 42%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationSafetyGuards::test_state_bounds_scalar PASSED [ 43%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationSafetyGuards::test_nan_guard PASSED [ 43%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationSafetyGuards::test_safety_guard_failure PASSED [ 44%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationErrorHandling::test_zero_horizon PASSED [ 45%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationErrorHandling::test_invalid_inputs PASSED [ 45%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationErrorHandling::test_mismatched_dimensions PASSED [ 46%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationErrorHandling::test_empty_arrays PASSED [ 47%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationErrorHandling::test_large_inputs PASSED [ 47%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationPerformance::test_batch_performance PASSED [ 48%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationPerformance::test_memory_efficiency FAILED [ 49%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationFallback::test_imports_not_available SKIPPED [ 50%]
+tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationFallback::test_mock_simulation_structure PASSED [ 50%]
+tests/test_simulation/safety/test_safety_guards.py::TestLegacySafetyGuards::test_guard_no_nan_success PASSED [ 51%]
+tests/test_simulation/safety/test_safety_guards.py::TestLegacySafetyGuards::test_guard_no_nan_failure_cases PASSED [ 52%]
+tests/test_simulation/safety/test_safety_guards.py::TestLegacySafetyGuards::test_guard_energy_success PASSED [ 52%]
+tests/test_simulation/safety/test_safety_guards.py::TestLegacySafetyGuards::test_guard_energy_failure_cases PASSED [ 53%]
+tests/test_simulation/safety/test_safety_guards.py::TestLegacySafetyGuards::test_guard_bounds_success PASSED [ 54%]
+tests/test_simulation/safety/test_safety_guards.py::TestLegacySafetyGuards::test_guard_bounds_failure_cases PASSED [ 54%]
+tests/test_simulation/safety/test_safety_guards.py::TestLegacySafetyGuards::test_legacy_guards_batch_operations PASSED [ 55%]
+tests/test_simulation/safety/test_safety_guards.py::TestModernSafetyGuards::test_nan_guard_functionality PASSED [ 56%]
+tests/test_simulation/safety/test_safety_guards.py::TestModernSafetyGuards::test_energy_guard_functionality PASSED [ 56%]
+tests/test_simulation/safety/test_safety_guards.py::TestModernSafetyGuards::test_bounds_guard_functionality PASSED [ 57%]
+tests/test_simulation/safety/test_safety_guards.py::TestModernSafetyGuards::test_bounds_guard_partial_bounds PASSED [ 58%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyViolationError::test_safety_violation_error_creation PASSED [ 58%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyViolationError::test_safety_violation_error_optional_step PASSED [ 59%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardManager::test_manager_initialization PASSED [ 60%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardManager::test_adding_guards PASSED [ 60%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardManager::test_check_all_success PASSED [ 61%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardManager::test_check_all_failure_nan PASSED [ 62%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardManager::test_check_all_failure_energy PASSED [ 62%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardManager::test_check_all_failure_bounds PASSED [ 63%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardManager::test_clear_guards PASSED [ 64%]
+tests/test_simulation/safety/test_safety_guards.py::TestModernLegacyCompatibility::test_modern_legacy_nan_compatibility PASSED [ 64%]
+tests/test_simulation/safety/test_safety_guards.py::TestModernLegacyCompatibility::test_modern_legacy_energy_compatibility PASSED [ 65%]
+tests/test_simulation/safety/test_safety_guards.py::TestModernLegacyCompatibility::test_modern_legacy_bounds_compatibility PASSED [ 66%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_apply_safety_guards_minimal_config FAILED [ 66%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_apply_safety_guards_with_energy_limits FAILED [ 67%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_apply_safety_guards_with_state_bounds FAILED [ 68%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_create_default_guards_minimal FAILED [ 68%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_create_default_guards_full_config PASSED [ 69%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_create_default_guards_partial_config PASSED [ 70%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardPerformance::test_nan_guard_performance PASSED [ 70%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardPerformance::test_energy_guard_performance PASSED [ 71%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardPerformance::test_bounds_guard_performance FAILED [ 72%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardPerformance::test_manager_performance_multiple_guards PASSED [ 72%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardEdgeCases::test_empty_state_handling PASSED [ 73%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardEdgeCases::test_single_element_states PASSED [ 74%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardEdgeCases::test_extreme_values PASSED [ 75%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardEdgeCases::test_zero_energy_limit PASSED [ 75%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardEdgeCases::test_bounds_guard_equal_limits PASSED [ 76%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardsFallback::test_imports_not_available SKIPPED [ 77%]
+tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardsFallback::test_safety_guard_test_structure PASSED [ 77%]
+tests/test_simulation/safety/test_vector_sim_guards.py::test_simulate_bounds_guard_raises FAILED [ 78%]
+tests/test_simulation/safety/test_vector_sim_guards.py::test_simulate_energy_guard_raises FAILED [ 79%]
+tests/test_simulation/safety/test_vector_sim_guards.py::test_simulate_nan_guard_raises FAILED [ 79%]
+tests/test_simulation/safety/test_vector_sim_guards.py::test_simulate_system_batch_early_stops_scalar PASSED [ 80%]
+tests/test_simulation/safety/test_vector_sim_guards.py::test_simulate_system_batch_early_stops_batch PASSED [ 81%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationScalarInputs::test_scalar_control_single_value PASSED [ 81%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationScalarInputs::test_scalar_control_zero_dimensional_array PASSED [ 82%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationScalarInputs::test_scalar_control_sequence PASSED [ 83%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationScalarInputs::test_scalar_control_numpy_array_sequence PASSED [ 83%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationScalarInputs::test_mixed_control_types PASSED [ 84%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationScalarInputs::test_batch_scalar_controls FAILED [ 85%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSequenceMismatches::test_control_shorter_than_horizon PASSED [ 85%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSequenceMismatches::test_control_longer_than_horizon PASSED [ 86%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSequenceMismatches::test_empty_control_sequence PASSED [ 87%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSequenceMismatches::test_single_control_multiple_steps PASSED [ 87%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSequenceMismatches::test_batch_sequence_mismatches PASSED [ 88%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationDimensionMismatches::test_scalar_control_vector_state PASSED [ 89%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationDimensionMismatches::test_vector_control_scalar_state PASSED [ 89%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationDimensionMismatches::test_mismatched_control_state_dimensions PASSED [ 90%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationDimensionMismatches::test_batch_dimension_mismatches FAILED [ 91%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationEdgeCases::test_zero_dimensional_inputs PASSED [ 91%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationEdgeCases::test_very_large_arrays PASSED [ 92%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationEdgeCases::test_extreme_values PASSED [ 93%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationEdgeCases::test_non_finite_inputs_handling PASSED [ 93%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationEdgeCases::test_type_coercion_robustness PASSED [ 94%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationEdgeCases::test_memory_efficiency_large_batch PASSED [ 95%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSafetyAndRecovery::test_safety_guard_integration FAILED [ 95%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSafetyAndRecovery::test_early_stopping_robustness PASSED [ 96%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSafetyAndRecovery::test_configuration_fallback_handling PASSED [ 97%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationBatchRobustness::test_batch_with_different_initial_conditions PASSED [ 97%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationBatchRobustness::test_batch_broadcasting_edge_cases FAILED [ 98%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationBatchRobustness::test_batch_early_stopping_consistency PASSED [ 99%]
+tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationBatchRobustness::test_large_batch_performance PASSED [100%]
+
+================================== FAILURES ===================================
+________ TestSimulationIntegrationBasic.test_basic_simulation_workflow ________
+tests\test_simulation\core\test_simulation_integration.py:190: in test_basic_simulation_workflow
+    assert len(t_arr) == expected_steps + 1
+E   assert 1 == (100 + 1)
+E    +  where 1 = len(array([0.]))
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B7AB6A0F0>
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.MockDynamicsModel object at 0x0000013B7AB6AF00>
+        expected_steps = 100
+        initial_state = array([0.1 , 0.  , 0.05, 0.  ])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationIntegrationBasic object at 0x0000013B7C1C0860>
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        x_arr      = array([[0.1 , 0.  , 0.05, 0.  ]])
+_______ TestSimulationErrorHandling.test_fallback_controller_activation _______
+tests\test_simulation\core\test_simulation_integration.py:424: in test_fallback_controller_activation
+    assert len(t_arr) == expected_steps + 1
+E   assert 1 == (10 + 1)
+E    +  where 1 = len(array([0.]))
+        SlowController = <class 'tests.test_simulation.core.test_simulation_integration.TestSimulationErrorHandling.test_fallback_controller_activation.<locals>.SlowController'>
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.MockDynamicsModel object at 0x0000013B7C275B80>
+        expected_steps = 10
+        fast_fallback_controller = <function TestSimulationErrorHandling.test_fallback_controller_activation.<locals>.fast_fallback_controller at 0x0000013B7C331940>
+        initial_state = array([0.1, 0. , 0. , 0. ])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationErrorHandling object at 0x0000013B7C1C1190>
+        slow_controller = <tests.test_simulation.core.test_simulation_integration.TestSimulationErrorHandling.test_fallback_controller_activation.<locals>.SlowController object at 0x0000013B674B8B30>
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        x_arr      = array([[0.1, 0. , 0. , 0. ]])
+______ TestIntegratorCompatibility.test_euler_integration_compatibility _______
+tests\test_simulation\core\test_simulation_integration.py:458: in test_euler_integration_compatibility
+    assert len(t_arr) == 21
+E   assert 1 == 21
+E    +  where 1 = len(array([0.]))
+        IntegratorDynamics = <class 'tests.test_simulation.core.test_simulation_integration.TestIntegratorCompatibility.test_euler_integration_compatibility.<locals>.IntegratorDynamics'>
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B7C276720>
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.TestIntegratorCompatibility.test_euler_integration_compatibility.<locals>.IntegratorDynamics object at 0x0000013B7C274CB0>
+        initial_state = array([0.1, 0. ])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestIntegratorCompatibility object at 0x0000013B7C1C1340>
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        x_arr      = array([[0.1, 0. ]])
+_______ TestIntegratorCompatibility.test_integrator_statistics_tracking _______
+tests\test_simulation\core\test_simulation_integration.py:572: in test_integrator_statistics_tracking
+    assert stats["total_steps"] > 0
+E   assert 0 > 0
+        StatTrackingDynamics = <class 'tests.test_simulation.core.test_simulation_integration.TestIntegratorCompatibility.test_integrator_statistics_tracking.<locals>.StatTrackingDynamics'>
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B7C382900>
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.TestIntegratorCompatibility.test_integrator_statistics_tracking.<locals>.StatTrackingDynamics object at 0x0000013B7C382810>
+        initial_state = array([0.1])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestIntegratorCompatibility object at 0x0000013B7C1C17C0>
+        stats      = {'accepted_steps': 0,
+ 'function_evaluations': 0,
+ 'rejected_steps': 0,
+ 'total_steps': 0}
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        x_arr      = array([[0.1]])
+____________ TestSimulationStepRouter.test_step_function_dispatch _____________
+tests\test_simulation\core\test_simulation_integration.py:587: in test_step_function_dispatch
+    next_state = step(state, control, dt)
+        control    = 0.1
+        dt         = 0.01
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationStepRouter object at 0x0000013B7C1C19A0>
+        state      = array([0.1 , 0.  , 0.05, 0.  ])
+src\simulation\engines\simulation_runner.py:105: in step
+    return get_step_fn()(x, u, dt)
+        dt         = 0.01
+        u          = 0.1
+        x          = array([0.1 , 0.  , 0.05, 0.  ])
+src\simulation\engines\simulation_runner.py:85: in get_step_fn
+    return _load_full_step() if use_full else _load_lowrank_step()
+        use_full   = False
+src\simulation\engines\simulation_runner.py:72: in _load_lowrank_step
+    from ...plant.models.dip_lowrank import step as step_fn
+E   ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+______ TestSimulationStepRouter.test_step_function_with_different_inputs ______
+tests\test_simulation\core\test_simulation_integration.py:605: in test_step_function_with_different_inputs
+    next_state = step(state, control, dt)
+        control    = 0.5
+        dt         = 0.01
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationStepRouter object at 0x0000013B7C1C1B20>
+        state      = array([1.])
+        test_cases = [(array([1.]), 0.5, 0.01),
+ (array([1. , 0.5]), 1.0, 0.005),
+ (array([0.1, 0. , 0.2, 0. ]), -0.5, 0.02)]
+src\simulation\engines\simulation_runner.py:105: in step
+    return get_step_fn()(x, u, dt)
+        dt         = 0.01
+        u          = 0.5
+        x          = array([1.])
+src\simulation\engines\simulation_runner.py:85: in get_step_fn
+    return _load_full_step() if use_full else _load_lowrank_step()
+        use_full   = False
+src\simulation\engines\simulation_runner.py:72: in _load_lowrank_step
+    from ...plant.models.dip_lowrank import step as step_fn
+E   ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+________ TestSimulationPerformance.test_simulation_performance_scaling ________
+tests\test_simulation\core\test_simulation_integration.py:642: in test_simulation_performance_scaling
+    assert len(t_arr) == expected_steps + 1
+E   assert 1 == (100 + 1)
+E    +  where 1 = len(array([0.]))
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B7C3F0D70>
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.MockDynamicsModel object at 0x0000013B7C3F0AA0>
+        end        = 1759334363.3033185
+        expected_steps = 100
+        initial_state = array([0., 0., 0., 0., 0., 0.])
+        run_times  = [0.0]
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationPerformance object at 0x0000013B7C1C1CA0>
+        sim_time   = 0.1
+        sim_times  = [0.1, 0.5, 1.0]
+        start      = 1759334363.3033185
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        x_arr      = array([[0., 0., 0., 0., 0., 0.]])
+__________ TestSimulationRobustness.test_extreme_initial_conditions ___________
+tests\test_simulation\core\test_simulation_integration.py:808: in test_extreme_initial_conditions
+    assert len(t_arr) > 1
+E   assert 1 > 1
+E    +  where 1 = len(array([0.]))
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B7C1C10D0>
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.MockDynamicsModel object at 0x0000013B7C1C0FB0>
+        extreme_conditions = [array([10.,  0.,  0.,  0.]),
+ array([ 0., 10.,  0.,  0.]),
+ array([ 0.,  0., 10.,  0.]),
+ array([1.e-10, 1.e-10, 1.e-10, 1.e-10]),
+ array([-5.,  2., -3.,  1.])]
+        initial_state = array([10.,  0.,  0.,  0.])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationRobustness object at 0x0000013B7C1C2480>
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        x_arr      = array([[10.,  0.,  0.,  0.]])
+_____________ TestSimulationRobustness.test_very_small_timesteps ______________
+tests\test_simulation\core\test_simulation_integration.py:828: in test_very_small_timesteps
+    assert len(t_arr) == 10001  # 0.01/1e-6 + 1
+E   assert 1 == 10001
+E    +  where 1 = len(array([0.]))
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B7C1C1A60>
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.MockDynamicsModel object at 0x0000013B7C1C1EE0>
+        initial_state = array([0.1, 0. , 0. , 0. ])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationRobustness object at 0x0000013B7C1C2600>
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        x_arr      = array([[0.1, 0. , 0. , 0. ]])
+_____________ TestSimulationRobustness.test_very_large_timesteps ______________
+tests\test_simulation\core\test_simulation_integration.py:846: in test_very_large_timesteps
+    assert len(t_arr) == 11  # 1.0/0.1 + 1
+E   assert 1 == 11
+E    +  where 1 = len(array([0.]))
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B7C382F60>
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.MockDynamicsModel object at 0x0000013B7C382EA0>
+        initial_state = array([0.01, 0.  , 0.  , 0.  ])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationRobustness object at 0x0000013B7C1C2780>
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        x_arr      = array([[0.01, 0.  , 0.  , 0.  ]])
+_________ TestSimulationRobustness.test_random_parameters_robustness __________
+tests\test_simulation\core\test_simulation_integration.py:875: in test_random_parameters_robustness
+    assert len(t_arr) > 1
+E   assert 1 > 1
+E    +  where 1 = len(array([0.]))
+        _          = 0
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B79CA92E0>
+        dt         = 0.004485261007457112
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.MockDynamicsModel object at 0x0000013B546F1DF0>
+        initial_state = array([-0.11978064,  0.21416584, -0.0094621 , -0.09288281, -0.08852303,
+       -0.04121885, -0.04826188])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationRobustness object at 0x0000013B7C1C2900>
+        sim_time   = 0.4084443440871048
+        state_dim  = 7
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        u_max      = 39.20485901336569
+        x_arr      = array([[-0.11978064,  0.21416584, -0.0094621 , -0.09288281, -0.08852303,
+        -0.04121885, -0.04826188]])
+
+During handling of the above exception, another exception occurred:
+tests\test_simulation\core\test_simulation_integration.py:881: in test_random_parameters_robustness
+    pytest.fail(f"Random test failed with params: state_dim={state_dim}, "
+E   Failed: Random test failed with params: state_dim=7, sim_time=0.4084443440871048, dt=0.004485261007457112, u_max=39.20485901336569. Error: assert 1 > 1
+E    +  where 1 = len(array([0.]))
+        _          = 0
+        controller = <tests.test_simulation.core.test_simulation_integration.MockController object at 0x0000013B79CA92E0>
+        dt         = 0.004485261007457112
+        dynamics   = <tests.test_simulation.core.test_simulation_integration.MockDynamicsModel object at 0x0000013B546F1DF0>
+        initial_state = array([-0.11978064,  0.21416584, -0.0094621 , -0.09288281, -0.08852303,
+       -0.04121885, -0.04826188])
+        self       = <tests.test_simulation.core.test_simulation_integration.TestSimulationRobustness object at 0x0000013B7C1C2900>
+        sim_time   = 0.4084443440871048
+        state_dim  = 7
+        t_arr      = array([0.])
+        u_arr      = array([], dtype=float64)
+        u_max      = 39.20485901336569
+        x_arr      = array([[-0.11978064,  0.21416584, -0.0094621 , -0.09288281, -0.08852303,
+        -0.04121885, -0.04826188]])
+________ TestSimulationRunnerErrorHandling.test_invalid_initial_state _________
+tests\test_simulation\engines\test_simulation_runner.py:318: in test_invalid_initial_state
+    result = runner.run_simulation(invalid_state)
+        invalid_state = array([1., 2.])
+        mock_dynamics = <Mock id='1354997657536'>
+        runner     = <tests.test_simulation.engines.test_simulation_runner.SimulationRunner object at 0x0000013B7C274CB0>
+        self       = <tests.test_simulation.engines.test_simulation_runner.TestSimulationRunnerErrorHandling object at 0x0000013B7C1F1310>
+tests\test_simulation\engines\test_simulation_runner.py:45: in run_simulation
+    states[i] = states[i-1] + np.array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0]) * self.dt
+E   ValueError: operands could not be broadcast together with shapes (2,) (6,)
+        controller = None
+        controls   = array([0., 0., 0., ..., 0., 0., 0.])
+        i          = 1
+        initial_state = array([1., 2.])
+        reference  = None
+        self       = <tests.test_simulation.engines.test_simulation_runner.SimulationRunner object at 0x0000013B7C274CB0>
+        states     = array([[1., 2.],
+       [0., 0.],
+       [0., 0.],
+       ...,
+       [0., 0.],
+       [0., 0.],
+       [0., 0.]])
+        time_steps = 1001
+        times      = array([ 0.  ,  0.01,  0.02, ...,  9.98,  9.99, 10.  ])
+___________ TestVectorSimulationPerformance.test_memory_efficiency ____________
+tests\test_simulation\engines\test_vector_sim.py:409: in test_memory_efficiency
+    assert object_growth < 500  # Allow reasonable growth for numpy arrays and test artifacts
+E   assert 1028 < 500
+        _          = 49
+        control_inputs = array([[ 1.87066338],
+       [ 0.11462151],
+       [-0.87589958],
+       [ 1.37453345],
+       [ 0.95527548],
+       [ 1.00765349],
+       [-2.0061302 ],
+       [ 1.94867096],
+       [-0.55851474],
+       [ 0.77795477]])
+        final_objects = 237724
+        gc         = <module 'gc' (built-in)>
+        initial_objects = 236696
+        initial_state = array([ 0.48925592,  0.2856898 , -1.06672111, -0.11662993, -0.72308773,
+       -0.40105885])
+        mock_safety_guards = None
+        mock_step_function = <function TestVectorSimulationPerformance.mock_step_function.<locals>.mock_step at 0x0000013B7C41E200>
+        object_growth = 1028
+        result     = array([[ 0.48925592,  0.2856898 , -1.06672111, -0.11662993, -0.72308773,
+        -0.40105885],
+       [ 0.50796255,  0.30439643, -1.04801448, -0.0979233 , -0.7043811 ,
+        -0.38235222],
+       [ 0.50910877,  0.30554265, -1.04686826, -0.09677708, -0.70323488,
+        -0.381206  ],
+       [ 0.50034977,  0.29678365, -1.05562726, -0.10553608, -0.71199388,
+        -0.389965  ],
+       [ 0.5140951 ,  0.31052899, -1.04188192, -0.09179074, -0.69824854,
+        -0.37621966],
+       [ 0.52364786,  0.32008174, -1.03232917, -0.08223799, -0.68869579,
+        -0.36666691],
+       [ 0.53372439,  0.33015828, -1.02225263, -0.07216146, -0.67861925,
+        -0.35659037],
+       [ 0.51366309,  0.31009698, -1.04231393, -0.09222276, -0.69868055,
+        -0.37665167],
+       [ 0.5331498 ,  0.32958369, -1.02282722, -0.07273605, -0.67919384,
+        -0.35716497],
+       [ 0.52756465,  0.32399854, -1.02841237, -0.07832119, -0.68477899,
+        -0.36275011],
+       [ 0.5353442 ,  0.33177809, -1.02063282, -0.07054165, -0.67699944,
+        -0.35497056]])
+        self       = <tests.test_simulation.engines.test_vector_sim.TestVectorSimulationPerformance object at 0x0000013B7C1F3C80>
+_____ TestSafetyGuardIntegration.test_apply_safety_guards_minimal_config ______
+tests\test_simulation\safety\test_safety_guards.py:427: in test_apply_safety_guards_minimal_config
+    apply_safety_guards(valid_state, step_idx=0, config=Mock())
+        self       = <tests.test_simulation.safety.test_safety_guards.TestSafetyGuardIntegration object at 0x0000013B7C2492E0>
+        valid_state = array([1., 2., 3.])
+src\simulation\safety\guards.py:229: in apply_safety_guards
+    guard_energy(state, energy_limits)
+        config     = <Mock id='1354958743328'>
+        energy_limits = <Mock name='mock.simulation.safety.energy_limits' id='1354655469728'>
+        safety_config = <Mock name='mock.simulation' id='1354997466800'>
+        safety_settings = <Mock name='mock.simulation.safety' id='1354997466368'>
+        state      = array([1., 2., 3.])
+        step_idx   = 0
+src\simulation\safety\guards.py:154: in guard_energy
+    if not limits or "max" not in limits:
+E   TypeError: argument of type 'Mock' is not iterable
+        limits     = <Mock name='mock.simulation.safety.energy_limits' id='1354655469728'>
+        state      = array([1., 2., 3.])
+___ TestSafetyGuardIntegration.test_apply_safety_guards_with_energy_limits ____
+tests\test_simulation\safety\test_safety_guards.py:440: in test_apply_safety_guards_with_energy_limits
+    apply_safety_guards(low_energy, step_idx=0, config=self.mock_config)
+        low_energy = array([0.5, 0.5])
+        self       = <tests.test_simulation.safety.test_safety_guards.TestSafetyGuardIntegration object at 0x0000013B7C249490>
+src\simulation\safety\guards.py:239: in apply_safety_guards
+    guard_bounds(state, bounds, step_idx * 0.01)  # Approximate time
+        bounds     = (<Mock name='mock.simulation.safety.state_bounds.lower' id='1354999803072'>,
+ <Mock name='mock.simulation.safety.state_bounds.upper' id='1354999806192'>)
+        config     = <Mock id='1354999795152'>
+        energy_limits = {'max': 2.0}
+        safety_config = <Mock name='mock.simulation' id='1354958014368'>
+        safety_settings = <Mock name='mock.simulation.safety' id='1354999806624'>
+        state      = array([0.5, 0.5])
+        state_bounds = <Mock name='mock.simulation.safety.state_bounds' id='1354999806048'>
+        step_idx   = 0
+src\simulation\safety\guards.py:191: in guard_bounds
+    lo = -np.inf if lower is None else np.asarray(lower, dtype=float)
+E   TypeError: float() argument must be a string or a real number, not 'Mock'
+        bounds     = (<Mock name='mock.simulation.safety.state_bounds.lower' id='1354999803072'>,
+ <Mock name='mock.simulation.safety.state_bounds.upper' id='1354999806192'>)
+        lower      = <Mock name='mock.simulation.safety.state_bounds.lower' id='1354999803072'>
+        state      = array([0.5, 0.5])
+        t          = 0.0
+        upper      = <Mock name='mock.simulation.safety.state_bounds.upper' id='1354999806192'>
+        x          = array([0.5, 0.5])
+____ TestSafetyGuardIntegration.test_apply_safety_guards_with_state_bounds ____
+tests\test_simulation\safety\test_safety_guards.py:457: in test_apply_safety_guards_with_state_bounds
+    apply_safety_guards(valid_state, step_idx=0, config=self.mock_config)
+        self       = <tests.test_simulation.safety.test_safety_guards.TestSafetyGuardIntegration object at 0x0000013B7C21BA40>
+        valid_state = array([ 0.5, -0.5])
+src\simulation\safety\guards.py:229: in apply_safety_guards
+    guard_energy(state, energy_limits)
+        config     = <Mock id='1354999802256'>
+        energy_limits = <Mock name='mock.simulation.safety.energy_limits' id='1354999801584'>
+        safety_config = <Mock name='mock.simulation' id='1354999803312'>
+        safety_settings = <Mock name='mock.simulation.safety' id='1354999801632'>
+        state      = array([ 0.5, -0.5])
+        step_idx   = 0
+src\simulation\safety\guards.py:154: in guard_energy
+    if not limits or "max" not in limits:
+E   TypeError: argument of type 'Mock' is not iterable
+        limits     = <Mock name='mock.simulation.safety.energy_limits' id='1354999801584'>
+        state      = array([ 0.5, -0.5])
+________ TestSafetyGuardIntegration.test_create_default_guards_minimal ________
+tests\test_simulation\safety\test_safety_guards.py:467: in test_create_default_guards_minimal
+    manager = create_default_guards(minimal_config)
+        minimal_config = <Mock id='1354999727216'>
+        self       = <tests.test_simulation.safety.test_safety_guards.TestSafetyGuardIntegration object at 0x0000013B7C21AF30>
+src\simulation\safety\guards.py:326: in create_default_guards
+    if energy_limits and 'max' in energy_limits:
+E   TypeError: argument of type 'Mock' is not iterable
+        config     = <Mock id='1354999727216'>
+        energy_limits = <Mock name='mock.simulation.safety.energy_limits' id='1354999727696'>
+        manager    = <src.simulation.safety.guards.SafetyGuardManager object at 0x0000013B7C4705F0>
+        safety_config = <Mock name='mock.simulation' id='1354999728224'>
+        safety_settings = <Mock name='mock.simulation.safety' id='1354999727504'>
+__________ TestSafetyGuardPerformance.test_bounds_guard_performance ___________
+tests\test_simulation\safety\test_safety_guards.py:560: in test_bounds_guard_performance
+    assert result == True
+E   assert False == True
+        _          = 0
+        guard      = <src.simulation.safety.guards.BoundsGuard object at 0x0000013B7C478A10>
+        large_state = array([ 4.04055281e+00, -6.81771086e+00,  2.09668235e+00,  6.01768291e+00,
+        1.71616899e+00, -5.78471031e-01,  5.69806470e+00, -3.47159405e+00,
+       -7.64916454e+00, -1.00298907e+00,  2.67522596e+00,  5.19468381e+00,
+        2.65251287e+00,  4.17910534e+00,  5.22655715e+00, -1.69688503e+00,
+       -7.39696510e-01,  6.43583897e+00, -6.05078512e+00,  2.14566431e+00,
+       -3.58354414e+00,  5.50130802e+00, -8.96774029e-02,  3.79696769e-02,
+        8.64439944e+00, -5.38021390e+00,  1.07909737e+00, -9.00630655e-01,
+        2.66205658e+00,  9.64665393e+00, -3.02620755e+00, -5.98698856e+00,
+       -4.04663713e+00, -1.16409041e+00,  3.21154169e-01,  5.72643979e-01,
+        9.01330476e+00,  8.12419522e+00,  6.51473245e+00,  1.25721932e+01,
+        4.12049228e+00,  5.54177542e+00,  4.02385261e+00,  3.20452657e+00,
+        1.97198262e+00, -1.98428522e+00, -6.23389124e+00, -6.53269845e-01,
+        2.82886850e+00,  3.61309505e-01, -5.32667847e+00, -8.29415250e-01,
+       -1.09001404e+00, -3.11773210e-01,  2.45457674e+00,  3.53129018e+00,
+       -2.50025725e+00,  4.90560594e+00,  5.65819060e+00,  1.60150967e+00,
+        3.32375136e+00,  4.92115721e+00, -5.48822325e+00,  5.27365667e+00,
+       -3.95030436e+00, -3.46350818e+00,  9.81445839e-01, -1.07202006e+01,
+        8.78101541e-01,  4.90890473e+00, -8.22961923e+00,  5.44504662e+00,
+       -3.49393809e+00,  1.03430890e+00, -2.76787254e+00,  2.86459242e+00,
+        5.12473778e+00,  3.23505182e+00, -1.99057475e-02, -2.37927668e+00,
+       -3.46510147e-01,  3.27985732e+00,  3.45133200e+00,  2.75413291e+00,
+       -6.41288771e+00, -1.15112292e-01, -3.16714482e+00,  3.32464510e+00,
+       -3.82485877e+00,  2.26026879e+00, -1.41093880e+00, -9.39548092e+00,
+        4.65479643e+00, -1.26436109e-01,  6.37988648e+00, -8.32654539e+00,
+       -1.45760655e+00, -1.08202210e+00,  1.35103146e+00, -6.62593652e+00,
+        2.72018928e+00,  9.55831203e+00,  2.37268673e+00,  4.64362009e-01,
+       -6.88728704e+00, -3.87123057e+00, -2.79224504e-01, -2.64888235e+00,
+        5.13128213e+00,  2.66851600e+00,  1.34618929e+01, -4.90429218e+00,
+        1.65573057e-01, -6.91746186e+00, -1.11122039e+01,  3.61360490e+00,
+        2.48307691e+00, -4.27295217e+00,  4.65148098e-01, -3.14633799e+00,
+       -2.47103727e+00, -1.60142306e+00, -4.48282589e+00, -3.58324955e+00,
+       -3.44217722e+00,  2.11439423e+00, -1.38711009e+01, -1.13814631e+00,
+       -5.43840938e+00, -5.25776343e+00, -2.62826687e+00, -7.16985499e-02,
+       -1.07205931e+00, -5.32030255e+00,  3.60848259e+00, -4.51301993e+00,
+       -3.67353128e+00,  1.42245893e+00,  1.60184282e+00, -3.05849831e+00,
+       -1.46808102e+01, -4.42745443e+00,  8.09440931e-01,  3.44304027e+00,
+       -3.96483288e-01, -2.39493024e+00,  1.14660550e+01, -1.86243061e+00,
+        3.06116343e+00, -6.67526048e+00, -5.45083925e+00,  3.23662806e+00,
+        5.22280638e+00, -1.94858445e+00, -9.24317846e+00, -8.37786697e-01,
+        9.47029504e-01,  4.94090195e-01, -2.81694832e+00, -7.64420596e-01,
+       -3.74888422e+00, -5.55919112e+00,  3.77834260e+00,  4.88991567e-01,
+       -7.53417793e-01, -2.53573871e+00, -9.00867783e-01,  8.01582144e-01,
+        8.64340788e+00,  3.27268425e+00, -3.33154561e+00, -3.27881871e+00,
+       -4.05840550e+00, -1.00260266e+00, -4.06225725e+00,  2.37411872e+00,
+       -1.32175813e+01,  2.67584155e+00,  1.37688744e+00,  6.31371242e+00,
+        4.38394777e+00, -3.41848893e+00,  3.82149040e+00, -8.40337386e-01,
+       -9.67153379e+00,  7.94159699e-01, -3.12126710e+00,  1.10758198e-03,
+        8.25724915e+00,  1.12393451e+00, -5.08667426e+00,  4.82207503e+00,
+        1.81271285e+00, -5.67580915e+00, -8.03118884e+00, -4.88668780e+00,
+        4.18150900e+00, -1.50801067e+00,  4.05712595e-01, -6.69264835e+00,
+        4.31609490e+00, -1.00759183e+01, -3.27688758e+00,  2.09231930e+00,
+       -5.61315723e+00,  3.07064640e+00, -4.34596989e+00, -6.13035296e+00,
+        6.43241032e+00,  7.69650965e-01,  2.59518039e+00,  5.09104792e+00,
+       -1.30964947e+01,  3.17391320e+00, -3.80512592e+00, -3.14636395e+00,
+        2.18720539e+00, -1.81520387e+00,  2.97260538e+00, -2.04214838e-01,
+        8.41045073e-01, -2.45110796e+00, -5.32466645e+00, -3.70158785e+00,
+       -5.14120652e-01,  9.18619196e+00,  7.35953200e+00, -3.26647989e+00,
+        3.01288387e-01, -1.43861487e+00,  6.51333094e-01,  1.29456374e+00,
+        2.63757508e+00, -1.45056939e+01,  1.83249333e+00, -1.99460515e+00,
+       -3.52468957e+00,  3.97128339e+00,  7.33412208e+00,  3.44501572e+00,
+       -2.59275804e+00, -5.38002825e+00, -1.50312221e+01,  9.12579983e-01,
+        2.89508054e+00, -5.09317550e-01,  4.66873104e+00, -6.60095118e+00,
+       -8.56194782e-01, -1.25150480e+00, -5.50543421e-01,  5.83965831e+00,
+       -5.24211120e-01, -1.47396225e+00, -4.68346740e+00,  6.64289736e+00,
+       -7.15598111e+00, -2.76499716e+00,  8.46968534e+00,  2.34121649e+00,
+       -1.00883259e-01,  1.08460278e-01, -4.73188994e+00, -3.42636224e-01,
+       -1.74932919e+00,  8.98142997e-01, -7.53120693e+00,  1.98926004e+00,
+        5.08314837e+00, -1.01911563e+00,  3.23549197e+00,  1.55173137e+00,
+       -3.03870070e+00, -5.29262843e+00, -4.59194244e+00,  1.46446285e+00,
+       -2.80725660e-01,  6.37546511e+00,  3.95435056e+00,  3.94392492e+00,
+        1.31540401e+00, -4.81099475e+00,  1.62669648e+00,  3.19265825e-01,
+       -5.69190694e+00,  6.04974629e+00,  5.51144687e+00, -5.72074572e+00,
+       -3.18897453e+00, -2.74975110e+00,  3.04925772e+00,  2.47362590e+00,
+        2.22036064e-01,  1.36928640e+00, -6.43816098e+00,  1.90680641e+00,
+       -5.04426878e-01, -3.39521591e+00, -7.66253137e+00,  1.34805781e-01,
+        1.78479948e+00, -8.51240901e+00,  9.24303533e-02,  6.11198759e-01,
+       -2.77114772e+00,  1.89919101e+00, -6.63312081e-01,  1.41585503e+00,
+        2.67123466e+00,  2.67403453e+00,  5.08410247e+00,  1.69162594e+00,
+       -2.38520370e+00, -3.23895022e+00, -5.31654376e+00,  7.55898216e-01,
+        6.60655857e+00, -1.79226303e+00,  2.24804124e+00, -3.76140002e+00,
+        9.74024576e-01,  6.29673564e+00,  3.43123987e+00, -7.85406017e+00,
+        2.85347408e+00,  3.08112889e+00,  8.67434866e-01,  3.33761056e+00,
+       -4.16751020e+00,  3.16315774e-01,  5.55086970e+00,  5.09974742e+00,
+        2.74022487e+00, -4.41497612e+00, -5.20231885e+00,  5.72718372e-01,
+        9.03871194e-01, -5.01858861e-01, -4.02392489e+00,  2.18480538e+00,
+        5.50826743e-01,  1.44912158e+00,  2.96716880e+00, -1.36824894e+00,
+       -2.44379189e+00,  5.53782662e+00, -3.78679243e+00, -2.34587100e+00,
+        6.17123908e+00, -2.73512126e+00, -4.93088218e-01, -2.05984935e+00,
+       -8.91610741e+00, -6.16538260e-01, -5.05310882e+00,  1.27290216e+00,
+        5.52819255e+00, -1.10708687e+01, -2.03458492e+00,  2.26161616e+00,
+       -1.09167446e+01,  6.68132680e+00,  1.89946018e+00,  5.41606411e+00,
+       -2.81973932e+00, -2.21660385e+00, -8.04681774e-01,  1.06910452e+01,
+        6.59052680e+00,  6.61738498e-01,  1.27200886e+00,  3.17451906e+00,
+        1.19577741e+01,  1.91359897e+00,  2.29796981e-01, -1.69299198e+00,
+        1.17457624e+00, -2.93510909e+00,  2.48046169e+00, -7.16298315e+00,
+       -1.30250295e+00,  3.67316427e+00,  1.84561827e+00, -2.31312310e+00,
+       -1.16012255e+00,  5.17667343e+00, -6.05200848e+00, -6.02296824e+00,
+       -4.64816976e+00, -5.33893213e-02, -6.78369034e+00,  4.76500796e+00,
+       -4.62146229e+00,  1.12177779e+00, -2.89536550e+00, -3.27485404e-01,
+       -8.01672955e+00,  5.00658123e+00, -4.80748999e+00, -5.33108361e+00,
+        1.18950451e+01,  2.77153655e+00,  4.81208204e+00,  2.29445698e+00,
+       -2.26240280e+00, -6.53424929e+00, -1.49410194e+00, -4.89079672e+00,
+       -4.59057586e+00, -7.91593664e+00,  5.72379799e-01,  7.86706074e+00,
+        2.79068362e+00, -5.28951939e-01, -2.02859364e-01, -1.52388866e+01,
+       -2.11917711e+00, -7.13337948e+00,  6.72062640e-01, -1.29987994e+00,
+       -4.34652271e+00,  5.59483522e-01,  5.16395765e-01,  7.59312020e+00,
+        3.43208750e+00,  1.08486395e+00, -4.73757237e+00, -5.36719560e+00,
+        2.99424004e+00, -1.00034686e+00,  1.24682796e+00,  4.89000262e+00,
+       -7.56569388e+00,  6.98517693e+00,  4.84690893e+00, -1.02722011e+01,
+        1.17654622e+01,  1.60688160e+00, -2.39269150e+00,  2.59531112e+00,
+       -4.88737318e+00,  2.73064177e+00, -3.96748229e+00,  1.01017977e+01,
+        3.00500970e-01,  3.24911526e+00, -3.93032550e+00,  4.08248012e+00,
+       -6.29003175e-02, -7.05925854e+00, -1.19381360e+00,  9.65555534e+00,
+        4.29488513e+00, -1.89487534e+00, -9.34582881e+00, -4.16245589e+00,
+       -7.03237002e+00, -9.22504003e+00,  3.92795565e+00,  3.11936982e-01,
+        8.97554224e+00, -4.98820949e+00, -1.14046738e-02, -6.97087176e+00,
+       -2.97436681e+00, -1.11054981e+00, -1.87326984e+00,  2.67703153e-01,
+        4.85804782e+00,  4.33208793e+00, -3.84667292e+00, -1.51770609e-01,
+        3.97048187e+00,  5.17868254e+00, -3.30578342e+00,  3.54082227e+00,
+        1.65573255e+00, -5.32994557e+00,  4.00078981e+00,  7.57716042e-01,
+       -8.70695303e+00, -1.46926780e+00,  1.99287708e-01, -3.02912239e+00,
+        6.14114213e+00,  6.32234245e+00, -1.91245079e+00, -2.46112761e+00,
+       -6.56173367e-01, -1.00040283e+00, -2.96250947e+00, -1.85439830e+01,
+        8.77405938e+00,  2.08981889e-03, -8.91550560e-01,  1.62584565e+00,
+       -4.00288743e-01, -2.15157922e+00, -5.02822993e+00, -9.19306388e+00,
+       -6.77189465e+00, -5.58337033e+00,  3.25461079e+00,  3.62311573e+00,
+       -4.40899552e+00, -1.33182707e+01,  4.56035975e-02, -2.10771108e+00,
+       -2.23131243e+00,  4.77968738e+00,  6.93263127e-01, -4.88189824e+00,
+       -6.03206517e+00, -1.31305678e+00, -4.53206381e+00, -3.61988120e-01,
+        5.13071022e+00, -6.89891206e+00,  4.38897174e-01,  4.57524991e+00,
+       -4.30936679e-01,  3.60790448e+00, -1.43636246e+00,  8.54140397e-01,
+        2.20392466e+00, -2.86001219e+00,  9.95338009e+00,  2.88790090e+00,
+        6.51492749e+00,  5.35511973e+00,  1.63644635e+00,  6.92894711e+00,
+        9.39573556e-01, -3.64887642e+00,  7.40961578e-02, -5.03083456e+00,
+       -1.05085216e+01, -4.26271122e+00,  3.64407665e-01,  5.30962393e+00,
+       -4.27759602e+00,  5.05081227e+00, -6.05341493e+00, -4.59761233e+00,
+        7.24578302e+00,  2.38105100e-01, -8.68109726e-01,  1.17639995e+00,
+       -6.03201625e+00, -1.65424064e+00,  1.33057906e-02,  6.15690468e+00,
+       -8.35208570e+00,  8.81495158e+00, -6.23238692e-01, -5.55278124e+00,
+       -6.45817358e+00,  1.36574659e+00, -6.73604740e+00, -2.80061773e+00,
+       -1.24951530e+00,  5.71837870e+00,  5.09226730e+00, -3.21496195e+00,
+       -1.06341585e+00, -7.97692450e+00, -1.01954776e+01, -6.14526224e+00,
+        5.61548681e+00,  3.90040361e+00,  1.91718131e+00, -7.28812243e+00,
+       -3.55829789e+00, -4.28910514e+00, -8.29991853e-01, -1.14526778e+00,
+       -5.00978428e+00,  1.74608404e+00,  1.14473190e+00, -3.64411550e+00,
+        1.52139196e+00,  5.62142684e+00,  7.14030389e+00,  2.45331078e+00,
+        2.30633972e+00, -1.20069457e+00,  5.14856448e+00, -5.35175726e+00,
+        4.56925072e+00, -1.43802367e+00,  7.45468414e+00,  2.94103204e+00,
+       -3.39331155e-01, -1.18243824e+00,  2.62806427e+00,  2.38562174e+00,
+       -1.99171502e+00,  4.59178791e-01,  4.48195044e+00, -6.81678129e+00,
+        3.62939110e+00,  2.60607289e+00,  5.93323738e+00, -3.57826851e+00,
+        2.85804305e-02,  1.02534188e+00,  3.69398259e+00,  2.14558465e+00,
+       -6.19777549e+00,  1.45522016e+00,  1.00211439e+01,  3.05878788e+00,
+        8.19023472e+00,  5.21530689e+00,  6.81200968e+00,  1.54984330e+00,
+        2.60922555e+00,  1.27758878e+00,  2.17043252e-02,  3.71097490e+00,
+       -2.60500970e+00,  9.42691158e+00, -4.64006484e+00,  4.05694060e+00,
+        6.89335709e+00, -8.83108770e-01, -5.56488656e+00,  5.77764795e+00,
+        1.01697655e+00,  4.06658036e+00, -5.47272994e-01,  8.65962341e+00,
+       -1.05850403e+01,  1.88088776e+00,  6.70874742e+00,  5.26695224e-01,
+        1.51179347e+00, -2.17005906e+00,  1.03442539e-01, -8.35928307e+00,
+       -3.59215666e+00, -3.93377564e+00,  3.34561996e+00, -2.85684880e+00,
+       -2.71237775e+00, -1.88961680e+00, -3.74322351e+00,  1.34511135e+00,
+        1.88815735e+00,  4.12509290e+00,  3.26375041e+00,  2.76378872e+00,
+       -1.64484167e+00, -1.96551875e+00, -4.35605501e+00, -4.44621844e+00,
+        9.71307048e-01, -3.59708020e+00,  7.34162067e+00, -1.87504115e-01,
+        7.50695054e+00,  2.85883527e+00, -3.88618217e+00, -3.10230943e-01,
+       -8.36726171e+00,  9.52126775e-01, -3.42884204e+00, -5.56729004e+00,
+        7.61073379e+00,  5.15293870e+00,  5.01519489e+00,  3.91055638e+00,
+       -6.17444522e+00, -2.00239746e+00, -1.69751821e+00, -8.54868537e+00,
+       -2.78500547e+00, -2.73048988e+00,  6.29994737e-01,  1.26619380e+01,
+       -1.04481383e-01,  6.32572273e-01, -1.25105136e+00,  3.68856440e+00,
+       -5.36958604e+00,  9.48018748e+00, -6.20796037e-01, -1.97594917e+00,
+        4.85018537e+00, -4.45461296e+00,  3.59625492e+00,  7.02585028e+00,
+       -1.20671386e+00,  1.02642081e+01,  3.22145763e+00,  3.28347130e+00,
+        6.82932668e+00,  8.15367477e+00,  1.30919493e+00,  3.98452721e+00,
+        6.98170747e+00, -5.80905538e+00, -8.64751200e+00, -2.87769602e-01,
+       -8.76745679e+00, -1.56997548e+00,  1.57186767e+00, -1.37819383e+00,
+       -7.07965241e-01, -5.00833257e+00,  3.94071772e+00, -5.31731684e+00,
+       -1.05145087e+01, -1.03669386e+00,  4.57509962e+00,  3.99153959e-01,
+       -5.82398508e+00,  5.09754837e-01,  2.19151852e+00,  4.51583458e-01,
+       -1.32292123e+00,  2.43019341e+00, -8.69213451e+00, -4.46977695e+00,
+       -6.52604049e+00,  6.74193186e+00,  3.56015860e+00,  9.25625172e-01,
+       -7.25310827e+00,  3.72073894e+00,  6.93270067e+00,  2.85747368e+00,
+       -1.75887083e-01,  3.15859016e+00,  1.36458057e+00,  4.63038117e+00,
+        4.51842821e+00, -1.10532768e+00, -3.30320691e+00, -1.99911470e+00,
+        2.67925168e+00, -1.69719826e+00, -3.75264809e+00, -4.76685627e-03,
+        5.53728465e+00,  6.75540336e-01, -1.38108998e+00,  1.60215896e+00,
+        4.20196045e-01, -9.66818521e+00,  3.48379572e+00,  2.03729220e+00,
+        8.08589947e-02,  5.31178350e+00,  6.06499682e+00,  3.99384331e+00,
+       -4.25150408e+00, -4.07855555e+00,  5.58667770e+00, -9.38611963e+00,
+       -7.44237576e-01,  2.19912904e+00, -8.75203868e+00,  1.17171619e+00,
+        4.77214538e+00, -7.42788035e+00,  8.29085103e+00, -5.04915038e+00,
+        2.87368123e+00, -4.17982142e-01,  3.47578119e-01, -6.41747568e+00,
+        6.30236481e+00,  1.62941732e+00,  8.10420088e+00, -6.28708610e+00,
+       -9.06173169e-01,  1.04764620e+00,  3.01915736e-01,  3.33392672e+00,
+       -9.69592710e-01,  1.06101302e+01,  1.99211611e-01, -1.44207722e+01,
+        4.21005042e-01,  6.30731992e+00, -4.61653051e+00, -4.93377595e+00,
+       -4.20194853e+00, -5.38238405e+00, -2.39700857e+00,  4.54648613e+00,
+        7.63166364e+00, -1.21212516e+01, -1.89227327e+00,  1.51348997e+00,
+        1.01339182e+00,  9.49969833e+00, -1.00534695e+01, -1.29453197e+01,
+        1.03110626e+01,  3.76716847e+00, -2.85685793e+00,  8.57993865e-01,
+        1.21608811e+00, -2.97760395e+00,  7.08891853e-01,  1.77406687e+00,
+        1.00776513e+01,  4.81725611e+00,  8.69661570e+00, -6.71785742e+00,
+       -1.73598630e+00,  1.21123492e+00, -9.60550377e+00,  5.90929669e+00,
+        3.21104886e+00, -1.83579260e+00, -9.16671718e-01,  6.26933444e+00,
+       -3.97718974e+00,  6.47092675e+00, -1.26019368e+00,  3.77998026e+00,
+        4.33821028e-01,  1.11659692e+01, -4.43696195e+00, -2.86641311e+00,
+       -7.53062739e+00, -5.48378584e+00,  3.56564054e+00,  8.00081819e+00,
+        4.13240435e+00, -2.69574986e-02, -4.46807251e+00,  4.49209336e+00,
+       -4.74300953e+00, -6.74475867e+00, -1.54234667e+00, -1.01697031e+01,
+       -6.90692437e+00,  9.42995168e+00, -7.83404212e+00, -5.94074191e+00,
+        3.59164539e-01,  6.19519400e-01, -1.17312149e+00, -1.00168687e+01,
+        4.24244664e+00, -2.21526700e+00,  6.10224761e+00, -3.22408811e+00,
+        4.91247170e+00,  6.48041725e+00, -2.33471138e+00,  4.40225097e+00,
+       -6.64272339e+00,  1.31844744e+00,  6.11113854e+00,  2.59246423e+00,
+        1.20311196e+01,  2.87178996e+00, -1.82635626e+00,  1.42044320e+01,
+        8.16850509e+00, -8.01453781e+00, -3.92081802e+00, -5.19079054e+00,
+        3.22814802e+00,  2.85579018e+00,  2.81725966e+00, -8.14954730e+00,
+       -3.19045773e+00, -7.46426274e-01, -9.10960275e+00, -4.35913883e+00,
+        6.78216855e+00, -7.77037999e+00,  7.27630247e+00,  5.45574546e+00,
+       -1.45368610e+00, -3.24436500e+00,  4.15913811e+00, -3.93870080e+00,
+       -3.68998975e+00, -1.19342020e-01, -1.06511680e+01, -7.24987799e+00,
+       -1.57830625e+00,  2.37848016e+00, -4.00786969e+00, -9.88052390e-01,
+       -8.06729704e+00,  4.66241926e+00,  1.10041165e+00,  1.54272951e+00,
+        2.44125309e+00,  3.90637517e-01, -2.41886379e+00,  5.64827274e+00,
+        7.84405739e-01, -8.28597143e-01, -4.32732696e-02, -1.49825332e-01,
+       -8.78828020e-01,  2.23053181e+00, -4.67930111e+00, -4.31395518e+00,
+        2.79631845e+00, -7.26196704e-01,  4.85696551e+00,  2.04439500e+00,
+       -2.76313955e+00,  2.87548182e+00,  5.98595479e+00,  2.23489778e+00,
+        3.32792472e+00, -8.58854253e-01,  4.96519941e+00, -2.90345207e+00,
+        1.69271513e+00,  1.28475308e+01,  2.69440528e+00, -2.10355615e+00,
+       -2.11646121e+00, -3.56708486e-01,  4.25622891e+00,  7.28887546e-01,
+       -3.24263907e+00, -3.25148496e+00,  7.60246655e-01,  2.11974934e-01,
+        2.27488085e+00,  4.58744948e+00,  1.36367985e+01, -7.31016758e+00,
+        3.43431064e+00,  4.91538542e-01, -9.22288116e+00,  6.24765362e+00,
+        2.10586613e+00,  3.99903146e+00, -8.49709473e+00, -1.10208464e+00,
+       -5.39598472e+00,  1.08155047e+01,  5.72275173e+00, -3.40483892e+00,
+       -7.68319450e+00,  9.70275332e-01,  5.46211001e+00, -8.67526803e+00,
+       -4.65887335e+00, -5.52792355e+00,  4.33473083e+00, -1.84914544e+00,
+       -1.63968261e+00,  8.73273403e-01, -4.39140406e+00, -7.21843368e+00,
+        6.84842581e+00,  7.31242854e+00,  8.97912297e-01,  1.26077753e+00,
+        6.30506988e+00,  7.83267783e-01, -2.09538953e+00,  1.96695634e-01,
+        6.96584319e+00,  2.66608342e-01, -3.34691267e+00,  7.35010246e-01,
+        3.28111569e+00,  2.68126747e+00,  2.76411974e+00, -4.13338840e+00,
+        3.85051783e+00,  1.42329696e-01, -3.55895584e+00,  3.81075857e+00,
+       -2.26819424e+00, -7.87148674e+00, -5.00301191e+00, -9.08184665e-01,
+        2.89151141e+00, -4.32034976e+00, -1.20331230e+00, -6.08303616e+00,
+        4.91016458e+00,  8.58665557e+00,  8.04641262e+00,  4.82489775e+00,
+        4.31254979e+00, -1.03593976e+01,  8.85866161e-01, -2.48046312e+00,
+        4.40233181e+00, -1.26879894e+01,  9.64838514e-01, -1.07221892e+00])
+        lower_bounds = array([-10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.,
+       -10., -10., -10., -10., -10., -10., -10., -10., -10., -10.])
+        result     = False
+        self       = <tests.test_simulation.safety.test_safety_guards.TestSafetyGuardPerformance object at 0x0000013B7C2480B0>
+        start_time = 1759334365.3960965
+        state_size = 1000
+        time       = <module 'time' (built-in)>
+        upper_bounds = array([10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.,
+       10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10., 10.])
+______________________ test_simulate_bounds_guard_raises ______________________
+tests\test_simulation\safety\test_vector_sim_guards.py:27: in test_simulate_bounds_guard_raises
+    _ = simulate(x0, u, dt=0.1, state_bounds=(np.array([-1.0, -1.0]), np.array([1.0, 1.0])))
+        u          = array([0., 0.])
+        x0         = array([10.,  0.])
+src\simulation\engines\vector_sim.py:211: in simulate
+    x_next = _step_fn(x_b, u_i, dt)
+        H          = 2
+        batch_mode = False
+        control_idx = 0
+        control_inputs = array([0., 0.])
+        dt         = 0.1
+        energy_limits = None
+        horizon    = None
+        i          = 0
+        initial_state = array([10.,  0.])
+        n_batches  = 1
+        safety_cfg = None
+        sim_cfg    = namespace(use_full_dynamics=False, safety=None)
+        state_bounds = (array([-1., -1.]), array([1., 1.]))
+        state_dim  = 2
+        states     = array([[[10.,  0.],
+        [ 0.,  0.],
+        [ 0.,  0.]]])
+        stop_fn    = None
+        stop_index = 2
+        t          = 0.0
+        t0         = 0.0
+        u          = array([0., 0.])
+        u_i        = 0.0
+        x          = array([10.,  0.])
+        x_b        = array([[10.,  0.]])
+src\simulation\engines\simulation_runner.py:105: in step
+    return get_step_fn()(x, u, dt)
+        dt         = 0.1
+        u          = 0.0
+        x          = array([[10.,  0.]])
+src\simulation\engines\simulation_runner.py:85: in get_step_fn
+    return _load_full_step() if use_full else _load_lowrank_step()
+        use_full   = False
+src\simulation\engines\simulation_runner.py:72: in _load_lowrank_step
+    from ...plant.models.dip_lowrank import step as step_fn
+E   ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+______________________ test_simulate_energy_guard_raises ______________________
+tests\test_simulation\safety\test_vector_sim_guards.py:34: in test_simulate_energy_guard_raises
+    _ = simulate(x0, u, dt=0.1, energy_limits=10.0)
+        u          = array([0., 0.])
+        x0         = array([100.,   0.])
+src\simulation\engines\vector_sim.py:211: in simulate
+    x_next = _step_fn(x_b, u_i, dt)
+        H          = 2
+        batch_mode = False
+        control_idx = 0
+        control_inputs = array([0., 0.])
+        dt         = 0.1
+        energy_limits = 10.0
+        horizon    = None
+        i          = 0
+        initial_state = array([100.,   0.])
+        n_batches  = 1
+        safety_cfg = None
+        sim_cfg    = namespace(use_full_dynamics=False, safety=None)
+        state_bounds = None
+        state_dim  = 2
+        states     = array([[[100.,   0.],
+        [  0.,   0.],
+        [  0.,   0.]]])
+        stop_fn    = None
+        stop_index = 2
+        t          = 0.0
+        t0         = 0.0
+        u          = array([0., 0.])
+        u_i        = 0.0
+        x          = array([100.,   0.])
+        x_b        = array([[100.,   0.]])
+src\simulation\engines\simulation_runner.py:105: in step
+    return get_step_fn()(x, u, dt)
+        dt         = 0.1
+        u          = 0.0
+        x          = array([[100.,   0.]])
+src\simulation\engines\simulation_runner.py:85: in get_step_fn
+    return _load_full_step() if use_full else _load_lowrank_step()
+        use_full   = False
+src\simulation\engines\simulation_runner.py:72: in _load_lowrank_step
+    from ...plant.models.dip_lowrank import step as step_fn
+E   ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+_______________________ test_simulate_nan_guard_raises ________________________
+tests\test_simulation\safety\test_vector_sim_guards.py:48: in test_simulate_nan_guard_raises
+    _ = simulate(np.array([np.nan, 0.0]), u, dt=0.1)
+        u          = array([0., 0.])
+        x0         = array([0., 0.])
+src\simulation\engines\vector_sim.py:211: in simulate
+    x_next = _step_fn(x_b, u_i, dt)
+        H          = 2
+        batch_mode = False
+        control_idx = 0
+        control_inputs = array([0., 0.])
+        dt         = 0.1
+        energy_limits = None
+        horizon    = None
+        i          = 0
+        initial_state = array([nan,  0.])
+        n_batches  = 1
+        safety_cfg = None
+        sim_cfg    = namespace(use_full_dynamics=False, safety=None)
+        state_bounds = None
+        state_dim  = 2
+        states     = array([[[nan,  0.],
+        [ 0.,  0.],
+        [ 0.,  0.]]])
+        stop_fn    = None
+        stop_index = 2
+        t          = 0.0
+        t0         = 0.0
+        u          = array([0., 0.])
+        u_i        = 0.0
+        x          = array([nan,  0.])
+        x_b        = array([[nan,  0.]])
+src\simulation\engines\simulation_runner.py:105: in step
+    return get_step_fn()(x, u, dt)
+        dt         = 0.1
+        u          = 0.0
+        x          = array([[nan,  0.]])
+src\simulation\engines\simulation_runner.py:85: in get_step_fn
+    return _load_full_step() if use_full else _load_lowrank_step()
+        use_full   = False
+src\simulation\engines\simulation_runner.py:72: in _load_lowrank_step
+    from ...plant.models.dip_lowrank import step as step_fn
+E   ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+_________ TestVectorSimulationScalarInputs.test_batch_scalar_controls _________
+tests\test_simulation\vector\test_vector_simulation_robustness.py:146: in test_batch_scalar_controls
+    result = simulate(initial_states, control_inputs, 0.1, horizon=2)
+        control_formats = [array([[0.1, 0.2],
+       [0.3, 0.4]]), 0.5, array([0.1, 0.2])]
+        control_inputs = 0.5
+        i          = 1
+        initial_states = array([[1., 0.],
+       [2., 1.]])
+        mock_safety_guards = None
+        mock_step_function = <function TestVectorSimulationScalarInputs.mock_step_function.<locals>.mock_step at 0x0000013B7C4E0FE0>
+        result     = array([[[1.  , 0.  ],
+        [1.01, 0.01],
+        [1.03, 0.03]],
+
+       [[2.  , 1.  ],
+        [2.01, 1.01],
+        [2.03, 1.03]]])
+        self       = <tests.test_simulation.vector.test_vector_simulation_robustness.TestVectorSimulationScalarInputs object at 0x0000013B7C274530>
+src\simulation\engines\vector_sim.py:197: in simulate
+    control_idx = min(i, u.shape[1] - 1)
+E   IndexError: tuple index out of range
+        H          = 2
+        batch_mode = True
+        control_inputs = 0.5
+        dt         = 0.1
+        energy_limits = None
+        horizon    = 2
+        i          = 0
+        initial_state = array([[1., 0.],
+       [2., 1.]])
+        n_batches  = 2
+        safety_cfg = None
+        sim_cfg    = namespace(use_full_dynamics=False, safety=None)
+        state_bounds = None
+        state_dim  = 2
+        states     = array([[[1., 0.],
+        [0., 0.],
+        [0., 0.]],
+
+       [[2., 1.],
+        [0., 0.],
+        [0., 0.]]])
+        stop_fn    = None
+        stop_index = 2
+        t          = 0.0
+        t0         = 0.0
+        u          = array(0.5)
+        x          = array([[1., 0.],
+       [2., 1.]])
+        x_b        = array([[1., 0.],
+       [2., 1.]])
+___ TestVectorSimulationDimensionMismatches.test_batch_dimension_mismatches ___
+tests\test_simulation\vector\test_vector_simulation_robustness.py:368: in test_batch_dimension_mismatches
+    result = simulate(initial_states, control_input, 0.1, horizon=1)
+        control_formats = [0.3,
+ array([0.1, 0.2]),
+ array([[0.1],
+       [0.2]]),
+ array([[0.1, 0.2],
+       [0.3, 0.4]])]
+        control_input = 0.3
+        initial_states = array([[1. , 0. ],
+       [0.5, 1.5]])
+        mock_safety_guards = None
+        robust_step_function = <function TestVectorSimulationDimensionMismatches.robust_step_function.<locals>.mock_step at 0x0000013B7C4E02C0>
+        self       = <tests.test_simulation.vector.test_vector_simulation_robustness.TestVectorSimulationDimensionMismatches object at 0x0000013B7C275100>
+src\simulation\engines\vector_sim.py:197: in simulate
+    control_idx = min(i, u.shape[1] - 1)
+E   IndexError: tuple index out of range
+        H          = 1
+        batch_mode = True
+        control_inputs = 0.3
+        dt         = 0.1
+        energy_limits = None
+        horizon    = 1
+        i          = 0
+        initial_state = array([[1. , 0. ],
+       [0.5, 1.5]])
+        n_batches  = 2
+        safety_cfg = None
+        sim_cfg    = namespace(use_full_dynamics=False, safety=None)
+        state_bounds = None
+        state_dim  = 2
+        states     = array([[[1. , 0. ],
+        [0. , 0. ]],
+
+       [[0.5, 1.5],
+        [0. , 0. ]]])
+        stop_fn    = None
+        stop_index = 1
+        t          = 0.0
+        t0         = 0.0
+        u          = array(0.3)
+        x          = array([[1. , 0. ],
+       [0.5, 1.5]])
+        x_b        = array([[1. , 0. ],
+       [0.5, 1.5]])
+_____ TestVectorSimulationSafetyAndRecovery.test_safety_guard_integration _____
+tests\test_simulation\vector\test_vector_simulation_robustness.py:572: in test_safety_guard_integration
+    result = simulate(
+        control_input = array([0.1, 0.2])
+        dt         = 0.1
+        initial_state = array([1., 0.])
+        mock_energy = <MagicMock name='_guard_energy' id='1354996913104'>
+        self       = <tests.test_simulation.vector.test_vector_simulation_robustness.TestVectorSimulationSafetyAndRecovery object at 0x0000013B7C275BB0>
+src\simulation\engines\vector_sim.py:211: in simulate
+    x_next = _step_fn(x_b, u_i, dt)
+        H          = 2
+        batch_mode = False
+        control_idx = 0
+        control_inputs = array([0.1, 0.2])
+        dt         = 0.1
+        energy_limits = 10.0
+        horizon    = None
+        i          = 0
+        initial_state = array([1., 0.])
+        n_batches  = 1
+        safety_cfg = None
+        sim_cfg    = namespace(use_full_dynamics=False, safety=None)
+        state_bounds = None
+        state_dim  = 2
+        states     = array([[[1., 0.],
+        [0., 0.],
+        [0., 0.]]])
+        stop_fn    = None
+        stop_index = 2
+        t          = 0.0
+        t0         = 0.0
+        u          = array([0.1, 0.2])
+        u_i        = 0.1
+        x          = array([1., 0.])
+        x_b        = array([[1., 0.]])
+src\simulation\engines\simulation_runner.py:105: in step
+    return get_step_fn()(x, u, dt)
+        dt         = 0.1
+        u          = 0.1
+        x          = array([[1., 0.]])
+src\simulation\engines\simulation_runner.py:85: in get_step_fn
+    return _load_full_step() if use_full else _load_lowrank_step()
+        use_full   = False
+src\simulation\engines\simulation_runner.py:72: in _load_lowrank_step
+    from ...plant.models.dip_lowrank import step as step_fn
+E   ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+___ TestVectorSimulationBatchRobustness.test_batch_broadcasting_edge_cases ____
+tests\test_simulation\vector\test_vector_simulation_robustness.py:731: in test_batch_broadcasting_edge_cases
+    result = simulate(initial_states, control_input, 0.1, horizon=2)
+        batch_size = 3
+        broadcast_cases = [(0.5, 'scalar broadcast'),
+ (array([0.1, 0.2, 0.3]), 'sequence broadcast'),
+ (array([[0.1, 0.2, 0.3]]), 'single batch broadcast'),
+ (array([[0.1, 0.2],
+       [0.3, 0.4],
+       [0.5, 0.6]]), 'full batch')]
+        case_name  = 'scalar broadcast'
+        control_input = 0.5
+        initial_states = array([[-0.15047849,  0.01340745],
+       [ 0.16266364, -0.09794591],
+       [-0.08344409, -0.04698513]])
+        mock_batch_step = <function TestVectorSimulationBatchRobustness.mock_batch_step.<locals>.mock_step at 0x0000013B7C4E2700>
+        mock_safety_guards = None
+        self       = <tests.test_simulation.vector.test_vector_simulation_robustness.TestVectorSimulationBatchRobustness object at 0x0000013B7C2762D0>
+src\simulation\engines\vector_sim.py:197: in simulate
+    control_idx = min(i, u.shape[1] - 1)
+E   IndexError: tuple index out of range
+        H          = 2
+        batch_mode = True
+        control_inputs = 0.5
+        dt         = 0.1
+        energy_limits = None
+        horizon    = 2
+        i          = 0
+        initial_state = array([[-0.15047849,  0.01340745],
+       [ 0.16266364, -0.09794591],
+       [-0.08344409, -0.04698513]])
+        n_batches  = 3
+        safety_cfg = None
+        sim_cfg    = namespace(use_full_dynamics=False, safety=None)
+        state_bounds = None
+        state_dim  = 2
+        states     = array([[[-0.15047849,  0.01340745],
+        [ 0.        ,  0.        ],
+        [ 0.        ,  0.        ]],
+
+       [[ 0.16266364, -0.09794591],
+        [ 0.        ,  0.        ],
+        [ 0.        ,  0.        ]],
+
+       [[-0.08344409, -0.04698513],
+        [ 0.        ,  0.        ],
+        [ 0.        ,  0.        ]]])
+        stop_fn    = None
+        stop_index = 2
+        t          = 0.0
+        t0         = 0.0
+        u          = array(0.5)
+        x          = array([[-0.15047849,  0.01340745],
+       [ 0.16266364, -0.09794591],
+       [-0.08344409, -0.04698513]])
+        x_b        = array([[-0.15047849,  0.01340745],
+       [ 0.16266364, -0.09794591],
+       [-0.08344409, -0.04698513]])
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.12.6-final-0 _______________
+
+Name                             Stmts   Miss  Cover
+----------------------------------------------------
+src\core\__init__.py                 7      0   100%
+src\core\dynamics.py                92     75    18%
+src\core\dynamics_full.py           16     11    31%
+src\core\safety_guards.py            2      0   100%
+src\core\simulation_context.py       2      2     0%
+src\core\simulation_runner.py        2      0   100%
+src\core\vector_sim.py               3      0   100%
+----------------------------------------------------
+TOTAL                              124     88    29%
+Coverage JSON written to file logs/pytest_run_20251001_192629/coverage/simulation_coverage.json
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_simulation\core\test_simulation_integration.py:710: Real controller integration failed: assert 1 == 51
+ +  where 1 = len(array([0.]))
+SKIPPED [1] tests\test_simulation\core\test_simulation_integration.py:745: Plant models not available
+SKIPPED [1] tests\test_simulation\engines\test_simulation_runner.py:83: Source modules not yet implemented
+SKIPPED [1] tests\test_simulation\engines\test_vector_sim.py:416: Test only when imports fail
+SKIPPED [1] tests\test_simulation\safety\test_safety_guards.py:657: Test only when imports fail
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationIntegrationBasic::test_basic_simulation_workflow - assert 1 == (100 + 1)
+ +  where 1 = len(array([0.]))
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationErrorHandling::test_fallback_controller_activation - assert 1 == (10 + 1)
+ +  where 1 = len(array([0.]))
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestIntegratorCompatibility::test_euler_integration_compatibility - assert 1 == 21
+ +  where 1 = len(array([0.]))
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestIntegratorCompatibility::test_integrator_statistics_tracking - assert 0 > 0
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationStepRouter::test_step_function_dispatch - ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationStepRouter::test_step_function_with_different_inputs - ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationPerformance::test_simulation_performance_scaling - assert 1 == (100 + 1)
+ +  where 1 = len(array([0.]))
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationRobustness::test_extreme_initial_conditions - assert 1 > 1
+ +  where 1 = len(array([0.]))
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationRobustness::test_very_small_timesteps - assert 1 == 10001
+ +  where 1 = len(array([0.]))
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationRobustness::test_very_large_timesteps - assert 1 == 11
+ +  where 1 = len(array([0.]))
+FAILED tests/test_simulation/core/test_simulation_integration.py::TestSimulationRobustness::test_random_parameters_robustness - Failed: Random test failed with params: state_dim=7, sim_time=0.4084443440871048, dt=0.004485261007457112, u_max=39.20485901336569. Error: assert 1 > 1
+ +  where 1 = len(array([0.]))
+FAILED tests/test_simulation/engines/test_simulation_runner.py::TestSimulationRunnerErrorHandling::test_invalid_initial_state - ValueError: operands could not be broadcast together with shapes (2,) (6,)
+FAILED tests/test_simulation/engines/test_vector_sim.py::TestVectorSimulationPerformance::test_memory_efficiency - assert 1028 < 500
+FAILED tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_apply_safety_guards_minimal_config - TypeError: argument of type 'Mock' is not iterable
+FAILED tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_apply_safety_guards_with_energy_limits - TypeError: float() argument must be a string or a real number, not 'Mock'
+FAILED tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_apply_safety_guards_with_state_bounds - TypeError: argument of type 'Mock' is not iterable
+FAILED tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardIntegration::test_create_default_guards_minimal - TypeError: argument of type 'Mock' is not iterable
+FAILED tests/test_simulation/safety/test_safety_guards.py::TestSafetyGuardPerformance::test_bounds_guard_performance - assert False == True
+FAILED tests/test_simulation/safety/test_vector_sim_guards.py::test_simulate_bounds_guard_raises - ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+FAILED tests/test_simulation/safety/test_vector_sim_guards.py::test_simulate_energy_guard_raises - ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+FAILED tests/test_simulation/safety/test_vector_sim_guards.py::test_simulate_nan_guard_raises - ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+FAILED tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationScalarInputs::test_batch_scalar_controls - IndexError: tuple index out of range
+FAILED tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationDimensionMismatches::test_batch_dimension_mismatches - IndexError: tuple index out of range
+FAILED tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationSafetyAndRecovery::test_safety_guard_integration - ModuleNotFoundError: No module named 'src.plant.models.dip_lowrank'
+FAILED tests/test_simulation/vector/test_vector_simulation_robustness.py::TestVectorSimulationBatchRobustness::test_batch_broadcasting_edge_cases - IndexError: tuple index out of range
+================= 25 failed, 118 passed, 5 skipped in 17.68s ==================
