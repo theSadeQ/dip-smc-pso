@@ -12,6 +12,7 @@ import warnings
 
 from ..base import SimulationBasedObjective
 from ...core.interfaces import ObjectiveFunction
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 class ParetoObjective(SimulationBasedObjective):
@@ -197,7 +198,8 @@ class ParetoObjective(SimulationBasedObjective):
             normalized = np.zeros_like(objective_values)
             for i in range(self.n_objectives):
                 range_i = maxs[i] - mins[i]
-                if range_i > 1e-12:
+                # Issue #13: Standardized division protection
+                if range_i > EPSILON_DIV:
                     normalized[i] = (objective_values[i] - mins[i]) / range_i
                 else:
                     normalized[i] = 0.0
@@ -220,7 +222,8 @@ class ParetoObjective(SimulationBasedObjective):
             normalized = np.zeros_like(objective_values)
             for i in range(self.n_objectives):
                 range_i = self._normalization_bounds['maxs'][i] - self._normalization_bounds['mins'][i]
-                if range_i > 1e-12:
+                # Issue #13: Standardized division protection
+                if range_i > EPSILON_DIV:
                     normalized[i] = ((objective_values[i] - self._normalization_bounds['mins'][i]) / range_i)
                 else:
                     normalized[i] = 0.0
@@ -298,7 +301,8 @@ class ParetoObjective(SimulationBasedObjective):
 
             # Calculate distance to neighbors
             obj_range = extended_objectives[sorted_indices[-1], m] - extended_objectives[sorted_indices[0], m]
-            if obj_range > 1e-12:
+            # Issue #13: Standardized division protection
+            if obj_range > EPSILON_DIV:
                 distance = (extended_objectives[sorted_indices[current_position + 1], m] -
                            extended_objectives[sorted_indices[current_position - 1], m]) / obj_range
                 crowding_distance += distance
@@ -318,7 +322,8 @@ class ParetoObjective(SimulationBasedObjective):
             # For each objective, find required epsilon for domination
             max_ratio = 0.0
             for i in range(self.n_objectives):
-                if pareto_obj[i] > 1e-12:
+                # Issue #13: Standardized division protection
+                if pareto_obj[i] > EPSILON_DIV:
                     ratio = objectives[i] / pareto_obj[i]
                     max_ratio = max(max_ratio, ratio)
                 elif objectives[i] > pareto_obj[i]:

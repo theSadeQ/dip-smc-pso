@@ -492,7 +492,8 @@ class EnhancedConvergenceAnalyzer:
         # Factor 2: Convergence velocity stability
         if len(self.convergence_metrics_history) >= 3:
             recent_velocities = [m.convergence_velocity for m in self.convergence_metrics_history[-3:]]
-            velocity_stability = 1.0 - np.std(recent_velocities) / (np.mean(np.abs(recent_velocities)) + 1e-6)
+            # Issue #13: Standardized division protection
+            velocity_stability = 1.0 - np.std(recent_velocities) / (np.mean(np.abs(recent_velocities)) + EPSILON_DIV)
             factors.append(max(0.0, velocity_stability))
 
         # Factor 3: Diversity maintenance
@@ -534,7 +535,8 @@ class EnhancedConvergenceAnalyzer:
 
                 # Confidence is higher when interval is narrower
                 interval_width = confidence_interval[1] - confidence_interval[0]
-                normalized_width = interval_width / (abs(mean_fitness) + 1e-6)
+                # Issue #13: Standardized division protection
+                normalized_width = interval_width / (abs(mean_fitness) + EPSILON_DIV)
                 confidence = 1.0 / (1.0 + normalized_width)
             else:
                 confidence = 1.0  # Perfect consistency

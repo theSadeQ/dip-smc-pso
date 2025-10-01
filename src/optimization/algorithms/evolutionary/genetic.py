@@ -16,6 +16,7 @@ import multiprocessing as mp
 from ..base import OptimizationAlgorithm
 from ...core.interfaces import OptimizationProblem, ParameterSpace, OptimizationResult
 from ...core.parameters import ContinuousParameterSpace
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 @dataclass
@@ -294,7 +295,8 @@ class GeneticAlgorithm(OptimizationAlgorithm):
         # Convert to probabilities (invert for minimization)
         max_fitness = np.max(fitnesses)
         if max_fitness > 0:
-            weights = (max_fitness - fitnesses) + 1e-10
+            # Issue #13: Standardized division protection
+            weights = (max_fitness - fitnesses) + EPSILON_DIV
         else:
             weights = np.ones_like(fitnesses)
 
@@ -501,7 +503,8 @@ class GeneticAlgorithm(OptimizationAlgorithm):
         # Check if fitness improvement has stagnated
         if len(self.fitness_history) > 20:
             recent_improvement = abs(self.fitness_history[-1] - self.fitness_history[-20])
-            if recent_improvement < 1e-6:
+            # Issue #13: Standardized epsilon for convergence check
+            if recent_improvement < EPSILON_DIV:
                 return True
 
         # Check if diversity is too low
@@ -562,7 +565,8 @@ class GeneticAlgorithm(OptimizationAlgorithm):
         # Linear regression on log fitness improvement
         recent_history = self.fitness_history[-10:]
         x = np.arange(len(recent_history))
-        y = np.log(np.maximum(recent_history, 1e-10))
+        # Issue #13: Standardized division protection for log domain
+        y = np.log(np.maximum(recent_history, EPSILON_DIV))
 
         try:
             slope, _ = np.polyfit(x, y, 1)
