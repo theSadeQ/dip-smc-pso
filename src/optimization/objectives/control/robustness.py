@@ -12,6 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 import warnings
 
 from ..base import SimulationBasedObjective
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 class RobustnessObjective(SimulationBasedObjective):
@@ -414,7 +415,8 @@ class RobustnessObjective(SimulationBasedObjective):
         settling_time = times[settling_index]
 
         # Convert to settling speed (inverse of settling time)
-        return 1.0 / (settling_time + 1e-6)
+        # Issue #13: Standardized division protection
+        return 1.0 / (settling_time + EPSILON_DIV)
 
     def get_robustness_analysis(self,
                               controller_params: np.ndarray) -> Dict[str, Any]:

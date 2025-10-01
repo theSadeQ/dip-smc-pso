@@ -10,6 +10,7 @@ from typing import Any, Dict, Optional, Union, Callable, Tuple
 import numpy as np
 
 from ..base import SimulationBasedObjective
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 class OvershootObjective(SimulationBasedObjective):
@@ -324,7 +325,8 @@ class OvershootObjective(SimulationBasedObjective):
             control_signal = controls.flatten()
             control_peak = np.max(np.abs(control_signal))
             control_mean = np.mean(np.abs(control_signal))
-            control_overshoot_ratio = control_peak / (control_mean + 1e-6)
+            # Issue #13: Standardized division protection
+            control_overshoot_ratio = control_peak / (control_mean + EPSILON_DIV)
 
             analysis['control_peak'] = control_peak
             analysis['control_mean'] = control_mean

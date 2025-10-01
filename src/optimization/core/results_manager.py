@@ -40,6 +40,8 @@ try:
 except ImportError:
     HDF5_AVAILABLE = False
 
+from src.utils.numerical_stability import EPSILON_DIV
+
 
 @dataclass
 class OptimizationMetadata:
@@ -413,7 +415,8 @@ class OptimizationResultsManager:
         mean_distance = np.mean(distances)
         std_distance = np.std(distances)
 
-        return float(std_distance / (mean_distance + 1e-10))
+        # Issue #13: Standardized division protection
+        return float(std_distance / (mean_distance + EPSILON_DIV))
 
     def _perform_statistical_tests(self, results: List[OptimizationResults]) -> Dict[str, Any]:
         """Perform statistical significance tests on results."""

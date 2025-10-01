@@ -10,6 +10,7 @@ from typing import Any, Dict, Optional, Union, Callable
 import numpy as np
 
 from ..base import SimulationBasedObjective
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 class EnergyConsumptionObjective(SimulationBasedObjective):
@@ -207,10 +208,11 @@ class EnergyConsumptionObjective(SimulationBasedObjective):
 
         if tracking_error is not None and tracking_error > 0:
             # Energy efficiency as performance per unit energy
-            efficiency = 1.0 / (tracking_error * energy + 1e-12)
+            # Issue #13: Standardized division protection
+            efficiency = 1.0 / (tracking_error * energy + EPSILON_DIV)
         else:
             # Pure energy efficiency (inverse of energy)
-            efficiency = 1.0 / (energy + 1e-12)
+            efficiency = 1.0 / (energy + EPSILON_DIV)
 
         return efficiency
 

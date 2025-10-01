@@ -12,6 +12,7 @@ import warnings
 
 from ..base import SimulationBasedObjective
 from ...core.interfaces import ObjectiveFunction
+from src.utils.numerical_stability import EPSILON_DIV
 
 
 class WeightedSumObjective(SimulationBasedObjective):
@@ -147,7 +148,8 @@ class WeightedSumObjective(SimulationBasedObjective):
             # Normalize by reference values
             normalized = np.zeros_like(objective_values)
             for i in range(self.n_objectives):
-                if abs(ref_values[i]) > 1e-12:
+                # Issue #13: Standardized division protection
+                if abs(ref_values[i]) > EPSILON_DIV:
                     normalized[i] = objective_values[i] / ref_values[i]
                 else:
                     normalized[i] = objective_values[i]
@@ -167,7 +169,8 @@ class WeightedSumObjective(SimulationBasedObjective):
             normalized = np.zeros_like(objective_values)
             for i in range(self.n_objectives):
                 range_i = self._max_values[i] - self._min_values[i]
-                if range_i > 1e-12:
+                # Issue #13: Standardized division protection
+                if range_i > EPSILON_DIV:
                     normalized[i] = (objective_values[i] - self._min_values[i]) / range_i
                 else:
                     normalized[i] = 0.0
@@ -186,7 +189,8 @@ class WeightedSumObjective(SimulationBasedObjective):
             # Normalize by (value - mean) / std
             normalized = np.zeros_like(objective_values)
             for i in range(self.n_objectives):
-                if stds[i] > 1e-12:
+                # Issue #13: Standardized division protection
+                if stds[i] > EPSILON_DIV:
                     normalized[i] = (objective_values[i] - means[i]) / stds[i]
                 else:
                     normalized[i] = objective_values[i] - means[i]
@@ -450,8 +454,9 @@ class AdaptiveWeightedSumObjective(WeightedSumObjective):
 
         # Adapt weights based on ranges and trends
         # Give more weight to objectives with larger ranges and better trends
-        range_weights = obj_ranges / (np.sum(obj_ranges) + 1e-12)
-        trend_weights = trends / (np.sum(trends) + 1e-12)
+        # Issue #13: Standardized division protection
+        range_weights = obj_ranges / (np.sum(obj_ranges) + EPSILON_DIV)
+        trend_weights = trends / (np.sum(trends) + EPSILON_DIV)
 
         # Combine adaptation signals
         adaptation_signal = 0.5 * range_weights + 0.5 * trend_weights
