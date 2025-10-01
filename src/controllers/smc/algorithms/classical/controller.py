@@ -50,7 +50,10 @@ class ModularClassicalSMC:
         self._surface = LinearSlidingSurface(config.get_surface_gains())
         self._equivalent = EquivalentControl(
             dynamics_model=config.dynamics_model,
-            regularization=config.regularization,
+            regularization_alpha=config.regularization_alpha,
+            min_regularization=config.min_regularization,
+            max_condition_number=config.max_condition_number,
+            use_fixed_regularization=not config.use_adaptive_regularization,
             controllability_threshold=config.get_effective_controllability_threshold()
         )
         self._boundary_layer = BoundaryLayer(

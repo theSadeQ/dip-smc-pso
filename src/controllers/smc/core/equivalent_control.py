@@ -34,18 +34,23 @@ class EquivalentControl:
 
     def __init__(self,
                  dynamics_model: Optional[Any] = None,
-                 regularization: float = 1e-10,
+                 regularization_alpha: float = 1e-4,
+                 min_regularization: float = 1e-10,
+                 max_condition_number: float = 1e14,
+                 use_fixed_regularization: bool = False,
                  controllability_threshold: float = 1e-4):
         """
         Initialize equivalent control computation.
 
         Args:
             dynamics_model: System dynamics model with get_dynamics() method
-            regularization: Matrix regularization for numerical stability
+            regularization_alpha: Base regularization scaling factor (adaptive mode)
+            min_regularization: Minimum regularization for numerical stability
+            max_condition_number: Maximum acceptable condition number
+            use_fixed_regularization: Use fixed rather than adaptive regularization
             controllability_threshold: Minimum |LM^{-1}B| for equivalent control
         """
         self.dynamics_model = dynamics_model
-        self.regularization = regularization
         self.controllability_threshold = controllability_threshold
 
         # Control input matrix for cart force [force affects cart position only]
@@ -54,12 +59,12 @@ class EquivalentControl:
         # Setup logging
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        # Initialize robust matrix inversion infrastructure
+        # Initialize robust matrix inversion infrastructure with centralized AdaptiveRegularizer
         self.adaptive_regularizer = AdaptiveRegularizer(
-            regularization_alpha=regularization,
-            max_condition_number=1e14,
-            min_regularization=regularization,
-            use_fixed_regularization=False
+            regularization_alpha=regularization_alpha,
+            max_condition_number=max_condition_number,
+            min_regularization=min_regularization,
+            use_fixed_regularization=use_fixed_regularization
         )
         self.matrix_inverter = MatrixInverter(regularizer=self.adaptive_regularizer)
 
@@ -173,20 +178,6 @@ class EquivalentControl:
                 # Fallback: assume unit gains
                 return np.array([0.0, 1.0, 1.0], dtype=float)
 
-    def _regularize_matrix(self, M: np.ndarray) -> np.ndarray:
-        """
-        Add regularization to matrix for numerical stability.
-
-        Args:
-            M: Matrix to regularize
-
-        Returns:
-            Regularized matrix M + ε*I
-        """
-        if M.ndim != 2 or M.shape[0] != M.shape[1]:
-            raise ValueError("Matrix must be square for regularization")
-
-        return M + self.regularization * np.eye(M.shape[0])
 
     def check_controllability(self, state: np.ndarray, sliding_surface) -> dict:
         """

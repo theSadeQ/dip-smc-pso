@@ -43,7 +43,12 @@ class SuperTwistingSMCConfig:
     # Boundary layer and switching
     boundary_layer: float = field(default=0.01)            # Chattering reduction
     switch_method: str = field(default="tanh")             # Switching function type
-    regularization: float = field(default=1e-10)           # Numerical regularization
+
+    # Numerical stability parameters (standardized with AdaptiveRegularizer)
+    regularization_alpha: float = field(default=1e-4)      # Base regularization scaling factor
+    min_regularization: float = field(default=1e-10)       # Minimum regularization
+    max_condition_number: float = field(default=1e14)      # Maximum acceptable condition number
+    use_adaptive_regularization: bool = field(default=True) # Use adaptive vs fixed regularization
 
     # Optional dynamics model
     dynamics_model: Optional[object] = field(default=None, compare=False)
@@ -100,8 +105,13 @@ class SuperTwistingSMCConfig:
         if self.boundary_layer <= 0:
             raise ValueError("boundary_layer must be positive")
 
-        if self.regularization <= 0:
-            raise ValueError("regularization must be positive")
+        # Validate regularization parameters
+        if self.regularization_alpha <= 0:
+            raise ValueError("regularization_alpha must be positive")
+        if self.min_regularization <= 0:
+            raise ValueError("min_regularization must be positive")
+        if self.max_condition_number <= 0:
+            raise ValueError("max_condition_number must be positive")
 
         if self.switch_method not in ("tanh", "linear", "sign"):
             raise ValueError("switch_method must be 'tanh', 'linear', or 'sign'")
@@ -194,7 +204,10 @@ class SuperTwistingSMCConfig:
             'power_exponent': self.power_exponent,
             'boundary_layer': self.boundary_layer,
             'switch_method': self.switch_method,
-            'regularization': self.regularization
+            'regularization_alpha': self.regularization_alpha,
+            'min_regularization': self.min_regularization,
+            'max_condition_number': self.max_condition_number,
+            'use_adaptive_regularization': self.use_adaptive_regularization
         }
 
     @classmethod

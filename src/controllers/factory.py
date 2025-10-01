@@ -649,11 +649,18 @@ def create_controller(controller_type: str,
             # Add controller-specific required parameters
             if controller_type == 'classical_smc':
                 config_params.setdefault('boundary_layer', 0.02)  # Required parameter
+                config_params.setdefault('regularization_alpha', 1e-4)
+                config_params.setdefault('min_regularization', 1e-10)
+                config_params.setdefault('max_condition_number', 1e14)
+                config_params.setdefault('use_adaptive_regularization', True)
             elif controller_type == 'sta_smc':
                 # STA-SMC uses gains directly, no separate K1/K2 parameters
                 # The gains array is [K1, K2, k1, k2, lam1, lam2]
                 config_params.setdefault('power_exponent', 0.5)
-                config_params.setdefault('regularization', 1e-6)
+                config_params.setdefault('regularization_alpha', 1e-4)
+                config_params.setdefault('min_regularization', 1e-10)
+                config_params.setdefault('max_condition_number', 1e14)
+                config_params.setdefault('use_adaptive_regularization', True)
                 config_params.setdefault('boundary_layer', 0.01)
                 config_params.setdefault('switch_method', 'tanh')
                 config_params.setdefault('damping_gain', 0.0)
@@ -754,11 +761,18 @@ def create_controller(controller_type: str,
             # Add controller-specific required parameters
             if controller_type == 'classical_smc':
                 fallback_params['boundary_layer'] = 0.02  # Required parameter
+                fallback_params['regularization_alpha'] = 1e-4
+                fallback_params['min_regularization'] = 1e-10
+                fallback_params['max_condition_number'] = 1e14
+                fallback_params['use_adaptive_regularization'] = True
             elif controller_type == 'sta_smc':
                 # STA-SMC uses gains directly, no separate K1/K2 parameters
                 fallback_params.update({
                     'power_exponent': 0.5,
-                    'regularization': 1e-6,
+                    'regularization_alpha': 1e-4,
+                    'min_regularization': 1e-10,
+                    'max_condition_number': 1e14,
+                    'use_adaptive_regularization': True,
                     'boundary_layer': 0.01,
                     'switch_method': 'tanh',
                     'damping_gain': 0.0

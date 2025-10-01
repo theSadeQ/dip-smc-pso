@@ -58,7 +58,7 @@ class ModularSuperTwistingSMC:
             K2=config.K2,
             alpha=config.power_exponent,
             anti_windup_limit=config.get_effective_anti_windup_gain(),
-            regularization=config.regularization
+            regularization=config.min_regularization  # Use min_regularization for backward compatibility
         )
 
         # Internal state
