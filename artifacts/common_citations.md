@@ -327,6 +327,7 @@
 - **Journal:** Information Sciences, 176(8), 937-971
 - **Used in batches:**
   - Batch 02 (Claim 2): CRITICAL - PSO Optimization (Lyapunov stability)
+  - Batch 04 (Claim 1): CRITICAL - Lyapunov Stability (PSO global asymptotic stability)
   - Batch 13 (expected): HIGH - PSO Optimization
 
 **Key topics covered:**
@@ -522,7 +523,7 @@
 - **Publisher:** Prentice Hall
 - **ISBN:** 0-13-067389-7
 - **Used in batches:**
-  - Batch 04 (expected): CRITICAL - Lyapunov Stability
+  - Batch 04 (Claim 2): CRITICAL - Lyapunov Stability (PSO maintains Lyapunov stability)
 
 **Key topics covered:**
 - Chapter 4: Lyapunov Stability Theory
