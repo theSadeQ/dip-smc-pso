@@ -24,9 +24,13 @@ import shutil
 from datetime import datetime
 
 # Import our modules
-from . import citation_database as db
-from . import web_citation_search as web
-from .citation_validator import CitationValidator
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+
+import citation_database as db
+import web_citation_search as web
+from citation_validator import CitationValidator
 
 
 class CitationDiscoveryEngine:
@@ -107,9 +111,9 @@ class CitationDiscoveryEngine:
 
             # Progress feedback
             if discovery_info['success']:
-                print(f"✓ {discovery_info['method']}")
+                print(f"[OK] {discovery_info['method']}")
             else:
-                print(f"✗ {discovery_info['notes']}")
+                print(f"[FAIL] {discovery_info['notes']}")
 
         print("-"*80)
         print("")
@@ -139,9 +143,9 @@ class CitationDiscoveryEngine:
         is_valid, issues = validator.validate_complete_output(completed_claims)
 
         if is_valid:
-            print("✓ Validation PASSED")
+            print("[OK] Validation PASSED")
         else:
-            print(f"⚠ Validation found {len([e for e in issues if e.severity == 'ERROR'])} errors")
+            print(f"[WARN] Validation found {len([e for e in issues if e.severity == 'ERROR'])} errors")
 
         # Print statistics
         print("")
@@ -400,10 +404,10 @@ class CitationDiscoveryEngine:
         print("")
 
         if self.stats['tier3_manual'] > 0:
-            print(f"⚠ {self.stats['tier3_manual']} claims need manual review")
+            print(f"[WARN] {self.stats['tier3_manual']} claims need manual review")
             print("  Check output for 'MANUAL_REVIEW_NEEDED' markers")
         else:
-            print("✓ All citations discovered automatically!")
+            print("[OK] All citations discovered automatically!")
 
         print("="*80)
 
@@ -460,14 +464,14 @@ def main():
     # Print result
     print("")
     if success:
-        print("✓ SUCCESS: Citation discovery complete!")
+        print("[SUCCESS] Citation discovery complete!")
         print("")
         print("Next steps:")
         print("1. Review any MANUAL_REVIEW_NEEDED markers in output")
         print("2. Run validation: python .dev_tools/citation_validator.py")
         print("3. Apply citations: python .dev_tools/apply_chatgpt_citations.py")
     else:
-        print(f"✗ FAILED: {message}")
+        print(f"[FAILED] {message}")
 
     import sys
     sys.exit(0 if success else 1)
