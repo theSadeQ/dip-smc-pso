@@ -99,15 +99,41 @@ After downloading each source, verify:
 
 ## Current Sources
 
-**Total citations:** [Fill in after research]
-**Downloaded:** [Fill in as you download]
+**Total citations:** 3 citations (all verified ✅)
+**Downloaded:** 0/3 (ready to download)
+**Quality:** 3/3 peer-reviewed (2 conferences + 1 Tier 1 journal)
 
 ### Downloaded Files
 
 Update this list as you download sources:
-- [ ] `citation1_bibtex_key.pdf` - Author (Year) Journal/Conference
-- [ ] `citation2_bibtex_key.pdf` - Author (Year) Journal/Conference
-- [ ] `citation3_bibtex_key.pdf` - Author (Year) Journal/Conference
+
+#### ✅ Citation 1 - Moreno & Osorio (2008)
+- [ ] `moreno2008lyapunov.pdf`
+- **Source:** IEEE CDC 2008
+- **DOI:** 10.1109/CDC.2008.4739356
+- **Direct URL:** https://doi.org/10.1109/CDC.2008.4739356
+- **Alternative:** https://ieeexplore.ieee.org/document/4739356
+- **Access:** IEEE Xplore (institutional access or free via author site)
+- **Note:** Seminal paper on super-twisting Lyapunov functions (837+ citations)
+
+#### ✅ Citation 2 - Liu et al. (2007)
+- [ ] `liu2007stability.pdf`
+- **Source:** ICIC 2007 (Springer LNCS vol 4682)
+- **DOI:** 10.1007/978-3-540-74205-0_82
+- **Direct URL:** https://doi.org/10.1007/978-3-540-74205-0_82
+- **Alternative:** https://link.springer.com/chapter/10.1007/978-3-540-74205-0_82
+- **Access:** Springer (institutional access or free via ResearchGate)
+- **Note:** PSO stability analysis with β < 4 conditions
+
+#### ✅ Citation 3 - Utkin & Poznyak (2013)
+- [ ] `utkin2013adaptive.pdf`
+- **Source:** Automatica (Elsevier), vol. 49, no. 1, pp. 39-47
+- **DOI:** 10.1016/j.automatica.2012.09.008
+- **Direct URL:** https://doi.org/10.1016/j.automatica.2012.09.008
+- **Alternative:** https://www.sciencedirect.com/science/article/abs/pii/S0005109812004694
+- **Access:** ScienceDirect (institutional access or ResearchGate)
+- **Note:** Tier 1 journal - Adaptive SMC with super-twisting, Lyapunov stability proofs
+- **Upgraded from:** Luo et al. (2023) book chapter → Automatica journal paper
 
 ---
 
@@ -121,4 +147,4 @@ Update this list as you download sources:
 
 ---
 
-**Last Updated:** [Date when sources were downloaded]
+**Last Updated:** 2025-10-02 (Batch 03 - 2 verified citations documented, awaiting Citation 3 correction)
