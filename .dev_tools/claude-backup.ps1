@@ -44,6 +44,7 @@ $DEFAULT_REPO_ROOT = "D:\Projects\main"
 $LOG_DIR = ".\.dev_tools\backup"
 $LOG_FILE = Join-Path $LOG_DIR "backup.log"
 $TOKEN_THRESHOLD = 2000
+$DISABLE_FLAG = ".\.dev_tools\.BACKUP_DISABLED"
 #endregion
 
 #region Helper Functions
@@ -289,6 +290,12 @@ function Test-TokenThreshold {
 #region Main Execution
 
 try {
+    # Check if backup is disabled
+    if (Test-Path $DISABLE_FLAG) {
+        # Exit silently without logging (prevents spam in Task Scheduler)
+        exit 0
+    }
+
     Write-Log "=== Claude Code Auto-Backup Script ===" -Level Info
 
     # Ensure Git is in PATH (fixes Task Scheduler issue)
