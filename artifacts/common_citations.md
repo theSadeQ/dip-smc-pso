@@ -13,6 +13,46 @@
 
 ## Sliding Mode Control (Classical)
 
+### Utkin (1977) - *Variable Structure Systems with Sliding Modes*
+
+- **BibTeX Key:** `utkin1977variable`
+- **Type:** journal
+- **DOI:** 10.1109/TAC.1977.1101446
+- **Journal:** IEEE Transactions on Automatic Control, Vol. AC-22, No. 2, pp. 212-222
+- **Citations:** 5,220+ (seminal paper - THE foundational SMC reference)
+- **Used in batches:**
+  - Batch 06 (Claim 1): CRITICAL - Super-Twisting SMC (classical SMC finite-time convergence)
+
+**Key topics covered:**
+- Seminal formulation of variable structure systems
+- Classical sliding mode control law: $\dot{s} = -\eta \, \mathrm{sign}(s)$
+- Reaching condition: $s \dot{s} = -\eta |s|$ for finite-time convergence
+- Matched uncertainty compensation
+- Global finite-time convergence to sliding surface
+
+**When to use:**
+- THE foundational citation for classical SMC theory
+- Finite-time convergence proofs for SMC
+- Switching gain design to exceed disturbance bounds
+- Variable structure systems theory
+
+**BibTeX Entry:**
+```bibtex
+@article{utkin1977variable,
+  title={Variable Structure Systems with Sliding Modes},
+  author={Utkin, Vadim I.},
+  journal={IEEE Transactions on Automatic Control},
+  volume={22},
+  number={2},
+  pages={212--222},
+  year={1977},
+  publisher={IEEE},
+  doi={10.1109/TAC.1977.1101446}
+}
+```
+
+---
+
 ### Slotine & Li (1991) - *Applied Nonlinear Control*
 
 - **BibTeX Key:** `slotine1991applied`
@@ -160,6 +200,47 @@
   organization={IEEE},
   address={Cancún, México},
   doi={10.1109/CDC.2008.4739356}
+}
+```
+
+---
+
+### Moreno & Osorio (2012) - *Strict Lyapunov Functions for the Super-Twisting Algorithm*
+
+- **BibTeX Key:** `moreno2012strict`
+- **Type:** journal
+- **DOI:** 10.1109/TAC.2012.2186179
+- **Journal:** IEEE Transactions on Automatic Control, Vol. 57(4), pp. 1035-1040
+- **Citations:** 977+ (canonical super-twisting Lyapunov analysis)
+- **Used in batches:**
+  - Batch 06 (Claim 2): CRITICAL - Super-Twisting SMC (STA finite-time convergence)
+
+**Key topics covered:**
+- Family of strict Lyapunov functions for super-twisting algorithm
+- Lyapunov derivative negative definiteness proof
+- Finite-time convergence to second-order sliding set: $\{s=0, \dot{s}=0\}$
+- Convergence time estimation
+- Robustness to wider class of perturbations than classical results
+
+**When to use:**
+- THE canonical citation for super-twisting Lyapunov stability
+- Finite-time convergence proofs for STA
+- Second-order sliding mode Lyapunov analysis
+- Strict Lyapunov function construction for higher-order SMC
+- Super-twisting gain selection with Lyapunov guarantees
+
+**BibTeX Entry:**
+```bibtex
+@article{moreno2012strict,
+  title={Strict Lyapunov Functions for the Super-Twisting Algorithm},
+  author={Moreno, Jaime A. and Osorio, Marisol},
+  journal={IEEE Transactions on Automatic Control},
+  volume={57},
+  number={4},
+  pages={1035--1040},
+  year={2012},
+  publisher={IEEE},
+  doi={10.1109/TAC.2012.2186179}
 }
 ```
 
@@ -650,6 +731,6 @@ When you find a citation used multiple times:
 ---
 
 **Last Updated:** 2025-10-02
-**Total Citations:** 18
-**Batches Completed:** 1/17
-**Next Update:** After completing Batch 02
+**Total Citations:** 20 (added Utkin 1977, Moreno & Osorio 2012)
+**Batches Completed:** 6/17 (Batches 01-06)
+**Next Update:** After completing Batch 07

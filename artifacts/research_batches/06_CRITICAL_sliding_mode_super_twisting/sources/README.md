@@ -99,15 +99,35 @@ After downloading each source, verify:
 
 ## Current Sources
 
-**Total citations:** [Fill in after research]
-**Downloaded:** [Fill in as you download]
+**Total citations:** 2 unique citations (all verified ✅)
+**Downloaded:** 0/2 (ready to download)
+**Quality:** 2/2 peer-reviewed IEEE TAC (both Tier 1!)
+**Citation Reuse:** 0/2 new citations (both canonical/seminal additions to database)
 
 ### Downloaded Files
 
 Update this list as you download sources:
-- [ ] `citation1_bibtex_key.pdf` - Author (Year) Journal/Conference
-- [ ] `citation2_bibtex_key.pdf` - Author (Year) Journal/Conference
-- [ ] `citation3_bibtex_key.pdf` - Author (Year) Journal/Conference
+
+#### ✅ Citation 1 - Utkin (1977)
+- [ ] `utkin1977variable.pdf`
+- **Source:** IEEE Transactions on Automatic Control, Vol. AC-22, No. 2, pp. 212-222
+- **DOI:** 10.1109/TAC.1977.1101446
+- **Direct URL:** https://doi.org/10.1109/TAC.1977.1101446
+- **Alternative:** https://ieeexplore.ieee.org/document/1101446/
+- **Access:** IEEE Xplore (institutional access or ResearchGate)
+- **Note:** THE seminal SMC paper (5,220+ citations) - variable structure systems
+- **New to collection** (first use in Batch 06 - foundational addition!)
+
+#### ✅ Citation 2 - Moreno & Osorio (2012)
+- [ ] `moreno2012strict.pdf`
+- **Source:** IEEE Transactions on Automatic Control, Vol. 57(4), pp. 1035-1040
+- **DOI:** 10.1109/TAC.2012.2186179
+- **Direct URL:** https://doi.org/10.1109/TAC.2012.2186179
+- **Alternative:** https://ieeexplore.ieee.org/document/6144710/
+- **Alternative:** https://www.researchgate.net/publication/254057753_Strict_Lyapunov_Functions_for_the_Super-Twisting_Algorithm
+- **Access:** IEEE Xplore (institutional), ResearchGate (preprint)
+- **Note:** Canonical super-twisting Lyapunov analysis (977+ citations) - strict Lyapunov functions
+- **New to collection** (first use in Batch 06 - we have 2008 CDC version, this is stronger)
 
 ---
 
@@ -121,4 +141,4 @@ Update this list as you download sources:
 
 ---
 
-**Last Updated:** [Date when sources were downloaded]
+**Last Updated:** 2025-10-02 (Batch 06 - 2 verified Tier 1 citations, both canonical/seminal works)
