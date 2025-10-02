@@ -1,0 +1,1150 @@
+# Complete ChatGPT Prompt for 100% Citation Accuracy
+
+**Task:** Categorize and cite 108 code claims from a control systems research project
+
+---
+
+## Project Context
+
+You are helping verify citations for a **Double Inverted Pendulum Sliding Mode Control with PSO Optimization** codebase. This is a Python scientific computing project implementing:
+
+- **Control Systems**: Sliding Mode Control (SMC), Model Predictive Control (MPC), Adaptive Control
+- **Optimization**: Particle Swarm Optimization (PSO), Genetic Algorithms, Differential Evolution, BFGS, Nelder-Mead
+- **Dynamics Simulation**: Nonlinear pendulum physics, numerical integrators (Runge-Kutta)
+- **Analysis Tools**: Stability analysis, convergence monitoring, performance metrics
+
+---
+
+## Your Task
+
+We have **108 code claims** that need citation verification. For each claim, you must:
+
+1. **Read the actual source code** (provided in JSON below)
+2. **Classify** the claim into one of three categories
+3. **Find appropriate citations** for Categories A and B only
+4. **Provide rationale** based on actual code content (not the description!)
+
+---
+
+## Classification Rules (CRITICAL)
+
+### Category C: Pure Implementation (NO CITATION) ✅ MOST COMMON (~70%)
+
+Mark as **Category C** if the code is:
+
+#### Software Engineering Patterns
+- Base classes, interfaces, abstract classes (`class BaseOptimizer(ABC):`)
+- Factory patterns, registry patterns (`CONTROLLER_REGISTRY = {}`)
+- Configuration classes (`@dataclass class Config:`)
+- Module imports (`from .pso import PSO` in `__init__.py`)
+- Property accessors (`@property def state(self):`)
+- Context managers, decorators (`@contextmanager`, `@cached_property`)
+
+#### Infrastructure Code
+- Error handling, logging (`logger.info(...)`, `raise ValueError(...)`)
+- Testing utilities, fixtures (`@pytest.fixture`)
+- File I/O, serialization (`def to_dict(self):`, `json.dump(...)`)
+- Hardware interfaces, networking (`socket.connect(...)`)
+- Threading primitives (`self.lock = threading.Lock()`)
+- Type hints, type checking (`from typing import Optional[float]`)
+
+#### Simple Computations
+- Variance, mean, standard deviation (`variance = np.var(data)`)
+- Array operations (`x = np.zeros(n)`)
+- Data transformations, filtering
+- Plotting, visualization utilities (`plt.plot(...)`)
+
+#### Library Usage (Not Implementation)
+- Calling a library function (`scipy.optimize.minimize(...)`)
+- Using an existing optimizer (`result = optimizer.run()`)
+- Invoking pre-built algorithms
+
+**KEY QUESTION**: Is this "glue code" that connects components or implements standard software patterns? → **Category C**
+
+---
+
+### Category A: Algorithmic Theory (PEER-REVIEWED PAPER) 📄 ~20%
+
+Mark as **Category A** if the code **implements a specific algorithm** from literature:
+
+#### Optimization Algorithms (Implementation, Not Usage)
+- **Particle Swarm Optimization**: Manual velocity/position update equations
+- **Differential Evolution**: Mutation, crossover, selection operators (not calling `scipy.optimize.differential_evolution`)
+- **Genetic Algorithm**: Selection, crossover, mutation operators from scratch
+- **BFGS/L-BFGS**: Hessian approximation updates (not calling `scipy.optimize.minimize`)
+- **Nelder-Mead Simplex**: Reflection, expansion, contraction steps (not calling library)
+
+#### Control Algorithms
+- **Sliding Mode Control**: Specific sliding surface design equations
+- **Super-Twisting Algorithm**: 2nd-order sliding mode dynamics implementation
+- **Model Predictive Control**: Prediction horizon optimization equations
+
+#### Numerical Methods
+- **Runge-Kutta**: Butcher tableau implementation (not calling `solve_ivp`)
+- **Adams-Bashforth**: Multi-step predictor-corrector from scratch
+- **Recursive Least Squares**: RLS update equations for parameter estimation
+
+**KEY TEST**: Does the code implement the algorithm equations manually? AND Does a paper exist where the title explicitly mentions this algorithm? → **Category A**
+
+**IMPORTANT**: If code just calls `scipy.optimize.differential_evolution(...)` → **Category C** (library usage, not implementation)
+
+---
+
+### Category B: Foundational Concept (TEXTBOOK) 📚 ~10%
+
+Mark as **Category B** if code **documents/explains** a control theory concept (but doesn't implement a specific algorithm):
+
+- **Module docstrings** explaining control theory (`"""Sliding mode control achieves robustness by...`)
+- **Comments** describing theoretical foundations (`# Lyapunov stability requires V̇ < 0`)
+- **Stability metrics** definitions (overshoot, settling time, rise time) in documentation
+
+**Common Textbooks to Use**:
+- Control: Ogata (2010) "Modern Control Engineering"
+- Nonlinear Control: Khalil (2002) "Nonlinear Systems"
+- SMC: Utkin (1992) "Sliding Modes in Control and Optimization"
+- Numerical: Hairer et al. (1993) "Solving Ordinary Differential Equations"
+- Optimization: Nocedal & Wright (2006) "Numerical Optimization"
+
+**KEY TEST**: Is this a docstring or comment explaining a concept (not implementing it)? → **Category B**
+
+---
+
+## Decision Tree
+
+```
+START → Read actual code (ignore context description)
+  ↓
+  Is this implementing algorithm equations manually?
+  ├─ YES → Does paper title mention this algorithm?
+  │        ├─ YES → **Category A** (cite paper)
+  │        └─ NO → **Category C** (no citation)
+  └─ NO → Is this a docstring/comment explaining theory?
+           ├─ YES → **Category B** (cite textbook)
+           └─ NO → **Category C** (no citation)
+```
+
+---
+
+## Input Data: 108 Claims with Source Code
+
+Below is the JSON array with all 108 claims. **CRITICAL**: Base your decision on the `"code"` field, NOT the `"context"` field!
+
+```json
+[
+  {
+    "claim_id": "CODE-IMPL-085",
+    "file": "src\\benchmarks\\core\\trial_runner.py",
+    "line": 29,
+    "context": "use default from simulator...",
+    "code": "       9 | independent simulations of control systems. It handles:\n      10 | - Batch simulation execution\n      11 | - Randomization and seeding\n      12 | - Error handling and fallbacks\n      13 | - Trial orchestration and coordination\n      14 | \n      15 | The Central Limit Theorem implies that for skewed distributions, a sample\n      16 | size of at least 25–30 trials is required for the sample mean to approximate\n      17 | a normal distribution. By default, 30 trials are executed.\n      18 | \"\"\"\n      19 | \n      20 | from __future__ import annotations\n      21 | \n      22 | from typing import Callable, Any, List, Dict, Tuple, Optional\n      23 | import numpy as np\n      24 | \n      25 | from src.core.vector_sim import simulate_system_batch\n      26 | from ..metrics import compute_basic_metrics\n      27 | \n      28 | \n>>>   29 | def execute_single_trial(\n      30 |     controller_factory: Callable[[np.ndarray], Any],\n      31 |     trial_seed: int,\n      32 |     sim_duration: float,\n      33 |     sim_dt: Optional[float],\n      34 |     max_force: float,\n      35 |     noise_std: float = 0.0\n      36 | ) -> Dict[str, float]:\n      37 |     \"\"\"Execute a single simulation trial with the given parameters.\n      38 | \n      39 |     Parameters\n      40 |     ----------\n      41 |     controller_factory : Callable\n      42 |         Factory function that creates controller instances\n      43 |     trial_seed : int\n      44 |         Random seed for this specific trial\n      45 |     sim_duration : float\n      46 |         Simulation duration in seconds\n      47 |     sim_dt : float, optional\n      48 |         Simulation time step. If None, use default from simulator\n      49 |     max_force : float"
+  },
+  {
+    "claim_id": "CODE-IMPL-115",
+    "file": "src\\controllers\\mpc\\mpc_controller.py",
+    "line": 41,
+    "context": "Robustly call continuous‑time dynamics: xdot = f(x,u)...",
+    "code": "      21 | \n      22 | try:\n      23 |     from src.core.dynamics import DoubleInvertedPendulum  # type: ignore\n      24 | except Exception:\n      25 |     try:\n      26 |         from core.dynamics import DoubleInvertedPendulum  # type: ignore\n      27 |     except Exception:\n      28 |         DoubleInvertedPendulum = object  # type: ignore\n      29 | \n      30 | try:\n      31 |     from src.controllers.classic_smc import ClassicalSMC  # type: ignore\n      32 | except Exception:\n      33 |     try:\n      34 |         from controllers.classic_smc import ClassicalSMC  # type: ignore\n      35 |     except Exception:\n      36 |         ClassicalSMC = None  # type: ignore\n      37 | \n      38 | logger = logging.getLogger(__name__)\n      39 | \n      40 | \n>>>   41 | def _call_f(dyn: DoubleInvertedPendulum, x: np.ndarray, u: float | np.ndarray) -> np.ndarray:\n      42 |     \"\"\"\n      43 |     Robustly call continuous‑time dynamics: xdot = f(x,u)\n      44 |     Supports several common method names; last‑resort: finite‑difference via step(., dt).\n      45 |     \"\"\"\n      46 |     u = float(np.atleast_1d(u).astype(float)[0])\n      47 |     for name in (\"f\", \"continuous_dynamics\", \"dynamics\", \"ode\", \"state_derivative\"):\n      48 |         if hasattr(dyn, name):\n      49 |             fn = getattr(dyn, name)\n      50 |             try:\n      51 |                 xdot = fn(np.asarray(x, dtype=float), float(u))\n      52 |                 return np.asarray(xdot, dtype=float)\n      53 |             except TypeError:\n      54 |                 # Signature mismatch; try next option\n      55 |                 continue\n      56 | \n      57 |     # Last resort: use a very small step to approximate derivative\n      58 |     if hasattr(dyn, \"step\"):\n      59 |         try:\n      60 |             dt = 1e-6\n      61 |             x = np.asarray(x, dtype=float)"
+  },
+  {
+    "claim_id": "CODE-IMPL-117",
+    "file": "src\\controllers\\mpc_controller.py",
+    "line": 1,
+    "context": "Compatibility import for MPC controller...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #========================= src/controllers/mpc_controller.py ==========================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Compatibility import for MPC controller.\n       7 | \n       8 | This module provides backward compatibility for old import paths.\n       9 | The actual implementation is in src.controllers.mpc.mpc_controller.\n      10 | \n      11 | Usage:\n      12 |     from src.controllers.mpc_controller import MPCController  # Old style (works)\n      13 |     from src.controllers import MPCController                 # New style (preferred)\n      14 | \"\"\"\n      15 | \n      16 | # Import from the actual location\n      17 | from .mpc.mpc_controller import MPCController, MPCWeights, _numeric_linearize_continuous\n      18 | \n      19 | # Export for backward compatibility\n      20 | __all__ = [\"MPCController\", \"MPCWeights\", \"_numeric_linearize_continuous\"]"
+  },
+  {
+    "claim_id": "CODE-IMPL-121",
+    "file": "src\\controllers\\smc\\adaptive_smc.py",
+    "line": 263,
+    "context": "use named tuples are\n    subclasses of ``tuple``...",
+    "code": "     243 |                 from ...utils import require_positive  # when importing as src.controllers.*\n     244 |             except Exception:\n     245 |                 from utils import require_positive    # when src itself on sys.path\n     246 |         k1, k2, lam1, lam2, gamma = gains[:5]\n     247 |         for name, val in zip((\"k1\", \"k2\", \"lam1\", \"lam2\", \"gamma\"), (k1, k2, lam1, lam2, gamma)):\n     248 |             require_positive(val, f\"AdaptiveSMC gain {name}\")\n     249 |     def initialize_state(self) -> Tuple[float, float, float]:\n     250 |         \"\"\"Initialize internal state: (K, last_u, time_in_sliding).\"\"\"\n     251 |         return (self.K_init, 0.0, 0.0)\n     252 | \n     253 |     def initialize_history(self) -> Dict:\n     254 |         \"\"\"Initialize history dictionary.\"\"\"\n     255 |         return {\n     256 |             'K': [],\n     257 |             'sigma': [],\n     258 |             'u_sw': [],\n     259 |             'dK': [],\n     260 |             'time_in_sliding': []\n     261 |         }\n     262 | \n>>>  263 |     def compute_control(\n     264 |         self,\n     265 |         state: np.ndarray,\n     266 |         state_vars: Tuple[float, float, float],\n     267 |         history: Dict,\n     268 |     ) -> AdaptiveSMCOutput:  # type: ignore[override]\n     269 |         \"\"\"\n     270 |         Compute the adaptive sliding–mode control law with unified anti‑windup.\n     271 | \n     272 |         The controller constructs a sliding surface based on the joint\n     273 |         velocities and positions and generates a switching control using\n     274 |         either a hyperbolic tangent or a linear saturation function.  The\n     275 |         adaptive gain ``K`` increases proportionally to the magnitude of the\n     276 |         sliding surface whenever the system is outside a small dead‑zone and\n     277 |         remains constant (or decays slowly toward its nominal value) inside\n     278 |         the dead‑zone.  Unlike some earlier\n     279 |         implementations, the adaptation law no longer depends on the rate of\n     280 |         change of the control input; including such a term lacks theoretical\n     281 |         justification and can destabilise the adaptation process.  A leak\n     282 |         term pulls ``K`` back toward ``K_init`` over time to prevent\n     283 |         unbounded growth.  The method returns the saturated control input,"
+  },
+  {
+    "claim_id": "CODE-IMPL-122",
+    "file": "src\\controllers\\smc\\adaptive_smc.py",
+    "line": 427,
+    "context": "Set dynamics model (for compatibility, not used in this implementation)...",
+    "code": "     407 |         new_K = prev_K + dK * self.dt\n     408 |         new_K = np.clip(new_K, self.K_min, self.K_max)\n     409 | \n     410 |         # Update history in place.  Avoid allocating a new dictionary\n     411 |         # on every call; simply append to existing lists.  Initialize\n     412 |         # lists if they are missing to support callers passing in a\n     413 |         # partially filled history.  History accumulation can be\n     414 |         # disabled by passing in an empty dict, though the lists\n     415 |         # will be created on demand if needed.\n     416 |         hist = history\n     417 |         hist.setdefault('K', []).append(new_K)\n     418 |         hist.setdefault('sigma', []).append(sigma)\n     419 |         hist.setdefault('u_sw', []).append(u_sw)\n     420 |         hist.setdefault('dK', []).append(dK)\n     421 |         hist.setdefault('time_in_sliding', []).append(new_time_in_sliding)\n     422 |         # Construct a structured return value.  Returning a named tuple\n     423 |         # clarifies the meaning of each element while preserving\n     424 |         # tuple‑like behaviour.\n     425 |         return AdaptiveSMCOutput(u, (new_K, u, new_time_in_sliding), hist, sigma)\n     426 | \n>>>  427 |     def set_dynamics(self, dynamics_model) -> None:\n     428 |         \"\"\"Set dynamics model (for compatibility, not used in this implementation).\"\"\"\n     429 |         pass\n     430 | \n     431 |     def reset(self) -> None:\n     432 |         \"\"\"Reset AdaptiveSMC controller state.\n     433 | \n     434 |         Resets the adaptive gain K to its initial value and clears\n     435 |         any internal tracking variables.\n     436 |         \"\"\"\n     437 |         # Reset adaptive gain to initial value\n     438 |         # Note: The controller uses state_vars parameter for persistence,\n     439 |         # so we don't maintain persistent internal state here.\n     440 |         # This method ensures interface compliance.\n     441 |         pass\n     442 | \n     443 |     def cleanup(self) -> None:\n     444 |         \"\"\"Clean up controller resources (Issue #15).\n     445 | \n     446 |         Explicitly releases any cached data to facilitate garbage\n     447 |         collection and prevent memory leaks during repeated"
+  },
+  {
+    "claim_id": "CODE-IMPL-132",
+    "file": "src\\controllers\\smc\\algorithms\\adaptive\\parameter_estimation.py",
+    "line": 1,
+    "context": "Implements online estimation of system uncertainties and disturbance bounds...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #========== src/controllers/smc/algorithms/adaptive/parameter_estimation.py ===========\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Parameter and Uncertainty Estimation for Adaptive SMC.\n       7 | \n       8 | Implements online estimation of system uncertainties and disturbance bounds\n       9 | to improve adaptive gain selection and overall controller performance.\n      10 | \n      11 | Mathematical Background:\n      12 | - Uncertainty bound estimation: η̂ = max{|disturbance|, model_error}\n      13 | - Sliding mode observer: estimate unknown dynamics components\n      14 | - Recursive least squares: parameter identification\n      15 | \"\"\"\n      16 | \n      17 | from typing import List, Optional, Union, Dict, Any\n      18 | import numpy as np\n      19 | from collections import deque\n      20 | \n      21 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-135",
+    "file": "src\\controllers\\smc\\algorithms\\adaptive\\parameter_estimation.py",
+    "line": 250,
+    "context": "Update parameter estimates using RLS algorithm...",
+    "code": "     230 |         Args:\n     231 |             n_parameters: Number of parameters to identify\n     232 |             forgetting_factor: RLS forgetting factor λ ∈ (0,1]\n     233 |             initial_covariance: Initial covariance matrix scaling\n     234 |         \"\"\"\n     235 |         if n_parameters <= 0:\n     236 |             raise ValueError(\"Number of parameters must be positive\")\n     237 |         if not (0 < forgetting_factor <= 1):\n     238 |             raise ValueError(\"Forgetting factor must be in (0, 1]\")\n     239 | \n     240 |         self.n_params = n_parameters\n     241 |         self.lambda_rls = forgetting_factor\n     242 | \n     243 |         # RLS state\n     244 |         self.theta_hat = np.zeros(n_parameters)  # Parameter estimates\n     245 |         self.P = initial_covariance * np.eye(n_parameters)  # Covariance matrix\n     246 | \n     247 |         # History\n     248 |         self._parameter_history = []\n     249 | \n>>>  250 |     def update_parameters(self, regressor: np.ndarray, measurement: float) -> np.ndarray:\n     251 |         \"\"\"\n     252 |         Update parameter estimates using RLS algorithm.\n     253 | \n     254 |         RLS equations:\n     255 |         K(k) = P(k-1)φ(k) / [λ + φ(k)ᵀP(k-1)φ(k)]\n     256 |         θ̂(k) = θ̂(k-1) + K(k)[y(k) - φ(k)ᵀθ̂(k-1)]\n     257 |         P(k) = [P(k-1) - K(k)φ(k)ᵀP(k-1)] / λ\n     258 | \n     259 |         Args:\n     260 |             regressor: φ(k) regressor vector\n     261 |             measurement: y(k) measurement\n     262 | \n     263 |         Returns:\n     264 |             Updated parameter estimates θ̂(k)\n     265 |         \"\"\"\n     266 |         if len(regressor) != self.n_params:\n     267 |             raise ValueError(f\"Regressor size {len(regressor)} != n_parameters {self.n_params}\")\n     268 | \n     269 |         phi = np.asarray(regressor).reshape(-1, 1)\n     270 |         y = float(measurement)"
+  },
+  {
+    "claim_id": "CODE-IMPL-150",
+    "file": "src\\controllers\\smc\\algorithms\\hybrid\\controller.py",
+    "line": 112,
+    "context": "Initialize individual SMC controllers based on hybrid mode...",
+    "code": "      92 |         self.controllers = {}\n      93 |         self._initialize_controllers()\n      94 | \n      95 |         # Initialize switching logic\n      96 |         self.switching_logic = HybridSwitchingLogic(config)\n      97 | \n      98 |         # Initialize transition filter\n      99 |         if config.transition_smoothing:\n     100 |             self.transition_filter = TransitionFilter(config.smoothing_time_constant)\n     101 |         else:\n     102 |             self.transition_filter = None\n     103 | \n     104 |         # Internal state\n     105 |         self.simulation_time = 0.0\n     106 |         self.control_history = []\n     107 |         self.switching_history = []\n     108 | \n     109 |         # Current mode for compatibility with tests (Control Systems Specialist interface fix)\n     110 |         self._current_mode = config.hybrid_mode\n     111 | \n>>>  112 |     def _initialize_controllers(self) -> None:\n     113 |         \"\"\"Initialize individual SMC controllers based on hybrid mode.\"\"\"\n     114 |         active_controllers = self.config.get_active_controllers()\n     115 | \n     116 |         for controller_type in active_controllers:\n     117 |             controller_config = self.config.get_controller_config(controller_type)\n     118 | \n     119 |             if controller_type == 'classical':\n     120 |                 self.controllers['classical'] = ModularClassicalSMC(controller_config)\n     121 |             elif controller_type == 'adaptive':\n     122 |                 self.controllers['adaptive'] = ModularAdaptiveSMC(controller_config)\n     123 |             elif controller_type == 'supertwisting':\n     124 |                 self.controllers['supertwisting'] = ModularSuperTwistingSMC(controller_config)\n     125 |             else:\n     126 |                 raise ValueError(f\"Unknown controller type: {controller_type}\")\n     127 | \n     128 |         self.logger.info(f\"Initialized hybrid SMC with controllers: {list(self.controllers.keys())}\")\n     129 | \n     130 |     @property\n     131 |     def current_mode(self) -> \"HybridMode\":\n     132 |         \"\"\"Get current hybrid mode for test compatibility.\"\"\""
+  },
+  {
+    "claim_id": "CODE-IMPL-152",
+    "file": "src\\controllers\\smc\\algorithms\\hybrid\\switching_logic.py",
+    "line": 1,
+    "context": "Hybrid Switching Logic for Multi-Controller SMC...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #============== src/controllers/smc/algorithms/hybrid/switching_logic.py ==============\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Hybrid Switching Logic for Multi-Controller SMC.\n       7 | \n       8 | Implements intelligent switching between multiple SMC controllers based on:\n       9 | - System performance metrics\n      10 | - Operating conditions\n      11 | - Predictive analysis\n      12 | - Learning algorithms\n      13 | \n      14 | Mathematical Background:\n      15 | - Switching functions prevent controller chattering\n      16 | - Hysteresis bands ensure stable transitions\n      17 | - Performance indices guide optimal controller selection\n      18 | \"\"\"\n      19 | \n      20 | from typing import Dict, List, Optional, Any, Tuple\n      21 | import numpy as np"
+  },
+  {
+    "claim_id": "CODE-IMPL-155",
+    "file": "src\\controllers\\smc\\algorithms\\hybrid\\switching_logic.py",
+    "line": 265,
+    "context": "Evaluate switching based on control effort...",
+    "code": "     245 |             else:\n     246 |                 return None\n     247 | \n     248 |         if target.value == current_controller:\n     249 |             return None\n     250 | \n     251 |         # Calculate confidence based on how far from threshold\n     252 |         distance_from_threshold = min(\n     253 |             abs(surface_magnitude - thresh) for thresh in thresholds\n     254 |         )\n     255 |         max_distance = max(thresholds) - min(thresholds)\n     256 |         confidence = min(1.0, distance_from_threshold / max_distance)\n     257 | \n     258 |         return SwitchingDecision(\n     259 |             target_controller=target,\n     260 |             reason=reason,\n     261 |             confidence=confidence,\n     262 |             metrics={'surface_magnitude': surface_magnitude}\n     263 |         )\n     264 | \n>>>  265 |     def _evaluate_control_effort_switching(self, control_results: Dict[str, Any]) -> Optional[SwitchingDecision]:\n     266 |         \"\"\"Evaluate switching based on control effort.\"\"\"\n     267 |         current_controller = self.current_controller.value\n     268 | \n     269 |         if current_controller not in control_results:\n     270 |             return None\n     271 | \n     272 |         control_effort = abs(control_results[current_controller].get('u', 0.0))\n     273 |         effort_threshold = self.config.max_force * 0.8  # 80% of max force\n     274 | \n     275 |         if control_effort > effort_threshold:\n     276 |             # High control effort - switch to smoother controller\n     277 |             if 'classical' in self.active_controllers and current_controller != 'classical':\n     278 |                 target = ControllerState.CLASSICAL\n     279 |                 reason = f\"High control effort {control_effort:.3f} > {effort_threshold:.3f}\"\n     280 |                 confidence = min(1.0, (control_effort - effort_threshold) / (self.config.max_force - effort_threshold))\n     281 | \n     282 |                 return SwitchingDecision(\n     283 |                     target_controller=target,\n     284 |                     reason=reason,\n     285 |                     confidence=confidence,"
+  },
+  {
+    "claim_id": "CODE-IMPL-157",
+    "file": "src\\controllers\\smc\\algorithms\\hybrid\\switching_logic.py",
+    "line": 319,
+    "context": "Evaluate switching based on adaptation rate (for adaptive controllers)...",
+    "code": "     299 | \n     300 |             if 'supertwisting' in self.active_controllers and current_controller != 'supertwisting':\n     301 |                 target = ControllerState.SUPERTWISTING\n     302 |             elif 'adaptive' in self.active_controllers and current_controller != 'adaptive':\n     303 |                 target = ControllerState.ADAPTIVE\n     304 |             else:\n     305 |                 return None\n     306 | \n     307 |             reason = f\"High tracking error {tracking_error:.3f} > {error_threshold:.3f}\"\n     308 |             confidence = min(1.0, tracking_error / (2 * error_threshold))\n     309 | \n     310 |             return SwitchingDecision(\n     311 |                 target_controller=target,\n     312 |                 reason=reason,\n     313 |                 confidence=confidence,\n     314 |                 metrics={'tracking_error': tracking_error}\n     315 |             )\n     316 | \n     317 |         return None\n     318 | \n>>>  319 |     def _evaluate_adaptation_rate_switching(self, control_results: Dict[str, Any]) -> Optional[SwitchingDecision]:\n     320 |         \"\"\"Evaluate switching based on adaptation rate (for adaptive controllers).\"\"\"\n     321 |         current_controller = self.current_controller.value\n     322 | \n     323 |         if current_controller == 'adaptive' and 'adaptive' in control_results:\n     324 |             adaptation_rate = control_results['adaptive'].get('adaptation_rate', 0.0)\n     325 |             high_adaptation_threshold = 10.0  # Configurable\n     326 | \n     327 |             if adaptation_rate > high_adaptation_threshold:\n     328 |                 # High adaptation rate indicates uncertainty - might switch to Super-Twisting\n     329 |                 if 'supertwisting' in self.active_controllers:\n     330 |                     target = ControllerState.SUPERTWISTING\n     331 |                     reason = f\"High adaptation rate {adaptation_rate:.3f}\"\n     332 |                     confidence = min(1.0, adaptation_rate / (2 * high_adaptation_threshold))\n     333 | \n     334 |                     return SwitchingDecision(\n     335 |                         target_controller=target,\n     336 |                         reason=reason,\n     337 |                         confidence=confidence,\n     338 |                         metrics={'adaptation_rate': adaptation_rate}\n     339 |                     )"
+  },
+  {
+    "claim_id": "CODE-IMPL-159",
+    "file": "src\\controllers\\smc\\algorithms\\hybrid\\switching_logic.py",
+    "line": 381,
+    "context": "Evaluate switching based on time (round-robin or scheduled switching)...",
+    "code": "     361 | \n     362 |         # Switch if another controller is significantly better\n     363 |         improvement_threshold = 0.1  # 10% improvement needed\n     364 |         if (best_controller != current_controller and\n     365 |             current_performance > best_performance * (1 + improvement_threshold)):\n     366 | \n     367 |             target = ControllerState(best_controller)\n     368 |             improvement = (current_performance - best_performance) / current_performance\n     369 |             reason = f\"Performance improvement {improvement:.2%} by switching to {best_controller}\"\n     370 |             confidence = min(1.0, improvement / 0.5)  # Cap at 50% improvement\n     371 | \n     372 |             return SwitchingDecision(\n     373 |                 target_controller=target,\n     374 |                 reason=reason,\n     375 |                 confidence=confidence,\n     376 |                 metrics={'performance_improvement': improvement}\n     377 |             )\n     378 | \n     379 |         return None\n     380 | \n>>>  381 |     def _evaluate_time_based_switching(self, current_time: float) -> Optional[SwitchingDecision]:\n     382 |         \"\"\"Evaluate switching based on time (round-robin or scheduled switching).\"\"\"\n     383 |         # Simple round-robin switching every 2 seconds\n     384 |         switching_period = 2.0\n     385 |         controller_index = int(current_time / switching_period) % len(self.active_controllers)\n     386 |         target_controller_name = self.active_controllers[controller_index]\n     387 | \n     388 |         if target_controller_name != self.current_controller.value:\n     389 |             target = ControllerState(target_controller_name)\n     390 |             reason = f\"Time-based switching at t={current_time:.1f}s\"\n     391 |             confidence = 1.0\n     392 | \n     393 |             return SwitchingDecision(\n     394 |                 target_controller=target,\n     395 |                 reason=reason,\n     396 |                 confidence=confidence,\n     397 |                 metrics={'switching_time': current_time}\n     398 |             )\n     399 | \n     400 |         return None\n     401 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-167",
+    "file": "src\\controllers\\smc\\algorithms\\super_twisting\\controller.py",
+    "line": 248,
+    "context": "Vectorized feasibility check for super‑twisting SMC gains...",
+    "code": "     228 |             'K1': self.config.K1,\n     229 |             'K2': self.config.K2\n     230 |         }\n     231 | \n     232 |     def _is_anti_windup_active(self) -> bool:\n     233 |         \"\"\"Check if anti-windup is currently active.\"\"\"\n     234 |         if self.config.anti_windup_gain is None:\n     235 |             return False\n     236 | \n     237 |         twisting_state = self._twisting_algorithm.get_state_dict()\n     238 |         integral_state = abs(twisting_state['internal_state']['integral_state'])\n     239 |         limit = self.config.get_effective_anti_windup_gain()\n     240 | \n     241 |         return integral_state >= 0.9 * limit\n     242 | \n     243 |     @property\n     244 |     def gains(self) -> List[float]:\n     245 |         \"\"\"Return controller gains [K1, K2, k1, k2, λ1, λ2].\"\"\"\n     246 |         return list(self.config.gains)\n     247 | \n>>>  248 |     def validate_gains(self, gains_b: \"np.ndarray\") -> \"np.ndarray\":\n     249 |         \"\"\"\n     250 |         Vectorized feasibility check for super‑twisting SMC gains.\n     251 | \n     252 |         The algorithmic gains ``K1`` and ``K2`` must be strictly positive and\n     253 |         satisfy K1 > K2 for stability and finite‑time convergence. When\n     254 |         a six‑element gain vector is provided the sliding‑surface gains\n     255 |         ``k1``, ``k2`` and the lambda parameters ``lam1``, ``lam2`` must also\n     256 |         be positive.\n     257 | \n     258 |         Parameters\n     259 |         ----------\n     260 |         gains_b : np.ndarray\n     261 |             Array of shape (B, D) containing candidate gain vectors.  The\n     262 |             first two columns correspond to ``K1`` and ``K2``; if ``D`` ≥ 6\n     263 |             then columns 3–6 correspond to ``k1``, ``k2``, ``lam1`` and\n     264 |             ``lam2`` respectively.\n     265 | \n     266 |         Returns\n     267 |         -------\n     268 |         np.ndarray"
+  },
+  {
+    "claim_id": "CODE-IMPL-178",
+    "file": "src\\controllers\\smc\\classic_smc.py",
+    "line": 282,
+    "context": "uses six gains in the order...",
+    "code": "     262 |             return self._dynamics_ref()\n     263 |         return None\n     264 | \n     265 |     @dyn.setter\n     266 |     def dyn(self, value):\n     267 |         \"\"\"Set dynamics model using weakref.\"\"\"\n     268 |         if value is not None:\n     269 |             self._dynamics_ref = weakref.ref(value)\n     270 |         else:\n     271 |             self._dynamics_ref = lambda: None\n     272 | \n     273 |     def initialize_state(self) -> tuple:\n     274 |         \"\"\"No internal state for classical SMC; returns an empty tuple.\"\"\"\n     275 |         return ()\n     276 | \n     277 |     def initialize_history(self) -> dict:\n     278 |         \"\"\"No history tracked for classical SMC; returns an empty dict.\"\"\"\n     279 |         return {}\n     280 | \n     281 |     @staticmethod\n>>>  282 |     def validate_gains(gains: Union[Sequence[float], np.ndarray, Any]) -> None:\n     283 |         \"\"\"\n     284 |         Validate that exactly six gains have been provided for the classical SMC.\n     285 | \n     286 |         The classical sliding–mode controller uses six gains in the order\n     287 |         ``[k1, k2, lam1, lam2, K, kd]``.  Any other length is considered\n     288 |         misconfigured and results in a ``ValueError``.  This validator accepts\n     289 |         any sequence or array-like input and coerces it to a one‑dimensional\n     290 |         array of floats before verifying its length.  When coercion fails or\n     291 |         the resulting array does not contain exactly six elements, a\n     292 |         ``ValueError`` is raised.\n     293 | \n     294 |         Parameters\n     295 |         ----------\n     296 |         gains : Sequence[float] or array-like\n     297 |             Sequence of gain values supplied during construction.\n     298 | \n     299 |         Raises\n     300 |         ------\n     301 |         ValueError\n     302 |             If ``gains`` is not convertible to a sequence of length six."
+  },
+  {
+    "claim_id": "CODE-IMPL-180",
+    "file": "src\\controllers\\smc\\classic_smc.py",
+    "line": 488,
+    "context": "Reset ClassicalSMC controller state...",
+    "code": "     468 | \n     469 |         # Combine equivalent and robust terms and saturate final command\n     470 |         # to the actuator limits.  The final saturation prevents\n     471 |         # commanded torques/forces from exceeding the physical\n     472 |         # capability of the actuator.\n     473 |         u = u_eq + u_robust\n     474 |         u_saturated = float(np.clip(u, -self.max_force, self.max_force))\n     475 | \n     476 |         # Telemetry: append key signals to history (in-place)\n     477 |         hist = history if isinstance(history, dict) else {}\n     478 |         hist.setdefault('sigma', []).append(float(sigma))\n     479 |         hist.setdefault('epsilon_eff', []).append(float(eps_dyn))\n     480 |         hist.setdefault('u_eq', []).append(float(u_eq))\n     481 |         hist.setdefault('u_robust', []).append(float(u_robust))\n     482 |         hist.setdefault('u_total', []).append(float(u))\n     483 |         hist.setdefault('u', []).append(float(u_saturated))\n     484 | \n     485 |         # Return structured output\n     486 |         return ClassicalSMCOutput(u_saturated, (), hist)\n     487 | \n>>>  488 |     def reset(self) -> None:\n     489 |         \"\"\"Reset ClassicalSMC controller state.\n     490 | \n     491 |         Classical SMC has no internal state variables to reset since it is\n     492 |         stateless and purely reactive based on current measurements.\n     493 |         This method is provided for interface compliance.\n     494 |         \"\"\"\n     495 |         # Classical SMC is stateless - no internal state to reset\n     496 |         pass\n     497 | \n     498 |     def cleanup(self) -> None:\n     499 |         \"\"\"Explicit memory cleanup to prevent leaks.\n     500 | \n     501 |         Clears large NumPy arrays and breaks circular references to allow\n     502 |         proper garbage collection. Should be called when the controller is\n     503 |         no longer needed.\n     504 |         \"\"\"\n     505 |         # Nullify dynamics reference\n     506 |         if hasattr(self, '_dynamics_ref'):\n     507 |             self._dynamics_ref = lambda: None\n     508 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-181",
+    "file": "src\\controllers\\smc\\core\\equivalent_control.py",
+    "line": 1,
+    "context": "Equivalent Control Computation for SMC Controllers...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #=================== src/controllers/smc/core/equivalent_control.py ===================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Equivalent Control Computation for SMC Controllers.\n       7 | \n       8 | Implements model-based equivalent control (u_eq) that drives the system along\n       9 | the sliding surface. This is the feedforward component of SMC that provides\n      10 | nominal performance when the model is accurate.\n      11 | \n      12 | Mathematical Background:\n      13 | - Equivalent control: u_eq = -(LM^{-1}B)^{-1} * LM^{-1}F\n      14 | - Where: M = inertia matrix, F = nonlinear forces, L = surface gradient, B = input matrix\n      15 | - Requires dynamics model and assumes controllability: |LM^{-1}B| > threshold\n      16 | \"\"\"\n      17 | \n      18 | from typing import Optional, Any, Tuple\n      19 | import numpy as np\n      20 | import logging\n      21 | from abc import ABC, abstractmethod"
+  },
+  {
+    "claim_id": "CODE-IMPL-182",
+    "file": "src\\controllers\\smc\\core\\equivalent_control.py",
+    "line": 35,
+    "context": "Initialize equivalent control computation...",
+    "code": "      15 | - Requires dynamics model and assumes controllability: |LM^{-1}B| > threshold\n      16 | \"\"\"\n      17 | \n      18 | from typing import Optional, Any, Tuple\n      19 | import numpy as np\n      20 | import logging\n      21 | from abc import ABC, abstractmethod\n      22 | \n      23 | # Import robust matrix inversion infrastructure\n      24 | from src.plant.core.numerical_stability import MatrixInverter, AdaptiveRegularizer\n      25 | \n      26 | \n      27 | class EquivalentControl:\n      28 |     \"\"\"\n      29 |     Model-based equivalent control computation for SMC.\n      30 | \n      31 |     Computes the control input that would maintain the system exactly on the\n      32 |     sliding surface if the model were perfect and no disturbances were present.\n      33 |     \"\"\"\n      34 | \n>>>   35 |     def __init__(self,\n      36 |                  dynamics_model: Optional[Any] = None,\n      37 |                  regularization: float = 1e-10,\n      38 |                  regularization_alpha: float = 1e-4,\n      39 |                  min_regularization: float = 1e-10,\n      40 |                  max_condition_number: float = 1e14,\n      41 |                  use_fixed_regularization: bool = False,\n      42 |                  controllability_threshold: float = 1e-4):\n      43 |         \"\"\"\n      44 |         Initialize equivalent control computation.\n      45 | \n      46 |         Args:\n      47 |             dynamics_model: System dynamics model with get_dynamics() method\n      48 |             regularization_alpha: Base regularization scaling factor (adaptive mode)\n      49 |             min_regularization: Minimum regularization for numerical stability\n      50 |             max_condition_number: Maximum acceptable condition number\n      51 |             use_fixed_regularization: Use fixed rather than adaptive regularization\n      52 |             controllability_threshold: Minimum |LM^{-1}B| for equivalent control\n      53 |         \"\"\"\n      54 |         self.dynamics_model = dynamics_model\n      55 |         self.regularization = regularization"
+  },
+  {
+    "claim_id": "CODE-IMPL-183",
+    "file": "src\\controllers\\smc\\core\\gain_validation.py",
+    "line": 45,
+    "context": "Centralized gain validation for all SMC controller types...",
+    "code": "      25 |     \"\"\"SMC controller types with different gain requirements.\"\"\"\n      26 |     CLASSICAL = \"classical\"\n      27 |     ADAPTIVE = \"adaptive\"\n      28 |     SUPER_TWISTING = \"super_twisting\"\n      29 |     HYBRID = \"hybrid\"\n      30 | \n      31 | \n      32 | @dataclass\n      33 | class GainBounds:\n      34 |     \"\"\"Bounds for SMC controller gains.\"\"\"\n      35 |     min_value: float\n      36 |     max_value: float\n      37 |     name: str\n      38 |     description: str\n      39 | \n      40 |     def validate(self, value: float) -> bool:\n      41 |         \"\"\"Check if value is within bounds.\"\"\"\n      42 |         return self.min_value <= value <= self.max_value\n      43 | \n      44 | \n>>>   45 | class SMCGainValidator:\n      46 |     \"\"\"\n      47 |     Centralized gain validation for all SMC controller types.\n      48 | \n      49 |     Provides type-specific validation rules based on SMC theory requirements.\n      50 |     \"\"\"\n      51 | \n      52 |     def __init__(self):\n      53 |         \"\"\"Initialize gain validator with standard bounds.\"\"\"\n      54 |         self._gain_bounds = self._initialize_standard_bounds()\n      55 | \n      56 |     def _initialize_standard_bounds(self) -> Dict[SMCControllerType, List[GainBounds]]:\n      57 |         \"\"\"Initialize standard gain bounds for each controller type.\"\"\"\n      58 |         return {\n      59 |             SMCControllerType.CLASSICAL: [\n      60 |                 GainBounds(0.1, 1000.0, \"k1\", \"Joint 1 position gain\"),\n      61 |                 GainBounds(0.1, 1000.0, \"k2\", \"Joint 2 position gain\"),\n      62 |                 GainBounds(0.1, 1000.0, \"lam1\", \"Joint 1 velocity gain\"),\n      63 |                 GainBounds(0.1, 1000.0, \"lam2\", \"Joint 2 velocity gain\"),\n      64 |                 GainBounds(0.1, 1000.0, \"K\", \"Switching gain\"),\n      65 |                 GainBounds(0.0, 1000.0, \"kd\", \"Derivative gain (non-negative)\"),"
+  },
+  {
+    "claim_id": "CODE-IMPL-192",
+    "file": "src\\controllers\\smc\\core\\switching_functions.py",
+    "line": 148,
+    "context": "uses chattering in practice...",
+    "code": "     128 | \n     129 |         Formula: sat(s/ε) = clip(s/ε, -1, 1)\n     130 | \n     131 |         Properties:\n     132 |         - Simple and computationally efficient\n     133 |         - Bounded output: [-1, 1]\n     134 |         - Linear in boundary layer, constant outside\n     135 |         - Can cause degraded robustness near origin (zero slope outside boundary)\n     136 |         \"\"\"\n     137 |         # Enhanced mathematical safety\n     138 |         if epsilon <= 0:\n     139 |             return np.sign(s)\n     140 | \n     141 |         # Safe division with overflow check\n     142 |         ratio = s / epsilon\n     143 |         if not np.isfinite(ratio):\n     144 |             return np.sign(s)\n     145 | \n     146 |         return np.clip(ratio, -1, 1)\n     147 | \n>>>  148 |     def _sign_switching(self, s: float, epsilon: float) -> float:\n     149 |         \"\"\"\n     150 |         Pure sign function (discontinuous).\n     151 | \n     152 |         Formula: sign(s)\n     153 | \n     154 |         Properties:\n     155 |         - Theoretically optimal robustness\n     156 |         - Discontinuous at origin\n     157 |         - Causes chattering in practice\n     158 |         - Use only when chattering is acceptable\n     159 |         \"\"\"\n     160 |         # Epsilon is ignored for pure sign function\n     161 |         return np.sign(s)\n     162 | \n     163 |     def _sigmoid_switching(self, s: float, epsilon: float, slope: float = 4.0) -> float:\n     164 |         \"\"\"\n     165 |         Sigmoid switching function with configurable slope.\n     166 | \n     167 |         Formula: 2/(1 + exp(-slope*s/ε)) - 1\n     168 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-193",
+    "file": "src\\controllers\\smc\\core\\switching_functions.py",
+    "line": 199,
+    "context": "Compute derivative of switching function...",
+    "code": "     179 |         \"\"\"\n     180 |         # Enhanced mathematical safety\n     181 |         if epsilon <= 0:\n     182 |             return np.sign(s)\n     183 | \n     184 |         # Apply configurable slope for tuning\n     185 |         ratio = -slope * s / epsilon\n     186 | \n     187 |         # Prevent numerical overflow in exponential\n     188 |         if ratio > 700:  # exp(700) overflows\n     189 |             return -1.0\n     190 |         elif ratio < -700:  # exp(-700) underflows\n     191 |             return 1.0\n     192 | \n     193 |         exp_term = np.exp(ratio)\n     194 |         if not np.isfinite(exp_term):\n     195 |             return np.sign(s)\n     196 | \n     197 |         return 2.0 / (1.0 + exp_term) - 1.0\n     198 | \n>>>  199 |     def get_derivative(self, surface_value: float, boundary_layer: float) -> float:\n     200 |         \"\"\"\n     201 |         Compute derivative of switching function.\n     202 | \n     203 |         Useful for analysis and adaptive boundary layer methods.\n     204 |         \"\"\"\n     205 |         s, epsilon = surface_value, boundary_layer\n     206 | \n     207 |         if self.method == SwitchingMethod.TANH:\n     208 |             if epsilon <= 0:\n     209 |                 return 0.0  # Sign function has zero derivative almost everywhere\n     210 |             tanh_val = np.tanh(s / epsilon)\n     211 |             return (1.0 - tanh_val**2) / epsilon\n     212 | \n     213 |         elif self.method == SwitchingMethod.LINEAR:\n     214 |             if epsilon <= 0 or abs(s) >= epsilon:\n     215 |                 return 0.0  # Zero derivative outside boundary layer\n     216 |             return 1.0 / epsilon\n     217 | \n     218 |         elif self.method == SwitchingMethod.SIGMOID:\n     219 |             if epsilon <= 0:"
+  },
+  {
+    "claim_id": "CODE-IMPL-194",
+    "file": "src\\controllers\\smc\\core\\switching_functions.py",
+    "line": 229,
+    "context": "Hyperbolic tangent switching function with optimized slope...",
+    "code": "     209 |                 return 0.0  # Sign function has zero derivative almost everywhere\n     210 |             tanh_val = np.tanh(s / epsilon)\n     211 |             return (1.0 - tanh_val**2) / epsilon\n     212 | \n     213 |         elif self.method == SwitchingMethod.LINEAR:\n     214 |             if epsilon <= 0 or abs(s) >= epsilon:\n     215 |                 return 0.0  # Zero derivative outside boundary layer\n     216 |             return 1.0 / epsilon\n     217 | \n     218 |         elif self.method == SwitchingMethod.SIGMOID:\n     219 |             if epsilon <= 0:\n     220 |                 return 0.0\n     221 |             exp_term = np.exp(-2.0 * s / epsilon)\n     222 |             return (4.0 / epsilon) * exp_term / (1.0 + exp_term)**2\n     223 | \n     224 |         else:  # SIGN\n     225 |             return 0.0\n     226 | \n     227 | \n     228 | # Convenience functions for direct use\n>>>  229 | def tanh_switching(s: float, epsilon: float, slope: float = 3.0) -> float:\n     230 |     \"\"\"\n     231 |     Hyperbolic tangent switching function with optimized slope.\n     232 | \n     233 |     Args:\n     234 |         s: Sliding surface value\n     235 |         epsilon: Boundary layer thickness\n     236 |         slope: Slope parameter (default: 3.0 for optimal chattering reduction)\n     237 | \n     238 |     Returns:\n     239 |         tanh((slope * s)/ε) ∈ [-1, 1]\n     240 | \n     241 |     Note:\n     242 |         Default slope reduced from steep (10+) to gentle (3.0) for better\n     243 |         chattering reduction. Use slope=2-5 for smooth control, slope>5\n     244 |         approaches discontinuous behavior.\n     245 |     \"\"\"\n     246 |     if epsilon <= 0:\n     247 |         return np.sign(s)\n     248 |     ratio = (slope * s) / epsilon\n     249 |     if abs(ratio) > 700:"
+  },
+  {
+    "claim_id": "CODE-IMPL-195",
+    "file": "src\\controllers\\smc\\core\\switching_functions.py",
+    "line": 270,
+    "context": "uses chattering in real systems...",
+    "code": "     250 |         return np.sign(s)\n     251 |     return np.tanh(ratio)\n     252 | \n     253 | \n     254 | def linear_switching(s: float, epsilon: float) -> float:\n     255 |     \"\"\"\n     256 |     Linear saturation switching function.\n     257 | \n     258 |     Args:\n     259 |         s: Sliding surface value\n     260 |         epsilon: Boundary layer thickness\n     261 | \n     262 |     Returns:\n     263 |         sat(s/ε) = clip(s/ε, -1, 1)\n     264 |     \"\"\"\n     265 |     if epsilon <= 0:\n     266 |         return np.sign(s)\n     267 |     return np.clip(s / epsilon, -1, 1)\n     268 | \n     269 | \n>>>  270 | def sign_switching(s: float, epsilon: float = 0.0) -> float:\n     271 |     \"\"\"\n     272 |     Pure sign function (DEPRECATED - causes severe chattering).\n     273 | \n     274 |     WARNING: Discontinuous switching causes chattering in real systems.\n     275 |     Prefer tanh_switching() or linear_switching() with appropriate boundary layer.\n     276 | \n     277 |     Args:\n     278 |         s: Sliding surface value\n     279 |         epsilon: Ignored (kept for interface consistency)\n     280 | \n     281 |     Returns:\n     282 |         sign(s) ∈ {-1, 0, 1}\n     283 | \n     284 |     Deprecated:\n     285 |         Use tanh_switching(s, epsilon, slope=3.0) instead for chattering reduction.\n     286 |     \"\"\"\n     287 |     import warnings\n     288 |     warnings.warn(\n     289 |         \"sign_switching() is deprecated and causes severe chattering. \"\n     290 |         \"Use tanh_switching(s, epsilon, slope=3.0) for smooth control.\","
+  },
+  {
+    "claim_id": "CODE-IMPL-201",
+    "file": "src\\controllers\\smc\\sta_smc.py",
+    "line": 35,
+    "context": "Numba‑accelerated core of the Super‑Twisting SMC...",
+    "code": "      15 | # Provide a fallback implementation when Numba is unavailable so that this\n      16 | # module can be imported without raising a ModuleNotFoundError.  The dummy\n      17 | # object supplies an ``njit`` decorator that simply returns the original\n      18 | # function unchanged.\n      19 | try:\n      20 |     import numba  # type: ignore\n      21 | except Exception:  # pragma: no cover - fallback when numba is missing\n      22 |     class _DummyNumba:\n      23 |         def njit(self, *args, **kwargs):  # type: ignore\n      24 |             def deco(fn):\n      25 |                 return fn\n      26 |             return deco\n      27 |     numba = _DummyNumba()  # type: ignore\n      28 | import numpy as np\n      29 | # Import from new organized structure\n      30 | from ...utils import saturate\n      31 | from ...utils import STAOutput\n      32 | from typing import Optional, List, Tuple, Dict, Union\n      33 | \n      34 | @numba.njit(cache=True)\n>>>   35 | def _sta_smc_control_numba(\n      36 |     state: np.ndarray,\n      37 |     z: float,\n      38 |     alg_gain_K1: float, alg_gain_K2: float, surf_gain_k1: float, surf_gain_k2: float, surf_lam1: float, surf_lam2: float,\n      39 |     damping_gain: float, dt: float, max_force: float, boundary_layer: float,\n      40 |     u_eq: float = 0.0\n      41 | ) -> Tuple[float, float, float]:\n      42 |     \"\"\"\n      43 |     Numba‑accelerated core of the Super‑Twisting SMC.\n      44 | \n      45 |     Uses a saturated sign function for sigma to maintain full control authority\n      46 |     outside the boundary layer and linear behavior inside it, which is required\n      47 |     for robust, finite‑time convergence of the super‑twisting algorithm.\n      48 |     \"\"\"\n      49 |     _, th1, th2, _, th1dot, th2dot = state\n      50 | \n      51 |     # Sliding surface: sigma = k1*(th1dot + lam1*th1) + k2*(th2dot + lam2*th2)\n      52 |     sigma = surf_gain_k1 * (th1dot + surf_lam1 * th1) + surf_gain_k2 * (th2dot + surf_lam2 * th2)\n      53 | \n      54 |     # ---- FIX CS‑01: robust saturation instead of \"sigma/(|sigma|+eps)\" ----\n      55 |     eps = boundary_layer  # guaranteed > 0 by __init__"
+  },
+  {
+    "claim_id": "CODE-IMPL-204",
+    "file": "src\\controllers\\smc\\sta_smc.py",
+    "line": 195,
+    "context": "Initialize a Super‑Twisting Sliding Mode Controller...",
+    "code": "     175 | \n     176 |     **Gain positivity (F‑4.SMCDesign.2 / RC‑04)**:  For finite‑time convergence of\n     177 |     the super‑twisting algorithm the algorithmic gains ``K1`` and ``K2`` must\n     178 |     be strictly positive and the sliding‑surface gains ``k1`` and ``k2`` together\n     179 |     with the slope parameters ``λ1`` and ``λ2`` must also be strictly positive.\n     180 |     Super‑twisting literature emphasises that positive constants are required to\n     181 |     ensure robust finite‑time stability【MorenoOsorio2012†L27-L40】 and positive\n     182 |     sliding‑surface coefficients guarantee that the error terms combine with\n     183 |     positive weights【OkstateThesis2013†L1415-L1419】.  The constructor therefore\n     184 |     validates all gains using ``require_positive`` and raises a ``ValueError``\n     185 |     when any gain is non‑positive.\n     186 | \n     187 |     Returns\n     188 |     -------\n     189 |     tuple\n     190 |         A triple ``(u, (z, σ), history)`` containing the saturated control\n     191 |         signal ``u``, the updated internal state and sliding surface value,\n     192 |         and a history dictionary (empty for this controller).\n     193 |     \"\"\"\n     194 | \n>>>  195 |     def __init__(\n     196 |         self,\n     197 |         gains: Union[Tuple[float, ...], List[float]],\n     198 |         dt: float,\n     199 |         max_force: float = 150.0,\n     200 |         damping_gain: float = 0.0,\n     201 |         boundary_layer: float = 0.01,\n     202 |         dynamics_model: Optional[object] = None,\n     203 |         switch_method: str = \"linear\",\n     204 |         regularization: float = 1e-10,\n     205 |         anti_windup_gain: float = 0.0,\n     206 |     ) -> None:\n     207 |         \"\"\"\n     208 |         Initialize a Super‑Twisting Sliding Mode Controller.\n     209 | \n     210 |         Parameters\n     211 |         ----------\n     212 |         gains : array‑like of length 2 or 6\n     213 |             Controller gains.  A 2‑vector supplies algorithmic gains\n     214 |             ``[K1, K2]`` and defaults sliding surface parameters.  A 6‑vector\n     215 |             supplies ``[K1, K2, k1, k2, λ1, λ2]`` explicitly."
+  },
+  {
+    "claim_id": "CODE-IMPL-207",
+    "file": "src\\controllers\\smc\\sta_smc.py",
+    "line": 513,
+    "context": "Compute the model‑based equivalent control ``u_eq`` using Tikhonov regularisation...",
+    "code": "     493 | \n     494 |     def __del__(self) -> None:\n     495 |         \"\"\"Destructor for automatic cleanup.\n     496 | \n     497 |         Ensures cleanup is called when the controller is garbage collected.\n     498 |         Catches all exceptions to prevent errors during finalization.\n     499 |         \"\"\"\n     500 |         try:\n     501 |             self.cleanup()\n     502 |         except Exception:\n     503 |             pass  # Prevent exceptions during cleanup\n     504 | \n     505 |     def set_dynamics(self, dynamics_model) -> None:\n     506 |         \"\"\"Attach dynamics model if available (used by u_eq if implemented).\"\"\"\n     507 |         self.dyn = dynamics_model\n     508 | \n     509 |     def _compute_sliding_surface(self, state: np.ndarray) -> float:\n     510 |         _, th1, th2, _, th1dot, th2dot = state\n     511 |         return self.surf_gain_k1 * (th1dot + self.surf_lam1 * th1) + self.surf_gain_k2 * (th2dot + self.surf_lam2 * th2)\n     512 | \n>>>  513 |     def _compute_equivalent_control(self, state: np.ndarray) -> float:\n     514 |         \"\"\"Compute the model‑based equivalent control ``u_eq`` using Tikhonov regularisation.\n     515 | \n     516 |         The original implementation used an SVD‑based condition estimate and a\n     517 |         pseudo‑inverse to invert the inertia matrix.  This version instead\n     518 |         applies a small diagonal regularisation and solves the resulting\n     519 |         linear systems directly, reducing computational overhead and\n     520 |         eliminating the need for a full SVD.  Adding a small constant to\n     521 |         the diagonal of a symmetric indefinite matrix makes it positive\n     522 |         definite and invertible, a standard technique in control\n     523 |         literature.\n     524 |         \"\"\"\n     525 |         if self.dyn is None:\n     526 |             return 0.0\n     527 | \n     528 |         q_dot = state[3:]\n     529 |         try:\n     530 |             M, C, G = self.dyn._compute_physics_matrices(state)\n     531 |         except Exception:\n     532 |             return 0.0\n     533 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-209",
+    "file": "src\\controllers\\swing_up_smc.py",
+    "line": 1,
+    "context": "Swing-up SMC controller compatibility module...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #========================== src/controllers/swing_up_smc.py ===========================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Swing-up SMC controller compatibility module.\n       7 | \n       8 | This module provides backward compatibility for test modules that expect\n       9 | swing-up SMC functionality at src.controllers.swing_up_smc. All functionality\n      10 | is re-exported from the actual implementation location.\n      11 | \"\"\"\n      12 | \n      13 | # Import all swing-up SMC functionality from the actual location\n      14 | from .specialized.swing_up_smc import *\n      15 | \n      16 | __all__ = []"
+  },
+  {
+    "claim_id": "CODE-IMPL-210",
+    "file": "src\\core\\vector_sim.py",
+    "line": 1,
+    "context": "Compatibility import module for vector simulation functionality...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #=============================== src/core/vector_sim.py ===============================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Compatibility import module for vector simulation functionality.\n       7 | \n       8 | This module provides backward compatibility for test modules that expect\n       9 | vector simulation components at src.core.vector_sim. All functionality\n      10 | is re-exported from the actual implementation location.\n      11 | \"\"\"\n      12 | \n      13 | # Import all components from the actual vector_sim location\n      14 | from src.simulation.engines.vector_sim import *\n      15 | \n      16 | # Explicitly import key functions that actually exist\n      17 | from src.simulation.engines.vector_sim import (\n      18 |     simulate,\n      19 |     simulate_system_batch,\n      20 | )\n      21 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-215",
+    "file": "src\\integration\\compatibility_matrix.py",
+    "line": 662,
+    "context": "Get production recommendation based on status...",
+    "code": "     642 |             status = \"production_ready\"\n     643 |             confidence = \"high\"\n     644 |         elif system_health >= 80 and len(critical_violations) == 0:\n     645 |             status = \"production_ready_with_monitoring\"\n     646 |             confidence = \"medium\"\n     647 |         elif system_health >= 70:\n     648 |             status = \"needs_improvement\"\n     649 |             confidence = \"low\"\n     650 |         else:\n     651 |             status = \"not_production_ready\"\n     652 |             confidence = \"very_low\"\n     653 | \n     654 |         return {\n     655 |             \"status\": status,\n     656 |             \"confidence\": confidence,\n     657 |             \"health_score\": system_health,\n     658 |             \"critical_blockers\": len(critical_violations),\n     659 |             \"recommendation\": self._get_production_recommendation(status)\n     660 |         }\n     661 | \n>>>  662 |     def _get_production_recommendation(self, status: str) -> str:\n     663 |         \"\"\"Get production recommendation based on status.\"\"\"\n     664 |         recommendations = {\n     665 |             \"production_ready\": \"System is ready for production deployment with standard monitoring\",\n     666 |             \"production_ready_with_monitoring\": \"Deploy with enhanced monitoring and gradual rollout\",\n     667 |             \"needs_improvement\": \"Address compatibility issues before production deployment\",\n     668 |             \"not_production_ready\": \"Critical compatibility issues must be resolved before deployment\"\n     669 |         }\n     670 |         return recommendations.get(status, \"Unknown production status\")\n     671 | \n     672 | def asdict(obj) -> Dict[str, Any]:\n     673 |     \"\"\"Convert dataclass to dictionary (simplified implementation).\"\"\"\n     674 |     if hasattr(obj, '__dict__'):\n     675 |         result = {}\n     676 |         for key, value in obj.__dict__.items():\n     677 |             if isinstance(value, list):\n     678 |                 result[key] = [asdict(item) if hasattr(item, '__dict__') else item for item in value]\n     679 |             elif hasattr(value, '__dict__'):\n     680 |                 result[key] = asdict(value)\n     681 |             elif isinstance(value, Enum):\n     682 |                 result[key] = value.value"
+  },
+  {
+    "claim_id": "CODE-IMPL-218",
+    "file": "src\\integration\\production_readiness.py",
+    "line": 542,
+    "context": "Determine production readiness level based on score and gate status...",
+    "code": "     522 |             ])\n     523 | \n     524 |         else:\n     525 |             recommendations.append(f\"Improve {gate_name} by {gap:.1f} points\")\n     526 | \n     527 |         return recommendations\n     528 | \n     529 |     def _calculate_overall_score(self, quality_gates: List[QualityGate]) -> float:\n     530 |         \"\"\"Calculate weighted overall readiness score.\"\"\"\n     531 |         total_weighted_score = 0.0\n     532 |         total_weight = 0.0\n     533 | \n     534 |         for gate in quality_gates:\n     535 |             gate_score = min(100.0, (gate.current_value / gate.threshold) * 100)\n     536 |             weighted_score = gate_score * gate.weight\n     537 |             total_weighted_score += weighted_score\n     538 |             total_weight += gate.weight\n     539 | \n     540 |         return (total_weighted_score / total_weight) if total_weight > 0 else 0.0\n     541 | \n>>>  542 |     def _determine_readiness_level(self, overall_score: float, quality_gates: List[QualityGate]) -> ReadinessLevel:\n     543 |         \"\"\"Determine production readiness level based on score and gate status.\"\"\"\n     544 |         critical_failures = [gate for gate in quality_gates if gate.critical and not gate.passed]\n     545 | \n     546 |         if len(critical_failures) > 0:\n     547 |             return ReadinessLevel.BLOCKED\n     548 |         elif overall_score >= 95.0:\n     549 |             return ReadinessLevel.PRODUCTION_READY\n     550 |         elif overall_score >= 85.0:\n     551 |             return ReadinessLevel.CONDITIONAL_READY\n     552 |         elif overall_score >= 70.0:\n     553 |             return ReadinessLevel.NEEDS_IMPROVEMENT\n     554 |         else:\n     555 |             return ReadinessLevel.NOT_READY\n     556 | \n     557 |     def _identify_blocking_issues(self, quality_gates: List[QualityGate]) -> List[str]:\n     558 |         \"\"\"Identify blocking issues preventing production deployment.\"\"\"\n     559 |         blocking_issues = []\n     560 | \n     561 |         for gate in quality_gates:\n     562 |             if gate.critical and not gate.passed:"
+  },
+  {
+    "claim_id": "CODE-IMPL-219",
+    "file": "src\\integration\\production_readiness.py",
+    "line": 617,
+    "context": "Analyze improvement trend based on historical data...",
+    "code": "     597 |             \"🧪 Run comprehensive integration tests before deployment\",\n     598 |             \"📊 Monitor production readiness trends and address regressions\",\n     599 |             \"🔍 Validate cross-domain compatibility regularly\"\n     600 |         ])\n     601 | \n     602 |         return recommendations\n     603 | \n     604 |     def _calculate_confidence_level(self, overall_score: float, quality_gates: List[QualityGate]) -> str:\n     605 |         \"\"\"Calculate confidence level in readiness assessment.\"\"\"\n     606 |         critical_passed = all(gate.passed for gate in quality_gates if gate.critical)\n     607 | \n     608 |         if overall_score >= 95.0 and critical_passed:\n     609 |             return \"very_high\"\n     610 |         elif overall_score >= 85.0 and critical_passed:\n     611 |             return \"high\"\n     612 |         elif overall_score >= 70.0:\n     613 |             return \"medium\"\n     614 |         else:\n     615 |             return \"low\"\n     616 | \n>>>  617 |     def _analyze_improvement_trend(self, current_score: float) -> str:\n     618 |         \"\"\"Analyze improvement trend based on historical data.\"\"\"\n     619 |         try:\n     620 |             with sqlite3.connect(self.db_path) as conn:\n     621 |                 cursor = conn.execute(\"\"\"\n     622 |                     SELECT overall_score FROM readiness_assessments\n     623 |                     ORDER BY timestamp DESC LIMIT 5\n     624 |                 \"\"\")\n     625 | \n     626 |                 recent_scores = [row[0] for row in cursor.fetchall()]\n     627 | \n     628 |                 if len(recent_scores) < 2:\n     629 |                     return \"insufficient_data\"\n     630 | \n     631 |                 # Calculate trend\n     632 |                 recent_avg = sum(recent_scores[1:]) / len(recent_scores[1:])\n     633 | \n     634 |                 if current_score > recent_avg + 2:\n     635 |                     return \"improving\"\n     636 |                 elif current_score < recent_avg - 2:\n     637 |                     return \"declining\""
+  },
+  {
+    "claim_id": "CODE-IMPL-239",
+    "file": "src\\interfaces\\hil\\simulation_bridge.py",
+    "line": 183,
+    "context": "Linear plant model implementation...",
+    "code": "     163 |                 self._state = state.state_vector.copy()\n     164 |                 return True\n     165 |             return False\n     166 |         except Exception:\n     167 |             return False\n     168 | \n     169 |     async def reset(self) -> bool:\n     170 |         \"\"\"Reset plant to initial state.\"\"\"\n     171 |         if self._initialized:\n     172 |             initial_state = self._parameters.get('initial_state', np.zeros_like(self._state))\n     173 |             self._state = np.array(initial_state, dtype=float)\n     174 |             return True\n     175 |         return False\n     176 | \n     177 |     async def cleanup(self) -> bool:\n     178 |         \"\"\"Clean up plant model.\"\"\"\n     179 |         self._initialized = False\n     180 |         return True\n     181 | \n     182 | \n>>>  183 | class LinearPlantModel(PlantModel):\n     184 |     \"\"\"Linear plant model implementation.\"\"\"\n     185 | \n     186 |     def __init__(self, model_id: str):\n     187 |         super().__init__(model_id)\n     188 |         self._A = None\n     189 |         self._B = None\n     190 |         self._C = None\n     191 |         self._D = None\n     192 | \n     193 |     @property\n     194 |     def input_names(self) -> List[str]:\n     195 |         return ['control_input']\n     196 | \n     197 |     @property\n     198 |     def output_names(self) -> List[str]:\n     199 |         return ['plant_output', 'state_vector']\n     200 | \n     201 |     async def initialize(self, parameters: Dict[str, Any]) -> bool:\n     202 |         \"\"\"Initialize linear plant model.\"\"\"\n     203 |         success = await super().initialize(parameters)"
+  },
+  {
+    "claim_id": "CODE-IMPL-240",
+    "file": "src\\interfaces\\monitoring\\diagnostics.py",
+    "line": 598,
+    "context": "uses for a category of issues...",
+    "code": "     578 |             elif \"Memory\" in result.title:\n     579 |                 causes[\"memory_management\"].append(result)\n     580 |             elif \"Network\" in result.title:\n     581 |                 causes[\"connectivity\"].append(result)\n     582 |             elif \"Disk\" in result.title:\n     583 |                 causes[\"storage\"].append(result)\n     584 |             else:\n     585 |                 causes[\"other\"].append(result)\n     586 | \n     587 |         analysis = {}\n     588 |         for category, category_results in causes.items():\n     589 |             if category_results:\n     590 |                 analysis[category] = {\n     591 |                     \"issue_count\": len(category_results),\n     592 |                     \"severity\": max(r.level.value for r in category_results),\n     593 |                     \"potential_causes\": self._get_potential_causes(category, category_results)\n     594 |                 }\n     595 | \n     596 |         return analysis\n     597 | \n>>>  598 |     def _get_potential_causes(self, category: str, results: List[DiagnosticResult]) -> List[str]:\n     599 |         \"\"\"Get potential root causes for a category of issues.\"\"\"\n     600 |         if category == \"performance\":\n     601 |             return self.knowledge_base.get(\"high_cpu\", {}).get(\"causes\", [])\n     602 |         elif category == \"memory_management\":\n     603 |             return self.knowledge_base.get(\"high_memory\", {}).get(\"causes\", [])\n     604 |         elif category == \"connectivity\":\n     605 |             return self.knowledge_base.get(\"network_errors\", {}).get(\"causes\", [])\n     606 |         else:\n     607 |             return [\"Unknown root cause - requires manual investigation\"]\n     608 | \n     609 | \n     610 | # Global diagnostic engine instance\n     611 | diagnostic_engine = DiagnosticEngine()\n     612 | troubleshooting_assistant = TroubleshootingAssistant(diagnostic_engine)\n     613 | \n     614 | \n     615 | async def run_comprehensive_diagnostics() -> Dict[str, Any]:\n     616 |     \"\"\"Run comprehensive system diagnostics.\"\"\"\n     617 |     results = await diagnostic_engine.run_all_checks()\n     618 |     analysis = troubleshooting_assistant.analyze_results(results)"
+  },
+  {
+    "claim_id": "CODE-IMPL-259",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 23,
+    "context": "Initialize the optimization algorithm...",
+    "code": "       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"Base classes for optimization algorithms.\"\"\"\n       6 | \n       7 | from __future__ import annotations\n       8 | \n       9 | from abc import ABC, abstractmethod\n      10 | from typing import Any, Dict, Optional\n      11 | \n      12 | from ..core.interfaces import OptimizationProblem, ParameterSpace, OptimizationResult\n      13 | \n      14 | \n      15 | class OptimizationAlgorithm(ABC):\n      16 |     \"\"\"Abstract base class for optimization algorithms.\n      17 | \n      18 |     This class defines the common interface that all optimization algorithms\n      19 |     must implement. It provides a standard structure for algorithm initialization,\n      20 |     execution, and result reporting.\n      21 |     \"\"\"\n      22 | \n>>>   23 |     def __init__(self):\n      24 |         \"\"\"Initialize the optimization algorithm.\"\"\"\n      25 |         self.name = self.__class__.__name__\n      26 |         self.is_initialized = False\n      27 |         self.current_iteration = 0\n      28 | \n      29 |     @abstractmethod\n      30 |     def optimize(self,\n      31 |                 problem: OptimizationProblem,\n      32 |                 parameter_space: ParameterSpace,\n      33 |                 **kwargs) -> OptimizationResult:\n      34 |         \"\"\"Run the optimization algorithm.\n      35 | \n      36 |         Parameters\n      37 |         ----------\n      38 |         problem : OptimizationProblem\n      39 |             The optimization problem to solve\n      40 |         parameter_space : ParameterSpace\n      41 |             The parameter space to search over\n      42 |         **kwargs\n      43 |             Additional algorithm-specific parameters"
+  },
+  {
+    "claim_id": "CODE-IMPL-260",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 30,
+    "context": "Run the optimization algorithm...",
+    "code": "      10 | from typing import Any, Dict, Optional\n      11 | \n      12 | from ..core.interfaces import OptimizationProblem, ParameterSpace, OptimizationResult\n      13 | \n      14 | \n      15 | class OptimizationAlgorithm(ABC):\n      16 |     \"\"\"Abstract base class for optimization algorithms.\n      17 | \n      18 |     This class defines the common interface that all optimization algorithms\n      19 |     must implement. It provides a standard structure for algorithm initialization,\n      20 |     execution, and result reporting.\n      21 |     \"\"\"\n      22 | \n      23 |     def __init__(self):\n      24 |         \"\"\"Initialize the optimization algorithm.\"\"\"\n      25 |         self.name = self.__class__.__name__\n      26 |         self.is_initialized = False\n      27 |         self.current_iteration = 0\n      28 | \n      29 |     @abstractmethod\n>>>   30 |     def optimize(self,\n      31 |                 problem: OptimizationProblem,\n      32 |                 parameter_space: ParameterSpace,\n      33 |                 **kwargs) -> OptimizationResult:\n      34 |         \"\"\"Run the optimization algorithm.\n      35 | \n      36 |         Parameters\n      37 |         ----------\n      38 |         problem : OptimizationProblem\n      39 |             The optimization problem to solve\n      40 |         parameter_space : ParameterSpace\n      41 |             The parameter space to search over\n      42 |         **kwargs\n      43 |             Additional algorithm-specific parameters\n      44 | \n      45 |         Returns\n      46 |         -------\n      47 |         OptimizationResult\n      48 |             The optimization results\n      49 |         \"\"\"\n      50 |         pass"
+  },
+  {
+    "claim_id": "CODE-IMPL-262",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 66,
+    "context": "Reset the algorithm to initial state...",
+    "code": "      46 |         -------\n      47 |         OptimizationResult\n      48 |             The optimization results\n      49 |         \"\"\"\n      50 |         pass\n      51 | \n      52 |     def get_algorithm_info(self) -> Dict[str, Any]:\n      53 |         \"\"\"Get information about the algorithm.\n      54 | \n      55 |         Returns\n      56 |         -------\n      57 |         dict\n      58 |             Algorithm information including name, parameters, and current state\n      59 |         \"\"\"\n      60 |         return {\n      61 |             'name': self.name,\n      62 |             'is_initialized': self.is_initialized,\n      63 |             'current_iteration': self.current_iteration\n      64 |         }\n      65 | \n>>>   66 |     def reset(self):\n      67 |         \"\"\"Reset the algorithm to initial state.\"\"\"\n      68 |         self.is_initialized = False\n      69 |         self.current_iteration = 0\n      70 | \n      71 |     def supports_constraints(self) -> bool:\n      72 |         \"\"\"Check if algorithm supports constraints.\n      73 | \n      74 |         Returns\n      75 |         -------\n      76 |         bool\n      77 |             True if constraints are supported\n      78 |         \"\"\"\n      79 |         return False\n      80 | \n      81 |     def supports_parallel_evaluation(self) -> bool:\n      82 |         \"\"\"Check if algorithm supports parallel function evaluation.\n      83 | \n      84 |         Returns\n      85 |         -------\n      86 |         bool"
+  },
+  {
+    "claim_id": "CODE-IMPL-263",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 71,
+    "context": "Check if algorithm supports constraints...",
+    "code": "      51 | \n      52 |     def get_algorithm_info(self) -> Dict[str, Any]:\n      53 |         \"\"\"Get information about the algorithm.\n      54 | \n      55 |         Returns\n      56 |         -------\n      57 |         dict\n      58 |             Algorithm information including name, parameters, and current state\n      59 |         \"\"\"\n      60 |         return {\n      61 |             'name': self.name,\n      62 |             'is_initialized': self.is_initialized,\n      63 |             'current_iteration': self.current_iteration\n      64 |         }\n      65 | \n      66 |     def reset(self):\n      67 |         \"\"\"Reset the algorithm to initial state.\"\"\"\n      68 |         self.is_initialized = False\n      69 |         self.current_iteration = 0\n      70 | \n>>>   71 |     def supports_constraints(self) -> bool:\n      72 |         \"\"\"Check if algorithm supports constraints.\n      73 | \n      74 |         Returns\n      75 |         -------\n      76 |         bool\n      77 |             True if constraints are supported\n      78 |         \"\"\"\n      79 |         return False\n      80 | \n      81 |     def supports_parallel_evaluation(self) -> bool:\n      82 |         \"\"\"Check if algorithm supports parallel function evaluation.\n      83 | \n      84 |         Returns\n      85 |         -------\n      86 |         bool\n      87 |             True if parallel evaluation is supported\n      88 |         \"\"\"\n      89 |         return False\n      90 | \n      91 |     def get_default_parameters(self) -> Dict[str, Any]:"
+  },
+  {
+    "claim_id": "CODE-IMPL-264",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 81,
+    "context": "Check if algorithm supports parallel function evaluation...",
+    "code": "      61 |             'name': self.name,\n      62 |             'is_initialized': self.is_initialized,\n      63 |             'current_iteration': self.current_iteration\n      64 |         }\n      65 | \n      66 |     def reset(self):\n      67 |         \"\"\"Reset the algorithm to initial state.\"\"\"\n      68 |         self.is_initialized = False\n      69 |         self.current_iteration = 0\n      70 | \n      71 |     def supports_constraints(self) -> bool:\n      72 |         \"\"\"Check if algorithm supports constraints.\n      73 | \n      74 |         Returns\n      75 |         -------\n      76 |         bool\n      77 |             True if constraints are supported\n      78 |         \"\"\"\n      79 |         return False\n      80 | \n>>>   81 |     def supports_parallel_evaluation(self) -> bool:\n      82 |         \"\"\"Check if algorithm supports parallel function evaluation.\n      83 | \n      84 |         Returns\n      85 |         -------\n      86 |         bool\n      87 |             True if parallel evaluation is supported\n      88 |         \"\"\"\n      89 |         return False\n      90 | \n      91 |     def get_default_parameters(self) -> Dict[str, Any]:\n      92 |         \"\"\"Get default algorithm parameters.\n      93 | \n      94 |         Returns\n      95 |         -------\n      96 |         dict\n      97 |             Default parameter values\n      98 |         \"\"\"\n      99 |         return {}\n     100 | \n     101 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-265",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 91,
+    "context": "Get default algorithm parameters...",
+    "code": "      71 |     def supports_constraints(self) -> bool:\n      72 |         \"\"\"Check if algorithm supports constraints.\n      73 | \n      74 |         Returns\n      75 |         -------\n      76 |         bool\n      77 |             True if constraints are supported\n      78 |         \"\"\"\n      79 |         return False\n      80 | \n      81 |     def supports_parallel_evaluation(self) -> bool:\n      82 |         \"\"\"Check if algorithm supports parallel function evaluation.\n      83 | \n      84 |         Returns\n      85 |         -------\n      86 |         bool\n      87 |             True if parallel evaluation is supported\n      88 |         \"\"\"\n      89 |         return False\n      90 | \n>>>   91 |     def get_default_parameters(self) -> Dict[str, Any]:\n      92 |         \"\"\"Get default algorithm parameters.\n      93 | \n      94 |         Returns\n      95 |         -------\n      96 |         dict\n      97 |             Default parameter values\n      98 |         \"\"\"\n      99 |         return {}\n     100 | \n     101 | \n     102 | class PopulationBasedAlgorithm(OptimizationAlgorithm):\n     103 |     \"\"\"Base class for population-based optimization algorithms.\n     104 | \n     105 |     This class extends OptimizationAlgorithm with common functionality\n     106 |     for algorithms that maintain a population of candidate solutions.\n     107 |     \"\"\"\n     108 | \n     109 |     def __init__(self, population_size: int = 50):\n     110 |         \"\"\"Initialize population-based algorithm.\n     111 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-267",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 109,
+    "context": "Initialize population-based algorithm...",
+    "code": "      89 |         return False\n      90 | \n      91 |     def get_default_parameters(self) -> Dict[str, Any]:\n      92 |         \"\"\"Get default algorithm parameters.\n      93 | \n      94 |         Returns\n      95 |         -------\n      96 |         dict\n      97 |             Default parameter values\n      98 |         \"\"\"\n      99 |         return {}\n     100 | \n     101 | \n     102 | class PopulationBasedAlgorithm(OptimizationAlgorithm):\n     103 |     \"\"\"Base class for population-based optimization algorithms.\n     104 | \n     105 |     This class extends OptimizationAlgorithm with common functionality\n     106 |     for algorithms that maintain a population of candidate solutions.\n     107 |     \"\"\"\n     108 | \n>>>  109 |     def __init__(self, population_size: int = 50):\n     110 |         \"\"\"Initialize population-based algorithm.\n     111 | \n     112 |         Parameters\n     113 |         ----------\n     114 |         population_size : int\n     115 |             Size of the population\n     116 |         \"\"\"\n     117 |         super().__init__()\n     118 |         self.population_size = population_size\n     119 |         self.population = None\n     120 |         self.generation = 0\n     121 | \n     122 |     def get_algorithm_info(self) -> Dict[str, Any]:\n     123 |         \"\"\"Get algorithm information including population details.\"\"\"\n     124 |         info = super().get_algorithm_info()\n     125 |         info.update({\n     126 |             'population_size': self.population_size,\n     127 |             'generation': self.generation,\n     128 |             'has_population': self.population is not None\n     129 |         })"
+  },
+  {
+    "claim_id": "CODE-IMPL-269",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 132,
+    "context": "Reset the algorithm including population...",
+    "code": "     112 |         Parameters\n     113 |         ----------\n     114 |         population_size : int\n     115 |             Size of the population\n     116 |         \"\"\"\n     117 |         super().__init__()\n     118 |         self.population_size = population_size\n     119 |         self.population = None\n     120 |         self.generation = 0\n     121 | \n     122 |     def get_algorithm_info(self) -> Dict[str, Any]:\n     123 |         \"\"\"Get algorithm information including population details.\"\"\"\n     124 |         info = super().get_algorithm_info()\n     125 |         info.update({\n     126 |             'population_size': self.population_size,\n     127 |             'generation': self.generation,\n     128 |             'has_population': self.population is not None\n     129 |         })\n     130 |         return info\n     131 | \n>>>  132 |     def reset(self):\n     133 |         \"\"\"Reset the algorithm including population.\"\"\"\n     134 |         super().reset()\n     135 |         self.population = None\n     136 |         self.generation = 0\n     137 | \n     138 |     def supports_parallel_evaluation(self) -> bool:\n     139 |         \"\"\"Population-based algorithms typically support parallel evaluation.\"\"\"\n     140 |         return True\n     141 | \n     142 | \n     143 | class GradientBasedAlgorithm(OptimizationAlgorithm):\n     144 |     \"\"\"Base class for gradient-based optimization algorithms.\n     145 | \n     146 |     This class extends OptimizationAlgorithm with common functionality\n     147 |     for algorithms that use gradient information.\n     148 |     \"\"\"\n     149 | \n     150 |     def __init__(self, gradient_tolerance: float = 1e-6):\n     151 |         \"\"\"Initialize gradient-based algorithm.\n     152 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-270",
+    "file": "src\\optimization\\algorithms\\base.py",
+    "line": 138,
+    "context": "Population-based algorithms typically support parallel evaluation...",
+    "code": "     118 |         self.population_size = population_size\n     119 |         self.population = None\n     120 |         self.generation = 0\n     121 | \n     122 |     def get_algorithm_info(self) -> Dict[str, Any]:\n     123 |         \"\"\"Get algorithm information including population details.\"\"\"\n     124 |         info = super().get_algorithm_info()\n     125 |         info.update({\n     126 |             'population_size': self.population_size,\n     127 |             'generation': self.generation,\n     128 |             'has_population': self.population is not None\n     129 |         })\n     130 |         return info\n     131 | \n     132 |     def reset(self):\n     133 |         \"\"\"Reset the algorithm including population.\"\"\"\n     134 |         super().reset()\n     135 |         self.population = None\n     136 |         self.generation = 0\n     137 | \n>>>  138 |     def supports_parallel_evaluation(self) -> bool:\n     139 |         \"\"\"Population-based algorithms typically support parallel evaluation.\"\"\"\n     140 |         return True\n     141 | \n     142 | \n     143 | class GradientBasedAlgorithm(OptimizationAlgorithm):\n     144 |     \"\"\"Base class for gradient-based optimization algorithms.\n     145 | \n     146 |     This class extends OptimizationAlgorithm with common functionality\n     147 |     for algorithms that use gradient information.\n     148 |     \"\"\"\n     149 | \n     150 |     def __init__(self, gradient_tolerance: float = 1e-6):\n     151 |         \"\"\"Initialize gradient-based algorithm.\n     152 | \n     153 |         Parameters\n     154 |         ----------\n     155 |         gradient_tolerance : float\n     156 |             Tolerance for gradient convergence\n     157 |         \"\"\"\n     158 |         super().__init__()"
+  },
+  {
+    "claim_id": "CODE-IMPL-321",
+    "file": "src\\optimization\\core\\context.py",
+    "line": 166,
+    "context": "Factory method to create optimizers...",
+    "code": "     146 |             'algorithm_name': self.results.get('algorithm_name', 'Unknown'),\n     147 |             'random_seed': self.results.get('random_seed'),\n     148 |             'optimization_result': {\n     149 |                 'success': result.success,\n     150 |                 'status': result.status.value,\n     151 |                 'message': result.message,\n     152 |                 'optimal_value': float(result.fun),\n     153 |                 'optimal_parameters': result.x.tolist(),\n     154 |                 'iterations': result.nit,\n     155 |                 'function_evaluations': result.nfev\n     156 |             },\n     157 |             'convergence_summary': {\n     158 |                 'total_iterations': len(self.iteration_data),\n     159 |                 'best_value_history': [float(data['best_value']) for data in self.iteration_data[-100:]],  # Last 100\n     160 |                 'final_parameters': self.iteration_data[-1]['parameters'].tolist() if self.iteration_data else None\n     161 |             }\n     162 |         }\n     163 | \n     164 |         return summary\n     165 | \n>>>  166 |     def create_optimizer_factory(self, algorithm_name: str, **kwargs) -> Optimizer:\n     167 |         \"\"\"Factory method to create optimizers.\"\"\"\n     168 |         algorithm_name = algorithm_name.lower()\n     169 | \n     170 |         if algorithm_name == 'pso':\n     171 |             from ..algorithms.swarm.pso import ParticleSwarmOptimizer\n     172 |             return ParticleSwarmOptimizer(self.problem.parameter_space, **kwargs)\n     173 | \n     174 |         elif algorithm_name == 'ga':\n     175 |             from ..algorithms.evolutionary.genetic import GeneticAlgorithm\n     176 |             return GeneticAlgorithm(self.problem.parameter_space, **kwargs)\n     177 | \n     178 |         elif algorithm_name == 'de':\n     179 |             from ..algorithms.evolutionary.differential import DifferentialEvolution\n     180 |             return DifferentialEvolution(self.problem.parameter_space, **kwargs)\n     181 | \n     182 |         elif algorithm_name == 'cma_es':\n     183 |             from ..algorithms.evolutionary.cma_es import CMAES\n     184 |             return CMAES(self.problem.parameter_space, **kwargs)\n     185 | \n     186 |         elif algorithm_name == 'nelder_mead':"
+  },
+  {
+    "claim_id": "CODE-IMPL-322",
+    "file": "src\\optimization\\core\\context.py",
+    "line": 197,
+    "context": "Get list of available optimization algorithms...",
+    "code": "     177 | \n     178 |         elif algorithm_name == 'de':\n     179 |             from ..algorithms.evolutionary.differential import DifferentialEvolution\n     180 |             return DifferentialEvolution(self.problem.parameter_space, **kwargs)\n     181 | \n     182 |         elif algorithm_name == 'cma_es':\n     183 |             from ..algorithms.evolutionary.cma_es import CMAES\n     184 |             return CMAES(self.problem.parameter_space, **kwargs)\n     185 | \n     186 |         elif algorithm_name == 'nelder_mead':\n     187 |             from ..algorithms.gradient.simplex import NelderMead\n     188 |             return NelderMead(self.problem.parameter_space, **kwargs)\n     189 | \n     190 |         elif algorithm_name == 'bayesian':\n     191 |             from ..algorithms.bayesian.gaussian_process import BayesianOptimization\n     192 |             return BayesianOptimization(self.problem.parameter_space, **kwargs)\n     193 | \n     194 |         else:\n     195 |             raise ValueError(f\"Unknown algorithm: {algorithm_name}\")\n     196 | \n>>>  197 |     def get_available_algorithms(self) -> List[str]:\n     198 |         \"\"\"Get list of available optimization algorithms.\"\"\"\n     199 |         return [\n     200 |             'pso',           # Particle Swarm Optimization\n     201 |             'ga',            # Genetic Algorithm\n     202 |             'de',            # Differential Evolution\n     203 |             'cma_es',        # CMA-ES\n     204 |             'nelder_mead',   # Nelder-Mead Simplex\n     205 |             'bayesian'       # Bayesian Optimization\n     206 |         ]\n     207 | \n     208 | \n     209 | # Convenience function for quick optimization\n     210 | def optimize(problem: OptimizationProblem,\n     211 |             algorithm: str = 'pso',\n     212 |             random_seed: Optional[int] = None,\n     213 |             **kwargs) -> 'OptimizationResult':\n     214 |     \"\"\"Quick optimization function.\n     215 | \n     216 |     Parameters\n     217 |     ----------"
+  },
+  {
+    "claim_id": "CODE-IMPL-323",
+    "file": "src\\optimization\\core\\context.py",
+    "line": 210,
+    "context": "Quick optimization function...",
+    "code": "     190 |         elif algorithm_name == 'bayesian':\n     191 |             from ..algorithms.bayesian.gaussian_process import BayesianOptimization\n     192 |             return BayesianOptimization(self.problem.parameter_space, **kwargs)\n     193 | \n     194 |         else:\n     195 |             raise ValueError(f\"Unknown algorithm: {algorithm_name}\")\n     196 | \n     197 |     def get_available_algorithms(self) -> List[str]:\n     198 |         \"\"\"Get list of available optimization algorithms.\"\"\"\n     199 |         return [\n     200 |             'pso',           # Particle Swarm Optimization\n     201 |             'ga',            # Genetic Algorithm\n     202 |             'de',            # Differential Evolution\n     203 |             'cma_es',        # CMA-ES\n     204 |             'nelder_mead',   # Nelder-Mead Simplex\n     205 |             'bayesian'       # Bayesian Optimization\n     206 |         ]\n     207 | \n     208 | \n     209 | # Convenience function for quick optimization\n>>>  210 | def optimize(problem: OptimizationProblem,\n     211 |             algorithm: str = 'pso',\n     212 |             random_seed: Optional[int] = None,\n     213 |             **kwargs) -> 'OptimizationResult':\n     214 |     \"\"\"Quick optimization function.\n     215 | \n     216 |     Parameters\n     217 |     ----------\n     218 |     problem : OptimizationProblem\n     219 |         Problem to optimize\n     220 |     algorithm : str, optional\n     221 |         Algorithm name (default: 'pso')\n     222 |     random_seed : int, optional\n     223 |         Random seed\n     224 |     **kwargs\n     225 |         Algorithm-specific parameters\n     226 | \n     227 |     Returns\n     228 |     -------\n     229 |     OptimizationResult\n     230 |         Optimization results"
+  },
+  {
+    "claim_id": "CODE-IMPL-325",
+    "file": "src\\optimization\\core\\interfaces.py",
+    "line": 274,
+    "context": "parameter_space : ParameterSpace...",
+    "code": "     254 |             return -values\n     255 |         return values\n     256 | \n     257 |     def check_constraints(self, parameters: np.ndarray) -> Tuple[bool, List[float]]:\n     258 |         \"\"\"Check all constraints.\"\"\"\n     259 |         violations = []\n     260 |         satisfied = True\n     261 | \n     262 |         for constraint in self.constraints:\n     263 |             violation = constraint.evaluate(parameters)\n     264 |             violations.append(violation)\n     265 |             if not constraint.is_satisfied(parameters):\n     266 |                 satisfied = False\n     267 | \n     268 |         return satisfied, violations\n     269 | \n     270 | \n     271 | class Optimizer(ABC):\n     272 |     \"\"\"Abstract base class for optimization algorithms.\"\"\"\n     273 | \n>>>  274 |     def __init__(self, parameter_space: ParameterSpace, **kwargs):\n     275 |         \"\"\"Initialize optimizer.\n     276 | \n     277 |         Parameters\n     278 |         ----------\n     279 |         parameter_space : ParameterSpace\n     280 |             Parameter space to optimize over\n     281 |         **kwargs\n     282 |             Algorithm-specific parameters\n     283 |         \"\"\"\n     284 |         self.parameter_space = parameter_space\n     285 |         self.convergence_monitor = None\n     286 |         self._callback = None\n     287 | \n     288 |     @abstractmethod\n     289 |     def optimize(self, problem: OptimizationProblem, **kwargs) -> OptimizationResult:\n     290 |         \"\"\"Perform optimization.\n     291 | \n     292 |         Parameters\n     293 |         ----------\n     294 |         problem : OptimizationProblem"
+  },
+  {
+    "claim_id": "CODE-IMPL-326",
+    "file": "src\\optimization\\core\\interfaces.py",
+    "line": 289,
+    "context": "problem : OptimizationProblem...",
+    "code": "     269 | \n     270 | \n     271 | class Optimizer(ABC):\n     272 |     \"\"\"Abstract base class for optimization algorithms.\"\"\"\n     273 | \n     274 |     def __init__(self, parameter_space: ParameterSpace, **kwargs):\n     275 |         \"\"\"Initialize optimizer.\n     276 | \n     277 |         Parameters\n     278 |         ----------\n     279 |         parameter_space : ParameterSpace\n     280 |             Parameter space to optimize over\n     281 |         **kwargs\n     282 |             Algorithm-specific parameters\n     283 |         \"\"\"\n     284 |         self.parameter_space = parameter_space\n     285 |         self.convergence_monitor = None\n     286 |         self._callback = None\n     287 | \n     288 |     @abstractmethod\n>>>  289 |     def optimize(self, problem: OptimizationProblem, **kwargs) -> OptimizationResult:\n     290 |         \"\"\"Perform optimization.\n     291 | \n     292 |         Parameters\n     293 |         ----------\n     294 |         problem : OptimizationProblem\n     295 |             Problem to optimize\n     296 |         **kwargs\n     297 |             Algorithm-specific options\n     298 | \n     299 |         Returns\n     300 |         -------\n     301 |         OptimizationResult\n     302 |             Optimization results\n     303 |         \"\"\"\n     304 |         pass\n     305 | \n     306 |     def set_convergence_monitor(self, monitor: 'ConvergenceMonitor') -> None:\n     307 |         \"\"\"Set convergence monitor.\"\"\"\n     308 |         self.convergence_monitor = monitor\n     309 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-327",
+    "file": "src\\optimization\\core\\interfaces.py",
+    "line": 316,
+    "context": "Name of the optimization algorithm...",
+    "code": "     296 |         **kwargs\n     297 |             Algorithm-specific options\n     298 | \n     299 |         Returns\n     300 |         -------\n     301 |         OptimizationResult\n     302 |             Optimization results\n     303 |         \"\"\"\n     304 |         pass\n     305 | \n     306 |     def set_convergence_monitor(self, monitor: 'ConvergenceMonitor') -> None:\n     307 |         \"\"\"Set convergence monitor.\"\"\"\n     308 |         self.convergence_monitor = monitor\n     309 | \n     310 |     def set_callback(self, callback: Callable) -> None:\n     311 |         \"\"\"Set iteration callback function.\"\"\"\n     312 |         self._callback = callback\n     313 | \n     314 |     @property\n     315 |     @abstractmethod\n>>>  316 |     def algorithm_name(self) -> str:\n     317 |         \"\"\"Name of the optimization algorithm.\"\"\"\n     318 |         pass\n     319 | \n     320 |     @property\n     321 |     @abstractmethod\n     322 |     def supports_constraints(self) -> bool:\n     323 |         \"\"\"Whether algorithm supports constraints.\"\"\"\n     324 |         pass\n     325 | \n     326 |     @property\n     327 |     @abstractmethod\n     328 |     def supports_bounds(self) -> bool:\n     329 |         \"\"\"Whether algorithm supports parameter bounds.\"\"\"\n     330 |         pass\n     331 | \n     332 |     @property\n     333 |     @abstractmethod\n     334 |     def is_population_based(self) -> bool:\n     335 |         \"\"\"Whether algorithm uses a population of candidates.\"\"\"\n     336 |         pass"
+  },
+  {
+    "claim_id": "CODE-IMPL-328",
+    "file": "src\\optimization\\core\\interfaces.py",
+    "line": 322,
+    "context": "Whether algorithm supports constraints...",
+    "code": "     302 |             Optimization results\n     303 |         \"\"\"\n     304 |         pass\n     305 | \n     306 |     def set_convergence_monitor(self, monitor: 'ConvergenceMonitor') -> None:\n     307 |         \"\"\"Set convergence monitor.\"\"\"\n     308 |         self.convergence_monitor = monitor\n     309 | \n     310 |     def set_callback(self, callback: Callable) -> None:\n     311 |         \"\"\"Set iteration callback function.\"\"\"\n     312 |         self._callback = callback\n     313 | \n     314 |     @property\n     315 |     @abstractmethod\n     316 |     def algorithm_name(self) -> str:\n     317 |         \"\"\"Name of the optimization algorithm.\"\"\"\n     318 |         pass\n     319 | \n     320 |     @property\n     321 |     @abstractmethod\n>>>  322 |     def supports_constraints(self) -> bool:\n     323 |         \"\"\"Whether algorithm supports constraints.\"\"\"\n     324 |         pass\n     325 | \n     326 |     @property\n     327 |     @abstractmethod\n     328 |     def supports_bounds(self) -> bool:\n     329 |         \"\"\"Whether algorithm supports parameter bounds.\"\"\"\n     330 |         pass\n     331 | \n     332 |     @property\n     333 |     @abstractmethod\n     334 |     def is_population_based(self) -> bool:\n     335 |         \"\"\"Whether algorithm uses a population of candidates.\"\"\"\n     336 |         pass\n     337 | \n     338 | \n     339 | class ConvergenceMonitor(ABC):\n     340 |     \"\"\"Abstract base class for convergence monitoring.\"\"\"\n     341 | \n     342 |     @abstractmethod"
+  },
+  {
+    "claim_id": "CODE-IMPL-329",
+    "file": "src\\optimization\\core\\interfaces.py",
+    "line": 328,
+    "context": "Whether algorithm supports parameter bounds...",
+    "code": "     308 |         self.convergence_monitor = monitor\n     309 | \n     310 |     def set_callback(self, callback: Callable) -> None:\n     311 |         \"\"\"Set iteration callback function.\"\"\"\n     312 |         self._callback = callback\n     313 | \n     314 |     @property\n     315 |     @abstractmethod\n     316 |     def algorithm_name(self) -> str:\n     317 |         \"\"\"Name of the optimization algorithm.\"\"\"\n     318 |         pass\n     319 | \n     320 |     @property\n     321 |     @abstractmethod\n     322 |     def supports_constraints(self) -> bool:\n     323 |         \"\"\"Whether algorithm supports constraints.\"\"\"\n     324 |         pass\n     325 | \n     326 |     @property\n     327 |     @abstractmethod\n>>>  328 |     def supports_bounds(self) -> bool:\n     329 |         \"\"\"Whether algorithm supports parameter bounds.\"\"\"\n     330 |         pass\n     331 | \n     332 |     @property\n     333 |     @abstractmethod\n     334 |     def is_population_based(self) -> bool:\n     335 |         \"\"\"Whether algorithm uses a population of candidates.\"\"\"\n     336 |         pass\n     337 | \n     338 | \n     339 | class ConvergenceMonitor(ABC):\n     340 |     \"\"\"Abstract base class for convergence monitoring.\"\"\"\n     341 | \n     342 |     @abstractmethod\n     343 |     def update(self, iteration: int, best_value: float, parameters: np.ndarray, **kwargs) -> None:\n     344 |         \"\"\"Update convergence monitor with new iteration data.\"\"\"\n     345 |         pass\n     346 | \n     347 |     @abstractmethod\n     348 |     def check_convergence(self) -> Tuple[bool, ConvergenceStatus, str]:"
+  },
+  {
+    "claim_id": "CODE-IMPL-330",
+    "file": "src\\optimization\\core\\interfaces.py",
+    "line": 334,
+    "context": "uses a population of candidates...",
+    "code": "     314 |     @property\n     315 |     @abstractmethod\n     316 |     def algorithm_name(self) -> str:\n     317 |         \"\"\"Name of the optimization algorithm.\"\"\"\n     318 |         pass\n     319 | \n     320 |     @property\n     321 |     @abstractmethod\n     322 |     def supports_constraints(self) -> bool:\n     323 |         \"\"\"Whether algorithm supports constraints.\"\"\"\n     324 |         pass\n     325 | \n     326 |     @property\n     327 |     @abstractmethod\n     328 |     def supports_bounds(self) -> bool:\n     329 |         \"\"\"Whether algorithm supports parameter bounds.\"\"\"\n     330 |         pass\n     331 | \n     332 |     @property\n     333 |     @abstractmethod\n>>>  334 |     def is_population_based(self) -> bool:\n     335 |         \"\"\"Whether algorithm uses a population of candidates.\"\"\"\n     336 |         pass\n     337 | \n     338 | \n     339 | class ConvergenceMonitor(ABC):\n     340 |     \"\"\"Abstract base class for convergence monitoring.\"\"\"\n     341 | \n     342 |     @abstractmethod\n     343 |     def update(self, iteration: int, best_value: float, parameters: np.ndarray, **kwargs) -> None:\n     344 |         \"\"\"Update convergence monitor with new iteration data.\"\"\"\n     345 |         pass\n     346 | \n     347 |     @abstractmethod\n     348 |     def check_convergence(self) -> Tuple[bool, ConvergenceStatus, str]:\n     349 |         \"\"\"Check if convergence criteria are met.\n     350 | \n     351 |         Returns\n     352 |         -------\n     353 |         tuple\n     354 |             (converged, status, message)"
+  },
+  {
+    "claim_id": "CODE-IMPL-331",
+    "file": "src\\optimization\\core\\interfaces.py",
+    "line": 399,
+    "context": "Update population based on fitness values...",
+    "code": "     379 |             Parameter space\n     380 |         population_size : int\n     381 |             Size of population\n     382 |         **kwargs\n     383 |             Additional parameters\n     384 |         \"\"\"\n     385 |         super().__init__(parameter_space, **kwargs)\n     386 |         self.population_size = population_size\n     387 | \n     388 |     @property\n     389 |     def is_population_based(self) -> bool:\n     390 |         \"\"\"Population-based optimizers return True.\"\"\"\n     391 |         return True\n     392 | \n     393 |     @abstractmethod\n     394 |     def initialize_population(self, rng: np.random.Generator) -> np.ndarray:\n     395 |         \"\"\"Initialize population of parameter vectors.\"\"\"\n     396 |         pass\n     397 | \n     398 |     @abstractmethod\n>>>  399 |     def update_population(self, population: np.ndarray, fitness: np.ndarray, **kwargs) -> np.ndarray:\n     400 |         \"\"\"Update population based on fitness values.\"\"\"\n     401 |         pass"
+  },
+  {
+    "claim_id": "CODE-IMPL-332",
+    "file": "src\\optimization\\core\\problem.py",
+    "line": 149,
+    "context": "Initialize multi-objective problem...",
+    "code": "     129 | \n     130 |         # Run simulation\n     131 |         sim_config = {**self.simulation_config, **kwargs}\n     132 |         times, states, controls = run_simulation(\n     133 |             controller=controller,\n     134 |             dynamics_model=dynamics_model,\n     135 |             **sim_config\n     136 |         )\n     137 | \n     138 |         return {\n     139 |             'times': times,\n     140 |             'states': states,\n     141 |             'controls': controls,\n     142 |             'controller': controller\n     143 |         }\n     144 | \n     145 | \n     146 | class MultiObjectiveProblem(OptimizationProblem):\n     147 |     \"\"\"Multi-objective optimization problem.\"\"\"\n     148 | \n>>>  149 |     def __init__(self,\n     150 |                  objectives: List[ObjectiveFunction],\n     151 |                  parameter_space: ParameterSpace,\n     152 |                  weights: Optional[np.ndarray] = None,\n     153 |                  optimization_type: OptimizationType = OptimizationType.MINIMIZATION,\n     154 |                  constraints: Optional[List[Constraint]] = None,\n     155 |                  name: str = \"Multi-Objective Problem\"):\n     156 |         \"\"\"Initialize multi-objective problem.\n     157 | \n     158 |         Parameters\n     159 |         ----------\n     160 |         objectives : List[ObjectiveFunction]\n     161 |             List of objective functions\n     162 |         parameter_space : ParameterSpace\n     163 |             Parameter space\n     164 |         weights : np.ndarray, optional\n     165 |             Weights for weighted sum approach\n     166 |         optimization_type : OptimizationType, optional\n     167 |             Optimization type\n     168 |         constraints : List[Constraint], optional\n     169 |             Constraints"
+  },
+  {
+    "claim_id": "CODE-IMPL-334",
+    "file": "src\\optimization\\objectives\\base.py",
+    "line": 141,
+    "context": "Initialize composite objective...",
+    "code": "     121 |         return float(value)\n     122 | \n     123 |     def evaluate_batch(self, parameters: np.ndarray, **kwargs) -> np.ndarray:\n     124 |         \"\"\"Evaluate objective for batch of parameters.\"\"\"\n     125 |         values = self._compute_analytical_objective(parameters)\n     126 |         self._evaluation_count += parameters.shape[0]\n     127 | \n     128 |         if np.isscalar(values):\n     129 |             return np.full(parameters.shape[0], values)\n     130 |         return np.asarray(values)\n     131 | \n     132 |     @property\n     133 |     def is_vectorized(self) -> bool:\n     134 |         \"\"\"Analytical objectives can be vectorized.\"\"\"\n     135 |         return True\n     136 | \n     137 | \n     138 | class CompositeObjective(ObjectiveFunction):\n     139 |     \"\"\"Composite objective combining multiple objectives.\"\"\"\n     140 | \n>>>  141 |     def __init__(self,\n     142 |                  objectives: List[ObjectiveFunction],\n     143 |                  weights: Optional[np.ndarray] = None,\n     144 |                  combination_method: str = 'weighted_sum'):\n     145 |         \"\"\"Initialize composite objective.\n     146 | \n     147 |         Parameters\n     148 |         ----------\n     149 |         objectives : List[ObjectiveFunction]\n     150 |             List of objective functions to combine\n     151 |         weights : np.ndarray, optional\n     152 |             Weights for each objective (default: equal weights)\n     153 |         combination_method : str, optional\n     154 |             Method to combine objectives ('weighted_sum', 'product', 'max')\n     155 |         \"\"\"\n     156 |         self.objectives = objectives\n     157 |         self.weights = weights if weights is not None else np.ones(len(objectives)) / len(objectives)\n     158 |         self.combination_method = combination_method\n     159 |         self._evaluation_count = 0\n     160 | \n     161 |         if len(self.weights) != len(self.objectives):"
+  },
+  {
+    "claim_id": "CODE-IMPL-335",
+    "file": "src\\optimization\\objectives\\base.py",
+    "line": 187,
+    "context": "Combine objective values according to method...",
+    "code": "     167 |         combined_value = self._combine_objectives(values)\n     168 |         self._evaluation_count += 1\n     169 |         return combined_value\n     170 | \n     171 |     def evaluate_batch(self, parameters: np.ndarray, **kwargs) -> np.ndarray:\n     172 |         \"\"\"Evaluate composite objective for batch.\"\"\"\n     173 |         batch_size = parameters.shape[0]\n     174 |         all_values = np.zeros((batch_size, len(self.objectives)))\n     175 | \n     176 |         for i, obj in enumerate(self.objectives):\n     177 |             all_values[:, i] = obj.evaluate_batch(parameters, **kwargs)\n     178 | \n     179 |         combined_values = np.array([\n     180 |             self._combine_objectives(all_values[j])\n     181 |             for j in range(batch_size)\n     182 |         ])\n     183 | \n     184 |         self._evaluation_count += batch_size\n     185 |         return combined_values\n     186 | \n>>>  187 |     def _combine_objectives(self, values: List[float]) -> float:\n     188 |         \"\"\"Combine objective values according to method.\"\"\"\n     189 |         values = np.array(values)\n     190 | \n     191 |         if self.combination_method == 'weighted_sum':\n     192 |             return float(np.sum(self.weights * values))\n     193 | \n     194 |         elif self.combination_method == 'product':\n     195 |             # Weighted geometric mean\n     196 |             return float(np.prod(values ** self.weights))\n     197 | \n     198 |         elif self.combination_method == 'max':\n     199 |             # Weighted maximum\n     200 |             return float(np.max(self.weights * values))\n     201 | \n     202 |         else:\n     203 |             raise ValueError(f\"Unknown combination method: {self.combination_method}\")\n     204 | \n     205 |     @property\n     206 |     def is_vectorized(self) -> bool:\n     207 |         \"\"\"Composite objective is vectorized if all components are.\"\"\""
+  },
+  {
+    "claim_id": "CODE-IMPL-336",
+    "file": "src\\optimization\\objectives\\control\\robustness.py",
+    "line": 75,
+    "context": "Compute robustness objective...",
+    "code": "      55 |             External disturbance magnitude\n      56 |         reference_trajectory : np.ndarray, optional\n      57 |             Reference trajectory for tracking\n      58 |         \"\"\"\n      59 |         super().__init__(simulation_config, controller_factory, reference_trajectory)\n      60 | \n      61 |         self.robustness_metric = robustness_metric.lower()\n      62 |         self.n_variations = n_variations\n      63 |         self.parameter_uncertainty = parameter_uncertainty\n      64 |         self.noise_level = noise_level\n      65 |         self.disturbance_magnitude = disturbance_magnitude\n      66 | \n      67 |         # Validate robustness metric\n      68 |         valid_metrics = ['monte_carlo', 'worst_case', 'sensitivity', 'h_infinity', 'composite']\n      69 |         if self.robustness_metric not in valid_metrics:\n      70 |             raise ValueError(f\"robustness_metric must be one of {valid_metrics}\")\n      71 | \n      72 |         # Store nominal performance for comparison\n      73 |         self._nominal_performance = None\n      74 | \n>>>   75 |     def _compute_objective_from_simulation(self,\n      76 |                                          times: np.ndarray,\n      77 |                                          states: np.ndarray,\n      78 |                                          controls: np.ndarray,\n      79 |                                          **kwargs) -> float:\n      80 |         \"\"\"Compute robustness objective.\n      81 | \n      82 |         This method evaluates robustness by running multiple simulations\n      83 |         with varied parameters and computing robustness metrics.\n      84 |         \"\"\"\n      85 |         # Get controller parameters from kwargs or assume they're the optimization variables\n      86 |         controller_params = kwargs.get('controller_parameters', None)\n      87 | \n      88 |         if controller_params is None:\n      89 |             # Use the simulation results as nominal case\n      90 |             return self._compute_robustness_from_results(times, states, controls)\n      91 | \n      92 |         if self.robustness_metric == 'monte_carlo':\n      93 |             return self._compute_monte_carlo_robustness(controller_params)\n      94 | \n      95 |         elif self.robustness_metric == 'worst_case':"
+  },
+  {
+    "claim_id": "CODE-IMPL-339",
+    "file": "src\\optimization\\objectives\\control\\tracking.py",
+    "line": 220,
+    "context": "Objective based on frequency response characteristics...",
+    "code": "     200 |         last_outside_index = np.where(outside_band)[0][-1]\n     201 |         return times[last_outside_index]\n     202 | \n     203 |     def _compute_overshoot(self, output: np.ndarray) -> float:\n     204 |         \"\"\"Compute maximum overshoot percentage.\"\"\"\n     205 |         final_value = output[-1]\n     206 |         if final_value == 0:\n     207 |             return 0.0\n     208 | \n     209 |         max_value = np.max(output)\n     210 |         overshoot = (max_value - final_value) / abs(final_value) * 100\n     211 |         return max(0.0, overshoot)\n     212 | \n     213 |     def _compute_steady_state_error(self, output: np.ndarray) -> float:\n     214 |         \"\"\"Compute steady-state error.\"\"\"\n     215 |         final_value = output[-1]\n     216 |         desired_value = self.step_amplitude\n     217 |         return abs(desired_value - final_value)\n     218 | \n     219 | \n>>>  220 | class FrequencyResponseObjective(SimulationBasedObjective):\n     221 |     \"\"\"Objective based on frequency response characteristics.\"\"\"\n     222 | \n     223 |     def __init__(self,\n     224 |                  simulation_config: Dict[str, Any],\n     225 |                  controller_factory: Callable,\n     226 |                  frequency_range: np.ndarray,\n     227 |                  desired_bandwidth: Optional[float] = None,\n     228 |                  desired_phase_margin: Optional[float] = None,\n     229 |                  desired_gain_margin: Optional[float] = None):\n     230 |         \"\"\"Initialize frequency response objective.\n     231 | \n     232 |         Parameters\n     233 |         ----------\n     234 |         simulation_config : dict\n     235 |             Simulation configuration\n     236 |         controller_factory : callable\n     237 |             Controller factory function\n     238 |         frequency_range : np.ndarray\n     239 |             Frequency range for analysis\n     240 |         desired_bandwidth : float, optional"
+  },
+  {
+    "claim_id": "CODE-IMPL-340",
+    "file": "src\\optimization\\objectives\\multi\\pareto.py",
+    "line": 18,
+    "context": "Multi-objective optimization using Pareto dominance...",
+    "code": "       1 | #======================================================================================\\\\\\\n       2 | #==================== src/optimization/objectives/multi/pareto.py =====================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"Pareto-based multi-objective optimization.\"\"\"\n       6 | \n       7 | from __future__ import annotations\n       8 | \n       9 | from typing import Any, Dict, List, Optional, Union, Callable, Tuple\n      10 | import numpy as np\n      11 | import warnings\n      12 | \n      13 | from ..base import SimulationBasedObjective\n      14 | from ...core.interfaces import ObjectiveFunction\n      15 | from src.utils.numerical_stability import EPSILON_DIV\n      16 | \n      17 | \n>>>   18 | class ParetoObjective(SimulationBasedObjective):\n      19 |     \"\"\"Multi-objective optimization using Pareto dominance.\n      20 | \n      21 |     This objective handles true multi-objective optimization by maintaining\n      22 |     a Pareto frontier of non-dominated solutions. Unlike weighted sum approaches,\n      23 |     this can find solutions on non-convex portions of the Pareto frontier.\n      24 | \n      25 |     The objective returns a composite metric but also maintains detailed\n      26 |     Pareto analysis for optimization algorithms that can handle it.\n      27 |     \"\"\"\n      28 | \n      29 |     def __init__(self,\n      30 |                  simulation_config: Dict[str, Any],\n      31 |                  controller_factory: Callable,\n      32 |                  objectives: List[ObjectiveFunction],\n      33 |                  scalarization_method: str = 'hypervolume',\n      34 |                  reference_point: Optional[List[float]] = None,\n      35 |                  normalization: str = 'adaptive',\n      36 |                  reference_trajectory: Optional[np.ndarray] = None):\n      37 |         \"\"\"Initialize Pareto multi-objective.\n      38 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-341",
+    "file": "src\\optimization\\objectives\\multi\\pareto.py",
+    "line": 29,
+    "context": "Initialize Pareto multi-objective...",
+    "code": "       9 | from typing import Any, Dict, List, Optional, Union, Callable, Tuple\n      10 | import numpy as np\n      11 | import warnings\n      12 | \n      13 | from ..base import SimulationBasedObjective\n      14 | from ...core.interfaces import ObjectiveFunction\n      15 | from src.utils.numerical_stability import EPSILON_DIV\n      16 | \n      17 | \n      18 | class ParetoObjective(SimulationBasedObjective):\n      19 |     \"\"\"Multi-objective optimization using Pareto dominance.\n      20 | \n      21 |     This objective handles true multi-objective optimization by maintaining\n      22 |     a Pareto frontier of non-dominated solutions. Unlike weighted sum approaches,\n      23 |     this can find solutions on non-convex portions of the Pareto frontier.\n      24 | \n      25 |     The objective returns a composite metric but also maintains detailed\n      26 |     Pareto analysis for optimization algorithms that can handle it.\n      27 |     \"\"\"\n      28 | \n>>>   29 |     def __init__(self,\n      30 |                  simulation_config: Dict[str, Any],\n      31 |                  controller_factory: Callable,\n      32 |                  objectives: List[ObjectiveFunction],\n      33 |                  scalarization_method: str = 'hypervolume',\n      34 |                  reference_point: Optional[List[float]] = None,\n      35 |                  normalization: str = 'adaptive',\n      36 |                  reference_trajectory: Optional[np.ndarray] = None):\n      37 |         \"\"\"Initialize Pareto multi-objective.\n      38 | \n      39 |         Parameters\n      40 |         ----------\n      41 |         simulation_config : dict\n      42 |             Simulation configuration parameters\n      43 |         controller_factory : callable\n      44 |             Function to create controller from parameters\n      45 |         objectives : list of ObjectiveFunction\n      46 |             List of objective functions to optimize\n      47 |         scalarization_method : str, default='hypervolume'\n      48 |             Method to convert Pareto metrics to scalar: 'hypervolume', 'crowding', 'epsilon'\n      49 |         reference_point : list of float, optional"
+  },
+  {
+    "claim_id": "CODE-IMPL-342",
+    "file": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+    "line": 18,
+    "context": "Multi-objective optimization using weighted sum scalarization...",
+    "code": "       1 | #======================================================================================\\\\\\\n       2 | #================= src/optimization/objectives/multi/weighted_sum.py ==================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"Weighted sum multi-objective optimization.\"\"\"\n       6 | \n       7 | from __future__ import annotations\n       8 | \n       9 | from typing import Any, Dict, List, Optional, Union, Callable\n      10 | import numpy as np\n      11 | import warnings\n      12 | \n      13 | from ..base import SimulationBasedObjective\n      14 | from ...core.interfaces import ObjectiveFunction\n      15 | from src.utils.numerical_stability import EPSILON_DIV\n      16 | \n      17 | \n>>>   18 | class WeightedSumObjective(SimulationBasedObjective):\n      19 |     \"\"\"Multi-objective optimization using weighted sum scalarization.\n      20 | \n      21 |     This objective combines multiple objectives into a single scalar objective\n      22 |     using weighted sum: f(x) = Σ(wi * fi(x))\n      23 | \n      24 |     The weighted sum approach is simple but has limitations:\n      25 |     - Cannot find non-convex portions of Pareto frontier\n      26 |     - Weight selection can be difficult\n      27 |     - Scale differences between objectives matter\n      28 |     \"\"\"\n      29 | \n      30 |     def __init__(self,\n      31 |                  simulation_config: Dict[str, Any],\n      32 |                  controller_factory: Callable,\n      33 |                  objectives: List[ObjectiveFunction],\n      34 |                  weights: Optional[List[float]] = None,\n      35 |                  normalization: str = 'none',\n      36 |                  reference_values: Optional[List[float]] = None,\n      37 |                  reference_trajectory: Optional[np.ndarray] = None):\n      38 |         \"\"\"Initialize weighted sum multi-objective."
+  },
+  {
+    "claim_id": "CODE-IMPL-343",
+    "file": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+    "line": 30,
+    "context": "Initialize weighted sum multi-objective...",
+    "code": "      10 | import numpy as np\n      11 | import warnings\n      12 | \n      13 | from ..base import SimulationBasedObjective\n      14 | from ...core.interfaces import ObjectiveFunction\n      15 | from src.utils.numerical_stability import EPSILON_DIV\n      16 | \n      17 | \n      18 | class WeightedSumObjective(SimulationBasedObjective):\n      19 |     \"\"\"Multi-objective optimization using weighted sum scalarization.\n      20 | \n      21 |     This objective combines multiple objectives into a single scalar objective\n      22 |     using weighted sum: f(x) = Σ(wi * fi(x))\n      23 | \n      24 |     The weighted sum approach is simple but has limitations:\n      25 |     - Cannot find non-convex portions of Pareto frontier\n      26 |     - Weight selection can be difficult\n      27 |     - Scale differences between objectives matter\n      28 |     \"\"\"\n      29 | \n>>>   30 |     def __init__(self,\n      31 |                  simulation_config: Dict[str, Any],\n      32 |                  controller_factory: Callable,\n      33 |                  objectives: List[ObjectiveFunction],\n      34 |                  weights: Optional[List[float]] = None,\n      35 |                  normalization: str = 'none',\n      36 |                  reference_values: Optional[List[float]] = None,\n      37 |                  reference_trajectory: Optional[np.ndarray] = None):\n      38 |         \"\"\"Initialize weighted sum multi-objective.\n      39 | \n      40 |         Parameters\n      41 |         ----------\n      42 |         simulation_config : dict\n      43 |             Simulation configuration parameters\n      44 |         controller_factory : callable\n      45 |             Function to create controller from parameters\n      46 |         objectives : list of ObjectiveFunction\n      47 |             List of objective functions to combine\n      48 |         weights : list of float, optional\n      49 |             Weights for each objective (default: equal weights)\n      50 |         normalization : str, default='none'"
+  },
+  {
+    "claim_id": "CODE-IMPL-344",
+    "file": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+    "line": 133,
+    "context": "Normalize objective values based on selected method...",
+    "code": "     113 |             except Exception as e:\n     114 |                 warnings.warn(f\"Evaluation of objective {i} failed: {e}\")\n     115 |                 objective_values.append(float('inf'))  # High penalty for failed objectives\n     116 | \n     117 |         objective_values = np.array(objective_values)\n     118 | \n     119 |         # Store for adaptive normalization\n     120 |         if self.normalization == 'adaptive':\n     121 |             self._evaluation_history.append(objective_values.copy())\n     122 |             if len(self._evaluation_history) > 1000:  # Limit history size\n     123 |                 self._evaluation_history = self._evaluation_history[-1000:]\n     124 | \n     125 |         # Normalize objectives\n     126 |         normalized_values = self._normalize_objectives(objective_values)\n     127 | \n     128 |         # Compute weighted sum\n     129 |         weighted_sum = np.dot(self.weights, normalized_values)\n     130 | \n     131 |         return weighted_sum\n     132 | \n>>>  133 |     def _normalize_objectives(self, objective_values: np.ndarray) -> np.ndarray:\n     134 |         \"\"\"Normalize objective values based on selected method.\"\"\"\n     135 |         if self.normalization == 'none':\n     136 |             return objective_values\n     137 | \n     138 |         elif self.normalization == 'reference':\n     139 |             if self.reference_values is None:\n     140 |                 warnings.warn(\"Reference normalization requested but no reference values provided\")\n     141 |                 return objective_values\n     142 | \n     143 |             ref_values = np.array(self.reference_values)\n     144 |             if len(ref_values) != self.n_objectives:\n     145 |                 warnings.warn(\"Number of reference values does not match number of objectives\")\n     146 |                 return objective_values\n     147 | \n     148 |             # Normalize by reference values\n     149 |             normalized = np.zeros_like(objective_values)\n     150 |             for i in range(self.n_objectives):\n     151 |                 # Issue #13: Standardized division protection\n     152 |                 if abs(ref_values[i]) > EPSILON_DIV:\n     153 |                     normalized[i] = objective_values[i] / ref_values[i]"
+  },
+  {
+    "claim_id": "CODE-IMPL-370",
+    "file": "src\\plant\\core\\dynamics.py",
+    "line": 1,
+    "context": "Plant core dynamics compatibility module...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #============================= src/plant/core/dynamics.py =============================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Plant core dynamics compatibility module.\n       7 | \n       8 | This module provides backward compatibility for test modules that expect\n       9 | plant dynamics components at src.plant.core.dynamics. All functionality\n      10 | is re-exported from the actual implementation locations.\n      11 | \"\"\"\n      12 | \n      13 | # Import all dynamics functionality from existing locations\n      14 | from ...core.dynamics import *\n      15 | from ..models.dynamics import *\n      16 | \n      17 | # Also import from specific model implementations\n      18 | try:\n      19 |     from ..models.full.dynamics import *\n      20 | except ImportError:\n      21 |     pass"
+  },
+  {
+    "claim_id": "CODE-IMPL-375",
+    "file": "src\\plant\\core\\physics_matrices.py",
+    "line": 248,
+    "context": "Simplified physics matrices for computational efficiency...",
+    "code": "     228 |     @njit\n     229 |     def _compute_gravity_vector_numba(\n     230 |         theta1: float, theta2: float,\n     231 |         m1: float, m2: float,\n     232 |         L1: float, Lc1: float, Lc2: float, g: float\n     233 |     ) -> np.ndarray:\n     234 |         \"\"\"JIT-compiled gravity vector computation.\"\"\"\n     235 | \n     236 |         s1 = np.sin(theta1)\n     237 |         s2 = np.sin(theta2)\n     238 | \n     239 |         G1 = 0.0\n     240 |         G2 = -(m1 * Lc1 + m2 * L1) * g * s1 - m2 * Lc2 * g * s2\n     241 |         G3 = -m2 * Lc2 * g * s2\n     242 | \n     243 |         G = np.array([G1, G2, G3])\n     244 | \n     245 |         return G\n     246 | \n     247 | \n>>>  248 | class SimplifiedDIPPhysicsMatrices(DIPPhysicsMatrices):\n     249 |     \"\"\"\n     250 |     Simplified physics matrices for computational efficiency.\n     251 | \n     252 |     Uses approximations and simplifications suitable for control design\n     253 |     while maintaining essential dynamics characteristics.\n     254 |     \"\"\"\n     255 | \n     256 |     def compute_inertia_matrix(self, state: np.ndarray) -> np.ndarray:\n     257 |         \"\"\"Simplified inertia matrix with reduced coupling terms.\"\"\"\n     258 |         _, theta1, theta2, _, _, _ = state\n     259 | \n     260 |         # Simplified computation with reduced cross-coupling\n     261 |         return self._compute_simplified_inertia_matrix_numba(\n     262 |             theta1, theta2, self.m0, self.m1, self.m2,\n     263 |             self.L1, self.L2, self.Lc1, self.Lc2, self.I1, self.I2\n     264 |         )\n     265 | \n     266 |     @staticmethod\n     267 |     @njit\n     268 |     def _compute_simplified_inertia_matrix_numba("
+  },
+  {
+    "claim_id": "CODE-IMPL-378",
+    "file": "src\\plant\\models\\base\\dynamics_interface.py",
+    "line": 19,
+    "context": "Available integration methods for dynamics...",
+    "code": "       1 | #======================================================================================\\\\\\\n       2 | #==================== src/plant/models/base/dynamics_interface.py =====================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Common interface for plant dynamics models.\n       7 | \n       8 | Defines abstract base classes and protocols that ensure consistency\n       9 | across different dynamics implementations (simplified, full, low-rank).\n      10 | \"\"\"\n      11 | \n      12 | from __future__ import annotations\n      13 | from typing import Protocol, Tuple, Optional, Dict, Any, NamedTuple\n      14 | from abc import ABC, abstractmethod\n      15 | from enum import Enum\n      16 | import numpy as np\n      17 | \n      18 | \n>>>   19 | class IntegrationMethod(Enum):\n      20 |     \"\"\"Available integration methods for dynamics.\"\"\"\n      21 |     EULER = \"euler\"\n      22 |     RK4 = \"rk4\"\n      23 |     RK45 = \"rk45\"\n      24 |     ADAPTIVE = \"adaptive\"\n      25 | \n      26 | \n      27 | class DynamicsResult(NamedTuple):\n      28 |     \"\"\"\n      29 |     Result of dynamics computation.\n      30 | \n      31 |     Contains state derivatives and optional diagnostic information\n      32 |     for debugging and analysis.\n      33 |     \"\"\"\n      34 |     state_derivative: np.ndarray    # dx/dt vector\n      35 |     success: bool                   # Whether computation succeeded\n      36 |     info: Dict[str, Any]           # Additional information\n      37 | \n      38 |     @classmethod\n      39 |     def success_result("
+  },
+  {
+    "claim_id": "CODE-IMPL-379",
+    "file": "src\\plant\\models\\base\\dynamics_interface.py",
+    "line": 73,
+    "context": "Compute system dynamics at given state and input...",
+    "code": "      53 |         cls,\n      54 |         reason: str,\n      55 |         **info: Any\n      56 |     ) -> 'DynamicsResult':\n      57 |         \"\"\"Create failed dynamics result.\"\"\"\n      58 |         return cls(\n      59 |             state_derivative=np.array([]),\n      60 |             success=False,\n      61 |             info={\"failure_reason\": reason, **info}\n      62 |         )\n      63 | \n      64 | \n      65 | class DynamicsModel(Protocol):\n      66 |     \"\"\"\n      67 |     Protocol for plant dynamics models.\n      68 | \n      69 |     Defines the interface that all dynamics models must implement\n      70 |     for consistent integration with controllers and simulators.\n      71 |     \"\"\"\n      72 | \n>>>   73 |     def compute_dynamics(\n      74 |         self,\n      75 |         state: np.ndarray,\n      76 |         control_input: np.ndarray,\n      77 |         time: float = 0.0,\n      78 |         **kwargs: Any\n      79 |     ) -> DynamicsResult:\n      80 |         \"\"\"\n      81 |         Compute system dynamics at given state and input.\n      82 | \n      83 |         Args:\n      84 |             state: Current system state\n      85 |             control_input: Applied control input\n      86 |             time: Current time (for time-varying systems)\n      87 |             **kwargs: Additional implementation-specific parameters\n      88 | \n      89 |         Returns:\n      90 |             Dynamics computation result\n      91 |         \"\"\"\n      92 |         ...\n      93 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-382",
+    "file": "src\\plant\\models\\full\\dynamics.py",
+    "line": 1,
+    "context": "Full Fidelity DIP Dynamics Model...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #========================= src/plant/models/full/dynamics.py ==========================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Full Fidelity DIP Dynamics Model.\n       7 | \n       8 | Complete high-fidelity implementation of the double inverted pendulum\n       9 | with all nonlinear effects, advanced numerical integration, and\n      10 | comprehensive physics modeling.\n      11 | \"\"\"\n      12 | \n      13 | from __future__ import annotations\n      14 | from typing import Tuple, Optional, Dict, Any, Union\n      15 | import numpy as np\n      16 | import warnings\n      17 | \n      18 | from ..base import BaseDynamicsModel, DynamicsResult\n      19 | from ...core import (\n      20 |     DIPStateValidator,\n      21 |     NumericalInstabilityError,"
+  },
+  {
+    "claim_id": "CODE-IMPL-384",
+    "file": "src\\plant\\models\\full\\dynamics.py",
+    "line": 530,
+    "context": "Compatibility method for legacy code expecting _rhs_core...",
+    "code": "     510 |                 was_regularized=cond_num > self.config.max_condition_number,\n     511 |                 failed=False\n     512 |             )\n     513 | \n     514 |         # Update integration statistics\n     515 |         self.integration_stats['successful_steps'] += 1\n     516 |         self.integration_stats['total_steps'] += 1\n     517 | \n     518 |     def _record_numerical_instability(self, state: np.ndarray, error_msg: str) -> None:\n     519 |         \"\"\"Record numerical instability with context.\"\"\"\n     520 |         if hasattr(self, '_stability_monitor'):\n     521 |             self._stability_monitor.record_inversion(\n     522 |                 condition_number=np.inf,\n     523 |                 was_regularized=True,\n     524 |                 failed=True\n     525 |             )\n     526 | \n     527 |         self.integration_stats['rejected_steps'] += 1\n     528 |         self.integration_stats['total_steps'] += 1\n     529 | \n>>>  530 |     def _rhs_core(self, state: np.ndarray, u: float = 0.0) -> np.ndarray:\n     531 |         \"\"\"\n     532 |         Compatibility method for legacy code expecting _rhs_core.\n     533 | \n     534 |         This method provides backward compatibility for code that expects\n     535 |         the '_rhs_core' method interface. Maps to the standard compute_dynamics\n     536 |         interface.\n     537 | \n     538 |         Args:\n     539 |             state: System state vector [x, dx, theta1, dtheta1, theta2, dtheta2]\n     540 |             u: Control input (scalar force)\n     541 | \n     542 |         Returns:\n     543 |             State derivative vector\n     544 |         \"\"\"\n     545 |         control_input = np.array([u]) if np.isscalar(u) else u\n     546 |         result = self.compute_dynamics(state, control_input)\n     547 | \n     548 |         if result.success:\n     549 |             return result.state_derivative\n     550 |         else:"
+  },
+  {
+    "claim_id": "CODE-IMPL-386",
+    "file": "src\\plant\\models\\full\\physics.py",
+    "line": 34,
+    "context": "Full-fidelity physics computation for DIP dynamics...",
+    "code": "      14 | from typing import Tuple, Any, Optional\n      15 | import numpy as np\n      16 | \n      17 | try:\n      18 |     from numba import njit\n      19 | except ImportError:\n      20 |     def njit(*args, **kwargs):\n      21 |         def decorator(func):\n      22 |             return func\n      23 |         return decorator\n      24 | \n      25 | from ...core import (\n      26 |     DIPPhysicsMatrices,\n      27 |     AdaptiveRegularizer,\n      28 |     MatrixInverter,\n      29 |     NumericalInstabilityError\n      30 | )\n      31 | from .config import FullDIPConfig\n      32 | \n      33 | \n>>>   34 | class FullFidelityPhysicsComputer:\n      35 |     \"\"\"\n      36 |     Full-fidelity physics computation for DIP dynamics.\n      37 | \n      38 |     Implements complete nonlinear dynamics with:\n      39 |     - All coupling terms and nonlinear effects\n      40 |     - Advanced friction modeling (viscous + Coulomb)\n      41 |     - Aerodynamic forces and drag\n      42 |     - Gyroscopic and Coriolis effects\n      43 |     - High-precision matrix computation\n      44 |     \"\"\"\n      45 | \n      46 |     def __init__(self, config: FullDIPConfig):\n      47 |         \"\"\"\n      48 |         Initialize full-fidelity physics computer.\n      49 | \n      50 |         Args:\n      51 |             config: Validated configuration for full DIP model\n      52 |         \"\"\"\n      53 |         self.config = config\n      54 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-387",
+    "file": "src\\plant\\models\\full\\physics.py",
+    "line": 70,
+    "context": "Compute complete right-hand side of dynamics equation...",
+    "code": "      50 |         Args:\n      51 |             config: Validated configuration for full DIP model\n      52 |         \"\"\"\n      53 |         self.config = config\n      54 | \n      55 |         # Setup base physics matrices\n      56 |         self.base_matrices = DIPPhysicsMatrices(config)\n      57 | \n      58 |         # Setup high-precision numerical stability\n      59 |         self.regularizer = AdaptiveRegularizer(\n      60 |             regularization_alpha=config.regularization_alpha,\n      61 |             max_condition_number=config.max_condition_number,\n      62 |             min_regularization=config.min_regularization,\n      63 |             use_fixed_regularization=False  # Always use adaptive for full model\n      64 |         )\n      65 |         self.matrix_inverter = MatrixInverter(self.regularizer)\n      66 | \n      67 |         # Precompute commonly used constants\n      68 |         self._setup_cached_parameters()\n      69 | \n>>>   70 |     def compute_complete_dynamics_rhs(\n      71 |         self,\n      72 |         state: np.ndarray,\n      73 |         control_input: np.ndarray,\n      74 |         time: float = 0.0,\n      75 |         wind_velocity: Optional[np.ndarray] = None\n      76 |     ) -> np.ndarray:\n      77 |         \"\"\"\n      78 |         Compute complete right-hand side of dynamics equation.\n      79 | \n      80 |         Implements the full nonlinear dynamics:\n      81 |         M(q)q̈ + C(q,q̇)q̇ + G(q) + F_friction + F_aero + F_disturbance = u\n      82 | \n      83 |         Args:\n      84 |             state: State vector [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]\n      85 |             control_input: Control input [F] (force on cart)\n      86 |             time: Current time for time-varying effects\n      87 |             wind_velocity: Wind velocity vector [vx, vy] if aerodynamics enabled\n      88 | \n      89 |         Returns:\n      90 |             State derivative vector"
+  },
+  {
+    "claim_id": "CODE-IMPL-390",
+    "file": "src\\plant\\models\\lowrank\\dynamics.py",
+    "line": 1,
+    "context": "Low-rank DIP Dynamics Model...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #======================== src/plant/models/lowrank/dynamics.py ========================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Low-rank DIP Dynamics Model.\n       7 | \n       8 | Simplified implementation optimized for computational efficiency while\n       9 | maintaining essential double inverted pendulum dynamics. Ideal for\n      10 | fast prototyping, educational purposes, and real-time applications.\n      11 | \"\"\"\n      12 | \n      13 | from __future__ import annotations\n      14 | from typing import Tuple, Optional, Dict, Any, Union\n      15 | import numpy as np\n      16 | import warnings\n      17 | \n      18 | from ..base import BaseDynamicsModel, DynamicsResult\n      19 | from ...core import (\n      20 |     DIPStateValidator,\n      21 |     NumericalInstabilityError,"
+  },
+  {
+    "claim_id": "CODE-IMPL-393",
+    "file": "src\\plant\\models\\lowrank\\physics.py",
+    "line": 1,
+    "context": "Low-rank DIP Physics Computer...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #======================== src/plant/models/lowrank/physics.py =========================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Low-rank DIP Physics Computer.\n       7 | \n       8 | Simplified physics computation optimized for speed and efficiency.\n       9 | Uses approximations and reduced-order models to maintain essential\n      10 | dynamics while minimizing computational overhead.\n      11 | \"\"\"\n      12 | \n      13 | from __future__ import annotations\n      14 | from typing import Optional, Tuple\n      15 | import numpy as np\n      16 | \n      17 | from .config import LowRankDIPConfig\n      18 | \n      19 | \n      20 | class LowRankPhysicsComputer:\n      21 |     \"\"\""
+  },
+  {
+    "claim_id": "CODE-IMPL-397",
+    "file": "src\\plant\\models\\simplified\\dynamics.py",
+    "line": 1,
+    "context": "Simplified DIP Dynamics Model...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #====================== src/plant/models/simplified/dynamics.py =======================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Simplified DIP Dynamics Model.\n       7 | \n       8 | Main dynamics model implementation combining all simplified DIP components.\n       9 | Provides a clean, modular interface for the simplified double inverted\n      10 | pendulum dynamics with numerical stability and performance optimizations.\n      11 | \"\"\"\n      12 | \n      13 | from __future__ import annotations\n      14 | from typing import Tuple, Optional, Dict, Any, Union\n      15 | import numpy as np\n      16 | import warnings\n      17 | \n      18 | from ..base import BaseDynamicsModel, DynamicsResult\n      19 | from ...core import (\n      20 |     DIPStateValidator,\n      21 |     NumericalInstabilityError,"
+  },
+  {
+    "claim_id": "CODE-IMPL-399",
+    "file": "src\\plant\\models\\simplified\\dynamics.py",
+    "line": 290,
+    "context": "Compute dynamics using standard (modular) approach...",
+    "code": "     270 |     def get_equilibrium_states(self) -> Dict[str, np.ndarray]:\n     271 |         \"\"\"Get standard equilibrium states for the DIP system.\"\"\"\n     272 |         return {\n     273 |             \"upright\": np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0]),\n     274 |             \"downward\": np.array([0.0, np.pi, np.pi, 0.0, 0.0, 0.0]),\n     275 |             \"mixed_1\": np.array([0.0, 0.0, np.pi, 0.0, 0.0, 0.0]),\n     276 |             \"mixed_2\": np.array([0.0, np.pi, 0.0, 0.0, 0.0, 0.0])\n     277 |         }\n     278 | \n     279 |     def _setup_validation(self) -> None:\n     280 |         \"\"\"Setup state validation for simplified DIP.\"\"\"\n     281 |         self._state_validator = DIPStateValidator(\n     282 |             position_bounds=(-10.0, 10.0),\n     283 |             angle_bounds=(-4*np.pi, 4*np.pi),\n     284 |             velocity_bounds=(-50.0, 50.0),\n     285 |             angular_velocity_bounds=(-100.0, 100.0),\n     286 |             wrap_angles=True,\n     287 |             strict_validation=False\n     288 |         )\n     289 | \n>>>  290 |     def _compute_standard_dynamics(\n     291 |         self,\n     292 |         state: np.ndarray,\n     293 |         control_input: np.ndarray\n     294 |     ) -> np.ndarray:\n     295 |         \"\"\"Compute dynamics using standard (modular) approach.\"\"\"\n     296 |         return self.physics.compute_dynamics_rhs(state, control_input)\n     297 | \n     298 |     def _compute_fast_dynamics(\n     299 |         self,\n     300 |         state: np.ndarray,\n     301 |         control_input: np.ndarray\n     302 |     ) -> np.ndarray:\n     303 |         \"\"\"Compute dynamics using fast JIT-compiled approach.\"\"\"\n     304 |         return compute_simplified_dynamics_numba(\n     305 |             state,\n     306 |             control_input[0],\n     307 |             self.config.cart_mass,\n     308 |             self.config.pendulum1_mass,\n     309 |             self.config.pendulum2_mass,\n     310 |             self.config.pendulum1_length,"
+  },
+  {
+    "claim_id": "CODE-IMPL-400",
+    "file": "src\\plant\\models\\simplified\\dynamics.py",
+    "line": 298,
+    "context": "Compute dynamics using fast JIT-compiled approach...",
+    "code": "     278 | \n     279 |     def _setup_validation(self) -> None:\n     280 |         \"\"\"Setup state validation for simplified DIP.\"\"\"\n     281 |         self._state_validator = DIPStateValidator(\n     282 |             position_bounds=(-10.0, 10.0),\n     283 |             angle_bounds=(-4*np.pi, 4*np.pi),\n     284 |             velocity_bounds=(-50.0, 50.0),\n     285 |             angular_velocity_bounds=(-100.0, 100.0),\n     286 |             wrap_angles=True,\n     287 |             strict_validation=False\n     288 |         )\n     289 | \n     290 |     def _compute_standard_dynamics(\n     291 |         self,\n     292 |         state: np.ndarray,\n     293 |         control_input: np.ndarray\n     294 |     ) -> np.ndarray:\n     295 |         \"\"\"Compute dynamics using standard (modular) approach.\"\"\"\n     296 |         return self.physics.compute_dynamics_rhs(state, control_input)\n     297 | \n>>>  298 |     def _compute_fast_dynamics(\n     299 |         self,\n     300 |         state: np.ndarray,\n     301 |         control_input: np.ndarray\n     302 |     ) -> np.ndarray:\n     303 |         \"\"\"Compute dynamics using fast JIT-compiled approach.\"\"\"\n     304 |         return compute_simplified_dynamics_numba(\n     305 |             state,\n     306 |             control_input[0],\n     307 |             self.config.cart_mass,\n     308 |             self.config.pendulum1_mass,\n     309 |             self.config.pendulum2_mass,\n     310 |             self.config.pendulum1_length,\n     311 |             self.config.pendulum2_length,\n     312 |             self.config.pendulum1_com,\n     313 |             self.config.pendulum2_com,\n     314 |             self.config.pendulum1_inertia,\n     315 |             self.config.pendulum2_inertia,\n     316 |             self.config.gravity,\n     317 |             self.config.cart_friction,\n     318 |             self.config.joint1_friction,"
+  },
+  {
+    "claim_id": "CODE-IMPL-402",
+    "file": "src\\plant\\models\\simplified\\physics.py",
+    "line": 1,
+    "context": "Simplified Physics Computation for DIP...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #======================= src/plant/models/simplified/physics.py =======================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Simplified Physics Computation for DIP.\n       7 | \n       8 | Focused physics computation module extracted from the monolithic\n       9 | dynamics implementation. Provides optimized matrix computation\n      10 | with numerical stability features.\n      11 | \"\"\"\n      12 | \n      13 | from __future__ import annotations\n      14 | from typing import Tuple, Any\n      15 | import numpy as np\n      16 | \n      17 | try:\n      18 |     from numba import njit\n      19 | except ImportError:\n      20 |     def njit(*args, **kwargs):\n      21 |         def decorator(func):"
+  },
+  {
+    "claim_id": "CODE-IMPL-403",
+    "file": "src\\plant\\models\\simplified\\physics.py",
+    "line": 35,
+    "context": "Simplified physics computation for DIP dynamics...",
+    "code": "      15 | import numpy as np\n      16 | \n      17 | try:\n      18 |     from numba import njit\n      19 | except ImportError:\n      20 |     def njit(*args, **kwargs):\n      21 |         def decorator(func):\n      22 |             return func\n      23 |         return decorator\n      24 | \n      25 | from ...core import (\n      26 |     DIPPhysicsMatrices,\n      27 |     SimplifiedDIPPhysicsMatrices,\n      28 |     AdaptiveRegularizer,\n      29 |     MatrixInverter,\n      30 |     NumericalInstabilityError\n      31 | )\n      32 | from .config import SimplifiedDIPConfig\n      33 | \n      34 | \n>>>   35 | class SimplifiedPhysicsComputer:\n      36 |     \"\"\"\n      37 |     Simplified physics computation for DIP dynamics.\n      38 | \n      39 |     Optimized for computational efficiency while maintaining essential\n      40 |     dynamics characteristics. Uses adaptive regularization for numerical\n      41 |     stability and supports both full and simplified matrix computation.\n      42 |     \"\"\"\n      43 | \n      44 |     def __init__(self, config: SimplifiedDIPConfig):\n      45 |         \"\"\"\n      46 |         Initialize simplified physics computer.\n      47 | \n      48 |         Args:\n      49 |             config: Validated configuration for simplified DIP\n      50 |         \"\"\"\n      51 |         self.config = config\n      52 | \n      53 |         # Setup physics matrix computers\n      54 |         self.full_matrices = DIPPhysicsMatrices(config)\n      55 |         self.simplified_matrices = SimplifiedDIPPhysicsMatrices(config)"
+  },
+  {
+    "claim_id": "CODE-IMPL-404",
+    "file": "src\\plant\\models\\simplified\\physics.py",
+    "line": 236,
+    "context": "JIT-compiled simplified dynamics computation...",
+    "code": "     216 | \n     217 |     def set_simplified_inertia(self, use_simplified: bool = True) -> None:\n     218 |         \"\"\"Enable/disable simplified inertia matrix computation.\"\"\"\n     219 |         self.use_simplified_inertia = use_simplified\n     220 | \n     221 |     def get_matrix_conditioning(self, state: np.ndarray) -> float:\n     222 |         \"\"\"Get condition number of inertia matrix.\"\"\"\n     223 |         M = self.compute_inertia_matrix(state)\n     224 |         return np.linalg.cond(M)\n     225 | \n     226 |     def check_numerical_stability(self, state: np.ndarray) -> bool:\n     227 |         \"\"\"Check if current state leads to numerically stable computation.\"\"\"\n     228 |         try:\n     229 |             M = self.compute_inertia_matrix(state)\n     230 |             return self.regularizer.check_conditioning(M)\n     231 |         except (np.linalg.LinAlgError, ValueError):\n     232 |             return False\n     233 | \n     234 | \n     235 | @njit\n>>>  236 | def compute_simplified_dynamics_numba(\n     237 |     state: np.ndarray,\n     238 |     control_force: float,\n     239 |     m0: float, m1: float, m2: float,\n     240 |     L1: float, L2: float, Lc1: float, Lc2: float,\n     241 |     I1: float, I2: float, g: float,\n     242 |     c0: float, c1: float, c2: float,\n     243 |     reg_alpha: float, min_reg: float\n     244 | ) -> np.ndarray:\n     245 |     \"\"\"\n     246 |     JIT-compiled simplified dynamics computation.\n     247 | \n     248 |     Ultra-fast dynamics computation for performance-critical applications.\n     249 |     Uses simplified physics with minimal overhead.\n     250 | \n     251 |     Args:\n     252 |         state: System state vector\n     253 |         control_force: Applied control force\n     254 |         m0, m1, m2: Masses\n     255 |         L1, L2, Lc1, Lc2: Lengths and COM distances\n     256 |         I1, I2: Inertias"
+  },
+  {
+    "claim_id": "CODE-IMPL-406",
+    "file": "src\\simulation\\context\\simulation_context.py",
+    "line": 30,
+    "context": "Initializes and holds the context for a simulation run...",
+    "code": "      10 | from __future__ import annotations\n      11 | \n      12 | import logging\n      13 | from typing import Optional, List, Any\n      14 | \n      15 | # Import the necessary components\n      16 | from src.config import load_config, ConfigSchema\n      17 | # Import dynamics lazily to avoid circular imports\n      18 | # from ...plant.models.dynamics import DoubleInvertedPendulum as DIPDynamics\n      19 | # from ...plant.models.dip_full import FullDIPDynamics\n      20 | # Import factory lazily to avoid circular imports\n      21 | # from src.controllers.factory import create_controller as _create_controller\n      22 | \n      23 | try:\n      24 |     # Optional: FDI system may not be present in some builds\n      25 |     from ...analysis.fault_detection.fdi import FaultDetectionInterface as FDIsystem  # type: ignore\n      26 | except Exception:\n      27 |     FDIsystem = None  # type: ignore\n      28 | \n      29 | \n>>>   30 | class SimulationContext:\n      31 |     \"\"\"\n      32 |     Initializes and holds the context for a simulation run.\n      33 | \n      34 |     This class centralizes the setup logic by loading the configuration\n      35 |     and selecting the appropriate dynamics model based on that config.\n      36 |     \"\"\"\n      37 |     def __init__(self, config_path: str = \"config.yaml\"):\n      38 |         \"\"\"\n      39 |         Initialize the simulation context by loading the configuration.\n      40 |         \"\"\"\n      41 |         self.config: ConfigSchema = load_config(config_path, allow_unknown=True)\n      42 |         self.dynamics_model = self._initialize_dynamics_model()\n      43 | \n      44 |     def _initialize_dynamics_model(self) -> Any:\n      45 |         \"\"\"\n      46 |         Initialize the correct dynamics model based on the configuration.\n      47 | \n      48 |         This is the central point for model selection logic.\n      49 |         \"\"\"\n      50 |         # Import dynamics lazily to avoid circular imports"
+  },
+  {
+    "claim_id": "CODE-IMPL-410",
+    "file": "src\\simulation\\core\\interfaces.py",
+    "line": 74,
+    "context": "Integration method order...",
+    "code": "      54 |         dynamics_fn : callable\n      55 |             Function computing state derivatives: f(x, u, t) -> dx/dt\n      56 |         state : np.ndarray\n      57 |             Current state vector\n      58 |         control : np.ndarray\n      59 |             Control input vector\n      60 |         dt : float\n      61 |             Integration time step\n      62 |         **kwargs\n      63 |             Integration-specific parameters\n      64 | \n      65 |         Returns\n      66 |         -------\n      67 |         np.ndarray\n      68 |             Integrated state\n      69 |         \"\"\"\n      70 |         pass\n      71 | \n      72 |     @property\n      73 |     @abstractmethod\n>>>   74 |     def order(self) -> int:\n      75 |         \"\"\"Integration method order.\"\"\"\n      76 |         pass\n      77 | \n      78 |     @property\n      79 |     @abstractmethod\n      80 |     def adaptive(self) -> bool:\n      81 |         \"\"\"Whether integrator supports adaptive step size.\"\"\"\n      82 |         pass\n      83 | \n      84 | \n      85 | class Orchestrator(ABC):\n      86 |     \"\"\"Base interface for simulation execution strategies.\"\"\"\n      87 | \n      88 |     @abstractmethod\n      89 |     def execute(self,\n      90 |                initial_state: np.ndarray,\n      91 |                control_inputs: np.ndarray,\n      92 |                dt: float,\n      93 |                horizon: int,\n      94 |                **kwargs) -> 'ResultContainer':"
+  },
+  {
+    "claim_id": "CODE-IMPL-411",
+    "file": "src\\simulation\\core\\interfaces.py",
+    "line": 89,
+    "context": "Execute simulation with specified strategy...",
+    "code": "      69 |         \"\"\"\n      70 |         pass\n      71 | \n      72 |     @property\n      73 |     @abstractmethod\n      74 |     def order(self) -> int:\n      75 |         \"\"\"Integration method order.\"\"\"\n      76 |         pass\n      77 | \n      78 |     @property\n      79 |     @abstractmethod\n      80 |     def adaptive(self) -> bool:\n      81 |         \"\"\"Whether integrator supports adaptive step size.\"\"\"\n      82 |         pass\n      83 | \n      84 | \n      85 | class Orchestrator(ABC):\n      86 |     \"\"\"Base interface for simulation execution strategies.\"\"\"\n      87 | \n      88 |     @abstractmethod\n>>>   89 |     def execute(self,\n      90 |                initial_state: np.ndarray,\n      91 |                control_inputs: np.ndarray,\n      92 |                dt: float,\n      93 |                horizon: int,\n      94 |                **kwargs) -> 'ResultContainer':\n      95 |         \"\"\"Execute simulation with specified strategy.\n      96 | \n      97 |         Parameters\n      98 |         ----------\n      99 |         initial_state : np.ndarray\n     100 |             Initial state vector or batch of states\n     101 |         control_inputs : np.ndarray\n     102 |             Control input sequence\n     103 |         dt : float\n     104 |             Time step\n     105 |         horizon : int\n     106 |             Simulation horizon\n     107 |         **kwargs\n     108 |             Strategy-specific parameters\n     109 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-415",
+    "file": "src\\simulation\\core\\time_domain.py",
+    "line": 72,
+    "context": "Advance simulation by one time step...",
+    "code": "      52 |         return self._current_time\n      53 | \n      54 |     @property\n      55 |     def current_step(self) -> int:\n      56 |         \"\"\"Current simulation step.\"\"\"\n      57 |         return self._current_step\n      58 | \n      59 |     @property\n      60 |     def progress(self) -> float:\n      61 |         \"\"\"Simulation progress as fraction (0.0 to 1.0).\"\"\"\n      62 |         if self.total_time is None:\n      63 |             return 0.0\n      64 |         return min(self._current_time / self.total_time, 1.0)\n      65 | \n      66 |     def start_simulation(self) -> None:\n      67 |         \"\"\"Mark simulation start time.\"\"\"\n      68 |         self._start_wall_time = time.perf_counter()\n      69 |         self._current_time = 0.0\n      70 |         self._current_step = 0\n      71 | \n>>>   72 |     def advance_step(self, dt: Optional[float] = None) -> Tuple[float, int]:\n      73 |         \"\"\"Advance simulation by one time step.\n      74 | \n      75 |         Parameters\n      76 |         ----------\n      77 |         dt : float, optional\n      78 |             Time step (uses default if None)\n      79 | \n      80 |         Returns\n      81 |         -------\n      82 |         tuple\n      83 |             (new_time, new_step)\n      84 |         \"\"\"\n      85 |         if dt is None:\n      86 |             dt = self.dt\n      87 | \n      88 |         self._current_time += dt\n      89 |         self._current_step += 1\n      90 | \n      91 |         return self._current_time, self._current_step\n      92 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-420",
+    "file": "src\\simulation\\engines\\simulation_runner.py",
+    "line": 1,
+    "context": "Simulation step router...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #==================== src/simulation/engines/simulation_runner.py =====================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"\n       6 | Simulation step router.\n       7 | \n       8 | This module dispatches between full and low‑rank dynamics implementations\n       9 | based on ``config.simulation.use_full_dynamics``.  It exposes a unified\n      10 | ``step(x, u, dt)`` function which calls either ``src.plant.models.dip_full.step``\n      11 | or ``src.plant.models.dip_lowrank.step`` depending on the configuration.\n      12 | \n      13 | If the full dynamics module cannot be imported, a RuntimeError with a\n      14 | specific message is raised.  Tests match the message text exactly.\n      15 | \"\"\"\n      16 | \n      17 | from __future__ import annotations\n      18 | \n      19 | from importlib import import_module\n      20 | \n      21 | import time"
+  },
+  {
+    "claim_id": "CODE-IMPL-422",
+    "file": "src\\simulation\\engines\\simulation_runner.py",
+    "line": 87,
+    "context": "Unified simulation step entry point...",
+    "code": "      67 |     Returns\n      68 |     -------\n      69 |     callable\n      70 |         The low‑rank ``step(x, u, dt)`` function.\n      71 |     \"\"\"\n      72 |     from ...plant.models.dip_lowrank import step as step_fn\n      73 |     return step_fn\n      74 | \n      75 | def get_step_fn():\n      76 |     \"\"\"\n      77 |     Return the appropriate step function based on the configuration flag.\n      78 | \n      79 |     Returns\n      80 |     -------\n      81 |     callable\n      82 |         Either ``src.plant.models.dip_full.step`` or ``src.plant.models.dip_lowrank.step``.\n      83 |     \"\"\"\n      84 |     use_full = getattr(getattr(config, \"simulation\", None), \"use_full_dynamics\", False)\n      85 |     return _load_full_step() if use_full else _load_lowrank_step()\n      86 | \n>>>   87 | def step(x, u, dt):\n      88 |     \"\"\"\n      89 |     Unified simulation step entry point.\n      90 | \n      91 |     Parameters\n      92 |     ----------\n      93 |     x : array-like\n      94 |         Current state.\n      95 |     u : array-like\n      96 |         Control input(s).\n      97 |     dt : float\n      98 |         Timestep.\n      99 | \n     100 |     Returns\n     101 |     -------\n     102 |     array-like\n     103 |         Next state computed by the selected dynamics implementation.\n     104 |     \"\"\"\n     105 |     return get_step_fn()(x, u, dt)\n     106 | \n     107 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-423",
+    "file": "src\\simulation\\engines\\simulation_runner.py",
+    "line": 109,
+    "context": "Simulate a single controller trajectory using an explicit Euler method...",
+    "code": "      89 |     Unified simulation step entry point.\n      90 | \n      91 |     Parameters\n      92 |     ----------\n      93 |     x : array-like\n      94 |         Current state.\n      95 |     u : array-like\n      96 |         Control input(s).\n      97 |     dt : float\n      98 |         Timestep.\n      99 | \n     100 |     Returns\n     101 |     -------\n     102 |     array-like\n     103 |         Next state computed by the selected dynamics implementation.\n     104 |     \"\"\"\n     105 |     return get_step_fn()(x, u, dt)\n     106 | \n     107 | \n     108 | \n>>>  109 | def run_simulation(\n     110 |     *,\n     111 |     controller: Any,\n     112 |     dynamics_model: Any,\n     113 |     sim_time: float,\n     114 |     dt: float,\n     115 |     initial_state: Any,\n     116 |     u_max: Optional[float] = None,\n     117 |     seed: Optional[int] = None,\n     118 |     rng: Optional[np.random.Generator] = None,\n     119 |     latency_margin: Optional[float] = None,\n     120 |     fallback_controller: Optional[Callable[[float, np.ndarray], float]] = None,\n     121 |     **_kwargs: Any,\n     122 | ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:\n     123 |     \"\"\"Simulate a single controller trajectory using an explicit Euler method.\n     124 | \n     125 |     The runner integrates the provided ``dynamics_model`` forward in time under\n     126 |     the control law defined by ``controller``.  It produces uniformly spaced\n     127 |     timestamps, a state trajectory and the applied control sequence.  If the\n     128 |     dynamics return NaN/Inf values or raise an exception at any step, the\n     129 |     simulation halts immediately and the outputs are truncated to include only"
+  },
+  {
+    "claim_id": "CODE-IMPL-437",
+    "file": "src\\simulation\\integrators\\adaptive\\runge_kutta.py",
+    "line": 177,
+    "context": "Legacy Dormand-Prince 4(5) step function for backward compatibility...",
+    "code": "     157 |         y5 = y + dt * np.sum(b5 * k.T, axis=1)\n     158 | \n     159 |         # Error estimate\n     160 |         error = y5 - y4\n     161 |         error_norm = self._compute_error_norm(error, y)\n     162 | \n     163 |         # Step size control\n     164 |         dt_new, accept = self.error_controller.update_step_size(\n     165 |             error_norm, dt, self.min_step, self.max_step, order=5\n     166 |         )\n     167 | \n     168 |         return IntegrationResult(\n     169 |             state=y5 if accept else y,\n     170 |             accepted=accept,\n     171 |             error_estimate=error_norm,\n     172 |             suggested_dt=dt_new,\n     173 |             function_evaluations=7\n     174 |         )\n     175 | \n     176 | \n>>>  177 | def rk45_step(f: Callable[[float, np.ndarray], np.ndarray],\n     178 |               t: float,\n     179 |               y: np.ndarray,\n     180 |               dt: float,\n     181 |               abs_tol: float,\n     182 |               rel_tol: float) -> Tuple[Optional[np.ndarray], float]:\n     183 |     \"\"\"Legacy Dormand-Prince 4(5) step function for backward compatibility.\n     184 | \n     185 |     Parameters\n     186 |     ----------\n     187 |     f : callable\n     188 |         Function computing time derivative dy/dt = f(t, y)\n     189 |     t : float\n     190 |         Current integration time\n     191 |     y : np.ndarray\n     192 |         Current state vector\n     193 |     dt : float\n     194 |         Proposed step size\n     195 |     abs_tol : float\n     196 |         Absolute tolerance for error control\n     197 |     rel_tol : float"
+  },
+  {
+    "claim_id": "CODE-IMPL-438",
+    "file": "src\\simulation\\integrators\\adaptive\\runge_kutta.py",
+    "line": 228,
+    "context": "Original RK45 implementation for fallback...",
+    "code": "     208 |     adaptive_integrator.py implementation.\n     209 |     \"\"\"\n     210 |     # Create integrator instance\n     211 |     integrator = DormandPrince45(rtol=rel_tol, atol=abs_tol)\n     212 | \n     213 |     # Wrapper to match expected interface\n     214 |     def dynamics_wrapper(time, state, control):\n     215 |         return f(time, state)\n     216 | \n     217 |     try:\n     218 |         result = integrator._adaptive_step(f, t, y, dt)\n     219 |         if result.accepted:\n     220 |             return result.state, result.suggested_dt\n     221 |         else:\n     222 |             return None, result.suggested_dt\n     223 |     except Exception:\n     224 |         # Fallback to original implementation for safety\n     225 |         return _original_rk45_step(f, t, y, dt, abs_tol, rel_tol)\n     226 | \n     227 | \n>>>  228 | def _original_rk45_step(f: Callable[[float, np.ndarray], np.ndarray],\n     229 |                        t: float,\n     230 |                        y: np.ndarray,\n     231 |                        dt: float,\n     232 |                        abs_tol: float,\n     233 |                        rel_tol: float) -> Tuple[Optional[np.ndarray], float]:\n     234 |     \"\"\"Original RK45 implementation for fallback.\"\"\"\n     235 |     # Dormand-Prince coefficients (c, a's, b4, b5)\n     236 |     c2 = 1/5\n     237 |     c3 = 3/10\n     238 |     c4 = 4/5\n     239 |     c5 = 8/9\n     240 |     c6 = 1.0\n     241 |     c7 = 1.0\n     242 | \n     243 |     a21 = 1/5\n     244 |     a31 = 3/40; a32 = 9/40\n     245 |     a41 = 44/45; a42 = -56/15; a43 = 32/9\n     246 |     a51 = 19372/6561; a52 = -25360/2187; a53 = 64448/6561; a54 = -212/729\n     247 |     a61 = 9017/3168; a62 = -355/33; a63 = 46732/5247; a64 = 49/176; a65 = -5103/18656\n     248 |     a71 = 35/384; a72 = 0.0; a73 = 500/1113; a74 = 125/192; a75 = -2187/6784; a76 = 11/84"
+  },
+  {
+    "claim_id": "CODE-IMPL-440",
+    "file": "src\\simulation\\integrators\\base.py",
+    "line": 19,
+    "context": "Initialize base integrator...",
+    "code": "       1 | #======================================================================================\\\\\\\n       2 | #========================= src/simulation/integrators/base.py =========================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"Base integrator interface and common utilities.\"\"\"\n       6 | \n       7 | from __future__ import annotations\n       8 | \n       9 | from abc import ABC, abstractmethod\n      10 | from typing import Any, Callable, Dict, Optional, Tuple\n      11 | import numpy as np\n      12 | \n      13 | from ..core.interfaces import Integrator\n      14 | \n      15 | \n      16 | class BaseIntegrator(Integrator):\n      17 |     \"\"\"Base class for numerical integration methods.\"\"\"\n      18 | \n>>>   19 |     def __init__(self, rtol: float = 1e-6, atol: float = 1e-9):\n      20 |         \"\"\"Initialize base integrator.\n      21 | \n      22 |         Parameters\n      23 |         ----------\n      24 |         rtol : float, optional\n      25 |             Relative tolerance for adaptive methods\n      26 |         atol : float, optional\n      27 |             Absolute tolerance for adaptive methods\n      28 |         \"\"\"\n      29 |         self.rtol = rtol\n      30 |         self.atol = atol\n      31 |         self._stats = {\n      32 |             \"total_steps\": 0,\n      33 |             \"accepted_steps\": 0,\n      34 |             \"rejected_steps\": 0,\n      35 |             \"function_evaluations\": 0\n      36 |         }\n      37 | \n      38 |     @abstractmethod\n      39 |     def integrate(self,"
+  },
+  {
+    "claim_id": "CODE-IMPL-443",
+    "file": "src\\simulation\\integrators\\base.py",
+    "line": 159,
+    "context": "Initialize integration result...",
+    "code": "     139 |             Error estimate\n     140 |         state : np.ndarray\n     141 |             Current state\n     142 | \n     143 |         Returns\n     144 |         -------\n     145 |         float\n     146 |             Normalized error\n     147 |         \"\"\"\n     148 |         # Scale by tolerance\n     149 |         scale = self.atol + self.rtol * np.abs(state)\n     150 |         normalized_error = error / scale\n     151 | \n     152 |         # Compute RMS norm\n     153 |         return np.sqrt(np.mean(normalized_error**2))\n     154 | \n     155 | \n     156 | class IntegrationResult:\n     157 |     \"\"\"Container for integration step results.\"\"\"\n     158 | \n>>>  159 |     def __init__(self,\n     160 |                  state: np.ndarray,\n     161 |                  accepted: bool = True,\n     162 |                  error_estimate: Optional[float] = None,\n     163 |                  suggested_dt: Optional[float] = None,\n     164 |                  function_evaluations: int = 1):\n     165 |         \"\"\"Initialize integration result.\n     166 | \n     167 |         Parameters\n     168 |         ----------\n     169 |         state : np.ndarray\n     170 |             Integrated state\n     171 |         accepted : bool, optional\n     172 |             Whether step was accepted\n     173 |         error_estimate : float, optional\n     174 |             Error estimate for adaptive methods\n     175 |         suggested_dt : float, optional\n     176 |             Suggested next time step\n     177 |         function_evaluations : int, optional\n     178 |             Number of function evaluations used\n     179 |         \"\"\""
+  },
+  {
+    "claim_id": "CODE-IMPL-446",
+    "file": "src\\simulation\\integrators\\compatibility.py",
+    "line": 267,
+    "context": "Safely integrate using fallback method...",
+    "code": "     247 |                 # Check for invalid results\n     248 |                 if not np.all(np.isfinite(result)):\n     249 |                     raise ValueError(\"Primary integrator returned non-finite values\")\n     250 | \n     251 |                 return result\n     252 | \n     253 |             except Exception as e:\n     254 |                 self.failure_count += 1\n     255 | \n     256 |                 # Switch to fallback after repeated failures\n     257 |                 if self.failure_count >= 3:\n     258 |                     self.fallback_active = True\n     259 |                     print(f\"Warning: Switching to fallback integrator after {self.failure_count} failures: {e}\")\n     260 | \n     261 |                 # Use fallback for this step\n     262 |                 return self._safe_fallback_integrate(dynamics_fn, state, control, dt)\n     263 |         else:\n     264 |             # Use fallback integrator\n     265 |             return self._safe_fallback_integrate(dynamics_fn, state, control, dt)\n     266 | \n>>>  267 |     def _safe_fallback_integrate(self, dynamics_fn: Callable, state: np.ndarray,\n     268 |                                control: np.ndarray, dt: float) -> np.ndarray:\n     269 |         \"\"\"Safely integrate using fallback method.\"\"\"\n     270 |         try:\n     271 |             result = self.fallback_integrator.integrate(dynamics_fn, state, control, dt)\n     272 | \n     273 |             # Additional safety check\n     274 |             if not np.all(np.isfinite(result)):\n     275 |                 # Ultimate fallback: simple Euler step with reduced dt\n     276 |                 dt_safe = min(dt * 0.1, 1e-6)\n     277 |                 derivative = dynamics_fn(0.0, state, control)\n     278 |                 if np.all(np.isfinite(derivative)):\n     279 |                     result = state + dt_safe * derivative\n     280 |                 else:\n     281 |                     result = state  # No change if derivative is problematic\n     282 | \n     283 |             return result\n     284 | \n     285 |         except Exception:\n     286 |             # Ultimate safety: return unchanged state\n     287 |             return state.copy()"
+  },
+  {
+    "claim_id": "CODE-IMPL-448",
+    "file": "src\\simulation\\integrators\\discrete\\zero_order_hold.py",
+    "line": 41,
+    "context": "Integration method order (exact for linear systems)...",
+    "code": "      21 |                  B: Optional[np.ndarray] = None,\n      22 |                  dt: Optional[float] = None):\n      23 |         \"\"\"Initialize ZOH discretization.\n      24 | \n      25 |         Parameters\n      26 |         ----------\n      27 |         A : np.ndarray, optional\n      28 |             State matrix for linear system dx/dt = Ax + Bu\n      29 |         B : np.ndarray, optional\n      30 |             Input matrix for linear system dx/dt = Ax + Bu\n      31 |         dt : float, optional\n      32 |             Discretization time step (can be set later)\n      33 |         \"\"\"\n      34 |         super().__init__()\n      35 |         self.A = A\n      36 |         self.B = B\n      37 |         self.dt_discrete = dt\n      38 |         self._discrete_matrices = None\n      39 | \n      40 |     @property\n>>>   41 |     def order(self) -> int:\n      42 |         \"\"\"Integration method order (exact for linear systems).\"\"\"\n      43 |         return float('inf')  # Exact for linear systems\n      44 | \n      45 |     @property\n      46 |     def adaptive(self) -> bool:\n      47 |         \"\"\"Whether integrator supports adaptive step size.\"\"\"\n      48 |         return False\n      49 | \n      50 |     def set_linear_system(self, A: np.ndarray, B: np.ndarray, dt: float) -> None:\n      51 |         \"\"\"Set linear system matrices and compute discrete-time equivalent.\n      52 | \n      53 |         Parameters\n      54 |         ----------\n      55 |         A : np.ndarray\n      56 |             Continuous-time state matrix\n      57 |         B : np.ndarray\n      58 |             Continuous-time input matrix\n      59 |         dt : float\n      60 |             Discretization time step\n      61 |         \"\"\""
+  },
+  {
+    "claim_id": "CODE-IMPL-449",
+    "file": "src\\simulation\\integrators\\discrete\\zero_order_hold.py",
+    "line": 132,
+    "context": "Integrate nonlinear system with ZOH control approximation...",
+    "code": "     112 | \n     113 |         Returns\n     114 |         -------\n     115 |         np.ndarray\n     116 |             Integrated state\n     117 |         \"\"\"\n     118 |         self._validate_inputs(dynamics_fn, state, control, dt)\n     119 | \n     120 |         if self._discrete_matrices is not None and np.isclose(dt, self.dt_discrete):\n     121 |             # Use precomputed discrete-time matrices for linear system\n     122 |             Ad, Bd = self._discrete_matrices\n     123 |             new_state = Ad @ state + Bd @ control\n     124 |             self._update_stats(True, 0)  # No function evaluations for linear case\n     125 |         else:\n     126 |             # For nonlinear systems or different dt, use approximation\n     127 |             # Assume control is held constant over interval\n     128 |             new_state = self._integrate_nonlinear(dynamics_fn, state, control, dt, t)\n     129 | \n     130 |         return new_state\n     131 | \n>>>  132 |     def _integrate_nonlinear(self,\n     133 |                            dynamics_fn: Callable,\n     134 |                            state: np.ndarray,\n     135 |                            control: np.ndarray,\n     136 |                            dt: float,\n     137 |                            t: float) -> np.ndarray:\n     138 |         \"\"\"Integrate nonlinear system with ZOH control approximation.\n     139 | \n     140 |         For nonlinear systems, we approximate by holding control constant\n     141 |         and using a higher-order integration method.\n     142 |         \"\"\"\n     143 |         # Use RK4 with constant control as approximation to ZOH\n     144 |         k1 = dynamics_fn(t, state, control)\n     145 |         k2 = dynamics_fn(t + dt/2, state + dt*k1/2, control)\n     146 |         k3 = dynamics_fn(t + dt/2, state + dt*k2/2, control)\n     147 |         k4 = dynamics_fn(t + dt, state + dt*k3, control)\n     148 | \n     149 |         new_state = state + dt * (k1 + 2*k2 + 2*k3 + k4) / 6\n     150 |         self._update_stats(True, 4)\n     151 |         return new_state\n     152 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-451",
+    "file": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line": 1,
+    "context": "Euler integration methods (explicit and implicit)...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #=================== src/simulation/integrators/fixed_step/euler.py ===================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"Euler integration methods (explicit and implicit).\"\"\"\n       6 | \n       7 | from __future__ import annotations\n       8 | \n       9 | from typing import Callable\n      10 | import numpy as np\n      11 | from scipy.optimize import fsolve\n      12 | \n      13 | from ..base import BaseIntegrator\n      14 | \n      15 | \n      16 | class ForwardEuler(BaseIntegrator):\n      17 |     \"\"\"Forward (explicit) Euler integration method.\"\"\"\n      18 | \n      19 |     @property\n      20 |     def order(self) -> int:\n      21 |         \"\"\"Integration method order.\"\"\""
+  },
+  {
+    "claim_id": "CODE-IMPL-452",
+    "file": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line": 16,
+    "context": "Forward (explicit) Euler integration method...",
+    "code": "       1 | #======================================================================================\\\\\\\n       2 | #=================== src/simulation/integrators/fixed_step/euler.py ===================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"Euler integration methods (explicit and implicit).\"\"\"\n       6 | \n       7 | from __future__ import annotations\n       8 | \n       9 | from typing import Callable\n      10 | import numpy as np\n      11 | from scipy.optimize import fsolve\n      12 | \n      13 | from ..base import BaseIntegrator\n      14 | \n      15 | \n>>>   16 | class ForwardEuler(BaseIntegrator):\n      17 |     \"\"\"Forward (explicit) Euler integration method.\"\"\"\n      18 | \n      19 |     @property\n      20 |     def order(self) -> int:\n      21 |         \"\"\"Integration method order.\"\"\"\n      22 |         return 1\n      23 | \n      24 |     @property\n      25 |     def adaptive(self) -> bool:\n      26 |         \"\"\"Whether integrator supports adaptive step size.\"\"\"\n      27 |         return False\n      28 | \n      29 |     def integrate(self,\n      30 |                  dynamics_fn: Callable,\n      31 |                  state: np.ndarray,\n      32 |                  control: np.ndarray,\n      33 |                  dt: float,\n      34 |                  t: float = 0.0,\n      35 |                  **kwargs) -> np.ndarray:\n      36 |         \"\"\"Integrate using forward Euler method."
+  },
+  {
+    "claim_id": "CODE-IMPL-454",
+    "file": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line": 29,
+    "context": "Integrate using forward Euler method...",
+    "code": "       9 | from typing import Callable\n      10 | import numpy as np\n      11 | from scipy.optimize import fsolve\n      12 | \n      13 | from ..base import BaseIntegrator\n      14 | \n      15 | \n      16 | class ForwardEuler(BaseIntegrator):\n      17 |     \"\"\"Forward (explicit) Euler integration method.\"\"\"\n      18 | \n      19 |     @property\n      20 |     def order(self) -> int:\n      21 |         \"\"\"Integration method order.\"\"\"\n      22 |         return 1\n      23 | \n      24 |     @property\n      25 |     def adaptive(self) -> bool:\n      26 |         \"\"\"Whether integrator supports adaptive step size.\"\"\"\n      27 |         return False\n      28 | \n>>>   29 |     def integrate(self,\n      30 |                  dynamics_fn: Callable,\n      31 |                  state: np.ndarray,\n      32 |                  control: np.ndarray,\n      33 |                  dt: float,\n      34 |                  t: float = 0.0,\n      35 |                  **kwargs) -> np.ndarray:\n      36 |         \"\"\"Integrate using forward Euler method.\n      37 | \n      38 |         Parameters\n      39 |         ----------\n      40 |         dynamics_fn : callable\n      41 |             Dynamics function f(t, x, u) -> dx/dt\n      42 |         state : np.ndarray\n      43 |             Current state\n      44 |         control : np.ndarray\n      45 |             Control input\n      46 |         dt : float\n      47 |             Time step\n      48 |         t : float, optional\n      49 |             Current time"
+  },
+  {
+    "claim_id": "CODE-IMPL-455",
+    "file": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line": 66,
+    "context": "Backward (implicit) Euler integration method...",
+    "code": "      46 |         dt : float\n      47 |             Time step\n      48 |         t : float, optional\n      49 |             Current time\n      50 | \n      51 |         Returns\n      52 |         -------\n      53 |         np.ndarray\n      54 |             Integrated state: x_new = x + dt * f(t, x, u)\n      55 |         \"\"\"\n      56 |         self._validate_inputs(dynamics_fn, state, control, dt)\n      57 | \n      58 |         # Forward Euler: x_{k+1} = x_k + dt * f(t_k, x_k, u_k)\n      59 |         derivative = dynamics_fn(t, state, control)\n      60 |         new_state = state + dt * derivative\n      61 | \n      62 |         self._update_stats(True, 1)\n      63 |         return new_state\n      64 | \n      65 | \n>>>   66 | class BackwardEuler(BaseIntegrator):\n      67 |     \"\"\"Backward (implicit) Euler integration method.\"\"\"\n      68 | \n      69 |     def __init__(self,\n      70 |                  rtol: float = 1e-6,\n      71 |                  atol: float = 1e-9,\n      72 |                  max_iterations: int = 50):\n      73 |         \"\"\"Initialize backward Euler integrator.\n      74 | \n      75 |         Parameters\n      76 |         ----------\n      77 |         rtol : float, optional\n      78 |             Relative tolerance for implicit solver\n      79 |         atol : float, optional\n      80 |             Absolute tolerance for implicit solver\n      81 |         max_iterations : int, optional\n      82 |             Maximum iterations for implicit solver\n      83 |         \"\"\"\n      84 |         super().__init__(rtol, atol)\n      85 |         self.max_iterations = max_iterations\n      86 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-457",
+    "file": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line": 97,
+    "context": "Integrate using backward Euler method...",
+    "code": "      77 |         rtol : float, optional\n      78 |             Relative tolerance for implicit solver\n      79 |         atol : float, optional\n      80 |             Absolute tolerance for implicit solver\n      81 |         max_iterations : int, optional\n      82 |             Maximum iterations for implicit solver\n      83 |         \"\"\"\n      84 |         super().__init__(rtol, atol)\n      85 |         self.max_iterations = max_iterations\n      86 | \n      87 |     @property\n      88 |     def order(self) -> int:\n      89 |         \"\"\"Integration method order.\"\"\"\n      90 |         return 1\n      91 | \n      92 |     @property\n      93 |     def adaptive(self) -> bool:\n      94 |         \"\"\"Whether integrator supports adaptive step size.\"\"\"\n      95 |         return False\n      96 | \n>>>   97 |     def integrate(self,\n      98 |                  dynamics_fn: Callable,\n      99 |                  state: np.ndarray,\n     100 |                  control: np.ndarray,\n     101 |                  dt: float,\n     102 |                  t: float = 0.0,\n     103 |                  **kwargs) -> np.ndarray:\n     104 |         \"\"\"Integrate using backward Euler method.\n     105 | \n     106 |         Parameters\n     107 |         ----------\n     108 |         dynamics_fn : callable\n     109 |             Dynamics function f(t, x, u) -> dx/dt\n     110 |         state : np.ndarray\n     111 |             Current state\n     112 |         control : np.ndarray\n     113 |             Control input\n     114 |         dt : float\n     115 |             Time step\n     116 |         t : float, optional\n     117 |             Current time"
+  },
+  {
+    "claim_id": "CODE-IMPL-458",
+    "file": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line": 154,
+    "context": "Modified Euler method (Heun's method)...",
+    "code": "     134 |         x0 = state + dt * dynamics_fn(t, state, control)\n     135 | \n     136 |         try:\n     137 |             # Solve implicit equation\n     138 |             solution = fsolve(residual, x0, xtol=self.atol, maxfev=self.max_iterations)\n     139 |             new_state = solution\n     140 | \n     141 |             # Estimate function evaluations (approximate)\n     142 |             func_evals = min(self.max_iterations, 10)  # Estimate based on typical convergence\n     143 |             self._update_stats(True, func_evals)\n     144 | \n     145 |             return new_state\n     146 | \n     147 |         except Exception as e:\n     148 |             # Fallback to forward Euler if implicit solver fails\n     149 |             new_state = state + dt * dynamics_fn(t, state, control)\n     150 |             self._update_stats(True, 2)  # One eval for forward Euler + one failed attempt\n     151 |             return new_state\n     152 | \n     153 | \n>>>  154 | class ModifiedEuler(BaseIntegrator):\n     155 |     \"\"\"Modified Euler method (Heun's method).\"\"\"\n     156 | \n     157 |     @property\n     158 |     def order(self) -> int:\n     159 |         \"\"\"Integration method order.\"\"\"\n     160 |         return 2\n     161 | \n     162 |     @property\n     163 |     def adaptive(self) -> bool:\n     164 |         \"\"\"Whether integrator supports adaptive step size.\"\"\"\n     165 |         return False\n     166 | \n     167 |     def integrate(self,\n     168 |                  dynamics_fn: Callable,\n     169 |                  state: np.ndarray,\n     170 |                  control: np.ndarray,\n     171 |                  dt: float,\n     172 |                  t: float = 0.0,\n     173 |                  **kwargs) -> np.ndarray:\n     174 |         \"\"\"Integrate using modified Euler (Heun's) method."
+  },
+  {
+    "claim_id": "CODE-IMPL-460",
+    "file": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line": 167,
+    "context": "Integrate using modified Euler (Heun's) method...",
+    "code": "     147 |         except Exception as e:\n     148 |             # Fallback to forward Euler if implicit solver fails\n     149 |             new_state = state + dt * dynamics_fn(t, state, control)\n     150 |             self._update_stats(True, 2)  # One eval for forward Euler + one failed attempt\n     151 |             return new_state\n     152 | \n     153 | \n     154 | class ModifiedEuler(BaseIntegrator):\n     155 |     \"\"\"Modified Euler method (Heun's method).\"\"\"\n     156 | \n     157 |     @property\n     158 |     def order(self) -> int:\n     159 |         \"\"\"Integration method order.\"\"\"\n     160 |         return 2\n     161 | \n     162 |     @property\n     163 |     def adaptive(self) -> bool:\n     164 |         \"\"\"Whether integrator supports adaptive step size.\"\"\"\n     165 |         return False\n     166 | \n>>>  167 |     def integrate(self,\n     168 |                  dynamics_fn: Callable,\n     169 |                  state: np.ndarray,\n     170 |                  control: np.ndarray,\n     171 |                  dt: float,\n     172 |                  t: float = 0.0,\n     173 |                  **kwargs) -> np.ndarray:\n     174 |         \"\"\"Integrate using modified Euler (Heun's) method.\n     175 | \n     176 |         Parameters\n     177 |         ----------\n     178 |         dynamics_fn : callable\n     179 |             Dynamics function f(t, x, u) -> dx/dt\n     180 |         state : np.ndarray\n     181 |             Current state\n     182 |         control : np.ndarray\n     183 |             Control input\n     184 |         dt : float\n     185 |             Time step\n     186 |         t : float, optional\n     187 |             Current time"
+  },
+  {
+    "claim_id": "CODE-IMPL-473",
+    "file": "src\\simulation\\orchestrators\\base.py",
+    "line": 102,
+    "context": "Execute simulation with orchestrator-specific strategy...",
+    "code": "      82 |             Additional parameters\n      83 | \n      84 |         Returns\n      85 |         -------\n      86 |         np.ndarray\n      87 |             Next state vector\n      88 |         \"\"\"\n      89 |         # Get time from kwargs or default to 0\n      90 |         t = kwargs.get(\"t\", 0.0)\n      91 | \n      92 |         # Create dynamics wrapper function\n      93 |         def dynamics_fn(time, x, u):\n      94 |             return self.dynamics_model.compute_dynamics(x, u)\n      95 | \n      96 |         # Integrate using selected method\n      97 |         next_state = self._integrator.integrate(dynamics_fn, state, control, dt, t)\n      98 | \n      99 |         return next_state\n     100 | \n     101 |     @abstractmethod\n>>>  102 |     def execute(self,\n     103 |                initial_state: np.ndarray,\n     104 |                control_inputs: np.ndarray,\n     105 |                dt: float,\n     106 |                horizon: int,\n     107 |                **kwargs) -> ResultContainer:\n     108 |         \"\"\"Execute simulation with orchestrator-specific strategy.\"\"\"\n     109 |         pass\n     110 | \n     111 |     def _create_result_container(self) -> ResultContainer:\n     112 |         \"\"\"Create appropriate result container.\"\"\"\n     113 |         return StandardResultContainer()\n     114 | \n     115 |     def _validate_simulation_inputs(self,\n     116 |                                   initial_state: np.ndarray,\n     117 |                                   control_inputs: np.ndarray,\n     118 |                                   dt: float,\n     119 |                                   horizon: int) -> None:\n     120 |         \"\"\"Validate simulation inputs.\"\"\"\n     121 |         if not isinstance(initial_state, np.ndarray):\n     122 |             raise TypeError(\"initial_state must be numpy array\")"
+  },
+  {
+    "claim_id": "CODE-IMPL-474",
+    "file": "src\\simulation\\orchestrators\\parallel.py",
+    "line": 159,
+    "context": "Run a single simulation using sequential orchestrator...",
+    "code": "     139 |                     # Handle failed simulation\n     140 |                     print(f\"Simulation {index} failed: {e}\")\n     141 |                     results.append((index, None))\n     142 | \n     143 |         # Sort results by original index\n     144 |         results.sort(key=lambda x: x[0])\n     145 | \n     146 |         # Combine into batch result container\n     147 |         batch_result = BatchResultContainer()\n     148 |         for index, result in results:\n     149 |             if result is not None:\n     150 |                 states = result.get_states()\n     151 |                 times = result.get_times()\n     152 |                 controls = getattr(result, 'controls', None)\n     153 | \n     154 |                 batch_result.add_trajectory(states, times,\n     155 |                                           controls=controls, batch_index=index)\n     156 | \n     157 |         return batch_result\n     158 | \n>>>  159 |     def _run_single_simulation(self,\n     160 |                              initial_state: np.ndarray,\n     161 |                              control_inputs: np.ndarray,\n     162 |                              dt: float,\n     163 |                              horizon: int,\n     164 |                              kwargs: dict) -> ResultContainer:\n     165 |         \"\"\"Run a single simulation using sequential orchestrator.\n     166 | \n     167 |         This method creates a new sequential orchestrator for each worker\n     168 |         to avoid thread safety issues.\n     169 |         \"\"\"\n     170 |         # Create a new context for this thread\n     171 |         context = type(self.context)(self.context.config.model_dump_json())\n     172 |         sequential = SequentialOrchestrator(context)\n     173 | \n     174 |         return sequential.execute(initial_state, control_inputs, dt, horizon, **kwargs)\n     175 | \n     176 | \n     177 | class WorkerPool:\n     178 |     \"\"\"Reusable worker pool for parallel simulations.\"\"\"\n     179 | "
+  },
+  {
+    "claim_id": "CODE-IMPL-476",
+    "file": "src\\simulation\\orchestrators\\sequential.py",
+    "line": 187,
+    "context": "Legacy simulation runner for backward compatibility...",
+    "code": "     167 | def step(x, u, dt):\n     168 |     \"\"\"Legacy step function for backward compatibility.\n     169 | \n     170 |     Parameters\n     171 |     ----------\n     172 |     x : array-like\n     173 |         Current state\n     174 |     u : array-like\n     175 |         Control input\n     176 |     dt : float\n     177 |         Time step\n     178 | \n     179 |     Returns\n     180 |     -------\n     181 |     array-like\n     182 |         Next state\n     183 |     \"\"\"\n     184 |     return get_step_fn()(x, u, dt)\n     185 | \n     186 | \n>>>  187 | def run_simulation(\n     188 |     *,\n     189 |     controller: Any,\n     190 |     dynamics_model: Any,\n     191 |     sim_time: float,\n     192 |     dt: float,\n     193 |     initial_state: Any,\n     194 |     u_max: Optional[float] = None,\n     195 |     seed: Optional[int] = None,\n     196 |     rng: Optional[np.random.Generator] = None,\n     197 |     latency_margin: Optional[float] = None,\n     198 |     fallback_controller: Optional[Callable[[float, np.ndarray], float]] = None,\n     199 |     **_kwargs: Any,\n     200 | ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:\n     201 |     \"\"\"Legacy simulation runner for backward compatibility.\n     202 | \n     203 |     This function maintains the exact interface and behavior of the original\n     204 |     run_simulation function from simulation_runner.py.\n     205 | \n     206 |     Parameters\n     207 |     ----------"
+  },
+  {
+    "claim_id": "CODE-IMPL-477",
+    "file": "src\\simulation\\results\\containers.py",
+    "line": 1,
+    "context": "Result container implementations for simulation data...",
+    "code": ">>>    1 | #======================================================================================\\\\\\\n       2 | #======================== src/simulation/results/containers.py ========================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"Result container implementations for simulation data.\"\"\"\n       6 | \n       7 | from __future__ import annotations\n       8 | \n       9 | from typing import Any, Dict, List, Optional\n      10 | import numpy as np\n      11 | \n      12 | from ..core.interfaces import ResultContainer\n      13 | \n      14 | \n      15 | class StandardResultContainer(ResultContainer):\n      16 |     \"\"\"Standard result container for single simulations.\"\"\"\n      17 | \n      18 |     def __init__(self):\n      19 |         \"\"\"Initialize standard result container.\"\"\"\n      20 |         self.states = None\n      21 |         self.times = None"
+  },
+  {
+    "claim_id": "CODE-IMPL-478",
+    "file": "src\\simulation\\safety\\recovery.py",
+    "line": 18,
+    "context": "Implement recovery strategy...",
+    "code": "       1 | #======================================================================================\\\\\\\n       2 | #========================= src/simulation/safety/recovery.py ==========================\\\\\\\n       3 | #======================================================================================\\\\\\\n       4 | \n       5 | \"\"\"Safety recovery strategies for simulation framework.\"\"\"\n       6 | \n       7 | from __future__ import annotations\n       8 | \n       9 | from abc import ABC, abstractmethod\n      10 | from typing import Any, Optional\n      11 | import numpy as np\n      12 | \n      13 | \n      14 | class RecoveryStrategy(ABC):\n      15 |     \"\"\"Base class for safety recovery strategies.\"\"\"\n      16 | \n      17 |     @abstractmethod\n>>>   18 |     def recover(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      19 |         \"\"\"Implement recovery strategy.\n      20 | \n      21 |         Parameters\n      22 |         ----------\n      23 |         state : np.ndarray\n      24 |             Current state\n      25 |         control : float\n      26 |             Current control\n      27 |         violation_info : dict\n      28 |             Information about the safety violation\n      29 | \n      30 |         Returns\n      31 |         -------\n      32 |         tuple\n      33 |             (recovered_state, recovered_control, success)\n      34 |         \"\"\"\n      35 |         pass\n      36 | \n      37 | \n      38 | class EmergencyStop(RecoveryStrategy):"
+  },
+  {
+    "claim_id": "CODE-IMPL-479",
+    "file": "src\\simulation\\safety\\recovery.py",
+    "line": 38,
+    "context": "Emergency stop recovery strategy...",
+    "code": "      18 |     def recover(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      19 |         \"\"\"Implement recovery strategy.\n      20 | \n      21 |         Parameters\n      22 |         ----------\n      23 |         state : np.ndarray\n      24 |             Current state\n      25 |         control : float\n      26 |             Current control\n      27 |         violation_info : dict\n      28 |             Information about the safety violation\n      29 | \n      30 |         Returns\n      31 |         -------\n      32 |         tuple\n      33 |             (recovered_state, recovered_control, success)\n      34 |         \"\"\"\n      35 |         pass\n      36 | \n      37 | \n>>>   38 | class EmergencyStop(RecoveryStrategy):\n      39 |     \"\"\"Emergency stop recovery strategy.\"\"\"\n      40 | \n      41 |     def recover(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      42 |         \"\"\"Apply emergency stop - zero control and hold state.\"\"\"\n      43 |         return state.copy(), 0.0, True\n      44 | \n      45 | \n      46 | class StateLimiter(RecoveryStrategy):\n      47 |     \"\"\"State limiting recovery strategy.\"\"\"\n      48 | \n      49 |     def __init__(self, lower_bounds: np.ndarray, upper_bounds: np.ndarray):\n      50 |         \"\"\"Initialize state limiter.\n      51 | \n      52 |         Parameters\n      53 |         ----------\n      54 |         lower_bounds : np.ndarray\n      55 |             Lower bounds for state variables\n      56 |         upper_bounds : np.ndarray\n      57 |             Upper bounds for state variables\n      58 |         \"\"\""
+  },
+  {
+    "claim_id": "CODE-IMPL-480",
+    "file": "src\\simulation\\safety\\recovery.py",
+    "line": 46,
+    "context": "State limiting recovery strategy...",
+    "code": "      26 |             Current control\n      27 |         violation_info : dict\n      28 |             Information about the safety violation\n      29 | \n      30 |         Returns\n      31 |         -------\n      32 |         tuple\n      33 |             (recovered_state, recovered_control, success)\n      34 |         \"\"\"\n      35 |         pass\n      36 | \n      37 | \n      38 | class EmergencyStop(RecoveryStrategy):\n      39 |     \"\"\"Emergency stop recovery strategy.\"\"\"\n      40 | \n      41 |     def recover(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      42 |         \"\"\"Apply emergency stop - zero control and hold state.\"\"\"\n      43 |         return state.copy(), 0.0, True\n      44 | \n      45 | \n>>>   46 | class StateLimiter(RecoveryStrategy):\n      47 |     \"\"\"State limiting recovery strategy.\"\"\"\n      48 | \n      49 |     def __init__(self, lower_bounds: np.ndarray, upper_bounds: np.ndarray):\n      50 |         \"\"\"Initialize state limiter.\n      51 | \n      52 |         Parameters\n      53 |         ----------\n      54 |         lower_bounds : np.ndarray\n      55 |             Lower bounds for state variables\n      56 |         upper_bounds : np.ndarray\n      57 |             Upper bounds for state variables\n      58 |         \"\"\"\n      59 |         self.lower_bounds = lower_bounds\n      60 |         self.upper_bounds = upper_bounds\n      61 | \n      62 |     def recover(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      63 |         \"\"\"Clip state to bounds and reduce control.\"\"\"\n      64 |         recovered_state = np.clip(state, self.lower_bounds, self.upper_bounds)\n      65 |         recovered_control = control * 0.5  # Reduce control aggressiveness\n      66 |         return recovered_state, recovered_control, True"
+  },
+  {
+    "claim_id": "CODE-IMPL-481",
+    "file": "src\\simulation\\safety\\recovery.py",
+    "line": 77,
+    "context": "Register recovery strategy for specific violation type...",
+    "code": "      57 |             Upper bounds for state variables\n      58 |         \"\"\"\n      59 |         self.lower_bounds = lower_bounds\n      60 |         self.upper_bounds = upper_bounds\n      61 | \n      62 |     def recover(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      63 |         \"\"\"Clip state to bounds and reduce control.\"\"\"\n      64 |         recovered_state = np.clip(state, self.lower_bounds, self.upper_bounds)\n      65 |         recovered_control = control * 0.5  # Reduce control aggressiveness\n      66 |         return recovered_state, recovered_control, True\n      67 | \n      68 | \n      69 | class SafetyRecovery:\n      70 |     \"\"\"Safety recovery manager.\"\"\"\n      71 | \n      72 |     def __init__(self):\n      73 |         \"\"\"Initialize safety recovery manager.\"\"\"\n      74 |         self.strategies = {}\n      75 |         self.default_strategy = EmergencyStop()\n      76 | \n>>>   77 |     def register_strategy(self, violation_type: str, strategy: RecoveryStrategy) -> None:\n      78 |         \"\"\"Register recovery strategy for specific violation type.\"\"\"\n      79 |         self.strategies[violation_type] = strategy\n      80 | \n      81 |     def apply_recovery(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      82 |         \"\"\"Apply appropriate recovery strategy.\"\"\"\n      83 |         violation_type = violation_info.get('type', 'unknown')\n      84 |         strategy = self.strategies.get(violation_type, self.default_strategy)\n      85 |         return strategy.recover(state, control, violation_info)"
+  },
+  {
+    "claim_id": "CODE-IMPL-482",
+    "file": "src\\simulation\\safety\\recovery.py",
+    "line": 81,
+    "context": "Apply appropriate recovery strategy...",
+    "code": "      61 | \n      62 |     def recover(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      63 |         \"\"\"Clip state to bounds and reduce control.\"\"\"\n      64 |         recovered_state = np.clip(state, self.lower_bounds, self.upper_bounds)\n      65 |         recovered_control = control * 0.5  # Reduce control aggressiveness\n      66 |         return recovered_state, recovered_control, True\n      67 | \n      68 | \n      69 | class SafetyRecovery:\n      70 |     \"\"\"Safety recovery manager.\"\"\"\n      71 | \n      72 |     def __init__(self):\n      73 |         \"\"\"Initialize safety recovery manager.\"\"\"\n      74 |         self.strategies = {}\n      75 |         self.default_strategy = EmergencyStop()\n      76 | \n      77 |     def register_strategy(self, violation_type: str, strategy: RecoveryStrategy) -> None:\n      78 |         \"\"\"Register recovery strategy for specific violation type.\"\"\"\n      79 |         self.strategies[violation_type] = strategy\n      80 | \n>>>   81 |     def apply_recovery(self, state: np.ndarray, control: float, violation_info: dict) -> tuple:\n      82 |         \"\"\"Apply appropriate recovery strategy.\"\"\"\n      83 |         violation_type = violation_info.get('type', 'unknown')\n      84 |         strategy = self.strategies.get(violation_type, self.default_strategy)\n      85 |         return strategy.recover(state, control, violation_info)"
+  },
+  {
+    "claim_id": "CODE-IMPL-517",
+    "file": "src\\utils\\types\\control_outputs.py",
+    "line": 86,
+    "context": "according to the super‑twisting\n    algorithm and are needed to resume control in the next time step...",
+    "code": "      66 |         The saturated control input (N).\n      67 |     state : Tuple[float, ...]\n      68 |         A tuple containing the updated integrator or adaptation states\n      69 |         returned by the controller.  The length of this tuple depends on\n      70 |         the controller implementation (e.g., leak integrator value).\n      71 |     history : Dict[str, Any]\n      72 |         Dictionary capturing intermediate variables and trajectories.\n      73 |     sigma : float\n      74 |         Current sliding surface value.  Exposing sigma allows the caller\n      75 |         to monitor the switching surface and verify sliding mode\n      76 |         convergence.  Providing it here rather than re‑computing avoids\n      77 |         redundant calculations.\n      78 |     \"\"\"\n      79 | \n      80 |     u: float\n      81 |     state: Tuple[float, ...]\n      82 |     history: Dict[str, Any]\n      83 |     sigma: float\n      84 | \n      85 | \n>>>   86 | class STAOutput(NamedTuple):\n      87 |     \"\"\"Return type for super‑twisting controllers.\n      88 | \n      89 |     Parameters\n      90 |     ----------\n      91 |     u : float\n      92 |         The bounded control input (N).\n      93 |     state : Tuple[float, float]\n      94 |         A tuple containing the auxiliary integrator states (e.g., ``z`` and\n      95 |         ``sigma``).  These states evolve according to the super‑twisting\n      96 |         algorithm and are needed to resume control in the next time step.\n      97 |     history : Dict[str, Any]\n      98 |         History information for diagnostics and plotting.\n      99 |     \"\"\"\n     100 | \n     101 |     u: float\n     102 |     state: Tuple[float, ...]\n     103 |     history: Dict[str, Any]\n     104 | \n     105 | \n     106 | class HybridSTAOutput(NamedTuple):"
+  }
+]
+```
+
+---
+
+## Your Output Format
+
+Return a JSON array with exactly 108 elements in this format:
+
+```json
+[
+  {
+    "claim_id": "CODE-IMPL-XXX",
+    "category": "A" | "B" | "C",
+    "confidence": "HIGH" | "MEDIUM" | "LOW",
+    "rationale": "Based on ACTUAL CODE: brief explanation (1-2 sentences)",
+    "code_summary": "What this code does (1 sentence, <50 words)",
+
+    // IF CATEGORY A (Peer-Reviewed Paper):
+    "algorithm_name": "Specific algorithm name",
+    "suggested_citation": "Author (Year)",
+    "bibtex_key": "author_year_keyword",
+    "doi_or_url": "DOI (10.xxxx/...) or arXiv URL",
+    "paper_title": "Full paper title",
+    "reference_type": "journal" | "conference" | "arxiv",
+    "verification": "Why this paper matches code (cite equation/section if possible)",
+
+    // IF CATEGORY B (Textbook):
+    "concept": "Control theory concept being documented",
+    "suggested_citation": "Author (Year)",
+    "bibtex_key": "author_year_keyword",
+    "isbn": "ISBN number",
+    "book_title": "Full book title",
+    "reference_type": "book",
+    "chapter_section": "Relevant chapter/section (if known)",
+
+    // IF CATEGORY C (No Citation):
+    // Leave citation fields empty or omit them
+    "suggested_citation": "",
+    "bibtex_key": "",
+    "doi_or_url": "",
+    "reference_type": ""
+  },
+  ...
+]
+```
+
+---
+
+## Known Algorithm Citations (For Reference)
+
+If you detect these algorithms being **implemented** (not just called), use these citations:
+
+### Optimization Algorithms
+- **Differential Evolution**: Storn & Price (1997) "Differential Evolution – A Simple and Efficient Heuristic..." DOI: 10.1023/A:1008202821328
+- **Genetic Algorithm**: Goldberg (1989) "Genetic Algorithms in Search, Optimization, and Machine Learning" ISBN: 978-0201157673
+- **BFGS**: Nocedal & Wright (2006) "Numerical Optimization" ISBN: 978-0387303031 (Chapter 6)
+- **Nelder-Mead**: Nelder & Mead (1965) "A Simplex Method for Function Minimization" DOI: 10.1093/comjnl/7.4.308
+
+### Numerical Methods
+- **Recursive Least Squares**: Ljung (1999) "System Identification: Theory for the User" ISBN: 978-0136566953
+- **Runge-Kutta (RK45)**: Hairer et al. (1993) "Solving Ordinary Differential Equations I" ISBN: 978-3540566700
+
+### Control Theory
+- **Sliding Mode Control Theory**: Utkin (1992) "Sliding Modes in Control and Optimization" ISBN: 978-3642843815
+- **Control Stability Metrics**: Ogata (2010) "Modern Control Engineering" ISBN: 978-0136156734
+
+---
+
+## Citation Quality Requirements
+
+### Category A Citations Must:
+1. ✅ Paper title explicitly mentions the algorithm
+2. ✅ DOI format is `10.xxxx/...` or arXiv URL
+3. ✅ Reference type is `journal`, `conference`, or `arxiv`
+4. ✅ You verified the abstract matches the implementation
+5. ❌ Do NOT cite generic "optimization" papers
+6. ❌ Do NOT cite Wikipedia or blog posts
+
+### Category B Citations Must:
+1. ✅ Standard textbook from graduate control/optimization courses
+2. ✅ ISBN included
+3. ✅ Reference type is `book`
+
+---
+
+## Example Outputs
+
+### Example 1: Category C (No Citation) - Module Import
+
+**Input Code:**
+```python
+from .pso import PSO
+from .differential import DifferentialEvolution
+
+__all__ = ["PSO", "DifferentialEvolution"]
+```
+
+**Output:**
+```json
+{
+  "claim_id": "CODE-IMPL-XXX",
+  "category": "C",
+  "confidence": "HIGH",
+  "rationale": "Module __init__.py imports - pure Python packaging infrastructure",
+  "code_summary": "Exports PSO and DifferentialEvolution classes for module interface",
+  "suggested_citation": "",
+  "bibtex_key": "",
+  "doi_or_url": "",
+  "reference_type": ""
+}
+```
+
+---
+
+### Example 2: Category A (Algorithm Implementation) - Differential Evolution
+
+**Input Code:**
+```python
+def _mutation(self, population, F):
+    """Perform DE/rand/1 mutation strategy."""
+    n_pop = len(population)
+    mutants = []
+    for i in range(n_pop):
+        indices = [idx for idx in range(n_pop) if idx != i]
+        r1, r2, r3 = random.sample(indices, 3)
+        mutant = population[r1] + F * (population[r2] - population[r3])
+        mutants.append(mutant)
+    return mutants
+```
+
+**Output:**
+```json
+{
+  "claim_id": "CODE-IMPL-XXX",
+  "category": "A",
+  "confidence": "HIGH",
+  "rationale": "Implements DE/rand/1 mutation operator from scratch (not calling library)",
+  "code_summary": "Differential evolution mutation: v_i = x_r1 + F(x_r2 - x_r3)",
+  "algorithm_name": "Differential Evolution",
+  "suggested_citation": "Storn & Price (1997)",
+  "bibtex_key": "storn1997differential",
+  "doi_or_url": "10.1023/A:1008202821328",
+  "paper_title": "Differential Evolution – A Simple and Efficient Heuristic for Global Optimization over Continuous Spaces",
+  "reference_type": "journal",
+  "verification": "Paper Eq. (1) defines DE/rand/1 mutation: v_i = x_r1 + F(x_r2 - x_r3), exactly matches implementation"
+}
+```
+
+---
+
+### Example 3: Category C (Library Usage) - NOT Implementation
+
+**Input Code:**
+```python
+from scipy.optimize import differential_evolution
+
+def optimize_gains(objective_func, bounds):
+    result = differential_evolution(objective_func, bounds)
+    return result.x
+```
+
+**Output:**
+```json
+{
+  "claim_id": "CODE-IMPL-XXX",
+  "category": "C",
+  "confidence": "HIGH",
+  "rationale": "Calls scipy library function - NOT implementing the algorithm",
+  "code_summary": "Uses scipy.optimize.differential_evolution (library call, not implementation)",
+  "suggested_citation": "",
+  "bibtex_key": "",
+  "doi_or_url": "",
+  "reference_type": ""
+}
+```
+
+---
+
+### Example 4: Category B (Textbook Concept)
+
+**Input Code:**
+```python
+"""
+Stability Analysis Metrics.
+
+Computes standard control system performance metrics:
+- Settling time: Time for error to remain within ±2% of final value
+- Overshoot: Maximum deviation from final value
+- Rise time: Time to reach 90% of final value
+
+These metrics characterize the transient response of control systems.
+"""
+```
+
+**Output:**
+```json
+{
+  "claim_id": "CODE-IMPL-XXX",
+  "category": "B",
+  "confidence": "HIGH",
+  "rationale": "Module docstring explaining standard control metrics (not implementing specific algorithm)",
+  "code_summary": "Documents stability metrics definitions (settling time, overshoot, rise time)",
+  "concept": "Transient response performance metrics for control systems",
+  "suggested_citation": "Ogata (2010)",
+  "bibtex_key": "ogata2010modern",
+  "isbn": "978-0136156734",
+  "book_title": "Modern Control Engineering",
+  "reference_type": "book",
+  "chapter_section": "Chapter 5: Transient Response Analysis"
+}
+```
+
+---
+
+## Processing Guidelines
+
+1. **Read code carefully** - Ignore the `context` field, focus on `code` field
+2. **Default to Category C** - Most claims (~70%) are pure implementation
+3. **Be strict for Category A** - Only if implementing algorithm equations manually
+4. **For Category A** - Google Scholar search: "[algorithm name] original paper"
+5. **For Category B** - Use recommended textbooks from list above
+6. **For Category C** - No citation needed (most common!)
+
+---
+
+## Validation Checklist
+
+Before submitting, verify:
+
+- [ ] All 108 claims processed
+- [ ] Each claim has `claim_id`, `category`, `confidence`, `rationale`, `code_summary`
+- [ ] Category A claims have valid DOI (format `10.xxxx/...`) or arXiv URL
+- [ ] Category A paper titles explicitly mention the algorithm
+- [ ] Category B claims have ISBN numbers
+- [ ] Category C claims have empty citation fields
+- [ ] Rationales are based on ACTUAL CODE, not context descriptions
+- [ ] Output is valid JSON array
+
+---
+
+## Expected Distribution
+
+Based on project analysis:
+- **Category C** (No citation): ~70-75 claims (65-70%)
+- **Category A** (Papers): ~20-25 claims (20-23%)
+- **Category B** (Textbooks): ~10-13 claims (10-12%)
+
+If your distribution differs significantly, double-check Category C criteria - most infrastructure code needs no citation!
+
+---
+
+## BEGIN PROCESSING
+
+Please process all 108 claims and return the complete JSON array. Take your time to:
+1. Read the actual source code for each claim
+2. Apply the decision tree strictly
+3. Default to Category C when uncertain
+4. Find appropriate citations only for Categories A and B
+
+**START NOW** ↓

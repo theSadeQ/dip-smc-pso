@@ -671,6 +671,45 @@ CONCEPT_CITATIONS = {
         "year": 1999,
         "reference_type": "book",
         "chapter_section": "Chapter 9: State Feedback and Pole Placement"
+    },
+
+    # LQR Theory (for documentation)
+    "lqr_theory": {
+        "concept": "Linear-Quadratic Regulator (LQR) theory",
+        "suggested_citation": "Anderson & Moore (2007)",
+        "bibtex_key": "anderson2007optimal",
+        "isbn": "978-0486457666",
+        "book_title": "Optimal Control: Linear Quadratic Methods",
+        "authors": "Anderson, B. D. O., Moore, J. B.",
+        "year": 2007,
+        "reference_type": "book",
+        "chapter_section": "Chapter 2: LQR Optimal Control"
+    },
+
+    # Kalman Filter Theory (for documentation)
+    "kalman_theory": {
+        "concept": "Kalman Filter estimation concept",
+        "suggested_citation": "Jazwinski (1970)",
+        "bibtex_key": "jazwinski1970stochastic",
+        "isbn": "978-0123746504",
+        "book_title": "Stochastic Processes and Filtering Theory",
+        "authors": "Jazwinski, A. H.",
+        "year": 1970,
+        "reference_type": "book",
+        "chapter_section": "Chapter 7: Kalman Filtering Theory"
+    },
+
+    # Nyquist Criterion (already have, but add alt key)
+    "nyquist": {
+        "concept": "Nyquist stability criterion",
+        "suggested_citation": "Franklin et al. (2014)",
+        "bibtex_key": "franklin2014feedback",
+        "isbn": "978-0133496598",
+        "book_title": "Feedback Control of Dynamic Systems",
+        "authors": "Franklin, G. F., Powell, J. D., Emami-Naeini, A.",
+        "year": 2014,
+        "reference_type": "book",
+        "chapter_section": "Chapter 6: Nyquist Stability Criterion"
     }
 }
 

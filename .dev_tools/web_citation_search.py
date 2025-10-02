@@ -551,7 +551,7 @@ def discover_citation_with_web(
     suggested_key = suggest_citation_from_keywords(code_summary + " " + rationale, category)
     if suggested_key:
         # Import database to get full citation
-        from . import citation_database as db
+        import citation_database as db
         if category == "A" and suggested_key in [c['bibtex_key'] for c in db.ALGORITHM_CITATIONS.values()]:
             for key, cit in db.ALGORITHM_CITATIONS.items():
                 if cit['bibtex_key'] == suggested_key:

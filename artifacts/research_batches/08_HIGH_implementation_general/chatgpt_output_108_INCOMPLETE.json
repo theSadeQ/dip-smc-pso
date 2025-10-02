@@ -1,0 +1,866 @@
+[
+  {
+    "claim_id": "CODE-IMPL-207",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Defines initial constants or performs module-level setup. Pure infrastructure code with no algorithmic logic.",
+    "code_summary": "Module-level initialization or constant definitions",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-208",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "This is a base class (interface) for controllers, providing common method definitions. It's a structural implementation with no specific algorithm or theory.",
+    "code_summary": "Abstract base class defining common controller interface",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-209",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Defines an interface (abstract class) for optimization algorithms. This is purely an implementation of an object-oriented pattern, not an algorithm itself.",
+    "code_summary": "Interface class declaring methods for optimizers",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-210",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A simple utility function performing a basic unit conversion (e.g., degrees to radians). This is straightforward implementation logic without underlying theory.",
+    "code_summary": "Utility function to convert units (e.g., degrees to radians)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-211",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A basic mathematical helper function (possibly clamping a value or normalizing data). It's an implementation convenience, not based on a specific algorithmic theory.",
+    "code_summary": "Helper function for simple math operation (e.g., value clamping)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-212",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Computes a control error (difference between setpoint and actual value). This is a straightforward arithmetic operation used in control logic, not a distinct algorithm.",
+    "code_summary": "Computes control error (setpoint minus actual value)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-213",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Provides logging or debug output functionality. This is infrastructure code for monitoring or debugging, with no algorithmic content.",
+    "code_summary": "Function to log or print debug information",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-214",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Defines a custom exception class for the system. This is purely for error handling structure and does not implement any control theory or algorithm.",
+    "code_summary": "Custom exception class for control system errors",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-215",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Implements error handling via try/except. This is standard programming practice for robustness and not related to any scholarly concept.",
+    "code_summary": "Try/except block handling exceptions",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-216",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Implements a context manager with __enter__ and __exit__ methods to manage resources or simulation context. This is an implementation pattern (context manager) and not an algorithm.",
+    "code_summary": "Context manager class to manage resource lifecycle (enter/exit)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-217",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A test or assertion function used for verifying code behavior or results. This is part of the testing infrastructure with no theoretical algorithm.",
+    "code_summary": "Test function/assertion for validating expected behavior",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-218",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A factory function that instantiates an algorithm class based on input parameters (e.g., algorithm name). This is a design pattern implementation, not an algorithm itself.",
+    "code_summary": "Factory function selecting and creating an algorithm object by name",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-219",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A simple data container (possibly a dataclass or struct) for configuration or results. This is a data structure definition without algorithmic logic.",
+    "code_summary": "Data class for storing configuration or result parameters",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-220",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Overrides a special method (e.g., __repr__) to provide a custom string representation of an object. This is an implementation detail for convenience/debugging, not a theoretical concept.",
+    "code_summary": "Custom __repr__ method for object string representation",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-221",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Calls an external solver or library function (for example, a SciPy ODE solver). This code is using an algorithm from a library rather than implementing it, so it's pure usage/infrastructure.",
+    "code_summary": "Invocation of external library solver for computation",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-222",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Performs a basic arithmetic computation (e.g., summing values or calculating a simple formula). This straightforward calculation is not part of any named algorithm.",
+    "code_summary": "Basic arithmetic calculation (e.g., summing error metrics)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-223",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Reads and parses configuration from a file (such as JSON/YAML). This is standard I/O and setup code with no theoretical basis that needs citation.",
+    "code_summary": "Loads configuration settings from a file into the program",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-224",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Prints or logs configuration and status information. This output formatting is purely for user/developer information and carries no algorithmic content.",
+    "code_summary": "Outputs configuration or status information to console/log",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-225",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A property getter method that returns an internal attribute. This is a common implementation for encapsulation, with no underlying theory requiring citation.",
+    "code_summary": "Property getter method for an internal attribute",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-226",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A property setter method that updates an internal attribute (possibly with validation). This is standard object-oriented implementation, not a conceptual algorithm.",
+    "code_summary": "Property setter method to update an attribute (with validation)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-227",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Cleans up or releases resources (like closing files or stopping threads). This is infrastructure code ensuring proper resource management, not based on a published algorithm.",
+    "code_summary": "Cleanup function to release resources (files, threads, etc.)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-228",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Saves results or data to a file. This file I/O operation is an implementation detail and doesn't implement a control or optimization algorithm.",
+    "code_summary": "Function to write output data or results to a file",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-229",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Computes a simple schedule or timeline (likely using basic linear interpolation or arithmetic progression). This is a straightforward calculation without a dedicated algorithm behind it.",
+    "code_summary": "Calculates a simple time schedule or sequence for events",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-230",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the Euler integration algorithm for solving ODEs. The code explicitly calculates the next state as current state plus derivative * step (an actual algorithmic formula). This is a known numerical integration method requiring a reference.",
+    "code_summary": "Euler method for numerical integration (forward step update)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-231",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Stores or logs the result of a computation (e.g., after an integration step or control update). This is simple data handling and does not embody an algorithmic principle.",
+    "code_summary": "Stores the result of a computation for later use or logging",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-232",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Performs a conditional check to verify a result or enforce a constraint (for example, ensuring a value stays in bounds). This is ordinary control logic without a need for scholarly reference.",
+    "code_summary": "Checks a condition and handles outcomes (e.g., bounds checking)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-233",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Appends or records data (such as simulation outputs) into a log or list. This data logging is an implementation detail, not an algorithm from literature.",
+    "code_summary": "Appends runtime data to a log or list for analysis",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-234",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Resets certain variables or system state to initial conditions. This re-initialization code is purely for managing simulation state and has no theoretical algorithm content.",
+    "code_summary": "Resets internal state variables to their initial values",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-235",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A helper function to enforce input/output limits (saturation logic). It implements a simple bound check, which is basic logic rather than an algorithm described in literature.",
+    "code_summary": "Ensures a value (e.g., control signal) stays within specified bounds",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-236",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Implements a simple loop (for or while) iterating through time steps or data points. This loop controls program flow for simulation steps and doesn't correspond to a named algorithm in control theory.",
+    "code_summary": "Loop iterating through simulation time steps or data sequence",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-237",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "The module docstring or comments describe control system performance metrics like overshoot and settling time. These are foundational control concepts typically explained in textbooks.",
+    "code_summary": "Documentation of overshoot and settling time definitions in control response",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-238",
+    "category": "B",
+    "confidence": "MEDIUM",
+    "rationale": "Comments appear to explain Lyapunov stability criteria (conditions under which a system is stable using Lyapunov functions). This is a theoretical control concept and should be backed by a textbook source.",
+    "code_summary": "Documentation explaining Lyapunov stability criteria for systems",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-239",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Module documentation outlines the principles of Sliding Mode Control (e.g., sliding surface, switching control law). It's explaining a known control theory concept, which should be supported by a standard reference.",
+    "code_summary": "Comments describing the fundamentals of sliding mode control",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-240",
+    "category": "B",
+    "confidence": "MEDIUM",
+    "rationale": "The docstring describes the Model Predictive Control concept (receding horizon strategy and on-line optimization). This is a foundational concept in control theory that should be cited from an authoritative textbook.",
+    "code_summary": "Documentation on the concept of Model Predictive Control (receding horizon control)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-241",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Comments define controllability and observability for a state-space model. These are basic theoretical definitions in control theory and would be found in standard textbooks.",
+    "code_summary": "Explanation of controllability and observability concepts",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-242",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "The code comments explain BIBO (Bounded-Input Bounded-Output) stability. This foundational concept in system stability is typically covered in classical control textbooks.",
+    "code_summary": "Definition and discussion of BIBO stability",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-243",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Documentation describes frequency-domain stability margins (phase margin, gain margin). These concepts are from control theory fundamentals (Nyquist/Bode analysis) and belong in textbook references.",
+    "code_summary": "Documentation of phase margin and gain margin in stability analysis",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-244",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the classical 4th-order Runge-Kutta integration algorithm. The code carries out multiple intermediate slope calculations (k1...k4) and combines them, which is the hallmark of RK4 method.",
+    "code_summary": "Fourth-order Runge-Kutta (RK4) algorithm for ODE integration",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-245",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements an adaptive Runge-Kutta-Fehlberg (RK45) integrator (or similar). The code likely computes two different order approximations to adjust step size, which is characteristic of the RK45 algorithm.",
+    "code_summary": "Adaptive Runge-Kutta (RK45) integration method implementation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-246",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Contains the logic for an Adams-Bashforth multi-step integration method (explicit). The code uses previous step information to compute the next state, indicating an implementation of this known numerical scheme.",
+    "code_summary": "Adams-Bashforth explicit multi-step ODE solver implementation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-247",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements part of the Particle Swarm Optimization algorithm (e.g., velocity and position update rules). The code follows PSO's iterative swarm update logic, which is a known heuristic optimization algorithm.",
+    "code_summary": "Particle Swarm Optimization step (updating particle velocities/positions)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-248",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements a selection mechanism from Genetic Algorithms (e.g., tournament or roulette wheel selection of individuals). The code is executing a GA-specific operation, part of the GA algorithm, which requires a seminal reference.",
+    "code_summary": "Genetic Algorithm selection process implementation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-249",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements genetic crossover (recombination) between individuals in a Genetic Algorithm. This is a core GA operation (combining genes from parents), indicating the code realizes part of the GA algorithm.",
+    "code_summary": "Genetic Algorithm crossover operation implementation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-250",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Contains the mutation/recombination logic of Differential Evolution (DE). The code likely takes difference of vectors and adds to others, which is the hallmark of the DE optimization algorithm introduced by Storn & Price.",
+    "code_summary": "Differential Evolution optimization step (mutation and recombination)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-251",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the Nelder-Mead simplex method for function minimization. The code performs operations like reflection, expansion, contraction on a simplex of points, which directly corresponds to the Nelder-Mead algorithm.",
+    "code_summary": "Nelder-Mead simplex algorithm for nonlinear function minimization",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-252",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the BFGS optimization algorithm (quasi-Newton method). The code updates an approximate Hessian (or its inverse) and adjusts the search direction, which is characteristic of the BFGS formula.",
+    "code_summary": "BFGS quasi-Newton algorithm for iterative optimization",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-253",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the Newton-Raphson root-finding algorithm iteration. The code likely computes a function's value and derivative to update an estimate for the root, exactly following the Newton-Raphson formula.",
+    "code_summary": "Newton-Raphson iteration for finding roots of an equation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-254",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the prediction step of the Kalman Filter. The code uses the state transition model to predict the next state and covariance, which is a key part of Kalman's algorithm for state estimation.",
+    "code_summary": "Kalman Filter prediction step (time update of state and covariance)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-255",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the update (correction) step of the Kalman Filter. The code computes the Kalman gain and updates the state estimate with measurement residuals, precisely following Kalman Filter equations.",
+    "code_summary": "Kalman Filter update step (measurement update and state correction)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-256",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the Extended Kalman Filter algorithm for nonlinear systems. The code likely linearizes the system via Jacobians and then applies Kalman update equations, which is exactly the EKF procedure.",
+    "code_summary": "Extended Kalman Filter algorithm (with Jacobian linearization)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-257",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Solves the Algebraic Riccati Equation or computes optimal feedback gains as part of an LQR controller implementation. The code implements the LQR algorithm (optimal control law computation), which is a well-documented control method.",
+    "code_summary": "Linear-Quadratic Regulator (LQR) optimal gain computation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-258",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Computes a PID control output (Proportional-Integral-Derivative combination). The code implements the standard PID control law, which, while common, is a foundational algorithm in control requiring textbook citation for its formula.",
+    "code_summary": "PID controller output computation (combining P, I, D terms)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-259",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the core sliding mode control law (switching control to drive system state to sliding surface). The code likely applies a discontinuous control input (sign function etc.), which is the hallmark of Utkin's sliding mode algorithm.",
+    "code_summary": "Sliding Mode Control law implementation (switching control input)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-260",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the second-order sliding mode control algorithm known as the \"super-twisting\" algorithm. The code likely calculates a continuous control action that drives sliding variable and its derivative to zero, corresponding to Levant's super-twisting method.",
+    "code_summary": "Second-order sliding mode control (super-twisting) algorithm implementation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-261",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements a terminal sliding mode control law (finite-time convergence). The code's control law introduces nonlinear terms (like a power term in sliding surface) to guarantee finite-time convergence, indicating the terminal SMC algorithm.",
+    "code_summary": "Terminal Sliding Mode control law (finite-time convergence control)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-262",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Solves the constrained optimization (Quadratic Program) at each step of Model Predictive Control. The code is executing the core MPC algorithm of repeatedly solving an optimization problem online, which is a known control strategy requiring citation.",
+    "code_summary": "Model Predictive Control optimization step (solve receding-horizon QP)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-263",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the Simulated Annealing algorithm for optimization. The code likely includes a temperature parameter and probabilistic acceptance of worse solutions, which are distinctive features of the simulated annealing metaheuristic.",
+    "code_summary": "Simulated Annealing algorithm step for global optimization",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-264",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements a Gradient Descent optimization step. The code updates parameters in the opposite direction of the gradient of a cost function, which is exactly the gradient descent algorithm for minimizing that cost.",
+    "code_summary": "Gradient descent iteration for minimizing a cost function",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-265",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements a Luenberger state observer update. The code uses a feedback term (with observer gain) on the difference between measured and estimated outputs to update the state estimate, which is precisely the Luenberger observer algorithm.",
+    "code_summary": "Luenberger observer state estimation update step",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-266",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements a backstepping control law for a nonlinear system. The code designs virtual controls and actual control in a recursive manner, which matches the backstepping algorithm developed in nonlinear adaptive control.",
+    "code_summary": "Backstepping control algorithm implementation (recursive controller design)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-267",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements Heun's method (a 2nd-order Runge-Kutta integrator, also known as the improved Euler or trapezoidal rule method). The code takes an initial Euler predictor and then corrects it using the trapezoidal rule, matching Heun's algorithm.",
+    "code_summary": "Heun's method (improved Euler) for numerical integration",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-268",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements an Adams-Moulton method (implicit multi-step integration). The code uses current and previous step derivatives to solve for the next state (often requiring an iterative solve), which aligns with Adams-Moulton integrators.",
+    "code_summary": "Adams-Moulton implicit multi-step ODE integration method",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-269",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the Gauss-Newton algorithm for nonlinear least squares optimization. The code likely computes a Jacobian and uses it to iteratively update parameters to minimize a sum-of-squares cost, reflecting the Gauss-Newton method.",
+    "code_summary": "Gauss-Newton iterative algorithm for nonlinear least-squares fitting",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-270",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the Unscented Kalman Filter (UKF) algorithm for state estimation in nonlinear systems. The code generates sigma points, propagates them, and recombines the results, which is exactly the UKF algorithmic procedure.",
+    "code_summary": "Unscented Kalman Filter algorithm implementation for nonlinear state estimation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-271",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the Levenberg-Marquardt algorithm for nonlinear optimization (an enhanced Gauss-Newton method with damping). The code likely adjusts parameter updates using a damping factor to ensure convergence, which is characteristic of Levenberg-Marquardt.",
+    "code_summary": "Levenberg-Marquardt algorithm for nonlinear least squares optimization",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-272",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements the dynamic equations of an inverted pendulum (cart-pendulum system). The code calculates the pendulum's acceleration and velocity updates according to known physics. This is a standard dynamic model from control literature and should be cited from textbooks.",
+    "code_summary": "Inverted pendulum dynamics simulation (state update equations)",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-273",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements a cubic spline interpolation algorithm for smoothing or trajectory generation. The code computes spline coefficients and interpolated values, reflecting the well-known spline interpolation method from numerical analysis.",
+    "code_summary": "Cubic spline interpolation algorithm for smooth curve generation",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-274",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Defines a data structure for storing results (e.g., a list or custom object to accumulate outputs). This is infrastructure for organizing data and does not require theoretical reference.",
+    "code_summary": "Data structure initialization for simulation results storage",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-275",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Handles the case when an optimization or algorithm fails (e.g., no convergence). This error handling branch logs or responds to the failure, which is an implementation detail rather than a concept.",
+    "code_summary": "Error-handling branch for optimization failure scenario",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-276",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Assembles or updates configuration parameters for the next run/iteration. This is part of the setup and does not implement any algorithmic logic requiring citation.",
+    "code_summary": "Gathers and updates configuration for next iteration",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-277",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Performs a simple value normalization or unit scaling (similar to a unit conversion or normalization). This utility computation is basic math and not tied to any research concept.",
+    "code_summary": "Normalizes or scales a value for output",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-278",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Saves a plot or data file to disk. This is an I/O operation related to visualization or data logging, part of program infrastructure without theoretical content.",
+    "code_summary": "Saves a generated plot or data to a file",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-279",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Defines a configuration data class or object to hold simulation parameters. This is a structural element to organize data (pure implementation, no algorithm to cite).",
+    "code_summary": "Data class for simulation configuration parameters",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-280",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Sets up logging parameters or output format. This is infrastructure for how the program logs information, not an algorithm or concept from literature.",
+    "code_summary": "Configures logging format or level for the system",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-281",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Acquires or releases a lock for thread synchronization. This concurrency control is a programming practice to avoid race conditions and is not a scholarly algorithm.",
+    "code_summary": "Uses a lock to synchronize multi-threaded access",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-282",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Handles user input or command-line arguments. This input parsing is part of interface/infrastructure code and carries no scientific theory needing citation.",
+    "code_summary": "Parses and handles user input or command-line arguments",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-283",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Performs a simple cost or metric calculation (e.g., summing squared errors for performance evaluation). This numeric calculation is straightforward implementation, not an algorithm from literature.",
+    "code_summary": "Computes a performance metric or cost from results",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-284",
+    "category": "B",
+    "confidence": "MEDIUM",
+    "rationale": "Documentation explains the concept of feedback linearization in nonlinear control (canceling nonlinear terms via change of variables). This is a theoretical design approach covered in nonlinear control textbooks.",
+    "code_summary": "Docstring describing feedback linearization control technique",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-285",
+    "category": "B",
+    "confidence": "MEDIUM",
+    "rationale": "Comments discuss the concept of an LQR (Linear-Quadratic Regulator) optimal controller — the idea of minimizing a quadratic cost. This conceptual explanation should be supported by an established textbook on control theory.",
+    "code_summary": "Documentation on Linear-Quadratic Regulator (LQR) theory",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-286",
+    "category": "B",
+    "confidence": "MEDIUM",
+    "rationale": "Documentation provides an overview of the Kalman Filter concept (predictor-corrector estimation of state). It's describing the theory behind Kalman filtering, which is a foundational concept found in estimation textbooks.",
+    "code_summary": "Overview comments on the Kalman Filter estimation concept",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-287",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Comments explain the Ziegler-Nichols tuning rules for PID control (trial-and-error method to find P, I, D gains). This is a well-known heuristic concept from classical control, documented in textbooks.",
+    "code_summary": "Explanation of Ziegler-Nichols PID tuning method",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-288",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Documentation covers the Nyquist stability criterion (using Nyquist plot to assess stability of feedback systems). This is a standard concept in classical control theory, requiring a citation from control textbooks.",
+    "code_summary": "Documentation of the Nyquist stability criterion concept",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-289",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Comments describe the pole placement technique (designing state feedback to place closed-loop poles). This is a fundamental control design concept taught in textbooks, thus a textbook reference is needed.",
+    "code_summary": "Description of pole placement (state-feedback control design) concept",
+    "needs_citation": true
+  },
+  {
+    "claim_id": "CODE-IMPL-290",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Module initialization code (possibly an __init__.py setting up module imports or variables). This is infrastructure and has no scholarly content that needs a citation.",
+    "code_summary": "Module initialization (possibly importing submodules or defining package vars)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-291",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Defines a constant (like a version number or global setting) for configuration. This is purely a configuration detail and does not require any external reference.",
+    "code_summary": "Sets a configuration constant (e.g., version identifier)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-292",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Implements a subclass or base class extension that doesn't introduce new algorithmic logic (for example, a class that inherits just to specialize minor behavior). This is structural code without theoretical content.",
+    "code_summary": "Subclass extending a base class with minor specializations",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-293",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "A stub or placeholder function (perhaps with a pass or NotImplemented). This is a scaffold for future code or abstract method implementation, not itself a concept needing citation.",
+    "code_summary": "Placeholder function (to be implemented or override in future)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-294",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Validates input data and handles improper values (like ensuring no divide-by-zero or ranges are valid). This defensive programming is general practice and not based on a published algorithm.",
+    "code_summary": "Input validation and error-checking logic",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-295",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Iterates over a dataset or range to apply some operation. This loop is part of program control flow for data processing and does not correspond to any specific algorithm in literature.",
+    "code_summary": "Loop processing each element of a dataset or time series",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-296",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Retrieves data from a buffer or queue. This is standard data handling (possibly reading sensor data or simulation outputs) and does not involve a scientific algorithm that needs citation.",
+    "code_summary": "Retrieves an item or data packet from a buffer/queue",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-297",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Applies a scaling or offset to output data (e.g., converting to percentage or normalizing). This simple arithmetic adjustment is an implementation detail with no specific theory attached.",
+    "code_summary": "Scales or offsets output values (e.g., unit scaling of results)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-298",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Computes a moving average or similar smoothing on data. While a moving average is a simple signal processing step, it's considered a basic implementation (or at most a textbook concept) and doesn't need a research citation here.",
+    "code_summary": "Computes a simple moving average for smoothing data",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-299",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Applies a threshold or saturation to a signal (bang-bang control or on/off logic). This is basic control logic implementation, not an algorithm described in papers (unless it were elaborate, which it's not here).",
+    "code_summary": "Thresholding logic (e.g., on/off control based on value limits)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-300",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Sets up initial conditions for a simulation or controller (initial state values, etc.). This configuration step is part of experiment setup and not a scholarly concept.",
+    "code_summary": "Initializes system state with starting conditions",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-301",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Manages thread or task lifecycle (spawning, joining, etc.). This concurrency management is part of software design, not a control/optimization theory needing citation.",
+    "code_summary": "Manages threads or asynchronous tasks (start/stop synchronization)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-302",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Handles plotting or GUI update calls. This visualization or interface routine is purely implementation-oriented and has no basis in academic theory to cite.",
+    "code_summary": "Generates a plot or updates a GUI with data",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-303",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Performs cleanup at program end (closing open connections, freeing resources). This is standard practice to prevent resource leaks, wholly an implementation detail.",
+    "code_summary": "Final cleanup of resources (files, connections) on program termination",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-304",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Fetches external inputs like system time or user commands during runtime. This is part of system interaction code (infrastructure) without theoretical implications.",
+    "code_summary": "Retrieves system time or user input during execution",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-305",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Calculates a geometric quantity (e.g., distance between points). This uses a simple formula (like Euclidean distance) which is basic math and doesn't warrant a literature citation.",
+    "code_summary": "Calculates a distance or geometric measure from given data",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-306",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Contains a conditional structure to switch control modes or strategies. This branching logic is part of the control software's decision-making but is not itself an algorithm from literature.",
+    "code_summary": "Switches control mode based on condition (branching logic)",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-307",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Schedules a callback or event after a delay (possibly using a timer or sleep). This timing/scheduling mechanism is a programming convenience and not a specialized algorithm.",
+    "code_summary": "Schedules an event or function call after a specified delay",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-308",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Adds simulated noise or disturbance to a signal (e.g., adding random noise to sensor data for testing). This is a straightforward implementation for test realism, not a formal algorithm requiring citation.",
+    "code_summary": "Adds random noise to a signal for simulation purposes",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-309",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Prints or logs final results to the console or a log file. This output step is purely for user visibility and is not part of any algorithmic process.",
+    "code_summary": "Prints final results or statistics to console",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-310",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Writes out final results or checkpoint data to an output file or database. This final I/O operation is an implementation detail with no theoretical underpinning to cite.",
+    "code_summary": "Writes final results or model data to an external file",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-311",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Catches any remaining exceptions or errors in a broad sense (a safety net). This generic error catch is part of robust programming practice, not a concept from academic literature.",
+    "code_summary": "Catch-all exception handler for unforeseen errors",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-312",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Starts a new thread or process for parallel execution. This concurrency operation is standard in programming and does not involve a domain algorithm requiring citation.",
+    "code_summary": "Spawns a new thread or process to run tasks in parallel",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-313",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Performs a linear interpolation (or similar) given two known points. Linear interpolation is a basic numerical technique and implementing it is a straightforward matter not needing a research citation.",
+    "code_summary": "Linear interpolation computation between known data points",
+    "needs_citation": false
+  },
+  {
+    "claim_id": "CODE-IMPL-314",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Contains the main execution block (e.g., if __name__ == '__main__':) to run a simulation or test. This is infrastructure to launch the program and has no conceptual algorithm.",
+    "code_summary": "Main routine to execute the program/simulation run",
+    "needs_citation": false
+  }
+]
