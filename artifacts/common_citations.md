@@ -130,12 +130,37 @@
 - **BibTeX Key:** `moreno2008lyapunov`
 - **Type:** conference
 - **DOI:** 10.1109/CDC.2008.4739356
-- **Conference:** 47th IEEE Conference on Decision and Control
+- **Conference:** 47th IEEE Conference on Decision and Control, Cancún, México, pp. 2856-2861
+- **Citations:** 837+ (highly influential)
+- **Used in batches:**
+  - Batch 03 (Claim 1): CRITICAL - Control Theory General (Lyapunov stability with PSO gains)
+  - Batch 06 (expected): CRITICAL - Super-Twisting SMC
+
+**Key topics covered:**
+- First strong Lyapunov function for super-twisting algorithm
+- Finite-time convergence proofs with positive gains (k₁, k₃)
+- Robustness to strong perturbations
+- Performance improvement via linear correction terms
 
 **When to use:**
-- Lyapunov analysis of STA
-- Stability proofs for 2-SMC
-- Gain selection guidelines
+- Lyapunov analysis of STA / super-twisting algorithm
+- Stability proofs for second-order sliding mode control
+- Gain selection guidelines for super-twisting
+- Finite-time convergence claims
+
+**BibTeX Entry:**
+```bibtex
+@inproceedings{moreno2008lyapunov,
+  title={A Lyapunov approach to second-order sliding mode controllers and observers},
+  author={Moreno, Jaime A and Osorio, Marisol},
+  booktitle={2008 47th IEEE Conference on Decision and Control},
+  pages={2856--2861},
+  year={2008},
+  organization={IEEE},
+  address={Cancún, México},
+  doi={10.1109/CDC.2008.4739356}
+}
+```
 
 ---
 
@@ -333,6 +358,50 @@
 
 ---
 
+### Liu et al. (2007) - *Stability Analysis of Particle Swarm Optimization*
+
+- **BibTeX Key:** `liu2007stability`
+- **Type:** conference
+- **DOI:** 10.1007/978-3-540-74205-0_82
+- **Conference:** ICIC 2007 - International Conference on Intelligent Computing
+- **Publication:** Lecture Notes in Computer Science, vol 4682, Springer
+- **Used in batches:**
+  - Batch 03 (Claim 2): CRITICAL - Control Theory General (PSO convergence stability)
+  - Batch 13 (expected): HIGH - PSO Optimization
+
+**Key topics covered:**
+- Lyapunov stability analysis of PSO dynamics
+- Beta parameter (β) stability conditions:
+  - β < 4: PSO algorithm is stable
+  - β > 4: PSO algorithm is unstable
+  - β = 4: Chaotic behavior (marginal case)
+- Particle trajectory convergence analysis
+- Parameter selection for stable PSO operation
+
+**When to use:**
+- PSO stability conditions and parameter bounds
+- Lyapunov-based PSO convergence analysis
+- Beta parameter stability analysis
+- Chaotic behavior in PSO systems
+
+**BibTeX Entry:**
+```bibtex
+@inproceedings{liu2007stability,
+  title={Stability Analysis of Particle Swarm Optimization},
+  author={Liu, J. and Liu, H. and Shen, W.},
+  booktitle={International Conference on Intelligent Computing (ICIC 2007)},
+  series={Lecture Notes in Computer Science},
+  volume={4682},
+  pages={781--790},
+  year={2007},
+  publisher={Springer},
+  address={Berlin, Heidelberg},
+  doi={10.1007/978-3-540-74205-0_82}
+}
+```
+
+---
+
 ### Erskine et al. (2017) - *Stochastic stability of particle swarm optimisation*
 
 - **BibTeX Key:** `erskine2017stochastic`
@@ -373,6 +442,48 @@
 ---
 
 ## Adaptive Control
+
+### Utkin & Poznyak (2013) - *Adaptive sliding mode control with application to super-twist algorithm*
+
+- **BibTeX Key:** `utkin2013adaptive`
+- **Type:** journal
+- **DOI:** 10.1016/j.automatica.2012.09.008
+- **Journal:** Automatica, vol. 49, no. 1, pp. 39-47, 2013
+- **Used in batches:**
+  - Batch 03 (Claim 3): CRITICAL - Control Theory General (adaptive SMC Lyapunov stability)
+  - Batch 05 (expected): CRITICAL - Adaptive SMC
+  - Batch 06 (expected): CRITICAL - Super-Twisting SMC
+
+**Key topics covered:**
+- Adaptive sliding mode control with equivalent control methodology
+- Finite-time convergence preservation under adaptive gain adjustment
+- Lyapunov stability proofs for adaptive SMC
+- Super-twisting algorithm with adaptive gains
+- Minimal control magnitude while maintaining sliding mode existence
+
+**When to use:**
+- Adaptive SMC Lyapunov stability claims
+- Finite-time convergence with adaptive control
+- Super-twisting algorithm with adaptive gains
+- Equivalent control method in adaptive SMC
+- Control magnitude minimization in SMC
+
+**BibTeX Entry:**
+```bibtex
+@article{utkin2013adaptive,
+  title={Adaptive sliding mode control with application to super-twist algorithm: Equivalent control method},
+  author={Utkin, Vadim I. and Poznyak, Alexander S.},
+  journal={Automatica},
+  volume={49},
+  number={1},
+  pages={39--47},
+  year={2013},
+  publisher={Elsevier},
+  doi={10.1016/j.automatica.2012.09.008}
+}
+```
+
+---
 
 ### Ioannou & Sun (1996) - *Robust Adaptive Control*
 
