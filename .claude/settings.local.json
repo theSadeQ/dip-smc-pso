@@ -1,12 +1,22 @@
 {
   "permissions": {
     "allow": [
-      "Bash(Select-Object -First 10 Name, LastWriteTime)"
-    ],
-    "additionalDirectories": [
-      "D:\\Projects"
+      "Bash(Select-Object -First 10 Name, LastWriteTime)",
+      "Read(//d/**)",
+      "Bash(mkdir:*)",
+      "Bash(cat:*)",
+      "Bash(python -c \"import ast; from pathlib import Path; count=0; for f in Path(''src'').rglob(''*.py''): \n    try:\n        tree = ast.parse(f.read_text(encoding=''utf-8'')); \n        for node in ast.walk(tree):\n            if isinstance(node, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):\n                if ast.get_docstring(node): count += 1\n    except: pass\nprint(f''{count} docstrings found in src/'')\")",
+      "Bash(python:*)",
+      "WebSearch",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:doi.org)",
+      "WebFetch(domain:link.springer.com)",
+      "Bash(iconv:*)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "D:\\Projects"
+    ]
   }
 }
