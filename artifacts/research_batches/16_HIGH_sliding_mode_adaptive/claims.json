@@ -1,0 +1,165 @@
+{
+  "batch_id": "16_HIGH_sliding_mode_adaptive",
+  "priority": "HIGH",
+  "topic": "sliding_mode_adaptive",
+  "claim_count": 11,
+  "estimated_time_hours": 2.2,
+  "generated_date": "2025-10-02T08:52:09.038966",
+  "claims": [
+    {
+      "id": "CODE-IMPL-101",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\adaptive_smc.py",
+      "line_number": "1",
+      "context": "Compatibility import for Adaptive SMC controller...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-119",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\adaptive_smc.py",
+      "line_number": "1",
+      "context": "Adaptive sliding\u2011mode controller with online gain adaptation...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-124",
+      "description": "Package (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\__init__.py",
+      "line_number": "1",
+      "context": "Adaptive SMC Algorithm Package...",
+      "current_citation": "",
+      "keywords": [
+        "Package",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-125",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\adaptation_law.py",
+      "line_number": "1",
+      "context": "Adaptive Gain Update Laws for Adaptive SMC...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-126",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\adaptation_law.py",
+      "line_number": "21",
+      "context": "Online gain adaptation for Adaptive SMC...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-127",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\adaptation_law.py",
+      "line_number": "83",
+      "context": "Update adaptive gain using adaptation law...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-128",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\config.py",
+      "line_number": "18",
+      "context": "Type-safe configuration for Adaptive SMC controller...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-129",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\config.py",
+      "line_number": "52",
+      "context": "Validate gain vector according to adaptive SMC theory...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-130",
+      "description": "Adaptive Sliding Mode Control using composed components:\n- LinearSlidingSurface: Surface computation\n- AdaptationLaw: Online gain adjustment\n- UncertaintyEstimator: Disturbance bound estimation\n- SwitchingFunction: Smooth chattering reduction\n\nReplaces the monolithic 427-line controller with composition (attributed to: focused modules)",
+      "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\controller.py",
+      "line_number": "1",
+      "context": "Implements Adaptive Sliding Mode Control using composed components:\n- LinearSlidingSurface: Surface computation\n- AdaptationLaw: Online gain adjustment\n- UncertaintyEstimator: Disturbance bound estima...",
+      "current_citation": "",
+      "keywords": [
+        "Adaptive",
+        "Sliding",
+        "Mode",
+        "Control",
+        "using"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-131",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\controller.py",
+      "line_number": "76",
+      "context": "Compute adaptive SMC control law...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    },
+    {
+      "id": "CODE-IMPL-198",
+      "description": "None (attributed to: None)",
+      "file_path": "src\\controllers\\smc\\hybrid_adaptive_sta_smc.py",
+      "line_number": "385",
+      "context": "Compute tapering factor for adaptive gain growth...",
+      "current_citation": "",
+      "keywords": [
+        "None",
+        "(attributed",
+        "to:",
+        "None)"
+      ]
+    }
+  ]
+}
