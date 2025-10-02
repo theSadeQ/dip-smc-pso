@@ -597,6 +597,126 @@
 
 ---
 
+## Fault Detection and Hysteresis Switching
+
+### Hespanha et al. (2003) - *Hysteresis-based switching algorithms for supervisory control*
+
+- **BibTeX Key:** `hespanha2003hysteresis`
+- **Type:** journal
+- **DOI:** 10.1016/S0005-1098(02)00241-8
+- **Journal:** Automatica, 39(2), 263-272
+- **Citations:** High-impact paper in supervisory control
+- **Used in batches:**
+  - Batch 07 (Claim 1): CRITICAL - Fault Detection (hysteresis prevents chattering)
+
+**Key topics covered:**
+- Hysteresis-based switching for supervisory control of uncertain systems
+- Deadband prevents chattering when signals have bounded derivatives
+- Finite number of switches on finite time intervals
+- Continuous monitoring signals with hysteresis separation
+
+**When to use:**
+- Hysteresis switching to prevent chattering
+- Supervisory control with multiple controllers
+- Bounded-derivative signal switching
+- Fault detection with hysteresis deadbands
+
+**BibTeX Entry:**
+```bibtex
+@article{hespanha2003hysteresis,
+  title={Hysteresis-based switching algorithms for supervisory control of uncertain systems},
+  author={Hespanha, Jo{\~a}o P. and Liberzon, Daniel and Morse, A. Stephen},
+  journal={Automatica},
+  volume={39},
+  number={2},
+  pages={263--272},
+  year={2003},
+  publisher={Elsevier},
+  doi={10.1016/S0005-1098(02)00241-8}
+}
+```
+
+---
+
+### Morse, Mayne & Goodwin (1992) - *Applications of hysteresis switching in parameter adaptive control*
+
+- **BibTeX Key:** `morse1992applications`
+- **Type:** journal
+- **DOI:** 10.1109/9.151225
+- **Journal:** IEEE Transactions on Automatic Control, 37(9), 1343-1354
+- **Citations:** Foundational paper on hysteresis in adaptive control
+- **Used in batches:**
+  - Batch 07 (Claim 1): CRITICAL - Fault Detection (hysteresis deadband prevents oscillatory switching)
+
+**Key topics covered:**
+- Hysteresis switching in parameter-adaptive control
+- Two-threshold deadband: external (trigger) and internal (reset)
+- Finite dwell time enforcement
+- Prevention of oscillatory switching with bounded signal changes
+
+**When to use:**
+- THE foundational citation for hysteresis in adaptive control
+- Two-threshold deadband design
+- Dwell-time enforcement in switching systems
+- Parameter adaptive control with hysteresis
+
+**BibTeX Entry:**
+```bibtex
+@article{morse1992applications,
+  title={Applications of hysteresis switching in parameter adaptive control},
+  author={Morse, A. Stephen and Mayne, David Q. and Goodwin, Graham C.},
+  journal={IEEE Transactions on Automatic Control},
+  volume={37},
+  number={9},
+  pages={1343--1354},
+  year={1992},
+  publisher={IEEE},
+  doi={10.1109/9.151225}
+}
+```
+
+---
+
+### Weller & Goodwin (1994) - *Hysteresis switching adaptive control of linear multivariable systems*
+
+- **BibTeX Key:** `weller1994hysteresis`
+- **Type:** journal
+- **DOI:** 10.1109/9.299622
+- **Journal:** IEEE Transactions on Automatic Control, vol. 39, no. 7, pp. 1360-1375
+- **Citations:** Influential extension of Morse (1992) to multivariable systems
+- **Used in batches:**
+  - Batch 07 (Claim 1): CRITICAL - Fault Detection (finite switching with hysteresis)
+
+**Key topics covered:**
+- Model-reference adaptive control with hysteresis switching
+- Extension of Morse's hysteresis strategy to multivariable systems
+- Explicit proof: "hysteresis precludes switching arbitrarily rapidly"
+- Finite-time switching cessation guarantee
+- Multiple estimator switching with deadband δ
+
+**When to use:**
+- Multivariable adaptive control with hysteresis
+- Finite switching proofs with deadband
+- Model-reference adaptive control (MRAC)
+- Extensions of Morse (1992) to MIMO systems
+
+**BibTeX Entry:**
+```bibtex
+@article{weller1994hysteresis,
+  title={Hysteresis switching adaptive control of linear multivariable systems},
+  author={Weller, Steven R. and Goodwin, Graham C.},
+  journal={IEEE Transactions on Automatic Control},
+  volume={39},
+  number={7},
+  pages={1360--1375},
+  year={1994},
+  publisher={IEEE},
+  doi={10.1109/9.299622}
+}
+```
+
+---
+
 ## Lyapunov Stability
 
 ### Khalil (2002) - *Nonlinear Systems* (3rd ed.)
@@ -731,6 +851,6 @@ When you find a citation used multiple times:
 ---
 
 **Last Updated:** 2025-10-02
-**Total Citations:** 20 (added Utkin 1977, Moreno & Osorio 2012)
-**Batches Completed:** 6/17 (Batches 01-06)
-**Next Update:** After completing Batch 07
+**Total Citations:** 23 (added Hespanha 2003, Morse 1992, Weller 1994)
+**Batches Completed:** 7/17 (Batches 01-07)
+**Next Update:** After completing Batch 08
