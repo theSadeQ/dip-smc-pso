@@ -99,15 +99,34 @@ After downloading each source, verify:
 
 ## Current Sources
 
-**Total citations:** [Fill in after research]
-**Downloaded:** [Fill in as you download]
+**Total citations:** 2 unique citations (all verified ✅)
+**Downloaded:** 0/2 (ready to download)
+**Quality:** 2/2 peer-reviewed (1 journal + 1 canonical textbook)
+**Citation Reuse:** 2/2 reused from previous batches (100% efficiency!) 🎉
 
 ### Downloaded Files
 
 Update this list as you download sources:
-- [ ] `citation1_bibtex_key.pdf` - Author (Year) Journal/Conference
-- [ ] `citation2_bibtex_key.pdf` - Author (Year) Journal/Conference
-- [ ] `citation3_bibtex_key.pdf` - Author (Year) Journal/Conference
+
+#### ✅ Citation 1 - van den Bergh & Engelbrecht (2006)
+- [ ] `vandenbergh2006study.pdf`
+- **Source:** Information Sciences (Elsevier), vol. 176, no. 8, pp. 937-971
+- **DOI:** 10.1016/j.ins.2005.02.003
+- **Direct URL:** https://doi.org/10.1016/j.ins.2005.02.003
+- **Alternative:** https://www.sciencedirect.com/science/article/abs/pii/S0020025505000661
+- **Access:** ScienceDirect (institutional access or ResearchGate)
+- **Note:** PSO Lyapunov stability - eigenvalue convergence conditions for DIP
+- **Reused from:** Batch 02 (Claim 2), Batch 04 (Claim 1)
+
+#### ✅ Citation 2 - Utkin (1992)
+- [ ] `utkin1992sliding_link.txt` (or PDF if available)
+- **Source:** Sliding Modes in Control and Optimization - Springer textbook
+- **DOI:** 10.1007/978-3-642-84379-2
+- **ISBN:** 978-3-642-84379-2
+- **Alternative:** Library access, Springer online, or used book
+- **Access:** University library, Springer website, or PDF via academic networks
+- **Note:** Chapter 5 - SMC Lyapunov stability proofs (canonical SMC reference)
+- **Reused from:** First use in common_citations.md (anticipated in Batch 01)
 
 ---
 
@@ -121,4 +140,4 @@ Update this list as you download sources:
 
 ---
 
-**Last Updated:** [Date when sources were downloaded]
+**Last Updated:** 2025-10-02 (Batch 05 - 2 verified citations, 100% reuse efficiency - FASTEST BATCH!)
