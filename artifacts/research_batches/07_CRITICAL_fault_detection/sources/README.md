@@ -99,15 +99,47 @@ After downloading each source, verify:
 
 ## Current Sources
 
-**Total citations:** [Fill in after research]
-**Downloaded:** [Fill in as you download]
+**Total citations:** 3 unique citations (all verified ✅)
+**Downloaded:** 0/3 (ready to download)
+**Quality:** 3/3 peer-reviewed Tier 1 (Automatica + IEEE TAC)
+**Citation Reuse:** 0/3 new citations (all foundational additions to database)
 
 ### Downloaded Files
 
 Update this list as you download sources:
-- [ ] `citation1_bibtex_key.pdf` - Author (Year) Journal/Conference
-- [ ] `citation2_bibtex_key.pdf` - Author (Year) Journal/Conference
-- [ ] `citation3_bibtex_key.pdf` - Author (Year) Journal/Conference
+
+#### ✅ Citation 1 - Hespanha et al. (2003)
+- [ ] `hespanha2003hysteresis.pdf`
+- **Source:** Automatica, 39(2), 263-272
+- **DOI:** 10.1016/S0005-1098(02)00241-8
+- **Direct URL:** https://doi.org/10.1016/S0005-1098(02)00241-8
+- **Alternative:** https://www.sciencedirect.com/science/article/pii/S0005109802002418
+- **Alternative:** Search on ResearchGate or Google Scholar
+- **Access:** Elsevier (institutional access or preprint)
+- **Note:** Hysteresis-based switching for supervisory control (foundational paper)
+- **New to collection** (first use in Batch 07)
+
+#### ✅ Citation 2 - Morse, Mayne & Goodwin (1992)
+- [ ] `morse1992applications.pdf`
+- **Source:** IEEE Transactions on Automatic Control, 37(9), 1343-1354
+- **DOI:** 10.1109/9.151225
+- **Direct URL:** https://doi.org/10.1109/9.151225
+- **Alternative:** https://ieeexplore.ieee.org/document/151225/
+- **Alternative:** Search on ResearchGate or Google Scholar
+- **Access:** IEEE Xplore (institutional access)
+- **Note:** THE foundational paper on hysteresis in adaptive control
+- **New to collection** (first use in Batch 07)
+
+#### ✅ Citation 3 - Weller & Goodwin (1994)
+- [ ] `weller1994hysteresis.pdf`
+- **Source:** IEEE Transactions on Automatic Control, 39(7), 1360-1375
+- **DOI:** 10.1109/9.299622
+- **Direct URL:** https://doi.org/10.1109/9.299622
+- **Alternative:** https://ieeexplore.ieee.org/document/299622/
+- **Alternative:** Search on ResearchGate or Google Scholar
+- **Access:** IEEE Xplore (institutional access)
+- **Note:** Extension of Morse (1992) to multivariable systems - finite switching proof
+- **New to collection** (first use in Batch 07 - replacement for incorrect Miljković 2021)
 
 ---
 
@@ -121,4 +153,4 @@ Update this list as you download sources:
 
 ---
 
-**Last Updated:** [Date when sources were downloaded]
+**Last Updated:** 2025-10-02 (Batch 07 - 3 verified Tier 1 citations, all foundational hysteresis switching papers)
