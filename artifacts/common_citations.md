@@ -57,6 +57,7 @@
 - **Publisher:** Springer-Verlag
 - **Used in batches:**
   - Batch 01 (expected if needed)
+  - Batch 05 (Claim 2): CRITICAL - Inverted Pendulum (SMC Lyapunov stability)
   - Batch 11 (expected)
 
 **Key topics covered:**
@@ -328,6 +329,7 @@
 - **Used in batches:**
   - Batch 02 (Claim 2): CRITICAL - PSO Optimization (Lyapunov stability)
   - Batch 04 (Claim 1): CRITICAL - Lyapunov Stability (PSO global asymptotic stability)
+  - Batch 05 (Claim 1): CRITICAL - Inverted Pendulum (PSO ensures DIP stability)
   - Batch 13 (expected): HIGH - PSO Optimization
 
 **Key topics covered:**
