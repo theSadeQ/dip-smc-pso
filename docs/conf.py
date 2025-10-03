@@ -161,6 +161,8 @@ html_css_files = [
 
 html_js_files = [
     'back-to-top.js',
+    'lazy-load.js',
+    'dark-mode.js',
 ]
 
 # HTML output options
