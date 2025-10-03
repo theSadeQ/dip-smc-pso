@@ -32,6 +32,8 @@ exclude_patterns = [
     '.DS_Store',                # macOS folder metadata
     '.github/**',               # GitHub templates and workflows
     '**.ipynb_checkpoints',     # Jupyter notebook checkpoints
+    'implementation/api/**',    # Auto-generated API docs (autosummary disabled)
+    'implementation/legacy_*.md',   # Legacy documentation with autosummary
 ]
 
 # Extensions - comprehensive set for world-class docs
@@ -52,7 +54,7 @@ extensions = [
     'sphinxcontrib.bibtex',       # Bibliography support
     'sphinx_copybutton',
     'sphinx_design',
-    'sphinxcontrib.mermaid',
+    # 'sphinxcontrib.mermaid',  # Disabled - Windows encoding issues with Greek letters
     # 'sphinx_reredirects',  # Temporarily disabled for testing
     'sphinx.ext.doctest',         # Test code blocks
     'sphinx.ext.duration',
@@ -163,9 +165,9 @@ copybutton_prompt_text = r">>> |\.\.\. |\$ "
 copybutton_prompt_is_regexp = True
 copybutton_exclude = '.linenos, .gp, .go'
 
-# Mermaid configuration
-mermaid_output_format = 'svg'
-mermaid_params = ['--theme', 'neutral', '--width', '800', '--backgroundColor', 'white']
+# Mermaid configuration (disabled while extension is unavailable)
+# mermaid_output_format = 'svg'
+# mermaid_params = ['--theme', 'neutral', '--width', '800', '--backgroundColor', 'white']
 
 # LaTeX output configuration (for PDF generation)
 latex_engine = 'pdflatex'
