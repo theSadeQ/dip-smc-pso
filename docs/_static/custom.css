@@ -501,3 +501,281 @@ table, tr, td, th, pre, code, blockquote {
         font-size: 18px;
     }
 }
+
+/* ============================================================================
+   Reading Progress Bar
+   ============================================================================ */
+
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-brand-primary, #2962ff), var(--color-brand-content, #1976d2));
+    z-index: 1002;
+    transition: width 0.1s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Pulse animation when reaching milestones */
+@keyframes progressPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.reading-progress[aria-valuenow="25"],
+.reading-progress[aria-valuenow="50"],
+.reading-progress[aria-valuenow="75"],
+.reading-progress[aria-valuenow="100"] {
+    animation: progressPulse 0.5s ease;
+}
+
+/* ============================================================================
+   Enhanced TOC Active Section Highlighting
+   ============================================================================ */
+
+.toc-scroll a.active,
+.contents.local a.active {
+    font-weight: 600;
+    color: var(--color-brand-primary, #2962ff);
+    border-left: 3px solid var(--color-brand-primary, #2962ff);
+    padding-left: 12px;
+    background-color: var(--color-background-secondary, #f5f5f5);
+    margin-left: -15px;
+    transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .toc-scroll a.active,
+[data-theme="dark"] .contents.local a.active {
+    background-color: var(--color-background-secondary, #2d2d2d);
+}
+
+/* Smooth scroll in TOC container */
+.toc-scroll,
+.contents.local {
+    scroll-behavior: smooth;
+}
+
+/* ============================================================================
+   Breadcrumb Sticky Enhancement
+   ============================================================================ */
+
+.breadcrumb {
+    position: sticky;
+    top: 3px; /* Below progress bar */
+    background-color: var(--color-background-primary, #ffffff);
+    z-index: 100;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-background-border, #e0e0e0);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .breadcrumb {
+    background-color: var(--color-background-primary, #1a1a1a);
+    border-bottom-color: var(--color-background-border, #404040);
+}
+
+/* ============================================================================
+   Print and PDF Export Styles
+   ============================================================================ */
+
+@media print {
+    /* Hide interactive UI elements */
+    .back-to-top,
+    .theme-toggle,
+    .reading-progress,
+    nav,
+    .sidebar,
+    .toc-drawer,
+    .breadcrumb,
+    header.mobile-header,
+    footer.mobile-footer,
+    button,
+    .search-button {
+        display: none !important;
+    }
+
+    /* Optimize page breaks */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    pre, blockquote, table, figure, img {
+        page-break-inside: avoid;
+    }
+
+    /* Avoid breaking list items */
+    li {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure code blocks are readable in print */
+    pre, code {
+        border: 1px solid #ccc;
+        background-color: #f5f5f5 !important;
+        color: #000 !important;
+        padding: 8px;
+        font-size: 10pt;
+        line-height: 1.4;
+    }
+
+    /* Inline code */
+    :not(pre) > code {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+        border: 1px solid #ddd;
+        padding: 2px 4px;
+    }
+
+    /* Show URLs for external links */
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+        word-break: break-all;
+    }
+
+    /* Don't show URLs for internal links */
+    a[href^="#"]:after,
+    a[href^="/"]:after {
+        content: "";
+    }
+
+    /* Preserve images with max width */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid;
+    }
+
+    /* Table formatting for print */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 9pt;
+    }
+
+    table th {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+        border: 1px solid #ccc;
+        padding: 6px;
+        font-weight: bold;
+    }
+
+    table td {
+        border: 1px solid #ccc;
+        padding: 6px;
+    }
+
+    /* Admonitions (note, warning, etc.) */
+    .admonition {
+        border: 1px solid #ccc;
+        border-left: 4px solid #666;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #f9f9f9 !important;
+        page-break-inside: avoid;
+    }
+
+    .admonition.note {
+        border-left-color: #2196f3;
+    }
+
+    .admonition.warning {
+        border-left-color: #ff9800;
+    }
+
+    .admonition.error {
+        border-left-color: #f44336;
+    }
+
+    /* Headers and footers */
+    @page {
+        margin: 2cm;
+        size: A4 portrait;
+
+        @bottom-right {
+            content: "Page " counter(page);
+            font-size: 9pt;
+            color: #666;
+        }
+
+        @bottom-left {
+            content: "DIP-SMC-PSO Documentation";
+            font-size: 9pt;
+            color: #666;
+        }
+    }
+
+    /* First page specific styling */
+    @page :first {
+        @bottom-left {
+            content: "";
+        }
+        @bottom-right {
+            content: "";
+        }
+    }
+
+    /* Main content styling */
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt;
+        line-height: 1.6;
+    }
+
+    main, article {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Heading sizes for print */
+    h1 { font-size: 24pt; margin-top: 0; }
+    h2 { font-size: 18pt; margin-top: 14pt; }
+    h3 { font-size: 14pt; margin-top: 12pt; }
+    h4 { font-size: 12pt; margin-top: 10pt; }
+    h5, h6 { font-size: 11pt; margin-top: 8pt; }
+
+    /* Paragraph spacing */
+    p {
+        margin: 8pt 0;
+        orphans: 3;
+        widows: 3;
+    }
+
+    /* Lists */
+    ul, ol {
+        margin: 8pt 0;
+        padding-left: 20pt;
+    }
+
+    li {
+        margin: 4pt 0;
+    }
+
+    /* Blockquotes */
+    blockquote {
+        border-left: 4px solid #ccc;
+        padding-left: 12pt;
+        margin: 12pt 0;
+        font-style: italic;
+        color: #333 !important;
+    }
+
+    /* Math equations (preserve) */
+    .math, .MathJax {
+        font-size: 11pt !important;
+    }
+
+    /* Remove box shadows and fancy effects */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+}
