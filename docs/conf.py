@@ -38,7 +38,7 @@ exclude_patterns = [
 extensions = [
     # Core Sphinx extensions
     'sphinx.ext.autodoc',         # Auto-generate docs from docstrings
-    'sphinx.ext.autosummary',     # Generate summary tables
+    # 'sphinx.ext.autosummary',     # Temporarily disabled for testing
     'sphinx.ext.napoleon',        # Google/NumPy style docstrings
     'sphinx.ext.viewcode',        # Add source code links
     'sphinx.ext.linkcode',        # Permalinks to GitHub
@@ -53,11 +53,11 @@ extensions = [
     'sphinx_copybutton',
     'sphinx_design',
     'sphinxcontrib.mermaid',
-    'sphinx_reredirects',
+    # 'sphinx_reredirects',  # Temporarily disabled for testing
     'sphinx.ext.doctest',         # Test code blocks
     'sphinx.ext.duration',
-    'sphinx_gallery.gen_gallery', # Executable examples
-    'traceability',               # Requirements traceability generator
+    # 'sphinx_gallery.gen_gallery', # Temporarily disabled for testing
+    # 'traceability',               # Temporarily disabled for testing
 ]
 
 # MyST Parser configuration - quality-of-life features
@@ -100,13 +100,17 @@ numfig_format = {
 
 # Bibliography configuration
 bibtex_bibfiles = [
-    'refs.bib',           # Main bibliography file
-    'bib/smc.bib',
-    'bib/pso.bib',
-    'bib/dip.bib',
-    'bib/software.bib',
+    'refs.bib',            # Main bibliography file
+    'bib/smc.bib',         # Sliding mode control references
+    'bib/pso.bib',         # PSO optimization references
+    'bib/dip.bib',         # Double inverted pendulum references
+    'bib/software.bib',    # Software and tools references
+    'bib/stability.bib',   # Lyapunov stability and finite-time stability
+    'bib/adaptive.bib',    # Adaptive control theory
+    'bib/fdi.bib',         # Fault detection and isolation
+    'bib/numerical.bib',   # Numerical methods and integration
 ]
-bibtex_default_style = 'unsrt'  # Basic unsorted style for compatibility
+bibtex_default_style = 'alpha'  # Built-in alphabetic style
 
 # Auto-section labeling for stable cross-references
 autosectionlabel_prefix_document = True
@@ -122,9 +126,9 @@ autodoc_default_options = {
 autodoc_typehints = 'description'
 autodoc_typehints_description_target = 'documented'
 
-# Autosummary configuration - generates summary tables
-autosummary_generate = True
-autosummary_imported_members = True
+# Autosummary configuration - temporarily disabled for testing
+# autosummary_generate = True
+# autosummary_imported_members = True
 
 # Intersphinx mapping for external documentation
 intersphinx_mapping = {
@@ -183,19 +187,19 @@ else:
     # Strict mode for local development
     suppress_warnings = []
 
-# Redirects for moved pages
-redirects = {
-    # Legacy landing pages moved to new Reference IA
-    'controllers/index': 'reference/controllers/index',
-    'optimization/index': 'reference/optimizer/index',
-    'implementation/index': 'reference/index',
-    'implementation/code_documentation_index': 'reference/index',
-    # Controllers detail pages
-    'controllers/classical-smc': 'reference/controllers/classical-smc',
-    'controllers/super-twisting-smc': 'reference/controllers/super-twisting-smc',
-    'controllers/adaptive-smc': 'reference/controllers/adaptive-smc',
-    'controllers/hybrid-adaptive-smc': 'reference/controllers/hybrid-adaptive-smc',
-}
+# Redirects for moved pages (disabled while sphinx_reredirects extension is unavailable)
+# redirects = {
+#     # Legacy landing pages moved to new Reference IA
+#     'controllers/index': 'reference/controllers/index',
+#     'optimization/index': 'reference/optimizer/index',
+#     'implementation/index': 'reference/index',
+#     'implementation/code_documentation_index': 'reference/index',
+#     # Controllers detail pages
+#     'controllers/classical-smc': 'reference/controllers/classical-smc',
+#     'controllers/super-twisting-smc': 'reference/controllers/super-twisting-smc',
+#     'controllers/adaptive-smc': 'reference/controllers/adaptive-smc',
+#     'controllers/hybrid-adaptive-smc': 'reference/controllers/hybrid-adaptive-smc',
+# }
 
 # ----------------------------- GitHub linkcode ------------------------------
 GITHUB_USER = "theSadeQ"
@@ -277,15 +281,16 @@ autodoc_mock_imports = [
 
 
 # ----------------------------- Sphinx-Gallery -------------------------------
-# Run only fast examples in CI when DOCS_FAST=1 is set
-_fast_mode = os.environ.get("DOCS_FAST")
-_filename_pattern = r"^plot_fast_" if _fast_mode else r"^plot_"
-
-sphinx_gallery_conf = {
-    'examples_dirs': ['examples'],      # relative to docs/
-    'gallery_dirs': ['auto_examples'],  # built gallery target
-    'filename_pattern': _filename_pattern,
-    'ignore_pattern': r"_heavy|_skip",
-    'min_reported_time': 0,
-    'remove_config_comments': True,
-}
+# Temporarily disabled while sphinx_gallery extension is unavailable
+# # Run only fast examples in CI when DOCS_FAST=1 is set
+# _fast_mode = os.environ.get("DOCS_FAST")
+# _filename_pattern = r"^plot_fast_" if _fast_mode else r"^plot_"
+#
+# sphinx_gallery_conf = {
+#     'examples_dirs': ['examples'],      # relative to docs/
+#     'gallery_dirs': ['auto_examples'],  # built gallery target
+#     'filename_pattern': _filename_pattern,
+#     'ignore_pattern': r"_heavy|_skip",
+#     'min_reported_time': 0,
+#     'remove_config_comments': True,
+# }

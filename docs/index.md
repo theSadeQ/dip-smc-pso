@@ -94,6 +94,7 @@ presentation/results-discussion
 
 api/index
 examples/index
+bibliography
 traceability/index
 ```
 
@@ -106,6 +107,17 @@ RELEASE_CHECKLIST
 CHANGELOG
 symbols
 results_readme
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 📚 Citations & Attribution
+
+../CITATIONS
+../CITATIONS_ACADEMIC
+../DEPENDENCIES
+../PATTERNS
+../LICENSES
 ```
 
 ## Mathematical Foundation
@@ -186,11 +198,30 @@ flowchart LR
 
 This optimization process is implemented in {py:obj}`src.optimizer.pso_optimizer.PSOOptimizer` and integrates with all controller types described in {numref}`table:controller_comparison`.
 
-## Bibliography
+## Bibliography & References
 
-## References
+For complete academic citations and attribution, see:
 
-Bibliography coming soon - citations system is being configured.
+- **{doc}`bibliography`** - Complete BibTeX bibliography with all academic references
+- **{doc}`../CITATIONS_ACADEMIC`** - Detailed academic theory citations with exact page numbers
+- **{doc}`../DEPENDENCIES`** - Software dependencies and licenses
+- **{doc}`../PATTERNS`** - Design patterns and architectural decisions
+- **{doc}`../CITATIONS`** - Master citation index and quick reference
+
+### Key References
+
+This project builds upon decades of control theory research. Core references include:
+
+**Sliding Mode Control:**
+{cite}`smc_utkin_1992_sliding_modes,smc_slotine_li_1991_applied_nonlinear_control,smc_levant_2003_higher_order_smc`
+
+**PSO Optimization:**
+{cite}`pso_kennedy_1995_particle_swarm_optimization,pso_clerc_2002_particle_swarm`
+
+**Stability Theory:**
+{cite}`khalil2002nonlinear`
+
+For the complete bibliography, see the {doc}`bibliography` page.
 
 ## Project Links
 
