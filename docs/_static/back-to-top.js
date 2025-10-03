@@ -135,6 +135,118 @@
     }
 
     /**
+     * Initialize reading progress bar
+     */
+    function initReadingProgress() {
+        // Create progress bar element
+        const progressBar = document.createElement('div');
+        progressBar.className = 'reading-progress';
+        progressBar.setAttribute('role', 'progressbar');
+        progressBar.setAttribute('aria-label', 'Reading progress');
+        progressBar.setAttribute('aria-valuenow', '0');
+        progressBar.setAttribute('aria-valuemin', '0');
+        progressBar.setAttribute('aria-valuemax', '100');
+        document.body.appendChild(progressBar);
+
+        // Update progress on scroll
+        function updateProgress() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', Math.round(progress).toString());
+        }
+
+        // Debounced scroll handler
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(updateProgress, 50);
+        }, { passive: true });
+
+        // Initial update
+        updateProgress();
+
+        console.log('Reading progress bar initialized');
+    }
+
+    /**
+     * Highlight active section in TOC
+     */
+    function initTOCHighlighting() {
+        const tocLinks = document.querySelectorAll('.toc-scroll a[href^="#"], .contents.local a[href^="#"]');
+
+        if (tocLinks.length === 0) {
+            console.log('No TOC links found for highlighting');
+            return;
+        }
+
+        // Get all sections referenced in TOC
+        const sections = Array.from(tocLinks).map(link => {
+            const id = link.getAttribute('href').substring(1);
+            return {
+                element: document.getElementById(id),
+                link: link,
+                id: id
+            };
+        }).filter(item => item.element !== null);
+
+        if (sections.length === 0) return;
+
+        function updateActiveTOC() {
+            const scrollPos = window.pageYOffset + 100; // Offset for header
+
+            // Find current section
+            let activeSection = null;
+            for (const section of sections) {
+                if (section.element.offsetTop <= scrollPos) {
+                    activeSection = section;
+                } else {
+                    break;
+                }
+            }
+
+            // Update TOC links
+            sections.forEach(section => {
+                if (activeSection && section.id === activeSection.id) {
+                    section.link.classList.add('active');
+                    section.link.setAttribute('aria-current', 'location');
+                } else {
+                    section.link.classList.remove('active');
+                    section.link.removeAttribute('aria-current');
+                }
+            });
+
+            // Scroll TOC to show active item
+            if (activeSection && activeSection.link) {
+                const tocContainer = activeSection.link.closest('.toc-scroll, .contents.local');
+                if (tocContainer) {
+                    const linkRect = activeSection.link.getBoundingClientRect();
+                    const containerRect = tocContainer.getBoundingClientRect();
+
+                    // If link is outside visible area, scroll it into view
+                    if (linkRect.top < containerRect.top || linkRect.bottom > containerRect.bottom) {
+                        activeSection.link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                    }
+                }
+            }
+        }
+
+        // Throttled scroll handler
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(updateActiveTOC, 100);
+        }, { passive: true });
+
+        // Initial update
+        updateActiveTOC();
+
+        console.log(`TOC highlighting initialized for ${sections.length} sections`);
+    }
+
+    /**
      * Initialize all enhancements when DOM is ready
      */
     function init() {
@@ -142,6 +254,8 @@
         makeTOCSticky();
         enhanceDownloadLinks();
         addSmoothScrollToInternalLinks();
+        initReadingProgress();
+        initTOCHighlighting();
 
         console.log('DIP-SMC-PSO Documentation enhancements loaded');
     }
