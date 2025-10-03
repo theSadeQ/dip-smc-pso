@@ -1,0 +1,114 @@
+[
+  {
+    "claim_id": "CODE-IMPL-332",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Pure implementation detail - initialization or utility function",
+    "code_summary": "Initialize multi-objective problem...",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-334",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Pure implementation detail - initialization or utility function",
+    "code_summary": "Initialize composite objective...",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-335",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Pure implementation detail - initialization or utility function",
+    "code_summary": "Combine objective values according to method...",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-336",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Computes robustness objective using H-infinity norm, a control theory concept",
+    "code_summary": "Compute robustness objective...",
+    "needs_citation": true,
+    "concept": "Robustness in control systems (H-infinity norm)",
+    "suggested_citation": "Zhou & Doyle (1998)",
+    "bibtex_key": "zhou1998essentials",
+    "isbn": "978-0135258330",
+    "book_title": "Essentials of Robust Control",
+    "reference_type": "book",
+    "chapter_section": "Chapter 2: Robust Control Performance"
+  },
+  {
+    "claim_id": "CODE-IMPL-339",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Objective based on frequency response characteristics, a control theory concept",
+    "code_summary": "Objective based on frequency response characteristics...",
+    "needs_citation": true,
+    "concept": "Frequency response analysis in control systems",
+    "suggested_citation": "Ogata (2010)",
+    "bibtex_key": "ogata2010modern",
+    "isbn": "978-0136156734",
+    "book_title": "Modern Control Engineering",
+    "reference_type": "book",
+    "chapter_section": "Chapter 7: Frequency Response Analysis"
+  },
+  {
+    "claim_id": "CODE-IMPL-340",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements Pareto dominance check for multi-objective optimization",
+    "code_summary": "Multi-objective optimization using Pareto dominance...",
+    "needs_citation": true,
+    "algorithm_name": "Pareto Dominance in Multi-Objective Optimization",
+    "suggested_citation": "Deb (2001)",
+    "bibtex_key": "deb2001multi",
+    "isbn": "978-0471873396",
+    "book_title": "Multi-Objective Optimization using Evolutionary Algorithms",
+    "reference_type": "book"
+  },
+  {
+    "claim_id": "CODE-IMPL-341",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Pure implementation detail - initialization or utility function",
+    "code_summary": "Initialize Pareto multi-objective...",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-342",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements weighted sum scalarization for multi-objective optimization",
+    "code_summary": "Multi-objective optimization using weighted sum scalarization...",
+    "needs_citation": true,
+    "algorithm_name": "Weighted Sum Scalarization",
+    "suggested_citation": "Marler & Arora (2004)",
+    "bibtex_key": "marler2004survey",
+    "doi_or_url": "10.1007/s00158-004-0370-0",
+    "paper_title": "Survey of multi-objective optimization methods for engineering",
+    "reference_type": "paper"
+  },
+  {
+    "claim_id": "CODE-IMPL-343",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Pure implementation detail - initialization or utility function",
+    "code_summary": "Initialize weighted sum multi-objective...",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-344",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Normalizes objective values - pure implementation utility",
+    "code_summary": "Normalize objective values based on selected method...",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  }
+]

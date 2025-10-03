@@ -1,0 +1,82 @@
+[
+ {
+ "claim_id": "CODE-IMPL-178",
+ "category": "A",
+ "confidence": "HIGH",
+ "rationale": "Implements part of the classical sliding mode control law using six gain parameters, which is a specific control algorithm requiring citation of its original source.",
+ "code_summary": "Uses six gain parameters in a specified order for the classical SMC law.",
+ "needs_citation": true,
+ "algorithm_name": "Classical Sliding Mode Control (SMC) algorithm",
+ "suggested_citation": "Utkin (1977)",
+ "bibtex_key": "Utkin1977Sliding",
+ "doi_or_url": "10.1109/TAC.1977.1101446",
+ "paper_title": "Variable Structure Systems with Sliding Modes",
+ "reference_type": "paper"
+ },
+ {
+ "claim_id": "CODE-IMPL-180",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This code simply resets the controller's internal state, which is a pure implementation detail not involving any novel algorithm or theory.",
+ "code_summary": "Resets the state of the Classical SMC controller to its initial values.",
+ "needs_citation": false,
+ "implementation_type": "initialization"
+ },
+ {
+ "claim_id": "CODE-IMPL-201",
+ "category": "A",
+ "confidence": "HIGH",
+ "rationale": "This is implementing the core computations of the Super-Twisting sliding mode control algorithm (using Numba for speed), which is a specific known algorithm needing a reference to its original paper.",
+ "code_summary": "Numba-accelerated core of the Super-Twisting SMC algorithm.",
+ "needs_citation": true,
+ "algorithm_name": "Super-Twisting Sliding Mode Control algorithm",
+ "suggested_citation": "Levant (1993)",
+ "bibtex_key": "Levant1993Twisting",
+ "doi_or_url": "10.1016/0005-1098(93)90127-K",
+ "paper_title": "Sliding order and sliding accuracy in sliding mode control",
+ "reference_type": "paper"
+ },
+ {
+ "claim_id": "CODE-IMPL-204",
+ "category": "B",
+ "confidence": "MEDIUM",
+ "rationale": "The code deals with using a saturated sign function, which is intended to mitigate the chattering phenomenon in sliding mode control. This relates to a theoretical concept (chattering) explained in textbooks, not a new algorithm, so a textbook citation is appropriate.",
+ "code_summary": "Initializes a Super-Twisting SMC controller, including an option to use a saturated sign function.",
+ "needs_citation": true,
+ "concept": "Chattering in sliding mode control",
+ "suggested_citation": "Utkin (1992)",
+ "bibtex_key": "Utkin1992Sliding",
+ "isbn": "978-3642843976",
+ "book_title": "Sliding Modes in Control and Optimization",
+ "reference_type": "book",
+ "chapter_section": "Chapter 11: Systems with High Gains and Discontinuous Controls"
+ },
+ {
+ "claim_id": "CODE-IMPL-167",
+ "category": "A",
+ "confidence": "HIGH",
+ "rationale": "This code performs a check on the super-twisting controller's gain values to ensure they meet the algorithm's requirements, which is part of implementing the super-twisting algorithm and thus needs the original algorithm reference.",
+ "code_summary": "Performs a vectorized feasibility check to ensure the super-twisting SMC gains satisfy required conditions.",
+ "needs_citation": true,
+ "algorithm_name": "Super-Twisting Sliding Mode Control algorithm",
+ "suggested_citation": "Levant (1993)",
+ "bibtex_key": "Levant1993Twisting",
+ "doi_or_url": "10.1016/0005-1098(93)90127-K",
+ "paper_title": "Sliding order and sliding accuracy in sliding mode control",
+ "reference_type": "paper"
+ },
+ {
+ "claim_id": "CODE-IMPL-517",
+ "category": "A",
+ "confidence": "HIGH",
+ "rationale": "The code references the super-twisting algorithm and handling of control outputs between time steps, indicating it's implementing the known super-twisting control method, which should be credited to its original source.",
+ "code_summary": "Stores outputs according to the Super-Twisting algorithm that are needed to resume control at the next time step.",
+ "needs_citation": true,
+ "algorithm_name": "Super-Twisting Sliding Mode Control algorithm",
+ "suggested_citation": "Levant (1993)",
+ "bibtex_key": "Levant1993Twisting",
+ "doi_or_url": "10.1016/0005-1098(93)90127-K",
+ "paper_title": "Sliding order and sliding accuracy in sliding mode control",
+ "reference_type": "paper"
+ }
+ ]

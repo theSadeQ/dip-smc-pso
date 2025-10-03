@@ -1,0 +1,382 @@
+{
+  "summary": {
+    "likely_A": 21,
+    "likely_B": 3,
+    "likely_C": 21,
+    "needs_review": 46
+  },
+  "categorized": {
+    "likely_A": [
+      {
+        "id": "CODE-IMPL-135",
+        "reason": "rls"
+      },
+      {
+        "id": "CODE-IMPL-152",
+        "reason": "switching logic"
+      },
+      {
+        "id": "CODE-IMPL-181",
+        "reason": "equivalent control"
+      },
+      {
+        "id": "CODE-IMPL-182",
+        "reason": "equivalent control"
+      },
+      {
+        "id": "CODE-IMPL-204",
+        "reason": "sliding mode"
+      },
+      {
+        "id": "CODE-IMPL-322",
+        "reason": "optimization"
+      },
+      {
+        "id": "CODE-IMPL-323",
+        "reason": "optimization"
+      },
+      {
+        "id": "CODE-IMPL-326",
+        "reason": "optimization"
+      },
+      {
+        "id": "CODE-IMPL-327",
+        "reason": "optimization"
+      },
+      {
+        "id": "CODE-IMPL-332",
+        "reason": "optimization"
+      },
+      {
+        "id": "CODE-IMPL-340",
+        "reason": "optimization"
+      },
+      {
+        "id": "CODE-IMPL-342",
+        "reason": "optimization"
+      },
+      {
+        "id": "CODE-IMPL-423",
+        "reason": "euler"
+      },
+      {
+        "id": "CODE-IMPL-438",
+        "reason": "rk4"
+      },
+      {
+        "id": "CODE-IMPL-451",
+        "reason": "euler"
+      },
+      {
+        "id": "CODE-IMPL-452",
+        "reason": "euler"
+      },
+      {
+        "id": "CODE-IMPL-454",
+        "reason": "euler"
+      },
+      {
+        "id": "CODE-IMPL-455",
+        "reason": "euler"
+      },
+      {
+        "id": "CODE-IMPL-457",
+        "reason": "euler"
+      },
+      {
+        "id": "CODE-IMPL-458",
+        "reason": "euler"
+      },
+      {
+        "id": "CODE-IMPL-460",
+        "reason": "euler"
+      }
+    ],
+    "likely_B": [
+      {
+        "id": "CODE-IMPL-192",
+        "reason": "chattering"
+      },
+      {
+        "id": "CODE-IMPL-195",
+        "reason": "chattering"
+      },
+      {
+        "id": "CODE-IMPL-336",
+        "reason": "robustness"
+      }
+    ],
+    "likely_C": [
+      {
+        "id": "CODE-IMPL-122",
+        "reason": "set"
+      },
+      {
+        "id": "CODE-IMPL-150",
+        "reason": "initialize"
+      },
+      {
+        "id": "CODE-IMPL-167",
+        "reason": "check"
+      },
+      {
+        "id": "CODE-IMPL-180",
+        "reason": "reset"
+      },
+      {
+        "id": "CODE-IMPL-321",
+        "reason": "factory"
+      },
+      {
+        "id": "CODE-IMPL-325",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-328",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-329",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-330",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-331",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-334",
+        "reason": "initialize"
+      },
+      {
+        "id": "CODE-IMPL-341",
+        "reason": "initialize"
+      },
+      {
+        "id": "CODE-IMPL-343",
+        "reason": "initialize"
+      },
+      {
+        "id": "CODE-IMPL-378",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-379",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-406",
+        "reason": "initialize"
+      },
+      {
+        "id": "CODE-IMPL-410",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-411",
+        "reason": "interface/factory file"
+      },
+      {
+        "id": "CODE-IMPL-440",
+        "reason": "initialize"
+      },
+      {
+        "id": "CODE-IMPL-443",
+        "reason": "initialize"
+      },
+      {
+        "id": "CODE-IMPL-474",
+        "reason": "create"
+      }
+    ],
+    "needs_review": [
+      {
+        "id": "CODE-IMPL-085",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-115",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-117",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-121",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-132",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-155",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-157",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-159",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-178",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-183",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-193",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-194",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-201",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-335",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-339",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-344",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-370",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-375",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-382",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-384",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-386",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-387",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-390",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-393",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-397",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-399",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-400",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-402",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-403",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-404",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-415",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-420",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-422",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-437",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-446",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-448",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-449",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-473",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-476",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-477",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-478",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-479",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-480",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-481",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-482",
+        "reason": "no clear pattern"
+      },
+      {
+        "id": "CODE-IMPL-517",
+        "reason": "no clear pattern"
+      }
+    ]
+  }
+}
