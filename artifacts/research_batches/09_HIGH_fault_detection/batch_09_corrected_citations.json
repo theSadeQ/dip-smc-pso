@@ -1,0 +1,259 @@
+[
+  {
+    "claim_id": "CODE-IMPL-008",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Protocol definition for fault detection interface - pure software abstraction, not a theoretical concept",
+    "code_summary": "Protocol defining the interface for fault detection systems",
+    "needs_citation": false,
+    "implementation_type": "interface"
+  },
+  {
+    "claim_id": "CODE-IMPL-010",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Interface verification function - pure implementation utility",
+    "code_summary": "Verify that FDI system correctly implements FaultDetectionInterface",
+    "needs_citation": false,
+    "implementation_type": "validation"
+  },
+  {
+    "claim_id": "CODE-IMPL-011",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Module docstring describing system architecture, not explaining fault detection theory",
+    "code_summary": "Enhanced fault detection and isolation system",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-018",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Module docstring listing residual generation methods without theoretical explanation",
+    "code_summary": "Model-based residual generation for fault detection",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-019",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Class implementing composite pattern to combine multiple residual generators - software design pattern",
+    "code_summary": "Adaptive residual generator that combines multiple methods",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-020",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Method implementing weighted combination of residuals - pure implementation logic",
+    "code_summary": "Generate adaptive residual by combining multiple methods",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-021",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Factory function for creating residual generators - software design pattern",
+    "code_summary": "Factory function to create residual generators",
+    "needs_citation": false,
+    "implementation_type": "factory"
+  },
+  {
+    "claim_id": "CODE-IMPL-022",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Factory implementation for instantiating specific generator types",
+    "code_summary": "Create a residual generator of the specified type",
+    "needs_citation": false,
+    "implementation_type": "factory"
+  },
+  {
+    "claim_id": "CODE-IMPL-023",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Getter utility returning list of available methods",
+    "code_summary": "Get list of available residual generation methods",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-024",
+    "category": "B",
+    "confidence": "HIGH",
+    "rationale": "Module docstring explaining the concept of adaptive threshold methods for fault detection under varying conditions",
+    "code_summary": "Adaptive threshold methods for fault detection",
+    "needs_citation": true,
+    "concept": "Adaptive threshold generation for robust fault detection",
+    "suggested_citation": "Montes de Oca et al. (2012)",
+    "bibtex_key": "montesdeoca2012robust",
+    "doi_or_url": "10.1002/acs.1263",
+    "paper_title": "Robust fault detection based on adaptive threshold generation using interval LPV observers",
+    "journal": "International Journal of Adaptive Control and Signal Processing",
+    "volume_pages": "26(3), 258-283",
+    "reference_type": "paper"
+  },
+  {
+    "claim_id": "CODE-IMPL-025",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Method implementing sliding window update for threshold - pure implementation detail",
+    "code_summary": "Update threshold based on new residual value",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-026",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Class implementing statistical threshold adaptation - implementation not theoretical explanation",
+    "code_summary": "Statistical adaptive threshold based on residual statistics",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-027",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Method implementing threshold update using statistics - pure implementation",
+    "code_summary": "Update threshold using statistical methods",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-028",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Private method computing threshold from statistics - implementation detail",
+    "code_summary": "Compute threshold using statistical methods",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-030",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Manager class coordinating multiple threshold adapters - infrastructure code",
+    "code_summary": "Manager for multiple threshold adapters with different methods",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-031",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Initialization method for threshold manager - pure implementation",
+    "code_summary": "Initialize adaptive threshold manager",
+    "needs_citation": false,
+    "implementation_type": "initialization"
+  },
+  {
+    "claim_id": "CODE-IMPL-033",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Method updating all adapters and returning results - utility function",
+    "code_summary": "Update all adapters and return thresholds",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-034",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Method computing consensus threshold from multiple adapters - aggregation utility",
+    "code_summary": "Get consensus threshold from all adapters",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-035",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Factory function for threshold adapters - software design pattern",
+    "code_summary": "Factory function to create threshold adapters",
+    "needs_citation": false,
+    "implementation_type": "factory"
+  },
+  {
+    "claim_id": "CODE-IMPL-036",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Factory function for threshold manager - software design pattern",
+    "code_summary": "Factory function to create adaptive threshold manager",
+    "needs_citation": false,
+    "implementation_type": "factory"
+  },
+  {
+    "claim_id": "CODE-IMPL-037",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Factory implementation creating specific adapter types",
+    "code_summary": "Create a threshold adapter of the specified type",
+    "needs_citation": false,
+    "implementation_type": "factory"
+  },
+  {
+    "claim_id": "CODE-IMPL-038",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Getter utility returning available methods",
+    "code_summary": "Get list of available threshold adaptation methods",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-039",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Factory call creating manager with multiple methods",
+    "code_summary": "Create an adaptive threshold manager with multiple methods",
+    "needs_citation": false,
+    "implementation_type": "factory"
+  },
+  {
+    "claim_id": "CODE-IMPL-160",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Method recording threshold adaptation history for future analysis - implementation detail, not a known learning algorithm",
+    "code_summary": "Update learned switching thresholds based on decision outcomes",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-211",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Compatibility import for backward compatibility - infrastructure code",
+    "code_summary": "Compatibility import for fault detection system",
+    "needs_citation": false,
+    "implementation_type": "utility"
+  },
+  {
+    "claim_id": "CODE-IMPL-495",
+    "category": "C",
+    "confidence": "HIGH",
+    "rationale": "Method checking coverage against quality gate thresholds - pure implementation utility, not coverage technique evaluation",
+    "code_summary": "Check current coverage against quality gate thresholds",
+    "needs_citation": false,
+    "implementation_type": "validation"
+  },
+  {
+    "claim_id": "CODE-IMPL-509",
+    "category": "A",
+    "confidence": "HIGH",
+    "rationale": "Implements safe division with epsilon threshold to prevent floating-point exceptions, based on floating-point arithmetic theory",
+    "code_summary": "Safe division with epsilon threshold protection against zero division",
+    "needs_citation": true,
+    "algorithm_name": "Floating-point safe division with epsilon threshold",
+    "suggested_citation": "Goldberg (1991)",
+    "bibtex_key": "goldberg1991floating",
+    "doi_or_url": "10.1145/103162.103163",
+    "paper_title": "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
+    "journal": "ACM Computing Surveys",
+    "volume_pages": "23(1), 5-48",
+    "reference_type": "paper"
+  }
+]
