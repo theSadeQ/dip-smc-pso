@@ -5,7 +5,7 @@ This page contains the complete bibliography for the DIP_SMC_PSO project, organi
 ## Complete Bibliography
 
 ```{bibliography}
-:style: ieee
+
 :all:
 ```
 
@@ -16,7 +16,7 @@ This page contains the complete bibliography for the DIP_SMC_PSO project, organi
 The theoretical foundations of sliding mode control draw from several seminal works:
 
 ```{bibliography}
-:style: ieee
+
 :filter: keywords % "sliding mode control" or keywords % "higher-order sliding mode" or keywords % "super-twisting"
 
 utkin1999sliding
@@ -38,7 +38,7 @@ utkin2016discussion
 The adaptive control components build upon classical nonlinear control theory:
 
 ```{bibliography}
-:style: ieee
+
 :filter: keywords % "adaptive control" or keywords % "nonlinear control" or keywords % "Lyapunov"
 
 slotine1991applied
@@ -58,7 +58,7 @@ chen2019adaptive
 The parameter optimization methodology is based on PSO theory and multi-objective optimization:
 
 ```{bibliography}
-:style: ieee
+
 :filter: keywords % "particle swarm optimization" or keywords % "evolutionary" or keywords % "multi-objective"
 
 kennedy1995particle
@@ -82,7 +82,7 @@ wolpert1997no
 The specific application to inverted pendulum control systems:
 
 ```{bibliography}
-:style: ieee
+
 :filter: keywords % "inverted pendulum" or keywords % "benchmark" or keywords % "experimental"
 
 furuta2003swing
@@ -102,7 +102,7 @@ wang2011experimental
 The underlying mathematical theory for system modeling and analysis:
 
 ```{bibliography}
-:style: ieee
+
 :filter: keywords % "classical mechanics" or keywords % "numerical methods" or keywords % "differential equations"
 
 goldstein2002classical
@@ -122,7 +122,7 @@ filippov1988differential
 The computational tools and scientific computing frameworks:
 
 ```{bibliography}
-:style: ieee
+
 :filter: keywords % "scientific computing" or keywords % "software" or keywords % "MATLAB"
 
 scipy2020
