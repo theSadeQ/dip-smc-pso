@@ -1,11 +1,63 @@
-# Benchmarks
+# Benchmarks Module
 
-This section maps to `src/benchmarks/` and documents benchmarking utilities, metrics, and statistical analyses.
+## Overview
 
-- Key modules:
-  - {py:mod}`src.benchmarks.core.trial_runner`
-  - {py:mod}`src.benchmarks.metrics` (control, constraint, stability)
-  - {py:mod}`src.benchmarks.statistics.confidence_intervals`
+This section documents all Python source files in `src/benchmarks/`.
 
-See `docs/benchmarks_methodology.md` for methodology and `tests/test_analysis/performance/` for examples.
+## Module Architecture
 
+**Total Files:** 11
+**Total Classes:** 2
+**Total Functions:** 26
+
+## Files in This Module
+
+```{toctree}
+:maxdepth: 2
+
+statistical_benchmarks_v2
+__init__
+config___init__
+core_trial_runner
+core___init__
+metrics_constraint_metrics
+metrics_control_metrics
+metrics_stability_metrics
+metrics___init__
+statistics_confidence_intervals
+statistics___init__
+```
+
+## Quick Navigation
+
+### By File Type
+
+
+#### __Init__
+
+- [benchmarks.__init__](__init__.md)
+
+#### Config
+
+- [benchmarks.config.__init__](config___init__.md)
+
+#### Core
+
+- [benchmarks.core.trial_runner](core_trial_runner.md)
+- [benchmarks.core.__init__](core___init__.md)
+
+#### Metrics
+
+- [benchmarks.metrics.constraint_metrics](metrics_constraint_metrics.md)
+- [benchmarks.metrics.control_metrics](metrics_control_metrics.md)
+- [benchmarks.metrics.stability_metrics](metrics_stability_metrics.md)
+- [benchmarks.metrics.__init__](metrics___init__.md)
+
+#### Statistical_Benchmarks_V2
+
+- [benchmarks.statistical_benchmarks_v2](statistical_benchmarks_v2.md)
+
+#### Statistics
+
+- [benchmarks.statistics.confidence_intervals](statistics_confidence_intervals.md)
+- [benchmarks.statistics.__init__](statistics___init__.md)

@@ -176,6 +176,25 @@ copybutton_prompt_text = r">>> |\.\.\. |\$ "
 copybutton_prompt_is_regexp = True
 copybutton_exclude = '.linenos, .gp, .go'
 
+# Code highlighting configuration - Pygments
+pygments_style = 'monokai'  # Dark mode compatible
+pygments_dark_style = 'monokai'  # Explicit dark mode style
+
+# Literalinclude default options for embedded source code
+highlight_language = 'python'
+highlight_options = {
+    'stripnl': False,  # Keep newlines at start/end
+}
+
+# Default options for literalinclude directive (Week 1 automation)
+# These apply to all literalinclude blocks unless overridden
+literalinclude_default_options = {
+    'linenos': True,           # Show line numbers by default
+    'dedent': 0,               # No automatic dedentation
+    'encoding': 'utf-8',       # File encoding
+    'tab-width': 4,            # Tab width for display
+}
+
 # Mermaid configuration - use client-side rendering (no CLI required)
 mermaid_output_format = 'raw'  # Embed Mermaid code for browser rendering
 mermaid_init_js = "mermaid.initialize({startOnLoad:true,theme:'neutral'});"

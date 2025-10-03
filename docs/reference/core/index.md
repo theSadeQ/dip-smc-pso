@@ -1,14 +1,58 @@
-# Core Simulation Engine
+# Core Module
 
-This section maps to `src/core/` and covers the simulation runner, context, dynamics, and vectorized simulation utilities.
+## Overview
 
-- Key modules:
-  - {py:mod}`src.core.simulation_runner`
-  - {py:mod}`src.core.simulation_context`
-  - {py:mod}`src.core.dynamics`
-  - {py:mod}`src.core.dynamics_full`
-  - {py:mod}`src.core.vector_sim`
-  - {py:mod}`src.core.safety_guards`
+This section documents all Python source files in `src/core/`.
 
-Related examples: CLI entry `simulate.py` demonstrates integration with controllers and plant dynamics.
+## Module Architecture
 
+**Total Files:** 7
+**Total Classes:** 2
+**Total Functions:** 3
+
+## Files in This Module
+
+```{toctree}
+:maxdepth: 2
+
+dynamics
+dynamics_full
+safety_guards
+simulation_context
+simulation_runner
+vector_sim
+__init__
+```
+
+## Quick Navigation
+
+### By File Type
+
+
+#### __Init__
+
+- [core.__init__](__init__.md)
+
+#### Dynamics
+
+- [core.dynamics](dynamics.md)
+
+#### Dynamics_Full
+
+- [core.dynamics_full](dynamics_full.md)
+
+#### Safety_Guards
+
+- [core.safety_guards](safety_guards.md)
+
+#### Simulation_Context
+
+- [core.simulation_context](simulation_context.md)
+
+#### Simulation_Runner
+
+- [core.simulation_runner](simulation_runner.md)
+
+#### Vector_Sim
+
+- [core.vector_sim](vector_sim.md)

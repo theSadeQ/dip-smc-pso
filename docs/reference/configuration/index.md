@@ -1,9 +1,28 @@
-# Configuration (Resilient)
+# Configuration Module
 
-This section maps to `src/configuration/` and documents resilient configuration utilities that complement the main `src/config` package.
+## Overview
 
-- Key modules:
-  - {py:mod}`src.configuration.config_resilient`
+This section documents all Python source files in `src/configuration/`.
 
-Use alongside the Configuration System reference for complete coverage of configuration mechanisms.
+## Module Architecture
 
+**Total Files:** 1
+**Total Classes:** 4
+**Total Functions:** 6
+
+## Files in This Module
+
+```{toctree}
+:maxdepth: 2
+
+config_resilient
+```
+
+## Quick Navigation
+
+### By File Type
+
+
+#### Config_Resilient
+
+- [configuration.config_resilient](config_resilient.md)
