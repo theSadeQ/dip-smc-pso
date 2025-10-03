@@ -17,8 +17,9 @@ def validate_chatgpt_output(data):
         errors.append("Output must be a JSON array")
         return errors
 
-    if len(data) != 108:
-        errors.append(f"Expected 108 claims, got {len(data)}")
+    # Don't enforce specific count - can be 91 or 108 claims
+    if len(data) == 0:
+        errors.append("No claims found in output")
 
     required_fields = ['claim_id', 'category', 'confidence', 'rationale', 'code_summary']
 
@@ -32,10 +33,12 @@ def validate_chatgpt_output(data):
         if claim.get('category') not in ['A', 'B', 'C']:
             errors.append(f"Claim {claim.get('claim_id', i+1)}: Invalid category '{claim.get('category')}'")
 
-        # Check Category A has citations
+        # Check Category A has citations (paper OR book)
         if claim.get('category') == 'A':
-            if not claim.get('doi_or_url') or not claim.get('paper_title'):
-                errors.append(f"Claim {claim['claim_id']}: Category A missing citation")
+            has_paper = claim.get('doi_or_url') and claim.get('paper_title')
+            has_book = claim.get('isbn') and claim.get('book_title')
+            if not has_paper and not has_book:
+                errors.append(f"Claim {claim['claim_id']}: Category A missing citation (needs paper OR book)")
 
         # Check Category B has textbook info
         if claim.get('category') == 'B':
@@ -45,8 +48,19 @@ def validate_chatgpt_output(data):
     return errors
 
 def main():
-    # Paths
-    chatgpt_output_path = Path('D:/Projects/main/artifacts/research_batches/08_HIGH_implementation_general/chatgpt_output_108_citations.json')
+    # Paths - try 91 claims first, fallback to 108
+    chatgpt_91_path = Path('D:/Projects/main/artifacts/research_batches/08_HIGH_implementation_general/chatgpt_output_91_citations.json')
+    chatgpt_108_path = Path('D:/Projects/main/artifacts/research_batches/08_HIGH_implementation_general/chatgpt_output_108_citations.json')
+
+    if chatgpt_91_path.exists():
+        chatgpt_output_path = chatgpt_91_path
+        print("Using 91 claims file (new batch)")
+    elif chatgpt_108_path.exists():
+        chatgpt_output_path = chatgpt_108_path
+        print("Using 108 claims file (previous batch)")
+    else:
+        chatgpt_output_path = chatgpt_91_path  # Default for error message
+
     csv_path = Path('D:/Projects/main/artifacts/claims_research_tracker.csv')
 
     # Check if ChatGPT output exists
@@ -85,10 +99,12 @@ def main():
     citation_map = {}
     for claim in chatgpt_data:
         claim_id = claim['claim_id']
+        # Handle both paper citations (doi_or_url) and book citations (isbn)
+        doi_or_url = claim.get('doi_or_url', '') or claim.get('isbn', '')
         citation_map[claim_id] = {
             'Suggested_Citation': claim.get('suggested_citation', ''),
             'BibTeX_Key': claim.get('bibtex_key', ''),
-            'DOI_or_URL': claim.get('doi_or_url', ''),
+            'DOI_or_URL': doi_or_url,
             'Reference_Type': claim.get('reference_type', ''),
             'Research_Status': 'completed',
             'Research_Notes': f"CHATGPT_100%: {claim['rationale']}"

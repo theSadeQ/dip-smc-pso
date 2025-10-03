@@ -1,0 +1,97 @@
+[
+ {
+ "claim_id": "CODE-IMPL-406",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This code deals with setting up and storing the simulation context, which is an implementation detail (initialization of simulation parameters) and not an algorithm or theory concept.",
+ "code_summary": "Initializes and holds the context for a simulation run.",
+ "needs_citation": false,
+ "implementation_type": "initialization"
+ },
+ {
+ "claim_id": "CODE-IMPL-410",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "The code is defining or documenting an 'integration method order' as a property in an interface, which is a software detail. It is not implementing a specific algorithm or explaining a theoretical concept, just representing a parameter, so it doesn't require an external citation.",
+ "code_summary": "Specifies the order of the numerical integration method.",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-411",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This is an interface method to execute the simulation with a given strategy. It's a part of the simulation infrastructure (design of how simulation runs) rather than implementing a known algorithm or a control theory concept.",
+ "code_summary": "Executes the simulation using the specified strategy.",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-415",
+ "category": "C",
+ "confidence": "MEDIUM",
+ "rationale": "This function advances the simulation by one time step, which is a general implementation task in the simulation's time management. It likely calls an integration step but does not explicitly implement a known algorithm (the details are handled elsewhere). Therefore it's treated as a utility implementation detail rather than an algorithm needing citation.",
+ "code_summary": "Advances the simulation by one time step.",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ },
+ {
+ "claim_id": "CODE-IMPL-420",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "The code serves as a router for simulation steps, which is part of the internal control flow of the simulation engine. It's infrastructure code that directs how each simulation step is processed, not a specific algorithm or theoretical concept from control theory.",
+ "code_summary": "Routes a simulation step to the appropriate executor.",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ },
+ {
+ "claim_id": "CODE-IMPL-422",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This is a unified entry point for stepping the simulation, essentially providing a single interface for simulation steps. It is a design/structural aspect of the code (an interface to the simulation engine), not an implementation of a control algorithm or theory, so it doesn't need an external citation.",
+ "code_summary": "Provides a unified entry point for performing a simulation step.",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-423",
+ "category": "A",
+ "confidence": "HIGH",
+ "rationale": "This code implements the explicit Euler integration method to simulate a controller trajectory. The Euler method is a well-known numerical integration algorithm, so a citation to a canonical reference for the Euler method is required.",
+ "code_summary": "Uses the explicit Euler method to simulate a single controller trajectory.",
+ "needs_citation": true,
+ "algorithm_name": "Explicit Euler method",
+ "suggested_citation": "Hairer et al. (1993)",
+ "bibtex_key": "hairer1993solving",
+ "doi_or_url": "10.1007/978-3-540-78862-1",
+ "paper_title": "Solving Ordinary Differential Equations I: Nonstiff Problems",
+ "reference_type": "paper"
+ },
+ {
+ "claim_id": "CODE-IMPL-473",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This method executes the simulation using a strategy defined by the orchestrator. It's specific to the orchestrator's design (how it runs simulations) and is part of the code's execution logic. It does not involve implementing a known algorithm from literature or explaining theory.",
+ "code_summary": "Executes the simulation using an orchestrator-specific strategy.",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-474",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This code runs a single simulation in the context of a parallel orchestrator. It likely spawns or delegates to a sequential run for each simulation and is an implementation detail of the orchestrator. It doesn't correspond to a standard algorithm or theory concept, just how the parallel orchestrator manages simulations.",
+ "code_summary": "Runs a single simulation using the sequential orchestrator strategy (in a parallel context).",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ },
+ {
+ "claim_id": "CODE-IMPL-476",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This is a legacy simulation runner kept for backward compatibility. It's purely an implementation detail to maintain older interfaces and doesn't implement any new algorithm or require theoretical explanation. Therefore, it doesn't need any citation.",
+ "code_summary": "Provides a legacy simulation runner for backward compatibility.",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ }
+ ]

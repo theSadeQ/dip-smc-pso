@@ -1,0 +1,56 @@
+{
+  "group_name": "SMC Core - Equivalent Control & Switching",
+  "description": "Equivalent control computation, switching functions, chattering mitigation",
+  "total_claims": 7,
+  "claims": [
+    {
+      "claim_id": "CODE-IMPL-181",
+      "code_summary": "Equivalent Control Computation for SMC Controllers...",
+      "file_path": "src\\controllers\\smc\\core\\equivalent_control.py",
+      "line_number": "1",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-182",
+      "code_summary": "Initialize equivalent control computation...",
+      "file_path": "src\\controllers\\smc\\core\\equivalent_control.py",
+      "line_number": "35",
+      "description": "regularization_alpha (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-183",
+      "code_summary": "Centralized gain validation for all SMC controller types...",
+      "file_path": "src\\controllers\\smc\\core\\gain_validation.py",
+      "line_number": "45",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-192",
+      "code_summary": "uses chattering in practice...",
+      "file_path": "src\\controllers\\smc\\core\\switching_functions.py",
+      "line_number": "148",
+      "description": "chattering (attributed to: practice)"
+    },
+    {
+      "claim_id": "CODE-IMPL-193",
+      "code_summary": "Compute derivative of switching function...",
+      "file_path": "src\\controllers\\smc\\core\\switching_functions.py",
+      "line_number": "199",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-194",
+      "code_summary": "Hyperbolic tangent switching function with optimized slope...",
+      "file_path": "src\\controllers\\smc\\core\\switching_functions.py",
+      "line_number": "229",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-195",
+      "code_summary": "uses chattering in real systems...",
+      "file_path": "src\\controllers\\smc\\core\\switching_functions.py",
+      "line_number": "270",
+      "description": "chattering (attributed to: real systems)"
+    }
+  ]
+}

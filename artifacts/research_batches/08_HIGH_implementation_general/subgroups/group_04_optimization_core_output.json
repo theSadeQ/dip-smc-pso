@@ -1,0 +1,92 @@
+[
+ {
+ "claim_id": "CODE-IMPL-321",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Implements a factory pattern for optimizer instantiation, a code design feature not tied to a specific algorithm or theory.",
+ "code_summary": "Factory method to create optimizers...",
+ "needs_citation": false,
+ "implementation_type": "factory"
+ },
+ {
+ "claim_id": "CODE-IMPL-322",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This function retrieves a list of available optimization algorithms, which is a utility function and not tied to any algorithm's theory.",
+ "code_summary": "Get list of available optimization algorithms...",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ },
+ {
+ "claim_id": "CODE-IMPL-323",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Provides a quick optimization routine as a convenience wrapper, which is an implementation detail rather than an algorithm implementation or theory.",
+ "code_summary": "Quick optimization function...",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ },
+ {
+ "claim_id": "CODE-IMPL-325",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Defines a parameter space attribute in an optimization interface, which is a structural code element without implementing an algorithm or theory concept.",
+ "code_summary": "parameter_space : ParameterSpace...",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-326",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Specifies an optimization problem attribute in the interface, which is a code implementation detail rather than an algorithm or theoretical concept.",
+ "code_summary": "problem : OptimizationProblem...",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-327",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Uses an interface property to store or return the algorithm's name, a purely informational implementation detail not tied to a specific algorithmic method or theory.",
+ "code_summary": "Name of the optimization algorithm...",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-328",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Indicates via an interface property whether the algorithm supports constraints, which is a feature flag in code and not an implemented algorithm or theoretical principle requiring citation.",
+ "code_summary": "Whether algorithm supports constraints...",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-329",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Indicates via an interface property whether the algorithm supports parameter bounds, a code-level feature indicator not corresponding to a specific algorithm or theory needing citation.",
+ "code_summary": "Whether algorithm supports parameter bounds...",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-330",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Marks whether an optimizer uses a population of candidates, which is a classification of algorithm type in code (population-based vs single-point) and not an implementation of an algorithm itself.",
+ "code_summary": "uses a population of candidates...",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-331",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "Defines an abstract interface method for updating a population based on fitness, representing a generic algorithm step placeholder rather than a concrete algorithm implementation or theoretical concept explanation.",
+ "code_summary": "Update population based on fitness values...",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ }
+ ]

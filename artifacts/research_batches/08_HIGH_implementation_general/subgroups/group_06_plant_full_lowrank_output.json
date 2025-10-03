@@ -1,0 +1,56 @@
+[
+ {
+ "claim_id": "CODE-IMPL-382",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This code implements the full double inverted pendulum (DIP) dynamics which is specific to the project and not a general algorithm or theory requiring citation.",
+ "code_summary": "Full Fidelity DIP Dynamics Model",
+ "needs_citation": false,
+ "implementation_type": "initialization"
+ },
+ {
+ "claim_id": "CODE-IMPL-384",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This is a compatibility interface method for legacy code; it does not implement any algorithm or theoretical concept that requires external citation.",
+ "code_summary": "Compatibility method for legacy code expecting _rhs_core",
+ "needs_citation": false,
+ "implementation_type": "interface"
+ },
+ {
+ "claim_id": "CODE-IMPL-386",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This code performs a physics calculation for the DIP's dynamics, which is a specific implementation detail and not a standard algorithm or control theory concept that would need a citation.",
+ "code_summary": "Full-fidelity physics computation for DIP dynamics",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ },
+ {
+ "claim_id": "CODE-IMPL-387",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This code computes the right-hand side of the DIP dynamics equations as part of the model's implementation, which is not an externally defined algorithm or concept requiring a citation.",
+ "code_summary": "Compute complete right-hand side of dynamics equation",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ },
+ {
+ "claim_id": "CODE-IMPL-390",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This defines a low-rank DIP dynamics model specific to the project; it is purely an implementation variation of the system model rather than a known algorithm or theoretical concept from literature.",
+ "code_summary": "Low-rank DIP Dynamics Model",
+ "needs_citation": false,
+ "implementation_type": "initialization"
+ },
+ {
+ "claim_id": "CODE-IMPL-393",
+ "category": "C",
+ "confidence": "HIGH",
+ "rationale": "This code handles physics computations for the low-rank DIP model, which is an internal implementation detail and not a standard algorithm or theory requiring external reference.",
+ "code_summary": "Low-rank DIP Physics Computer",
+ "needs_citation": false,
+ "implementation_type": "utility"
+ }
+ ]

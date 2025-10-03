@@ -1,0 +1,77 @@
+{
+  "group_name": "Multi-Objective Optimization",
+  "description": "Pareto dominance, weighted sum scalarization, robustness objectives",
+  "total_claims": 10,
+  "claims": [
+    {
+      "claim_id": "CODE-IMPL-332",
+      "code_summary": "Initialize multi-objective problem...",
+      "file_path": "src\\optimization\\core\\problem.py",
+      "line_number": "149",
+      "description": "optimization_type (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-334",
+      "code_summary": "Initialize composite objective...",
+      "file_path": "src\\optimization\\objectives\\base.py",
+      "line_number": "141",
+      "description": "to combine objectives (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-335",
+      "code_summary": "Combine objective values according to method...",
+      "file_path": "src\\optimization\\objectives\\base.py",
+      "line_number": "187",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-336",
+      "code_summary": "Compute robustness objective...",
+      "file_path": "src\\optimization\\objectives\\control\\robustness.py",
+      "line_number": "75",
+      "description": "evaluates robustness by (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-339",
+      "code_summary": "Objective based on frequency response characteristics...",
+      "file_path": "src\\optimization\\objectives\\control\\tracking.py",
+      "line_number": "220",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-340",
+      "code_summary": "Multi-objective optimization using Pareto dominance...",
+      "file_path": "src\\optimization\\objectives\\multi\\pareto.py",
+      "line_number": "18",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-341",
+      "code_summary": "Initialize Pareto multi-objective...",
+      "file_path": "src\\optimization\\objectives\\multi\\pareto.py",
+      "line_number": "29",
+      "description": "to convert Pareto (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-342",
+      "code_summary": "Multi-objective optimization using weighted sum scalarization...",
+      "file_path": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+      "line_number": "18",
+      "description": "is simple but (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-343",
+      "code_summary": "Initialize weighted sum multi-objective...",
+      "file_path": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+      "line_number": "30",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-344",
+      "code_summary": "Normalize objective values based on selected method...",
+      "file_path": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+      "line_number": "133",
+      "description": "None (attributed to: None)"
+    }
+  ]
+}

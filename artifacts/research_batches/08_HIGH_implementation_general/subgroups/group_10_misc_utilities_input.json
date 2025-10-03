@@ -1,0 +1,91 @@
+{
+  "group_name": "Miscellaneous & Utilities",
+  "description": "Benchmarks, MPC, compatibility, safety, result containers, ZOH integration",
+  "total_claims": 12,
+  "claims": [
+    {
+      "claim_id": "CODE-IMPL-085",
+      "code_summary": "use default from simulator...",
+      "file_path": "src\\benchmarks\\core\\trial_runner.py",
+      "line_number": "29",
+      "description": "default (attributed to: simulator)"
+    },
+    {
+      "claim_id": "CODE-IMPL-115",
+      "code_summary": "Robustly call continuous\u2011time dynamics: xdot = f(x,u)...",
+      "file_path": "src\\controllers\\mpc\\mpc_controller.py",
+      "line_number": "41",
+      "description": "names (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-117",
+      "code_summary": "Compatibility import for MPC controller...",
+      "file_path": "src\\controllers\\mpc_controller.py",
+      "line_number": "1",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-446",
+      "code_summary": "Safely integrate using fallback method...",
+      "file_path": "src\\simulation\\integrators\\compatibility.py",
+      "line_number": "267",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-448",
+      "code_summary": "Integration method order (exact for linear systems)...",
+      "file_path": "src\\simulation\\integrators\\discrete\\zero_order_hold.py",
+      "line_number": "41",
+      "description": "order (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-449",
+      "code_summary": "Integrate nonlinear system with ZOH control approximation...",
+      "file_path": "src\\simulation\\integrators\\discrete\\zero_order_hold.py",
+      "line_number": "132",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-477",
+      "code_summary": "Result container implementations for simulation data...",
+      "file_path": "src\\simulation\\results\\containers.py",
+      "line_number": "1",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-478",
+      "code_summary": "Implement recovery strategy...",
+      "file_path": "src\\simulation\\safety\\recovery.py",
+      "line_number": "18",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-479",
+      "code_summary": "Emergency stop recovery strategy...",
+      "file_path": "src\\simulation\\safety\\recovery.py",
+      "line_number": "38",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-480",
+      "code_summary": "State limiting recovery strategy...",
+      "file_path": "src\\simulation\\safety\\recovery.py",
+      "line_number": "46",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-481",
+      "code_summary": "Register recovery strategy for specific violation type...",
+      "file_path": "src\\simulation\\safety\\recovery.py",
+      "line_number": "77",
+      "description": "None (attributed to: None)"
+    },
+    {
+      "claim_id": "CODE-IMPL-482",
+      "code_summary": "Apply appropriate recovery strategy...",
+      "file_path": "src\\simulation\\safety\\recovery.py",
+      "line_number": "81",
+      "description": "None (attributed to: None)"
+    }
+  ]
+}

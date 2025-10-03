@@ -1,0 +1,639 @@
+[
+  {
+    "claim_id": "CODE-IMPL-085",
+    "code_summary": "use default from simulator...",
+    "file_path": "src\\benchmarks\\core\\trial_runner.py",
+    "line_number": "29",
+    "description": "default (attributed to: simulator)"
+  },
+  {
+    "claim_id": "CODE-IMPL-115",
+    "code_summary": "Robustly call continuous\u2011time dynamics: xdot = f(x,u)...",
+    "file_path": "src\\controllers\\mpc\\mpc_controller.py",
+    "line_number": "41",
+    "description": "names (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-117",
+    "code_summary": "Compatibility import for MPC controller...",
+    "file_path": "src\\controllers\\mpc_controller.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-121",
+    "code_summary": "use named tuples are\n    subclasses of ``tuple``...",
+    "file_path": "src\\controllers\\smc\\adaptive_smc.py",
+    "line_number": "263",
+    "description": "named tuples are\n    subclasses (attributed to: ``tuple``)"
+  },
+  {
+    "claim_id": "CODE-IMPL-122",
+    "code_summary": "Set dynamics model (for compatibility, not used in this implementation)...",
+    "file_path": "src\\controllers\\smc\\adaptive_smc.py",
+    "line_number": "427",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-132",
+    "code_summary": "Implements online estimation of system uncertainties and disturbance bounds...",
+    "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\parameter_estimation.py",
+    "line_number": "1",
+    "description": "online estimation (attributed to: system uncertainties and disturbance bounds)"
+  },
+  {
+    "claim_id": "CODE-IMPL-135",
+    "code_summary": "Update parameter estimates using RLS algorithm...",
+    "file_path": "src\\controllers\\smc\\algorithms\\adaptive\\parameter_estimation.py",
+    "line_number": "250",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-150",
+    "code_summary": "Initialize individual SMC controllers based on hybrid mode...",
+    "file_path": "src\\controllers\\smc\\algorithms\\hybrid\\controller.py",
+    "line_number": "112",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-152",
+    "code_summary": "Hybrid Switching Logic for Multi-Controller SMC...",
+    "file_path": "src\\controllers\\smc\\algorithms\\hybrid\\switching_logic.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-155",
+    "code_summary": "Evaluate switching based on control effort...",
+    "file_path": "src\\controllers\\smc\\algorithms\\hybrid\\switching_logic.py",
+    "line_number": "265",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-157",
+    "code_summary": "Evaluate switching based on adaptation rate (for adaptive controllers)...",
+    "file_path": "src\\controllers\\smc\\algorithms\\hybrid\\switching_logic.py",
+    "line_number": "319",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-159",
+    "code_summary": "Evaluate switching based on time (round-robin or scheduled switching)...",
+    "file_path": "src\\controllers\\smc\\algorithms\\hybrid\\switching_logic.py",
+    "line_number": "381",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-167",
+    "code_summary": "Vectorized feasibility check for super\u2011twisting SMC gains...",
+    "file_path": "src\\controllers\\smc\\algorithms\\super_twisting\\controller.py",
+    "line_number": "248",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-178",
+    "code_summary": "uses six gains in the order...",
+    "file_path": "src\\controllers\\smc\\classic_smc.py",
+    "line_number": "282",
+    "description": "six gains (attributed to: the order)"
+  },
+  {
+    "claim_id": "CODE-IMPL-180",
+    "code_summary": "Reset ClassicalSMC controller state...",
+    "file_path": "src\\controllers\\smc\\classic_smc.py",
+    "line_number": "488",
+    "description": "is provided for (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-181",
+    "code_summary": "Equivalent Control Computation for SMC Controllers...",
+    "file_path": "src\\controllers\\smc\\core\\equivalent_control.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-182",
+    "code_summary": "Initialize equivalent control computation...",
+    "file_path": "src\\controllers\\smc\\core\\equivalent_control.py",
+    "line_number": "35",
+    "description": "regularization_alpha (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-183",
+    "code_summary": "Centralized gain validation for all SMC controller types...",
+    "file_path": "src\\controllers\\smc\\core\\gain_validation.py",
+    "line_number": "45",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-192",
+    "code_summary": "uses chattering in practice...",
+    "file_path": "src\\controllers\\smc\\core\\switching_functions.py",
+    "line_number": "148",
+    "description": "chattering (attributed to: practice)"
+  },
+  {
+    "claim_id": "CODE-IMPL-193",
+    "code_summary": "Compute derivative of switching function...",
+    "file_path": "src\\controllers\\smc\\core\\switching_functions.py",
+    "line_number": "199",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-194",
+    "code_summary": "Hyperbolic tangent switching function with optimized slope...",
+    "file_path": "src\\controllers\\smc\\core\\switching_functions.py",
+    "line_number": "229",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-195",
+    "code_summary": "uses chattering in real systems...",
+    "file_path": "src\\controllers\\smc\\core\\switching_functions.py",
+    "line_number": "270",
+    "description": "chattering (attributed to: real systems)"
+  },
+  {
+    "claim_id": "CODE-IMPL-201",
+    "code_summary": "Numba\u2011accelerated core of the Super\u2011Twisting SMC...",
+    "file_path": "src\\controllers\\smc\\sta_smc.py",
+    "line_number": "35",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-204",
+    "code_summary": "Initialize a Super\u2011Twisting Sliding Mode Controller...",
+    "file_path": "src\\controllers\\smc\\sta_smc.py",
+    "line_number": "195",
+    "description": "for saturated sign (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-321",
+    "code_summary": "Factory method to create optimizers...",
+    "file_path": "src\\optimization\\core\\context.py",
+    "line_number": "166",
+    "description": "to create optimizers (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-322",
+    "code_summary": "Get list of available optimization algorithms...",
+    "file_path": "src\\optimization\\core\\context.py",
+    "line_number": "197",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-323",
+    "code_summary": "Quick optimization function...",
+    "file_path": "src\\optimization\\core\\context.py",
+    "line_number": "210",
+    "description": "name (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-325",
+    "code_summary": "parameter_space : ParameterSpace...",
+    "file_path": "src\\optimization\\core\\interfaces.py",
+    "line_number": "274",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-326",
+    "code_summary": "problem : OptimizationProblem...",
+    "file_path": "src\\optimization\\core\\interfaces.py",
+    "line_number": "289",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-327",
+    "code_summary": "Name of the optimization algorithm...",
+    "file_path": "src\\optimization\\core\\interfaces.py",
+    "line_number": "316",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-328",
+    "code_summary": "Whether algorithm supports constraints...",
+    "file_path": "src\\optimization\\core\\interfaces.py",
+    "line_number": "322",
+    "description": "supports constraints (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-329",
+    "code_summary": "Whether algorithm supports parameter bounds...",
+    "file_path": "src\\optimization\\core\\interfaces.py",
+    "line_number": "328",
+    "description": "supports parameter bounds (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-330",
+    "code_summary": "uses a population of candidates...",
+    "file_path": "src\\optimization\\core\\interfaces.py",
+    "line_number": "334",
+    "description": "a population (attributed to: candidates)"
+  },
+  {
+    "claim_id": "CODE-IMPL-331",
+    "code_summary": "Update population based on fitness values...",
+    "file_path": "src\\optimization\\core\\interfaces.py",
+    "line_number": "399",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-332",
+    "code_summary": "Initialize multi-objective problem...",
+    "file_path": "src\\optimization\\core\\problem.py",
+    "line_number": "149",
+    "description": "optimization_type (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-334",
+    "code_summary": "Initialize composite objective...",
+    "file_path": "src\\optimization\\objectives\\base.py",
+    "line_number": "141",
+    "description": "to combine objectives (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-335",
+    "code_summary": "Combine objective values according to method...",
+    "file_path": "src\\optimization\\objectives\\base.py",
+    "line_number": "187",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-336",
+    "code_summary": "Compute robustness objective...",
+    "file_path": "src\\optimization\\objectives\\control\\robustness.py",
+    "line_number": "75",
+    "description": "evaluates robustness by (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-339",
+    "code_summary": "Objective based on frequency response characteristics...",
+    "file_path": "src\\optimization\\objectives\\control\\tracking.py",
+    "line_number": "220",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-340",
+    "code_summary": "Multi-objective optimization using Pareto dominance...",
+    "file_path": "src\\optimization\\objectives\\multi\\pareto.py",
+    "line_number": "18",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-341",
+    "code_summary": "Initialize Pareto multi-objective...",
+    "file_path": "src\\optimization\\objectives\\multi\\pareto.py",
+    "line_number": "29",
+    "description": "to convert Pareto (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-342",
+    "code_summary": "Multi-objective optimization using weighted sum scalarization...",
+    "file_path": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+    "line_number": "18",
+    "description": "is simple but (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-343",
+    "code_summary": "Initialize weighted sum multi-objective...",
+    "file_path": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+    "line_number": "30",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-344",
+    "code_summary": "Normalize objective values based on selected method...",
+    "file_path": "src\\optimization\\objectives\\multi\\weighted_sum.py",
+    "line_number": "133",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-370",
+    "code_summary": "Plant core dynamics compatibility module...",
+    "file_path": "src\\plant\\core\\dynamics.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-375",
+    "code_summary": "Simplified physics matrices for computational efficiency...",
+    "file_path": "src\\plant\\core\\physics_matrices.py",
+    "line_number": "248",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-378",
+    "code_summary": "Available integration methods for dynamics...",
+    "file_path": "src\\plant\\models\\base\\dynamics_interface.py",
+    "line_number": "19",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-379",
+    "code_summary": "Compute system dynamics at given state and input...",
+    "file_path": "src\\plant\\models\\base\\dynamics_interface.py",
+    "line_number": "73",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-382",
+    "code_summary": "Full Fidelity DIP Dynamics Model...",
+    "file_path": "src\\plant\\models\\full\\dynamics.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-384",
+    "code_summary": "Compatibility method for legacy code expecting _rhs_core...",
+    "file_path": "src\\plant\\models\\full\\dynamics.py",
+    "line_number": "530",
+    "description": "for legacy code (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-386",
+    "code_summary": "Full-fidelity physics computation for DIP dynamics...",
+    "file_path": "src\\plant\\models\\full\\physics.py",
+    "line_number": "34",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-387",
+    "code_summary": "Compute complete right-hand side of dynamics equation...",
+    "file_path": "src\\plant\\models\\full\\physics.py",
+    "line_number": "70",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-390",
+    "code_summary": "Low-rank DIP Dynamics Model...",
+    "file_path": "src\\plant\\models\\lowrank\\dynamics.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-393",
+    "code_summary": "Low-rank DIP Physics Computer...",
+    "file_path": "src\\plant\\models\\lowrank\\physics.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-397",
+    "code_summary": "Simplified DIP Dynamics Model...",
+    "file_path": "src\\plant\\models\\simplified\\dynamics.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-399",
+    "code_summary": "Compute dynamics using standard (modular) approach...",
+    "file_path": "src\\plant\\models\\simplified\\dynamics.py",
+    "line_number": "290",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-400",
+    "code_summary": "Compute dynamics using fast JIT-compiled approach...",
+    "file_path": "src\\plant\\models\\simplified\\dynamics.py",
+    "line_number": "298",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-402",
+    "code_summary": "Simplified Physics Computation for DIP...",
+    "file_path": "src\\plant\\models\\simplified\\physics.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-403",
+    "code_summary": "Simplified physics computation for DIP dynamics...",
+    "file_path": "src\\plant\\models\\simplified\\physics.py",
+    "line_number": "35",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-404",
+    "code_summary": "JIT-compiled simplified dynamics computation...",
+    "file_path": "src\\plant\\models\\simplified\\physics.py",
+    "line_number": "236",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-406",
+    "code_summary": "Initializes and holds the context for a simulation run...",
+    "file_path": "src\\simulation\\context\\simulation_context.py",
+    "line_number": "30",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-410",
+    "code_summary": "Integration method order...",
+    "file_path": "src\\simulation\\core\\interfaces.py",
+    "line_number": "74",
+    "description": "order (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-411",
+    "code_summary": "Execute simulation with specified strategy...",
+    "file_path": "src\\simulation\\core\\interfaces.py",
+    "line_number": "89",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-415",
+    "code_summary": "Advance simulation by one time step...",
+    "file_path": "src\\simulation\\core\\time_domain.py",
+    "line_number": "72",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-420",
+    "code_summary": "Simulation step router...",
+    "file_path": "src\\simulation\\engines\\simulation_runner.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-422",
+    "code_summary": "Unified simulation step entry point...",
+    "file_path": "src\\simulation\\engines\\simulation_runner.py",
+    "line_number": "87",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-423",
+    "code_summary": "Simulate a single controller trajectory using an explicit Euler method...",
+    "file_path": "src\\simulation\\engines\\simulation_runner.py",
+    "line_number": "109",
+    "description": "that advances the (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-437",
+    "code_summary": "Legacy Dormand-Prince 4(5) step function for backward compatibility...",
+    "file_path": "src\\simulation\\integrators\\adaptive\\runge_kutta.py",
+    "line_number": "177",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-438",
+    "code_summary": "Original RK45 implementation for fallback...",
+    "file_path": "src\\simulation\\integrators\\adaptive\\runge_kutta.py",
+    "line_number": "228",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-440",
+    "code_summary": "Initialize base integrator...",
+    "file_path": "src\\simulation\\integrators\\base.py",
+    "line_number": "19",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-443",
+    "code_summary": "Initialize integration result...",
+    "file_path": "src\\simulation\\integrators\\base.py",
+    "line_number": "159",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-446",
+    "code_summary": "Safely integrate using fallback method...",
+    "file_path": "src\\simulation\\integrators\\compatibility.py",
+    "line_number": "267",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-448",
+    "code_summary": "Integration method order (exact for linear systems)...",
+    "file_path": "src\\simulation\\integrators\\discrete\\zero_order_hold.py",
+    "line_number": "41",
+    "description": "order (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-449",
+    "code_summary": "Integrate nonlinear system with ZOH control approximation...",
+    "file_path": "src\\simulation\\integrators\\discrete\\zero_order_hold.py",
+    "line_number": "132",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-451",
+    "code_summary": "Euler integration methods (explicit and implicit)...",
+    "file_path": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-452",
+    "code_summary": "Forward (explicit) Euler integration method...",
+    "file_path": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line_number": "16",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-454",
+    "code_summary": "Integrate using forward Euler method...",
+    "file_path": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line_number": "29",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-455",
+    "code_summary": "Backward (implicit) Euler integration method...",
+    "file_path": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line_number": "66",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-457",
+    "code_summary": "Integrate using backward Euler method...",
+    "file_path": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line_number": "97",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-458",
+    "code_summary": "Modified Euler method (Heun's method)...",
+    "file_path": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line_number": "154",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-460",
+    "code_summary": "Integrate using modified Euler (Heun's) method...",
+    "file_path": "src\\simulation\\integrators\\fixed_step\\euler.py",
+    "line_number": "167",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-473",
+    "code_summary": "Execute simulation with orchestrator-specific strategy...",
+    "file_path": "src\\simulation\\orchestrators\\base.py",
+    "line_number": "102",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-474",
+    "code_summary": "Run a single simulation using sequential orchestrator...",
+    "file_path": "src\\simulation\\orchestrators\\parallel.py",
+    "line_number": "159",
+    "description": "creates a new (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-476",
+    "code_summary": "Legacy simulation runner for backward compatibility...",
+    "file_path": "src\\simulation\\orchestrators\\sequential.py",
+    "line_number": "187",
+    "description": "dynamics_model (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-477",
+    "code_summary": "Result container implementations for simulation data...",
+    "file_path": "src\\simulation\\results\\containers.py",
+    "line_number": "1",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-478",
+    "code_summary": "Implement recovery strategy...",
+    "file_path": "src\\simulation\\safety\\recovery.py",
+    "line_number": "18",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-479",
+    "code_summary": "Emergency stop recovery strategy...",
+    "file_path": "src\\simulation\\safety\\recovery.py",
+    "line_number": "38",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-480",
+    "code_summary": "State limiting recovery strategy...",
+    "file_path": "src\\simulation\\safety\\recovery.py",
+    "line_number": "46",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-481",
+    "code_summary": "Register recovery strategy for specific violation type...",
+    "file_path": "src\\simulation\\safety\\recovery.py",
+    "line_number": "77",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-482",
+    "code_summary": "Apply appropriate recovery strategy...",
+    "file_path": "src\\simulation\\safety\\recovery.py",
+    "line_number": "81",
+    "description": "None (attributed to: None)"
+  },
+  {
+    "claim_id": "CODE-IMPL-517",
+    "code_summary": "according to the super\u2011twisting\n    algorithm and are needed to resume control in the next time step...",
+    "file_path": "src\\utils\\types\\control_outputs.py",
+    "line_number": "86",
+    "description": "the super\u2011twisting\n    algorithm and are needed to resume control (attributed to: the next time step)"
+  }
+]
