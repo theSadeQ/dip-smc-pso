@@ -54,7 +54,7 @@ extensions = [
     'sphinxcontrib.bibtex',       # Bibliography support
     'sphinx_copybutton',
     'sphinx_design',
-    # 'sphinxcontrib.mermaid',  # Disabled - Windows encoding issues with Greek letters
+    'sphinxcontrib.mermaid',  # Re-enabled after replacing Greek letters with ASCII
     # 'sphinx_reredirects',  # Temporarily disabled for testing
     'sphinx.ext.doctest',         # Test code blocks
     'sphinx.ext.duration',
@@ -154,6 +154,15 @@ html_theme_options = {
     'source_directory': 'docs/',
 }
 
+# Custom CSS and JavaScript files
+html_css_files = [
+    'custom.css',
+]
+
+html_js_files = [
+    'back-to-top.js',
+]
+
 # HTML output options
 html_show_sourcelink = True
 html_show_sphinx = True
@@ -165,9 +174,9 @@ copybutton_prompt_text = r">>> |\.\.\. |\$ "
 copybutton_prompt_is_regexp = True
 copybutton_exclude = '.linenos, .gp, .go'
 
-# Mermaid configuration (disabled while extension is unavailable)
-# mermaid_output_format = 'svg'
-# mermaid_params = ['--theme', 'neutral', '--width', '800', '--backgroundColor', 'white']
+# Mermaid configuration - use client-side rendering (no CLI required)
+mermaid_output_format = 'raw'  # Embed Mermaid code for browser rendering
+mermaid_init_js = "mermaid.initialize({startOnLoad:true,theme:'neutral'});"
 
 # LaTeX output configuration (for PDF generation)
 latex_engine = 'pdflatex'
