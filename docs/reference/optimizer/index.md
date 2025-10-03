@@ -1,14 +1,33 @@
-# Optimizer
+# Optimizer Module
 
-This section maps primarily to `src/optimization/` and `src/optimizer/` for PSO and related optimization infrastructure.
+## Overview
 
-- Key modules:
-  - {py:mod}`src.optimizer.pso_optimizer` (legacy/compat PSO entry)
-  - {py:mod}`src.optimization.core` (problems, parameters, interfaces, context)
-  - {py:mod}`src.optimization.algorithms` (PSO, evolutionary, gradient-based)
-  - {py:mod}`src.optimization.objectives` (control/system objectives)
-  - {py:mod}`src.optimization.constraints`
-  - {py:mod}`src.optimization.results`
+This section documents all Python source files in `src/optimizer/`.
 
-Benchmarks and metrics are also used from `src/benchmarks/`.
+## Module Architecture
 
+**Total Files:** 2
+**Total Classes:** 0
+**Total Functions:** 0
+
+## Files in This Module
+
+```{toctree}
+:maxdepth: 2
+
+pso_optimizer
+__init__
+```
+
+## Quick Navigation
+
+### By File Type
+
+
+#### __Init__
+
+- [optimizer.__init__](__init__.md)
+
+#### Pso_Optimizer
+
+- [optimizer.pso_optimizer](pso_optimizer.md)

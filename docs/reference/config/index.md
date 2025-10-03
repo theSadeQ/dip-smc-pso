@@ -1,12 +1,48 @@
-# Configuration System
+# Config Module
 
-This section maps to `src/config/` and documents configuration loading, defaults, and logging.
+## Overview
 
-- Key modules:
-  - {py:mod}`src.config.loader`
-  - {py:mod}`src.config.schemas`
-  - {py:mod}`src.config.defaults`
-  - {py:mod}`src.config.logging`
+This section documents all Python source files in `src/config/`.
 
-See repository root `config/` directory for runtime/testing configurations and schemas.
+## Module Architecture
 
+**Total Files:** 5
+**Total Classes:** 33
+**Total Functions:** 6
+
+## Files in This Module
+
+```{toctree}
+:maxdepth: 2
+
+loader
+logging
+schemas
+__init__
+defaults___init__
+```
+
+## Quick Navigation
+
+### By File Type
+
+
+#### __Init__
+
+- [config.__init__](__init__.md)
+
+#### Defaults
+
+- [config.defaults.__init__](defaults___init__.md)
+
+#### Loader
+
+- [config.loader](loader.md)
+
+#### Logging
+
+- [config.logging](logging.md)
+
+#### Schemas
+
+- [config.schemas](schemas.md)

@@ -1,9 +1,33 @@
-# Fault Detection and Isolation (FDI)
+# Fault Detection Module
 
-This section maps to `src/fault_detection/` and documents fault detection utilities.
+## Overview
 
-- Key modules:
-  - {py:mod}`src.fault_detection.fdi`
+This section documents all Python source files in `src/fault_detection/`.
 
-See also Analysis → Fault Detection for broader analytics context (`src.analysis.fault_detection`).
+## Module Architecture
 
+**Total Files:** 2
+**Total Classes:** 0
+**Total Functions:** 0
+
+## Files in This Module
+
+```{toctree}
+:maxdepth: 2
+
+fdi
+__init__
+```
+
+## Quick Navigation
+
+### By File Type
+
+
+#### __Init__
+
+- [fault_detection.__init__](__init__.md)
+
+#### Fdi
+
+- [fault_detection.fdi](fdi.md)
