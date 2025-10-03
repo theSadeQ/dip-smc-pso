@@ -11,7 +11,11 @@
       "WebFetch(domain:arxiv.org)",
       "WebFetch(domain:doi.org)",
       "WebFetch(domain:link.springer.com)",
-      "Bash(iconv:*)"
+      "Bash(iconv:*)",
+      "WebFetch(domain:epubs.siam.org)",
+      "Bash(dir:*)",
+      "Bash(Select-Object -First 20)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": [],
