@@ -167,3 +167,337 @@ table.docutils td {
         display: none !important;
     }
 }
+
+/* ============================================================================
+   Lazy Loading Image States
+   ============================================================================ */
+
+/* Images awaiting lazy load - skeleton loading animation */
+img[data-src] {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    min-height: 100px;  /* Prevent layout shift */
+}
+
+/* Image currently loading */
+img.lazy-loading {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+/* Image successfully loaded */
+img.lazy-loaded {
+    opacity: 1;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Image failed to load */
+img.lazy-error {
+    opacity: 0.3;
+    border: 2px dashed #e0e0e0;
+    background: #f5f5f5;
+}
+
+/* Skeleton loading animation */
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Dark mode support for lazy loading */
+[data-theme="dark"] img[data-src] {
+    background: linear-gradient(90deg, #2d2d2d 25%, #404040 50%, #2d2d2d 75%);
+    background-size: 200% 100%;
+}
+
+[data-theme="dark"] img.lazy-error {
+    background: #1a1a1a;
+    border-color: #404040;
+}
+
+/* ============================================================================
+   Dark Mode Theme Styles
+   ============================================================================ */
+
+/* Theme toggle button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 100px;
+    z-index: 1001;
+    background-color: var(--color-background-secondary, #f5f5f5);
+    border: 1px solid var(--color-background-border, #e0e0e0);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:focus {
+    outline: 2px solid var(--color-brand-primary, #2962ff);
+    outline-offset: 2px;
+}
+
+.theme-icon {
+    font-size: 20px;
+    display: none;
+}
+
+.theme-toggle[data-theme="light"] .theme-icon.light {
+    display: block;
+}
+
+.theme-toggle[data-theme="dark"] .theme-icon.dark {
+    display: block;
+}
+
+/* Screen reader only class for announcements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Dark mode color scheme - comprehensive */
+[data-theme="dark"] {
+    /* Background colors */
+    --color-background-primary: #1a1a1a;
+    --color-background-secondary: #2d2d2d;
+    --color-background-border: #404040;
+
+    /* Text colors */
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #b0b0b0;
+    --color-text-muted: #808080;
+
+    /* Brand colors */
+    --color-brand-primary: #4a9eff;
+    --color-brand-content: #6bb0ff;
+
+    /* Semantic colors */
+    --color-success: #4caf50;
+    --color-warning: #ff9800;
+    --color-error: #f44336;
+    --color-info: #2196f3;
+}
+
+/* Apply dark mode to body and main elements */
+[data-theme="dark"] {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-primary);
+}
+
+/* Links */
+[data-theme="dark"] a {
+    color: var(--color-brand-primary);
+}
+
+[data-theme="dark"] a:hover {
+    color: var(--color-brand-content);
+}
+
+[data-theme="dark"] a:visited {
+    color: #9575cd;
+}
+
+/* Code blocks */
+[data-theme="dark"] code {
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-background-border);
+}
+
+[data-theme="dark"] pre {
+    background-color: #1e1e1e;
+    border: 1px solid var(--color-background-border);
+}
+
+[data-theme="dark"] div[class*="highlight"] {
+    background-color: #1e1e1e;
+    border: 1px solid var(--color-background-border);
+}
+
+/* Inline code */
+[data-theme="dark"] :not(pre) > code {
+    background-color: var(--color-background-secondary);
+    color: #f8f8f2;
+}
+
+/* Tables */
+[data-theme="dark"] table.docutils {
+    border-color: var(--color-background-border);
+}
+
+[data-theme="dark"] table.docutils th {
+    background-color: var(--color-background-secondary);
+    border-bottom-color: var(--color-brand-primary);
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] table.docutils td {
+    border-bottom-color: var(--color-background-border);
+    color: var(--color-text-primary);
+}
+
+/* Admonitions */
+[data-theme="dark"] .admonition {
+    background-color: var(--color-background-secondary);
+    border-color: var(--color-background-border);
+}
+
+[data-theme="dark"] .admonition.note {
+    border-left-color: var(--color-info);
+}
+
+[data-theme="dark"] .admonition.warning {
+    border-left-color: var(--color-warning);
+}
+
+[data-theme="dark"] .admonition.error {
+    border-left-color: var(--color-error);
+}
+
+/* Blockquotes */
+[data-theme="dark"] blockquote {
+    background-color: var(--color-background-secondary);
+    border-left-color: var(--color-brand-primary);
+    color: var(--color-text-secondary);
+}
+
+/* Headers */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: var(--color-text-primary);
+}
+
+/* Horizontal rules */
+[data-theme="dark"] hr {
+    border-color: var(--color-background-border);
+}
+
+/* Lists */
+[data-theme="dark"] ul,
+[data-theme="dark"] ol {
+    color: var(--color-text-primary);
+}
+
+/* Definition lists */
+[data-theme="dark"] dt {
+    color: var(--color-text-primary);
+    font-weight: bold;
+}
+
+[data-theme="dark"] dd {
+    color: var(--color-text-secondary);
+}
+
+/* Forms and inputs (if any) */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    border-color: var(--color-background-border);
+}
+
+/* Buttons */
+[data-theme="dark"] button {
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    border-color: var(--color-background-border);
+}
+
+[data-theme="dark"] button:hover {
+    background-color: var(--color-background-border);
+}
+
+/* Search box (if present) */
+[data-theme="dark"] .search-input {
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    border-color: var(--color-background-border);
+}
+
+/* Sidebar */
+[data-theme="dark"] .sidebar {
+    background-color: var(--color-background-secondary);
+    border-color: var(--color-background-border);
+}
+
+/* Footer */
+[data-theme="dark"] footer {
+    background-color: var(--color-background-secondary);
+    border-top-color: var(--color-background-border);
+    color: var(--color-text-secondary);
+}
+
+/* Back to top button in dark mode */
+[data-theme="dark"] .back-to-top {
+    background-color: var(--color-brand-primary);
+    color: white;
+}
+
+[data-theme="dark"] .back-to-top:hover {
+    background-color: var(--color-brand-content);
+}
+
+/* Download links in dark mode */
+[data-theme="dark"] .download-link {
+    background-color: var(--color-brand-primary);
+    color: white;
+}
+
+[data-theme="dark"] .download-link:hover {
+    background-color: var(--color-brand-content);
+}
+
+/* Presentation slides in dark mode */
+[data-theme="dark"] .presentation-slide {
+    background-color: var(--color-background-secondary);
+    border-color: var(--color-background-border);
+}
+
+/* Smooth transitions between themes */
+html, body, div, span, p, a, h1, h2, h3, h4, h5, h6,
+table, tr, td, th, pre, code, blockquote {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Mobile adjustments for theme toggle */
+@media (max-width: 768px) {
+    .theme-toggle {
+        top: 15px;
+        right: 70px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .theme-icon {
+        font-size: 18px;
+    }
+}
