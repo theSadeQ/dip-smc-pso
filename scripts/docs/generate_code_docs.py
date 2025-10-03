@@ -537,7 +537,9 @@ Every Python file in the project is documented here with:
             print(f"\n{'='*80}")
             print(f"Would create: {filepath}")
             print(f"{'='*80}")
-            print(content[:500])  # Print first 500 chars
+            # Use safe ASCII preview to avoid UnicodeEncodeError on Windows
+            preview = content[:500].encode('ascii', errors='replace').decode('ascii')
+            print(preview)
             if len(content) > 500:
                 print(f"\n... ({len(content) - 500} more characters)")
         else:
