@@ -81,8 +81,67 @@ class BatchFolderGenerator:
         with open(path, 'r', encoding='utf-8-sig') as f:
             return list(csv.DictReader(f))
 
+    def _should_skip_claim(self, claim: Dict) -> bool:
+        """Filter out obvious software patterns that don't need academic citations.
+
+        Returns True if claim should be SKIPPED (no citation needed).
+        """
+        skip_patterns = [
+            # Malformed/empty claims
+            'none (attributed to: none)',
+            'returns (attributed',
+            'none) (attributed',
+            'around the vectorised',  # Incomplete sentence fragments
+            'around the\nvectorised',
+
+            # Software engineering patterns
+            'factory', 'registry', 'container', 'wrapper',
+            'package for', 'module for', 'utility for',
+            'helper function', 'helper class',
+
+            # Generic implementations
+            'statistical analysis package',
+            'benchmarking tools',
+            'comparison tools',
+            'validation utilities',
+            'algorithm validation',  # "validation" alone is too generic
+
+            # Code structure
+            'enterprise', 'production-ready',
+            'instantiation', 'initialization',
+
+            # Implementation wrappers (code, not theory)
+            'implements statistical methods',  # Implementation, not theory
+            'vectorised tuner',  # Vectorization implementation
+            'high-throughput'  # Performance implementation detail
+        ]
+
+        desc = claim.get('Research_Description', '').lower()
+        context = claim.get('Full_Claim_Text', '').lower()
+
+        # Skip if matches any pattern
+        if any(pattern in desc for pattern in skip_patterns):
+            return True
+        if any(pattern in context[:200] for pattern in skip_patterns):
+            return True
+
+        # Skip if description is too short or malformed
+        if len(desc.strip()) < 10:
+            return True
+
+        # Skip if description is only 1-2 words (e.g., "validation")
+        word_count = len(desc.strip().split())
+        if word_count < 3:
+            return True
+
+        # Skip if description contains "attributed to: None" - malformed parsing
+        if '(attributed to:' in desc and 'none' in desc:
+            return True
+
+        return False
+
     def get_claims_for_batch(self, batch_info: Dict) -> List[Dict]:
-        """Get detailed claim information for a batch."""
+        """Get detailed claim information for a batch (with software pattern filtering)."""
         claims_in_batch = []
 
         # Use claim_ids from batch_info if available
@@ -91,16 +150,20 @@ class BatchFolderGenerator:
             # Match claims from CSV by ID
             for claim in self.csv_claims:
                 if claim['Claim_ID'] in target_ids:
-                    claims_in_batch.append(claim)
+                    # Apply software pattern filter
+                    if not self._should_skip_claim(claim):
+                        claims_in_batch.append(claim)
         else:
             # Fallback: Match by priority and topic
             for claim in self.csv_claims:
                 if claim['Priority'] == batch_info['priority']:
                     # Simple topic matching
                     if batch_info['topic'].replace('_', ' ') in claim['Research_Description'].lower():
-                        claims_in_batch.append(claim)
-                        if len(claims_in_batch) >= batch_info['claim_count']:
-                            break
+                        # Apply software pattern filter
+                        if not self._should_skip_claim(claim):
+                            claims_in_batch.append(claim)
+                            if len(claims_in_batch) >= batch_info['claim_count']:
+                                break
 
         return claims_in_batch[:batch_info['claim_count']]
 
@@ -129,6 +192,24 @@ class BatchFolderGenerator:
 I need academic citations for {topic_name.lower()} claims in a control systems research project (Double Inverted Pendulum with Sliding Mode Control and PSO Optimization).
 
 **Context:** These claims describe {topic_name.lower()} implementations and theoretical foundations. I need authoritative citations to support each claim.
+
+**IMPORTANT - Citation Scope (Read First!):**
+
+✅ **DO provide citations for:**
+- Mathematical theorems, lemmas, and proofs
+- Control theory algorithms (SMC theory, PSO convergence, MPC foundations)
+- Statistical methods (Monte Carlo *method*, bootstrap *theory*, confidence intervals)
+- Numerical analysis techniques (RK45 *algorithm*, adaptive step sizing)
+- Physical models and equations (pendulum dynamics, Lagrangian mechanics)
+
+❌ **DO NOT provide citations for:**
+- Software design patterns (Factory, Strategy, Observer - these are GoF patterns)
+- Module/package/class organization ("Statistical analysis package", "Benchmarking tools")
+- Code structure descriptions ("Production-ready", "Enterprise", "Utility functions")
+- Implementation wrappers (vectorized *implementation* vs. vectorization *theory*)
+- Return types, parameter validation, or generic software architecture
+
+**For software patterns, respond:** "SKIP: Standard software engineering pattern - no citation needed"
 
 **Output Format Required:**
 For EACH claim below, provide EXACTLY this format:
