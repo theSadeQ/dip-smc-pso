@@ -15,7 +15,12 @@
       "WebFetch(domain:epubs.siam.org)",
       "Bash(dir:*)",
       "Bash(Select-Object -First 20)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Read(//tmp/**)",
+      "Bash(find:*)",
+      "Bash(test:*)",
+      "Bash(cd:*)",
+      "Bash(if exist scriptsdocstemplates dir scriptsdocstemplates /b)"
     ],
     "deny": [],
     "ask": [],

@@ -1,0 +1,1488 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Controller Integration Guide - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/factory/controller_integration_guide.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/factory/controller_integration_guide.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="controller-integration-guide">
+<h1>Controller Integration Guide<a class="headerlink" href="#controller-integration-guide" title="Link to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>This guide provides comprehensive instructions for integrating SMC controllers with the factory system, plant models, and PSO optimization workflows. It covers the enhanced integration patterns implemented to resolve GitHub Issue #6 factory integration challenges.</p>
+</section>
+<section id="factory-controller-integration-architecture">
+<h2>Factory-Controller Integration Architecture<a class="headerlink" href="#factory-controller-integration-architecture" title="Link to this heading">¶</a></h2>
+<section id="controller-lifecycle-management">
+<h3>Controller Lifecycle Management<a class="headerlink" href="#controller-lifecycle-management" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">┌─────────────────┐</span>    <span class="err">┌──────────────────┐</span>    <span class="err">┌─────────────────┐</span>
+<span class="err">│</span>   <span class="n">Factory</span>       <span class="err">│</span>    <span class="err">│</span>   <span class="n">Controller</span>     <span class="err">│</span>    <span class="err">│</span>   <span class="n">Plant</span> <span class="n">Model</span>   <span class="err">│</span>
+<span class="err">│</span>   <span class="n">Creation</span>      <span class="err">│───▶│</span>   <span class="n">Instance</span>       <span class="err">│◄──▶│</span>   <span class="n">Integration</span>   <span class="err">│</span>
+<span class="err">└─────────────────┘</span>    <span class="err">└──────────────────┘</span>    <span class="err">└─────────────────┘</span>
+         <span class="err">│</span>                       <span class="err">│</span>                       <span class="err">│</span>
+         <span class="err">│</span>                       <span class="err">▼</span>                       <span class="err">│</span>
+         <span class="err">│</span>              <span class="err">┌──────────────────┐</span>             <span class="err">│</span>
+         <span class="err">│</span>              <span class="err">│</span> <span class="n">Configuration</span>    <span class="err">│</span>             <span class="err">│</span>
+         <span class="err">└─────────────▶│</span> <span class="n">Validation</span>       <span class="err">│◄────────────┘</span>
+                        <span class="err">└──────────────────┘</span>
+                                 <span class="err">│</span>
+                                 <span class="err">▼</span>
+                        <span class="err">┌──────────────────┐</span>
+                        <span class="err">│</span> <span class="n">Parameter</span>        <span class="err">│</span>
+                        <span class="err">│</span> <span class="n">Resolution</span>       <span class="err">│</span>
+                        <span class="err">└──────────────────┘</span>
+</pre></div>
+</div>
+</section>
+<section id="enhanced-factory-interface">
+<h3>Enhanced Factory Interface<a class="headerlink" href="#enhanced-factory-interface" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EnterpriseControllerFactory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enterprise-grade controller factory with comprehensive integration support.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">    - Type-safe controller creation</span>
+<span class="sd">    - Automatic parameter validation</span>
+<span class="sd">    - Plant model integration</span>
+<span class="sd">    - PSO optimization support</span>
+<span class="sd">    - Thread-safe operations</span>
+<span class="sd">    - Comprehensive error handling</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_controller</span><span class="p">(</span>
+        <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gains</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GainsArray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ControllerProtocol</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create controller with enhanced integration support.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            controller_type: Type of controller to create</span>
+<span class="sd">            config: Configuration object or dictionary</span>
+<span class="sd">            gains: Controller gains array</span>
+<span class="sd">            **kwargs: Additional parameters for flexibility</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Configured controller instance</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: Invalid controller type or configuration</span>
+<span class="sd">            TypeError: Invalid parameter types</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="controller-type-integration-patterns">
+<h2>Controller Type Integration Patterns<a class="headerlink" href="#controller-type-integration-patterns" title="Link to this heading">¶</a></h2>
+<section id="classical-smc-integration">
+<h3>Classical SMC Integration<a class="headerlink" href="#classical-smc-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integrate_classical_smc</span><span class="p">(</span>
+    <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">plant_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">optimization_bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complete integration pattern for Classical SMC.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - gains: [k1, k2, λ1, λ2, K, kd] - 6 element array</span>
+<span class="sd">    - Stability: All gains must be positive</span>
+<span class="sd">    - Chattering: boundary_layer parameter required</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># 1. Parameter validation</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Classical SMC requires exactly 6 gains&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gains</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All Classical SMC gains must be positive&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 2. Configuration construction</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">gains</span><span class="p">,</span>
+        <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="mf">150.0</span><span class="p">,</span>
+        <span class="s1">&#39;boundary_layer&#39;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>  <span class="c1"># Chattering reduction</span>
+        <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
+        <span class="s1">&#39;dynamics_model&#39;</span><span class="p">:</span> <span class="n">create_dynamics_model</span><span class="p">(</span><span class="n">plant_config</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># 3. Controller creation</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="c1"># 4. Integration validation</span>
+    <span class="n">validate_controller_plant_compatibility</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">plant_config</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;controller&#39;</span><span class="p">:</span> <span class="n">controller</span><span class="p">,</span>
+        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span>
+        <span class="s1">&#39;gain_bounds&#39;</span><span class="p">:</span> <span class="n">optimization_bounds</span> <span class="ow">or</span> <span class="n">get_default_bounds</span><span class="p">(</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;integration_status&#39;</span><span class="p">:</span> <span class="s1">&#39;success&#39;</span>
+    <span class="p">}</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">integrate_classical_smc</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">35.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span>
+    <span class="n">plant_config</span><span class="o">=</span><span class="n">simplified_dip_config</span><span class="p">,</span>
+    <span class="n">optimization_bounds</span><span class="o">=</span><span class="p">(</span>
+        <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>    <span class="c1"># Lower bounds</span>
+        <span class="p">[</span><span class="mf">50.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">]</span> <span class="c1"># Upper bounds</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="adaptive-smc-integration">
+<h3>Adaptive SMC Integration<a class="headerlink" href="#adaptive-smc-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integrate_adaptive_smc</span><span class="p">(</span>
+    <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">plant_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">adaptation_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complete integration pattern for Adaptive SMC.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - gains: [k1, k2, λ1, λ2, γ] - 5 element array</span>
+<span class="sd">    - Critical: γ (gamma) is adaptation rate in gains[4]</span>
+<span class="sd">    - Adaptation: Additional parameters for online estimation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># 1. Parameter validation</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Adaptive SMC requires exactly 5 gains&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Surface gains must be positive</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gains</span><span class="p">[:</span><span class="mi">4</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains (k1, k2, λ1, λ2) must be positive&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Adaptation rate validation</span>
+    <span class="n">gamma</span> <span class="o">=</span> <span class="n">gains</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">gamma</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">gamma</span> <span class="o">&gt;</span> <span class="mf">10.0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adaptation rate γ=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s2"> must be in (0, 10]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 2. Adaptation parameters</span>
+    <span class="n">default_adaptation</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;leak_rate&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="s1">&#39;adapt_rate_limit&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
+        <span class="s1">&#39;K_min&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="s1">&#39;K_max&#39;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+        <span class="s1">&#39;K_init&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
+        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s1">&#39;dead_zone&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+        <span class="s1">&#39;smooth_switch&#39;</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">adaptation_params</span><span class="p">:</span>
+        <span class="n">default_adaptation</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">adaptation_params</span><span class="p">)</span>
+
+    <span class="c1"># 3. Configuration construction</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">gains</span><span class="p">,</span>
+        <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="mf">150.0</span><span class="p">,</span>
+        <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
+        <span class="s1">&#39;boundary_layer&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">default_adaptation</span><span class="p">,</span>
+        <span class="s1">&#39;dynamics_model&#39;</span><span class="p">:</span> <span class="n">create_dynamics_model</span><span class="p">(</span><span class="n">plant_config</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># 4. Controller creation</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="s1">&#39;adaptive_smc&#39;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;controller&#39;</span><span class="p">:</span> <span class="n">controller</span><span class="p">,</span>
+        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span>
+        <span class="s1">&#39;adaptation_params&#39;</span><span class="p">:</span> <span class="n">default_adaptation</span><span class="p">,</span>
+        <span class="s1">&#39;gamma_value&#39;</span><span class="p">:</span> <span class="n">gamma</span><span class="p">,</span>
+        <span class="s1">&#39;integration_status&#39;</span><span class="p">:</span> <span class="s1">&#39;success&#39;</span>
+    <span class="p">}</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">integrate_adaptive_smc</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">25.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">],</span>
+    <span class="n">plant_config</span><span class="o">=</span><span class="n">full_dip_config</span><span class="p">,</span>
+    <span class="n">adaptation_params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;leak_rate&#39;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>     <span class="c1"># Faster parameter forgetting</span>
+        <span class="s1">&#39;adapt_rate_limit&#39;</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">,</span> <span class="c1"># Higher adaptation rate</span>
+        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.7</span>           <span class="c1"># Different adaptation law exponent</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="super-twisting-smc-integration">
+<h3>Super-Twisting SMC Integration<a class="headerlink" href="#super-twisting-smc-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integrate_super_twisting_smc</span><span class="p">(</span>
+    <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">plant_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">sta_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complete integration pattern for Super-Twisting SMC.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - gains: [K1, K2, k1, k2, λ1, λ2] - 6 element array</span>
+<span class="sd">    - STA: K1, K2 are super-twisting algorithm gains</span>
+<span class="sd">    - Convergence: Finite-time convergence properties</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># 1. Parameter validation</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Super-Twisting SMC requires exactly 6 gains&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gains</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All Super-Twisting SMC gains must be positive&quot;</span><span class="p">)</span>
+
+    <span class="c1"># STA-specific validation</span>
+    <span class="n">K1</span><span class="p">,</span> <span class="n">K2</span> <span class="o">=</span> <span class="n">gains</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gains</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">K1</span> <span class="o">&lt;=</span> <span class="n">K2</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;STA recommendation: K1=</span><span class="si">{</span><span class="n">K1</span><span class="si">}</span><span class="s2"> should be &gt; K2=</span><span class="si">{</span><span class="n">K2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 2. STA-specific parameters</span>
+    <span class="n">default_sta_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;power_exponent&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>      <span class="c1"># α = 0.5 for STA</span>
+        <span class="s1">&#39;regularization&#39;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">,</span>     <span class="c1"># Numerical stability</span>
+        <span class="s1">&#39;boundary_layer&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>     <span class="c1"># Built-in chattering reduction</span>
+        <span class="s1">&#39;switch_method&#39;</span><span class="p">:</span> <span class="s1">&#39;tanh&#39;</span><span class="p">,</span>    <span class="c1"># Smooth switching function</span>
+        <span class="s1">&#39;damping_gain&#39;</span><span class="p">:</span> <span class="mf">0.0</span>         <span class="c1"># Additional damping if needed</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">sta_params</span><span class="p">:</span>
+        <span class="n">default_sta_params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sta_params</span><span class="p">)</span>
+
+    <span class="c1"># 3. Configuration construction</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">gains</span><span class="p">,</span>
+        <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="mf">150.0</span><span class="p">,</span>
+        <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">default_sta_params</span><span class="p">,</span>
+        <span class="s1">&#39;dynamics_model&#39;</span><span class="p">:</span> <span class="n">create_dynamics_model</span><span class="p">(</span><span class="n">plant_config</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># 4. Controller creation</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="s1">&#39;sta_smc&#39;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;controller&#39;</span><span class="p">:</span> <span class="n">controller</span><span class="p">,</span>
+        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span>
+        <span class="s1">&#39;sta_params&#39;</span><span class="p">:</span> <span class="n">default_sta_params</span><span class="p">,</span>
+        <span class="s1">&#39;K1_K2_ratio&#39;</span><span class="p">:</span> <span class="n">K1</span> <span class="o">/</span> <span class="n">K2</span><span class="p">,</span>
+        <span class="s1">&#39;integration_status&#39;</span><span class="p">:</span> <span class="s1">&#39;success&#39;</span>
+    <span class="p">}</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">integrate_super_twisting_smc</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">35.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">],</span>
+    <span class="n">plant_config</span><span class="o">=</span><span class="n">full_nonlinear_config</span><span class="p">,</span>
+    <span class="n">sta_params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;power_exponent&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>  <span class="c1"># Slightly different convergence rate</span>
+        <span class="s1">&#39;switch_method&#39;</span><span class="p">:</span> <span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="c1"># Alternative switching function</span>
+        <span class="s1">&#39;damping_gain&#39;</span><span class="p">:</span> <span class="mf">1.0</span>     <span class="c1"># Additional damping for robustness</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="hybrid-adaptive-sta-smc-integration">
+<h3>Hybrid Adaptive-STA SMC Integration<a class="headerlink" href="#hybrid-adaptive-sta-smc-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integrate_hybrid_smc</span><span class="p">(</span>
+    <span class="n">surface_gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">plant_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">classical_gains</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">adaptive_gains</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hybrid_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;CLASSICAL_ADAPTIVE&#39;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complete integration pattern for Hybrid Adaptive-STA SMC.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - surface_gains: [k1, k2, λ1, λ2] - 4 element array (common sliding surface)</span>
+<span class="sd">    - classical_gains: 6-element array for classical sub-controller</span>
+<span class="sd">    - adaptive_gains: 5-element array for adaptive sub-controller</span>
+<span class="sd">    - hybrid_mode: Switching strategy between controllers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># 1. Surface gains validation</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">surface_gains</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Hybrid SMC requires exactly 4 surface gains&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">surface_gains</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All surface gains must be positive&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 2. Sub-controller configuration</span>
+    <span class="k">if</span> <span class="n">classical_gains</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">classical_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">35.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">adaptive_gains</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">adaptive_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">25.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">]</span>
+
+    <span class="c1"># 3. Create sub-configurations</span>
+    <span class="n">classical_config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
+        <span class="n">gains</span><span class="o">=</span><span class="n">classical_gains</span><span class="p">,</span>
+        <span class="n">max_force</span><span class="o">=</span><span class="mf">150.0</span><span class="p">,</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+        <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.02</span>
+    <span class="p">)</span>
+
+    <span class="n">adaptive_config</span> <span class="o">=</span> <span class="n">AdaptiveSMCConfig</span><span class="p">(</span>
+        <span class="n">gains</span><span class="o">=</span><span class="n">adaptive_gains</span><span class="p">,</span>
+        <span class="n">max_force</span><span class="o">=</span><span class="mf">150.0</span><span class="p">,</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+        <span class="n">leak_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">adapt_rate_limit</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+        <span class="n">K_min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">K_max</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+        <span class="n">K_init</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 4. Hybrid mode configuration</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.algorithms.hybrid.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">HybridMode</span>
+    <span class="n">mode_enum</span> <span class="o">=</span> <span class="n">HybridMode</span><span class="p">(</span><span class="n">hybrid_mode</span><span class="p">)</span>
+
+    <span class="c1"># 5. Main configuration</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">surface_gains</span><span class="p">,</span>
+        <span class="s1">&#39;hybrid_mode&#39;</span><span class="p">:</span> <span class="n">mode_enum</span><span class="p">,</span>
+        <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
+        <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="mf">150.0</span><span class="p">,</span>
+        <span class="s1">&#39;classical_config&#39;</span><span class="p">:</span> <span class="n">classical_config</span><span class="p">,</span>
+        <span class="s1">&#39;adaptive_config&#39;</span><span class="p">:</span> <span class="n">adaptive_config</span><span class="p">,</span>
+        <span class="s1">&#39;k1_init&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span>
+        <span class="s1">&#39;k2_init&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+        <span class="s1">&#39;gamma1&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s1">&#39;gamma2&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>
+        <span class="s1">&#39;dynamics_model&#39;</span><span class="p">:</span> <span class="n">create_dynamics_model</span><span class="p">(</span><span class="n">plant_config</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># 6. Controller creation</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;controller&#39;</span><span class="p">:</span> <span class="n">controller</span><span class="p">,</span>
+        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span>
+        <span class="s1">&#39;classical_config&#39;</span><span class="p">:</span> <span class="n">classical_config</span><span class="p">,</span>
+        <span class="s1">&#39;adaptive_config&#39;</span><span class="p">:</span> <span class="n">adaptive_config</span><span class="p">,</span>
+        <span class="s1">&#39;hybrid_mode&#39;</span><span class="p">:</span> <span class="n">mode_enum</span><span class="p">,</span>
+        <span class="s1">&#39;integration_status&#39;</span><span class="p">:</span> <span class="s1">&#39;success&#39;</span>
+    <span class="p">}</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">integrate_hybrid_smc</span><span class="p">(</span>
+    <span class="n">surface_gains</span><span class="o">=</span><span class="p">[</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">],</span>
+    <span class="n">plant_config</span><span class="o">=</span><span class="n">complex_dip_config</span><span class="p">,</span>
+    <span class="n">classical_gains</span><span class="o">=</span><span class="p">[</span><span class="mf">22.0</span><span class="p">,</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">14.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span>
+    <span class="n">adaptive_gains</span><span class="o">=</span><span class="p">[</span><span class="mf">28.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">14.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span>
+    <span class="n">hybrid_mode</span><span class="o">=</span><span class="s1">&#39;CLASSICAL_ADAPTIVE&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="plant-model-integration">
+<h2>Plant Model Integration<a class="headerlink" href="#plant-model-integration" title="Link to this heading">¶</a></h2>
+<section id="dynamics-model-creation-and-validation">
+<h3>Dynamics Model Creation and Validation<a class="headerlink" href="#dynamics-model-creation-and-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_and_validate_dynamics_model</span><span class="p">(</span>
+    <span class="n">plant_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create and validate plant dynamics model for controller integration.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple of (dynamics_model, validation_results)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># 1. Create dynamics model</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">plant_config</span><span class="p">,</span> <span class="s1">&#39;dynamics_model&#39;</span><span class="p">):</span>
+            <span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">plant_config</span><span class="o">.</span><span class="n">dynamics_model</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">plant_config</span><span class="p">,</span> <span class="s1">&#39;physics&#39;</span><span class="p">):</span>
+            <span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">DIPDynamics</span><span class="p">(</span><span class="n">plant_config</span><span class="o">.</span><span class="n">physics</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">plant_config</span><span class="p">,</span> <span class="s1">&#39;dip_params&#39;</span><span class="p">):</span>
+            <span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">DIPDynamics</span><span class="p">(</span><span class="n">plant_config</span><span class="o">.</span><span class="n">dip_params</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDIPDynamics</span>
+            <span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">SimplifiedDIPDynamics</span><span class="p">(</span><span class="n">plant_config</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not create specific dynamics model: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Fallback to generic dynamics</span>
+        <span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">DIPDynamics</span><span class="p">()</span>
+
+    <span class="c1"># 2. Validate dynamics-controller compatibility</span>
+    <span class="n">validation_results</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;model_type&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">dynamics_model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+        <span class="s1">&#39;state_dimension&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>  <span class="c1"># DIP standard state dimension</span>
+        <span class="s1">&#39;control_dimension&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Single control input</span>
+        <span class="s1">&#39;supports_linearization&#39;</span><span class="p">:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;linearize&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;supports_jacobian&#39;</span><span class="p">:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;compute_jacobian&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;integration_compatible&#39;</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">}</span>
+
+    <span class="c1"># 3. Test basic functionality</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">test_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+        <span class="n">test_control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">])</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">compute_dynamics</span><span class="p">(</span><span class="n">test_state</span><span class="p">,</span> <span class="n">test_control</span><span class="p">)</span>
+        <span class="n">validation_results</span><span class="p">[</span><span class="s1">&#39;compute_dynamics_test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;state_derivative&#39;</span><span class="p">)</span>
+        <span class="n">validation_results</span><span class="p">[</span><span class="s1">&#39;derivative_shape&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state_derivative</span><span class="o">.</span><span class="n">shape</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;state_derivative&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">validation_results</span><span class="p">[</span><span class="s1">&#39;compute_dynamics_test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">validation_results</span><span class="p">[</span><span class="s1">&#39;test_error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dynamics_model</span><span class="p">,</span> <span class="n">validation_results</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_controller_plant_compatibility</span><span class="p">(</span>
+    <span class="n">controller</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">plant_config</span><span class="p">:</span> <span class="n">Any</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate that controller and plant are compatible.&quot;&quot;&quot;</span>
+
+    <span class="n">compatibility</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;state_dimensions&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># Both use 6-DOF DIP state</span>
+        <span class="s1">&#39;control_dimensions&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># Both use single control input</span>
+        <span class="s1">&#39;sampling_time&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>     <span class="c1"># Compatible sampling rates</span>
+        <span class="s1">&#39;numerical_stability&#39;</span><span class="p">:</span> <span class="kc">True</span>  <span class="c1"># No obvious numerical issues</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Test control computation</span>
+        <span class="n">test_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+        <span class="n">control_output</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">test_state</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})</span>
+
+        <span class="n">compatibility</span><span class="p">[</span><span class="s1">&#39;control_computation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">compatibility</span><span class="p">[</span><span class="s1">&#39;control_bounds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control_output</span><span class="o">.</span><span class="n">u</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1000.0</span>  <span class="c1"># Reasonable control</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">compatibility</span><span class="p">[</span><span class="s1">&#39;control_computation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">compatibility</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">compatibility</span>
+</pre></div>
+</div>
+</section>
+<section id="plant-configuration-patterns">
+<h3>Plant Configuration Patterns<a class="headerlink" href="#plant-configuration-patterns" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pattern 1: Simplified DIP Configuration</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_simplified_plant_config</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create simplified DIP plant configuration for rapid prototyping.&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.configurations</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigurationFactory</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigurationFactory</span><span class="o">.</span><span class="n">create_default_config</span><span class="p">(</span><span class="s2">&quot;simplified&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;dynamics_type&#39;</span><span class="p">:</span> <span class="s1">&#39;simplified&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span>
+        <span class="s1">&#39;linearization_point&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+        <span class="s1">&#39;use_cases&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;controller_tuning&#39;</span><span class="p">,</span> <span class="s1">&#39;pso_optimization&#39;</span><span class="p">,</span> <span class="s1">&#39;rapid_testing&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+<span class="c1"># Pattern 2: Full Nonlinear DIP Configuration</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_full_nonlinear_plant_config</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create full nonlinear DIP configuration for high-fidelity simulation.&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.configurations</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigurationFactory</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigurationFactory</span><span class="o">.</span><span class="n">create_default_config</span><span class="p">(</span><span class="s2">&quot;full&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;dynamics_type&#39;</span><span class="p">:</span> <span class="s1">&#39;full_nonlinear&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span>
+        <span class="s1">&#39;friction_models&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;viscous&#39;</span><span class="p">,</span> <span class="s1">&#39;coulomb&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;disturbance_rejection&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;use_cases&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;performance_validation&#39;</span><span class="p">,</span> <span class="s1">&#39;robustness_testing&#39;</span><span class="p">,</span> <span class="s1">&#39;real_system_prep&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+<span class="c1"># Pattern 3: HIL-Ready Configuration</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_hil_plant_config</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create HIL-compatible plant configuration.&quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">create_full_nonlinear_plant_config</span><span class="p">()</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;real_time_constraints&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;communication_interface&#39;</span><span class="p">:</span> <span class="s1">&#39;tcp_socket&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sampling_rate&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>  <span class="c1"># 1 kHz for real-time control</span>
+        <span class="s1">&#39;latency_compensation&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;safety_monitors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;position_limits&#39;</span><span class="p">,</span> <span class="s1">&#39;velocity_limits&#39;</span><span class="p">,</span> <span class="s1">&#39;control_limits&#39;</span><span class="p">]</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="n">config</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pso-integration-workflow">
+<h2>PSO Integration Workflow<a class="headerlink" href="#pso-integration-workflow" title="Link to this heading">¶</a></h2>
+<section id="pso-compatible-controller-wrapper">
+<h3>PSO-Compatible Controller Wrapper<a class="headerlink" href="#pso-compatible-controller-wrapper" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PSOControllerWrapper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enhanced wrapper for PSO optimization integration.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">    - Simplified control interface for PSO fitness functions</span>
+<span class="sd">    - Automatic gain validation</span>
+<span class="sd">    - Performance monitoring</span>
+<span class="sd">    - Thread-safe operation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">controller</span><span class="p">:</span> <span class="n">ControllerProtocol</span><span class="p">,</span>
+        <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">validation_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">controller</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller_type</span> <span class="o">=</span> <span class="n">controller_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validation_enabled</span> <span class="o">=</span> <span class="n">validation_enabled</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_gains</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_determine_gain_count</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;max_force&#39;</span><span class="p">,</span> <span class="mf">150.0</span><span class="p">)</span>
+
+        <span class="c1"># Performance monitoring</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">call_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_compute_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_control_magnitude</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_determine_gain_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine expected gain count for controller type.&quot;&quot;&quot;</span>
+        <span class="n">gain_counts</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s1">&#39;sta_smc&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">:</span> <span class="mi">4</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">gain_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller_type</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">StateVector</span><span class="p">,</span>
+        <span class="n">return_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        PSO-optimized control computation with optional metadata.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state: System state vector [θ1, θ2, x, θ̇1, θ̇2, ẋ]</span>
+<span class="sd">            return_metadata: Whether to return computation metadata</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Control output as numpy array, optionally with metadata</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Validate input state</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected 6-DOF state, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Compute control using full controller interface</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})</span>
+
+            <span class="c1"># Extract control value</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">):</span>
+                <span class="n">control_value</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">u</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;u&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">control_value</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">control_value</span> <span class="o">=</span> <span class="n">result</span>
+
+            <span class="c1"># Convert to numpy array</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">control_value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                <span class="n">control_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">control_value</span><span class="p">)])</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">control_value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">control_array</span> <span class="o">=</span> <span class="n">control_value</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">control_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">control_value</span><span class="p">)])</span>
+
+            <span class="c1"># Apply safety saturation</span>
+            <span class="n">control_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">control_array</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
+
+            <span class="c1"># Update performance metrics</span>
+            <span class="n">compute_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">call_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_compute_time</span> <span class="o">+=</span> <span class="n">compute_time</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_control_magnitude</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_control_magnitude</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+            <span class="k">if</span> <span class="n">return_metadata</span><span class="p">:</span>
+                <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;compute_time&#39;</span><span class="p">:</span> <span class="n">compute_time</span><span class="p">,</span>
+                    <span class="s1">&#39;call_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span>
+                    <span class="s1">&#39;avg_compute_time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_compute_time</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span>
+                    <span class="s1">&#39;max_control_magnitude&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_control_magnitude</span><span class="p">,</span>
+                    <span class="s1">&#39;saturation_applied&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="n">control_array</span><span class="p">,</span> <span class="n">metadata</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">control_array</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control computation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># Return safe zero control</span>
+            <span class="k">if</span> <span class="n">return_metadata</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]),</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">GainsArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate gains for PSO optimization.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">gains_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
+
+            <span class="c1"># Check length</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains_array</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_gains</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="c1"># Check for finite positive values</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">gains_array</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">gains_array</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="c1"># Controller-specific validation</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller_type</span> <span class="o">==</span> <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">:</span>
+                <span class="n">gamma</span> <span class="o">=</span> <span class="n">gains_array</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">gamma</span> <span class="o">&gt;</span> <span class="mf">10.0</span> <span class="ow">or</span> <span class="n">gamma</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_performance_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get performance summary for optimization analysis.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;total_calls&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span>
+            <span class="s1">&#39;total_compute_time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_compute_time</span><span class="p">,</span>
+            <span class="s1">&#39;avg_compute_time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_compute_time</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_count</span><span class="p">),</span>
+            <span class="s1">&#39;max_control_magnitude&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_control_magnitude</span><span class="p">,</span>
+            <span class="s1">&#39;real_time_compatible&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_compute_time</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_count</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="pso-factory-integration">
+<h3>PSO Factory Integration<a class="headerlink" href="#pso-factory-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_pso_optimized_controller</span><span class="p">(</span>
+    <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">gains</span><span class="p">:</span> <span class="n">GainsArray</span><span class="p">,</span>
+    <span class="n">plant_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">pso_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PSOControllerWrapper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create PSO-optimized controller with comprehensive integration.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        controller_type: Type of SMC controller</span>
+<span class="sd">        gains: Controller gains for optimization</span>
+<span class="sd">        plant_config: Plant configuration</span>
+<span class="sd">        pso_options: PSO-specific options</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        PSO-wrapped controller ready for optimization</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Default PSO options</span>
+    <span class="n">default_pso_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;validation_enabled&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;performance_monitoring&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;safety_limits&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;real_time_constraints&#39;</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">pso_options</span><span class="p">:</span>
+        <span class="n">default_pso_options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pso_options</span><span class="p">)</span>
+
+    <span class="c1"># Create controller using factory</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
+            <span class="n">controller_type</span><span class="o">=</span><span class="n">controller_type</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="n">plant_config</span><span class="p">,</span>
+            <span class="n">gains</span><span class="o">=</span><span class="n">gains</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to create controller for PSO: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
+
+    <span class="c1"># Wrap for PSO optimization</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">PSOControllerWrapper</span><span class="p">(</span>
+        <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+        <span class="n">controller_type</span><span class="o">=</span><span class="n">controller_type</span><span class="p">,</span>
+        <span class="n">validation_enabled</span><span class="o">=</span><span class="n">default_pso_options</span><span class="p">[</span><span class="s1">&#39;validation_enabled&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Add PSO-required attributes</span>
+    <span class="n">wrapper</span><span class="o">.</span><span class="n">n_gains</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
+    <span class="n">wrapper</span><span class="o">.</span><span class="n">controller_type</span> <span class="o">=</span> <span class="n">controller_type</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_pso_optimization_bounds</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get PSO optimization bounds for controller type.&quot;&quot;&quot;</span>
+
+    <span class="n">bounds_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;lower&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+            <span class="s1">&#39;upper&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;lower&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+            <span class="s1">&#39;upper&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;sta_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;lower&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span>
+            <span class="s1">&#39;upper&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">80.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;lower&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span>
+            <span class="s1">&#39;upper&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">35.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">bounds</span> <span class="o">=</span> <span class="n">bounds_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;lower&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s1">&#39;upper&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>
+    <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">bounds</span><span class="p">[</span><span class="s1">&#39;lower&#39;</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="s1">&#39;upper&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="integration-testing-and-validation">
+<h2>Integration Testing and Validation<a class="headerlink" href="#integration-testing-and-validation" title="Link to this heading">¶</a></h2>
+<section id="comprehensive-integration-test-suite">
+<h3>Comprehensive Integration Test Suite<a class="headerlink" href="#comprehensive-integration-test-suite" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControllerIntegrationValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive validation of controller-factory-plant integration.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plant_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plant_config</span> <span class="o">=</span> <span class="n">plant_config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_test_states</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_test_states</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">StateVector</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate comprehensive test states for validation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;equilibrium&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
+            <span class="s1">&#39;small_disturbance&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
+            <span class="s1">&#39;large_angles&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]),</span>
+            <span class="s1">&#39;high_velocity&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">]),</span>
+            <span class="s1">&#39;extreme_state&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_controller_integration</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">gains</span><span class="p">:</span> <span class="n">GainsArray</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Comprehensive integration validation.&quot;&quot;&quot;</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;controller_type&#39;</span><span class="p">:</span> <span class="n">controller_type</span><span class="p">,</span>
+            <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">gains</span><span class="p">,</span>
+            <span class="s1">&#39;creation_success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;control_computation_success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;stability_analysis&#39;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s1">&#39;performance_metrics&#39;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s1">&#39;integration_score&#39;</span><span class="p">:</span> <span class="mf">0.0</span>
+        <span class="p">}</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 1. Controller creation test</span>
+            <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plant_config</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
+            <span class="n">results</span><span class="p">[</span><span class="s1">&#39;creation_success&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="c1"># 2. Control computation test</span>
+            <span class="n">control_results</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">state_name</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_states</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})</span>
+                    <span class="n">control_results</span><span class="p">[</span><span class="n">state_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="s1">&#39;control_magnitude&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control</span><span class="o">.</span><span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control</span><span class="p">),</span>
+                        <span class="s1">&#39;within_bounds&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control</span><span class="o">.</span><span class="n">u</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">control</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">200.0</span>
+                    <span class="p">}</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">control_results</span><span class="p">[</span><span class="n">state_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                    <span class="p">}</span>
+
+            <span class="n">results</span><span class="p">[</span><span class="s1">&#39;control_computation_success&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span>
+                <span class="n">result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">control_results</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="n">results</span><span class="p">[</span><span class="s1">&#39;control_results&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">control_results</span>
+
+            <span class="c1"># 3. PSO wrapper test</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">pso_wrapper</span> <span class="o">=</span> <span class="n">create_pso_optimized_controller</span><span class="p">(</span>
+                    <span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plant_config</span>
+                <span class="p">)</span>
+
+                <span class="n">pso_test_results</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">state_name</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_states</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">control_array</span> <span class="o">=</span> <span class="n">pso_wrapper</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+                    <span class="n">pso_test_results</span><span class="p">[</span><span class="n">state_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s1">&#39;control_shape&#39;</span><span class="p">:</span> <span class="n">control_array</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                        <span class="s1">&#39;control_value&#39;</span><span class="p">:</span> <span class="n">control_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="s1">&#39;within_saturation&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control_array</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">pso_wrapper</span><span class="o">.</span><span class="n">max_force</span>
+                    <span class="p">}</span>
+
+                <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pso_integration_success&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pso_test_results&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pso_test_results</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pso_integration_success&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pso_error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+            <span class="c1"># 4. Calculate integration score</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;creation_success&#39;</span><span class="p">]:</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="mf">25.0</span>
+            <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;control_computation_success&#39;</span><span class="p">]:</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="mf">25.0</span>
+            <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pso_integration_success&#39;</span><span class="p">]:</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="mf">25.0</span>
+
+            <span class="c1"># Additional scoring based on control quality</span>
+            <span class="n">successful_controls</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="mi">1</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">control_results</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">score</span> <span class="o">+=</span> <span class="p">(</span><span class="n">successful_controls</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">control_results</span><span class="p">))</span> <span class="o">*</span> <span class="mf">25.0</span>
+
+            <span class="n">results</span><span class="p">[</span><span class="s1">&#39;integration_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">results</span><span class="p">[</span><span class="s1">&#39;creation_error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_full_integration_suite</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">controller_configs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GainsArray</span><span class="p">]]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run full integration test suite for multiple controllers.&quot;&quot;&quot;</span>
+
+        <span class="n">suite_results</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;test_timestamp&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+            <span class="s1">&#39;plant_config_type&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plant_config</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="s1">&#39;controller_results&#39;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="p">}</span>
+
+        <span class="n">total_score</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">successful_integrations</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span> <span class="ow">in</span> <span class="n">controller_configs</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_controller_integration</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
+            <span class="n">suite_results</span><span class="p">[</span><span class="s1">&#39;controller_results&#39;</span><span class="p">][</span><span class="n">controller_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+            <span class="n">total_score</span> <span class="o">+=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;integration_score&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;integration_score&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">75.0</span><span class="p">:</span>  <span class="c1"># 75% threshold for success</span>
+                <span class="n">successful_integrations</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">suite_results</span><span class="p">[</span><span class="s1">&#39;summary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;total_controllers_tested&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">controller_configs</span><span class="p">),</span>
+            <span class="s1">&#39;successful_integrations&#39;</span><span class="p">:</span> <span class="n">successful_integrations</span><span class="p">,</span>
+            <span class="s1">&#39;success_rate&#39;</span><span class="p">:</span> <span class="n">successful_integrations</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">controller_configs</span><span class="p">),</span>
+            <span class="s1">&#39;average_integration_score&#39;</span><span class="p">:</span> <span class="n">total_score</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">controller_configs</span><span class="p">),</span>
+            <span class="s1">&#39;overall_status&#39;</span><span class="p">:</span> <span class="s1">&#39;PASS&#39;</span> <span class="k">if</span> <span class="n">successful_integrations</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">controller_configs</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span> <span class="k">else</span> <span class="s1">&#39;FAIL&#39;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">suite_results</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">ControllerIntegrationValidator</span><span class="p">(</span><span class="n">simplified_plant_config</span><span class="p">)</span>
+
+<span class="n">test_configs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">35.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;adaptive_smc&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">25.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;sta_smc&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">35.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>
+<span class="p">]</span>
+
+<span class="n">integration_results</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">run_full_integration_suite</span><span class="p">(</span><span class="n">test_configs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This integration guide provides comprehensive patterns for seamlessly integrating SMC controllers with the factory system, ensuring robust parameter handling, plant model compatibility, and PSO optimization support.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Controller Integration Guide</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#factory-controller-integration-architecture">Factory-Controller Integration Architecture</a><ul>
+<li><a class="reference internal" href="#controller-lifecycle-management">Controller Lifecycle Management</a></li>
+<li><a class="reference internal" href="#enhanced-factory-interface">Enhanced Factory Interface</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#controller-type-integration-patterns">Controller Type Integration Patterns</a><ul>
+<li><a class="reference internal" href="#classical-smc-integration">Classical SMC Integration</a></li>
+<li><a class="reference internal" href="#adaptive-smc-integration">Adaptive SMC Integration</a></li>
+<li><a class="reference internal" href="#super-twisting-smc-integration">Super-Twisting SMC Integration</a></li>
+<li><a class="reference internal" href="#hybrid-adaptive-sta-smc-integration">Hybrid Adaptive-STA SMC Integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#plant-model-integration">Plant Model Integration</a><ul>
+<li><a class="reference internal" href="#dynamics-model-creation-and-validation">Dynamics Model Creation and Validation</a></li>
+<li><a class="reference internal" href="#plant-configuration-patterns">Plant Configuration Patterns</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pso-integration-workflow">PSO Integration Workflow</a><ul>
+<li><a class="reference internal" href="#pso-compatible-controller-wrapper">PSO-Compatible Controller Wrapper</a></li>
+<li><a class="reference internal" href="#pso-factory-integration">PSO Factory Integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-testing-and-validation">Integration Testing and Validation</a><ul>
+<li><a class="reference internal" href="#comprehensive-integration-test-suite">Comprehensive Integration Test Suite</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

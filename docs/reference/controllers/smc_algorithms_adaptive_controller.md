@@ -14,6 +14,41 @@ Implements Adaptive Sliding Mode Control using composed components:
 
 Replaces the monolithic 427-line controller with composition of focused modules.
 
+
+## Mathematical Foundation
+
+### Adaptive Sliding Mode Control
+
+Adaptive SMC handles system uncertainties through online gain adaptation:
+
+```{math}
+\dot{K} = \gamma |s| - \sigma(K - K_0)
+```
+
+Where:
+- $\gamma > 0$: Adaptation rate
+- $\sigma > 0$: Leakage term preventing unbounded growth
+- $K_0$: Initial gain estimate
+
+### Stability with Adaptation
+
+Modified Lyapunov function:
+
+```{math}
+V(s, \tilde{K}) = \frac{1}{2}s^2 + \frac{1}{2\gamma}\tilde{K}^2
+```
+
+Where $\tilde{K} = K - K^*$ is the gain error. The derivative becomes:
+
+```{math}
+\dot{V} = -K^*|s| - \sigma \tilde{K}^2 \leq 0
+```
+
+Ensuring asymptotic stability even with unknown uncertainty bounds.
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory` for adaptation law derivation.
+
+
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/controllers/smc/algorithms/adaptive/controller.py

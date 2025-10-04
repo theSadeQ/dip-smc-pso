@@ -1,0 +1,1686 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Mathematical Validation Procedures for Control Systems - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/mathematical_validation_procedures.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/mathematical_validation_procedures.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>#==========================================================================================\<br />
+#==================== docs/mathematical_validation_procedures.md ======================\<br />
+#==========================================================================================\</p>
+<section class="tex2jax_ignore mathjax_ignore" id="mathematical-validation-procedures-for-control-systems">
+<h1>Mathematical Validation Procedures for Control Systems<a class="headerlink" href="#mathematical-validation-procedures-for-control-systems" title="Link to this heading">¶</a></h1>
+<section id="executive-summary">
+<h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading">¶</a></h2>
+<p>This document establishes comprehensive mathematical validation procedures for the double-inverted pendulum sliding mode control (DIP-SMC) project, ensuring theoretical soundness and implementation correctness through rigorous mathematical property verification. The procedures integrate control theory, optimization theory, and numerical analysis validation with automated testing frameworks.</p>
+<p><strong>Core Mathematical Domains:</strong></p>
+<ul class="simple">
+<li><p><strong>Sliding Mode Control Theory</strong>: Lyapunov stability, sliding surface design, finite-time convergence</p></li>
+<li><p><strong>PSO Optimization Theory</strong>: Convergence analysis, global optimization properties, parameter sensitivity</p></li>
+<li><p><strong>Numerical Stability Analysis</strong>: Integration accuracy, conditioning, floating-point precision</p></li>
+<li><p><strong>Real-Time Constraints</strong>: Timing analysis, deadline satisfaction, performance bounds</p></li>
+</ul>
+</section>
+<section id="sliding-mode-control-mathematical-validation">
+<h2>1. Sliding Mode Control Mathematical Validation<a class="headerlink" href="#sliding-mode-control-mathematical-validation" title="Link to this heading">¶</a></h2>
+<section id="lyapunov-stability-analysis">
+<h3>1.1 Lyapunov Stability Analysis<a class="headerlink" href="#lyapunov-stability-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+For sliding mode controllers, stability is established through Lyapunov theory using the quadratic candidate function:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V(s) = \frac{1}{2}s^2\]</div>
+</div>
+<p><strong>Stability Condition:</strong>
+The system is stable if:
+$<span class="math notranslate nohighlight">\(\dot{V}(s) = s \cdot \dot{s} &lt; 0 \quad \forall s \neq 0\)</span>$</p>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_lyapunov_stability</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
+                              <span class="n">test_scenarios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TestScenario</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">LyapunovValidationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate Lyapunov stability condition for SMC controller.</span>
+
+<span class="sd">    Mathematical Verification:</span>
+<span class="sd">    - Verifies V̇(s) = s·ṡ &lt; 0 for all s ≠ 0</span>
+<span class="sd">    - Tests across representative state space</span>
+<span class="sd">    - Validates finite-time convergence properties</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    controller : SMCController</span>
+<span class="sd">        Controller instance to validate</span>
+<span class="sd">    test_scenarios : List[TestScenario]</span>
+<span class="sd">        Representative test scenarios covering state space</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    LyapunovValidationResult</span>
+<span class="sd">        Comprehensive stability validation results</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">validation_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stability_violations</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">test_scenarios</span><span class="p">:</span>
+        <span class="c1"># Generate state trajectory</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">states</span> <span class="o">=</span> <span class="n">simulate_scenario</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">scenario</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">):</span>
+            <span class="c1"># Compute sliding surface value</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">scenario</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+
+            <span class="c1"># Skip points on sliding surface (within tolerance)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">SLIDING_SURFACE_TOLERANCE</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Compute sliding surface derivative</span>
+            <span class="n">s_dot</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_surface_derivative</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">scenario</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+
+            <span class="c1"># Lyapunov stability condition: V̇ = s·ṡ &lt; 0</span>
+            <span class="n">v_dot</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">s_dot</span>
+
+            <span class="k">if</span> <span class="n">v_dot</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">stability_violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">StabilityViolation</span><span class="p">(</span>
+                    <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span>
+                    <span class="n">sliding_surface</span><span class="o">=</span><span class="n">s</span><span class="p">,</span>
+                    <span class="n">surface_derivative</span><span class="o">=</span><span class="n">s_dot</span><span class="p">,</span>
+                    <span class="n">lyapunov_derivative</span><span class="o">=</span><span class="n">v_dot</span><span class="p">,</span>
+                    <span class="n">violation_magnitude</span><span class="o">=</span><span class="n">v_dot</span>
+                <span class="p">))</span>
+
+            <span class="n">validation_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LyapunovTestPoint</span><span class="p">(</span>
+                <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">sliding_surface</span><span class="o">=</span><span class="n">s</span><span class="p">,</span>
+                <span class="n">lyapunov_derivative</span><span class="o">=</span><span class="n">v_dot</span><span class="p">,</span>
+                <span class="n">stable</span><span class="o">=</span><span class="n">v_dot</span> <span class="o">&lt;</span> <span class="mi">0</span>
+            <span class="p">))</span>
+
+    <span class="c1"># Calculate stability metrics</span>
+    <span class="n">total_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">validation_results</span><span class="p">)</span>
+    <span class="n">stable_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">validation_results</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">stable</span><span class="p">])</span>
+    <span class="n">stability_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">stable_points</span> <span class="o">/</span> <span class="n">total_points</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">total_points</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">LyapunovValidationResult</span><span class="p">(</span>
+        <span class="n">total_test_points</span><span class="o">=</span><span class="n">total_points</span><span class="p">,</span>
+        <span class="n">stable_points</span><span class="o">=</span><span class="n">stable_points</span><span class="p">,</span>
+        <span class="n">stability_percentage</span><span class="o">=</span><span class="n">stability_percentage</span><span class="p">,</span>
+        <span class="n">stability_violations</span><span class="o">=</span><span class="n">stability_violations</span><span class="p">,</span>
+        <span class="n">validation_status</span><span class="o">=</span><span class="s1">&#39;passed&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">stability_violations</span> <span class="k">else</span> <span class="s1">&#39;failed&#39;</span><span class="p">,</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_lyapunov_results</span><span class="p">(</span><span class="n">stability_percentage</span><span class="p">,</span> <span class="n">stability_violations</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_interpret_lyapunov_results</span><span class="p">(</span><span class="n">stability_percentage</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                               <span class="n">violations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">StabilityViolation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate mathematical interpretation of Lyapunov stability results.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">stability_percentage</span> <span class="o">&gt;=</span> <span class="mf">99.9</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Lyapunov stability condition satisfied across test space. Controller theoretically stable.&quot;</span>
+    <span class="k">elif</span> <span class="n">stability_percentage</span> <span class="o">&gt;=</span> <span class="mf">95.0</span><span class="p">:</span>
+        <span class="n">interpretation</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Lyapunov stability satisfied for </span><span class="si">{</span><span class="n">stability_percentage</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% of test points. &quot;</span>
+        <span class="k">if</span> <span class="n">violations</span><span class="p">:</span>
+            <span class="n">violation_regions</span> <span class="o">=</span> <span class="n">_analyze_violation_regions</span><span class="p">(</span><span class="n">violations</span><span class="p">)</span>
+            <span class="n">interpretation</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Violations concentrated in </span><span class="si">{</span><span class="n">violation_regions</span><span class="si">}</span><span class="s2">. Consider gain tuning.&quot;</span>
+        <span class="k">return</span> <span class="n">interpretation</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Significant Lyapunov stability violations (</span><span class="si">{</span><span class="mi">100</span><span class="o">-</span><span class="n">stability_percentage</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%). Controller stability not verified.&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="sliding-surface-reachability-analysis">
+<h3>1.2 Sliding Surface Reachability Analysis<a class="headerlink" href="#sliding-surface-reachability-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+The sliding surface must be reachable in finite time. For the surface <span class="math notranslate nohighlight">\(s(x) = 0\)</span>, reachability is guaranteed if:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s \cdot \dot{s} \leq -\eta |s|\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\eta &gt; 0\)</span> is the reaching rate parameter.</p>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_sliding_surface_reachability</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
+                                        <span class="n">test_scenarios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TestScenario</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ReachabilityValidationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate sliding surface reachability condition.</span>
+
+<span class="sd">    Mathematical Foundation:</span>
+<span class="sd">    Reachability condition: s·ṡ ≤ -η|s| where η &gt; 0</span>
+
+<span class="sd">    Finite-time reaching: t_reach ≤ |s₀|/η</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">reachability_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">test_scenarios</span><span class="p">:</span>
+        <span class="n">initial_state</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">initial_state</span>
+        <span class="n">target_state</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">target_state</span>
+
+        <span class="c1"># Compute initial sliding surface value</span>
+        <span class="n">s0</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">SLIDING_SURFACE_TOLERANCE</span><span class="p">:</span>
+            <span class="c1"># Already on sliding surface</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Simulate trajectory to sliding surface</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">states</span> <span class="o">=</span> <span class="n">simulate_to_sliding_surface</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">scenario</span><span class="p">)</span>
+
+        <span class="c1"># Find reaching time</span>
+        <span class="n">reaching_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">SLIDING_SURFACE_TOLERANCE</span><span class="p">:</span>
+                <span class="n">reaching_time</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">break</span>
+
+        <span class="c1"># Validate reachability condition along trajectory</span>
+        <span class="n">reachability_condition_satisfied</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">reaching_rate_violations</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">reaching_time</span> <span class="ow">and</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">reaching_time</span><span class="p">:</span>
+                <span class="k">break</span>  <span class="c1"># Stop after reaching sliding surface</span>
+
+            <span class="n">s</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)</span>
+            <span class="n">s_dot</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_surface_derivative</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)</span>
+
+            <span class="c1"># Reachability condition: s·ṡ ≤ -η|s|</span>
+            <span class="n">reaching_condition</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">s_dot</span>
+            <span class="n">required_reaching_rate</span> <span class="o">=</span> <span class="o">-</span><span class="n">controller</span><span class="o">.</span><span class="n">reaching_rate</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">reaching_condition</span> <span class="o">&gt;</span> <span class="n">required_reaching_rate</span><span class="p">:</span>
+                <span class="n">reachability_condition_satisfied</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">reaching_rate_violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReachingRateViolation</span><span class="p">(</span>
+                    <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span>
+                    <span class="n">sliding_surface</span><span class="o">=</span><span class="n">s</span><span class="p">,</span>
+                    <span class="n">surface_derivative</span><span class="o">=</span><span class="n">s_dot</span><span class="p">,</span>
+                    <span class="n">reaching_condition</span><span class="o">=</span><span class="n">reaching_condition</span><span class="p">,</span>
+                    <span class="n">required_rate</span><span class="o">=</span><span class="n">required_reaching_rate</span>
+                <span class="p">))</span>
+
+        <span class="c1"># Theoretical reaching time bound</span>
+        <span class="n">theoretical_reaching_time</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s0</span><span class="p">)</span> <span class="o">/</span> <span class="n">controller</span><span class="o">.</span><span class="n">reaching_rate</span> <span class="k">if</span> <span class="n">controller</span><span class="o">.</span><span class="n">reaching_rate</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+
+        <span class="n">reachability_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReachabilityTestResult</span><span class="p">(</span>
+            <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">initial_sliding_surface</span><span class="o">=</span><span class="n">s0</span><span class="p">,</span>
+            <span class="n">actual_reaching_time</span><span class="o">=</span><span class="n">reaching_time</span><span class="p">,</span>
+            <span class="n">theoretical_reaching_time</span><span class="o">=</span><span class="n">theoretical_reaching_time</span><span class="p">,</span>
+            <span class="n">reachability_condition_satisfied</span><span class="o">=</span><span class="n">reachability_condition_satisfied</span><span class="p">,</span>
+            <span class="n">reaching_rate_violations</span><span class="o">=</span><span class="n">reaching_rate_violations</span><span class="p">,</span>
+            <span class="n">finite_time_reachable</span><span class="o">=</span><span class="n">reaching_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">reaching_time</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+        <span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ReachabilityValidationResult</span><span class="p">(</span>
+        <span class="n">test_results</span><span class="o">=</span><span class="n">reachability_results</span><span class="p">,</span>
+        <span class="n">overall_reachability</span><span class="o">=</span><span class="nb">all</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">finite_time_reachable</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reachability_results</span><span class="p">),</span>
+        <span class="n">reachability_percentage</span><span class="o">=</span><span class="nb">len</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reachability_results</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">finite_time_reachable</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">reachability_results</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_reachability_results</span><span class="p">(</span><span class="n">reachability_results</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="chattering-analysis-and-quantification">
+<h3>1.3 Chattering Analysis and Quantification<a class="headerlink" href="#chattering-analysis-and-quantification" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+Chattering is quantified using the chattering index:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[CI = \frac{1}{T} \int_0^T |u(t) - u_{avg}(t)| dt\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(u_{avg}(t)\)</span> is the averaged control signal.</p>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_chattering_characteristics</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
+                                      <span class="n">test_scenarios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TestScenario</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ChatteringValidationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze and validate chattering characteristics.</span>
+
+<span class="sd">    Mathematical Metrics:</span>
+<span class="sd">    - Chattering Index: CI = (1/T)∫|u(t) - u_avg(t)|dt</span>
+<span class="sd">    - Frequency Content: Dominant frequencies in control signal</span>
+<span class="sd">    - Amplitude Analysis: Peak-to-peak chattering amplitude</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">chattering_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">test_scenarios</span><span class="p">:</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">controls</span> <span class="o">=</span> <span class="n">simulate_with_control_history</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">scenario</span><span class="p">)</span>
+
+        <span class="c1"># Calculate chattering index</span>
+        <span class="n">control_signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
+
+        <span class="c1"># Moving average filter for averaged control</span>
+        <span class="n">window_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="n">scenario</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span>  <span class="c1"># 100ms window</span>
+        <span class="n">u_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">control_signal</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span><span class="o">/</span><span class="n">window_size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Chattering index calculation</span>
+        <span class="n">chattering_deviation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control_signal</span> <span class="o">-</span> <span class="n">u_avg</span><span class="p">)</span>
+        <span class="n">chattering_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">chattering_deviation</span><span class="p">)</span>
+
+        <span class="c1"># Frequency analysis</span>
+        <span class="n">frequencies</span><span class="p">,</span> <span class="n">power_spectrum</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">welch</span><span class="p">(</span><span class="n">control_signal</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">scenario</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span>
+        <span class="n">dominant_frequency</span> <span class="o">=</span> <span class="n">frequencies</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">power_spectrum</span><span class="p">)]</span>
+
+        <span class="c1"># Amplitude analysis</span>
+        <span class="n">control_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">control_signal</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">control_signal</span><span class="p">)</span>
+
+        <span class="c1"># Assess chattering severity</span>
+        <span class="n">chattering_severity</span> <span class="o">=</span> <span class="n">_assess_chattering_severity</span><span class="p">(</span>
+            <span class="n">chattering_index</span><span class="p">,</span> <span class="n">dominant_frequency</span><span class="p">,</span> <span class="n">control_range</span>
+        <span class="p">)</span>
+
+        <span class="n">chattering_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ChatteringTestResult</span><span class="p">(</span>
+            <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">chattering_index</span><span class="o">=</span><span class="n">chattering_index</span><span class="p">,</span>
+            <span class="n">dominant_frequency</span><span class="o">=</span><span class="n">dominant_frequency</span><span class="p">,</span>
+            <span class="n">control_range</span><span class="o">=</span><span class="n">control_range</span><span class="p">,</span>
+            <span class="n">chattering_severity</span><span class="o">=</span><span class="n">chattering_severity</span><span class="p">,</span>
+            <span class="n">acceptable_chattering</span><span class="o">=</span><span class="n">chattering_index</span> <span class="o">&lt;</span> <span class="n">ACCEPTABLE_CHATTERING_THRESHOLD</span>
+        <span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ChatteringValidationResult</span><span class="p">(</span>
+        <span class="n">test_results</span><span class="o">=</span><span class="n">chattering_results</span><span class="p">,</span>
+        <span class="n">overall_chattering_acceptable</span><span class="o">=</span><span class="nb">all</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">acceptable_chattering</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">chattering_results</span><span class="p">),</span>
+        <span class="n">average_chattering_index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">chattering_index</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">chattering_results</span><span class="p">]),</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_chattering_results</span><span class="p">(</span><span class="n">chattering_results</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_assess_chattering_severity</span><span class="p">(</span><span class="n">chattering_index</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                               <span class="n">dominant_frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                               <span class="n">control_range</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assess chattering severity based on multiple metrics.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Chattering severity classification</span>
+    <span class="k">if</span> <span class="n">chattering_index</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
+        <span class="n">severity</span> <span class="o">=</span> <span class="s2">&quot;minimal&quot;</span>
+    <span class="k">elif</span> <span class="n">chattering_index</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">severity</span> <span class="o">=</span> <span class="s2">&quot;low&quot;</span>
+    <span class="k">elif</span> <span class="n">chattering_index</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="n">severity</span> <span class="o">=</span> <span class="s2">&quot;moderate&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">severity</span> <span class="o">=</span> <span class="s2">&quot;high&quot;</span>
+
+    <span class="c1"># Frequency considerations</span>
+    <span class="k">if</span> <span class="n">dominant_frequency</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>  <span class="c1"># Hz</span>
+        <span class="n">severity</span> <span class="o">+=</span> <span class="s2">&quot;_high_frequency&quot;</span>
+
+    <span class="c1"># Control range considerations</span>
+    <span class="k">if</span> <span class="n">control_range</span> <span class="o">&gt;</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">MAX_CONTROL_INPUT</span><span class="p">:</span>
+        <span class="n">severity</span> <span class="o">+=</span> <span class="s2">&quot;_large_amplitude&quot;</span>
+
+    <span class="k">return</span> <span class="n">severity</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pso-optimization-mathematical-validation">
+<h2>2. PSO Optimization Mathematical Validation<a class="headerlink" href="#pso-optimization-mathematical-validation" title="Link to this heading">¶</a></h2>
+<section id="convergence-analysis">
+<h3>2.1 Convergence Analysis<a class="headerlink" href="#convergence-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+PSO convergence is analyzed using the <strong>Clerc-Kennedy constriction factor</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\chi = \frac{2}{|2 - \phi - \sqrt{\phi^2 - 4\phi}|}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\phi = c_1 + c_2 &gt; 4\)</span> ensures convergence.</p>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_pso_convergence_properties</span><span class="p">(</span><span class="n">pso_optimizer</span><span class="p">:</span> <span class="n">PSOOptimizer</span><span class="p">,</span>
+                                       <span class="n">benchmark_functions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BenchmarkFunction</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">PSOConvergenceValidationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate PSO convergence properties using benchmark functions.</span>
+
+<span class="sd">    Mathematical Foundation:</span>
+<span class="sd">    - Clerc-Kennedy convergence conditions</span>
+<span class="sd">    - Global convergence analysis</span>
+<span class="sd">    - Convergence rate estimation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">convergence_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">benchmark_func</span> <span class="ow">in</span> <span class="n">benchmark_functions</span><span class="p">:</span>
+        <span class="c1"># Run multiple PSO trials</span>
+        <span class="n">trial_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_PSO_TRIALS</span><span class="p">):</span>
+            <span class="c1"># Initialize PSO with validated parameters</span>
+            <span class="n">pso_result</span> <span class="o">=</span> <span class="n">pso_optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+                <span class="n">objective_function</span><span class="o">=</span><span class="n">benchmark_func</span><span class="o">.</span><span class="n">objective</span><span class="p">,</span>
+                <span class="n">bounds</span><span class="o">=</span><span class="n">benchmark_func</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>
+                <span class="n">max_iterations</span><span class="o">=</span><span class="n">MAX_PSO_ITERATIONS</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Analyze convergence properties</span>
+            <span class="n">convergence_analysis</span> <span class="o">=</span> <span class="n">_analyze_pso_convergence</span><span class="p">(</span>
+                <span class="n">pso_result</span><span class="o">.</span><span class="n">cost_history</span><span class="p">,</span>
+                <span class="n">benchmark_func</span><span class="o">.</span><span class="n">global_minimum</span><span class="p">,</span>
+                <span class="n">pso_result</span><span class="o">.</span><span class="n">final_cost</span>
+            <span class="p">)</span>
+
+            <span class="n">trial_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">convergence_analysis</span><span class="p">)</span>
+
+        <span class="c1"># Aggregate trial results</span>
+        <span class="n">success_rate</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">trial_results</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">converged_to_global</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">trial_results</span><span class="p">)</span>
+        <span class="n">average_convergence_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">convergence_rate</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">trial_results</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">converged</span><span class="p">])</span>
+
+        <span class="n">convergence_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PSOBenchmarkResult</span><span class="p">(</span>
+            <span class="n">benchmark_function</span><span class="o">=</span><span class="n">benchmark_func</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">success_rate</span><span class="o">=</span><span class="n">success_rate</span><span class="p">,</span>
+            <span class="n">average_convergence_rate</span><span class="o">=</span><span class="n">average_convergence_rate</span><span class="p">,</span>
+            <span class="n">trial_results</span><span class="o">=</span><span class="n">trial_results</span><span class="p">,</span>
+            <span class="n">mathematical_properties</span><span class="o">=</span><span class="n">_analyze_mathematical_properties</span><span class="p">(</span><span class="n">trial_results</span><span class="p">)</span>
+        <span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">PSOConvergenceValidationResult</span><span class="p">(</span>
+        <span class="n">benchmark_results</span><span class="o">=</span><span class="n">convergence_results</span><span class="p">,</span>
+        <span class="n">overall_convergence_validated</span><span class="o">=</span><span class="nb">all</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">success_rate</span> <span class="o">&gt;=</span> <span class="n">MIN_PSO_SUCCESS_RATE</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">convergence_results</span><span class="p">),</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_pso_convergence</span><span class="p">(</span><span class="n">convergence_results</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_analyze_pso_convergence</span><span class="p">(</span><span class="n">cost_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+                           <span class="n">global_minimum</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                           <span class="n">final_cost</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConvergenceAnalysis</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze PSO convergence characteristics.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Check if converged to global minimum</span>
+    <span class="n">convergence_tolerance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">global_minimum</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span> <span class="k">if</span> <span class="n">global_minimum</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.01</span>
+    <span class="n">converged_to_global</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">final_cost</span> <span class="o">-</span> <span class="n">global_minimum</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">convergence_tolerance</span>
+
+    <span class="c1"># Estimate convergence rate</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cost_history</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="c1"># Fit exponential decay model: cost(t) = A * exp(-λt) + C</span>
+        <span class="n">log_costs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cost_history</span><span class="p">)</span> <span class="o">-</span> <span class="n">global_minimum</span> <span class="o">+</span> <span class="mf">1e-8</span><span class="p">)</span>
+        <span class="n">convergence_rate</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_costs</span><span class="p">)),</span> <span class="n">log_costs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">convergence_rate</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Detect premature convergence</span>
+    <span class="n">cost_variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">cost_history</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cost_history</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+    <span class="n">premature_convergence</span> <span class="o">=</span> <span class="n">cost_variance</span> <span class="o">&lt;</span> <span class="n">PREMATURE_CONVERGENCE_THRESHOLD</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">converged_to_global</span>
+
+    <span class="k">return</span> <span class="n">ConvergenceAnalysis</span><span class="p">(</span>
+        <span class="n">converged</span><span class="o">=</span><span class="n">final_cost</span> <span class="o">&lt;=</span> <span class="n">global_minimum</span> <span class="o">+</span> <span class="n">convergence_tolerance</span><span class="p">,</span>
+        <span class="n">converged_to_global</span><span class="o">=</span><span class="n">converged_to_global</span><span class="p">,</span>
+        <span class="n">convergence_rate</span><span class="o">=</span><span class="n">convergence_rate</span><span class="p">,</span>
+        <span class="n">premature_convergence</span><span class="o">=</span><span class="n">premature_convergence</span><span class="p">,</span>
+        <span class="n">final_error</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">final_cost</span> <span class="o">-</span> <span class="n">global_minimum</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-objective-optimization-validation">
+<h3>2.2 Multi-Objective Optimization Validation<a class="headerlink" href="#multi-objective-optimization-validation" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+For multi-objective PSO optimization, Pareto optimality is validated:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Pareto Optimal: } \nexists x \text{ such that } f_i(x) \leq f_i(x^*) \forall i \text{ and } f_j(x) &lt; f_j(x^*) \text{ for some } j\]</div>
+</div>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_multi_objective_pso</span><span class="p">(</span><span class="n">multi_obj_optimizer</span><span class="p">:</span> <span class="n">MultiObjectivePSOOptimizer</span><span class="p">,</span>
+                               <span class="n">test_problems</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiObjectiveTestProblem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">MultiObjectiveValidationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate multi-objective PSO using standard test problems.</span>
+
+<span class="sd">    Mathematical Foundation:</span>
+<span class="sd">    - Pareto optimality verification</span>
+<span class="sd">    - Hypervolume indicator calculation</span>
+<span class="sd">    - Convergence to Pareto front analysis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">validation_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">test_problem</span> <span class="ow">in</span> <span class="n">test_problems</span><span class="p">:</span>
+        <span class="c1"># Run multi-objective optimization</span>
+        <span class="n">pareto_result</span> <span class="o">=</span> <span class="n">multi_obj_optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+            <span class="n">objective_functions</span><span class="o">=</span><span class="n">test_problem</span><span class="o">.</span><span class="n">objectives</span><span class="p">,</span>
+            <span class="n">bounds</span><span class="o">=</span><span class="n">test_problem</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>
+            <span class="n">max_iterations</span><span class="o">=</span><span class="n">MAX_MULTI_OBJ_ITERATIONS</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Validate Pareto optimality</span>
+        <span class="n">pareto_validation</span> <span class="o">=</span> <span class="n">_validate_pareto_optimality</span><span class="p">(</span>
+            <span class="n">pareto_result</span><span class="o">.</span><span class="n">pareto_front</span><span class="p">,</span>
+            <span class="n">test_problem</span><span class="o">.</span><span class="n">true_pareto_front</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Calculate hypervolume indicator</span>
+        <span class="n">hypervolume</span> <span class="o">=</span> <span class="n">_calculate_hypervolume</span><span class="p">(</span>
+            <span class="n">pareto_result</span><span class="o">.</span><span class="n">pareto_front</span><span class="p">,</span>
+            <span class="n">test_problem</span><span class="o">.</span><span class="n">reference_point</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Analyze convergence to Pareto front</span>
+        <span class="n">convergence_analysis</span> <span class="o">=</span> <span class="n">_analyze_pareto_convergence</span><span class="p">(</span>
+            <span class="n">pareto_result</span><span class="o">.</span><span class="n">pareto_history</span><span class="p">,</span>
+            <span class="n">test_problem</span><span class="o">.</span><span class="n">true_pareto_front</span>
+        <span class="p">)</span>
+
+        <span class="n">validation_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MultiObjectiveTestResult</span><span class="p">(</span>
+            <span class="n">test_problem</span><span class="o">=</span><span class="n">test_problem</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">pareto_validation</span><span class="o">=</span><span class="n">pareto_validation</span><span class="p">,</span>
+            <span class="n">hypervolume</span><span class="o">=</span><span class="n">hypervolume</span><span class="p">,</span>
+            <span class="n">convergence_analysis</span><span class="o">=</span><span class="n">convergence_analysis</span><span class="p">,</span>
+            <span class="n">mathematical_properties</span><span class="o">=</span><span class="n">_analyze_multi_objective_properties</span><span class="p">(</span><span class="n">pareto_result</span><span class="p">)</span>
+        <span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">MultiObjectiveValidationResult</span><span class="p">(</span>
+        <span class="n">test_results</span><span class="o">=</span><span class="n">validation_results</span><span class="p">,</span>
+        <span class="n">overall_validation</span><span class="o">=</span><span class="nb">all</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">pareto_validation</span><span class="o">.</span><span class="n">valid</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">validation_results</span><span class="p">),</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_multi_objective_results</span><span class="p">(</span><span class="n">validation_results</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="numerical-stability-analysis">
+<h2>3. Numerical Stability Analysis<a class="headerlink" href="#numerical-stability-analysis" title="Link to this heading">¶</a></h2>
+<section id="integration-method-validation">
+<h3>3.1 Integration Method Validation<a class="headerlink" href="#integration-method-validation" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+Numerical integration accuracy is validated using energy conservation and error analysis:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[E(t) = \frac{1}{2}m\dot{q}^2 + V(q) = \text{constant}\]</div>
+</div>
+<p>for conservative systems.</p>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_numerical_integration_stability</span><span class="p">(</span><span class="n">integrators</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">NumericalIntegrator</span><span class="p">],</span>
+                                           <span class="n">test_scenarios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">IntegrationTestScenario</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NumericalStabilityResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate numerical integration stability and accuracy.</span>
+
+<span class="sd">    Mathematical Foundation:</span>
+<span class="sd">    - Energy conservation verification</span>
+<span class="sd">    - Truncation error analysis</span>
+<span class="sd">    - Stability region analysis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">stability_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">integrator</span> <span class="ow">in</span> <span class="n">integrators</span><span class="p">:</span>
+        <span class="n">integrator_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">test_scenarios</span><span class="p">:</span>
+            <span class="c1"># Run integration</span>
+            <span class="n">t</span><span class="p">,</span> <span class="n">states</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span>
+                <span class="n">initial_state</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">initial_state</span><span class="p">,</span>
+                <span class="n">dynamics</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">dynamics</span><span class="p">,</span>
+                <span class="n">time_span</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">time_span</span><span class="p">,</span>
+                <span class="n">dt</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">dt</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Energy conservation analysis (for Hamiltonian systems)</span>
+            <span class="k">if</span> <span class="n">scenario</span><span class="o">.</span><span class="n">is_conservative</span><span class="p">:</span>
+                <span class="n">energy_conservation</span> <span class="o">=</span> <span class="n">_validate_energy_conservation</span><span class="p">(</span>
+                    <span class="n">states</span><span class="p">,</span> <span class="n">scenario</span><span class="o">.</span><span class="n">physics_params</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">energy_conservation</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># Truncation error estimation</span>
+            <span class="n">truncation_error</span> <span class="o">=</span> <span class="n">_estimate_truncation_error</span><span class="p">(</span>
+                <span class="n">integrator</span><span class="p">,</span> <span class="n">scenario</span><span class="p">,</span> <span class="n">reference_solution</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">reference_solution</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Stability analysis</span>
+            <span class="n">stability_analysis</span> <span class="o">=</span> <span class="n">_analyze_numerical_stability</span><span class="p">(</span>
+                <span class="n">states</span><span class="p">,</span> <span class="n">scenario</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">integrator</span><span class="o">.</span><span class="n">stability_region</span>
+            <span class="p">)</span>
+
+            <span class="n">integrator_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">IntegrationTestResult</span><span class="p">(</span>
+                <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">energy_conservation</span><span class="o">=</span><span class="n">energy_conservation</span><span class="p">,</span>
+                <span class="n">truncation_error</span><span class="o">=</span><span class="n">truncation_error</span><span class="p">,</span>
+                <span class="n">stability_analysis</span><span class="o">=</span><span class="n">stability_analysis</span><span class="p">,</span>
+                <span class="n">numerical_accuracy</span><span class="o">=</span><span class="n">_calculate_numerical_accuracy</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">scenario</span><span class="o">.</span><span class="n">reference_solution</span><span class="p">)</span>
+            <span class="p">))</span>
+
+        <span class="n">stability_results</span><span class="p">[</span><span class="n">integrator</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">integrator_results</span>
+
+    <span class="k">return</span> <span class="n">NumericalStabilityResult</span><span class="p">(</span>
+        <span class="n">integrator_results</span><span class="o">=</span><span class="n">stability_results</span><span class="p">,</span>
+        <span class="n">overall_stability</span><span class="o">=</span><span class="n">_assess_overall_numerical_stability</span><span class="p">(</span><span class="n">stability_results</span><span class="p">),</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_numerical_stability</span><span class="p">(</span><span class="n">stability_results</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_energy_conservation</span><span class="p">(</span><span class="n">states</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                                <span class="n">physics_params</span><span class="p">:</span> <span class="n">PhysicsParameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EnergyConservationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate energy conservation for Hamiltonian systems.&quot;&quot;&quot;</span>
+
+    <span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+        <span class="c1"># Calculate kinetic energy</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">state</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># [θ₁, θ₂, x]</span>
+        <span class="n">q_dot</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>  <span class="c1"># [θ̇₁, θ̇₂, ẋ]</span>
+
+        <span class="c1"># Mass matrix for double inverted pendulum</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">calculate_mass_matrix</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">physics_params</span><span class="p">)</span>
+        <span class="n">kinetic_energy</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">q_dot</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">M</span> <span class="o">@</span> <span class="n">q_dot</span>
+
+        <span class="c1"># Potential energy</span>
+        <span class="n">potential_energy</span> <span class="o">=</span> <span class="n">calculate_potential_energy</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">physics_params</span><span class="p">)</span>
+
+        <span class="c1"># Total energy</span>
+        <span class="n">total_energy</span> <span class="o">=</span> <span class="n">kinetic_energy</span> <span class="o">+</span> <span class="n">potential_energy</span>
+        <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_energy</span><span class="p">)</span>
+
+    <span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+    <span class="n">initial_energy</span> <span class="o">=</span> <span class="n">energies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Energy drift analysis</span>
+    <span class="n">energy_drift</span> <span class="o">=</span> <span class="n">energies</span> <span class="o">-</span> <span class="n">initial_energy</span>
+    <span class="n">max_absolute_drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">energy_drift</span><span class="p">))</span>
+    <span class="n">max_relative_drift</span> <span class="o">=</span> <span class="n">max_absolute_drift</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">initial_energy</span><span class="p">)</span> <span class="k">if</span> <span class="n">initial_energy</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">max_absolute_drift</span>
+
+    <span class="c1"># Energy conservation quality</span>
+    <span class="k">if</span> <span class="n">max_relative_drift</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+        <span class="n">conservation_quality</span> <span class="o">=</span> <span class="s2">&quot;excellent&quot;</span>
+    <span class="k">elif</span> <span class="n">max_relative_drift</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">:</span>
+        <span class="n">conservation_quality</span> <span class="o">=</span> <span class="s2">&quot;good&quot;</span>
+    <span class="k">elif</span> <span class="n">max_relative_drift</span> <span class="o">&lt;</span> <span class="mf">1e-2</span><span class="p">:</span>
+        <span class="n">conservation_quality</span> <span class="o">=</span> <span class="s2">&quot;acceptable&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">conservation_quality</span> <span class="o">=</span> <span class="s2">&quot;poor&quot;</span>
+
+    <span class="k">return</span> <span class="n">EnergyConservationResult</span><span class="p">(</span>
+        <span class="n">initial_energy</span><span class="o">=</span><span class="n">initial_energy</span><span class="p">,</span>
+        <span class="n">final_energy</span><span class="o">=</span><span class="n">energies</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">max_absolute_drift</span><span class="o">=</span><span class="n">max_absolute_drift</span><span class="p">,</span>
+        <span class="n">max_relative_drift</span><span class="o">=</span><span class="n">max_relative_drift</span><span class="p">,</span>
+        <span class="n">conservation_quality</span><span class="o">=</span><span class="n">conservation_quality</span><span class="p">,</span>
+        <span class="n">energy_conserved</span><span class="o">=</span><span class="n">max_relative_drift</span> <span class="o">&lt;</span> <span class="n">ENERGY_CONSERVATION_TOLERANCE</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="conditioning-and-numerical-precision-analysis">
+<h3>3.2 Conditioning and Numerical Precision Analysis<a class="headerlink" href="#conditioning-and-numerical-precision-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+Matrix conditioning analysis using condition number:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\kappa(A) = \|A\| \|A^{-1}\|\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\kappa(A) &gt; 10^{12}\)</span> indicates ill-conditioning for double precision.</p>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_matrix_conditioning</span><span class="p">(</span><span class="n">matrices</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+                               <span class="n">operations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MatrixOperation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ConditioningValidationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate numerical conditioning of matrix operations.</span>
+
+<span class="sd">    Mathematical Foundation:</span>
+<span class="sd">    - Condition number analysis: κ(A) = ||A|| ||A⁻¹||</span>
+<span class="sd">    - Numerical stability bounds</span>
+<span class="sd">    - Precision loss estimation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">conditioning_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">matrix_name</span><span class="p">,</span> <span class="n">matrix</span> <span class="ow">in</span> <span class="n">matrices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Calculate condition number</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">condition_number</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+            <span class="n">condition_number</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Assess conditioning quality</span>
+        <span class="k">if</span> <span class="n">condition_number</span> <span class="o">&lt;</span> <span class="mf">1e3</span><span class="p">:</span>
+            <span class="n">conditioning_quality</span> <span class="o">=</span> <span class="s2">&quot;excellent&quot;</span>
+        <span class="k">elif</span> <span class="n">condition_number</span> <span class="o">&lt;</span> <span class="mf">1e6</span><span class="p">:</span>
+            <span class="n">conditioning_quality</span> <span class="o">=</span> <span class="s2">&quot;good&quot;</span>
+        <span class="k">elif</span> <span class="n">condition_number</span> <span class="o">&lt;</span> <span class="mf">1e12</span><span class="p">:</span>
+            <span class="n">conditioning_quality</span> <span class="o">=</span> <span class="s2">&quot;acceptable&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">conditioning_quality</span> <span class="o">=</span> <span class="s2">&quot;ill_conditioned&quot;</span>
+
+        <span class="c1"># Estimate precision loss</span>
+        <span class="n">precision_loss_bits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">condition_number</span><span class="p">)</span> <span class="k">if</span> <span class="n">condition_number</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="n">conditioning_results</span><span class="p">[</span><span class="n">matrix_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">MatrixConditioningResult</span><span class="p">(</span>
+            <span class="n">condition_number</span><span class="o">=</span><span class="n">condition_number</span><span class="p">,</span>
+            <span class="n">conditioning_quality</span><span class="o">=</span><span class="n">conditioning_quality</span><span class="p">,</span>
+            <span class="n">precision_loss_bits</span><span class="o">=</span><span class="n">precision_loss_bits</span><span class="p">,</span>
+            <span class="n">numerically_stable</span><span class="o">=</span><span class="n">condition_number</span> <span class="o">&lt;</span> <span class="n">CONDITIONING_THRESHOLD</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Validate matrix operations</span>
+    <span class="n">operation_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">operations</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Perform operation and check for numerical issues</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">matrices</span><span class="p">)</span>
+
+            <span class="c1"># Check for NaN or Inf values</span>
+            <span class="n">has_numerical_issues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">result</span><span class="p">))</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+            <span class="c1"># Estimate accumulated round-off error</span>
+            <span class="n">roundoff_error</span> <span class="o">=</span> <span class="n">_estimate_roundoff_error</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="n">matrices</span><span class="p">)</span>
+
+            <span class="n">operation_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MatrixOperationResult</span><span class="p">(</span>
+                <span class="n">operation_name</span><span class="o">=</span><span class="n">operation</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">successful</span><span class="o">=</span><span class="ow">not</span> <span class="n">has_numerical_issues</span><span class="p">,</span>
+                <span class="n">roundoff_error</span><span class="o">=</span><span class="n">roundoff_error</span><span class="p">,</span>
+                <span class="n">numerical_stability</span><span class="o">=</span><span class="n">_assess_operation_stability</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">roundoff_error</span><span class="p">)</span>
+            <span class="p">))</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">operation_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MatrixOperationResult</span><span class="p">(</span>
+                <span class="n">operation_name</span><span class="o">=</span><span class="n">operation</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">successful</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ConditioningValidationResult</span><span class="p">(</span>
+        <span class="n">matrix_conditioning</span><span class="o">=</span><span class="n">conditioning_results</span><span class="p">,</span>
+        <span class="n">operation_results</span><span class="o">=</span><span class="n">operation_results</span><span class="p">,</span>
+        <span class="n">overall_conditioning</span><span class="o">=</span><span class="n">_assess_overall_conditioning</span><span class="p">(</span><span class="n">conditioning_results</span><span class="p">,</span> <span class="n">operation_results</span><span class="p">),</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_conditioning_results</span><span class="p">(</span><span class="n">conditioning_results</span><span class="p">,</span> <span class="n">operation_results</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="real-time-mathematical-constraints">
+<h2>4. Real-Time Mathematical Constraints<a class="headerlink" href="#real-time-mathematical-constraints" title="Link to this heading">¶</a></h2>
+<section id="timing-analysis-and-deadline-satisfaction">
+<h3>4.1 Timing Analysis and Deadline Satisfaction<a class="headerlink" href="#timing-analysis-and-deadline-satisfaction" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+Real-time constraint satisfaction using schedulability analysis:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^{n} \frac{C_i}{T_i} \leq U_{bound}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(C_i\)</span> is execution time, <span class="math notranslate nohighlight">\(T_i\)</span> is period, and <span class="math notranslate nohighlight">\(U_{bound}\)</span> is utilization bound.</p>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_real_time_constraints</span><span class="p">(</span><span class="n">control_system</span><span class="p">:</span> <span class="n">ControlSystem</span><span class="p">,</span>
+                                 <span class="n">timing_requirements</span><span class="p">:</span> <span class="n">TimingRequirements</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealTimeValidationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate real-time mathematical constraints.</span>
+
+<span class="sd">    Mathematical Foundation:</span>
+<span class="sd">    - Schedulability analysis: Σ(Cᵢ/Tᵢ) ≤ U_bound</span>
+<span class="sd">    - Deadline satisfaction probability</span>
+<span class="sd">    - Worst-case execution time (WCET) analysis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Measure execution times for critical functions</span>
+    <span class="n">execution_times</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">control_system</span><span class="o">.</span><span class="n">critical_functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Run timing measurements</span>
+        <span class="n">measured_times</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_TIMING_MEASUREMENTS</span><span class="p">):</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="n">function</span><span class="p">()</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="n">measured_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+
+        <span class="c1"># Statistical analysis of execution times</span>
+        <span class="n">mean_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">measured_times</span><span class="p">)</span>
+        <span class="n">std_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">measured_times</span><span class="p">)</span>
+        <span class="n">max_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_times</span><span class="p">)</span>
+
+        <span class="c1"># Estimate worst-case execution time (WCET)</span>
+        <span class="c1"># Using 99.9th percentile as WCET estimate</span>
+        <span class="n">wcet_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">measured_times</span><span class="p">,</span> <span class="mf">99.9</span><span class="p">)</span>
+
+        <span class="n">execution_times</span><span class="p">[</span><span class="n">function_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ExecutionTimeAnalysis</span><span class="p">(</span>
+            <span class="n">mean_time</span><span class="o">=</span><span class="n">mean_time</span><span class="p">,</span>
+            <span class="n">std_time</span><span class="o">=</span><span class="n">std_time</span><span class="p">,</span>
+            <span class="n">max_measured_time</span><span class="o">=</span><span class="n">max_time</span><span class="p">,</span>
+            <span class="n">wcet_estimate</span><span class="o">=</span><span class="n">wcet_estimate</span><span class="p">,</span>
+            <span class="n">deadline</span><span class="o">=</span><span class="n">timing_requirements</span><span class="o">.</span><span class="n">deadlines</span><span class="p">[</span><span class="n">function_name</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Schedulability analysis</span>
+    <span class="n">utilization</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">deadline_violations</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">timing_analysis</span> <span class="ow">in</span> <span class="n">execution_times</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="n">timing_requirements</span><span class="o">.</span><span class="n">periods</span><span class="p">[</span><span class="n">function_name</span><span class="p">]</span>
+        <span class="n">deadline</span> <span class="o">=</span> <span class="n">timing_requirements</span><span class="o">.</span><span class="n">deadlines</span><span class="p">[</span><span class="n">function_name</span><span class="p">]</span>
+
+        <span class="c1"># Calculate utilization</span>
+        <span class="n">function_utilization</span> <span class="o">=</span> <span class="n">timing_analysis</span><span class="o">.</span><span class="n">wcet_estimate</span> <span class="o">/</span> <span class="n">period</span>
+        <span class="n">utilization</span> <span class="o">+=</span> <span class="n">function_utilization</span>
+
+        <span class="c1"># Check deadline satisfaction</span>
+        <span class="k">if</span> <span class="n">timing_analysis</span><span class="o">.</span><span class="n">wcet_estimate</span> <span class="o">&gt;</span> <span class="n">deadline</span><span class="p">:</span>
+            <span class="n">deadline_violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DeadlineViolation</span><span class="p">(</span>
+                <span class="n">function_name</span><span class="o">=</span><span class="n">function_name</span><span class="p">,</span>
+                <span class="n">wcet</span><span class="o">=</span><span class="n">timing_analysis</span><span class="o">.</span><span class="n">wcet_estimate</span><span class="p">,</span>
+                <span class="n">deadline</span><span class="o">=</span><span class="n">deadline</span><span class="p">,</span>
+                <span class="n">violation_magnitude</span><span class="o">=</span><span class="n">timing_analysis</span><span class="o">.</span><span class="n">wcet_estimate</span> <span class="o">-</span> <span class="n">deadline</span>
+            <span class="p">))</span>
+
+    <span class="c1"># Determine schedulability</span>
+    <span class="n">utilization_bound</span> <span class="o">=</span> <span class="n">timing_requirements</span><span class="o">.</span><span class="n">utilization_bound</span>
+    <span class="n">schedulable</span> <span class="o">=</span> <span class="n">utilization</span> <span class="o">&lt;=</span> <span class="n">utilization_bound</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">deadline_violations</span>
+
+    <span class="k">return</span> <span class="n">RealTimeValidationResult</span><span class="p">(</span>
+        <span class="n">execution_time_analysis</span><span class="o">=</span><span class="n">execution_times</span><span class="p">,</span>
+        <span class="n">total_utilization</span><span class="o">=</span><span class="n">utilization</span><span class="p">,</span>
+        <span class="n">utilization_bound</span><span class="o">=</span><span class="n">utilization_bound</span><span class="p">,</span>
+        <span class="n">deadline_violations</span><span class="o">=</span><span class="n">deadline_violations</span><span class="p">,</span>
+        <span class="n">schedulable</span><span class="o">=</span><span class="n">schedulable</span><span class="p">,</span>
+        <span class="n">real_time_constraints_satisfied</span><span class="o">=</span><span class="n">schedulable</span><span class="p">,</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_real_time_results</span><span class="p">(</span>
+            <span class="n">utilization</span><span class="p">,</span> <span class="n">utilization_bound</span><span class="p">,</span> <span class="n">deadline_violations</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="jitter-and-latency-analysis">
+<h3>4.2 Jitter and Latency Analysis<a class="headerlink" href="#jitter-and-latency-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Theoretical Foundation:</strong>
+Statistical analysis of timing jitter using probability distributions:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[P(\text{jitter} &gt; J_{max}) \leq \epsilon_{acceptable}\]</div>
+</div>
+<p><strong>Implementation Validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_timing_jitter_and_latency</span><span class="p">(</span><span class="n">control_loop</span><span class="p">:</span> <span class="n">ControlLoop</span><span class="p">,</span>
+                                     <span class="n">jitter_requirements</span><span class="p">:</span> <span class="n">JitterRequirements</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JitterValidationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate timing jitter and latency characteristics.</span>
+
+<span class="sd">    Mathematical Foundation:</span>
+<span class="sd">    - Jitter probability: P(jitter &gt; J_max) ≤ ε_acceptable</span>
+<span class="sd">    - Latency distribution analysis</span>
+<span class="sd">    - Phase margin impact assessment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Collect timing measurements</span>
+    <span class="n">timing_measurements</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_JITTER_MEASUREMENTS</span><span class="p">):</span>
+        <span class="n">measurement</span> <span class="o">=</span> <span class="n">control_loop</span><span class="o">.</span><span class="n">run_single_iteration_with_timing</span><span class="p">()</span>
+        <span class="n">timing_measurements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurement</span><span class="p">)</span>
+
+    <span class="c1"># Extract timing components</span>
+    <span class="n">sensor_latencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">sensor_latency</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">timing_measurements</span><span class="p">]</span>
+    <span class="n">computation_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">computation_time</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">timing_measurements</span><span class="p">]</span>
+    <span class="n">actuator_latencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">actuator_latency</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">timing_measurements</span><span class="p">]</span>
+    <span class="n">total_latencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">total_latency</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">timing_measurements</span><span class="p">]</span>
+
+    <span class="c1"># Jitter analysis (timing variability)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_jitter</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">component_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JitterAnalysis</span><span class="p">:</span>
+        <span class="n">times_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+
+        <span class="c1"># Calculate jitter metrics</span>
+        <span class="n">mean_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">times_array</span><span class="p">)</span>
+        <span class="n">jitter_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">times_array</span><span class="p">)</span>
+        <span class="n">max_jitter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">times_array</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">times_array</span><span class="p">)</span>
+
+        <span class="c1"># Jitter probability analysis</span>
+        <span class="n">jitter_threshold</span> <span class="o">=</span> <span class="n">jitter_requirements</span><span class="o">.</span><span class="n">max_acceptable_jitter</span><span class="p">[</span><span class="n">component_name</span><span class="p">]</span>
+        <span class="n">jitter_violations</span> <span class="o">=</span> <span class="n">times_array</span><span class="p">[</span><span class="n">times_array</span> <span class="o">&gt;</span> <span class="n">mean_time</span> <span class="o">+</span> <span class="n">jitter_threshold</span><span class="p">]</span>
+        <span class="n">jitter_violation_probability</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">jitter_violations</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">times_array</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">JitterAnalysis</span><span class="p">(</span>
+            <span class="n">component</span><span class="o">=</span><span class="n">component_name</span><span class="p">,</span>
+            <span class="n">mean_time</span><span class="o">=</span><span class="n">mean_time</span><span class="p">,</span>
+            <span class="n">jitter_std</span><span class="o">=</span><span class="n">jitter_std</span><span class="p">,</span>
+            <span class="n">max_jitter</span><span class="o">=</span><span class="n">max_jitter</span><span class="p">,</span>
+            <span class="n">jitter_violation_probability</span><span class="o">=</span><span class="n">jitter_violation_probability</span><span class="p">,</span>
+            <span class="n">acceptable_jitter</span><span class="o">=</span><span class="n">jitter_violation_probability</span> <span class="o">&lt;=</span> <span class="n">jitter_requirements</span><span class="o">.</span><span class="n">acceptable_violation_probability</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Analyze jitter for each component</span>
+    <span class="n">jitter_analyses</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;sensor&#39;</span><span class="p">:</span> <span class="n">analyze_jitter</span><span class="p">(</span><span class="n">sensor_latencies</span><span class="p">,</span> <span class="s1">&#39;sensor&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;computation&#39;</span><span class="p">:</span> <span class="n">analyze_jitter</span><span class="p">(</span><span class="n">computation_times</span><span class="p">,</span> <span class="s1">&#39;computation&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;actuator&#39;</span><span class="p">:</span> <span class="n">analyze_jitter</span><span class="p">(</span><span class="n">actuator_latencies</span><span class="p">,</span> <span class="s1">&#39;actuator&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;total&#39;</span><span class="p">:</span> <span class="n">analyze_jitter</span><span class="p">(</span><span class="n">total_latencies</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Control system impact analysis</span>
+    <span class="n">control_impact</span> <span class="o">=</span> <span class="n">_analyze_jitter_control_impact</span><span class="p">(</span>
+        <span class="n">jitter_analyses</span><span class="p">,</span> <span class="n">control_loop</span><span class="o">.</span><span class="n">controller_parameters</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">JitterValidationResult</span><span class="p">(</span>
+        <span class="n">jitter_analyses</span><span class="o">=</span><span class="n">jitter_analyses</span><span class="p">,</span>
+        <span class="n">control_impact</span><span class="o">=</span><span class="n">control_impact</span><span class="p">,</span>
+        <span class="n">overall_timing_acceptable</span><span class="o">=</span><span class="nb">all</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">acceptable_jitter</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jitter_analyses</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+        <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="n">_interpret_jitter_results</span><span class="p">(</span><span class="n">jitter_analyses</span><span class="p">,</span> <span class="n">control_impact</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_analyze_jitter_control_impact</span><span class="p">(</span><span class="n">jitter_analyses</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">JitterAnalysis</span><span class="p">],</span>
+                                 <span class="n">controller_params</span><span class="p">:</span> <span class="n">ControllerParameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ControlImpactAnalysis</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze impact of timing jitter on control performance.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Phase margin impact estimation</span>
+    <span class="n">total_jitter_std</span> <span class="o">=</span> <span class="n">jitter_analyses</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">jitter_std</span>
+    <span class="n">control_frequency</span> <span class="o">=</span> <span class="n">controller_params</span><span class="o">.</span><span class="n">control_frequency</span>
+
+    <span class="c1"># Phase delay due to jitter (in radians)</span>
+    <span class="n">phase_delay_std</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">control_frequency</span> <span class="o">*</span> <span class="n">total_jitter_std</span>
+
+    <span class="c1"># Estimate phase margin degradation</span>
+    <span class="n">nominal_phase_margin</span> <span class="o">=</span> <span class="n">controller_params</span><span class="o">.</span><span class="n">nominal_phase_margin</span>
+    <span class="n">phase_margin_degradation</span> <span class="o">=</span> <span class="n">phase_delay_std</span>
+    <span class="n">remaining_phase_margin</span> <span class="o">=</span> <span class="n">nominal_phase_margin</span> <span class="o">-</span> <span class="n">phase_margin_degradation</span>
+
+    <span class="c1"># Stability impact assessment</span>
+    <span class="k">if</span> <span class="n">remaining_phase_margin</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">:</span>  <span class="c1"># 30 degrees</span>
+        <span class="n">stability_impact</span> <span class="o">=</span> <span class="s2">&quot;minimal&quot;</span>
+    <span class="k">elif</span> <span class="n">remaining_phase_margin</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">12</span><span class="p">:</span>  <span class="c1"># 15 degrees</span>
+        <span class="n">stability_impact</span> <span class="o">=</span> <span class="s2">&quot;moderate&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stability_impact</span> <span class="o">=</span> <span class="s2">&quot;significant&quot;</span>
+
+    <span class="k">return</span> <span class="n">ControlImpactAnalysis</span><span class="p">(</span>
+        <span class="n">phase_delay_std</span><span class="o">=</span><span class="n">phase_delay_std</span><span class="p">,</span>
+        <span class="n">phase_margin_degradation</span><span class="o">=</span><span class="n">phase_margin_degradation</span><span class="p">,</span>
+        <span class="n">remaining_phase_margin</span><span class="o">=</span><span class="n">remaining_phase_margin</span><span class="p">,</span>
+        <span class="n">stability_impact</span><span class="o">=</span><span class="n">stability_impact</span><span class="p">,</span>
+        <span class="n">performance_degradation_estimate</span><span class="o">=</span><span class="n">_estimate_performance_degradation</span><span class="p">(</span><span class="n">phase_margin_degradation</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="property-based-testing-for-mathematical-validation">
+<h2>5. Property-Based Testing for Mathematical Validation<a class="headerlink" href="#property-based-testing-for-mathematical-validation" title="Link to this heading">¶</a></h2>
+<section id="hypothesis-driven-mathematical-testing">
+<h3>5.1 Hypothesis-Driven Mathematical Testing<a class="headerlink" href="#hypothesis-driven-mathematical-testing" title="Link to this heading">¶</a></h3>
+<p><strong>Implementation Framework:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">given</span><span class="p">,</span> <span class="n">strategies</span> <span class="k">as</span> <span class="n">st</span><span class="p">,</span> <span class="n">assume</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hypothesis.extra.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hnp</span>
+
+<span class="nd">@given</span><span class="p">(</span>
+    <span class="n">state</span><span class="o">=</span><span class="n">hnp</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,),</span> <span class="n">elements</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">allow_nan</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+    <span class="n">gains</span><span class="o">=</span><span class="n">hnp</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,),</span> <span class="n">elements</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_lyapunov_stability_property</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Property-based test for Lyapunov stability condition.</span>
+
+<span class="sd">    Mathematical Property: V̇(s) = s·ṡ &lt; 0 for all s ≠ 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Assume physical constraints</span>
+    <span class="n">assume</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">g</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gains</span><span class="p">))</span>  <span class="c1"># Positive gains required</span>
+    <span class="n">assume</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">)</span>  <span class="c1"># Reasonable state magnitude</span>
+
+    <span class="c1"># Create controller with given gains</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+    <span class="c1"># Compute sliding surface</span>
+    <span class="n">sliding_surface</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+    <span class="c1"># Skip if on sliding surface</span>
+    <span class="n">assume</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">)</span>
+
+    <span class="c1"># Compute surface derivative</span>
+    <span class="n">surface_derivative</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_surface_derivative</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+    <span class="c1"># Lyapunov stability condition</span>
+    <span class="n">lyapunov_derivative</span> <span class="o">=</span> <span class="n">sliding_surface</span> <span class="o">*</span> <span class="n">surface_derivative</span>
+
+    <span class="c1"># Mathematical property: V̇ &lt; 0 for s ≠ 0</span>
+    <span class="k">assert</span> <span class="n">lyapunov_derivative</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Lyapunov condition violated: V̇ = </span><span class="si">{</span><span class="n">lyapunov_derivative</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nd">@given</span><span class="p">(</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">lists</span><span class="p">(</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">tuples</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="mf">10.1</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)),</span>
+        <span class="n">min_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mi">8</span>
+    <span class="p">),</span>
+    <span class="n">c1</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+    <span class="n">c2</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_pso_convergence_property</span><span class="p">(</span><span class="n">bounds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span> <span class="n">c1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c2</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Property-based test for PSO convergence conditions.</span>
+
+<span class="sd">    Mathematical Property: φ = c1 + c2 &gt; 4 ensures convergence</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span>
+    <span class="n">assume</span><span class="p">(</span><span class="n">phi</span> <span class="o">&gt;</span> <span class="mf">4.0</span><span class="p">)</span>  <span class="c1"># Convergence condition</span>
+
+    <span class="c1"># Calculate constriction factor</span>
+    <span class="n">chi</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="n">phi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">phi</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">phi</span><span class="p">))</span>
+
+    <span class="c1"># Constriction factor should be positive and less than 1</span>
+    <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">chi</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Invalid constriction factor: χ = </span><span class="si">{</span><span class="n">chi</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Test PSO with these parameters</span>
+    <span class="n">pso</span> <span class="o">=</span> <span class="n">PSOOptimizer</span><span class="p">(</span><span class="n">c1</span><span class="o">=</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="n">c2</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">chi</span><span class="p">)</span>
+
+    <span class="c1"># Use simple quadratic test function</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">quadratic_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pso</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">quadratic_function</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">max_iterations</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+    <span class="c1"># Should converge to approximately zero for quadratic function</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">best_cost</span> <span class="o">&lt;</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;PSO failed to converge: final cost = </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">best_cost</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nd">@given</span><span class="p">(</span>
+    <span class="n">dt</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">),</span>
+    <span class="n">simulation_time</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_numerical_integration_energy_conservation</span><span class="p">(</span><span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">simulation_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Property-based test for energy conservation in numerical integration.</span>
+
+<span class="sd">    Mathematical Property: E(t) = constant for Hamiltonian systems</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">assume</span><span class="p">(</span><span class="n">simulation_time</span> <span class="o">/</span> <span class="n">dt</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">)</span>  <span class="c1"># Reasonable number of steps</span>
+
+    <span class="c1"># Create conservative test system (simple pendulum)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pendulum_dynamics</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="n">g</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">1.0</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">theta_dot</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="n">g</span><span class="o">/</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span>
+
+    <span class="c1"># Initial condition</span>
+    <span class="n">initial_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>  <span class="c1"># Small angle, no initial velocity</span>
+
+    <span class="c1"># Integrate using RK4</span>
+    <span class="n">integrator</span> <span class="o">=</span> <span class="n">RK4Integrator</span><span class="p">()</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">states</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span>
+        <span class="n">dynamics</span><span class="o">=</span><span class="n">pendulum_dynamics</span><span class="p">,</span>
+        <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
+        <span class="n">time_span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">simulation_time</span><span class="p">),</span>
+        <span class="n">dt</span><span class="o">=</span><span class="n">dt</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Calculate energy at each time step</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">1.0</span>
+    <span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+        <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="n">kinetic</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">theta_dot</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">potential</span> <span class="o">=</span> <span class="n">g</span><span class="o">/</span><span class="n">L</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+        <span class="n">total_energy</span> <span class="o">=</span> <span class="n">kinetic</span> <span class="o">+</span> <span class="n">potential</span>
+        <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_energy</span><span class="p">)</span>
+
+    <span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+    <span class="n">initial_energy</span> <span class="o">=</span> <span class="n">energies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Energy should be conserved (within numerical tolerance)</span>
+    <span class="n">max_energy_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">energies</span> <span class="o">-</span> <span class="n">initial_energy</span><span class="p">))</span>
+    <span class="n">relative_energy_error</span> <span class="o">=</span> <span class="n">max_energy_error</span> <span class="o">/</span> <span class="n">initial_energy</span>
+
+    <span class="c1"># Energy conservation tolerance depends on dt and simulation time</span>
+    <span class="n">tolerance</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">dt</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">simulation_time</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">relative_energy_error</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Energy not conserved: relative error = </span><span class="si">{</span><span class="n">relative_energy_error</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="comprehensive-mathematical-validation-framework">
+<h2>6. Comprehensive Mathematical Validation Framework<a class="headerlink" href="#comprehensive-mathematical-validation-framework" title="Link to this heading">¶</a></h2>
+<section id="integrated-mathematical-test-suite">
+<h3>6.1 Integrated Mathematical Test Suite<a class="headerlink" href="#integrated-mathematical-test-suite" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ComprehensiveMathematicalValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive mathematical validation for control systems.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validators</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;stability&#39;</span><span class="p">:</span> <span class="n">LyapunovStabilityValidator</span><span class="p">(),</span>
+            <span class="s1">&#39;reachability&#39;</span><span class="p">:</span> <span class="n">SlidingSurfaceReachabilityValidator</span><span class="p">(),</span>
+            <span class="s1">&#39;convergence&#39;</span><span class="p">:</span> <span class="n">PSOConvergenceValidator</span><span class="p">(),</span>
+            <span class="s1">&#39;numerical&#39;</span><span class="p">:</span> <span class="n">NumericalStabilityValidator</span><span class="p">(),</span>
+            <span class="s1">&#39;real_time&#39;</span><span class="p">:</span> <span class="n">RealTimeConstraintValidator</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_all_mathematical_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                           <span class="n">control_system</span><span class="p">:</span> <span class="n">ControlSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ComprehensiveMathematicalValidationResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute complete mathematical validation suite.&quot;&quot;&quot;</span>
+
+        <span class="n">validation_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">validator_name</span><span class="p">,</span> <span class="n">validator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">validation_results</span><span class="p">[</span><span class="n">validator_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">control_system</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">validation_results</span><span class="p">[</span><span class="n">validator_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ValidationResult</span><span class="p">(</span>
+                    <span class="n">status</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">,</span>
+                    <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                    <span class="n">mathematical_interpretation</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Failed to validate </span><span class="si">{</span><span class="n">validator_name</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+        <span class="c1"># Calculate overall mathematical rigor score</span>
+        <span class="n">rigor_score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_mathematical_rigor_score</span><span class="p">(</span><span class="n">validation_results</span><span class="p">)</span>
+
+        <span class="c1"># Generate mathematical soundness assessment</span>
+        <span class="n">soundness_assessment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assess_mathematical_soundness</span><span class="p">(</span><span class="n">validation_results</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ComprehensiveMathematicalValidationResult</span><span class="p">(</span>
+            <span class="n">validation_results</span><span class="o">=</span><span class="n">validation_results</span><span class="p">,</span>
+            <span class="n">mathematical_rigor_score</span><span class="o">=</span><span class="n">rigor_score</span><span class="p">,</span>
+            <span class="n">mathematical_soundness</span><span class="o">=</span><span class="n">soundness_assessment</span><span class="p">,</span>
+            <span class="n">theoretical_properties_verified</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_count_verified_properties</span><span class="p">(</span><span class="n">validation_results</span><span class="p">),</span>
+            <span class="n">deployment_mathematical_approval</span><span class="o">=</span><span class="n">rigor_score</span> <span class="o">&gt;=</span> <span class="n">MATHEMATICAL_DEPLOYMENT_THRESHOLD</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_mathematical_rigor_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                          <span class="n">validation_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ValidationResult</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate overall mathematical rigor score.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Weight different validation aspects</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;stability&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>        <span class="c1"># Critical for safety</span>
+            <span class="s1">&#39;reachability&#39;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span>    <span class="c1"># Critical for performance</span>
+            <span class="s1">&#39;convergence&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>      <span class="c1"># Important for optimization</span>
+            <span class="s1">&#39;numerical&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>       <span class="c1"># Important for accuracy</span>
+            <span class="s1">&#39;real_time&#39;</span><span class="p">:</span> <span class="mf">0.1</span>         <span class="c1"># Important for implementation</span>
+        <span class="p">}</span>
+
+        <span class="n">weighted_score</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">total_weight</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">for</span> <span class="n">validator_name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">validation_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">validator_name</span> <span class="ow">in</span> <span class="n">weights</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span>
+                <span class="c1"># Extract numerical score from validation result</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">):</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">score</span>
+                <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;passed&#39;</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="mf">1.0</span>
+                <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;partial&#39;</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="mf">0.7</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+                <span class="n">weighted_score</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">validator_name</span><span class="p">]</span> <span class="o">*</span> <span class="n">score</span>
+                <span class="n">total_weight</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">validator_name</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">weighted_score</span> <span class="o">/</span> <span class="n">total_weight</span> <span class="k">if</span> <span class="n">total_weight</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>This comprehensive mathematical validation framework establishes rigorous procedures for verifying the theoretical soundness and implementation correctness of the DIP-SMC control system. By integrating Lyapunov stability analysis, PSO convergence verification, numerical stability assessment, and real-time constraint validation, the framework ensures that the implemented system maintains mathematical rigor while meeting practical performance requirements.</p>
+<p>The property-based testing approach using Hypothesis provides extensive coverage of the mathematical property space, while the comprehensive validation suite offers systematic verification of all critical mathematical aspects. This framework supports confident deployment of control systems with verified theoretical properties and validated implementation correctness.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Mathematical Validation Procedures for Control Systems</a><ul>
+<li><a class="reference internal" href="#executive-summary">Executive Summary</a></li>
+<li><a class="reference internal" href="#sliding-mode-control-mathematical-validation">1. Sliding Mode Control Mathematical Validation</a><ul>
+<li><a class="reference internal" href="#lyapunov-stability-analysis">1.1 Lyapunov Stability Analysis</a></li>
+<li><a class="reference internal" href="#sliding-surface-reachability-analysis">1.2 Sliding Surface Reachability Analysis</a></li>
+<li><a class="reference internal" href="#chattering-analysis-and-quantification">1.3 Chattering Analysis and Quantification</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pso-optimization-mathematical-validation">2. PSO Optimization Mathematical Validation</a><ul>
+<li><a class="reference internal" href="#convergence-analysis">2.1 Convergence Analysis</a></li>
+<li><a class="reference internal" href="#multi-objective-optimization-validation">2.2 Multi-Objective Optimization Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-stability-analysis">3. Numerical Stability Analysis</a><ul>
+<li><a class="reference internal" href="#integration-method-validation">3.1 Integration Method Validation</a></li>
+<li><a class="reference internal" href="#conditioning-and-numerical-precision-analysis">3.2 Conditioning and Numerical Precision Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#real-time-mathematical-constraints">4. Real-Time Mathematical Constraints</a><ul>
+<li><a class="reference internal" href="#timing-analysis-and-deadline-satisfaction">4.1 Timing Analysis and Deadline Satisfaction</a></li>
+<li><a class="reference internal" href="#jitter-and-latency-analysis">4.2 Jitter and Latency Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#property-based-testing-for-mathematical-validation">5. Property-Based Testing for Mathematical Validation</a><ul>
+<li><a class="reference internal" href="#hypothesis-driven-mathematical-testing">5.1 Hypothesis-Driven Mathematical Testing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#comprehensive-mathematical-validation-framework">6. Comprehensive Mathematical Validation Framework</a><ul>
+<li><a class="reference internal" href="#integrated-mathematical-test-suite">6.1 Integrated Mathematical Test Suite</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=08e7b316"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/back-to-top.js?v=840797bb"></script>
+    <script src="_static/lazy-load.js?v=dc25293c"></script>
+    <script src="_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

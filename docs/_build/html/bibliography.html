@@ -1,0 +1,1308 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Contributing – ResearchPlanSpec Validation" href="CONTRIBUTING.html" /><link rel="prev" title="Examples" href="examples/index.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Bibliography &amp; Academic References - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/bibliography.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/bibliography.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="bibliography-academic-references">
+<h1>Bibliography &amp; Academic References<a class="headerlink" href="#bibliography-academic-references" title="Link to this heading">¶</a></h1>
+<p>Complete academic citations for all control theory, optimization theory, and mathematical foundations used in this project.</p>
+<section id="complete-bibliography">
+<h2>Complete Bibliography<a class="headerlink" href="#complete-bibliography" title="Link to this heading">¶</a></h2>
+<p>All references organized by category, automatically generated from BibTeX files.</p>
+<div class="docutils container" id="id1">
+<div role="list" class="citation-list">
+<div class="citation" id="id69" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AP98<span class="fn-bracket">]</span></span>
+<p>Uri M. Ascher and Linda R. Petzold. <em>Computer Methods for Ordinary Differential Equations and Differential-Algebraic Equations</em>. Society for Industrial and Applied Mathematics, Philadelphia, PA, 1998. ISBN 978-0898714128. Chapter 5: Stability of Multistep Methods - A-stability, L-stability, Dahlquist barrier. <a class="reference external" href="https://doi.org/10.1137/1.9781611971392">doi:10.1137/1.9781611971392</a>.</p>
+</div>
+<div class="citation" id="id50" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BB00<span class="fn-bracket">]</span></span>
+<p>Sanjay P. Bhat and Dennis S. Bernstein. Finite-time stability of continuous autonomous systems. <em>SIAM Journal on Control and Optimization</em>, 38(3):751–766, 2000. <a class="reference external" href="https://doi.org/10.1137/S0363012997321358">doi:10.1137/S0363012997321358</a>.</p>
+</div>
+<div class="citation" id="id41" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bou14<span class="fn-bracket">]</span></span>
+<p>A. Boubaker. The inverted pendulum: a fundamental benchmark in control theory and robotics. <em>International Journal of Automation &amp; Control</em>, 8(2):94–115, 2014.</p>
+</div>
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BZ86<span class="fn-bracket">]</span></span>
+<p>J. A. Burton and A. S. I. Zinober. Continuous approximation of variable structure control. <em>International Journal of Systems Science</em>, 17(6):875–885, 1986. <a class="reference external" href="https://doi.org/10.1080/00207728608926853">doi:10.1080/00207728608926853</a>.</p>
+</div>
+<div class="citation" id="id11" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>But03<span class="fn-bracket">]</span></span>
+<p>J. C. Butcher. <em>Numerical Methods for Ordinary Differential Equations</em>. John Wiley &amp; Sons, second edition, 2003. ISBN 978-0-471-96758-3. URL: <a class="reference external" href="https://doi.org/10.1002/0470868279">https://doi.org/10.1002/0470868279</a>, <a class="reference external" href="https://doi.org/10.1002/0470868279">doi:10.1002/0470868279</a>.</p>
+</div>
+<div class="citation" id="id68" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>But16<span class="fn-bracket">]</span></span>
+<p>John C. Butcher. <em>Numerical Methods for Ordinary Differential Equations</em>. John Wiley &amp; Sons, Chichester, UK, 3 edition, 2016. ISBN 978-1119121503. Chapter 3: Runge-Kutta Methods - Dormand-Prince RK45 method. <a class="reference external" href="https://doi.org/10.1002/9781119121534">doi:10.1002/9781119121534</a>.</p>
+</div>
+<div class="citation" id="id62" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CP99<span class="fn-bracket">]</span></span>
+<p>Jie Chen and Ron J. Patton. <em>Robust Model-Based Fault Diagnosis for Dynamic Systems</em>. Springer, Boston, MA, 1999. ISBN 978-1461272595. Probabilistic and deterministic threshold determination approaches. <a class="reference external" href="https://doi.org/10.1007/978-1-4615-5149-2">doi:10.1007/978-1-4615-5149-2</a>.</p>
+</div>
+<div class="citation" id="id36" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Cle06<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc. <em>Particle Swarm Optimization</em>. ISTE Ltd, London, UK, 2006. ISBN 978-1905209040. Chapter 4: Convergence Analysis - probabilistic convergence proofs.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CK02<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc and James Kennedy. The particle swarm - explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Transactions on Evolutionary Computation</em>, 6(1):58–73, 2002. Theorem 1: Stability conditions for PSO particle dynamics. <a class="reference external" href="https://doi.org/10.1109/4235.985692">doi:10.1109/4235.985692</a>.</p>
+</div>
+<div class="citation" id="id64" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Din08<span class="fn-bracket">]</span></span>
+<p>Steven X. Ding. <em>Model-based Fault Diagnosis Techniques: Design Schemes, Algorithms, and Tools</em>. Springer, Berlin, 2008. ISBN 978-3540763031. Adaptive and robust threshold design with optimal deadband selection. <a class="reference external" href="https://doi.org/10.1007/978-3-540-76304-8">doi:10.1007/978-3-540-76304-8</a>.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DP80<span class="fn-bracket">]</span></span>
+<p>J. R. Dormand and P. J. Prince. A family of embedded runge-kutta formulae. <em>Journal of Computational and Applied Mathematics</em>, 6(1):19–26, 1980. URL: <a class="reference external" href="https://doi.org/10.1016/0771-050X(80)90013-3">https://doi.org/10.1016/0771-050X(80)90013-3</a>, <a class="reference external" href="https://doi.org/10.1016/0771-050X(80)90013-3">doi:10.1016/0771-050X(80)90013-3</a>.</p>
+</div>
+<div class="citation" id="id24" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ES98<span class="fn-bracket">]</span></span>
+<p>Christopher Edwards and Sarah K. Spurgeon. <em>Sliding Mode Control: Theory and Applications</em>. CRC Press, Boca Raton, FL, 1998. ISBN 978-0748406012. Chapter 3: Sliding Surface Design - pole placement via surface parameters.</p>
+</div>
+<div class="citation" id="id47" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ESR25<span class="fn-bracket">]</span></span>
+<p>S. Ekanathan, O. Smith, and C. Rackauckas. A fully adaptive radau method for the efficient solution of stiff ordinary differential equations at low tolerances. arXiv preprint, 2025.</p>
+</div>
+<div class="citation" id="id30" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>FLMD20<span class="fn-bracket">]</span></span>
+<p>D. Freitas, L. G. Lopes, and F. Morgado-Dias. Particle swarm optimization: a historical review up to the current developments. <em>Entropy</em>, 22:362, 2020.</p>
+</div>
+<div class="citation" id="id17" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Gab25<span class="fn-bracket">]</span></span>
+<p>J. Gaber. Observer-free sliding mode control via structured decomposition: a smooth and bounded control framework. arXiv preprint, 2025.</p>
+</div>
+<div class="citation" id="id61" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Ger98<span class="fn-bracket">]</span></span>
+<p>Janos Gertler. <em>Fault Detection and Diagnosis in Engineering Systems</em>. CRC Press, Boca Raton, FL, 1998. ISBN 978-0824793517. Comprehensive treatment of threshold selection and hysteresis methods.</p>
+</div>
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GBZG22<span class="fn-bracket">]</span></span>
+<p>Z. Gong, Y. Ba, M. Zhang, and Y. Guo. Robust sliding mode control of the permanent magnet synchronous motor with an improved power reaching law. <em>Energies</em>, 15(5):1935, 2022.</p>
+</div>
+<div class="citation" id="id66" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HNW93<span class="fn-bracket">]</span></span>
+<p>Ernst Hairer, Syvert P. Nørsett, and Gerhard Wanner. <em>Solving Ordinary Differential Equations I: Nonstiff Problems</em>. Springer-Verlag, Berlin, 2 edition, 1993. ISBN 978-3540566700. Chapter II: Runge-Kutta and Extrapolation Methods - order conditions for explicit RK. <a class="reference external" href="https://doi.org/10.1007/978-3-540-78862-1">doi:10.1007/978-3-540-78862-1</a>.</p>
+</div>
+<div class="citation" id="id67" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HW96<span class="fn-bracket">]</span></span>
+<p>Ernst Hairer and Gerhard Wanner. <em>Solving Ordinary Differential Equations II: Stiff and Differential-Algebraic Problems</em>. Springer-Verlag, Berlin, 2 edition, 1996. ISBN 978-3540604525. Chapter IV: Stiff Problems - One-Step Methods, characterization of stiffness. <a class="reference external" href="https://doi.org/10.1007/978-3-642-05221-7">doi:10.1007/978-3-642-05221-7</a>.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Han98<span class="fn-bracket">]</span></span>
+<p>Per Christian Hansen. <em>Rank-Deficient and Discrete Ill-Posed Problems: Numerical Aspects of Linear Inversion</em>. Society for Industrial and Applied Mathematics, 1998. ISBN 978-0-89871-403-6. URL: <a class="reference external" href="https://doi.org/10.1137/1.9780898719697">https://doi.org/10.1137/1.9780898719697</a>, <a class="reference external" href="https://doi.org/10.1137/1.9780898719697">doi:10.1137/1.9780898719697</a>.</p>
+</div>
+<div class="citation" id="id8" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>H+24a<span class="fn-bracket">]</span></span>
+<p>Charles R. Harris and others. NumPy 1.26.0: the fundamental package for scientific computing with Python. 2024. Release 1.26.0. URL: <a class="reference external" href="https://github.com/numpy/numpy">https://github.com/numpy/numpy</a>, <a class="reference external" href="https://doi.org/10.1038/s41586-020-2649-2">doi:10.1038/s41586-020-2649-2</a>.</p>
+</div>
+<div class="citation" id="id45" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>H+24b<span class="fn-bracket">]</span></span>
+<p>Charles R. Harris and others. NumPy 1.26.0: the fundamental package for scientific computing with Python. 2024. Release 1.26.0. URL: <a class="reference external" href="https://github.com/numpy/numpy">https://github.com/numpy/numpy</a>, <a class="reference external" href="https://doi.org/10.1038/s41586-020-2649-2">doi:10.1038/s41586-020-2649-2</a>.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HYT08<span class="fn-bracket">]</span></span>
+<p>J. Huang, B. Yao, and G. Tao. Adaptive second-order sliding-mode control of nonlinear systems. <em>IEEE Transactions on Automatic Control</em>, 53(11):2689–2694, 2008.</p>
+</div>
+<div class="citation" id="id56" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>IK83<span class="fn-bracket">]</span></span>
+<p>Petros A. Ioannou and Petar V. Kokotovic. <em>Adaptive Systems with Reduced Models</em>. Springer-Verlag, New York, NY, 1983. ISBN 978-0387909868. <a class="reference external" href="https://doi.org/10.1007/BFb0006310">doi:10.1007/BFb0006310</a>.</p>
+</div>
+<div class="citation" id="id55" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>IS96<span class="fn-bracket">]</span></span>
+<p>Petros A. Ioannou and Jing Sun. <em>Robust Adaptive Control</em>. Prentice Hall, Upper Saddle River, NJ, 1996. ISBN 978-0133439717. Comprehensive treatment of robust adaptive laws with parameter projection.</p>
+</div>
+<div class="citation" id="id42" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>IIAS23<span class="fn-bracket">]</span></span>
+<p>I. Irfan, U. Irfan, M. W. Ahmad, and A. Saleem. Control strategies for a double inverted pendulum system. <em>PLOS ONE</em>, 18(3):e0282522, 2023.</p>
+</div>
+<div class="citation" id="id63" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Ise06<span class="fn-bracket">]</span></span>
+<p>Rolf Isermann. <em>Fault-Diagnosis Systems: An Introduction from Fault Detection to Fault Tolerance</em>. Springer, Berlin, 2006. ISBN 978-3540241126. Design guidelines for hysteresis thresholds and residual evaluation. <a class="reference external" href="https://doi.org/10.1007/3-540-30368-5">doi:10.1007/3-540-30368-5</a>.</p>
+</div>
+<div class="citation" id="id37" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JLY07<span class="fn-bracket">]</span></span>
+<p>Ming Jiang, Yun Ping Luo, and Shu Yan Yang. Stochastic convergence analysis and parameter selection of the standard particle swarm optimization algorithm. <em>Information Processing Letters</em>, 102(1):8–16, 2007. <a class="reference external" href="https://doi.org/10.1016/j.ipl.2006.10.005">doi:10.1016/j.ipl.2006.10.005</a>.</p>
+</div>
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95a<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. In <em>Proceedings of the IEEE International Conference on Neural Networks</em>, volume 4, 1942–1948. 1995. <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95b<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. <em>Proceedings of ICNN'95-international conference on neural networks</em>, 4:1942–1948, 1995. URL: <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a>, <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id48" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02a<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 978-0130673893. Chapter 4: Lyapunov Stability - Modern treatment of Lyapunov theory.</p>
+</div>
+<div class="citation" id="id40" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02b<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 0-13-067389-7. Third Edition.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KAT17<span class="fn-bracket">]</span></span>
+<p>A. Khan, A. Ahmed, and M. O. Tokhi. Robust particle swarm optimisation for uncertain dynamic systems. <em>IET Control Theory &amp; Applications</em>, 11(3):435–443, 2017.</p>
+</div>
+<div class="citation" id="id29" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev93<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Sliding order and sliding accuracy in sliding mode control. <em>International Journal of Control</em>, 58(6):1247–1263, 1993. <a class="reference external" href="https://doi.org/10.1080/00207179308923053">doi:10.1080/00207179308923053</a>.</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03a<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International Journal of Control</em>, 76(9–10):924–941, 2003. <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03b<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International journal of Control</em>, 76(9-10):924–941, 2003. URL: <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">https://doi.org/10.1080/0020717031000099029</a>, <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id27" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev07<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Principles of 2-sliding mode design. <em>Automatica</em>, 43(4):576–586, 2007. <a class="reference external" href="https://doi.org/10.1016/j.automatica.2006.10.008">doi:10.1016/j.automatica.2006.10.008</a>.</p>
+</div>
+<div class="citation" id="id49" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lya92<span class="fn-bracket">]</span></span>
+<p>Aleksandr Mikhailovich Lyapunov. <em>The General Problem of the Stability of Motion</em>. Taylor &amp; Francis, 1992. English translation of 1892 original doctoral thesis.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MLT13<span class="fn-bracket">]</span></span>
+<p>A. Messina, R. Lanzafame, and S. Tomarchio. Multi-objective optimal tuning of sliding mode controllers by evolutionary algorithms. <em>IEEE/ASME Transactions on Mechatronics</em>, 18(5):1446–1454, 2013.</p>
+</div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MO12<span class="fn-bracket">]</span></span>
+<p>Jaime A Moreno and Manuel Osorio. Strict lyapunov functions for the super-twisting algorithm. <em>IEEE Transactions on Automatic Control</em>, 57(4):1035–1040, 2012. URL: <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">https://doi.org/10.1109/TAC.2012.2186179</a>, <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">doi:10.1109/TAC.2012.2186179</a>.</p>
+</div>
+<div class="citation" id="id51" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MP06<span class="fn-bracket">]</span></span>
+<p>Emmanuel Moulay and Wilfrid Perruquetti. Finite time stability and stabilization of a class of continuous systems. <em>Journal of Mathematical Analysis and Applications</em>, 323(2):1430–1443, 2006. <a class="reference external" href="https://doi.org/10.1016/j.jmaa.2005.11.046">doi:10.1016/j.jmaa.2005.11.046</a>.</p>
+</div>
+<div class="citation" id="id57" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>NA05<span class="fn-bracket">]</span></span>
+<p>Kumpati S. Narendra and Anuradha M. Annaswamy. <em>Stable Adaptive Systems</em>. Dover Publications, Mineola, NY, 2005. ISBN 978-0486442266. Direct and indirect adaptive control with Lyapunov stability analysis.</p>
+</div>
+<div class="citation" id="id59" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PSBP10<span class="fn-bracket">]</span></span>
+<p>Franck Plestan, Yuri Shtessel, Vincent Brégeault, and Alexander Poznyak. New methodologies for adaptive sliding mode control. <em>International Journal of Control</em>, 83(9):1907–1919, 2010. <a class="reference external" href="https://doi.org/10.1080/00207179.2010.501385">doi:10.1080/00207179.2010.501385</a>.</p>
+</div>
+<div class="citation" id="id39" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PKB07<span class="fn-bracket">]</span></span>
+<p>Riccardo Poli, James Kennedy, and Tim Blackwell. Particle swarm optimization: an overview. <em>Swarm Intelligence</em>, 1(1):33–57, 2007. <a class="reference external" href="https://doi.org/10.1007/s11721-007-0002-0">doi:10.1007/s11721-007-0002-0</a>.</p>
+</div>
+<div class="citation" id="id52" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Pol12<span class="fn-bracket">]</span></span>
+<p>Andrey Polyakov. Nonlinear feedback design for fixed-time stabilization of linear controllable systems. <em>IEEE Transactions on Automatic Control</em>, 57(8):2106–2110, 2012. <a class="reference external" href="https://doi.org/10.1109/TAC.2011.2179869">doi:10.1109/TAC.2011.2179869</a>.</p>
+</div>
+<div class="citation" id="id60" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PP92<span class="fn-bracket">]</span></span>
+<p>Jean-Baptiste Pomet and Laurent Praly. Adaptive nonlinear regulation: estimation from the lyapunov equation. <em>IEEE Transactions on Automatic Control</em>, 37(6):729–740, 1992. <a class="reference external" href="https://doi.org/10.1109/9.256328">doi:10.1109/9.256328</a>.</p>
+</div>
+<div class="citation" id="id65" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PTVF07<span class="fn-bracket">]</span></span>
+<p>William H. Press, Saul A. Teukolsky, William T. Vetterling, and Brian P. Flannery. <em>Numerical Recipes: The Art of Scientific Computing</em>. Cambridge University Press, Cambridge, UK, 3 edition, 2007. ISBN 978-0521880688. Chapter 17: Integration of Ordinary Differential Equations - Runge-Kutta methods.</p>
+</div>
+<div class="citation" id="id46" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RKR08<span class="fn-bracket">]</span></span>
+<p>H. Raichle, C. Kanzow, and P. Rentrop. On the numerical solution of stiff odes arising in sliding mode control. <em>Automatica</em>, 44(12):3078–3083, 2008.</p>
+</div>
+<div class="citation" id="id38" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SE98<span class="fn-bracket">]</span></span>
+<p>Yuhui Shi and Russell Eberhart. A modified particle swarm optimizer. In <em>Proceedings of IEEE International Conference on Evolutionary Computation</em>, 69–73. 1998. <a class="reference external" href="https://doi.org/10.1109/ICEC.1998.699146">doi:10.1109/ICEC.1998.699146</a>.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SEFL14<span class="fn-bracket">]</span></span>
+<p>Yuri Shtessel, Christopher Edwards, Leonid Fridman, and Arie Levant. <em>Sliding Mode Control and Observation</em>. Birkh&quot;auser, New York, NY, 1 edition, 2014. ISBN 9780817648923. <a class="reference external" href="https://doi.org/10.1007/978-0-8176-4893-0">doi:10.1007/978-0-8176-4893-0</a>.</p>
+</div>
+<div class="citation" id="id23" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SS83<span class="fn-bracket">]</span></span>
+<p>J.-J. Slotine and S. Sastry. Tracking control of nonlinear systems using sliding surfaces. <em>International Journal of Control</em>, 38(2):465–492, 1983.</p>
+</div>
+<div class="citation" id="id2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91a<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E Slotine and Weiping Li. Applied nonlinear control. <em>Prentice Hall</em>, pages 1–461, 1991. URL: <a class="reference external" href="https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html">https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html</a>.</p>
+</div>
+<div class="citation" id="id58" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SC86<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and J. A. Coetsee. Adaptive sliding controller synthesis for non-linear systems. <em>International Journal of Control</em>, 43(6):1631–1651, 1986. <a class="reference external" href="https://doi.org/10.1080/00207178608933564">doi:10.1080/00207178608933564</a>.</p>
+</div>
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91b<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and Weiping Li. <em>Applied Nonlinear Control</em>. Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-040890-5.</p>
+</div>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Tre03<span class="fn-bracket">]</span></span>
+<p>Ioan Cristian Trelea. The particle swarm optimization algorithm: convergence analysis and parameter selection. <em>Information Processing Letters</em>, 85(6):317–325, 2003. <a class="reference external" href="https://doi.org/10.1016/S0020-0190(02)00447-7">doi:10.1016/S0020-0190(02)00447-7</a>.</p>
+</div>
+<div class="citation" id="id22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Utk77<span class="fn-bracket">]</span></span>
+<p>V. I. Utkin. Variable structure systems with sliding modes. <em>IEEE Transactions on Automatic Control</em>, 22(2):212–222, 1977.</p>
+</div>
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS09<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, J&quot;urgen Guldner, and Jingxin Shi. <em>Sliding Mode Control in Electro-Mechanical Systems</em>. CRC Press, Boca Raton, FL, 2 edition, 2009. Second edition. <a class="reference external" href="https://doi.org/10.1201/9781420065619">doi:10.1201/9781420065619</a>.</p>
+</div>
+<div class="citation" id="id3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS13<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, Jürgen Guldner, and Jingxin Shi. Sliding mode control. <em>Springer</em>, 2013. URL: <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">https://doi.org/10.1007/978-3-642-84379-2</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+<div class="citation" id="id25" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id553">Utk92</a><span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Utk93<span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. Sliding mode control design principles and applications to electric drives. <em>IEEE Transactions on Industrial Electronics</em>, 40(1):23–36, 1993. <a class="reference external" href="https://doi.org/10.1109/41.184818">doi:10.1109/41.184818</a>.</p>
+</div>
+<div class="citation" id="id35" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>vdBE06<span class="fn-bracket">]</span></span>
+<p>Frans van den Bergh and Andries P. Engelbrecht. A study of particle swarm optimization particle trajectories. <em>Information Sciences</em>, 176(8):937–971, 2006. <a class="reference external" href="https://doi.org/10.1016/j.ins.2005.02.003">doi:10.1016/j.ins.2005.02.003</a>.</p>
+</div>
+<div class="citation" id="id53" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Vid02<span class="fn-bracket">]</span></span>
+<p>Mathukumalli Vidyasagar. <em>Nonlinear Systems Analysis</em>. Society for Industrial and Applied Mathematics, Philadelphia, PA, 2 edition, 2002. ISBN 978-0898715262. <a class="reference external" href="https://doi.org/10.1137/1.9780898719185">doi:10.1137/1.9780898719185</a>.</p>
+</div>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>V+24a<span class="fn-bracket">]</span></span>
+<p>Pauli Virtanen and others. SciPy 1.11.0: fundamental algorithms for scientific computing. 2024. Release 1.11.0. URL: <a class="reference external" href="https://github.com/scipy/scipy">https://github.com/scipy/scipy</a>.</p>
+</div>
+<div class="citation" id="id44" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>V+24b<span class="fn-bracket">]</span></span>
+<p>Pauli Virtanen and others. SciPy 1.11.0: fundamental algorithms for scientific computing. 2024. Release 1.11.0. URL: <a class="reference external" href="https://github.com/scipy/scipy">https://github.com/scipy/scipy</a>.</p>
+</div>
+<div class="citation" id="id19" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>YMT07<span class="fn-bracket">]</span></span>
+<p>Y. Yang, M. Q.-H. Meng, and K. K. Tan. Adaptive sliding mode control for uncertain systems. <em>Automatica</em>, 43(2):201–207, 2007.</p>
+</div>
+<div class="citation" id="id28" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>YUO99<span class="fn-bracket">]</span></span>
+<p>K. David Young, Vadim I. Utkin, and Ümit Özgüner. A control engineer's guide to sliding mode control. <em>IEEE Transactions on Control Systems Technology</em>, 7(3):328–342, 1999. <a class="reference external" href="https://doi.org/10.1109/87.761053">doi:10.1109/87.761053</a>.</p>
+</div>
+<div class="citation" id="id43" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ZRock01<span class="fn-bracket">]</span></span>
+<p>W. Zhong and H. R&quot;ock. Energy and passivity based control of the double inverted pendulum on a cart. In <em>Proceedings of the 2001 IEEE International Conference on Control Applications</em>, 896–901. Mexico City, 2001.</p>
+</div>
+<div class="citation" id="id54" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AW95<span class="fn-bracket">]</span></span>
+<p>Karl Johan Åström and Björn Wittenmark. <em>Adaptive Control</em>. Dover Publications, Mineola, NY, 2 edition, 1995. ISBN 978-0486462783. Classic text on model reference adaptive systems and parameter estimation.</p>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="references-by-category">
+<h2>References by Category<a class="headerlink" href="#references-by-category" title="Link to this heading">¶</a></h2>
+<section id="sliding-mode-control-theory">
+<h3>Sliding Mode Control Theory<a class="headerlink" href="#sliding-mode-control-theory" title="Link to this heading">¶</a></h3>
+<p>Foundational and advanced SMC techniques including classical, super-twisting, adaptive, and hybrid controllers.</p>
+<div class="docutils container" id="id70">
+<div role="list" class="citation-list">
+<div class="citation" id="id102" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CK02<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc and James Kennedy. The particle swarm - explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Transactions on Evolutionary Computation</em>, 6(1):58–73, 2002. Theorem 1: Stability conditions for PSO particle dynamics. <a class="reference external" href="https://doi.org/10.1109/4235.985692">doi:10.1109/4235.985692</a>.</p>
+</div>
+<div class="citation" id="id100" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95a<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. In <em>Proceedings of the IEEE International Conference on Neural Networks</em>, volume 4, 1942–1948. 1995. <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id74" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95b<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. <em>Proceedings of ICNN'95-international conference on neural networks</em>, 4:1942–1948, 1995. URL: <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a>, <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id117" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02a<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 978-0130673893. Chapter 4: Lyapunov Stability - Modern treatment of Lyapunov theory.</p>
+</div>
+<div class="citation" id="id109" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02b<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 0-13-067389-7. Third Edition.</p>
+</div>
+<div class="citation" id="id83" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03a<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International Journal of Control</em>, 76(9–10):924–941, 2003. <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id75" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03b<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International journal of Control</em>, 76(9-10):924–941, 2003. URL: <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">https://doi.org/10.1080/0020717031000099029</a>, <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id73" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MO12<span class="fn-bracket">]</span></span>
+<p>Jaime A Moreno and Manuel Osorio. Strict lyapunov functions for the super-twisting algorithm. <em>IEEE Transactions on Automatic Control</em>, 57(4):1035–1040, 2012. URL: <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">https://doi.org/10.1109/TAC.2012.2186179</a>, <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">doi:10.1109/TAC.2012.2186179</a>.</p>
+</div>
+<div class="citation" id="id71" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91a<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E Slotine and Weiping Li. Applied nonlinear control. <em>Prentice Hall</em>, pages 1–461, 1991. URL: <a class="reference external" href="https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html">https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html</a>.</p>
+</div>
+<div class="citation" id="id81" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91b<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and Weiping Li. <em>Applied Nonlinear Control</em>. Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-040890-5.</p>
+</div>
+<div class="citation" id="id82" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS09<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, J&quot;urgen Guldner, and Jingxin Shi. <em>Sliding Mode Control in Electro-Mechanical Systems</em>. CRC Press, Boca Raton, FL, 2 edition, 2009. Second edition. <a class="reference external" href="https://doi.org/10.1201/9781420065619">doi:10.1201/9781420065619</a>.</p>
+</div>
+<div class="citation" id="id94" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id553">Utk92</a><span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pso-optimization-theory">
+<h3>PSO Optimization Theory<a class="headerlink" href="#pso-optimization-theory" title="Link to this heading">¶</a></h3>
+<p>Particle swarm optimization theory, convergence analysis, and parameter tuning methods.</p>
+<div class="docutils container" id="id139">
+<div role="list" class="citation-list">
+<div class="citation" id="id171" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CK02<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc and James Kennedy. The particle swarm - explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Transactions on Evolutionary Computation</em>, 6(1):58–73, 2002. Theorem 1: Stability conditions for PSO particle dynamics. <a class="reference external" href="https://doi.org/10.1109/4235.985692">doi:10.1109/4235.985692</a>.</p>
+</div>
+<div class="citation" id="id169" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95a<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. In <em>Proceedings of the IEEE International Conference on Neural Networks</em>, volume 4, 1942–1948. 1995. <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id143" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95b<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. <em>Proceedings of ICNN'95-international conference on neural networks</em>, 4:1942–1948, 1995. URL: <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a>, <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id186" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02a<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 978-0130673893. Chapter 4: Lyapunov Stability - Modern treatment of Lyapunov theory.</p>
+</div>
+<div class="citation" id="id178" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02b<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 0-13-067389-7. Third Edition.</p>
+</div>
+<div class="citation" id="id152" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03a<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International Journal of Control</em>, 76(9–10):924–941, 2003. <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id144" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03b<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International journal of Control</em>, 76(9-10):924–941, 2003. URL: <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">https://doi.org/10.1080/0020717031000099029</a>, <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id142" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MO12<span class="fn-bracket">]</span></span>
+<p>Jaime A Moreno and Manuel Osorio. Strict lyapunov functions for the super-twisting algorithm. <em>IEEE Transactions on Automatic Control</em>, 57(4):1035–1040, 2012. URL: <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">https://doi.org/10.1109/TAC.2012.2186179</a>, <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">doi:10.1109/TAC.2012.2186179</a>.</p>
+</div>
+<div class="citation" id="id140" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91a<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E Slotine and Weiping Li. Applied nonlinear control. <em>Prentice Hall</em>, pages 1–461, 1991. URL: <a class="reference external" href="https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html">https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html</a>.</p>
+</div>
+<div class="citation" id="id150" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91b<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and Weiping Li. <em>Applied Nonlinear Control</em>. Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-040890-5.</p>
+</div>
+<div class="citation" id="id151" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS09<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, J&quot;urgen Guldner, and Jingxin Shi. <em>Sliding Mode Control in Electro-Mechanical Systems</em>. CRC Press, Boca Raton, FL, 2 edition, 2009. Second edition. <a class="reference external" href="https://doi.org/10.1201/9781420065619">doi:10.1201/9781420065619</a>.</p>
+</div>
+<div class="citation" id="id163" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id553">Utk92</a><span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="stability-theory">
+<h3>Stability Theory<a class="headerlink" href="#stability-theory" title="Link to this heading">¶</a></h3>
+<p>Lyapunov stability, finite-time stability, and fixed-time stability analysis.</p>
+<div class="docutils container" id="id208">
+<div role="list" class="citation-list">
+<div class="citation" id="id240" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CK02<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc and James Kennedy. The particle swarm - explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Transactions on Evolutionary Computation</em>, 6(1):58–73, 2002. Theorem 1: Stability conditions for PSO particle dynamics. <a class="reference external" href="https://doi.org/10.1109/4235.985692">doi:10.1109/4235.985692</a>.</p>
+</div>
+<div class="citation" id="id238" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95a<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. In <em>Proceedings of the IEEE International Conference on Neural Networks</em>, volume 4, 1942–1948. 1995. <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id212" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95b<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. <em>Proceedings of ICNN'95-international conference on neural networks</em>, 4:1942–1948, 1995. URL: <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a>, <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id255" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02a<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 978-0130673893. Chapter 4: Lyapunov Stability - Modern treatment of Lyapunov theory.</p>
+</div>
+<div class="citation" id="id247" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02b<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 0-13-067389-7. Third Edition.</p>
+</div>
+<div class="citation" id="id221" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03a<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International Journal of Control</em>, 76(9–10):924–941, 2003. <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id213" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03b<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International journal of Control</em>, 76(9-10):924–941, 2003. URL: <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">https://doi.org/10.1080/0020717031000099029</a>, <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id211" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MO12<span class="fn-bracket">]</span></span>
+<p>Jaime A Moreno and Manuel Osorio. Strict lyapunov functions for the super-twisting algorithm. <em>IEEE Transactions on Automatic Control</em>, 57(4):1035–1040, 2012. URL: <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">https://doi.org/10.1109/TAC.2012.2186179</a>, <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">doi:10.1109/TAC.2012.2186179</a>.</p>
+</div>
+<div class="citation" id="id209" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91a<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E Slotine and Weiping Li. Applied nonlinear control. <em>Prentice Hall</em>, pages 1–461, 1991. URL: <a class="reference external" href="https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html">https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html</a>.</p>
+</div>
+<div class="citation" id="id219" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91b<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and Weiping Li. <em>Applied Nonlinear Control</em>. Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-040890-5.</p>
+</div>
+<div class="citation" id="id220" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS09<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, J&quot;urgen Guldner, and Jingxin Shi. <em>Sliding Mode Control in Electro-Mechanical Systems</em>. CRC Press, Boca Raton, FL, 2 edition, 2009. Second edition. <a class="reference external" href="https://doi.org/10.1201/9781420065619">doi:10.1201/9781420065619</a>.</p>
+</div>
+<div class="citation" id="id232" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id553">Utk92</a><span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="adaptive-control-theory">
+<h3>Adaptive Control Theory<a class="headerlink" href="#adaptive-control-theory" title="Link to this heading">¶</a></h3>
+<p>Model reference adaptive systems, robust adaptive laws, and parameter estimation.</p>
+<div class="docutils container" id="id277">
+<div role="list" class="citation-list">
+<div class="citation" id="id309" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CK02<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc and James Kennedy. The particle swarm - explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Transactions on Evolutionary Computation</em>, 6(1):58–73, 2002. Theorem 1: Stability conditions for PSO particle dynamics. <a class="reference external" href="https://doi.org/10.1109/4235.985692">doi:10.1109/4235.985692</a>.</p>
+</div>
+<div class="citation" id="id307" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95a<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. In <em>Proceedings of the IEEE International Conference on Neural Networks</em>, volume 4, 1942–1948. 1995. <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id281" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95b<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. <em>Proceedings of ICNN'95-international conference on neural networks</em>, 4:1942–1948, 1995. URL: <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a>, <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id324" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02a<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 978-0130673893. Chapter 4: Lyapunov Stability - Modern treatment of Lyapunov theory.</p>
+</div>
+<div class="citation" id="id316" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02b<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 0-13-067389-7. Third Edition.</p>
+</div>
+<div class="citation" id="id290" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03a<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International Journal of Control</em>, 76(9–10):924–941, 2003. <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id282" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03b<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International journal of Control</em>, 76(9-10):924–941, 2003. URL: <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">https://doi.org/10.1080/0020717031000099029</a>, <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id280" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MO12<span class="fn-bracket">]</span></span>
+<p>Jaime A Moreno and Manuel Osorio. Strict lyapunov functions for the super-twisting algorithm. <em>IEEE Transactions on Automatic Control</em>, 57(4):1035–1040, 2012. URL: <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">https://doi.org/10.1109/TAC.2012.2186179</a>, <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">doi:10.1109/TAC.2012.2186179</a>.</p>
+</div>
+<div class="citation" id="id278" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91a<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E Slotine and Weiping Li. Applied nonlinear control. <em>Prentice Hall</em>, pages 1–461, 1991. URL: <a class="reference external" href="https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html">https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html</a>.</p>
+</div>
+<div class="citation" id="id288" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91b<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and Weiping Li. <em>Applied Nonlinear Control</em>. Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-040890-5.</p>
+</div>
+<div class="citation" id="id289" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS09<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, J&quot;urgen Guldner, and Jingxin Shi. <em>Sliding Mode Control in Electro-Mechanical Systems</em>. CRC Press, Boca Raton, FL, 2 edition, 2009. Second edition. <a class="reference external" href="https://doi.org/10.1201/9781420065619">doi:10.1201/9781420065619</a>.</p>
+</div>
+<div class="citation" id="id301" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id553">Utk92</a><span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="fault-detection-isolation">
+<h3>Fault Detection &amp; Isolation<a class="headerlink" href="#fault-detection-isolation" title="Link to this heading">¶</a></h3>
+<p>Threshold selection, hysteresis methods, and robust fault diagnosis techniques.</p>
+<div class="docutils container" id="id346">
+<div role="list" class="citation-list">
+<div class="citation" id="id378" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CK02<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc and James Kennedy. The particle swarm - explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Transactions on Evolutionary Computation</em>, 6(1):58–73, 2002. Theorem 1: Stability conditions for PSO particle dynamics. <a class="reference external" href="https://doi.org/10.1109/4235.985692">doi:10.1109/4235.985692</a>.</p>
+</div>
+<div class="citation" id="id376" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95a<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. In <em>Proceedings of the IEEE International Conference on Neural Networks</em>, volume 4, 1942–1948. 1995. <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id350" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95b<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. <em>Proceedings of ICNN'95-international conference on neural networks</em>, 4:1942–1948, 1995. URL: <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a>, <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id393" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02a<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 978-0130673893. Chapter 4: Lyapunov Stability - Modern treatment of Lyapunov theory.</p>
+</div>
+<div class="citation" id="id385" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02b<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 0-13-067389-7. Third Edition.</p>
+</div>
+<div class="citation" id="id359" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03a<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International Journal of Control</em>, 76(9–10):924–941, 2003. <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id351" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03b<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International journal of Control</em>, 76(9-10):924–941, 2003. URL: <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">https://doi.org/10.1080/0020717031000099029</a>, <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id349" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MO12<span class="fn-bracket">]</span></span>
+<p>Jaime A Moreno and Manuel Osorio. Strict lyapunov functions for the super-twisting algorithm. <em>IEEE Transactions on Automatic Control</em>, 57(4):1035–1040, 2012. URL: <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">https://doi.org/10.1109/TAC.2012.2186179</a>, <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">doi:10.1109/TAC.2012.2186179</a>.</p>
+</div>
+<div class="citation" id="id347" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91a<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E Slotine and Weiping Li. Applied nonlinear control. <em>Prentice Hall</em>, pages 1–461, 1991. URL: <a class="reference external" href="https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html">https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html</a>.</p>
+</div>
+<div class="citation" id="id357" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91b<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and Weiping Li. <em>Applied Nonlinear Control</em>. Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-040890-5.</p>
+</div>
+<div class="citation" id="id358" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS09<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, J&quot;urgen Guldner, and Jingxin Shi. <em>Sliding Mode Control in Electro-Mechanical Systems</em>. CRC Press, Boca Raton, FL, 2 edition, 2009. Second edition. <a class="reference external" href="https://doi.org/10.1201/9781420065619">doi:10.1201/9781420065619</a>.</p>
+</div>
+<div class="citation" id="id370" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id553">Utk92</a><span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="numerical-methods">
+<h3>Numerical Methods<a class="headerlink" href="#numerical-methods" title="Link to this heading">¶</a></h3>
+<p>Runge-Kutta integration, stiff ODE solvers, and numerical stability analysis.</p>
+<div class="docutils container" id="id415">
+<div role="list" class="citation-list">
+<div class="citation" id="id447" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CK02<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc and James Kennedy. The particle swarm - explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Transactions on Evolutionary Computation</em>, 6(1):58–73, 2002. Theorem 1: Stability conditions for PSO particle dynamics. <a class="reference external" href="https://doi.org/10.1109/4235.985692">doi:10.1109/4235.985692</a>.</p>
+</div>
+<div class="citation" id="id445" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95a<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. In <em>Proceedings of the IEEE International Conference on Neural Networks</em>, volume 4, 1942–1948. 1995. <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id419" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95b<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. <em>Proceedings of ICNN'95-international conference on neural networks</em>, 4:1942–1948, 1995. URL: <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a>, <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id462" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02a<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 978-0130673893. Chapter 4: Lyapunov Stability - Modern treatment of Lyapunov theory.</p>
+</div>
+<div class="citation" id="id454" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02b<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 0-13-067389-7. Third Edition.</p>
+</div>
+<div class="citation" id="id428" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03a<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International Journal of Control</em>, 76(9–10):924–941, 2003. <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id420" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03b<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International journal of Control</em>, 76(9-10):924–941, 2003. URL: <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">https://doi.org/10.1080/0020717031000099029</a>, <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id418" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MO12<span class="fn-bracket">]</span></span>
+<p>Jaime A Moreno and Manuel Osorio. Strict lyapunov functions for the super-twisting algorithm. <em>IEEE Transactions on Automatic Control</em>, 57(4):1035–1040, 2012. URL: <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">https://doi.org/10.1109/TAC.2012.2186179</a>, <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">doi:10.1109/TAC.2012.2186179</a>.</p>
+</div>
+<div class="citation" id="id416" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91a<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E Slotine and Weiping Li. Applied nonlinear control. <em>Prentice Hall</em>, pages 1–461, 1991. URL: <a class="reference external" href="https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html">https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html</a>.</p>
+</div>
+<div class="citation" id="id426" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91b<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and Weiping Li. <em>Applied Nonlinear Control</em>. Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-040890-5.</p>
+</div>
+<div class="citation" id="id427" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS09<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, J&quot;urgen Guldner, and Jingxin Shi. <em>Sliding Mode Control in Electro-Mechanical Systems</em>. CRC Press, Boca Raton, FL, 2 edition, 2009. Second edition. <a class="reference external" href="https://doi.org/10.1201/9781420065619">doi:10.1201/9781420065619</a>.</p>
+</div>
+<div class="citation" id="id439" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id553">Utk92</a><span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="software-tools">
+<h3>Software &amp; Tools<a class="headerlink" href="#software-tools" title="Link to this heading">¶</a></h3>
+<p>Python scientific computing libraries and numerical computation frameworks.</p>
+<div class="docutils container" id="id484">
+<div role="list" class="citation-list">
+<div class="citation" id="id516" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CK02<span class="fn-bracket">]</span></span>
+<p>Maurice Clerc and James Kennedy. The particle swarm - explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Transactions on Evolutionary Computation</em>, 6(1):58–73, 2002. Theorem 1: Stability conditions for PSO particle dynamics. <a class="reference external" href="https://doi.org/10.1109/4235.985692">doi:10.1109/4235.985692</a>.</p>
+</div>
+<div class="citation" id="id514" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95a<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. In <em>Proceedings of the IEEE International Conference on Neural Networks</em>, volume 4, 1942–1948. 1995. <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id488" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KE95b<span class="fn-bracket">]</span></span>
+<p>James Kennedy and Russell Eberhart. Particle swarm optimization. <em>Proceedings of ICNN'95-international conference on neural networks</em>, 4:1942–1948, 1995. URL: <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a>, <a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">doi:10.1109/ICNN.1995.488968</a>.</p>
+</div>
+<div class="citation" id="id531" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02a<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 978-0130673893. Chapter 4: Lyapunov Stability - Modern treatment of Lyapunov theory.</p>
+</div>
+<div class="citation" id="id523" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kha02b<span class="fn-bracket">]</span></span>
+<p>Hassan K. Khalil. <em>Nonlinear Systems</em>. Prentice Hall, Upper Saddle River, NJ, 3 edition, 2002. ISBN 0-13-067389-7. Third Edition.</p>
+</div>
+<div class="citation" id="id497" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03a<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International Journal of Control</em>, 76(9–10):924–941, 2003. <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id489" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lev03b<span class="fn-bracket">]</span></span>
+<p>Arie Levant. Higher-order sliding modes, differentiation and output-feedback control. <em>International journal of Control</em>, 76(9-10):924–941, 2003. URL: <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">https://doi.org/10.1080/0020717031000099029</a>, <a class="reference external" href="https://doi.org/10.1080/0020717031000099029">doi:10.1080/0020717031000099029</a>.</p>
+</div>
+<div class="citation" id="id487" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MO12<span class="fn-bracket">]</span></span>
+<p>Jaime A Moreno and Manuel Osorio. Strict lyapunov functions for the super-twisting algorithm. <em>IEEE Transactions on Automatic Control</em>, 57(4):1035–1040, 2012. URL: <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">https://doi.org/10.1109/TAC.2012.2186179</a>, <a class="reference external" href="https://doi.org/10.1109/TAC.2012.2186179">doi:10.1109/TAC.2012.2186179</a>.</p>
+</div>
+<div class="citation" id="id485" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91a<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E Slotine and Weiping Li. Applied nonlinear control. <em>Prentice Hall</em>, pages 1–461, 1991. URL: <a class="reference external" href="https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html">https://www.pearson.com/us/higher-education/program/Slotine-Applied-Nonlinear-Control/PGM94140.html</a>.</p>
+</div>
+<div class="citation" id="id495" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL91b<span class="fn-bracket">]</span></span>
+<p>Jean-Jacques E. Slotine and Weiping Li. <em>Applied Nonlinear Control</em>. Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-040890-5.</p>
+</div>
+<div class="citation" id="id496" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>UGS09<span class="fn-bracket">]</span></span>
+<p>Vadim Utkin, J&quot;urgen Guldner, and Jingxin Shi. <em>Sliding Mode Control in Electro-Mechanical Systems</em>. CRC Press, Boca Raton, FL, 2 edition, 2009. Second edition. <a class="reference external" href="https://doi.org/10.1201/9781420065619">doi:10.1201/9781420065619</a>.</p>
+</div>
+<div class="citation" id="id508" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id553">Utk92</a><span class="fn-bracket">]</span></span>
+<p>Vadim I. Utkin. <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. <a class="reference external" href="https://doi.org/10.1007/978-3-642-84379-2">doi:10.1007/978-3-642-84379-2</a>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">¶</a></h2>
+<p>For detailed attribution with exact page numbers and theorem references:</p>
+<ul class="simple">
+<li><p><span class="xref std std-doc">../CITATIONS_ACADEMIC</span> - Academic theory citations linked to exact locations in codebase</p></li>
+<li><p><span class="xref std std-doc">../DEPENDENCIES</span> - Software library citations and licenses</p></li>
+<li><p><span class="xref std std-doc">../PATTERNS</span> - Design pattern attribution and architectural decisions</p></li>
+<li><p><span class="xref std std-doc">../CITATIONS</span> - Master citation index and quick reference guide</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="citation-usage-in-documentation">
+<h2>Citation Usage in Documentation<a class="headerlink" href="#citation-usage-in-documentation" title="Link to this heading">¶</a></h2>
+<p>To cite a reference in your documentation, use the <code class="docutils literal notranslate"><span class="pre">{cite}</span></code> role:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>See {cite}`smc_utkin_1992_sliding_modes` for the original sliding mode formulation.
+
+Multiple citations: {cite}`pso_kennedy_1995_particle_swarm_optimization,pso_clerc_2002_particle_swarm`
+</pre></div>
+</div>
+<p><strong>Example output:</strong></p>
+<p>See <span id="id553">[<a class="reference internal" href="references/bibliography.html#id455" title="Vadim I. Utkin. Sliding Modes in Control and Optimization. Springer-Verlag, Berlin, 1992. ISBN 978-3642843792. Chapter 2: Sliding Mode Equations - exponential stability for linear sliding surfaces. doi:10.1007/978-3-642-84379-2.">Utk92</a>]</span> for the original sliding mode formulation.</p>
+</section>
+<hr class="docutils" />
+<section id="bibtex-source-files">
+<h2>BibTeX Source Files<a class="headerlink" href="#bibtex-source-files" title="Link to this heading">¶</a></h2>
+<p>The bibliography is generated from the following BibTeX files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">refs.bib</span></code> - Main bibliography</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bib/smc.bib</span></code> - Sliding mode control references</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bib/pso.bib</span></code> - PSO optimization references</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bib/stability.bib</span></code> - Lyapunov and stability theory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bib/adaptive.bib</span></code> - Adaptive control theory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bib/fdi.bib</span></code> - Fault detection and isolation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bib/numerical.bib</span></code> - Numerical methods and integration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bib/software.bib</span></code> - Software and tools</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bib/dip.bib</span></code> - Double inverted pendulum references</p></li>
+</ul>
+<p>All BibTeX files are located in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> and <code class="docutils literal notranslate"><span class="pre">docs/bib/</span></code> directories.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="CONTRIBUTING.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Contributing – ResearchPlanSpec Validation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="examples/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Examples</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Bibliography &amp; Academic References</a><ul>
+<li><a class="reference internal" href="#complete-bibliography">Complete Bibliography</a></li>
+<li><a class="reference internal" href="#references-by-category">References by Category</a><ul>
+<li><a class="reference internal" href="#sliding-mode-control-theory">Sliding Mode Control Theory</a></li>
+<li><a class="reference internal" href="#pso-optimization-theory">PSO Optimization Theory</a></li>
+<li><a class="reference internal" href="#stability-theory">Stability Theory</a></li>
+<li><a class="reference internal" href="#adaptive-control-theory">Adaptive Control Theory</a></li>
+<li><a class="reference internal" href="#fault-detection-isolation">Fault Detection &amp; Isolation</a></li>
+<li><a class="reference internal" href="#numerical-methods">Numerical Methods</a></li>
+<li><a class="reference internal" href="#software-tools">Software &amp; Tools</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#see-also">See Also</a></li>
+<li><a class="reference internal" href="#citation-usage-in-documentation">Citation Usage in Documentation</a></li>
+<li><a class="reference internal" href="#bibtex-source-files">BibTeX Source Files</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=08e7b316"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/back-to-top.js?v=840797bb"></script>
+    <script src="_static/lazy-load.js?v=dc25293c"></script>
+    <script src="_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

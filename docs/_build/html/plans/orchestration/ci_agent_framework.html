@@ -1,0 +1,1349 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>CI Agent Orchestration Framework - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/plans/orchestration/ci_agent_framework.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/plans/orchestration/ci_agent_framework.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="ci-agent-orchestration-framework">
+<h1>CI Agent Orchestration Framework<a class="headerlink" href="#ci-agent-orchestration-framework" title="Link to this heading">¶</a></h1>
+<p><strong>Document Version:</strong> 1.0.0
+<strong>Created:</strong> 2025-01-15
+<strong>Purpose:</strong> Multi-agent CI orchestration system for Windows PowerShell environments</p>
+<hr class="docutils" />
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#architecture-overview">Architecture Overview</a></p></li>
+<li><p><a class="reference internal" href="#agent-selection-decision-tree">Agent Selection Decision Tree</a></p></li>
+<li><p><a class="reference internal" href="#artifact-schema-design">Artifact Schema Design</a></p></li>
+<li><p><a class="reference internal" href="#windows-powershell-integration">Windows PowerShell Integration</a></p></li>
+<li><p><a class="reference internal" href="#usage-examples">Usage Examples</a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="architecture-overview">
+<h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Link to this heading">¶</a></h2>
+<section id="hub-and-spoke-with-minimal-coupling">
+<h3><strong>Hub-and-Spoke with Minimal Coupling</strong><a class="headerlink" href="#hub-and-spoke-with-minimal-coupling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>                    <span class="err">┌─────────────────────────┐</span>
+                    <span class="err">│</span> <span class="n">Ultimate</span> <span class="n">Orchestrator</span>   <span class="err">│</span>
+                    <span class="err">│</span> <span class="p">(</span><span class="n">Headless</span> <span class="n">CI</span> <span class="n">Agent</span><span class="p">)</span>     <span class="err">│</span>
+                    <span class="err">└───────────┬─────────────┘</span>
+                                <span class="err">│</span>
+                    <span class="err">┌───────────┴───────────┐</span>
+                    <span class="err">│</span>  <span class="n">Delegation</span> <span class="n">Layer</span>     <span class="err">│</span>
+                    <span class="err">│</span>  <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="mi">4</span> <span class="n">subagents</span><span class="p">)</span>      <span class="err">│</span>
+                    <span class="err">└───────────┬───────────┘</span>
+                                <span class="err">│</span>
+        <span class="err">┌───────────────────────┼───────────────────────┐</span>
+        <span class="err">│</span>                       <span class="err">│</span>                       <span class="err">│</span>
+   <span class="err">┌────▼────┐</span>           <span class="err">┌─────▼─────┐</span>          <span class="err">┌─────▼─────┐</span>
+   <span class="err">│</span> <span class="n">Agent</span> <span class="mi">1</span> <span class="err">│</span>           <span class="err">│</span>  <span class="n">Agent</span> <span class="mi">2</span>  <span class="err">│</span>          <span class="err">│</span>  <span class="n">Agent</span> <span class="mi">3</span>  <span class="err">│</span>
+   <span class="err">│</span> <span class="p">(</span><span class="n">Reused</span><span class="p">)</span><span class="err">│</span>           <span class="err">│</span> <span class="p">(</span><span class="n">Reused</span><span class="p">)</span>  <span class="err">│</span>          <span class="err">│</span>  <span class="p">(</span><span class="n">New</span><span class="err">?</span><span class="p">)</span>   <span class="err">│</span>
+   <span class="err">└────┬────┘</span>           <span class="err">└─────┬─────┘</span>          <span class="err">└─────┬─────┘</span>
+        <span class="err">│</span>                      <span class="err">│</span>                       <span class="err">│</span>
+        <span class="err">└──────────────────────┼───────────────────────┘</span>
+                               <span class="err">│</span>
+                    <span class="err">┌──────────▼──────────┐</span>
+                    <span class="err">│</span> <span class="n">Artifact</span> <span class="n">Integration</span><span class="err">│</span>
+                    <span class="err">│</span> <span class="p">(</span><span class="n">JSON</span> <span class="o">+</span> <span class="n">Patches</span><span class="p">)</span>    <span class="err">│</span>
+                    <span class="err">└─────────────────────┘</span>
+</pre></div>
+</div>
+</section>
+<section id="core-design-principles">
+<h3><strong>Core Design Principles</strong><a class="headerlink" href="#core-design-principles" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Reuse First, Create When Justified</strong></p>
+<ul class="simple">
+<li><p>Existing agents cover 80% of common tasks</p></li>
+<li><p>Create new agents only for skill gaps &gt;30%</p></li>
+</ul>
+</li>
+<li><p><strong>Minimal Coupling</strong></p>
+<ul class="simple">
+<li><p>Agents work independently on non-overlapping tasks</p></li>
+<li><p>Shared artifact contracts prevent tight dependencies</p></li>
+<li><p>Orchestrator handles conflict resolution</p></li>
+</ul>
+</li>
+<li><p><strong>Parallelization Opportunities</strong></p>
+<ul class="simple">
+<li><p>2-4 agents can work concurrently</p></li>
+<li><p>Speedup: 1.5x-2x vs sequential execution</p></li>
+<li><p>Token efficiency: Reusing existing agents minimizes context</p></li>
+</ul>
+</li>
+<li><p><strong>Windows-First Design</strong></p>
+<ul class="simple">
+<li><p>PowerShell command templates</p></li>
+<li><p>Path handling (<code class="docutils literal notranslate"><span class="pre">\</span></code> separators)</p></li>
+<li><p>Environment-specific validation</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="agent-selection-decision-tree">
+<h2>Agent Selection Decision Tree<a class="headerlink" href="#agent-selection-decision-tree" title="Link to this heading">¶</a></h2>
+<section id="available-agent-pool">
+<h3><strong>Available Agent Pool</strong><a class="headerlink" href="#available-agent-pool" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Agent</p></th>
+<th class="head"><p>Skills</p></th>
+<th class="head"><p>Typical Duration</p></th>
+<th class="head"><p>Parallelization</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Integration Coordinator</strong></p></td>
+<td><p>Cross-domain orchestration, system health, config validation, debugging</p></td>
+<td><p>30-90min</p></td>
+<td><p>Medium</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Control Systems Specialist</strong></p></td>
+<td><p>SMC design, stability analysis, Lyapunov functions, controller implementation</p></td>
+<td><p>45-120min</p></td>
+<td><p>Low</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PSO Optimization Engineer</strong></p></td>
+<td><p>PSO tuning, convergence analysis, multi-objective optimization, fitness design</p></td>
+<td><p>60-180min</p></td>
+<td><p>Medium</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Documentation Expert</strong></p></td>
+<td><p>LaTeX math, Sphinx docs, API documentation, scientific writing, citations</p></td>
+<td><p>30-90min</p></td>
+<td><p>High</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Code Beautification Specialist</strong></p></td>
+<td><p>ASCII headers, type hints, directory organization, PEP 8, architecture patterns</p></td>
+<td><p>20-60min</p></td>
+<td><p>High</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="decision-matrix-reuse-vs-create">
+<h3><strong>Decision Matrix: Reuse vs Create</strong><a class="headerlink" href="#decision-matrix-reuse-vs-create" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AgentSelectionStrategy</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decision framework for optimal agent configuration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">should_reuse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">issue_requirements</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate skill match scores for existing agents.</span>
+
+<span class="sd">        Returns: {agent_name: match_score (0.0-1.0)}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">agent_name</span><span class="p">,</span> <span class="n">agent_spec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">EXISTING_AGENTS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">agent_skills</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">agent_spec</span><span class="p">[</span><span class="s1">&#39;skills&#39;</span><span class="p">])</span>
+
+            <span class="c1"># Jaccard similarity</span>
+            <span class="n">intersection</span> <span class="o">=</span> <span class="n">issue_requirements</span> <span class="o">&amp;</span> <span class="n">agent_skills</span>
+            <span class="n">union</span> <span class="o">=</span> <span class="n">issue_requirements</span> <span class="o">|</span> <span class="n">agent_skills</span>
+
+            <span class="n">scores</span><span class="p">[</span><span class="n">agent_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersection</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">union</span><span class="p">)</span> <span class="k">if</span> <span class="n">union</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+        <span class="k">return</span> <span class="n">scores</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">should_create_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">best_match_score</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                         <span class="n">workload_estimate</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create new agent if:</span>
+<span class="sd">        1. Skill gap &gt; 30% (best_match &lt; 0.7)</span>
+<span class="sd">        2. Throughput gap: workload &gt; 4 hours AND parallelizable</span>
+<span class="sd">        3. Policy gap: CLAUDE.md mandates specialist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">best_match_score</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;create&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="s1">&#39;SKILL_GAP&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;blocking&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;justification&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;No existing agent covers &gt;70% of required skills&#39;</span>
+            <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">workload_estimate</span> <span class="o">&gt;</span> <span class="mi">240</span><span class="p">:</span>  <span class="c1"># 4 hours</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;create&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="s1">&#39;THROUGHPUT_GAP&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;blocking&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Can proceed slower</span>
+                <span class="s1">&#39;justification&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">workload_estimate</span><span class="si">}</span><span class="s1">min workload benefits from parallelization&#39;</span>
+            <span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;create&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-citation-system">
+<h3><strong>Example: Citation System</strong><a class="headerlink" href="#example-citation-system" title="Link to this heading">¶</a></h3>
+<p><strong>Issue Requirements:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">issue_requirements</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;citation_extraction&#39;</span><span class="p">,</span>      <span class="c1"># NEW SKILL (0% match)</span>
+    <span class="s1">&#39;academic_search&#39;</span><span class="p">,</span>          <span class="c1"># NEW SKILL (0% match)</span>
+    <span class="s1">&#39;BibTeX_management&#39;</span><span class="p">,</span>       <span class="c1"># NEW SKILL (0% match)</span>
+    <span class="s1">&#39;scientific_writing&#39;</span><span class="p">,</span>      <span class="c1"># Documentation Expert (100% match)</span>
+    <span class="s1">&#39;API_integration&#39;</span><span class="p">,</span>         <span class="c1"># NEW SKILL (0% match)</span>
+    <span class="s1">&#39;cross_reference_validation&#39;</span> <span class="c1"># Integration Coordinator (80% match)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Agent Selection:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;selected_agents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Academic Research Automation Engineer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NEW - BLOCKING&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;match_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Skill gap: 4/6 requirements (67%) not covered by existing pool&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documentation Expert&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;REUSED&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;match_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.35</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Handles scientific writing and BibTeX formatting&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Integration Coordinator&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;REUSED&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;match_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cross-reference validation and QA&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;justification&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3-agent configuration optimal: NEW agent for specialized research automation, 2 existing agents for formatting/validation. Parallelization: NEW agent + DOC work simultaneously on different claim batches.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="artifact-schema-design">
+<h2>Artifact Schema Design<a class="headerlink" href="#artifact-schema-design" title="Link to this heading">¶</a></h2>
+<section id="shared-json-schema">
+<h3><strong>Shared JSON Schema</strong><a class="headerlink" href="#shared-json-schema" title="Link to this heading">¶</a></h3>
+<p>All agents produce JSON artifacts with standardized structure:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;agent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ISO8601&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issue_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;float (0.0-1.0)&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;changes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;code_change | doc_change | config_change&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;relative\\path\\to\\file&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// Windows paths</span>
+<span class="w">      </span><span class="nt">&quot;patch&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unified diff format&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;rationale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;why this change&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;validation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;test_command&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;expected_result&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;requires&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;other_agent_artifacts.json&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;provides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;interfaces for downstream&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="integration-algorithm">
+<h3><strong>Integration Algorithm</strong><a class="headerlink" href="#integration-algorithm" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integrate_artifacts</span><span class="p">(</span><span class="n">agent_outputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reconcile multiple agent outputs.</span>
+
+<span class="sd">    Conflict resolution order:</span>
+<span class="sd">    1. Domain expert wins (Control Specialist &gt; Integration Coordinator for SMC)</span>
+<span class="sd">    2. Higher confidence wins (confidence &gt; 0.8 overrides &lt; 0.8)</span>
+<span class="sd">    3. More specific wins (file-level &gt; directory-level)</span>
+<span class="sd">    4. Manual review required (flag for human)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">DOMAIN_PRIORITY</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Academic Research Automation Engineer&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+        <span class="s1">&#39;Control Systems Specialist&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+        <span class="s1">&#39;PSO Optimization Engineer&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
+        <span class="s1">&#39;Documentation Expert&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="s1">&#39;Integration Coordinator&#39;</span><span class="p">:</span> <span class="mi">50</span>
+    <span class="p">}</span>
+
+    <span class="n">merged</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;changes&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;conflicts&#39;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Group changes by file</span>
+    <span class="n">by_file</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">agent_outputs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">change</span> <span class="ow">in</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;changes&#39;</span><span class="p">]:</span>
+            <span class="n">by_file</span><span class="p">[</span><span class="n">change</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">][</span><span class="s1">&#39;agent_name&#39;</span><span class="p">],</span> <span class="n">change</span><span class="p">))</span>
+
+    <span class="c1"># Detect and resolve conflicts</span>
+    <span class="k">for</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">changes</span> <span class="ow">in</span> <span class="n">by_file</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">changes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Multiple agents modified same file - resolve conflict</span>
+            <span class="n">winner</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">changes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">DOMAIN_PRIORITY</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Domain expert priority</span>
+                <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;confidence&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>     <span class="c1"># Confidence tiebreaker</span>
+            <span class="p">))</span>
+
+            <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;changes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">winner</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;conflicts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="n">file_path</span><span class="p">,</span>
+                <span class="s1">&#39;agents&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">],</span>
+                <span class="s1">&#39;resolution&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Used </span><span class="si">{</span><span class="n">winner</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> (domain priority + confidence)&quot;</span>
+            <span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;changes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">changes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">merged</span>
+</pre></div>
+</div>
+</section>
+<section id="example-artifact">
+<h3><strong>Example Artifact</strong><a class="headerlink" href="#example-artifact" title="Link to this heading">¶</a></h3>
+<p><strong>Agent 1 Output</strong> (<code class="docutils literal notranslate"><span class="pre">artifacts/formal_claims.json</span></code>):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;agent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Academic Research Automation Engineer&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.92</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;changes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;doc_change&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs\\theory\\smc_theory_complete.md&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;patch&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;diff --git a/docs/theory/smc_theory_complete.md ...&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;rationale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Add citation for Theorem 1 (Levant 2003)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;validation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sphinx-build -b html docs docs\\_build&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0 warnings&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Agent 2 Output</strong> (<code class="docutils literal notranslate"><span class="pre">artifacts/citation_style.json</span></code>):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;agent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documentation Expert&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15T10:32:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;changes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;doc_change&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs\\references\\bibliography.md&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;patch&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;diff --git a/docs/references/bibliography.md ...&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;rationale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Format bibliography in IEEE style&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;validation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bibtex docs\\references\\enhanced_bibliography.bib&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0 errors&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Integrated Output:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;changes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs\\theory\\smc_theory_complete.md&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Academic Research Automation Engineer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.92</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs\\references\\bibliography.md&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documentation Expert&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;conflicts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="windows-powershell-integration">
+<h2>Windows PowerShell Integration<a class="headerlink" href="#windows-powershell-integration" title="Link to this heading">¶</a></h2>
+<section id="environment-setup">
+<h3><strong>Environment Setup</strong><a class="headerlink" href="#environment-setup" title="Link to this heading">¶</a></h3>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Standard environment variables</span>
+<span class="nv">$env:REPO_ROOT</span> <span class="p">=</span> <span class="s2">&quot;D:\Projects\main&quot;</span>
+<span class="nv">$env:PYTHON_PATH</span> <span class="p">=</span> <span class="s2">&quot;python&quot;</span>
+<span class="nv">$env:GIT_PATH</span> <span class="p">=</span> <span class="s2">&quot;git&quot;</span>
+
+<span class="c"># Error handling</span>
+<span class="nv">$ErrorActionPreference</span> <span class="p">=</span> <span class="s1">&#39;Stop&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="validation-command-templates">
+<h3><strong>Validation Command Templates</strong><a class="headerlink" href="#validation-command-templates" title="Link to this heading">¶</a></h3>
+<section id="template-1-static-analysis">
+<h4><strong>Template 1: Static Analysis</strong><a class="headerlink" href="#template-1-static-analysis" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Step 1: Type checking</span>
+<span class="nb">Set-Location</span> <span class="nv">$env:REPO_ROOT</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">mypy</span> <span class="n">src</span><span class="p">\</span> <span class="p">-</span><span class="n">-strict</span> <span class="p">-</span><span class="n">-show-error-codes</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ne</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">&quot;mypy failed&quot;</span> <span class="p">}</span>
+
+<span class="c"># Step 2: Linting</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">ruff</span> <span class="n">check</span> <span class="n">src</span><span class="p">\</span> <span class="n">tests</span><span class="p">\</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ne</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">&quot;ruff failed&quot;</span> <span class="p">}</span>
+
+<span class="c"># Step 3: Import validation</span>
+<span class="n">python</span> <span class="n">-c</span> <span class="s2">&quot;import src; print(&#39;Imports OK&#39;)&quot;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ne</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">&quot;Import check failed&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="template-2-unit-tests">
+<h4><strong>Template 2: Unit Tests</strong><a class="headerlink" href="#template-2-unit-tests" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Fast unit tests (controllers only)</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="n">tests</span><span class="p">\</span><span class="n">test_controllers</span><span class="p">\</span> <span class="p">`</span>
+  <span class="n">-v</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-maxfail</span><span class="p">=</span><span class="n">3</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-tb</span><span class="p">=</span><span class="n">short</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-durations</span><span class="p">=</span><span class="n">10</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ne</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">&quot;Unit tests failed&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="template-3-integration-tests">
+<h4><strong>Template 3: Integration Tests</strong><a class="headerlink" href="#template-3-integration-tests" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Slower integration tests</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="n">tests</span><span class="p">\</span><span class="n">test_integration</span><span class="p">\</span> <span class="p">`</span>
+  <span class="n">-v</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-maxfail</span><span class="p">=</span><span class="n">1</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-durations</span><span class="p">=</span><span class="n">5</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-timeout</span><span class="p">=</span><span class="n">300</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ne</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">&quot;Integration tests failed&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="template-4-coverage-gates">
+<h4><strong>Template 4: Coverage Gates</strong><a class="headerlink" href="#template-4-coverage-gates" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Coverage enforcement</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-cov</span><span class="p">=</span><span class="n">src</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-cov-report</span><span class="p">=</span><span class="n">term</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-cov-report</span><span class="p">=</span><span class="n">html</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-cov-fail-under</span><span class="p">=</span><span class="n">85</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ne</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">&quot;Coverage below 85%&quot;</span> <span class="p">}</span>
+
+<span class="c"># Open coverage report</span>
+<span class="nb">start </span><span class="n">htmlcov</span><span class="p">\</span><span class="n">index</span><span class="p">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</section>
+<section id="template-5-performance-benchmarks">
+<h4><strong>Template 5: Performance Benchmarks</strong><a class="headerlink" href="#template-5-performance-benchmarks" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Performance regression detection</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="n">tests</span><span class="p">\</span><span class="n">test_benchmarks</span><span class="p">\</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-benchmark-only</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-benchmark-compare</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-benchmark-compare-fail</span><span class="p">=</span><span class="n">mean</span><span class="p">:</span><span class="n">5</span><span class="p">%</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ne</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">&quot;Performance regression &gt;5%&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="complete-validation-pipeline">
+<h3><strong>Complete Validation Pipeline</strong><a class="headerlink" href="#complete-validation-pipeline" title="Link to this heading">¶</a></h3>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># File: .dev_tools\validation\run_ci_validation.ps1</span>
+
+<span class="k">param</span><span class="p">(</span>
+    <span class="no">[switch]</span><span class="nv">$SkipSlow</span><span class="p">,</span>
+    <span class="no">[switch]</span><span class="nv">$SkipBenchmarks</span>
+<span class="p">)</span>
+
+<span class="nv">$ErrorActionPreference</span> <span class="p">=</span> <span class="s1">&#39;Stop&#39;</span>
+<span class="nb">Set-Location</span> <span class="s2">&quot;D:\Projects\main&quot;</span>
+
+<span class="nb">Write-Host</span> <span class="s2">&quot;===== CI Validation Pipeline =====&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Cyan</span>
+
+<span class="c"># Phase 1: Static Analysis</span>
+<span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[1/5] Static Analysis...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">mypy</span> <span class="n">src</span><span class="p">\</span> <span class="p">-</span><span class="n">-strict</span> <span class="p">-</span><span class="n">-show-error-codes</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">ruff</span> <span class="n">check</span> <span class="n">src</span><span class="p">\</span> <span class="n">tests</span><span class="p">\</span>
+
+<span class="c"># Phase 2: Unit Tests</span>
+<span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[2/5] Unit Tests...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="n">tests</span><span class="p">\</span><span class="n">test_controllers</span><span class="p">\</span> <span class="n">-v</span> <span class="p">-</span><span class="n">-maxfail</span><span class="p">=</span><span class="n">3</span>
+
+<span class="c"># Phase 3: Integration Tests (optional)</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$SkipSlow</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[3/5] Integration Tests...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+    <span class="n">python</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="n">tests</span><span class="p">\</span><span class="n">test_integration</span><span class="p">\</span> <span class="n">-v</span> <span class="p">-</span><span class="n">-maxfail</span><span class="p">=</span><span class="n">1</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[3/5] Integration Tests (SKIPPED)&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Gray</span>
+<span class="p">}</span>
+
+<span class="c"># Phase 4: Coverage</span>
+<span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[4/5] Coverage Analysis...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="p">-</span><span class="n">-cov</span><span class="p">=</span><span class="n">src</span> <span class="p">-</span><span class="n">-cov-report</span><span class="p">=</span><span class="n">term</span> <span class="p">-</span><span class="n">-cov-fail-under</span><span class="p">=</span><span class="n">85</span>
+
+<span class="c"># Phase 5: Benchmarks (optional)</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$SkipBenchmarks</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[5/5] Performance Benchmarks...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+    <span class="n">python</span> <span class="n">-m</span> <span class="n">pytest</span> <span class="n">tests</span><span class="p">\</span><span class="n">test_benchmarks</span><span class="p">\</span> <span class="p">-</span><span class="n">-benchmark-only</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[5/5] Benchmarks (SKIPPED)&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Gray</span>
+<span class="p">}</span>
+
+<span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">===== All Gates Passed =====&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+</pre></div>
+</div>
+<p><strong>Usage:</strong></p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Full validation</span>
+<span class="p">.\\.</span><span class="n">dev_tools</span><span class="p">\\</span><span class="n">validation</span><span class="p">\\</span><span class="n">run_ci_validation</span><span class="p">.</span><span class="n">ps1</span>
+
+<span class="c"># Skip slow tests</span>
+<span class="p">.\\.</span><span class="n">dev_tools</span><span class="p">\\</span><span class="n">validation</span><span class="p">\\</span><span class="n">run_ci_validation</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-SkipSlow</span>
+
+<span class="c"># Skip benchmarks</span>
+<span class="p">.\\.</span><span class="n">dev_tools</span><span class="p">\\</span><span class="n">validation</span><span class="p">\\</span><span class="n">run_ci_validation</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-SkipBenchmarks</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-citation-system-3-agents">
+<h3><strong>Example 1: Citation System (3 Agents)</strong><a class="headerlink" href="#example-1-citation-system-3-agents" title="Link to this heading">¶</a></h3>
+<p><strong>Orchestrator JSON Output:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Build citation verification system with AI research + formatting + validation&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;high&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;justification&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3-agent optimal: NEW agent (research automation), DOC expert (formatting), INT coordinator (QA). Parallelization: 2x speedup. Token efficiency: Reuse 2 existing.&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;selected_agents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Academic Research Automation Engineer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Specialized AI research + citation extraction (62.5% skill gap)&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documentation Expert&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BibTeX formatting + Sphinx integration (35% match)&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Integration Coordinator&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cross-reference validation + coverage gates (25% match)&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;plan&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;Step 1 (NEW): Extract 500+ claims from docs + code&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Step 2 (NEW): AI research via Semantic Scholar + ArXiv&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Step 3 (DOC): Format citations in Sphinx {cite} syntax&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Step 4 (INT): Validate coverage gates (100% theorems cited)&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;delegation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Academic Research Automation Engineer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;docs/**/*.md (259 files)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;src/**/*.py (165 files)&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;deliverables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;artifacts\\claims_inventory.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;artifacts\\research_results.json&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;definition_of_done&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;≥500 claims extracted&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;≥85% CRITICAL claims have refs&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documentation Expert&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;artifacts\\citation_mapping.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;docs\\references\\enhanced_bibliography.bib&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;deliverables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;patches\\citation_insertions.patch&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;docs\\references\\bibliography.md&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;definition_of_done&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;100% theorems cited&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Sphinx builds without warnings&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Integration Coordinator&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;artifacts\\claims_inventory.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;patches\\citation_insertions.patch&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;deliverables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;artifacts\\coverage_gate_results.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;.github\\workflows\\citation_validation.yml&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;definition_of_done&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Coverage gates pass&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;CI workflow active&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;verification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;commands_ps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;Set-Location D:\\Projects\\main&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;python .dev_tools\\citation_validation\\validate_json_schemas.py artifacts\\*.json&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;bibtex docs\\references\\enhanced_bibliography.bib&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;sphinx-build -b html docs docs\\_build -W&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;python .dev_tools\\citation_validation\\enforce_coverage_gates.py&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;expected&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;JSON schemas valid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;BibTeX compiles (0 errors)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Sphinx builds (0 warnings)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Coverage: 100% theorems, 90% implementations&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;risk_notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;API rate limits: Implement exponential backoff&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Citation key conflicts: Dedup with existing 39 refs&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Sphinx build time: +30% acceptable for quality&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;subagent_requests&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Academic Research Automation Engineer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;why&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Skill gap: 62.5% of requirements (AI research + citation extraction) not covered&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;Multi-stage claim extraction (regex + AST + NLP)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Academic API integration (Semantic Scholar, ArXiv, CrossRef)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Citation quality scoring and ranking&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;BibTeX generation from API responses&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;inputs_contract&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;docs/**/*.md&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;src/**/*.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;.env (API keys)&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;outputs_contract&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;claims_inventory.json: {claims: [...], research_queue: {...}}&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;research_results.json: {claim_id: [ranked_refs]}&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;enhanced_bibliography.bib: BibTeX entries&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;citation_mapping.json: {claim_id: [citation_keys]}&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;handoff&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DOC expert consumes citation_mapping.json for insertion. INT coordinator validates coverage.&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.88</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-chattering-reduction-2-agents">
+<h3><strong>Example 2: Chattering Reduction (2 Agents)</strong><a class="headerlink" href="#example-2-chattering-reduction-2-agents" title="Link to this heading">¶</a></h3>
+<p><strong>Orchestrator JSON Output:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reduce chattering in classical SMC by 50% via boundary layer tuning + PSO optimization&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;low&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;justification&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2-agent optimal: Control Systems Specialist (100% match for SMC/Lyapunov), PSO Engineer (90% match for gain tuning). Sequential workflow (theory → optimization). No parallelization benefit.&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;selected_agents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Control Systems Specialist&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Core SMC expert: boundary layer design, Lyapunov stability, chattering theory (100% match)&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PSO Optimization Engineer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tunes epsilon and gains with chattering-focused fitness function (90% match)&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;plan&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;Step 1 (Control): Analyze chattering sources, design boundary layer modifications&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Step 2 (PSO): Optimize epsilon + gains with chattering-focused fitness&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Step 3 (Control): Validate stability + performance with optimized params&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Step 4 (Both): Integration test + documentation&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;delegation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Control Systems Specialist&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src\\controllers\\smc\\classic_smc.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;docs\\theory\\smc_theory_complete.md&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;deliverables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;patches\\boundary_layer_modifications.patch&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;artifacts\\lyapunov_stability_proof.md&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;definition_of_done&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Lyapunov stability proven&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Chattering-focused design validated&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PSO Optimization Engineer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;artifacts\\chattering_fitness_function.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;config.yaml&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;deliverables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;optimization_results\\chattering_gains.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;artifacts\\pso_convergence_plot.png&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;definition_of_done&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Chattering reduced by ≥50%&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Stability margins maintained&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;verification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;commands_ps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;python simulate.py --ctrl classical_smc --load optimization_results\\chattering_gains.json --plot&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;python -m pytest tests\\test_controllers\\smc\\test_chattering_reduction.py -v&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;expected&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;Chattering metric reduced by ≥50%&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Lyapunov stability tests pass&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Settling time unchanged (&lt; 2s)&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;risk_notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;Trade-off: Larger boundary layer may increase steady-state error&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Validation: Ensure stability margins &gt;20% for robustness&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;subagent_requests&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+
+<span class="w">  </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<section id="agent-selection">
+<h3><strong>1. Agent Selection</strong><a class="headerlink" href="#agent-selection" title="Link to this heading">¶</a></h3>
+<p>✅ <strong>DO:</strong></p>
+<ul class="simple">
+<li><p>Reuse existing agents when skill match &gt;70%</p></li>
+<li><p>Create new agents for skill gaps &gt;30%</p></li>
+<li><p>Justify agent count (2-4 optimal for speed/token balance)</p></li>
+</ul>
+<p>❌ <strong>DON’T:</strong></p>
+<ul class="simple">
+<li><p>Create redundant agents (check existing pool first)</p></li>
+<li><p>Use &gt;4 agents (overhead &gt; benefit)</p></li>
+<li><p>Use 1 agent for multi-domain tasks (token inefficient)</p></li>
+</ul>
+</section>
+<section id="artifact-design">
+<h3><strong>2. Artifact Design</strong><a class="headerlink" href="#artifact-design" title="Link to this heading">¶</a></h3>
+<p>✅ <strong>DO:</strong></p>
+<ul class="simple">
+<li><p>Use standardized JSON schema across all agents</p></li>
+<li><p>Include confidence scores for conflict resolution</p></li>
+<li><p>Provide validation commands for each artifact</p></li>
+</ul>
+<p>❌ <strong>DON’T:</strong></p>
+<ul class="simple">
+<li><p>Create tight dependencies between agents</p></li>
+<li><p>Mix artifact types (keep JSON separate from patches)</p></li>
+<li><p>Omit metadata (timestamp, agent name, confidence)</p></li>
+</ul>
+</section>
+<section id="windows-integration">
+<h3><strong>3. Windows Integration</strong><a class="headerlink" href="#windows-integration" title="Link to this heading">¶</a></h3>
+<p>✅ <strong>DO:</strong></p>
+<ul class="simple">
+<li><p>Use PowerShell-native commands (<code class="docutils literal notranslate"><span class="pre">Set-Location</span></code>, not <code class="docutils literal notranslate"><span class="pre">cd</span></code>)</p></li>
+<li><p>Handle paths with <code class="docutils literal notranslate"><span class="pre">\</span></code> separators</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">$ErrorActionPreference</span> <span class="pre">=</span> <span class="pre">'Stop'</span></code> for safety</p></li>
+</ul>
+<p>❌ <strong>DON’T:</strong></p>
+<ul class="simple">
+<li><p>Use bash commands (<code class="docutils literal notranslate"><span class="pre">find</span></code>, <code class="docutils literal notranslate"><span class="pre">grep</span></code>) - use PowerShell equivalents</p></li>
+<li><p>Assume Unix-style paths (<code class="docutils literal notranslate"><span class="pre">/</span></code> separators)</p></li>
+<li><p>Ignore exit codes (<code class="docutils literal notranslate"><span class="pre">$LASTEXITCODE</span></code>)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="related-documents">
+<h2>Related Documents<a class="headerlink" href="#related-documents" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../citation_system/00_master_roadmap.html"><span class="std std-doc">../citation_system/00_master_roadmap.md</span></a> - Citation system implementation</p></li>
+<li><p><a class="reference internal" href="../../CLAUDE.html"><span class="std std-doc">../../CLAUDE.md</span></a> - Project conventions and agent pool</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Document Revision History:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Changes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>2025-01-15</p></td>
+<td><p>Initial framework documentation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Status:</strong> ✅ <strong>FRAMEWORK DEFINED - READY FOR USE</strong></p>
+<p><strong>End of CI Agent Orchestration Framework</strong></p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">CI Agent Orchestration Framework</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#architecture-overview">Architecture Overview</a><ul>
+<li><a class="reference internal" href="#hub-and-spoke-with-minimal-coupling"><strong>Hub-and-Spoke with Minimal Coupling</strong></a></li>
+<li><a class="reference internal" href="#core-design-principles"><strong>Core Design Principles</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#agent-selection-decision-tree">Agent Selection Decision Tree</a><ul>
+<li><a class="reference internal" href="#available-agent-pool"><strong>Available Agent Pool</strong></a></li>
+<li><a class="reference internal" href="#decision-matrix-reuse-vs-create"><strong>Decision Matrix: Reuse vs Create</strong></a></li>
+<li><a class="reference internal" href="#example-citation-system"><strong>Example: Citation System</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#artifact-schema-design">Artifact Schema Design</a><ul>
+<li><a class="reference internal" href="#shared-json-schema"><strong>Shared JSON Schema</strong></a></li>
+<li><a class="reference internal" href="#integration-algorithm"><strong>Integration Algorithm</strong></a></li>
+<li><a class="reference internal" href="#example-artifact"><strong>Example Artifact</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#windows-powershell-integration">Windows PowerShell Integration</a><ul>
+<li><a class="reference internal" href="#environment-setup"><strong>Environment Setup</strong></a></li>
+<li><a class="reference internal" href="#validation-command-templates"><strong>Validation Command Templates</strong></a><ul>
+<li><a class="reference internal" href="#template-1-static-analysis"><strong>Template 1: Static Analysis</strong></a></li>
+<li><a class="reference internal" href="#template-2-unit-tests"><strong>Template 2: Unit Tests</strong></a></li>
+<li><a class="reference internal" href="#template-3-integration-tests"><strong>Template 3: Integration Tests</strong></a></li>
+<li><a class="reference internal" href="#template-4-coverage-gates"><strong>Template 4: Coverage Gates</strong></a></li>
+<li><a class="reference internal" href="#template-5-performance-benchmarks"><strong>Template 5: Performance Benchmarks</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#complete-validation-pipeline"><strong>Complete Validation Pipeline</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-citation-system-3-agents"><strong>Example 1: Citation System (3 Agents)</strong></a></li>
+<li><a class="reference internal" href="#example-2-chattering-reduction-2-agents"><strong>Example 2: Chattering Reduction (2 Agents)</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li><a class="reference internal" href="#agent-selection"><strong>1. Agent Selection</strong></a></li>
+<li><a class="reference internal" href="#artifact-design"><strong>2. Artifact Design</strong></a></li>
+<li><a class="reference internal" href="#windows-integration"><strong>3. Windows Integration</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#related-documents">Related Documents</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

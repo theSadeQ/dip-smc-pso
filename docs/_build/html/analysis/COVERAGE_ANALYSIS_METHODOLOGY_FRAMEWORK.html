@@ -1,0 +1,1558 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Coverage Analysis Methodology Framework - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/analysis/COVERAGE_ANALYSIS_METHODOLOGY_FRAMEWORK.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/analysis/COVERAGE_ANALYSIS_METHODOLOGY_FRAMEWORK.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>#==========================================================================================\<br />
+#==================== COVERAGE_ANALYSIS_METHODOLOGY_FRAMEWORK.md ====================\<br />
+#==========================================================================================\</p>
+<section class="tex2jax_ignore mathjax_ignore" id="coverage-analysis-methodology-framework">
+<h1>Coverage Analysis Methodology Framework<a class="headerlink" href="#coverage-analysis-methodology-framework" title="Link to this heading">¶</a></h1>
+<section id="github-issue-9-resolution-quality-gate-documentation-enforcement">
+<h2>GitHub Issue #9 Resolution: Quality Gate Documentation &amp; Enforcement<a class="headerlink" href="#github-issue-9-resolution-quality-gate-documentation-enforcement" title="Link to this heading">¶</a></h2>
+<p><strong>Repository</strong>: <a class="reference external" href="https://github.com/theSadeQ/dip-smc-pso.git">https://github.com/theSadeQ/dip-smc-pso.git</a>
+<strong>Documentation Expert</strong>: Control Systems &amp; Coverage Analysis Specialist
+<strong>Mission</strong>: Establish comprehensive coverage methodology to resolve 23.1% → 85%/95%/100% quality gates</p>
+</section>
+<hr class="docutils" />
+<section id="coverage-crisis-analysis">
+<h2>🚨 Coverage Crisis Analysis<a class="headerlink" href="#coverage-crisis-analysis" title="Link to this heading">¶</a></h2>
+<section id="current-state-assessment">
+<h3>Current State Assessment<a class="headerlink" href="#current-state-assessment" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CRITICAL</span> <span class="n">COVERAGE</span> <span class="n">CRISIS</span> <span class="n">IDENTIFIED</span><span class="p">:</span>
+<span class="err">├─</span> <span class="n">Current</span> <span class="n">Coverage</span><span class="p">:</span> <span class="mf">23.1</span><span class="o">%</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">016</span><span class="o">/</span><span class="mi">17</span><span class="p">,</span><span class="mi">354</span> <span class="n">lines</span><span class="p">)</span>
+<span class="err">├─</span> <span class="n">Target</span> <span class="n">Thresholds</span><span class="p">:</span> <span class="mi">85</span><span class="o">%/</span><span class="mi">95</span><span class="o">%/</span><span class="mi">100</span><span class="o">%</span>
+<span class="err">├─</span> <span class="n">Quality</span> <span class="n">Gate</span> <span class="n">Status</span><span class="p">:</span> <span class="n">FAILING</span>
+<span class="err">└─</span> <span class="n">Production</span> <span class="n">Readiness</span> <span class="n">Impact</span><span class="p">:</span> <span class="n">BLOCKING</span>
+</pre></div>
+</div>
+</section>
+<section id="coverage-gap-analysis">
+<h3>Coverage Gap Analysis<a class="headerlink" href="#coverage-gap-analysis" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Component Category</strong></p></th>
+<th class="head"><p><strong>Current</strong></p></th>
+<th class="head"><p><strong>Target</strong></p></th>
+<th class="head"><p><strong>Gap</strong></p></th>
+<th class="head"><p><strong>Status</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Overall System</p></td>
+<td><p>23.1%</p></td>
+<td><p>≥85%</p></td>
+<td><p>-61.9%</p></td>
+<td><p>🔴 CRITICAL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Critical Components</p></td>
+<td><p>Unknown</p></td>
+<td><p>≥95%</p></td>
+<td><p>Unknown</p></td>
+<td><p>🔴 CRITICAL</p></td>
+</tr>
+<tr class="row-even"><td><p>Safety-Critical</p></td>
+<td><p>Unknown</p></td>
+<td><p>100%</p></td>
+<td><p>Unknown</p></td>
+<td><p>🔴 CRITICAL</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="coverage-measurement-framework">
+<h2>📊 Coverage Measurement Framework<a class="headerlink" href="#coverage-measurement-framework" title="Link to this heading">¶</a></h2>
+<section id="coverage-tool-configuration">
+<h3>1. Coverage Tool Configuration<a class="headerlink" href="#coverage-tool-configuration" title="Link to this heading">¶</a></h3>
+<section id="pytest-cov-configuration-primary">
+<h4>pytest-cov Configuration (Primary)<a class="headerlink" href="#pytest-cov-configuration-primary" title="Link to this heading">¶</a></h4>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># pytest.ini - Coverage configuration</span>
+<span class="k">[tool:pytest]</span>
+<span class="na">addopts</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">--cov</span><span class="o">=</span><span class="s">src</span>
+<span class="w">    </span><span class="na">--cov-report</span><span class="o">=</span><span class="s">term-missing</span>
+<span class="w">    </span><span class="na">--cov-report</span><span class="o">=</span><span class="s">xml:coverage.xml</span>
+<span class="w">    </span><span class="na">--cov-report</span><span class="o">=</span><span class="s">html:htmlcov</span>
+<span class="w">    </span><span class="na">--cov-fail-under</span><span class="o">=</span><span class="s">85</span>
+<span class="w">    </span><span class="na">--cov-branch</span>
+
+<span class="c1"># Coverage exclusions</span>
+<span class="k">[tool:coverage:run]</span>
+<span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">src</span>
+<span class="na">omit</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">*/tests/*</span>
+<span class="w">    </span><span class="na">*/conftest.py</span>
+<span class="w">    </span><span class="na">*/__init__.py</span>
+<span class="w">    </span><span class="na">*/migrations/*</span>
+<span class="w">    </span><span class="na">*/venv/*</span>
+<span class="w">    </span><span class="na">setup.py</span>
+
+<span class="k">[tool:coverage:report]</span>
+<span class="na">precision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+<span class="na">show_missing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+<span class="na">skip_covered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
+<span class="na">exclude_lines</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">pragma</span><span class="o">:</span><span class="w"> </span><span class="s">no cover</span>
+<span class="w">    </span><span class="na">def __repr__</span>
+<span class="w">    </span><span class="na">raise AssertionError</span>
+<span class="w">    </span><span class="na">raise NotImplementedError</span>
+<span class="w">    </span><span class="na">if __name__</span><span class="w"> </span><span class="o">=</span><span class="s">= .__main__.:</span>
+<span class="w">    </span><span class="na">@abstract</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-coverage-commands">
+<h4>Advanced Coverage Commands<a class="headerlink" href="#advanced-coverage-commands" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard coverage measurement</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>term-missing<span class="w"> </span>--cov-report<span class="o">=</span>xml
+
+<span class="c1"># Branch coverage analysis</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-branch<span class="w"> </span>--cov-report<span class="o">=</span>html
+
+<span class="c1"># Component-specific coverage</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>src/controllers<span class="w"> </span>--cov-report<span class="o">=</span>term<span class="w"> </span>tests/test_controllers/
+
+<span class="c1"># Critical component isolation</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>src/controllers/smc<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">95</span><span class="w"> </span>tests/test_controllers/smc/
+
+<span class="c1"># Safety-critical component validation (100% requirement)</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>src/core/safety_guards<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">100</span><span class="w"> </span>tests/test_simulation/safety/
+</pre></div>
+</div>
+</section>
+</section>
+<section id="coverage-categorization-system">
+<h3>2. Coverage Categorization System<a class="headerlink" href="#coverage-categorization-system" title="Link to this heading">¶</a></h3>
+<section id="component-classification-matrix">
+<h4>Component Classification Matrix<a class="headerlink" href="#component-classification-matrix" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coverage_categories</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">safety_critical</span><span class="p">:</span><span class="w">      </span><span class="c1"># 100% coverage required</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/core/safety_guards.py</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/core/simulation_context.py (safety methods)</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/controllers/*/gain_validation.py</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/utils/validation/parameter_bounds.py</span>
+
+<span class="w">  </span><span class="nt">critical_components</span><span class="p">:</span><span class="w">   </span><span class="c1"># ≥95% coverage required</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/controllers/smc/</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/controllers/adaptive_smc.py</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/controllers/classic_smc.py</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/controllers/sta_smc.py</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/core/dynamics.py</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/core/dynamics_full.py</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/optimizer/pso_optimizer.py</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/core/simulation_runner.py</span>
+
+<span class="w">  </span><span class="nt">general_components</span><span class="p">:</span><span class="w">    </span><span class="c1"># ≥85% coverage required</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/config/</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/utils/</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/benchmarks/</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/analysis/</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/interfaces/</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mathematical-coverage-analysis">
+<h3>3. Mathematical Coverage Analysis<a class="headerlink" href="#mathematical-coverage-analysis" title="Link to this heading">¶</a></h3>
+<section id="coverage-metrics-definition">
+<h4>Coverage Metrics Definition<a class="headerlink" href="#coverage-metrics-definition" title="Link to this heading">¶</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(C_{total}\)</span> be the total coverage percentage, defined as:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[C_{total} = \frac{L_{covered}}{L_{total}} \times 100\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L_{covered}\)</span> = number of lines executed during testing</p></li>
+<li><p><span class="math notranslate nohighlight">\(L_{total}\)</span> = total number of executable lines</p></li>
+</ul>
+</section>
+<section id="multi-tier-coverage-requirements">
+<h4>Multi-Tier Coverage Requirements<a class="headerlink" href="#multi-tier-coverage-requirements" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+C_{safety} &amp;= 100\% \quad \forall \text{ safety-critical components} \\
+C_{critical} &amp;\geq 95\% \quad \forall \text{ critical components} \\
+C_{general} &amp;\geq 85\% \quad \forall \text{ general components} \\
+C_{overall} &amp;\geq 85\% \quad \text{system-wide}
+\end{aligned}\end{split}\]</div>
+</div>
+</section>
+<section id="branch-coverage-analysis">
+<h4>Branch Coverage Analysis<a class="headerlink" href="#branch-coverage-analysis" title="Link to this heading">¶</a></h4>
+<p>For comprehensive coverage validation:
+$<span class="math notranslate nohighlight">\(C_{branch} = \frac{B_{taken}}{B_{total}} \times 100 \geq 80\%\)</span>$</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quality-gate-enforcement-specification">
+<h2>🎯 Quality Gate Enforcement Specification<a class="headerlink" href="#quality-gate-enforcement-specification" title="Link to this heading">¶</a></h2>
+<section id="automated-quality-gates">
+<h3>1. Automated Quality Gates<a class="headerlink" href="#automated-quality-gates" title="Link to this heading">¶</a></h3>
+<section id="ci-cd-pipeline-integration">
+<h4>CI/CD Pipeline Integration<a class="headerlink" href="#ci-cd-pipeline-integration" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># .github/workflows/coverage-gates.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Coverage Quality Gates</span>
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">coverage-validation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup Python</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.9&#39;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pip install -r requirements.txt</span>
+<span class="w">          </span><span class="no">pip install pytest-cov coverage[toml]</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Safety-Critical Coverage (100%)</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pytest --cov=src/core/safety_guards --cov-fail-under=100 \</span>
+<span class="w">                 </span><span class="no">--cov-report=xml:coverage_safety.xml \</span>
+<span class="w">                 </span><span class="no">tests/test_simulation/safety/</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Critical Components Coverage (95%)</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pytest --cov=src/controllers/smc --cov-fail-under=95 \</span>
+<span class="w">                 </span><span class="no">--cov-report=xml:coverage_critical.xml \</span>
+<span class="w">                 </span><span class="no">tests/test_controllers/smc/</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Overall System Coverage (85%)</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pytest --cov=src --cov-fail-under=85 \</span>
+<span class="w">                 </span><span class="no">--cov-report=xml:coverage_overall.xml</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Coverage Report Upload</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">codecov/codecov-action@v3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./coverage_*.xml</span>
+<span class="w">          </span><span class="nt">fail_ci_if_error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pre-commit-coverage-hooks">
+<h3>2. Pre-commit Coverage Hooks<a class="headerlink" href="#pre-commit-coverage-hooks" title="Link to this heading">¶</a></h3>
+<section id="pre-commit-configuration">
+<h4>Pre-commit Configuration<a class="headerlink" href="#pre-commit-configuration" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># .pre-commit-config.yaml</span>
+<span class="nt">repos</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage-check</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Coverage Quality Gate</span>
+<span class="w">        </span><span class="nt">entry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bash</span>
+<span class="w">        </span><span class="nt">language</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">system</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-c</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">            </span><span class="no">pytest --cov=src --cov-fail-under=85 --cov-report=term-missing</span>
+<span class="w">            </span><span class="no">if [ $? -ne 0 ]; then</span>
+<span class="w">              </span><span class="no">echo &quot;❌ Coverage below 85% threshold - commit blocked&quot;</span>
+<span class="w">              </span><span class="no">exit 1</span>
+<span class="w">            </span><span class="no">fi</span>
+<span class="w">            </span><span class="no">echo &quot;✅ Coverage quality gate passed&quot;</span>
+<span class="w">        </span><span class="nt">pass_filenames</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">always_run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">stages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">commit</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="coverage-threshold-enforcement">
+<h3>3. Coverage Threshold Enforcement<a class="headerlink" href="#coverage-threshold-enforcement" title="Link to this heading">¶</a></h3>
+<section id="dynamic-threshold-validation">
+<h4>Dynamic Threshold Validation<a class="headerlink" href="#dynamic-threshold-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># scripts/coverage_validator.py</span>
+<span class="c1">#==========================================================================================\\\</span>
+<span class="c1">#=================================== coverage_validator.py ==============================\\\</span>
+<span class="c1">#==========================================================================================\\\</span>
+
+<span class="sd">&quot;&quot;&quot;Advanced coverage validation with mathematical threshold enforcement.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CoverageValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mathematical coverage validation with multi-tier enforcement.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coverage_xml</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize coverage validator with XML report.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coverage_xml</span> <span class="o">=</span> <span class="n">coverage_xml</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">coverage_xml</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_component_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate coverage for specific component pattern.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            component_pattern: Pattern to match component files</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coverage percentage for matched components</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total_lines</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">covered_lines</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;.//package&#39;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">class_elem</span> <span class="ow">in</span> <span class="n">package</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;.//class&#39;</span><span class="p">):</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">class_elem</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">component_pattern</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+                    <span class="n">lines</span> <span class="o">=</span> <span class="n">class_elem</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;.//line&#39;</span><span class="p">)</span>
+                    <span class="n">total_lines</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+                    <span class="n">covered_lines</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hits&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">covered_lines</span> <span class="o">/</span> <span class="n">total_lines</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">total_lines</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_quality_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate all quality gate thresholds.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict mapping gate name to (actual, required, passed) tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gates</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;safety_critical&#39;</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_component_coverage</span><span class="p">(</span><span class="s1">&#39;safety_guards&#39;</span><span class="p">),</span> <span class="mf">100.0</span><span class="p">),</span>
+            <span class="s1">&#39;controllers_smc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_component_coverage</span><span class="p">(</span><span class="s1">&#39;controllers/smc&#39;</span><span class="p">),</span> <span class="mf">95.0</span><span class="p">),</span>
+            <span class="s1">&#39;core_dynamics&#39;</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_component_coverage</span><span class="p">(</span><span class="s1">&#39;core/dynamics&#39;</span><span class="p">),</span> <span class="mf">95.0</span><span class="p">),</span>
+            <span class="s1">&#39;pso_optimizer&#39;</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_component_coverage</span><span class="p">(</span><span class="s1">&#39;optimizer/pso&#39;</span><span class="p">),</span> <span class="mf">95.0</span><span class="p">),</span>
+            <span class="s1">&#39;overall_system&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;line-rate&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">85.0</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">gate_name</span><span class="p">,</span> <span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">required</span><span class="p">)</span> <span class="ow">in</span> <span class="n">gates</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">passed</span> <span class="o">=</span> <span class="n">actual</span> <span class="o">&gt;=</span> <span class="n">required</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">gate_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">passed</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_coverage_report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate comprehensive coverage analysis report.&quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_quality_gates</span><span class="p">()</span>
+
+        <span class="n">report</span> <span class="o">=</span> <span class="s2">&quot;## Coverage Quality Gate Analysis</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="n">report</span> <span class="o">+=</span> <span class="s2">&quot;| **Component** | **Actual** | **Required** | **Status** |</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">report</span> <span class="o">+=</span> <span class="s2">&quot;|---------------|------------|--------------|------------|</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">for</span> <span class="n">gate_name</span><span class="p">,</span> <span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">passed</span><span class="p">)</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✅ PASS&quot;</span> <span class="k">if</span> <span class="n">passed</span> <span class="k">else</span> <span class="s2">&quot;❌ FAIL&quot;</span>
+            <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">gate_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">actual</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | </span><span class="si">{</span><span class="n">required</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> |</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="n">overall_pass</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">passed</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">passed</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">**Overall Quality Gate Status**: </span><span class="si">{</span><span class="s1">&#39;✅ PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">overall_pass</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌ FAIL&#39;</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">report</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">validator</span> <span class="o">=</span> <span class="n">CoverageValidator</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;coverage.xml&quot;</span><span class="p">))</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_quality_gates</span><span class="p">()</span>
+
+    <span class="c1"># Enforcement logic</span>
+    <span class="n">failed_gates</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">passed</span><span class="p">)</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">passed</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">failed_gates</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Coverage quality gates FAILED: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">failed_gates</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">generate_coverage_report</span><span class="p">())</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ All coverage quality gates PASSED&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="coverage-improvement-implementation-guide">
+<h2>📈 Coverage Improvement Implementation Guide<a class="headerlink" href="#coverage-improvement-implementation-guide" title="Link to this heading">¶</a></h2>
+<section id="systematic-gap-analysis">
+<h3>1. Systematic Gap Analysis<a class="headerlink" href="#systematic-gap-analysis" title="Link to this heading">¶</a></h3>
+<section id="coverage-gap-identification-script">
+<h4>Coverage Gap Identification Script<a class="headerlink" href="#coverage-gap-identification-script" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># scripts/coverage_gap_analyzer.py</span>
+<span class="c1">#==========================================================================================\\\</span>
+<span class="c1">#=============================== coverage_gap_analyzer.py =============================\\\</span>
+<span class="c1">#==========================================================================================\\\</span>
+
+<span class="sd">&quot;&quot;&quot;Systematic analysis of coverage gaps with actionable recommendations.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CoverageGapAnalyzer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scientific analysis of coverage gaps with improvement recommendations.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_uncovered_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Identify specific uncovered lines in module.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            module_path: Path to module for analysis</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping files to uncovered line numbers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;coverage&quot;</span><span class="p">,</span> <span class="s2">&quot;report&quot;</span><span class="p">,</span> <span class="s2">&quot;--show-missing&quot;</span><span class="p">,</span> <span class="s2">&quot;--include&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">module_path</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">uncovered_lines</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]:</span>  <span class="c1"># Skip header</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;TOTAL&#39;</span><span class="p">):</span>
+                <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="n">file_path</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">missing_lines</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;100%&#39;</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+                    <span class="k">if</span> <span class="n">missing_lines</span> <span class="ow">and</span> <span class="n">missing_lines</span> <span class="o">!=</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+                        <span class="n">uncovered_lines</span><span class="p">[</span><span class="n">file_path</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_missing_lines</span><span class="p">(</span><span class="n">missing_lines</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">uncovered_lines</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_missing_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">missing_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse missing lines string into list of line numbers.&quot;&quot;&quot;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">missing_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;-&#39;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+                <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">part</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">))</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">lines</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_improvement_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uncovered_lines</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate actionable improvement plan for coverage gaps.&quot;&quot;&quot;</span>
+        <span class="n">plan</span> <span class="o">=</span> <span class="s2">&quot;## Coverage Improvement Action Plan</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+        <span class="k">for</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">lines</span> <span class="ow">in</span> <span class="n">uncovered_lines</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">plan</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;### </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">plan</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;**Uncovered Lines**: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span><span class="si">}</span><span class="s2"> lines</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">plan</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;**Line Numbers**: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">lines</span><span class="p">[:</span><span class="mi">10</span><span class="p">]))</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; ... (+</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="si">}</span><span class="s2"> more)&quot;</span>
+            <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Categorize improvement actions</span>
+            <span class="k">if</span> <span class="s1">&#39;controller&#39;</span> <span class="ow">in</span> <span class="n">file_path</span><span class="p">:</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;**Recommended Actions**:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Add unit tests for control law computation</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Test boundary conditions and saturation limits</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Validate stability properties with edge cases</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="k">elif</span> <span class="s1">&#39;dynamics&#39;</span> <span class="ow">in</span> <span class="n">file_path</span><span class="p">:</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;**Recommended Actions**:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Test state integration accuracy</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Validate physical parameter ranges</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Test numerical stability edge cases</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="k">elif</span> <span class="s1">&#39;optimizer&#39;</span> <span class="ow">in</span> <span class="n">file_path</span><span class="p">:</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;**Recommended Actions**:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Test convergence scenarios</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Validate parameter bounds enforcement</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">plan</span> <span class="o">+=</span> <span class="s2">&quot;- Test optimization termination conditions</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">plan</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">prioritize_coverage_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uncovered_lines</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prioritize coverage improvement tasks by impact.&quot;&quot;&quot;</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">lines</span> <span class="ow">in</span> <span class="n">uncovered_lines</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">priority</span> <span class="o">=</span> <span class="s2">&quot;HIGH&quot;</span>
+            <span class="k">if</span> <span class="s1">&#39;safety&#39;</span> <span class="ow">in</span> <span class="n">file_path</span> <span class="ow">or</span> <span class="s1">&#39;critical&#39;</span> <span class="ow">in</span> <span class="n">file_path</span><span class="p">:</span>
+                <span class="n">priority</span> <span class="o">=</span> <span class="s2">&quot;CRITICAL&quot;</span>
+            <span class="k">elif</span> <span class="s1">&#39;util&#39;</span> <span class="ow">in</span> <span class="n">file_path</span> <span class="ow">or</span> <span class="s1">&#39;helper&#39;</span> <span class="ow">in</span> <span class="n">file_path</span><span class="p">:</span>
+                <span class="n">priority</span> <span class="o">=</span> <span class="s2">&quot;MEDIUM&quot;</span>
+
+            <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">file_path</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">),</span> <span class="n">priority</span><span class="p">))</span>
+
+        <span class="c1"># Sort by priority and line count</span>
+        <span class="n">priority_order</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;CRITICAL&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;HIGH&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;MEDIUM&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+        <span class="n">tasks</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">priority_order</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">tasks</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-development-standards">
+<h3>2. Test Development Standards<a class="headerlink" href="#test-development-standards" title="Link to this heading">¶</a></h3>
+<section id="test-coverage-requirements-by-component-type">
+<h4>Test Coverage Requirements by Component Type<a class="headerlink" href="#test-coverage-requirements-by-component-type" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test development guidelines with mathematical validation</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestCoverageStandards</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mathematical standards for test coverage requirements.&quot;&quot;&quot;</span>
+
+    <span class="n">CONTROLLER_TESTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;unit_tests&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;test_control_law_computation&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_gain_validation&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_saturation_limits&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_reset_functionality&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_parameter_bounds&#39;</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;property_tests&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;test_stability_lyapunov&#39;</span><span class="p">,</span>  <span class="c1"># Lyapunov function V̇ ≤ 0</span>
+            <span class="s1">&#39;test_control_boundedness&#39;</span><span class="p">,</span>  <span class="c1"># |u| ≤ u_max</span>
+            <span class="s1">&#39;test_finite_time_convergence&#39;</span><span class="p">,</span>  <span class="c1"># t_reach &lt; ∞</span>
+            <span class="s1">&#39;test_chattering_mitigation&#39;</span>  <span class="c1"># High frequency analysis</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;integration_tests&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;test_dynamics_integration&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_pso_optimization&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_simulation_workflow&#39;</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">DYNAMICS_TESTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;mathematical_properties&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;test_energy_conservation&#39;</span><span class="p">,</span>  <span class="c1"># E(t) conservation</span>
+            <span class="s1">&#39;test_momentum_conservation&#39;</span><span class="p">,</span>  <span class="c1"># p(t) conservation</span>
+            <span class="s1">&#39;test_symplectic_integration&#39;</span><span class="p">,</span>  <span class="c1"># Hamiltonian structure</span>
+            <span class="s1">&#39;test_numerical_stability&#39;</span>  <span class="c1"># Condition number analysis</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;physical_validation&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;test_realistic_parameters&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_boundary_conditions&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_equilibrium_points&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;test_linearization_accuracy&#39;</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">PSO_TESTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;optimization_theory&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;test_convergence_criteria&#39;</span><span class="p">,</span>  <span class="c1"># f(x*) - f(x_k) → 0</span>
+            <span class="s1">&#39;test_particle_dynamics&#39;</span><span class="p">,</span>     <span class="c1"># Position/velocity updates</span>
+            <span class="s1">&#39;test_global_best_tracking&#39;</span><span class="p">,</span>  <span class="c1"># g_best monotonic improvement</span>
+            <span class="s1">&#39;test_termination_conditions&#39;</span> <span class="c1"># Max iterations, tolerance</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;parameter_validation&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;test_inertia_weight_bounds&#39;</span><span class="p">,</span>  <span class="c1"># w ∈ [0.1, 0.9]</span>
+            <span class="s1">&#39;test_acceleration_coefficients&#39;</span><span class="p">,</span>  <span class="c1"># c1, c2 ∈ [0, 4]</span>
+            <span class="s1">&#39;test_velocity_clamping&#39;</span><span class="p">,</span>     <span class="c1"># |v| ≤ v_max</span>
+            <span class="s1">&#39;test_boundary_handling&#39;</span>      <span class="c1"># Position constraint enforcement</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="coverage-automation-scripts">
+<h3>3. Coverage Automation Scripts<a class="headerlink" href="#coverage-automation-scripts" title="Link to this heading">¶</a></h3>
+<section id="automated-coverage-improvement-workflow">
+<h4>Automated Coverage Improvement Workflow<a class="headerlink" href="#automated-coverage-improvement-workflow" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># scripts/coverage_improvement_workflow.sh</span>
+<span class="c1">#==========================================================================================\\\</span>
+<span class="c1">#========================= coverage_improvement_workflow.sh ===========================\\\</span>
+<span class="c1">#==========================================================================================\\\</span>
+
+<span class="s2">&quot;&quot;&quot;Automated coverage improvement workflow with quality gate validation.&quot;&quot;&quot;</span>
+
+<span class="nb">set</span><span class="w"> </span>-e
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🚀 Starting Coverage Improvement Workflow&quot;</span>
+
+<span class="c1"># Step 1: Baseline coverage measurement</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;📊 Measuring baseline coverage...&quot;</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>xml:coverage_baseline.xml<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+
+<span class="c1"># Step 2: Gap analysis</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🔍 Analyzing coverage gaps...&quot;</span>
+python<span class="w"> </span>scripts/coverage_gap_analyzer.py<span class="w"> </span>&gt;<span class="w"> </span>coverage_gaps_report.md
+
+<span class="c1"># Step 3: Safety-critical validation (100% required)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🔒 Validating safety-critical components...&quot;</span>
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>pytest<span class="w"> </span>--cov<span class="o">=</span>src/core/safety_guards<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">100</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;❌ CRITICAL: Safety components below 100% coverage&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="c1"># Step 4: Critical components validation (95% required)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;⚡ Validating critical components...&quot;</span>
+<span class="nv">CRITICAL_COMPONENTS</span><span class="o">=(</span>
+<span class="w">    </span><span class="s2">&quot;src/controllers/smc&quot;</span>
+<span class="w">    </span><span class="s2">&quot;src/core/dynamics&quot;</span>
+<span class="w">    </span><span class="s2">&quot;src/optimizer/pso_optimizer&quot;</span>
+<span class="o">)</span>
+
+<span class="k">for</span><span class="w"> </span>component<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CRITICAL_COMPONENTS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Testing </span><span class="si">${</span><span class="nv">component</span><span class="si">}</span><span class="s2">...&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>pytest<span class="w"> </span>--cov<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">component</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">95</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;⚠️  Warning: </span><span class="si">${</span><span class="nv">component</span><span class="si">}</span><span class="s2"> below 95% coverage&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="c1"># Step 5: Overall system validation (85% required)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🎯 Validating overall system coverage...&quot;</span>
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>pytest<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">85</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;❌ Overall system coverage below 85% threshold&quot;</span>
+
+<span class="w">    </span><span class="c1"># Generate improvement recommendations</span>
+<span class="w">    </span>python<span class="w"> </span>scripts/coverage_validator.py
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;📋 Coverage improvement plan generated&quot;</span>
+
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ All coverage quality gates passed!&quot;</span>
+
+<span class="c1"># Step 6: Generate final report</span>
+python<span class="w"> </span>scripts/coverage_validator.py<span class="w"> </span>&gt;<span class="w"> </span>coverage_quality_report.md
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;📄 Coverage quality report generated&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🎉 Coverage improvement workflow completed successfully&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="coverage-monitoring-and-reporting-framework">
+<h2>🔧 Coverage Monitoring and Reporting Framework<a class="headerlink" href="#coverage-monitoring-and-reporting-framework" title="Link to this heading">¶</a></h2>
+<section id="real-time-coverage-dashboard">
+<h3>1. Real-time Coverage Dashboard<a class="headerlink" href="#real-time-coverage-dashboard" title="Link to this heading">¶</a></h3>
+<section id="coverage-metrics-aggregation">
+<h4>Coverage Metrics Aggregation<a class="headerlink" href="#coverage-metrics-aggregation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># src/utils/coverage/monitoring.py</span>
+<span class="c1">#==========================================================================================\\\</span>
+<span class="c1">#=========================== src/utils/coverage/monitoring.py ========================\\\</span>
+<span class="c1">#==========================================================================================\\\</span>
+
+<span class="sd">&quot;&quot;&quot;Real-time coverage monitoring and alerting system.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CoverageMetrics</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Coverage metrics data structure.&quot;&quot;&quot;</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">overall_coverage</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">critical_coverage</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">safety_coverage</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">branch_coverage</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">test_count</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">execution_time</span><span class="p">:</span> <span class="nb">float</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CoverageMonitor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Real-time coverage monitoring with trend analysis.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metrics_file</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;coverage_metrics.json&quot;</span><span class="p">)):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics_file</span> <span class="o">=</span> <span class="n">metrics_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CoverageMetrics</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_metrics_history</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_coverage_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coverage_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CoverageMetrics</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record coverage metrics from test run.&quot;&quot;&quot;</span>
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">CoverageMetrics</span><span class="p">(</span>
+            <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+            <span class="n">overall_coverage</span><span class="o">=</span><span class="n">coverage_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;overall&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">critical_coverage</span><span class="o">=</span><span class="n">coverage_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;critical&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">safety_coverage</span><span class="o">=</span><span class="n">coverage_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;safety&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">branch_coverage</span><span class="o">=</span><span class="n">coverage_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;branch&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">test_count</span><span class="o">=</span><span class="n">coverage_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;test_count&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">execution_time</span><span class="o">=</span><span class="n">coverage_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;execution_time&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_metrics_history</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">metrics</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_coverage_trends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze coverage trends over recent runs.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics_history</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">window_size</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;trend&quot;</span><span class="p">:</span> <span class="s2">&quot;insufficient_data&quot;</span><span class="p">}</span>
+
+        <span class="n">recent_metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics_history</span><span class="p">[</span><span class="o">-</span><span class="n">window_size</span><span class="p">:]</span>
+
+        <span class="c1"># Calculate trend slopes</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">calculate_slope</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">x_mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">/</span> <span class="n">n</span>
+            <span class="n">y_mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+
+            <span class="n">numerator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="n">x_mean</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+            <span class="n">denominator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="n">x_mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span> <span class="k">if</span> <span class="n">denominator</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="n">overall_slope</span> <span class="o">=</span> <span class="n">calculate_slope</span><span class="p">([</span><span class="n">m</span><span class="o">.</span><span class="n">overall_coverage</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">recent_metrics</span><span class="p">])</span>
+        <span class="n">critical_slope</span> <span class="o">=</span> <span class="n">calculate_slope</span><span class="p">([</span><span class="n">m</span><span class="o">.</span><span class="n">critical_coverage</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">recent_metrics</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;overall_trend&quot;</span><span class="p">:</span> <span class="s2">&quot;improving&quot;</span> <span class="k">if</span> <span class="n">overall_slope</span> <span class="o">&gt;</span> <span class="mf">0.1</span> <span class="k">else</span> <span class="s2">&quot;declining&quot;</span> <span class="k">if</span> <span class="n">overall_slope</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.1</span> <span class="k">else</span> <span class="s2">&quot;stable&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;critical_trend&quot;</span><span class="p">:</span> <span class="s2">&quot;improving&quot;</span> <span class="k">if</span> <span class="n">critical_slope</span> <span class="o">&gt;</span> <span class="mf">0.1</span> <span class="k">else</span> <span class="s2">&quot;declining&quot;</span> <span class="k">if</span> <span class="n">critical_slope</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.1</span> <span class="k">else</span> <span class="s2">&quot;stable&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;overall_slope&quot;</span><span class="p">:</span> <span class="n">overall_slope</span><span class="p">,</span>
+            <span class="s2">&quot;critical_slope&quot;</span><span class="p">:</span> <span class="n">critical_slope</span><span class="p">,</span>
+            <span class="s2">&quot;latest_metrics&quot;</span><span class="p">:</span> <span class="n">recent_metrics</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="vm">__dict__</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_coverage_alert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold_violations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate coverage alert for threshold violations.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">threshold_violations</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;✅ All coverage thresholds met&quot;</span>
+
+        <span class="n">alert</span> <span class="o">=</span> <span class="s2">&quot;🚨 COVERAGE THRESHOLD VIOLATIONS DETECTED</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">threshold_violations</span><span class="p">:</span>
+            <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;❌ </span><span class="si">{</span><span class="n">violation</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 Current Coverage Status:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">latest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics_history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics_history</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">latest</span><span class="p">:</span>
+            <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- Overall: </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">overall_coverage</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- Critical: </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">critical_coverage</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- Safety: </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">safety_coverage</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">alert</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_metrics_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save metrics history to JSON file.&quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics_history</span><span class="p">]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_metrics_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load metrics history from JSON file.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">metrics_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">CoverageMetrics</span><span class="p">(</span><span class="o">**</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="automated-coverage-reporting">
+<h3>2. Automated Coverage Reporting<a class="headerlink" href="#automated-coverage-reporting" title="Link to this heading">¶</a></h3>
+<section id="coverage-report-generation-system">
+<h4>Coverage Report Generation System<a class="headerlink" href="#coverage-report-generation-system" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># scripts/coverage_report_generator.py</span>
+<span class="c1">#==========================================================================================\\\</span>
+<span class="c1">#========================== coverage_report_generator.py =============================\\\</span>
+<span class="c1">#==========================================================================================\\\</span>
+
+<span class="sd">&quot;&quot;&quot;Automated coverage report generation with mathematical analysis.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CoverageReportGenerator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Advanced coverage reporting with scientific analysis.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_executive_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate executive summary for coverage analysis.&quot;&quot;&quot;</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;# Coverage Analysis Executive Summary</span>
+<span class="s2">**Generated**: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">**Repository**: https://github.com/theSadeQ/dip-smc-pso.git</span>
+
+<span class="s2">## Quality Gate Status</span>
+<span class="s2">| **Threshold** | **Current** | **Target** | **Status** | **Gap** |</span>
+<span class="s2">|---------------|-------------|------------|------------|---------|</span>
+<span class="s2">| Overall System | </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | 85.0% | </span><span class="si">{</span><span class="s1">&#39;✅ PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">85</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌ FAIL&#39;</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="mi">85</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">% |</span>
+<span class="s2">| Critical Components | </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;critical&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | 95.0% | </span><span class="si">{</span><span class="s1">&#39;✅ PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;critical&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">95</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌ FAIL&#39;</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="mi">95</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;critical&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">% |</span>
+<span class="s2">| Safety-Critical | </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;safety&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | 100.0% | </span><span class="si">{</span><span class="s1">&#39;✅ PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;safety&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌ FAIL&#39;</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;safety&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">% |</span>
+
+<span class="s2">## Mathematical Analysis</span>
+<span class="s2">**Coverage Efficiency**: $C_</span><span class="se">{{</span><span class="s2">eff</span><span class="se">}}</span><span class="s2"> = </span><span class="se">\\</span><span class="s2">frac</span><span class="se">{{</span><span class="s2">C_</span><span class="se">{{</span><span class="s2">achieved</span><span class="se">}}}}{{</span><span class="s2">C_</span><span class="se">{{</span><span class="s2">target</span><span class="se">}}}}</span><span class="s2"> = </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">85</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">$</span>
+
+<span class="s2">**Risk Assessment**: </span><span class="si">{</span><span class="s1">&#39;LOW&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">85</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;HIGH&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;MEDIUM&#39;</span><span class="si">}</span>
+
+<span class="s2">**Improvement Velocity Required**: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">85</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% per week to reach target in 4 weeks</span>
+<span class="s2">&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">report</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_component_breakdown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_metrics</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate detailed component coverage breakdown.&quot;&quot;&quot;</span>
+        <span class="n">breakdown</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">## Component Coverage Breakdown</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+        <span class="n">sorted_components</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">component_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">component</span><span class="p">,</span> <span class="n">coverage</span> <span class="ow">in</span> <span class="n">sorted_components</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✅&quot;</span> <span class="k">if</span> <span class="n">coverage</span> <span class="o">&gt;=</span> <span class="mi">85</span> <span class="k">else</span> <span class="s2">&quot;⚠️&quot;</span> <span class="k">if</span> <span class="n">coverage</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="k">else</span> <span class="s2">&quot;❌&quot;</span>
+            <span class="n">breakdown</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- **</span><span class="si">{</span><span class="n">component</span><span class="si">}</span><span class="s2">**: </span><span class="si">{</span><span class="n">coverage</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">breakdown</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_mathematical_recommendations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_coverage</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate mathematical recommendations for coverage improvement.&quot;&quot;&quot;</span>
+        <span class="n">gap</span> <span class="o">=</span> <span class="mi">85</span> <span class="o">-</span> <span class="n">current_coverage</span>
+
+        <span class="n">recommendations</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">## Mathematical Improvement Strategy</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="n">gap</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Calculate required test additions</span>
+            <span class="n">total_lines</span> <span class="o">=</span> <span class="mi">17354</span>  <span class="c1"># From coverage analysis</span>
+            <span class="n">uncovered_lines</span> <span class="o">=</span> <span class="n">total_lines</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">current_coverage</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+            <span class="n">target_coverage_lines</span> <span class="o">=</span> <span class="n">total_lines</span> <span class="o">*</span> <span class="mf">0.85</span>
+            <span class="n">required_additional_coverage</span> <span class="o">=</span> <span class="n">target_coverage_lines</span> <span class="o">-</span> <span class="p">(</span><span class="n">total_lines</span> <span class="o">-</span> <span class="n">uncovered_lines</span><span class="p">)</span>
+
+            <span class="n">recommendations</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">### Quantitative Analysis</span>
+<span class="s2">- **Total Lines**: </span><span class="si">{</span><span class="n">total_lines</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span>
+<span class="s2">- **Currently Covered**: </span><span class="si">{</span><span class="n">total_lines</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">uncovered_lines</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> lines</span>
+<span class="s2">- **Target Coverage Lines**: </span><span class="si">{</span><span class="n">target_coverage_lines</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> lines</span>
+<span class="s2">- **Additional Coverage Required**: </span><span class="si">{</span><span class="n">required_additional_coverage</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> lines</span>
+
+<span class="s2">### Improvement Mathematics</span>
+<span class="s2">$$</span><span class="se">\\</span><span class="s2">Delta C = </span><span class="se">\\</span><span class="s2">frac</span><span class="se">{{</span><span class="s2">L_</span><span class="se">{{</span><span class="s2">additional</span><span class="se">}}}}{{</span><span class="s2">L_</span><span class="se">{{</span><span class="s2">total</span><span class="se">}}}}</span><span class="s2"> </span><span class="se">\\</span><span class="s2">times 100 = </span><span class="se">\\</span><span class="s2">frac</span><span class="se">{{</span><span class="si">{</span><span class="n">required_additional_coverage</span><span class="si">:</span><span class="s2">,.0f</span><span class="se">}}</span><span class="si">}</span><span class="se">{{</span><span class="si">{</span><span class="n">total_lines</span><span class="si">:</span><span class="s2">,</span><span class="se">}}</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="s2">times 100 = </span><span class="si">{</span><span class="n">gap</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="se">\\</span><span class="s2">%$$</span>
+
+<span class="s2">### Strategic Recommendations</span>
+<span class="s2">1. **Priority 1**: Focus on safety-critical components (100% requirement)</span>
+<span class="s2">2. **Priority 2**: Enhance critical component coverage (95% requirement)</span>
+<span class="s2">3. **Priority 3**: Systematically improve general components (85% requirement)</span>
+
+<span class="s2">### Resource Estimation</span>
+<span class="s2">- **Test Development Effort**: ~</span><span class="si">{</span><span class="n">required_additional_coverage</span><span class="o">/</span><span class="mi">50</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> person-hours</span>
+<span class="s2">- **Timeline**: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">required_additional_coverage</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> weeks for systematic improvement</span>
+<span class="s2">- **Weekly Target**: </span><span class="si">{</span><span class="n">gap</span><span class="o">/</span><span class="mi">4</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% coverage improvement per week</span>
+<span class="s2">&quot;&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">recommendations</span> <span class="o">+=</span> <span class="s2">&quot;✅ **Coverage targets achieved!** Focus on maintenance and quality improvement.&quot;</span>
+
+        <span class="k">return</span> <span class="n">recommendations</span>
+
+<span class="c1"># Integration with existing quality gates</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">integration_with_claude_md</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integration instructions for CLAUDE.md quality standards.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">## Integration with CLAUDE.md Quality Standards</span>
+
+<span class="s2">### Automated Repository Management</span>
+<span class="s2">This coverage framework integrates with the mandatory auto-update policy:</span>
+
+<span class="s2">```bash</span>
+<span class="s2"># After coverage improvements</span>
+<span class="s2">git add .</span>
+<span class="s2">git commit -m &quot;Coverage Analysis: Systematic improvement to </span><span class="si">{new_percentage}</span><span class="s2">%</span>
+
+<span class="s2">- Enhanced test coverage for critical components</span>
+<span class="s2">- Added safety-critical component validation</span>
+<span class="s2">- Improved overall system coverage by </span><span class="si">{improvement}</span><span class="s2">%</span>
+
+<span class="s2">🤖 Generated with [Claude Code](https://claude.ai/code)</span>
+
+<span class="s2">Co-Authored-By: Claude &lt;noreply@anthropic.com&gt;&quot;</span>
+
+<span class="s2">git push origin main</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="quality-gate-integration">
+<h3>Quality Gate Integration<a class="headerlink" href="#quality-gate-integration" title="Link to this heading">¶</a></h3>
+<p>The coverage framework enforces the established thresholds:</p>
+<ul class="simple">
+<li><p><strong>Overall</strong> ≥ 85% (matching <a class="reference external" href="http://CLAUDE.md">CLAUDE.md</a> requirements)</p></li>
+<li><p><strong>Critical components</strong> ≥ 95% (controllers, dynamics, simulation engines)</p></li>
+<li><p><strong>Safety-critical</strong> 100% (safety guards, validation mechanisms)</p></li>
+</ul>
+</section>
+<section id="production-readiness-impact">
+<h3>Production Readiness Impact<a class="headerlink" href="#production-readiness-impact" title="Link to this heading">¶</a></h3>
+<p>Coverage improvements directly impact the Production Readiness Score calculation,
+moving from current 6.1/10 toward target 8.5+/10 for production deployment.
+“””</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
+
+<span class="c1">## 🔗 Integration with Existing Quality Standards</span>
+
+<span class="c1">### CLAUDE.md Integration</span>
+<span class="n">This</span> <span class="n">coverage</span> <span class="n">framework</span> <span class="n">fully</span> <span class="n">integrates</span> <span class="k">with</span> <span class="n">the</span> <span class="n">existing</span> <span class="n">CLAUDE</span><span class="o">.</span><span class="n">md</span> <span class="n">quality</span> <span class="n">standards</span><span class="p">:</span>
+
+<span class="mf">1.</span> <span class="o">**</span><span class="n">Coverage</span> <span class="n">Targets</span> <span class="n">Alignment</span><span class="o">**</span><span class="p">:</span> <span class="n">Maintains</span> <span class="n">the</span> <span class="n">established</span> <span class="mi">85</span><span class="o">%/</span><span class="mi">95</span><span class="o">%/</span><span class="mi">100</span><span class="o">%</span> <span class="n">thresholds</span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Automated</span> <span class="n">Git</span> <span class="n">Workflow</span><span class="o">**</span><span class="p">:</span> <span class="n">All</span> <span class="n">coverage</span> <span class="n">improvements</span> <span class="n">trigger</span> <span class="n">automatic</span> <span class="n">repository</span> <span class="n">updates</span>
+<span class="mf">3.</span> <span class="o">**</span><span class="n">Quality</span> <span class="n">Gate</span> <span class="n">Enforcement</span><span class="o">**</span><span class="p">:</span> <span class="n">Blocks</span> <span class="n">commits</span><span class="o">/</span><span class="n">deployments</span> <span class="n">below</span> <span class="n">thresholds</span>
+<span class="mf">4.</span> <span class="o">**</span><span class="n">Production</span> <span class="n">Readiness</span> <span class="n">Impact</span><span class="o">**</span><span class="p">:</span> <span class="n">Coverage</span> <span class="n">improvements</span> <span class="n">directly</span> <span class="n">impact</span> <span class="n">production</span> <span class="n">scoring</span>
+
+<span class="c1">### Multi-Agent Orchestration Compatibility</span>
+<span class="n">Compatible</span> <span class="k">with</span> <span class="n">the</span> <span class="mi">6</span><span class="o">-</span><span class="n">agent</span> <span class="n">orchestration</span> <span class="n">system</span><span class="p">:</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Ultimate</span> <span class="n">Orchestrator</span><span class="o">**</span><span class="p">:</span> <span class="n">Strategic</span> <span class="n">coverage</span> <span class="n">planning</span> <span class="ow">and</span> <span class="n">validation</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Integration</span> <span class="n">Coordinator</span><span class="o">**</span><span class="p">:</span> <span class="n">Cross</span><span class="o">-</span><span class="n">domain</span> <span class="n">coverage</span> <span class="n">verification</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Control</span> <span class="n">Systems</span> <span class="n">Specialist</span><span class="o">**</span><span class="p">:</span> <span class="n">Controller</span><span class="o">-</span><span class="n">specific</span> <span class="n">coverage</span> <span class="n">enhancement</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">PSO</span> <span class="n">Optimization</span> <span class="n">Engineer</span><span class="o">**</span><span class="p">:</span> <span class="n">Optimization</span> <span class="n">algorithm</span> <span class="n">coverage</span> <span class="n">validation</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Documentation</span> <span class="n">Expert</span><span class="o">**</span><span class="p">:</span> <span class="n">Coverage</span> <span class="n">methodology</span> <span class="n">documentation</span> <span class="ow">and</span> <span class="n">reporting</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Code</span> <span class="n">Beautification</span> <span class="n">Specialist</span><span class="o">**</span><span class="p">:</span> <span class="n">Coverage</span> <span class="n">tooling</span> <span class="ow">and</span> <span class="n">automation</span> <span class="n">optimization</span>
+
+<span class="o">---</span>
+
+<span class="c1">## 📋 Implementation Roadmap</span>
+
+<span class="c1">### Phase 1: Infrastructure (Week 1)</span>
+<span class="mf">1.</span> <span class="err">✅</span> <span class="n">Coverage</span> <span class="n">analysis</span> <span class="n">framework</span> <span class="n">documentation</span>
+<span class="mf">2.</span> <span class="err">⏳</span> <span class="n">Coverage</span> <span class="n">validation</span> <span class="n">scripts</span> <span class="n">deployment</span>
+<span class="mf">3.</span> <span class="err">⏳</span> <span class="n">Quality</span> <span class="n">gate</span> <span class="n">enforcement</span> <span class="n">setup</span>
+<span class="mf">4.</span> <span class="err">⏳</span> <span class="n">Automated</span> <span class="n">reporting</span> <span class="n">system</span> <span class="n">configuration</span>
+
+<span class="c1">### Phase 2: Critical Component Coverage (Week 2-3)</span>
+<span class="mf">1.</span> <span class="err">⏳</span> <span class="n">Safety</span><span class="o">-</span><span class="n">critical</span> <span class="n">components</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="n">coverage</span>
+<span class="mf">2.</span> <span class="err">⏳</span> <span class="n">SMC</span> <span class="n">controllers</span><span class="p">:</span> <span class="mi">95</span><span class="o">%</span> <span class="n">coverage</span>
+<span class="mf">3.</span> <span class="err">⏳</span> <span class="n">Dynamics</span> <span class="n">models</span><span class="p">:</span> <span class="mi">95</span><span class="o">%</span> <span class="n">coverage</span>
+<span class="mf">4.</span> <span class="err">⏳</span> <span class="n">PSO</span> <span class="n">optimizer</span><span class="p">:</span> <span class="mi">95</span><span class="o">%</span> <span class="n">coverage</span>
+
+<span class="c1">### Phase 3: System-wide Coverage (Week 4)</span>
+<span class="mf">1.</span> <span class="err">⏳</span> <span class="n">General</span> <span class="n">components</span><span class="p">:</span> <span class="mi">85</span><span class="o">%</span> <span class="n">coverage</span>
+<span class="mf">2.</span> <span class="err">⏳</span> <span class="n">Integration</span> <span class="n">tests</span> <span class="n">enhancement</span>
+<span class="mf">3.</span> <span class="err">⏳</span> <span class="n">End</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">end</span> <span class="n">coverage</span> <span class="n">validation</span>
+<span class="mf">4.</span> <span class="err">⏳</span> <span class="n">Production</span> <span class="n">readiness</span> <span class="n">certification</span>
+
+<span class="c1">### Success Metrics</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Coverage</span> <span class="n">Overall</span><span class="o">**</span><span class="p">:</span> <span class="mf">23.1</span><span class="o">%</span> <span class="err">→</span> <span class="mi">85</span><span class="o">%+</span> <span class="p">(</span><span class="err">↑</span><span class="mf">61.9</span><span class="o">%</span><span class="p">)</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Quality</span> <span class="n">Gates</span><span class="o">**</span><span class="p">:</span> <span class="mi">0</span><span class="o">/</span><span class="mi">3</span> <span class="err">→</span> <span class="mi">3</span><span class="o">/</span><span class="mi">3</span> <span class="n">passing</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Production</span> <span class="n">Readiness</span><span class="o">**</span><span class="p">:</span> <span class="mf">6.1</span><span class="o">/</span><span class="mi">10</span> <span class="err">→</span> <span class="mf">8.5</span><span class="o">+/</span><span class="mi">10</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Test</span> <span class="n">Suite</span> <span class="n">Robustness</span><span class="o">**</span><span class="p">:</span> <span class="n">Enhanced</span> <span class="n">scientific</span> <span class="n">validation</span>
+
+<span class="o">---</span>
+
+<span class="c1">## 🎯 Conclusion</span>
+
+<span class="n">This</span> <span class="n">comprehensive</span> <span class="n">coverage</span> <span class="n">analysis</span> <span class="n">methodology</span> <span class="n">framework</span> <span class="n">provides</span><span class="p">:</span>
+
+<span class="mf">1.</span> <span class="o">**</span><span class="n">Scientific</span> <span class="n">Rigor</span><span class="o">**</span><span class="p">:</span> <span class="n">Mathematical</span> <span class="n">validation</span> <span class="n">of</span> <span class="n">coverage</span> <span class="n">thresholds</span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Automated</span> <span class="n">Enforcement</span><span class="o">**</span><span class="p">:</span> <span class="n">Quality</span> <span class="n">gates</span> <span class="n">preventing</span> <span class="n">regression</span>
+<span class="mf">3.</span> <span class="o">**</span><span class="n">Systematic</span> <span class="n">Improvement</span><span class="o">**</span><span class="p">:</span> <span class="n">Data</span><span class="o">-</span><span class="n">driven</span> <span class="n">coverage</span> <span class="n">enhancement</span>
+<span class="mf">4.</span> <span class="o">**</span><span class="n">Production</span> <span class="n">Readiness</span><span class="o">**</span><span class="p">:</span> <span class="n">Direct</span> <span class="n">impact</span> <span class="n">on</span> <span class="n">deployment</span> <span class="n">capabilities</span>
+<span class="mf">5.</span> <span class="o">**</span><span class="n">Long</span><span class="o">-</span><span class="n">term</span> <span class="n">Maintenance</span><span class="o">**</span><span class="p">:</span> <span class="n">Sustainable</span> <span class="n">coverage</span> <span class="n">monitoring</span>
+
+<span class="n">The</span> <span class="n">framework</span> <span class="n">resolves</span> <span class="n">GitHub</span> <span class="n">Issue</span> <span class="c1">#9 by establishing robust coverage methodology that transforms the current 23.1% coverage crisis into a systematic path toward 85%/95%/100% quality gate achievement.</span>
+
+<span class="o">**</span><span class="n">Next</span> <span class="n">Action</span><span class="o">**</span><span class="p">:</span> <span class="n">Deploy</span> <span class="n">coverage</span> <span class="n">validation</span> <span class="n">scripts</span> <span class="ow">and</span> <span class="n">begin</span> <span class="n">systematic</span> <span class="n">coverage</span> <span class="n">improvement</span> <span class="n">according</span> <span class="n">to</span> <span class="n">the</span> <span class="n">established</span> <span class="n">mathematical</span> <span class="n">framework</span><span class="o">.</span>
+
+<span class="o">---</span>
+
+<span class="o">*</span><span class="n">Generated</span> <span class="n">by</span> <span class="n">Documentation</span> <span class="n">Expert</span> <span class="n">Agent</span> <span class="o">|</span> <span class="n">Control</span> <span class="n">Systems</span> <span class="n">Coverage</span> <span class="n">Analysis</span> <span class="n">Specialist</span><span class="o">*</span>
+<span class="o">*</span><span class="n">Repository</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">theSadeQ</span><span class="o">/</span><span class="n">dip</span><span class="o">-</span><span class="n">smc</span><span class="o">-</span><span class="n">pso</span><span class="o">.</span><span class="n">git</span><span class="o">*</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Coverage Analysis Methodology Framework</a><ul>
+<li><a class="reference internal" href="#github-issue-9-resolution-quality-gate-documentation-enforcement">GitHub Issue #9 Resolution: Quality Gate Documentation &amp; Enforcement</a></li>
+<li><a class="reference internal" href="#coverage-crisis-analysis">🚨 Coverage Crisis Analysis</a><ul>
+<li><a class="reference internal" href="#current-state-assessment">Current State Assessment</a></li>
+<li><a class="reference internal" href="#coverage-gap-analysis">Coverage Gap Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coverage-measurement-framework">📊 Coverage Measurement Framework</a><ul>
+<li><a class="reference internal" href="#coverage-tool-configuration">1. Coverage Tool Configuration</a><ul>
+<li><a class="reference internal" href="#pytest-cov-configuration-primary">pytest-cov Configuration (Primary)</a></li>
+<li><a class="reference internal" href="#advanced-coverage-commands">Advanced Coverage Commands</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coverage-categorization-system">2. Coverage Categorization System</a><ul>
+<li><a class="reference internal" href="#component-classification-matrix">Component Classification Matrix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mathematical-coverage-analysis">3. Mathematical Coverage Analysis</a><ul>
+<li><a class="reference internal" href="#coverage-metrics-definition">Coverage Metrics Definition</a></li>
+<li><a class="reference internal" href="#multi-tier-coverage-requirements">Multi-Tier Coverage Requirements</a></li>
+<li><a class="reference internal" href="#branch-coverage-analysis">Branch Coverage Analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quality-gate-enforcement-specification">🎯 Quality Gate Enforcement Specification</a><ul>
+<li><a class="reference internal" href="#automated-quality-gates">1. Automated Quality Gates</a><ul>
+<li><a class="reference internal" href="#ci-cd-pipeline-integration">CI/CD Pipeline Integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pre-commit-coverage-hooks">2. Pre-commit Coverage Hooks</a><ul>
+<li><a class="reference internal" href="#pre-commit-configuration">Pre-commit Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coverage-threshold-enforcement">3. Coverage Threshold Enforcement</a><ul>
+<li><a class="reference internal" href="#dynamic-threshold-validation">Dynamic Threshold Validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coverage-improvement-implementation-guide">📈 Coverage Improvement Implementation Guide</a><ul>
+<li><a class="reference internal" href="#systematic-gap-analysis">1. Systematic Gap Analysis</a><ul>
+<li><a class="reference internal" href="#coverage-gap-identification-script">Coverage Gap Identification Script</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-development-standards">2. Test Development Standards</a><ul>
+<li><a class="reference internal" href="#test-coverage-requirements-by-component-type">Test Coverage Requirements by Component Type</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coverage-automation-scripts">3. Coverage Automation Scripts</a><ul>
+<li><a class="reference internal" href="#automated-coverage-improvement-workflow">Automated Coverage Improvement Workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coverage-monitoring-and-reporting-framework">🔧 Coverage Monitoring and Reporting Framework</a><ul>
+<li><a class="reference internal" href="#real-time-coverage-dashboard">1. Real-time Coverage Dashboard</a><ul>
+<li><a class="reference internal" href="#coverage-metrics-aggregation">Coverage Metrics Aggregation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#automated-coverage-reporting">2. Automated Coverage Reporting</a><ul>
+<li><a class="reference internal" href="#coverage-report-generation-system">Coverage Report Generation System</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quality-gate-integration">Quality Gate Integration</a></li>
+<li><a class="reference internal" href="#production-readiness-impact">Production Readiness Impact</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

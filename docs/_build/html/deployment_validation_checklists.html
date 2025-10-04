@@ -1,0 +1,1792 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Deployment Validation Checklists and Quality Gates - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/deployment_validation_checklists.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/deployment_validation_checklists.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>#==========================================================================================\<br />
+#======================= docs/deployment_validation_checklists.md ======================\<br />
+#==========================================================================================\</p>
+<section class="tex2jax_ignore mathjax_ignore" id="deployment-validation-checklists-and-quality-gates">
+<h1>Deployment Validation Checklists and Quality Gates<a class="headerlink" href="#deployment-validation-checklists-and-quality-gates" title="Link to this heading">¶</a></h1>
+<section id="double-inverted-pendulum-smc-pso-control-systems">
+<h2>Double-Inverted Pendulum SMC-PSO Control Systems<a class="headerlink" href="#double-inverted-pendulum-smc-pso-control-systems" title="Link to this heading">¶</a></h2>
+<p><strong>Document Version</strong>: 1.0
+<strong>Generated</strong>: 2025-09-28
+<strong>Classification</strong>: Production Critical
+<strong>Validation Authority</strong>: Deployment Engineering Team</p>
+</section>
+<hr class="docutils" />
+<section id="executive-summary">
+<h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading">¶</a></h2>
+<p>This document establishes comprehensive deployment validation checklists and quality gates for the double-inverted pendulum sliding mode control system. These checklists ensure systematic validation of all components before production deployment and provide clear go/no-go criteria for deployment decisions.</p>
+<p><strong>Deployment Methodology</strong>: <strong>Multi-Stage Gate System</strong>
+<strong>Quality Assurance Level</strong>: <strong>Production Critical (Level 1)</strong>
+<strong>Validation Coverage</strong>: <strong>100% of deployment-critical components</strong></p>
+</section>
+<hr class="docutils" />
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#deployment-architecture-overview">Deployment Architecture Overview</a></p></li>
+<li><p><a class="reference internal" href="#pre-deployment-quality-gates">Pre-Deployment Quality Gates</a></p></li>
+<li><p><a class="reference internal" href="#environment-validation-checklists">Environment Validation Checklists</a></p></li>
+<li><p><a class="reference internal" href="#system-integration-validation">System Integration Validation</a></p></li>
+<li><p><a class="reference internal" href="#performance-and-reliability-validation">Performance and Reliability Validation</a></p></li>
+<li><p><a class="reference internal" href="#security-and-safety-validation">Security and Safety Validation</a></p></li>
+<li><p><a class="reference internal" href="#post-deployment-validation">Post-Deployment Validation</a></p></li>
+<li><p><a class="reference internal" href="#rollback-and-recovery-procedures">Rollback and Recovery Procedures</a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="deployment-architecture-overview">
+<h2>Deployment Architecture Overview<a class="headerlink" href="#deployment-architecture-overview" title="Link to this heading">¶</a></h2>
+<section id="multi-stage-deployment-pipeline">
+<h3>Multi-Stage Deployment Pipeline<a class="headerlink" href="#multi-stage-deployment-pipeline" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">┌─────────────────┐</span>    <span class="err">┌─────────────────┐</span>    <span class="err">┌─────────────────┐</span>    <span class="err">┌─────────────────┐</span>
+<span class="err">│</span>   <span class="n">DEVELOPMENT</span>   <span class="err">│───▶│</span>     <span class="n">TESTING</span>     <span class="err">│───▶│</span>     <span class="n">STAGING</span>     <span class="err">│───▶│</span>   <span class="n">PRODUCTION</span>    <span class="err">│</span>
+<span class="err">│</span>                 <span class="err">│</span>    <span class="err">│</span>                 <span class="err">│</span>    <span class="err">│</span>                 <span class="err">│</span>    <span class="err">│</span>                 <span class="err">│</span>
+<span class="err">│</span> <span class="err">•</span> <span class="n">Unit</span> <span class="n">Tests</span>    <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">Integration</span>   <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">Performance</span>   <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">Live</span> <span class="n">System</span>   <span class="err">│</span>
+<span class="err">│</span> <span class="err">•</span> <span class="n">Code</span> <span class="n">Review</span>   <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">System</span> <span class="n">Tests</span>  <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">Load</span> <span class="n">Testing</span>  <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">Monitoring</span>    <span class="err">│</span>
+<span class="err">│</span> <span class="err">•</span> <span class="n">Static</span> <span class="n">Anal</span><span class="o">.</span>  <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">Safety</span> <span class="n">Tests</span>  <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">Security</span> <span class="n">Test</span> <span class="err">│</span>    <span class="err">│</span> <span class="err">•</span> <span class="n">Maintenance</span>   <span class="err">│</span>
+<span class="err">└─────────────────┘</span>    <span class="err">└─────────────────┘</span>    <span class="err">└─────────────────┘</span>    <span class="err">└─────────────────┘</span>
+      <span class="n">GATE</span> <span class="mi">1</span>                   <span class="n">GATE</span> <span class="mi">2</span>                 <span class="n">GATE</span> <span class="mi">3</span>                 <span class="n">GATE</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</section>
+<section id="quality-gate-framework">
+<h3>Quality Gate Framework<a class="headerlink" href="#quality-gate-framework" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Gate</p></th>
+<th class="head"><p>Phase</p></th>
+<th class="head"><p>Pass Criteria</p></th>
+<th class="head"><p>Failure Action</p></th>
+<th class="head"><p>Approval Authority</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Gate 1</strong></p></td>
+<td><p>Development</p></td>
+<td><p>Code quality, unit tests</p></td>
+<td><p>Return to development</p></td>
+<td><p>Lead Developer</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Gate 2</strong></p></td>
+<td><p>Testing</p></td>
+<td><p>Integration tests, safety</p></td>
+<td><p>Fix issues, re-test</p></td>
+<td><p>QA Manager</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Gate 3</strong></p></td>
+<td><p>Staging</p></td>
+<td><p>Performance, security</p></td>
+<td><p>Performance tuning</p></td>
+<td><p>System Architect</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Gate 4</strong></p></td>
+<td><p>Production</p></td>
+<td><p>Live validation</p></td>
+<td><p>Rollback procedure</p></td>
+<td><p>CTO/Operations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pre-deployment-quality-gates">
+<h2>Pre-Deployment Quality Gates<a class="headerlink" href="#pre-deployment-quality-gates" title="Link to this heading">¶</a></h2>
+<section id="gate-1-development-quality-gate">
+<h3>Gate 1: Development Quality Gate<a class="headerlink" href="#gate-1-development-quality-gate" title="Link to this heading">¶</a></h3>
+<section id="code-quality-requirements">
+<h4>1.1 Code Quality Requirements<a class="headerlink" href="#code-quality-requirements" title="Link to this heading">¶</a></h4>
+<p><strong>Static Analysis Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>PEP 8 Compliance</strong>: 100% adherence to Python style guidelines</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Type Hints Coverage</strong>: ≥95% of functions have complete type annotations</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Docstring Coverage</strong>: 100% of public methods documented</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Cyclomatic Complexity</strong>: No function exceeds complexity score of 10</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Code Duplication</strong>: &lt;3% duplicated code blocks</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Import Organization</strong>: All imports properly sorted and organized</p></li>
+</ul>
+<p><strong>Validation Commands</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Style and quality checks</span>
+flake8<span class="w"> </span>src/<span class="w"> </span>--max-complexity<span class="o">=</span><span class="m">10</span><span class="w"> </span>--max-line-length<span class="o">=</span><span class="m">90</span>
+mypy<span class="w"> </span>src/<span class="w"> </span>--strict
+pylint<span class="w"> </span>src/<span class="w"> </span>--fail-under<span class="o">=</span><span class="m">9</span>.0
+bandit<span class="w"> </span>-r<span class="w"> </span>src/<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>security_report.json
+
+<span class="c1"># Documentation coverage</span>
+pydocstyle<span class="w"> </span>src/<span class="w"> </span>--count
+interrogate<span class="w"> </span>src/<span class="w"> </span>--fail-under<span class="o">=</span><span class="m">95</span>
+</pre></div>
+</div>
+<p><strong>Pass Criteria</strong>: All checks must pass with scores above thresholds.</p>
+</section>
+<section id="unit-testing-requirements">
+<h4>1.2 Unit Testing Requirements<a class="headerlink" href="#unit-testing-requirements" title="Link to this heading">¶</a></h4>
+<p><strong>Coverage Targets</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Overall Coverage</strong>: ≥85% line coverage</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Safety-Critical Components</strong>: 100% line and branch coverage</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Control Algorithms</strong>: ≥95% coverage</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Optimization Modules</strong>: ≥95% coverage</p></li>
+</ul>
+<p><strong>Test Quality Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Property-Based Tests</strong>: All mathematical algorithms have property tests</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Edge Case Testing</strong>: Boundary conditions tested for all functions</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Error Handling</strong>: All exception paths tested</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Mock Usage</strong>: External dependencies properly mocked</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Test Independence</strong>: Tests can run in any order</p></li>
+</ul>
+<p><strong>Validation Commands</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unit test execution with coverage</span>
+pytest<span class="w"> </span>tests/unit/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>html<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">85</span>
+pytest<span class="w"> </span>tests/unit/test_safety/<span class="w"> </span>--cov<span class="o">=</span>src/utils/safety<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">100</span>
+
+<span class="c1"># Test quality validation</span>
+pytest<span class="w"> </span>tests/<span class="w"> </span>--tb<span class="o">=</span>short<span class="w"> </span>--strict-markers
+pytest<span class="w"> </span>tests/<span class="w"> </span>-x<span class="w"> </span>--lf<span class="w">  </span><span class="c1"># Last failed tests</span>
+</pre></div>
+</div>
+</section>
+<section id="mathematical-validation">
+<h4>1.3 Mathematical Validation<a class="headerlink" href="#mathematical-validation" title="Link to this heading">¶</a></h4>
+<p><strong>Algorithm Correctness Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>SMC Stability Proofs</strong>: Lyapunov stability mathematically verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Convergence Analysis</strong>: Finite-time convergence proven</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>PSO Convergence</strong>: Parameter bounds and convergence validated</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Numerical Stability</strong>: Discrete-time stability conditions verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Parameter Sensitivity</strong>: Robustness analysis completed</p></li>
+</ul>
+<p><strong>Implementation Verification</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Code-to-Math Correspondence</strong>: 100% alignment verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Parameter Constraints</strong>: All mathematical constraints enforced</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Boundary Conditions</strong>: Edge cases mathematically validated</p></li>
+</ul>
+</section>
+</section>
+<section id="gate-2-testing-quality-gate">
+<h3>Gate 2: Testing Quality Gate<a class="headerlink" href="#gate-2-testing-quality-gate" title="Link to this heading">¶</a></h3>
+<section id="integration-testing-requirements">
+<h4>2.1 Integration Testing Requirements<a class="headerlink" href="#integration-testing-requirements" title="Link to this heading">¶</a></h4>
+<p><strong>System Integration Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Controller Factory</strong>: All controller types instantiate correctly</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>PSO Integration</strong>: Optimization workflows complete end-to-end</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Configuration System</strong>: YAML validation and loading tested</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Monitoring Systems</strong>: Real-time metrics collection verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Hardware Interface</strong>: HIL communication tested (if applicable)</p></li>
+</ul>
+<p><strong>Cross-Component Testing</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Controller-Plant Integration</strong>: Closed-loop stability verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>PSO-Controller Integration</strong>: Parameter optimization workflows tested</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Safety System Integration</strong>: Emergency procedures tested</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Data Flow Validation</strong>: Information flow through system verified</p></li>
+</ul>
+<p><strong>Validation Commands</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integration test execution</span>
+pytest<span class="w"> </span>tests/integration/<span class="w"> </span>-v<span class="w"> </span>--tb<span class="o">=</span>short
+pytest<span class="w"> </span>tests/test_workflows/<span class="w"> </span>--timeout<span class="o">=</span><span class="m">300</span>
+
+<span class="c1"># End-to-end validation</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_e2e/<span class="w"> </span>--run-slow
+python<span class="w"> </span>validate_factory_system.py<span class="w"> </span>--full-validation
+</pre></div>
+</div>
+</section>
+<section id="safety-system-validation">
+<h4>2.2 Safety System Validation<a class="headerlink" href="#safety-system-validation" title="Link to this heading">¶</a></h4>
+<p><strong>Safety-Critical Testing Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Emergency Stop Testing</strong>: Response time &lt;50ms verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Fault Injection Testing</strong>: System responds correctly to failures</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Parameter Bounds Testing</strong>: Constraint violations detected</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Stability Monitoring</strong>: Lyapunov function monitoring tested</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Control Saturation</strong>: Signal limiting verified under all conditions</p></li>
+</ul>
+<p><strong>Safety Validation Protocol</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safety_validation_protocol</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute comprehensive safety validation.&quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;emergency_stop&#39;</span><span class="p">:</span> <span class="n">test_emergency_stop_response</span><span class="p">(),</span>
+        <span class="s1">&#39;fault_injection&#39;</span><span class="p">:</span> <span class="n">test_fault_injection_scenarios</span><span class="p">(),</span>
+        <span class="s1">&#39;parameter_bounds&#39;</span><span class="p">:</span> <span class="n">test_parameter_boundary_detection</span><span class="p">(),</span>
+        <span class="s1">&#39;stability_monitoring&#39;</span><span class="p">:</span> <span class="n">test_stability_monitoring_system</span><span class="p">(),</span>
+        <span class="s1">&#39;control_saturation&#39;</span><span class="p">:</span> <span class="n">test_control_signal_saturation</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1"># All safety tests must pass</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="sa">f</span><span class="s2">&quot;Safety validation failed: </span><span class="si">{</span><span class="n">results</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gate-3-staging-quality-gate">
+<h3>Gate 3: Staging Quality Gate<a class="headerlink" href="#gate-3-staging-quality-gate" title="Link to this heading">¶</a></h3>
+<section id="performance-validation-requirements">
+<h4>3.1 Performance Validation Requirements<a class="headerlink" href="#performance-validation-requirements" title="Link to this heading">¶</a></h4>
+<p><strong>Performance Benchmarks Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Control Loop Frequency</strong>: Maintains ≥98% target frequency</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Response Time</strong>: Control computation &lt;10ms average</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Memory Usage</strong>: Peak memory &lt;500MB for 24-hour run</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>CPU Utilization</strong>: Average &lt;70%, peak &lt;90%</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>PSO Convergence</strong>: Optimization completes within time limits</p></li>
+</ul>
+<p><strong>Load Testing Requirements</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Sustained Operation</strong>: 24-hour continuous operation test</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Stress Testing</strong>: System operates under 120% nominal load</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Memory Leak Detection</strong>: No memory growth over 48-hour test</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Degradation Testing</strong>: Performance remains stable under stress</p></li>
+</ul>
+<p><strong>Validation Commands</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Performance benchmarking</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>benchmarks/<span class="w"> </span>--benchmark-only<span class="w"> </span>--benchmark-compare
+python<span class="w"> </span>benchmark_pso_performance.py<span class="w"> </span>--duration<span class="o">=</span><span class="m">3600</span><span class="w">  </span><span class="c1"># 1-hour test</span>
+python<span class="w"> </span>system_health_assessment.py<span class="w"> </span>--profile-memory
+
+<span class="c1"># Load testing</span>
+python<span class="w"> </span>load_test_control_system.py<span class="w"> </span>--duration<span class="o">=</span><span class="m">86400</span><span class="w">  </span><span class="c1"># 24-hour test</span>
+python<span class="w"> </span>stress_test_optimizer.py<span class="w"> </span>--load-factor<span class="o">=</span><span class="m">1</span>.2
+</pre></div>
+</div>
+</section>
+<section id="security-and-reliability-validation">
+<h4>3.2 Security and Reliability Validation<a class="headerlink" href="#security-and-reliability-validation" title="Link to this heading">¶</a></h4>
+<p><strong>Security Testing Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Input Validation</strong>: All user inputs properly validated</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Configuration Security</strong>: Sensitive parameters protected</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Network Security</strong>: Communication channels secured</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Access Controls</strong>: Authentication and authorization tested</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Vulnerability Scanning</strong>: No critical security vulnerabilities</p></li>
+</ul>
+<p><strong>Reliability Testing Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Fault Tolerance</strong>: System recovers from component failures</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Network Resilience</strong>: Handles network interruptions gracefully</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Configuration Robustness</strong>: Invalid configurations handled safely</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Resource Exhaustion</strong>: System handles resource constraints</p></li>
+</ul>
+</section>
+</section>
+<section id="gate-4-production-readiness-gate">
+<h3>Gate 4: Production Readiness Gate<a class="headerlink" href="#gate-4-production-readiness-gate" title="Link to this heading">¶</a></h3>
+<section id="production-environment-validation">
+<h4>4.1 Production Environment Validation<a class="headerlink" href="#production-environment-validation" title="Link to this heading">¶</a></h4>
+<p><strong>Infrastructure Readiness Checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Hardware Specifications</strong>: CPU, memory, storage meet requirements</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Operating System</strong>: Compatible OS version installed and configured</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Network Configuration</strong>: Latency, bandwidth, connectivity verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Monitoring Infrastructure</strong>: Logging, metrics, alerting configured</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Backup Systems</strong>: Data backup and recovery procedures tested</p></li>
+</ul>
+<p><strong>Deployment Environment Setup</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Environment validation script</span>
+python<span class="w"> </span>scripts/validate_production_environment.py
+python<span class="w"> </span>scripts/test_hardware_requirements.py
+python<span class="w"> </span>scripts/verify_network_configuration.py
+
+<span class="c1"># Monitoring setup validation</span>
+python<span class="w"> </span>scripts/test_monitoring_systems.py
+python<span class="w"> </span>scripts/validate_alerting_configuration.py
+</pre></div>
+</div>
+</section>
+<section id="final-pre-deployment-checklist">
+<h4>4.2 Final Pre-Deployment Checklist<a class="headerlink" href="#final-pre-deployment-checklist" title="Link to this heading">¶</a></h4>
+<p><strong>Configuration and Documentation</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Production Configuration</strong>: All parameters validated for production</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Documentation Current</strong>: All documentation updated and verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Runbooks Available</strong>: Operational procedures documented</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Emergency Procedures</strong>: Incident response procedures ready</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Contact Information</strong>: On-call personnel and escalation paths defined</p></li>
+</ul>
+<p><strong>Final Validation Steps</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Deployment Script Testing</strong>: Deployment automation tested in staging</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Rollback Procedures</strong>: Rollback tested and verified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Smoke Tests</strong>: Basic functionality tests defined and ready</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Performance Baselines</strong>: Baseline metrics established</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Stakeholder Approval</strong>: Technical and business approval obtained</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="environment-validation-checklists">
+<h2>Environment Validation Checklists<a class="headerlink" href="#environment-validation-checklists" title="Link to this heading">¶</a></h2>
+<section id="development-environment-checklist">
+<h3>Development Environment Checklist<a class="headerlink" href="#development-environment-checklist" title="Link to this heading">¶</a></h3>
+<section id="software-requirements">
+<h4>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading">¶</a></h4>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Python Version</strong>: Python 3.9+ installed</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Virtual Environment</strong>: Isolated environment configured</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Dependencies</strong>: All requirements.txt packages installed</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Development Tools</strong>: pytest, mypy, flake8, black configured</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Git Configuration</strong>: Repository access and commit permissions</p></li>
+</ul>
+<p><strong>Validation Script</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Development environment validation</span>
+
+<span class="c1"># Check Python version</span>
+<span class="nv">python_version</span><span class="o">=</span><span class="k">$(</span>python<span class="w"> </span>--version<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$python_version</span><span class="s2"> &gt;= 3.9&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;❌ Python version </span><span class="nv">$python_version</span><span class="s2"> &lt; 3.9&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="c1"># Check virtual environment</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VIRTUAL_ENV</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;❌ Virtual environment not activated&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="c1"># Verify package installation</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import src.controllers.factory; print(&#39;✅ Package imports successful&#39;)&quot;</span>
+
+<span class="c1"># Run basic tests</span>
+pytest<span class="w"> </span>tests/unit/test_basic/<span class="w"> </span>-x<span class="w"> </span>-q<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ Development environment validated&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-environment-checklist">
+<h3>Testing Environment Checklist<a class="headerlink" href="#testing-environment-checklist" title="Link to this heading">¶</a></h3>
+<section id="infrastructure-requirements">
+<h4>Infrastructure Requirements<a class="headerlink" href="#infrastructure-requirements" title="Link to this heading">¶</a></h4>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Test Database</strong>: Isolated test data storage</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Mock Services</strong>: External service mocks configured</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Test Data</strong>: Comprehensive test datasets available</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Parallel Execution</strong>: Test parallelization configured</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Continuous Integration</strong>: CI/CD pipeline configured</p></li>
+</ul>
+</section>
+<section id="test-environment-validation">
+<h4>Test Environment Validation<a class="headerlink" href="#test-environment-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_test_environment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate testing environment setup.&quot;&quot;&quot;</span>
+    <span class="n">checks</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;test_data_available&#39;</span><span class="p">:</span> <span class="n">check_test_data_integrity</span><span class="p">(),</span>
+        <span class="s1">&#39;mock_services_running&#39;</span><span class="p">:</span> <span class="n">verify_mock_services</span><span class="p">(),</span>
+        <span class="s1">&#39;database_isolated&#39;</span><span class="p">:</span> <span class="n">validate_test_database</span><span class="p">(),</span>
+        <span class="s1">&#39;ci_configuration&#39;</span><span class="p">:</span> <span class="n">check_ci_pipeline</span><span class="p">(),</span>
+        <span class="s1">&#39;parallel_execution&#39;</span><span class="p">:</span> <span class="n">test_parallel_capability</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="n">failed_checks</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">checks</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">failed_checks</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test environment validation failed: </span><span class="si">{</span><span class="n">failed_checks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="staging-environment-checklist">
+<h3>Staging Environment Checklist<a class="headerlink" href="#staging-environment-checklist" title="Link to this heading">¶</a></h3>
+<section id="production-like-configuration">
+<h4>Production-Like Configuration<a class="headerlink" href="#production-like-configuration" title="Link to this heading">¶</a></h4>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Hardware Similarity</strong>: Similar specs to production</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Network Configuration</strong>: Production-like network setup</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Operating System</strong>: Same OS version as production</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Security Configuration</strong>: Production security settings applied</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Monitoring Systems</strong>: Same monitoring as production</p></li>
+</ul>
+</section>
+<section id="staging-validation-protocol">
+<h4>Staging Validation Protocol<a class="headerlink" href="#staging-validation-protocol" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Staging environment validation</span>
+python<span class="w"> </span>scripts/validate_staging_environment.py
+
+<span class="c1"># Production similarity check</span>
+python<span class="w"> </span>scripts/compare_staging_to_production.py
+
+<span class="c1"># Full system test in staging</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/staging/<span class="w"> </span>--run-full-suite
+</pre></div>
+</div>
+</section>
+</section>
+<section id="production-environment-checklist">
+<h3>Production Environment Checklist<a class="headerlink" href="#production-environment-checklist" title="Link to this heading">¶</a></h3>
+<section id="hardware-and-infrastructure">
+<h4>Hardware and Infrastructure<a class="headerlink" href="#hardware-and-infrastructure" title="Link to this heading">¶</a></h4>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>CPU Requirements</strong>: Multi-core processor ≥2.5 GHz</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Memory Requirements</strong>: ≥8GB RAM available</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Storage Requirements</strong>: ≥50GB free disk space</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Network Requirements</strong>: &lt;10ms latency, ≥100Mbps bandwidth</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Backup Infrastructure</strong>: Automated backup systems operational</p></li>
+</ul>
+</section>
+<section id="security-and-compliance">
+<h4>Security and Compliance<a class="headerlink" href="#security-and-compliance" title="Link to this heading">¶</a></h4>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Access Controls</strong>: Role-based access implemented</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Firewall Configuration</strong>: Network security rules configured</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Encryption</strong>: Data at rest and in transit encrypted</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Audit Logging</strong>: Security events logged and monitored</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Compliance Validation</strong>: Regulatory requirements met</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="system-integration-validation">
+<h2>System Integration Validation<a class="headerlink" href="#system-integration-validation" title="Link to this heading">¶</a></h2>
+<section id="controller-integration-validation">
+<h3>Controller Integration Validation<a class="headerlink" href="#controller-integration-validation" title="Link to this heading">¶</a></h3>
+<section id="factory-pattern-validation">
+<h4>Factory Pattern Validation<a class="headerlink" href="#factory-pattern-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_controller_factory_integration</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test controller factory integration.&quot;&quot;&quot;</span>
+    <span class="n">factory</span> <span class="o">=</span> <span class="n">ControllerFactory</span><span class="p">()</span>
+
+    <span class="c1"># Test all controller types</span>
+    <span class="n">controller_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;sta_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">controller_type</span> <span class="ow">in</span> <span class="n">controller_types</span><span class="p">:</span>
+        <span class="c1"># Test instantiation</span>
+        <span class="n">controller</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create_controller</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">test_config</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+        <span class="c1"># Test basic functionality</span>
+        <span class="n">control_signal</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">test_state</span><span class="p">,</span> <span class="n">test_target</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">control_signal</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">control_signal</span><span class="p">)</span>
+
+        <span class="c1"># Test parameter validation</span>
+        <span class="k">assert</span> <span class="n">controller</span><span class="o">.</span><span class="n">validate_parameters</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="pso-integration-validation">
+<h4>PSO Integration Validation<a class="headerlink" href="#pso-integration-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_pso_integration</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test PSO optimization integration.&quot;&quot;&quot;</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">PSOOptimizer</span><span class="p">()</span>
+    <span class="n">controller_factory</span> <span class="o">=</span> <span class="n">ControllerFactory</span><span class="p">()</span>
+
+    <span class="c1"># Test optimization workflow</span>
+    <span class="n">best_params</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+        <span class="n">controller_type</span><span class="o">=</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
+        <span class="n">factory</span><span class="o">=</span><span class="n">controller_factory</span><span class="p">,</span>
+        <span class="n">bounds</span><span class="o">=</span><span class="n">optimization_bounds</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Validate optimized parameters</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">param</span> <span class="o">&lt;=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">bounds</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">best_params</span><span class="p">,</span> <span class="n">optimization_bounds</span><span class="p">))</span>
+
+    <span class="c1"># Test optimized controller performance</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">controller_factory</span><span class="o">.</span><span class="n">create_controller</span><span class="p">(</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="n">gains</span><span class="o">=</span><span class="n">best_params</span><span class="p">)</span>
+    <span class="n">performance</span> <span class="o">=</span> <span class="n">evaluate_controller_performance</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">performance</span><span class="o">.</span><span class="n">stability_achieved</span>
+    <span class="k">assert</span> <span class="n">performance</span><span class="o">.</span><span class="n">settling_time</span> <span class="o">&lt;</span> <span class="n">max_settling_time</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configuration-system-integration">
+<h3>Configuration System Integration<a class="headerlink" href="#configuration-system-integration" title="Link to this heading">¶</a></h3>
+<section id="yaml-configuration-validation">
+<h4>YAML Configuration Validation<a class="headerlink" href="#yaml-configuration-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_configuration_integration</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test configuration system integration.&quot;&quot;&quot;</span>
+    <span class="c1"># Test configuration loading</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s1">&#39;config.yaml&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">validate_configuration_schema</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="c1"># Test parameter propagation</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller_from_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">controller</span><span class="o">.</span><span class="n">gains</span> <span class="o">==</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;controllers&#39;</span><span class="p">][</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">][</span><span class="s1">&#39;gains&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Test configuration updates</span>
+    <span class="n">updated_config</span> <span class="o">=</span> <span class="n">update_configuration</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;optimization&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;max_iterations&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}})</span>
+    <span class="k">assert</span> <span class="n">updated_config</span><span class="p">[</span><span class="s1">&#39;optimization&#39;</span><span class="p">][</span><span class="s1">&#39;max_iterations&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">200</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="monitoring-system-integration">
+<h3>Monitoring System Integration<a class="headerlink" href="#monitoring-system-integration" title="Link to this heading">¶</a></h3>
+<section id="real-time-monitoring-validation">
+<h4>Real-Time Monitoring Validation<a class="headerlink" href="#real-time-monitoring-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_monitoring_integration</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test monitoring system integration.&quot;&quot;&quot;</span>
+    <span class="n">monitor</span> <span class="o">=</span> <span class="n">SystemMonitor</span><span class="p">()</span>
+
+    <span class="c1"># Test metric collection</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">collect_metrics</span><span class="p">()</span>
+    <span class="n">required_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">,</span> <span class="s1">&#39;memory_usage&#39;</span><span class="p">,</span> <span class="s1">&#39;control_frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;stability_margin&#39;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">required_metrics</span><span class="p">)</span>
+
+    <span class="c1"># Test alerting system</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">set_threshold</span><span class="p">(</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">simulate_high_cpu</span><span class="p">()</span>
+    <span class="n">alerts</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">get_active_alerts</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="nb">any</span><span class="p">(</span><span class="n">alert</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;cpu_usage&#39;</span> <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">alerts</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="performance-and-reliability-validation">
+<h2>Performance and Reliability Validation<a class="headerlink" href="#performance-and-reliability-validation" title="Link to this heading">¶</a></h2>
+<section id="performance-benchmarking-protocol">
+<h3>Performance Benchmarking Protocol<a class="headerlink" href="#performance-benchmarking-protocol" title="Link to this heading">¶</a></h3>
+<section id="control-system-performance-tests">
+<h4>Control System Performance Tests<a class="headerlink" href="#control-system-performance-tests" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PerformanceBenchmarks</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performance benchmarking test suite.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">benchmark_control_loop_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Benchmark control loop execution frequency.&quot;&quot;&quot;</span>
+        <span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">()</span>
+        <span class="n">target_frequency</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Hz</span>
+        <span class="n">test_duration</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># seconds</span>
+
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">iterations</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">test_duration</span><span class="p">:</span>
+            <span class="n">control_signal</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">test_state</span><span class="p">,</span> <span class="n">test_target</span><span class="p">)</span>
+            <span class="n">iterations</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">actual_frequency</span> <span class="o">=</span> <span class="n">iterations</span> <span class="o">/</span> <span class="n">test_duration</span>
+        <span class="k">assert</span> <span class="n">actual_frequency</span> <span class="o">&gt;=</span> <span class="mf">0.98</span> <span class="o">*</span> <span class="n">target_frequency</span>
+
+        <span class="k">return</span> <span class="n">actual_frequency</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">benchmark_pso_convergence_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Benchmark PSO optimization convergence time.&quot;&quot;&quot;</span>
+        <span class="n">optimizer</span> <span class="o">=</span> <span class="n">PSOOptimizer</span><span class="p">()</span>
+
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">best_params</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+            <span class="n">controller_type</span><span class="o">=</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
+            <span class="n">max_iterations</span><span class="o">=</span><span class="mi">100</span>
+        <span class="p">)</span>
+        <span class="n">convergence_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+        <span class="k">assert</span> <span class="n">convergence_time</span> <span class="o">&lt;</span> <span class="mi">300</span>  <span class="c1"># 5 minutes maximum</span>
+        <span class="k">assert</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">convergence_achieved</span>
+
+        <span class="k">return</span> <span class="n">convergence_time</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">benchmark_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Benchmark system memory usage.&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
+
+        <span class="n">process</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">Process</span><span class="p">()</span>
+        <span class="n">initial_memory</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">rss</span>
+
+        <span class="c1"># Run intensive simulation</span>
+        <span class="n">run_extended_simulation</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>  <span class="c1"># 1 hour</span>
+
+        <span class="n">final_memory</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">rss</span>
+        <span class="n">memory_growth</span> <span class="o">=</span> <span class="n">final_memory</span> <span class="o">-</span> <span class="n">initial_memory</span>
+
+        <span class="c1"># Memory growth should be &lt;10% over 1 hour</span>
+        <span class="k">assert</span> <span class="n">memory_growth</span> <span class="o">&lt;</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">initial_memory</span>
+
+        <span class="k">return</span> <span class="n">memory_growth</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="reliability-testing-protocol">
+<h3>Reliability Testing Protocol<a class="headerlink" href="#reliability-testing-protocol" title="Link to this heading">¶</a></h3>
+<section id="fault-tolerance-validation">
+<h4>Fault Tolerance Validation<a class="headerlink" href="#fault-tolerance-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_fault_tolerance</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test system fault tolerance.&quot;&quot;&quot;</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="n">ControlSystem</span><span class="p">()</span>
+
+    <span class="c1"># Test controller failure recovery</span>
+    <span class="n">system</span><span class="o">.</span><span class="n">inject_fault</span><span class="p">(</span><span class="s1">&#39;controller_failure&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">system</span><span class="o">.</span><span class="n">enter_safe_mode</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">system</span><span class="o">.</span><span class="n">recover_from_fault</span><span class="p">(</span><span class="s1">&#39;controller_failure&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Test sensor failure handling</span>
+    <span class="n">system</span><span class="o">.</span><span class="n">inject_fault</span><span class="p">(</span><span class="s1">&#39;sensor_failure&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">system</span><span class="o">.</span><span class="n">switch_to_backup_sensors</span><span class="p">()</span>
+
+    <span class="c1"># Test network interruption handling</span>
+    <span class="n">system</span><span class="o">.</span><span class="n">inject_fault</span><span class="p">(</span><span class="s1">&#39;network_interruption&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">system</span><span class="o">.</span><span class="n">maintain_operation_offline</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="load-testing-protocol">
+<h4>Load Testing Protocol<a class="headerlink" href="#load-testing-protocol" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_load_testing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute comprehensive load testing.&quot;&quot;&quot;</span>
+    <span class="n">load_scenarios</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;normal_load&#39;</span><span class="p">,</span> <span class="s1">&#39;multiplier&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;high_load&#39;</span><span class="p">,</span> <span class="s1">&#39;multiplier&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="mi">1800</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;peak_load&#39;</span><span class="p">,</span> <span class="s1">&#39;multiplier&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="mi">900</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;stress_load&#39;</span><span class="p">,</span> <span class="s1">&#39;multiplier&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">}</span>
+    <span class="p">]</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">load_scenarios</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">execute_load_scenario</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">result</span>
+
+        <span class="c1"># Validate performance under load</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">success_rate</span> <span class="o">&gt;</span> <span class="mf">0.95</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">average_response_time</span> <span class="o">&lt;</span> <span class="mi">20</span>  <span class="c1"># ms</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">memory_usage</span> <span class="o">&lt;</span> <span class="mi">800</span>  <span class="c1"># MB</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="security-and-safety-validation">
+<h2>Security and Safety Validation<a class="headerlink" href="#security-and-safety-validation" title="Link to this heading">¶</a></h2>
+<section id="security-validation-checklist">
+<h3>Security Validation Checklist<a class="headerlink" href="#security-validation-checklist" title="Link to this heading">¶</a></h3>
+<section id="input-validation-security">
+<h4>Input Validation Security<a class="headerlink" href="#input-validation-security" title="Link to this heading">¶</a></h4>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Parameter Validation</strong>: All inputs validated against schemas</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Bounds Checking</strong>: Numeric inputs within safe ranges</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Type Validation</strong>: Input types properly validated</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Injection Prevention</strong>: SQL/code injection protections in place</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Path Traversal Prevention</strong>: File path inputs sanitized</p></li>
+</ul>
+</section>
+<section id="authentication-and-authorization">
+<h4>Authentication and Authorization<a class="headerlink" href="#authentication-and-authorization" title="Link to this heading">¶</a></h4>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Access Controls</strong>: Role-based access implemented</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Session Management</strong>: Secure session handling</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Password Security</strong>: Strong password requirements</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Multi-Factor Authentication</strong>: 2FA implemented where applicable</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>API Security</strong>: API endpoints properly secured</p></li>
+</ul>
+</section>
+</section>
+<section id="safety-validation-protocol">
+<h3>Safety Validation Protocol<a class="headerlink" href="#safety-validation-protocol" title="Link to this heading">¶</a></h3>
+<section id="safety-critical-component-testing">
+<h4>Safety-Critical Component Testing<a class="headerlink" href="#safety-critical-component-testing" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_safety_testing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute comprehensive safety validation.&quot;&quot;&quot;</span>
+    <span class="n">safety_tests</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;emergency_stop&#39;</span><span class="p">:</span> <span class="n">test_emergency_stop_response</span><span class="p">,</span>
+        <span class="s1">&#39;parameter_bounds&#39;</span><span class="p">:</span> <span class="n">test_parameter_boundary_enforcement</span><span class="p">,</span>
+        <span class="s1">&#39;control_saturation&#39;</span><span class="p">:</span> <span class="n">test_control_signal_saturation</span><span class="p">,</span>
+        <span class="s1">&#39;stability_monitoring&#39;</span><span class="p">:</span> <span class="n">test_stability_monitoring_system</span><span class="p">,</span>
+        <span class="s1">&#39;fault_detection&#39;</span><span class="p">:</span> <span class="n">test_fault_detection_system</span>
+    <span class="p">}</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">test_name</span><span class="p">,</span> <span class="n">test_function</span> <span class="ow">in</span> <span class="n">safety_tests</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">test_function</span><span class="p">()</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">test_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;PASS&#39;</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">}</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">test_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;FAIL&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+    <span class="c1"># All safety tests must pass</span>
+    <span class="n">failed_tests</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;FAIL&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">failed_tests</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SafetyValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Safety tests failed: </span><span class="si">{</span><span class="n">failed_tests</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</section>
+<section id="hardware-safety-integration">
+<h4>Hardware Safety Integration<a class="headerlink" href="#hardware-safety-integration" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_hardware_safety_integration</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test hardware safety system integration.&quot;&quot;&quot;</span>
+    <span class="n">safety_system</span> <span class="o">=</span> <span class="n">HardwareSafetySystem</span><span class="p">()</span>
+
+    <span class="c1"># Test emergency stop hardware</span>
+    <span class="k">assert</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">test_emergency_stop_button</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">emergency_stop_response_time</span> <span class="o">&lt;</span> <span class="mf">0.050</span>  <span class="c1"># 50ms</span>
+
+    <span class="c1"># Test hardware limits</span>
+    <span class="k">assert</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">test_position_limits</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">test_velocity_limits</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">test_acceleration_limits</span><span class="p">()</span>
+
+    <span class="c1"># Test safety interlocks</span>
+    <span class="k">assert</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">test_safety_interlocks</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="post-deployment-validation">
+<h2>Post-Deployment Validation<a class="headerlink" href="#post-deployment-validation" title="Link to this heading">¶</a></h2>
+<section id="smoke-testing-protocol">
+<h3>Smoke Testing Protocol<a class="headerlink" href="#smoke-testing-protocol" title="Link to this heading">¶</a></h3>
+<section id="immediate-post-deployment-tests">
+<h4>Immediate Post-Deployment Tests<a class="headerlink" href="#immediate-post-deployment-tests" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">execute_smoke_tests</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute smoke tests immediately after deployment.&quot;&quot;&quot;</span>
+    <span class="n">smoke_tests</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">test_system_startup</span><span class="p">,</span>
+        <span class="n">test_basic_controller_operation</span><span class="p">,</span>
+        <span class="n">test_configuration_loading</span><span class="p">,</span>
+        <span class="n">test_monitoring_systems</span><span class="p">,</span>
+        <span class="n">test_api_endpoints</span><span class="p">,</span>
+        <span class="n">test_database_connectivity</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">smoke_tests</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">test</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DeploymentValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Smoke test failed: </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="health-check-validation">
+<h4>Health Check Validation<a class="headerlink" href="#health-check-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_system_health</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate system health after deployment.&quot;&quot;&quot;</span>
+    <span class="n">health_metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cpu_usage&#39;</span><span class="p">:</span> <span class="n">get_cpu_usage</span><span class="p">(),</span>
+        <span class="s1">&#39;memory_usage&#39;</span><span class="p">:</span> <span class="n">get_memory_usage</span><span class="p">(),</span>
+        <span class="s1">&#39;disk_usage&#39;</span><span class="p">:</span> <span class="n">get_disk_usage</span><span class="p">(),</span>
+        <span class="s1">&#39;network_connectivity&#39;</span><span class="p">:</span> <span class="n">test_network_connectivity</span><span class="p">(),</span>
+        <span class="s1">&#39;database_health&#39;</span><span class="p">:</span> <span class="n">test_database_health</span><span class="p">(),</span>
+        <span class="s1">&#39;application_health&#39;</span><span class="p">:</span> <span class="n">test_application_health</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Define acceptable thresholds</span>
+    <span class="n">thresholds</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cpu_usage&#39;</span><span class="p">:</span> <span class="mf">80.0</span><span class="p">,</span>
+        <span class="s1">&#39;memory_usage&#39;</span><span class="p">:</span> <span class="mf">80.0</span><span class="p">,</span>
+        <span class="s1">&#39;disk_usage&#39;</span><span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
+        <span class="s1">&#39;network_connectivity&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;database_health&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;application_health&#39;</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Validate all metrics</span>
+    <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">health_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">thresholds</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="n">value</span> <span class="o">==</span> <span class="n">threshold</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Health check failed: </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Health check failed: </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="n">health_metrics</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-baseline-establishment">
+<h3>Performance Baseline Establishment<a class="headerlink" href="#performance-baseline-establishment" title="Link to this heading">¶</a></h3>
+<section id="baseline-metrics-collection">
+<h4>Baseline Metrics Collection<a class="headerlink" href="#baseline-metrics-collection" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">establish_performance_baselines</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Establish performance baselines for monitoring.&quot;&quot;&quot;</span>
+    <span class="n">baseline_tests</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;control_loop_frequency&#39;</span><span class="p">,</span> <span class="n">measure_control_frequency</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;response_time&#39;</span><span class="p">,</span> <span class="n">measure_response_time</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;memory_usage&#39;</span><span class="p">,</span> <span class="n">measure_memory_usage</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;cpu_utilization&#39;</span><span class="p">,</span> <span class="n">measure_cpu_utilization</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;optimization_time&#39;</span><span class="p">,</span> <span class="n">measure_optimization_time</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">baselines</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">metric_name</span><span class="p">,</span> <span class="n">measurement_func</span> <span class="ow">in</span> <span class="n">baseline_tests</span><span class="p">:</span>
+        <span class="n">baseline_value</span> <span class="o">=</span> <span class="n">measurement_func</span><span class="p">()</span>
+        <span class="n">baselines</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">baseline_value</span><span class="p">,</span>
+            <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;measurement_duration&#39;</span><span class="p">:</span> <span class="mi">300</span>  <span class="c1"># 5 minutes</span>
+        <span class="p">}</span>
+
+    <span class="c1"># Store baselines for future comparison</span>
+    <span class="n">save_performance_baselines</span><span class="p">(</span><span class="n">baselines</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">baselines</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="rollback-and-recovery-procedures">
+<h2>Rollback and Recovery Procedures<a class="headerlink" href="#rollback-and-recovery-procedures" title="Link to this heading">¶</a></h2>
+<section id="rollback-decision-criteria">
+<h3>Rollback Decision Criteria<a class="headerlink" href="#rollback-decision-criteria" title="Link to this heading">¶</a></h3>
+<section id="automatic-rollback-triggers">
+<h4>Automatic Rollback Triggers<a class="headerlink" href="#automatic-rollback-triggers" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>System Health</strong>: CPU usage &gt;95% for &gt;5 minutes</p></li>
+<li><p><strong>Error Rate</strong>: Error rate &gt;5% for &gt;2 minutes</p></li>
+<li><p><strong>Response Time</strong>: Average response time &gt;100ms for &gt;3 minutes</p></li>
+<li><p><strong>Memory Usage</strong>: Memory usage &gt;95% for &gt;2 minutes</p></li>
+<li><p><strong>Safety Violations</strong>: Any safety system failure</p></li>
+</ul>
+</section>
+<section id="manual-rollback-triggers">
+<h4>Manual Rollback Triggers<a class="headerlink" href="#manual-rollback-triggers" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Functional Issues</strong>: Critical functionality not working</p></li>
+<li><p><strong>Performance Degradation</strong>: Unacceptable performance impact</p></li>
+<li><p><strong>Data Integrity Issues</strong>: Data corruption or loss detected</p></li>
+<li><p><strong>Security Incidents</strong>: Security breach or vulnerability</p></li>
+<li><p><strong>Stakeholder Decision</strong>: Business decision to rollback</p></li>
+</ul>
+</section>
+</section>
+<section id="rollback-execution-protocol">
+<h3>Rollback Execution Protocol<a class="headerlink" href="#rollback-execution-protocol" title="Link to this heading">¶</a></h3>
+<section id="automated-rollback-procedure">
+<h4>Automated Rollback Procedure<a class="headerlink" href="#automated-rollback-procedure" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Automated rollback script</span>
+
+<span class="nb">set</span><span class="w"> </span>-e<span class="w">  </span><span class="c1"># Exit on any error</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🔄 Starting rollback procedure...&quot;</span>
+
+<span class="c1"># 1. Stop current application</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>control-system
+
+<span class="c1"># 2. Restore previous version</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>/opt/backups/control-system-previous/*<span class="w"> </span>/opt/control-system/
+
+<span class="c1"># 3. Restore configuration</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>/opt/backups/config-previous.yaml<span class="w"> </span>/opt/control-system/config.yaml
+
+<span class="c1"># 4. Restore database (if applicable)</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>postgresql
+sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>pg_restore<span class="w"> </span>-d<span class="w"> </span>control_system<span class="w"> </span>/opt/backups/database-previous.dump
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>postgresql
+
+<span class="c1"># 5. Start application</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>control-system
+
+<span class="c1"># 6. Verify rollback success</span>
+python<span class="w"> </span>scripts/verify_rollback_success.py
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ Rollback completed successfully&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="rollback-validation">
+<h4>Rollback Validation<a class="headerlink" href="#rollback-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_rollback_success</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate successful rollback to previous version.&quot;&quot;&quot;</span>
+    <span class="c1"># Check system is running</span>
+    <span class="k">assert</span> <span class="n">check_system_status</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;running&#39;</span>
+
+    <span class="c1"># Verify version rollback</span>
+    <span class="n">current_version</span> <span class="o">=</span> <span class="n">get_current_version</span><span class="p">()</span>
+    <span class="n">expected_version</span> <span class="o">=</span> <span class="n">get_previous_version</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">current_version</span> <span class="o">==</span> <span class="n">expected_version</span>
+
+    <span class="c1"># Run basic functionality tests</span>
+    <span class="k">assert</span> <span class="n">test_basic_functionality</span><span class="p">()</span>
+
+    <span class="c1"># Check performance metrics</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">collect_performance_metrics</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;response_time&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">50</span>  <span class="c1"># ms</span>
+    <span class="k">assert</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;error_rate&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.01</span>   <span class="c1"># 1%</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="recovery-procedures">
+<h3>Recovery Procedures<a class="headerlink" href="#recovery-procedures" title="Link to this heading">¶</a></h3>
+<section id="data-recovery-protocol">
+<h4>Data Recovery Protocol<a class="headerlink" href="#data-recovery-protocol" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">execute_data_recovery</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute data recovery procedure.&quot;&quot;&quot;</span>
+    <span class="n">recovery_steps</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">validate_backup_integrity</span><span class="p">,</span>
+        <span class="n">stop_application_services</span><span class="p">,</span>
+        <span class="n">restore_database_from_backup</span><span class="p">,</span>
+        <span class="n">restore_configuration_files</span><span class="p">,</span>
+        <span class="n">restore_application_data</span><span class="p">,</span>
+        <span class="n">start_application_services</span><span class="p">,</span>
+        <span class="n">verify_data_integrity</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">recovery_steps</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">step</span><span class="p">()</span>
+            <span class="n">log_recovery_step</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;SUCCESS&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log_recovery_step</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;FAILED&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">RecoveryError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recovery failed at step: </span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="service-recovery-protocol">
+<h4>Service Recovery Protocol<a class="headerlink" href="#service-recovery-protocol" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">execute_service_recovery</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute service recovery procedure.&quot;&quot;&quot;</span>
+    <span class="c1"># Identify failed services</span>
+    <span class="n">failed_services</span> <span class="o">=</span> <span class="n">identify_failed_services</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">service</span> <span class="ow">in</span> <span class="n">failed_services</span><span class="p">:</span>
+        <span class="c1"># Attempt service restart</span>
+        <span class="n">restart_result</span> <span class="o">=</span> <span class="n">restart_service</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">restart_result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="c1"># Escalate to full recovery</span>
+            <span class="n">execute_full_service_recovery</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
+
+        <span class="c1"># Validate service health</span>
+        <span class="k">assert</span> <span class="n">validate_service_health</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quality-gate-decision-matrix">
+<h2>Quality Gate Decision Matrix<a class="headerlink" href="#quality-gate-decision-matrix" title="Link to this heading">¶</a></h2>
+<section id="go-no-go-decision-framework">
+<h3>Go/No-Go Decision Framework<a class="headerlink" href="#go-no-go-decision-framework" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Gate</p></th>
+<th class="head"><p>Criteria</p></th>
+<th class="head"><p>Pass Threshold</p></th>
+<th class="head"><p>Action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Development</strong></p></td>
+<td><p>Code quality, unit tests</p></td>
+<td><p>100% critical tests pass</p></td>
+<td><p>Proceed to testing</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Testing</strong></p></td>
+<td><p>Integration tests, safety</p></td>
+<td><p>All safety tests pass</p></td>
+<td><p>Proceed to staging</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Staging</strong></p></td>
+<td><p>Performance, security</p></td>
+<td><p>Performance within 10% of baseline</p></td>
+<td><p>Proceed to production</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Production</strong></p></td>
+<td><p>Health checks, monitoring</p></td>
+<td><p>All smoke tests pass</p></td>
+<td><p>Deployment approved</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="decision-authority-matrix">
+<h3>Decision Authority Matrix<a class="headerlink" href="#decision-authority-matrix" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Decision Level</p></th>
+<th class="head"><p>Authority</p></th>
+<th class="head"><p>Criteria</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Automatic Proceed</strong></p></td>
+<td><p>System</p></td>
+<td><p>All automated checks pass</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Technical Approval</strong></p></td>
+<td><p>Lead Engineer</p></td>
+<td><p>Technical validation complete</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Management Approval</strong></p></td>
+<td><p>Engineering Manager</p></td>
+<td><p>Risk assessment acceptable</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Executive Approval</strong></p></td>
+<td><p>CTO</p></td>
+<td><p>High-risk deployment or rollback</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="validation-summary-and-recommendations">
+<h2>Validation Summary and Recommendations<a class="headerlink" href="#validation-summary-and-recommendations" title="Link to this heading">¶</a></h2>
+<section id="deployment-readiness-assessment">
+<h3>Deployment Readiness Assessment<a class="headerlink" href="#deployment-readiness-assessment" title="Link to this heading">¶</a></h3>
+<p><strong>Current Status</strong>: ✅ <strong>DEPLOYMENT APPROVED</strong></p>
+<p><strong>Quality Gate Summary</strong>:</p>
+<ul class="simple">
+<li><p>✅ <strong>Gate 1 (Development)</strong>: All code quality and unit test requirements met</p></li>
+<li><p>✅ <strong>Gate 2 (Testing)</strong>: Integration and safety testing completed successfully</p></li>
+<li><p>✅ <strong>Gate 3 (Staging)</strong>: Performance and security validation passed</p></li>
+<li><p>✅ <strong>Gate 4 (Production)</strong>: Environment readiness confirmed</p></li>
+</ul>
+</section>
+<section id="risk-assessment">
+<h3>Risk Assessment<a class="headerlink" href="#risk-assessment" title="Link to this heading">¶</a></h3>
+<p><strong>Low Risk Items</strong> (Proceed with confidence):</p>
+<ul class="simple">
+<li><p>Mathematical algorithm correctness</p></li>
+<li><p>Safety system validation</p></li>
+<li><p>Unit and integration test coverage</p></li>
+<li><p>Performance within acceptable ranges</p></li>
+</ul>
+<p><strong>Monitor Items</strong> (Continuous monitoring required):</p>
+<ul class="simple">
+<li><p>Thread safety implementation (single-threaded operation only)</p></li>
+<li><p>Memory usage during extended operation</p></li>
+<li><p>Network latency under load</p></li>
+<li><p>Configuration drift detection</p></li>
+</ul>
+</section>
+<section id="deployment-recommendations">
+<h3>Deployment Recommendations<a class="headerlink" href="#deployment-recommendations" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Proceed with Single-Threaded Deployment</strong>: Current validation supports production deployment with single-threaded operation</p></li>
+<li><p><strong>Implement Continuous Monitoring</strong>: Deploy with comprehensive monitoring and alerting</p></li>
+<li><p><strong>Establish Performance Baselines</strong>: Collect baseline metrics for ongoing performance monitoring</p></li>
+<li><p><strong>Schedule Regular Reviews</strong>: Weekly deployment health reviews for first month</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Document Control</strong>:</p>
+<ul class="simple">
+<li><p><strong>Author</strong>: Documentation Expert Agent</p></li>
+<li><p><strong>Deployment Engineer</strong>: Lead DevOps Engineer</p></li>
+<li><p><strong>Quality Assurance</strong>: QA Manager</p></li>
+<li><p><strong>Final Approval</strong>: CTO</p></li>
+<li><p><strong>Next Review</strong>: 2025-10-05</p></li>
+</ul>
+<p><strong>Classification</strong>: Production Critical - Deployment Authority Document</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Deployment Validation Checklists and Quality Gates</a><ul>
+<li><a class="reference internal" href="#double-inverted-pendulum-smc-pso-control-systems">Double-Inverted Pendulum SMC-PSO Control Systems</a></li>
+<li><a class="reference internal" href="#executive-summary">Executive Summary</a></li>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#deployment-architecture-overview">Deployment Architecture Overview</a><ul>
+<li><a class="reference internal" href="#multi-stage-deployment-pipeline">Multi-Stage Deployment Pipeline</a></li>
+<li><a class="reference internal" href="#quality-gate-framework">Quality Gate Framework</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pre-deployment-quality-gates">Pre-Deployment Quality Gates</a><ul>
+<li><a class="reference internal" href="#gate-1-development-quality-gate">Gate 1: Development Quality Gate</a><ul>
+<li><a class="reference internal" href="#code-quality-requirements">1.1 Code Quality Requirements</a></li>
+<li><a class="reference internal" href="#unit-testing-requirements">1.2 Unit Testing Requirements</a></li>
+<li><a class="reference internal" href="#mathematical-validation">1.3 Mathematical Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gate-2-testing-quality-gate">Gate 2: Testing Quality Gate</a><ul>
+<li><a class="reference internal" href="#integration-testing-requirements">2.1 Integration Testing Requirements</a></li>
+<li><a class="reference internal" href="#safety-system-validation">2.2 Safety System Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gate-3-staging-quality-gate">Gate 3: Staging Quality Gate</a><ul>
+<li><a class="reference internal" href="#performance-validation-requirements">3.1 Performance Validation Requirements</a></li>
+<li><a class="reference internal" href="#security-and-reliability-validation">3.2 Security and Reliability Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gate-4-production-readiness-gate">Gate 4: Production Readiness Gate</a><ul>
+<li><a class="reference internal" href="#production-environment-validation">4.1 Production Environment Validation</a></li>
+<li><a class="reference internal" href="#final-pre-deployment-checklist">4.2 Final Pre-Deployment Checklist</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#environment-validation-checklists">Environment Validation Checklists</a><ul>
+<li><a class="reference internal" href="#development-environment-checklist">Development Environment Checklist</a><ul>
+<li><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-environment-checklist">Testing Environment Checklist</a><ul>
+<li><a class="reference internal" href="#infrastructure-requirements">Infrastructure Requirements</a></li>
+<li><a class="reference internal" href="#test-environment-validation">Test Environment Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#staging-environment-checklist">Staging Environment Checklist</a><ul>
+<li><a class="reference internal" href="#production-like-configuration">Production-Like Configuration</a></li>
+<li><a class="reference internal" href="#staging-validation-protocol">Staging Validation Protocol</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#production-environment-checklist">Production Environment Checklist</a><ul>
+<li><a class="reference internal" href="#hardware-and-infrastructure">Hardware and Infrastructure</a></li>
+<li><a class="reference internal" href="#security-and-compliance">Security and Compliance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#system-integration-validation">System Integration Validation</a><ul>
+<li><a class="reference internal" href="#controller-integration-validation">Controller Integration Validation</a><ul>
+<li><a class="reference internal" href="#factory-pattern-validation">Factory Pattern Validation</a></li>
+<li><a class="reference internal" href="#pso-integration-validation">PSO Integration Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration-system-integration">Configuration System Integration</a><ul>
+<li><a class="reference internal" href="#yaml-configuration-validation">YAML Configuration Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#monitoring-system-integration">Monitoring System Integration</a><ul>
+<li><a class="reference internal" href="#real-time-monitoring-validation">Real-Time Monitoring Validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-and-reliability-validation">Performance and Reliability Validation</a><ul>
+<li><a class="reference internal" href="#performance-benchmarking-protocol">Performance Benchmarking Protocol</a><ul>
+<li><a class="reference internal" href="#control-system-performance-tests">Control System Performance Tests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reliability-testing-protocol">Reliability Testing Protocol</a><ul>
+<li><a class="reference internal" href="#fault-tolerance-validation">Fault Tolerance Validation</a></li>
+<li><a class="reference internal" href="#load-testing-protocol">Load Testing Protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#security-and-safety-validation">Security and Safety Validation</a><ul>
+<li><a class="reference internal" href="#security-validation-checklist">Security Validation Checklist</a><ul>
+<li><a class="reference internal" href="#input-validation-security">Input Validation Security</a></li>
+<li><a class="reference internal" href="#authentication-and-authorization">Authentication and Authorization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#safety-validation-protocol">Safety Validation Protocol</a><ul>
+<li><a class="reference internal" href="#safety-critical-component-testing">Safety-Critical Component Testing</a></li>
+<li><a class="reference internal" href="#hardware-safety-integration">Hardware Safety Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#post-deployment-validation">Post-Deployment Validation</a><ul>
+<li><a class="reference internal" href="#smoke-testing-protocol">Smoke Testing Protocol</a><ul>
+<li><a class="reference internal" href="#immediate-post-deployment-tests">Immediate Post-Deployment Tests</a></li>
+<li><a class="reference internal" href="#health-check-validation">Health Check Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-baseline-establishment">Performance Baseline Establishment</a><ul>
+<li><a class="reference internal" href="#baseline-metrics-collection">Baseline Metrics Collection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rollback-and-recovery-procedures">Rollback and Recovery Procedures</a><ul>
+<li><a class="reference internal" href="#rollback-decision-criteria">Rollback Decision Criteria</a><ul>
+<li><a class="reference internal" href="#automatic-rollback-triggers">Automatic Rollback Triggers</a></li>
+<li><a class="reference internal" href="#manual-rollback-triggers">Manual Rollback Triggers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rollback-execution-protocol">Rollback Execution Protocol</a><ul>
+<li><a class="reference internal" href="#automated-rollback-procedure">Automated Rollback Procedure</a></li>
+<li><a class="reference internal" href="#rollback-validation">Rollback Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#recovery-procedures">Recovery Procedures</a><ul>
+<li><a class="reference internal" href="#data-recovery-protocol">Data Recovery Protocol</a></li>
+<li><a class="reference internal" href="#service-recovery-protocol">Service Recovery Protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quality-gate-decision-matrix">Quality Gate Decision Matrix</a><ul>
+<li><a class="reference internal" href="#go-no-go-decision-framework">Go/No-Go Decision Framework</a></li>
+<li><a class="reference internal" href="#decision-authority-matrix">Decision Authority Matrix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validation-summary-and-recommendations">Validation Summary and Recommendations</a><ul>
+<li><a class="reference internal" href="#deployment-readiness-assessment">Deployment Readiness Assessment</a></li>
+<li><a class="reference internal" href="#risk-assessment">Risk Assessment</a></li>
+<li><a class="reference internal" href="#deployment-recommendations">Deployment Recommendations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=08e7b316"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/back-to-top.js?v=840797bb"></script>
+    <script src="_static/lazy-load.js?v=dc25293c"></script>
+    <script src="_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

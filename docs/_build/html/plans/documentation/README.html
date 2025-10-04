@@ -1,0 +1,1332 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Complete Codebase Documentation Plan - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/plans/documentation/README.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/plans/documentation/README.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="complete-codebase-documentation-plan">
+<h1>Complete Codebase Documentation Plan<a class="headerlink" href="#complete-codebase-documentation-plan" title="Link to this heading">¶</a></h1>
+<p><strong>Project</strong>: Double Inverted Pendulum Sliding Mode Control with PSO Optimization
+<strong>Total Duration</strong>: 6-8 Weeks (1-2 Months)
+<strong>Estimated Effort</strong>: 160-200 hours
+<strong>Target</strong>: World-class, research-grade documentation with embedded source code</p>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>This documentation initiative will transform the DIP-SMC-PSO codebase into a comprehensive, publication-ready knowledge base by:</p>
+<p>✅ <strong>Embedding all 316 Python source files</strong> into Sphinx documentation
+✅ <strong>Providing line-by-line explanations</strong> for critical algorithms
+✅ <strong>Documenting mathematical foundations</strong> with LaTeX equations and proofs
+✅ <strong>Creating 50+ working code examples</strong> and 18 tutorials
+✅ <strong>Generating 40+ architecture diagrams</strong> with Mermaid
+✅ <strong>Establishing automated documentation workflows</strong> for maintenance</p>
+</section>
+<hr class="docutils" />
+<section id="documentation-goals">
+<h2>Documentation Goals<a class="headerlink" href="#documentation-goals" title="Link to this heading">¶</a></h2>
+<section id="quantitative-targets">
+<h3>Quantitative Targets<a class="headerlink" href="#quantitative-targets" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>316</strong> Python files documented with embedded source code</p></li>
+<li><p><strong>450+</strong> new documentation pages created</p></li>
+<li><p><strong>80,000-100,000</strong> lines of markdown content</p></li>
+<li><p><strong>50+</strong> standalone executable examples</p></li>
+<li><p><strong>18</strong> comprehensive tutorials (beginner → advanced → developer)</p></li>
+<li><p><strong>40+</strong> visual diagrams (architecture, UML, flowcharts)</p></li>
+<li><p><strong>30</strong> mathematical theory documents with proofs</p></li>
+</ul>
+</section>
+<section id="qualitative-goals">
+<h3>Qualitative Goals<a class="headerlink" href="#qualitative-goals" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Research-grade</strong>: Suitable for academic publication and citation</p></li>
+<li><p><strong>Onboarding-optimized</strong>: New developers productive in days, not weeks</p></li>
+<li><p><strong>Self-contained</strong>: Complete reference for every component</p></li>
+<li><p><strong>Educational</strong>: Teach control theory and PSO from first principles</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="weekly-breakdown">
+<h2>Weekly Breakdown<a class="headerlink" href="#weekly-breakdown" title="Link to this heading">¶</a></h2>
+<section id="week-1-foundation-automation-ready">
+<h3><a class="reference internal" href="week_1_foundation_automation.html"><span class="std std-doc">Week 1: Foundation &amp; Automation</span></a> ✅ READY<a class="headerlink" href="#week-1-foundation-automation-ready" title="Link to this heading">¶</a></h3>
+<p><strong>Duration</strong>: 5-7 days | <strong>Effort</strong>: 8-10 hours</p>
+<p><strong>Objectives</strong>:</p>
+<ul class="simple">
+<li><p>Create automated documentation generator script</p></li>
+<li><p>Design reusable templates (module/class/function)</p></li>
+<li><p>Configure Sphinx for code embedding with literalinclude</p></li>
+</ul>
+<p><strong>Deliverables</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/docs/generate_code_docs.py</span></code> (automation tool)</p></li>
+<li><p>3 documentation templates (module/class/function)</p></li>
+<li><p>14 module index pages with navigation</p></li>
+<li><p>Enhanced Sphinx configuration</p></li>
+</ul>
+<p><strong>Impact</strong>: 80% reduction in manual documentation effort</p>
+</section>
+<hr class="docutils" />
+<section id="week-2-controllers-module-complete">
+<h3><a class="reference internal" href="week_2_controllers_module.html"><span class="std std-doc">Week 2: Controllers Module</span></a> ✅ COMPLETE<a class="headerlink" href="#week-2-controllers-module-complete" title="Link to this heading">¶</a></h3>
+<p><strong>Duration</strong>: 10-14 days | <strong>Effort</strong>: 25-30 hours</p>
+<p><strong>Priority</strong>: HIGHEST (core functionality)</p>
+<p><strong>Coverage</strong>:</p>
+<ul class="simple">
+<li><p>SMC variants (classical, adaptive, super-twisting, hybrid)</p></li>
+<li><p>Controller factory and PSO integration</p></li>
+<li><p>Base interfaces and control primitives</p></li>
+<li><p>MPC controller (experimental)</p></li>
+</ul>
+<p><strong>Deliverables</strong>:</p>
+<ul class="simple">
+<li><p>Complete controller documentation with theory</p></li>
+<li><p>Control law mathematical foundations</p></li>
+<li><p>Lyapunov stability analysis</p></li>
+<li><p>Usage examples and benchmarks</p></li>
+</ul>
+<p><strong>Status</strong>: ✅ COMPLETE (7,450+ lines delivered)
+<strong>Document</strong>: <code class="docutils literal notranslate"><span class="pre">week_2_controllers_module.md</span></code> | <strong>Summary</strong>: <code class="docutils literal notranslate"><span class="pre">week_2_completion_summary.md</span></code></p>
+</section>
+<hr class="docutils" />
+<section id="week-3-optimization-simulation-planned">
+<h3><a class="reference internal" href="week_3_optimization_simulation.html"><span class="std std-doc">Week 3: Optimization &amp; Simulation</span></a> ✅ PLANNED<a class="headerlink" href="#week-3-optimization-simulation-planned" title="Link to this heading">¶</a></h3>
+<p><strong>Duration</strong>: 10-14 days | <strong>Effort</strong>: 25-30 hours</p>
+<p><strong>Coverage</strong>:</p>
+<ul class="simple">
+<li><p>PSO optimization module (~60 files)</p></li>
+<li><p>Simulation engine and dynamics (~42 files)</p></li>
+<li><p>Batch simulation and Numba vectorization</p></li>
+<li><p>Integration methods (Euler, RK4, RK45)</p></li>
+</ul>
+<p><strong>Deliverables</strong>:</p>
+<ul class="simple">
+<li><p>PSO algorithm theory and convergence analysis</p></li>
+<li><p>Dynamics model equations (Lagrangian mechanics)</p></li>
+<li><p>Performance optimization techniques</p></li>
+<li><p>Numerical integration accuracy analysis</p></li>
+<li><p>9+ tutorials, 30+ code examples</p></li>
+</ul>
+<p><strong>Status</strong>: 📋 PLANNED (estimated ~14,680 lines)
+<strong>Document</strong>: ✅ <code class="docutils literal notranslate"><span class="pre">week_3_optimization_simulation.md</span></code> (comprehensive plan complete)</p>
+</section>
+<hr class="docutils" />
+<section id="week-4-supporting-modules-79-files">
+<h3>Week 4: Supporting Modules (79 files)<a class="headerlink" href="#week-4-supporting-modules-79-files" title="Link to this heading">¶</a></h3>
+<p><strong>Duration</strong>: 7 days | <strong>Effort</strong>: 20-25 hours</p>
+<p><strong>Coverage</strong>:</p>
+<ul class="simple">
+<li><p>Plant models (27 files) - physical equations</p></li>
+<li><p>Interfaces (46 files) - protocols and types</p></li>
+<li><p>Configuration (6 files) - Pydantic schemas</p></li>
+</ul>
+<p><strong>Deliverables</strong>:</p>
+<ul class="simple">
+<li><p>Physical system derivations</p></li>
+<li><p>Type annotations and validation</p></li>
+<li><p>Configuration schema documentation</p></li>
+</ul>
+<p><strong>Document</strong>: <code class="docutils literal notranslate"><span class="pre">week_4_supporting_modules.md</span></code> (to be created)</p>
+</section>
+<hr class="docutils" />
+<section id="week-5-analysis-utilities-73-files">
+<h3>Week 5: Analysis &amp; Utilities (73 files)<a class="headerlink" href="#week-5-analysis-utilities-73-files" title="Link to this heading">¶</a></h3>
+<p><strong>Duration</strong>: 7 days | <strong>Effort</strong>: 20-25 hours</p>
+<p><strong>Coverage</strong>:</p>
+<ul class="simple">
+<li><p>Analysis module (30 files) - metrics, stability, fault detection</p></li>
+<li><p>Utils module (32 files) - validation, monitoring, reproducibility</p></li>
+<li><p>Benchmarks (11 files) - performance testing</p></li>
+</ul>
+<p><strong>Deliverables</strong>:</p>
+<ul class="simple">
+<li><p>Performance metrics formulas (ISE, ITAE, RMSE)</p></li>
+<li><p>Stability analysis methods (Lyapunov, eigenvalue)</p></li>
+<li><p>Monitoring and visualization code</p></li>
+</ul>
+<p><strong>Document</strong>: <code class="docutils literal notranslate"><span class="pre">week_5_analysis_utilities.md</span></code> (to be created)</p>
+</section>
+<hr class="docutils" />
+<section id="week-6-tutorials-examples-68-items">
+<h3>Week 6: Tutorials &amp; Examples (68 items)<a class="headerlink" href="#week-6-tutorials-examples-68-items" title="Link to this heading">¶</a></h3>
+<p><strong>Duration</strong>: 7 days | <strong>Effort</strong>: 25-30 hours</p>
+<p><strong>Coverage</strong>:</p>
+<ul class="simple">
+<li><p>Getting Started (5 tutorials)</p></li>
+<li><p>Advanced Topics (8 tutorials)</p></li>
+<li><p>Developer Guides (5 tutorials)</p></li>
+<li><p>Code Examples Library (50+ scripts)</p></li>
+</ul>
+<p><strong>Deliverables</strong>:</p>
+<ul class="simple">
+<li><p>Beginner to advanced learning path</p></li>
+<li><p>Standalone executable examples</p></li>
+<li><p>Developer contribution guides</p></li>
+<li><p>Best practices and patterns</p></li>
+</ul>
+<p><strong>Document</strong>: <code class="docutils literal notranslate"><span class="pre">week_6_tutorials_examples.md</span></code> (to be created)</p>
+</section>
+<hr class="docutils" />
+<section id="week-7-architecture-diagrams-40-diagrams">
+<h3>Week 7: Architecture &amp; Diagrams (40+ diagrams)<a class="headerlink" href="#week-7-architecture-diagrams-40-diagrams" title="Link to this heading">¶</a></h3>
+<p><strong>Duration</strong>: 7 days | <strong>Effort</strong>: 15-20 hours</p>
+<p><strong>Coverage</strong>:</p>
+<ul class="simple">
+<li><p>System architecture diagrams</p></li>
+<li><p>Module-level class hierarchies</p></li>
+<li><p>Sequence diagrams (key workflows)</p></li>
+<li><p>Algorithm flowcharts</p></li>
+<li><p>UML package dependencies</p></li>
+</ul>
+<p><strong>Deliverables</strong>:</p>
+<ul class="simple">
+<li><p>Visual documentation system</p></li>
+<li><p>Mermaid diagram integration</p></li>
+<li><p>Interactive architecture explorer</p></li>
+<li><p>Design pattern documentation</p></li>
+</ul>
+<p><strong>Document</strong>: <code class="docutils literal notranslate"><span class="pre">week_7_architecture_diagrams.md</span></code> (to be created)</p>
+</section>
+<hr class="docutils" />
+<section id="week-8-mathematical-foundations-polish-30-docs">
+<h3>Week 8: Mathematical Foundations &amp; Polish (30 docs)<a class="headerlink" href="#week-8-mathematical-foundations-polish-30-docs" title="Link to this heading">¶</a></h3>
+<p><strong>Duration</strong>: 7 days | <strong>Effort</strong>: 20-25 hours</p>
+<p><strong>Coverage</strong>:</p>
+<ul class="simple">
+<li><p>Control theory foundations (Lyapunov, sliding surfaces)</p></li>
+<li><p>PSO convergence proofs</p></li>
+<li><p>Numerical methods analysis</p></li>
+<li><p>Cross-references and navigation</p></li>
+<li><p>Quality assurance and validation</p></li>
+</ul>
+<p><strong>Deliverables</strong>:</p>
+<ul class="simple">
+<li><p>Mathematical theory documents with LaTeX</p></li>
+<li><p>Cross-referenced documentation</p></li>
+<li><p>Comprehensive index and glossary</p></li>
+<li><p>Final validation and polish</p></li>
+</ul>
+<p><strong>Document</strong>: <code class="docutils literal notranslate"><span class="pre">week_8_foundations_polish.md</span></code> (to be created)</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="progress-tracking">
+<h2>Progress Tracking<a class="headerlink" href="#progress-tracking" title="Link to this heading">¶</a></h2>
+<section id="overall-status">
+<h3>Overall Status<a class="headerlink" href="#overall-status" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Week</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Files</p></th>
+<th class="head"><p>Effort</p></th>
+<th class="head"><p>Start Date</p></th>
+<th class="head"><p>End Date</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>✅ COMPLETE</p></td>
+<td><p>N/A</p></td>
+<td><p>8-10h</p></td>
+<td><p>2025-09-27</p></td>
+<td><p>2025-10-01</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>✅ COMPLETE</p></td>
+<td><p>55</p></td>
+<td><p>25-30h</p></td>
+<td><p>2025-10-01</p></td>
+<td><p>2025-10-04</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>📋 PLANNED</p></td>
+<td><p>102</p></td>
+<td><p>25-30h</p></td>
+<td><p>2025-10-14</p></td>
+<td><p>2025-10-24</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>⏳ PENDING</p></td>
+<td><p>79</p></td>
+<td><p>20-25h</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>⏳ PENDING</p></td>
+<td><p>73</p></td>
+<td><p>20-25h</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>⏳ PENDING</p></td>
+<td><p>68</p></td>
+<td><p>25-30h</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>⏳ PENDING</p></td>
+<td><p>40+</p></td>
+<td><p>15-20h</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>⏳ PENDING</p></td>
+<td><p>30</p></td>
+<td><p>20-25h</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Legend</strong>: 📋 Planned | 🚧 In Progress | ✅ Complete | ⏳ Pending</p>
+</section>
+<section id="completion-metrics">
+<h3>Completion Metrics<a class="headerlink" href="#completion-metrics" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Documentation</span> <span class="n">Coverage</span><span class="p">:</span>  <span class="mi">17</span><span class="o">%</span> <span class="p">(</span><span class="mi">55</span><span class="o">/</span><span class="mi">316</span> <span class="n">files</span><span class="p">)</span> <span class="o">-</span> <span class="n">Week</span> <span class="mi">2</span> <span class="n">complete</span>
+<span class="n">Tutorial</span> <span class="n">Progress</span><span class="p">:</span>       <span class="mi">0</span><span class="o">%</span> <span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">18</span> <span class="n">tutorials</span><span class="p">)</span>
+<span class="n">Diagram</span> <span class="n">Progress</span><span class="p">:</span>        <span class="mi">0</span><span class="o">%</span> <span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">40</span><span class="o">+</span> <span class="n">diagrams</span><span class="p">)</span>
+<span class="n">Theory</span> <span class="n">Documents</span><span class="p">:</span>        <span class="mi">13</span><span class="o">%</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">30</span> <span class="n">documents</span><span class="p">)</span> <span class="o">-</span> <span class="n">Week</span> <span class="mi">2</span> <span class="n">foundations</span>
+<span class="n">Overall</span> <span class="n">Progress</span><span class="p">:</span>        <span class="mi">25</span><span class="o">%</span> <span class="p">(</span><span class="n">Weeks</span> <span class="mi">1</span><span class="o">-</span><span class="mi">2</span> <span class="n">complete</span><span class="p">,</span> <span class="n">Week</span> <span class="mi">3</span> <span class="n">planned</span><span class="p">)</span>
+
+<span class="n">Week</span> <span class="mi">2</span> <span class="n">Achievement</span><span class="p">:</span>      <span class="mi">7</span><span class="p">,</span><span class="mi">450</span><span class="o">+</span> <span class="n">lines</span> <span class="n">delivered</span> <span class="p">(</span><span class="mi">164</span><span class="o">%</span> <span class="n">of</span> <span class="mi">4</span><span class="p">,</span><span class="mi">550</span> <span class="n">target</span><span class="p">)</span>
+<span class="n">Week</span> <span class="mi">3</span> <span class="n">Estimated</span><span class="p">:</span>        <span class="mi">14</span><span class="p">,</span><span class="mi">680</span><span class="o">+</span> <span class="n">lines</span> <span class="n">planned</span>
+</pre></div>
+</div>
+<p><strong>Updated</strong>: 2025-10-04 (Week 3 plan created, Week 2 complete)</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="success-criteria">
+<h2>Success Criteria<a class="headerlink" href="#success-criteria" title="Link to this heading">¶</a></h2>
+<section id="phase-1-weeks-1-4-foundation-core">
+<h3>Phase 1 (Weeks 1-4): Foundation &amp; Core<a class="headerlink" href="#phase-1-weeks-1-4-foundation-core" title="Link to this heading">¶</a></h3>
+<p>✅ 100% automation infrastructure operational
+✅ Controllers module fully documented (highest priority)
+✅ Core functionality (optimization, simulation) documented
+✅ 80% code coverage achieved</p>
+</section>
+<section id="phase-2-weeks-5-6-usability">
+<h3>Phase 2 (Weeks 5-6): Usability<a class="headerlink" href="#phase-2-weeks-5-6-usability" title="Link to this heading">¶</a></h3>
+<p>✅ All 316 files documented with embedded code
+✅ 18 tutorials completed and tested
+✅ 50+ working examples validated
+✅ Comprehensive module documentation</p>
+</section>
+<section id="phase-3-weeks-7-8-excellence">
+<h3>Phase 3 (Weeks 7-8): Excellence<a class="headerlink" href="#phase-3-weeks-7-8-excellence" title="Link to this heading">¶</a></h3>
+<p>✅ 40+ architecture diagrams integrated
+✅ Mathematical foundations complete
+✅ Cross-references and navigation polished
+✅ Publication-ready documentation quality</p>
+</section>
+<section id="production-readiness">
+<h3>Production Readiness<a class="headerlink" href="#production-readiness" title="Link to this heading">¶</a></h3>
+<p>✅ All literalinclude paths validated (0 broken links)
+✅ All code examples tested and working
+✅ Sphinx builds with 0 warnings
+✅ Documentation search fully functional
+✅ Mobile-responsive design</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="automation-strategy">
+<h2>Automation Strategy<a class="headerlink" href="#automation-strategy" title="Link to this heading">¶</a></h2>
+<section id="week-1-foundation">
+<h3>Week 1 Foundation<a class="headerlink" href="#week-1-foundation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Documentation Generator</strong>: AST-based automation for structure</p></li>
+<li><p><strong>Template System</strong>: Consistent formatting across all pages</p></li>
+<li><p><strong>Validation Tools</strong>: Continuous quality checks</p></li>
+</ul>
+</section>
+<section id="ongoing-automation">
+<h3>Ongoing Automation<a class="headerlink" href="#ongoing-automation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>CI/CD Integration</strong>: Auto-build on commits</p></li>
+<li><p><strong>Coverage Tracking</strong>: Monitor documentation progress</p></li>
+<li><p><strong>Link Validation</strong>: Detect broken references</p></li>
+<li><p><strong>Code Sync</strong>: Flag outdated documentation</p></li>
+</ul>
+</section>
+<section id="maintenance">
+<h3>Maintenance<a class="headerlink" href="#maintenance" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Pre-commit Hooks</strong>: Enforce documentation for new files</p></li>
+<li><p><strong>Monthly Audits</strong>: Auto-scan for missing docs</p></li>
+<li><p><strong>Version Control</strong>: Track documentation changes with code</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="risk-management">
+<h2>Risk Management<a class="headerlink" href="#risk-management" title="Link to this heading">¶</a></h2>
+<section id="critical-risks">
+<h3>Critical Risks<a class="headerlink" href="#critical-risks" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Risk</p></th>
+<th class="head"><p>Impact</p></th>
+<th class="head"><p>Mitigation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Automation complexity</p></td>
+<td><p>Timeline delay</p></td>
+<td><p>Start simple, iterate in Week 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scope creep (too detailed)</p></td>
+<td><p>Burnout</p></td>
+<td><p>Prioritize controllers/optimization</p></td>
+</tr>
+<tr class="row-even"><td><p>Template inflexibility</p></td>
+<td><p>Quality issues</p></td>
+<td><p>Make templates customizable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sphinx configuration issues</p></td>
+<td><p>Blocked progress</p></td>
+<td><p>Test early in Week 1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="time-management">
+<h3>Time Management<a class="headerlink" href="#time-management" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Buffer Time</strong>: 20% buffer in each week</p></li>
+<li><p><strong>Checkpoints</strong>: Review at weeks 2, 4, 6, 8</p></li>
+<li><p><strong>Flexibility</strong>: Can extend to 10 weeks if needed</p></li>
+<li><p><strong>MVP</strong>: Weeks 1-4 create usable documentation</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="documentation-standards">
+<h2>Documentation Standards<a class="headerlink" href="#documentation-standards" title="Link to this heading">¶</a></h2>
+<section id="code-embedding-rules">
+<h3>Code Embedding Rules<a class="headerlink" href="#code-embedding-rules" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Always embed full source code</strong> using literalinclude</p></li>
+<li><p><strong>Add line numbers</strong> for reference</p></li>
+<li><p><strong>Emphasize key lines</strong> (algorithms, control laws)</p></li>
+<li><p><strong>Link to GitHub</strong> for version history</p></li>
+</ol>
+</section>
+<section id="explanation-quality">
+<h3>Explanation Quality<a class="headerlink" href="#explanation-quality" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Theory first</strong>: Explain mathematical background</p></li>
+<li><p><strong>Line-by-line</strong>: Walk through critical algorithms</p></li>
+<li><p><strong>Examples always</strong>: Show usage with runnable code</p></li>
+<li><p><strong>Performance notes</strong>: Document complexity and benchmarks</p></li>
+</ol>
+</section>
+<section id="visual-standards">
+<h3>Visual Standards<a class="headerlink" href="#visual-standards" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Mermaid diagrams</strong>: For architecture and workflows</p></li>
+<li><p><strong>LaTeX equations</strong>: For mathematical notation</p></li>
+<li><p><strong>Screenshots</strong>: For UI and output examples</p></li>
+<li><p><strong>Tables</strong>: For parameter lists and comparisons</p></li>
+</ol>
+</section>
+<section id="writing-style">
+<h3>Writing Style<a class="headerlink" href="#writing-style" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Conversational tone</strong>: Informal, educational</p></li>
+<li><p><strong>Active voice</strong>: “The controller computes…” not “Is computed…”</p></li>
+<li><p><strong>Complete thoughts</strong>: Don’t assume prior knowledge</p></li>
+<li><p><strong>Cross-reference liberally</strong>: Link related concepts</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tools-infrastructure">
+<h2>Tools &amp; Infrastructure<a class="headerlink" href="#tools-infrastructure" title="Link to this heading">¶</a></h2>
+<section id="required-software">
+<h3>Required Software<a class="headerlink" href="#required-software" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Documentation tools</span>
+sphinx&gt;<span class="o">=</span><span class="m">5</span>.0
+sphinx-copybutton&gt;<span class="o">=</span><span class="m">0</span>.5.0
+sphinx-togglebutton&gt;<span class="o">=</span><span class="m">0</span>.3.0
+sphinx-design&gt;<span class="o">=</span><span class="m">0</span>.4.0
+myst-parser&gt;<span class="o">=</span><span class="m">1</span>.0.0
+pygments&gt;<span class="o">=</span><span class="m">2</span>.14.0
+
+<span class="c1"># Diagram generation</span>
+mermaid-cli<span class="w">  </span><span class="c1"># Optional for pre-rendering</span>
+
+<span class="c1"># Validation</span>
+linkchecker<span class="w">  </span><span class="c1"># Check for broken links</span>
+pytest&gt;<span class="o">=</span><span class="m">7</span>.0<span class="w">  </span><span class="c1"># Test code examples</span>
+</pre></div>
+</div>
+</section>
+<section id="scripts-location">
+<h3>Scripts Location<a class="headerlink" href="#scripts-location" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span>
+<span class="err">├──</span> <span class="n">generate_code_docs</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Week 1: Main generator</span>
+<span class="err">├──</span> <span class="n">validate_code_docs</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Week 1: Validation</span>
+<span class="err">├──</span> <span class="n">extract_theory</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Week 8: Theory extraction</span>
+<span class="err">├──</span> <span class="n">generate_diagrams</span><span class="o">.</span><span class="n">py</span>       <span class="c1"># Week 7: Diagram automation</span>
+<span class="err">├──</span> <span class="n">test_examples</span><span class="o">.</span><span class="n">py</span>           <span class="c1"># Week 6: Example testing</span>
+<span class="err">└──</span> <span class="n">templates</span><span class="o">/</span>
+    <span class="err">├──</span> <span class="n">module_template</span><span class="o">.</span><span class="n">md</span>
+    <span class="err">├──</span> <span class="n">class_template</span><span class="o">.</span><span class="n">md</span>
+    <span class="err">└──</span> <span class="n">function_template</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+</section>
+<section id="ci-cd-integration">
+<h3>CI/CD Integration<a class="headerlink" href="#ci-cd-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># .github/workflows/docs.yml (to be created)</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Documentation CI</span>
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build-docs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build Sphinx docs</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Validate links</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Test code examples</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check coverage</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
+<section id="for-documentation-contributors">
+<h3>For Documentation Contributors<a class="headerlink" href="#for-documentation-contributors" title="Link to this heading">¶</a></h3>
+<p><strong>1. Set up environment</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\P</span>rojects<span class="se">\m</span>ain
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>docs/requirements.txt
+</pre></div>
+</div>
+<p><strong>2. Start with Week 1</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the plan</span>
+cat<span class="w"> </span>docs/plans/documentation/week_1_foundation_automation.md
+
+<span class="c1"># Create the generator script</span>
+python<span class="w"> </span>scripts/docs/generate_code_docs.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<p><strong>3. Generate documentation</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For a single module</span>
+python<span class="w"> </span>scripts/docs/generate_code_docs.py<span class="w"> </span>--module<span class="w"> </span>controllers
+
+<span class="c1"># For all modules</span>
+python<span class="w"> </span>scripts/docs/generate_code_docs.py<span class="w"> </span>--all
+</pre></div>
+</div>
+<p><strong>4. Build and preview</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs/
+make<span class="w"> </span>html
+open<span class="w"> </span>_build/html/index.html
+</pre></div>
+</div>
+</section>
+<section id="for-reviewers">
+<h3>For Reviewers<a class="headerlink" href="#for-reviewers" title="Link to this heading">¶</a></h3>
+<p><strong>Weekly review checklist</strong>:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Review generated documentation for accuracy</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Verify code examples run successfully</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Check theory sections for correctness</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Validate cross-references work</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Ensure visual quality and formatting</p></li>
+</ul>
+<p><strong>Feedback locations</strong>:</p>
+<ul class="simple">
+<li><p>GitHub Issues: Use <code class="docutils literal notranslate"><span class="pre">documentation</span></code> label</p></li>
+<li><p>Pull Requests: Review generated docs</p></li>
+<li><p>Discussion: See project communication channels</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="milestones-celebrations">
+<h2>Milestones &amp; Celebrations<a class="headerlink" href="#milestones-celebrations" title="Link to this heading">¶</a></h2>
+<section id="week-1">
+<h3>Week 1 🎯<a class="headerlink" href="#week-1" title="Link to this heading">¶</a></h3>
+<p>🎉 <strong>Automation working!</strong> - Foundation for 80% efficiency gain</p>
+</section>
+<section id="week-4">
+<h3>Week 4 🏆<a class="headerlink" href="#week-4" title="Link to this heading">¶</a></h3>
+<p>🎉 <strong>Core docs complete!</strong> - Controllers, optimization, simulation documented</p>
+</section>
+<section id="week-6">
+<h3>Week 6 🚀<a class="headerlink" href="#week-6" title="Link to this heading">¶</a></h3>
+<p>🎉 <strong>All code documented!</strong> - 316 files embedded with explanations</p>
+</section>
+<section id="week-8">
+<h3>Week 8 🏅<a class="headerlink" href="#week-8" title="Link to this heading">¶</a></h3>
+<p>🎉 <strong>World-class docs!</strong> - Publication-ready, research-grade documentation</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">¶</a></h2>
+<section id="documentation-references">
+<h3>Documentation References<a class="headerlink" href="#documentation-references" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/">Sphinx Documentation</a></p></li>
+<li><p><a class="reference external" href="https://myst-parser.readthedocs.io/">MyST Parser</a></p></li>
+<li><p><a class="reference external" href="https://mermaid.js.org/">Mermaid Diagrams</a></p></li>
+<li><p><a class="reference external" href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX Math</a></p></li>
+</ul>
+</section>
+<section id="project-documentation">
+<h3>Project Documentation<a class="headerlink" href="#project-documentation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><span class="xref myst">CLAUDE.md</span> - Project conventions</p></li>
+<li><p><span class="xref myst">README.md</span> - Project overview</p></li>
+<li><p><a class="reference internal" href="../../DOCUMENTATION_SYSTEM.html"><span class="std std-doc">DOCUMENTATION_SYSTEM.md</span></a> - Current docs</p></li>
+</ul>
+</section>
+<section id="control-theory-references">
+<h3>Control Theory References<a class="headerlink" href="#control-theory-references" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Sliding Mode Control: Utkin et al. (2009)</p></li>
+<li><p>PSO: Kennedy &amp; Eberhart (1995)</p></li>
+<li><p>Inverted Pendulum: Åström &amp; Furuta (2000)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="contact-support">
+<h2>Contact &amp; Support<a class="headerlink" href="#contact-support" title="Link to this heading">¶</a></h2>
+<p><strong>Project Repository</strong>: <a class="reference external" href="https://github.com/theSadeQ/dip-smc-pso.git">https://github.com/theSadeQ/dip-smc-pso.git</a></p>
+<p><strong>Documentation Questions</strong>:</p>
+<ul class="simple">
+<li><p>Create GitHub issue with <code class="docutils literal notranslate"><span class="pre">documentation</span></code> label</p></li>
+<li><p>Check existing plans in <code class="docutils literal notranslate"><span class="pre">docs/plans/documentation/</span></code></p></li>
+<li><p>Review <code class="docutils literal notranslate"><span class="pre">CLAUDE.md</span></code> for project conventions</p></li>
+</ul>
+<p><strong>Contribution Guide</strong>: See <code class="docutils literal notranslate"><span class="pre">docs/CONTRIBUTING.md</span></code></p>
+</section>
+<hr class="docutils" />
+<section id="appendix-file-inventory">
+<h2>Appendix: File Inventory<a class="headerlink" href="#appendix-file-inventory" title="Link to this heading">¶</a></h2>
+<section id="module-breakdown-316-files">
+<h3>Module Breakdown (316 files)<a class="headerlink" href="#module-breakdown-316-files" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Files</p></th>
+<th class="head"><p>Priority</p></th>
+<th class="head"><p>Week</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>controllers</p></td>
+<td><p>55</p></td>
+<td><p>CRITICAL</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>optimization</p></td>
+<td><p>50</p></td>
+<td><p>HIGH</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>simulation</p></td>
+<td><p>52</p></td>
+<td><p>HIGH</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>interfaces</p></td>
+<td><p>46</p></td>
+<td><p>MEDIUM</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>analysis</p></td>
+<td><p>30</p></td>
+<td><p>MEDIUM</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>utils</p></td>
+<td><p>32</p></td>
+<td><p>MEDIUM</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>plant</p></td>
+<td><p>27</p></td>
+<td><p>MEDIUM</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>benchmarks</p></td>
+<td><p>11</p></td>
+<td><p>LOW</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>hil</p></td>
+<td><p>7</p></td>
+<td><p>LOW</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>config</p></td>
+<td><p>6</p></td>
+<td><p>LOW</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p><strong>316</strong></p></td>
+<td><p>-</p></td>
+<td><p><strong>1-8</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="documentation-page-count">
+<h3>Documentation Page Count<a class="headerlink" href="#documentation-page-count" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Module overviews: 14 pages</p></li>
+<li><p>Source file docs: 316 pages</p></li>
+<li><p>Theory documents: 30 pages</p></li>
+<li><p>Tutorials: 18 pages</p></li>
+<li><p>Examples: 50+ pages</p></li>
+<li><p>Architecture: 40+ pages</p></li>
+<li><p><strong>Total</strong>: <strong>450+ pages</strong></p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Plan Version</strong>: 1.0
+<strong>Created</strong>: 2025-10-03
+<strong>Last Updated</strong>: 2025-10-03
+<strong>Status</strong>: Week 1 ready for execution
+<strong>Next Milestone</strong>: Complete Week 1 automation (Day 7)</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Complete Codebase Documentation Plan</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#documentation-goals">Documentation Goals</a><ul>
+<li><a class="reference internal" href="#quantitative-targets">Quantitative Targets</a></li>
+<li><a class="reference internal" href="#qualitative-goals">Qualitative Goals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#weekly-breakdown">Weekly Breakdown</a><ul>
+<li><a class="reference internal" href="#week-1-foundation-automation-ready"><span class="xref myst">Week 1: Foundation &amp; Automation</span> ✅ READY</a></li>
+<li><a class="reference internal" href="#week-2-controllers-module-complete"><span class="xref myst">Week 2: Controllers Module</span> ✅ COMPLETE</a></li>
+<li><a class="reference internal" href="#week-3-optimization-simulation-planned"><span class="xref myst">Week 3: Optimization &amp; Simulation</span> ✅ PLANNED</a></li>
+<li><a class="reference internal" href="#week-4-supporting-modules-79-files">Week 4: Supporting Modules (79 files)</a></li>
+<li><a class="reference internal" href="#week-5-analysis-utilities-73-files">Week 5: Analysis &amp; Utilities (73 files)</a></li>
+<li><a class="reference internal" href="#week-6-tutorials-examples-68-items">Week 6: Tutorials &amp; Examples (68 items)</a></li>
+<li><a class="reference internal" href="#week-7-architecture-diagrams-40-diagrams">Week 7: Architecture &amp; Diagrams (40+ diagrams)</a></li>
+<li><a class="reference internal" href="#week-8-mathematical-foundations-polish-30-docs">Week 8: Mathematical Foundations &amp; Polish (30 docs)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#progress-tracking">Progress Tracking</a><ul>
+<li><a class="reference internal" href="#overall-status">Overall Status</a></li>
+<li><a class="reference internal" href="#completion-metrics">Completion Metrics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#success-criteria">Success Criteria</a><ul>
+<li><a class="reference internal" href="#phase-1-weeks-1-4-foundation-core">Phase 1 (Weeks 1-4): Foundation &amp; Core</a></li>
+<li><a class="reference internal" href="#phase-2-weeks-5-6-usability">Phase 2 (Weeks 5-6): Usability</a></li>
+<li><a class="reference internal" href="#phase-3-weeks-7-8-excellence">Phase 3 (Weeks 7-8): Excellence</a></li>
+<li><a class="reference internal" href="#production-readiness">Production Readiness</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#automation-strategy">Automation Strategy</a><ul>
+<li><a class="reference internal" href="#week-1-foundation">Week 1 Foundation</a></li>
+<li><a class="reference internal" href="#ongoing-automation">Ongoing Automation</a></li>
+<li><a class="reference internal" href="#maintenance">Maintenance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#risk-management">Risk Management</a><ul>
+<li><a class="reference internal" href="#critical-risks">Critical Risks</a></li>
+<li><a class="reference internal" href="#time-management">Time Management</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documentation-standards">Documentation Standards</a><ul>
+<li><a class="reference internal" href="#code-embedding-rules">Code Embedding Rules</a></li>
+<li><a class="reference internal" href="#explanation-quality">Explanation Quality</a></li>
+<li><a class="reference internal" href="#visual-standards">Visual Standards</a></li>
+<li><a class="reference internal" href="#writing-style">Writing Style</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tools-infrastructure">Tools &amp; Infrastructure</a><ul>
+<li><a class="reference internal" href="#required-software">Required Software</a></li>
+<li><a class="reference internal" href="#scripts-location">Scripts Location</a></li>
+<li><a class="reference internal" href="#ci-cd-integration">CI/CD Integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li><a class="reference internal" href="#for-documentation-contributors">For Documentation Contributors</a></li>
+<li><a class="reference internal" href="#for-reviewers">For Reviewers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#milestones-celebrations">Milestones &amp; Celebrations</a><ul>
+<li><a class="reference internal" href="#week-1">Week 1 🎯</a></li>
+<li><a class="reference internal" href="#week-4">Week 4 🏆</a></li>
+<li><a class="reference internal" href="#week-6">Week 6 🚀</a></li>
+<li><a class="reference internal" href="#week-8">Week 8 🏅</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#documentation-references">Documentation References</a></li>
+<li><a class="reference internal" href="#project-documentation">Project Documentation</a></li>
+<li><a class="reference internal" href="#control-theory-references">Control Theory References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#contact-support">Contact &amp; Support</a></li>
+<li><a class="reference internal" href="#appendix-file-inventory">Appendix: File Inventory</a><ul>
+<li><a class="reference internal" href="#module-breakdown-316-files">Module Breakdown (316 files)</a></li>
+<li><a class="reference internal" href="#documentation-page-count">Documentation Page Count</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

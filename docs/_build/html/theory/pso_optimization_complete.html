@@ -1,0 +1,1144 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Complete PSO Optimization Theory - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/theory/pso_optimization_complete.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/theory/pso_optimization_complete.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="complete-pso-optimization-theory">
+<h1>Complete PSO Optimization Theory<a class="headerlink" href="#complete-pso-optimization-theory" title="Link to this heading">¶</a></h1>
+<p>This section provides comprehensive coverage of Particle Swarm Optimization (PSO) theory as applied to sliding mode controller parameter tuning, including mathematical foundations, convergence analysis, and multi-objective optimization strategies.</p>
+<section id="introduction-to-particle-swarm-optimization">
+<h2>Introduction to Particle Swarm Optimization<a class="headerlink" href="#introduction-to-particle-swarm-optimization" title="Link to this heading">¶</a></h2>
+<p>Particle Swarm Optimization <span id="id1">[<a class="reference internal" href="../references/bibliography.html#id435" title="James Kennedy and Russell Eberhart. Particle swarm optimization. Proceedings of ICNN'95-international conference on neural networks, 4:1942–1948, 1995. URL: https://doi.org/10.1109/ICNN.1995.488968, doi:10.1109/ICNN.1995.488968.">KE95b</a>]</span> is a population-based metaheuristic inspired by the social behavior of bird flocking and fish schooling. In the context of control systems, PSO provides an effective framework for automated parameter tuning and multi-objective optimization.</p>
+<section id="biological-inspiration">
+<h3>Biological Inspiration<a class="headerlink" href="#biological-inspiration" title="Link to this heading">¶</a></h3>
+<p>The algorithm mimics the collective intelligence observed in nature:</p>
+<ul class="simple">
+<li><p><strong>Individual exploration</strong> (cognitive component)</p></li>
+<li><p><strong>Social learning</strong> (social component)</p></li>
+<li><p><strong>Collective convergence</strong> toward optimal solutions</p></li>
+</ul>
+</section>
+<section id="mathematical-foundation">
+<h3>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h3>
+<p><strong>Definition 1 (Search Space)</strong>: The optimization problem is defined over a D-dimensional search space:</p>
+<div class="math-wrapper docutils container" id="equation-eq-search-space">
+<div class="math notranslate nohighlight" id="equation-eq-search-space">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-search-space" title="Link to this equation">¶</a></span>\[\Omega = \{\vec{\theta} \in \mathbb{R}^D : \vec{\theta}^{min} \leq \vec{\theta} \leq \vec{\theta}^{max}\}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{\theta}\)</span> represents the parameter vector to be optimized.</p>
+<p><strong>Definition 2 (Objective Function)</strong>: The fitness landscape is defined by:</p>
+<div class="math-wrapper docutils container" id="equation-eq-objective-function">
+<div class="math notranslate nohighlight" id="equation-eq-objective-function">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-objective-function" title="Link to this equation">¶</a></span>\[f: \Omega \rightarrow \mathbb{R}, \quad f(\vec{\theta}) \mapsto \text{performance metric}\]</div>
+</div>
+</section>
+</section>
+<section id="classical-pso-algorithm">
+<h2>Classical PSO Algorithm<a class="headerlink" href="#classical-pso-algorithm" title="Link to this heading">¶</a></h2>
+<section id="particle-dynamics">
+<h3>Particle Dynamics<a class="headerlink" href="#particle-dynamics" title="Link to this heading">¶</a></h3>
+<p>Each particle <span class="math notranslate nohighlight">\(i\)</span> in the swarm is characterized by:</p>
+<ul class="simple">
+<li><p><strong>Position</strong>: <span class="math notranslate nohighlight">\(\vec{x}_i^{(k)} \in \Omega\)</span> (current parameter values)</p></li>
+<li><p><strong>Velocity</strong>: <span class="math notranslate nohighlight">\(\vec{v}_i^{(k)} \in \mathbb{R}^D\)</span> (search direction and magnitude)</p></li>
+<li><p><strong>Personal best</strong>: <span class="math notranslate nohighlight">\(\vec{p}_i\)</span> (best position found by particle <span class="math notranslate nohighlight">\(i\)</span>)</p></li>
+<li><p><strong>Global best</strong>: <span class="math notranslate nohighlight">\(\vec{g}\)</span> (best position found by entire swarm)</p></li>
+</ul>
+</section>
+<section id="update-equations">
+<h3>Update Equations<a class="headerlink" href="#update-equations" title="Link to this heading">¶</a></h3>
+<p>The particle dynamics follow the canonical PSO equations:</p>
+<div class="math-wrapper docutils container" id="equation-eq-pso-velocity-update">
+<div class="math notranslate nohighlight" id="equation-eq-pso-velocity-update">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-pso-velocity-update" title="Link to this equation">¶</a></span>\[\vec{v}_i^{(k+1)} = w\vec{v}_i^{(k)} + c_1 r_1^{(k)}(\vec{p}_i - \vec{x}_i^{(k)}) + c_2 r_2^{(k)}(\vec{g} - \vec{x}_i^{(k)})\]</div>
+</div>
+<div class="math-wrapper docutils container" id="equation-eq-pso-position-update">
+<div class="math notranslate nohighlight" id="equation-eq-pso-position-update">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-pso-position-update" title="Link to this equation">¶</a></span>\[\vec{x}_i^{(k+1)} = \vec{x}_i^{(k)} + \vec{v}_i^{(k+1)}\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w\)</span> - inertia weight controlling exploration vs. exploitation</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_1, c_2\)</span> - acceleration coefficients (cognitive and social)</p></li>
+<li><p><span class="math notranslate nohighlight">\(r_1^{(k)}, r_2^{(k)} \sim \mathcal{U}(0,1)\)</span> - random numbers ensuring stochastic search</p></li>
+</ul>
+</section>
+<section id="parameter-interpretation">
+<h3>Parameter Interpretation<a class="headerlink" href="#parameter-interpretation" title="Link to this heading">¶</a></h3>
+<p><strong>Inertia Weight <span class="math notranslate nohighlight">\(w\)</span></strong>:</p>
+<ul class="simple">
+<li><p>High values (<span class="math notranslate nohighlight">\(w &gt; 0.9\)</span>): Global exploration, slower convergence</p></li>
+<li><p>Low values (<span class="math notranslate nohighlight">\(w &lt; 0.4\)</span>): Local exploitation, faster convergence</p></li>
+<li><p>Time-varying: <span class="math notranslate nohighlight">\(w^{(k)} = w_{max} - \frac{k}{k_{max}}(w_{max} - w_{min})\)</span></p></li>
+</ul>
+<p><strong>Acceleration Coefficients</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(c_1\)</span> (cognitive): Attraction to personal best (individual memory)</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_2\)</span> (social): Attraction to global best (collective knowledge)</p></li>
+<li><p>Typical values: <span class="math notranslate nohighlight">\(c_1 = c_2 = 2.0\)</span> (balanced exploration)</p></li>
+</ul>
+</section>
+</section>
+<section id="convergence-analysis">
+<h2>Convergence Analysis<a class="headerlink" href="#convergence-analysis" title="Link to this heading">¶</a></h2>
+<section id="deterministic-analysis">
+<h3>Deterministic Analysis<a class="headerlink" href="#deterministic-analysis" title="Link to this heading">¶</a></h3>
+<p>Consider the simplified case without randomness (<span class="math notranslate nohighlight">\(r_1 = r_2 = 1\)</span>). The particle dynamics become:</p>
+<div class="math-wrapper docutils container" id="equation-eq-deterministic-dynamics">
+<div class="math notranslate nohighlight" id="equation-eq-deterministic-dynamics">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-deterministic-dynamics" title="Link to this equation">¶</a></span>\[\vec{v}_i^{(k+1)} = w\vec{v}_i^{(k)} + c_1(\vec{p}_i - \vec{x}_i^{(k)}) + c_2(\vec{g} - \vec{x}_i^{(k)})\]</div>
+</div>
+<p><strong>Theorem 1 (Stability Condition)</strong>: The particle converges to a stable trajectory if:</p>
+<div class="math-wrapper docutils container" id="equation-eq-stability-condition">
+<div class="math notranslate nohighlight" id="equation-eq-stability-condition">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-stability-condition" title="Link to this equation">¶</a></span>\[0 &lt; w &lt; 1 \quad \text{and} \quad 0 &lt; c_1 + c_2 &lt; 2(1 + w)\]</div>
+</div>
+<p><em>Proof</em>: The characteristic equation of the difference equation is:</p>
+<div class="math-wrapper docutils container" id="equation-eq-characteristic-equation">
+<div class="math notranslate nohighlight" id="equation-eq-characteristic-equation">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-characteristic-equation" title="Link to this equation">¶</a></span>\[\lambda^2 - w\lambda - (c_1 + c_2 - w) = 0\]</div>
+</div>
+<p>For stability, both roots must satisfy <span class="math notranslate nohighlight">\(|\lambda| &lt; 1\)</span>. Analysis of the discriminant and root bounds yields the stated conditions. □</p>
+</section>
+<section id="stochastic-analysis">
+<h3>Stochastic Analysis<a class="headerlink" href="#stochastic-analysis" title="Link to this heading">¶</a></h3>
+<p>In the presence of randomness, convergence analysis requires stochastic techniques.</p>
+<p><strong>Definition 3 (Mean Square Convergence)</strong>: The swarm converges in mean square if:</p>
+<div class="math-wrapper docutils container" id="equation-eq-mean-square-convergence">
+<div class="math notranslate nohighlight" id="equation-eq-mean-square-convergence">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-mean-square-convergence" title="Link to this equation">¶</a></span>\[\lim_{k \rightarrow \infty} \mathbb{E}[\|\vec{x}_i^{(k)} - \vec{x}^*\|^2] = 0\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{x}^*\)</span> is the global optimum.</p>
+<p><strong>Theorem 2 (Stochastic Convergence)</strong>: Under the stability condition and with decreasing inertia weight, PSO converges to the global optimum with probability 1 for unimodal functions.</p>
+</section>
+<section id="no-free-lunch-theorem">
+<h3>No Free Lunch Theorem<a class="headerlink" href="#no-free-lunch-theorem" title="Link to this heading">¶</a></h3>
+<p><strong>Theorem 3 (No Free Lunch)</strong>: Averaged over all possible optimization problems, no optimization algorithm performs better than random search <span id="id2">[]</span>.</p>
+<p><strong>Implication</strong>: PSO effectiveness depends on matching algorithm characteristics to problem structure.</p>
+</section>
+</section>
+<section id="multi-objective-pso-for-control-design">
+<h2>Multi-Objective PSO for Control Design<a class="headerlink" href="#multi-objective-pso-for-control-design" title="Link to this heading">¶</a></h2>
+<section id="control-parameter-optimization-problem">
+<h3>Control Parameter Optimization Problem<a class="headerlink" href="#control-parameter-optimization-problem" title="Link to this heading">¶</a></h3>
+<p>For sliding mode controller tuning, we define a multi-objective optimization problem:</p>
+<div class="math-wrapper docutils container" id="equation-eq-multiobjective-problem">
+<div class="math notranslate nohighlight" id="equation-eq-multiobjective-problem">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-multiobjective-problem" title="Link to this equation">¶</a></span>\[\begin{split}\min_{\vec{\theta}} \vec{F}(\vec{\theta}) = \begin{bmatrix} f_1(\vec{\theta}) \\ f_2(\vec{\theta}) \\ \vdots \\ f_m(\vec{\theta}) \end{bmatrix}\end{split}\]</div>
+</div>
+<p>subject to:</p>
+<div class="math-wrapper docutils container" id="equation-eq-parameter-constraints">
+<div class="math notranslate nohighlight" id="equation-eq-parameter-constraints">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-parameter-constraints" title="Link to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+\vec{\theta}^{min} &amp;\leq \vec{\theta} \leq \vec{\theta}^{max} \\
+g_j(\vec{\theta}) &amp;\leq 0, \quad j = 1, \ldots, p
+\end{aligned}\end{split}\]</div>
+</div>
+</section>
+<section id="objective-function-components">
+<h3>Objective Function Components<a class="headerlink" href="#objective-function-components" title="Link to this heading">¶</a></h3>
+<p>For the DIP-SMC system, the objective vector includes:</p>
+<p><strong>Tracking Performance</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-tracking-objective">
+<div class="math notranslate nohighlight" id="equation-eq-tracking-objective">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-tracking-objective" title="Link to this equation">¶</a></span>\[f_1(\vec{\theta}) = \int_0^T \|\vec{e}(t, \vec{\theta})\|^2 dt\]</div>
+</div>
+<p><strong>Control Effort</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-control-effort-objective">
+<div class="math notranslate nohighlight" id="equation-eq-control-effort-objective">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-control-effort-objective" title="Link to this equation">¶</a></span>\[f_2(\vec{\theta}) = \int_0^T u(t, \vec{\theta})^2 dt\]</div>
+</div>
+<p><strong>Control Smoothness</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-smoothness-objective">
+<div class="math notranslate nohighlight" id="equation-eq-smoothness-objective">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-smoothness-objective" title="Link to this equation">¶</a></span>\[f_3(\vec{\theta}) = \int_0^T \left(\frac{du}{dt}(t, \vec{\theta})\right)^2 dt\]</div>
+</div>
+<p><strong>Robustness Margin</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-robustness-objective">
+<div class="math notranslate nohighlight" id="equation-eq-robustness-objective">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-robustness-objective" title="Link to this equation">¶</a></span>\[f_4(\vec{\theta}) = -\min_{\Delta \vec{p}} \{\|\Delta \vec{p}\| : \text{system unstable}\}\]</div>
+</div>
+</section>
+<section id="weighted-sum-approach">
+<h3>Weighted Sum Approach<a class="headerlink" href="#weighted-sum-approach" title="Link to this heading">¶</a></h3>
+<p>The multi-objective problem is converted to a scalar optimization using weights:</p>
+<div class="math-wrapper docutils container" id="equation-eq-weighted-sum">
+<div class="math notranslate nohighlight" id="equation-eq-weighted-sum">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-weighted-sum" title="Link to this equation">¶</a></span>\[J(\vec{\theta}) = \sum_{i=1}^m w_i f_i(\vec{\theta})\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(w_i \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_{i=1}^m w_i = 1\)</span>.</p>
+</section>
+<section id="pareto-optimality">
+<h3>Pareto Optimality<a class="headerlink" href="#pareto-optimality" title="Link to this heading">¶</a></h3>
+<p><strong>Definition 4 (Pareto Dominance)</strong>: Solution <span class="math notranslate nohighlight">\(\vec{\theta}_1\)</span> dominates <span class="math notranslate nohighlight">\(\vec{\theta}_2\)</span> (denoted <span class="math notranslate nohighlight">\(\vec{\theta}_1 \prec \vec{\theta}_2\)</span>) if:</p>
+<div class="math-wrapper docutils container" id="equation-eq-pareto-dominance">
+<div class="math notranslate nohighlight" id="equation-eq-pareto-dominance">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-pareto-dominance" title="Link to this equation">¶</a></span>\[f_i(\vec{\theta}_1) \leq f_i(\vec{\theta}_2) \quad \forall i \in \{1, \ldots, m\}\]</div>
+</div>
+<p>with strict inequality for at least one objective.</p>
+<p><strong>Definition 5 (Pareto Optimal Set)</strong>: The Pareto optimal set is:</p>
+<div class="math-wrapper docutils container" id="equation-eq-pareto-set">
+<div class="math notranslate nohighlight" id="equation-eq-pareto-set">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-pareto-set" title="Link to this equation">¶</a></span>\[\mathcal{P} = \{\vec{\theta} \in \Omega : \nexists \vec{\theta}' \in \Omega \text{ such that } \vec{\theta}' \prec \vec{\theta}\}\]</div>
+</div>
+</section>
+</section>
+<section id="advanced-pso-variants">
+<h2>Advanced PSO Variants<a class="headerlink" href="#advanced-pso-variants" title="Link to this heading">¶</a></h2>
+<section id="constriction-factor-pso">
+<h3>Constriction Factor PSO<a class="headerlink" href="#constriction-factor-pso" title="Link to this heading">¶</a></h3>
+<p>To ensure convergence, Clerc and Kennedy <span id="id3">[]</span> introduced the constriction factor:</p>
+<div class="math-wrapper docutils container" id="equation-eq-constriction-factor">
+<div class="math notranslate nohighlight" id="equation-eq-constriction-factor">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-constriction-factor" title="Link to this equation">¶</a></span>\[\chi = \frac{2}{|2 - \phi - \sqrt{\phi^2 - 4\phi}|}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\phi = c_1 + c_2 &gt; 4\)</span>.</p>
+<p>The modified update equation becomes:</p>
+<div class="math-wrapper docutils container" id="equation-eq-constriction-pso">
+<div class="math notranslate nohighlight" id="equation-eq-constriction-pso">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-constriction-pso" title="Link to this equation">¶</a></span>\[\vec{v}_i^{(k+1)} = \chi[\vec{v}_i^{(k)} + c_1 r_1^{(k)}(\vec{p}_i - \vec{x}_i^{(k)}) + c_2 r_2^{(k)}(\vec{g} - \vec{x}_i^{(k)})]\]</div>
+</div>
+</section>
+<section id="adaptive-pso">
+<h3>Adaptive PSO<a class="headerlink" href="#adaptive-pso" title="Link to this heading">¶</a></h3>
+<p>Parameters adapt based on swarm behavior:</p>
+<div class="math-wrapper docutils container" id="equation-eq-adaptive-inertia">
+<div class="math notranslate nohighlight" id="equation-eq-adaptive-inertia">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-adaptive-inertia" title="Link to this equation">¶</a></span>\[w^{(k)} = w_{min} + (w_{max} - w_{min}) \exp\left(-\frac{2k}{k_{max}}\right)\]</div>
+</div>
+<div class="math-wrapper docutils container" id="equation-eq-adaptive-acceleration">
+<div class="math notranslate nohighlight" id="equation-eq-adaptive-acceleration">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-adaptive-acceleration" title="Link to this equation">¶</a></span>\[c_1^{(k)} = c_{1,f} + (c_{1,i} - c_{1,f})\frac{k_{max} - k}{k_{max}}\]</div>
+</div>
+</section>
+<section id="multi-swarm-pso">
+<h3>Multi-Swarm PSO<a class="headerlink" href="#multi-swarm-pso" title="Link to this heading">¶</a></h3>
+<p>Multiple sub-swarms explore different regions:</p>
+<div class="math-wrapper docutils container" id="equation-eq-multiswarm-update">
+<div class="math notranslate nohighlight" id="equation-eq-multiswarm-update">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-multiswarm-update" title="Link to this equation">¶</a></span>\[\vec{v}_{i,s}^{(k+1)} = w\vec{v}_{i,s}^{(k)} + c_1 r_1(\vec{p}_{i,s} - \vec{x}_{i,s}^{(k)}) + c_2 r_2(\vec{g}_s - \vec{x}_{i,s}^{(k)})\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(s\)</span> denotes the sub-swarm index and <span class="math notranslate nohighlight">\(\vec{g}_s\)</span> is the local best.</p>
+</section>
+</section>
+<section id="application-to-smc-parameter-tuning">
+<h2>Application to SMC Parameter Tuning<a class="headerlink" href="#application-to-smc-parameter-tuning" title="Link to this heading">¶</a></h2>
+<section id="parameter-vector-definition">
+<h3>Parameter Vector Definition<a class="headerlink" href="#parameter-vector-definition" title="Link to this heading">¶</a></h3>
+<p>For the complete SMC parameter optimization:</p>
+<div class="math-wrapper docutils container" id="equation-eq-smc-parameter-vector">
+<div class="math notranslate nohighlight" id="equation-eq-smc-parameter-vector">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-smc-parameter-vector" title="Link to this equation">¶</a></span>\[\begin{split}\vec{\theta} = \begin{bmatrix} c_x \\ c_{\theta_1} \\ c_{\theta_2} \\ \eta \\ \epsilon \\ \alpha \\ \beta \end{bmatrix}\end{split}\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\([c_x, c_{\theta_1}, c_{\theta_2}]\)</span> - sliding surface parameters</p></li>
+<li><p><span class="math notranslate nohighlight">\(\eta\)</span> - switching gain (classical SMC)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> - boundary layer thickness</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha, \beta\)</span> - super-twisting parameters</p></li>
+</ul>
+</section>
+<section id="constraint-handling">
+<h3>Constraint Handling<a class="headerlink" href="#constraint-handling" title="Link to this heading">¶</a></h3>
+<p><strong>Box Constraints</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-box-constraints">
+<div class="math notranslate nohighlight" id="equation-eq-box-constraints">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-box-constraints" title="Link to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+0.1 &amp;\leq c_i \leq 20 \\
+0.1 &amp;\leq \eta \leq 10 \\
+0.001 &amp;\leq \epsilon \leq 0.5 \\
+0.1 &amp;\leq \alpha \leq 5 \\
+0.1 &amp;\leq \beta \leq 5
+\end{aligned}\end{split}\]</div>
+</div>
+<p><strong>Stability Constraints</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-stability-constraints">
+<div class="math notranslate nohighlight" id="equation-eq-stability-constraints">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-stability-constraints" title="Link to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+\text{Closed-loop eigenvalues} &amp;: \text{Re}(\lambda_i) &lt; -0.1 \\
+\text{Super-twisting condition} &amp;: \alpha &gt; 2\sqrt{2\rho}/\sqrt{\gamma}
+\end{aligned}\end{split}\]</div>
+</div>
+</section>
+<section id="fitness-evaluation">
+<h3>Fitness Evaluation<a class="headerlink" href="#fitness-evaluation" title="Link to this heading">¶</a></h3>
+<p>The fitness evaluation requires:</p>
+<ol class="arabic simple">
+<li><p><strong>Simulation execution</strong> with current parameters</p></li>
+<li><p><strong>Performance metric computation</strong></p></li>
+<li><p><strong>Constraint violation assessment</strong></p></li>
+<li><p><strong>Penalty application</strong> for infeasible solutions</p></li>
+</ol>
+<div class="math-wrapper docutils container" id="equation-eq-penalized-objective">
+<div class="math notranslate nohighlight" id="equation-eq-penalized-objective">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-penalized-objective" title="Link to this equation">¶</a></span>\[J_{pen}(\vec{\theta}) = J(\vec{\theta}) + \sum_{j=1}^p \mu_j \max(0, g_j(\vec{\theta}))^2\]</div>
+</div>
+</section>
+</section>
+<section id="convergence-enhancement-strategies">
+<h2>Convergence Enhancement Strategies<a class="headerlink" href="#convergence-enhancement-strategies" title="Link to this heading">¶</a></h2>
+<section id="diversity-maintenance">
+<h3>Diversity Maintenance<a class="headerlink" href="#diversity-maintenance" title="Link to this heading">¶</a></h3>
+<p><strong>Velocity Clamping</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-velocity-clamping">
+<div class="math notranslate nohighlight" id="equation-eq-velocity-clamping">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-velocity-clamping" title="Link to this equation">¶</a></span>\[\begin{split}v_{i,d}^{(k+1)} = \begin{cases}
+v_{max,d} &amp; \text{if } v_{i,d}^{(k+1)} &gt; v_{max,d} \\
+-v_{max,d} &amp; \text{if } v_{i,d}^{(k+1)} &lt; -v_{max,d} \\
+v_{i,d}^{(k+1)} &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+</div>
+<p><strong>Swarm Diversity Measure</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-diversity-measure">
+<div class="math notranslate nohighlight" id="equation-eq-diversity-measure">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-diversity-measure" title="Link to this equation">¶</a></span>\[D^{(k)} = \frac{1}{N} \sum_{i=1}^N \|\vec{x}_i^{(k)} - \bar{\vec{x}}^{(k)}\|\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\bar{\vec{x}}^{(k)} = \frac{1}{N}\sum_{i=1}^N \vec{x}_i^{(k)}\)</span> is the swarm centroid.</p>
+</section>
+<section id="premature-convergence-detection">
+<h3>Premature Convergence Detection<a class="headerlink" href="#premature-convergence-detection" title="Link to this heading">¶</a></h3>
+<p><strong>Convergence Criterion</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-convergence-criterion">
+<div class="math notranslate nohighlight" id="equation-eq-convergence-criterion">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-convergence-criterion" title="Link to this equation">¶</a></span>\[\sigma^{(k)} = \sqrt{\frac{1}{N}\sum_{i=1}^N (f_i^{(k)} - \bar{f}^{(k)})^2} &lt; \epsilon_{conv}\]</div>
+</div>
+<p><strong>Restart Strategy</strong>: When premature convergence is detected, reinitialize particles while preserving the global best.</p>
+</section>
+<section id="hybrid-approaches">
+<h3>Hybrid Approaches<a class="headerlink" href="#hybrid-approaches" title="Link to this heading">¶</a></h3>
+<p><strong>PSO-Gradient Hybrid</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-pso-gradient-hybrid">
+<div class="math notranslate nohighlight" id="equation-eq-pso-gradient-hybrid">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-pso-gradient-hybrid" title="Link to this equation">¶</a></span>\[\vec{x}_{i}^{(k+1)} = \vec{x}_i^{(k)} + \vec{v}_i^{(k+1)} - \alpha_{grad} \nabla J(\vec{x}_i^{(k)})\]</div>
+</div>
+</section>
+</section>
+<section id="performance-analysis">
+<h2>Performance Analysis<a class="headerlink" href="#performance-analysis" title="Link to this heading">¶</a></h2>
+<section id="computational-complexity">
+<h3>Computational Complexity<a class="headerlink" href="#computational-complexity" title="Link to this heading">¶</a></h3>
+<p><strong>Time Complexity</strong>: <span class="math notranslate nohighlight">\(O(N \cdot k_{max} \cdot T_{sim})\)</span> where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(N\)</span> - swarm size</p></li>
+<li><p><span class="math notranslate nohighlight">\(k_{max}\)</span> - maximum iterations</p></li>
+<li><p><span class="math notranslate nohighlight">\(T_{sim}\)</span> - simulation time per evaluation</p></li>
+</ul>
+<p><strong>Space Complexity</strong>: <span class="math notranslate nohighlight">\(O(N \cdot D)\)</span> for storing particle positions and velocities.</p>
+</section>
+<section id="scalability-analysis">
+<h3>Scalability Analysis<a class="headerlink" href="#scalability-analysis" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper docutils container" id="table-pso-scalability">
+<table class="docutils align-default" id="table-pso-scalability">
+<caption><span class="caption-text">PSO Scalability</span><a class="headerlink" href="#table-pso-scalability" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem Dimension</p></th>
+<th class="head"><p>Recommended Swarm Size</p></th>
+<th class="head"><p>Expected Evaluations</p></th>
+<th class="head"><p>Convergence Rate</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>D ≤ 5</p></td>
+<td><p>20-30</p></td>
+<td><p>500-1000</p></td>
+<td><p>Fast</p></td>
+</tr>
+<tr class="row-odd"><td><p>5 &lt; D ≤ 10</p></td>
+<td><p>30-50</p></td>
+<td><p>1000-2000</p></td>
+<td><p>Moderate</p></td>
+</tr>
+<tr class="row-even"><td><p>10 &lt; D ≤ 20</p></td>
+<td><p>50-100</p></td>
+<td><p>2000-5000</p></td>
+<td><p>Slow</p></td>
+</tr>
+<tr class="row-odd"><td><p>D &gt; 20</p></td>
+<td><p>100-200</p></td>
+<td><p>5000-10000</p></td>
+<td><p>Very Slow</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="benchmark-performance">
+<h3>Benchmark Performance<a class="headerlink" href="#benchmark-performance" title="Link to this heading">¶</a></h3>
+<p>For standard test functions:</p>
+<p><strong>Sphere Function</strong> (unimodal):</p>
+<div class="math-wrapper docutils container" id="equation-eq-sphere-function">
+<div class="math notranslate nohighlight" id="equation-eq-sphere-function">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-sphere-function" title="Link to this equation">¶</a></span>\[f(\vec{x}) = \sum_{i=1}^D x_i^2\]</div>
+</div>
+<p><strong>Rastrigin Function</strong> (multimodal):</p>
+<div class="math-wrapper docutils container" id="equation-eq-rastrigin-function">
+<div class="math notranslate nohighlight" id="equation-eq-rastrigin-function">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-rastrigin-function" title="Link to this equation">¶</a></span>\[f(\vec{x}) = 10D + \sum_{i=1}^D (x_i^2 - 10\cos(2\pi x_i))\]</div>
+</div>
+<p><strong>Convergence Results</strong>: PSO typically achieves:</p>
+<ul class="simple">
+<li><p>Sphere: <span class="math notranslate nohighlight">\(\mathcal{O}(10^{-6})\)</span> accuracy in 500-1000 evaluations</p></li>
+<li><p>Rastrigin: Near-global optimum in 2000-5000 evaluations</p></li>
+</ul>
+</section>
+</section>
+<section id="practical-implementation-guidelines">
+<h2>Practical Implementation Guidelines<a class="headerlink" href="#practical-implementation-guidelines" title="Link to this heading">¶</a></h2>
+<section id="parameter-selection">
+<h3>Parameter Selection<a class="headerlink" href="#parameter-selection" title="Link to this heading">¶</a></h3>
+<p><strong>Swarm Size</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-swarm-size-rule">
+<div class="math notranslate nohighlight" id="equation-eq-swarm-size-rule">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-swarm-size-rule" title="Link to this equation">¶</a></span>\[N = 10 + 2\sqrt{D}\]</div>
+</div>
+<p><strong>Inertia Weight Schedule</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-inertia-schedule">
+<div class="math notranslate nohighlight" id="equation-eq-inertia-schedule">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-inertia-schedule" title="Link to this equation">¶</a></span>\[w^{(k)} = 0.9 - 0.5 \cdot \frac{k}{k_{max}}\]</div>
+</div>
+<p><strong>Acceleration Coefficients</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-acceleration-schedule">
+<div class="math notranslate nohighlight" id="equation-eq-acceleration-schedule">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-acceleration-schedule" title="Link to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+c_1^{(k)} &amp;= 2.5 - 2 \cdot \frac{k}{k_{max}} \\
+c_2^{(k)} &amp;= 0.5 + 2 \cdot \frac{k}{k_{max}}
+\end{aligned}\end{split}\]</div>
+</div>
+</section>
+<section id="termination-criteria">
+<h3>Termination Criteria<a class="headerlink" href="#termination-criteria" title="Link to this heading">¶</a></h3>
+<p>Multiple criteria ensure robust termination:</p>
+<ol class="arabic simple">
+<li><p><strong>Maximum iterations</strong>: <span class="math notranslate nohighlight">\(k \geq k_{max}\)</span></p></li>
+<li><p><strong>Target fitness</strong>: <span class="math notranslate nohighlight">\(f(\vec{g}) \leq f_{target}\)</span></p></li>
+<li><p><strong>Stagnation</strong>: No improvement for <span class="math notranslate nohighlight">\(k_{stag}\)</span> iterations</p></li>
+<li><p><strong>Diversity collapse</strong>: <span class="math notranslate nohighlight">\(D^{(k)} &lt; D_{min}\)</span></p></li>
+</ol>
+</section>
+<section id="parallel-implementation">
+<h3>Parallel Implementation<a class="headerlink" href="#parallel-implementation" title="Link to this heading">¶</a></h3>
+<p>PSO is inherently parallelizable:</p>
+<div class="math-wrapper docutils container" id="equation-eq-parallel-evaluation">
+<div class="math notranslate nohighlight" id="equation-eq-parallel-evaluation">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-parallel-evaluation" title="Link to this equation">¶</a></span>\[\text{Speedup} \approx \min(N, P)\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(P\)</span> is the number of processors.</p>
+</section>
+<section id="library-implementation-pyswarms">
+<h3>Library Implementation: PySwarms<a class="headerlink" href="#library-implementation-pyswarms" title="Link to this heading">¶</a></h3>
+<p>This repository uses <strong>PySwarms (GlobalBestPSO)</strong> as the underlying PSO implementation engine. The theoretical algorithms described above are realized through the following practical considerations:</p>
+<p><strong>Core Engine</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyswarms.single</span><span class="w"> </span><span class="kn">import</span> <span class="n">GlobalBestPSO</span>
+</pre></div>
+</div>
+<p><strong>Implementation Features</strong>:</p>
+<ul>
+<li><p><strong>Inertia Weight Scheduling</strong>: Applied via <code class="docutils literal notranslate"><span class="pre">w_schedule</span></code> configuration parameter using linear decrease from <span class="math notranslate nohighlight">\(w_{start}\)</span> to <span class="math notranslate nohighlight">\(w_{end}\)</span> over the iteration horizon:</p>
+<div class="math-wrapper docutils container" id="equation-eq-pyswarms-inertia-schedule">
+<div class="math notranslate nohighlight" id="equation-eq-pyswarms-inertia-schedule">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-pyswarms-inertia-schedule" title="Link to this equation">¶</a></span>\[w^{(k)} = w_{start} - \frac{k}{k_{max}}(w_{start} - w_{end})\]</div>
+</div>
+</li>
+<li><p><strong>Velocity Clamping</strong>: Implemented through <code class="docutils literal notranslate"><span class="pre">velocity_clamp</span></code> parameter to prevent particle divergence:</p>
+<div class="math-wrapper docutils container" id="equation-eq-pyswarms-velocity-clamping">
+<div class="math notranslate nohighlight" id="equation-eq-pyswarms-velocity-clamping">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-pyswarms-velocity-clamping" title="Link to this equation">¶</a></span>\[\vec{v}_{min} \leq \vec{v}_i^{(k)} \leq \vec{v}_{max}\]</div>
+</div>
+<p>where clamp limits are expressed as fractions of the search range: <span class="math notranslate nohighlight">\(\vec{v}_{min/max} = \delta_{min/max} \cdot (\vec{\theta}_{max} - \vec{\theta}_{min})\)</span></p>
+</li>
+<li><p><strong>Boundary Handling</strong>: Automatic constraint enforcement for parameter bounds defined in <a class="reference internal" href="#equation-eq-search-space">()</a></p></li>
+<li><p><strong>Deterministic Seeding</strong>: Ensures reproducible optimization runs through controlled random number generation</p></li>
+</ul>
+<p><strong>Configuration Interface</strong>:
+The PSO parameters are configured through the project’s YAML configuration system, mapping theoretical parameters to implementation:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pso</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">n_particles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">              </span><span class="c1"># Swarm size N</span>
+<span class="w">  </span><span class="nt">iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span><span class="w">                   </span><span class="c1"># Maximum iterations k_max</span>
+<span class="w">  </span><span class="nt">w</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span><span class="w">                       </span><span class="c1"># Base inertia weight</span>
+<span class="w">  </span><span class="nt">c1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w">                      </span><span class="c1"># Cognitive coefficient</span>
+<span class="w">  </span><span class="nt">c2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w">                      </span><span class="c1"># Social coefficient</span>
+<span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span><span class="w">                     </span><span class="c1"># Reproducible optimization runs</span>
+<span class="w">  </span><span class="c1"># Optional advanced features (supported but not configured by default):</span>
+<span class="w">  </span><span class="c1"># w_schedule: [0.9, 0.4]     # Linear inertia decrease</span>
+<span class="w">  </span><span class="c1"># velocity_clamp: [0.1, 0.3] # Velocity limits as fractions</span>
+<span class="w">  </span><span class="nt">bounds</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">]</span><span class="w">    </span><span class="c1"># Lower bounds</span>
+<span class="w">    </span><span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">100.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">100.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">150.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Upper bounds</span>
+</pre></div>
+</div>
+<p><strong>Cost Function Integration</strong>:
+The multi-objective cost function <a class="reference internal" href="#equation-eq-multiobjective-problem">()</a> is evaluated through vectorized simulation, with PSO managing the parameter search while the cost computation handles:</p>
+<ul class="simple">
+<li><p>Batch trajectory simulation</p></li>
+<li><p>Performance metric calculation</p></li>
+<li><p>Constraint violation penalties</p></li>
+<li><p>Statistical aggregation across uncertainty scenarios</p></li>
+</ul>
+</section>
+</section>
+<section id="case-study-dip-smc-optimization">
+<h2>Case Study: DIP-SMC Optimization<a class="headerlink" href="#case-study-dip-smc-optimization" title="Link to this heading">¶</a></h2>
+<section id="problem-formulation">
+<h3>Problem Formulation<a class="headerlink" href="#problem-formulation" title="Link to this heading">¶</a></h3>
+<p><strong>Objective</strong>: Minimize weighted sum of tracking error, control effort, and chattering:</p>
+<div class="math-wrapper docutils container" id="equation-eq-dip-smc-objective">
+<div class="math notranslate nohighlight" id="equation-eq-dip-smc-objective">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-dip-smc-objective" title="Link to this equation">¶</a></span>\[J(\vec{\theta}) = w_1 \int_0^T \|\vec{e}(t)\|^2 dt + w_2 \int_0^T u(t)^2 dt + w_3 \mathcal{I}_{chat}\]</div>
+</div>
+<p><strong>Parameter Vector</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-dip-parameter-vector">
+<div class="math notranslate nohighlight" id="equation-eq-dip-parameter-vector">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-dip-parameter-vector" title="Link to this equation">¶</a></span>\[\vec{\theta} = [c_x, c_{\theta_1}, c_{\theta_2}, \eta, \epsilon]^T\]</div>
+</div>
+<p><strong>Constraints</strong>:</p>
+<ul class="simple">
+<li><p>Physical limits: <span class="math notranslate nohighlight">\(0.1 \leq c_i \leq 20\)</span>, <span class="math notranslate nohighlight">\(0.1 \leq \eta \leq 10\)</span></p></li>
+<li><p>Stability: Closed-loop poles in left half-plane</p></li>
+<li><p>Performance: Settling time <span class="math notranslate nohighlight">\(&lt; 5\)</span> seconds</p></li>
+</ul>
+</section>
+<section id="optimization-results">
+<h3>Optimization Results<a class="headerlink" href="#optimization-results" title="Link to this heading">¶</a></h3>
+<p><strong>Convergence</strong>: Typically converges in 30-50 generations
+<strong>Final Parameters</strong>:</p>
+<ul class="simple">
+<li><p>Classical SMC: <span class="math notranslate nohighlight">\(\vec{\theta}^* = [5.2, 8.1, 7.8, 2.3, 0.05]\)</span></p></li>
+<li><p>Performance: 85% improvement over manual tuning</p></li>
+</ul>
+</section>
+<section id="sensitivity-analysis">
+<h3>Sensitivity Analysis<a class="headerlink" href="#sensitivity-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Parameter Sensitivity</strong>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-sensitivity-analysis">
+<div class="math notranslate nohighlight" id="equation-eq-sensitivity-analysis">
+<span class="eqno">()<a class="headerlink" href="#equation-eq-sensitivity-analysis" title="Link to this equation">¶</a></span>\[S_i = \frac{\partial J}{\partial \theta_i} \cdot \frac{\theta_i}{J}\]</div>
+</div>
+<p>Results show highest sensitivity to sliding surface parameters <span class="math notranslate nohighlight">\(c_i\)</span>.</p>
+</section>
+</section>
+<section id="conclusions">
+<h2>Conclusions<a class="headerlink" href="#conclusions" title="Link to this heading">¶</a></h2>
+<p>This comprehensive analysis of PSO theory provides the mathematical foundation for automated SMC parameter tuning. Key contributions include:</p>
+<ol class="arabic simple">
+<li><p><strong>Rigorous convergence analysis</strong> for stochastic optimization</p></li>
+<li><p><strong>Multi-objective formulation</strong> for control design trade-offs</p></li>
+<li><p><strong>Practical implementation guidelines</strong> for real-world applications</p></li>
+<li><p><strong>Performance benchmarks</strong> for algorithm evaluation</p></li>
+</ol>
+<p>The integration of PSO with sliding mode control theory, developed in <a class="reference internal" href="smc_theory_complete.html"><span class="doc">Complete Sliding Mode Control Theory</span></a>, enables systematic controller design for the double-inverted pendulum system described in <a class="reference internal" href="system_dynamics_complete.html"><span class="doc">Complete System Dynamics</span></a>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<p>The theoretical development follows <span id="id4">[<a class="reference internal" href="../references/bibliography.html#id435" title="James Kennedy and Russell Eberhart. Particle swarm optimization. Proceedings of ICNN'95-international conference on neural networks, 4:1942–1948, 1995. URL: https://doi.org/10.1109/ICNN.1995.488968, doi:10.1109/ICNN.1995.488968.">KE95b</a>]</span>, <span id="id5">[]</span>, and <span id="id6">[]</span>. Multi-objective extensions are based on <span id="id7">[]</span> and <span id="id8">[]</span>. Convergence analysis follows <span id="id9">[]</span> and <span id="id10">[]</span>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Complete PSO Optimization Theory</a><ul>
+<li><a class="reference internal" href="#introduction-to-particle-swarm-optimization">Introduction to Particle Swarm Optimization</a><ul>
+<li><a class="reference internal" href="#biological-inspiration">Biological Inspiration</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#classical-pso-algorithm">Classical PSO Algorithm</a><ul>
+<li><a class="reference internal" href="#particle-dynamics">Particle Dynamics</a></li>
+<li><a class="reference internal" href="#update-equations">Update Equations</a></li>
+<li><a class="reference internal" href="#parameter-interpretation">Parameter Interpretation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#convergence-analysis">Convergence Analysis</a><ul>
+<li><a class="reference internal" href="#deterministic-analysis">Deterministic Analysis</a></li>
+<li><a class="reference internal" href="#stochastic-analysis">Stochastic Analysis</a></li>
+<li><a class="reference internal" href="#no-free-lunch-theorem">No Free Lunch Theorem</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multi-objective-pso-for-control-design">Multi-Objective PSO for Control Design</a><ul>
+<li><a class="reference internal" href="#control-parameter-optimization-problem">Control Parameter Optimization Problem</a></li>
+<li><a class="reference internal" href="#objective-function-components">Objective Function Components</a></li>
+<li><a class="reference internal" href="#weighted-sum-approach">Weighted Sum Approach</a></li>
+<li><a class="reference internal" href="#pareto-optimality">Pareto Optimality</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-pso-variants">Advanced PSO Variants</a><ul>
+<li><a class="reference internal" href="#constriction-factor-pso">Constriction Factor PSO</a></li>
+<li><a class="reference internal" href="#adaptive-pso">Adaptive PSO</a></li>
+<li><a class="reference internal" href="#multi-swarm-pso">Multi-Swarm PSO</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#application-to-smc-parameter-tuning">Application to SMC Parameter Tuning</a><ul>
+<li><a class="reference internal" href="#parameter-vector-definition">Parameter Vector Definition</a></li>
+<li><a class="reference internal" href="#constraint-handling">Constraint Handling</a></li>
+<li><a class="reference internal" href="#fitness-evaluation">Fitness Evaluation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#convergence-enhancement-strategies">Convergence Enhancement Strategies</a><ul>
+<li><a class="reference internal" href="#diversity-maintenance">Diversity Maintenance</a></li>
+<li><a class="reference internal" href="#premature-convergence-detection">Premature Convergence Detection</a></li>
+<li><a class="reference internal" href="#hybrid-approaches">Hybrid Approaches</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-analysis">Performance Analysis</a><ul>
+<li><a class="reference internal" href="#computational-complexity">Computational Complexity</a></li>
+<li><a class="reference internal" href="#scalability-analysis">Scalability Analysis</a></li>
+<li><a class="reference internal" href="#benchmark-performance">Benchmark Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#practical-implementation-guidelines">Practical Implementation Guidelines</a><ul>
+<li><a class="reference internal" href="#parameter-selection">Parameter Selection</a></li>
+<li><a class="reference internal" href="#termination-criteria">Termination Criteria</a></li>
+<li><a class="reference internal" href="#parallel-implementation">Parallel Implementation</a></li>
+<li><a class="reference internal" href="#library-implementation-pyswarms">Library Implementation: PySwarms</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#case-study-dip-smc-optimization">Case Study: DIP-SMC Optimization</a><ul>
+<li><a class="reference internal" href="#problem-formulation">Problem Formulation</a></li>
+<li><a class="reference internal" href="#optimization-results">Optimization Results</a></li>
+<li><a class="reference internal" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusions">Conclusions</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

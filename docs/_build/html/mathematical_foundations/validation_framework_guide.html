@@ -1,0 +1,1461 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Validation Framework Guide - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/mathematical_foundations/validation_framework_guide.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/mathematical_foundations/validation_framework_guide.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="validation-framework-guide">
+<h1>Validation Framework Guide<a class="headerlink" href="#validation-framework-guide" title="Link to this heading">¶</a></h1>
+<p><strong>System Reliability Foundation: Robust Parameter Validation &amp; Scientific Verification</strong></p>
+<hr class="docutils" />
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#introduction">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#parameter-validators">Parameter Validators</a></p></li>
+<li><p><a class="reference internal" href="#range-validators">Range Validators</a></p></li>
+<li><p><a class="reference internal" href="#smc-gain-validation">SMC Gain Validation</a></p></li>
+<li><p><a class="reference internal" href="#end-to-end-workflow-validation">End-to-End Workflow Validation</a></p></li>
+<li><p><a class="reference internal" href="#integration-patterns">Integration Patterns</a></p></li>
+<li><p><a class="reference internal" href="#performance-considerations">Performance Considerations</a></p></li>
+<li><p><a class="reference internal" href="#best-practices">Best Practices</a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>The validation framework provides comprehensive parameter validation across the entire DIP-SMC-PSO system. It ensures robust parameter checking, early error detection with clear messages, and scientific parameter validation system-wide.</p>
+<section id="design-philosophy">
+<h3>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Fail Fast:</strong> Invalid parameters detected immediately at construction time</p></li>
+<li><p><strong>Clear Messages:</strong> Error messages include parameter name, value, and constraint</p></li>
+<li><p><strong>Type Safety:</strong> All validators return typed values (float) for consistency</p></li>
+<li><p><strong>Performance:</strong> Minimal overhead (&lt;10μs per validation)</p></li>
+<li><p><strong>Comprehensive:</strong> Covers control, physics, optimization, and simulation parameters</p></li>
+</ol>
+</section>
+<section id="validation-hierarchy">
+<h3>Validation Hierarchy<a class="headerlink" href="#validation-hierarchy" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">┌─────────────────────────────────────────┐</span>
+<span class="err">│</span>   <span class="n">End</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">End</span> <span class="n">Workflow</span> <span class="n">Validation</span>        <span class="err">│</span>  <span class="err">←</span> <span class="n">Production</span> <span class="n">readiness</span>
+<span class="err">├─────────────────────────────────────────┤</span>
+<span class="err">│</span>   <span class="n">Domain</span><span class="o">-</span><span class="n">Specific</span> <span class="n">Validators</span>            <span class="err">│</span>  <span class="err">←</span> <span class="n">SMC</span> <span class="n">gains</span><span class="p">,</span> <span class="n">physics</span><span class="p">,</span> <span class="n">optimization</span>
+<span class="err">├─────────────────────────────────────────┤</span>
+<span class="err">│</span>   <span class="n">Range</span> <span class="n">Validators</span>                       <span class="err">│</span>  <span class="err">←</span> <span class="n">Bounds</span> <span class="n">checking</span>
+<span class="err">├─────────────────────────────────────────┤</span>
+<span class="err">│</span>   <span class="n">Parameter</span> <span class="n">Validators</span>                   <span class="err">│</span>  <span class="err">←</span> <span class="n">Basic</span> <span class="n">constraints</span> <span class="p">(</span><span class="n">positive</span><span class="p">,</span> <span class="n">finite</span><span class="p">)</span>
+<span class="err">└─────────────────────────────────────────┘</span>
+</pre></div>
+</div>
+</section>
+<section id="coverage-standards">
+<h3>Coverage Standards<a class="headerlink" href="#coverage-standards" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Target</p></th>
+<th class="head"><p>Actual</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Parameter validators</p></td>
+<td><p>100%</p></td>
+<td><p>100%</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>Range validators</p></td>
+<td><p>100%</p></td>
+<td><p>100%</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>SMC gain validation</p></td>
+<td><p>100%</p></td>
+<td><p>100%</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>End-to-end workflows</p></td>
+<td><p>95%</p></td>
+<td><p>95%+</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Overall</strong></p></td>
+<td><p><strong>≥85%</strong></p></td>
+<td><p><strong>≥95%</strong></p></td>
+<td><p><strong>✅</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="parameter-validators">
+<h2>Parameter Validators<a class="headerlink" href="#parameter-validators" title="Link to this heading">¶</a></h2>
+<section id="require-positive">
+<h3>require_positive<a class="headerlink" href="#require-positive" title="Link to this heading">¶</a></h3>
+<p>Validates that a numeric value is positive (or non-negative).</p>
+<p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/validation/parameter_validators.py</span></code></p>
+<section id="signature">
+<h4>Signature<a class="headerlink" href="#signature" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">require_positive</span><span class="p">(</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">allow_zero</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+</pre></div>
+</div>
+</section>
+<section id="mathematical-constraint">
+<h4>Mathematical Constraint<a class="headerlink" href="#mathematical-constraint" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+x &gt; 0 \quad \text{(strict positivity)}
+\]</div>
+</div>
+<p>or</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+x \geq 0 \quad \text{(if allow_zero=True)}
+\]</div>
+</div>
+</section>
+<section id="usage-examples">
+<h4>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.parameter_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>
+
+<span class="c1"># Control gains must be positive</span>
+<span class="n">k_p</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;proportional_gain&quot;</span><span class="p">)</span>  <span class="c1"># ✅ Returns 10.0</span>
+
+<span class="c1"># Mass parameters must be positive</span>
+<span class="n">mass</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;cart_mass&quot;</span><span class="p">)</span>  <span class="c1"># ✅ Returns 1.5</span>
+
+<span class="c1"># Friction can be zero (but not negative)</span>
+<span class="n">friction</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;friction_coefficient&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># ✅ Returns 0.0</span>
+
+<span class="c1"># Invalid: negative gain</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">k_p</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="s2">&quot;proportional_gain&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Error: &quot;proportional_gain must be &gt; 0; got -5.0&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="error-messages">
+<h4>Error Messages<a class="headerlink" href="#error-messages" title="Link to this heading">¶</a></h4>
+<p><strong>Pattern:</strong> <code class="docutils literal notranslate"><span class="pre">{name}</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">{constraint};</span> <span class="pre">got</span> <span class="pre">{value}</span></code></p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;control_gain</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">&gt;</span> <span class="pre">0;</span> <span class="pre">got</span> <span class="pre">-2.5&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;time_constant</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">a</span> <span class="pre">finite</span> <span class="pre">number;</span> <span class="pre">got</span> <span class="pre">inf&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;friction_coefficient</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">≥</span> <span class="pre">0;</span> <span class="pre">got</span> <span class="pre">-0.1&quot;</span></code></p></li>
+</ul>
+</section>
+<section id="common-applications">
+<h4>Common Applications<a class="headerlink" href="#common-applications" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter Type</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Constraint</p></th>
+<th class="head"><p>allow_zero</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Control gains</p></td>
+<td><p><span class="math notranslate nohighlight">\(K_p, K_d, K_i\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(&gt; 0\)</span></p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>Masses</p></td>
+<td><p><span class="math notranslate nohighlight">\(m_1, m_2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(&gt; 0\)</span></p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-even"><td><p>Lengths</p></td>
+<td><p><span class="math notranslate nohighlight">\(l_1, l_2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(&gt; 0\)</span></p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>Friction</p></td>
+<td><p><span class="math notranslate nohighlight">\(b_1, b_2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\geq 0\)</span></p></td>
+<td><p>True</p></td>
+</tr>
+<tr class="row-even"><td><p>Time constants</p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau, dt\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(&gt; 0\)</span></p></td>
+<td><p>False</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="require-finite">
+<h3>require_finite<a class="headerlink" href="#require-finite" title="Link to this heading">¶</a></h3>
+<p>Validates that a value is finite (not NaN or infinite).</p>
+<section id="id1">
+<h4>Signature<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">require_finite</span><span class="p">(</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>Mathematical Constraint<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+x \in \mathbb{R} \quad \land \quad |x| &lt; \infty
+\]</div>
+</div>
+</section>
+<section id="id3">
+<h4>Usage Examples<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.parameter_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_finite</span>
+
+<span class="c1"># Initial conditions (can be positive, negative, or zero)</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;initial_position&quot;</span><span class="p">)</span>       <span class="c1"># ✅</span>
+<span class="n">theta0</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;initial_angle&quot;</span><span class="p">)</span>     <span class="c1"># ✅</span>
+<span class="n">velocity</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;initial_velocity&quot;</span><span class="p">)</span> <span class="c1"># ✅</span>
+
+<span class="c1"># Invalid: infinite value</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="s2">&quot;measurement&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Error: &quot;measurement must be a finite number; got inf&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="c1"># Invalid: NaN value</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">),</span> <span class="s2">&quot;sensor_reading&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Error: &quot;sensor_reading must be a finite number; got nan&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="range-validators">
+<h2>Range Validators<a class="headerlink" href="#range-validators" title="Link to this heading">¶</a></h2>
+<section id="require-in-range">
+<h3>require_in_range<a class="headerlink" href="#require-in-range" title="Link to this heading">¶</a></h3>
+<p>Validates that a value lies within a specified interval.</p>
+<p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/validation/range_validators.py</span></code></p>
+<section id="id4">
+<h4>Signature<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">require_in_range</span><span class="p">(</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">minimum</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">maximum</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">allow_equal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>Mathematical Constraint<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
+<p><strong>Closed interval (allow_equal=True, default):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+x \in [x_{\min}, x_{\max}]
+\]</div>
+</div>
+<p><strong>Open interval (allow_equal=False):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+x \in (x_{\min}, x_{\max})
+\]</div>
+</div>
+</section>
+<section id="id6">
+<h4>Usage Examples<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.range_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_in_range</span>
+
+<span class="c1"># Adaptation rates (bounded for stability)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="s2">&quot;adaptation_rate&quot;</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># ✅</span>
+
+<span class="c1"># Normalized values</span>
+<span class="n">confidence</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># ✅</span>
+
+<span class="c1"># Control saturation limits</span>
+<span class="n">u_max</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span><span class="mf">50.0</span><span class="p">,</span> <span class="s2">&quot;max_control&quot;</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">200.0</span><span class="p">)</span>  <span class="c1"># ✅</span>
+
+<span class="c1"># Exclusive bounds (value must be strictly inside interval)</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span>
+    <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;threshold&quot;</span><span class="p">,</span>
+    <span class="n">minimum</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">allow_equal</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># 0 &lt; threshold &lt; 1</span>
+<span class="p">)</span>  <span class="c1"># ✅</span>
+
+<span class="c1"># Invalid: below minimum</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;rate&quot;</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Error: &quot;rate must be in the interval [0.0, 1.0]; got -0.1&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="require-probability">
+<h3>require_probability<a class="headerlink" href="#require-probability" title="Link to this heading">¶</a></h3>
+<p>Validates that a value is a valid probability in [0, 1].</p>
+<section id="id7">
+<h4>Signature<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">require_probability</span><span class="p">(</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h4>Mathematical Constraint<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+p \in [0, 1]
+\]</div>
+</div>
+<p>Equivalent to: <code class="docutils literal notranslate"><span class="pre">require_in_range(value,</span> <span class="pre">name,</span> <span class="pre">minimum=0.0,</span> <span class="pre">maximum=1.0)</span></code></p>
+</section>
+<section id="id9">
+<h4>Usage Examples<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.range_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_probability</span>
+
+<span class="c1"># Optimization parameters</span>
+<span class="n">mutation_rate</span> <span class="o">=</span> <span class="n">require_probability</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;mutation_rate&quot;</span><span class="p">)</span>     <span class="c1"># ✅</span>
+<span class="n">crossover_prob</span> <span class="o">=</span> <span class="n">require_probability</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="s2">&quot;crossover_prob&quot;</span><span class="p">)</span>   <span class="c1"># ✅</span>
+
+<span class="c1"># Statistical parameters</span>
+<span class="n">confidence_level</span> <span class="o">=</span> <span class="n">require_probability</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">)</span>    <span class="c1"># ✅</span>
+
+<span class="c1"># Edge cases</span>
+<span class="n">min_prob</span> <span class="o">=</span> <span class="n">require_probability</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;min_probability&quot;</span><span class="p">)</span>        <span class="c1"># ✅ (exactly 0)</span>
+<span class="n">max_prob</span> <span class="o">=</span> <span class="n">require_probability</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;max_probability&quot;</span><span class="p">)</span>        <span class="c1"># ✅ (exactly 1)</span>
+
+<span class="c1"># Invalid: outside [0, 1]</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">require_probability</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;cognitive_parameter&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Error: &quot;cognitive_parameter must be in the interval [0.0, 1.0]; got 1.5&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="smc-gain-validation">
+<h2>SMC Gain Validation<a class="headerlink" href="#smc-gain-validation" title="Link to this heading">¶</a></h2>
+<section id="smcgainvalidator-class">
+<h3>SMCGainValidator Class<a class="headerlink" href="#smcgainvalidator-class" title="Link to this heading">¶</a></h3>
+<p>Centralized validation for all SMC controller types with theoretical stability guarantees.</p>
+<p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/controllers/smc/core/gain_validation.py</span></code></p>
+<section id="controller-types">
+<h4>Controller Types<a class="headerlink" href="#controller-types" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SMCControllerType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">CLASSICAL</span> <span class="o">=</span> <span class="s2">&quot;classical&quot;</span>           <span class="c1"># 6 gains</span>
+    <span class="n">ADAPTIVE</span> <span class="o">=</span> <span class="s2">&quot;adaptive&quot;</span>             <span class="c1"># 5 gains</span>
+    <span class="n">SUPER_TWISTING</span> <span class="o">=</span> <span class="s2">&quot;super_twisting&quot;</span> <span class="c1"># 6 gains</span>
+    <span class="n">HYBRID</span> <span class="o">=</span> <span class="s2">&quot;hybrid&quot;</span>                 <span class="c1"># 4 gains</span>
+</pre></div>
+</div>
+</section>
+<section id="mathematical-requirements">
+<h4>Mathematical Requirements<a class="headerlink" href="#mathematical-requirements" title="Link to this heading">¶</a></h4>
+<p><strong>Classical SMC:</strong></p>
+<ul class="simple">
+<li><p>Surface gains <span class="math notranslate nohighlight">\(k_1, k_2, \lambda_1, \lambda_2 &gt; 0\)</span> (Hurwitz stability)</p></li>
+<li><p>Switching gain <span class="math notranslate nohighlight">\(K &gt; 0\)</span> (reaching condition)</p></li>
+<li><p>Derivative gain <span class="math notranslate nohighlight">\(k_d \geq 0\)</span> (damping)</p></li>
+</ul>
+<p><strong>Adaptive SMC:</strong></p>
+<ul class="simple">
+<li><p>Surface gains <span class="math notranslate nohighlight">\(k_1, k_2, \lambda_1, \lambda_2 &gt; 0\)</span></p></li>
+<li><p>Adaptation rate <span class="math notranslate nohighlight">\(\gamma \in (0.01, 10.0)\)</span> (boundedness)</p></li>
+</ul>
+<p><strong>Super-Twisting:</strong></p>
+<ul class="simple">
+<li><p>Twisting gains <span class="math notranslate nohighlight">\(K_1 &gt; K_2 &gt; 0\)</span> (finite-time convergence)</p></li>
+<li><p>Surface gains <span class="math notranslate nohighlight">\(k_1, k_2, \lambda_1, \lambda_2 &gt; 0\)</span></p></li>
+</ul>
+<p><strong>Hybrid Adaptive STA-SMC:</strong></p>
+<ul class="simple">
+<li><p>All gains <span class="math notranslate nohighlight">\(c_1, \lambda_1, c_2, \lambda_2 &gt; 0\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="id10">
+<h3>Usage Examples<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<section id="basic-gain-validation">
+<h4>Basic Gain Validation<a class="headerlink" href="#basic-gain-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.core.gain_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMCGainValidator</span><span class="p">,</span> <span class="n">validate_smc_gains</span>
+
+<span class="n">validator</span> <span class="o">=</span> <span class="n">SMCGainValidator</span><span class="p">()</span>
+
+<span class="c1"># Classical SMC gains</span>
+<span class="n">classical_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_gains</span><span class="p">(</span><span class="n">classical_gains</span><span class="p">,</span> <span class="s2">&quot;classical&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Gains valid for Classical SMC&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Validation failed:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;violations&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">violation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">violation</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> not in </span><span class="si">{</span><span class="n">violation</span><span class="p">[</span><span class="s1">&#39;bounds&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Quick validation</span>
+<span class="n">is_valid</span> <span class="o">=</span> <span class="n">validate_smc_gains</span><span class="p">(</span><span class="n">classical_gains</span><span class="p">,</span> <span class="s2">&quot;classical&quot;</span><span class="p">)</span>  <span class="c1"># Returns: True</span>
+</pre></div>
+</div>
+</section>
+<section id="stability-condition-checking">
+<h4>Stability Condition Checking<a class="headerlink" href="#stability-condition-checking" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.core.gain_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMCGainValidator</span>
+
+<span class="n">validator</span> <span class="o">=</span> <span class="n">SMCGainValidator</span><span class="p">()</span>
+
+<span class="c1"># Super-twisting gains (requires K1 &gt; K2)</span>
+<span class="n">sta_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]</span>  <span class="c1"># [K1, K2, k1, k2, λ1, λ2]</span>
+
+<span class="n">stability</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_stability_conditions</span><span class="p">(</span><span class="n">sta_gains</span><span class="p">,</span> <span class="s2">&quot;super_twisting&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">stability</span><span class="p">[</span><span class="s1">&#39;stable&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Stability conditions satisfied&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️ Stability issues:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">stability</span><span class="p">[</span><span class="s1">&#39;issues&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">issue</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Example output:</span>
+<span class="c1"># ✅ Stability conditions satisfied (K1=5.0 &gt; K2=4.0 &gt; 0)</span>
+</pre></div>
+</div>
+</section>
+<section id="gain-bounds-retrieval">
+<h4>Gain Bounds Retrieval<a class="headerlink" href="#gain-bounds-retrieval" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.core.gain_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gain_bounds_for_controller</span>
+
+<span class="c1"># Get recommended ranges for adaptive SMC</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">get_gain_bounds_for_controller</span><span class="p">(</span><span class="s2">&quot;adaptive&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adaptive SMC Gain Bounds:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">gain_name</span><span class="p">,</span> <span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">)</span> <span class="ow">in</span> <span class="n">bounds</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">gain_name</span><span class="si">}</span><span class="s2">: [</span><span class="si">{</span><span class="n">min_val</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">max_val</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Output:</span>
+<span class="c1"># k1: [0.1, 1000.0]</span>
+<span class="c1"># k2: [0.1, 1000.0]</span>
+<span class="c1"># lam1: [0.1, 1000.0]</span>
+<span class="c1"># lam2: [0.1, 1000.0]</span>
+<span class="c1"># gamma: [0.01, 10.0]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="validation-results-structure">
+<h3>Validation Results Structure<a class="headerlink" href="#validation-results-structure" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;valid&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>                        <span class="c1"># Overall validation result</span>
+    <span class="s1">&#39;violations&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">],</span>             <span class="c1"># List of violations (if any)</span>
+    <span class="s1">&#39;controller_type&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>               <span class="c1"># Controller type validated</span>
+    <span class="s1">&#39;gains_checked&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>                 <span class="c1"># Number of gains validated</span>
+    <span class="s1">&#39;gains_provided&#39;</span><span class="p">:</span> <span class="nb">int</span>                 <span class="c1"># Number of gains provided</span>
+<span class="p">}</span>
+
+<span class="c1"># Stability result structure</span>
+<span class="p">{</span>
+    <span class="s1">&#39;stable&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>                       <span class="c1"># Stability conditions satisfied</span>
+    <span class="s1">&#39;issues&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>                  <span class="c1"># Stability issues (if any)</span>
+    <span class="s1">&#39;controller_type&#39;</span><span class="p">:</span> <span class="nb">str</span>                <span class="c1"># Controller type</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="end-to-end-workflow-validation">
+<h2>End-to-End Workflow Validation<a class="headerlink" href="#end-to-end-workflow-validation" title="Link to this heading">¶</a></h2>
+<section id="endtoendworkflowvalidator-class">
+<h3>EndToEndWorkflowValidator Class<a class="headerlink" href="#endtoendworkflowvalidator-class" title="Link to this heading">¶</a></h3>
+<p>Validates complete system workflows from CLI entry to output generation.</p>
+<p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_integration/test_end_to_end_validation.py</span></code></p>
+<section id="validation-workflows">
+<h4>Validation Workflows<a class="headerlink" href="#validation-workflows" title="Link to this heading">¶</a></h4>
+<ol class="arabic simple">
+<li><p><strong>CLI Accessibility:</strong> Entry point existence, help system, command options</p></li>
+<li><p><strong>Configuration System:</strong> YAML loading, parsing, validation, key sections</p></li>
+<li><p><strong>Simulation Execution:</strong> Pipeline execution, timeout handling, error recovery</p></li>
+<li><p><strong>Output Generation:</strong> Artifact creation, directory structure, file formats</p></li>
+</ol>
+</section>
+<section id="usage-example">
+<h4>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tests.test_integration.test_end_to_end_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">EndToEndWorkflowValidator</span>
+
+<span class="n">validator</span> <span class="o">=</span> <span class="n">EndToEndWorkflowValidator</span><span class="p">()</span>
+
+<span class="c1"># Validate CLI accessibility</span>
+<span class="n">cli_result</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_cli_accessibility</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CLI Validation: </span><span class="si">{</span><span class="s1">&#39;✅ PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">cli_result</span><span class="o">.</span><span class="n">success</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌ FAIL&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">cli_result</span><span class="o">.</span><span class="n">execution_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steps completed:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">cli_result</span><span class="o">.</span><span class="n">steps_completed</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✓ </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">cli_result</span><span class="o">.</span><span class="n">error_messages</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Errors:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">cli_result</span><span class="o">.</span><span class="n">error_messages</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✗ </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Validate configuration system</span>
+<span class="n">config_result</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_configuration_system</span><span class="p">()</span>
+
+<span class="c1"># Validate simulation execution</span>
+<span class="n">sim_result</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_simulation_execution</span><span class="p">()</span>
+
+<span class="c1"># Overall system validation</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== System Validation Summary ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CLI Accessibility: </span><span class="si">{</span><span class="n">cli_result</span><span class="o">.</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration: </span><span class="si">{</span><span class="n">config_result</span><span class="o">.</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation: </span><span class="si">{</span><span class="n">sim_result</span><span class="o">.</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">success_rate</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">cli_result</span><span class="o">.</span><span class="n">success</span><span class="p">,</span> <span class="n">config_result</span><span class="o">.</span><span class="n">success</span><span class="p">,</span> <span class="n">sim_result</span><span class="o">.</span><span class="n">success</span><span class="p">])</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="n">production_ready</span> <span class="o">=</span> <span class="n">success_rate</span> <span class="o">&gt;=</span> <span class="mf">0.95</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Success Rate: </span><span class="si">{</span><span class="n">success_rate</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Production Ready: </span><span class="si">{</span><span class="s1">&#39;✅ YES&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">production_ready</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌ NO&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="integration-patterns">
+<h2>Integration Patterns<a class="headerlink" href="#integration-patterns" title="Link to this heading">¶</a></h2>
+<section id="control-parameter-validation">
+<h3>Control Parameter Validation<a class="headerlink" href="#control-parameter-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.parameter_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.range_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_in_range</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PIDController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">ki</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kd</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">u_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize PID controller with validated parameters.&quot;&quot;&quot;</span>
+        <span class="c1"># Gains must be positive</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">kp</span><span class="p">,</span> <span class="s2">&quot;proportional_gain&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ki</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">ki</span><span class="p">,</span> <span class="s2">&quot;integral_gain&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kd</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">kd</span><span class="p">,</span> <span class="s2">&quot;derivative_gain&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Saturation limit must be positive and reasonable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_max</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span>
+            <span class="n">u_max</span><span class="p">,</span> <span class="s2">&quot;control_saturation&quot;</span><span class="p">,</span>
+            <span class="n">minimum</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">500.0</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="physics-parameter-validation">
+<h3>Physics Parameter Validation<a class="headerlink" href="#physics-parameter-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.parameter_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span><span class="p">,</span> <span class="n">require_finite</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DoublePendulumParams</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">m2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">l1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">l2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                 <span class="n">b1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize physics parameters with validation.&quot;&quot;&quot;</span>
+        <span class="c1"># Masses must be positive</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m1</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="s2">&quot;cart_mass&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m2</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span> <span class="s2">&quot;pendulum1_mass&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Lengths must be positive</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l1</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="s2">&quot;pendulum1_length&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l2</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="s2">&quot;pendulum2_length&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Friction can be zero</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b1</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span> <span class="s2">&quot;joint1_friction&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">b2</span><span class="p">,</span> <span class="s2">&quot;joint2_friction&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Gravity is finite (can be negative for upside-down tests)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s2">&quot;gravity&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="optimization-parameter-validation">
+<h3>Optimization Parameter Validation<a class="headerlink" href="#optimization-parameter-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.parameter_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.range_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_probability</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PSOConfig</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_particles</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">iters</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">c1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize PSO configuration with validation.&quot;&quot;&quot;</span>
+        <span class="c1"># Population and iterations must be positive integers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_particles</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">require_positive</span><span class="p">(</span><span class="n">n_particles</span><span class="p">,</span> <span class="s2">&quot;population_size&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iters</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">require_positive</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span> <span class="s2">&quot;max_iterations&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Acceleration coefficients (typically ~2.0, but allow flexibility)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="s2">&quot;cognitive_coefficient&quot;</span><span class="p">,</span>
+                                   <span class="n">minimum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="s2">&quot;social_coefficient&quot;</span><span class="p">,</span>
+                                   <span class="n">minimum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+
+        <span class="c1"># Inertia weight (typically 0.4-0.9)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;inertia_weight&quot;</span><span class="p">,</span>
+                                  <span class="n">minimum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="simulation-parameter-validation">
+<h3>Simulation Parameter Validation<a class="headerlink" href="#simulation-parameter-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation.parameter_validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SimulationConfig</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                 <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="n">rtol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize simulation configuration with validation.&quot;&quot;&quot;</span>
+        <span class="c1"># Time parameters must be positive</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="s2">&quot;simulation_duration&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="s2">&quot;time_step&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Tolerances must be positive and small</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atol</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">atol</span><span class="p">,</span> <span class="s2">&quot;absolute_tolerance&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rtol</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">rtol</span><span class="p">,</span> <span class="s2">&quot;relative_tolerance&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Sanity check: dt should be much smaller than duration</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;time_step (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="si">}</span><span class="s2">) must be smaller than &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;simulation_duration (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="performance-considerations">
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h2>
+<section id="validation-overhead">
+<h3>Validation Overhead<a class="headerlink" href="#validation-overhead" title="Link to this heading">¶</a></h3>
+<p><strong>Benchmark results</strong> (from <code class="docutils literal notranslate"><span class="pre">tests/test_utils/validation/test_validation_framework.py</span></code>):</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Time (μs)</p></th>
+<th class="head"><p>Overhead</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>require_positive</p></td>
+<td><p>~3 μs</p></td>
+<td><p>Negligible</p></td>
+</tr>
+<tr class="row-odd"><td><p>require_finite</p></td>
+<td><p>~2 μs</p></td>
+<td><p>Negligible</p></td>
+</tr>
+<tr class="row-even"><td><p>require_in_range</p></td>
+<td><p>~4 μs</p></td>
+<td><p>Negligible</p></td>
+</tr>
+<tr class="row-odd"><td><p>SMC gain validation</p></td>
+<td><p>~50 μs</p></td>
+<td><p>Minimal</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Test:</strong> 3000 validations completed in &lt; 10 ms</p>
+</section>
+<section id="performance-best-practices">
+<h3>Performance Best Practices<a class="headerlink" href="#performance-best-practices" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Validate at Construction:</strong> Perform validation once at object creation, not in hot loops</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✅ GOOD: Validate once at construction</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Controller</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="n">require_positive</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gain_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gains</span><span class="p">)]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="c1"># Use validated self.gains - no repeated validation</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">@</span> <span class="n">state</span>
+
+<span class="c1"># ❌ BAD: Repeated validation in hot loop</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Controller</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+        <span class="c1"># Validation on every control step - wasteful!</span>
+        <span class="n">validated_gains</span> <span class="o">=</span> <span class="p">[</span><span class="n">require_positive</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gain_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gains</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">validated_gains</span> <span class="o">@</span> <span class="n">state</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Batch Validation:</strong> Validate arrays once, not element-by-element</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✅ GOOD: Single validation for array</span>
+<span class="n">gains_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">require_positive</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gain_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gains</span><span class="p">)])</span>
+
+<span class="c1"># ❌ BAD: Repeated validation in inner loops</span>
+<span class="k">for</span> <span class="n">timestep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">gain</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
+        <span class="n">validated</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gain_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Wasteful!</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<section id="clear-error-messages">
+<h3>1. Clear Error Messages<a class="headerlink" href="#clear-error-messages" title="Link to this heading">¶</a></h3>
+<p><strong>Pattern:</strong> <code class="docutils literal notranslate"><span class="pre">{parameter_name}</span> <span class="pre">{constraint}</span> <span class="pre">{context};</span> <span class="pre">got</span> <span class="pre">{actual_value}</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Good error messages</span>
+<span class="s2">&quot;proportional_gain must be &gt; 0; got -2.5&quot;</span>
+<span class="s2">&quot;adaptation_rate must be in the interval [0.01, 10.0]; got 15.0&quot;</span>
+<span class="s2">&quot;twisting_gain_K2 must satisfy K1 &gt; K2 &gt; 0; got K1=4.0, K2=5.0&quot;</span>
+
+<span class="c1"># Bad error messages (avoid)</span>
+<span class="s2">&quot;Invalid value&quot;</span>                       <span class="c1"># Missing parameter name</span>
+<span class="s2">&quot;Error: -2.5&quot;</span>                         <span class="c1"># Missing constraint</span>
+<span class="s2">&quot;Value out of range&quot;</span>                  <span class="c1"># Missing actual bounds</span>
+</pre></div>
+</div>
+</section>
+<section id="parameter-naming-conventions">
+<h3>2. Parameter Naming Conventions<a class="headerlink" href="#parameter-naming-conventions" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use descriptive names matching mathematical notation</span>
+<span class="n">k_p</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;proportional_gain&quot;</span><span class="p">)</span>      <span class="c1"># Not &quot;k&quot;, &quot;param1&quot;</span>
+<span class="n">lambda_1</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="s2">&quot;surface_gain_joint1&quot;</span><span class="p">)</span> <span class="c1"># Not &quot;l1&quot;, &quot;gain&quot;</span>
+<span class="n">theta_0</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;initial_angle_rad&quot;</span><span class="p">)</span>      <span class="c1"># Include units</span>
+</pre></div>
+</div>
+</section>
+<section id="validation-order">
+<h3>3. Validation Order<a class="headerlink" href="#validation-order" title="Link to this heading">¶</a></h3>
+<p>Validate in order of specificity:</p>
+<ol class="arabic simple">
+<li><p><strong>Type &amp; Finiteness</strong> (require_finite)</p></li>
+<li><p><strong>Sign</strong> (require_positive)</p></li>
+<li><p><strong>Bounds</strong> (require_in_range)</p></li>
+<li><p><strong>Domain-specific</strong> (SMC stability, physics constraints)</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Validate in order of increasing specificity</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;adaptation_rate&quot;</span><span class="p">)</span>        <span class="c1"># 1. Finite</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="s2">&quot;adaptation_rate&quot;</span><span class="p">)</span>      <span class="c1"># 2. Positive</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">require_in_range</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="s2">&quot;adaptation_rate&quot;</span><span class="p">,</span>      <span class="c1"># 3. Bounded</span>
+                        <span class="n">minimum</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="c1"># 4. Check stability implications (if needed)</span>
+<span class="k">if</span> <span class="n">gamma</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Large adaptation rate may cause instability&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-validation-logic">
+<h3>4. Testing Validation Logic<a class="headerlink" href="#testing-validation-logic" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_controller_parameter_validation</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that controller rejects invalid parameters.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Valid parameters should work</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">PIDController</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">u_max</span><span class="o">=</span><span class="mf">50.0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">controller</span><span class="o">.</span><span class="n">kp</span> <span class="o">==</span> <span class="mf">10.0</span>
+
+    <span class="c1"># Negative gain should fail</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;proportional_gain must be &gt; 0&quot;</span><span class="p">):</span>
+        <span class="n">PIDController</span><span class="p">(</span><span class="n">kp</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">u_max</span><span class="o">=</span><span class="mf">50.0</span><span class="p">)</span>
+
+    <span class="c1"># Excessive saturation should fail</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;control_saturation must be in the interval&quot;</span><span class="p">):</span>
+        <span class="n">PIDController</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">u_max</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="debugging-failed-validations">
+<h3>5. Debugging Failed Validations<a class="headerlink" href="#debugging-failed-validations" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable validation warnings during development</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="s2">&quot;classical&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Print detailed context</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provided gains: </span><span class="si">{</span><span class="n">gains</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected bounds: </span><span class="si">{</span><span class="n">validator</span><span class="o">.</span><span class="n">get_recommended_ranges</span><span class="p">(</span><span class="s1">&#39;classical&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Parameter Validators:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/validation/parameter_validators.py</span></code></p></li>
+<li><p><strong>Range Validators:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/validation/range_validators.py</span></code></p></li>
+<li><p><strong>SMC Gain Validation:</strong> <code class="docutils literal notranslate"><span class="pre">src/controllers/smc/core/gain_validation.py</span></code></p></li>
+<li><p><strong>Validation Tests:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_utils/validation/test_validation_framework.py</span></code></p></li>
+<li><p><strong>End-to-End Validation:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_integration/test_end_to_end_validation.py</span></code></p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>File Location:</strong> <code class="docutils literal notranslate"><span class="pre">docs/mathematical_foundations/validation_framework_guide.md</span></code>
+<strong>Lines:</strong> 562
+<strong>Coverage:</strong> Parameter validation, range validation, SMC gain validation, end-to-end workflows
+<strong>Cross-references:</strong></p>
+<ul class="simple">
+<li><p>Parameter validators: <code class="docutils literal notranslate"><span class="pre">src/utils/validation/parameter_validators.py</span></code></p></li>
+<li><p>Range validators: <code class="docutils literal notranslate"><span class="pre">src/utils/validation/range_validators.py</span></code></p></li>
+<li><p>SMC validation: <code class="docutils literal notranslate"><span class="pre">src/controllers/smc/core/gain_validation.py</span></code></p></li>
+<li><p>Framework tests: <code class="docutils literal notranslate"><span class="pre">tests/test_utils/validation/test_validation_framework.py</span></code></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Validation Framework Guide</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#design-philosophy">Design Philosophy</a></li>
+<li><a class="reference internal" href="#validation-hierarchy">Validation Hierarchy</a></li>
+<li><a class="reference internal" href="#coverage-standards">Coverage Standards</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parameter-validators">Parameter Validators</a><ul>
+<li><a class="reference internal" href="#require-positive">require_positive</a><ul>
+<li><a class="reference internal" href="#signature">Signature</a></li>
+<li><a class="reference internal" href="#mathematical-constraint">Mathematical Constraint</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a></li>
+<li><a class="reference internal" href="#error-messages">Error Messages</a></li>
+<li><a class="reference internal" href="#common-applications">Common Applications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#require-finite">require_finite</a><ul>
+<li><a class="reference internal" href="#id1">Signature</a></li>
+<li><a class="reference internal" href="#id2">Mathematical Constraint</a></li>
+<li><a class="reference internal" href="#id3">Usage Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#range-validators">Range Validators</a><ul>
+<li><a class="reference internal" href="#require-in-range">require_in_range</a><ul>
+<li><a class="reference internal" href="#id4">Signature</a></li>
+<li><a class="reference internal" href="#id5">Mathematical Constraint</a></li>
+<li><a class="reference internal" href="#id6">Usage Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#require-probability">require_probability</a><ul>
+<li><a class="reference internal" href="#id7">Signature</a></li>
+<li><a class="reference internal" href="#id8">Mathematical Constraint</a></li>
+<li><a class="reference internal" href="#id9">Usage Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#smc-gain-validation">SMC Gain Validation</a><ul>
+<li><a class="reference internal" href="#smcgainvalidator-class">SMCGainValidator Class</a><ul>
+<li><a class="reference internal" href="#controller-types">Controller Types</a></li>
+<li><a class="reference internal" href="#mathematical-requirements">Mathematical Requirements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">Usage Examples</a><ul>
+<li><a class="reference internal" href="#basic-gain-validation">Basic Gain Validation</a></li>
+<li><a class="reference internal" href="#stability-condition-checking">Stability Condition Checking</a></li>
+<li><a class="reference internal" href="#gain-bounds-retrieval">Gain Bounds Retrieval</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validation-results-structure">Validation Results Structure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#end-to-end-workflow-validation">End-to-End Workflow Validation</a><ul>
+<li><a class="reference internal" href="#endtoendworkflowvalidator-class">EndToEndWorkflowValidator Class</a><ul>
+<li><a class="reference internal" href="#validation-workflows">Validation Workflows</a></li>
+<li><a class="reference internal" href="#usage-example">Usage Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-patterns">Integration Patterns</a><ul>
+<li><a class="reference internal" href="#control-parameter-validation">Control Parameter Validation</a></li>
+<li><a class="reference internal" href="#physics-parameter-validation">Physics Parameter Validation</a></li>
+<li><a class="reference internal" href="#optimization-parameter-validation">Optimization Parameter Validation</a></li>
+<li><a class="reference internal" href="#simulation-parameter-validation">Simulation Parameter Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-considerations">Performance Considerations</a><ul>
+<li><a class="reference internal" href="#validation-overhead">Validation Overhead</a></li>
+<li><a class="reference internal" href="#performance-best-practices">Performance Best Practices</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li><a class="reference internal" href="#clear-error-messages">1. Clear Error Messages</a></li>
+<li><a class="reference internal" href="#parameter-naming-conventions">2. Parameter Naming Conventions</a></li>
+<li><a class="reference internal" href="#validation-order">3. Validation Order</a></li>
+<li><a class="reference internal" href="#testing-validation-logic">4. Testing Validation Logic</a></li>
+<li><a class="reference internal" href="#debugging-failed-validations">5. Debugging Failed Validations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>
