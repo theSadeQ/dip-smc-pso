@@ -9,6 +9,280 @@ This module provides seamless integration between hardware components and
 simulation models, enabling hybrid testing where some components are real
 hardware and others are simulated models.
 
+
+## Mathematical Foundation
+
+### Bridge Architecture Pattern
+
+The simulation bridge decouples plant and controller execution:
+
+```{math}
+\text{Plant} \xleftrightarrow{\text{Bridge}} \text{Controller}
+```
+
+**Key Properties:**
+1. **Asynchrony**: Plant and controller run at different rates
+2. **Location transparency**: Local or remote execution
+3. **Protocol abstraction**: TCP, UDP, shared memory, etc.
+
+### Data Exchange Protocol
+
+Bi-directional message passing:
+
+```{math}
+\begin{align}
+M_{\text{state}} &: \text{Plant} \rightarrow \text{Controller} : (\vec{x}, t, \text{metadata}) \\
+M_{\text{control}} &: \text{Controller} \rightarrow \text{Plant} : (u, t, \text{flags})
+\end{align}
+```
+
+**Message Synchronization:**
+```{math}
+|t_{\text{state}} - t_{\text{control}}| < \epsilon
+```
+
+Ensures temporal consistency between state and control.
+
+### Communication Middleware
+
+**Transport Layer Options:**
+1. **TCP**: Reliable, ordered delivery (default)
+2. **UDP**: Low-latency, unreliable
+3. **Shared Memory**: Zero-copy for co-located processes
+
+**Protocol Selection Criteria:**
+```{math}
+\text{Protocol} = \begin{cases}
+\text{TCP} & \text{if reliability required} \\
+\text{UDP} & \text{if latency critical} \\
+\text{Shared Mem} & \text{if same machine}
+\end{cases}
+```
+
+### State Interpolation
+
+For asynchronous execution, interpolate state:
+
+```{math}
+\vec{x}(t_{\text{req}}) \approx \vec{x}(t_k) + \frac{t_{\text{req}} - t_k}{t_{k+1} - t_k} (\vec{x}(t_{k+1}) - \vec{x}(t_k))
+```
+
+**Linear Interpolation Accuracy:**
+```{math}
+\|\vec{x}_{\text{true}} - \vec{x}_{\text{interp}}\| \leq C \|\Delta t\|^2
+```
+
+### Fault Tolerance
+
+**Heartbeat Mechanism:**
+```{math}
+\text{Health}(t) = \begin{cases}
+\text{OK} & \text{if } t - t_{\text{last\_msg}} < T_{\text{heartbeat}} \\
+\text{TIMEOUT} & \text{otherwise}
+\end{cases}
+```
+
+**Automatic Reconnection:**
+- Exponential backoff: $T_{\text{retry}} = T_0 \cdot 2^n$
+- Maximum retries: 5 attempts
+- Circuit breaker: Disable after persistent failures
+
+### Performance Metrics
+
+**Throughput:**
+```{math}
+\text{Throughput} = \frac{\text{Messages}}{\text{Time}} \quad [\text{msg/s}]
+```
+
+**Latency Percentiles:**
+- P50: Median latency (typical)
+- P95: 95th percentile (good)
+- P99: 99th percentile (worst-case)
+
+### Bridge Implementation
+
+**Thread Model:**
+- **Receiver thread**: Listens for incoming messages
+- **Sender thread**: Sends outgoing messages
+- **Main thread**: Orchestrates simulation logic
+
+**Thread Safety:**
+- Lock-free queues for message passing
+- Atomic operations for shared state
+- No blocking operations in critical path
+
+## Architecture Diagram
+
+```{mermaid}
+graph LR
+    A[Plant Server] <-->|State| B[Bridge]
+    B <-->|Control| A
+    B <-->|State| C[Controller Client]
+    C <-->|Control| B
+
+    B --> D[Protocol Handler]
+    D --> E[TCP Handler]
+    D --> F[UDP Handler]
+    D --> G[Shared Mem Handler]
+
+    B --> H[State Buffer]
+    B --> I[Control Buffer]
+
+    H --> J[Interpolator]
+    I --> K[Extrapolator]
+
+    style B fill:#9cf
+    style D fill:#ff9
+    style J fill:#f9f
+```
+
+**Bridge Responsibilities:**
+1. **Protocol Translation**: Convert between different transport protocols
+2. **State Management**: Buffer and interpolate state data
+3. **Timing Coordination**: Synchronize plant and controller clocks
+4. **Fault Handling**: Detect timeouts and connection failures
+5. **Logging**: Record all messages for debugging
+
+## Usage Examples
+
+### Example 1: Basic Bridge Setup
+
+```python
+from src.interfaces.hil.simulation_bridge import SimulationBridge
+
+# Initialize bridge
+bridge = SimulationBridge(
+    server_addr=("127.0.0.1", 5555),
+    client_addr=("127.0.0.1", 6666),
+    protocol="tcp"
+)
+
+# Start bridge
+bridge.start()
+
+# Bridge runs until shutdown
+bridge.stop()
+```
+
+### Example 2: Protocol Translation
+
+```python
+from src.interfaces.hil.simulation_bridge import SimulationBridge
+
+# TCP server, UDP client
+bridge = SimulationBridge(
+    server_addr=("127.0.0.1", 5555),
+    client_addr=("127.0.0.1", 6666),
+    server_protocol="tcp",
+    client_protocol="udp"
+)
+
+bridge.start()
+```
+
+### Example 3: State Interpolation
+
+```python
+from src.interfaces.hil.simulation_bridge import SimulationBridge
+import numpy as np
+
+# Bridge with interpolation
+bridge = SimulationBridge(
+    server_addr=("127.0.0.1", 5555),
+    client_addr=("127.0.0.1", 6666)
+)
+
+# Enable state interpolation
+bridge.enable_interpolation(method="linear")
+
+# Custom interpolation
+def custom_interpolator(state_buffer, t_req):
+    # Find surrounding states
+    t_prev, x_prev = state_buffer.get_before(t_req)
+    t_next, x_next = state_buffer.get_after(t_req)
+
+    # Linear interpolation
+    alpha = (t_req - t_prev) / (t_next - t_prev)
+    x_interp = x_prev + alpha * (x_next - x_prev)
+
+    return x_interp
+
+bridge.set_interpolator(custom_interpolator)
+bridge.start()
+```
+
+### Example 4: Fault-Tolerant Bridge
+
+```python
+from src.interfaces.hil.simulation_bridge import SimulationBridge
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('SimulationBridge')
+
+# Bridge with fault tolerance
+bridge = SimulationBridge(
+    server_addr=("127.0.0.1", 5555),
+    client_addr=("127.0.0.1", 6666),
+    heartbeat_interval=1.0,  # 1 second heartbeat
+    reconnect_attempts=5
+)
+
+# Monitor health
+def health_callback(status):
+    if status == "TIMEOUT":
+        logger.warning("Connection timeout detected")
+    elif status == "RECONNECTING":
+        logger.info("Attempting reconnection...")
+    elif status == "OK":
+        logger.info("Connection healthy")
+
+bridge.set_health_callback(health_callback)
+bridge.start()
+```
+
+### Example 5: Performance Monitoring
+
+```python
+from src.interfaces.hil.simulation_bridge import SimulationBridge
+import time
+
+# Bridge with metrics
+bridge = SimulationBridge(
+    server_addr=("127.0.0.1", 5555),
+    client_addr=("127.0.0.1", 6666)
+)
+
+# Metrics collection
+metrics = {
+    'throughput': [],
+    'latency': [],
+    'packet_loss': 0
+}
+
+# Override message handler for monitoring
+original_forward = bridge._forward_message
+
+def monitored_forward(msg, direction):
+    start = time.time()
+    try:
+        result = original_forward(msg, direction)
+        latency = (time.time() - start) * 1000
+        metrics['latency'].append(latency)
+        return result
+    except Exception as e:
+        metrics['packet_loss'] += 1
+        raise
+
+bridge._forward_message = monitored_forward
+bridge.start()
+
+# Report metrics
+print(f"Mean latency: {np.mean(metrics['latency']):.2f} ms")
+print(f"Packet loss: {metrics['packet_loss']} packets")
+```
+
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/interfaces/hil/simulation_bridge.py
