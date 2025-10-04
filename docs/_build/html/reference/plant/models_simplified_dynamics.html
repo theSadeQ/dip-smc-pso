@@ -495,6 +495,59 @@
 Provides a clean, modular interface for the simplified double inverted
 pendulum dynamics with numerical stability and performance optimizations.</p>
 </section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[State x, Control u] --&gt; B[Mass Matrix M_q_]
+    A --&gt; C[Coriolis Matrix C_q,q̇_]
+    A --&gt; D[Gravity Vector G_q_]
+    A --&gt; E[Input Matrix B]
+    B --&gt; F[Invert M]
+    C --&gt; G[Compute Forces]
+    D --&gt; G
+    E --&gt; G
+    F --&gt; H[M^-1_]
+    G --&gt; I[Total Force F]
+    H --&gt; J[Solve: ẍ = M^-1__F-Cq̇-G_+Bu_]
+    I --&gt; J
+    J --&gt; K[State Derivative ẋ]
+    K --&gt; L[Return: θ̈_1_, θ̈_2_, ẍ]
+
+    style B fill:#9cf
+    style C fill:#fcf
+    style D fill:#ff9
+    style J fill:#f9f
+    style L fill:#9f9
+        </div><p><strong>Data Flow:</strong></p>
+<ol class="arabic simple">
+<li><p>Extract generalized coordinates q = [x, θ₁, θ₂]</p></li>
+<li><p>Compute configuration-dependent matrices M, C, G</p></li>
+<li><p>Apply control input u via input matrix B</p></li>
+<li><p>Solve second-order dynamics: Mq̈ + Cq̇ + G = Bu</p></li>
+<li><p>Return accelerations [ẍ, θ̈₁, θ̈₂] for integration</p></li>
+</ol>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="double-inverted-pendulum-dynamics">
+<h3>Double-Inverted Pendulum Dynamics<a class="headerlink" href="#double-inverted-pendulum-dynamics" title="Link to this heading">¶</a></h3>
+<p>Lagrangian formulation:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{M}(\vec{q})\ddot{\vec{q}} + \vec{C}(\vec{q},\dot{\vec{q}})\dot{\vec{q}} + \vec{G}(\vec{q}) = \vec{B}\vec{u}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{q} = [x, \theta_1, \theta_2]^T\)</span>: Generalized coordinates</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{M}(\vec{q})\)</span>: Mass matrix (configuration-dependent)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{C}\)</span>: Coriolis/centrifugal matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{G}\)</span>: Gravitational vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{B}\)</span>: Input matrix</p></li>
+</ul>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../plant/complete_dynamics_derivation</span></p>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1476,6 +1529,133 @@ pendulum dynamics with numerical stability and performance optimizations.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.physics</span> <span class="pre">import</span> <span class="pre">SimplifiedPhysicsComputer,</span> <span class="pre">compute_simplified_dynamics_numba</span></code></p></li>
 </ul>
 </section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="model-instantiation-configuration">
+<h3>Model Instantiation &amp; Configuration<a class="headerlink" href="#model-instantiation-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDynamics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.full</span><span class="w"> </span><span class="kn">import</span> <span class="n">FullDynamics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.configurations</span><span class="w"> </span><span class="kn">import</span> <span class="n">DIPPhysicsConfig</span>
+
+<span class="c1"># Simplified dynamics (fast, linearized friction)</span>
+<span class="n">simplified</span> <span class="o">=</span> <span class="n">SimplifiedDynamics</span><span class="p">(</span>
+    <span class="n">cart_mass</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">pole1_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">pole2_mass</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">pole1_length</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">pole2_length</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="n">friction_cart</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="p">)</span>
+
+<span class="c1"># Full nonlinear dynamics (high fidelity)</span>
+<span class="n">full</span> <span class="o">=</span> <span class="n">FullDynamics</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">DIPPhysicsConfig</span><span class="p">(</span>
+        <span class="n">cart_mass</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">pole1_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">pole2_mass</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">pole1_length</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">pole2_length</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+        <span class="n">friction_cart</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">friction_pole1</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">friction_pole2</span><span class="o">=</span><span class="mf">0.01</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Compute dynamics at a state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]</span>
+<span class="n">control</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+<span class="n">state_derivative</span> <span class="o">=</span> <span class="n">simplified</span><span class="o">.</span><span class="n">compute_dynamics</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accelerations: </span><span class="si">{</span><span class="n">state_derivative</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># [ẍ, θ̈₁, θ̈₂]</span>
+</pre></div>
+</div>
+</section>
+<section id="energy-analysis-conservation">
+<h3>Energy Analysis &amp; Conservation<a class="headerlink" href="#energy-analysis-conservation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Simulate and track energy</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDynamics</span><span class="p">()</span>
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_state</span><span class="p">]</span>
+<span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># Compute energy before step</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">compute_total_energy</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+    <span class="c1"># Integrate</span>
+    <span class="n">x_dot</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">compute_dynamics</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">next_state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">x_dot</span>
+    <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+
+<span class="c1"># Plot energy conservation</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Total Energy (J)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Energy Conservation Analysis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">energy_drift</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">energies</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">energies</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">energies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Energy drift: </span><span class="si">{</span><span class="n">energy_drift</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="linearization-at-equilibrium">
+<h3>Linearization at Equilibrium<a class="headerlink" href="#linearization-at-equilibrium" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linearize around upright equilibrium</span>
+<span class="n">equilibrium_state</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Upright, stationary</span>
+<span class="n">equilibrium_control</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">compute_linearization</span><span class="p">(</span><span class="n">equilibrium_state</span><span class="p">,</span> <span class="n">equilibrium_control</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A matrix (state dynamics):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="n">B</span> <span class="n">matrix</span> <span class="p">(</span><span class="n">control</span> <span class="n">influence</span><span class="p">):</span><span class="s2">&quot;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+<span class="c1"># Analyze stability of linearized system</span>
+<span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span>
+<span class="n">Eigenvalues</span><span class="p">:</span> <span class="p">{</span><span class="n">eigenvalues</span><span class="p">}</span><span class="s2">&quot;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unstable modes: </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="model-comparison-study">
+<h3>Model Comparison Study<a class="headerlink" href="#model-comparison-study" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDynamics</span><span class="p">,</span> <span class="n">FullDynamics</span><span class="p">,</span> <span class="n">LowRankDynamics</span>
+
+<span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Simplified&#39;</span><span class="p">:</span> <span class="n">SimplifiedDynamics</span><span class="p">(),</span>
+    <span class="s1">&#39;Full&#39;</span><span class="p">:</span> <span class="n">FullDynamics</span><span class="p">(),</span>
+    <span class="s1">&#39;LowRank&#39;</span><span class="p">:</span> <span class="n">LowRankDynamics</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1"># Compare computational cost</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">control</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">compute_dynamics</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">elapsed</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">ms for 10k evaluations&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  → </span><span class="si">{</span><span class="n">elapsed</span><span class="o">/</span><span class="mi">10000</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">µs per call&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../plant/dynamics_comparison_study</span></p>
+</section>
+</section>
 </section>
 
         </article>
@@ -1518,6 +1698,11 @@ pendulum dynamics with numerical stability and performance optimizations.</p>
             <ul>
 <li><a class="reference internal" href="#">plant.models.simplified.dynamics</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#double-inverted-pendulum-dynamics">Double-Inverted Pendulum Dynamics</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#simplifieddipdynamics"><code class="docutils literal notranslate"><span class="pre">SimplifiedDIPDynamics</span></code></a><ul>
@@ -1547,6 +1732,13 @@ pendulum dynamics with numerical stability and performance optimizations.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#model-instantiation-configuration">Model Instantiation &amp; Configuration</a></li>
+<li><a class="reference internal" href="#energy-analysis-conservation">Energy Analysis &amp; Conservation</a></li>
+<li><a class="reference internal" href="#linearization-at-equilibrium">Linearization at Equilibrium</a></li>
+<li><a class="reference internal" href="#model-comparison-study">Model Comparison Study</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1565,6 +1757,10 @@ pendulum dynamics with numerical stability and performance optimizations.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

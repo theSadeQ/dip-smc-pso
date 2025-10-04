@@ -501,6 +501,70 @@ and is fully documented with theoretical backing.</p>
 <p>References used throughout this module are provided in the accompanying
 design-review report.</p>
 </section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Parameter Bounds] --&gt; B[Initialize Swarm]
+    B --&gt; C[Particle Population]
+    C --&gt; D{For Each Particle}
+    D --&gt; E[Create Controller]
+    E --&gt; F[Run Simulation]
+    F --&gt; G[Compute Cost]
+    G --&gt; H[Update Personal Best]
+    H --&gt; I{All Particles Done?}
+    I --&gt;|No| D
+    I --&gt;|Yes| J[Update Global Best]
+    J --&gt; K{Convergence?}
+    K --&gt;|No| L[Update Velocities]
+    L --&gt; M[Update Positions]
+    M --&gt; D
+    K --&gt;|Yes| N[Return Optimal Gains]
+
+    style C fill:#9cf
+    style G fill:#ff9
+    style J fill:#f9f
+    style N fill:#9f9
+        </div><p><strong>Data Flow:</strong></p>
+<ol class="arabic simple">
+<li><p>Initialize swarm in parameter space</p></li>
+<li><p>Evaluate fitness via closed-loop simulation</p></li>
+<li><p>Update particle velocities: v = wv + c₁(p-x) + c₂(g-x)</p></li>
+<li><p>Converge to optimal controller gains</p></li>
+<li><p>Return best solution with performance metrics</p></li>
+</ol>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="particle-swarm-optimization">
+<h3>Particle Swarm Optimization<a class="headerlink" href="#particle-swarm-optimization" title="Link to this heading">¶</a></h3>
+<p>PSO updates particle positions using:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+v_i^{k+1} &amp;= wv_i^k + c_1r_1(p_i - x_i^k) + c_2r_2(g - x_i^k) \\
+x_i^{k+1} &amp;= x_i^k + v_i^{k+1}
+\end{align}\end{split}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w\)</span>: Inertia weight (exploration vs exploitation)</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_1, c_2\)</span>: Cognitive and social coefficients</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_i\)</span>: Personal best position</p></li>
+<li><p><span class="math notranslate nohighlight">\(g\)</span>: Global best position</p></li>
+</ul>
+</section>
+<section id="convergence-properties">
+<h3>Convergence Properties<a class="headerlink" href="#convergence-properties" title="Link to this heading">¶</a></h3>
+<p>Proper parameter selection ensures:</p>
+<ol class="arabic simple">
+<li><p><strong>Global exploration</strong>: <span class="math notranslate nohighlight">\(w \in [0.4, 0.9]\)</span></p></li>
+<li><p><strong>Local exploitation</strong>: <span class="math notranslate nohighlight">\(c_1 + c_2 &lt; 4\)</span></p></li>
+<li><p><strong>Velocity bounds</strong>: Prevent divergence</p></li>
+</ol>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../mathematical_foundations/optimization_theory</span></p>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -2352,6 +2416,100 @@ saves and restores the global RNG state.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">...simulation.engines.vector_sim</span> <span class="pre">import</span> <span class="pre">simulate_system_batch</span></code></p></li>
 </ul>
 </section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="multi-objective-pso-optimization">
+<h3>Multi-Objective PSO Optimization<a class="headerlink" href="#multi-objective-pso-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.algorithms.pso_optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSOTuner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_smc_for_pso</span><span class="p">,</span> <span class="n">SMCType</span>
+
+<span class="c1"># Define multi-objective cost function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">multi_objective_cost</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">HYBRID</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+
+    <span class="c1"># Combine objectives with weights</span>
+    <span class="n">tracking_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]))</span>  <span class="c1"># Angles</span>
+    <span class="n">control_effort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">))</span>
+    <span class="n">chattering</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="n">tracking_error</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">control_effort</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">chattering</span>
+
+<span class="c1"># Configure PSO with adaptive parameters</span>
+<span class="n">pso</span> <span class="o">=</span> <span class="n">PSOTuner</span><span class="p">(</span>
+    <span class="n">controller_factory</span><span class="o">=</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">HYBRID</span><span class="p">,</span> <span class="n">g</span><span class="p">),</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">([</span><span class="mf">1.0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">),</span>  <span class="c1"># Hybrid has 4 gains</span>
+    <span class="n">n_particles</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+    <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">w</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>           <span class="c1"># Inertia weight</span>
+    <span class="n">c1</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>          <span class="c1"># Cognitive coefficient</span>
+    <span class="n">c2</span><span class="o">=</span><span class="mf">1.5</span>           <span class="c1"># Social coefficient</span>
+<span class="p">)</span>
+
+<span class="n">best_gains</span><span class="p">,</span> <span class="n">best_cost</span> <span class="o">=</span> <span class="n">pso</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimal gains: </span><span class="si">{</span><span class="n">best_gains</span><span class="si">}</span><span class="s2">, Cost: </span><span class="si">{</span><span class="n">best_cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="convergence-monitoring-analysis">
+<h3>Convergence Monitoring &amp; Analysis<a class="headerlink" href="#convergence-monitoring-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Track convergence history</span>
+<span class="n">convergence_history</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">convergence_callback</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">global_best_cost</span><span class="p">):</span>
+    <span class="n">convergence_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">global_best_cost</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2">: Best cost = </span><span class="si">{</span><span class="n">global_best_cost</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">pso</span> <span class="o">=</span> <span class="n">PSOTuner</span><span class="p">(</span>
+    <span class="n">controller_factory</span><span class="o">=</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span> <span class="n">g</span><span class="p">),</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="n">bounds_lower</span><span class="p">,</span> <span class="n">bounds_upper</span><span class="p">),</span>
+    <span class="n">callback</span><span class="o">=</span><span class="n">convergence_callback</span>
+<span class="p">)</span>
+
+<span class="n">best_gains</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">pso</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+<span class="c1"># Plot convergence</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">convergence_history</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Iteration&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Best Cost&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PSO Convergence Analysis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="robustness-focused-optimization">
+<h3>Robustness-Focused Optimization<a class="headerlink" href="#robustness-focused-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize for robustness across parameter uncertainty</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">robust_cost</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
+    <span class="n">controller_factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">ADAPTIVE</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
+
+    <span class="c1"># Test across multiple scenarios</span>
+    <span class="n">costs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">mass_variation</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">]:</span>  <span class="c1"># ±20% mass uncertainty</span>
+        <span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDynamics</span><span class="p">(</span><span class="n">cart_mass</span><span class="o">=</span><span class="n">mass_variation</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">controller_factory</span><span class="p">(),</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+        <span class="n">costs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compute_ISE</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">))</span>
+
+    <span class="c1"># Return worst-case cost (robust optimization)</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">costs</span><span class="p">)</span>
+
+<span class="n">pso</span> <span class="o">=</span> <span class="n">PSOTuner</span><span class="p">(</span>
+    <span class="n">controller_factory</span><span class="o">=</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Not used, cost computes internally</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">([</span><span class="mf">0.1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">),</span>  <span class="c1"># Adaptive SMC: 5 gains</span>
+    <span class="n">fitness_function</span><span class="o">=</span><span class="n">robust_cost</span><span class="p">,</span>
+    <span class="n">n_particles</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">max_iter</span><span class="o">=</span><span class="mi">150</span>
+<span class="p">)</span>
+
+<span class="n">robust_gains</span><span class="p">,</span> <span class="n">worst_case_cost</span> <span class="o">=</span> <span class="n">pso</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../optimization_workflows/advanced_pso_strategies</span></p>
+</section>
+</section>
 </section>
 
         </article>
@@ -2394,6 +2552,12 @@ saves and restores the global RNG state.</p>
             <ul>
 <li><a class="reference internal" href="#">optimization.algorithms.pso_optimizer</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#particle-swarm-optimization">Particle Swarm Optimization</a></li>
+<li><a class="reference internal" href="#convergence-properties">Convergence Properties</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#psotuner"><code class="docutils literal notranslate"><span class="pre">PSOTuner</span></code></a><ul>
@@ -2426,6 +2590,12 @@ saves and restores the global RNG state.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#multi-objective-pso-optimization">Multi-Objective PSO Optimization</a></li>
+<li><a class="reference internal" href="#convergence-monitoring-analysis">Convergence Monitoring &amp; Analysis</a></li>
+<li><a class="reference internal" href="#robustness-focused-optimization">Robustness-Focused Optimization</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2444,6 +2614,10 @@ saves and restores the global RNG state.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

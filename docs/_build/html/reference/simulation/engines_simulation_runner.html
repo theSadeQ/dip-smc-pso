@@ -498,6 +498,106 @@ or <code class="docutils literal notranslate"><span class="pre">src.plant.models
 <p>If the full dynamics module cannot be imported, a RuntimeError with a
 specific message is raised.  Tests match the message text exactly.</p>
 </section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Initial State x_0_] --&gt; B[Simulation Loop]
+    B --&gt; C[Controller Compute]
+    C --&gt; D[Control Signal u]
+    D --&gt; E[Dynamics Model]
+    E --&gt; F[State Derivative ẋ]
+    F --&gt; G{Integration Method}
+    G --&gt;|Euler| H[x_k+1_ = x_k_ + Δt·ẋ]
+    G --&gt;|RK4| I[4-stage Runge-Kutta]
+    G --&gt;|RK45| J[Adaptive Step Size]
+    H --&gt; K[Next State]
+    I --&gt; K
+    J --&gt; K
+    K --&gt; L{Time &lt; T_max_?}
+    L --&gt;|Yes| B
+    L --&gt;|No| M[Simulation Result]
+
+    style C fill:#9cf
+    style E fill:#fcf
+    style G fill:#ff9
+    style M fill:#9f9
+        </div><p><strong>Data Flow:</strong></p>
+<ol class="arabic simple">
+<li><p>Initialize state and time</p></li>
+<li><p>Compute control action from controller</p></li>
+<li><p>Evaluate system dynamics: ẋ = f(x, u, t)</p></li>
+<li><p>Integrate using numerical method (Euler/RK4/RK45)</p></li>
+<li><p>Update state and repeat until termination</p></li>
+</ol>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="numerical-integration-methods">
+<h3>Numerical Integration Methods<a class="headerlink" href="#numerical-integration-methods" title="Link to this heading">¶</a></h3>
+<p>The simulation runner employs multiple numerical integration schemes for solving the DIP dynamics:</p>
+<section id="euler-method-first-order">
+<h4>Euler Method (First-Order)<a class="headerlink" href="#euler-method-first-order" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{k+1} = \vec{x}_k + \Delta t \cdot \vec{f}(\vec{x}_k, \vec{u}_k, t_k)\]</div>
+</div>
+<ul class="simple">
+<li><p><strong>Accuracy</strong>: O(Δt) local truncation error</p></li>
+<li><p><strong>Stability</strong>: Conditionally stable (small Δt required)</p></li>
+<li><p><strong>Use case</strong>: Fast prototyping, simple dynamics</p></li>
+</ul>
+</section>
+<section id="runge-kutta-4th-order-rk4">
+<h4>Runge-Kutta 4th Order (RK4)<a class="headerlink" href="#runge-kutta-4th-order-rk4" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+k_1 &amp;= \vec{f}(\vec{x}_k, \vec{u}_k, t_k) \\
+k_2 &amp;= \vec{f}(\vec{x}_k + \frac{\Delta t}{2}k_1, \vec{u}_k, t_k + \frac{\Delta t}{2}) \\
+k_3 &amp;= \vec{f}(\vec{x}_k + \frac{\Delta t}{2}k_2, \vec{u}_k, t_k + \frac{\Delta t}{2}) \\
+k_4 &amp;= \vec{f}(\vec{x}_k + \Delta t k_3, \vec{u}_k, t_k + \Delta t) \\
+\vec{x}_{k+1} &amp;= \vec{x}_k + \frac{\Delta t}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\end{align}\end{split}\]</div>
+</div>
+<ul class="simple">
+<li><p><strong>Accuracy</strong>: O(Δt⁴) local truncation error</p></li>
+<li><p><strong>Stability</strong>: More stable than Euler</p></li>
+<li><p><strong>Use case</strong>: Production simulations, accurate trajectories</p></li>
+</ul>
+</section>
+<section id="adaptive-rk45-dormand-prince">
+<h4>Adaptive RK45 (Dormand-Prince)<a class="headerlink" href="#adaptive-rk45-dormand-prince" title="Link to this heading">¶</a></h4>
+<p>Variable step-size integration with error control:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{error} = ||\vec{x}_{RK4} - \vec{x}_{RK5}|| &lt; \text{tol}\]</div>
+</div>
+<ul class="simple">
+<li><p><strong>Accuracy</strong>: Adaptive (user-specified tolerance)</p></li>
+<li><p><strong>Stability</strong>: Highly stable with step adaptation</p></li>
+<li><p><strong>Use case</strong>: Stiff dynamics, energy conservation studies</p></li>
+</ul>
+</section>
+</section>
+<section id="simulation-pipeline-architecture">
+<h3>Simulation Pipeline Architecture<a class="headerlink" href="#simulation-pipeline-architecture" title="Link to this heading">¶</a></h3>
+<p>The simulation follows a unified execution model:</p>
+<ol class="arabic simple">
+<li><p><strong>Initialization</strong>: Set initial state <span class="math notranslate nohighlight">\(\vec{x}_0\)</span> and time <span class="math notranslate nohighlight">\(t_0\)</span></p></li>
+<li><p><strong>Control Loop</strong>: For each timestep:</p>
+<ul class="simple">
+<li><p>Compute control: <span class="math notranslate nohighlight">\(\vec{u}_k = \text{controller}(\vec{x}_k, t_k)\)</span></p></li>
+<li><p>Integrate dynamics: <span class="math notranslate nohighlight">\(\vec{x}_{k+1} = \text{integrator}(\vec{x}_k, \vec{u}_k, \Delta t)\)</span></p></li>
+<li><p>Update time: <span class="math notranslate nohighlight">\(t_{k+1} = t_k + \Delta t\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>Termination</strong>: Until <span class="math notranslate nohighlight">\(t \geq t_{\text{max}}\)</span> or instability detected</p></li>
+</ol>
+<p><strong>Performance</strong>: Numba JIT compilation accelerates batch simulations by 10-50× for PSO optimization workflows.</p>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../mathematical_foundations/numerical_methods</span></p>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1527,6 +1627,121 @@ sequence.  Empty if no integration steps were executed.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></p></li>
 </ul>
 </section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="basic-simulation-workflow">
+<h3>Basic Simulation Workflow<a class="headerlink" href="#basic-simulation-workflow" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines.simulation_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_simulation</span><span class="p">,</span> <span class="n">SimulationRunner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.algorithms.classical</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDynamics</span>
+
+<span class="c1"># Create controller and dynamics</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
+    <span class="n">surface_gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">],</span>
+    <span class="n">switching_gain</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span>
+<span class="p">)</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDynamics</span><span class="p">()</span>
+
+<span class="c1"># Run simulation (functional API)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final tracking error: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">:</span><span class="mi">2</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-simulation-for-parameter-sweeps">
+<h3>Batch Simulation for Parameter Sweeps<a class="headerlink" href="#batch-simulation-for-parameter-sweeps" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines.vector_sim</span><span class="w"> </span><span class="kn">import</span> <span class="n">simulate_system_batch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Test multiple initial conditions in parallel</span>
+<span class="n">initial_conditions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="c1"># ... 100 conditions</span>
+<span class="p">])</span>
+
+<span class="c1"># Batch simulation (Numba accelerated)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">simulate_system_batch</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">initial_states</span><span class="o">=</span><span class="n">initial_conditions</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Analyze batch results</span>
+<span class="n">settling_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_settling_time</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">states</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean settling time: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">settling_times</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="numba-jit-acceleration-pattern">
+<h3>Numba JIT Acceleration Pattern<a class="headerlink" href="#numba-jit-acceleration-pattern" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines.simulation_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Define JIT-compiled dynamics function</span>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fast_dynamics_step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="c1"># Simplified dynamics for speed</span>
+    <span class="c1"># ... vectorized numpy operations ...</span>
+    <span class="k">return</span> <span class="n">next_state</span>
+
+<span class="c1"># Use in high-performance simulation</span>
+<span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+    <span class="n">dynamics_model</span><span class="o">=</span><span class="n">fast_dynamics_step</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>  <span class="c1"># High-frequency control (1kHz)</span>
+    <span class="n">max_time</span><span class="o">=</span><span class="mf">100.0</span>  <span class="c1"># Long-duration test</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">reference</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation completed in </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">computation_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average step time: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">computation_time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="integration-method-comparison">
+<h3>Integration Method Comparison<a class="headerlink" href="#integration-method-comparison" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines.simulation_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_simulation</span>
+
+<span class="c1"># Compare Euler vs RK4 accuracy</span>
+<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;euler&#39;</span><span class="p">,</span> <span class="s1">&#39;rk4&#39;</span><span class="p">,</span> <span class="s1">&#39;rk45&#39;</span><span class="p">]</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span>
+        <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+        <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+        <span class="n">initial_state</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">integration_method</span><span class="o">=</span><span class="n">method</span>
+    <span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+    <span class="c1"># Analyze energy conservation</span>
+    <span class="n">energy_drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">energy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">result</span><span class="o">.</span><span class="n">energy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">: Energy drift = </span><span class="si">{</span><span class="n">energy_drift</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../simulation_workflows/performance_optimization</span></p>
+</section>
+</section>
 </section>
 
         </article>
@@ -1569,6 +1784,17 @@ sequence.  Empty if no integration steps were executed.</p>
             <ul>
 <li><a class="reference internal" href="#">simulation.engines.simulation_runner</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#numerical-integration-methods">Numerical Integration Methods</a><ul>
+<li><a class="reference internal" href="#euler-method-first-order">Euler Method (First-Order)</a></li>
+<li><a class="reference internal" href="#runge-kutta-4th-order-rk4">Runge-Kutta 4th Order (RK4)</a></li>
+<li><a class="reference internal" href="#adaptive-rk45-dormand-prince">Adaptive RK45 (Dormand-Prince)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#simulation-pipeline-architecture">Simulation Pipeline Architecture</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#simulationrunner"><code class="docutils literal notranslate"><span class="pre">SimulationRunner</span></code></a><ul>
@@ -1614,6 +1840,13 @@ sequence.  Empty if no integration steps were executed.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#basic-simulation-workflow">Basic Simulation Workflow</a></li>
+<li><a class="reference internal" href="#batch-simulation-for-parameter-sweeps">Batch Simulation for Parameter Sweeps</a></li>
+<li><a class="reference internal" href="#numba-jit-acceleration-pattern">Numba JIT Acceleration Pattern</a></li>
+<li><a class="reference internal" href="#integration-method-comparison">Integration Method Comparison</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1632,6 +1865,10 @@ sequence.  Empty if no integration steps were executed.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>
