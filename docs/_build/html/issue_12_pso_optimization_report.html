@@ -1,0 +1,1085 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Issue #12 PSO Optimization Campaign Report - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/issue_12_pso_optimization_report.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/issue_12_pso_optimization_report.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="issue-12-pso-optimization-campaign-report">
+<h1>Issue #12 PSO Optimization Campaign Report<a class="headerlink" href="#issue-12-pso-optimization-campaign-report" title="Link to this heading">¶</a></h1>
+<section id="executive-summary">
+<h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading">¶</a></h2>
+<p><strong>Date:</strong> 2025-09-30
+<strong>Objective:</strong> Optimize SMC controller gains to achieve chattering_index &lt; 2.0 (Issue #12 target)
+<strong>Status:</strong> Implementation Complete, Campaign In Progress
+<strong>Critical Finding:</strong> PSOTuner cost=0.0 bug blocks standard optimization workflow</p>
+</section>
+<hr class="docutils" />
+<section id="problem-analysis">
+<h2>Problem Analysis<a class="headerlink" href="#problem-analysis" title="Link to this heading">¶</a></h2>
+<section id="root-cause-identification">
+<h3>Root Cause Identification<a class="headerlink" href="#root-cause-identification" title="Link to this heading">¶</a></h3>
+<p>Current chattering performance:</p>
+<ul class="simple">
+<li><p><strong>classical_smc:</strong> chattering_index = 69.33 (target: &lt;2.0)</p></li>
+<li><p><strong>adaptive_smc:</strong> chattering_index = 232.92 (target: &lt;2.0)</p></li>
+<li><p><strong>sta_smc:</strong> chattering_index = 196.38 (target: &lt;2.0)</p></li>
+<li><p><strong>hybrid_adaptive_sta_smc:</strong> TypeError (interface issue)</p></li>
+</ul>
+<p><strong>Primary Bottleneck:</strong> Controller gains need optimization for chattering reduction while maintaining tracking performance.</p>
+</section>
+<section id="multi-objective-fitness-function-design">
+<h3>Multi-Objective Fitness Function Design<a class="headerlink" href="#multi-objective-fitness-function-design" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Primary Objective: Maintain tracking performance</span>
+<span class="n">tracking_error_rms</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">theta1</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">theta2</span><span class="o">^</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Secondary Objective: Reduce chattering</span>
+<span class="n">chattering_index</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">time_domain_index</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">freq_domain_index</span>
+
+<span class="n">where</span><span class="p">:</span>
+  <span class="n">time_domain_index</span> <span class="o">=</span> <span class="n">RMS</span><span class="p">(</span><span class="n">d</span><span class="p">(</span><span class="n">control</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+  <span class="n">freq_domain_index</span> <span class="o">=</span> <span class="n">HF_power</span> <span class="o">/</span> <span class="n">total_power</span> <span class="p">(</span><span class="n">f</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="n">Hz</span><span class="p">)</span>
+
+<span class="c1"># Combined Fitness</span>
+<span class="n">fitness</span> <span class="o">=</span> <span class="n">tracking_error_rms</span> <span class="o">+</span> <span class="mf">10.0</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">chattering_index</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span>
+
+<span class="c1"># Constraints:</span>
+<span class="o">-</span> <span class="n">tracking_error_rms</span> <span class="o">&lt;</span> <span class="mf">0.1</span> <span class="n">rad</span>
+<span class="o">-</span> <span class="n">chattering_index</span> <span class="o">&lt;</span> <span class="mf">2.0</span>
+<span class="o">-</span> <span class="n">control_effort</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="n">N</span> <span class="n">RMS</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="critical-issue-psotuner-cost-0-0-bug">
+<h2>Critical Issue: PSOTuner Cost=0.0 Bug<a class="headerlink" href="#critical-issue-psotuner-cost-0-0-bug" title="Link to this heading">¶</a></h2>
+<section id="symptom">
+<h3>Symptom<a class="headerlink" href="#symptom" title="Link to this heading">¶</a></h3>
+<p>When using <code class="docutils literal notranslate"><span class="pre">src/optimization/algorithms/pso_optimizer.PSOTuner</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_cost</span><span class="o">=</span><span class="mf">0.0</span> <span class="k">for</span> <span class="nb">all</span> <span class="mi">100</span> <span class="n">iterations</span>
+<span class="n">PSO</span> <span class="n">convergence</span> <span class="n">flat</span> <span class="n">line</span>
+<span class="n">Validation</span> <span class="n">shows</span> <span class="n">chattering_index</span><span class="o">=</span><span class="mf">342.25</span> <span class="p">(</span><span class="n">no</span> <span class="n">improvement</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="root-cause">
+<h3>Root Cause<a class="headerlink" href="#root-cause" title="Link to this heading">¶</a></h3>
+<p><strong>Excessive cost normalization in config.yaml:</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cost_function</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">weights</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">state_error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w">      </span><span class="c1"># Too low</span>
+<span class="w">    </span><span class="nt">control_effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">    </span><span class="c1"># Too low</span>
+<span class="w">    </span><span class="nt">control_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">     </span><span class="c1"># Too low</span>
+<span class="w">    </span><span class="nt">stability</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">         </span><span class="c1"># Too low</span>
+
+<span class="w">  </span><span class="nt">norms</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">state_error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span><span class="w">      </span><span class="c1"># High normalization</span>
+<span class="w">    </span><span class="nt">control_effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span><span class="w">  </span><span class="c1"># High normalization</span>
+<span class="w">    </span><span class="nt">control_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000.0</span><span class="w">   </span><span class="c1"># Very high normalization</span>
+<span class="w">    </span><span class="nt">sliding</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+</pre></div>
+</div>
+<p><strong>Effect:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In _compute_cost_from_traj:</span>
+<span class="n">ise_normalized</span> <span class="o">=</span> <span class="n">ise</span> <span class="o">/</span> <span class="mf">10.0</span>       <span class="c1"># e.g., 5.0 / 10.0 = 0.5</span>
+<span class="n">weighted_cost</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">control_effort_norm</span> <span class="o">=</span> <span class="n">u_sq</span> <span class="o">/</span> <span class="mf">100.0</span>  <span class="c1"># e.g., 1000 / 100 = 10.0</span>
+<span class="n">weighted_ctrl</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="mf">10.0</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">control_rate_norm</span> <span class="o">=</span> <span class="n">du_sq</span> <span class="o">/</span> <span class="mf">1000.0</span>  <span class="c1"># e.g., 500 / 1000 = 0.5</span>
+<span class="n">weighted_rate</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">=</span> <span class="mf">0.005</span>  <span class="c1"># Negligible!</span>
+
+<span class="c1"># Total cost is dominated by tracking, control derivative term vanishes</span>
+<span class="c1"># PSO sees all particles as nearly equivalent (cost ≈ 0.0)</span>
+</pre></div>
+</div>
+</section>
+<section id="impact">
+<h3>Impact<a class="headerlink" href="#impact" title="Link to this heading">¶</a></h3>
+<p><strong>Chattering is NOT penalized</strong> because:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">control_rate</span></code> weight (0.01) is 100x smaller than <code class="docutils literal notranslate"><span class="pre">state_error</span></code> weight (1.0)</p></li>
+<li><p>Control rate normalization (1000.0) further suppresses the derivative term</p></li>
+<li><p>Chattering (high du/dt) becomes invisible to the optimizer</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="solution-direct-pso-implementation">
+<h2>Solution: Direct PSO Implementation<a class="headerlink" href="#solution-direct-pso-implementation" title="Link to this heading">¶</a></h2>
+<section id="approach">
+<h3>Approach<a class="headerlink" href="#approach" title="Link to this heading">¶</a></h3>
+<p>Bypass PSOTuner and implement custom PSO with explicit chattering penalty:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># optimize_chattering_direct.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_and_evaluate</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Direct simulation with chattering metrics.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Compute chattering without excessive normalization</span>
+    <span class="n">control_derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">control_hist</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">time_domain_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">control_derivative</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft</span><span class="p">(</span><span class="n">control_hist</span><span class="p">))</span>
+    <span class="n">hf_power_ratio</span> <span class="o">=</span> <span class="n">high_freq_power</span> <span class="o">/</span> <span class="n">total_power</span>
+
+    <span class="n">chattering_index</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">time_domain_index</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">hf_power_ratio</span>
+
+    <span class="c1"># Explicit multi-objective fitness</span>
+    <span class="n">chattering_penalty</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">chattering_index</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">10.0</span>
+    <span class="n">tracking_penalty</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tracking_error</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span>
+
+    <span class="n">fitness</span> <span class="o">=</span> <span class="n">tracking_error_rms</span> <span class="o">+</span> <span class="n">chattering_penalty</span> <span class="o">+</span> <span class="n">tracking_penalty</span>
+    <span class="k">return</span> <span class="n">fitness</span>
+
+<span class="c1"># Use PySwarms GlobalBestPSO directly</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">GlobalBestPSO</span><span class="p">(</span><span class="n">n_particles</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">n_dims</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">pso_options</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
+<span class="n">best_cost</span><span class="p">,</span> <span class="n">best_gains</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective_function</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="advantages">
+<h3>Advantages<a class="headerlink" href="#advantages" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Transparent Cost Function:</strong> No hidden normalization</p></li>
+<li><p><strong>Explicit Chattering Penalty:</strong> Directly targets Issue #12 metric</p></li>
+<li><p><strong>Multi-Objective Balance:</strong> Configurable penalty weights</p></li>
+<li><p><strong>Debugging Friendly:</strong> Full control over fitness computation</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="optimization-configuration">
+<h2>Optimization Configuration<a class="headerlink" href="#optimization-configuration" title="Link to this heading">¶</a></h2>
+<section id="pso-parameters">
+<h3>PSO Parameters<a class="headerlink" href="#pso-parameters" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">n_particles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w">          </span><span class="c1"># Increased for better exploration</span>
+<span class="nt">iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span><span class="w">               </span><span class="c1"># Longer convergence for multi-objective</span>
+<span class="nt">w</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span><span class="w">                   </span><span class="c1"># Inertia weight</span>
+<span class="nt">c1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w">                  </span><span class="c1"># Cognitive coefficient</span>
+<span class="nt">c2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w">                  </span><span class="c1"># Social coefficient</span>
+<span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span><span class="w">                 </span><span class="c1"># Reproducibility</span>
+</pre></div>
+</div>
+</section>
+<section id="search-space-bounds">
+<h3>Search Space Bounds<a class="headerlink" href="#search-space-bounds" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From config.yaml pso.bounds</span>
+<span class="n">classical_smc</span><span class="p">:</span>  <span class="mi">6</span> <span class="n">gains</span> <span class="p">[</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">-</span><span class="mf">150.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="o">-</span><span class="mf">10.0</span><span class="p">]</span>
+<span class="n">adaptive_smc</span><span class="p">:</span>   <span class="mi">5</span> <span class="n">gains</span> <span class="p">[</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="o">-</span><span class="mf">10.0</span><span class="p">]</span>
+<span class="n">sta_smc</span><span class="p">:</span>        <span class="mi">6</span> <span class="n">gains</span> <span class="p">[</span><span class="mf">2.0</span><span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">99.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">-</span><span class="mf">150.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="o">-</span><span class="mf">10.0</span><span class="p">]</span>
+<span class="n">hybrid_adaptive_sta_smc</span><span class="p">:</span> <span class="mi">4</span> <span class="n">gains</span> <span class="p">[</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">-</span><span class="mf">20.0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="fitness-function-configuration">
+<h3>Fitness Function Configuration<a class="headerlink" href="#fitness-function-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chattering_target</span> <span class="o">=</span> <span class="mf">2.0</span>           <span class="c1"># Issue #12 target</span>
+<span class="n">tracking_target</span> <span class="o">=</span> <span class="mf">0.1</span>             <span class="c1"># Max acceptable tracking error (rad)</span>
+<span class="n">effort_target</span> <span class="o">=</span> <span class="mf">100.0</span>             <span class="c1"># Control effort constraint (N RMS)</span>
+
+<span class="n">chattering_penalty_weight</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># Secondary objective weight</span>
+<span class="n">tracking_penalty_weight</span> <span class="o">=</span> <span class="mf">100.0</span>   <span class="c1"># Hard constraint weight</span>
+<span class="n">effort_penalty_weight</span> <span class="o">=</span> <span class="mf">0.1</span>       <span class="c1"># Soft constraint weight</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="implementation-files">
+<h2>Implementation Files<a class="headerlink" href="#implementation-files" title="Link to this heading">¶</a></h2>
+<section id="created">
+<h3>Created<a class="headerlink" href="#created" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">optimize_chattering_reduction.py</span></code></strong> (original, blocked by cost=0.0 bug)</p>
+<ul class="simple">
+<li><p>Attempted to use PSOTuner</p></li>
+<li><p>Discovered normalization issue</p></li>
+<li><p>Documented for future PSOTuner fixes</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">optimize_chattering_direct.py</span></code></strong> (working solution)</p>
+<ul class="simple">
+<li><p>Direct PySwarms integration</p></li>
+<li><p>Custom fitness function</p></li>
+<li><p>Full control over chattering metrics</p></li>
+<li><p>Comprehensive validation</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single controller optimization</span>
+python<span class="w"> </span>optimize_chattering_direct.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--n-particles<span class="w"> </span><span class="m">50</span><span class="w"> </span>--iters<span class="w"> </span><span class="m">300</span>
+
+<span class="c1"># Full campaign (all controllers)</span>
+python<span class="w"> </span>optimize_chattering_direct.py<span class="w"> </span>--controller<span class="w"> </span>all<span class="w"> </span>--n-particles<span class="w"> </span><span class="m">50</span><span class="w"> </span>--iters<span class="w"> </span><span class="m">300</span><span class="w"> </span>--output-dir<span class="w"> </span>optimization_results_direct
+
+<span class="c1"># Quick test (reduced iterations)</span>
+python<span class="w"> </span>optimize_chattering_direct.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--n-particles<span class="w"> </span><span class="m">30</span><span class="w"> </span>--iters<span class="w"> </span><span class="m">100</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="expected-deliverables">
+<h2>Expected Deliverables<a class="headerlink" href="#expected-deliverables" title="Link to this heading">¶</a></h2>
+<section id="optimized-gains-files">
+<h3>Optimized Gains Files<a class="headerlink" href="#optimized-gains-files" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimization_results_direct</span><span class="o">/</span>
+<span class="err">├──</span> <span class="n">gains_classical_smc_chattering</span><span class="o">.</span><span class="n">json</span>
+<span class="err">├──</span> <span class="n">gains_adaptive_smc_chattering</span><span class="o">.</span><span class="n">json</span>
+<span class="err">├──</span> <span class="n">gains_sta_smc_chattering</span><span class="o">.</span><span class="n">json</span>
+<span class="err">├──</span> <span class="n">gains_hybrid_chattering</span><span class="o">.</span><span class="n">json</span>
+<span class="err">├──</span> <span class="n">convergence_classical_smc_direct</span><span class="o">.</span><span class="n">png</span>
+<span class="err">├──</span> <span class="n">convergence_adaptive_smc_direct</span><span class="o">.</span><span class="n">png</span>
+<span class="err">├──</span> <span class="n">convergence_sta_smc_direct</span><span class="o">.</span><span class="n">png</span>
+<span class="err">├──</span> <span class="n">convergence_hybrid_direct</span><span class="o">.</span><span class="n">png</span>
+<span class="err">└──</span> <span class="n">optimization_summary</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</section>
+<section id="validation-metrics">
+<h3>Validation Metrics<a class="headerlink" href="#validation-metrics" title="Link to this heading">¶</a></h3>
+<p>Each result includes:</p>
+<ul class="simple">
+<li><p><strong>chattering_index:</strong> Target &lt; 2.0</p></li>
+<li><p><strong>tracking_error_rms:</strong> Constraint &lt; 0.1 rad</p></li>
+<li><p><strong>control_effort_rms:</strong> Constraint &lt; 100 N</p></li>
+<li><p><strong>smoothness_index:</strong> Target &gt; 0.7</p></li>
+<li><p><strong>hf_power_ratio:</strong> Target &lt; 0.1</p></li>
+</ul>
+</section>
+<section id="acceptance-criteria">
+<h3>Acceptance Criteria<a class="headerlink" href="#acceptance-criteria" title="Link to this heading">¶</a></h3>
+<p>Must achieve:</p>
+<ul class="simple">
+<li><p>≥3/4 controllers pass <code class="docutils literal notranslate"><span class="pre">chattering_index</span> <span class="pre">&lt;</span> <span class="pre">2.0</span></code></p></li>
+<li><p>All controllers maintain <code class="docutils literal notranslate"><span class="pre">tracking_error_rms</span> <span class="pre">&lt;</span> <span class="pre">0.1</span></code></p></li>
+<li><p>No performance degradation &gt;5%</p></li>
+</ul>
+<p>Nice to have:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">chattering_index</span> <span class="pre">&lt;</span> <span class="pre">1.5</span></code> (better than target)</p></li>
+<li><p>Control effort reduction vs. baseline</p></li>
+<li><p>All 5 acceptance criteria passed</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="time-estimates">
+<h2>Time Estimates<a class="headerlink" href="#time-estimates" title="Link to this heading">¶</a></h2>
+<section id="per-controller-optimization">
+<h3>Per-Controller Optimization<a class="headerlink" href="#per-controller-optimization" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Particle evaluation:</strong> ~0.15s per particle (10s simulation + overhead)</p></li>
+<li><p><strong>PSO iteration:</strong> ~4.5s (30 particles)</p></li>
+<li><p><strong>100 iterations:</strong> ~7-8 minutes</p></li>
+<li><p><strong>300 iterations:</strong> ~22-25 minutes</p></li>
+</ul>
+</section>
+<section id="full-campaign">
+<h3>Full Campaign<a class="headerlink" href="#full-campaign" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>4 controllers × 300 iterations:</strong> ~90-100 minutes (~1.5-2 hours)</p></li>
+<li><p><strong>Validation:</strong> ~5 minutes</p></li>
+<li><p><strong>Total:</strong> ~2 hours</p></li>
+</ul>
+</section>
+<section id="reduced-test-run">
+<h3>Reduced Test Run<a class="headerlink" href="#reduced-test-run" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Single controller × 100 iterations:</strong> ~8 minutes</p></li>
+<li><p><strong>Quick validation:</strong> ~2 minutes</p></li>
+<li><p><strong>Total:</strong> ~10 minutes per controller</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="recommendations">
+<h2>Recommendations<a class="headerlink" href="#recommendations" title="Link to this heading">¶</a></h2>
+<section id="immediate-actions">
+<h3>Immediate Actions<a class="headerlink" href="#immediate-actions" title="Link to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p><strong>Complete Optimization Campaign:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run overnight or on dedicated compute</span>
+python<span class="w"> </span>optimize_chattering_direct.py<span class="w"> </span>--controller<span class="w"> </span>all<span class="w"> </span>--n-particles<span class="w"> </span><span class="m">50</span><span class="w"> </span>--iters<span class="w"> </span><span class="m">300</span><span class="w"> </span>--seed<span class="w"> </span><span class="m">42</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Validate Optimized Gains:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run validation test with new gains</span>
+pytest<span class="w"> </span>tests/test_integration/test_numerical_stability/test_numerical_stability_deep.py::TestChatteringReductionEffectiveness<span class="w"> </span>-v
+</pre></div>
+</div>
+</li>
+<li><p><strong>Update config.yaml:</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace controller_defaults gains with optimized values</span>
+<span class="nt">controller_defaults</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">classical_smc</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">optimized_values_here</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="long-term-fixes">
+<h3>Long-Term Fixes<a class="headerlink" href="#long-term-fixes" title="Link to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p><strong>Fix PSOTuner Cost Function:</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># In config.yaml</span>
+<span class="nt">cost_function</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">weights</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">state_error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">control_effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">    </span><span class="nt">control_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span><span class="w">     </span><span class="c1"># Increase from 0.01 → 10.0</span>
+<span class="w">    </span><span class="nt">stability</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+
+<span class="w">  </span><span class="nt">norms</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">state_error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">    </span><span class="nt">control_effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
+<span class="w">    </span><span class="nt">control_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span><span class="w">    </span><span class="c1"># Reduce from 1000.0 → 100.0</span>
+<span class="w">    </span><span class="nt">sliding</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Add Chattering Metric to PSOTuner:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In pso_optimizer.py _compute_cost_from_traj</span>
+
+<span class="c1"># Add chattering index calculation</span>
+<span class="n">control_derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">u_b</span><span class="p">,</span> <span class="n">dt_const</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">chattering_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">control_derivative</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Add FFT spectral analysis</span>
+<span class="c1"># ... (similar to optimize_chattering_direct.py)</span>
+
+<span class="c1"># Add to fitness</span>
+<span class="n">chattering_index</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">chattering_time</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">freq_index</span>
+<span class="n">chattering_penalty</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">chattering_index</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">penalty_weight</span>
+<span class="n">J</span> <span class="o">+=</span> <span class="n">chattering_penalty</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Add Integration Test:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_pso_tuner_chattering_optimization</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify PSOTuner properly optimizes for chattering reduction.&quot;&quot;&quot;</span>
+    <span class="c1"># Create tuner with chattering-focused cost</span>
+    <span class="c1"># Run optimization</span>
+    <span class="c1"># Assert chattering_index decreased</span>
+    <span class="c1"># Assert cost &gt; 0.0 (no more zero-cost bug)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="current-status">
+<h2>Current Status<a class="headerlink" href="#current-status" title="Link to this heading">¶</a></h2>
+<section id="completed">
+<h3>Completed<a class="headerlink" href="#completed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Root cause analysis (gains optimization needed)</p></li>
+<li><p>Multi-objective fitness function design</p></li>
+<li><p>PSOTuner cost=0.0 bug discovery and documentation</p></li>
+<li><p>Direct PSO implementation (<code class="docutils literal notranslate"><span class="pre">optimize_chattering_direct.py</span></code>)</p></li>
+<li><p>Test run initiated (classical_smc, 100 iterations)</p></li>
+</ul>
+</section>
+<section id="in-progress">
+<h3>In Progress<a class="headerlink" href="#in-progress" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Classical SMC optimization (expected ~8 minutes)</p></li>
+<li><p>Full campaign setup ready for execution</p></li>
+</ul>
+</section>
+<section id="pending">
+<h3>Pending<a class="headerlink" href="#pending" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Complete optimization for all 4 controllers</p></li>
+<li><p>Validation with optimized gains</p></li>
+<li><p>Update config.yaml with final gains</p></li>
+<li><p>Generate comparison report (before/after)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="technical-notes">
+<h2>Technical Notes<a class="headerlink" href="#technical-notes" title="Link to this heading">¶</a></h2>
+<section id="chattering-measurement">
+<h3>Chattering Measurement<a class="headerlink" href="#chattering-measurement" title="Link to this heading">¶</a></h3>
+<p><strong>Time-Domain Component (70% weight):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">control_signal</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">time_domain_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">control_derivative</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Frequency-Domain Component (30% weight):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft</span><span class="p">(</span><span class="n">control_signal</span><span class="p">))</span>
+<span class="n">freqs</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">control_signal</span><span class="p">),</span> <span class="n">d</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">hf_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">freqs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">10.0</span>  <span class="c1"># High-frequency threshold</span>
+<span class="n">hf_power_ratio</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">spectrum</span><span class="p">[</span><span class="n">hf_mask</span><span class="p">])</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">spectrum</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Combined Metric:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chattering_index</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">time_domain_index</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">hf_power_ratio</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-trade-off">
+<h3>Performance Trade-Off<a class="headerlink" href="#performance-trade-off" title="Link to this heading">¶</a></h3>
+<p>The fitness function balances:</p>
+<ul class="simple">
+<li><p><strong>Tracking accuracy</strong> (primary, must satisfy)</p></li>
+<li><p><strong>Chattering reduction</strong> (secondary, optimization target)</p></li>
+<li><p><strong>Control efficiency</strong> (tertiary, soft constraint)</p></li>
+</ul>
+<p>Penalty structure ensures tracking is never sacrificed for chattering reduction.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="validation-protocol">
+<h2>Validation Protocol<a class="headerlink" href="#validation-protocol" title="Link to this heading">¶</a></h2>
+<p>After optimization, validate each controller:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run comprehensive validation</span>
+<span class="n">pytest</span> <span class="n">tests</span><span class="o">/</span><span class="n">test_integration</span><span class="o">/</span><span class="n">test_numerical_stability</span><span class="o">/</span><span class="n">test_numerical_stability_deep</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">TestChatteringReductionEffectiveness</span> <span class="o">-</span><span class="n">v</span>
+
+<span class="c1"># Expected output:</span>
+<span class="c1"># 1. Chattering Index: X.XX / 2.0 (PASS/FAIL)</span>
+<span class="c1"># 2. Boundary Layer Effectiveness: X.XX / 0.8 (PASS/FAIL)</span>
+<span class="c1"># 3. Control Smoothness: X.XX / 0.7 (PASS/FAIL)</span>
+<span class="c1"># 4. High-Frequency Power Ratio: X.XX / 0.1 (PASS/FAIL)</span>
+<span class="c1"># 5. Performance Degradation: X.X% / 5% (PASS/FAIL)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Issue #12:</strong> SMC Chattering Reduction Ineffectiveness (CRIT-003)</p></li>
+<li><p><strong>Validation Test:</strong> <code class="docutils literal notranslate"><span class="pre">test_numerical_stability_deep.py::TestChatteringReductionEffectiveness</span></code></p></li>
+<li><p><strong>Configuration:</strong> <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> (pso, cost_function, controller_defaults)</p></li>
+<li><p><strong>Optimization Scripts:</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimize_chattering_reduction.py</span></code> (blocked by cost=0.0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimize_chattering_direct.py</span></code> (working implementation)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>The PSO optimization infrastructure is <strong>ready and functional</strong> using the direct implementation approach. The PSOTuner cost=0.0 bug has been identified and documented, with a working alternative solution (<code class="docutils literal notranslate"><span class="pre">optimize_chattering_direct.py</span></code>) that provides explicit control over the multi-objective fitness function.</p>
+<p><strong>Estimated completion time for full campaign:</strong> 2 hours</p>
+<p><strong>Next steps:</strong> Execute full optimization campaign and validate results against Issue #12 acceptance criteria.</p>
+<hr class="docutils" />
+<p><strong>Author:</strong> Claude (Ultimate PSO Optimization Engineer)
+<strong>Date:</strong> 2025-09-30
+<strong>Status:</strong> Implementation Complete, Campaign Ready for Execution</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Issue #12 PSO Optimization Campaign Report</a><ul>
+<li><a class="reference internal" href="#executive-summary">Executive Summary</a></li>
+<li><a class="reference internal" href="#problem-analysis">Problem Analysis</a><ul>
+<li><a class="reference internal" href="#root-cause-identification">Root Cause Identification</a></li>
+<li><a class="reference internal" href="#multi-objective-fitness-function-design">Multi-Objective Fitness Function Design</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#critical-issue-psotuner-cost-0-0-bug">Critical Issue: PSOTuner Cost=0.0 Bug</a><ul>
+<li><a class="reference internal" href="#symptom">Symptom</a></li>
+<li><a class="reference internal" href="#root-cause">Root Cause</a></li>
+<li><a class="reference internal" href="#impact">Impact</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#solution-direct-pso-implementation">Solution: Direct PSO Implementation</a><ul>
+<li><a class="reference internal" href="#approach">Approach</a></li>
+<li><a class="reference internal" href="#advantages">Advantages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#optimization-configuration">Optimization Configuration</a><ul>
+<li><a class="reference internal" href="#pso-parameters">PSO Parameters</a></li>
+<li><a class="reference internal" href="#search-space-bounds">Search Space Bounds</a></li>
+<li><a class="reference internal" href="#fitness-function-configuration">Fitness Function Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation-files">Implementation Files</a><ul>
+<li><a class="reference internal" href="#created">Created</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#expected-deliverables">Expected Deliverables</a><ul>
+<li><a class="reference internal" href="#optimized-gains-files">Optimized Gains Files</a></li>
+<li><a class="reference internal" href="#validation-metrics">Validation Metrics</a></li>
+<li><a class="reference internal" href="#acceptance-criteria">Acceptance Criteria</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#time-estimates">Time Estimates</a><ul>
+<li><a class="reference internal" href="#per-controller-optimization">Per-Controller Optimization</a></li>
+<li><a class="reference internal" href="#full-campaign">Full Campaign</a></li>
+<li><a class="reference internal" href="#reduced-test-run">Reduced Test Run</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#recommendations">Recommendations</a><ul>
+<li><a class="reference internal" href="#immediate-actions">Immediate Actions</a></li>
+<li><a class="reference internal" href="#long-term-fixes">Long-Term Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#current-status">Current Status</a><ul>
+<li><a class="reference internal" href="#completed">Completed</a></li>
+<li><a class="reference internal" href="#in-progress">In Progress</a></li>
+<li><a class="reference internal" href="#pending">Pending</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#technical-notes">Technical Notes</a><ul>
+<li><a class="reference internal" href="#chattering-measurement">Chattering Measurement</a></li>
+<li><a class="reference internal" href="#performance-trade-off">Performance Trade-Off</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validation-protocol">Validation Protocol</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=08e7b316"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/back-to-top.js?v=840797bb"></script>
+    <script src="_static/lazy-load.js?v=dc25293c"></script>
+    <script src="_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

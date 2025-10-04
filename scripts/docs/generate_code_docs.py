@@ -242,7 +242,7 @@ class DocumentationGenerator:
         if self.dry_run:
             print("\n[DRY RUN] No files were actually created.")
         else:
-            print(f"\n✅ Documentation generation complete!")
+            print(f"\n[SUCCESS] Documentation generation complete!")
             print(f"   Generated docs in: {self.docs_root}")
 
     def _generate_module_docs(self, module_name: str, files: List[Path]):

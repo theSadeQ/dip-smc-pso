@@ -1,0 +1,1959 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Claim Extraction User Guide - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/tools/claim_extraction_guide.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/tools/claim_extraction_guide.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="claim-extraction-user-guide">
+<h1>Claim Extraction User Guide<a class="headerlink" href="#claim-extraction-user-guide" title="Link to this heading">¶</a></h1>
+<p><strong>Phase 1: Claim Extraction Infrastructure (Week 1)</strong>
+<strong>Version:</strong> 1.0.0
+<strong>Last Updated:</strong> 2025-10-02
+<strong>Estimated Reading Time:</strong> 15 minutes</p>
+<hr class="docutils" />
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#overview">Overview</a></p></li>
+<li><p><a class="reference internal" href="#quick-start">Quick Start</a></p></li>
+<li><p><a class="reference internal" href="#confidence-scoring-explanation">Confidence Scoring Explanation</a></p></li>
+<li><p><a class="reference internal" href="#priority-assignment-logic">Priority Assignment Logic</a></p></li>
+<li><p><a class="reference internal" href="#output-schema-reference">Output Schema Reference</a></p></li>
+<li><p><a class="reference internal" href="#performance-benchmarks">Performance Benchmarks</a></p></li>
+<li><p><a class="reference internal" href="#validation-procedures">Validation Procedures</a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting">Troubleshooting</a></p></li>
+<li><p><a class="reference internal" href="#integration-with-phase-2">Integration with Phase 2</a></p></li>
+<li><p><a class="reference internal" href="#faq">FAQ</a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h2>1. Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<section id="phase-1-objectives">
+<h3>1.1 Phase 1 Objectives<a class="headerlink" href="#phase-1-objectives" title="Link to this heading">¶</a></h3>
+<p><strong>Goal:</strong> Extract <strong>500+ claims</strong> from codebase to create comprehensive research queue for Phase 2 automated citation validation.</p>
+<p><strong>Two-Pronged Extraction Strategy:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Formal Claims</strong> (from documentation)</p>
+<ul class="simple">
+<li><p><strong>Source:</strong> <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory (259 markdown files)</p></li>
+<li><p><strong>Targets:</strong> Theorems, lemmas, propositions, corollaries</p></li>
+<li><p><strong>Tool:</strong> <code class="docutils literal notranslate"><span class="pre">.dev_tools/claim_extraction/formal_extractor.py</span></code></p></li>
+<li><p><strong>Expected Output:</strong> 40-50 formal mathematical claims</p></li>
+</ul>
+</li>
+<li><p><strong>Code Claims</strong> (from implementation)</p>
+<ul class="simple">
+<li><p><strong>Source:</strong> <code class="docutils literal notranslate"><span class="pre">src/</span></code> directory (165 Python files)</p></li>
+<li><p><strong>Targets:</strong> “Implements X from Y” patterns in docstrings</p></li>
+<li><p><strong>Tool:</strong> <code class="docutils literal notranslate"><span class="pre">.dev_tools/claim_extraction/code_extractor.py</span></code></p></li>
+<li><p><strong>Expected Output:</strong> 150-250 implementation claims</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="tool-architecture">
+<h3>1.2 Tool Architecture<a class="headerlink" href="#tool-architecture" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span>                    <span class="n">Phase</span> <span class="mi">1</span> <span class="n">Architecture</span>                      <span class="err">│</span>
+<span class="err">├─────────────────────────────────────────────────────────────┤</span>
+<span class="err">│</span>                                                               <span class="err">│</span>
+<span class="err">│</span>  <span class="err">┌──────────────┐</span>         <span class="err">┌──────────────┐</span>                  <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>   <span class="n">docs</span><span class="o">/</span>      <span class="err">│</span> <span class="err">───────</span><span class="o">&gt;</span><span class="err">│</span>   <span class="n">Formal</span>     <span class="err">│</span>                  <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span> <span class="p">(</span><span class="mi">259</span> <span class="o">.</span><span class="n">md</span><span class="p">)</span>    <span class="err">│</span>         <span class="err">│</span>  <span class="n">Extractor</span>   <span class="err">│──</span><span class="o">&gt;</span> <span class="n">formal_claims</span><span class="o">.</span><span class="n">json</span>
+<span class="err">│</span>  <span class="err">└──────────────┘</span>         <span class="err">│</span> <span class="p">(</span><span class="n">Regex</span><span class="o">-</span><span class="n">based</span><span class="p">)</span><span class="err">│</span>                  <span class="err">│</span>
+<span class="err">│</span>                            <span class="err">└──────────────┘</span>                  <span class="err">│</span>
+<span class="err">│</span>                                                               <span class="err">│</span>
+<span class="err">│</span>  <span class="err">┌──────────────┐</span>         <span class="err">┌──────────────┐</span>                  <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>    <span class="n">src</span><span class="o">/</span>      <span class="err">│</span> <span class="err">───────</span><span class="o">&gt;</span><span class="err">│</span>    <span class="n">Code</span>      <span class="err">│</span>                  <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span> <span class="p">(</span><span class="mi">165</span> <span class="o">.</span><span class="n">py</span><span class="p">)</span>    <span class="err">│</span>         <span class="err">│</span>  <span class="n">Extractor</span>   <span class="err">│──</span><span class="o">&gt;</span> <span class="n">code_claims</span><span class="o">.</span><span class="n">json</span>
+<span class="err">│</span>  <span class="err">└──────────────┘</span>         <span class="err">│</span> <span class="p">(</span><span class="n">AST</span><span class="o">-</span><span class="n">based</span><span class="p">)</span>  <span class="err">│</span>                  <span class="err">│</span>
+<span class="err">│</span>                            <span class="err">└──────────────┘</span>                  <span class="err">│</span>
+<span class="err">│</span>                                    <span class="err">│</span>                          <span class="err">│</span>
+<span class="err">│</span>                                    <span class="n">v</span>                          <span class="err">│</span>
+<span class="err">│</span>                            <span class="err">┌──────────────┐</span>                  <span class="err">│</span>
+<span class="err">│</span>                            <span class="err">│</span>    <span class="n">Merge</span>     <span class="err">│</span>                  <span class="err">│</span>
+<span class="err">│</span>                            <span class="err">│</span>   <span class="o">+</span> <span class="n">Dedup</span>    <span class="err">│──</span><span class="o">&gt;</span> <span class="n">claims_inventory</span><span class="o">.</span><span class="n">json</span>
+<span class="err">│</span>                            <span class="err">│</span> <span class="o">+</span> <span class="n">Prioritize</span> <span class="err">│</span>    <span class="p">(</span><span class="mi">500</span><span class="o">+</span> <span class="n">claims</span><span class="p">)</span> <span class="err">│</span>
+<span class="err">│</span>                            <span class="err">└──────────────┘</span>                  <span class="err">│</span>
+<span class="err">│</span>                                                               <span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────┘</span>
+</pre></div>
+</div>
+</section>
+<section id="expected-outputs">
+<h3>1.3 Expected Outputs<a class="headerlink" href="#expected-outputs" title="Link to this heading">¶</a></h3>
+<p><strong>Final Artifact:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/claims_inventory.json</span></code></p>
+<p><strong>Contents:</strong></p>
+<ul class="simple">
+<li><p><strong>Total Claims:</strong> 500+ extracted claims</p></li>
+<li><p><strong>Research Queue:</strong> Prioritized list (CRITICAL → HIGH → MEDIUM)</p></li>
+<li><p><strong>Metadata:</strong> Confidence scores, source files, line numbers</p></li>
+<li><p><strong>Statistics:</strong> Distribution by source, priority, confidence</p></li>
+</ul>
+<p><strong>Phase 2 Handoff:</strong> Research queue feeds into AI-powered citation finder for automated academic reference matching.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quick-start">
+<h2>2. Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<section id="three-step-workflow">
+<h3>2.1 Three-Step Workflow<a class="headerlink" href="#three-step-workflow" title="Link to this heading">¶</a></h3>
+<p><strong>Prerequisites:</strong></p>
+<ul class="simple">
+<li><p>Python 3.9+</p></li>
+<li><p>Working directory: <code class="docutils literal notranslate"><span class="pre">D:\Projects\main</span></code></p></li>
+<li><p>Virtual environment activated (if applicable)</p></li>
+</ul>
+<p><strong>Step 1: Extract Formal Claims</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>.dev_tools/claim_extraction/formal_extractor.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>docs/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>artifacts/formal_claims.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--verbose
+</pre></div>
+</div>
+<p><strong>Expected Console Output:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">FORMAL</span> <span class="n">EXTRACTOR</span><span class="p">]</span> <span class="n">Starting</span> <span class="n">extraction</span> <span class="kn">from</span><span class="w"> </span><span class="nn">docs</span><span class="o">/</span>
+<span class="n">Scanning</span> <span class="mi">259</span> <span class="n">markdown</span> <span class="n">files</span><span class="o">...</span>
+  <span class="err">├─</span> <span class="n">Processing</span> <span class="n">docs</span><span class="o">/</span><span class="n">theory</span><span class="o">/</span><span class="n">smc_theory_complete</span><span class="o">.</span><span class="n">md</span> <span class="p">(</span><span class="mi">12</span> <span class="n">claims</span><span class="p">)</span>
+  <span class="err">├─</span> <span class="n">Processing</span> <span class="n">docs</span><span class="o">/</span><span class="n">mathematical_foundations</span><span class="o">/</span><span class="n">lyapunov_stability</span><span class="o">.</span><span class="n">md</span> <span class="p">(</span><span class="mi">8</span> <span class="n">claims</span><span class="p">)</span>
+  <span class="err">├─</span> <span class="n">Processing</span> <span class="n">docs</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">adaptive_smc</span><span class="o">.</span><span class="n">md</span> <span class="p">(</span><span class="mi">5</span> <span class="n">claims</span><span class="p">)</span>
+  <span class="err">└─</span> <span class="o">...</span> <span class="p">(</span><span class="mi">256</span> <span class="n">more</span> <span class="n">files</span><span class="p">)</span>
+
+<span class="n">Extraction</span> <span class="n">Summary</span><span class="p">:</span>
+  <span class="n">Total</span> <span class="n">claims</span> <span class="n">extracted</span><span class="p">:</span> <span class="mi">41</span>
+  <span class="err">├─</span> <span class="n">Theorems</span><span class="p">:</span> <span class="mi">15</span>
+  <span class="err">├─</span> <span class="n">Lemmas</span><span class="p">:</span> <span class="mi">8</span>
+  <span class="err">├─</span> <span class="n">Propositions</span><span class="p">:</span> <span class="mi">12</span>
+  <span class="err">└─</span> <span class="n">Corollaries</span><span class="p">:</span> <span class="mi">6</span>
+
+  <span class="n">Citation</span> <span class="n">Status</span><span class="p">:</span>
+  <span class="err">├─</span> <span class="n">Cited</span> <span class="p">(</span><span class="n">confidence</span> <span class="err">≥</span><span class="mf">0.8</span><span class="p">):</span> <span class="mi">12</span>
+  <span class="err">└─</span> <span class="n">Uncited</span> <span class="p">(</span><span class="n">confidence</span> <span class="o">&lt;</span><span class="mf">0.8</span><span class="p">):</span> <span class="mi">29</span>  <span class="err">←</span> <span class="n">CRITICAL</span> <span class="n">research</span> <span class="n">targets</span>
+
+<span class="n">Performance</span><span class="p">:</span>
+  <span class="n">Execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.24</span> <span class="n">seconds</span>
+  <span class="n">Throughput</span><span class="p">:</span> <span class="mi">208</span> <span class="n">files</span><span class="o">/</span><span class="n">second</span>
+
+<span class="n">Output</span> <span class="n">saved</span> <span class="n">to</span><span class="p">:</span> <span class="n">artifacts</span><span class="o">/</span><span class="n">formal_claims</span><span class="o">.</span><span class="n">json</span> <span class="err">✅</span>
+</pre></div>
+</div>
+<p><strong>Step 2: Extract Code Claims</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>.dev_tools/claim_extraction/code_extractor.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>src/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>artifacts/code_claims.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--verbose
+</pre></div>
+</div>
+<p><strong>Expected Console Output:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">CODE</span> <span class="n">EXTRACTOR</span><span class="p">]</span> <span class="n">Starting</span> <span class="n">AST</span><span class="o">-</span><span class="n">based</span> <span class="n">extraction</span> <span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="o">/</span>
+<span class="n">Scanning</span> <span class="mi">165</span> <span class="n">Python</span> <span class="n">files</span><span class="o">...</span>
+  <span class="err">├─</span> <span class="n">src</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">smc</span><span class="o">/</span><span class="n">classical_smc</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="mi">4</span> <span class="n">claims</span><span class="p">)</span>
+  <span class="err">├─</span> <span class="n">src</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">smc</span><span class="o">/</span><span class="n">sta_smc</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="mi">6</span> <span class="n">claims</span><span class="p">)</span>
+  <span class="err">├─</span> <span class="n">src</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">adaptive_smc</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="mi">5</span> <span class="n">claims</span><span class="p">)</span>
+  <span class="err">└─</span> <span class="o">...</span> <span class="p">(</span><span class="mi">162</span> <span class="n">more</span> <span class="n">files</span><span class="p">)</span>
+
+<span class="n">Extraction</span> <span class="n">Summary</span><span class="p">:</span>
+  <span class="n">Total</span> <span class="n">claims</span> <span class="n">extracted</span><span class="p">:</span> <span class="mi">187</span>
+  <span class="err">├─</span> <span class="n">Implementation</span> <span class="n">claims</span><span class="p">:</span> <span class="mi">142</span>
+  <span class="err">├─</span> <span class="n">Algorithm</span> <span class="n">references</span><span class="p">:</span> <span class="mi">28</span>
+  <span class="err">└─</span> <span class="n">Citation</span> <span class="n">patterns</span><span class="p">:</span> <span class="mi">17</span>
+
+  <span class="n">Scope</span> <span class="n">Distribution</span><span class="p">:</span>
+  <span class="err">├─</span> <span class="n">Class</span><span class="o">-</span><span class="n">level</span><span class="p">:</span> <span class="mi">85</span>
+  <span class="err">├─</span> <span class="n">Method</span><span class="o">-</span><span class="n">level</span><span class="p">:</span> <span class="mi">78</span>
+  <span class="err">└─</span> <span class="n">Module</span><span class="o">-</span><span class="n">level</span><span class="p">:</span> <span class="mi">24</span>
+
+<span class="n">Performance</span><span class="p">:</span>
+  <span class="n">Execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">2.31</span> <span class="n">seconds</span>
+  <span class="n">Throughput</span><span class="p">:</span> <span class="mi">71</span> <span class="n">files</span><span class="o">/</span><span class="n">second</span>
+
+<span class="n">Output</span> <span class="n">saved</span> <span class="n">to</span><span class="p">:</span> <span class="n">artifacts</span><span class="o">/</span><span class="n">code_claims</span><span class="o">.</span><span class="n">json</span> <span class="err">✅</span>
+</pre></div>
+</div>
+<p><strong>Step 3: Merge and Prioritize</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>.dev_tools/claim_extraction/merge_claims.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--formal<span class="w"> </span>artifacts/formal_claims.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--code<span class="w"> </span>artifacts/code_claims.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>artifacts/claims_inventory.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--verbose
+</pre></div>
+</div>
+<p><strong>Expected Console Output:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">MERGE</span> <span class="n">CLAIMS</span><span class="p">]</span> <span class="n">Loading</span> <span class="nb">input</span> <span class="n">files</span><span class="o">...</span>
+  <span class="err">├─</span> <span class="n">Formal</span> <span class="n">claims</span><span class="p">:</span> <span class="mi">41</span> <span class="n">loaded</span>
+  <span class="err">└─</span> <span class="n">Code</span> <span class="n">claims</span><span class="p">:</span> <span class="mi">187</span> <span class="n">loaded</span>
+
+<span class="n">Deduplication</span><span class="p">:</span>
+  <span class="n">Total</span> <span class="n">before</span> <span class="n">merge</span><span class="p">:</span> <span class="mi">228</span>
+  <span class="n">Duplicates</span> <span class="n">removed</span><span class="p">:</span> <span class="mi">16</span>
+  <span class="n">Total</span> <span class="n">after</span> <span class="n">merge</span><span class="p">:</span> <span class="mi">212</span>
+
+<span class="n">Priority</span> <span class="n">Assignment</span><span class="p">:</span>
+  <span class="err">├─</span> <span class="n">CRITICAL</span><span class="p">:</span> <span class="mi">29</span> <span class="n">claims</span> <span class="p">(</span><span class="n">uncited</span> <span class="n">formal</span> <span class="n">theorems</span><span class="o">/</span><span class="n">lemmas</span><span class="p">)</span>
+  <span class="err">├─</span> <span class="n">HIGH</span><span class="p">:</span> <span class="mi">68</span> <span class="n">claims</span> <span class="p">(</span><span class="n">uncited</span> <span class="n">implementations</span><span class="p">)</span>
+  <span class="err">└─</span> <span class="n">MEDIUM</span><span class="p">:</span> <span class="mi">115</span> <span class="n">claims</span> <span class="p">(</span><span class="n">cited</span> <span class="ow">or</span> <span class="n">informal</span><span class="p">)</span>
+
+<span class="n">Research</span> <span class="n">Queue</span> <span class="n">Generation</span><span class="p">:</span>
+  <span class="n">Phase</span> <span class="mi">2</span> <span class="n">queue</span> <span class="n">created</span> <span class="k">with</span> <span class="mi">212</span> <span class="n">claims</span>
+  <span class="n">Top</span> <span class="n">priority</span><span class="p">:</span> <span class="n">CRITICAL</span> <span class="n">claims</span> <span class="n">require</span> <span class="err">≥</span><span class="mi">2</span> <span class="n">academic</span> <span class="n">references</span>
+
+<span class="n">Performance</span><span class="p">:</span>
+  <span class="n">Execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.38</span> <span class="n">seconds</span>
+
+<span class="n">Output</span> <span class="n">saved</span> <span class="n">to</span><span class="p">:</span> <span class="n">artifacts</span><span class="o">/</span><span class="n">claims_inventory</span><span class="o">.</span><span class="n">json</span> <span class="err">✅</span>
+
+<span class="n">Next</span> <span class="n">Steps</span><span class="p">:</span>
+  <span class="mf">1.</span> <span class="n">Review</span> <span class="n">claims_inventory</span><span class="o">.</span><span class="n">json</span>
+  <span class="mf">2.</span> <span class="n">Validate</span> <span class="n">quality</span> <span class="k">with</span><span class="p">:</span> <span class="n">python</span> <span class="o">.</span><span class="n">dev_tools</span><span class="o">/</span><span class="n">claim_extraction</span><span class="o">/</span><span class="n">validate_precision</span><span class="o">.</span><span class="n">py</span>
+  <span class="mf">3.</span> <span class="n">Proceed</span> <span class="n">to</span> <span class="n">Phase</span> <span class="mi">2</span> <span class="n">citation</span> <span class="n">research</span>
+</pre></div>
+</div>
+</section>
+<section id="one-command-execution">
+<h3>2.2 One-Command Execution<a class="headerlink" href="#one-command-execution" title="Link to this heading">¶</a></h3>
+<p><strong>Full Pipeline Script:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create shell script for convenience</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>extract_all_claims.sh<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">#!/bin/bash</span>
+<span class="s">set -e</span>
+
+<span class="s">echo &quot;=== Phase 1 Claim Extraction Pipeline ===&quot;</span>
+
+<span class="s"># Step 1: Formal claims</span>
+<span class="s">python .dev_tools/claim_extraction/formal_extractor.py \</span>
+<span class="s">  --input docs/ \</span>
+<span class="s">  --output artifacts/formal_claims.json \</span>
+<span class="s">  --verbose</span>
+
+<span class="s"># Step 2: Code claims</span>
+<span class="s">python .dev_tools/claim_extraction/code_extractor.py \</span>
+<span class="s">  --input src/ \</span>
+<span class="s">  --output artifacts/code_claims.json \</span>
+<span class="s">  --verbose</span>
+
+<span class="s"># Step 3: Merge</span>
+<span class="s">python .dev_tools/claim_extraction/merge_claims.py \</span>
+<span class="s">  --formal artifacts/formal_claims.json \</span>
+<span class="s">  --code artifacts/code_claims.json \</span>
+<span class="s">  --output artifacts/claims_inventory.json \</span>
+<span class="s">  --verbose</span>
+
+<span class="s">echo &quot;✅ Pipeline complete! Review artifacts/claims_inventory.json&quot;</span>
+<span class="s">EOF</span>
+
+chmod<span class="w"> </span>+x<span class="w"> </span>extract_all_claims.sh
+./extract_all_claims.sh
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="confidence-scoring-explanation">
+<h2>3. Confidence Scoring Explanation<a class="headerlink" href="#confidence-scoring-explanation" title="Link to this heading">¶</a></h2>
+<section id="formal-claims-scoring-formula">
+<h3>3.1 Formal Claims Scoring Formula<a class="headerlink" href="#formal-claims-scoring-formula" title="Link to this heading">¶</a></h3>
+<p><strong>Base Formula:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[c_{\text{formal}}(x) = 0.5 + \sum_{i} w_i \cdot I_i(x)\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(c_{\text{formal}}(x)\)</span> = confidence score for formal claim <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span> = weight for indicator <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(I_i(x)\)</span> = binary indicator function (1 if present, 0 otherwise)</p></li>
+</ul>
+<p><strong>Confidence Boosters:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Indicator</p></th>
+<th class="head"><p>Weight <span class="math notranslate nohighlight">\(w_i\)</span></p></th>
+<th class="head"><p>Condition</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Numbered</strong></p></td>
+<td><p>+0.2</p></td>
+<td><p>Explicit numbering</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">**Theorem</span> <span class="pre">3.1**</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cited</strong></p></td>
+<td><p>+0.2</p></td>
+<td><p>Reference present</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{cite}`utkin1992`</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Proof</strong></p></td>
+<td><p>+0.1</p></td>
+<td><p>Proof included</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">**Proof**:</span> <span class="pre">...</span> <span class="pre">□</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Math Block</strong></p></td>
+<td><p>+0.1</p></td>
+<td><p>LaTeX equations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">```{math}</span>&#160; <span class="pre">...</span></code> `</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Examples with Calculations:</strong></p>
+<p><strong>Example 1: High Confidence (1.0)</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gs">**Theorem 3.1**</span> {cite}`utkin1992`
+
+The sliding surface $s = \lambda e + \dot{e}$ guarantees finite-time convergence.
+
+<span class="gs">**Proof**</span>: Consider Lyapunov function $V = \frac{1}{2}s^2$... □
+
+```{math}
+\dot{V} = s\dot{s} \leq -\eta|s| &lt; 0
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">**</span><span class="n">Calculation</span><span class="p">:</span><span class="o">**</span>
+<span class="o">-</span> <span class="n">Base</span><span class="p">:</span> <span class="mf">0.5</span>
+<span class="o">-</span> <span class="n">Numbered</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.2</span><span class="p">):</span> <span class="err">`</span><span class="o">**</span><span class="n">Theorem</span> <span class="mf">3.1</span><span class="o">**</span><span class="err">`</span> <span class="err">✅</span>
+<span class="o">-</span> <span class="n">Cited</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.2</span><span class="p">):</span> <span class="err">``</span> <span class="p">{</span><span class="n">cite</span><span class="p">}</span><span class="err">`</span><span class="n">utkin1992</span><span class="err">`</span> <span class="err">``</span> <span class="err">✅</span>
+<span class="o">-</span> <span class="n">Proof</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.1</span><span class="p">):</span> <span class="err">`</span><span class="o">**</span><span class="n">Proof</span><span class="o">**</span><span class="p">:</span> <span class="o">...</span> <span class="err">□`</span> <span class="err">✅</span>
+<span class="o">-</span> <span class="n">Math</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.1</span><span class="p">):</span> <span class="err">``</span> <span class="err">```</span><span class="p">{</span><span class="n">math</span><span class="p">}</span> <span class="err">``</span> <span class="n">block</span> <span class="err">✅</span>
+
+<span class="o">**</span><span class="n">Total</span><span class="p">:</span><span class="o">**</span> <span class="err">$</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">=</span> <span class="mf">1.0</span><span class="err">$</span> <span class="p">(</span><span class="n">maximum</span> <span class="n">confidence</span><span class="p">)</span>
+
+<span class="o">**</span><span class="n">Example</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Medium</span> <span class="n">Confidence</span> <span class="p">(</span><span class="mf">0.6</span><span class="p">)</span><span class="o">**</span>
+<span class="err">```</span><span class="n">markdown</span>
+<span class="o">**</span><span class="n">Lemma</span><span class="o">**</span> <span class="p">(</span><span class="n">Informal</span><span class="p">)</span>
+
+<span class="n">Boundary</span> <span class="n">layer</span> <span class="n">thickness</span> <span class="n">affects</span> <span class="n">chattering</span> <span class="n">amplitude</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>Calculation:</strong></p>
+<ul class="simple">
+<li><p>Base: 0.5</p></li>
+<li><p>Numbered: No explicit number ❌</p></li>
+<li><p>Cited: No citation ❌</p></li>
+<li><p>Proof: No proof ❌</p></li>
+<li><p>Math: No math block ❌</p></li>
+</ul>
+<p><strong>Total:</strong> <span class="math notranslate nohighlight">\(0.5 + 0.1\)</span> (bonus for keyword “Lemma”) = 0.6</p>
+<p><strong>Example 3: Low Confidence (0.5)</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>The control law converges in finite time.
+</pre></div>
+</div>
+<p><strong>Calculation:</strong></p>
+<ul class="simple">
+<li><p>Base: 0.5</p></li>
+<li><p>No structural indicators</p></li>
+</ul>
+<p><strong>Total:</strong> 0.5 (baseline)</p>
+</section>
+<section id="code-claims-scoring-formula">
+<h3>3.2 Code Claims Scoring Formula<a class="headerlink" href="#code-claims-scoring-formula" title="Link to this heading">¶</a></h3>
+<p><strong>Simplified Formula:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}c_{\text{code}}(x) = \begin{cases}
+0.9 &amp; \text{if DOI or numbered citation} \\
+0.8 &amp; \text{if &quot;Implements X from Y&quot; with specific source} \\
+0.6 &amp; \text{if vague source (e.g., &quot;from literature&quot;)} \\
+0.5 &amp; \text{if informal mention}
+\end{cases}\end{split}\]</div>
+</div>
+<p><strong>Examples:</strong></p>
+<p><strong>High Confidence (0.9):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SuperTwistingSMC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements second-order sliding mode control.</span>
+
+<span class="sd">    Algorithm from Levant (2003), DOI: 10.1016/j.automatica.2003.09.014</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p><strong>Medium-High Confidence (0.8):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_reaching_law</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reaching law implementation from Edwards &amp; Spurgeon (1998).</span>
+
+<span class="sd">    Uses constant plus proportional term for convergence.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p><strong>Medium Confidence (0.6):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">adaptive_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adaptive gain scheduling from adaptive control literature.</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># Vague source → lower confidence</span>
+</pre></div>
+</div>
+</section>
+<section id="confidence-interpretation">
+<h3>3.3 Confidence Interpretation<a class="headerlink" href="#confidence-interpretation" title="Link to this heading">¶</a></h3>
+<p><strong>Thresholds:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Range</p></th>
+<th class="head"><p>Interpretation</p></th>
+<th class="head"><p>Action in Phase 2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>0.8 - 1.0</strong></p></td>
+<td><p>High confidence</p></td>
+<td><p>Verify existing citation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>0.5 - 0.8</strong></p></td>
+<td><p>Medium confidence</p></td>
+<td><p>Find 1-2 supporting references</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>0.0 - 0.5</strong></p></td>
+<td><p>Low confidence</p></td>
+<td><p>Investigate claim validity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="priority-assignment-logic">
+<h2>4. Priority Assignment Logic<a class="headerlink" href="#priority-assignment-logic" title="Link to this heading">¶</a></h2>
+<section id="priority-definitions">
+<h3>4.1 Priority Definitions<a class="headerlink" href="#priority-definitions" title="Link to this heading">¶</a></h3>
+<p><strong>Tiered System:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Priority</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Count (Expected)</p></th>
+<th class="head"><p>Phase 2 Research Effort</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>CRITICAL</strong></p></td>
+<td><p>Uncited formal theorems/lemmas</p></td>
+<td><p>~29</p></td>
+<td><p>Find ≥2 peer-reviewed papers</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>HIGH</strong></p></td>
+<td><p>Uncited implementation claims</p></td>
+<td><p>~136</p></td>
+<td><p>Find ≥1 paper/GitHub reference</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MEDIUM</strong></p></td>
+<td><p>Already cited OR informal</p></td>
+<td><p>~335</p></td>
+<td><p>Verify existing citations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="assignment-algorithm">
+<h3>4.2 Assignment Algorithm<a class="headerlink" href="#assignment-algorithm" title="Link to this heading">¶</a></h3>
+<p><strong>Decision Tree:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">assign_priority</span><span class="p">(</span><span class="n">claim</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Priority assignment based on claim attributes.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Rule 1: Formal theorems/lemmas without citations → CRITICAL</span>
+    <span class="k">if</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;theorem&quot;</span><span class="p">,</span> <span class="s2">&quot;lemma&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;CRITICAL&quot;</span>
+
+    <span class="c1"># Rule 2: Code implementations without specific sources → HIGH</span>
+    <span class="k">if</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;code&quot;</span> <span class="ow">and</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;HIGH&quot;</span>
+
+    <span class="c1"># Rule 3: Already cited (confidence ≥0.8) → MEDIUM</span>
+    <span class="k">if</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.8</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;MEDIUM&quot;</span>
+
+    <span class="c1"># Rule 4: Informal or supporting claims → MEDIUM</span>
+    <span class="k">if</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;proposition&quot;</span><span class="p">,</span> <span class="s2">&quot;note&quot;</span><span class="p">,</span> <span class="s2">&quot;remark&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;MEDIUM&quot;</span>
+
+    <span class="c1"># Default: MEDIUM</span>
+    <span class="k">return</span> <span class="s2">&quot;MEDIUM&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="rationale">
+<h3>4.3 Rationale<a class="headerlink" href="#rationale" title="Link to this heading">¶</a></h3>
+<p><strong>Why prioritize uncited formal theorems as CRITICAL?</strong></p>
+<ul class="simple">
+<li><p><strong>Scientific Credibility:</strong> Unverified mathematical claims undermine research validity</p></li>
+<li><p><strong>Audit Risk:</strong> Peer review will flag uncited theoretical foundations</p></li>
+<li><p><strong>Impact:</strong> Control theory requires rigorous mathematical proofs</p></li>
+</ul>
+<p><strong>Why HIGH for uncited implementations?</strong></p>
+<ul class="simple">
+<li><p><strong>Reproducibility:</strong> Readers need original algorithm sources to replicate</p></li>
+<li><p><strong>IP Concerns:</strong> Properly attribute algorithmic contributions</p></li>
+<li><p><strong>Debugging:</strong> Citations help trace implementation details</p></li>
+</ul>
+<p><strong>Why MEDIUM for already cited?</strong></p>
+<ul class="simple">
+<li><p><strong>Lower Risk:</strong> Citation already exists, just needs verification</p></li>
+<li><p><strong>Efficiency:</strong> Focus Phase 2 AI research on gaps</p></li>
+</ul>
+</section>
+<section id="expected-distribution">
+<h3>4.4 Expected Distribution<a class="headerlink" href="#expected-distribution" title="Link to this heading">¶</a></h3>
+<p><strong>Target Breakdown (500 claims):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CRITICAL</span> <span class="p">(</span><span class="mi">29</span> <span class="n">claims</span> <span class="o">-</span> <span class="mi">6</span><span class="o">%</span><span class="p">)</span>
+<span class="err">├─</span> <span class="n">Uncited</span> <span class="n">Theorem</span><span class="p">:</span> <span class="mi">15</span>
+<span class="err">├─</span> <span class="n">Uncited</span> <span class="n">Lemma</span><span class="p">:</span> <span class="mi">8</span>
+<span class="err">└─</span> <span class="n">Uncited</span> <span class="n">Corollary</span><span class="p">:</span> <span class="mi">6</span>
+
+<span class="n">HIGH</span> <span class="p">(</span><span class="mi">136</span> <span class="n">claims</span> <span class="o">-</span> <span class="mi">27</span><span class="o">%</span><span class="p">)</span>
+<span class="err">├─</span> <span class="n">Uncited</span> <span class="s2">&quot;Implements X from Y&quot;</span><span class="p">:</span> <span class="mi">95</span>
+<span class="err">├─</span> <span class="n">Vague</span> <span class="n">sources</span> <span class="p">(</span><span class="s2">&quot;literature&quot;</span><span class="p">):</span> <span class="mi">28</span>
+<span class="err">└─</span> <span class="n">Algorithm</span> <span class="n">references</span> <span class="n">without</span> <span class="n">DOI</span><span class="p">:</span> <span class="mi">13</span>
+
+<span class="n">MEDIUM</span> <span class="p">(</span><span class="mi">335</span> <span class="n">claims</span> <span class="o">-</span> <span class="mi">67</span><span class="o">%</span><span class="p">)</span>
+<span class="err">├─</span> <span class="n">Cited</span> <span class="n">implementations</span><span class="p">:</span> <span class="mi">142</span>
+<span class="err">├─</span> <span class="n">Propositions</span> <span class="p">(</span><span class="n">formal</span> <span class="n">but</span> <span class="n">less</span> <span class="n">critical</span><span class="p">):</span> <span class="mi">58</span>
+<span class="err">├─</span> <span class="n">Informal</span> <span class="n">notes</span><span class="p">:</span> <span class="mi">85</span>
+<span class="err">└─</span> <span class="n">Supporting</span> <span class="n">utilities</span><span class="p">:</span> <span class="mi">50</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="output-schema-reference">
+<h2>5. Output Schema Reference<a class="headerlink" href="#output-schema-reference" title="Link to this heading">¶</a></h2>
+<section id="claims-inventory-json-structure">
+<h3>5.1 <code class="docutils literal notranslate"><span class="pre">claims_inventory.json</span></code> Structure<a class="headerlink" href="#claims-inventory-json-structure" title="Link to this heading">¶</a></h3>
+<p><strong>Top-Level Schema:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;total_claims&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;extraction_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-10-02T14:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;by_priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;CRITICAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;HIGH&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">136</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;MEDIUM&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">335</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;by_source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;formal_extractor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;code_extractor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">459</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;research_queue&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;CRITICAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;claim_0001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;claim_0005&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;HIGH&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;claim_0042&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;claim_0053&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;MEDIUM&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;claims&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;claim_0001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sliding surface s = λe + ė guarantees convergence&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;theorem&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;formal&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs/theory/smc_theory_complete.md&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">142</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">      </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;module&quot;</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="err">For</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">claims</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="claim-object-fields">
+<h3>5.2 Claim Object Fields<a class="headerlink" href="#claim-object-fields" title="Link to this heading">¶</a></h3>
+<p><strong>Field Descriptions:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Unique claim identifier</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;claim_0042&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Extracted claim statement</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Implements</span> <span class="pre">STA</span> <span class="pre">from</span> <span class="pre">Levant&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Claim category</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;theorem&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;implementation&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">source</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Extractor origin</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;formal&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;code&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">file</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Source file path</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;src/controllers/sta_smc.py&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">line</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>Line number in file</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">142</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">confidence</span></code></p></td>
+<td><p>float</p></td>
+<td><p>Score (0.0-1.0)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.8</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">priority</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Research priority</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;CRITICAL&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;HIGH&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;MEDIUM&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">citations</span></code></p></td>
+<td><p>array</p></td>
+<td><p>Detected citations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[{&quot;type&quot;:</span> <span class="pre">&quot;doi&quot;,</span> <span class="pre">&quot;value&quot;:</span> <span class="pre">&quot;10.1016/...&quot;}]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scope</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Code scope (optional)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;module:class:Foo:function:bar&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="research-queue-format">
+<h3>5.3 Research Queue Format<a class="headerlink" href="#research-queue-format" title="Link to this heading">¶</a></h3>
+<p><strong>Purpose:</strong> Ordered list for Phase 2 AI citation finder</p>
+<p><strong>Structure:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;research_queue&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;CRITICAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;claim_0001&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// Process first (highest risk)</span>
+<span class="w">    </span><span class="s2">&quot;claim_0005&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;claim_0012&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;HIGH&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">    </span><span class="c1">// Process second</span>
+<span class="w">  </span><span class="nt">&quot;MEDIUM&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">   </span><span class="c1">// Process last (or skip if time-constrained)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Phase 2 Integration:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">inventory</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;artifacts/claims_inventory.json&quot;</span><span class="p">))</span>
+
+<span class="c1"># Process CRITICAL claims first</span>
+<span class="k">for</span> <span class="n">claim_id</span> <span class="ow">in</span> <span class="n">inventory</span><span class="p">[</span><span class="s2">&quot;research_queue&quot;</span><span class="p">][</span><span class="s2">&quot;CRITICAL&quot;</span><span class="p">]:</span>
+    <span class="n">claim</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">inventory</span><span class="p">[</span><span class="s2">&quot;claims&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">claim_id</span><span class="p">)</span>
+
+    <span class="c1"># AI research: find ≥2 academic papers</span>
+    <span class="n">references</span> <span class="o">=</span> <span class="n">ai_citation_finder</span><span class="p">(</span><span class="n">claim</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span> <span class="n">min_refs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Validate and store</span>
+    <span class="n">validate_references</span><span class="p">(</span><span class="n">claim_id</span><span class="p">,</span> <span class="n">references</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="performance-benchmarks">
+<h2>6. Performance Benchmarks<a class="headerlink" href="#performance-benchmarks" title="Link to this heading">¶</a></h2>
+<section id="target-performance-table">
+<h3>6.1 Target Performance Table<a class="headerlink" href="#target-performance-table" title="Link to this heading">¶</a></h3>
+<p><strong>Phase 1 Acceptance Criteria:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Input</p></th>
+<th class="head"><p>Target Time</p></th>
+<th class="head"><p>Target Throughput</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Formal Extractor</strong></p></td>
+<td><p>259 MD files</p></td>
+<td><p>≤1.4s</p></td>
+<td><p>≥185 files/s</p></td>
+<td><p>✅ (1.24s)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Code Extractor</strong></p></td>
+<td><p>165 PY files</p></td>
+<td><p>≤2.5s</p></td>
+<td><p>≥66 files/s</p></td>
+<td><p>✅ (2.31s)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Merger</strong></p></td>
+<td><p>2 JSON files</p></td>
+<td><p>≤0.5s</p></td>
+<td><p>N/A</p></td>
+<td><p>✅ (0.38s)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Total Pipeline</strong></p></td>
+<td><p>424 files</p></td>
+<td><p>&lt;5.0s</p></td>
+<td><p>-</p></td>
+<td><p>✅ (3.93s)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="quality-metrics-expected">
+<h3>6.2 Quality Metrics (Expected)<a class="headerlink" href="#quality-metrics-expected" title="Link to this heading">¶</a></h3>
+<p><strong>Precision (Manual Review):</strong></p>
+<ul class="simple">
+<li><p>Sample size: 40 claims (stratified)</p></li>
+<li><p>Target: ≥90% overall precision</p></li>
+<li><p>CRITICAL tier: ≥95% precision</p></li>
+</ul>
+<p><strong>Recall (Ground Truth):</strong></p>
+<ul class="simple">
+<li><p>Ground truth files: 2-3 manually verified files</p></li>
+<li><p>Target: ≥95% recall</p></li>
+</ul>
+</section>
+<section id="scalability-analysis">
+<h3>6.3 Scalability Analysis<a class="headerlink" href="#scalability-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Current Codebase:</strong></p>
+<ul class="simple">
+<li><p>424 total files (259 MD + 165 PY)</p></li>
+<li><p>~3.9 second execution</p></li>
+</ul>
+<p><strong>Projected Scalability:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Codebase Size</p></th>
+<th class="head"><p>Files</p></th>
+<th class="head"><p>Estimated Time</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Current</p></td>
+<td><p>424</p></td>
+<td><p>3.9s</p></td>
+</tr>
+<tr class="row-odd"><td><p>2× Growth</p></td>
+<td><p>848</p></td>
+<td><p>7.8s</p></td>
+</tr>
+<tr class="row-even"><td><p>5× Growth</p></td>
+<td><p>2,120</p></td>
+<td><p>19.5s</p></td>
+</tr>
+<tr class="row-odd"><td><p>10× Growth</p></td>
+<td><p>4,240</p></td>
+<td><p>39s</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Linear Scaling:</strong> <span class="math notranslate nohighlight">\(O(n)\)</span> complexity ensures predictable performance growth.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="validation-procedures">
+<h2>7. Validation Procedures<a class="headerlink" href="#validation-procedures" title="Link to this heading">¶</a></h2>
+<section id="precision-validation">
+<h3>7.1 Precision Validation<a class="headerlink" href="#precision-validation" title="Link to this heading">¶</a></h3>
+<p><strong>Manual Review Protocol:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>.dev_tools/claim_extraction/validate_precision.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--sample-size<span class="w"> </span><span class="m">40</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--stratify-by<span class="w"> </span>priority<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>artifacts/precision_report.json
+</pre></div>
+</div>
+<p><strong>Workflow:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Stratified Sampling:</strong> Select 40 claims (10 CRITICAL, 15 HIGH, 15 MEDIUM)</p></li>
+<li><p><strong>Manual Review:</strong> Human expert labels each as True Positive or False Positive</p></li>
+<li><p><strong>Precision Calculation:</strong></p></li>
+</ol>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Precision} = \frac{\text{True Positives}}{\text{Total Sample}} = \frac{TP}{40}\]</div>
+</div>
+<p><strong>Example Report:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;sample_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;stratification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;CRITICAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.90</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;HIGH&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.93</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;MEDIUM&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.87</span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;overall_precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.90</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;false_positives&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;claim_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;claim_0042&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;example_code&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;May implement X in future&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="recall-validation">
+<h3>7.2 Recall Validation<a class="headerlink" href="#recall-validation" title="Link to this heading">¶</a></h3>
+<p><strong>Ground Truth Testing:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>.dev_tools/claim_extraction/tests/test_ground_truth_recall.py<span class="w"> </span>-v
+</pre></div>
+</div>
+<p><strong>Test Design:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Curate Ground Truth:</strong> Manually identify all claims in 2-3 reference files</p></li>
+<li><p><strong>Run Extractor:</strong> Process ground truth files</p></li>
+<li><p><strong>Compare:</strong> Expected vs extracted claims</p></li>
+<li><p><strong>Calculate Recall:</strong></p></li>
+</ol>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Recall} = \frac{\text{Extracted Claims}}{\text{Expected Claims}}\]</div>
+</div>
+<p><strong>Example Test:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_ground_truth_recall</span><span class="p">():</span>
+    <span class="c1"># Ground truth: docs/theory/smc_theory_complete.md</span>
+    <span class="n">expected_claims</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;Theorem 1: Sliding surface convergence&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Lemma 2: Boundary layer stability&quot;</span><span class="p">,</span>
+        <span class="c1"># ... (manually verified, 18 total)</span>
+    <span class="p">]</span>
+
+    <span class="n">extractor</span> <span class="o">=</span> <span class="n">FormalExtractor</span><span class="p">()</span>
+    <span class="n">extracted</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;docs/theory/smc_theory_complete.md&quot;</span><span class="p">)</span>
+
+    <span class="n">recall</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">extracted</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">expected_claims</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">recall</span> <span class="o">&gt;=</span> <span class="mf">0.95</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Recall </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> below target 95%&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="end-to-end-validation">
+<h3>7.3 End-to-End Validation<a class="headerlink" href="#end-to-end-validation" title="Link to this heading">¶</a></h3>
+<p><strong>Full Pipeline Test:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>.dev_tools/claim_extraction/run_full_validation.sh
+</pre></div>
+</div>
+<p><strong>Validation Script:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># Run extraction</span>
+./extract_all_claims.sh
+
+<span class="c1"># Validate precision</span>
+python<span class="w"> </span>.dev_tools/claim_extraction/validate_precision.py<span class="w"> </span>--sample-size<span class="w"> </span><span class="m">40</span>
+
+<span class="c1"># Validate recall</span>
+pytest<span class="w"> </span>.dev_tools/claim_extraction/tests/test_ground_truth_recall.py<span class="w"> </span>-v
+
+<span class="c1"># Performance check</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>artifacts/claims_inventory.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.metadata.performance.total_time_sec&#39;</span><span class="k">)</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;❌ Performance regression: execution time &gt;5.0s&quot;</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ All validation checks passed&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>8. Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="issue-execution-time-5-seconds">
+<h3>8.1 Issue: Execution Time &gt;5 Seconds<a class="headerlink" href="#issue-execution-time-5-seconds" title="Link to this heading">¶</a></h3>
+<p><strong>Symptoms:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">6.2</span> <span class="n">seconds</span> <span class="p">(</span><span class="n">FAILED</span><span class="p">)</span>
+<span class="n">Target</span><span class="p">:</span> <span class="o">&lt;</span><span class="mf">5.0</span> <span class="n">seconds</span>
+</pre></div>
+</div>
+<p><strong>Diagnosis Steps:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Profile execution:</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"> </span>-s<span class="w"> </span>cumtime<span class="w"> </span>.dev_tools/claim_extraction/code_extractor.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>src/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Check for bottlenecks:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="n">ncalls</span>  <span class="n">tottime</span>  <span class="n">percall</span>  <span class="n">cumtime</span>  <span class="n">percall</span> <span class="n">filename</span><span class="p">:</span><span class="n">lineno</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+      <span class="mi">165</span>    <span class="mf">3.841</span>    <span class="mf">0.023</span>    <span class="mf">3.841</span>    <span class="mf">0.023</span> <span class="n">ast</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">35</span><span class="p">(</span><span class="n">parse</span><span class="p">)</span>  <span class="err">←</span> <span class="n">BOTTLENECK</span>
+      <span class="mi">852</span>    <span class="mf">1.203</span>    <span class="mf">0.001</span>    <span class="mf">1.203</span>    <span class="mf">0.001</span> <span class="p">{</span><span class="n">method</span> <span class="s1">&#39;finditer&#39;</span> <span class="n">of</span> <span class="s1">&#39;re.Pattern&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Fixes:</strong></p>
+<p><strong>Fix 1: Enable AST caching</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add to code_extractor.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_with_cache</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">cache_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;.cache/</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">.ast&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cache_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cache_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+    <span class="n">cache_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">cache_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;wb&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">tree</span>
+</pre></div>
+</div>
+<p><strong>Fix 2: Early exit optimization</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Skip files with no docstrings</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">ast</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">tree</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># No docstrings possible</span>
+</pre></div>
+</div>
+<p><strong>Fix 3: Parallel processing</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split workload across CPU cores</span>
+python<span class="w"> </span>.dev_tools/claim_extraction/code_extractor.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>src/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>artifacts/code_claims.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--parallel<span class="w"> </span><span class="m">4</span><span class="w">  </span><span class="c1"># Use 4 cores</span>
+</pre></div>
+</div>
+</section>
+<section id="issue-false-positives-in-critical-claims">
+<h3>8.2 Issue: False Positives in CRITICAL Claims<a class="headerlink" href="#issue-false-positives-in-critical-claims" title="Link to this heading">¶</a></h3>
+<p><strong>Symptoms:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Precision</span> <span class="p">(</span><span class="n">CRITICAL</span><span class="p">):</span> <span class="mi">80</span><span class="o">%</span> <span class="p">(</span><span class="n">below</span> <span class="mi">95</span><span class="o">%</span> <span class="n">target</span><span class="p">)</span>
+<span class="kc">False</span> <span class="n">positives</span><span class="p">:</span> <span class="mi">2</span><span class="o">/</span><span class="mi">10</span> <span class="n">claims</span>
+
+<span class="n">Examples</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">claim_0012</span><span class="p">:</span> <span class="s2">&quot;Example: Implement STA from Levant&quot;</span> <span class="p">(</span><span class="n">example</span> <span class="n">code</span><span class="p">,</span> <span class="ow">not</span> <span class="n">actual</span> <span class="n">claim</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Diagnosis:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Review false positives</span>
+cat<span class="w"> </span>artifacts/precision_report.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.false_positives[] | select(.priority == &quot;CRITICAL&quot;)&#39;</span>
+</pre></div>
+</div>
+<p><strong>Fixes:</strong></p>
+<p><strong>Fix 1: Add negative lookahead for examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In formal_extractor.py, modify pattern:</span>
+<span class="n">THEOREM_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s1">&#39;(?&lt;!Example[:\s])(?&lt;!e\.g\.[:\s])&#39;</span>  <span class="c1"># Negative lookbehind</span>
+    <span class="sa">r</span><span class="s1">&#39;\*\*Theorem\s+(\d+\.?\d*)\*\*&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Fix 2: Increase confidence threshold for CRITICAL</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In merge_claims.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">assign_priority</span><span class="p">(</span><span class="n">claim</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;theorem&quot;</span><span class="p">,</span> <span class="s2">&quot;lemma&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span>  <span class="c1"># Changed from 0.7</span>
+            <span class="k">return</span> <span class="s2">&quot;CRITICAL&quot;</span>
+</pre></div>
+</div>
+<p><strong>Fix 3: Filter by section headers</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Skip &quot;Examples&quot; sections in markdown</span>
+<span class="k">if</span> <span class="n">current_section</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;## Examples&quot;</span><span class="p">):</span>
+    <span class="k">continue</span>  <span class="c1"># Don&#39;t extract from example sections</span>
+</pre></div>
+</div>
+</section>
+<section id="issue-low-recall-missing-known-claims">
+<h3>8.3 Issue: Low Recall (Missing Known Claims)<a class="headerlink" href="#issue-low-recall-missing-known-claims" title="Link to this heading">¶</a></h3>
+<p><strong>Symptoms:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Recall</span><span class="p">:</span> <span class="mi">88</span><span class="o">%</span> <span class="p">(</span><span class="n">below</span> <span class="mi">95</span><span class="o">%</span> <span class="n">target</span><span class="p">)</span>
+<span class="kc">False</span> <span class="n">negatives</span><span class="p">:</span> <span class="mi">3</span> <span class="n">claims</span>
+
+<span class="n">Missing</span><span class="p">:</span>
+  <span class="o">-</span> <span class="s2">&quot;Thm 1: Convergence&quot;</span> <span class="p">(</span><span class="n">abbreviation</span> <span class="ow">not</span> <span class="n">detected</span><span class="p">)</span>
+  <span class="o">-</span> <span class="n">Multi</span><span class="o">-</span><span class="n">line</span> <span class="n">theorem</span> <span class="n">statement</span> <span class="p">(</span><span class="n">regex</span> <span class="n">broke</span> <span class="n">on</span> <span class="n">newlines</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Diagnosis:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run ground truth test with verbose output</span>
+pytest<span class="w"> </span>.dev_tools/claim_extraction/tests/test_ground_truth_recall.py<span class="w"> </span>-v<span class="w"> </span>-s
+</pre></div>
+</div>
+<p><strong>Fixes:</strong></p>
+<p><strong>Fix 1: Add abbreviation patterns</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Support &quot;Thm&quot; in addition to &quot;Theorem&quot;</span>
+<span class="n">THEOREM_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s1">&#39;\*\*(Theorem|Thm\.?)\s+(\d+\.?\d*)\*\*&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Fix 2: Multi-line statement handling</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalize whitespace before pattern matching</span>
+<span class="n">docstring_normalized</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">docstring</span><span class="p">)</span>
+<span class="n">matches</span> <span class="o">=</span> <span class="n">THEOREM_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">docstring_normalized</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Fix 3: AST-based formal extractor (future enhancement)</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For complex markdown, parse to AST instead of regex</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">markdown_ast</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_markdown</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">parse_markdown</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span>
+<span class="n">theorems</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">tree</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;theorem&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="issue-json-schema-validation-failure">
+<h3>8.4 Issue: JSON Schema Validation Failure<a class="headerlink" href="#issue-json-schema-validation-failure" title="Link to this heading">¶</a></h3>
+<p><strong>Symptoms:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ValidationError</span><span class="p">:</span> <span class="s1">&#39;phase&#39;</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">required</span> <span class="nb">property</span>
+<span class="n">File</span><span class="p">:</span> <span class="n">artifacts</span><span class="o">/</span><span class="n">quality_report_sample</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p><strong>Diagnosis:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Validate against schema</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">import json</span>
+<span class="s2">import jsonschema</span>
+
+<span class="s2">schema = json.load(open(&#39;artifacts/quality_report_schema.json&#39;))</span>
+<span class="s2">data = json.load(open(&#39;artifacts/quality_report_sample.json&#39;))</span>
+
+<span class="s2">jsonschema.validate(data, schema)</span>
+<span class="s2">print(&#39;✅ Valid&#39;)</span>
+<span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p><strong>Fixes:</strong></p>
+<p><strong>Fix 1: Add missing required fields</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;report_metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;phase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Phase 1: Claim Extraction Infrastructure&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// ← Add this</span>
+<span class="w">    </span><span class="nt">&quot;generation_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-10-02T14:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;total_claims_extracted&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tools_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Fix 2: Fix field types</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wrong:</span>
+<span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="nt">&quot;0.90&quot;</span><span class="w">  </span><span class="c1">// String</span>
+
+<span class="c1">// Correct:</span>
+<span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.90</span><span class="w">    </span><span class="c1">// Number</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="integration-with-phase-2">
+<h2>9. Integration with Phase 2<a class="headerlink" href="#integration-with-phase-2" title="Link to this heading">¶</a></h2>
+<section id="handoff-workflow">
+<h3>9.1 Handoff Workflow<a class="headerlink" href="#handoff-workflow" title="Link to this heading">¶</a></h3>
+<p><strong>Phase 1 Deliverable → Phase 2 Input:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">artifacts</span><span class="o">/</span><span class="n">claims_inventory</span><span class="o">.</span><span class="n">json</span> <span class="p">(</span><span class="mi">500</span><span class="o">+</span> <span class="n">claims</span><span class="p">)</span>
+         <span class="err">↓</span>
+<span class="n">Phase</span> <span class="mi">2</span><span class="p">:</span> <span class="n">AI</span> <span class="n">Citation</span> <span class="n">Finder</span>
+         <span class="err">↓</span>
+<span class="n">artifacts</span><span class="o">/</span><span class="n">citations_validated</span><span class="o">.</span><span class="n">json</span> <span class="p">(</span><span class="n">claims</span> <span class="o">+</span> <span class="n">references</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Phase 2 Research Loop:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">phase2.ai_researcher</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_citations</span>
+
+<span class="c1"># Load Phase 1 output</span>
+<span class="n">inventory</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;artifacts/claims_inventory.json&quot;</span><span class="p">))</span>
+
+<span class="n">citations</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Process CRITICAL queue first (highest priority)</span>
+<span class="k">for</span> <span class="n">claim_id</span> <span class="ow">in</span> <span class="n">inventory</span><span class="p">[</span><span class="s2">&quot;research_queue&quot;</span><span class="p">][</span><span class="s2">&quot;CRITICAL&quot;</span><span class="p">]:</span>
+    <span class="n">claim</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">inventory</span><span class="p">[</span><span class="s2">&quot;claims&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">claim_id</span><span class="p">)</span>
+
+    <span class="c1"># AI research: find ≥2 peer-reviewed papers</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Researching: </span><span class="si">{</span><span class="n">claim</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">references</span> <span class="o">=</span> <span class="n">find_citations</span><span class="p">(</span>
+        <span class="n">claim_text</span><span class="o">=</span><span class="n">claim</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
+        <span class="n">min_references</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Google Scholar&quot;</span><span class="p">,</span> <span class="s2">&quot;arXiv&quot;</span><span class="p">,</span> <span class="s2">&quot;IEEE Xplore&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Validate quality</span>
+    <span class="n">validated_refs</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">references</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;relevance_score&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.8</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validated_refs</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">citations</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;claim_id&quot;</span><span class="p">:</span> <span class="n">claim_id</span><span class="p">,</span>
+            <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">validated_refs</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;VALIDATED&quot;</span>
+        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">citations</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;claim_id&quot;</span><span class="p">:</span> <span class="n">claim_id</span><span class="p">,</span>
+            <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">validated_refs</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;NEEDS_MANUAL_REVIEW&quot;</span>
+        <span class="p">})</span>
+
+<span class="c1"># Save Phase 2 output</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">citations</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;artifacts/citations_validated.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="citation-validation-criteria">
+<h3>9.2 Citation Validation Criteria<a class="headerlink" href="#citation-validation-criteria" title="Link to this heading">¶</a></h3>
+<p><strong>Acceptance Criteria for CRITICAL Claims:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterion</p></th>
+<th class="head"><p>Requirement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Number of references</strong></p></td>
+<td><p>≥2 peer-reviewed papers</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Relevance score</strong></p></td>
+<td><p>≥0.8 (AI semantic similarity)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Publication type</strong></p></td>
+<td><p>Journal article, conference paper, or textbook</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Recency</strong></p></td>
+<td><p>Published within last 30 years (prefer recent)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Acceptance Criteria for HIGH Claims:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterion</p></th>
+<th class="head"><p>Requirement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Number of references</strong></p></td>
+<td><p>≥1 credible source</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Source types</strong></p></td>
+<td><p>Papers, GitHub repos, technical docs</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Relevance score</strong></p></td>
+<td><p>≥0.7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="expected-phase-2-timeline">
+<h3>9.3 Expected Phase 2 Timeline<a class="headerlink" href="#expected-phase-2-timeline" title="Link to this heading">¶</a></h3>
+<p><strong>Research Velocity Estimates:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Priority</p></th>
+<th class="head"><p>Claims</p></th>
+<th class="head"><p>AI Time/Claim</p></th>
+<th class="head"><p>Total Time</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CRITICAL</p></td>
+<td><p>29</p></td>
+<td><p>2 min</p></td>
+<td><p>~1 hour</p></td>
+</tr>
+<tr class="row-odd"><td><p>HIGH</p></td>
+<td><p>136</p></td>
+<td><p>1 min</p></td>
+<td><p>~2.3 hours</p></td>
+</tr>
+<tr class="row-even"><td><p>MEDIUM</p></td>
+<td><p>335</p></td>
+<td><p>30 sec</p></td>
+<td><p>~2.8 hours</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Total</strong></p></td>
+<td><p><strong>500</strong></p></td>
+<td><p>-</p></td>
+<td><p><strong>~6 hours</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Parallelization:</strong> With 4 parallel AI agents, total time ≈ 1.5 hours</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="faq">
+<h2>10. FAQ<a class="headerlink" href="#faq" title="Link to this heading">¶</a></h2>
+<section id="general-questions">
+<h3>10.1 General Questions<a class="headerlink" href="#general-questions" title="Link to this heading">¶</a></h3>
+<p><strong>Q: Why are confidence scores important if we’re researching all claims anyway?</strong></p>
+<p>A: Confidence scores prioritize manual review effort. Low-confidence CRITICAL claims get human validation before AI research to avoid wasting compute on false positives.</p>
+<hr class="docutils" />
+<p><strong>Q: Can I customize priority assignments?</strong></p>
+<p>A: Yes. Edit <code class="docutils literal notranslate"><span class="pre">assign_priority()</span></code> function in <code class="docutils literal notranslate"><span class="pre">.dev_tools/claim_extraction/merge_claims.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">assign_priority</span><span class="p">(</span><span class="n">claim</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="c1"># Example: Treat all controller claims as HIGH</span>
+    <span class="k">if</span> <span class="s2">&quot;controller&quot;</span> <span class="ow">in</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&quot;HIGH&quot;</span>
+
+    <span class="c1"># Original logic...</span>
+    <span class="k">if</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;theorem&quot;</span><span class="p">,</span> <span class="s2">&quot;lemma&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;CRITICAL&quot;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Q: What if a file has syntax errors?</strong></p>
+<p>A: Code extractor skips files with <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code> and logs them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">WARNING</span><span class="p">]</span> <span class="n">Syntax</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">src</span><span class="o">/</span><span class="n">broken_file</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">42</span> <span class="o">-</span> <span class="n">skipping</span>
+</pre></div>
+</div>
+<p>Fix syntax errors manually, then re-run extraction.</p>
+</section>
+<hr class="docutils" />
+<section id="technical-questions">
+<h3>10.2 Technical Questions<a class="headerlink" href="#technical-questions" title="Link to this heading">¶</a></h3>
+<p><strong>Q: How do I add new citation formats?</strong></p>
+<p>A: Add regex pattern to <code class="docutils literal notranslate"><span class="pre">CITATION_PATTERNS</span></code> in <code class="docutils literal notranslate"><span class="pre">code_extractor.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CITATION_PATTERNS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Existing patterns...</span>
+    <span class="s1">&#39;rfc&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;RFC\s+(\d</span><span class="si">{4}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">),</span>  <span class="c1"># New: RFC citations</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Q: Why is AST extraction slower than regex?</strong></p>
+<p>A: AST parsing is <span class="math notranslate nohighlight">\(O(n)\)</span> but with higher constant factor than regex. Trade-off:</p>
+<ul class="simple">
+<li><p>Regex: Fast but low precision (~60%)</p></li>
+<li><p>AST: Slower but high precision (~85%)</p></li>
+</ul>
+<p>For our quality requirements (≥90% precision), AST is necessary.</p>
+<hr class="docutils" />
+<p><strong>Q: Can I extract from Jupyter notebooks?</strong></p>
+<p>A: Current tools support <code class="docutils literal notranslate"><span class="pre">.py</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code> only. For <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> support:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add to code_extractor.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nbformat</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_from_notebook</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">,</span> <span class="n">as_version</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">&quot;code&quot;</span><span class="p">:</span>
+            <span class="c1"># Extract from code cell source</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+            <span class="c1"># ... (existing AST extraction)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Q: How do I handle non-English docstrings?</strong></p>
+<p>A: Current patterns are English-only. For multi-language support:</p>
+<ol class="arabic simple">
+<li><p>Add language detection:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langdetect</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect</span>
+
+<span class="k">if</span> <span class="n">detect</span><span class="p">(</span><span class="n">docstring</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;en&#39;</span><span class="p">:</span>
+    <span class="n">docstring</span> <span class="o">=</span> <span class="n">translate_to_english</span><span class="p">(</span><span class="n">docstring</span><span class="p">)</span>  <span class="c1"># Use translation API</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Add language-specific patterns (e.g., French “Théorème”, German “Satz”).</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="workflow-questions">
+<h3>10.3 Workflow Questions<a class="headerlink" href="#workflow-questions" title="Link to this heading">¶</a></h3>
+<p><strong>Q: Should I run extraction incrementally or in batch?</strong></p>
+<p>A: <strong>Batch for initial extraction</strong>, incremental for updates:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial: Full extraction</span>
+./extract_all_claims.sh
+
+<span class="c1"># Updates: Only changed files (future feature)</span>
+python<span class="w"> </span>.dev_tools/claim_extraction/incremental_extract.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--since<span class="w"> </span><span class="s2">&quot;2025-10-01&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--update<span class="w"> </span>artifacts/claims_inventory.json
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Q: How do I regenerate inventory after fixing false positives?</strong></p>
+<p>A: Re-run merge step with <code class="docutils literal notranslate"><span class="pre">--force</span></code> flag:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>.dev_tools/claim_extraction/merge_claims.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--formal<span class="w"> </span>artifacts/formal_claims.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--code<span class="w"> </span>artifacts/code_claims.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>artifacts/claims_inventory.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--force<span class="w">  </span><span class="c1"># Overwrite existing</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Q: What if I disagree with a priority assignment?</strong></p>
+<p>A: Manually edit <code class="docutils literal notranslate"><span class="pre">claims_inventory.json</span></code> or create override file:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// priority_overrides.json</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;claim_0042&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// Upgrade from HIGH</span>
+<span class="w">  </span><span class="nt">&quot;claim_0053&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LOW&quot;</span><span class="w">        </span><span class="c1">// Downgrade from MEDIUM</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>.dev_tools/claim_extraction/apply_overrides.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--inventory<span class="w"> </span>artifacts/claims_inventory.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--overrides<span class="w"> </span>priority_overrides.json
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Q: How often should I re-run extraction?</strong></p>
+<p>A: <strong>Weekly during active development</strong>, or trigger on:</p>
+<ul class="simple">
+<li><p>New controller implementations</p></li>
+<li><p>Documentation updates</p></li>
+<li><p>Major refactoring</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="appendix-command-reference">
+<h2>Appendix: Command Reference<a class="headerlink" href="#appendix-command-reference" title="Link to this heading">¶</a></h2>
+<p><strong>Quick Command Cheat Sheet:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Full extraction pipeline</span>
+./extract_all_claims.sh
+
+<span class="c1"># Precision validation</span>
+python<span class="w"> </span>.dev_tools/claim_extraction/validate_precision.py<span class="w"> </span>--sample-size<span class="w"> </span><span class="m">40</span>
+
+<span class="c1"># Recall testing</span>
+pytest<span class="w"> </span>.dev_tools/claim_extraction/tests/test_ground_truth_recall.py<span class="w"> </span>-v
+
+<span class="c1"># Performance profiling</span>
+python<span class="w"> </span>-m<span class="w"> </span>cProfile<span class="w"> </span>-s<span class="w"> </span>cumtime<span class="w"> </span>.dev_tools/claim_extraction/code_extractor.py
+
+<span class="c1"># Schema validation</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import json, jsonschema; jsonschema.validate(json.load(open(&#39;artifacts/quality_report_sample.json&#39;)), json.load(open(&#39;artifacts/quality_report_schema.json&#39;)))&quot;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Document Status:</strong> ✅ Complete (Week 1 Deliverable)
+<strong>Total Sections:</strong> 10 comprehensive guides
+<strong>Code Examples:</strong> 25+ executable snippets
+<strong>Troubleshooting Scenarios:</strong> 8 common issues with solutions</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Claim Extraction User Guide</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#overview">1. Overview</a><ul>
+<li><a class="reference internal" href="#phase-1-objectives">1.1 Phase 1 Objectives</a></li>
+<li><a class="reference internal" href="#tool-architecture">1.2 Tool Architecture</a></li>
+<li><a class="reference internal" href="#expected-outputs">1.3 Expected Outputs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-start">2. Quick Start</a><ul>
+<li><a class="reference internal" href="#three-step-workflow">2.1 Three-Step Workflow</a></li>
+<li><a class="reference internal" href="#one-command-execution">2.2 One-Command Execution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#confidence-scoring-explanation">3. Confidence Scoring Explanation</a><ul>
+<li><a class="reference internal" href="#formal-claims-scoring-formula">3.1 Formal Claims Scoring Formula</a></li>
+<li><a class="reference internal" href="#code-claims-scoring-formula">3.2 Code Claims Scoring Formula</a></li>
+<li><a class="reference internal" href="#confidence-interpretation">3.3 Confidence Interpretation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#priority-assignment-logic">4. Priority Assignment Logic</a><ul>
+<li><a class="reference internal" href="#priority-definitions">4.1 Priority Definitions</a></li>
+<li><a class="reference internal" href="#assignment-algorithm">4.2 Assignment Algorithm</a></li>
+<li><a class="reference internal" href="#rationale">4.3 Rationale</a></li>
+<li><a class="reference internal" href="#expected-distribution">4.4 Expected Distribution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#output-schema-reference">5. Output Schema Reference</a><ul>
+<li><a class="reference internal" href="#claims-inventory-json-structure">5.1 <code class="docutils literal notranslate"><span class="pre">claims_inventory.json</span></code> Structure</a></li>
+<li><a class="reference internal" href="#claim-object-fields">5.2 Claim Object Fields</a></li>
+<li><a class="reference internal" href="#research-queue-format">5.3 Research Queue Format</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-benchmarks">6. Performance Benchmarks</a><ul>
+<li><a class="reference internal" href="#target-performance-table">6.1 Target Performance Table</a></li>
+<li><a class="reference internal" href="#quality-metrics-expected">6.2 Quality Metrics (Expected)</a></li>
+<li><a class="reference internal" href="#scalability-analysis">6.3 Scalability Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validation-procedures">7. Validation Procedures</a><ul>
+<li><a class="reference internal" href="#precision-validation">7.1 Precision Validation</a></li>
+<li><a class="reference internal" href="#recall-validation">7.2 Recall Validation</a></li>
+<li><a class="reference internal" href="#end-to-end-validation">7.3 End-to-End Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">8. Troubleshooting</a><ul>
+<li><a class="reference internal" href="#issue-execution-time-5-seconds">8.1 Issue: Execution Time &gt;5 Seconds</a></li>
+<li><a class="reference internal" href="#issue-false-positives-in-critical-claims">8.2 Issue: False Positives in CRITICAL Claims</a></li>
+<li><a class="reference internal" href="#issue-low-recall-missing-known-claims">8.3 Issue: Low Recall (Missing Known Claims)</a></li>
+<li><a class="reference internal" href="#issue-json-schema-validation-failure">8.4 Issue: JSON Schema Validation Failure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-with-phase-2">9. Integration with Phase 2</a><ul>
+<li><a class="reference internal" href="#handoff-workflow">9.1 Handoff Workflow</a></li>
+<li><a class="reference internal" href="#citation-validation-criteria">9.2 Citation Validation Criteria</a></li>
+<li><a class="reference internal" href="#expected-phase-2-timeline">9.3 Expected Phase 2 Timeline</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#faq">10. FAQ</a><ul>
+<li><a class="reference internal" href="#general-questions">10.1 General Questions</a></li>
+<li><a class="reference internal" href="#technical-questions">10.2 Technical Questions</a></li>
+<li><a class="reference internal" href="#workflow-questions">10.3 Workflow Questions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#appendix-command-reference">Appendix: Command Reference</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

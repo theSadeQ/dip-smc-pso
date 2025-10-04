@@ -1,0 +1,1201 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Coverage Quality Gates Runbook - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/testing/guides/coverage_quality_gates_runbook.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/testing/guides/coverage_quality_gates_runbook.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>#==========================================================================================\<br />
+#================== docs/testing/coverage_quality_gates_runbook.md ======================\<br />
+#==========================================================================================\</p>
+<section class="tex2jax_ignore mathjax_ignore" id="coverage-quality-gates-runbook">
+<h1>Coverage Quality Gates Runbook<a class="headerlink" href="#coverage-quality-gates-runbook" title="Link to this heading">¶</a></h1>
+<p><strong>Issue #9 - Comprehensive Coverage Infrastructure Documentation</strong></p>
+<blockquote>
+<div><p><strong>🎯 Mission</strong>: Complete developer and CI runbook for coverage quality gate enforcement in the double-inverted pendulum sliding mode control project</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="executive-summary">
+<h2>📋 Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading">¶</a></h2>
+<p>This runbook provides comprehensive coverage workflow documentation for the <strong>dip-smc-pso</strong> project. The infrastructure enforces rigorous <strong>85%/95%/100%</strong> coverage thresholds across general/critical/safety-critical components with mathematical precision and automated validation.</p>
+<section id="coverage-architecture-overview">
+<h3>Coverage Architecture Overview<a class="headerlink" href="#coverage-architecture-overview" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Coverage</span> <span class="n">Infrastructure</span>
+<span class="err">├──</span> <span class="n">scripts</span><span class="o">/</span><span class="n">coverage_validator</span><span class="o">.</span><span class="n">py</span>    <span class="c1"># Advanced coverage validation engine</span>
+<span class="err">├──</span> <span class="n">scripts</span><span class="o">/</span><span class="n">run_quality_gates</span><span class="o">.</span><span class="n">py</span>     <span class="c1"># Comprehensive quality gate framework</span>
+<span class="err">├──</span> <span class="n">pytest</span><span class="o">.</span><span class="n">ini</span>                       <span class="c1"># Test configuration &amp; coverage settings</span>
+<span class="err">└──</span> <span class="n">Quality</span> <span class="n">Gate</span> <span class="n">Matrix</span>              <span class="c1"># 85%/95%/100% enforcement</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quality-gate-thresholds">
+<h2>🎯 Quality Gate Thresholds<a class="headerlink" href="#quality-gate-thresholds" title="Link to this heading">¶</a></h2>
+<section id="three-tier-coverage-framework">
+<h3>Three-Tier Coverage Framework<a class="headerlink" href="#three-tier-coverage-framework" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Tier</strong></p></th>
+<th class="head"><p><strong>Threshold</strong></p></th>
+<th class="head"><p><strong>Components</strong></p></th>
+<th class="head"><p><strong>Enforcement</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Safety-Critical</strong></p></td>
+<td><p><strong>100%</strong></p></td>
+<td><p>Parameter bounds, gain validation, safety guards</p></td>
+<td><p>MANDATORY</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Critical Components</strong></p></td>
+<td><p><strong>≥95%</strong></p></td>
+<td><p>Controllers, dynamics, PSO optimizer, simulation core</p></td>
+<td><p>REQUIRED</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>General System</strong></p></td>
+<td><p><strong>≥85%</strong></p></td>
+<td><p>Overall codebase coverage</p></td>
+<td><p>STANDARD</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mathematical-coverage-definition">
+<h3>Mathematical Coverage Definition<a class="headerlink" href="#mathematical-coverage-definition" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Coverage</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">C_eff</span> <span class="o">=</span> <span class="n">C_achieved</span> <span class="o">/</span> <span class="n">C_target</span>
+<span class="n">Production</span> <span class="n">Ready</span><span class="p">:</span> <span class="n">C_eff</span> <span class="err">≥</span> <span class="mf">1.0</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">applicable</span> <span class="n">tiers</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="local-development-workflow">
+<h2>🛠️ Local Development Workflow<a class="headerlink" href="#local-development-workflow" title="Link to this heading">¶</a></h2>
+<section id="basic-coverage-collection">
+<h3>1. Basic Coverage Collection<a class="headerlink" href="#basic-coverage-collection" title="Link to this heading">¶</a></h3>
+<p><strong>Generate XML coverage report:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic coverage with XML output</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>xml:coverage.xml<span class="w"> </span>--cov-report<span class="o">=</span>html:htmlcov/
+
+<span class="c1"># Quick coverage check (terminal output)</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+</pre></div>
+</div>
+<p><strong>Advanced coverage with component filtering:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Critical components only</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/<span class="w"> </span>tests/test_core/<span class="w"> </span>--cov<span class="o">=</span>src/controllers<span class="w"> </span>--cov<span class="o">=</span>src/core<span class="w"> </span>--cov-report<span class="o">=</span>xml:critical_coverage.xml
+
+<span class="c1"># Safety-critical components</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/smc/core/<span class="w"> </span>--cov<span class="o">=</span>src/controllers/smc/core<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">100</span>
+</pre></div>
+</div>
+</section>
+<section id="quality-gate-validation">
+<h3>2. Quality Gate Validation<a class="headerlink" href="#quality-gate-validation" title="Link to this heading">¶</a></h3>
+<p><strong>Run advanced coverage validator:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate detailed coverage analysis report</span>
+python<span class="w"> </span>scripts/coverage_validator.py<span class="w"> </span>--verbose<span class="w"> </span>--coverage-xml<span class="w"> </span>coverage.xml<span class="w"> </span>--output-report<span class="w"> </span>coverage_analysis.md
+
+<span class="c1"># Export JSON metrics for CI integration</span>
+python<span class="w"> </span>scripts/coverage_validator.py<span class="w"> </span>--coverage-xml<span class="w"> </span>coverage.xml<span class="w"> </span>--output-json<span class="w"> </span>coverage_metrics.json<span class="w"> </span>--fail-below-threshold
+</pre></div>
+</div>
+<p><strong>Comprehensive quality gate validation:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run all quality gates (infrastructure + coverage + performance)</span>
+python<span class="w"> </span>scripts/run_quality_gates.py<span class="w"> </span>--gate<span class="w"> </span>all<span class="w"> </span>--output<span class="w"> </span>quality_gate_results.json
+
+<span class="c1"># Individual gate validation</span>
+python<span class="w"> </span>scripts/run_quality_gates.py<span class="w"> </span>--gate<span class="w"> </span>safety<span class="w">          </span><span class="c1"># Safety-critical coverage</span>
+python<span class="w"> </span>scripts/run_quality_gates.py<span class="w"> </span>--gate<span class="w"> </span>critical<span class="w">       </span><span class="c1"># Critical components</span>
+python<span class="w"> </span>scripts/run_quality_gates.py<span class="w"> </span>--gate<span class="w"> </span>overall<span class="w">        </span><span class="c1"># Overall coverage</span>
+</pre></div>
+</div>
+</section>
+<section id="coverage-report-analysis">
+<h3>3. Coverage Report Analysis<a class="headerlink" href="#coverage-report-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>HTML Report Generation:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Comprehensive HTML report with missing line highlighting</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>html:htmlcov/<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+
+<span class="c1"># Open report</span>
+start<span class="w"> </span>htmlcov/index.html<span class="w">  </span><span class="c1"># Windows</span>
+open<span class="w"> </span>htmlcov/index.html<span class="w">   </span><span class="c1"># macOS</span>
+</pre></div>
+</div>
+<p><strong>Missing Coverage Identification:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify missing coverage by component</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>missing<span class="w"> </span>--cov-branch
+
+<span class="c1"># Focus on critical components</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/<span class="w"> </span>--cov<span class="o">=</span>src/controllers<span class="w"> </span>--cov-report<span class="o">=</span>missing
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ci-cd-integration">
+<h2>🏗️ CI/CD Integration<a class="headerlink" href="#ci-cd-integration" title="Link to this heading">¶</a></h2>
+<section id="github-actions-workflow-integration">
+<h3>GitHub Actions Workflow Integration<a class="headerlink" href="#github-actions-workflow-integration" title="Link to this heading">¶</a></h3>
+<p><strong>Add to <code class="docutils literal notranslate"><span class="pre">.github/workflows/test.yml</span></code>:</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Coverage Quality Gates</span>
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">coverage-validation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup Python</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.9&#39;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pip install -r requirements.txt</span>
+<span class="w">          </span><span class="no">pip install pytest-cov</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run comprehensive coverage</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">python -m pytest tests/ --cov=src --cov-report=xml:coverage.xml --cov-report=json:coverage.json</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Validate quality gates</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">python scripts/coverage_validator.py --coverage-xml coverage.xml --fail-below-threshold --verbose</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run quality gate framework</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">python scripts/run_quality_gates.py --gate all --output quality_results.json</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload coverage artifacts</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage-reports</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">            </span><span class="no">coverage.xml</span>
+<span class="w">            </span><span class="no">coverage.json</span>
+<span class="w">            </span><span class="no">coverage_analysis.md</span>
+<span class="w">            </span><span class="no">quality_results.json</span>
+<span class="w">            </span><span class="no">htmlcov/</span>
+</pre></div>
+</div>
+</section>
+<section id="quality-gate-enforcement-scripts">
+<h3>Quality Gate Enforcement Scripts<a class="headerlink" href="#quality-gate-enforcement-scripts" title="Link to this heading">¶</a></h3>
+<p><strong>Pre-commit quality gates:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># .git/hooks/pre-commit</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🔍 Running coverage quality gates...&quot;</span>
+
+<span class="c1"># Generate coverage</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>xml:coverage.xml<span class="w"> </span>-q
+
+<span class="c1"># Validate gates</span>
+python<span class="w"> </span>scripts/coverage_validator.py<span class="w"> </span>--coverage-xml<span class="w"> </span>coverage.xml<span class="w"> </span>--fail-below-threshold
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;❌ Coverage quality gates failed. Commit blocked.&quot;</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ Coverage quality gates passed.&quot;</span>
+</pre></div>
+</div>
+<p><strong>Deployment readiness check:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># deployment_check.sh</span>
+python<span class="w"> </span>scripts/run_quality_gates.py<span class="w"> </span>--gate<span class="w"> </span>all
+<span class="nv">GATE_STATUS</span><span class="o">=</span><span class="nv">$?</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$GATE_STATUS</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ Production deployment approved - All quality gates passed&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;❌ Production deployment blocked - Quality gate failures detected&quot;</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="coverage-categories-component-classification">
+<h2>📊 Coverage Categories &amp; Component Classification<a class="headerlink" href="#coverage-categories-component-classification" title="Link to this heading">¶</a></h2>
+<section id="safety-critical-components-100-required">
+<h3>Safety-Critical Components (100% Required)<a class="headerlink" href="#safety-critical-components-100-required" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SAFETY_CRITICAL_PATTERNS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;safety_guards&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;parameter_bounds&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gain_validation&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;bounds_checking&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Validation Commands:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enforce 100% coverage on safety-critical</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/smc/core/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov<span class="o">=</span>src/controllers/smc/core<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-fail-under<span class="o">=</span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-report<span class="o">=</span>html:safety_critical_report/
+</pre></div>
+</div>
+</section>
+<section id="critical-components-95-required">
+<h3>Critical Components (≥95% Required)<a class="headerlink" href="#critical-components-95-required" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CRITICAL_COMPONENT_PATTERNS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;controllers/smc&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;controllers/adaptive_smc&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;controllers/classic_smc&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;controllers/sta_smc&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;core/dynamics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;core/dynamics_full&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;optimizer/pso_optimizer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;core/simulation_runner&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Validation Commands:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Critical component coverage validation</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/<span class="w"> </span>tests/test_core/<span class="w"> </span>tests/test_optimization/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov<span class="o">=</span>src/controllers<span class="w"> </span>--cov<span class="o">=</span>src/core<span class="w"> </span>--cov<span class="o">=</span>src/optimizer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-fail-under<span class="o">=</span><span class="m">95</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-report<span class="o">=</span>html:critical_components_report/
+</pre></div>
+</div>
+</section>
+<section id="general-system-coverage-85-required">
+<h3>General System Coverage (≥85% Required)<a class="headerlink" href="#general-system-coverage-85-required" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Overall system coverage</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov<span class="o">=</span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-fail-under<span class="o">=</span><span class="m">85</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-report<span class="o">=</span>html:overall_coverage_report/
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-guide">
+<h2>🔧 Troubleshooting Guide<a class="headerlink" href="#troubleshooting-guide" title="Link to this heading">¶</a></h2>
+<section id="common-coverage-issues-solutions">
+<h3>Common Coverage Issues &amp; Solutions<a class="headerlink" href="#common-coverage-issues-solutions" title="Link to this heading">¶</a></h3>
+<section id="coverage-below-threshold">
+<h4>1. Coverage Below Threshold<a class="headerlink" href="#coverage-below-threshold" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">❌</span> <span class="n">Error</span><span class="p">:</span> <span class="n">Coverage</span> <span class="mf">82.3</span><span class="o">%</span> <span class="ow">is</span> <span class="n">below</span> <span class="n">required</span> <span class="mi">85</span><span class="o">%</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify missing coverage areas</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>missing
+
+<span class="c1"># Add focused tests for uncovered lines</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_specific_module.py<span class="w"> </span>--cov<span class="o">=</span>src/specific_module<span class="w"> </span>--cov-report<span class="o">=</span>html
+</pre></div>
+</div>
+</section>
+<section id="safety-critical-coverage-failures">
+<h4>2. Safety-Critical Coverage Failures<a class="headerlink" href="#safety-critical-coverage-failures" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">❌</span> <span class="n">Error</span><span class="p">:</span> <span class="n">Safety</span><span class="o">-</span><span class="n">critical</span> <span class="n">component</span> <span class="n">coverage</span> <span class="mi">95</span><span class="o">%</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="o">%</span> <span class="n">required</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify specific uncovered lines in safety-critical modules</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/smc/core/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov<span class="o">=</span>src/controllers/smc/core<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-report<span class="o">=</span>missing<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-branch
+
+<span class="c1"># Add comprehensive edge case tests</span>
+<span class="c1"># Focus on: parameter validation, bounds checking, error handling</span>
+</pre></div>
+</div>
+</section>
+<section id="infrastructure-health-failures">
+<h4>3. Infrastructure Health Failures<a class="headerlink" href="#infrastructure-health-failures" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">❌</span> <span class="n">Error</span><span class="p">:</span> <span class="n">Test</span> <span class="n">collection</span> <span class="n">failed</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Validate test discovery</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>--collect-only<span class="w"> </span>-v
+
+<span class="c1"># Check for syntax errors in test files</span>
+python<span class="w"> </span>-m<span class="w"> </span>py_compile<span class="w"> </span>tests/test_*.py
+
+<span class="c1"># Verify pytest installation</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+<section id="coverage-data-collection-issues">
+<h4>4. Coverage Data Collection Issues<a class="headerlink" href="#coverage-data-collection-issues" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">❌</span> <span class="n">Error</span><span class="p">:</span> <span class="n">coverage</span><span class="o">.</span><span class="n">xml</span> <span class="ow">not</span> <span class="n">found</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure pytest-cov is installed</span>
+pip<span class="w"> </span>install<span class="w"> </span>pytest-cov
+
+<span class="c1"># Generate coverage with explicit output</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>xml:coverage.xml<span class="w"> </span>--cov-report<span class="o">=</span>term
+
+<span class="c1"># Verify file generation</span>
+ls<span class="w"> </span>-la<span class="w"> </span>coverage.xml
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-optimization">
+<h3>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">¶</a></h3>
+<section id="slow-coverage-collection">
+<h4>1. Slow Coverage Collection<a class="headerlink" href="#slow-coverage-collection" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parallel test execution (if tests are thread-safe)</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>-n<span class="w"> </span>auto<span class="w"> </span>--cov-report<span class="o">=</span>xml
+
+<span class="c1"># Skip slow tests during coverage validation</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;not slow&quot;</span><span class="w"> </span>--cov-report<span class="o">=</span>xml
+</pre></div>
+</div>
+</section>
+<section id="memory-issues-with-large-test-suites">
+<h4>2. Memory Issues with Large Test Suites<a class="headerlink" href="#memory-issues-with-large-test-suites" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Incremental coverage collection</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/<span class="w"> </span>--cov<span class="o">=</span>src/controllers<span class="w"> </span>--cov-append
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_core/<span class="w"> </span>--cov<span class="o">=</span>src/core<span class="w"> </span>--cov-append
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_optimization/<span class="w"> </span>--cov<span class="o">=</span>src/optimizer<span class="w"> </span>--cov-append
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="improvement-strategies">
+<h2>📈 Improvement Strategies<a class="headerlink" href="#improvement-strategies" title="Link to this heading">¶</a></h2>
+<section id="coverage-enhancement-methodology">
+<h3>Coverage Enhancement Methodology<a class="headerlink" href="#coverage-enhancement-methodology" title="Link to this heading">¶</a></h3>
+<section id="gap-analysis-prioritization">
+<h4>1. Gap Analysis &amp; Prioritization<a class="headerlink" href="#gap-analysis-prioritization" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate detailed coverage analysis</span>
+python<span class="w"> </span>scripts/coverage_validator.py<span class="w"> </span>--verbose<span class="w"> </span>--coverage-xml<span class="w"> </span>coverage.xml<span class="w"> </span>--output-report<span class="w"> </span>gap_analysis.md
+
+<span class="c1"># Mathematical improvement metrics included:</span>
+<span class="c1"># - Percentage gaps by component</span>
+<span class="c1"># - Effort estimation (hours/weeks)</span>
+<span class="c1"># - Priority rankings (Critical/High/Medium)</span>
+</pre></div>
+</div>
+</section>
+<section id="systematic-coverage-improvement">
+<h4>2. Systematic Coverage Improvement<a class="headerlink" href="#systematic-coverage-improvement" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coverage improvement workflow:</span>
+<span class="c1"># 1. Identify lowest coverage modules</span>
+<span class="c1"># 2. Focus on critical components first</span>
+<span class="c1"># 3. Add property-based tests for edge cases</span>
+<span class="c1"># 4. Implement error injection testing</span>
+<span class="c1"># 5. Validate theoretical properties</span>
+</pre></div>
+</div>
+</section>
+<section id="test-quality-enhancement">
+<h4>3. Test Quality Enhancement<a class="headerlink" href="#test-quality-enhancement" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Property-based testing for mathematical properties</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_analysis/test_stability.py<span class="w"> </span>-v
+
+<span class="c1"># Mutation testing for test quality validation</span>
+mutmut<span class="w"> </span>run<span class="w"> </span>--paths-to-mutate<span class="o">=</span>src/controllers/
+
+<span class="c1"># Theoretical validation tests</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-k<span class="w"> </span><span class="s2">&quot;stability or lyapunov or convergence&quot;</span><span class="w"> </span>-v
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="configuration-standards">
+<h2>📋 Configuration Standards<a class="headerlink" href="#configuration-standards" title="Link to this heading">¶</a></h2>
+<section id="pytest-ini-coverage-configuration">
+<h3>pytest.ini Coverage Configuration<a class="headerlink" href="#pytest-ini-coverage-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[pytest]</span>
+<span class="na">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">-q --tb=short --cov-report=term-missing</span>
+<span class="na">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">tests</span>
+<span class="na">markers</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">slow</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as slow (deselect with &#39;-m &quot;not slow&quot;&#39;)</span>
+<span class="w">    </span><span class="na">benchmark</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as benchmarks</span>
+<span class="w">    </span><span class="na">unit</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as unit tests</span>
+<span class="w">    </span><span class="na">integration</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as integration tests</span>
+<span class="w">    </span><span class="na">safety_critical</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as safety-critical</span>
+<span class="w">    </span><span class="na">coverage_critical</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as coverage-critical</span>
+</pre></div>
+</div>
+</section>
+<section id="coverage-configuration-coveragerc">
+<h3>Coverage Configuration (.coveragerc)<a class="headerlink" href="#coverage-configuration-coveragerc" title="Link to this heading">¶</a></h3>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[run]</span>
+<span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">src/</span>
+<span class="na">omit</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">*/tests/*</span>
+<span class="w">    </span><span class="na">*/test_*</span>
+<span class="w">    </span><span class="na">*/__init__.py</span>
+<span class="w">    </span><span class="na">*/conftest.py</span>
+<span class="na">branch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">True</span>
+
+<span class="k">[report]</span>
+<span class="na">exclude_lines</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">pragma</span><span class="o">:</span><span class="w"> </span><span class="s">no cover</span>
+<span class="w">    </span><span class="na">def __repr__</span>
+<span class="w">    </span><span class="na">raise AssertionError</span>
+<span class="w">    </span><span class="na">raise NotImplementedError</span>
+<span class="w">    </span><span class="na">if __name__</span><span class="w"> </span><span class="o">=</span><span class="s">= .__main__.:</span>
+<span class="na">precision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+
+<span class="k">[html]</span>
+<span class="na">directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">htmlcov</span>
+<span class="na">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">DIP-SMC-PSO Coverage Report</span>
+
+<span class="k">[xml]</span>
+<span class="na">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">coverage.xml</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="integration-with-claude-md-standards">
+<h2>🎯 Integration with <a class="reference external" href="http://CLAUDE.md">CLAUDE.md</a> Standards<a class="headerlink" href="#integration-with-claude-md-standards" title="Link to this heading">¶</a></h2>
+<section id="alignment-with-project-standards">
+<h3>Alignment with Project Standards<a class="headerlink" href="#alignment-with-project-standards" title="Link to this heading">¶</a></h3>
+<p>This coverage framework enforces the <strong>Quality Assurance Integration</strong> standards defined in <a class="reference external" href="http://CLAUDE.md">CLAUDE.md</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">✅</span> <span class="n">Coverage</span> <span class="n">Thresholds</span><span class="p">:</span> <span class="err">≥</span><span class="mi">95</span><span class="o">%</span> <span class="n">critical</span> <span class="n">components</span><span class="p">,</span> <span class="err">≥</span><span class="mi">85</span><span class="o">%</span> <span class="n">overall</span>
+<span class="err">✅</span> <span class="n">Validation</span> <span class="n">Matrix</span><span class="p">:</span> <span class="mi">6</span><span class="o">/</span><span class="mi">6</span> <span class="n">quality</span> <span class="n">gates</span> <span class="n">framework</span>
+<span class="err">✅</span> <span class="n">Production</span> <span class="n">Gates</span><span class="p">:</span> <span class="n">Automated</span> <span class="n">go</span><span class="o">/</span><span class="n">no</span><span class="o">-</span><span class="n">go</span> <span class="n">deployment</span> <span class="n">decisions</span>
+<span class="err">✅</span> <span class="n">Regression</span> <span class="n">Detection</span><span class="p">:</span> <span class="n">Mathematical</span> <span class="n">coverage</span> <span class="n">efficiency</span> <span class="n">tracking</span>
+</pre></div>
+</div>
+</section>
+<section id="automatic-repository-management-integration">
+<h3>Automatic Repository Management Integration<a class="headerlink" href="#automatic-repository-management-integration" title="Link to this heading">¶</a></h3>
+<p><strong>Post-coverage validation workflow:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># After coverage improvements, auto-commit follows CLAUDE.md pattern:</span>
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">DOCUMENTATION EXPERT: Coverage Quality Gates Enhancement for Issue #9</span>
+
+<span class="s">- Comprehensive coverage workflow documentation</span>
+<span class="s">- Local development and CI integration procedures</span>
+<span class="s">- Quality gate troubleshooting and improvement strategies</span>
+<span class="s">- Mathematical coverage validation framework integration</span>
+
+<span class="s">🤖 Generated with [Claude Code](https://claude.ai/code)</span>
+
+<span class="s">Co-Authored-By: Claude &lt;noreply@anthropic.com&gt;</span>
+<span class="s">EOF</span>
+<span class="k">)</span><span class="s2">&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quick-reference-commands">
+<h2>🚀 Quick Reference Commands<a class="headerlink" href="#quick-reference-commands" title="Link to this heading">¶</a></h2>
+<section id="essential-coverage-commands">
+<h3>Essential Coverage Commands<a class="headerlink" href="#essential-coverage-commands" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Basic coverage check</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+
+<span class="c1"># 2. Generate XML + HTML reports</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>xml<span class="w"> </span>--cov-report<span class="o">=</span>html
+
+<span class="c1"># 3. Quality gate validation</span>
+python<span class="w"> </span>scripts/coverage_validator.py<span class="w"> </span>--coverage-xml<span class="w"> </span>coverage.xml<span class="w"> </span>--verbose
+
+<span class="c1"># 4. Comprehensive gate framework</span>
+python<span class="w"> </span>scripts/run_quality_gates.py<span class="w"> </span>--gate<span class="w"> </span>all
+
+<span class="c1"># 5. Safety-critical validation (100% required)</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/smc/core/<span class="w"> </span>--cov<span class="o">=</span>src/controllers/smc/core<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">100</span>
+
+<span class="c1"># 6. Critical components (≥95% required)</span>
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers/<span class="w"> </span>tests/test_core/<span class="w"> </span>--cov<span class="o">=</span>src/controllers<span class="w"> </span>--cov<span class="o">=</span>src/core<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">95</span>
+</pre></div>
+</div>
+</section>
+<section id="development-workflow-integration">
+<h3>Development Workflow Integration<a class="headerlink" href="#development-workflow-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Daily development cycle:</span>
+make<span class="w"> </span>test-coverage<span class="w">        </span><span class="c1"># Run tests with coverage</span>
+make<span class="w"> </span>coverage-report<span class="w">      </span><span class="c1"># Generate HTML report</span>
+make<span class="w"> </span>quality-gates<span class="w">        </span><span class="c1"># Validate all gates</span>
+make<span class="w"> </span>coverage-improve<span class="w">     </span><span class="c1"># Identify improvement areas</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="success-metrics-monitoring">
+<h2>📊 Success Metrics &amp; Monitoring<a class="headerlink" href="#success-metrics-monitoring" title="Link to this heading">¶</a></h2>
+<section id="coverage-quality-indicators">
+<h3>Coverage Quality Indicators<a class="headerlink" href="#coverage-quality-indicators" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Metric</strong></p></th>
+<th class="head"><p><strong>Target</strong></p></th>
+<th class="head"><p><strong>Monitoring</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Overall Coverage</p></td>
+<td><p>≥85%</p></td>
+<td><p>Automated CI validation</p></td>
+</tr>
+<tr class="row-odd"><td><p>Critical Components</p></td>
+<td><p>≥95%</p></td>
+<td><p>Quality gate enforcement</p></td>
+</tr>
+<tr class="row-even"><td><p>Safety-Critical</p></td>
+<td><p>100%</p></td>
+<td><p>Mandatory deployment blocker</p></td>
+</tr>
+<tr class="row-odd"><td><p>Coverage Efficiency</p></td>
+<td><p>C_eff ≥ 1.0</p></td>
+<td><p>Mathematical validation</p></td>
+</tr>
+<tr class="row-even"><td><p>Trend Analysis</p></td>
+<td><p>+2% monthly</p></td>
+<td><p>Historical tracking</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="production-readiness-assessment">
+<h3>Production Readiness Assessment<a class="headerlink" href="#production-readiness-assessment" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coverage contributes to overall Production Readiness Score</span>
+<span class="c1"># Current: 6.1/10 → Target: 8.5/10</span>
+<span class="c1"># Coverage improvements directly impact deployment authorization</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>🎯 Issue #9 Resolution</strong>: This runbook provides complete coverage infrastructure documentation, enabling developers to achieve and maintain the sophisticated 85%/95%/100% quality gate framework with mathematical precision and automated CI/CD integration.</p>
+<p><strong>🔗 Repository</strong>: <a class="reference external" href="https://github.com/theSadeQ/dip-smc-pso.git">https://github.com/theSadeQ/dip-smc-pso.git</a>
+<strong>📋 Documentation Version</strong>: 1.0.0 - Issue #9 Comprehensive Coverage Infrastructure
+<strong>🤖 Generated with</strong>: <a class="reference external" href="https://claude.ai/code">Claude Code</a> - Documentation Expert Agent</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Coverage Quality Gates Runbook</a><ul>
+<li><a class="reference internal" href="#executive-summary">📋 Executive Summary</a><ul>
+<li><a class="reference internal" href="#coverage-architecture-overview">Coverage Architecture Overview</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quality-gate-thresholds">🎯 Quality Gate Thresholds</a><ul>
+<li><a class="reference internal" href="#three-tier-coverage-framework">Three-Tier Coverage Framework</a></li>
+<li><a class="reference internal" href="#mathematical-coverage-definition">Mathematical Coverage Definition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#local-development-workflow">🛠️ Local Development Workflow</a><ul>
+<li><a class="reference internal" href="#basic-coverage-collection">1. Basic Coverage Collection</a></li>
+<li><a class="reference internal" href="#quality-gate-validation">2. Quality Gate Validation</a></li>
+<li><a class="reference internal" href="#coverage-report-analysis">3. Coverage Report Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ci-cd-integration">🏗️ CI/CD Integration</a><ul>
+<li><a class="reference internal" href="#github-actions-workflow-integration">GitHub Actions Workflow Integration</a></li>
+<li><a class="reference internal" href="#quality-gate-enforcement-scripts">Quality Gate Enforcement Scripts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coverage-categories-component-classification">📊 Coverage Categories &amp; Component Classification</a><ul>
+<li><a class="reference internal" href="#safety-critical-components-100-required">Safety-Critical Components (100% Required)</a></li>
+<li><a class="reference internal" href="#critical-components-95-required">Critical Components (≥95% Required)</a></li>
+<li><a class="reference internal" href="#general-system-coverage-85-required">General System Coverage (≥85% Required)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting-guide">🔧 Troubleshooting Guide</a><ul>
+<li><a class="reference internal" href="#common-coverage-issues-solutions">Common Coverage Issues &amp; Solutions</a><ul>
+<li><a class="reference internal" href="#coverage-below-threshold">1. Coverage Below Threshold</a></li>
+<li><a class="reference internal" href="#safety-critical-coverage-failures">2. Safety-Critical Coverage Failures</a></li>
+<li><a class="reference internal" href="#infrastructure-health-failures">3. Infrastructure Health Failures</a></li>
+<li><a class="reference internal" href="#coverage-data-collection-issues">4. Coverage Data Collection Issues</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-optimization">Performance Optimization</a><ul>
+<li><a class="reference internal" href="#slow-coverage-collection">1. Slow Coverage Collection</a></li>
+<li><a class="reference internal" href="#memory-issues-with-large-test-suites">2. Memory Issues with Large Test Suites</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#improvement-strategies">📈 Improvement Strategies</a><ul>
+<li><a class="reference internal" href="#coverage-enhancement-methodology">Coverage Enhancement Methodology</a><ul>
+<li><a class="reference internal" href="#gap-analysis-prioritization">1. Gap Analysis &amp; Prioritization</a></li>
+<li><a class="reference internal" href="#systematic-coverage-improvement">2. Systematic Coverage Improvement</a></li>
+<li><a class="reference internal" href="#test-quality-enhancement">3. Test Quality Enhancement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration-standards">📋 Configuration Standards</a><ul>
+<li><a class="reference internal" href="#pytest-ini-coverage-configuration">pytest.ini Coverage Configuration</a></li>
+<li><a class="reference internal" href="#coverage-configuration-coveragerc">Coverage Configuration (.coveragerc)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-with-claude-md-standards">🎯 Integration with CLAUDE.md Standards</a><ul>
+<li><a class="reference internal" href="#alignment-with-project-standards">Alignment with Project Standards</a></li>
+<li><a class="reference internal" href="#automatic-repository-management-integration">Automatic Repository Management Integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-reference-commands">🚀 Quick Reference Commands</a><ul>
+<li><a class="reference internal" href="#essential-coverage-commands">Essential Coverage Commands</a></li>
+<li><a class="reference internal" href="#development-workflow-integration">Development Workflow Integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#success-metrics-monitoring">📊 Success Metrics &amp; Monitoring</a><ul>
+<li><a class="reference internal" href="#coverage-quality-indicators">Coverage Quality Indicators</a></li>
+<li><a class="reference internal" href="#production-readiness-assessment">Production Readiness Assessment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

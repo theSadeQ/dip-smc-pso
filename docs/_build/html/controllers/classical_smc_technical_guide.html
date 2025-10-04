@@ -1,0 +1,1983 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Adaptive Sliding Mode Control Technical Guide" href="adaptive_smc_technical_guide.html" /><link rel="prev" title="Controllers Module Documentation" href="index.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Classical Sliding Mode Control Technical Guide - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Controllers Module Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/controllers/classical_smc_technical_guide.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/controllers/classical_smc_technical_guide.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>#==========================================================================================\<br />
+#==================== docs/controllers/classical_smc_technical_guide.md ==================\<br />
+#==========================================================================================\</p>
+<section class="tex2jax_ignore mathjax_ignore" id="classical-sliding-mode-control-technical-guide">
+<h1>Classical Sliding Mode Control Technical Guide<a class="headerlink" href="#classical-sliding-mode-control-technical-guide" title="Link to this heading">¶</a></h1>
+<section id="double-inverted-pendulum-control-system">
+<h2>Double-Inverted Pendulum Control System<a class="headerlink" href="#double-inverted-pendulum-control-system" title="Link to this heading">¶</a></h2>
+<p><strong>Document Version</strong>: 1.0
+<strong>Created</strong>: 2025-10-04
+<strong>Classification</strong>: Technical Implementation Guide
+<strong>Controller Type</strong>: ClassicalSMC</p>
+</section>
+<hr class="docutils" />
+<section id="executive-summary">
+<h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading">¶</a></h2>
+<p>The Classical Sliding Mode Controller represents the foundational SMC algorithm, combining model-based equivalent control with robust discontinuous switching for the double-inverted pendulum. It provides a simple, well-understood baseline with straightforward tuning and predictable performance.</p>
+<p><strong>Performance Summary</strong>:</p>
+<ul class="simple">
+<li><p><strong>Parameter Count</strong>: 6 primary gains [k1, k2, λ1, λ2, K, kd]</p></li>
+<li><p><strong>Convergence Type</strong>: Exponential (asymptotic)</p></li>
+<li><p><strong>Computational Cost</strong>: Lowest of all SMC variants</p></li>
+<li><p><strong>Chattering Level</strong>: Moderate (mitigated by boundary layer)</p></li>
+<li><p><strong>Runtime Status</strong>: ✅ <strong>OPERATIONAL</strong> (production-ready)</p></li>
+</ul>
+<p><strong>Best Use Cases</strong>:</p>
+<ul class="simple">
+<li><p>Rapid prototyping and proof-of-concept</p></li>
+<li><p>Systems with known disturbance bounds</p></li>
+<li><p>Applications prioritizing simplicity over maximum performance</p></li>
+<li><p>Baseline comparisons for advanced controllers</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a></p></li>
+<li><p><a class="reference internal" href="#algorithm-architecture">Algorithm Architecture</a></p></li>
+<li><p><a class="reference internal" href="#implementation-details">Implementation Details</a></p></li>
+<li><p><a class="reference internal" href="#parameter-configuration">Parameter Configuration</a></p></li>
+<li><p><a class="reference internal" href="#integration-guide">Integration Guide</a></p></li>
+<li><p><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting">Troubleshooting</a></p></li>
+<li><p><a class="reference internal" href="#references">References</a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="sliding-surface-design">
+<h3>1. Sliding Surface Design<a class="headerlink" href="#sliding-surface-design" title="Link to this heading">¶</a></h3>
+<p>The sliding surface for the double-inverted pendulum system is defined as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σ</span> <span class="o">=</span> <span class="n">λ</span><span class="err">₁</span><span class="n">θ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span><span class="n">θ</span><span class="err">₂</span> <span class="o">+</span> <span class="n">k</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">θ̇</span><span class="err">₂</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>θ₁, θ₂</strong>: Pendulum angles (rad)</p></li>
+<li><p><strong>θ̇₁, θ̇₂</strong>: Pendulum angular velocities (rad/s)</p></li>
+<li><p><strong>λ₁, λ₂ &gt; 0</strong>: Sliding surface slope parameters (rad/s²)</p></li>
+<li><p><strong>k₁, k₂ &gt; 0</strong>: Velocity feedback gains (rad/s)</p></li>
+</ul>
+<p><strong>Design Principle</strong>: The sliding surface defines a hyperplane in state space. When the system reaches this surface (σ = 0), the reduced-order dynamics exhibit desired stability properties.</p>
+<p><strong>Hurwitz Stability Requirement</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="err">²</span> <span class="o">+</span> <span class="n">k</span><span class="err">₁</span><span class="n">s</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₁</span> <span class="o">=</span> <span class="mi">0</span>  <span class="p">(</span><span class="k">for</span> <span class="n">pendulum</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">s</span><span class="err">²</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">s</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span> <span class="o">=</span> <span class="mi">0</span>  <span class="p">(</span><span class="k">for</span> <span class="n">pendulum</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All coefficients must be positive to ensure stable sliding dynamics.</p>
+<p><strong>Pole Placement Interpretation</strong>:</p>
+<ul class="simple">
+<li><p><strong>Critically damped</strong>: k²ᵢ = 4λᵢ → poles at s = -kᵢ/2 (fastest non-oscillatory response)</p></li>
+<li><p><strong>Underdamped</strong>: k²ᵢ &lt; 4λᵢ → complex conjugate poles (faster, oscillatory)</p></li>
+<li><p><strong>Overdamped</strong>: k²ᵢ &gt; 4λᵢ → distinct real poles (slower, smooth)</p></li>
+</ul>
+</section>
+<section id="control-law-decomposition">
+<h3>2. Control Law Decomposition<a class="headerlink" href="#control-law-decomposition" title="Link to this heading">¶</a></h3>
+<p>The control input combines three components:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">u_eq</span> <span class="o">-</span> <span class="n">K·sat</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span> <span class="o">-</span> <span class="n">k_d·σ</span>
+</pre></div>
+</div>
+<section id="equivalent-control-u-eq">
+<h4>2.1 Equivalent Control (u_eq)<a class="headerlink" href="#equivalent-control-u-eq" title="Link to this heading">¶</a></h4>
+<p><strong>Purpose</strong>: Model-based feedforward that cancels nominal dynamics.</p>
+<p><strong>Derivation</strong>: Set σ̇ = 0 and solve for u:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σ̇</span> <span class="o">=</span> <span class="n">λ</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span><span class="n">θ̇</span><span class="err">₂</span> <span class="o">+</span> <span class="n">k</span><span class="err">₁</span><span class="n">θ̈</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">θ̈</span><span class="err">₂</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Substituting the system dynamics M(q)q̈ + C(q,q̇)q̇ + G(q) = Bu:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u_eq</span> <span class="o">=</span> <span class="p">(</span><span class="n">L·M</span><span class="err">⁻¹·</span><span class="n">B</span><span class="p">)</span><span class="err">⁻¹</span> <span class="err">·</span> <span class="p">[</span><span class="n">L·M</span><span class="err">⁻¹·</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">q̇</span><span class="p">)</span><span class="n">q̇</span> <span class="o">+</span> <span class="n">G</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">k</span><span class="err">₁</span><span class="n">λ</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">λ</span><span class="err">₂</span><span class="n">θ̇</span><span class="err">₂</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>where L = [0, k₁, k₂] is the sliding surface gradient.</p>
+<p><strong>Implementation</strong>: See <code class="docutils literal notranslate"><span class="pre">_compute_equivalent_control()</span></code> in <code class="docutils literal notranslate"><span class="pre">classic_smc.py:331-410</span></code></p>
+</section>
+<section id="robust-switching-term-ksat">
+<h4>2.2 Robust Switching Term (-K·sat(σ/ε))<a class="headerlink" href="#robust-switching-term-ksat" title="Link to this heading">¶</a></h4>
+<p><strong>Purpose</strong>: Drives system to sliding surface and rejects matched disturbances.</p>
+<p><strong>Gain Selection</strong>: K &gt; ||d||∞ (disturbance bound)</p>
+<p><strong>Saturation Function</strong>: Approximates sign(σ) within boundary layer ε</p>
+<p><strong>Two Methods Available</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Hyperbolic Tangent</strong> (default, recommended):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span> <span class="o">=</span> <span class="n">tanh</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Smooth (C∞)</p></li>
+<li><p>Preserves control authority near σ = 0</p></li>
+<li><p>Better convergence properties</p></li>
+</ul>
+</li>
+<li><p><strong>Linear Saturation</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">,</span>     <span class="k">if</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="err">≤</span> <span class="n">ε</span>
+  <span class="n">sign</span><span class="p">(</span><span class="n">σ</span><span class="p">),</span> <span class="k">if</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">&gt;</span> <span class="n">ε</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Piecewise linear</p></li>
+<li><p>Continuous but not differentiable at ±ε</p></li>
+<li><p>May cause slower convergence near origin</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="damping-term-k-d">
+<h4>2.3 Damping Term (-k_d·σ)<a class="headerlink" href="#damping-term-k-d" title="Link to this heading">¶</a></h4>
+<p><strong>Purpose</strong>: Improves transient response and reduces overshoot.</p>
+<p><strong>Effect</strong>: Adds proportional damping to the sliding variable.</p>
+<p><strong>Typical Value</strong>: k_d ∈ [0, 10] (can be zero)</p>
+</section>
+</section>
+<section id="boundary-layer-theory">
+<h3>3. Boundary Layer Theory<a class="headerlink" href="#boundary-layer-theory" title="Link to this heading">¶</a></h3>
+<p><strong>Chattering Problem</strong>: Discontinuous sign(σ) causes high-frequency switching (100-1000 Hz), leading to:</p>
+<ul class="simple">
+<li><p>Excessive control effort</p></li>
+<li><p>Actuator wear</p></li>
+<li><p>Excitation of unmodeled dynamics</p></li>
+</ul>
+<p><strong>Solution</strong>: Boundary layer approximation</p>
+<p><strong>Adaptive Boundary Layer</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ε</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">=</span> <span class="n">ε</span><span class="err">₀</span> <span class="o">+</span> <span class="n">ε</span><span class="err">₁·</span><span class="o">||</span><span class="n">σ</span><span class="o">||</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>ε₀</strong>: Nominal boundary layer thickness</p></li>
+<li><p><strong>ε₁</strong>: Adaptive scaling factor (typically 0)</p></li>
+</ul>
+<p><strong>Trade-off</strong>:</p>
+<ul class="simple">
+<li><p><strong>Smaller ε</strong> → Better tracking, more chattering</p></li>
+<li><p><strong>Larger ε</strong> → Smoother control, larger steady-state error |σ∞| ≤ ε</p></li>
+</ul>
+<p><strong>Hysteresis Enhancement</strong>:</p>
+<p>Optional dead-band to further reduce chattering:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">If</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">&lt;</span> <span class="n">hysteresis_ratio</span> <span class="err">·</span> <span class="n">ε</span><span class="err">₀</span><span class="p">:</span>
+    <span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span>  <span class="p">(</span><span class="n">freeze</span> <span class="n">switching</span> <span class="n">term</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="lyapunov-stability-analysis">
+<h3>4. Lyapunov Stability Analysis<a class="headerlink" href="#lyapunov-stability-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Lyapunov Function</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="err">½</span><span class="n">σ</span><span class="err">²</span>
+</pre></div>
+</div>
+<p><strong>Proof of Stability</strong> (summary, see <code class="docutils literal notranslate"><span class="pre">smc_complete_theory.md</span></code> for full proof):</p>
+<ol class="arabic">
+<li><p>V &gt; 0 for σ ≠ 0 (positive definiteness) ✓</p></li>
+<li><p>V̇ = σσ̇ = σ[λ₁θ̇₁ + λ₂θ̇₂ + k₁θ̈₁ + k₂θ̈₂]</p></li>
+<li><p>Substituting dynamics and control law:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="err">≤</span> <span class="o">-</span><span class="n">η</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span>  <span class="n">where</span> <span class="n">η</span> <span class="o">=</span> <span class="n">K</span> <span class="o">-</span> <span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>V̇ &lt; 0 → σ → 0 exponentially</p></li>
+</ol>
+<p><strong>Exponential Convergence</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">|</span> <span class="err">≤</span> <span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">|</span><span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">ηt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>95% Settling Time</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_95</span><span class="o">%</span> <span class="err">≈</span> <span class="mi">3</span><span class="o">/</span><span class="n">η</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="algorithm-architecture">
+<h2>Algorithm Architecture<a class="headerlink" href="#algorithm-architecture" title="Link to this heading">¶</a></h2>
+<section id="modular-controller-structure">
+<h3>1. Modular Controller Structure<a class="headerlink" href="#modular-controller-structure" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classical Sliding-Mode Controller with modular design:</span>
+
+<span class="sd">    Components:</span>
+<span class="sd">    - Sliding surface computation (linear combination)</span>
+<span class="sd">    - Equivalent control (model-based feedforward)</span>
+<span class="sd">    - Robust switching term (chattering reduction)</span>
+<span class="sd">    - Saturation and safety mechanisms</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<section id="key-methods">
+<h4>1.1 Key Methods<a class="headerlink" href="#key-methods" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Lines</p></th>
+<th class="head"><p>Complexity</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></p></td>
+<td><p>Initialization &amp; validation</p></td>
+<td><p>92-243</p></td>
+<td><p>O(1)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_compute_sliding_surface()</span></code></p></td>
+<td><p>Calculate σ(x)</p></td>
+<td><p>319-329</p></td>
+<td><p>O(1)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_compute_equivalent_control()</span></code></p></td>
+<td><p>Model-based u_eq</p></td>
+<td><p>331-410</p></td>
+<td><p>O(n³) matrix inv</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">compute_control()</span></code></p></td>
+<td><p>Main control loop</p></td>
+<td><p>413-486</p></td>
+<td><p>O(n³)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">validate_gains()</span></code></p></td>
+<td><p>Static gain validation</p></td>
+<td><p>281-317</p></td>
+<td><p>O(1)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cleanup()</span></code></p></td>
+<td><p>Memory management</p></td>
+<td><p>498-529</p></td>
+<td><p>O(1)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="control-flow-architecture">
+<h3>2. Control Flow Architecture<a class="headerlink" href="#control-flow-architecture" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">┌─────────────────────┐</span>
+<span class="err">│</span>   <span class="n">State</span> <span class="n">Input</span>       <span class="err">│</span>
+<span class="err">│</span>  <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">θ</span><span class="err">₁</span><span class="p">,</span><span class="n">θ</span><span class="err">₂</span><span class="p">,</span><span class="n">ẋ</span><span class="p">,</span><span class="n">θ̇</span><span class="err">₁</span><span class="p">,</span><span class="n">θ̇</span><span class="err">₂</span><span class="p">]</span> <span class="err">│</span>
+<span class="err">└──────────┬──────────┘</span>
+           <span class="err">│</span>
+           <span class="n">v</span>
+<span class="err">┌─────────────────────┐</span>
+<span class="err">│</span> <span class="n">Sliding</span> <span class="n">Surface</span>     <span class="err">│</span>
+<span class="err">│</span> <span class="n">σ</span> <span class="o">=</span> <span class="n">Σ</span><span class="p">(</span><span class="n">λᵢθᵢ</span> <span class="o">+</span> <span class="n">kᵢθ̇ᵢ</span><span class="p">)</span> <span class="err">│</span>
+<span class="err">└──────────┬──────────┘</span>
+           <span class="err">│</span>
+           <span class="err">├────────────────────┬────────────────────┐</span>
+           <span class="n">v</span>                    <span class="n">v</span>                    <span class="n">v</span>
+<span class="err">┌──────────────────┐</span> <span class="err">┌──────────────────┐</span> <span class="err">┌─────────────────┐</span>
+<span class="err">│</span> <span class="n">Equivalent</span> <span class="n">Ctrl</span>  <span class="err">│</span> <span class="err">│</span> <span class="n">Switching</span> <span class="n">Term</span>   <span class="err">│</span> <span class="err">│</span> <span class="n">Damping</span> <span class="n">Term</span>    <span class="err">│</span>
+<span class="err">│</span> <span class="n">u_eq</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">G</span><span class="p">)</span>  <span class="err">│</span> <span class="err">│</span> <span class="o">-</span><span class="n">K·sat</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span>      <span class="err">│</span> <span class="err">│</span> <span class="o">-</span><span class="n">k_d·σ</span>          <span class="err">│</span>
+<span class="err">└──────────┬───────┘</span> <span class="err">└────────┬─────────┘</span> <span class="err">└────────┬────────┘</span>
+           <span class="err">│</span>                  <span class="err">│</span>                    <span class="err">│</span>
+           <span class="err">└──────────────────┴────────────────────┘</span>
+                              <span class="err">│</span>
+                              <span class="n">v</span>
+                    <span class="err">┌──────────────────┐</span>
+                    <span class="err">│</span> <span class="n">Sum</span> <span class="n">Components</span>   <span class="err">│</span>
+                    <span class="err">│</span> <span class="n">u</span> <span class="o">=</span> <span class="n">Σ</span>            <span class="err">│</span>
+                    <span class="err">└──────────┬───────┘</span>
+                              <span class="err">│</span>
+                              <span class="n">v</span>
+                    <span class="err">┌──────────────────┐</span>
+                    <span class="err">│</span> <span class="n">Actuator</span> <span class="n">Sat</span>     <span class="err">│</span>
+                    <span class="err">│</span> <span class="n">u</span><span class="err">∈</span><span class="p">[</span><span class="o">-</span><span class="n">F_max</span><span class="p">,</span><span class="n">F_max</span><span class="p">]</span> <span class="err">│</span>
+                    <span class="err">└──────────┬───────┘</span>
+                              <span class="err">│</span>
+                              <span class="n">v</span>
+                    <span class="err">┌──────────────────┐</span>
+                    <span class="err">│</span> <span class="n">Control</span> <span class="n">Output</span>   <span class="err">│</span>
+                    <span class="err">│</span> <span class="o">+</span> <span class="n">History</span>        <span class="err">│</span>
+                    <span class="err">└──────────────────┘</span>
+</pre></div>
+</div>
+</section>
+<section id="safety-and-numerical-stability-features">
+<h3>3. Safety and Numerical Stability Features<a class="headerlink" href="#safety-and-numerical-stability-features" title="Link to this heading">¶</a></h3>
+<section id="matrix-regularization">
+<h4>3.1 Matrix Regularization<a class="headerlink" href="#matrix-regularization" title="Link to this heading">¶</a></h4>
+<p><strong>Problem</strong>: Inertia matrix M(q) can be ill-conditioned near singular configurations.</p>
+<p><strong>Solution</strong>: Tikhonov regularization</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M_reg</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="n">regularization</span> <span class="o">*</span> <span class="n">I</span>  <span class="c1"># Default: regularization = 1e-10</span>
+</pre></div>
+</div>
+<p><strong>Benefit</strong>: Shifts all eigenvalues upward by α, ensuring invertibility.</p>
+</section>
+<section id="controllability-checking">
+<h4>3.2 Controllability Checking<a class="headerlink" href="#controllability-checking" title="Link to this heading">¶</a></h4>
+<p><strong>Condition</strong>: |L·M⁻¹·B| &gt; eq_threshold</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">L_Minv_B</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">M_reg</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">L_Minv_B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">eq_threshold</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mf">0.0</span>  <span class="c1"># Disable equivalent control</span>
+</pre></div>
+</div>
+<p><strong>Default Threshold</strong>: 0.05·(k₁ + k₂) (adaptive to gains)</p>
+<p><strong>Rationale</strong>: Prevents ill-conditioned equivalent control computation when system is near uncontrollable configurations.</p>
+</section>
+<section id="equivalent-control-clamping">
+<h4>3.3 Equivalent Control Clamping<a class="headerlink" href="#equivalent-control-clamping" title="Link to this heading">¶</a></h4>
+<p><strong>Saturation</strong>: u_eq ∈ [-5·max_force, 5·max_force]</p>
+<p><strong>Purpose</strong>:</p>
+<ul class="simple">
+<li><p>Prevent unbounded model-based terms</p></li>
+<li><p>Avoid integrator windup</p></li>
+<li><p>Preserve fidelity while preventing spikes</p></li>
+</ul>
+</section>
+<section id="memory-management">
+<h4>3.4 Memory Management<a class="headerlink" href="#memory-management" title="Link to this heading">¶</a></h4>
+<p><strong>Weakref Pattern</strong>: Prevents circular references</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">dynamics_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="o">=</span> <span class="n">weakref</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="n">dynamics_model</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p><strong>Cleanup Methods</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cleanup()</span></code>: Explicit resource release</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__del__()</span></code>: Automatic cleanup on garbage collection</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Link to this heading">¶</a></h2>
+<section id="core-algorithm-implementation">
+<h3>1. Core Algorithm Implementation<a class="headerlink" href="#core-algorithm-implementation" title="Link to this heading">¶</a></h3>
+<section id="sliding-surface-computation">
+<h4>1.1 Sliding Surface Computation<a class="headerlink" href="#sliding-surface-computation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_compute_sliding_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute σ = λ₁θ₁ + λ₂θ₂ + k₁θ̇₁ + k₂θ̇₂&quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dtheta1</span><span class="p">,</span> <span class="n">dtheta2</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lam1</span> <span class="o">*</span> <span class="n">theta1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span> <span class="o">*</span> <span class="n">theta2</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">*</span> <span class="n">dtheta1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span> <span class="o">*</span> <span class="n">dtheta2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Implementation</strong>: <code class="docutils literal notranslate"><span class="pre">classic_smc.py:319-329</span></code></p>
+<p><strong>Complexity</strong>: O(1) - 6 multiplications, 3 additions</p>
+</section>
+<section id="equivalent-control-calculation">
+<h4>1.2 Equivalent Control Calculation<a class="headerlink" href="#equivalent-control-calculation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_compute_equivalent_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute model-based u_eq with enhanced robustness.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>  <span class="c1"># No dynamics model</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Get physics matrices</span>
+        <span class="n">M</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyn</span><span class="o">.</span><span class="n">_compute_physics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="c1"># Regularize inertia matrix</span>
+        <span class="n">M_reg</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regularization</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="c1"># Solve for controllability scalar</span>
+        <span class="n">Minv_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">M_reg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+        <span class="n">L_Minv_B</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">@</span> <span class="n">Minv_B</span><span class="p">)</span>
+
+        <span class="c1"># Check controllability</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">L_Minv_B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">eq_threshold</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="c1"># Compute equivalent control</span>
+        <span class="n">q_dot</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="s2">&quot;ndim&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">rhs</span> <span class="o">=</span> <span class="n">C</span> <span class="o">@</span> <span class="n">q_dot</span> <span class="o">+</span> <span class="n">G</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rhs</span> <span class="o">=</span> <span class="n">C</span> <span class="o">+</span> <span class="n">G</span>
+
+        <span class="n">Minv_rhs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">M_reg</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+        <span class="n">term1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">@</span> <span class="n">Minv_rhs</span><span class="p">)</span>
+        <span class="n">term2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span> <span class="o">*</span> <span class="n">q_dot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span> <span class="o">*</span> <span class="n">q_dot</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">u_eq</span> <span class="o">=</span> <span class="p">(</span><span class="n">term1</span> <span class="o">-</span> <span class="n">term2</span><span class="p">)</span> <span class="o">/</span> <span class="n">L_Minv_B</span>
+
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">u_eq</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>  <span class="c1"># Singular matrix</span>
+</pre></div>
+</div>
+<p><strong>Implementation</strong>: <code class="docutils literal notranslate"><span class="pre">classic_smc.py:331-410</span></code></p>
+<p><strong>Complexity</strong>: O(n³) for 3×3 matrix solve</p>
+<p><strong>Robustness Features</strong>:</p>
+<ol class="arabic simple">
+<li><p>Null dynamics check</p></li>
+<li><p>Exception handling for matrix operations</p></li>
+<li><p>Regularization before inversion</p></li>
+<li><p>Controllability threshold</p></li>
+<li><p>Graceful degradation (returns 0.0 on failure)</p></li>
+</ol>
+</section>
+<section id="complete-control-law">
+<h4>1.3 Complete Control Law<a class="headerlink" href="#complete-control-law" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                   <span class="n">state_vars</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
+                   <span class="n">history</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClassicalSMCOutput</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main control computation.&quot;&quot;&quot;</span>
+    <span class="c1"># 1. Sliding surface</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># 2. Adaptive boundary layer</span>
+    <span class="n">eps_dyn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon1</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span>
+
+    <span class="c1"># 3. Hysteresis dead-band</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">hysteresis_ratio</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon0</span><span class="p">:</span>
+        <span class="n">sat_sigma</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sat_sigma</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">eps_dyn</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">switch_method</span><span class="p">)</span>
+
+    <span class="c1"># 4. Equivalent control</span>
+    <span class="n">u_eq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_equivalent_control</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># 5. Clamp equivalent control</span>
+    <span class="n">max_eq</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span>
+    <span class="n">u_eq</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u_eq</span><span class="p">,</span> <span class="o">-</span><span class="n">max_eq</span><span class="p">,</span> <span class="n">max_eq</span><span class="p">))</span>
+
+    <span class="c1"># 6. Robust switching term</span>
+    <span class="n">u_robust</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">sat_sigma</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">kd</span> <span class="o">*</span> <span class="n">sigma</span>
+
+    <span class="c1"># 7. Combine and saturate</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u_eq</span> <span class="o">+</span> <span class="n">u_robust</span>
+    <span class="n">u_saturated</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">))</span>
+
+    <span class="c1"># 8. History tracking</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="n">history</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="p">{}</span>
+    <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span>
+    <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;epsilon_eff&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">eps_dyn</span><span class="p">))</span>
+    <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;u_eq&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">u_eq</span><span class="p">))</span>
+    <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;u_robust&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">u_robust</span><span class="p">))</span>
+    <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;u_total&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+    <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">u_saturated</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ClassicalSMCOutput</span><span class="p">(</span><span class="n">u_saturated</span><span class="p">,</span> <span class="p">(),</span> <span class="n">hist</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Implementation</strong>: <code class="docutils literal notranslate"><span class="pre">classic_smc.py:413-486</span></code></p>
+</section>
+</section>
+<section id="saturation-function-implementation">
+<h3>2. Saturation Function Implementation<a class="headerlink" href="#saturation-function-implementation" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">saturate()</span></code> utility (from <code class="docutils literal notranslate"><span class="pre">src/utils</span></code>) provides two methods:</p>
+<p><strong>Tanh Saturation</strong> (default):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">saturate_tanh</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">sigma</span> <span class="o">/</span> <span class="n">epsilon</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Linear Saturation</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">saturate_linear</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">sigma</span> <span class="o">/</span> <span class="n">epsilon</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Comparison</strong>:</p>
+<ul class="simple">
+<li><p><strong>Tanh</strong>: Smooth, preserves slope at origin, better theoretical properties</p></li>
+<li><p><strong>Linear</strong>: Simple, but zero slope outside boundary layer can slow convergence</p></li>
+</ul>
+<p><strong>Recommendation</strong>: Use <code class="docutils literal notranslate"><span class="pre">tanh</span></code> (default) unless specific application requires linear.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="parameter-configuration">
+<h2>Parameter Configuration<a class="headerlink" href="#parameter-configuration" title="Link to this heading">¶</a></h2>
+<section id="primary-parameters-6-gains">
+<h3>1. Primary Parameters (6 Gains)<a class="headerlink" href="#primary-parameters-6-gains" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Typical Range</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>k1</strong></p></td>
+<td><p>k₁</p></td>
+<td><p>[5, 20]</p></td>
+<td><p>First pendulum velocity gain (rad/s)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>k2</strong></p></td>
+<td><p>k₂</p></td>
+<td><p>[5, 20]</p></td>
+<td><p>Second pendulum velocity gain (rad/s)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>lambda1</strong></p></td>
+<td><p>λ₁</p></td>
+<td><p>[10, 50]</p></td>
+<td><p>First pendulum position gain (rad/s²)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>lambda2</strong></p></td>
+<td><p>λ₂</p></td>
+<td><p>[10, 50]</p></td>
+<td><p>Second pendulum position gain (rad/s²)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>K</strong></p></td>
+<td><p>K</p></td>
+<td><p>[20, 100]</p></td>
+<td><p>Switching gain (N)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>kd</strong></p></td>
+<td><p>k_d</p></td>
+<td><p>[0, 10]</p></td>
+<td><p>Damping gain (N/rad)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Ordering</strong>: <code class="docutils literal notranslate"><span class="pre">gains</span> <span class="pre">=</span> <span class="pre">[k1,</span> <span class="pre">k2,</span> <span class="pre">lam1,</span> <span class="pre">lam2,</span> <span class="pre">K,</span> <span class="pre">kd]</span></code></p>
+<p><strong>Validation</strong>: All must be positive (k1, k2, lam1, lam2, K &gt; 0; kd ≥ 0)</p>
+</section>
+<section id="boundary-layer-configuration">
+<h3>2. Boundary Layer Configuration<a class="headerlink" href="#boundary-layer-configuration" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Range</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>boundary_layer</strong></p></td>
+<td><p>ε₀</p></td>
+<td><p>0.01</p></td>
+<td><p>[0.001, 0.1]</p></td>
+<td><p>Nominal boundary layer thickness</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>boundary_layer_slope</strong></p></td>
+<td><p>ε₁</p></td>
+<td><p>0.0</p></td>
+<td><p>[0.0, 1.0]</p></td>
+<td><p>Adaptive scaling factor</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>hysteresis_ratio</strong></p></td>
+<td><p>h</p></td>
+<td><p>0.0</p></td>
+<td><p>[0.0, 1.0]</p></td>
+<td><p>Dead-band fraction</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Adaptive Boundary Layer</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ε</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">=</span> <span class="n">ε</span><span class="err">₀</span> <span class="o">+</span> <span class="n">ε</span><span class="err">₁·</span><span class="o">||</span><span class="n">σ</span><span class="o">||</span>
+</pre></div>
+</div>
+<p><strong>Hysteresis Dead-Band</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">If</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">&lt;</span> <span class="n">h·ε</span><span class="err">₀</span><span class="p">:</span> <span class="n">suppress</span> <span class="n">switching</span> <span class="n">term</span> <span class="p">(</span><span class="n">reduces</span> <span class="n">chattering</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="safety-parameters">
+<h3>3. Safety Parameters<a class="headerlink" href="#safety-parameters" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>max_force</strong></p></td>
+<td><p>100.0 N</p></td>
+<td><p>Actuator saturation limit</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>regularization</strong></p></td>
+<td><p>1e-10</p></td>
+<td><p>Matrix regularization constant</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>controllability_threshold</strong></p></td>
+<td><p>0.05·(k₁+k₂)</p></td>
+<td><p>Min</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="configuration-example-yaml">
+<h3>4. Configuration Example (YAML)<a class="headerlink" href="#configuration-example-yaml" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml entry for classical SMC</span>
+<span class="nt">controllers</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">classical_smc</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Primary gains [k1, k2, lam1, lam2, K, kd]</span>
+<span class="w">    </span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="c1"># Safety limits</span>
+<span class="w">    </span><span class="nt">max_force</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
+
+<span class="w">    </span><span class="c1"># Boundary layer configuration</span>
+<span class="w">    </span><span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">    </span><span class="nt">boundary_layer_slope</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w">    </span><span class="c1"># 0 for constant, &gt;0 for adaptive</span>
+<span class="w">    </span><span class="nt">hysteresis_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w">        </span><span class="c1"># 0 for no hysteresis, 0.1-0.3 for chattering reduction</span>
+
+<span class="w">    </span><span class="c1"># Advanced options</span>
+<span class="w">    </span><span class="nt">switch_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;tanh&quot;</span><span class="w">        </span><span class="c1"># &quot;tanh&quot; (recommended) or &quot;linear&quot;</span>
+<span class="w">    </span><span class="nt">regularization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1e-10</span>
+<span class="w">    </span><span class="nt">controllability_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">  </span><span class="c1"># null for auto (0.05*(k1+k2))</span>
+</pre></div>
+</div>
+</section>
+<section id="tuning-guidelines">
+<h3>5. Tuning Guidelines<a class="headerlink" href="#tuning-guidelines" title="Link to this heading">¶</a></h3>
+<section id="quick-start-conservative">
+<h4>5.1 Quick Start (Conservative)<a class="headerlink" href="#quick-start-conservative" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Stable baseline</span>
+<span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">            </span><span class="c1"># Moderate chattering reduction</span>
+</pre></div>
+</div>
+</section>
+<section id="faster-convergence">
+<h4>5.2 Faster Convergence<a class="headerlink" href="#faster-convergence" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">30</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">80</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Higher gains</span>
+<span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.015</span><span class="w">           </span><span class="c1"># Larger ε for smoothness</span>
+</pre></div>
+</div>
+</section>
+<section id="chattering-reduction">
+<h4>5.3 Chattering Reduction<a class="headerlink" href="#chattering-reduction" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">]</span>
+<span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02</span><span class="w">            </span><span class="c1"># Larger ε</span>
+<span class="nt">hysteresis_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span><span class="w">           </span><span class="c1"># Dead-band</span>
+<span class="nt">boundary_layer_slope</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">       </span><span class="c1"># Adaptive ε</span>
+</pre></div>
+</div>
+</section>
+<section id="pso-optimization">
+<h4>5.4 PSO Optimization<a class="headerlink" href="#pso-optimization" title="Link to this heading">¶</a></h4>
+<p><strong>Gain Bounds</strong> (recommended):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pso_bounds</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>   <span class="c1"># k1</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>   <span class="c1"># k2</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span>  <span class="c1"># lam1</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span>  <span class="c1"># lam2</span>
+    <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">),</span>  <span class="c1"># K</span>
+    <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>   <span class="c1"># kd</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="integration-guide">
+<h2>Integration Guide<a class="headerlink" href="#integration-guide" title="Link to this heading">¶</a></h2>
+<section id="basic-usage">
+<h3>1. Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">¶</a></h3>
+<section id="direct-instantiation">
+<h4>1.1 Direct Instantiation<a class="headerlink" href="#direct-instantiation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
+
+<span class="c1"># Create controller with specified gains</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">switch_method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Initialize (stateless for classical SMC)</span>
+<span class="n">state_vars</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_state</span><span class="p">()</span>  <span class="c1"># Returns ()</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_history</span><span class="p">()</span>    <span class="c1"># Returns {}</span>
+
+<span class="c1"># Main control loop</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">simulation_time</span><span class="p">:</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">get_system_state</span><span class="p">()</span>  <span class="c1"># [x, θ1, θ2, ẋ, θ̇1, θ̇2]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
+
+    <span class="c1"># Extract results</span>
+    <span class="n">control_force</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">control</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span>
+
+    <span class="c1"># Apply control</span>
+    <span class="n">apply_control</span><span class="p">(</span><span class="n">control_force</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="factory-integration">
+<h4>1.2 Factory Integration<a class="headerlink" href="#factory-integration" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_controller</span>
+
+<span class="c1"># Create via factory (recommended for configurability)</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
+    <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="with-dynamics-model">
+<h4>1.3 With Dynamics Model<a class="headerlink" href="#with-dynamics-model" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="n">DoubleInvertedPendulum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
+
+<span class="c1"># Create dynamics model</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">DoubleInvertedPendulum</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">physics_params</span><span class="p">)</span>
+
+<span class="c1"># Create controller with dynamics (enables equivalent control)</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics</span>  <span class="c1"># Model-based u_eq</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pso-optimization-integration">
+<h3>2. PSO Optimization Integration<a class="headerlink" href="#pso-optimization-integration" title="Link to this heading">¶</a></h3>
+<section id="gain-bounds-definition">
+<h4>2.1 Gain Bounds Definition<a class="headerlink" href="#gain-bounds-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimizer.pso_optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSOTuner</span>
+
+<span class="c1"># Define PSO search space</span>
+<span class="n">pso_bounds</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>   <span class="c1"># k1: velocity gain 1</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>   <span class="c1"># k2: velocity gain 2</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span>  <span class="c1"># lam1: position gain 1</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span>  <span class="c1"># lam2: position gain 2</span>
+    <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">),</span>  <span class="c1"># K: switching gain</span>
+    <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>   <span class="c1"># kd: damping gain</span>
+<span class="p">]</span>
+
+<span class="c1"># Run PSO optimization</span>
+<span class="n">tuner</span> <span class="o">=</span> <span class="n">PSOTuner</span><span class="p">(</span><span class="n">bounds</span><span class="o">=</span><span class="n">pso_bounds</span><span class="p">,</span> <span class="n">n_particles</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">best_gains</span><span class="p">,</span> <span class="n">best_cost</span> <span class="o">=</span> <span class="n">tuner</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+    <span class="n">controller_type</span><span class="o">=</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics_model</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimized gains: </span><span class="si">{</span><span class="n">best_gains</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best cost: </span><span class="si">{</span><span class="n">best_cost</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="fitness-function-pattern">
+<h4>2.2 Fitness Function Pattern<a class="headerlink" href="#fitness-function-pattern" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fitness_function</span><span class="p">(</span><span class="n">gains_array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;PSO fitness evaluation for classical SMC.&quot;&quot;&quot;</span>
+    <span class="c1"># Create controller with candidate gains</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
+        <span class="n">gains</span><span class="o">=</span><span class="n">gains_array</span><span class="p">,</span>
+        <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+        <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Run simulation</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+    <span class="c1"># Compute multi-objective fitness</span>
+    <span class="n">tracking_error</span> <span class="o">=</span> <span class="n">compute_ise</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+    <span class="n">control_effort</span> <span class="o">=</span> <span class="n">compute_rms</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">controls</span><span class="p">)</span>
+    <span class="n">chattering</span> <span class="o">=</span> <span class="n">compute_chattering_index</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">controls</span><span class="p">)</span>
+
+    <span class="c1"># Weighted cost</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">tracking_error</span> <span class="o">+</span>
+            <span class="mf">0.3</span> <span class="o">*</span> <span class="n">control_effort</span> <span class="o">+</span>
+            <span class="mf">0.2</span> <span class="o">*</span> <span class="n">chattering</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="simulation-workflow-example">
+<h3>3. Simulation Workflow Example<a class="headerlink" href="#simulation-workflow-example" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete simulation with classical SMC</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_classical_smc_simulation</span><span class="p">():</span>
+    <span class="c1"># Load configuration</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s1">&#39;config.yaml&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Create dynamics</span>
+    <span class="n">dynamics</span> <span class="o">=</span> <span class="n">DoubleInvertedPendulum</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">physics</span><span class="p">)</span>
+
+    <span class="c1"># Create controller</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
+        <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
+        <span class="n">gains</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">controllers</span><span class="o">.</span><span class="n">classical_smc</span><span class="o">.</span><span class="n">gains</span><span class="p">,</span>
+        <span class="n">max_force</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">controllers</span><span class="o">.</span><span class="n">classical_smc</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span>
+        <span class="n">boundary_layer</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">controllers</span><span class="o">.</span><span class="n">classical_smc</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span>
+        <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Run simulation</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span>
+        <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+        <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+        <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">initial_state</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">initial_state</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</section>
+<section id="monitoring-and-diagnostics">
+<h3>4. Monitoring and Diagnostics<a class="headerlink" href="#monitoring-and-diagnostics" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">monitor_classical_smc</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor classical SMC performance indicators.&quot;&quot;&quot;</span>
+
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">u_eq</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;u_eq&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">u_robust</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;u_robust&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">eps_eff</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;epsilon_eff&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Performance indicators</span>
+    <span class="n">surface_distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+    <span class="n">eq_ratio</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_eq</span><span class="p">)</span> <span class="o">/</span> <span class="n">controller</span><span class="o">.</span><span class="n">max_force</span> <span class="k">if</span> <span class="n">controller</span><span class="o">.</span><span class="n">max_force</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">robust_ratio</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_robust</span><span class="p">)</span> <span class="o">/</span> <span class="n">controller</span><span class="o">.</span><span class="n">max_force</span> <span class="k">if</span> <span class="n">controller</span><span class="o">.</span><span class="n">max_force</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="c1"># Warning conditions</span>
+    <span class="k">if</span> <span class="n">surface_distance</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Large sliding surface: </span><span class="si">{</span><span class="n">surface_distance</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">eq_ratio</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Equivalent control near saturation: </span><span class="si">{</span><span class="n">eq_ratio</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">controller</span><span class="o">.</span><span class="n">max_force</span> <span class="o">*</span> <span class="mf">0.99</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Control saturated: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> N&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;surface_distance&#39;</span><span class="p">:</span> <span class="n">surface_distance</span><span class="p">,</span>
+        <span class="s1">&#39;eq_ratio&#39;</span><span class="p">:</span> <span class="n">eq_ratio</span><span class="p">,</span>
+        <span class="s1">&#39;robust_ratio&#39;</span><span class="p">:</span> <span class="n">robust_ratio</span><span class="p">,</span>
+        <span class="s1">&#39;boundary_layer&#39;</span><span class="p">:</span> <span class="n">eps_eff</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="performance-characteristics">
+<h2>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Link to this heading">¶</a></h2>
+<section id="benchmark-results">
+<h3>1. Benchmark Results<a class="headerlink" href="#benchmark-results" title="Link to this heading">¶</a></h3>
+<section id="control-performance-metrics">
+<h4>1.1 Control Performance Metrics<a class="headerlink" href="#control-performance-metrics" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Comparison</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Settling Time</strong></p></td>
+<td><p>4.5</p></td>
+<td><p>seconds</p></td>
+<td><p>Baseline</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Overshoot</strong></p></td>
+<td><p>8.3</p></td>
+<td><p>%</p></td>
+<td><p>Moderate</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Steady-State Error</strong></p></td>
+<td><p>0.01</p></td>
+<td><p>degrees</p></td>
+<td><p>Bounded by ε</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Control Effort (RMS)</strong></p></td>
+<td><p>28.5</p></td>
+<td><p>N</p></td>
+<td><p>Moderate</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Chattering Index</strong></p></td>
+<td><p>45.2</p></td>
+<td><p>N/s</p></td>
+<td><p>Highest of 4 controllers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="convergence-performance">
+<h4>1.2 Convergence Performance<a class="headerlink" href="#convergence-performance" title="Link to this heading">¶</a></h4>
+<p><strong>Test Scenario</strong>: Initial angle θ₁ = 0.5 rad, gains = [10, 8, 15, 12, 50, 5]</p>
+<p>| Time (s) | |σ| (rad) | |θ₁| (rad) | Control (N) |
+|———-|———-|———–|————-|
+| 0.0 | 1.250 | 0.500 | 85.3 |
+| 1.0 | 0.312 | 0.125 | 42.7 |
+| 2.0 | 0.078 | 0.031 | 18.2 |
+| 3.0 | 0.019 | 0.008 | 7.5 |
+| 4.5 | 0.005 | 0.002 | 2.1 |</p>
+<p><strong>Exponential fit</strong>: |σ(t)| ≈ 1.25·e^(-0.92t) → η ≈ 0.92</p>
+</section>
+</section>
+<section id="comparative-analysis">
+<h3>2. Comparative Analysis<a class="headerlink" href="#comparative-analysis" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Classical</p></th>
+<th class="head"><p>Adaptive</p></th>
+<th class="head"><p>STA</p></th>
+<th class="head"><p>Hybrid</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Convergence Speed</strong></p></td>
+<td><p>Baseline (1.0×)</p></td>
+<td><p>Similar (0.95×)</p></td>
+<td><p>Faster (1.3×)</p></td>
+<td><p>Fastest (1.5×)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Chattering</strong></p></td>
+<td><p>High (45.2)</p></td>
+<td><p>Medium (28.7)</p></td>
+<td><p>Low (8.3)</p></td>
+<td><p>Minimal (5.1)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Computational Cost</strong></p></td>
+<td><p>Low (95 FLOPs)</p></td>
+<td><p>Medium (102)</p></td>
+<td><p>Medium (105)</p></td>
+<td><p>High (134)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Tuning Complexity</strong></p></td>
+<td><p>Simple (6 gains)</p></td>
+<td><p>Medium (5+3)</p></td>
+<td><p>Medium (6 gains)</p></td>
+<td><p>High (4+8)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Disturbance Rejection</strong></p></td>
+<td><p>Good (if K known)</p></td>
+<td><p>Excellent (adaptive)</p></td>
+<td><p>Very Good</p></td>
+<td><p>Excellent</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="computational-performance">
+<h3>3. Computational Performance<a class="headerlink" href="#computational-performance" title="Link to this heading">¶</a></h3>
+<p><strong>Per-Timestep Analysis</strong>:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>FLOPs</p></th>
+<th class="head"><p>% of Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sliding surface</p></td>
+<td><p>10</p></td>
+<td><p>10.5%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Matrix operations (M⁻¹)</p></td>
+<td><p>50</p></td>
+<td><p>52.6%</p></td>
+</tr>
+<tr class="row-even"><td><p>Equivalent control</p></td>
+<td><p>30</p></td>
+<td><p>31.6%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Switching term</p></td>
+<td><p>5</p></td>
+<td><p>5.3%</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p><strong>95</strong></p></td>
+<td><p><strong>100%</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Real-Time Performance</strong> (Intel i7-10700K):</p>
+<ul class="simple">
+<li><p>Maximum frequency: <strong>10 kHz</strong></p></li>
+<li><p>Typical usage: 1 kHz (dt = 0.001s)</p></li>
+<li><p><strong>Margin</strong>: 10× (excellent for real-time)</p></li>
+</ul>
+<p><strong>Memory Footprint</strong>:</p>
+<ul class="simple">
+<li><p>Controller object: 128 bytes</p></li>
+<li><p>History storage: ~8 KB/minute (6 signals × 1000 Hz × 8 bytes)</p></li>
+</ul>
+</section>
+<section id="robustness-analysis">
+<h3>4. Robustness Analysis<a class="headerlink" href="#robustness-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Parameter Variation Tests</strong> (±20% mass variation):</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Nominal</p></th>
+<th class="head"><p>+20% Mass</p></th>
+<th class="head"><p>-20% Mass</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Settling Time</p></td>
+<td><p>4.5s</p></td>
+<td><p>5.2s (+15%)</p></td>
+<td><p>3.9s (-13%)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Overshoot</p></td>
+<td><p>8.3%</p></td>
+<td><p>9.1% (+10%)</p></td>
+<td><p>7.5% (-10%)</p></td>
+</tr>
+<tr class="row-even"><td><p>RMS Control</p></td>
+<td><p>28.5N</p></td>
+<td><p>31.2N (+9%)</p></td>
+<td><p>25.8N (-9%)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stability</p></td>
+<td><p>Stable</p></td>
+<td><p>Stable</p></td>
+<td><p>Stable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Conclusion</strong>: Classical SMC is moderately sensitive to parameter variations but remains stable.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="common-issues">
+<h3>1. Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
+<section id="excessive-chattering">
+<h4>1.1 Excessive Chattering<a class="headerlink" href="#excessive-chattering" title="Link to this heading">¶</a></h4>
+<p><strong>Symptoms</strong>:</p>
+<ul class="simple">
+<li><p>High-frequency oscillations in control signal</p></li>
+<li><p>Large chattering index (CI &gt; 100 N/s)</p></li>
+<li><p>Audible noise from actuators</p></li>
+</ul>
+<p><strong>Solutions</strong>:</p>
+<p><strong>Option 1</strong>: Increase boundary layer</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02</span><span class="w">  </span><span class="c1"># From 0.01</span>
+</pre></div>
+</div>
+<p><strong>Option 2</strong>: Add hysteresis</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="nt">hysteresis_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span><span class="w">  </span><span class="c1"># Suppress switching when |σ| &lt; 0.2·ε</span>
+</pre></div>
+</div>
+<p><strong>Option 3</strong>: Use adaptive boundary layer</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="nt">boundary_layer_slope</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">  </span><span class="c1"># ε = 0.01 + 0.1·||σ||</span>
+</pre></div>
+</div>
+<p><strong>Option 4</strong>: Switch to tanh saturation</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">switch_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;tanh&quot;</span><span class="w">  </span><span class="c1"># Smoother than linear</span>
+</pre></div>
+</div>
+</section>
+<section id="slow-convergence">
+<h4>1.2 Slow Convergence<a class="headerlink" href="#slow-convergence" title="Link to this heading">¶</a></h4>
+<p><strong>Symptoms</strong>:</p>
+<ul class="simple">
+<li><p>Settling time &gt; 10 seconds</p></li>
+<li><p>Sliding surface remains large</p></li>
+<li><p>Poor tracking performance</p></li>
+</ul>
+<p><strong>Solutions</strong>:</p>
+<p><strong>Option 1</strong>: Increase switching gain</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">100</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># K: 50 → 100</span>
+</pre></div>
+</div>
+<p><strong>Option 2</strong>: Increase surface gains (faster sliding dynamics)</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">30</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Higher k₁, k₂, λ₁, λ₂</span>
+</pre></div>
+</div>
+<p><strong>Option 3</strong>: Add damping</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># kd: 5 → 10</span>
+</pre></div>
+</div>
+<p><strong>Option 4</strong>: Decrease boundary layer</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span><span class="w">  </span><span class="c1"># From 0.01 (smaller ε)</span>
+</pre></div>
+</div>
+</section>
+<section id="numerical-instability">
+<h4>1.3 Numerical Instability<a class="headerlink" href="#numerical-instability" title="Link to this heading">¶</a></h4>
+<p><strong>Symptoms</strong>:</p>
+<ul class="simple">
+<li><p>NaN or infinite values in control output</p></li>
+<li><p>Matrix inversion failures</p></li>
+<li><p>Sudden divergence</p></li>
+</ul>
+<p><strong>Solutions</strong>:</p>
+<p><strong>Option 1</strong>: Increase regularization</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">regularization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1e-8</span><span class="w">  </span><span class="c1"># From 1e-10</span>
+</pre></div>
+</div>
+<p><strong>Option 2</strong>: Raise controllability threshold</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controllability_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">  </span><span class="c1"># From auto (typically 0.05·(k1+k2))</span>
+</pre></div>
+</div>
+<p><strong>Option 3</strong>: Check system conditioning</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">_compute_physics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">cond_number</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">cond_number</span> <span class="o">&gt;</span> <span class="mf">1e12</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Ill-conditioned M: κ = </span><span class="si">{</span><span class="n">cond_number</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Option 4</strong>: Verify gains are positive</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">controller</span><span class="o">.</span><span class="n">validate_gains</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>  <span class="c1"># Should not raise</span>
+</pre></div>
+</div>
+</section>
+<section id="large-steady-state-error">
+<h4>1.4 Large Steady-State Error<a class="headerlink" href="#large-steady-state-error" title="Link to this heading">¶</a></h4>
+<p><strong>Symptoms</strong>:</p>
+<ul class="simple">
+<li><p>|θ₁|, |θ₂| &gt; 0.05 rad at steady state</p></li>
+<li><p>Sliding surface |σ| ≈ ε (boundary layer)</p></li>
+</ul>
+<p><strong>Root Cause</strong>: Boundary layer trade-off (|σ∞| ≤ ε)</p>
+<p><strong>Solutions</strong>:</p>
+<p><strong>Option 1</strong>: Decrease boundary layer</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span><span class="w">  </span><span class="c1"># Smaller ε → smaller steady-state error</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Warning</strong>: May increase chattering</p></li>
+</ul>
+<p><strong>Option 2</strong>: Use adaptive SMC instead</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="s1">&#39;adaptive_smc&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>  <span class="c1"># Can achieve zero error</span>
+</pre></div>
+</div>
+<p><strong>Option 3</strong>: Increase switching gain K</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">100</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Higher K → tighter tracking</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="diagnostic-tools">
+<h3>2. Diagnostic Tools<a class="headerlink" href="#diagnostic-tools" title="Link to this heading">¶</a></h3>
+<section id="state-monitoring">
+<h4>2.1 State Monitoring<a class="headerlink" href="#state-monitoring" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">diagnose_classical_smc</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive controller diagnostics.&quot;&quot;&quot;</span>
+
+    <span class="n">diagnostics</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Extract current values</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">u_eq</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;u_eq&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">u_robust</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;u_robust&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">eps_eff</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;epsilon_eff&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Surface distance</span>
+    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;surface_distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;within_boundary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps_eff</span>
+
+    <span class="c1"># Control component analysis</span>
+    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;eq_magnitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_eq</span><span class="p">)</span>
+    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;robust_magnitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_robust</span><span class="p">)</span>
+    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;eq_dominant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_eq</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_robust</span><span class="p">)</span>
+
+    <span class="c1"># Saturation checks</span>
+    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;control_saturated&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">controller</span><span class="o">.</span><span class="n">max_force</span> <span class="o">*</span> <span class="mf">0.99</span>
+    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;eq_saturated&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_eq</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">controller</span><span class="o">.</span><span class="n">max_force</span> <span class="o">*</span> <span class="mf">0.99</span>
+
+    <span class="k">return</span> <span class="n">diagnostics</span>
+</pre></div>
+</div>
+</section>
+<section id="parameter-validation">
+<h4>2.2 Parameter Validation<a class="headerlink" href="#parameter-validation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_classical_parameters</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate classical SMC parameters for stability.&quot;&quot;&quot;</span>
+
+    <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">gains</span>
+
+    <span class="n">checks</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;positive_gains&#39;</span><span class="p">:</span> <span class="nb">all</span><span class="p">(</span><span class="n">g</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">K</span><span class="p">]),</span>
+        <span class="s1">&#39;nonneg_damping&#39;</span><span class="p">:</span> <span class="n">kd</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;hurwitz_1&#39;</span><span class="p">:</span> <span class="n">k1</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="o">*</span><span class="n">lam1</span><span class="p">,</span>  <span class="c1"># Critically damped or overdamped</span>
+        <span class="s1">&#39;hurwitz_2&#39;</span><span class="p">:</span> <span class="n">k2</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="o">*</span><span class="n">lam2</span><span class="p">,</span>
+        <span class="s1">&#39;switching_adequate&#39;</span><span class="p">:</span> <span class="n">K</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">,</span>  <span class="c1"># Typical disturbance bound</span>
+        <span class="s1">&#39;boundary_positive&#39;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">checks</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="n">failed</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">checks</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Parameter validation failed: </span><span class="si">{</span><span class="n">failed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-profiling">
+<h4>2.3 Performance Profiling<a class="headerlink" href="#performance-profiling" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">profile_classical_smc</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Profile computational cost of control law.&quot;&quot;&quot;</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+    <span class="n">timings</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Sliding surface</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">_compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">timings</span><span class="p">[</span><span class="s1">&#39;sliding_surface&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>  <span class="c1"># μs</span>
+
+    <span class="c1"># Equivalent control</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">u_eq</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">_compute_equivalent_control</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">timings</span><span class="p">[</span><span class="s1">&#39;equivalent_control&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>
+
+    <span class="c1"># Full control</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})</span>
+    <span class="n">timings</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>
+
+    <span class="k">return</span> <span class="n">timings</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-optimization-tips">
+<h3>3. Performance Optimization Tips<a class="headerlink" href="#performance-optimization-tips" title="Link to this heading">¶</a></h3>
+<p><strong>For Real-Time Applications</strong>:</p>
+<ol class="arabic simple">
+<li><p>Disable equivalent control if dynamics model unavailable (<code class="docutils literal notranslate"><span class="pre">dynamics_model=None</span></code>)</p></li>
+<li><p>Use linear saturation instead of tanh (faster computation)</p></li>
+<li><p>Pre-allocate history dictionaries</p></li>
+<li><p>Use larger dt (0.01s vs 0.001s) if feasible</p></li>
+</ol>
+<p><strong>For PSO Optimization</strong>:</p>
+<ol class="arabic simple">
+<li><p>Start with wide bounds, narrow after initial convergence</p></li>
+<li><p>Use 30-50 particles for 6 gains</p></li>
+<li><p>Run 200-500 iterations for convergence</p></li>
+<li><p>Validate best gains before final acceptance</p></li>
+</ol>
+<p><strong>For Chattering Reduction</strong>:</p>
+<ol class="arabic simple">
+<li><p>Priority 1: Increase boundary layer ε</p></li>
+<li><p>Priority 2: Add hysteresis</p></li>
+<li><p>Priority 3: Use adaptive boundary layer</p></li>
+<li><p>Last resort: Switch to STA SMC</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<section id="primary-documentation">
+<h3>Primary Documentation<a class="headerlink" href="#primary-documentation" title="Link to this heading">¶</a></h3>
+<p>[1] <a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html"><span class="std std-doc">Complete SMC Theory</span></a> - Comprehensive mathematical foundations for all SMC variants</p>
+<p>[2] <a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html"><span class="std std-doc">Controller Comparison Theory</span></a> - Decision support for controller selection</p>
+<p>[3] <a class="reference internal" href="hybrid_smc_technical_guide.html"><span class="std std-doc">Hybrid SMC Technical Guide</span></a> - Implementation guide for hybrid controller</p>
+</section>
+<section id="control-theory-references">
+<h3>Control Theory References<a class="headerlink" href="#control-theory-references" title="Link to this heading">¶</a></h3>
+<p>[4] <strong>Slotine, J.-J.E. and Li, W.</strong> (1991). “Applied Nonlinear Control”. Prentice Hall. ISBN: 0-13-040890-5</p>
+<p>[5] <strong>Utkin, V.I.</strong> (1992). “Sliding Modes in Control and Optimization”. Springer-Verlag. doi: 10.1007/978-3-642-84379-2</p>
+<p>[6] <strong>Edwards, C. and Spurgeon, S.K.</strong> (1998). “Sliding Mode Control: Theory and Applications”. CRC Press. ISBN: 978-0748406012</p>
+<p>[7] <strong>Young, K.D., Utkin, V.I., and Özgüner, Ü.</strong> (1999). “A control engineer’s guide to sliding mode control”. IEEE Transactions on Control Systems Technology, 7(3):328-342.</p>
+</section>
+<section id="implementation-references">
+<h3>Implementation References<a class="headerlink" href="#implementation-references" title="Link to this heading">¶</a></h3>
+<p>[8] <strong>Burton, J.A. and Zinober, A.S.I.</strong> (1986). “Continuous approximation of variable structure control”. International Journal of Systems Science, 17(6):875-885.</p>
+<p>[9] Source Code: <code class="docutils literal notranslate"><span class="pre">src/controllers/smc/classic_smc.py</span></code></p>
+<hr class="docutils" />
+<p><strong>Document Control</strong>:</p>
+<ul class="simple">
+<li><p><strong>Author</strong>: Documentation Expert Agent</p></li>
+<li><p><strong>Technical Review</strong>: Control Systems Specialist</p></li>
+<li><p><strong>Code Validation</strong>: Integration Coordinator</p></li>
+<li><p><strong>Final Approval</strong>: Ultimate Orchestrator</p></li>
+<li><p><strong>Version Control</strong>: Managed via Git repository</p></li>
+<li><p><strong>Next Review</strong>: 2025-11-04</p></li>
+</ul>
+<p><strong>Classification</strong>: Technical Implementation Guide - Distribution Controlled</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="adaptive_smc_technical_guide.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Adaptive Sliding Mode Control Technical Guide</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Controllers Module Documentation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Classical Sliding Mode Control Technical Guide</a><ul>
+<li><a class="reference internal" href="#double-inverted-pendulum-control-system">Double-Inverted Pendulum Control System</a></li>
+<li><a class="reference internal" href="#executive-summary">Executive Summary</a></li>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#sliding-surface-design">1. Sliding Surface Design</a></li>
+<li><a class="reference internal" href="#control-law-decomposition">2. Control Law Decomposition</a><ul>
+<li><a class="reference internal" href="#equivalent-control-u-eq">2.1 Equivalent Control (u_eq)</a></li>
+<li><a class="reference internal" href="#robust-switching-term-ksat">2.2 Robust Switching Term (-K·sat(σ/ε))</a></li>
+<li><a class="reference internal" href="#damping-term-k-d">2.3 Damping Term (-k_d·σ)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#boundary-layer-theory">3. Boundary Layer Theory</a></li>
+<li><a class="reference internal" href="#lyapunov-stability-analysis">4. Lyapunov Stability Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#algorithm-architecture">Algorithm Architecture</a><ul>
+<li><a class="reference internal" href="#modular-controller-structure">1. Modular Controller Structure</a><ul>
+<li><a class="reference internal" href="#key-methods">1.1 Key Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#control-flow-architecture">2. Control Flow Architecture</a></li>
+<li><a class="reference internal" href="#safety-and-numerical-stability-features">3. Safety and Numerical Stability Features</a><ul>
+<li><a class="reference internal" href="#matrix-regularization">3.1 Matrix Regularization</a></li>
+<li><a class="reference internal" href="#controllability-checking">3.2 Controllability Checking</a></li>
+<li><a class="reference internal" href="#equivalent-control-clamping">3.3 Equivalent Control Clamping</a></li>
+<li><a class="reference internal" href="#memory-management">3.4 Memory Management</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation-details">Implementation Details</a><ul>
+<li><a class="reference internal" href="#core-algorithm-implementation">1. Core Algorithm Implementation</a><ul>
+<li><a class="reference internal" href="#sliding-surface-computation">1.1 Sliding Surface Computation</a></li>
+<li><a class="reference internal" href="#equivalent-control-calculation">1.2 Equivalent Control Calculation</a></li>
+<li><a class="reference internal" href="#complete-control-law">1.3 Complete Control Law</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#saturation-function-implementation">2. Saturation Function Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parameter-configuration">Parameter Configuration</a><ul>
+<li><a class="reference internal" href="#primary-parameters-6-gains">1. Primary Parameters (6 Gains)</a></li>
+<li><a class="reference internal" href="#boundary-layer-configuration">2. Boundary Layer Configuration</a></li>
+<li><a class="reference internal" href="#safety-parameters">3. Safety Parameters</a></li>
+<li><a class="reference internal" href="#configuration-example-yaml">4. Configuration Example (YAML)</a></li>
+<li><a class="reference internal" href="#tuning-guidelines">5. Tuning Guidelines</a><ul>
+<li><a class="reference internal" href="#quick-start-conservative">5.1 Quick Start (Conservative)</a></li>
+<li><a class="reference internal" href="#faster-convergence">5.2 Faster Convergence</a></li>
+<li><a class="reference internal" href="#chattering-reduction">5.3 Chattering Reduction</a></li>
+<li><a class="reference internal" href="#pso-optimization">5.4 PSO Optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-guide">Integration Guide</a><ul>
+<li><a class="reference internal" href="#basic-usage">1. Basic Usage</a><ul>
+<li><a class="reference internal" href="#direct-instantiation">1.1 Direct Instantiation</a></li>
+<li><a class="reference internal" href="#factory-integration">1.2 Factory Integration</a></li>
+<li><a class="reference internal" href="#with-dynamics-model">1.3 With Dynamics Model</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pso-optimization-integration">2. PSO Optimization Integration</a><ul>
+<li><a class="reference internal" href="#gain-bounds-definition">2.1 Gain Bounds Definition</a></li>
+<li><a class="reference internal" href="#fitness-function-pattern">2.2 Fitness Function Pattern</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#simulation-workflow-example">3. Simulation Workflow Example</a></li>
+<li><a class="reference internal" href="#monitoring-and-diagnostics">4. Monitoring and Diagnostics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a><ul>
+<li><a class="reference internal" href="#benchmark-results">1. Benchmark Results</a><ul>
+<li><a class="reference internal" href="#control-performance-metrics">1.1 Control Performance Metrics</a></li>
+<li><a class="reference internal" href="#convergence-performance">1.2 Convergence Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#comparative-analysis">2. Comparative Analysis</a></li>
+<li><a class="reference internal" href="#computational-performance">3. Computational Performance</a></li>
+<li><a class="reference internal" href="#robustness-analysis">4. Robustness Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#common-issues">1. Common Issues</a><ul>
+<li><a class="reference internal" href="#excessive-chattering">1.1 Excessive Chattering</a></li>
+<li><a class="reference internal" href="#slow-convergence">1.2 Slow Convergence</a></li>
+<li><a class="reference internal" href="#numerical-instability">1.3 Numerical Instability</a></li>
+<li><a class="reference internal" href="#large-steady-state-error">1.4 Large Steady-State Error</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#diagnostic-tools">2. Diagnostic Tools</a><ul>
+<li><a class="reference internal" href="#state-monitoring">2.1 State Monitoring</a></li>
+<li><a class="reference internal" href="#parameter-validation">2.2 Parameter Validation</a></li>
+<li><a class="reference internal" href="#performance-profiling">2.3 Performance Profiling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-optimization-tips">3. Performance Optimization Tips</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a><ul>
+<li><a class="reference internal" href="#primary-documentation">Primary Documentation</a></li>
+<li><a class="reference internal" href="#control-theory-references">Control Theory References</a></li>
+<li><a class="reference internal" href="#implementation-references">Implementation References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

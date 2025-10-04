@@ -1,0 +1,1079 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>System Diagrams - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/visual/system_diagrams.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/visual/system_diagrams.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="system-diagrams">
+<h1>System Diagrams<a class="headerlink" href="#system-diagrams" title="Link to this heading">¶</a></h1>
+<p>This section provides comprehensive visual representations of the double-inverted pendulum system, including physical structure, coordinate systems, and signal flow diagrams.</p>
+<section id="physical-system-architecture">
+<h2>Physical System Architecture<a class="headerlink" href="#physical-system-architecture" title="Link to this heading">¶</a></h2>
+<section id="double-inverted-pendulum-structure">
+<h3>Double-Inverted Pendulum Structure<a class="headerlink" href="#double-inverted-pendulum-structure" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart TB
+    subgraph &quot;Physical Plant&quot;
+        direction TB
+        Cart[Cart&lt;br/&gt;Mass: m₀ = 1.0 kg&lt;br/&gt;Position: x(t)]
+
+        subgraph &quot;Pendulum Assembly&quot;
+            Pend1[Pendulum 1&lt;br/&gt;Mass: m₁ = 0.1 kg&lt;br/&gt;Length: l₁ = 0.5 m&lt;br/&gt;Angle: θ₁(t)]
+            Pend2[Pendulum 2&lt;br/&gt;Mass: m₂ = 0.1 kg&lt;br/&gt;Length: l₂ = 0.5 m&lt;br/&gt;Angle: θ₂(t)]
+        end
+
+        Cart --&gt; Pend1
+        Pend1 --&gt; Pend2
+    end
+
+    subgraph &quot;Actuation System&quot;
+        Motor[DC Motor&lt;br/&gt;Force: u(t)&lt;br/&gt;Range: ±50 N]
+        Amplifier[Power Amplifier&lt;br/&gt;Voltage: ±10 V]
+        Controller[Digital Controller&lt;br/&gt;Sample Rate: 1 kHz]
+    end
+
+    subgraph &quot;Sensing System&quot;
+        PosSensor[Position Encoder&lt;br/&gt;Resolution: 0.1 mm&lt;br/&gt;Measurement: x(t)]
+        AngleSensor1[Angle Encoder 1&lt;br/&gt;Resolution: 0.01°&lt;br/&gt;Measurement: θ₁(t)]
+        AngleSensor2[Angle Encoder 2&lt;br/&gt;Resolution: 0.01°&lt;br/&gt;Measurement: θ₂(t)]
+    end
+
+    Controller --&gt; Amplifier
+    Amplifier --&gt; Motor
+    Motor --&gt;|Force u(t)| Cart
+
+    Cart --&gt; PosSensor
+    Pend1 --&gt; AngleSensor1
+    Pend2 --&gt; AngleSensor2
+
+    PosSensor --&gt; Controller
+    AngleSensor1 --&gt; Controller
+    AngleSensor2 --&gt; Controller
+
+    style Cart fill:#e1f5fe
+    style Pend1 fill:#f3e5f5
+    style Pend2 fill:#f3e5f5
+    style Controller fill:#e8f5e8
+        </div></section>
+<section id="coordinate-system-definition">
+<h3>Coordinate System Definition<a class="headerlink" href="#coordinate-system-definition" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart LR
+    subgraph &quot;Coordinate Frame&quot;
+        Origin[Origin&lt;br/&gt;Fixed Point&lt;br/&gt;x = 0]
+        XAxis[X-Axis&lt;br/&gt;Horizontal&lt;br/&gt;Positive → Right]
+        YAxis[Y-Axis&lt;br/&gt;Vertical&lt;br/&gt;Positive ↑ Up]
+    end
+
+    subgraph &quot;Generalized Coordinates&quot;
+        CartPos[Cart Position&lt;br/&gt;x(t) ∈ ℝ&lt;br/&gt;Range: ±2 m]
+        Angle1[Pendulum 1 Angle&lt;br/&gt;θ₁(t) ∈ ℝ&lt;br/&gt;Upward = 0]
+        Angle2[Pendulum 2 Angle&lt;br/&gt;θ₂(t) ∈ ℝ&lt;br/&gt;Upward = 0]
+    end
+
+    subgraph &quot;State Vector&quot;
+        StateVec[q⃗(t) = [x, θ₁, θ₂]ᵀ&lt;br/&gt;x⃗(t) = [q⃗ᵀ, q⃗̇ᵀ]ᵀ ∈ ℝ⁶]
+    end
+
+    Origin --&gt; CartPos
+    XAxis --&gt; CartPos
+    YAxis --&gt; Angle1
+    YAxis --&gt; Angle2
+
+    CartPos --&gt; StateVec
+    Angle1 --&gt; StateVec
+    Angle2 --&gt; StateVec
+
+    style Origin fill:#fff3e0
+    style StateVec fill:#e8f5e8
+        </div></section>
+</section>
+<section id="control-system-architecture">
+<h2>Control System Architecture<a class="headerlink" href="#control-system-architecture" title="Link to this heading">¶</a></h2>
+<section id="complete-control-loop">
+<h3>Complete Control Loop<a class="headerlink" href="#complete-control-loop" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart TB
+    subgraph &quot;Reference Generation&quot;
+        RefGen[Reference Generator&lt;br/&gt;Trajectory Planning]
+        RefSignals[x_ref(t), θ₁_ref(t), θ₂_ref(t)&lt;br/&gt;ẋ_ref(t), θ̇₁_ref(t), θ̇₂_ref(t)]
+    end
+
+    subgraph &quot;Control System&quot;
+        ErrorCalc[Error Calculation&lt;br/&gt;e⃗(t) = x⃗(t) - x⃗_ref(t)]
+
+        subgraph &quot;SMC Controller Selection&quot;
+            ClassicalSMC[Classical SMC&lt;br/&gt;Boundary Layer Method]
+            SuperTwisting[Super-Twisting SMC&lt;br/&gt;Continuous Control]
+            AdaptiveSMC[Adaptive SMC&lt;br/&gt;Parameter Estimation]
+            HybridSMC[Hybrid Adaptive STA&lt;br/&gt;Best Performance]
+        end
+
+        SlidingSurface[Sliding Surface&lt;br/&gt;s(x⃗) = Sx⃗ = 0]
+        ControlLaw[Control Law&lt;br/&gt;u = u_eq + u_sw]
+    end
+
+    subgraph &quot;Plant Dynamics&quot;
+        PlantEq[M(q⃗)q⃗̈ + C(q⃗,q⃗̇)q⃗̇ + G(q⃗) = Bu⃗]
+        StateUpdate[State Integration&lt;br/&gt;ẋ⃗ = f(x⃗, u)]
+        OutputEq[y⃗ = Cx⃗&lt;br/&gt;Measured States]
+    end
+
+    subgraph &quot;Parameter Optimization&quot;
+        PSO[PSO Optimizer&lt;br/&gt;Automated Tuning]
+        ObjectiveFunc[J(θ) = w₁J_e + w₂J_u + w₃J_s]
+        ConstraintCheck[Stability Constraints&lt;br/&gt;Performance Bounds]
+    end
+
+    RefGen --&gt; RefSignals
+    RefSignals --&gt; ErrorCalc
+    OutputEq --&gt; ErrorCalc
+
+    ErrorCalc --&gt; ClassicalSMC
+    ErrorCalc --&gt; SuperTwisting
+    ErrorCalc --&gt; AdaptiveSMC
+    ErrorCalc --&gt; HybridSMC
+
+    ClassicalSMC --&gt; SlidingSurface
+    SuperTwisting --&gt; SlidingSurface
+    AdaptiveSMC --&gt; SlidingSurface
+    HybridSMC --&gt; SlidingSurface
+
+    SlidingSurface --&gt; ControlLaw
+    ControlLaw --&gt; PlantEq
+    PlantEq --&gt; StateUpdate
+    StateUpdate --&gt; OutputEq
+
+    ControlLaw --&gt; ObjectiveFunc
+    ObjectiveFunc --&gt; PSO
+    PSO --&gt; ConstraintCheck
+    ConstraintCheck --&gt; ClassicalSMC
+    ConstraintCheck --&gt; SuperTwisting
+    ConstraintCheck --&gt; AdaptiveSMC
+    ConstraintCheck --&gt; HybridSMC
+
+    style SlidingSurface fill:#f3e5f5
+    style PSO fill:#e1f5fe
+    style PlantEq fill:#fff3e0
+        </div></section>
+<section id="signal-flow-diagram">
+<h3>Signal Flow Diagram<a class="headerlink" href="#signal-flow-diagram" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart LR
+    subgraph &quot;Input Signals&quot;
+        RefTraj[Reference&lt;br/&gt;Trajectory&lt;br/&gt;x⃗_ref(t)]
+        Disturbance[External&lt;br/&gt;Disturbances&lt;br/&gt;d⃗(t)]
+    end
+
+    subgraph &quot;Controller Processing&quot;
+        ErrorComp[Error&lt;br/&gt;e⃗ = x⃗ - x⃗_ref]
+        SlidingCalc[Sliding Surface&lt;br/&gt;s = Se⃗]
+        EquivControl[Equivalent Control&lt;br/&gt;u_eq = (SB)⁻¹[Sf̂ - Sẋ_ref]]
+        SwitchControl[Switching Control&lt;br/&gt;u_sw = -η sign(s)]
+        ControlSum[Control Sum&lt;br/&gt;u = u_eq + u_sw]
+    end
+
+    subgraph &quot;Plant Response&quot;
+        PlantDyn[Plant Dynamics&lt;br/&gt;ẋ⃗ = f(x⃗, u) + d⃗]
+        StateOut[System State&lt;br/&gt;x⃗(t)]
+        MeasuredOut[Measured Output&lt;br/&gt;y⃗ = Cx⃗ + v⃗]
+    end
+
+    subgraph &quot;Feedback Path&quot;
+        StateFeedback[State Feedback&lt;br/&gt;Complete State]
+        NoiseFilter[Noise Filtering&lt;br/&gt;Kalman Filter]
+    end
+
+    RefTraj --&gt; ErrorComp
+    MeasuredOut --&gt; ErrorComp
+
+    ErrorComp --&gt; SlidingCalc
+    SlidingCalc --&gt; EquivControl
+    SlidingCalc --&gt; SwitchControl
+
+    EquivControl --&gt; ControlSum
+    SwitchControl --&gt; ControlSum
+
+    ControlSum --&gt; PlantDyn
+    Disturbance --&gt; PlantDyn
+    PlantDyn --&gt; StateOut
+    StateOut --&gt; MeasuredOut
+
+    MeasuredOut --&gt; NoiseFilter
+    NoiseFilter --&gt; StateFeedback
+    StateFeedback --&gt; ErrorComp
+
+    style ErrorComp fill:#f3e5f5
+    style SlidingCalc fill:#e8f5e8
+    style PlantDyn fill:#e1f5fe
+        </div></section>
+</section>
+<section id="mathematical-representation">
+<h2>Mathematical Representation<a class="headerlink" href="#mathematical-representation" title="Link to this heading">¶</a></h2>
+<section id="state-space-block-diagram">
+<h3>State-Space Block Diagram<a class="headerlink" href="#state-space-block-diagram" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart TB
+    subgraph &quot;State-Space Representation&quot;
+        StateEq[State Equation&lt;br/&gt;ẋ⃗ = [q⃗̇&lt;br/&gt;M⁻¹(Bu - Cq⃗̇ - G)]]
+        OutputEq[Output Equation&lt;br/&gt;y⃗ = [x, θ₁, θ₂]ᵀ]
+        StateVector[State Vector&lt;br/&gt;x⃗ = [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]ᵀ]
+    end
+
+    subgraph &quot;Matrix Components&quot;
+        MassMatrix[Inertia Matrix&lt;br/&gt;M(q⃗) ∈ ℝ³ˣ³&lt;br/&gt;Positive Definite]
+        CoriolisMatrix[Coriolis Matrix&lt;br/&gt;C(q⃗,q⃗̇) ∈ ℝ³ˣ³&lt;br/&gt;Velocity Dependent]
+        GravityVector[Gravity Vector&lt;br/&gt;G(q⃗) ∈ ℝ³&lt;br/&gt;Configuration Dependent]
+        InputMatrix[Input Matrix&lt;br/&gt;B = [1, 0, 0]ᵀ]
+    end
+
+    subgraph &quot;Properties&quot;
+        Controllability[Controllability&lt;br/&gt;rank(𝒞) = 6&lt;br/&gt;Fully Controllable]
+        Observability[Observability&lt;br/&gt;rank(𝒪) = 6&lt;br/&gt;Fully Observable]
+        Stability[Stability&lt;br/&gt;Unstable Equilibrium&lt;br/&gt;Requires Control]
+    end
+
+    StateVector --&gt; StateEq
+    StateEq --&gt; OutputEq
+
+    MassMatrix --&gt; StateEq
+    CoriolisMatrix --&gt; StateEq
+    GravityVector --&gt; StateEq
+    InputMatrix --&gt; StateEq
+
+    StateEq --&gt; Controllability
+    OutputEq --&gt; Observability
+    StateVector --&gt; Stability
+
+    style StateEq fill:#f3e5f5
+    style Stability fill:#fff3e0
+        </div></section>
+<section id="energy-flow-diagram">
+<h3>Energy Flow Diagram<a class="headerlink" href="#energy-flow-diagram" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart LR
+    subgraph &quot;Energy Sources&quot;
+        ElectricalEnergy[Electrical Energy&lt;br/&gt;Motor Input&lt;br/&gt;P_in = u·i]
+        GravitationalPE[Gravitational PE&lt;br/&gt;V = mgh&lt;br/&gt;Conservative]
+    end
+
+    subgraph &quot;Energy Storage&quot;
+        KineticEnergy[Kinetic Energy&lt;br/&gt;T = ½x⃗ᵀM(q⃗)x⃗̇&lt;br/&gt;Motion Energy]
+        PotentialEnergy[Potential Energy&lt;br/&gt;V = V_gravity&lt;br/&gt;Position Energy]
+    end
+
+    subgraph &quot;Energy Dissipation&quot;
+        FrictionLoss[Friction Losses&lt;br/&gt;P_friction = bẋ²&lt;br/&gt;Non-Conservative]
+        ElectricalLoss[Electrical Losses&lt;br/&gt;Motor Inefficiency&lt;br/&gt;Heat Generation]
+    end
+
+    subgraph &quot;Control Energy&quot;
+        ControlPower[Control Power&lt;br/&gt;P_control = u·ẋ&lt;br/&gt;Energy Injection]
+        OptimalControl[Optimal Control&lt;br/&gt;Minimize Energy&lt;br/&gt;Subject to Performance]
+    end
+
+    ElectricalEnergy --&gt; ControlPower
+    ControlPower --&gt; KineticEnergy
+    GravitationalPE --&gt; PotentialEnergy
+
+    KineticEnergy --&gt; FrictionLoss
+    ElectricalEnergy --&gt; ElectricalLoss
+
+    ControlPower --&gt; OptimalControl
+    OptimalControl --&gt; KineticEnergy
+    OptimalControl --&gt; PotentialEnergy
+
+    style KineticEnergy fill:#e8f5e8
+    style ControlPower fill:#f3e5f5
+    style OptimalControl fill:#e1f5fe
+        </div></section>
+</section>
+<section id="implementation-architecture">
+<h2>Implementation Architecture<a class="headerlink" href="#implementation-architecture" title="Link to this heading">¶</a></h2>
+<section id="software-module-hierarchy">
+<h3>Software Module Hierarchy<a class="headerlink" href="#software-module-hierarchy" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart TB
+    subgraph &quot;Application Layer&quot;
+        CLI[Command Line Interface&lt;br/&gt;simulate.py&lt;br/&gt;Main Entry Point]
+        WebApp[Streamlit Web App&lt;br/&gt;streamlit_app.py&lt;br/&gt;Interactive Interface]
+        JupyterNB[Jupyter Notebooks&lt;br/&gt;Analysis &amp; Visualization&lt;br/&gt;Research Tools]
+    end
+
+    subgraph &quot;Control Layer&quot;
+        ControlFactory[Controller Factory&lt;br/&gt;src.controllers.factory&lt;br/&gt;Dynamic Selection]
+
+        subgraph &quot;Controller Implementations&quot;
+            ClassicCtrl[Classical SMC&lt;br/&gt;src.controllers.classic_smc&lt;br/&gt;Boundary Layer Method]
+            STACtrl[Super-Twisting SMC&lt;br/&gt;src.controllers.sta_smc&lt;br/&gt;Continuous Control]
+            AdaptiveCtrl[Adaptive SMC&lt;br/&gt;src.controllers.adaptive_smc&lt;br/&gt;Parameter Estimation]
+            HybridCtrl[Hybrid Adaptive STA&lt;br/&gt;src.controllers.hybrid_adaptive_sta_smc&lt;br/&gt;Best Performance]
+        end
+    end
+
+    subgraph &quot;Simulation Layer&quot;
+        SimRunner[Simulation Runner&lt;br/&gt;src.core.simulation_runner&lt;br/&gt;Integration Engine]
+        SimContext[Simulation Context&lt;br/&gt;src.core.simulation_context&lt;br/&gt;State Management]
+        VectorSim[Vector Simulation&lt;br/&gt;src.core.vector_sim&lt;br/&gt;Batch Processing]
+    end
+
+    subgraph &quot;Physics Layer&quot;
+        DynamicsSimple[Simple Dynamics&lt;br/&gt;src.core.dynamics&lt;br/&gt;Linearized Model]
+        DynamicsFull[Full Dynamics&lt;br/&gt;src.core.dynamics_full&lt;br/&gt;Complete Nonlinear]
+        SafetyGuards[Safety Guards&lt;br/&gt;src.core.safety_guards&lt;br/&gt;Constraint Enforcement]
+    end
+
+    subgraph &quot;Optimization Layer&quot;
+        PSOOptimizer[PSO Optimizer&lt;br/&gt;src.optimizer.pso_optimizer&lt;br/&gt;Parameter Tuning]
+        CostFunctions[Cost Functions&lt;br/&gt;Multi-Objective Evaluation&lt;br/&gt;Performance Metrics]
+    end
+
+    subgraph &quot;Infrastructure Layer&quot;
+        ConfigMgmt[Configuration Management&lt;br/&gt;src.config&lt;br/&gt;YAML + Validation]
+        Protocols[Type Protocols&lt;br/&gt;src.core.protocols&lt;br/&gt;Interface Definitions]
+        NumbaUtils[Numba Utilities&lt;br/&gt;src.core.numba_utils&lt;br/&gt;JIT Compilation]
+    end
+
+    CLI --&gt; ControlFactory
+    WebApp --&gt; ControlFactory
+    JupyterNB --&gt; ControlFactory
+
+    ControlFactory --&gt; ClassicCtrl
+    ControlFactory --&gt; STACtrl
+    ControlFactory --&gt; AdaptiveCtrl
+    ControlFactory --&gt; HybridCtrl
+
+    ClassicCtrl --&gt; SimRunner
+    STACtrl --&gt; SimRunner
+    AdaptiveCtrl --&gt; SimRunner
+    HybridCtrl --&gt; SimRunner
+
+    SimRunner --&gt; SimContext
+    SimRunner --&gt; VectorSim
+    SimContext --&gt; DynamicsSimple
+    SimContext --&gt; DynamicsFull
+    VectorSim --&gt; NumbaUtils
+
+    DynamicsSimple --&gt; SafetyGuards
+    DynamicsFull --&gt; SafetyGuards
+
+    PSOOptimizer --&gt; CostFunctions
+    PSOOptimizer --&gt; ControlFactory
+
+    SimRunner --&gt; ConfigMgmt
+    ControlFactory --&gt; Protocols
+
+    style ControlFactory fill:#f3e5f5
+    style SimRunner fill:#e8f5e8
+    style PSOOptimizer fill:#e1f5fe
+    style ConfigMgmt fill:#fff3e0
+        </div></section>
+<section id="data-flow-architecture">
+<h3>Data Flow Architecture<a class="headerlink" href="#data-flow-architecture" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart LR
+    subgraph &quot;Input Data&quot;
+        ConfigFile[Configuration&lt;br/&gt;config.yaml&lt;br/&gt;Parameters &amp; Settings]
+        RefTrajectory[Reference Trajectory&lt;br/&gt;Desired States&lt;br/&gt;x_ref(t), θ_ref(t)]
+        InitialConditions[Initial Conditions&lt;br/&gt;x₀, θ₁₀, θ₂₀&lt;br/&gt;ẋ₀, θ̇₁₀, θ̇₂₀]
+    end
+
+    subgraph &quot;Processing Pipeline&quot;
+        Validation[Input Validation&lt;br/&gt;Pydantic Models&lt;br/&gt;Constraint Checking]
+        Simulation[Simulation Engine&lt;br/&gt;ODE Integration&lt;br/&gt;Real-time Execution]
+        Optimization[Optimization Loop&lt;br/&gt;PSO Algorithm&lt;br/&gt;Parameter Search]
+    end
+
+    subgraph &quot;Output Data&quot;
+        TimeSeriesData[Time Series&lt;br/&gt;States, Controls&lt;br/&gt;Performance Metrics]
+        OptimalParams[Optimal Parameters&lt;br/&gt;Tuned Gains&lt;br/&gt;JSON Export]
+        VisualizationData[Visualization&lt;br/&gt;Plots, Animations&lt;br/&gt;Analysis Reports]
+    end
+
+    subgraph &quot;Storage &amp; Export&quot;
+        JSONExport[JSON Files&lt;br/&gt;Structured Data&lt;br/&gt;Parameter Sets]
+        CSVExport[CSV Files&lt;br/&gt;Time Series&lt;br/&gt;Numerical Data]
+        PlotExport[Plot Files&lt;br/&gt;PNG, SVG, PDF&lt;br/&gt;Publication Quality]
+    end
+
+    ConfigFile --&gt; Validation
+    RefTrajectory --&gt; Validation
+    InitialConditions --&gt; Validation
+
+    Validation --&gt; Simulation
+    Validation --&gt; Optimization
+
+    Simulation --&gt; TimeSeriesData
+    Optimization --&gt; OptimalParams
+    TimeSeriesData --&gt; VisualizationData
+
+    TimeSeriesData --&gt; CSVExport
+    OptimalParams --&gt; JSONExport
+    VisualizationData --&gt; PlotExport
+
+    style Validation fill:#f3e5f5
+    style Simulation fill:#e8f5e8
+    style Optimization fill:#e1f5fe
+        </div></section>
+</section>
+<section id="performance-and-scalability">
+<h2>Performance and Scalability<a class="headerlink" href="#performance-and-scalability" title="Link to this heading">¶</a></h2>
+<section id="computational-architecture">
+<h3>Computational Architecture<a class="headerlink" href="#computational-architecture" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart TB
+    subgraph &quot;Performance Optimization&quot;
+        JITCompilation[JIT Compilation&lt;br/&gt;Numba Acceleration&lt;br/&gt;10-100x Speedup]
+        VectorizedOps[Vectorized Operations&lt;br/&gt;NumPy/SciPy&lt;br/&gt;SIMD Instructions]
+        ParallelExecution[Parallel Execution&lt;br/&gt;Multiprocessing&lt;br/&gt;PSO Particles]
+    end
+
+    subgraph &quot;Memory Management&quot;
+        EfficientStorage[Efficient Storage&lt;br/&gt;Structured Arrays&lt;br/&gt;Memory Locality]
+        LazyLoading[Lazy Loading&lt;br/&gt;On-Demand Data&lt;br/&gt;Reduced Memory]
+        CacheOptimization[Cache Optimization&lt;br/&gt;Temporal Locality&lt;br/&gt;Fast Access]
+    end
+
+    subgraph &quot;Scalability Features&quot;
+        BatchProcessing[Batch Processing&lt;br/&gt;Multiple Simulations&lt;br/&gt;Parameter Sweeps]
+        DistributedComputing[Distributed Computing&lt;br/&gt;Cluster Support&lt;br/&gt;MPI/Dask]
+        CloudDeployment[Cloud Deployment&lt;br/&gt;Container Support&lt;br/&gt;Kubernetes Ready]
+    end
+
+    JITCompilation --&gt; VectorizedOps
+    VectorizedOps --&gt; ParallelExecution
+
+    EfficientStorage --&gt; LazyLoading
+    LazyLoading --&gt; CacheOptimization
+
+    BatchProcessing --&gt; DistributedComputing
+    DistributedComputing --&gt; CloudDeployment
+
+    ParallelExecution --&gt; BatchProcessing
+    CacheOptimization --&gt; BatchProcessing
+
+    style JITCompilation fill:#e8f5e8
+    style ParallelExecution fill:#f3e5f5
+    style CloudDeployment fill:#e1f5fe
+        </div></section>
+<section id="real-time-performance">
+<h3>Real-Time Performance<a class="headerlink" href="#real-time-performance" title="Link to this heading">¶</a></h3>
+<div class="mermaid">
+            flowchart LR
+    subgraph &quot;Real-Time Requirements&quot;
+        SamplingRate[Sampling Rate&lt;br/&gt;1 kHz Control Loop&lt;br/&gt;1 ms Deadline]
+        LatencyBounds[Latency Bounds&lt;br/&gt;&lt; 0.5 ms Processing&lt;br/&gt;Deterministic Response]
+        ThroughputReqs[Throughput Requirements&lt;br/&gt;1000 samples/sec&lt;br/&gt;Continuous Operation]
+    end
+
+    subgraph &quot;Performance Metrics&quot;
+        ExecutionTime[Execution Time&lt;br/&gt;Per Control Cycle&lt;br/&gt;Microsecond Precision]
+        MemoryUsage[Memory Usage&lt;br/&gt;Peak &amp; Average&lt;br/&gt;Memory Profiling]
+        CPUUtilization[CPU Utilization&lt;br/&gt;Core Loading&lt;br/&gt;Thermal Management]
+    end
+
+    subgraph &quot;Optimization Strategies&quot;
+        PreComputation[Pre-computation&lt;br/&gt;Lookup Tables&lt;br/&gt;Trigonometric Functions]
+        AlgorithmTuning[Algorithm Tuning&lt;br/&gt;Reduced Complexity&lt;br/&gt;Approximate Methods]
+        HardwareAccel[Hardware Acceleration&lt;br/&gt;GPU Computing&lt;br/&gt;FPGA Implementation]
+    end
+
+    SamplingRate --&gt; ExecutionTime
+    LatencyBounds --&gt; ExecutionTime
+    ThroughputReqs --&gt; MemoryUsage
+
+    ExecutionTime --&gt; PreComputation
+    MemoryUsage --&gt; AlgorithmTuning
+    CPUUtilization --&gt; HardwareAccel
+
+    PreComputation --&gt; AlgorithmTuning
+    AlgorithmTuning --&gt; HardwareAccel
+
+    style SamplingRate fill:#fff3e0
+    style ExecutionTime fill:#f3e5f5
+    style HardwareAccel fill:#e1f5fe
+        </div></section>
+</section>
+<section id="navigation-links">
+<h2>Navigation Links<a class="headerlink" href="#navigation-links" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><span class="xref std std-doc">block_diagrams</span> - Control system block diagrams</p></li>
+<li><p><span class="xref std std-doc">algorithm_flowcharts</span> - Detailed algorithm flows</p></li>
+<li><p><span class="xref std std-doc">results_visualization</span> - Performance visualization</p></li>
+<li><p><a class="reference internal" href="../theory/system_dynamics_complete.html"><span class="doc">Complete System Dynamics</span></a> - Mathematical foundations</p></li>
+<li><p><span class="xref std std-doc">../implementation/code_documentation_index</span> - Code implementation</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">System Diagrams</a><ul>
+<li><a class="reference internal" href="#physical-system-architecture">Physical System Architecture</a><ul>
+<li><a class="reference internal" href="#double-inverted-pendulum-structure">Double-Inverted Pendulum Structure</a></li>
+<li><a class="reference internal" href="#coordinate-system-definition">Coordinate System Definition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#control-system-architecture">Control System Architecture</a><ul>
+<li><a class="reference internal" href="#complete-control-loop">Complete Control Loop</a></li>
+<li><a class="reference internal" href="#signal-flow-diagram">Signal Flow Diagram</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mathematical-representation">Mathematical Representation</a><ul>
+<li><a class="reference internal" href="#state-space-block-diagram">State-Space Block Diagram</a></li>
+<li><a class="reference internal" href="#energy-flow-diagram">Energy Flow Diagram</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation-architecture">Implementation Architecture</a><ul>
+<li><a class="reference internal" href="#software-module-hierarchy">Software Module Hierarchy</a></li>
+<li><a class="reference internal" href="#data-flow-architecture">Data Flow Architecture</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-and-scalability">Performance and Scalability</a><ul>
+<li><a class="reference internal" href="#computational-architecture">Computational Architecture</a></li>
+<li><a class="reference internal" href="#real-time-performance">Real-Time Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#navigation-links">Navigation Links</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
+    <script src="../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

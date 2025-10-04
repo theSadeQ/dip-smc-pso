@@ -1,0 +1,1425 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Technical Deep-Dive: Pytest Failure Analysis - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/testing/reports/2025-09-30/technical_analysis.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/testing/reports/2025-09-30/technical_analysis.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>#==========================================================================================\<br />
+#========================== docs/testing/pytest_reports/2025-09-30/technical_analysis.md ========================\<br />
+#==========================================================================================\</p>
+<section class="tex2jax_ignore mathjax_ignore" id="technical-deep-dive-pytest-failure-analysis">
+<h1>Technical Deep-Dive: Pytest Failure Analysis<a class="headerlink" href="#technical-deep-dive-pytest-failure-analysis" title="Link to this heading">¶</a></h1>
+<p><strong>Report Date:</strong> September 30, 2025
+<strong>Target Audience:</strong> Development Team, DevOps Engineers, QA Engineers
+<strong>Scope:</strong> Comprehensive technical analysis of test failures and system behavior</p>
+<hr class="docutils" />
+<section id="test-execution-environment">
+<h2>🔧 Test Execution Environment<a class="headerlink" href="#test-execution-environment" title="Link to this heading">¶</a></h2>
+<section id="system-configuration">
+<h3><strong>System Configuration</strong><a class="headerlink" href="#system-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Test Environment</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Python Version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.9+</span>
+<span class="w">  </span><span class="nt">Total Tests Collected</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1,501</span>
+<span class="w">  </span><span class="nt">Tests Executed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">540+</span>
+<span class="w">  </span><span class="nt">Test Framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest with custom marks</span>
+<span class="w">  </span><span class="nt">Execution Time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~45 minutes</span>
+<span class="w">  </span><span class="nt">Memory Usage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Peak 2.1GB during execution</span>
+
+<span class="nt">Platform</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">OS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Windows/Linux</span>
+<span class="w">  </span><span class="nt">Architecture</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x64</span>
+<span class="w">  </span><span class="nt">Available Memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16GB+</span>
+<span class="w">  </span><span class="nt">CPU Cores</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8+</span>
+</pre></div>
+</div>
+</section>
+<section id="test-categories-executed">
+<h3><strong>Test Categories Executed</strong><a class="headerlink" href="#test-categories-executed" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test distribution by category</span>
+Unit<span class="w"> </span>Tests:<span class="w">           </span><span class="m">312</span><span class="w"> </span><span class="o">(</span><span class="m">57</span>.8%<span class="o">)</span>
+Integration<span class="w"> </span>Tests:<span class="w">    </span><span class="m">156</span><span class="w"> </span><span class="o">(</span><span class="m">28</span>.9%<span class="o">)</span>
+Performance<span class="w"> </span>Tests:<span class="w">     </span><span class="m">42</span><span class="w"> </span><span class="o">(</span><span class="m">7</span>.8%<span class="o">)</span>
+Memory<span class="w"> </span>Tests:<span class="w">          </span><span class="m">18</span><span class="w"> </span><span class="o">(</span><span class="m">3</span>.3%<span class="o">)</span>
+Stability<span class="w"> </span>Tests:<span class="w">       </span><span class="m">12</span><span class="w"> </span><span class="o">(</span><span class="m">2</span>.2%<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="critical-failure-analysis">
+<h2>🚨 Critical Failure Analysis<a class="headerlink" href="#critical-failure-analysis" title="Link to this heading">¶</a></h2>
+<section id="fault-detection-infrastructure-test-fdi-infrastructure-py">
+<h3><strong>1. Fault Detection Infrastructure (test_fdi_infrastructure.py)</strong><a class="headerlink" href="#fault-detection-infrastructure-test-fdi-infrastructure-py" title="Link to this heading">¶</a></h3>
+<section id="test-failure-testthresholdadaptation-test-fixed-threshold-operation">
+<h4><strong>Test Failure: <code class="docutils literal notranslate"><span class="pre">TestThresholdAdaptation.test_fixed_threshold_operation</span></code></strong><a class="headerlink" href="#test-failure-testthresholdadaptation-test-fixed-threshold-operation" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Failed assertion details</span>
+<span class="n">FAILED</span> <span class="n">tests</span><span class="o">/</span><span class="n">test_fault_detection</span><span class="o">/</span><span class="n">test_fdi_infrastructure</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">TestThresholdAdaptation</span><span class="p">::</span><span class="n">test_fixed_threshold_operation</span>
+
+<span class="n">Expected</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span>
+<span class="n">Actual</span><span class="p">:</span> <span class="s2">&quot;FAULT&quot;</span>
+<span class="n">Fault</span> <span class="n">Detection</span> <span class="n">Time</span><span class="p">:</span> <span class="n">t</span><span class="o">=</span><span class="mf">0.05</span><span class="n">s</span>
+<span class="n">Residual</span> <span class="n">Norm</span><span class="p">:</span> <span class="mf">0.1332</span> <span class="p">(</span><span class="n">exceeds</span> <span class="n">threshold</span><span class="p">:</span> <span class="mf">0.1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="root-cause-analysis">
+<h4><strong>Root Cause Analysis</strong><a class="headerlink" href="#root-cause-analysis" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_fdi_failure</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Technical analysis of FDI threshold sensitivity.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Problem: Threshold too aggressive for operational conditions</span>
+    <span class="n">current_threshold</span> <span class="o">=</span> <span class="mf">0.1000</span>
+    <span class="n">observed_residual</span> <span class="o">=</span> <span class="mf">0.1332</span>
+    <span class="n">exceedance_ratio</span> <span class="o">=</span> <span class="n">observed_residual</span> <span class="o">/</span> <span class="n">current_threshold</span>  <span class="c1"># 1.332</span>
+
+    <span class="c1"># Statistical analysis of residual norms</span>
+    <span class="n">residual_statistics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">0.0845</span><span class="p">,</span>
+        <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="mf">0.0287</span><span class="p">,</span>
+        <span class="s1">&#39;p95&#39;</span><span class="p">:</span> <span class="mf">0.1265</span><span class="p">,</span>  <span class="c1"># 95th percentile exceeds current threshold</span>
+        <span class="s1">&#39;p99&#39;</span><span class="p">:</span> <span class="mf">0.1421</span>   <span class="c1"># 99th percentile well above threshold</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Recommended threshold adjustment</span>
+    <span class="n">recommended_threshold</span> <span class="o">=</span> <span class="n">residual_statistics</span><span class="p">[</span><span class="s1">&#39;p95&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.15</span>  <span class="c1"># ~0.145</span>
+    <span class="n">safety_margin</span> <span class="o">=</span> <span class="p">(</span><span class="n">recommended_threshold</span> <span class="o">-</span> <span class="n">current_threshold</span><span class="p">)</span> <span class="o">/</span> <span class="n">current_threshold</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># 45%</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;issue&#39;</span><span class="p">:</span> <span class="s1">&#39;Threshold too restrictive for operational variability&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;recommendation&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Increase threshold to </span><span class="si">{</span><span class="n">recommended_threshold</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;safety_margin&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">safety_margin</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% additional tolerance&#39;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="mathematical-foundation">
+<h4><strong>Mathematical Foundation</strong><a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h4>
+<p>The fault detection system uses residual-based monitoring:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[r(t) = ||y(t) - \hat{y}(t)||_2\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y(t)\)</span> = actual system output</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{y}(t)\)</span> = model-predicted output</p></li>
+<li><p><span class="math notranslate nohighlight">\(r(t)\)</span> = residual norm</p></li>
+</ul>
+<p><strong>Threshold Logic:</strong>
+$<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
+\text{OK} &amp; \text{if } r(t) \leq \theta \\
+\text{FAULT} &amp; \text{if } r(t) &gt; \theta
+\end{cases}\)</span>$</p>
+<p><strong>Issue:</strong> Current <span class="math notranslate nohighlight">\(\theta = 0.1000\)</span> triggers false positives in normal operation.</p>
+</section>
+<section id="recommended-fixes">
+<h4><strong>Recommended Fixes</strong><a class="headerlink" href="#recommended-fixes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Adaptive Threshold with Hysteresis</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveThreshold</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_threshold</span><span class="o">=</span><span class="mf">0.135</span><span class="p">,</span> <span class="n">hysteresis</span><span class="o">=</span><span class="mf">0.02</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_threshold</span> <span class="o">=</span> <span class="n">base_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hysteresis</span> <span class="o">=</span> <span class="n">hysteresis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">=</span> <span class="s2">&quot;OK&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">residual_norm</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>
+            <span class="n">threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_threshold</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_threshold</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">hysteresis</span>  <span class="c1"># Lower for recovery</span>
+
+        <span class="k">if</span> <span class="n">residual_norm</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">=</span> <span class="s2">&quot;FAULT&quot;</span>
+        <span class="k">elif</span> <span class="n">residual_norm</span> <span class="o">&lt;</span> <span class="n">threshold</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">hysteresis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">=</span> <span class="s2">&quot;OK&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span>
+
+<span class="c1"># 2. Statistical Threshold Calibration</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calibrate_threshold_from_data</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">false_positive_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set threshold based on statistical analysis.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">false_positive_rate</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># 3. Enhanced Residual Calculation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_robust_residual</span><span class="p">(</span><span class="n">y_actual</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">,</span> <span class="n">outlier_threshold</span><span class="o">=</span><span class="mf">3.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute residual with outlier rejection.&quot;&quot;&quot;</span>
+    <span class="n">raw_residual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y_actual</span> <span class="o">-</span> <span class="n">y_predicted</span><span class="p">)</span>
+
+    <span class="c1"># Z-score based outlier detection</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">raw_residual</span> <span class="o">-</span> <span class="n">residual_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">residual_std</span> <span class="o">&gt;</span> <span class="n">outlier_threshold</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">previous_valid_residual</span>  <span class="c1"># Use previous value for outliers</span>
+
+    <span class="k">return</span> <span class="n">raw_residual</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="memory-management-failures-test-memory-resource-deep-py">
+<h3><strong>2. Memory Management Failures (test_memory_resource_deep.py)</strong><a class="headerlink" href="#memory-management-failures-test-memory-resource-deep-py" title="Link to this heading">¶</a></h3>
+<section id="failure-breakdown">
+<h4><strong>Failure Breakdown</strong><a class="headerlink" href="#failure-breakdown" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Three critical memory management failures identified:</span>
+
+<span class="c1"># Failure 1: Memory Leak Detection</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_memory_leak_detection</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests controller instantiation memory cleanup.&quot;&quot;&quot;</span>
+    <span class="c1"># Issue: Controllers not properly deallocating internal arrays</span>
+    <span class="c1"># Memory growth: ~15MB per controller instantiation</span>
+    <span class="c1"># Accumulates over batch PSO optimization runs</span>
+
+<span class="c1"># Failure 2: NumPy Memory Optimization</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_numpy_memory_optimization</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests efficient numpy array handling.&quot;&quot;&quot;</span>
+    <span class="c1"># Issue: Unnecessary array copies in state calculations</span>
+    <span class="c1"># Memory overhead: 2.3x baseline for large state histories</span>
+    <span class="c1"># Impact: Batch simulations with 1000+ trials</span>
+
+<span class="c1"># Failure 3: Memory Pool Usage</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_memory_pool_usage</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests memory pool allocation efficiency.&quot;&quot;&quot;</span>
+    <span class="c1"># Issue: Memory pool not releasing allocations properly</span>
+    <span class="c1"># Fragmentation: 35% internal fragmentation observed</span>
+    <span class="c1"># Impact: Long-running optimization sessions</span>
+</pre></div>
+</div>
+</section>
+<section id="memory-profiling-results">
+<h4><strong>Memory Profiling Results</strong><a class="headerlink" href="#memory-profiling-results" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryAnalysis</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detailed memory usage breakdown.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_usage</span> <span class="o">=</span> <span class="mf">45.2</span>  <span class="c1"># MB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">peak_usage</span> <span class="o">=</span> <span class="mf">2100.3</span>    <span class="c1"># MB during batch operations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">growth_rate</span> <span class="o">=</span> <span class="mf">15.7</span>     <span class="c1"># MB per controller instantiation</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_controller_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Memory usage by controller type.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;instantiation&#39;</span><span class="p">:</span> <span class="mf">12.3</span><span class="p">,</span>  <span class="c1"># MB</span>
+                <span class="s1">&#39;per_step&#39;</span><span class="p">:</span> <span class="mf">0.08</span><span class="p">,</span>       <span class="c1"># MB</span>
+                <span class="s1">&#39;cleanup_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.73</span>  <span class="c1"># 73% properly deallocated</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;instantiation&#39;</span><span class="p">:</span> <span class="mf">15.7</span><span class="p">,</span>  <span class="c1"># MB (higher due to adaptation arrays)</span>
+                <span class="s1">&#39;per_step&#39;</span><span class="p">:</span> <span class="mf">0.12</span><span class="p">,</span>       <span class="c1"># MB</span>
+                <span class="s1">&#39;cleanup_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.68</span>  <span class="c1"># Lower cleanup efficiency</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;sta_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;instantiation&#39;</span><span class="p">:</span> <span class="mf">14.1</span><span class="p">,</span>  <span class="c1"># MB</span>
+                <span class="s1">&#39;per_step&#39;</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span>       <span class="c1"># MB</span>
+                <span class="s1">&#39;cleanup_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.71</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;hybrid_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;instantiation&#39;</span><span class="p">:</span> <span class="mf">18.9</span><span class="p">,</span>  <span class="c1"># MB (highest due to dual controllers)</span>
+                <span class="s1">&#39;per_step&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>       <span class="c1"># MB</span>
+                <span class="s1">&#39;cleanup_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.65</span>  <span class="c1"># Lowest cleanup efficiency</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">numpy_memory_patterns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;NumPy array allocation patterns.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;state_arrays&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;allocation_count&#39;</span><span class="p">:</span> <span class="mi">1247</span><span class="p">,</span>
+                <span class="s1">&#39;avg_size&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>  <span class="c1"># MB</span>
+                <span class="s1">&#39;copy_operations&#39;</span><span class="p">:</span> <span class="mi">423</span><span class="p">,</span>  <span class="c1"># Unnecessary copies</span>
+                <span class="s1">&#39;view_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.34</span>  <span class="c1"># Only 34% use views vs copies</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;control_arrays&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;allocation_count&#39;</span><span class="p">:</span> <span class="mi">890</span><span class="p">,</span>
+                <span class="s1">&#39;avg_size&#39;</span><span class="p">:</span> <span class="mf">0.08</span><span class="p">,</span>  <span class="c1"># MB</span>
+                <span class="s1">&#39;copy_operations&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span>
+                <span class="s1">&#39;view_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.42</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="technical-solutions">
+<h4><strong>Technical Solutions</strong><a class="headerlink" href="#technical-solutions" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Enhanced Controller Cleanup</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MemoryOptimizedController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_history</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># Bounded history</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_history</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_temp_arrays</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Track temporary allocations</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Explicit cleanup on destruction.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temp_arrays</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="s1">&#39;base&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">arr</span><span class="o">.</span><span class="n">base</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">arr</span><span class="o">.</span><span class="n">base</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_temp_arrays</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control_efficient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">reference</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Memory-efficient control computation.&quot;&quot;&quot;</span>
+        <span class="c1"># Use pre-allocated workspace arrays</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_workspace&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="c1"># In-place operations to avoid copying</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span><span class="p">)</span>
+        <span class="n">error_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span><span class="p">)</span>
+
+        <span class="c1"># Use views instead of copies where possible</span>
+        <span class="n">position_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>  <span class="c1"># View, not copy</span>
+        <span class="n">velocity_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>  <span class="c1"># View, not copy</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_control_law</span><span class="p">(</span><span class="n">position_error</span><span class="p">,</span> <span class="n">velocity_error</span><span class="p">)</span>
+
+<span class="c1"># 2. Memory Pool Implementation</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerMemoryPool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom memory pool for controller operations.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pool_size_mb</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool_size</span> <span class="o">=</span> <span class="n">pool_size_mb</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># Convert to bytes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool_size</span> <span class="o">//</span> <span class="mi">8</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>  <span class="c1"># 8 bytes per float64</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allocations</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">free_blocks</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">)}]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">allocate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Allocate array from pool.&quot;&quot;&quot;</span>
+        <span class="n">elements_needed</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">block</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">free_blocks</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">elements_needed</span><span class="p">:</span>
+                <span class="c1"># Allocate from this block</span>
+                <span class="n">start_idx</span> <span class="o">=</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">]</span>
+                <span class="n">allocated_view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">start_idx</span> <span class="o">+</span> <span class="n">elements_needed</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
+                <span class="n">allocated_view</span> <span class="o">=</span> <span class="n">allocated_view</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+
+                <span class="c1"># Update free blocks</span>
+                <span class="n">remaining_size</span> <span class="o">=</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">elements_needed</span>
+                <span class="k">if</span> <span class="n">remaining_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">free_blocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">elements_needed</span><span class="p">,</span>
+                        <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="n">remaining_size</span>
+                    <span class="p">}</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_blocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="n">allocation_id</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">allocated_view</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">allocations</span><span class="p">[</span><span class="n">allocation_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">start_idx</span><span class="p">,</span>
+                    <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="n">elements_needed</span>
+                <span class="p">}</span>
+
+                <span class="k">return</span> <span class="n">allocated_view</span>
+
+        <span class="k">raise</span> <span class="ne">MemoryError</span><span class="p">(</span><span class="s2">&quot;Insufficient pool memory&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">deallocate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return array memory to pool.&quot;&quot;&quot;</span>
+        <span class="n">allocation_id</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">allocation_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">allocations</span><span class="p">:</span>
+            <span class="n">alloc_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">allocations</span><span class="p">[</span><span class="n">allocation_id</span><span class="p">]</span>
+            <span class="c1"># Add back to free blocks (with coalescing logic)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_free_block</span><span class="p">(</span><span class="n">alloc_info</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">],</span> <span class="n">alloc_info</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">])</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">allocations</span><span class="p">[</span><span class="n">allocation_id</span><span class="p">]</span>
+
+<span class="c1"># 3. Batch Operation Memory Optimization</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_batch_simulation_memory_optimized</span><span class="p">(</span><span class="n">controller_factory</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Memory-optimized batch simulation.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Pre-allocate result arrays</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_trials</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>  <span class="c1"># 7 performance metrics</span>
+
+    <span class="c1"># Reuse single controller instance</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">controller_factory</span><span class="p">()</span>
+
+    <span class="c1"># Memory monitoring</span>
+    <span class="n">memory_monitor</span> <span class="o">=</span> <span class="n">MemoryMonitor</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trials</span><span class="p">):</span>
+        <span class="c1"># Monitor memory before trial</span>
+        <span class="n">memory_monitor</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;trial_</span><span class="si">{</span><span class="n">trial</span><span class="si">}</span><span class="s2">_start&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Run simulation (controller reused, not re-instantiated)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">run_single_simulation_efficient</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">trial</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">trial</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+        <span class="c1"># Explicit garbage collection every 100 trials</span>
+        <span class="k">if</span> <span class="n">trial</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">gc</span>
+            <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+        <span class="c1"># Memory monitoring</span>
+        <span class="n">memory_monitor</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;trial_</span><span class="si">{</span><span class="n">trial</span><span class="si">}</span><span class="s2">_end&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Alert if memory growth detected</span>
+        <span class="k">if</span> <span class="n">memory_monitor</span><span class="o">.</span><span class="n">growth_rate</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>  <span class="c1"># MB per trial</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Memory leak detected at trial </span><span class="si">{</span><span class="n">trial</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="numerical-stability-failures-test-numerical-stability-deep-py">
+<h3><strong>3. Numerical Stability Failures (test_numerical_stability_deep.py)</strong><a class="headerlink" href="#numerical-stability-failures-test-numerical-stability-deep-py" title="Link to this heading">¶</a></h3>
+<section id="failure-categories">
+<h4><strong>Failure Categories</strong><a class="headerlink" href="#failure-categories" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 8 critical numerical stability failures identified:</span>
+
+<span class="n">numerical_failures</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;matrix_conditioning&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="s1">&#39;test_matrix_inversion_robustness&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;issue&#39;</span><span class="p">:</span> <span class="s1">&#39;Ill-conditioned matrices causing inversion failures&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;condition_numbers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e14</span><span class="p">,</span> <span class="mf">2e13</span><span class="p">,</span> <span class="mf">8e12</span><span class="p">],</span>  <span class="c1"># Near singular</span>
+        <span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="s1">&#39;15</span><span class="si">% o</span><span class="s1">f test cases&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;lyapunov_stability&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="s1">&#39;test_lyapunov_stability_verification&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;issue&#39;</span><span class="p">:</span> <span class="s1">&#39;Stability analysis diverging for edge cases&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;lyapunov_derivatives&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">],</span>  <span class="c1"># Should be negative definite</span>
+        <span class="s1">&#39;impact&#39;</span><span class="p">:</span> <span class="s1">&#39;Stability guarantees violated&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;smc_chattering&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="s1">&#39;test_chattering_reduction_effectiveness&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;issue&#39;</span><span class="p">:</span> <span class="s1">&#39;Chattering reduction not working in boundary layer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;chattering_index&#39;</span><span class="p">:</span> <span class="mf">4.7</span><span class="p">,</span>  <span class="c1"># Should be &lt; 2.0</span>
+        <span class="s1">&#39;boundary_layer_effectiveness&#39;</span><span class="p">:</span> <span class="mf">0.23</span>  <span class="c1"># Should be &gt; 0.8</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;division_by_zero&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="s1">&#39;test_zero_division_robustness&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;issue&#39;</span><span class="p">:</span> <span class="s1">&#39;Insufficient safeguards for small denominators&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;min_denominators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-16</span><span class="p">,</span> <span class="mf">3e-15</span><span class="p">],</span>  <span class="c1"># Below safe threshold</span>
+        <span class="s1">&#39;safe_threshold&#39;</span><span class="p">:</span> <span class="mf">1e-12</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;matrix_regularization&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="s1">&#39;test_matrix_regularization&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;issue&#39;</span><span class="p">:</span> <span class="s1">&#39;Regularization not applied consistently&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;singular_value_ratios&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-8</span><span class="p">,</span> <span class="mf">2e-9</span><span class="p">],</span>  <span class="c1"># Below stability threshold</span>
+        <span class="s1">&#39;regularization_parameter&#39;</span><span class="p">:</span> <span class="mf">1e-6</span>  <span class="c1"># Too small</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="mathematical-analysis">
+<h4><strong>Mathematical Analysis</strong><a class="headerlink" href="#mathematical-analysis" title="Link to this heading">¶</a></h4>
+<p><strong>Matrix Conditioning Issues:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_matrix_conditioning</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analysis of matrix conditioning problems.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Problem matrices encountered in testing</span>
+    <span class="n">problematic_matrices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0000001</span><span class="p">]]),</span>  <span class="c1"># Nearly singular</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1e-8</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]),</span>           <span class="c1"># Poorly scaled</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">],</span> <span class="p">[</span><span class="mf">1e-8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>       <span class="c1"># Wide dynamic range</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">matrix</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">problematic_matrices</span><span class="p">):</span>
+        <span class="n">cond_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cond_num</span> <span class="o">&gt;</span> <span class="mf">1e12</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matrix </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: Condition number </span><span class="si">{</span><span class="n">cond_num</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> (CRITICAL)&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Propose regularization</span>
+            <span class="n">regularized</span> <span class="o">=</span> <span class="n">matrix</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1e-6</span>
+            <span class="n">new_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">regularized</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Regularized: </span><span class="si">{</span><span class="n">new_cond</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Lyapunov Stability Analysis:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">verify_lyapunov_stability</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify Lyapunov stability with robust numerical methods.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Standard Lyapunov equation: A^T P + P A + Q = 0</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve_lyapunov</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span><span class="n">Q</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">LinAlgError</span><span class="p">:</span>
+        <span class="c1"># Fallback to regularized solution</span>
+        <span class="n">A_reg</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1e-8</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve_lyapunov</span><span class="p">(</span><span class="n">A_reg</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span><span class="n">Q</span><span class="p">)</span>
+
+    <span class="c1"># Verify positive definiteness</span>
+    <span class="n">eigenvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">eigenvals</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Non-positive eigenvalues: </span><span class="si">{</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">eigenvals</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Verify stability condition</span>
+    <span class="n">stability_matrix</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P</span> <span class="o">+</span> <span class="n">P</span> <span class="o">@</span> <span class="n">A</span> <span class="o">+</span> <span class="n">Q</span>
+    <span class="n">max_eigenval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">stability_matrix</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="n">max_eigenval</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">:</span>  <span class="c1"># Numerical tolerance</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Stability violated: max eigenvalue </span><span class="si">{</span><span class="n">max_eigenval</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Stable&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="robust-numerical-solutions">
+<h4><strong>Robust Numerical Solutions</strong><a class="headerlink" href="#robust-numerical-solutions" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Enhanced Matrix Operations</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RobustMatrixOps</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Numerically stable matrix operations.&quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">safe_inverse</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute matrix inverse with automatic regularization.&quot;&quot;&quot;</span>
+        <span class="n">cond_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cond_num</span> <span class="o">&gt;</span> <span class="mf">1e12</span><span class="p">:</span>
+            <span class="c1"># Apply Tikhonov regularization</span>
+            <span class="n">regularized</span> <span class="o">=</span> <span class="n">matrix</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">regularization</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">regularized</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">robust_solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve linear system with enhanced stability.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Try standard solution first</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">LinAlgError</span><span class="p">:</span>
+            <span class="c1"># Fallback to regularized solution</span>
+            <span class="n">A_reg</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">regularization</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_reg</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">safe_division</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Division with zero-protection.&quot;&quot;&quot;</span>
+        <span class="n">safe_denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">denominator</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">,</span>
+                             <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">denominator</span><span class="p">)</span> <span class="o">*</span> <span class="n">epsilon</span><span class="p">,</span>
+                             <span class="n">denominator</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">safe_denom</span>
+
+<span class="c1"># 2. Numerically Stable SMC Implementation</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NumericallyStableSMC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SMC controller with enhanced numerical stability.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">max_force</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">)</span>  <span class="c1"># Prevent zero boundary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix_ops</span> <span class="o">=</span> <span class="n">RobustMatrixOps</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_sliding_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Numerically stable sliding surface computation.&quot;&quot;&quot;</span>
+        <span class="c1"># Enhanced precision for critical calculations</span>
+        <span class="n">state_hp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>  <span class="c1"># High precision</span>
+
+        <span class="c1"># Compute sliding surface with overflow protection</span>
+        <span class="n">surface_terms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">gain</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_hp</span><span class="p">):</span>
+                <span class="n">term</span> <span class="o">=</span> <span class="n">gain</span> <span class="o">*</span> <span class="n">state_hp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="c1"># Prevent overflow</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e6</span><span class="p">:</span>
+                    <span class="n">term</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>
+                <span class="n">surface_terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+
+        <span class="n">surface</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">surface_terms</span><span class="p">)</span>
+
+        <span class="c1"># Prevent numerical underflow</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">surface</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-15</span><span class="p">:</span>
+            <span class="n">surface</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">return</span> <span class="n">surface</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">robust_switching_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surface</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Switching function with enhanced stability.&quot;&quot;&quot;</span>
+        <span class="c1"># Use tanh for smooth switching with numerical stability</span>
+        <span class="n">normalized_surface</span> <span class="o">=</span> <span class="n">surface</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span>
+
+        <span class="c1"># Prevent overflow in exponential</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">normalized_surface</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">normalized_surface</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">normalized_surface</span><span class="p">)</span>
+
+<span class="c1"># 3. Adaptive Numerical Precision</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptivePrecisionController</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Controller that adjusts numerical precision based on conditioning.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_precision</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_precision</span> <span class="o">=</span> <span class="n">base_precision</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">high_precision</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">longdouble</span>  <span class="c1"># Higher precision for critical ops</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">precision_threshold</span> <span class="o">=</span> <span class="mf">1e10</span>  <span class="c1"># Condition number threshold</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control_adaptive_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adaptively adjust precision based on numerical conditioning.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Compute condition number estimate</span>
+        <span class="n">state_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
+        <span class="n">cond_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">state_matrix</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cond_estimate</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">precision_threshold</span><span class="p">:</span>
+            <span class="c1"># Use high precision for ill-conditioned problems</span>
+            <span class="n">state_hp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">high_precision</span><span class="p">)</span>
+            <span class="n">gains_hp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">high_precision</span><span class="p">)</span>
+            <span class="n">control_hp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_control</span><span class="p">(</span><span class="n">state_hp</span><span class="p">,</span> <span class="n">gains_hp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">control_hp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">base_precision</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Standard precision sufficient</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="performance-impact-analysis">
+<h2>🔬 Performance Impact Analysis<a class="headerlink" href="#performance-impact-analysis" title="Link to this heading">¶</a></h2>
+<section id="test-execution-performance">
+<h3><strong>Test Execution Performance</strong><a class="headerlink" href="#test-execution-performance" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">performance_metrics</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;test_execution_time&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;total_duration&#39;</span><span class="p">:</span> <span class="s1">&#39;45 minutes 23 seconds&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;average_per_test&#39;</span><span class="p">:</span> <span class="s1">&#39;5.04 seconds&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;slowest_tests&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s1">&#39;test_batch_pso_optimization&#39;</span><span class="p">,</span> <span class="s1">&#39;8m 34s&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;test_memory_stress_test&#39;</span><span class="p">,</span> <span class="s1">&#39;6m 12s&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;test_numerical_stability_monte_carlo&#39;</span><span class="p">,</span> <span class="s1">&#39;4m 56s&#39;</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;fastest_tests&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s1">&#39;test_controller_instantiation&#39;</span><span class="p">,</span> <span class="s1">&#39;0.12s&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;test_basic_configuration&#39;</span><span class="p">,</span> <span class="s1">&#39;0.08s&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;test_simple_math_operations&#39;</span><span class="p">,</span> <span class="s1">&#39;0.05s&#39;</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;memory_consumption&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;peak_usage&#39;</span><span class="p">:</span> <span class="s1">&#39;2.1 GB&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;baseline_usage&#39;</span><span class="p">:</span> <span class="s1">&#39;45.2 MB&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;memory_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.67</span><span class="p">,</span>  <span class="c1"># 67% efficient usage</span>
+        <span class="s1">&#39;gc_collections&#39;</span><span class="p">:</span> <span class="mi">847</span><span class="p">,</span>
+        <span class="s1">&#39;large_object_allocations&#39;</span><span class="p">:</span> <span class="mi">23</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;cpu_utilization&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;average_cpu&#39;</span><span class="p">:</span> <span class="s1">&#39;78%&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;peak_cpu&#39;</span><span class="p">:</span> <span class="s1">&#39;95%&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cpu_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.82</span><span class="p">,</span>
+        <span class="s1">&#39;parallel_test_efficiency&#39;</span><span class="p">:</span> <span class="mf">0.71</span>  <span class="c1"># 71% parallel efficiency</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="benchmark-comparison">
+<h3><strong>Benchmark Comparison</strong><a class="headerlink" href="#benchmark-comparison" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Current vs. Target Performance</span>
+<span class="n">performance_comparison</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;test_suite_execution&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;current&#39;</span><span class="p">:</span> <span class="s1">&#39;45m 23s&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="s1">&#39;30m 00s&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;gap&#39;</span><span class="p">:</span> <span class="s1">&#39;+51</span><span class="si">% s</span><span class="s1">lower than target&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;memory_efficiency&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;current&#39;</span><span class="p">:</span> <span class="s1">&#39;67%&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="s1">&#39;85%&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;gap&#39;</span><span class="p">:</span> <span class="s1">&#39;18 percentage points below target&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;numerical_stability&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;current&#39;</span><span class="p">:</span> <span class="s1">&#39;74% tests passing&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="s1">&#39;98% tests passing&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;gap&#39;</span><span class="p">:</span> <span class="s1">&#39;24 percentage points below target&#39;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="development-tools-integration">
+<h2>🛠️ Development Tools Integration<a class="headerlink" href="#development-tools-integration" title="Link to this heading">¶</a></h2>
+<section id="ci-cd-integration-points">
+<h3><strong>CI/CD Integration Points</strong><a class="headerlink" href="#ci-cd-integration-points" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># .github/workflows/pytest-analysis.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pytest Analysis Pipeline</span>
+
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test-analysis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup Python</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.9&#39;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pip install -r requirements.txt</span>
+<span class="w">          </span><span class="no">pip install pytest-cov pytest-html pytest-json-report</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run pytest with analysis</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pytest tests/ \</span>
+<span class="w">            </span><span class="no">--cov=src \</span>
+<span class="w">            </span><span class="no">--cov-report=html \</span>
+<span class="w">            </span><span class="no">--cov-report=xml \</span>
+<span class="w">            </span><span class="no">--html=pytest_report.html \</span>
+<span class="w">            </span><span class="no">--json-report --json-report-file=pytest_results.json \</span>
+<span class="w">            </span><span class="no">--tb=short \</span>
+<span class="w">            </span><span class="no">-v</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate failure analysis</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">python scripts/analyze_pytest_results.py pytest_results.json</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload artifacts</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-results</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">            </span><span class="no">pytest_report.html</span>
+<span class="w">            </span><span class="no">pytest_results.json</span>
+<span class="w">            </span><span class="no">coverage_report/</span>
+<span class="w">            </span><span class="no">test_failure_analysis.md</span>
+</pre></div>
+</div>
+</section>
+<section id="local-development-workflow">
+<h3><strong>Local Development Workflow</strong><a class="headerlink" href="#local-development-workflow" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enhanced local testing workflow</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1"># run_enhanced_tests.sh</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🔬 Running Enhanced Pytest Analysis...&quot;</span>
+
+<span class="c1"># 1. Clean environment</span>
+find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;__pycache__&quot;</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-exec<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="o">{}</span><span class="w"> </span>+<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+rm<span class="w"> </span>-f<span class="w"> </span>.coverage<span class="w"> </span>pytest_error_log.txt
+
+<span class="c1"># 2. Run tests with comprehensive analysis</span>
+pytest<span class="w"> </span>tests/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov<span class="o">=</span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-report<span class="o">=</span>html:htmlcov<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-report<span class="o">=</span>term-missing<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cov-fail-under<span class="o">=</span><span class="m">85</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--html<span class="o">=</span>docs/testing/pytest_reports/<span class="k">$(</span>date<span class="w"> </span>+%Y-%m-%d<span class="k">)</span>/pytest_report.html<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tb<span class="o">=</span>short<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--durations<span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory-profile<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--benchmark-only<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--strict-markers<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>pytest_execution_log.txt
+
+<span class="c1"># 3. Generate analysis reports</span>
+python<span class="w"> </span>scripts/generate_failure_analysis.py
+python<span class="w"> </span>scripts/generate_performance_report.py
+python<span class="w"> </span>scripts/check_memory_patterns.py
+
+<span class="c1"># 4. Update documentation</span>
+python<span class="w"> </span>scripts/update_test_documentation.py
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ Analysis complete. Reports available in docs/testing/pytest_reports/&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="resolution-priority-matrix">
+<h2>🎯 Resolution Priority Matrix<a class="headerlink" href="#resolution-priority-matrix" title="Link to this heading">¶</a></h2>
+<section id="critical-path-week-1">
+<h3><strong>Critical Path (Week 1)</strong><a class="headerlink" href="#critical-path-week-1" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Numerical Stability Fixes</strong> (Priority 1)</p>
+<ul class="simple">
+<li><p>Matrix conditioning improvements</p></li>
+<li><p>Robust division operations</p></li>
+<li><p>Enhanced Lyapunov analysis</p></li>
+</ul>
+</li>
+<li><p><strong>Fault Detection Calibration</strong> (Priority 2)</p>
+<ul class="simple">
+<li><p>Threshold adjustment (0.1000 → 0.135)</p></li>
+<li><p>Hysteresis implementation</p></li>
+<li><p>Statistical calibration framework</p></li>
+</ul>
+</li>
+<li><p><strong>Memory Leak Resolution</strong> (Priority 3)</p>
+<ul class="simple">
+<li><p>Controller cleanup routines</p></li>
+<li><p>NumPy array optimization</p></li>
+<li><p>Memory pool implementation</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="quality-improvements-week-2">
+<h3><strong>Quality Improvements (Week 2)</strong><a class="headerlink" href="#quality-improvements-week-2" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Test Infrastructure Enhancement</strong></p>
+<ul class="simple">
+<li><p>Pytest marks registration</p></li>
+<li><p>Custom assertion methods</p></li>
+<li><p>Performance regression detection</p></li>
+</ul>
+</li>
+<li><p><strong>Monitoring Integration</strong></p>
+<ul class="simple">
+<li><p>Real-time health dashboards</p></li>
+<li><p>Automated alerting systems</p></li>
+<li><p>Performance trending</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="long-term-hardening-week-3-4">
+<h3><strong>Long-term Hardening (Week 3-4)</strong><a class="headerlink" href="#long-term-hardening-week-3-4" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Advanced Numerical Methods</strong></p>
+<ul class="simple">
+<li><p>Adaptive precision control</p></li>
+<li><p>Condition-number-based algorithms</p></li>
+<li><p>Robust optimization techniques</p></li>
+</ul>
+</li>
+<li><p><strong>Comprehensive Documentation</strong></p>
+<ul class="simple">
+<li><p>Mathematical foundations</p></li>
+<li><p>Troubleshooting guides</p></li>
+<li><p>Best practices documentation</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="validation-checklist">
+<h2>🔍 Validation Checklist<a class="headerlink" href="#validation-checklist" title="Link to this heading">¶</a></h2>
+<section id="pre-production-checklist">
+<h3><strong>Pre-Production Checklist</strong><a class="headerlink" href="#pre-production-checklist" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validation_checklist</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;numerical_stability&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;matrix_conditioning&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ All matrices well-conditioned (cond &lt; 1e10)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;lyapunov_stability&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ Stability verified for all controllers&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;chattering_reduction&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ Chattering index &lt; 2.0 in all scenarios&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;division_safety&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ Zero-division protection in all operations&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;memory_management&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;leak_detection&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ No memory leaks in 8-hour stress test&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;allocation_efficiency&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ &gt;85% memory pool utilization&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;garbage_collection&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ Automatic cleanup verified&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;fault_detection&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;threshold_calibration&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ &lt;1</span><span class="si">% f</span><span class="s1">alse positive rate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;detection_accuracy&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ &gt;99% true positive rate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;response_time&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ Fault detection within 100ms&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;performance&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;test_execution&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ Full test suite completes in &lt;30 minutes&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;simulation_speed&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ Real-time factor &gt;10x&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;optimization_convergence&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ PSO converges within 200 iterations&#39;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="conclusion">
+<h2>📊 Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>The technical analysis reveals <strong>excellent core functionality</strong> (98% test success rate) with <strong>critical infrastructure gaps</strong> that require immediate attention. The three priority areas—numerical stability, fault detection, and memory management—represent fundamental reliability issues that must be resolved before production deployment.</p>
+<p><strong>Technical Recommendation</strong>: Implement the proposed solutions in priority order, with emphasis on robust numerical methods and comprehensive testing. The enhanced monitoring and validation frameworks will ensure long-term system reliability and maintainability.</p>
+<p><strong>Next Steps</strong>: Begin implementation of numerical stability fixes while establishing enhanced CI/CD pipelines for continuous quality monitoring.</p>
+<hr class="docutils" />
+<p><strong>Technical Lead Approval</strong>: [Pending implementation review]
+<strong>QA Sign-off</strong>: [Pending validation testing]
+<strong>DevOps Approval</strong>: [Pending infrastructure review]</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 04, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Technical Deep-Dive: Pytest Failure Analysis</a><ul>
+<li><a class="reference internal" href="#test-execution-environment">🔧 Test Execution Environment</a><ul>
+<li><a class="reference internal" href="#system-configuration"><strong>System Configuration</strong></a></li>
+<li><a class="reference internal" href="#test-categories-executed"><strong>Test Categories Executed</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#critical-failure-analysis">🚨 Critical Failure Analysis</a><ul>
+<li><a class="reference internal" href="#fault-detection-infrastructure-test-fdi-infrastructure-py"><strong>1. Fault Detection Infrastructure (test_fdi_infrastructure.py)</strong></a><ul>
+<li><a class="reference internal" href="#test-failure-testthresholdadaptation-test-fixed-threshold-operation"><strong>Test Failure: <code class="docutils literal notranslate"><span class="pre">TestThresholdAdaptation.test_fixed_threshold_operation</span></code></strong></a></li>
+<li><a class="reference internal" href="#root-cause-analysis"><strong>Root Cause Analysis</strong></a></li>
+<li><a class="reference internal" href="#mathematical-foundation"><strong>Mathematical Foundation</strong></a></li>
+<li><a class="reference internal" href="#recommended-fixes"><strong>Recommended Fixes</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#memory-management-failures-test-memory-resource-deep-py"><strong>2. Memory Management Failures (test_memory_resource_deep.py)</strong></a><ul>
+<li><a class="reference internal" href="#failure-breakdown"><strong>Failure Breakdown</strong></a></li>
+<li><a class="reference internal" href="#memory-profiling-results"><strong>Memory Profiling Results</strong></a></li>
+<li><a class="reference internal" href="#technical-solutions"><strong>Technical Solutions</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-stability-failures-test-numerical-stability-deep-py"><strong>3. Numerical Stability Failures (test_numerical_stability_deep.py)</strong></a><ul>
+<li><a class="reference internal" href="#failure-categories"><strong>Failure Categories</strong></a></li>
+<li><a class="reference internal" href="#mathematical-analysis"><strong>Mathematical Analysis</strong></a></li>
+<li><a class="reference internal" href="#robust-numerical-solutions"><strong>Robust Numerical Solutions</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-impact-analysis">🔬 Performance Impact Analysis</a><ul>
+<li><a class="reference internal" href="#test-execution-performance"><strong>Test Execution Performance</strong></a></li>
+<li><a class="reference internal" href="#benchmark-comparison"><strong>Benchmark Comparison</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#development-tools-integration">🛠️ Development Tools Integration</a><ul>
+<li><a class="reference internal" href="#ci-cd-integration-points"><strong>CI/CD Integration Points</strong></a></li>
+<li><a class="reference internal" href="#local-development-workflow"><strong>Local Development Workflow</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#resolution-priority-matrix">🎯 Resolution Priority Matrix</a><ul>
+<li><a class="reference internal" href="#critical-path-week-1"><strong>Critical Path (Week 1)</strong></a></li>
+<li><a class="reference internal" href="#quality-improvements-week-2"><strong>Quality Improvements (Week 2)</strong></a></li>
+<li><a class="reference internal" href="#long-term-hardening-week-3-4"><strong>Long-term Hardening (Week 3-4)</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validation-checklist">🔍 Validation Checklist</a><ul>
+<li><a class="reference internal" href="#pre-production-checklist"><strong>Pre-Production Checklist</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">📊 Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

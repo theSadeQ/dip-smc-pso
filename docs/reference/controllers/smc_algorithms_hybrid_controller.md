@@ -15,6 +15,29 @@ Orchestrates:
 - Smooth control transitions
 - Performance monitoring and learning
 
+
+## Mathematical Foundation
+
+### Hybrid Adaptive-STA SMC
+
+Combines model-based equivalent control with robust adaptive super-twisting:
+
+```{math}
+u = u_{eq} + u_{sta}
+```
+
+- $u_{eq}$: Leverages system model when available
+- $u_{sta}$: Adaptive super-twisting for robustness
+
+### Mode Switching Logic
+
+Intelligent switching between:
+1. **Model-based mode**: When model confidence is high
+2. **Robust mode**: When uncertainty is detected
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory`
+
+
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/controller.py

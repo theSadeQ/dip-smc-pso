@@ -14,6 +14,37 @@ Implements Super-Twisting Sliding Mode Control using composed components:
 Provides finite-time convergence with chattering reduction through
 second-order sliding mode dynamics.
 
+
+## Mathematical Foundation
+
+### Super-Twisting Algorithm (STA)
+
+Second-order sliding mode control with continuous control signal:
+
+```{math}
+\begin{align}
+u &= -K_1 |s|^{1/2} \text{sign}(s) + u_1 \\
+\dot{u}_1 &= -K_2 \text{sign}(s)
+\end{align}
+```
+
+### Finite-Time Convergence
+
+STA ensures $s = \dot{s} = 0$ in finite time with:
+
+```{math}
+K_1 > 0, \quad K_2 > \frac{L}{2}
+```
+
+Where $L$ is the Lipschitz constant of disturbances.
+
+### Chattering-Free Property
+
+Continuous control eliminates chattering while maintaining finite-time convergence.
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory`
+
+
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/controllers/smc/algorithms/super_twisting/controller.py
