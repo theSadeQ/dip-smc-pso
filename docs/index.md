@@ -55,6 +55,8 @@ streamlit_dashboard_guide.md
 :maxdepth: 2
 :caption: 🎮 Control Systems & Optimization
 
+controllers/index
+mathematical_foundations/index
 reference/controllers/index
 reference/optimizer/index
 analysis_plan.md
@@ -177,13 +179,13 @@ The Particle Swarm Optimization process for controller tuning follows this syste
 
 ```{mermaid}
 flowchart LR
-    Init[Initialize Swarm] --> Eval[Evaluate Fitness J(θ)]
+    Init[Initialize Swarm] --> Eval[Evaluate Fitness J(theta)]
     Eval --> Update[Update p_best & g_best]
     Update --> Velocity[Update Velocity v_i]
     Velocity --> Position[Update Position x_i]
     Position --> Converged{Converged?}
     Converged -- No --> Eval
-    Converged -- Yes --> Output[Output θ*]
+    Converged -- Yes --> Output[Output theta*]
 
     subgraph "Fitness Evaluation"
         Eval --> Sim[Run Simulation]
