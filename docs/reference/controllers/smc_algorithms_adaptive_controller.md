@@ -15,6 +15,35 @@ Implements Adaptive Sliding Mode Control using composed components:
 Replaces the monolithic 427-line controller with composition of focused modules.
 
 
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State Input] --> B[Sliding Surface]
+    B --> C{Surface Value s}
+    C --> D[Adaptation Law]
+    D --> E[Adaptive Gain K_t_]
+    C --> F[Switching Control]
+    E --> F
+    F --> G[Saturation]
+    G --> H[Control Output u]
+    C --> I[Uncertainty Estimator]
+    I --> D
+
+    style C fill:#ff9
+    style D fill:#9cf
+    style E fill:#f9f
+    style G fill:#f99
+```
+
+**Data Flow:**
+1. State → Sliding Surface Computation
+2. Surface Value → Adaptation Law + Switching Control
+3. Online Gain Adaptation: K̇ = γ|s| - σ(K - K₀)
+4. Adaptive Switching → Saturation → Control Output
+
+
 ## Mathematical Foundation
 
 ### Adaptive Sliding Mode Control
@@ -221,3 +250,92 @@ This module imports:
 - `from .adaptation_law import AdaptationLaw`
 - `from .parameter_estimation import UncertaintyEstimator`
 - `from .config import AdaptiveSMCConfig`
+
+
+## Usage Examples
+
+### Basic Instantiation
+
+```python
+from src.controllers.smc.algorithms.adaptive import ModularAdaptiveSMC
+from src.controllers.smc.algorithms.adaptive.config import AdaptiveSMCConfig
+
+# Configure adaptive controller
+config = AdaptiveSMCConfig(
+    surface_gains=[10.0, 8.0, 15.0, 12.0],  # [k1, k2, λ1, λ2]
+    initial_switching_gain=25.0,             # K₀
+    adaptation_rate=5.0,                     # γ
+    leakage_term=0.1,                        # σ
+    max_force=100.0
+)
+
+controller = ModularAdaptiveSMC(config, dynamics=dynamics)
+```
+
+### Simulation with Online Adaptation
+
+```python
+from src.core.simulation_runner import SimulationRunner
+from src.plant.models.simplified import SimplifiedDynamics
+
+# Create simulation with adaptive controller
+dynamics = SimplifiedDynamics()
+runner = SimulationRunner(controller, dynamics)
+
+# Run with uncertainty
+result = runner.run(
+    initial_state=[0.1, 0.05, 0, 0, 0, 0],
+    duration=10.0,
+    dt=0.01
+)
+
+# Analyze gain adaptation
+adaptive_gains = result.history['adaptive_gain']
+print(f"Final adapted gain: {adaptive_gains[-1]:.2f}")
+```
+
+### PSO Optimization of Adaptive Parameters
+
+```python
+from src.controllers.factory import create_smc_for_pso, SMCType
+from src.optimizer.pso_optimizer import PSOTuner
+
+# Adaptive SMC has 5 gains: [k1, k2, λ1, λ2, K₀]
+bounds = [
+    (0.1, 50.0),   # k1
+    (0.1, 50.0),   # k2
+    (0.1, 50.0),   # λ1
+    (0.1, 50.0),   # λ2
+    (1.0, 100.0)   # K₀
+]
+
+# Create controller factory
+def controller_factory(gains):
+    return create_smc_for_pso(SMCType.ADAPTIVE, gains, max_force=100.0)
+
+# Run PSO optimization
+tuner = PSOTuner(bounds, controller_factory)
+best_gains, best_fitness = tuner.optimize(n_particles=30, iters=100)
+```
+
+### Custom Adaptation Tuning
+
+```python
+from src.controllers.smc.algorithms.adaptive.adaptation_law import AdaptationLaw
+
+# Experiment with different adaptation strategies
+adaptation = AdaptationLaw(
+    gamma=5.0,        # Fast adaptation
+    sigma=0.1,        # Low leakage
+    K_min=1.0,        # Minimum gain bound
+    K_max=200.0       # Maximum gain bound
+)
+
+# Test adaptation response
+for uncertainty in [5.0, 10.0, 20.0]:
+    adapted_gain = adaptation.update(surface=0.1, uncertainty=uncertainty, dt=0.01)
+    print(f"Uncertainty={uncertainty}: K={adapted_gain:.2f}")
+```
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory` for adaptation law theory.
+

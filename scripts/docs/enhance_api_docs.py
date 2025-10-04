@@ -414,6 +414,12 @@ Where:
 
         if 'classical' in path_str and 'controller' in path_str:
             return self._classical_smc_examples(high_priority)
+        elif 'adaptive' in path_str and 'controller' in path_str:
+            return self._adaptive_smc_examples(high_priority)
+        elif ('super_twisting' in path_str or 'sta' in path_str) and 'controller' in path_str:
+            return self._sta_smc_examples(high_priority)
+        elif 'hybrid' in path_str and 'controller' in path_str:
+            return self._hybrid_smc_examples(high_priority)
         elif 'pso' in path_str:
             return self._pso_examples(high_priority)
 
@@ -581,6 +587,283 @@ best_gains, best_cost = pso.optimize()
 **See:** {doc}`../../../examples/optimization_workflows/pso_tuning_guide`
 """
 
+    def _adaptive_smc_examples(self, high_priority: bool) -> str:
+        """Generate Adaptive SMC usage examples."""
+        if high_priority:
+            return """## Usage Examples
+
+### Basic Instantiation
+
+```python
+from src.controllers.smc.algorithms.adaptive import ModularAdaptiveSMC
+from src.controllers.smc.algorithms.adaptive.config import AdaptiveSMCConfig
+
+# Configure adaptive controller
+config = AdaptiveSMCConfig(
+    surface_gains=[10.0, 8.0, 15.0, 12.0],  # [k1, k2, λ1, λ2]
+    initial_switching_gain=25.0,             # K₀
+    adaptation_rate=5.0,                     # γ
+    leakage_term=0.1,                        # σ
+    max_force=100.0
+)
+
+controller = ModularAdaptiveSMC(config, dynamics=dynamics)
+```
+
+### Simulation with Online Adaptation
+
+```python
+from src.core.simulation_runner import SimulationRunner
+from src.plant.models.simplified import SimplifiedDynamics
+
+# Create simulation with adaptive controller
+dynamics = SimplifiedDynamics()
+runner = SimulationRunner(controller, dynamics)
+
+# Run with uncertainty
+result = runner.run(
+    initial_state=[0.1, 0.05, 0, 0, 0, 0],
+    duration=10.0,
+    dt=0.01
+)
+
+# Analyze gain adaptation
+adaptive_gains = result.history['adaptive_gain']
+print(f"Final adapted gain: {adaptive_gains[-1]:.2f}")
+```
+
+### PSO Optimization of Adaptive Parameters
+
+```python
+from src.controllers.factory import create_smc_for_pso, SMCType
+from src.optimizer.pso_optimizer import PSOTuner
+
+# Adaptive SMC has 5 gains: [k1, k2, λ1, λ2, K₀]
+bounds = [
+    (0.1, 50.0),   # k1
+    (0.1, 50.0),   # k2
+    (0.1, 50.0),   # λ1
+    (0.1, 50.0),   # λ2
+    (1.0, 100.0)   # K₀
+]
+
+# Create controller factory
+def controller_factory(gains):
+    return create_smc_for_pso(SMCType.ADAPTIVE, gains, max_force=100.0)
+
+# Run PSO optimization
+tuner = PSOTuner(bounds, controller_factory)
+best_gains, best_fitness = tuner.optimize(n_particles=30, iters=100)
+```
+
+### Custom Adaptation Tuning
+
+```python
+from src.controllers.smc.algorithms.adaptive.adaptation_law import AdaptationLaw
+
+# Experiment with different adaptation strategies
+adaptation = AdaptationLaw(
+    gamma=5.0,        # Fast adaptation
+    sigma=0.1,        # Low leakage
+    K_min=1.0,        # Minimum gain bound
+    K_max=200.0       # Maximum gain bound
+)
+
+# Test adaptation response
+for uncertainty in [5.0, 10.0, 20.0]:
+    adapted_gain = adaptation.update(surface=0.1, uncertainty=uncertainty, dt=0.01)
+    print(f"Uncertainty={uncertainty}: K={adapted_gain:.2f}")
+```
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory` for adaptation law theory.
+"""
+        return ""
+
+    def _sta_smc_examples(self, high_priority: bool) -> str:
+        """Generate Super-Twisting SMC usage examples."""
+        if high_priority:
+            return """## Usage Examples
+
+### Basic Instantiation
+
+```python
+from src.controllers.smc.algorithms.super_twisting import ModularSuperTwistingSMC
+from src.controllers.smc.algorithms.super_twisting.config import SuperTwistingSMCConfig
+
+# Configure super-twisting controller
+config = SuperTwistingSMCConfig(
+    surface_gains=[25.0, 10.0, 15.0, 12.0],  # Higher gains for robustness
+    proportional_gain=20.0,                   # K₁
+    integral_gain=15.0,                       # K₂
+    derivative_gain=5.0,                      # kd
+    max_force=100.0
+)
+
+controller = ModularSuperTwistingSMC(config, dynamics=dynamics)
+```
+
+### Chattering-Free Simulation
+
+```python
+from src.core.simulation_runner import SimulationRunner
+from src.plant.models.full import FullDynamics
+
+# Use full dynamics for realistic chattering assessment
+dynamics = FullDynamics()
+runner = SimulationRunner(controller, dynamics)
+
+result = runner.run(
+    initial_state=[0.15, 0.1, 0, 0, 0, 0],
+    duration=10.0,
+    dt=0.001  # High frequency for chattering detection
+)
+
+# Analyze chattering index
+chattering = runner.compute_chattering_index(result.control_history)
+print(f"Chattering index: {chattering:.4f} (lower is better)")
+```
+
+### PSO Optimization for Finite-Time Convergence
+
+```python
+from src.controllers.factory import create_smc_for_pso, SMCType
+
+# STA requires 6 gains: [k1, k2, λ1, λ2, K₁, K₂]
+# STA stability: K₁ > K₂ for finite-time convergence
+bounds = [
+    (1.0, 50.0),    # k1
+    (1.0, 50.0),    # k2
+    (1.0, 50.0),    # λ1
+    (1.0, 50.0),    # λ2
+    (10.0, 100.0),  # K₁ (proportional)
+    (5.0, 50.0),    # K₂ (integral)
+]
+
+def controller_factory(gains):
+    return create_smc_for_pso(SMCType.SUPER_TWISTING, gains, max_force=100.0)
+
+# Optimize for convergence time
+tuner = PSOTuner(bounds, controller_factory, metric='convergence_time')
+best_gains, best_time = tuner.optimize(n_particles=40, iters=150)
+```
+
+### Finite-Time Convergence Verification
+
+```python
+import numpy as np
+
+# Theoretical convergence time: t_c ≈ 2|s(0)|/(K₁√K₂)
+K1, K2 = 20.0, 15.0
+s0 = 0.1
+
+theoretical_time = 2 * abs(s0) / (K1 * np.sqrt(K2))
+print(f"Theoretical convergence: {theoretical_time:.3f}s")
+
+# Run simulation and measure actual convergence
+result = runner.run(initial_state=[0.1, 0, 0, 0, 0, 0], duration=5.0)
+actual_time = np.argmax(np.abs(result.surface_history) < 0.01) * 0.01
+print(f"Actual convergence: {actual_time:.3f}s")
+```
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory` for STA theory and proofs.
+"""
+        return ""
+
+    def _hybrid_smc_examples(self, high_priority: bool) -> str:
+        """Generate Hybrid SMC usage examples."""
+        if high_priority:
+            return """## Usage Examples
+
+### Basic Instantiation
+
+```python
+from src.controllers.smc.algorithms.hybrid import ModularHybridSMC
+from src.controllers.smc.algorithms.hybrid.config import HybridSMCConfig
+
+# Configure hybrid controller
+config = HybridSMCConfig(
+    surface_gains=[15.0, 12.0, 18.0, 15.0],
+    proportional_gain=25.0,
+    integral_gain=18.0,
+    derivative_gain=6.0,
+    max_force=100.0,
+    switching_threshold=0.05  # Mode switching sensitivity
+)
+
+controller = ModularHybridSMC(config, dynamics_model=dynamics)
+```
+
+### Mode Switching Demonstration
+
+```python
+from src.core.simulation_runner import SimulationRunner
+from src.plant.models.simplified import SimplifiedDynamics
+
+dynamics = SimplifiedDynamics()
+runner = SimulationRunner(controller, dynamics)
+
+result = runner.run(
+    initial_state=[0.2, 0.15, 0, 0, 0, 0],  # Large disturbance
+    duration=15.0,
+    dt=0.01
+)
+
+# Analyze mode switching history
+mode_history = result.controller_history['active_mode']
+switches = np.diff(mode_history).nonzero()[0]
+print(f"Mode switches: {len(switches)} times")
+```
+
+### PSO Optimization with Hybrid Strategy
+
+```python
+from src.controllers.factory import create_smc_for_pso, SMCType
+
+# Hybrid SMC has 4 gains (surface only, internal switching)
+bounds = [
+    (1.0, 50.0),   # k1
+    (1.0, 50.0),   # k2
+    (1.0, 50.0),   # λ1
+    (1.0, 50.0),   # λ2
+]
+
+def controller_factory(gains):
+    return create_smc_for_pso(SMCType.HYBRID, gains, max_force=100.0)
+
+# Optimize for robustness
+tuner = PSOTuner(bounds, controller_factory, metric='robustness_index')
+best_gains, best_robustness = tuner.optimize(n_particles=35, iters=120)
+```
+
+### Comparing All SMC Variants
+
+```python
+from src.controllers.factory import create_all_smc_controllers
+
+gains_dict = {
+    "classical": [10, 8, 15, 12, 50, 5],
+    "adaptive": [10, 8, 15, 12, 25],
+    "sta": [25, 10, 15, 12, 20, 15],
+    "hybrid": [15, 12, 18, 15]
+}
+
+controllers = create_all_smc_controllers(gains_dict, max_force=100.0)
+
+# Benchmark all controllers
+from src.benchmarks import run_comprehensive_comparison
+comparison = run_comprehensive_comparison(
+    controllers=controllers,
+    scenarios='standard',
+    metrics='all'
+)
+
+comparison.generate_report('controller_comparison.pdf')
+```
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory` for hybrid control theory.
+"""
+        return ""
+
     def _add_line_explanations(self, content: str, source_path: Path, high_priority: bool) -> str:
         """Add line-by-line explanations for key methods."""
         if not high_priority:
@@ -738,6 +1021,103 @@ graph TD
 2. Surface Value → Equivalent & Switching Control
 3. Control Components → Combination & Saturation
 4. Final Control → Actuator
+"""
+
+        elif 'adaptive' in path_str and 'controller' in path_str:
+            return """## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State Input] --> B[Sliding Surface]
+    B --> C{Surface Value s}
+    C --> D[Adaptation Law]
+    D --> E[Adaptive Gain K_t_]
+    C --> F[Switching Control]
+    E --> F
+    F --> G[Saturation]
+    G --> H[Control Output u]
+    C --> I[Uncertainty Estimator]
+    I --> D
+
+    style C fill:#ff9
+    style D fill:#9cf
+    style E fill:#f9f
+    style G fill:#f99
+```
+
+**Data Flow:**
+1. State → Sliding Surface Computation
+2. Surface Value → Adaptation Law + Switching Control
+3. Online Gain Adaptation: K̇ = γ|s| - σ(K - K₀)
+4. Adaptive Switching → Saturation → Control Output
+"""
+
+        elif ('super_twisting' in path_str or 'sta' in path_str) and 'controller' in path_str:
+            return """## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State Input] --> B[Sliding Surface]
+    B --> C{Surface Value s}
+    C --> D[Proportional Term]
+    C --> E[Integral Term]
+    D --> F["u₁ = -K₁|s|^1/2_sign_s_"]
+    E --> G["u̇₂ = -K₂sign_s_"]
+    G --> H[Integrator]
+    H --> I[u₂]
+    F --> J[Control Combiner]
+    I --> J
+    J --> K[Saturation]
+    K --> L[Control Output u]
+
+    style C fill:#ff9
+    style D fill:#9cf
+    style E fill:#fcf
+    style J fill:#9f9
+    style K fill:#f99
+```
+
+**Data Flow:**
+1. State → Sliding Surface Computation
+2. Surface → Proportional Term (fractional power)
+3. Surface → Integral Term (continuous integration)
+4. Continuous Control → Chattering-Free Output
+"""
+
+        elif 'hybrid' in path_str and 'controller' in path_str:
+            return """## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State Input] --> B[Sliding Surface]
+    B --> C{Surface Value s}
+    A --> D[Model Confidence]
+    D --> E{Switching Logic}
+    C --> F[Equivalent Control]
+    C --> G[Super-Twisting Control]
+    E -->|High Confidence| F
+    E -->|Low Confidence| G
+    F --> H[Transition Filter]
+    G --> H
+    H --> I[Saturation]
+    I --> J[Control Output u]
+    C --> K[Performance Monitor]
+    K --> E
+
+    style C fill:#ff9
+    style E fill:#f9f
+    style F fill:#9cf
+    style G fill:#fcf
+    style H fill:#cfc
+    style I fill:#f99
+```
+
+**Data Flow:**
+1. State → Sliding Surface + Model Confidence
+2. Performance Monitoring → Mode Switching Decision
+3. High Confidence → Equivalent Control (model-based)
+4. Low Confidence → Super-Twisting (robust)
+5. Smooth Transition → Final Control Output
 """
 
         return ""
