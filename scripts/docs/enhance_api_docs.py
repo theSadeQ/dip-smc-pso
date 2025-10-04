@@ -56,6 +56,10 @@ class APIDocEnhancer:
         'dynamics.md',
         'dynamics_full.md',
         'models_simplified_dynamics.md',  # Week 6 Phase 2
+        'statistical_benchmarks_v2.md',  # Week 7 Phase 1
+        'validation_monte_carlo.md',  # Week 7 Phase 1
+        'validation_statistical_benchmarks.md',  # Week 7 Phase 1
+        'validation_metrics.md',  # Week 7 Phase 1
     ]
 
     def __init__(self, docs_root: Path, src_root: Path, dry_run: bool = False):
@@ -166,6 +170,14 @@ class APIDocEnhancer:
             return self._simulation_runner_theory(high_priority)
         elif 'dynamics' in path_str:
             return self._dynamics_theory(high_priority)
+        elif 'statistical_benchmarks' in path_str:
+            return self._statistical_benchmarks_theory(high_priority)
+        elif 'monte_carlo' in path_str:
+            return self._monte_carlo_theory(high_priority)
+        elif 'validation' in path_str and 'metrics' in path_str:
+            return self._validation_metrics_theory(high_priority)
+        elif 'validation' in path_str and 'benchmark' in path_str:
+            return self._validation_benchmark_theory(high_priority)
 
         return ""
 
@@ -501,6 +513,14 @@ Supports Euler, RK4, and adaptive RK45 integration methods for solving DIP dynam
             return self._simulation_runner_examples(high_priority)
         elif 'dynamics' in path_str and 'model' in path_str:
             return self._dynamics_examples(high_priority)
+        elif 'statistical_benchmarks' in path_str:
+            return self._statistical_benchmarks_examples(high_priority)
+        elif 'monte_carlo' in path_str:
+            return self._monte_carlo_examples(high_priority)
+        elif 'validation' in path_str and 'metrics' in path_str:
+            return self._validation_metrics_examples(high_priority)
+        elif 'validation' in path_str and 'benchmark' in path_str:
+            return self._validation_benchmark_examples(high_priority)
 
         return ""
 
@@ -1377,6 +1397,1142 @@ for name, model in models.items():
 **See:** {doc}`../../../plant/dynamics_comparison_study`
 """
 
+    # ===================================================================================
+    # Benchmarking Framework Theory Methods (Week 7 Phase 1)
+    # ===================================================================================
+
+    def _statistical_benchmarks_theory(self, high_priority: bool) -> str:
+        """Generate statistical benchmarking theory section."""
+        if high_priority:
+            return """## Mathematical Foundation
+
+### Statistical Performance Evaluation
+
+Statistical benchmarking provides rigorous quantification of controller performance across multiple trials with uncertainty quantification.
+
+#### Confidence Intervals
+
+For a performance metric $m$ measured across $n$ trials, the $(1-\\alpha)$ confidence interval estimates the true population mean $\\mu_m$:
+
+**t-Distribution (Parametric)**:
+```{math}
+CI_{1-\\alpha} = \\bar{m} \\pm t_{\\alpha/2, n-1} \\frac{s_m}{\\sqrt{n}}
+```
+
+Where:
+- $\\bar{m}$: Sample mean
+- $s_m$: Sample standard deviation
+- $t_{\\alpha/2, n-1}$: Critical t-value
+- Assumes: Normal distribution of metrics
+
+**Bootstrap (Non-Parametric)**:
+```{math}
+CI_{1-\\alpha} = \\left[m_{\\alpha/2}^*, m_{1-\\alpha/2}^*\\right]
+```
+
+Computed via $B$ bootstrap resamples:
+1. Draw $n$ samples with replacement from original data
+2. Compute metric for each resample
+3. Use empirical quantiles for interval bounds
+
+**No assumptions** about underlying distribution.
+
+#### Hypothesis Testing
+
+**Welch's t-test** for comparing two controller means:
+
+```{math}
+t = \\frac{\\bar{m}_1 - \\bar{m}_2}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}
+```
+
+- **Null Hypothesis**: $H_0: \\mu_1 = \\mu_2$
+- **Alternative**: $H_1: \\mu_1 \\neq \\mu_2$
+- **Degrees of Freedom**: Welch-Satterthwaite approximation (unequal variances)
+
+**Interpretation**: Reject $H_0$ if $p < 0.05$ → significant performance difference.
+
+### Performance Metrics
+
+**Integral Squared Error (ISE)**:
+```{math}
+ISE = \\int_0^T ||\\vec{x}(t)||^2 dt \\approx \\sum_{k=0}^{N} ||\\vec{x}_k||^2 \\Delta t
+```
+
+**Settling Time** ($t_s$): Time until $||\\vec{x}(t)|| < 0.02$ permanently.
+
+**Control Effort**:
+```{math}
+RMS_u = \\sqrt{\\frac{1}{T} \\int_0^T u^2(t) dt}
+```
+
+**Chattering Index**:
+```{math}
+CI = \\frac{1}{N-1} \\sum_{k=1}^{N} |u_k - u_{k-1}|
+```
+
+**See:** {doc}`../../../mathematical_foundations/statistical_analysis`
+"""
+        else:
+            return ""
+
+    def _monte_carlo_theory(self, high_priority: bool) -> str:
+        """Generate Monte Carlo validation theory section."""
+        if high_priority:
+            return """## Mathematical Foundation
+
+### Monte Carlo Validation Theory
+
+Monte Carlo methods assess controller robustness by evaluating performance distributions across random perturbations.
+
+#### Uncertainty Propagation
+
+Given parameter uncertainty $\\vec{\\theta} \\sim P(\\vec{\\theta})$, estimate expected performance:
+
+```{math}
+\\mathbb{E}[J] = \\int J(\\vec{\\theta}) P(\\vec{\\theta}) d\\vec{\\theta} \\approx \\frac{1}{N} \\sum_{i=1}^{N} J(\\vec{\\theta}_i)
+```
+
+Where $\\vec{\\theta}_i \\sim P(\\vec{\\theta})$ are i.i.d. samples.
+
+**Convergence Rate**: Error decreases as $O(1/\\sqrt{N})$ (independent of dimension).
+
+#### Robustness Metrics
+
+**Success Rate**:
+```{math}
+SR = \\frac{1}{N} \\sum_{i=1}^{N} \\mathbb{1}_{\\text{stable}}(\\vec{\\theta}_i)
+```
+
+Where $\\mathbb{1}_{\\text{stable}} = 1$ if system remains stable.
+
+**Worst-Case Performance**:
+```{math}
+J_{\\text{worst}} = \\max_{i \\in [1,N]} J(\\vec{\\theta}_i)
+```
+
+Critical for safety-critical systems.
+
+**Performance Percentiles**:
+```{math}
+J_{p} = \\text{quantile}(\\{J(\\vec{\\theta}_i)\\}_{i=1}^N, p)
+```
+
+Example: $J_{95}$ = 95th percentile (worst 5% performance).
+
+#### Sampling Strategies
+
+**Uniform Perturbations**:
+```{math}
+\\theta_i = \\theta_0 (1 + \\delta_i), \\quad \\delta_i \\sim \\mathcal{U}(-\\epsilon, +\\epsilon)
+```
+
+**Gaussian Perturbations**:
+```{math}
+\\theta_i \\sim \\mathcal{N}(\\theta_0, \\sigma^2 \\theta_0^2)
+```
+
+**Latin Hypercube Sampling**: Ensures stratified coverage of parameter space (more efficient than uniform for high dimensions).
+
+### Confidence Bounds
+
+For estimated mean $\\bar{J}$:
+
+```{math}
+CI_{95\\%} = \\bar{J} \\pm 1.96 \\frac{s_J}{\\sqrt{N}}
+```
+
+**Rule of Thumb**: $N \\geq 30$ trials for reliable statistics, $N \\geq 100$ for robust estimation.
+
+**See:** {doc}`../../../validation/monte_carlo_methodology`
+"""
+        else:
+            return ""
+
+    def _validation_metrics_theory(self, high_priority: bool) -> str:
+        """Generate validation metrics theory section."""
+        if high_priority:
+            return """## Mathematical Foundation
+
+### Performance Metric Theory
+
+Rigorous performance metrics enable objective controller comparison and validation against specifications.
+
+#### Control Engineering Metrics
+
+**Integral of Time-weighted Absolute Error (ITAE)**:
+```{math}
+ITAE = \\int_0^T t |\\vec{x}(t)| dt
+```
+
+- **Purpose**: Penalizes long settling times
+- **Property**: Emphasizes late-time errors more than early errors
+- **Interpretation**: Lower ITAE → faster convergence
+
+**Overshoot**:
+```{math}
+OS = \\frac{\\max(x(t)) - x_{\\text{ref}}}{x_{\\text{ref}}} \\times 100\\%
+```
+
+**Damping Ratio** (estimated from overshoot):
+```{math}
+\\zeta \\approx \\frac{-\\ln(OS/100)}{\\sqrt{\\pi^2 + \\ln^2(OS/100)}}
+```
+
+#### Constraint Violation Analysis
+
+**Saturation Severity**:
+```{math}
+SV = \\int_0^T \\max(0, |u(t)| - u_{\\max}) dt
+```
+
+**Violation Frequency**:
+```{math}
+VF = \\frac{1}{T} \\sum_{k=0}^{N} \\mathbb{1}_{|u_k| > u_{\\max}}
+```
+
+**Peak Violation**:
+```{math}
+PV = \\max_{t \\in [0,T]} (|u(t)| - u_{\\max})
+```
+
+#### Stability Metrics
+
+**Lyapunov Exponent** (numerical estimate):
+```{math}
+\\lambda = \\lim_{T \\to \\infty} \\frac{1}{T} \\ln \\frac{||\\delta \\vec{x}(T)||}{||\\delta \\vec{x}(0)||}
+```
+
+- $\\lambda < 0$: Asymptotically stable
+- $\\lambda > 0$: Unstable (chaos)
+
+**Energy Dissipation Rate**:
+```{math}
+\\dot{E} = \\frac{dE}{dt} < 0 \\quad \\forall t > t_0
+```
+
+Required for Lyapunov stability.
+
+### Statistical Properties
+
+**Consistency**: Metrics should be monotonic in performance (better control → lower ISE).
+
+**Sensitivity**: Sufficient resolution to distinguish controller variants.
+
+**Robustness**: Insensitive to numerical noise and discretization.
+
+**See:** {doc}`../../../control_theory/performance_specifications`
+"""
+        else:
+            return ""
+
+    def _validation_benchmark_theory(self, high_priority: bool) -> str:
+        """Generate validation benchmark theory section."""
+        if high_priority:
+            return """## Mathematical Foundation
+
+### Benchmark Validation Theory
+
+Systematic benchmarking ensures reproducible, statistically rigorous comparison of control algorithms.
+
+#### Experimental Design
+
+**Randomized Controlled Trials (RCT)**:
+- **Random seed variation**: Ensures independent trials
+- **Controlled conditions**: Fixed physics, initial states
+- **Replicability**: Deterministic given seed
+
+**Factorial Design** for parameter studies:
+```{math}
+\\text{Trials} = n_{\\text{seeds}} \\times n_{\\text{controllers}} \\times n_{\\text{scenarios}}
+```
+
+#### Statistical Comparison
+
+**Analysis of Variance (ANOVA)**:
+
+Tests null hypothesis $H_0$: All controller means equal.
+
+**F-statistic**:
+```{math}
+F = \\frac{MS_{\\text{between}}}{MS_{\\text{within}}} = \\frac{\\sum_i n_i (\\bar{m}_i - \\bar{m})^2 / (k-1)}{\\sum_i \\sum_j (m_{ij} - \\bar{m}_i)^2 / (N-k)}
+```
+
+Where:
+- $k$: Number of controllers
+- $n_i$: Trials per controller $i$
+- $N = \\sum_i n_i$: Total trials
+
+**Reject $H_0$ if** $p < \\alpha$ (typically $\\alpha = 0.05$).
+
+**Post-hoc Pairwise Comparisons**:
+- **Bonferroni correction**: $\\alpha_{\\text{adj}} = \\alpha / m$ for $m$ comparisons
+- **Tukey HSD**: Controls family-wise error rate
+
+#### Performance Ranking
+
+**Pareto Dominance**:
+
+Controller $A$ Pareto-dominates $B$ if:
+```{math}
+J_i^A \\leq J_i^B \\quad \\forall i \\quad \\text{and} \\quad \\exists j: J_j^A < J_j^B
+```
+
+For all metrics $J_i$ (ISE, settling time, control effort, etc.).
+
+**Multi-Objective Scoring**:
+```{math}
+S = \\sum_{i=1}^{M} w_i \\frac{J_i - J_i^{\\text{min}}}{J_i^{\\text{max}} - J_i^{\\text{min}}}
+```
+
+Normalized weighted sum of metrics.
+
+#### Reproducibility Standards
+
+1. **Seed control**: Document all RNG seeds
+2. **Version pinning**: Fix library versions
+3. **Configuration archival**: Save exact parameter sets
+4. **Statistical reporting**: Include CIs, p-values, effect sizes
+
+**Effect Size (Cohen's d)**:
+```{math}
+d = \\frac{\\bar{m}_1 - \\bar{m}_2}{s_{\\text{pooled}}}
+```
+
+- $|d| < 0.2$: Small effect
+- $|d| \\in [0.5, 0.8]$: Medium effect
+- $|d| > 0.8$: Large effect
+
+**See:** {doc}`../../../validation/benchmarking_methodology`
+"""
+        else:
+            return ""
+
+    # ===================================================================================
+    # Benchmarking Framework Diagram Methods (Week 7 Phase 1)
+    # ===================================================================================
+
+    def _statistical_benchmarks_diagram(self) -> str:
+        """Generate statistical benchmarking workflow diagram."""
+        return """## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Controller Factory] --> B[Multi-Trial Execution]
+    B --> C{For Each Trial i=1..N}
+    C --> D[Simulation]
+    D --> E[Compute Metrics]
+    E --> F[Metrics Collection]
+    F --> G{All Trials Done?}
+    G -->|No| C
+    G -->|Yes| H[Statistical Analysis]
+    H --> I[Confidence Intervals]
+    H --> J[Hypothesis Tests]
+    H --> K[Distribution Fitting]
+    I --> L[Results Package]
+    J --> L
+    K --> L
+    L --> M[Validation Report]
+
+    style B fill:#9cf
+    style E fill:#fcf
+    style H fill:#ff9
+    style L fill:#9f9
+    style M fill:#9f9
+```
+
+**Data Flow:**
+1. Controller factory creates instances for each trial
+2. Execute $N$ independent simulations with different seeds
+3. Compute performance metrics: ISE, settling time, control effort
+4. Statistical analysis: CIs (t-distribution or bootstrap), hypothesis testing
+5. Generate validation report with results and visualizations
+
+**Key Components:**
+- **Trial Runner**: Orchestrates parallel execution
+- **Metrics Computer**: Unified metric calculations
+- **Statistics Engine**: CI computation, t-tests, ANOVA
+- **Report Generator**: LaTeX/Markdown output
+"""
+
+    def _monte_carlo_diagram(self) -> str:
+        """Generate Monte Carlo validation workflow diagram."""
+        return """## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Nominal Parameters] --> B[Uncertainty Model]
+    B --> C{For Each Sample i=1..N}
+    C --> D[Perturb Parameters]
+    D --> E[Create Scenario]
+    E --> F[Run Simulation]
+    F --> G[Evaluate Stability]
+    G --> H{Stable?}
+    H -->|Yes| I[Compute Performance]
+    H -->|No| J[Record Failure]
+    I --> K[Metrics Collection]
+    J --> K
+    K --> L{All Samples Done?}
+    L -->|No| C
+    L -->|Yes| M[Robustness Analysis]
+    M --> N[Success Rate]
+    M --> O[Worst-Case Metrics]
+    M --> P[Percentile Analysis]
+    N --> Q[Monte Carlo Report]
+    O --> Q
+    P --> Q
+
+    style D fill:#9cf
+    style G fill:#fcf
+    style M fill:#ff9
+    style Q fill:#9f9
+```
+
+**Data Flow:**
+1. Define uncertainty model (e.g., ±20% mass, ±10% length)
+2. Sample $N$ parameter sets from uncertainty distribution
+3. For each sample: simulate system and evaluate stability
+4. Collect metrics for successful trials
+5. Robustness analysis: success rate, worst-case, percentiles
+6. Generate report with uncertainty quantification
+
+**Sampling Methods:**
+- **Uniform**: $\\theta \\sim \\mathcal{U}(\\theta_0(1-\\epsilon), \\theta_0(1+\\epsilon))$
+- **Gaussian**: $\\theta \\sim \\mathcal{N}(\\theta_0, \\sigma^2)$
+- **Latin Hypercube**: Stratified sampling for high dimensions
+"""
+
+    def _validation_metrics_diagram(self) -> str:
+        """Generate validation metrics computation diagram."""
+        return """## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Simulation Result] --> B[Time Vector t]
+    A --> C[State Trajectory x_t_]
+    A --> D[Control Signal u_t_]
+
+    B --> E[Control Metrics]
+    C --> E
+    E --> F[ISE]
+    E --> G[ITAE]
+    E --> H[RMS Control]
+
+    B --> I[Stability Metrics]
+    C --> I
+    I --> J[Overshoot]
+    I --> K[Settling Time]
+    I --> L[Damping Ratio]
+
+    B --> M[Constraint Metrics]
+    D --> M
+    M --> N[Saturation Severity]
+    M --> O[Violation Count]
+    M --> P[Peak Violation]
+
+    F --> Q[Metrics Dictionary]
+    G --> Q
+    H --> Q
+    J --> Q
+    K --> Q
+    L --> Q
+    N --> Q
+    O --> Q
+    P --> Q
+    Q --> R[Validation Result]
+
+    style E fill:#9cf
+    style I fill:#fcf
+    style M fill:#ff9
+    style Q fill:#f9f
+    style R fill:#9f9
+```
+
+**Data Flow:**
+1. Extract time, state, control trajectories from simulation
+2. **Control Metrics Module**: Compute ISE, ITAE, RMS
+3. **Stability Metrics Module**: Compute overshoot, settling time, damping
+4. **Constraint Metrics Module**: Compute violations and severity
+5. Aggregate all metrics into unified dictionary
+6. Return structured validation result
+
+**Metric Categories:**
+- **Control Performance**: Tracking accuracy, convergence speed
+- **Stability Analysis**: Overshoot, damping characteristics
+- **Constraint Satisfaction**: Actuator limits, physical constraints
+"""
+
+    def _validation_benchmark_diagram(self) -> str:
+        """Generate validation benchmark comparison diagram."""
+        return """## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Controller A] --> B[Benchmark Suite]
+    C[Controller B] --> B
+    D[Controller C] --> B
+
+    B --> E[Scenario 1: Stabilization]
+    B --> F[Scenario 2: Tracking]
+    B --> G[Scenario 3: Disturbance Rejection]
+
+    E --> H[Multi-Trial Runner]
+    F --> H
+    G --> H
+
+    H --> I{For Each Controller×Scenario}
+    I --> J[N Trials]
+    J --> K[Metrics Collection]
+    K --> L{All Combinations Done?}
+    L -->|No| I
+    L -->|Yes| M[Comparative Analysis]
+
+    M --> N[ANOVA]
+    M --> O[Pairwise t-tests]
+    M --> P[Pareto Ranking]
+
+    N --> Q[Statistical Report]
+    O --> Q
+    P --> Q
+    Q --> R[Benchmark Comparison]
+
+    style B fill:#9cf
+    style H fill:#fcf
+    style M fill:#ff9
+    style Q fill:#f9f
+    style R fill:#9f9
+```
+
+**Data Flow:**
+1. Define benchmark suite with multiple scenarios
+2. For each controller × scenario combination:
+   - Execute $N$ trials with different seeds
+   - Collect performance metrics
+3. Comparative statistical analysis:
+   - **ANOVA**: Test for significant differences
+   - **Pairwise tests**: Identify specific differences (with Bonferroni correction)
+   - **Pareto ranking**: Multi-objective dominance analysis
+4. Generate comprehensive benchmark report
+
+**Output Includes:**
+- Statistical significance (p-values)
+- Effect sizes (Cohen's d)
+- Confidence intervals (95%)
+- Performance rankings with uncertainty
+"""
+
+    # ===================================================================================
+    # Benchmarking Framework Example Methods (Week 7 Phase 1)
+    # ===================================================================================
+
+    def _statistical_benchmarks_examples(self, high_priority: bool) -> str:
+        """Generate statistical benchmarking usage examples."""
+        return """## Usage Examples
+
+### Basic Statistical Benchmarking
+
+```python
+from src.benchmarks.statistical_benchmarks_v2 import run_trials
+from src.controllers.factory import create_smc_for_pso, SMCType
+
+# Define controller factory
+def controller_factory():
+    return create_smc_for_pso(
+        SMCType.CLASSICAL,
+        gains=[10, 8, 15, 12, 50, 5],
+        max_force=100.0
+    )
+
+# Configure benchmarking
+from src.config import load_config
+config = load_config("config.yaml")
+
+# Run trials with statistical analysis
+metrics_list, ci_results = run_trials(
+    controller_factory,
+    config,
+    n_trials=30,
+    confidence_level=0.95
+)
+
+# Access results
+print(f"Mean ISE: {ci_results['ise']['mean']:.4f}")
+print(f"95% CI: [{ci_results['ise']['ci_lower']:.4f}, {ci_results['ise']['ci_upper']:.4f}]")
+print(f"Std Dev: {ci_results['ise']['std']:.4f}")
+```
+
+### Advanced: Bootstrap Confidence Intervals
+
+```python
+from src.benchmarks.statistical_benchmarks_v2 import run_trials_with_advanced_statistics
+
+# Run with bootstrap CI (non-parametric, no normality assumption)
+metrics_list, analysis = run_trials_with_advanced_statistics(
+    controller_factory,
+    config,
+    n_trials=50,
+    confidence_level=0.99,
+    use_bootstrap=True,
+    n_bootstrap=10000
+)
+
+# Bootstrap results more robust for non-normal distributions
+print(f"Bootstrap 99% CI for settling time:")
+print(f"  [{analysis['settling_time']['bootstrap_ci'][0]:.3f}, "
+      f"{analysis['settling_time']['bootstrap_ci'][1]:.3f}]")
+```
+
+### Controller Comparison with Hypothesis Testing
+
+```python
+from src.benchmarks.statistical_benchmarks_v2 import compare_controllers
+
+# Define two controllers
+def classical_factory():
+    return create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5])
+
+def adaptive_factory():
+    return create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5])
+
+# Statistical comparison
+comparison = compare_controllers(
+    controller_a_factory=classical_factory,
+    controller_b_factory=adaptive_factory,
+    config=config,
+    n_trials=40
+)
+
+# Interpret results
+for metric, result in comparison.items():
+    print(f"\n{metric.upper()}:")
+    print(f"  Classical: {result['mean_a']:.4f} ± {result['std_a']:.4f}")
+    print(f"  Adaptive:  {result['mean_b']:.4f} ± {result['std_b']:.4f}")
+    print(f"  p-value:   {result['p_value']:.4e}")
+
+    if result['p_value'] < 0.05:
+        better = 'Classical' if result['mean_a'] < result['mean_b'] else 'Adaptive'
+        print(f"  → {better} is significantly better (p < 0.05)")
+    else:
+        print(f"  → No significant difference (p ≥ 0.05)")
+```
+
+### Batch Benchmarking Multiple Controllers
+
+```python
+from src.benchmarks.core import run_multiple_trials
+
+controllers = {
+    'Classical': lambda: create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
+    'Adaptive': lambda: create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]),
+    'STA': lambda: create_smc_for_pso(SMCType.SUPER_TWISTING, [25, 10, 15, 12, 20, 15]),
+    'Hybrid': lambda: create_smc_for_pso(SMCType.HYBRID, [15, 12, 18, 15])
+}
+
+results = {}
+for name, factory in controllers.items():
+    metrics_list, ci_results = run_trials(factory, config, n_trials=30)
+    results[name] = ci_results
+
+# Compare ISE across all controllers
+import pandas as pd
+comparison_df = pd.DataFrame({
+    name: {
+        'ISE': r['ise']['mean'],
+        'ISE_CI': f"[{r['ise']['ci_lower']:.3f}, {r['ise']['ci_upper']:.3f}]",
+        'Settling Time': r['settling_time']['mean']
+    }
+    for name, r in results.items()
+}).T
+
+print(comparison_df)
+```
+
+**See:** {doc}`../../../benchmarking_workflows/statistical_analysis_guide`
+"""
+
+    def _monte_carlo_examples(self, high_priority: bool) -> str:
+        """Generate Monte Carlo validation usage examples."""
+        return """## Usage Examples
+
+### Basic Monte Carlo Robustness Analysis
+
+```python
+from src.analysis.validation.monte_carlo import MonteCarloValidator
+from src.controllers.factory import create_smc_for_pso, SMCType
+
+# Define controller
+controller_factory = lambda: create_smc_for_pso(
+    SMCType.CLASSICAL,
+    gains=[10, 8, 15, 12, 50, 5],
+    max_force=100.0
+)
+
+# Configure uncertainty model (±20% on masses, ±10% on lengths)
+uncertainty = {
+    'cart_mass': {'type': 'uniform', 'range': (-0.2, 0.2)},
+    'pole1_mass': {'type': 'uniform', 'range': (-0.2, 0.2)},
+    'pole2_mass': {'type': 'uniform', 'range': (-0.2, 0.2)},
+    'pole1_length': {'type': 'uniform', 'range': (-0.1, 0.1)},
+    'pole2_length': {'type': 'uniform', 'range': (-0.1, 0.1)},
+}
+
+# Run Monte Carlo validation
+validator = MonteCarloValidator(
+    controller_factory=controller_factory,
+    uncertainty_model=uncertainty,
+    n_samples=100,
+    seed=42
+)
+
+results = validator.run()
+
+# Analyze robustness
+print(f"Success Rate: {results['success_rate']*100:.1f}%")
+print(f"Mean ISE: {results['mean_ise']:.4f}")
+print(f"Worst-case ISE: {results['worst_case_ise']:.4f}")
+print(f"95th Percentile ISE: {results['percentile_95_ise']:.4f}")
+```
+
+### Gaussian Uncertainty with Correlation
+
+```python
+import numpy as np
+
+# Define correlated uncertainties (masses tend to vary together)
+mean_params = np.array([1.0, 0.1, 0.05])  # cart, pole1, pole2 masses
+cov_matrix = np.array([
+    [0.04, 0.01, 0.005],   # cart mass variance and covariances
+    [0.01, 0.004, 0.002],  # pole1 mass
+    [0.005, 0.002, 0.001]  # pole2 mass
+])
+
+# Gaussian Monte Carlo
+validator = MonteCarloValidator(
+    controller_factory=controller_factory,
+    uncertainty_model={
+        'masses': {
+            'type': 'gaussian',
+            'mean': mean_params,
+            'cov': cov_matrix
+        }
+    },
+    n_samples=200
+)
+
+results = validator.run()
+
+# Visualize uncertainty propagation
+import matplotlib.pyplot as plt
+plt.figure(figsize=(10, 6))
+plt.subplot(1, 2, 1)
+plt.hist(results['ise_samples'], bins=30, alpha=0.7, edgecolor='black')
+plt.xlabel('ISE')
+plt.ylabel('Frequency')
+plt.title('Performance Distribution under Uncertainty')
+
+plt.subplot(1, 2, 2)
+plt.scatter(results['param_samples'][:, 0], results['ise_samples'], alpha=0.5)
+plt.xlabel('Cart Mass Perturbation')
+plt.ylabel('ISE')
+plt.title('Sensitivity to Cart Mass')
+plt.tight_layout()
+plt.show()
+```
+
+### Latin Hypercube Sampling for High-Dimensional Uncertainty
+
+```python
+from src.analysis.validation.monte_carlo import LatinHypercubeSampler
+
+# High-dimensional uncertainty (all 8 physics parameters)
+uncertainty_full = {
+    'cart_mass': (-0.2, 0.2),
+    'pole1_mass': (-0.2, 0.2),
+    'pole2_mass': (-0.2, 0.2),
+    'pole1_length': (-0.1, 0.1),
+    'pole2_length': (-0.1, 0.1),
+    'friction_cart': (-0.3, 0.3),
+    'friction_pole1': (-0.3, 0.3),
+    'friction_pole2': (-0.3, 0.3),
+}
+
+# Latin Hypercube Sampling (more efficient than random for high dimensions)
+sampler = LatinHypercubeSampler(uncertainty_full, n_samples=150, seed=42)
+param_samples = sampler.generate()
+
+# Run validation with LHS samples
+validator = MonteCarloValidator(
+    controller_factory=controller_factory,
+    param_samples=param_samples  # Pre-generated samples
+)
+
+results = validator.run()
+
+# Analyze which parameters drive failures
+failure_params = param_samples[~results['stability_mask']]
+print(f"Failure modes analysis:")
+print(f"  Cart mass range in failures: [{failure_params[:, 0].min():.3f}, {failure_params[:, 0].max():.3f}]")
+print(f"  Pole1 length range in failures: [{failure_params[:, 3].min():.3f}, {failure_params[:, 3].max():.3f}]")
+```
+
+### Robustness Comparison Across Controllers
+
+```python
+controllers = {
+    'Classical': lambda: create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
+    'Adaptive': lambda: create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]),
+}
+
+uncertainty = {
+    'cart_mass': {'type': 'uniform', 'range': (-0.3, 0.3)},  # Aggressive uncertainty
+    'pole1_mass': {'type': 'uniform', 'range': (-0.3, 0.3)},
+}
+
+robustness_results = {}
+for name, factory in controllers.items():
+    validator = MonteCarloValidator(factory, uncertainty, n_samples=200)
+    robustness_results[name] = validator.run()
+
+# Compare success rates
+for name, res in robustness_results.items():
+    print(f"{name}:")
+    print(f"  Success Rate: {res['success_rate']*100:.1f}%")
+    print(f"  Mean ISE (successful): {res['mean_ise']:.4f}")
+    print(f"  Worst-case ISE: {res['worst_case_ise']:.4f}")
+```
+
+**See:** {doc}`../../../validation/monte_carlo_robustness_guide`
+"""
+
+    def _validation_metrics_examples(self, high_priority: bool) -> str:
+        """Generate validation metrics usage examples."""
+        return """## Usage Examples
+
+### Compute All Metrics for a Simulation
+
+```python
+from src.benchmarks.metrics import compute_all_metrics
+from src.simulation.engines.simulation_runner import run_simulation
+from src.controllers.factory import create_smc_for_pso, SMCType
+from src.plant.models.simplified import SimplifiedDynamics
+
+# Run simulation
+controller = create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5])
+dynamics = SimplifiedDynamics()
+
+result = run_simulation(
+    controller=controller,
+    dynamics_model=dynamics,
+    initial_state=[0.1, 0.05, 0, 0, 0, 0],
+    sim_time=10.0,
+    dt=0.01
+)
+
+# Compute comprehensive metrics
+metrics = compute_all_metrics(
+    t=result.time,
+    x=result.states,
+    u=result.control,
+    max_force=100.0,
+    include_advanced=True
+)
+
+# Access metrics
+print("Control Performance:")
+print(f"  ISE: {metrics['ise']:.4f}")
+print(f"  ITAE: {metrics['itae']:.4f}")
+print(f"  RMS Control: {metrics['rms_control']:.4f}")
+
+print("\nStability Analysis:")
+print(f"  Settling Time: {metrics['settling_time']:.3f}s")
+print(f"  Overshoot: {metrics['overshoot']:.2f}%")
+print(f"  Damping Ratio: {metrics['damping_ratio']:.3f}")
+
+print("\nConstraint Violations:")
+print(f"  Saturation Count: {metrics['saturation_count']}")
+print(f"  Saturation Severity: {metrics['saturation_severity']:.4f}")
+```
+
+### Individual Metric Computation
+
+```python
+from src.benchmarks.metrics.control_metrics import compute_ise, compute_itae
+from src.benchmarks.metrics.stability_metrics import compute_overshoot, compute_settling_time
+from src.benchmarks.metrics.constraint_metrics import count_control_violations
+
+# Control metrics
+ise = compute_ise(result.time, result.states)
+itae = compute_itae(result.time, result.states)
+
+# Stability metrics
+overshoot = compute_overshoot(result.states[:, 0])  # First angle
+settling_time = compute_settling_time(result.time, result.states, threshold=0.02)
+
+# Constraint violations
+violations, severity, peak = count_control_violations(result.control, max_force=100.0)
+
+print(f"ISE: {ise:.4f}, ITAE: {itae:.4f}")
+print(f"Overshoot: {overshoot:.2f}%, Settling: {settling_time:.3f}s")
+print(f"Violations: {violations}, Severity: {severity:.4f}, Peak: {peak:.2f}")
+```
+
+### Custom Metric: Chattering Index
+
+```python
+import numpy as np
+
+def compute_chattering_index(u, dt):
+    \"\"\"Quantify control chattering.\"\"\"
+    # Total variation of control signal
+    tv = np.sum(np.abs(np.diff(u))) * dt
+    return tv
+
+chattering = compute_chattering_index(result.control, dt=0.01)
+print(f"Chattering Index: {chattering:.4f}")
+
+# Compare chattering across controllers
+controllers = {
+    'Classical': create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
+    'STA': create_smc_for_pso(SMCType.SUPER_TWISTING, [25, 10, 15, 12, 20, 15]),
+}
+
+chattering_results = {}
+for name, ctrl in controllers.items():
+    result = run_simulation(ctrl, dynamics, [0.1, 0.05, 0, 0, 0, 0], 10.0, 0.01)
+    chattering_results[name] = compute_chattering_index(result.control, 0.01)
+
+for name, ci in chattering_results.items():
+    print(f"{name} Chattering: {ci:.4f}")
+```
+
+### Energy-Based Metrics
+
+```python
+# Track energy conservation (for unforced natural dynamics)
+def compute_energy_drift(result, dynamics):
+    \"\"\"Measure energy drift as validation check.\"\"\"
+    energies = [dynamics.compute_total_energy(x) for x in result.states]
+    initial_energy = energies[0]
+    drift = np.abs(np.array(energies) - initial_energy) / initial_energy * 100
+    max_drift = np.max(drift)
+    mean_drift = np.mean(drift)
+    return {'max_drift_%': max_drift, 'mean_drift_%': mean_drift}
+
+energy_metrics = compute_energy_drift(result, dynamics)
+print(f"Energy drift: {energy_metrics['max_drift_%']:.3f}% (max), "
+      f"{energy_metrics['mean_drift_%']:.3f}% (mean)")
+```
+
+### Batch Metric Computation for Trials
+
+```python
+from src.benchmarks.metrics import compute_all_metrics
+
+# Compute metrics for multiple trials
+trials_results = []  # List of simulation results from multiple runs
+
+metrics_collection = []
+for result in trials_results:
+    metrics = compute_all_metrics(result.time, result.states, result.control, 100.0)
+    metrics_collection.append(metrics)
+
+# Aggregate statistics
+import pandas as pd
+df = pd.DataFrame(metrics_collection)
+
+print("Metric Statistics Across Trials:")
+print(df[['ise', 'settling_time', 'overshoot', 'rms_control']].describe())
+```
+
+**See:** {doc}`../../../performance_metrics/metric_definitions`
+"""
+
+    def _validation_benchmark_examples(self, high_priority: bool) -> str:
+        """Generate validation benchmark usage examples."""
+        return """## Usage Examples
+
+### Basic Multi-Controller Benchmark
+
+```python
+from src.analysis.validation.benchmarking import run_benchmark_suite
+from src.controllers.factory import create_smc_for_pso, SMCType
+
+# Define controllers to compare
+controllers = {
+    'Classical SMC': lambda: create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
+    'Adaptive SMC': lambda: create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]),
+    'Super-Twisting': lambda: create_smc_for_pso(SMCType.SUPER_TWISTING, [25, 10, 15, 12, 20, 15]),
+    'Hybrid': lambda: create_smc_for_pso(SMCType.HYBRID, [15, 12, 18, 15])
+}
+
+# Run benchmark
+results = run_benchmark_suite(
+    controllers=controllers,
+    n_trials=30,
+    scenarios=['stabilization', 'tracking', 'disturbance']
+)
+
+# Generate comparison report
+results.generate_report('benchmark_report.pdf')
+
+# Access statistical comparison
+print(results.summary_table())
+```
+
+### ANOVA for Multi-Controller Comparison
+
+```python
+from src.analysis.validation.statistical_tests import run_anova
+
+# Extract ISE values for each controller
+ise_data = {
+    name: [trial['ise'] for trial in results[name]]
+    for name in controllers.keys()
+}
+
+# Run ANOVA
+anova_result = run_anova(ise_data)
+
+print(f"ANOVA F-statistic: {anova_result['F']:.3f}")
+print(f"p-value: {anova_result['p_value']:.4e}")
+
+if anova_result['p_value'] < 0.05:
+    print("Significant differences detected between controllers (p < 0.05)")
+
+    # Post-hoc pairwise comparisons
+    from src.analysis.validation.statistical_tests import pairwise_t_tests
+
+    pairwise_results = pairwise_t_tests(
+        ise_data,
+        correction='bonferroni'  # Conservative correction for multiple comparisons
+    )
+
+    print("\nPairwise Comparisons (Bonferroni corrected):")
+    for (ctrl_a, ctrl_b), p_val in pairwise_results.items():
+        sig = "***" if p_val < 0.001 else "**" if p_val < 0.01 else "*" if p_val < 0.05 else "ns"
+        print(f"  {ctrl_a} vs {ctrl_b}: p = {p_val:.4e} {sig}")
+```
+
+### Pareto Ranking for Multi-Objective Comparison
+
+```python
+from src.analysis.validation.benchmarking import compute_pareto_ranking
+
+# Define multiple objectives (minimize all)
+objectives = ['ise', 'settling_time', 'rms_control', 'chattering_index']
+
+# Compute Pareto frontier
+pareto_ranking = compute_pareto_ranking(
+    results,
+    objectives=objectives,
+    direction='minimize'  # All objectives to be minimized
+)
+
+print("Pareto Ranking (Tier 1 = Non-dominated):")
+for tier, controllers in pareto_ranking.items():
+    print(f"  Tier {tier}: {', '.join(controllers)}")
+
+# Visualize Pareto frontier (2D projection)
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(8, 6))
+for name, data in results.items():
+    ise_mean = np.mean([t['ise'] for t in data])
+    settling_mean = np.mean([t['settling_time'] for t in data])
+
+    tier = [k for k, v in pareto_ranking.items() if name in v][0]
+    marker = 'o' if tier == 1 else 's'
+
+    plt.scatter(ise_mean, settling_mean, label=name, marker=marker, s=100)
+
+plt.xlabel('Mean ISE')
+plt.ylabel('Mean Settling Time (s)')
+plt.title('Pareto Frontier: ISE vs Settling Time')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+### Scenario-Based Benchmarking
+
+```python
+from src.analysis.validation.benchmarking import BenchmarkScenario
+
+# Define custom scenarios
+scenarios = [
+    BenchmarkScenario(
+        name='Stabilization',
+        initial_state=[0.1, 0.05, 0, 0, 0, 0],
+        duration=10.0,
+        performance_weights={'ise': 0.6, 'settling_time': 0.4}
+    ),
+    BenchmarkScenario(
+        name='Large Disturbance',
+        initial_state=[0.3, 0.2, 0, 0, 0, 0],
+        duration=15.0,
+        performance_weights={'ise': 0.4, 'overshoot': 0.3, 'settling_time': 0.3}
+    ),
+    BenchmarkScenario(
+        name='Tracking',
+        reference_trajectory='sinusoidal',
+        duration=20.0,
+        performance_weights={'tracking_error': 0.8, 'control_effort': 0.2}
+    )
+]
+
+# Run scenario-based benchmark
+scenario_results = {}
+for scenario in scenarios:
+    scenario_results[scenario.name] = run_benchmark_suite(
+        controllers=controllers,
+        scenario=scenario,
+        n_trials=25
+    )
+
+# Aggregate scenario performance
+for scenario_name, res in scenario_results.items():
+    print(f"\n{scenario_name} Results:")
+    for ctrl_name, data in res.items():
+        weighted_score = scenario.compute_weighted_score(data)
+        print(f"  {ctrl_name}: Score = {weighted_score:.4f}")
+```
+
+### Reproducibility and Archival
+
+```python
+from src.analysis.validation.benchmarking import BenchmarkArchive
+
+# Archive full benchmark configuration and results
+archive = BenchmarkArchive('benchmark_20251004.h5')
+
+archive.save(
+    controllers=controllers,
+    results=results,
+    config={'n_trials': 30, 'dt': 0.01, 'duration': 10.0},
+    metadata={
+        'date': '2025-10-04',
+        'author': 'Researcher',
+        'purpose': 'Controller comparison for publication',
+        'software_versions': {
+            'numpy': np.__version__,
+            'scipy': scipy.__version__
+        }
+    }
+)
+
+# Later: Reload exact benchmark
+archive_loaded = BenchmarkArchive('benchmark_20251004.h5')
+results_reloaded = archive_loaded.load()
+
+# Verify reproducibility
+assert np.allclose(
+    results['Classical SMC'][0]['ise'],
+    results_reloaded['Classical SMC'][0]['ise']
+)
+```
+
+**See:** {doc}`../../../benchmarking/reproducible_validation_workflow`
+"""
+
     def _insert_explanation(self, content: str, explanation: Dict) -> str:
         """Insert line-by-line explanation after method source code."""
         method_name = explanation['method_name']
@@ -1646,6 +2802,15 @@ graph TD
 4. Solve second-order dynamics: Mq̈ + Cq̇ + G = Bu
 5. Return accelerations [ẍ, θ̈₁, θ̈₂] for integration
 """
+
+        elif 'statistical_benchmarks' in path_str:
+            return self._statistical_benchmarks_diagram()
+        elif 'monte_carlo' in path_str:
+            return self._monte_carlo_diagram()
+        elif 'validation' in path_str and 'metrics' in path_str:
+            return self._validation_metrics_diagram()
+        elif 'validation' in path_str and 'benchmark' in path_str:
+            return self._validation_benchmark_diagram()
 
         return ""
 
