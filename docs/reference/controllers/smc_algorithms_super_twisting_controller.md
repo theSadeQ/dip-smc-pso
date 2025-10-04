@@ -15,6 +15,38 @@ Provides finite-time convergence with chattering reduction through
 second-order sliding mode dynamics.
 
 
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State Input] --> B[Sliding Surface]
+    B --> C{Surface Value s}
+    C --> D[Proportional Term]
+    C --> E[Integral Term]
+    D --> F["u₁ = -K₁|s|^1/2_sign_s_"]
+    E --> G["u̇₂ = -K₂sign_s_"]
+    G --> H[Integrator]
+    H --> I[u₂]
+    F --> J[Control Combiner]
+    I --> J
+    J --> K[Saturation]
+    K --> L[Control Output u]
+
+    style C fill:#ff9
+    style D fill:#9cf
+    style E fill:#fcf
+    style J fill:#9f9
+    style K fill:#f99
+```
+
+**Data Flow:**
+1. State → Sliding Surface Computation
+2. Surface → Proportional Term (fractional power)
+3. Surface → Integral Term (continuous integration)
+4. Continuous Control → Chattering-Free Output
+
+
 ## Mathematical Foundation
 
 ### Super-Twisting Algorithm (STA)
@@ -238,3 +270,90 @@ This module imports:
 - `from ...core.switching_functions import SwitchingFunction`
 - `from .twisting_algorithm import SuperTwistingAlgorithm`
 - `from .config import SuperTwistingSMCConfig`
+
+
+## Usage Examples
+
+### Basic Instantiation
+
+```python
+from src.controllers.smc.algorithms.super_twisting import ModularSuperTwistingSMC
+from src.controllers.smc.algorithms.super_twisting.config import SuperTwistingSMCConfig
+
+# Configure super-twisting controller
+config = SuperTwistingSMCConfig(
+    surface_gains=[25.0, 10.0, 15.0, 12.0],  # Higher gains for robustness
+    proportional_gain=20.0,                   # K₁
+    integral_gain=15.0,                       # K₂
+    derivative_gain=5.0,                      # kd
+    max_force=100.0
+)
+
+controller = ModularSuperTwistingSMC(config, dynamics=dynamics)
+```
+
+### Chattering-Free Simulation
+
+```python
+from src.core.simulation_runner import SimulationRunner
+from src.plant.models.full import FullDynamics
+
+# Use full dynamics for realistic chattering assessment
+dynamics = FullDynamics()
+runner = SimulationRunner(controller, dynamics)
+
+result = runner.run(
+    initial_state=[0.15, 0.1, 0, 0, 0, 0],
+    duration=10.0,
+    dt=0.001  # High frequency for chattering detection
+)
+
+# Analyze chattering index
+chattering = runner.compute_chattering_index(result.control_history)
+print(f"Chattering index: {chattering:.4f} (lower is better)")
+```
+
+### PSO Optimization for Finite-Time Convergence
+
+```python
+from src.controllers.factory import create_smc_for_pso, SMCType
+
+# STA requires 6 gains: [k1, k2, λ1, λ2, K₁, K₂]
+# STA stability: K₁ > K₂ for finite-time convergence
+bounds = [
+    (1.0, 50.0),    # k1
+    (1.0, 50.0),    # k2
+    (1.0, 50.0),    # λ1
+    (1.0, 50.0),    # λ2
+    (10.0, 100.0),  # K₁ (proportional)
+    (5.0, 50.0),    # K₂ (integral)
+]
+
+def controller_factory(gains):
+    return create_smc_for_pso(SMCType.SUPER_TWISTING, gains, max_force=100.0)
+
+# Optimize for convergence time
+tuner = PSOTuner(bounds, controller_factory, metric='convergence_time')
+best_gains, best_time = tuner.optimize(n_particles=40, iters=150)
+```
+
+### Finite-Time Convergence Verification
+
+```python
+import numpy as np
+
+# Theoretical convergence time: t_c ≈ 2|s(0)|/(K₁√K₂)
+K1, K2 = 20.0, 15.0
+s0 = 0.1
+
+theoretical_time = 2 * abs(s0) / (K1 * np.sqrt(K2))
+print(f"Theoretical convergence: {theoretical_time:.3f}s")
+
+# Run simulation and measure actual convergence
+result = runner.run(initial_state=[0.1, 0, 0, 0, 0, 0], duration=5.0)
+actual_time = np.argmax(np.abs(result.surface_history) < 0.01) * 0.01
+print(f"Actual convergence: {actual_time:.3f}s")
+```
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory` for STA theory and proofs.
+

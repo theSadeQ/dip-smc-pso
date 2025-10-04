@@ -16,6 +16,42 @@ Orchestrates:
 - Performance monitoring and learning
 
 
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State Input] --> B[Sliding Surface]
+    B --> C{Surface Value s}
+    A --> D[Model Confidence]
+    D --> E{Switching Logic}
+    C --> F[Equivalent Control]
+    C --> G[Super-Twisting Control]
+    E -->|High Confidence| F
+    E -->|Low Confidence| G
+    F --> H[Transition Filter]
+    G --> H
+    H --> I[Saturation]
+    I --> J[Control Output u]
+    C --> K[Performance Monitor]
+    K --> E
+
+    style C fill:#ff9
+    style E fill:#f9f
+    style F fill:#9cf
+    style G fill:#fcf
+    style H fill:#cfc
+    style I fill:#f99
+```
+
+**Data Flow:**
+1. State → Sliding Surface + Model Confidence
+2. Performance Monitoring → Mode Switching Decision
+3. High Confidence → Equivalent Control (model-based)
+4. Low Confidence → Super-Twisting (robust)
+5. Smooth Transition → Final Control Output
+
+
 ## Mathematical Foundation
 
 ### Hybrid Adaptive-STA SMC
@@ -286,3 +322,95 @@ This module imports:
 - `from ..super_twisting.controller import ModularSuperTwistingSMC`
 - `from .switching_logic import HybridSwitchingLogic, ControllerState`
 - `from .config import HybridSMCConfig`
+
+
+## Usage Examples
+
+### Basic Instantiation
+
+```python
+from src.controllers.smc.algorithms.hybrid import ModularHybridSMC
+from src.controllers.smc.algorithms.hybrid.config import HybridSMCConfig
+
+# Configure hybrid controller
+config = HybridSMCConfig(
+    surface_gains=[15.0, 12.0, 18.0, 15.0],
+    proportional_gain=25.0,
+    integral_gain=18.0,
+    derivative_gain=6.0,
+    max_force=100.0,
+    switching_threshold=0.05  # Mode switching sensitivity
+)
+
+controller = ModularHybridSMC(config, dynamics_model=dynamics)
+```
+
+### Mode Switching Demonstration
+
+```python
+from src.core.simulation_runner import SimulationRunner
+from src.plant.models.simplified import SimplifiedDynamics
+
+dynamics = SimplifiedDynamics()
+runner = SimulationRunner(controller, dynamics)
+
+result = runner.run(
+    initial_state=[0.2, 0.15, 0, 0, 0, 0],  # Large disturbance
+    duration=15.0,
+    dt=0.01
+)
+
+# Analyze mode switching history
+mode_history = result.controller_history['active_mode']
+switches = np.diff(mode_history).nonzero()[0]
+print(f"Mode switches: {len(switches)} times")
+```
+
+### PSO Optimization with Hybrid Strategy
+
+```python
+from src.controllers.factory import create_smc_for_pso, SMCType
+
+# Hybrid SMC has 4 gains (surface only, internal switching)
+bounds = [
+    (1.0, 50.0),   # k1
+    (1.0, 50.0),   # k2
+    (1.0, 50.0),   # λ1
+    (1.0, 50.0),   # λ2
+]
+
+def controller_factory(gains):
+    return create_smc_for_pso(SMCType.HYBRID, gains, max_force=100.0)
+
+# Optimize for robustness
+tuner = PSOTuner(bounds, controller_factory, metric='robustness_index')
+best_gains, best_robustness = tuner.optimize(n_particles=35, iters=120)
+```
+
+### Comparing All SMC Variants
+
+```python
+from src.controllers.factory import create_all_smc_controllers
+
+gains_dict = {
+    "classical": [10, 8, 15, 12, 50, 5],
+    "adaptive": [10, 8, 15, 12, 25],
+    "sta": [25, 10, 15, 12, 20, 15],
+    "hybrid": [15, 12, 18, 15]
+}
+
+controllers = create_all_smc_controllers(gains_dict, max_force=100.0)
+
+# Benchmark all controllers
+from src.benchmarks import run_comprehensive_comparison
+comparison = run_comprehensive_comparison(
+    controllers=controllers,
+    scenarios='standard',
+    metrics='all'
+)
+
+comparison.generate_report('controller_comparison.pdf')
+```
+
+**See:** {doc}`../../../mathematical_foundations/smc_complete_theory` for hybrid control theory.
+
