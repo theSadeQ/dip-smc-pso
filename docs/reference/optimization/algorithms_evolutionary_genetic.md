@@ -6,6 +6,171 @@
 
 Genetic Algorithm implementation for control parameter optimization.
 
+
+
+## Advanced Mathematical Theory
+
+### Genetic Algorithm (GA)
+
+**Population evolution:**
+
+```{math}
+\mathcal{P}^{t+1} = \text{Mutate}(\text{Crossover}(\text{Select}(\mathcal{P}^t)))
+```
+
+### Selection Operators
+
+**Roulette wheel selection:**
+
+```{math}
+P(\vec{x}_i \text{ selected}) = \frac{f(\vec{x}_i)}{\sum_j f(\vec{x}_j)}
+```
+
+**Tournament selection:**
+
+```{math}
+\vec{x}_{winner} = \arg\max_{\vec{x} \in \text{Tournament}} f(\vec{x})
+```
+
+**Rank-based selection:**
+
+```{math}
+P(\vec{x}_i) = \frac{N - \text{rank}(\vec{x}_i) + 1}{\sum_j (N - \text{rank}(\vec{x}_j) + 1)}
+```
+
+### Crossover Operators
+
+**Single-point crossover:**
+
+```{math}
+\begin{align}
+\text{Child}_1[1:k] &= \text{Parent}_1[1:k], \quad \text{Child}_1[k+1:n] = \text{Parent}_2[k+1:n] \\
+\text{Child}_2[1:k] &= \text{Parent}_2[1:k], \quad \text{Child}_2[k+1:n] = \text{Parent}_1[k+1:n]
+\end{align}
+```
+
+**Uniform crossover:**
+
+```{math}
+\text{Child}_i[j] = \begin{cases}
+\text{Parent}_1[j], & r_j < 0.5 \\
+\text{Parent}_2[j], & r_j \geq 0.5
+\end{cases}
+```
+
+### Mutation Operators
+
+**Bit-flip mutation** (binary encoding):
+
+```{math}
+x_i' = \begin{cases}
+1 - x_i, & r < p_m \\
+x_i, & r \geq p_m
+\end{cases}
+```
+
+**Gaussian mutation** (real encoding):
+
+```{math}
+x_i' = x_i + \mathcal{N}(0, \sigma^2)
+```
+
+### Schema Theorem
+
+**Holland's Schema Theorem:**
+
+```{math}
+E[m(H, t+1)] \geq m(H, t) \cdot \frac{f(H)}{\bar{f}} \cdot \left[1 - p_c \delta(H) - o(H)p_m\right]
+```
+
+Where:
+- $m(H, t)$: Number of schema $H$ instances at generation $t$
+- $f(H)$: Average fitness of schema
+- $\delta(H)$: Defining length
+- $o(H)$: Order (number of fixed positions)
+
+**Implication:** Short, low-order, above-average schemata grow exponentially.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Initialize Population] --> B[Evaluate Fitness]
+    B --> C[Selection]
+
+    C --> D{Selection Type}
+    D -->|Roulette| E[Fitness Proportional]
+    D -->|Tournament| F[Best of K]
+    D -->|Rank| G[Rank-Based]
+
+    E --> H[Crossover]
+    F --> H
+    G --> H
+
+    H --> I{Crossover Type}
+    I -->|Single-Point| J[Single Cut]
+    I -->|Two-Point| K[Two Cuts]
+    I -->|Uniform| L[Random Mix]
+
+    J --> M[Mutation]
+    K --> M
+    L --> M
+
+    M --> N[New Population]
+    N --> O[Convergence Check]
+
+    O --> P{Converged?}
+    P -->|No| B
+    P -->|Yes| Q[Return Best]
+
+    style D fill:#ff9
+    style I fill:#9cf
+    style Q fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.algorithms import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/optimization/algorithms/evolutionary/genetic.py

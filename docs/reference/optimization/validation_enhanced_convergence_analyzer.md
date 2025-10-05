@@ -6,6 +6,155 @@
 
 Enhanced PSO Convergence Criteria and Validation Algorithms.
 
+
+
+## Advanced Mathematical Theory
+
+### Convergence Detection
+
+**Diversity metric:**
+
+```{math}
+D(\mathcal{P}) = \frac{1}{N} \sum_{i=1}^{N} \|\vec{x}_i - \bar{\vec{x}}\|
+```
+
+**Convergence criterion:**
+
+```{math}
+D(\mathcal{P}^t) < \epsilon_d \quad \text{and} \quad |f^t_{best} - f^{t-w}_{best}| < \epsilon_f
+```
+
+### Stagnation Detection
+
+**Improvement rate:**
+
+```{math}
+R_{imp}^t = \frac{f^{t-w}_{best} - f^t_{best}}{w}
+```
+
+**Stagnation if** $R_{imp}^t < \epsilon_{stag}$ for $T_{stag}$ iterations.
+
+### Statistical Convergence Tests
+
+**Welch's t-test** for mean comparison:
+
+```{math}
+t = \frac{\bar{f}_A - \bar{f}_B}{\sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}}}
+```
+
+**Confidence interval** for convergence value:
+
+```{math}
+\text{CI}_{95\%} = f_{best} \pm 1.96 \frac{\sigma}{\sqrt{M}}
+```
+
+### Convergence Rate Analysis
+
+**Linear convergence:**
+
+```{math}
+\|\vec{x}^{t+1} - \vec{x}^*\| \leq c \|\vec{x}^t - \vec{x}^*\|, \quad c < 1
+```
+
+**Superlinear convergence:**
+
+```{math}
+\lim_{t \to \infty} \frac{\|\vec{x}^{t+1} - \vec{x}^*\|}{\|\vec{x}^t - \vec{x}^*\|} = 0
+```
+
+**Quadratic convergence:**
+
+```{math}
+\|\vec{x}^{t+1} - \vec{x}^*\| \leq c \|\vec{x}^t - \vec{x}^*\|^2
+```
+
+### Plateau Detection
+
+**Plateau metric** over window $w$:
+
+```{math}
+P^t = \max_{\tau=t-w}^{t} f^{\tau}_{best} - f^t_{best}
+```
+
+**Plateau detected if** $P^t < \epsilon_p$ for $T_p$ iterations.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Optimization Results] --> B[Compute Diversity]
+    B --> C[Compute Improvement Rate]
+    C --> D[Statistical Tests]
+
+    D --> E{Diversity Check}
+    E -->|D < ε_d| F[Low Diversity]
+    E -->|D ≥ ε_d| G[Good Diversity]
+
+    F --> H[Stagnation Check]
+    G --> H
+
+    H --> I{R_imp < ε_stag?}
+    I -->|Yes| J[Stagnation Detected]
+    I -->|No| K[Still Improving]
+
+    J --> L[Plateau Detection]
+    K --> L
+
+    L --> M{Plateau?}
+    M -->|Yes| N[Convergence Confirmed]
+    M -->|No| O[Continue Monitoring]
+
+    N --> P[Convergence Report]
+    O --> Q[Next Iteration]
+
+    style E fill:#ff9
+    style I fill:#9cf
+    style P fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.algorithms import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 This module provides advanced convergence analysis and validation algorithms
 for PSO optimization in the controller factory integration context. Features
 include multi-criteria convergence detection, statistical validation, and
