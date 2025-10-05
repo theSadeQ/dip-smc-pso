@@ -632,8 +632,8 @@ python simulate.py --ctrl classical_smc --plot
 
 **Related Guides:**
 - [User Guide](../user-guide.md): Comprehensive workflows
-- [How-To: Running Simulations](../../how-to/running-simulations.md): Advanced options
-- [API Reference: Classical SMC](../../reference/controllers/smc_classic_smc.md): Implementation details
+- **How-To: Running Simulations** (coming soon): Advanced options
+- **API Reference** (coming soon): Implementation details
 
 **Advanced Topics:**
 - [Tutorial 03: PSO Optimization](tutorial-03-pso-optimization.md): Automatic gain tuning
