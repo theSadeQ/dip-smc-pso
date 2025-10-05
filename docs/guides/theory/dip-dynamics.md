@@ -27,6 +27,31 @@ The double-inverted pendulum (DIP) consists of:
 
 **Control Objective**: Balance both pendulums upright (`θ₁ = θ₂ = 0`) using horizontal cart force `u`.
 
+**Physical System Diagram**:
+
+```mermaid
+graph TD
+    subgraph "Double-Inverted Pendulum System"
+        CART["Cart (m₀)<br/>Position: x"] -->|Hinge| P1["First Pendulum (m₁, l₁)<br/>Angle: θ₁ from vertical"]
+        P1 -->|Hinge| P2["Second Pendulum (m₂, l₂)<br/>Angle: θ₂ from vertical"]
+
+        FORCE["Control Force u<br/>(Horizontal)"] -->|Applied to| CART
+
+        TRACK["Frictionless Track"] -.->|Constrained| CART
+    end
+
+    style CART fill:#ccccff
+    style P1 fill:#ffcccc
+    style P2 fill:#ccffcc
+    style FORCE fill:#ffffcc
+```
+
+**System Components**:
+- 🔵 **Cart**: Movable platform (1 DOF: position x)
+- 🔴 **Pendulum 1**: First link (1 DOF: angle θ₁)
+- 🟢 **Pendulum 2**: Second link (1 DOF: angle θ₂)
+- 🟡 **Control**: Horizontal force u (single actuator)
+
 ### State Variables
 
 **Generalized Coordinates** (3 DOF):
@@ -48,6 +73,35 @@ state = [x, ẋ, θ₁, θ̇₁, θ₂, θ̇₂]ᵀ
 ```
 u = horizontal force on cart (N)
 ```
+
+**State-Space Representation**:
+
+```mermaid
+flowchart LR
+    subgraph STATE["State Vector (6D)"]
+        direction TB
+        X["x<br/>(position)"]
+        DX["ẋ<br/>(velocity)"]
+        T1["θ₁<br/>(angle 1)"]
+        DT1["θ̇₁<br/>(angular vel 1)"]
+        T2["θ₂<br/>(angle 2)"]
+        DT2["θ̇₂<br/>(angular vel 2)"]
+    end
+
+    CONTROL["u<br/>(force)"] --> DYNAMICS["DIP Dynamics<br/>M(q)q̈ + C(q,q̇)q̇ + G(q) = Qu"]
+    STATE --> DYNAMICS
+    DYNAMICS --> NEXT["Next State<br/>(Integration)"]
+    NEXT --> STATE
+
+    style CONTROL fill:#ffffcc
+    style DYNAMICS fill:#ffcccc
+    style STATE fill:#ccffcc
+```
+
+**Dimensions**:
+- **State space**: 6D (position + velocity for 3 coordinates)
+- **Control space**: 1D (horizontal force only)
+- **Underactuated**: 6 states, 1 control → dynamic coupling essential
 
 ### Why This System is Challenging
 
@@ -81,6 +135,29 @@ u = horizontal force on cart (N)
 - Automatically handles constraints
 - Natural for deriving equations of motion
 - Uses `L = T - V` (kinetic - potential energy)
+
+**Lagrangian Derivation Process**:
+
+```mermaid
+flowchart TD
+    START["System Description<br/>(Masses, lengths, constraints)"] --> KE["Compute Kinetic Energy T<br/>½m₀ẋ² + ½m₁(ẋ₁²+ż₁²) + ½m₂(ẋ₂²+ż₂²)"]
+    KE --> PE["Compute Potential Energy V<br/>m₁gl₁cos(θ₁) + m₂g[l₁cos(θ₁)+l₂cos(θ₂)]"]
+
+    PE --> LAG["Form Lagrangian<br/>L = T - V"]
+
+    LAG --> EL["Apply Euler-Lagrange<br/>d/dt(∂L/∂q̇ᵢ) - ∂L/∂qᵢ = Qᵢ"]
+
+    EL --> EOM["Equations of Motion<br/>M(q)q̈ + C(q,q̇)q̇ + G(q) = Qu"]
+
+    style START fill:#ccccff
+    style LAG fill:#ffffcc
+    style EOM fill:#ccffcc
+```
+
+**Advantages**:
+- 🔵 **Systematic**: No need to derive constraint forces
+- 🟡 **Lagrangian** L = T - V: Single scalar function
+- 🟢 **Result**: Configuration-dependent dynamics M(q)
 
 ### Kinetic Energy
 
@@ -339,6 +416,40 @@ For 6-state system, need rank(C) = 6.
 3. Second-order coupling: `θ̈₁ → θ̈₂` (second pendulum)
 4. Three integration steps → reach all position states
 5. Controllability matrix full rank ✓
+
+**Control Propagation Diagram**:
+
+```mermaid
+flowchart TD
+    U["Control Force u"] --> CART_ACC["Cart Acceleration ẍ<br/>(Direct effect)"]
+
+    CART_ACC --> INERTIA1["Inertial Coupling<br/>to Pendulum 1"]
+    INERTIA1 --> P1_ACC["θ̈₁<br/>(First pendulum acceleration)"]
+
+    P1_ACC --> INERTIA2["Inertial Coupling<br/>to Pendulum 2"]
+    INERTIA2 --> P2_ACC["θ̈₂<br/>(Second pendulum acceleration)"]
+
+    CART_ACC --> CART_VEL["∫ → ẋ<br/>(Cart velocity)"] --> CART_POS["∫ → x<br/>(Cart position)"]
+    P1_ACC --> P1_VEL["∫ → θ̇₁<br/>(Angular velocity 1)"] --> P1_POS["∫ → θ₁<br/>(Angle 1)"]
+    P2_ACC --> P2_VEL["∫ → θ̇₂<br/>(Angular velocity 2)"] --> P2_POS["∫ → θ₂<br/>(Angle 2)"]
+
+    style U fill:#ffffcc
+    style CART_ACC fill:#ccffcc
+    style P1_ACC fill:#ffcccc
+    style P2_ACC fill:#ccccff
+```
+
+**Key Insight**: Single control input reaches all 6 states via:
+- 🟡 **Direct** effect on cart
+- 🟢 **Inertial coupling** to pendulum 1
+- 🔴 **Secondary coupling** to pendulum 2
+- 🔵 **Integration** for position control
+
+**Controllability Matrix**:
+```
+rank([B  AB  A²B  A³B  A⁴B  A⁵B]) = 6  ✓
+```
+System is **fully controllable** despite underactuation!
 
 ### Observability
 

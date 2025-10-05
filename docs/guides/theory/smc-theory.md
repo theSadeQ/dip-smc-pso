@@ -45,6 +45,27 @@ Where:
 - `s > 0`: System is above the surface
 - `s < 0`: System is below the surface
 
+**Geometric Visualization**:
+
+```mermaid
+graph TD
+    subgraph "State Space (θ, θ̇)"
+        A[Initial State<br/>s > 0] -->|Reaching Phase| B[Sliding Surface<br/>s = 0]
+        B -->|Sliding Mode| C[Equilibrium<br/>θ = θ̇ = 0]
+        D[Initial State<br/>s < 0] -->|Reaching Phase| B
+
+        style A fill:#ffcccc
+        style D fill:#ffcccc
+        style B fill:#ccffcc
+        style C fill:#ccccff
+    end
+```
+
+**Regions**:
+- 🔴 Red: System off surface (`s ≠ 0`) - Reaching phase active
+- 🟢 Green: On sliding surface (`s = 0`) - Desired dynamics
+- 🔵 Blue: Equilibrium point - Control objective
+
 ### Two Phases of SMC
 
 **Phase 1: Reaching Phase**
@@ -56,6 +77,31 @@ Where:
 - System reaches surface (`s = 0`)
 - Control maintains system on surface
 - Desired dynamics: determined by sliding surface design
+
+**Phase Diagram**:
+
+```mermaid
+sequenceDiagram
+    participant State as System State
+    participant Surface as Sliding Surface
+    participant Control as Controller
+
+    Note over State: Phase 1: Reaching
+    State->>Control: s ≠ 0 (off surface)
+    Control->>State: Large control effort
+    Note over State: s·ṡ < 0 (approaching)
+
+    State->>Surface: Reaches s = 0
+
+    Note over State: Phase 2: Sliding Mode
+    Surface->>Control: s ≈ 0 (on surface)
+    Control->>State: Switching control
+    Note over State: Maintain s = 0
+
+    State->>State: Slide to equilibrium
+```
+
+**Reaching Condition**: `s·ṡ < 0` ensures finite-time convergence to surface
 
 ### Why SMC for Underactuated Systems?
 
@@ -84,6 +130,22 @@ A **Lyapunov function** is like an "energy" function that:
 - Lyapunov function = height of ball
 - Equilibrium = bottom of bowl
 - Stability = ball always rolls downward
+
+**Visual Representation**:
+
+```mermaid
+graph TD
+    subgraph "Lyapunov Bowl (V = ½s²)"
+        A["s < 0<br/>(Ball on left)"] -->|V̇ < 0<br/>Rolling down| B["s = 0<br/>(Bottom)<br/>V = 0"]
+        C["s > 0<br/>(Ball on right)"] -->|V̇ < 0<br/>Rolling down| B
+
+        style A fill:#ffcccc
+        style C fill:#ffcccc
+        style B fill:#ccffcc
+    end
+```
+
+**Key Insight**: Control ensures `V̇ < 0` everywhere except equilibrium, guaranteeing convergence.
 
 ### Lyapunov Function for SMC
 
@@ -188,6 +250,25 @@ Where `ε > 0` is the **boundary layer thickness**
    tanh(s/ε) = (e^(s/ε) - e^(-s/ε)) / (e^(s/ε) + e^(-s/ε))
    ```
 
+**Boundary Layer Visualization**:
+
+```mermaid
+graph LR
+    subgraph "Switching Function Behavior"
+        A["s < -ε<br/>Discontinuous<br/>sign(s) = -1"] -->|Boundary Layer| B["−ε ≤ s ≤ ε<br/>Continuous<br/>Smooth transition"]
+        B -->|Boundary Layer| C["s > ε<br/>Discontinuous<br/>sign(s) = +1"]
+
+        style A fill:#ffcccc
+        style B fill:#ffffcc
+        style C fill:#ccffcc
+    end
+```
+
+**Regions**:
+- 🔴 Red (`|s| > ε`): Discontinuous sign function (traditional SMC)
+- 🟡 Yellow (`|s| ≤ ε`): Boundary layer (smooth approximation)
+- 🟢 Green: Continuous control, no chattering
+
 **Mathematical Properties**:
 - **Outside boundary layer** (`|s| > ε`): Behaves like `sign(s)`
 - **Inside boundary layer** (`|s| ≤ ε`): Smooth transition
@@ -256,6 +337,31 @@ Where:
 **Key Property**: `u` is **continuous** even though `sign(s)` appears, because:
 - `|s|^(1/2)` → 0 as `s → 0` (term vanishes at surface)
 - `u₂` integrates discontinuous term (integration → continuity)
+
+**Super-Twisting Control Structure**:
+
+```mermaid
+flowchart TD
+    S[Sliding Surface<br/>s = k·θ + λ·θ̇] --> U1["u₁ = -α·|s|^(1/2)·sign(s)<br/>(Continuous term)"]
+    S --> U2["u₂ = ∫(-β·sign(s)) dt<br/>(Integral term)"]
+
+    U1 --> SUM["+"]
+    U2 --> SUM
+
+    SUM --> U["Total Control u<br/>(Continuous!)"]
+
+    U --> PLANT[DIP System]
+    PLANT --> S
+
+    style U1 fill:#ccffcc
+    style U2 fill:#ffcccc
+    style U fill:#ccccff
+```
+
+**Components**:
+- 🟢 **u₁** (Continuous): Proportional to `|s|^(1/2)`, vanishes smoothly at `s=0`
+- 🔴 **u₂** (Integral): Accumulates switching term, provides robustness
+- 🔵 **Total u**: Sum is continuous despite discontinuous `sign(s)`
 
 ### Lyapunov Stability for STA
 
@@ -343,6 +449,34 @@ s = k₁θ₁ + k₂θ̇₁ + λ₁θ₂ + λ₂θ̇₂ = 0
 - Set `α > D` (e.g., `α = 1.5D`)
 - Set `β > (5α² + 4D)/(4α)`
 - Fine-tune for smooth control
+
+**SMC Design Workflow**:
+
+```mermaid
+flowchart TD
+    START[Start: Control Objective] --> SURFACE[Design Sliding Surface<br/>Choose k₁, k₂, λ₁, λ₂]
+    SURFACE --> CHOICE{Application<br/>Requirements}
+
+    CHOICE -->|Simple & Fast| CLASSICAL[Classical SMC<br/>Tune K, ε]
+    CHOICE -->|Smooth Control| STA[Super-Twisting<br/>Tune α, β]
+    CHOICE -->|Uncertainty| ADAPTIVE[Adaptive SMC<br/>Tune adaptation rate]
+    CHOICE -->|Best Performance| HYBRID[Hybrid SMC<br/>Combine all]
+
+    CLASSICAL --> TEST[Simulate & Test]
+    STA --> TEST
+    ADAPTIVE --> TEST
+    HYBRID --> TEST
+
+    TEST --> VALIDATE{Performance<br/>Acceptable?}
+    VALIDATE -->|No| PSO[PSO Optimization<br/>Auto-tune gains]
+    PSO --> TEST
+
+    VALIDATE -->|Yes| DONE[Deploy Controller]
+
+    style START fill:#ccccff
+    style DONE fill:#ccffcc
+    style PSO fill:#ffffcc
+```
 
 ### Gain Selection: Pole Placement Analogy
 
