@@ -415,10 +415,10 @@ Progress through our comprehensive tutorial series:
 
 Task-oriented recipes for specific workflows:
 
-- **[Running Simulations](../how-to/running-simulations.md):** CLI, Streamlit, programmatic usage
-- **[Optimization Workflows](../how-to/optimization-workflows.md):** PSO tuning, convergence analysis
-- **[Result Analysis](../how-to/result-analysis.md):** Metrics interpretation, visualization
-- **[Testing & Benchmarks](../how-to/testing-and-benchmarks.md):** Validation and performance
+- **Running Simulations** (coming soon): CLI, Streamlit, programmatic usage
+- **Optimization Workflows** (coming soon): PSO tuning, convergence analysis
+- **Result Analysis** (coming soon): Metrics interpretation, visualization
+- **Testing & Benchmarks** (coming soon): Validation and performance
 
 ### Advanced Topics
 
