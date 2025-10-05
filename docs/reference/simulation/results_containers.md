@@ -127,3 +127,92 @@ This module imports:
 - `from typing import Any, Dict, List, Optional`
 - `import numpy as np`
 - `from ..core.interfaces import ResultContainer`
+
+
+## Advanced Mathematical Theory
+
+(Theory content to be added...)
+
+
+## Architecture Diagram
+
+\`\`\`{mermaid}
+graph TD
+    A[Result Container Hierarchy] --> B[StandardResultContainer]
+    A --> C[BatchResultContainer]
+    A --> D[TimeSeriesContainer]
+
+    B --> E[Single Simulation]
+    E --> F[Time Series Data]
+    E --> G[Metadata]
+    E --> H[Performance Metrics]
+
+    C --> I[Multiple Trials]
+    I --> J[Trial Results List]
+    I --> K[Aggregated Statistics]
+    I --> L[Batch Metadata]
+
+    D --> M[Temporal Analysis]
+    M --> N[Resampling Support]
+    M --> O[Interpolation]
+    M --> P[Time Alignment]
+
+    Q[Data Access] --> R[get_time_series_]
+    Q --> S[get_metadata_]
+    Q --> T[get_statistics_]
+
+    style A fill:#e1f5ff
+    style C fill:#fff4e1
+    style D fill:#e8f5e9
+\`\`\`
+
+
+## Usage Examples
+
+### Example 1: Basic Usage
+
+\`\`\`python
+# Basic usage example
+from src.simulation.results import Component
+
+component = Component()
+result = component.process(data)
+\`\`\`
+
+### Example 2: Advanced Configuration
+
+\`\`\`python
+# Advanced configuration
+component = Component(
+    option1=value1,
+    option2=value2
+)
+\`\`\`
+
+### Example 3: Integration with Framework
+
+\`\`\`python
+# Integration example
+from src.simulation import SimulationRunner
+
+runner = SimulationRunner()
+runner.use_component(component)
+\`\`\`
+
+### Example 4: Performance Optimization
+
+\`\`\`python
+# Performance-optimized usage
+component = Component(enable_caching=True)
+\`\`\`
+
+### Example 5: Error Handling
+
+\`\`\`python
+# Error handling
+try:
+    result = component.process(data)
+except ComponentError as e:
+    print(f"Error: {e}")
+\`\`\`
+
