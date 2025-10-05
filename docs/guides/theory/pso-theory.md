@@ -35,6 +35,27 @@ PSO is inspired by **social behavior** of bird flocking and fish schooling:
 
 ### The PSO Algorithm
 
+**Algorithm Overview**:
+
+```mermaid
+flowchart TD
+    INIT[Initialize Swarm<br/>Random positions & velocities] --> EVAL1[Evaluate Fitness<br/>Run simulations]
+    EVAL1 --> UPDATE_P[Update Personal Best<br/>pᵢ = best position for each particle]
+    UPDATE_P --> UPDATE_G[Update Global Best<br/>g = best position overall]
+
+    UPDATE_G --> UPDATE_V[Update Velocities<br/>vᵢ = w·vᵢ + c₁·r₁·(pᵢ-xᵢ) + c₂·r₂·(g-xᵢ)]
+    UPDATE_V --> UPDATE_X[Update Positions<br/>xᵢ = xᵢ + vᵢ]
+
+    UPDATE_X --> CHECK{Converged?<br/>(Max iterations<br/>or stagnation)}
+    CHECK -->|No| EVAL2[Evaluate Fitness]
+    EVAL2 --> UPDATE_P
+
+    CHECK -->|Yes| DONE[Return Global Best<br/>Optimized gains]
+
+    style INIT fill:#ccccff
+    style DONE fill:#ccffcc
+```
+
 **Each particle `i` has**:
 - Position: `xᵢ(t)` (current solution)
 - Velocity: `vᵢ(t)` (search direction)
@@ -58,6 +79,36 @@ Where:
 - **`c₁·r₁·(pᵢ - xᵢ)`**: Move toward own best (personal experience)
 - **`c₂·r₂·(g - xᵢ)`**: Move toward swarm best (social learning)
 
+**Velocity Update Visualization**:
+
+```mermaid
+flowchart TD
+    V_OLD["vᵢ(t)<br/>(Current Velocity)"] --> INERTIA["w·vᵢ(t)<br/>Inertia Component"]
+    X["xᵢ(t)<br/>(Current Position)"] --> COGNITIVE["c₁·r₁·(pᵢ - xᵢ)<br/>Cognitive Pull"]
+    X --> SOCIAL["c₂·r₂·(g - xᵢ)<br/>Social Pull"]
+
+    PBEST["pᵢ<br/>(Personal Best)"] --> COGNITIVE
+    GBEST["g<br/>(Global Best)"] --> SOCIAL
+
+    INERTIA --> SUM["+"]
+    COGNITIVE --> SUM
+    SOCIAL --> SUM
+
+    SUM --> V_NEW["vᵢ(t+1)<br/>(New Velocity)"]
+    V_NEW --> X_NEW["xᵢ(t+1) = xᵢ(t) + vᵢ(t+1)<br/>(New Position)"]
+
+    style INERTIA fill:#ccccff
+    style COGNITIVE fill:#ccffcc
+    style SOCIAL fill:#ffcccc
+    style X_NEW fill:#ffffcc
+```
+
+**Components**:
+- 🔵 **Inertia**: Momentum from previous motion
+- 🟢 **Cognitive**: Attraction to personal best experience
+- 🔴 **Social**: Attraction to swarm's collective best
+- 🟡 **Result**: Balanced exploration and exploitation
+
 ### Exploration vs Exploitation
 
 **Exploration**: Search broadly to find new regions
@@ -73,6 +124,25 @@ Where:
 Early iterations: High w (explore) + low c₁,c₂
 Late iterations: Low w (exploit) + high c₁,c₂
 ```
+
+**Exploration vs Exploitation Balance**:
+
+```mermaid
+graph LR
+    subgraph "PSO Search Strategy"
+        EARLY["Early Iterations<br/>High w (0.9)<br/>Spread particles"] -->|Time| MID["Middle Phase<br/>Moderate w (0.7)<br/>Focused search"]
+        MID -->|Time| LATE["Late Iterations<br/>Low w (0.4)<br/>Converge to optimum"]
+
+        style EARLY fill:#ffcccc
+        style MID fill:#ffffcc
+        style LATE fill:#ccffcc
+    end
+```
+
+**Phases**:
+- 🔴 **Exploration** (High w): Search broadly, discover promising regions
+- 🟡 **Transition** (Medium w): Balance between search and convergence
+- 🟢 **Exploitation** (Low w): Refine solution, converge to optimum
 
 ### Global vs Local Optima
 
@@ -270,6 +340,27 @@ w = 0.7298    (inertia)
 - Continuous search space (gain values)
 - Fewer parameters to tune
 - Faster convergence
+
+**Algorithm Comparison for SMC Tuning**:
+
+```mermaid
+graph TD
+    PROBLEM["Controller Gain Tuning<br/>(6-8 parameters)"] --> CHOICE{Problem<br/>Characteristics}
+
+    CHOICE -->|Continuous<br/>Non-differentiable<br/>Multi-modal| PSO["PSO<br/>✓ Best choice<br/>Fast, robust"]
+    CHOICE -->|Discrete<br/>Combinatorial| GA["Genetic Algorithm<br/>✓ Good for discrete<br/>Slower convergence"]
+    CHOICE -->|Smooth<br/>Convex<br/>Gradient available| GRAD["Gradient Descent<br/>✓ Fast if convex<br/>Local optima risk"]
+
+    PSO --> RESULT["Optimized SMC Gains<br/>(100-200 iterations)"]
+    GA --> RESULT2["Optimized Gains<br/>(500+ generations)"]
+    GRAD --> RESULT3["Local Optimum<br/>(Fast but risky)"]
+
+    style PSO fill:#ccffcc
+    style GA fill:#ffffcc
+    style GRAD fill:#ffcccc
+```
+
+**Recommendation**: Use PSO for SMC gain tuning due to non-differentiable cost functions (sign, saturation) and multimodal landscapes.
 
 ### PSO vs Gradient-Based Methods
 
