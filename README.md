@@ -47,37 +47,146 @@ A comprehensive Python framework for simulating, controlling, and analyzing a do
 
 ## Architecture Overview
 
+### System Architecture
+
+```mermaid
+flowchart TB
+    subgraph "User Interfaces"
+        CLI["Command-Line Interface<br/>simulate.py"]
+        WEB["Web Dashboard<br/>Streamlit App"]
+    end
+
+    subgraph "Controllers Layer"
+        FACTORY["Controller Factory<br/>Type-safe instantiation"]
+        CLASSIC["Classical SMC<br/>Boundary layer"]
+        STA["Super-Twisting SMC<br/>Continuous control"]
+        ADAPT["Adaptive SMC<br/>Online tuning"]
+        HYBRID["Hybrid Adaptive STA<br/>Best of both"]
+    end
+
+    subgraph "Plant Models Layer"
+        SIMPLE["Simplified Dynamics<br/>Linearized, fast"]
+        FULL["Full Nonlinear<br/>High-fidelity"]
+        LOWRANK["Low-Rank Approx<br/>Efficient"]
+    end
+
+    subgraph "Core Simulation Engine"
+        RUNNER["SimulationRunner<br/>Orchestration"]
+        VECTOR["Vector Simulation<br/>Batch/Numba-accelerated"]
+        SAFETY["Safety Guards<br/>Constraint monitoring"]
+    end
+
+    subgraph "Optimization & Analysis"
+        PSO["PSO Tuner<br/>Gain optimization"]
+        COST["Cost Functions<br/>Multi-objective"]
+        STATS["Statistical Analysis<br/>Monte Carlo, CI"]
+        VIZ["Visualization<br/>Plots & animations"]
+    end
+
+    subgraph "Supporting Infrastructure"
+        CONFIG["Configuration<br/>YAML validation"]
+        MONITOR["Monitoring<br/>Performance tracking"]
+        HIL["HIL Interface<br/>Hardware integration"]
+    end
+
+    CLI --> FACTORY
+    WEB --> FACTORY
+
+    FACTORY --> CLASSIC
+    FACTORY --> STA
+    FACTORY --> ADAPT
+    FACTORY --> HYBRID
+
+    CLASSIC --> RUNNER
+    STA --> RUNNER
+    ADAPT --> RUNNER
+    HYBRID --> RUNNER
+
+    RUNNER --> SIMPLE
+    RUNNER --> FULL
+    RUNNER --> LOWRANK
+
+    RUNNER --> VECTOR
+    RUNNER --> SAFETY
+
+    FACTORY --> PSO
+    PSO --> COST
+    RUNNER --> STATS
+    STATS --> VIZ
+
+    CONFIG --> RUNNER
+    RUNNER --> MONITOR
+    RUNNER --> HIL
+
+    style CLI fill:#ccccff
+    style WEB fill:#ccccff
+    style FACTORY fill:#ffffcc
+    style CLASSIC fill:#ccffcc
+    style STA fill:#ccffcc
+    style ADAPT fill:#ccffcc
+    style HYBRID fill:#ccffcc
+    style RUNNER fill:#ffcccc
+    style PSO fill:#ffffcc
 ```
-DIP SMC PSO Framework
-├── Controllers/           # Control algorithms and factory
-│   ├── SMC Variants       # Classical, STA, Adaptive, Hybrid
-│   ├── MPC Controller     # Model Predictive Control
-│   └── Specialized        # Swing-up and custom controllers
-├── Plant Models/          # System dynamics
-│   ├── Simplified         # Linearized for fast iteration
-│   ├── Full Nonlinear     # High-fidelity physics
-│   └── Low-Rank           # Efficient approximation
-├── Core Engine/           # Simulation infrastructure
-│   ├── Simulation Runner  # Main execution engine
-│   ├── Vector Simulation  # Batch/parallel processing
-│   └── Safety Guards      # Constraint monitoring
-├── Optimization/          # Parameter tuning
-│   ├── PSO Algorithm      # Particle swarm optimization
-│   ├── Objectives         # Multi-objective cost functions
-│   └── Convergence        # Analysis and validation
-├── Analysis/              # Performance evaluation
-│   ├── Fault Detection    # FDI system
-│   ├── Statistics         # Monte Carlo, confidence intervals
-│   └── Visualization      # Plots and animations
-├── Interfaces/            # External connectivity
-│   ├── HIL Support        # Hardware-in-the-loop
-│   ├── Network Protocols  # UDP, TCP, WebSocket
-│   └── Data Exchange      # Serialization and streaming
-└── Utils/                 # Supporting tools
-    ├── Configuration      # YAML validation
-    ├── Monitoring         # Performance tracking
-    └── Development        # Testing and debugging
+
+**Component Layers:**
+- 🔵 **User Interfaces**: CLI and web-based interaction
+- 🟡 **Controllers**: SMC algorithms with factory pattern
+- 🟢 **Plant Models**: Dynamics with varying fidelity
+- 🔴 **Core Engine**: Simulation orchestration and execution
+- 🟡 **Optimization**: PSO-based automated tuning
+- **Infrastructure**: Configuration, monitoring, HIL support
+
+### Control Loop Data Flow
+
+```mermaid
+sequenceDiagram
+    participant Controller as SMC Controller
+    participant Surface as Sliding Surface
+    participant Law as Control Law
+    participant Plant as Plant Dynamics
+    participant State as System State
+
+    Note over State: Initial state: x(0), θ₁(0), θ₂(0), velocities
+
+    loop Every timestep dt = 0.01s
+        State->>Controller: Current state vector<br/>[x, ẋ, θ₁, θ̇₁, θ₂, θ̇₂]
+
+        Controller->>Surface: Compute sliding surface<br/>s = k₁θ₁ + k₂θ̇₁ + λ₁θ₂ + λ₂θ̇₂
+
+        Surface-->>Controller: Surface value s
+
+        Controller->>Law: Apply control law<br/>u = -K·tanh(s/ε) [Classical]<br/>u = -α|s|^½·sign(s) - ∫β·sign(s) [STA]
+
+        Law-->>Controller: Control force u
+
+        Note over Controller: Saturation check<br/>u_clamped = clip(u, -u_max, u_max)
+
+        Controller->>Plant: Apply control force<br/>u_clamped
+
+        Plant->>Plant: Integrate dynamics<br/>M(q)q̈ + C(q,q̇)q̇ + G(q) = Qu
+
+        Plant-->>State: Updated state<br/>x(t+dt)
+
+        Note over State: Check convergence<br/>|θ₁|, |θ₂| < tolerance?
+    end
+
+    State-->>Controller: ✅ Stabilized
 ```
+
+**Control Loop Phases:**
+1. **State Input**: Current system state (6D vector)
+2. **Surface Computation**: Combine state errors into sliding surface `s`
+3. **Control Law**: Apply SMC algorithm (classical, STA, adaptive, hybrid)
+4. **Saturation**: Enforce actuator limits
+5. **Dynamics Integration**: Update state via plant equations
+6. **Convergence Check**: Monitor performance metrics
+
+**Typical Loop Timing:**
+- Timestep `dt`: 0.01s (100 Hz control rate)
+- Simulation duration: 3-10 seconds
+- Total iterations: 300-1000 steps
+- Real-time capable with simplified dynamics
 
 ## Quick Start
 
@@ -183,6 +292,118 @@ python simulate.py --print-config
 # Validate configuration
 python simulate.py --validate-config
 ```
+
+## Documentation & Learning
+
+### Comprehensive Documentation
+
+This project provides **12,500+ lines** of professional documentation organized into four categories:
+
+**📚 Tutorials** - Step-by-step learning paths
+- Beginner to advanced progression
+- Hands-on exercises with real code
+- Expected results and troubleshooting
+
+**📖 How-To Guides** - Task-oriented recipes
+- Running simulations and analyzing results
+- PSO optimization workflows
+- Testing and validation procedures
+
+**🔧 API Reference** - Technical documentation
+- Complete module documentation
+- Code examples and usage patterns
+- Type signatures and parameter details
+
+**📐 Theory & Explanation** - Mathematical foundations
+- Sliding mode control theory
+- PSO algorithm principles
+- Double-inverted pendulum dynamics
+
+### Learning Paths
+
+Choose your path based on your goals and experience level:
+
+```mermaid
+flowchart TD
+    START["🎯 Start Here"] --> GOAL{What's your goal?}
+
+    GOAL -->|Quick prototype| PATH1["Path 1: Quick Start<br/>⏱️ 1-2 hours"]
+    GOAL -->|Compare controllers| PATH2["Path 2: Controller Expert<br/>⏱️ 4-6 hours"]
+    GOAL -->|Build custom SMC| PATH3["Path 3: Custom Development<br/>⏱️ 8-12 hours"]
+    GOAL -->|Research publication| PATH4["Path 4: Research Workflow<br/>⏱️ 12+ hours"]
+
+    PATH1 --> P1_1["Getting Started<br/>Installation & setup"]
+    P1_1 --> P1_2["Tutorial 01<br/>First simulation"]
+    P1_2 --> P1_3["How-To: Simulations<br/>CLI & Streamlit"]
+    P1_3 --> DONE1["✅ Ready to experiment"]
+
+    PATH2 --> P2_1["Getting Started"]
+    P2_1 --> P2_2["Tutorial 01<br/>Basics"]
+    P2_2 --> P2_3["Tutorial 02<br/>Controller comparison"]
+    P2_3 --> P2_4["Tutorial 03<br/>PSO optimization"]
+    P2_4 --> P2_5["How-To: Optimization<br/>Advanced tuning"]
+    P2_5 --> DONE2["✅ Controller expert"]
+
+    PATH3 --> P3_1["Getting Started"]
+    P3_1 --> P3_2["Tutorials 01-02<br/>Framework basics"]
+    P3_2 --> P3_3["Tutorial 04<br/>Custom controller"]
+    P3_3 --> P3_4["Tutorial 03<br/>Optimize custom"]
+    P3_4 --> P3_5["How-To: Testing<br/>Validation"]
+    P3_5 --> DONE3["✅ Custom SMC ready"]
+
+    PATH4 --> P4_1["Complete Paths 1-2<br/>Learn framework"]
+    P4_1 --> P4_2["Tutorial 05<br/>Research workflow"]
+    P4_2 --> P4_3["How-To: Analysis<br/>Statistics & plots"]
+    P4_3 --> P4_4["Theory Guides<br/>Mathematical foundations"]
+    P4_4 --> DONE4["✅ Publication ready"]
+
+    style START fill:#ccccff
+    style PATH1 fill:#ccffcc
+    style PATH2 fill:#ffffcc
+    style PATH3 fill:#ffcccc
+    style PATH4 fill:#ccccff
+    style DONE1 fill:#ccffcc
+    style DONE2 fill:#ccffcc
+    style DONE3 fill:#ccffcc
+    style DONE4 fill:#ccffcc
+```
+
+### Documentation Quick Links
+
+| Category | Document | Description | Lines | Time |
+|----------|----------|-------------|-------|------|
+| **🚀 Getting Started** | | | | |
+| | [Getting Started](docs/guides/getting-started.md) | Installation, first simulation, web UI | 523 | 15 min |
+| | [User Guide](docs/guides/user-guide.md) | Comprehensive reference manual | 826 | 30 min |
+| | [Quick Reference](docs/guides/QUICK_REFERENCE.md) | Command cheat sheet | - | 5 min |
+| **📚 Tutorials** | | | | |
+| | [Tutorial 01: First Simulation](docs/guides/tutorials/tutorial-01-first-simulation.md) | DIP system, Classical SMC, results | 600 | 45 min |
+| | [Tutorial 02: Controller Comparison](docs/guides/tutorials/tutorial-02-controller-comparison.md) | Compare 4 SMC types, tradeoffs | 797 | 60 min |
+| | [Tutorial 03: PSO Optimization](docs/guides/tutorials/tutorial-03-pso-optimization.md) | Auto gain tuning, convergence | 865 | 90 min |
+| | [Tutorial 04: Custom Controller](docs/guides/tutorials/tutorial-04-custom-controller.md) | Terminal SMC from scratch | 784 | 120 min |
+| | [Tutorial 05: Research Workflow](docs/guides/tutorials/tutorial-05-research-workflow.md) | End-to-end research project | 640 | 120 min |
+| **📖 How-To Guides** | | | | |
+| | [Running Simulations](docs/guides/how-to/running-simulations.md) | CLI, Streamlit, batch processing | 619 | 20 min |
+| | [Result Analysis](docs/guides/how-to/result-analysis.md) | Metrics, stats, visualization | 589 | 20 min |
+| | [Optimization Workflows](docs/guides/how-to/optimization-workflows.md) | PSO tuning, custom cost functions | 724 | 25 min |
+| | [Testing & Validation](docs/guides/how-to/testing-validation.md) | Test suite, benchmarks, coverage | 611 | 20 min |
+| **🔧 API Reference** | | | | |
+| | [API Index](docs/guides/api/README.md) | Overview and navigation | 203 | 10 min |
+| | [Controllers API](docs/guides/api/controllers.md) | Factory, SMC types, gain bounds | 726 | 30 min |
+| | [Simulation API](docs/guides/api/simulation.md) | SimulationRunner, dynamics, batch | 517 | 25 min |
+| | [Optimization API](docs/guides/api/optimization.md) | PSOTuner, cost functions | 543 | 25 min |
+| | [Configuration API](docs/guides/api/configuration.md) | YAML loading and validation | 438 | 20 min |
+| | [Plant Models API](docs/guides/api/plant-models.md) | Physics models, parameters | 424 | 20 min |
+| | [Utilities API](docs/guides/api/utilities.md) | Validation, monitoring, analysis | 434 | 20 min |
+| **📐 Theory** | | | | |
+| | [Theory Index](docs/guides/theory/README.md) | Overview and navigation | 104 | 5 min |
+| | [SMC Theory](docs/guides/theory/smc-theory.md) | Lyapunov, chattering, super-twisting | 619 | 30 min |
+| | [PSO Theory](docs/guides/theory/pso-theory.md) | Swarm intelligence, convergence | 438 | 25 min |
+| | [DIP Dynamics](docs/guides/theory/dip-dynamics.md) | Lagrangian, controllability | 501 | 25 min |
+
+**Total Documentation**: 12,525 lines across 28 documents
+
+**Navigation Hub**: See [docs/guides/INDEX.md](docs/guides/INDEX.md) for comprehensive navigation and detailed learning paths.
 
 ## Project Structure
 
