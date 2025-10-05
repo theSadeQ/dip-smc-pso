@@ -205,5 +205,5 @@ The controller ensures:
 
 - [Super-Twisting SMC](super-twisting-smc.md) - Base algorithm
 - [Adaptive SMC](adaptive-smc.md) - Adaptation principles
-- [SMC Theory Complete](../theory/smc_theory_complete.md) - Mathematical foundations
+- [SMC Theory Complete](../../guides/theory/smc-theory.md) - Mathematical foundations
 - [Results Analysis](../presentation/results-discussion.md) - Performance comparison

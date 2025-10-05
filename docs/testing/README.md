@@ -37,13 +37,13 @@ docs/testing/
 ## Coverage Integration Documentation
 
 ### Quality Gates & Standards
-- **[Coverage Quality Gates Runbook](coverage_quality_gates_runbook.md)** - Comprehensive quality gate specifications
-- **[Coverage Quality Gates Troubleshooting](coverage_quality_gates_troubleshooting.md)** - Troubleshooting guide for quality issues
-- **[Coverage Integration Summary](coverage_integration_summary.md)** - High-level integration overview
-- **[Coverage Local Development Guide](coverage_local_development_guide.md)** - Developer testing guide
+- **[Coverage Quality Gates Runbook](guides/coverage_quality_gates_runbook.md)** - Comprehensive quality gate specifications
+- **[Coverage Quality Gates Troubleshooting](guides/coverage_quality_gates_troubleshooting.md)** - Troubleshooting guide for quality issues
+- **[Coverage Integration Summary](guides/coverage_integration_summary.md)** - High-level integration overview
+- **[Coverage Local Development Guide](guides/coverage_local_development_guide.md)** - Developer testing guide
 
 ### Infrastructure & Testing
-- **[Test Infrastructure Guide](test_infrastructure_guide.md)** - Core testing infrastructure documentation
+- **[Test Infrastructure Guide](guides/test_infrastructure_guide.md)** - Core testing infrastructure documentation
 
 ## Recent Test Execution Reports
 
@@ -64,8 +64,8 @@ docs/testing/
 | Executive Summary | `pytest_reports/2025-09-30/executive_summary.md` | High-level test results |
 | Technical Analysis | `pytest_reports/2025-09-30/technical_analysis.md` | Detailed failure analysis |
 | Failure Breakdown | `pytest_reports/2025-09-30/failure_breakdown.md` | Categorized failure types |
-| Quality Gates | `coverage_quality_gates_runbook.md` | Coverage and quality standards |
-| Troubleshooting | `coverage_quality_gates_troubleshooting.md` | Common issue resolution |
+| Quality Gates | `guides/coverage_quality_gates_runbook.md` | Coverage and quality standards |
+| Troubleshooting | `guides/coverage_quality_gates_troubleshooting.md` | Common issue resolution |
 
 ## File Management Standards
 
