@@ -40,6 +40,9 @@ Classical SMC (1970s)
     └─→ Hybrid Adaptive STA (2000s) ← Combines both
 ```
 
+> **📚 Theory Deep Dive:** For mathematical foundations of these controllers, see:
+> - [SMC Theory Guide](../theory/smc-theory.md) - Lyapunov stability, chattering analysis, super-twisting mathematics
+
 ---
 
 ## Part 1: Controller Characteristics
@@ -789,9 +792,21 @@ Which controllers maintain performance? Why?
 
 ## Next Steps
 
-- **Tutorial 03:** PSO Optimization - Automatically tune controller gains
-- **Tutorial 04:** Custom Controller Development - Implement your own SMC variant
-- **API Reference:** In-depth controller documentation
-- **Research Papers:** Theoretical foundations and proofs
+**Next Tutorial:** [Tutorial 03: PSO Optimization](tutorial-03-pso-optimization.md) - Automatically tune controller gains
+
+**Related Guides:**
+- [Controllers API](../api/controllers.md): Technical reference for all 4 controller types
+- [Optimization Workflows How-To](../how-to/optimization-workflows.md): Advanced PSO tuning strategies
+
+**Theory & Foundations:**
+- [SMC Theory Guide](../theory/smc-theory.md): Deep mathematical foundations
+  - Lyapunov stability proofs
+  - Chattering analysis and boundary layers
+  - Super-twisting algorithm mathematics
+  - Practical design guidelines
+
+**Advanced Topics:**
+- [Tutorial 04: Custom Controllers](tutorial-04-custom-controller.md): Implement your own SMC variant
+- [Tutorial 05: Research Workflows](tutorial-05-research-workflow.md): Publication-ready comparative studies
 
 **Congratulations!** You now understand the strengths and tradeoffs of all 4 core SMC controllers and can select the appropriate one for your application.

@@ -33,7 +33,9 @@ The Controllers API provides a clean, type-safe factory system for creating and 
 - [Tutorial 02: Controller Comparison](../tutorials/tutorial-02-controller-comparison.md)
 - [Tutorial 04: Custom Controller](../tutorials/tutorial-04-custom-controller.md)
 - [How-To: Running Simulations](../how-to/running-simulations.md)
-- [Technical Reference](../../reference/controllers/__init__.md)
+
+**Theory & Foundations:**
+- [SMC Theory Guide](../theory/smc-theory.md): Mathematical foundations and design principles
 
 ---
 

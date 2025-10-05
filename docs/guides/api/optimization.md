@@ -34,7 +34,9 @@ The Optimization API provides Particle Swarm Optimization (PSO) for automated co
 - [Tutorial 03: PSO Optimization](../tutorials/tutorial-03-pso-optimization.md)
 - [How-To: Optimization Workflows](../how-to/optimization-workflows.md)
 - [Controllers API](controllers.md)
-- [Technical Reference](../../reference/optimizer/__init__.md)
+
+**Theory & Foundations:**
+- [PSO Algorithm Theory](../theory/pso-theory.md): Swarm intelligence, convergence theory, parameter selection
 
 ---
 

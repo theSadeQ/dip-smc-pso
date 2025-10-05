@@ -84,6 +84,9 @@ x[i] = x[i] + v[i]
 - `c2`: Social coefficient (~2.0, attraction to global best)
 - `r1, r2`: Random numbers in [0, 1] (stochastic exploration)
 
+> **📚 Theory Deep Dive:** For comprehensive PSO foundations, see:
+> - [PSO Algorithm Theory](../theory/pso-theory.md) - Swarm intelligence, convergence theory, parameter selection
+
 ---
 
 ## Part 2: PSO Configuration
@@ -858,8 +861,22 @@ if 'pso_history' in pso_log:
 
 ## Next Steps
 
-- **Tutorial 04:** Custom Controller Development - Implement your own SMC variant
-- **Tutorial 05:** Research Workflow - End-to-end research project example
-- **Advanced Topics:** Multi-objective optimization, constraint handling, hybrid algorithms
+**Next Tutorial:** [Tutorial 04: Custom Controller Development](tutorial-04-custom-controller.md) - Implement your own SMC variant
+
+**Related Guides:**
+- [Optimization API](../api/optimization.md): PSOTuner technical reference
+- [Optimization Workflows How-To](../how-to/optimization-workflows.md): Advanced PSO strategies and custom cost functions
+
+**Theory & Foundations:**
+- [PSO Algorithm Theory](../theory/pso-theory.md): Comprehensive theoretical foundations
+  - Swarm intelligence principles
+  - Convergence guarantees and velocity clamping
+  - Parameter selection guidelines (swarm size, iterations, inertia strategies)
+  - Benchmark comparisons (PSO vs GA vs gradient methods)
+
+**Advanced Topics:**
+- [Tutorial 05: Research Workflows](tutorial-05-research-workflow.md): Publication-ready optimization studies
+- Multi-objective optimization (coming soon)
+- Constraint handling and penalty methods (coming soon)
 
 **Congratulations!** You can now automatically tune SMC controllers using PSO optimization.

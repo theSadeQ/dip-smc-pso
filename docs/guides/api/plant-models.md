@@ -32,7 +32,9 @@ The Plant Models API provides physics-based models of the double-inverted pendul
 - [Tutorial 01: First Simulation](../tutorials/tutorial-01-first-simulation.md)
 - [Simulation API Guide](simulation.md)
 - [Configuration API Guide](configuration.md)
-- [Technical Reference](../../reference/core/__init__.md)
+
+**Theory & Foundations:**
+- [DIP Dynamics Theory](../theory/dip-dynamics.md): Lagrangian derivation, linearization, controllability analysis
 
 ---
 

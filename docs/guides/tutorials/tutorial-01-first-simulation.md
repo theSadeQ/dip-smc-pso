@@ -101,6 +101,10 @@ Sliding Mode Control (SMC) is a nonlinear control technique that:
 - **Finite-Time Convergence:** Reaches sliding surface in finite time
 - **Chattering:** High-frequency switching (mitigated by boundary layer ε)
 
+> **📚 Deep Dive:** For detailed mathematical foundations, see:
+> - [DIP Dynamics Theory](../theory/dip-dynamics.md) - Lagrangian derivation and controllability
+> - [SMC Theory](../theory/smc-theory.md) - Lyapunov stability and sliding mode principles
+
 ---
 
 ## Step-by-Step Simulation
@@ -632,8 +636,12 @@ python simulate.py --ctrl classical_smc --plot
 
 **Related Guides:**
 - [User Guide](../user-guide.md): Comprehensive workflows
-- **How-To: Running Simulations** (coming soon): Advanced options
-- **API Reference** (coming soon): Implementation details
+- [Running Simulations How-To](../how-to/running-simulations.md): CLI, Streamlit, and API usage
+- [Simulation API](../api/simulation.md): Implementation details
+
+**Theory & Foundations:**
+- [DIP Dynamics Theory](../theory/dip-dynamics.md): Understand the physics and mathematics
+- [SMC Theory](../theory/smc-theory.md): Deep dive into sliding mode control
 
 **Advanced Topics:**
 - [Tutorial 03: PSO Optimization](tutorial-03-pso-optimization.md): Automatic gain tuning
