@@ -16,6 +16,130 @@ Replaces the monolithic 458-line controller with composition of 50-100 line modu
 
 
 
+
+## Advanced Mathematical Theory
+
+### Component Composition
+
+Classical SMC combines three components:
+
+```{math}
+u = u_{eq} + u_{sw} = u_{eq} - K \, \text{sat}(s/\epsilon)
+```
+
+### Equivalent Control Computation
+
+From $\dot{s} = 0$ on sliding surface:
+
+```{math}
+u_{eq} = (\mathbf{\Lambda} \mathbf{M}^{-1} \mathbf{B})^{-1} \left[ -\mathbf{\Lambda} \mathbf{M}^{-1} (\mathbf{C} \dot{\vec{q}} + \mathbf{G}) - \mathbf{C}_s \dot{\vec{\theta}} \right]
+```
+
+### Switching Gain Selection
+
+**Minimum required gain:**
+
+```{math}
+K \geq \frac{|\Delta|_{max}}{\eta} + \varepsilon
+```
+
+Where:
+- $|\Delta|_{max}$: Maximum uncertainty bound
+- $\eta > 0$: Reaching rate parameter
+- $\varepsilon > 0$: Safety margin (typically 20%)
+
+### Reaching Time Bound
+
+With $s \dot{s} \leq -\eta |s|$:
+
+```{math}
+t_{reach} \leq \frac{|s(0)|}{\eta}
+```
+
+### Control Authority Analysis
+
+**Peak control estimate:**
+
+```{math}
+|u|_{peak} \leq |u_{eq}|_{max} + K
+```
+
+Must satisfy: $|u|_{peak} \leq 0.9 u_{max}$ (10% safety margin)
+
+### Performance Tuning Guidelines
+
+**Gain selection priority:**
+1. **Surface gains** ($c_i, \lambda_i$): Sliding dynamics
+2. **Switching gain** ($K$): Robustness
+3. **Boundary layer** ($\epsilon$): Chattering vs accuracy
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State x] --> B[Sliding Surface]
+    B --> C{s}
+    C --> D[Equivalent Control]
+    C --> E[Boundary Layer]
+
+    A --> D
+    D --> F[u_eq]
+    E --> G[u_sw = -K sat_s/ε_]
+
+    F --> H[Combiner: u = u_eq + u_sw]
+    G --> H
+    H --> I[Saturation]
+    I --> J[Control Output u]
+
+    style C fill:#ff9
+    style H fill:#9cf
+    style J fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.controllers.smc.algorithms.classical import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Controller
+
+```python
+# Use in complete control loop
+controller = create_controller(ctrl_type, config)
+result = simulate(controller, duration=5.0)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(state)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"ITAE: {metrics.itae:.3f}")
+```
+
 ## Architecture Diagram
 
 ```{mermaid}

@@ -17,6 +17,157 @@ Orchestrates:
 
 
 
+
+## Advanced Mathematical Theory
+
+### Hybrid Adaptive-STA Framework
+
+**Unified control law:**
+
+```{math}
+u = \begin{cases}
+u_{adaptive}, & \text{mode } m = 1 \\
+u_{STA}, & \text{mode } m = 2
+\end{cases}
+```
+
+**Smooth blending:**
+
+```{math}
+u = \lambda(t) u_{adaptive} + (1 - \lambda(t)) u_{STA}
+```
+
+Where $\lambda \in [0, 1]$ is blend factor.
+
+### Mode Selection Strategy
+
+**Adaptive mode** when:
+- Uncertainty high
+- Need online tuning
+- Slow dynamics acceptable
+
+**STA mode** when:
+- Uncertainty bounded and known
+- Fast convergence required
+- Chattering critical
+
+### Unified Adaptation Law
+
+**Shared gain adaptation:**
+
+```{math}
+\dot{K}_{shared} = \gamma |s| - \sigma K_{shared}
+```
+
+**Mode-specific scaling:**
+
+```{math}
+\begin{align}
+K_{adaptive} &= K_{shared} \\
+K_{STA,1} &= \beta_1 K_{shared} \\
+K_{STA,2} &= \beta_2 K_{shared}
+\end{align}
+```
+
+### Best-of-Both-Worlds Performance
+
+**Combines:**
+1. **Adaptive:** Online uncertainty handling
+2. **STA:** Finite-time convergence, low chattering
+
+**Achieves:**
+- Robustness to unknown disturbances
+- Fast transient response
+- Minimal steady-state chattering
+
+### Stability Analysis
+
+**Switched Lyapunov function:**
+
+```{math}
+V_{hybrid} = \begin{cases}
+V_{adaptive}, & m = 1 \\
+V_{STA}, & m = 2
+\end{cases}
+```
+
+**Stability condition:**
+
+```{math}
+V_{hybrid}(t_k^+) \leq V_{hybrid}(t_k^-), \quad \forall \text{ switch times } t_k
+```
+
+Non-increasing Lyapunov function at switches ensures stability.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State x] --> B[Sliding Surface s]
+    B --> C[Adaptive Controller]
+    B --> D[STA Controller]
+
+    C --> E[u_adaptive]
+    D --> F[u_STA]
+
+    E --> G[Switching Logic]
+    F --> G
+
+    G --> H{Mode Selection}
+    H -->|m=1| I[Output: u_adaptive]
+    H -->|m=2| J[Output: u_STA]
+
+    I --> K[Final Control u]
+    J --> K
+
+    style G fill:#ff9
+    style K fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.controllers.smc.algorithms.hybrid import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Controller
+
+```python
+# Use in complete control loop
+controller = create_controller(ctrl_type, config)
+result = simulate(controller, duration=5.0)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(state)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"ITAE: {metrics.itae:.3f}")
+```
+
 ## Architecture Diagram
 
 ```{mermaid}
