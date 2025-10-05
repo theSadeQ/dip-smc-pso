@@ -6,6 +6,206 @@
 
 Statistical testing framework for analysis validation.
 
+
+
+## Advanced Mathematical Theory
+
+### Hypothesis Testing Framework
+
+**Null hypothesis:** $H_0: \theta = \theta_0$
+**Alternative:** $H_1: \theta \neq \theta_0$ (two-sided)
+
+**Type I error:** $\alpha = P(\text{Reject } H_0 | H_0 \text{ true})$
+**Type II error:** $\beta = P(\text{Fail to reject } H_0 | H_1 \text{ true})$
+
+**Power:** $1 - \beta = P(\text{Reject } H_0 | H_1 \text{ true})$
+
+### t-test
+
+**One-sample t-test:**
+
+```{math}
+t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} \sim t_{n-1}
+```
+
+**Two-sample t-test (pooled variance):**
+
+```{math}
+t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}, \quad s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}
+```
+
+### Paired t-test
+
+**For paired samples:**
+
+```{math}
+t = \frac{\bar{d}}{s_d/\sqrt{n}} \sim t_{n-1}
+```
+
+Where $d_i = x_i - y_i$, $\bar{d} = \frac{1}{n}\sum d_i$, $s_d^2 = \frac{1}{n-1}\sum(d_i - \bar{d})^2$.
+
+### ANOVA
+
+**Total sum of squares:**
+
+```{math}
+\text{SST} = \sum_i\sum_j (x_{ij} - \bar{x})^2
+```
+
+**Between-group sum of squares:**
+
+```{math}
+\text{SSB} = \sum_i n_i(\bar{x}_i - \bar{x})^2
+```
+
+**Within-group sum of squares:**
+
+```{math}
+\text{SSW} = \sum_i\sum_j (x_{ij} - \bar{x}_i)^2
+```
+
+**F-statistic:**
+
+```{math}
+F = \frac{\text{MSB}}{\text{MSW}} = \frac{\text{SSB}/(k-1)}{\text{SSW}/(N-k)} \sim F_{k-1, N-k}
+```
+
+### Bonferroni Correction
+
+**For $m$ comparisons:**
+
+```{math}
+\alpha_{\text{corrected}} = \frac{\alpha}{m}
+```
+
+**Family-wise error rate (FWER):**
+
+```{math}
+\text{FWER} \leq 1 - (1-\alpha)^m \approx m\alpha
+```
+
+### Chi-Square Test
+
+**Goodness-of-fit:**
+
+```{math}
+\chi^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i} \sim \chi^2_{k-1}
+```
+
+Where $O_i$ are observed, $E_i$ are expected frequencies.
+
+### Kolmogorov-Smirnov Test
+
+**Test statistic:**
+
+```{math}
+D_n = \sup_x |F_n(x) - F_0(x)|
+```
+
+Where $F_n$ is empirical CDF, $F_0$ is theoretical CDF.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Data Samples] --> B{Test Type}
+    B -->|One Sample| C[t-test]
+    B -->|Two Samples| D[Two-Sample t-test]
+    B -->|Multiple Groups| E[ANOVA]
+    B -->|Paired| F[Paired t-test]
+
+    C --> G[Compute t-statistic]
+    D --> H[Welch's t-test]
+    F --> I[Difference t-test]
+    E --> J[F-statistic]
+
+    G --> K{|t| > t_crit?}
+    H --> K
+    I --> K
+    J --> L{F > F_crit?}
+
+    K -->|Yes| M[Reject H₀]
+    K -->|No| N[Fail to Reject]
+    L -->|Yes| M
+    L -->|No| N
+
+    M --> O[Significant]
+    N --> P[Not Significant]
+
+    E --> Q{Post-hoc?}
+    Q -->|Yes| R[Bonferroni]
+    R --> S[Pairwise Tests]
+
+    style B fill:#ff9
+    style K fill:#9cf
+    style L fill:#9cf
+    style M fill:#9f9
+    style N fill:#f99
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides comprehensive statistical testing capabilities for
 validating analysis results, comparing methods, and ensuring statistical
 rigor in control engineering applications.

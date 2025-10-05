@@ -6,6 +6,192 @@
 
 Statistical benchmarking utilities for the Double Inverted Pendulum project.
 
+
+
+## Advanced Mathematical Theory
+
+### Statistical Benchmarking
+
+**Sample mean estimator:**
+
+```{math}
+\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i
+```
+
+**Sample variance:**
+
+```{math}
+s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2
+```
+
+### Confidence Intervals
+
+**t-distribution CI** (unknown variance):
+
+```{math}
+\text{CI}_{1-\alpha} = \bar{x} \pm t_{\alpha/2, n-1} \frac{s}{\sqrt{n}}
+```
+
+**Normal CI** (known variance):
+
+```{math}
+\text{CI}_{1-\alpha} = \bar{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}
+```
+
+### Bootstrap Confidence Intervals
+
+**Bootstrap resampling:**
+
+1. Draw $B$ bootstrap samples: $\{x_1^*, \ldots, x_n^*\}_b, b=1,\ldots,B$
+2. Compute statistic: $\theta_b^* = g(x_1^*, \ldots, x_n^*)$
+3. CI from quantiles of $\{\theta_b^*\}$
+
+**Percentile method:**
+
+```{math}
+\text{CI}_{1-\alpha} = [\theta_{(\alpha/2)}^*, \theta_{(1-\alpha/2)}^*]
+```
+
+### Hypothesis Testing
+
+**t-test statistic:**
+
+```{math}
+t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} \sim t_{n-1}
+```
+
+**Decision rule:**
+
+```{math}
+\text{Reject } H_0 \text{ if } |t| > t_{\alpha/2, n-1}
+```
+
+### Welch's t-test
+
+**For unequal variances:**
+
+```{math}
+t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+```
+
+**Degrees of freedom (Welch-Satterthwaite):**
+
+```{math}
+\nu = \frac{\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1} + \frac{(s_2^2/n_2)^2}{n_2-1}}
+```
+
+### ANOVA F-test
+
+**F-statistic:**
+
+```{math}
+F = \frac{\text{MSB}}{\text{MSW}} = \frac{\sum n_i(\bar{x}_i - \bar{x})^2/(k-1)}{\sum\sum(x_{ij} - \bar{x}_i)^2/(N-k)}
+```
+
+Where $k$ is number of groups, $N$ is total sample size.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[N Trials] --> B[Simulation Loop]
+    B --> C[Compute Metrics]
+    C --> D[ISE, ITAE, etc]
+
+    D --> E[Statistical Analysis]
+    E --> F[Sample Mean]
+    E --> G[Sample Variance]
+
+    F --> H{Distribution Known?}
+    G --> H
+
+    H -->|Yes| I[t-Confidence Interval]
+    H -->|No| J[Bootstrap CI]
+
+    J --> K[B Bootstrap Samples]
+    K --> L[Empirical Distribution]
+    L --> M[Percentile CI]
+
+    I --> N[Hypothesis Testing]
+    M --> N
+
+    N --> O[t-test]
+    N --> P[ANOVA]
+
+    O --> Q{p < α?}
+    P --> Q
+
+    Q -->|Yes| R[Significant Difference]
+    Q -->|No| S[No Evidence]
+
+    style E fill:#ff9
+    style J fill:#9cf
+    style Q fill:#fcf
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This is the refactored version using modular architecture while maintaining
 full backward compatibility with the original statistical_benchmarks.py.
 

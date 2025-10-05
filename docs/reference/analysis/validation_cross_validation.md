@@ -6,6 +6,196 @@
 
 Cross-validation methods for analysis validation and model selection.
 
+
+
+## Advanced Mathematical Theory
+
+### Cross-Validation
+
+**k-fold cross-validation:**
+
+1. Split data into $k$ folds: $D_1, \ldots, D_k$
+2. For fold $i$: Train on $D \setminus D_i$, test on $D_i$
+3. Compute error: $\text{CV}(k) = \frac{1}{k}\sum_{i=1}^k \text{Err}_i$
+
+**Leave-One-Out (LOO):**
+
+```{math}
+\text{CV}_{LOO} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_{-i})^2
+```
+
+Where $\hat{y}_{-i}$ is prediction without sample $i$.
+
+### Bias-Variance Tradeoff
+
+**Prediction error decomposition:**
+
+```{math}
+\text{Err}(x) = \text{Bias}^2 + \text{Variance} + \sigma^2
+```
+
+**Bias:**
+
+```{math}
+\text{Bias}(\hat{f}(x)) = E[\hat{f}(x)] - f(x)
+```
+
+**Variance:**
+
+```{math}
+\text{Variance}(\hat{f}(x)) = E[(\hat{f}(x) - E[\hat{f}(x)])^2]
+```
+
+### Stratified Cross-Validation
+
+**Preserve class proportions:**
+
+```{math}
+\frac{n_c^{(i)}}{|D_i|} \approx \frac{n_c}{n} \quad \forall c, i
+```
+
+Where $n_c^{(i)}$ is count of class $c$ in fold $i$.
+
+### Time Series Cross-Validation
+
+**Forward chaining:**
+
+```{math}
+\begin{align}
+\text{Fold 1: } & \text{Train}(1:m), \text{Test}(m+1) \\
+\text{Fold 2: } & \text{Train}(1:m+1), \text{Test}(m+2) \\
+& \vdots \\
+\text{Fold } k: & \text{Train}(1:m+k-1), \text{Test}(m+k)
+\end{align}
+```
+
+### AIC and BIC
+
+**Akaike Information Criterion:**
+
+```{math}
+\text{AIC} = -2\ln(L) + 2p
+```
+
+**Bayesian Information Criterion:**
+
+```{math}
+\text{BIC} = -2\ln(L) + p\ln(n)
+```
+
+Where $L$ is likelihood, $p$ is parameters, $n$ is samples.
+
+### Generalized Cross-Validation
+
+**GCV score:**
+
+```{math}
+\text{GCV}(\lambda) = \frac{\|y - \hat{y}^{(\lambda)}\|^2}{(1 - \text{tr}(S^{(\lambda)})/n)^2}
+```
+
+Where $S^{(\lambda)}$ is smoother matrix.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Dataset D] --> B[Split into k Folds]
+    B --> C[Fold 1]
+    B --> D[Fold 2]
+    B --> E[...]
+    B --> F[Fold k]
+
+    C --> G[Iteration 1]
+    D --> H[Iteration 2]
+    F --> I[Iteration k]
+
+    G --> J[Train: D \ D₁]
+    J --> K[Test: D₁]
+    K --> L[Error₁]
+
+    H --> M[Train: D \ D₂]
+    M --> N[Test: D₂]
+    N --> O[Error₂]
+
+    I --> P[Train: D \ Dₖ]
+    P --> Q[Test: Dₖ]
+    Q --> R[Errorₖ]
+
+    L --> S[CV = 1/k Σ Errorᵢ]
+    O --> S
+    R --> S
+
+    S --> T{Select Model}
+    T --> U[Min CV Error]
+
+    style B fill:#9cf
+    style S fill:#ff9
+    style U fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides comprehensive cross-validation techniques for validating
 analysis methods, selecting models, and assessing generalization performance
 in control engineering applications.
