@@ -20,16 +20,16 @@
 ### 📋 Standards & Guidelines
 - **[Testing Standards](standards/testing_standards.md)** - Comprehensive testing guidelines
 - **[Test Template](templates/test_template.py)** - Standardized test file template
-- **[Coverage Quality Gates](coverage_quality_gates_runbook.md)** - Quality gate specifications
+- **[Coverage Quality Gates](guides/coverage_quality_gates_runbook.md)** - Quality gate specifications
 
 ### 🔧 Developer Resources
-- **[Local Development Guide](coverage_local_development_guide.md)** - Developer testing setup
-- **[Test Infrastructure Guide](test_infrastructure_guide.md)** - Core testing infrastructure
+- **[Local Development Guide](guides/coverage_local_development_guide.md)** - Developer testing setup
+- **[Test Infrastructure Guide](guides/test_infrastructure_guide.md)** - Core testing infrastructure
 - **[Pytest Workflow](workflows/pytest_testing_workflow.md)** - Testing execution workflows
 
 ### 🚨 Troubleshooting
-- **[Quality Gates Troubleshooting](coverage_quality_gates_troubleshooting.md)** - Common issue resolution
-- **[Integration Summary](coverage_integration_summary.md)** - High-level integration overview
+- **[Quality Gates Troubleshooting](guides/coverage_quality_gates_troubleshooting.md)** - Common issue resolution
+- **[Integration Summary](guides/coverage_integration_summary.md)** - High-level integration overview
 
 ## Document Categories
 
@@ -48,17 +48,17 @@
 |----------|------|---------|----------|
 | [Testing Standards](standards/testing_standards.md) | Standard | Comprehensive testing guidelines | All Developers |
 | [Test Template](templates/test_template.py) | Template | Standardized test structure | Test Authors |
-| [Coverage Quality Gates Runbook](coverage_quality_gates_runbook.md) | Standard | Quality gate specifications | QA/DevOps |
-| [Test Infrastructure Guide](test_infrastructure_guide.md) | Guide | Core testing infrastructure | Platform Team |
+| [Coverage Quality Gates Runbook](guides/coverage_quality_gates_runbook.md) | Standard | Quality gate specifications | QA/DevOps |
+| [Test Infrastructure Guide](guides/test_infrastructure_guide.md) | Guide | Core testing infrastructure | Platform Team |
 
 ### 🔧 Workflows & Processes
 
 | Document | Type | Purpose | Usage |
 |----------|------|---------|-------|
 | [Pytest Testing Workflow](workflows/pytest_testing_workflow.md) | Workflow | Test execution processes | Daily Development |
-| [Coverage Local Development Guide](coverage_local_development_guide.md) | Guide | Local testing setup | Developer Onboarding |
-| [Coverage Quality Gates Troubleshooting](coverage_quality_gates_troubleshooting.md) | Troubleshooting | Issue resolution | Problem Solving |
-| [Coverage Integration Summary](coverage_integration_summary.md) | Summary | Integration overview | System Understanding |
+| [Coverage Local Development Guide](guides/coverage_local_development_guide.md) | Guide | Local testing setup | Developer Onboarding |
+| [Coverage Quality Gates Troubleshooting](guides/coverage_quality_gates_troubleshooting.md) | Troubleshooting | Issue resolution | Problem Solving |
+| [Coverage Integration Summary](guides/coverage_integration_summary.md) | Summary | Integration overview | System Understanding |
 
 ## Cross-Reference Matrix
 
@@ -86,37 +86,37 @@
 
 | Failure Type | Analysis Document | Resolution Guide | Prevention Standard |
 |--------------|-------------------|------------------|-------------------|
-| **Configuration** | [Technical Analysis](pytest_reports/2025-09-30/technical_analysis.md) | [Config Troubleshooting](coverage_quality_gates_troubleshooting.md) | [Config Validation](standards/testing_standards.md#configuration-validation) |
-| **Import Errors** | [Failure Breakdown](pytest_reports/2025-09-30/failure_breakdown.md) | [Import Resolution](coverage_quality_gates_troubleshooting.md) | [Import Standards](standards/testing_standards.md#import-validation) |
-| **Numerical** | [Technical Analysis](pytest_reports/2025-09-30/technical_analysis.md) | [Numerical Stability](coverage_quality_gates_troubleshooting.md) | [Numerical Testing](standards/testing_standards.md#numerical-accuracy) |
-| **Memory** | [Executive Summary](pytest_reports/2025-09-30/executive_summary.md) | [Memory Debugging](coverage_quality_gates_troubleshooting.md) | [Memory Standards](standards/testing_standards.md#memory-testing) |
+| **Configuration** | [Technical Analysis](pytest_reports/2025-09-30/technical_analysis.md) | [Config Troubleshooting](guides/coverage_quality_gates_troubleshooting.md) | [Config Validation](standards/testing_standards.md#configuration-validation) |
+| **Import Errors** | [Failure Breakdown](pytest_reports/2025-09-30/failure_breakdown.md) | [Import Resolution](guides/coverage_quality_gates_troubleshooting.md) | [Import Standards](standards/testing_standards.md#import-validation) |
+| **Numerical** | [Technical Analysis](pytest_reports/2025-09-30/technical_analysis.md) | [Numerical Stability](guides/coverage_quality_gates_troubleshooting.md) | [Numerical Testing](standards/testing_standards.md#numerical-accuracy) |
+| **Memory** | [Executive Summary](pytest_reports/2025-09-30/executive_summary.md) | [Memory Debugging](guides/coverage_quality_gates_troubleshooting.md) | [Memory Standards](standards/testing_standards.md#memory-testing) |
 
 ## Workflow Navigation
 
 ### Daily Development Workflow
 
 1. **Check Status** → [Executive Summary](pytest_reports/2025-09-30/executive_summary.md)
-2. **Local Testing** → [Local Development Guide](coverage_local_development_guide.md)
+2. **Local Testing** → [Local Development Guide](guides/coverage_local_development_guide.md)
 3. **Run Tests** → [Pytest Workflow](workflows/pytest_testing_workflow.md)
-4. **Debug Issues** → [Troubleshooting Guide](coverage_quality_gates_troubleshooting.md)
+4. **Debug Issues** → [Troubleshooting Guide](guides/coverage_quality_gates_troubleshooting.md)
 
 ### New Feature Development
 
 1. **Review Standards** → [Testing Standards](standards/testing_standards.md)
 2. **Use Template** → [Test Template](templates/test_template.py)
-3. **Check Coverage** → [Quality Gates](coverage_quality_gates_runbook.md)
+3. **Check Coverage** → [Quality Gates](guides/coverage_quality_gates_runbook.md)
 4. **Validate Integration** → [Integration Testing](standards/testing_standards.md#integration-tests)
 
 ### Issue Resolution Workflow
 
 1. **Identify Issue** → [Failure Breakdown](pytest_reports/2025-09-30/failure_breakdown.md)
 2. **Understand Cause** → [Technical Analysis](pytest_reports/2025-09-30/technical_analysis.md)
-3. **Apply Fix** → [Troubleshooting Guide](coverage_quality_gates_troubleshooting.md)
+3. **Apply Fix** → [Troubleshooting Guide](guides/coverage_quality_gates_troubleshooting.md)
 4. **Validate Solution** → [Testing Standards](standards/testing_standards.md)
 
 ### QA/DevOps Workflow
 
-1. **Monitor Gates** → [Quality Gates Runbook](coverage_quality_gates_runbook.md)
+1. **Monitor Gates** → [Quality Gates Runbook](guides/coverage_quality_gates_runbook.md)
 2. **Review Results** → [Executive Summary](pytest_reports/2025-09-30/executive_summary.md)
 3. **Analyze Trends** → [Technical Analysis](pytest_reports/2025-09-30/technical_analysis.md)
 4. **Update Standards** → [Testing Standards](standards/testing_standards.md)
@@ -146,20 +146,21 @@ docs/testing/
 │   └── 📄 test_template.py            # Standard test file template
 ├── 📁 workflows/                   # Process documentation
 │   └── 📄 pytest_testing_workflow.md  # Testing workflows
-├── 📄 coverage_quality_gates_runbook.md # Quality gate specs
-├── 📄 coverage_quality_gates_troubleshooting.md # Issue resolution
-├── 📄 coverage_integration_summary.md # Integration overview
-├── 📄 coverage_local_development_guide.md # Developer guide
-└── 📄 test_infrastructure_guide.md # Infrastructure documentation
+└── 📁 guides/                      # Testing guides and references
+    ├── 📄 coverage_quality_gates_runbook.md # Quality gate specs
+    ├── 📄 coverage_quality_gates_troubleshooting.md # Issue resolution
+    ├── 📄 coverage_integration_summary.md # Integration overview
+    ├── 📄 coverage_local_development_guide.md # Developer guide
+    └── 📄 test_infrastructure_guide.md # Infrastructure documentation
 ```
 
 ### Access Patterns
 
 | User Role | Primary Entry Point | Common Workflows |
 |-----------|-------------------|------------------|
-| **Developer** | [README.md](README.md) → [Local Guide](coverage_local_development_guide.md) | Daily testing, debugging |
-| **QA Engineer** | [Executive Summary](pytest_reports/2025-09-30/executive_summary.md) → [Quality Gates](coverage_quality_gates_runbook.md) | Quality monitoring, validation |
-| **DevOps** | [Integration Summary](coverage_integration_summary.md) → [Infrastructure Guide](test_infrastructure_guide.md) | CI/CD, automation |
+| **Developer** | [README.md](README.md) → [Local Guide](guides/coverage_local_development_guide.md) | Daily testing, debugging |
+| **QA Engineer** | [Executive Summary](pytest_reports/2025-09-30/executive_summary.md) → [Quality Gates](guides/coverage_quality_gates_runbook.md) | Quality monitoring, validation |
+| **DevOps** | [Integration Summary](guides/coverage_integration_summary.md) → [Infrastructure Guide](guides/test_infrastructure_guide.md) | CI/CD, automation |
 | **Research** | [Testing Standards](standards/testing_standards.md) → [Technical Analysis](pytest_reports/2025-09-30/technical_analysis.md) | Scientific validation, analysis |
 
 ## Search and Discovery

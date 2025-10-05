@@ -123,6 +123,6 @@ u = controller.compute_control(state, reference, time)
 
 ## Related Documentation
 
-- [SMC Theory Complete](../theory/smc_theory_complete.md) - Mathematical foundations
+- [SMC Theory Complete](../../guides/theory/smc-theory.md) - Mathematical foundations
 - [Implementation Guide](../implementation/code_documentation_index.md) - Code documentation
-- [PSO Optimization](../theory/pso_optimization_complete.md) - Parameter tuning details
+- [PSO Optimization](../../guides/theory/pso-theory.md) - Parameter tuning details

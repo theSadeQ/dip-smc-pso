@@ -444,7 +444,7 @@ Phase 5 (Week 9-10) ← Final polish
 - [../orchestration/ci_agent_framework.md](../orchestration/ci_agent_framework.md) - Multi-agent CI system
 
 ### **Project Documentation**
-- [../../CLAUDE.md](../../CLAUDE.md) - Project conventions and standards
+- [../CLAUDE.md](../CLAUDE.md) - Project conventions and standards
 - [../../README.md](../../README.md) - Project overview
 - [../../CHANGELOG.md](../../CHANGELOG.md) - Version history
 
