@@ -20,7 +20,13 @@
       "Bash(find:*)",
       "Bash(test:*)",
       "Bash(cd:*)",
-      "Bash(if exist scriptsdocstemplates dir scriptsdocstemplates /b)"
+      "Bash(if exist scriptsdocstemplates dir scriptsdocstemplates /b)",
+      "Bash(for:*)",
+      "Bash(do grep -q \"Advanced Mathematical Theory\\|Architecture Diagram\" \"$f\")",
+      "Bash(done)",
+      "Bash(do if ! grep -q \"Advanced Mathematical Theory\\|Architecture Diagram\" \"$f\")",
+      "Bash(then echo \"$f\")",
+      "Bash(fi)"
     ],
     "deny": [],
     "ask": [],
