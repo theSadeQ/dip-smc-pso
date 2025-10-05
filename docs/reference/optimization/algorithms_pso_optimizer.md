@@ -6,6 +6,170 @@
 
 Particle Swarm Optimisation (PSO) tuner for sliding-mode controllers.
 
+
+
+## Advanced Mathematical Theory
+
+### PSO Optimizer Implementation
+
+**Complete PSO workflow:**
+
+1. **Initialization:** Sample $N$ particles uniformly in $\mathcal{X}$
+2. **Evaluation:** Compute $f(\vec{x}_i^0)$ for all particles
+3. **Update personal bests:** $\vec{p}_i = \vec{x}_i^0$
+4. **Update global best:** $\vec{g} = \arg\min_i f(\vec{p}_i)$
+5. **Iterate:** Update velocities and positions
+
+### Constraint Handling
+
+**Penalty method:**
+
+```{math}
+f_{penalty}(\vec{x}) = f(\vec{x}) + \sum_{j=1}^{m} r_j \max(0, g_j(\vec{x}))^2 + \sum_{k=1}^{p} s_k |h_k(\vec{x})|
+```
+
+**Dynamic penalty coefficients:**
+
+```{math}
+r_j(t) = r_{j,0} \cdot \left(1 + \frac{t}{T_{max}}\right)^{\beta}
+```
+
+### Convergence Acceleration
+
+**Quantum PSO (QPSO):**
+
+```{math}
+x_{i,d}^{t+1} = \phi p_{i,d} + (1 - \phi) g_d \pm \beta |x_{i,d}^t - C_d| \ln(1/u)
+```
+
+Where $C_d = \frac{1}{N} \sum_{i=1}^{N} p_{i,d}$ is mean best position.
+
+**Bare Bones PSO:**
+
+```{math}
+x_{i,d}^{t+1} \sim \mathcal{N}\left(\frac{p_{i,d} + g_d}{2}, |p_{i,d} - g_d|\right)
+```
+
+### Topology Design
+
+**Global best (gbest):**
+
+All particles influenced by single global best.
+
+**Local best (lbest):**
+
+```{math}
+l_i = \arg\min_{j \in N_i} f(\vec{p}_j)
+```
+
+Where $N_i$ is neighborhood of particle $i$.
+
+**Ring topology:** $N_i = \{i-1, i, i+1\}$
+**Von Neumann:** $N_i$ is 2D grid neighborhood
+
+### Parameter Tuning
+
+**Default parameters (Clerc):**
+
+```{math}
+\begin{align}
+w &= 0.729 \\
+c_1 &= c_2 = 1.49445 \\
+\phi &= c_1 + c_2 = 2.9889 > 4 \text{ (invalid for standard PSO)}
+\end{align}
+```
+
+**Adaptive parameters:**
+
+```{math}
+c_1(t) = c_{1,f} + (c_{1,i} - c_{1,f}) \frac{t}{T_{max}}
+```
+
+```{math}
+c_2(t) = c_{2,i} + (c_{2,f} - c_{2,i}) \frac{t}{T_{max}}
+```
+
+Typically: $c_{1,i} = 2.5, c_{1,f} = 0.5, c_{2,i} = 0.5, c_{2,f} = 2.5$
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[PSO Optimizer] --> B[Setup Problem]
+    B --> C[Initialize Parameters]
+    C --> D[Create Swarm]
+    D --> E[Parallel Evaluation]
+
+    E --> F[Fitness Results]
+    F --> G[Update Strategy]
+
+    G --> H{Inertia Weight}
+    H -->|Linear| I[Decrease w]
+    H -->|Adaptive| J[Adjust w]
+    H -->|Chaotic| K[Chaotic w]
+
+    I --> L[Update Swarm]
+    J --> L
+    K --> L
+
+    L --> M[Constraint Handling]
+    M --> N{Violations?}
+    N -->|Yes| O[Apply Penalty]
+    N -->|No| P[Convergence Check]
+    O --> P
+
+    P --> Q{Converged?}
+    Q -->|No| E
+    Q -->|Yes| R[Return Best Solution]
+
+    style G fill:#9cf
+    style P fill:#ff9
+    style R fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.core import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 This module defines the high-throughput, vectorised `PSOTuner` class that wraps
 a particle swarm optimisation algorithm around the vectorised simulation of a
 double inverted pendulum (DIP) system.  It incorporates improvements from
