@@ -6,6 +6,158 @@
 
 Report generation module for control system analysis.
 
+
+
+## Advanced Mathematical Theory
+
+### Report Generation Framework
+
+**Template system:**
+
+```{math}
+\text{Report} = \text{Template} \oplus \text{Data} \oplus \text{Style}
+```
+
+### LaTeX Generation
+
+**Mathematical content:**
+
+```latex
+\begin{equation}
+    \vec{r}(t) = \vec{y}(t) - \hat{\vec{y}}(t)
+\end{equation}
+```
+
+**Automatic figure inclusion:**
+
+```latex
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figure.pdf}
+    \caption{Performance analysis}
+\end{figure}
+```
+
+### Markdown Generation
+
+**Hierarchical structure:**
+
+```markdown
+# Analysis Report
+## Performance Metrics
+- ISE: 12.34
+- ITAE: 56.78
+```
+
+**Table generation:**
+
+```{math}
+\text{Table}[i,j] = f(\text{data}[i], \text{metric}[j])
+```
+
+### Multi-Format Export
+
+**Pandoc conversion:**
+
+```{math}
+\text{Markdown} \xrightarrow{\text{pandoc}} \begin{cases}
+\text{HTML} \\
+\text{PDF} \\
+\text{DOCX}
+\end{cases}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Analysis Results] --> B[Template Selection]
+    B --> C{Format}
+
+    C -->|LaTeX| D[LaTeX Template]
+    C -->|Markdown| E[Markdown Template]
+    C -->|HTML| F[HTML Template]
+
+    D --> G[Math Rendering]
+    E --> H[Simple Formatting]
+    F --> I[Interactive Elements]
+
+    G --> J[Figure Inclusion]
+    H --> J
+    I --> J
+
+    J --> K[Content Assembly]
+    K --> L[Style Application]
+
+    L --> M{Export Format}
+    M -->|PDF| N[PDF Output]
+    M -->|HTML| O[HTML Output]
+    M -->|DOCX| P[Word Output]
+
+    style K fill:#9cf
+    style L fill:#ff9
+    style N fill:#9f9
+    style O fill:#9f9
+    style P fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.analysis import Component
+
+# Initialize component
+component = Component(config)
+result = component.process(data)
+```
+
+### Example 2: Advanced Configuration
+
+```python
+# Configure with custom parameters
+config = {
+    'threshold': 0.05,
+    'method': 'adaptive'
+}
+component = Component(config)
+```
+
+### Example 3: Integration Workflow
+
+```python
+# Complete analysis workflow
+from src.analysis import analyze
+
+results = analyze(
+    data=sensor_data,
+    method='enhanced',
+    visualization=True
+)
+```
+
+### Example 4: Fault Detection Example
+
+```python
+# FDI system usage
+from src.analysis.fault_detection import FDISystem
+
+fdi = FDISystem(config)
+residual = fdi.generate_residual(y, u)
+fault = fdi.detect(residual)
+```
+
+### Example 5: Visualization Example
+
+```python
+# Generate analysis plots
+from src.analysis.visualization import AnalysisPlotter
+
+plotter = AnalysisPlotter(style='professional')
+fig = plotter.plot_time_series(data)
+fig.savefig('analysis.pdf')
+```
 This module provides automated report generation capabilities that combine
 analysis results, visualizations, and statistical summaries into comprehensive
 professional reports.

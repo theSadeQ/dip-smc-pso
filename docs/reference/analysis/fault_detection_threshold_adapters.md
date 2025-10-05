@@ -6,6 +6,191 @@
 
 Adaptive threshold methods for fault detection.
 
+
+
+## Advanced Mathematical Theory
+
+### Adaptive Threshold Theory
+
+**Fixed threshold problem:** High false alarms or missed detections.
+
+**Adaptive threshold:**
+
+```{math}
+\tau(t) = \bar{\tau} + k\sigma_r(t)
+```
+
+Where $\sigma_r(t)$ is residual standard deviation, $k$ is multiplier (e.g., 3 for 99.7%).
+
+### False Alarm Rate (FAR)
+
+**Probability of false alarm:**
+
+```{math}
+\text{FAR} = P(|r| > \tau | H_0)
+```
+
+Where $H_0$: no fault.
+
+**Gaussian residual:**
+
+```{math}
+\text{FAR} = 2\left(1 - \Phi\left(\frac{\tau}{\sigma_r}\right)\right)
+```
+
+Where $\Phi$ is standard normal CDF.
+
+### Missed Detection Rate (MDR)
+
+**Probability of missed detection:**
+
+```{math}
+\text{MDR} = P(|r| \leq \tau | H_1)
+```
+
+Where $H_1$: fault present.
+
+### ROC Curve
+
+**Receiver Operating Characteristic:**
+
+```{math}
+\begin{align}
+\text{TPR}(\tau) &= P(|r| > \tau | H_1) = 1 - \text{MDR} \\
+\text{FPR}(\tau) &= P(|r| > \tau | H_0) = \text{FAR}
+\end{align}
+```
+
+**Optimal threshold:** Maximize TPR, minimize FPR.
+
+**Area Under Curve (AUC):**
+
+```{math}
+\text{AUC} = \int_0^1 \text{TPR}(\text{FPR}^{-1}(x)) dx
+```
+
+AUC = 1: perfect detector, AUC = 0.5: random.
+
+### CUSUM Algorithm
+
+**Cumulative sum for change detection:**
+
+```{math}
+S_k = \max(0, S_{k-1} + r_k - \nu)
+```
+
+Alarm if $S_k > h$ (threshold).
+
+**Average run length (ARL):**
+
+```{math}
+\text{ARL}_0 = E[\text{time to false alarm}], \quad \text{ARL}_1 = E[\text{detection delay}]
+```
+
+### EWMA Threshold
+
+**Exponentially weighted moving average:**
+
+```{math}
+z_k = \lambda r_k + (1-\lambda)z_{k-1}
+```
+
+**Adaptive threshold:**
+
+```{math}
+\tau_k = \mu_z + L\sigma_z\sqrt{\frac{\lambda}{2-\lambda}[1-(1-\lambda)^{2k}]}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Residual r(t)] --> B[Statistical Analysis]
+    B --> C[Mean μ_r]
+    B --> D[Std Dev σ_r]
+
+    C --> E[Adaptive Threshold]
+    D --> E
+    E --> F[τ(t) = μ + kσ]
+
+    F --> G{Decision Logic}
+    A --> G
+
+    G -->|r > τ| H[Alarm]
+    G -->|r ≤ τ| I[Normal]
+
+    H --> J[ROC Analysis]
+    I --> K[Update Stats]
+
+    J --> L[TPR/FPR]
+    L --> M{Optimize?}
+    M -->|Yes| N[Adjust k]
+    M -->|No| O[Accept]
+
+    N --> E
+
+    style E fill:#9cf
+    style G fill:#ff9
+    style L fill:#fcf
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.analysis import Component
+
+# Initialize component
+component = Component(config)
+result = component.process(data)
+```
+
+### Example 2: Advanced Configuration
+
+```python
+# Configure with custom parameters
+config = {
+    'threshold': 0.05,
+    'method': 'adaptive'
+}
+component = Component(config)
+```
+
+### Example 3: Integration Workflow
+
+```python
+# Complete analysis workflow
+from src.analysis import analyze
+
+results = analyze(
+    data=sensor_data,
+    method='enhanced',
+    visualization=True
+)
+```
+
+### Example 4: Fault Detection Example
+
+```python
+# FDI system usage
+from src.analysis.fault_detection import FDISystem
+
+fdi = FDISystem(config)
+residual = fdi.generate_residual(y, u)
+fault = fdi.detect(residual)
+```
+
+### Example 5: Visualization Example
+
+```python
+# Generate analysis plots
+from src.analysis.visualization import AnalysisPlotter
+
+plotter = AnalysisPlotter(style='professional')
+fig = plotter.plot_time_series(data)
+fig.savefig('analysis.pdf')
+```
 This module provides various adaptive thresholding techniques to improve
 fault detection performance under varying operating conditions and
 system uncertainties.

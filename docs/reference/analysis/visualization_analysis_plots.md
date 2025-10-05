@@ -6,6 +6,164 @@
 
 Analysis visualization tools for control engineering applications.
 
+
+
+## Advanced Mathematical Theory
+
+### Visualization Theory
+
+**Human visual perception:** Weber-Fechner law
+
+```{math}
+S = k \ln(I/I_0)
+```
+
+Sensation $S$ proportional to log of intensity $I$.
+
+### Color Theory (CIELAB)
+
+**Perceptually uniform color space:**
+
+```{math}
+\begin{align}
+L^* &= 116f(Y/Y_n) - 16 \\
+a^* &= 500[f(X/X_n) - f(Y/Y_n)] \\
+b^* &= 200[f(Y/Y_n) - f(Z/Z_n)]
+\end{align}
+```
+
+Where $f(t) = t^{1/3}$ if $t > (6/29)^3$, else linear.
+
+### Time Series Smoothing
+
+**Moving average filter:**
+
+```{math}
+y_{smooth}(t) = \frac{1}{2w+1}\sum_{i=-w}^{w} y(t+i)
+```
+
+**Exponential smoothing:**
+
+```{math}
+s_t = \alpha y_t + (1-\alpha)s_{t-1}
+```
+
+### Phase Portrait Theory
+
+**State trajectory:**
+
+```{math}
+\vec{x}(t) = [x_1(t), x_2(t)], \quad \text{Plot: } (x_1, x_2)
+```
+
+**Vector field:**
+
+```{math}
+\vec{v}(x_1, x_2) = [\dot{x}_1(x_1, x_2), \dot{x}_2(x_1, x_2)]
+```
+
+### Nyquist Sampling
+
+**Anti-aliasing for plotting:**
+
+```{math}
+f_s \geq 2f_{max}
+```
+
+**Decimation:** Plot every $M$-th point:
+
+```{math}
+y_{plot}[n] = y[Mn]
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Analysis Data] --> B{Plot Type}
+
+    B -->|Time Series| C[Line Plot]
+    B -->|Phase Portrait| D[State Trajectory]
+    B -->|Comparison| E[Multi-Line Plot]
+
+    C --> F[Smoothing]
+    F --> G[Decimation]
+
+    D --> H[Vector Field]
+    H --> I[Trajectory Overlay]
+
+    E --> J[Legend]
+    J --> K[Color Palette]
+
+    G --> L[Style Application]
+    I --> L
+    K --> L
+
+    L --> M[Figure Generation]
+    M --> N[Export]
+
+    style L fill:#9cf
+    style M fill:#ff9
+    style N fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.analysis import Component
+
+# Initialize component
+component = Component(config)
+result = component.process(data)
+```
+
+### Example 2: Advanced Configuration
+
+```python
+# Configure with custom parameters
+config = {
+    'threshold': 0.05,
+    'method': 'adaptive'
+}
+component = Component(config)
+```
+
+### Example 3: Integration Workflow
+
+```python
+# Complete analysis workflow
+from src.analysis import analyze
+
+results = analyze(
+    data=sensor_data,
+    method='enhanced',
+    visualization=True
+)
+```
+
+### Example 4: Fault Detection Example
+
+```python
+# FDI system usage
+from src.analysis.fault_detection import FDISystem
+
+fdi = FDISystem(config)
+residual = fdi.generate_residual(y, u)
+fault = fdi.detect(residual)
+```
+
+### Example 5: Visualization Example
+
+```python
+# Generate analysis plots
+from src.analysis.visualization import AnalysisPlotter
+
+plotter = AnalysisPlotter(style='professional')
+fig = plotter.plot_time_series(data)
+fig.savefig('analysis.pdf')
+```
 This module provides comprehensive visualization capabilities for analysis results
 including performance plots, comparison charts, and interactive visualizations.
 
