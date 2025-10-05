@@ -441,14 +441,18 @@ Ready for more? Explore:
 
 - **Batch Simulations:** Monte Carlo validation for robustness analysis
 
-### API Reference Documentation
+### API Reference Guides
 
-Dive into the technical details:
+Comprehensive module-by-module technical reference with practical examples:
 
-- **[Controllers API](../reference/controllers/__init__.md):** All controller implementations
-- **[Simulation Engine](../reference/simulation/engines___init__.md):** Core simulation infrastructure
-- **[Optimization](../reference/optimization/algorithms_pso_optimizer.md):** PSO algorithm details
-- **[Plant Models](../reference/plant/core___init__.md):** Dynamics and physics
+- **[Controllers API Guide](api/controllers.md)** - Factory system, SMC types, custom controllers
+- **[Simulation API Guide](api/simulation.md)** - SimulationRunner, dynamics models, batch processing
+- **[Optimization API Guide](api/optimization.md)** - PSOTuner, cost functions, convergence monitoring
+- **[Configuration API Guide](api/configuration.md)** - Loading config, validation, programmatic setup
+- **[Plant Models API Guide](api/plant-models.md)** - Physics models, parameter configuration
+- **[Utilities API Guide](api/utilities.md)** - Validation, monitoring, analysis tools
+
+For auto-generated technical reference, see: [docs/reference/](../reference/index.md)
 
 ---
 

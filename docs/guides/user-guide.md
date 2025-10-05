@@ -162,6 +162,10 @@ ConfigurationError: Invalid controller gains
 - **Invalid ranges:** Boundary layer in (0, 1), friction coefficients in [0, ∞)
 - **Type mismatches:** Gains as list, not individual parameters
 
+**See also:**
+- [Configuration API Guide](api/configuration.md) - Detailed config system reference
+- [Plant Models API Guide](api/plant-models.md) - Physics parameter configuration
+
 ---
 
 ## Running Simulations
@@ -244,7 +248,10 @@ python simulate.py --ctrl classical_smc --override "simulation.dt=0.02" --plot
 # Warning: May cause numerical instability
 ```
 
-**See also:** [How-To: Running Simulations](how-to/running-simulations.md) for comprehensive CLI usage, Streamlit dashboard, programmatic API, and batch processing patterns.
+**See also:**
+- [How-To: Running Simulations](how-to/running-simulations.md) - CLI usage, Streamlit dashboard, batch processing
+- [Simulation API Guide](api/simulation.md) - SimulationRunner, dynamics models, performance optimization
+- [Controllers API Guide](api/controllers.md) - Factory system, SMC types, custom controllers
 
 ---
 
@@ -352,7 +359,9 @@ Optimization Complete!
 3. Adjust cost function weights (emphasize different metrics)
 4. Try different random `--seed`
 
-**See also:** [How-To: Optimization Workflows](how-to/optimization-workflows.md) for advanced PSO tuning, custom cost functions, convergence diagnostics, and parallel execution strategies.
+**See also:**
+- [How-To: Optimization Workflows](how-to/optimization-workflows.md) - Advanced PSO tuning, custom cost functions, parallel execution
+- [Optimization API Guide](api/optimization.md) - PSOTuner, cost functions, gain bounds, convergence monitoring
 
 ---
 
@@ -477,7 +486,9 @@ print(df.to_markdown())  # Pretty table output
 | hybrid     | 0.2512 | 0.823 | 2.31              | 3.92          | 110.45         |
 ```
 
-**See also:** [How-To: Result Analysis](how-to/result-analysis.md) for detailed metrics interpretation, statistical analysis, visualization techniques, and data export formats.
+**See also:**
+- [How-To: Result Analysis](how-to/result-analysis.md) - Metrics interpretation, statistical analysis, visualization
+- [Utilities API Guide](api/utilities.md) - Validation, monitoring, analysis tools, performance profiling
 
 ---
 
