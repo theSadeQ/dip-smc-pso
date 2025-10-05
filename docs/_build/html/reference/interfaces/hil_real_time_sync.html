@@ -495,6 +495,310 @@ This module provides real-time capabilities including high-priority scheduling,
 deadline monitoring, and timing constraint enforcement for deterministic
 control system execution.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="real-time-synchronization">
+<h3>Real-Time Synchronization<a class="headerlink" href="#real-time-synchronization" title="Link to this heading">¶</a></h3>
+<p>Maintain synchronized execution across plant and controller:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[|t_{\text{plant}} - t_{\text{controller}}| &lt; \delta_{\text{sync}}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\delta_{\text{sync}}\)</span> is the maximum allowable time skew (default: 1 ms).</p>
+</section>
+<section id="clock-synchronization">
+<h3>Clock Synchronization<a class="headerlink" href="#clock-synchronization" title="Link to this heading">¶</a></h3>
+<p><strong>Network Time Protocol (NTP) Adaptation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+t_{\text{offset}} &amp;= \frac{(t_2 - t_1) + (t_3 - t_4)}{2} \\
+t_{\text{latency}} &amp;= \frac{(t_4 - t_1) - (t_3 - t_2)}{2}
+\end{align}\end{split}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(t_1\)</span>: Client send time</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_2\)</span>: Server receive time</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_3\)</span>: Server send time</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_4\)</span>: Client receive time</p></li>
+</ul>
+</section>
+<section id="rate-synchronization">
+<h3>Rate Synchronization<a class="headerlink" href="#rate-synchronization" title="Link to this heading">¶</a></h3>
+<p>Synchronize simulation rates using PLL-style feedback:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta t_{\text{adjusted}} = \Delta t_{\text{nominal}} + K_p (t_{\text{ref}} - t_{\text{local}})\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(K_p\)</span>: Proportional gain for rate adjustment</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_{\text{ref}}\)</span>: Reference time from remote</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_{\text{local}}\)</span>: Local simulation time</p></li>
+</ul>
+</section>
+<section id="deadline-driven-scheduling">
+<h3>Deadline-Driven Scheduling<a class="headerlink" href="#deadline-driven-scheduling" title="Link to this heading">¶</a></h3>
+<p><strong>Earliest Deadline First (EDF) Policy:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Priority}(\text{Task}_i) = \frac{1}{D_i - t}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_i\)</span>: Deadline for task <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(t\)</span>: Current time</p></li>
+<li><p>Higher priority = earlier deadline</p></li>
+</ul>
+</section>
+<section id="timing-constraints">
+<h3>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Link to this heading">¶</a></h3>
+<p><strong>Hard Real-Time Constraint:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{exec}} + T_{\text{comm}} \leq \Delta t_{\text{control}}\]</div>
+</div>
+<p><strong>Jitter Bound:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[J = \max_k |t_k - t_{k-1} - \Delta t| &lt; J_{\text{max}}\]</div>
+</div>
+</section>
+<section id="synchronization-protocols">
+<h3>Synchronization Protocols<a class="headerlink" href="#synchronization-protocols" title="Link to this heading">¶</a></h3>
+<p><strong>Barrier Synchronization:</strong>
+All processes wait at barrier until all arrive:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\forall p \in \text{Processes} : t_p \geq t_{\text{barrier}}\]</div>
+</div>
+<p><strong>Lockstep Execution:</strong>
+Synchronize every control cycle:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Plant} &amp;: \text{step}(n) \rightarrow \text{wait}(n) \\
+\text{Controller} &amp;: \text{compute}(n) \rightarrow \text{signal}(n)
+\end{align}\end{split}\]</div>
+</div>
+</section>
+<section id="time-warp-algorithm">
+<h3>Time Warp Algorithm<a class="headerlink" href="#time-warp-algorithm" title="Link to this heading">¶</a></h3>
+<p>Optimistic synchronization with rollback:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Execute} &amp;: t_{\text{local}} &lt; t_{\text{virtual}} \\
+\text{Rollback} &amp;: \text{if } t_{\text{msg}} &lt; t_{\text{virtual}}
+\end{align}\end{split}\]</div>
+</div>
+<p><strong>Rollback Cost:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[C_{\text{rollback}} = C_{\text{restore}} + C_{\text{recompute}}\]</div>
+</div>
+</section>
+<section id="performance-monitoring">
+<h3>Performance Monitoring<a class="headerlink" href="#performance-monitoring" title="Link to this heading">¶</a></h3>
+<p><strong>Synchronization Quality Metrics:</strong></p>
+<ol class="arabic">
+<li><p><strong>Time Skew:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Skew} = |t_{\text{plant}} - t_{\text{controller}}|\]</div>
+</div>
+</li>
+<li><p><strong>Drift Rate:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Drift} = \frac{d}{dt}(t_{\text{plant}} - t_{\text{controller}})\]</div>
+</div>
+</li>
+<li><p><strong>Synchronization Efficiency:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\eta_{\text{sync}} = \frac{T_{\text{productive}}}{T_{\text{total}}}\]</div>
+</div>
+</li>
+</ol>
+<p><strong>Target Metrics:</strong></p>
+<ul class="simple">
+<li><p>Skew &lt; 1 ms</p></li>
+<li><p>Drift &lt; 100 ppm</p></li>
+<li><p>Efficiency &gt; 95%</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            sequenceDiagram
+    participant P as Plant
+    participant S as Sync Manager
+    participant C as Controller
+
+    Note over P,C: Synchronization Cycle
+
+    P-&gt;&gt;S: Send Timestamp t_p
+    C-&gt;&gt;S: Send Timestamp t_c
+    S-&gt;&gt;S: Compute Offset
+    S-&gt;&gt;P: Adjust Rate
+    S-&gt;&gt;C: Adjust Rate
+
+    Note over P,C: Execution Cycle
+
+    P-&gt;&gt;P: Step Dynamics
+    P-&gt;&gt;S: Wait at Barrier
+    C-&gt;&gt;C: Compute Control
+    C-&gt;&gt;S: Wait at Barrier
+    S-&gt;&gt;P: Release
+    S-&gt;&gt;C: Release
+
+    Note over P,C: Metrics Collection
+
+    S-&gt;&gt;S: Log Skew
+    S-&gt;&gt;S: Log Jitter
+    S-&gt;&gt;S: Check Violations
+        </div><p><strong>Synchronization Protocol:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Clock Sync Phase</strong>: Exchange timestamps and compute offset</p></li>
+<li><p><strong>Barrier Phase</strong>: Wait for all processes to reach synchronization point</p></li>
+<li><p><strong>Release Phase</strong>: All processes proceed together</p></li>
+<li><p><strong>Monitoring Phase</strong>: Track timing metrics and violations</p></li>
+</ol>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-synchronization">
+<h3>Example 1: Basic Synchronization<a class="headerlink" href="#example-1-basic-synchronization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.real_time_sync</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealTimeSync</span>
+
+<span class="c1"># Initialize synchronizer</span>
+<span class="n">sync</span> <span class="o">=</span> <span class="n">RealTimeSync</span><span class="p">(</span>
+    <span class="n">processes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;plant&quot;</span><span class="p">,</span> <span class="s2">&quot;controller&quot;</span><span class="p">],</span>
+    <span class="n">target_dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>  <span class="c1"># 10 ms control period</span>
+    <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.001</span>  <span class="c1"># 1 ms tolerance</span>
+<span class="p">)</span>
+
+<span class="c1"># Synchronize processes</span>
+<span class="n">sync</span><span class="o">.</span><span class="n">synchronize</span><span class="p">()</span>
+
+<span class="c1"># Plant and controller now running at same rate</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-clock-synchronization">
+<h3>Example 2: Clock Synchronization<a class="headerlink" href="#example-2-clock-synchronization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.real_time_sync</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClockSync</span>
+
+<span class="c1"># Create clock synchronizer</span>
+<span class="n">clock_sync</span> <span class="o">=</span> <span class="n">ClockSync</span><span class="p">()</span>
+
+<span class="c1"># Client-server clock sync</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">client_sync</span><span class="p">():</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># Send to server</span>
+    <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">get_timestamps</span><span class="p">()</span>
+    <span class="n">t4</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># Compute offset</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">clock_sync</span><span class="o">.</span><span class="n">compute_offset</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clock offset: </span><span class="si">{</span><span class="n">offset</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+
+<span class="n">client_sync</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-barrier-synchronization">
+<h3>Example 3: Barrier Synchronization<a class="headerlink" href="#example-3-barrier-synchronization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.real_time_sync</span><span class="w"> </span><span class="kn">import</span> <span class="n">BarrierSync</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
+
+<span class="c1"># Create barrier</span>
+<span class="n">barrier</span> <span class="o">=</span> <span class="n">BarrierSync</span><span class="p">(</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plant_process</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="c1"># Compute dynamics</span>
+        <span class="n">plant</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="c1"># Wait for controller</span>
+        <span class="n">barrier</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">controller_process</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="c1"># Compute control</span>
+        <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+        <span class="c1"># Wait for plant</span>
+        <span class="n">barrier</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="c1"># Run synchronized</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">plant_process</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">controller_process</span><span class="p">)</span>
+<span class="n">t1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">t2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="n">t2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-adaptive-rate-synchronization">
+<h3>Example 4: Adaptive Rate Synchronization<a class="headerlink" href="#example-4-adaptive-rate-synchronization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.real_time_sync</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSync</span>
+
+<span class="c1"># Adaptive synchronizer</span>
+<span class="n">sync</span> <span class="o">=</span> <span class="n">AdaptiveSync</span><span class="p">(</span>
+    <span class="n">kp</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># Proportional gain</span>
+    <span class="n">target_rate</span><span class="o">=</span><span class="mf">100.0</span>  <span class="c1"># 100 Hz</span>
+<span class="p">)</span>
+
+<span class="c1"># Plant loop with adaptive timing</span>
+<span class="n">plant_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># Step dynamics</span>
+    <span class="n">plant</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">dt_adjusted</span><span class="p">)</span>
+
+    <span class="c1"># Measure actual time</span>
+    <span class="n">actual_dt</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+    <span class="c1"># Adjust for next iteration</span>
+    <span class="n">dt_adjusted</span> <span class="o">=</span> <span class="n">sync</span><span class="o">.</span><span class="n">adjust_rate</span><span class="p">(</span><span class="n">actual_dt</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+
+    <span class="n">plant_time</span> <span class="o">+=</span> <span class="n">dt_adjusted</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-deadline-monitoring">
+<h3>Example 5: Deadline Monitoring<a class="headerlink" href="#example-5-deadline-monitoring" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.real_time_sync</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeadlineMonitor</span>
+
+<span class="c1"># Deadline monitor</span>
+<span class="n">monitor</span> <span class="o">=</span> <span class="n">DeadlineMonitor</span><span class="p">(</span>
+    <span class="n">deadline</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>  <span class="c1"># 10 ms deadline</span>
+    <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.001</span>  <span class="c1"># 1 ms tolerance</span>
+<span class="p">)</span>
+
+<span class="c1"># Control loop with deadline checking</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># Compute control</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># Check deadline</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">monitor</span><span class="o">.</span><span class="n">check_deadline</span><span class="p">(</span><span class="n">elapsed</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deadline violation at step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">elapsed</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+
+<span class="c1"># Report violations</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total violations: </span><span class="si">{</span><span class="n">monitor</span><span class="o">.</span><span class="n">violation_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Violation rate: </span><span class="si">{</span><span class="n">monitor</span><span class="o">.</span><span class="n">violation_rate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1787,6 +2091,26 @@ CPU affinity control, and real-time priority management.</p>
             <ul>
 <li><a class="reference internal" href="#">interfaces.hil.real_time_sync</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#real-time-synchronization">Real-Time Synchronization</a></li>
+<li><a class="reference internal" href="#clock-synchronization">Clock Synchronization</a></li>
+<li><a class="reference internal" href="#rate-synchronization">Rate Synchronization</a></li>
+<li><a class="reference internal" href="#deadline-driven-scheduling">Deadline-Driven Scheduling</a></li>
+<li><a class="reference internal" href="#timing-constraints">Timing Constraints</a></li>
+<li><a class="reference internal" href="#synchronization-protocols">Synchronization Protocols</a></li>
+<li><a class="reference internal" href="#time-warp-algorithm">Time Warp Algorithm</a></li>
+<li><a class="reference internal" href="#performance-monitoring">Performance Monitoring</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-synchronization">Example 1: Basic Synchronization</a></li>
+<li><a class="reference internal" href="#example-2-clock-synchronization">Example 2: Clock Synchronization</a></li>
+<li><a class="reference internal" href="#example-3-barrier-synchronization">Example 3: Barrier Synchronization</a></li>
+<li><a class="reference internal" href="#example-4-adaptive-rate-synchronization">Example 4: Adaptive Rate Synchronization</a></li>
+<li><a class="reference internal" href="#example-5-deadline-monitoring">Example 5: Deadline Monitoring</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#schedulingpolicy"><code class="docutils literal notranslate"><span class="pre">SchedulingPolicy</span></code></a><ul>
@@ -1892,6 +2216,10 @@ CPU affinity control, and real-time priority management.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

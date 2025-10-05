@@ -495,6 +495,322 @@ This module provides comprehensive data logging capabilities including
 high-frequency data collection, buffering, compression, and export
 for HIL system analysis and validation.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="data-logging-architecture">
+<h3>Data Logging Architecture<a class="headerlink" href="#data-logging-architecture" title="Link to this heading">¶</a></h3>
+<p>Capture comprehensive simulation data:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{D} = \{(t_k, \vec{x}_k, u_k, \vec{m}_k)\}_{k=0}^{N}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(t_k\)</span>: Timestamp</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{x}_k\)</span>: State vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(u_k\)</span>: Control input</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{m}_k\)</span>: Metadata (controller state, diagnostics)</p></li>
+</ul>
+</section>
+<section id="sampling-strategies">
+<h3>Sampling Strategies<a class="headerlink" href="#sampling-strategies" title="Link to this heading">¶</a></h3>
+<p><strong>1. Fixed-Rate Sampling:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t_{k+1} = t_k + \Delta t_{\text{log}}\]</div>
+</div>
+<p><strong>2. Event-Triggered Sampling:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Log}(t) \Leftrightarrow \|\vec{x}(t) - \vec{x}(t_{\text{last}})\| &gt; \epsilon\]</div>
+</div>
+<p><strong>3. Adaptive Sampling:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\Delta t_{\text{log}} = \begin{cases}
+\Delta t_{\text{min}} &amp; \text{if } \|\dot{\vec{x}}\| &gt; v_{\text{thresh}} \\
+\Delta t_{\text{max}} &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+</div>
+</section>
+<section id="data-compression">
+<h3>Data Compression<a class="headerlink" href="#data-compression" title="Link to this heading">¶</a></h3>
+<p><strong>Lossless Compression:</strong></p>
+<ul class="simple">
+<li><p>Delta encoding: Store differences instead of absolute values</p></li>
+<li><p>Run-length encoding: Compress repeated values</p></li>
+</ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta \vec{x}_k = \vec{x}_k - \vec{x}_{k-1}\]</div>
+</div>
+<p><strong>Lossy Compression:</strong></p>
+<ul class="simple">
+<li><p>Quantization: Reduce precision</p></li>
+<li><p>Downsampling: Reduce temporal resolution</p></li>
+</ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{\text{quantized}} = \text{round}\left(\frac{\vec{x}}{q}\right) \cdot q\]</div>
+</div>
+</section>
+<section id="storage-formats">
+<h3>Storage Formats<a class="headerlink" href="#storage-formats" title="Link to this heading">¶</a></h3>
+<p><strong>1. CSV (Human-Readable):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">time</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">theta1</span><span class="p">,</span><span class="n">theta2</span><span class="p">,</span><span class="n">x_dot</span><span class="p">,</span><span class="n">theta1_dot</span><span class="p">,</span><span class="n">theta2_dot</span><span class="p">,</span><span class="n">control</span>
+<span class="mf">0.000</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span>
+<span class="mf">0.010</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.099</span><span class="p">,</span><span class="o">-</span><span class="mf">0.049</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.02</span><span class="p">,</span><span class="mf">12.5</span>
+</pre></div>
+</div>
+<p><strong>2. HDF5 (High-Performance):</strong></p>
+<ul class="simple">
+<li><p>Hierarchical structure</p></li>
+<li><p>Chunked storage for efficient I/O</p></li>
+<li><p>Built-in compression (gzip, lzf)</p></li>
+</ul>
+<p><strong>3. Parquet (Columnar):</strong></p>
+<ul class="simple">
+<li><p>Efficient for analytical queries</p></li>
+<li><p>Schema evolution support</p></li>
+<li><p>Good compression ratios</p></li>
+</ul>
+</section>
+<section id="replay-functionality">
+<h3>Replay Functionality<a class="headerlink" href="#replay-functionality" title="Link to this heading">¶</a></h3>
+<p><strong>State Reconstruction:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}(t) = \vec{x}(t_k) + \int_{t_k}^{t} f(\vec{x}(\tau), u(\tau)) d\tau\]</div>
+</div>
+<p><strong>Control Reconstruction:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u(t) = u(t_k), \quad \forall t \in [t_k, t_{k+1})\]</div>
+</div>
+<p>Zero-order hold interpolation.</p>
+</section>
+<section id="performance-metrics">
+<h3>Performance Metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>1. Logging Overhead:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Overhead} = \frac{T_{\text{logging}}}{T_{\text{total}}} \times 100\%\]</div>
+</div>
+<p><strong>2. Storage Efficiency:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Compression Ratio} = \frac{\text{Raw Size}}{\text{Compressed Size}}\]</div>
+</div>
+<p><strong>3. I/O Throughput:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Throughput} = \frac{\text{Data Volume}}{\text{Write Time}} \quad [\text{MB/s}]\]</div>
+</div>
+</section>
+<section id="real-time-constraints">
+<h3>Real-Time Constraints<a class="headerlink" href="#real-time-constraints" title="Link to this heading">¶</a></h3>
+<p><strong>Logging Deadline:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{write}} &lt; \Delta t_{\text{control}}\]</div>
+</div>
+<p><strong>Buffer Management:</strong></p>
+<ul class="simple">
+<li><p>Ring buffer: Fixed-size circular buffer</p></li>
+<li><p>Double buffering: Write while logging</p></li>
+<li><p>Flush policy: Periodic or threshold-based</p></li>
+</ul>
+<p><strong>Buffering Strategy:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Flush} \Leftrightarrow (\text{Buffer Full}) \lor (t - t_{\text{last\_flush}} &gt; T_{\text{flush}})\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Simulation Data] --&gt; B{Sampling Strategy}
+    B --&gt;|Fixed Rate| C[Fixed Sampler]
+    B --&gt;|Event Trigger| D[Event Sampler]
+    B --&gt;|Adaptive| E[Adaptive Sampler]
+
+    C --&gt; F[Data Buffer]
+    D --&gt; F
+    E --&gt; F
+
+    F --&gt; G{Buffer Full?}
+    G --&gt;|Yes| H[Flush to Disk]
+    G --&gt;|No| F
+
+    H --&gt; I{Format}
+    I --&gt;|CSV| J[CSV Writer]
+    I --&gt;|HDF5| K[HDF5 Writer]
+    I --&gt;|Parquet| L[Parquet Writer]
+
+    J --&gt; M[File Storage]
+    K --&gt; M
+    L --&gt; M
+
+    M --&gt; N[Replay System]
+    N --&gt; O[State Reconstruction]
+    N --&gt; P[Control Reconstruction]
+
+    style F fill:#9cf
+    style H fill:#ff9
+    style M fill:#f9f
+        </div><p><strong>Logging Pipeline:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Data Sampling</strong>: Choose sampling strategy based on requirements</p></li>
+<li><p><strong>Buffering</strong>: Store data in memory buffer for efficiency</p></li>
+<li><p><strong>Flushing</strong>: Write to disk when buffer full or timeout</p></li>
+<li><p><strong>Serialization</strong>: Convert to chosen format (CSV, HDF5, Parquet)</p></li>
+<li><p><strong>Storage</strong>: Save to disk for later analysis</p></li>
+<li><p><strong>Replay</strong>: Reconstruct simulation from logged data</p></li>
+</ol>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-csv-logging">
+<h3>Example 1: Basic CSV Logging<a class="headerlink" href="#example-1-basic-csv-logging" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.data_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLogger</span>
+
+<span class="c1"># Create logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">DataLogger</span><span class="p">(</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;hil_data.csv&quot;</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">,</span>
+    <span class="n">sample_rate</span><span class="o">=</span><span class="mf">100.0</span>  <span class="c1"># 100 Hz</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulation with logging</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># Log data</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="o">=</span><span class="n">control</span><span class="p">)</span>
+
+<span class="c1"># Close logger</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data saved to hil_data.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-hdf5-high-performance-logging">
+<h3>Example 2: HDF5 High-Performance Logging<a class="headerlink" href="#example-2-hdf5-high-performance-logging" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.data_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">HDF5Logger</span>
+
+<span class="c1"># HDF5 logger with compression</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">HDF5Logger</span><span class="p">(</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;hil_data.h5&quot;</span><span class="p">,</span>
+    <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span>
+    <span class="n">compression_opts</span><span class="o">=</span><span class="mi">9</span>  <span class="c1"># Maximum compression</span>
+<span class="p">)</span>
+
+<span class="c1"># Create datasets</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;control&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="c1"># Log simulation data</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;control&quot;</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-event-triggered-logging">
+<h3>Example 3: Event-Triggered Logging<a class="headerlink" href="#example-3-event-triggered-logging" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.data_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventLogger</span>
+
+<span class="c1"># Event-based logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">EventLogger</span><span class="p">(</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;events.csv&quot;</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.1</span>  <span class="c1"># Log when state changes &gt; 0.1</span>
+<span class="p">)</span>
+
+<span class="n">last_state</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+
+    <span class="c1"># Check if significant change</span>
+    <span class="k">if</span> <span class="n">last_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">state_change</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">state</span> <span class="o">-</span> <span class="n">last_state</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">state_change</span> <span class="o">&gt;</span> <span class="n">logger</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="n">last_state</span> <span class="o">=</span> <span class="n">state</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Logged </span><span class="si">{</span><span class="n">logger</span><span class="o">.</span><span class="n">event_count</span><span class="si">}</span><span class="s2"> events&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-multi-format-logging">
+<h3>Example 4: Multi-Format Logging<a class="headerlink" href="#example-4-multi-format-logging" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.data_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiLogger</span>
+
+<span class="c1"># Log to multiple formats simultaneously</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">MultiLogger</span><span class="p">(</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;hil_data.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;hil_data.h5&quot;</span><span class="p">,</span> <span class="s2">&quot;hdf5&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;hil_data.parquet&quot;</span><span class="p">,</span> <span class="s2">&quot;parquet&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># Log to all formats</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">log_all</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="o">=</span><span class="n">control</span><span class="p">)</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">close_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-replay-from-logged-data">
+<h3>Example 5: Replay from Logged Data<a class="headerlink" href="#example-5-replay-from-logged-data" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.data_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLogger</span><span class="p">,</span> <span class="n">Replay</span>
+
+<span class="c1"># Log data</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">DataLogger</span><span class="p">(</span><span class="s2">&quot;original.csv&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="o">=</span><span class="n">control</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Replay simulation</span>
+<span class="n">replay</span> <span class="o">=</span> <span class="n">Replay</span><span class="p">(</span><span class="s2">&quot;original.csv&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">replay</span><span class="p">:</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;control&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Reconstruct dynamics</span>
+    <span class="n">reconstructed_state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+
+    <span class="c1"># Compare original vs reconstructed</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">state</span> <span class="o">-</span> <span class="n">reconstructed_state</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reconstruction error at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Replay complete&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1878,6 +2194,25 @@ with support for multiple formats and real-time compression.</p>
             <ul>
 <li><a class="reference internal" href="#">interfaces.hil.data_logging</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#data-logging-architecture">Data Logging Architecture</a></li>
+<li><a class="reference internal" href="#sampling-strategies">Sampling Strategies</a></li>
+<li><a class="reference internal" href="#data-compression">Data Compression</a></li>
+<li><a class="reference internal" href="#storage-formats">Storage Formats</a></li>
+<li><a class="reference internal" href="#replay-functionality">Replay Functionality</a></li>
+<li><a class="reference internal" href="#performance-metrics">Performance Metrics</a></li>
+<li><a class="reference internal" href="#real-time-constraints">Real-Time Constraints</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-csv-logging">Example 1: Basic CSV Logging</a></li>
+<li><a class="reference internal" href="#example-2-hdf5-high-performance-logging">Example 2: HDF5 High-Performance Logging</a></li>
+<li><a class="reference internal" href="#example-3-event-triggered-logging">Example 3: Event-Triggered Logging</a></li>
+<li><a class="reference internal" href="#example-4-multi-format-logging">Example 4: Multi-Format Logging</a></li>
+<li><a class="reference internal" href="#example-5-replay-from-logged-data">Example 5: Replay from Logged Data</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#logformat"><code class="docutils literal notranslate"><span class="pre">LogFormat</span></code></a><ul>
@@ -1955,6 +2290,10 @@ with support for multiple formats and real-time compression.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

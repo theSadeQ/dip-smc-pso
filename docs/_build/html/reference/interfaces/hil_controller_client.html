@@ -492,6 +492,300 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p><em>No module docstring available.</em></p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="remote-controller-execution">
+<h3>Remote Controller Execution<a class="headerlink" href="#remote-controller-execution" title="Link to this heading">¶</a></h3>
+<p>The client executes control law remotely with network delay:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u(t) = \pi(\tilde{\vec{x}}(t - \tau))\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pi\)</span>: Controller policy (SMC, MPC, etc.)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{\vec{x}}\)</span>: Noisy state measurement from plant server</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau\)</span>: Network latency (round-trip delay)</p></li>
+</ul>
+</section>
+<section id="request-response-cycle">
+<h3>Request-Response Cycle<a class="headerlink" href="#request-response-cycle" title="Link to this heading">¶</a></h3>
+<p>Synchronous communication pattern:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+t_0 &amp;: \text{Send state request} \\
+t_1 &amp;= t_0 + \tau_{\text{req}}: \text{Receive state from server} \\
+t_2 &amp;= t_1 + \Delta t_{\text{compute}}: \text{Compute control} \\
+t_3 &amp;= t_2 + \tau_{\text{resp}}: \text{Send control to server}
+\end{align}\end{split}\]</div>
+</div>
+<p><strong>Timing Budget:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau_{\text{req}} + \Delta t_{\text{compute}} + \tau_{\text{resp}} &lt; \Delta t_{\text{control}}\]</div>
+</div>
+</section>
+<section id="control-delay-effects">
+<h3>Control Delay Effects<a class="headerlink" href="#control-delay-effects" title="Link to this heading">¶</a></h3>
+<p>Delayed control input affects stability margins:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{\vec{x}}(t) = f(\vec{x}(t), u(t - \tau))\]</div>
+</div>
+<p><strong>Smith Predictor Compensation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u(t) = \pi(\hat{\vec{x}}(t + \tau))\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\hat{\vec{x}}\)</span> is predicted state accounting for delay.</p>
+</section>
+<section id="fallback-controller">
+<h3>Fallback Controller<a class="headerlink" href="#fallback-controller" title="Link to this heading">¶</a></h3>
+<p>PD controller for emergency scenarios:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u_{\text{fallback}} = -K_p \theta_1 - K_d \dot{\theta}_1\]</div>
+</div>
+<p><strong>Failover Conditions:</strong></p>
+<ol class="arabic simple">
+<li><p>Network timeout (&gt;1 second)</p></li>
+<li><p>Server connection lost</p></li>
+<li><p>Controller computation failure</p></li>
+</ol>
+</section>
+<section id="message-serialization">
+<h3>Message Serialization<a class="headerlink" href="#message-serialization" title="Link to this heading">¶</a></h3>
+<p>JSON-based state representation:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">,</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="kc">ta</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="kc">ta</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">x_do</span><span class="kc">t</span><span class="p">,</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="kc">ta</span><span class="mi">1</span><span class="err">_do</span><span class="kc">t</span><span class="p">,</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="kc">ta</span><span class="mi">2</span><span class="err">_do</span><span class="kc">t</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.123</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;control&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Serialization Performance:</strong></p>
+<ul class="simple">
+<li><p>Encode time: ~0.3 ms</p></li>
+<li><p>Decode time: ~0.2 ms</p></li>
+<li><p>Message size: ~150 bytes</p></li>
+</ul>
+</section>
+<section id="client-architecture">
+<h3>Client Architecture<a class="headerlink" href="#client-architecture" title="Link to this heading">¶</a></h3>
+<p><strong>Event Loop Pattern:</strong></p>
+<ol class="arabic simple">
+<li><p>Request state from server</p></li>
+<li><p>Wait for response (with timeout)</p></li>
+<li><p>Compute control action</p></li>
+<li><p>Send control to server</p></li>
+<li><p>Log data and metrics</p></li>
+<li><p>Repeat until simulation complete</p></li>
+</ol>
+<p><strong>Error Recovery:</strong></p>
+<ul class="simple">
+<li><p>Retry policy: 3 attempts with exponential backoff</p></li>
+<li><p>Graceful degradation: Switch to fallback controller</p></li>
+<li><p>Clean shutdown: Save partial results on failure</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Connect to Server] --&gt; B[Initialize Controller]
+    B --&gt; C{Simulation Loop}
+    C --&gt; D[Request State]
+    D --&gt; E[Receive State]
+    E --&gt; F[Compute Control]
+    F --&gt; G[Send Control]
+    G --&gt; H[Log Data]
+    H --&gt; I{More Steps?}
+    I --&gt;|Yes| C
+    I --&gt;|No| J[Disconnect]
+    J --&gt; K[Save Results]
+
+    E --&gt; L{Timeout?}
+    L --&gt;|Yes| M[Fallback Controller]
+    L --&gt;|No| F
+    M --&gt; G
+
+    F --&gt; N[Controller Logic]
+    N --&gt; O[SMC/MPC/PID]
+
+    style F fill:#9cf
+    style M fill:#ff9
+    style N fill:#f9f
+    style K fill:#9f9
+        </div><p><strong>Control Loop:</strong></p>
+<ol class="arabic simple">
+<li><p>Request current state from plant server</p></li>
+<li><p>Wait for state response (with timeout)</p></li>
+<li><p>Compute control action using controller</p></li>
+<li><p>Send control input to server</p></li>
+<li><p>Log data for analysis</p></li>
+<li><p>Repeat until simulation complete</p></li>
+</ol>
+<p><strong>Fault Tolerance:</strong></p>
+<ul class="simple">
+<li><p>Timeout detection: Switch to fallback PD controller</p></li>
+<li><p>Retry logic: 3 attempts with exponential backoff</p></li>
+<li><p>Graceful degradation: Save partial results on failure</p></li>
+</ul>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-controller-client">
+<h3>Example 1: Basic Controller Client<a class="headerlink" href="#example-1-basic-controller-client" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">HILControllerClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_config</span>
+
+<span class="c1"># Load configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+
+<span class="c1"># Connect to HIL server</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HILControllerClient</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">plant_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Auto-assign port</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">results_path</span><span class="o">=</span><span class="s2">&quot;hil_results.json&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Run HIL simulation</span>
+<span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HIL simulation complete, results saved to hil_results.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-custom-controller-integration">
+<h3>Example 2: Custom Controller Integration<a class="headerlink" href="#example-2-custom-controller-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">HILControllerClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
+
+<span class="c1"># Create custom controller</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Client with custom controller</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HILControllerClient</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">plant_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;192.168.1.100&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>  <span class="c1"># Remote server</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="mi">6666</span><span class="p">),</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span>
+<span class="p">)</span>
+
+<span class="c1"># Override controller</span>
+<span class="n">client</span><span class="o">.</span><span class="n">_controller</span> <span class="o">=</span> <span class="n">controller</span>
+
+<span class="c1"># Run simulation</span>
+<span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-fallback-controller-testing">
+<h3>Example 3: Fallback Controller Testing<a class="headerlink" href="#example-3-fallback-controller-testing" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">HILControllerClient</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Client with aggressive timeout</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HILControllerClient</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">plant_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">recv_timeout_s</span><span class="o">=</span><span class="mf">0.5</span>  <span class="c1"># 500 ms timeout</span>
+<span class="p">)</span>
+
+<span class="c1"># Monitor fallback activations</span>
+<span class="n">fallback_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">original_run</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">run</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">monitored_run</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">fallback_count</span>
+    <span class="c1"># Count timeout events</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">original_run</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
+        <span class="n">fallback_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fallback controller activated: </span><span class="si">{</span><span class="n">fallback_count</span><span class="si">}</span><span class="s2"> times&quot;</span><span class="p">)</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="n">monitored_run</span>
+<span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total fallback activations: </span><span class="si">{</span><span class="n">fallback_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-latency-measurement">
+<h3>Example 4: Latency Measurement<a class="headerlink" href="#example-4-latency-measurement" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">HILControllerClient</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Latency tracking</span>
+<span class="n">latencies</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Override communication for measurement</span>
+<span class="n">original_send_receive</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">_send_receive</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">measured_send_receive</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">original_send_receive</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="n">latency</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1"># ms</span>
+    <span class="n">latencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">latency</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">_send_receive</span> <span class="o">=</span> <span class="n">measured_send_receive</span>
+<span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Analyze latencies</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean latency: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">latencies</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P95 latency: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">latencies</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P99 latency: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">latencies</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-robust-client-with-retry-logic">
+<h3>Example 5: Robust Client with Retry Logic<a class="headerlink" href="#example-5-robust-client-with-retry-logic" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">HILControllerClient</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_client_with_retry</span><span class="p">(</span><span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="n">HILControllerClient</span><span class="p">(</span>
+                <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+                <span class="n">plant_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+                <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                <span class="n">steps</span><span class="o">=</span><span class="mi">5000</span>
+            <span class="p">)</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success on attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">except</span> <span class="ne">ConnectionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connection failed (attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">wait_time</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span>  <span class="c1"># Exponential backoff</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrying in </span><span class="si">{</span><span class="n">wait_time</span><span class="si">}</span><span class="s2"> seconds...&quot;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All retry attempts failed&quot;</span><span class="p">)</span>
+
+<span class="n">run_client_with_retry</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1190,6 +1484,24 @@ unintended controller.</p>
             <ul>
 <li><a class="reference internal" href="#">interfaces.hil.controller_client</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#remote-controller-execution">Remote Controller Execution</a></li>
+<li><a class="reference internal" href="#request-response-cycle">Request-Response Cycle</a></li>
+<li><a class="reference internal" href="#control-delay-effects">Control Delay Effects</a></li>
+<li><a class="reference internal" href="#fallback-controller">Fallback Controller</a></li>
+<li><a class="reference internal" href="#message-serialization">Message Serialization</a></li>
+<li><a class="reference internal" href="#client-architecture">Client Architecture</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-controller-client">Example 1: Basic Controller Client</a></li>
+<li><a class="reference internal" href="#example-2-custom-controller-integration">Example 2: Custom Controller Integration</a></li>
+<li><a class="reference internal" href="#example-3-fallback-controller-testing">Example 3: Fallback Controller Testing</a></li>
+<li><a class="reference internal" href="#example-4-latency-measurement">Example 4: Latency Measurement</a></li>
+<li><a class="reference internal" href="#example-5-robust-client-with-retry-logic">Example 5: Robust Client with Retry Logic</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#fallbackpdcontroller"><code class="docutils literal notranslate"><span class="pre">_FallbackPDController</span></code></a><ul>
@@ -1256,6 +1568,10 @@ unintended controller.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

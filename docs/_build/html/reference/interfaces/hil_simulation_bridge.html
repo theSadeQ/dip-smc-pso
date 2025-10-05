@@ -495,6 +495,290 @@ This module provides seamless integration between hardware components and
 simulation models, enabling hybrid testing where some components are real
 hardware and others are simulated models.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="bridge-architecture-pattern">
+<h3>Bridge Architecture Pattern<a class="headerlink" href="#bridge-architecture-pattern" title="Link to this heading">¶</a></h3>
+<p>The simulation bridge decouples plant and controller execution:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Plant} \xleftrightarrow{\text{Bridge}} \text{Controller}\]</div>
+</div>
+<p><strong>Key Properties:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Asynchrony</strong>: Plant and controller run at different rates</p></li>
+<li><p><strong>Location transparency</strong>: Local or remote execution</p></li>
+<li><p><strong>Protocol abstraction</strong>: TCP, UDP, shared memory, etc.</p></li>
+</ol>
+</section>
+<section id="data-exchange-protocol">
+<h3>Data Exchange Protocol<a class="headerlink" href="#data-exchange-protocol" title="Link to this heading">¶</a></h3>
+<p>Bi-directional message passing:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+M_{\text{state}} &amp;: \text{Plant} \rightarrow \text{Controller} : (\vec{x}, t, \text{metadata}) \\
+M_{\text{control}} &amp;: \text{Controller} \rightarrow \text{Plant} : (u, t, \text{flags})
+\end{align}\end{split}\]</div>
+</div>
+<p><strong>Message Synchronization:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[|t_{\text{state}} - t_{\text{control}}| &lt; \epsilon\]</div>
+</div>
+<p>Ensures temporal consistency between state and control.</p>
+</section>
+<section id="communication-middleware">
+<h3>Communication Middleware<a class="headerlink" href="#communication-middleware" title="Link to this heading">¶</a></h3>
+<p><strong>Transport Layer Options:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>TCP</strong>: Reliable, ordered delivery (default)</p></li>
+<li><p><strong>UDP</strong>: Low-latency, unreliable</p></li>
+<li><p><strong>Shared Memory</strong>: Zero-copy for co-located processes</p></li>
+</ol>
+<p><strong>Protocol Selection Criteria:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Protocol} = \begin{cases}
+\text{TCP} &amp; \text{if reliability required} \\
+\text{UDP} &amp; \text{if latency critical} \\
+\text{Shared Mem} &amp; \text{if same machine}
+\end{cases}\end{split}\]</div>
+</div>
+</section>
+<section id="state-interpolation">
+<h3>State Interpolation<a class="headerlink" href="#state-interpolation" title="Link to this heading">¶</a></h3>
+<p>For asynchronous execution, interpolate state:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}(t_{\text{req}}) \approx \vec{x}(t_k) + \frac{t_{\text{req}} - t_k}{t_{k+1} - t_k} (\vec{x}(t_{k+1}) - \vec{x}(t_k))\]</div>
+</div>
+<p><strong>Linear Interpolation Accuracy:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\|\vec{x}_{\text{true}} - \vec{x}_{\text{interp}}\| \leq C \|\Delta t\|^2\]</div>
+</div>
+</section>
+<section id="fault-tolerance">
+<h3>Fault Tolerance<a class="headerlink" href="#fault-tolerance" title="Link to this heading">¶</a></h3>
+<p><strong>Heartbeat Mechanism:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Health}(t) = \begin{cases}
+\text{OK} &amp; \text{if } t - t_{\text{last\_msg}} &lt; T_{\text{heartbeat}} \\
+\text{TIMEOUT} &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+</div>
+<p><strong>Automatic Reconnection:</strong></p>
+<ul class="simple">
+<li><p>Exponential backoff: <span class="math notranslate nohighlight">\(T_{\text{retry}} = T_0 \cdot 2^n\)</span></p></li>
+<li><p>Maximum retries: 5 attempts</p></li>
+<li><p>Circuit breaker: Disable after persistent failures</p></li>
+</ul>
+</section>
+<section id="performance-metrics">
+<h3>Performance Metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Throughput:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Throughput} = \frac{\text{Messages}}{\text{Time}} \quad [\text{msg/s}]\]</div>
+</div>
+<p><strong>Latency Percentiles:</strong></p>
+<ul class="simple">
+<li><p>P50: Median latency (typical)</p></li>
+<li><p>P95: 95th percentile (good)</p></li>
+<li><p>P99: 99th percentile (worst-case)</p></li>
+</ul>
+</section>
+<section id="bridge-implementation">
+<h3>Bridge Implementation<a class="headerlink" href="#bridge-implementation" title="Link to this heading">¶</a></h3>
+<p><strong>Thread Model:</strong></p>
+<ul class="simple">
+<li><p><strong>Receiver thread</strong>: Listens for incoming messages</p></li>
+<li><p><strong>Sender thread</strong>: Sends outgoing messages</p></li>
+<li><p><strong>Main thread</strong>: Orchestrates simulation logic</p></li>
+</ul>
+<p><strong>Thread Safety:</strong></p>
+<ul class="simple">
+<li><p>Lock-free queues for message passing</p></li>
+<li><p>Atomic operations for shared state</p></li>
+<li><p>No blocking operations in critical path</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph LR
+    A[Plant Server] &lt;--&gt;|State| B[Bridge]
+    B &lt;--&gt;|Control| A
+    B &lt;--&gt;|State| C[Controller Client]
+    C &lt;--&gt;|Control| B
+
+    B --&gt; D[Protocol Handler]
+    D --&gt; E[TCP Handler]
+    D --&gt; F[UDP Handler]
+    D --&gt; G[Shared Mem Handler]
+
+    B --&gt; H[State Buffer]
+    B --&gt; I[Control Buffer]
+
+    H --&gt; J[Interpolator]
+    I --&gt; K[Extrapolator]
+
+    style B fill:#9cf
+    style D fill:#ff9
+    style J fill:#f9f
+        </div><p><strong>Bridge Responsibilities:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Protocol Translation</strong>: Convert between different transport protocols</p></li>
+<li><p><strong>State Management</strong>: Buffer and interpolate state data</p></li>
+<li><p><strong>Timing Coordination</strong>: Synchronize plant and controller clocks</p></li>
+<li><p><strong>Fault Handling</strong>: Detect timeouts and connection failures</p></li>
+<li><p><strong>Logging</strong>: Record all messages for debugging</p></li>
+</ol>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-bridge-setup">
+<h3>Example 1: Basic Bridge Setup<a class="headerlink" href="#example-1-basic-bridge-setup" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.simulation_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBridge</span>
+
+<span class="c1"># Initialize bridge</span>
+<span class="n">bridge</span> <span class="o">=</span> <span class="n">SimulationBridge</span><span class="p">(</span>
+    <span class="n">server_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">client_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">6666</span><span class="p">),</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tcp&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Start bridge</span>
+<span class="n">bridge</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Bridge runs until shutdown</span>
+<span class="n">bridge</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-protocol-translation">
+<h3>Example 2: Protocol Translation<a class="headerlink" href="#example-2-protocol-translation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.simulation_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBridge</span>
+
+<span class="c1"># TCP server, UDP client</span>
+<span class="n">bridge</span> <span class="o">=</span> <span class="n">SimulationBridge</span><span class="p">(</span>
+    <span class="n">server_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">client_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">6666</span><span class="p">),</span>
+    <span class="n">server_protocol</span><span class="o">=</span><span class="s2">&quot;tcp&quot;</span><span class="p">,</span>
+    <span class="n">client_protocol</span><span class="o">=</span><span class="s2">&quot;udp&quot;</span>
+<span class="p">)</span>
+
+<span class="n">bridge</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-state-interpolation">
+<h3>Example 3: State Interpolation<a class="headerlink" href="#example-3-state-interpolation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.simulation_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBridge</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Bridge with interpolation</span>
+<span class="n">bridge</span> <span class="o">=</span> <span class="n">SimulationBridge</span><span class="p">(</span>
+    <span class="n">server_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">client_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">6666</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Enable state interpolation</span>
+<span class="n">bridge</span><span class="o">.</span><span class="n">enable_interpolation</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+
+<span class="c1"># Custom interpolation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">custom_interpolator</span><span class="p">(</span><span class="n">state_buffer</span><span class="p">,</span> <span class="n">t_req</span><span class="p">):</span>
+    <span class="c1"># Find surrounding states</span>
+    <span class="n">t_prev</span><span class="p">,</span> <span class="n">x_prev</span> <span class="o">=</span> <span class="n">state_buffer</span><span class="o">.</span><span class="n">get_before</span><span class="p">(</span><span class="n">t_req</span><span class="p">)</span>
+    <span class="n">t_next</span><span class="p">,</span> <span class="n">x_next</span> <span class="o">=</span> <span class="n">state_buffer</span><span class="o">.</span><span class="n">get_after</span><span class="p">(</span><span class="n">t_req</span><span class="p">)</span>
+
+    <span class="c1"># Linear interpolation</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_req</span> <span class="o">-</span> <span class="n">t_prev</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">t_next</span> <span class="o">-</span> <span class="n">t_prev</span><span class="p">)</span>
+    <span class="n">x_interp</span> <span class="o">=</span> <span class="n">x_prev</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_next</span> <span class="o">-</span> <span class="n">x_prev</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x_interp</span>
+
+<span class="n">bridge</span><span class="o">.</span><span class="n">set_interpolator</span><span class="p">(</span><span class="n">custom_interpolator</span><span class="p">)</span>
+<span class="n">bridge</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-fault-tolerant-bridge">
+<h3>Example 4: Fault-Tolerant Bridge<a class="headerlink" href="#example-4-fault-tolerant-bridge" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.simulation_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBridge</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Configure logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;SimulationBridge&#39;</span><span class="p">)</span>
+
+<span class="c1"># Bridge with fault tolerance</span>
+<span class="n">bridge</span> <span class="o">=</span> <span class="n">SimulationBridge</span><span class="p">(</span>
+    <span class="n">server_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">client_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">6666</span><span class="p">),</span>
+    <span class="n">heartbeat_interval</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># 1 second heartbeat</span>
+    <span class="n">reconnect_attempts</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+
+<span class="c1"># Monitor health</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">health_callback</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;TIMEOUT&quot;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Connection timeout detected&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;RECONNECTING&quot;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Attempting reconnection...&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Connection healthy&quot;</span><span class="p">)</span>
+
+<span class="n">bridge</span><span class="o">.</span><span class="n">set_health_callback</span><span class="p">(</span><span class="n">health_callback</span><span class="p">)</span>
+<span class="n">bridge</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-monitoring">
+<h3>Example 5: Performance Monitoring<a class="headerlink" href="#example-5-performance-monitoring" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.simulation_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBridge</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Bridge with metrics</span>
+<span class="n">bridge</span> <span class="o">=</span> <span class="n">SimulationBridge</span><span class="p">(</span>
+    <span class="n">server_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">client_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">6666</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Metrics collection</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;throughput&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;latency&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;packet_loss&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="c1"># Override message handler for monitoring</span>
+<span class="n">original_forward</span> <span class="o">=</span> <span class="n">bridge</span><span class="o">.</span><span class="n">_forward_message</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">monitored_forward</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">original_forward</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="n">latency</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;latency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">latency</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;packet_loss&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">raise</span>
+
+<span class="n">bridge</span><span class="o">.</span><span class="n">_forward_message</span> <span class="o">=</span> <span class="n">monitored_forward</span>
+<span class="n">bridge</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Report metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean latency: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;latency&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Packet loss: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;packet_loss&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> packets&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -2125,6 +2409,25 @@ ensuring proper timing, data flow, and synchronization.</p>
             <ul>
 <li><a class="reference internal" href="#">interfaces.hil.simulation_bridge</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#bridge-architecture-pattern">Bridge Architecture Pattern</a></li>
+<li><a class="reference internal" href="#data-exchange-protocol">Data Exchange Protocol</a></li>
+<li><a class="reference internal" href="#communication-middleware">Communication Middleware</a></li>
+<li><a class="reference internal" href="#state-interpolation">State Interpolation</a></li>
+<li><a class="reference internal" href="#fault-tolerance">Fault Tolerance</a></li>
+<li><a class="reference internal" href="#performance-metrics">Performance Metrics</a></li>
+<li><a class="reference internal" href="#bridge-implementation">Bridge Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-bridge-setup">Example 1: Basic Bridge Setup</a></li>
+<li><a class="reference internal" href="#example-2-protocol-translation">Example 2: Protocol Translation</a></li>
+<li><a class="reference internal" href="#example-3-state-interpolation">Example 3: State Interpolation</a></li>
+<li><a class="reference internal" href="#example-4-fault-tolerant-bridge">Example 4: Fault-Tolerant Bridge</a></li>
+<li><a class="reference internal" href="#example-5-performance-monitoring">Example 5: Performance Monitoring</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#bridgemode"><code class="docutils literal notranslate"><span class="pre">BridgeMode</span></code></a><ul>
@@ -2252,6 +2555,10 @@ ensuring proper timing, data flow, and synchronization.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

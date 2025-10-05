@@ -495,6 +495,287 @@ This module provides advanced HIL capabilities including real-time simulation,
 hardware integration, fault injection, and comprehensive testing frameworks
 for control system validation and verification.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="hil-package-architecture">
+<h3>HIL Package Architecture<a class="headerlink" href="#hil-package-architecture" title="Link to this heading">¶</a></h3>
+<p>The HIL package provides comprehensive hardware-in-the-loop testing:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{HIL System} = (\text{Server}, \text{Client}, \text{Bridge}, \text{Sync}, \text{Logging})\]</div>
+</div>
+</section>
+<section id="system-integration">
+<h3>System Integration<a class="headerlink" href="#system-integration" title="Link to this heading">¶</a></h3>
+<p><strong>Component Interaction:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Server} &amp;\xrightarrow{\vec{x}(t)} \text{Bridge} \xrightarrow{\vec{x}(t)} \text{Client} \\
+\text{Client} &amp;\xrightarrow{u(t)} \text{Bridge} \xrightarrow{u(t)} \text{Server}
+\end{align}\end{split}\]</div>
+</div>
+</section>
+<section id="end-to-end-latency">
+<h3>End-to-End Latency<a class="headerlink" href="#end-to-end-latency" title="Link to this heading">¶</a></h3>
+<p><strong>Total System Latency:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{e2e}} = T_{\text{server}} + T_{\text{bridge}} + T_{\text{network}} + T_{\text{client}}\]</div>
+</div>
+<p><strong>Latency Budget:</strong></p>
+<ul class="simple">
+<li><p>Server: 1 ms (dynamics computation)</p></li>
+<li><p>Bridge: 0.5 ms (serialization/routing)</p></li>
+<li><p>Network: 5 ms (configurable)</p></li>
+<li><p>Client: 2 ms (control computation)</p></li>
+<li><p><strong>Total</strong>: ~8.5 ms per cycle</p></li>
+</ul>
+</section>
+<section id="quality-of-service">
+<h3>Quality of Service<a class="headerlink" href="#quality-of-service" title="Link to this heading">¶</a></h3>
+<p><strong>Reliability Metrics:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Availability</strong>: <span class="math notranslate nohighlight">\(A = \frac{T_{\text{uptime}}}{T_{\text{total}}}\)</span></p></li>
+<li><p><strong>Packet Loss Rate</strong>: <span class="math notranslate nohighlight">\(P_{\text{loss}} = \frac{N_{\text{lost}}}{N_{\text{sent}}}\)</span></p></li>
+<li><p><strong>Mean Time Between Failures</strong>: MTBF</p></li>
+</ol>
+<p><strong>Performance Metrics:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Throughput</strong>: Messages/second</p></li>
+<li><p><strong>Latency</strong>: Round-trip time</p></li>
+<li><p><strong>Jitter</strong>: Variance in latency</p></li>
+</ol>
+</section>
+<section id="configuration-management">
+<h3>Configuration Management<a class="headerlink" href="#configuration-management" title="Link to this heading">¶</a></h3>
+<p><strong>System Configuration:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{C}_{\text{system}} = \{C_{\text{server}}, C_{\text{client}}, C_{\text{bridge}}, C_{\text{sync}}\}\]</div>
+</div>
+<p><strong>Validation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Valid}(\mathcal{C}) \Leftrightarrow \bigwedge_{i} \text{Constraint}_i(\mathcal{C})\]</div>
+</div>
+</section>
+<section id="usage-patterns">
+<h3>Usage Patterns<a class="headerlink" href="#usage-patterns" title="Link to this heading">¶</a></h3>
+<p><strong>1. Local HIL Testing:</strong></p>
+<ul class="simple">
+<li><p>Same machine</p></li>
+<li><p>Shared memory or localhost TCP</p></li>
+<li><p>Minimal latency</p></li>
+</ul>
+<p><strong>2. Distributed HIL Testing:</strong></p>
+<ul class="simple">
+<li><p>Different machines</p></li>
+<li><p>Network TCP</p></li>
+<li><p>Realistic latency</p></li>
+</ul>
+<p><strong>3. Hybrid Testing:</strong></p>
+<ul class="simple">
+<li><p>Some components local, others remote</p></li>
+<li><p>Mixed latency profiles</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TB
+    subgraph HIL System
+        A[Plant Server] &lt;--&gt; B[Simulation Bridge]
+        B &lt;--&gt; C[Controller Client]
+
+        D[Real-Time Sync] --&gt; A
+        D --&gt; C
+
+        E[Fault Injection] --&gt; A
+        E --&gt; C
+
+        F[Data Logging] --&gt; A
+        F --&gt; C
+
+        G[Test Automation] --&gt; A
+        G --&gt; C
+
+        H[Enhanced HIL] --&gt; A
+        H --&gt; C
+    end
+
+    I[Configuration Manager] --&gt; A
+    I --&gt; B
+    I --&gt; C
+    I --&gt; D
+    I --&gt; E
+    I --&gt; F
+    I --&gt; G
+    I --&gt; H
+
+    J[Results Storage] &lt;-- F
+    J &lt;-- G
+
+    style A fill:#9cf
+    style C fill:#9cf
+    style B fill:#ff9
+    style I fill:#f9f
+        </div><p><strong>System Components:</strong></p>
+<ul class="simple">
+<li><p><strong>Core</strong>: Server, Client, Bridge</p></li>
+<li><p><strong>Timing</strong>: Real-Time Sync</p></li>
+<li><p><strong>Testing</strong>: Fault Injection, Test Automation</p></li>
+<li><p><strong>Logging</strong>: Data Logging</p></li>
+<li><p><strong>Advanced</strong>: Enhanced HIL features</p></li>
+<li><p><strong>Management</strong>: Configuration Manager</p></li>
+</ul>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-complete-hil-setup">
+<h3>Example 1: Complete HIL Setup<a class="headerlink" href="#example-1-complete-hil-setup" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">hil</span>
+
+<span class="c1"># Complete HIL system setup</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+
+<span class="c1"># Start plant server</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">PlantServer</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Start controller client</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">HILControllerClient</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">plant_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+
+<span class="c1"># Run HIL simulation</span>
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>  <span class="c1"># Blocks until client connects</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-distributed-hil-testing">
+<h3>Example 2: Distributed HIL Testing<a class="headerlink" href="#example-2-distributed-hil-testing" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">hil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
+
+<span class="c1"># Server on one thread</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_server</span><span class="p">():</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">PlantServer</span><span class="p">(</span>
+        <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+        <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+    <span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Client on another thread</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_client</span><span class="p">():</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Wait for server to start</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">HILControllerClient</span><span class="p">(</span>
+        <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+        <span class="n">plant_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+        <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">steps</span><span class="o">=</span><span class="mi">5000</span>
+    <span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Run distributed</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run_server</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run_client</span><span class="p">)</span>
+<span class="n">t1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">t2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="n">t2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-hil-with-fault-injection">
+<h3>Example 3: HIL with Fault Injection<a class="headerlink" href="#example-3-hil-with-fault-injection" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">hil</span>
+
+<span class="c1"># Setup with fault injection</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">PlantServer</span><span class="p">(</span><span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c1"># Add fault injector</span>
+<span class="n">injector</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">FaultInjector</span><span class="p">()</span>
+<span class="n">injector</span><span class="o">.</span><span class="n">add_fault</span><span class="p">(</span>
+    <span class="n">fault_type</span><span class="o">=</span><span class="n">hil</span><span class="o">.</span><span class="n">FaultType</span><span class="o">.</span><span class="n">SENSOR_BIAS</span><span class="p">,</span>
+    <span class="n">target</span><span class="o">=</span><span class="s2">&quot;theta1&quot;</span><span class="p">,</span>
+    <span class="n">bias</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">start_time</span><span class="o">=</span><span class="mf">5.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Attach to server</span>
+<span class="n">server</span><span class="o">.</span><span class="n">set_fault_injector</span><span class="p">(</span><span class="n">injector</span><span class="p">)</span>
+
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-hil-with-data-logging">
+<h3>Example 4: HIL with Data Logging<a class="headerlink" href="#example-4-hil-with-data-logging" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">hil</span>
+
+<span class="c1"># Setup with logging</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">PlantServer</span><span class="p">(</span><span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">HILControllerClient</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">plant_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+
+<span class="c1"># Add logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">DataLogger</span><span class="p">(</span><span class="s2">&quot;hil_results.h5&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;hdf5&quot;</span><span class="p">)</span>
+
+<span class="c1"># Attach to client</span>
+<span class="n">client</span><span class="o">.</span><span class="n">set_logger</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+
+<span class="c1"># Run with logging</span>
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-automated-hil-test-suite">
+<h3>Example 5: Automated HIL Test Suite<a class="headerlink" href="#example-5-automated-hil-test-suite" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">hil</span>
+
+<span class="c1"># Create test suite</span>
+<span class="n">suite</span> <span class="o">=</span> <span class="n">hil</span><span class="o">.</span><span class="n">TestSuite</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Controller_Validation&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add test cases</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_test</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;stability&quot;</span><span class="p">,</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="n">pass_criteria</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;settling_time&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">suite</span><span class="o">.</span><span class="n">add_test</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;robustness&quot;</span><span class="p">,</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="n">disturbance</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">},</span>
+    <span class="n">pass_criteria</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;recovery_time&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Run all tests</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">suite</span><span class="o">.</span><span class="n">run_all</span><span class="p">()</span>
+
+<span class="c1"># Generate report</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">save_report</span><span class="p">(</span><span class="s2">&quot;test_report.json&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tests passed: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">pass_count</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">total_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#======================================================================================\\\</span>
@@ -601,6 +882,24 @@ for control system validation and verification.</p>
             <ul>
 <li><a class="reference internal" href="#">interfaces.hil.<strong>init</strong></a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#hil-package-architecture">HIL Package Architecture</a></li>
+<li><a class="reference internal" href="#system-integration">System Integration</a></li>
+<li><a class="reference internal" href="#end-to-end-latency">End-to-End Latency</a></li>
+<li><a class="reference internal" href="#quality-of-service">Quality of Service</a></li>
+<li><a class="reference internal" href="#configuration-management">Configuration Management</a></li>
+<li><a class="reference internal" href="#usage-patterns">Usage Patterns</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-complete-hil-setup">Example 1: Complete HIL Setup</a></li>
+<li><a class="reference internal" href="#example-2-distributed-hil-testing">Example 2: Distributed HIL Testing</a></li>
+<li><a class="reference internal" href="#example-3-hil-with-fault-injection">Example 3: HIL with Fault Injection</a></li>
+<li><a class="reference internal" href="#example-4-hil-with-data-logging">Example 4: HIL with Data Logging</a></li>
+<li><a class="reference internal" href="#example-5-automated-hil-test-suite">Example 5: Automated HIL Test Suite</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
@@ -621,6 +920,10 @@ for control system validation and verification.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

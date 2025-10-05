@@ -9,6 +9,301 @@ This module provides real-time capabilities including high-priority scheduling,
 deadline monitoring, and timing constraint enforcement for deterministic
 control system execution.
 
+
+## Mathematical Foundation
+
+### Real-Time Synchronization
+
+Maintain synchronized execution across plant and controller:
+
+```{math}
+|t_{\text{plant}} - t_{\text{controller}}| < \delta_{\text{sync}}
+```
+
+Where $\delta_{\text{sync}}$ is the maximum allowable time skew (default: 1 ms).
+
+### Clock Synchronization
+
+**Network Time Protocol (NTP) Adaptation:**
+
+```{math}
+\begin{align}
+t_{\text{offset}} &= \frac{(t_2 - t_1) + (t_3 - t_4)}{2} \\
+t_{\text{latency}} &= \frac{(t_4 - t_1) - (t_3 - t_2)}{2}
+\end{align}
+```
+
+Where:
+- $t_1$: Client send time
+- $t_2$: Server receive time
+- $t_3$: Server send time
+- $t_4$: Client receive time
+
+### Rate Synchronization
+
+Synchronize simulation rates using PLL-style feedback:
+
+```{math}
+\Delta t_{\text{adjusted}} = \Delta t_{\text{nominal}} + K_p (t_{\text{ref}} - t_{\text{local}})
+```
+
+Where:
+- $K_p$: Proportional gain for rate adjustment
+- $t_{\text{ref}}$: Reference time from remote
+- $t_{\text{local}}$: Local simulation time
+
+### Deadline-Driven Scheduling
+
+**Earliest Deadline First (EDF) Policy:**
+
+```{math}
+\text{Priority}(\text{Task}_i) = \frac{1}{D_i - t}
+```
+
+Where:
+- $D_i$: Deadline for task $i$
+- $t$: Current time
+- Higher priority = earlier deadline
+
+### Timing Constraints
+
+**Hard Real-Time Constraint:**
+```{math}
+T_{\text{exec}} + T_{\text{comm}} \leq \Delta t_{\text{control}}
+```
+
+**Jitter Bound:**
+```{math}
+J = \max_k |t_k - t_{k-1} - \Delta t| < J_{\text{max}}
+```
+
+### Synchronization Protocols
+
+**Barrier Synchronization:**
+All processes wait at barrier until all arrive:
+
+```{math}
+\forall p \in \text{Processes} : t_p \geq t_{\text{barrier}}
+```
+
+**Lockstep Execution:**
+Synchronize every control cycle:
+
+```{math}
+\begin{align}
+\text{Plant} &: \text{step}(n) \rightarrow \text{wait}(n) \\
+\text{Controller} &: \text{compute}(n) \rightarrow \text{signal}(n)
+\end{align}
+```
+
+### Time Warp Algorithm
+
+Optimistic synchronization with rollback:
+
+```{math}
+\begin{align}
+\text{Execute} &: t_{\text{local}} < t_{\text{virtual}} \\
+\text{Rollback} &: \text{if } t_{\text{msg}} < t_{\text{virtual}}
+\end{align}
+```
+
+**Rollback Cost:**
+```{math}
+C_{\text{rollback}} = C_{\text{restore}} + C_{\text{recompute}}
+```
+
+### Performance Monitoring
+
+**Synchronization Quality Metrics:**
+
+1. **Time Skew:**
+   ```{math}
+   \text{Skew} = |t_{\text{plant}} - t_{\text{controller}}|
+   ```
+
+2. **Drift Rate:**
+   ```{math}
+   \text{Drift} = \frac{d}{dt}(t_{\text{plant}} - t_{\text{controller}})
+   ```
+
+3. **Synchronization Efficiency:**
+   ```{math}
+   \eta_{\text{sync}} = \frac{T_{\text{productive}}}{T_{\text{total}}}
+   ```
+
+**Target Metrics:**
+- Skew < 1 ms
+- Drift < 100 ppm
+- Efficiency > 95%
+
+## Architecture Diagram
+
+```{mermaid}
+sequenceDiagram
+    participant P as Plant
+    participant S as Sync Manager
+    participant C as Controller
+
+    Note over P,C: Synchronization Cycle
+
+    P->>S: Send Timestamp t_p
+    C->>S: Send Timestamp t_c
+    S->>S: Compute Offset
+    S->>P: Adjust Rate
+    S->>C: Adjust Rate
+
+    Note over P,C: Execution Cycle
+
+    P->>P: Step Dynamics
+    P->>S: Wait at Barrier
+    C->>C: Compute Control
+    C->>S: Wait at Barrier
+    S->>P: Release
+    S->>C: Release
+
+    Note over P,C: Metrics Collection
+
+    S->>S: Log Skew
+    S->>S: Log Jitter
+    S->>S: Check Violations
+```
+
+**Synchronization Protocol:**
+1. **Clock Sync Phase**: Exchange timestamps and compute offset
+2. **Barrier Phase**: Wait for all processes to reach synchronization point
+3. **Release Phase**: All processes proceed together
+4. **Monitoring Phase**: Track timing metrics and violations
+
+## Usage Examples
+
+### Example 1: Basic Synchronization
+
+```python
+from src.interfaces.hil.real_time_sync import RealTimeSync
+
+# Initialize synchronizer
+sync = RealTimeSync(
+    processes=["plant", "controller"],
+    target_dt=0.01,  # 10 ms control period
+    tolerance=0.001  # 1 ms tolerance
+)
+
+# Synchronize processes
+sync.synchronize()
+
+# Plant and controller now running at same rate
+```
+
+### Example 2: Clock Synchronization
+
+```python
+from src.interfaces.hil.real_time_sync import ClockSync
+
+# Create clock synchronizer
+clock_sync = ClockSync()
+
+# Client-server clock sync
+def client_sync():
+    t1 = time.time()
+    # Send to server
+    t2, t3 = server.get_timestamps()
+    t4 = time.time()
+
+    # Compute offset
+    offset = clock_sync.compute_offset(t1, t2, t3, t4)
+    print(f"Clock offset: {offset * 1000:.2f} ms")
+
+client_sync()
+```
+
+### Example 3: Barrier Synchronization
+
+```python
+from src.interfaces.hil.real_time_sync import BarrierSync
+from threading import Thread
+
+# Create barrier
+barrier = BarrierSync(n_processes=2)
+
+def plant_process():
+    for step in range(1000):
+        # Compute dynamics
+        plant.step()
+        # Wait for controller
+        barrier.wait()
+
+def controller_process():
+    for step in range(1000):
+        # Compute control
+        controller.compute()
+        # Wait for plant
+        barrier.wait()
+
+# Run synchronized
+t1 = Thread(target=plant_process)
+t2 = Thread(target=controller_process)
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+```
+
+### Example 4: Adaptive Rate Synchronization
+
+```python
+from src.interfaces.hil.real_time_sync import AdaptiveSync
+
+# Adaptive synchronizer
+sync = AdaptiveSync(
+    kp=0.1,  # Proportional gain
+    target_rate=100.0  # 100 Hz
+)
+
+# Plant loop with adaptive timing
+plant_time = 0.0
+for step in range(10000):
+    start = time.time()
+
+    # Step dynamics
+    plant.step(dt_adjusted)
+
+    # Measure actual time
+    actual_dt = time.time() - start
+
+    # Adjust for next iteration
+    dt_adjusted = sync.adjust_rate(actual_dt, step)
+
+    plant_time += dt_adjusted
+```
+
+### Example 5: Deadline Monitoring
+
+```python
+from src.interfaces.hil.real_time_sync import DeadlineMonitor
+
+# Deadline monitor
+monitor = DeadlineMonitor(
+    deadline=0.01,  # 10 ms deadline
+    tolerance=0.001  # 1 ms tolerance
+)
+
+# Control loop with deadline checking
+for step in range(5000):
+    start = time.time()
+
+    # Compute control
+    control = controller.compute(state)
+
+    # Check deadline
+    elapsed = time.time() - start
+    if not monitor.check_deadline(elapsed):
+        print(f"Deadline violation at step {step}: {elapsed*1000:.2f} ms")
+
+# Report violations
+print(f"Total violations: {monitor.violation_count}")
+print(f"Violation rate: {monitor.violation_rate * 100:.2f}%")
+```
+
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/interfaces/hil/real_time_sync.py

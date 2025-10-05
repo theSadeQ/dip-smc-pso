@@ -10,6 +10,121 @@ This module provides comprehensive Monte Carlo simulation capabilities for
 analyzing system behavior under uncertainty, validating controller performance,
 and quantifying confidence in analysis results.
 
+
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Nominal Parameters] --> B[Uncertainty Model]
+    B --> C{For Each Sample i=1..N}
+    C --> D[Perturb Parameters]
+    D --> E[Create Scenario]
+    E --> F[Run Simulation]
+    F --> G[Evaluate Stability]
+    G --> H{Stable?}
+    H -->|Yes| I[Compute Performance]
+    H -->|No| J[Record Failure]
+    I --> K[Metrics Collection]
+    J --> K
+    K --> L{All Samples Done?}
+    L -->|No| C
+    L -->|Yes| M[Robustness Analysis]
+    M --> N[Success Rate]
+    M --> O[Worst-Case Metrics]
+    M --> P[Percentile Analysis]
+    N --> Q[Monte Carlo Report]
+    O --> Q
+    P --> Q
+
+    style D fill:#9cf
+    style G fill:#fcf
+    style M fill:#ff9
+    style Q fill:#9f9
+```
+
+**Data Flow:**
+1. Define uncertainty model (e.g., ±20% mass, ±10% length)
+2. Sample $N$ parameter sets from uncertainty distribution
+3. For each sample: simulate system and evaluate stability
+4. Collect metrics for successful trials
+5. Robustness analysis: success rate, worst-case, percentiles
+6. Generate report with uncertainty quantification
+
+**Sampling Methods:**
+- **Uniform**: $\theta \sim \mathcal{U}(\theta_0(1-\epsilon), \theta_0(1+\epsilon))$
+- **Gaussian**: $\theta \sim \mathcal{N}(\theta_0, \sigma^2)$
+- **Latin Hypercube**: Stratified sampling for high dimensions
+
+
+## Mathematical Foundation
+
+### Monte Carlo Validation Theory
+
+Monte Carlo methods assess controller robustness by evaluating performance distributions across random perturbations.
+
+#### Uncertainty Propagation
+
+Given parameter uncertainty $\vec{\theta} \sim P(\vec{\theta})$, estimate expected performance:
+
+```{math}
+\mathbb{E}[J] = \int J(\vec{\theta}) P(\vec{\theta}) d\vec{\theta} \approx \frac{1}{N} \sum_{i=1}^{N} J(\vec{\theta}_i)
+```
+
+Where $\vec{\theta}_i \sim P(\vec{\theta})$ are i.i.d. samples.
+
+**Convergence Rate**: Error decreases as $O(1/\sqrt{N})$ (independent of dimension).
+
+#### Robustness Metrics
+
+**Success Rate**:
+```{math}
+SR = \frac{1}{N} \sum_{i=1}^{N} \mathbb{1}_{\text{stable}}(\vec{\theta}_i)
+```
+
+Where $\mathbb{1}_{\text{stable}} = 1$ if system remains stable.
+
+**Worst-Case Performance**:
+```{math}
+J_{\text{worst}} = \max_{i \in [1,N]} J(\vec{\theta}_i)
+```
+
+Critical for safety-critical systems.
+
+**Performance Percentiles**:
+```{math}
+J_{p} = \text{quantile}(\{J(\vec{\theta}_i)\}_{i=1}^N, p)
+```
+
+Example: $J_{95}$ = 95th percentile (worst 5% performance).
+
+#### Sampling Strategies
+
+**Uniform Perturbations**:
+```{math}
+\theta_i = \theta_0 (1 + \delta_i), \quad \delta_i \sim \mathcal{U}(-\epsilon, +\epsilon)
+```
+
+**Gaussian Perturbations**:
+```{math}
+\theta_i \sim \mathcal{N}(\theta_0, \sigma^2 \theta_0^2)
+```
+
+**Latin Hypercube Sampling**: Ensures stratified coverage of parameter space (more efficient than uniform for high dimensions).
+
+### Confidence Bounds
+
+For estimated mean $\bar{J}$:
+
+```{math}
+CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}
+```
+
+**Rule of Thumb**: $N \geq 30$ trials for reliable statistics, $N \geq 100$ for robust estimation.
+
+**See:** {doc}`../../../validation/monte_carlo_methodology`
+
+
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py
@@ -287,3 +402,156 @@ This module imports:
 - `from ..core.interfaces import StatisticalValidator, AnalysisResult, AnalysisStatus, DataProtocol`
 
 *... and 1 more*
+
+
+## Usage Examples
+
+### Basic Monte Carlo Robustness Analysis
+
+```python
+from src.analysis.validation.monte_carlo import MonteCarloValidator
+from src.controllers.factory import create_smc_for_pso, SMCType
+
+# Define controller
+controller_factory = lambda: create_smc_for_pso(
+    SMCType.CLASSICAL,
+    gains=[10, 8, 15, 12, 50, 5],
+    max_force=100.0
+)
+
+# Configure uncertainty model (±20% on masses, ±10% on lengths)
+uncertainty = {
+    'cart_mass': {'type': 'uniform', 'range': (-0.2, 0.2)},
+    'pole1_mass': {'type': 'uniform', 'range': (-0.2, 0.2)},
+    'pole2_mass': {'type': 'uniform', 'range': (-0.2, 0.2)},
+    'pole1_length': {'type': 'uniform', 'range': (-0.1, 0.1)},
+    'pole2_length': {'type': 'uniform', 'range': (-0.1, 0.1)},
+}
+
+# Run Monte Carlo validation
+validator = MonteCarloValidator(
+    controller_factory=controller_factory,
+    uncertainty_model=uncertainty,
+    n_samples=100,
+    seed=42
+)
+
+results = validator.run()
+
+# Analyze robustness
+print(f"Success Rate: {results['success_rate']*100:.1f}%")
+print(f"Mean ISE: {results['mean_ise']:.4f}")
+print(f"Worst-case ISE: {results['worst_case_ise']:.4f}")
+print(f"95th Percentile ISE: {results['percentile_95_ise']:.4f}")
+```
+
+### Gaussian Uncertainty with Correlation
+
+```python
+import numpy as np
+
+# Define correlated uncertainties (masses tend to vary together)
+mean_params = np.array([1.0, 0.1, 0.05])  # cart, pole1, pole2 masses
+cov_matrix = np.array([
+    [0.04, 0.01, 0.005],   # cart mass variance and covariances
+    [0.01, 0.004, 0.002],  # pole1 mass
+    [0.005, 0.002, 0.001]  # pole2 mass
+])
+
+# Gaussian Monte Carlo
+validator = MonteCarloValidator(
+    controller_factory=controller_factory,
+    uncertainty_model={
+        'masses': {
+            'type': 'gaussian',
+            'mean': mean_params,
+            'cov': cov_matrix
+        }
+    },
+    n_samples=200
+)
+
+results = validator.run()
+
+# Visualize uncertainty propagation
+import matplotlib.pyplot as plt
+plt.figure(figsize=(10, 6))
+plt.subplot(1, 2, 1)
+plt.hist(results['ise_samples'], bins=30, alpha=0.7, edgecolor='black')
+plt.xlabel('ISE')
+plt.ylabel('Frequency')
+plt.title('Performance Distribution under Uncertainty')
+
+plt.subplot(1, 2, 2)
+plt.scatter(results['param_samples'][:, 0], results['ise_samples'], alpha=0.5)
+plt.xlabel('Cart Mass Perturbation')
+plt.ylabel('ISE')
+plt.title('Sensitivity to Cart Mass')
+plt.tight_layout()
+plt.show()
+```
+
+### Latin Hypercube Sampling for High-Dimensional Uncertainty
+
+```python
+from src.analysis.validation.monte_carlo import LatinHypercubeSampler
+
+# High-dimensional uncertainty (all 8 physics parameters)
+uncertainty_full = {
+    'cart_mass': (-0.2, 0.2),
+    'pole1_mass': (-0.2, 0.2),
+    'pole2_mass': (-0.2, 0.2),
+    'pole1_length': (-0.1, 0.1),
+    'pole2_length': (-0.1, 0.1),
+    'friction_cart': (-0.3, 0.3),
+    'friction_pole1': (-0.3, 0.3),
+    'friction_pole2': (-0.3, 0.3),
+}
+
+# Latin Hypercube Sampling (more efficient than random for high dimensions)
+sampler = LatinHypercubeSampler(uncertainty_full, n_samples=150, seed=42)
+param_samples = sampler.generate()
+
+# Run validation with LHS samples
+validator = MonteCarloValidator(
+    controller_factory=controller_factory,
+    param_samples=param_samples  # Pre-generated samples
+)
+
+results = validator.run()
+
+# Analyze which parameters drive failures
+failure_params = param_samples[~results['stability_mask']]
+print(f"Failure modes analysis:")
+print(f"  Cart mass range in failures: [{failure_params[:, 0].min():.3f}, {failure_params[:, 0].max():.3f}]")
+print(f"  Pole1 length range in failures: [{failure_params[:, 3].min():.3f}, {failure_params[:, 3].max():.3f}]")
+```
+
+### Robustness Comparison Across Controllers
+
+```python
+controllers = {
+    'Classical': lambda: create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
+    'Adaptive': lambda: create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]),
+}
+
+uncertainty = {
+    'cart_mass': {'type': 'uniform', 'range': (-0.3, 0.3)},  # Aggressive uncertainty
+    'pole1_mass': {'type': 'uniform', 'range': (-0.3, 0.3)},
+}
+
+robustness_results = {}
+for name, factory in controllers.items():
+    validator = MonteCarloValidator(factory, uncertainty, n_samples=200)
+    robustness_results[name] = validator.run()
+
+# Compare success rates
+for name, res in robustness_results.items():
+    print(f"{name}:")
+    print(f"  Success Rate: {res['success_rate']*100:.1f}%")
+    print(f"  Mean ISE (successful): {res['mean_ise']:.4f}")
+    print(f"  Worst-case ISE: {res['worst_case_ise']:.4f}")
+```
+
+**See:** {doc}`../../../validation/monte_carlo_robustness_guide`
+
