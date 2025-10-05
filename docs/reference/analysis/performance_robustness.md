@@ -6,6 +6,184 @@
 
 Robustness analysis tools for control systems.
 
+
+
+## Advanced Mathematical Theory
+
+### Robustness Analysis
+
+**Multiplicative uncertainty model:**
+
+```{math}
+G(s) = G_0(s)[1 + \Delta(s)W(s)]
+```
+
+Where $G_0$ is nominal model, $|\Delta(j\omega)| \leq 1$, $W(s)$ is weight.
+
+### Small Gain Theorem
+
+**Robust stability condition:**
+
+```{math}
+\|T(s)W(s)\|_\infty < 1
+```
+
+**Proof:** Loop gain $L = GC$, closed-loop $T = \frac{L}{1+L}$
+
+```{math}
+\|TW\|_\infty < 1 \implies |T(j\omega)W(j\omega)| < 1 \implies |G_0CW| < |1 + G_0C|
+```
+
+### $H_\infty$ Norm
+
+**Definition:**
+
+```{math}
+\|G(s)\|_\infty = \sup_{\omega} |G(j\omega)|
+```
+
+**Physical interpretation:** Maximum gain over all frequencies.
+
+### Structured Singular Value (μ)
+
+**Robust stability bound:**
+
+```{math}
+\mu(M(j\omega)) < 1 \, \forall \omega \implies \text{robust stability}
+```
+
+Where $M(s)$ is closed-loop transfer matrix.
+
+### Sensitivity to Parameter Variations
+
+**Sensitivity function:**
+
+```{math}
+S_p^y = \frac{\partial y/y}{\partial p/p} = \frac{p}{y}\frac{\partial y}{\partial p}
+```
+
+**Total sensitivity:**
+
+```{math}
+\frac{\Delta y}{y} \approx \sum_i S_{p_i}^y \frac{\Delta p_i}{p_i}
+```
+
+### Kharitonov's Theorem
+
+**For interval polynomial:**
+
+```{math}
+P(s) = \sum_{i=0}^n p_i s^i, \quad p_i \in [\underline{p}_i, \overline{p}_i]
+```
+
+Check stability of **4 Kharitonov polynomials**:
+
+```{math}
+\begin{align}
+K_1(s) &= \underline{p}_0 + \underline{p}_1 s + \overline{p}_2 s^2 + \overline{p}_3 s^3 + \cdots \\
+K_2(s) &= \overline{p}_0 + \overline{p}_1 s + \underline{p}_2 s^2 + \underline{p}_3 s^3 + \cdots \\
+K_3(s) &= \underline{p}_0 + \overline{p}_1 s + \overline{p}_2 s^2 + \underline{p}_3 s^3 + \cdots \\
+K_4(s) &= \overline{p}_0 + \underline{p}_1 s + \underline{p}_2 s^2 + \overline{p}_3 s^3 + \cdots
+\end{align}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Nominal Model G₀] --> B[Uncertainty Model]
+    B --> C[Multiplicative Δ·W]
+    B --> D[Additive Δ·W]
+
+    C --> E[Robust Stability]
+    D --> E
+
+    E --> F{||TW||∞ < 1?}
+    F -->|Yes| G[Robustly Stable]
+    F -->|No| H[Check μ]
+
+    H --> I{μ(M) < 1?}
+    I -->|Yes| G
+    I -->|No| J[Not Robust]
+
+    A --> K[Parameter Variations]
+    K --> L[Interval Polynomial]
+    L --> M[Kharitonov Test]
+
+    M --> N[4 Edge Polynomials]
+    N --> O{All Stable?}
+    O -->|Yes| P[Robust for All p]
+    O -->|No| J
+
+    style F fill:#ff9
+    style I fill:#9cf
+    style G fill:#9f9
+    style J fill:#f99
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides comprehensive robustness analysis capabilities including
 sensitivity analysis, uncertainty quantification, and robust performance metrics.
 
