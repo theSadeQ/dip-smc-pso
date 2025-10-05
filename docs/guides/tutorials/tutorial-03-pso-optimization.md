@@ -87,6 +87,107 @@ x[i] = x[i] + v[i]
 > **📚 Theory Deep Dive:** For comprehensive PSO foundations, see:
 > - [PSO Algorithm Theory](../theory/pso-theory.md) - Swarm intelligence, convergence theory, parameter selection
 
+### PSO Optimization Workflow
+
+**Complete PSO Process Visualization:**
+
+```mermaid
+flowchart TD
+    START["🎯 Start PSO Optimization"] --> INIT["📍 Initialize Swarm<br/>Generate N random particles<br/>(candidate gain sets)"]
+
+    INIT --> INIT_EVAL["📊 Initial Fitness Evaluation<br/>For each particle:<br/>- Run simulation<br/>- Compute cost function<br/>- Record performance"]
+
+    INIT_EVAL --> SET_BEST["🏆 Set Initial Bests<br/>- Personal best (pbest) = current position<br/>- Global best (gbest) = best in swarm"]
+
+    SET_BEST --> ITER_START{Iteration Loop<br/>i < max_iters?}
+
+    ITER_START -->|Yes| UPDATE_VEL["⚡ Update Velocities<br/>v[i] = w·v[i] + c1·r1·(pbest - x)<br/>+ c2·r2·(gbest - x)<br/>(Cognitive + Social components)"]
+
+    UPDATE_VEL --> UPDATE_POS["📍 Update Positions<br/>x[i] = x[i] + v[i]<br/>Clamp to bounds"]
+
+    UPDATE_POS --> EVAL["📊 Evaluate Fitness<br/>For each particle:<br/>- Simulate with new gains<br/>- Compute cost function"]
+
+    EVAL --> UPDATE_PBEST["🔄 Update Personal Best<br/>If cost < pbest_cost:<br/>pbest = current position"]
+
+    UPDATE_PBEST --> UPDATE_GBEST["🏆 Update Global Best<br/>If cost < gbest_cost:<br/>gbest = current position"]
+
+    UPDATE_GBEST --> CHECK_CONV{Convergence<br/>Check}
+
+    CHECK_CONV -->|Converged<br/>or max iters| DONE["✅ PSO Complete<br/>Return gbest (optimized gains)"]
+    CHECK_CONV -->|Not converged| ITER_START
+
+    DONE --> VALIDATE["✔️ Validation<br/>Re-simulate with optimized gains<br/>Verify performance improvement"]
+
+    VALIDATE --> FINAL["🎉 Optimized Controller Ready<br/>Save gains to JSON"]
+
+    style START fill:#ccccff
+    style INIT fill:#ffffcc
+    style INIT_EVAL fill:#ffcccc
+    style SET_BEST fill:#ccffcc
+    style ITER_START fill:#ccccff
+    style UPDATE_VEL fill:#ffffcc
+    style UPDATE_POS fill:#ffcccc
+    style EVAL fill:#ccffcc
+    style UPDATE_PBEST fill:#ffffcc
+    style UPDATE_GBEST fill:#ccffcc
+    style CHECK_CONV fill:#ffcccc
+    style DONE fill:#ccffcc
+    style VALIDATE fill:#ffffcc
+    style FINAL fill:#ccccff
+```
+
+**Workflow Stages:**
+
+1. 🔵 **Initialization**: Create swarm with random candidate solutions
+2. 🟡 **Velocity Update**: Adjust particle search direction (exploration + exploitation)
+3. 🔴 **Position Update**: Move particles in search space
+4. 🟢 **Fitness Evaluation**: Simulate and compute cost for each particle
+5. 🟢 **Best Tracking**: Update personal and global bests
+6. 🔴 **Convergence Check**: Stop if converged or max iterations reached
+7. 🟡 **Validation**: Verify final optimized gains
+
+**Typical Execution Times** (30 particles, 100 iterations):
+- **Classical SMC** (6 gains): ~5-10 minutes
+- **Super-Twisting** (6 gains): ~8-12 minutes
+- **Adaptive SMC** (5 gains): ~6-10 minutes
+- **Hybrid STA** (4 base gains): ~10-15 minutes
+
+**Convergence Patterns:**
+
+```mermaid
+graph LR
+    subgraph "Typical PSO Convergence"
+        direction TB
+        EARLY["Iterations 1-20<br/>🔴 Exploration Phase<br/>High cost variance<br/>Global search"]
+        MID["Iterations 21-60<br/>🟡 Exploitation Phase<br/>Decreasing cost<br/>Focusing on best region"]
+        LATE["Iterations 61-100<br/>🟢 Convergence Phase<br/>Minimal cost change<br/>Fine-tuning"]
+    end
+
+    EARLY --> MID
+    MID --> LATE
+
+    style EARLY fill:#ffcccc
+    style MID fill:#ffffcc
+    style LATE fill:#ccffcc
+```
+
+**Convergence Indicators**:
+- 🔴 **Early iterations (1-20%)**: High cost variance, global exploration
+- 🟡 **Mid iterations (20-60%)**: Cost decreasing, swarm converging
+- 🟢 **Late iterations (60-100%)**: Minimal improvement, fine-tuning
+
+**Good Convergence Signs**:
+- ✅ Steady cost decrease (no plateaus early)
+- ✅ gbest cost improves regularly
+- ✅ Swarm diversity decreases gradually
+- ✅ Final cost significantly lower than initial
+
+**Poor Convergence Signs**:
+- ❌ Cost plateaus at iteration 10-20 (premature convergence)
+- ❌ High cost variance throughout (not converging)
+- ❌ Oscillating gbest cost (unstable)
+- ❌ Final cost similar to initial (no optimization)
+
 ---
 
 ## Part 2: PSO Configuration

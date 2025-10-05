@@ -383,6 +383,59 @@ rms_control = np.sqrt(np.mean(u**2))
 - Indicates energy-efficient control
 - Actuator wear is low
 
+#### Expected Results Summary
+
+**Typical Performance Ranges** (Default Configuration)
+
+| Metric | Expected Range | Interpretation |
+|--------|----------------|----------------|
+| **Settling Time** | 2.0-3.0 seconds | Time to stabilize both pendulums |
+| **Max Overshoot** | 2-5% | Peak deviation from equilibrium |
+| **Steady-State Error** | 0.005-0.01 rad | Final angular error (~0.3-0.6°) |
+| **Peak Control** | 40-60 N | Maximum force during transient |
+| **RMS Control** | 10-15 N | Average control effort |
+| **Saturation Events** | 0-2% | Percentage of time at limits |
+
+**Visual Behavior Pattern**:
+
+```mermaid
+flowchart LR
+    subgraph "Simulation Timeline (0-5 seconds)"
+        direction TB
+        PHASE1["Phase 1: Initial Response<br/>0-0.5s<br/>⚡ Large control spike<br/>📊 Rapid state change"]
+        PHASE2["Phase 2: Active Stabilization<br/>0.5-2.5s<br/>🔄 Oscillating control<br/>📉 Decreasing amplitude"]
+        PHASE3["Phase 3: Steady State<br/>2.5-5.0s<br/>✅ Small corrections<br/>🎯 Near equilibrium"]
+    end
+
+    PHASE1 --> PHASE2
+    PHASE2 --> PHASE3
+
+    style PHASE1 fill:#ffcccc
+    style PHASE2 fill:#ffffcc
+    style PHASE3 fill:#ccffcc
+```
+
+**Phase Characteristics**:
+
+- 🔴 **Phase 1** (Initial Response): Large control action, rapid state change, peak forces
+- 🟡 **Phase 2** (Active Stabilization): Oscillatory behavior, gradually decreasing amplitude
+- 🟢 **Phase 3** (Steady State): Minimal oscillations, small control effort, convergence achieved
+
+**Good Results Checklist**:
+- ✅ All state variables bounded (no divergence)
+- ✅ Control input stays within ±150 N (no saturation)
+- ✅ Settling time < 3 seconds
+- ✅ Overshoot < 5%
+- ✅ Steady-state error < 1°
+- ✅ Smooth convergence (no instability)
+
+**Warning Signs** (Results requiring investigation):
+- ❌ States diverging to ±∞
+- ❌ Settling time > 5 seconds
+- ❌ Overshoot > 20%
+- ❌ Control saturated > 10% of time
+- ❌ Persistent high-frequency chattering
+
 ---
 
 ## Understanding Control Behavior
