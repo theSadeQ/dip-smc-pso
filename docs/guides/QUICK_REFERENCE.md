@@ -469,6 +469,13 @@ chmod +x batch_study.sh
   - [Result Analysis](how-to/result-analysis.md)
   - [Optimization Workflows](how-to/optimization-workflows.md)
   - [Testing & Validation](how-to/testing-validation.md)
+- [API Reference Guides](api/): Module-by-module technical reference
+  - [Controllers API](api/controllers.md)
+  - [Simulation API](api/simulation.md)
+  - [Optimization API](api/optimization.md)
+  - [Configuration API](api/configuration.md)
+  - [Plant Models API](api/plant-models.md)
+  - [Utilities API](api/utilities.md)
 - [GitHub Issues](https://github.com/theSadeQ/dip-smc-pso/issues): Bug reports & features
 
 ---

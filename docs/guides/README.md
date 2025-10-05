@@ -51,6 +51,30 @@ Welcome to the DIP SMC PSO framework documentation! This guide will help you nav
 - [**Testing & Validation**](how-to/testing-validation.md)
   Test suite, unit testing, performance benchmarking, coverage analysis
 
+### 📖 API Reference Guides
+**Module-by-module technical reference with examples**
+
+- [**API Index**](api/README.md)
+  Overview and navigation for all API guides
+
+- [**Controllers API**](api/controllers.md)
+  Factory system, SMC types, gain bounds, custom controllers (726 lines)
+
+- [**Simulation API**](api/simulation.md)
+  SimulationRunner, dynamics models, batch processing, performance (517 lines)
+
+- [**Optimization API**](api/optimization.md)
+  PSOTuner, cost functions, gain bounds, convergence monitoring (543 lines)
+
+- [**Configuration API**](api/configuration.md)
+  Loading config, validation, programmatic configuration (438 lines)
+
+- [**Plant Models API**](api/plant-models.md)
+  Physics models, parameter configuration, custom dynamics (424 lines)
+
+- [**Utilities API**](api/utilities.md)
+  Validation, control primitives, monitoring, analysis tools (434 lines)
+
 ---
 
 ## Documentation Structure
@@ -66,6 +90,14 @@ docs/guides/
 │   ├── result-analysis.md             (589 lines)
 │   ├── optimization-workflows.md      (724 lines)
 │   └── testing-validation.md          (611 lines)
+├── api/                               # API reference guides
+│   ├── README.md                      (203 lines)
+│   ├── controllers.md                 (726 lines)
+│   ├── simulation.md                  (517 lines)
+│   ├── optimization.md                (543 lines)
+│   ├── configuration.md               (438 lines)
+│   ├── plant-models.md                (424 lines)
+│   └── utilities.md                   (434 lines)
 └── tutorials/                         # Tutorial series
     ├── tutorial-01-first-simulation.md         (600 lines)
     ├── tutorial-02-controller-comparison.md    (797 lines)
@@ -74,7 +106,7 @@ docs/guides/
     └── tutorial-05-research-workflow.md        (640 lines)
 ```
 
-**Total: 7,578 lines of user documentation**
+**Total: 10,863 lines of user documentation** (up from 7,578)
 
 ---
 
