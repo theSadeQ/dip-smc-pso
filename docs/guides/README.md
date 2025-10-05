@@ -36,6 +36,21 @@ Welcome to the DIP SMC PSO framework documentation! This guide will help you nav
 5. [**Tutorial 05: Research Workflow**](tutorials/tutorial-05-research-workflow.md)
    End-to-end research project, statistical analysis, publication workflow (120+ min)
 
+### 🔧 How-To Guides
+**Task-oriented recipes for specific workflows**
+
+- [**Running Simulations**](how-to/running-simulations.md)
+  CLI usage, Streamlit dashboard, programmatic API, batch processing
+
+- [**Result Analysis**](how-to/result-analysis.md)
+  Metrics interpretation, statistical analysis, visualization, data export
+
+- [**Optimization Workflows**](how-to/optimization-workflows.md)
+  PSO tuning, custom cost functions, convergence diagnostics, parallel execution
+
+- [**Testing & Validation**](how-to/testing-validation.md)
+  Test suite, unit testing, performance benchmarking, coverage analysis
+
 ---
 
 ## Documentation Structure
@@ -46,6 +61,11 @@ docs/guides/
 ├── getting-started.md                 # Quick setup (523 lines)
 ├── user-guide.md                      # Comprehensive reference (826 lines)
 ├── QUICK_REFERENCE.md                 # Command cheat sheet
+├── how-to/                            # Task-oriented guides
+│   ├── running-simulations.md         (619 lines)
+│   ├── result-analysis.md             (589 lines)
+│   ├── optimization-workflows.md      (724 lines)
+│   └── testing-validation.md          (611 lines)
 └── tutorials/                         # Tutorial series
     ├── tutorial-01-first-simulation.md         (600 lines)
     ├── tutorial-02-controller-comparison.md    (797 lines)
@@ -54,7 +74,7 @@ docs/guides/
     └── tutorial-05-research-workflow.md        (640 lines)
 ```
 
-**Total: 5,035 lines of user documentation**
+**Total: 7,578 lines of user documentation**
 
 ---
 
@@ -65,7 +85,7 @@ Perfect for: First-time users, quick prototyping
 
 1. [Getting Started](getting-started.md) → Install & run first simulation
 2. [Tutorial 01](tutorials/tutorial-01-first-simulation.md) → Understand DIP & SMC basics
-3. [User Guide - Running Simulations](user-guide.md#running-simulations) → Explore CLI options
+3. [How-To: Running Simulations](how-to/running-simulations.md) → Explore CLI and Streamlit options
 
 ### Path 2: Controller Expert (4-6 hours)
 Perfect for: Control systems researchers, comparative studies
@@ -74,7 +94,7 @@ Perfect for: Control systems researchers, comparative studies
 2. [Tutorial 01](tutorials/tutorial-01-first-simulation.md) → Basics
 3. [Tutorial 02](tutorials/tutorial-02-controller-comparison.md) → Compare controllers
 4. [Tutorial 03](tutorials/tutorial-03-pso-optimization.md) → Optimize gains
-5. [User Guide - PSO Optimization](user-guide.md#pso-optimization) → Advanced tuning
+5. [How-To: Optimization Workflows](how-to/optimization-workflows.md) → Advanced PSO tuning
 
 ### Path 3: Custom Development (8-12 hours)
 Perfect for: Implementing novel SMC algorithms
@@ -83,15 +103,15 @@ Perfect for: Implementing novel SMC algorithms
 2. [Tutorial 01-02](tutorials/) → Learn framework basics
 3. [Tutorial 04](tutorials/tutorial-04-custom-controller.md) → Implement custom controller
 4. [Tutorial 03](tutorials/tutorial-03-pso-optimization.md) → Optimize custom controller
-5. [User Guide - Configuration](user-guide.md#configuration-management) → Advanced config
+5. [How-To: Testing & Validation](how-to/testing-validation.md) → Comprehensive testing
 
 ### Path 4: Research Publication (12+ hours)
 Perfect for: Graduate students, researchers
 
 1. Complete Paths 1-2 (understand framework & controllers)
 2. [Tutorial 05](tutorials/tutorial-05-research-workflow.md) → End-to-end research project
-3. [User Guide - Batch Processing](user-guide.md#batch-processing) → Monte Carlo studies
-4. [User Guide - Result Analysis](user-guide.md#result-analysis) → Statistical validation
+3. [How-To: Result Analysis](how-to/result-analysis.md) → Statistical validation and visualization
+4. [User Guide - Batch Processing](user-guide.md#batch-processing) → Monte Carlo studies
 
 ---
 
