@@ -1,4 +1,6 @@
 # plant.models.simplified.dynamics
+<!-- Enhanced by Week 8 Phase 2 -->
+
 
 **Source:** `src\plant\models\simplified\dynamics.py`
 
