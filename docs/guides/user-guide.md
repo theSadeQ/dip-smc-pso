@@ -244,6 +244,8 @@ python simulate.py --ctrl classical_smc --override "simulation.dt=0.02" --plot
 # Warning: May cause numerical instability
 ```
 
+**See also:** [How-To: Running Simulations](how-to/running-simulations.md) for comprehensive CLI usage, Streamlit dashboard, programmatic API, and batch processing patterns.
+
 ---
 
 ## PSO Optimization
@@ -349,6 +351,8 @@ Optimization Complete!
 2. Widen `bounds` (allow larger search space)
 3. Adjust cost function weights (emphasize different metrics)
 4. Try different random `--seed`
+
+**See also:** [How-To: Optimization Workflows](how-to/optimization-workflows.md) for advanced PSO tuning, custom cost functions, convergence diagnostics, and parallel execution strategies.
 
 ---
 
@@ -472,6 +476,8 @@ print(df.to_markdown())  # Pretty table output
 | adaptive   | 0.2834 | 1.052 | 3.52              | 6.83          | 118.67         |
 | hybrid     | 0.2512 | 0.823 | 2.31              | 3.92          | 110.45         |
 ```
+
+**See also:** [How-To: Result Analysis](how-to/result-analysis.md) for detailed metrics interpretation, statistical analysis, visualization techniques, and data export formats.
 
 ---
 
@@ -819,6 +825,7 @@ streamlit run streamlit_app.py
 ## Next Steps
 
 - **Tutorials:** Complete [Tutorial 02: Controller Comparison](tutorials/tutorial-02-controller-comparison.md)
+- **How-To Guides:** Task-oriented recipes for [Running Simulations](how-to/running-simulations.md), [Result Analysis](how-to/result-analysis.md), [Optimization Workflows](how-to/optimization-workflows.md), and [Testing & Validation](how-to/testing-validation.md)
 - **Advanced Topics:** PSO tuning, custom cost functions, batch analysis
 - **API Reference:** In-depth controller and simulation documentation
 - **Research Papers:** Theoretical foundations and validation studies

@@ -464,6 +464,11 @@ chmod +x batch_study.sh
 - [Getting Started](getting-started.md): Complete setup guide
 - [User Guide](user-guide.md): Comprehensive reference
 - [Tutorial Series](tutorials/): Step-by-step learning
+- [How-To Guides](how-to/): Task-oriented recipes
+  - [Running Simulations](how-to/running-simulations.md)
+  - [Result Analysis](how-to/result-analysis.md)
+  - [Optimization Workflows](how-to/optimization-workflows.md)
+  - [Testing & Validation](how-to/testing-validation.md)
 - [GitHub Issues](https://github.com/theSadeQ/dip-smc-pso/issues): Bug reports & features
 
 ---
