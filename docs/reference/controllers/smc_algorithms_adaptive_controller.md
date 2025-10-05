@@ -16,6 +16,147 @@ Replaces the monolithic 427-line controller with composition of focused modules.
 
 
 
+
+## Advanced Mathematical Theory
+
+### Adaptive SMC Structure
+
+**Control law:**
+
+```{math}
+u = -\hat{K}(t) \, \text{sat}(s/\epsilon)
+```
+
+Where $\hat{K}(t)$ is adapted online.
+
+### Complete Lyapunov Analysis
+
+**Augmented Lyapunov function:**
+
+```{math}
+V = \frac{1}{2} s^2 + \frac{1}{2\gamma} \tilde{K}^2
+```
+
+**Derivative on sliding surface ($s = 0$):**
+
+```{math}
+\dot{V} = s \dot{s} + \frac{1}{\gamma} \tilde{K} \dot{K}
+```
+
+**With adaptation law** $\dot{K} = \gamma |s| - \sigma K$:
+
+```{math}
+\dot{V} = s \dot{s} + \tilde{K} (|s| - \frac{\sigma}{\gamma} K)
+```
+
+If $\dot{s} = -\Delta - \hat{K} \text{sign}(s)$, then:
+
+```{math}
+s \dot{s} = -s \Delta - \hat{K} |s| = -s \Delta - K^* |s| - \tilde{K} |s|
+```
+
+Substituting:
+
+```{math}
+\dot{V} \leq -K^* |s| - s \Delta - \frac{\sigma}{\gamma} \tilde{K} K
+```
+
+### Robustness to Parametric Uncertainty
+
+**Model with uncertainty:**
+
+```{math}
+\dot{s} = f_0(\vec{x}) + \Delta f(\vec{x}, \vec{\theta}) + u
+```
+
+**Adaptive control ensures:**
+
+```{math}
+\lim_{t \to \infty} |s(t)| \leq \delta_{residual}
+```
+
+Where $\delta_{residual}$ depends on $\epsilon_{max}$ (unmodeled dynamics).
+
+### Transient Performance
+
+**Overshoot bound:**
+
+```{math}
+\max_{t \geq 0} |s(t)| \leq \sqrt{2 V(0)}
+```
+
+### Steady-State Error
+
+**Ultimate bound:**
+
+```{math}
+|s|_{ss} \leq \frac{\epsilon_{max}}{K_{min} - |\Delta|_{max}}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State x] --> B[Sliding Surface s]
+    B --> C[Adaptation Law: K̇ = γ|s|]
+    C --> D[Gain K_t_]
+    B --> E[Control: u = -K sat_s/ε_]
+    D --> E
+
+    E --> F[Saturation]
+    F --> G[Control Output u]
+
+    B --> H[Feedback to Adaptation]
+    H --> C
+
+    style C fill:#9cf
+    style G fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.controllers.smc.algorithms.adaptive import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Controller
+
+```python
+# Use in complete control loop
+controller = create_controller(ctrl_type, config)
+result = simulate(controller, duration=5.0)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(state)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"ITAE: {metrics.itae:.3f}")
+```
+
 ## Architecture Diagram
 
 ```{mermaid}
