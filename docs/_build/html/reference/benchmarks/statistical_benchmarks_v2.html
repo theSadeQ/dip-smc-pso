@@ -513,6 +513,116 @@ from src.benchmarks.statistical_benchmarks_v2 import run_trials</p>
 </pre></div>
 </div>
 </section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Controller Factory] --&gt; B[Multi-Trial Execution]
+    B --&gt; C{For Each Trial i=1..N}
+    C --&gt; D[Simulation]
+    D --&gt; E[Compute Metrics]
+    E --&gt; F[Metrics Collection]
+    F --&gt; G{All Trials Done?}
+    G --&gt;|No| C
+    G --&gt;|Yes| H[Statistical Analysis]
+    H --&gt; I[Confidence Intervals]
+    H --&gt; J[Hypothesis Tests]
+    H --&gt; K[Distribution Fitting]
+    I --&gt; L[Results Package]
+    J --&gt; L
+    K --&gt; L
+    L --&gt; M[Validation Report]
+
+    style B fill:#9cf
+    style E fill:#fcf
+    style H fill:#ff9
+    style L fill:#9f9
+    style M fill:#9f9
+        </div><p><strong>Data Flow:</strong></p>
+<ol class="arabic simple">
+<li><p>Controller factory creates instances for each trial</p></li>
+<li><p>Execute <span class="math notranslate nohighlight">\(N\)</span> independent simulations with different seeds</p></li>
+<li><p>Compute performance metrics: ISE, settling time, control effort</p></li>
+<li><p>Statistical analysis: CIs (t-distribution or bootstrap), hypothesis testing</p></li>
+<li><p>Generate validation report with results and visualizations</p></li>
+</ol>
+<p><strong>Key Components:</strong></p>
+<ul class="simple">
+<li><p><strong>Trial Runner</strong>: Orchestrates parallel execution</p></li>
+<li><p><strong>Metrics Computer</strong>: Unified metric calculations</p></li>
+<li><p><strong>Statistics Engine</strong>: CI computation, t-tests, ANOVA</p></li>
+<li><p><strong>Report Generator</strong>: LaTeX/Markdown output</p></li>
+</ul>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="statistical-performance-evaluation">
+<h3>Statistical Performance Evaluation<a class="headerlink" href="#statistical-performance-evaluation" title="Link to this heading">¶</a></h3>
+<p>Statistical benchmarking provides rigorous quantification of controller performance across multiple trials with uncertainty quantification.</p>
+<section id="confidence-intervals">
+<h4>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">¶</a></h4>
+<p>For a performance metric <span class="math notranslate nohighlight">\(m\)</span> measured across <span class="math notranslate nohighlight">\(n\)</span> trials, the <span class="math notranslate nohighlight">\((1-\alpha)\)</span> confidence interval estimates the true population mean <span class="math notranslate nohighlight">\(\mu_m\)</span>:</p>
+<p><strong>t-Distribution (Parametric)</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[CI_{1-\alpha} = \bar{m} \pm t_{\alpha/2, n-1} \frac{s_m}{\sqrt{n}}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bar{m}\)</span>: Sample mean</p></li>
+<li><p><span class="math notranslate nohighlight">\(s_m\)</span>: Sample standard deviation</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_{\alpha/2, n-1}\)</span>: Critical t-value</p></li>
+<li><p>Assumes: Normal distribution of metrics</p></li>
+</ul>
+<p><strong>Bootstrap (Non-Parametric)</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[CI_{1-\alpha} = \left[m_{\alpha/2}^*, m_{1-\alpha/2}^*\right]\]</div>
+</div>
+<p>Computed via <span class="math notranslate nohighlight">\(B\)</span> bootstrap resamples:</p>
+<ol class="arabic simple">
+<li><p>Draw <span class="math notranslate nohighlight">\(n\)</span> samples with replacement from original data</p></li>
+<li><p>Compute metric for each resample</p></li>
+<li><p>Use empirical quantiles for interval bounds</p></li>
+</ol>
+<p><strong>No assumptions</strong> about underlying distribution.</p>
+</section>
+<section id="hypothesis-testing">
+<h4>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">¶</a></h4>
+<p><strong>Welch’s t-test</strong> for comparing two controller means:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t = \frac{\bar{m}_1 - \bar{m}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}\]</div>
+</div>
+<ul class="simple">
+<li><p><strong>Null Hypothesis</strong>: <span class="math notranslate nohighlight">\(H_0: \mu_1 = \mu_2\)</span></p></li>
+<li><p><strong>Alternative</strong>: <span class="math notranslate nohighlight">\(H_1: \mu_1 \neq \mu_2\)</span></p></li>
+<li><p><strong>Degrees of Freedom</strong>: Welch-Satterthwaite approximation (unequal variances)</p></li>
+</ul>
+<p><strong>Interpretation</strong>: Reject <span class="math notranslate nohighlight">\(H_0\)</span> if <span class="math notranslate nohighlight">\(p &lt; 0.05\)</span> → significant performance difference.</p>
+</section>
+</section>
+<section id="performance-metrics">
+<h3>Performance Metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Integral Squared Error (ISE)</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[ISE = \int_0^T ||\vec{x}(t)||^2 dt \approx \sum_{k=0}^{N} ||\vec{x}_k||^2 \Delta t\]</div>
+</div>
+<p><strong>Settling Time</strong> (<span class="math notranslate nohighlight">\(t_s\)</span>): Time until <span class="math notranslate nohighlight">\(||\vec{x}(t)|| &lt; 0.02\)</span> permanently.</p>
+<p><strong>Control Effort</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[RMS_u = \sqrt{\frac{1}{T} \int_0^T u^2(t) dt}\]</div>
+</div>
+<p><strong>Chattering Index</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[CI = \frac{1}{N-1} \sum_{k=1}^{N} |u_k - u_{k-1}|\]</div>
+</div>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../mathematical_foundations/statistical_analysis</span></p>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1149,6 +1259,129 @@ Comprehensive comparison results</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.statistics</span> <span class="pre">import</span> <span class="pre">compute_basic_confidence_intervals</span></code></p></li>
 </ul>
 </section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="basic-statistical-benchmarking">
+<h3>Basic Statistical Benchmarking<a class="headerlink" href="#basic-statistical-benchmarking" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.statistical_benchmarks_v2</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_trials</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_smc_for_pso</span><span class="p">,</span> <span class="n">SMCType</span>
+
+<span class="c1"># Define controller factory</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">controller_factory</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">create_smc_for_pso</span><span class="p">(</span>
+        <span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span>
+        <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span>
+    <span class="p">)</span>
+
+<span class="c1"># Configure benchmarking</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_config</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+
+<span class="c1"># Run trials with statistical analysis</span>
+<span class="n">metrics_list</span><span class="p">,</span> <span class="n">ci_results</span> <span class="o">=</span> <span class="n">run_trials</span><span class="p">(</span>
+    <span class="n">controller_factory</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">,</span>
+    <span class="n">n_trials</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">confidence_level</span><span class="o">=</span><span class="mf">0.95</span>
+<span class="p">)</span>
+
+<span class="c1"># Access results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean ISE: </span><span class="si">{</span><span class="n">ci_results</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95% CI: [</span><span class="si">{</span><span class="n">ci_results</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;ci_lower&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci_results</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;ci_upper&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Std Dev: </span><span class="si">{</span><span class="n">ci_results</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-bootstrap-confidence-intervals">
+<h3>Advanced: Bootstrap Confidence Intervals<a class="headerlink" href="#advanced-bootstrap-confidence-intervals" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.statistical_benchmarks_v2</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_trials_with_advanced_statistics</span>
+
+<span class="c1"># Run with bootstrap CI (non-parametric, no normality assumption)</span>
+<span class="n">metrics_list</span><span class="p">,</span> <span class="n">analysis</span> <span class="o">=</span> <span class="n">run_trials_with_advanced_statistics</span><span class="p">(</span>
+    <span class="n">controller_factory</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">,</span>
+    <span class="n">n_trials</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">confidence_level</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span>
+    <span class="n">use_bootstrap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">n_bootstrap</span><span class="o">=</span><span class="mi">10000</span>
+<span class="p">)</span>
+
+<span class="c1"># Bootstrap results more robust for non-normal distributions</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bootstrap 99% CI for settling time:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;settling_time&#39;</span><span class="p">][</span><span class="s1">&#39;bootstrap_ci&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;settling_time&#39;</span><span class="p">][</span><span class="s1">&#39;bootstrap_ci&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="controller-comparison-with-hypothesis-testing">
+<h3>Controller Comparison with Hypothesis Testing<a class="headerlink" href="#controller-comparison-with-hypothesis-testing" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.statistical_benchmarks_v2</span><span class="w"> </span><span class="kn">import</span> <span class="n">compare_controllers</span>
+
+<span class="c1"># Define two controllers</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">classical_factory</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">adaptive_factory</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">ADAPTIVE</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+
+<span class="c1"># Statistical comparison</span>
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">compare_controllers</span><span class="p">(</span>
+    <span class="n">controller_a_factory</span><span class="o">=</span><span class="n">classical_factory</span><span class="p">,</span>
+    <span class="n">controller_b_factory</span><span class="o">=</span><span class="n">adaptive_factory</span><span class="p">,</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">n_trials</span><span class="o">=</span><span class="mi">40</span>
+<span class="p">)</span>
+
+<span class="c1"># Interpret results</span>
+<span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">comparison</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span>
+<span class="p">{</span><span class="n">metric</span><span class="o">.</span><span class="n">upper</span><span class="p">()}:</span><span class="s2">&quot;)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Classical: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;mean_a&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;std_a&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Adaptive:  </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;mean_b&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;std_b&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  p-value:   </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;p_value&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;p_value&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">better</span> <span class="o">=</span> <span class="s1">&#39;Classical&#39;</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mean_a&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;mean_b&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;Adaptive&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  → </span><span class="si">{</span><span class="n">better</span><span class="si">}</span><span class="s2"> is significantly better (p &lt; 0.05)&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  → No significant difference (p ≥ 0.05)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-benchmarking-multiple-controllers">
+<h3>Batch Benchmarking Multiple Controllers<a class="headerlink" href="#batch-benchmarking-multiple-controllers" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_multiple_trials</span>
+
+<span class="n">controllers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Classical&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>
+    <span class="s1">&#39;Adaptive&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">ADAPTIVE</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]),</span>
+    <span class="s1">&#39;STA&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">SUPER_TWISTING</span><span class="p">,</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]),</span>
+    <span class="s1">&#39;Hybrid&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">HYBRID</span><span class="p">,</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">factory</span> <span class="ow">in</span> <span class="n">controllers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">metrics_list</span><span class="p">,</span> <span class="n">ci_results</span> <span class="o">=</span> <span class="n">run_trials</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ci_results</span>
+
+<span class="c1"># Compare ISE across all controllers</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">comparison_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="n">name</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ISE&#39;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;ISE_CI&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;ci_lower&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;ci_upper&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;Settling Time&#39;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;settling_time&#39;</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">})</span><span class="o">.</span><span class="n">T</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">comparison_df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../benchmarking_workflows/statistical_analysis_guide</span></p>
+</section>
+</section>
 </section>
 
         </article>
@@ -1191,6 +1424,16 @@ Comprehensive comparison results</p>
             <ul>
 <li><a class="reference internal" href="#">benchmarks.statistical_benchmarks_v2</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#statistical-performance-evaluation">Statistical Performance Evaluation</a><ul>
+<li><a class="reference internal" href="#confidence-intervals">Confidence Intervals</a></li>
+<li><a class="reference internal" href="#hypothesis-testing">Hypothesis Testing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-metrics">Performance Metrics</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#functions">Functions</a><ul>
 <li><a class="reference internal" href="#compute-metrics-t-x-u-sigma-max-force"><code class="docutils literal notranslate"><span class="pre">compute_metrics(t,</span> <span class="pre">x,</span> <span class="pre">u,</span> <span class="pre">sigma,</span> <span class="pre">max_force)</span></code></a></li>
@@ -1220,6 +1463,13 @@ Comprehensive comparison results</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#basic-statistical-benchmarking">Basic Statistical Benchmarking</a></li>
+<li><a class="reference internal" href="#advanced-bootstrap-confidence-intervals">Advanced: Bootstrap Confidence Intervals</a></li>
+<li><a class="reference internal" href="#controller-comparison-with-hypothesis-testing">Controller Comparison with Hypothesis Testing</a></li>
+<li><a class="reference internal" href="#batch-benchmarking-multiple-controllers">Batch Benchmarking Multiple Controllers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1238,6 +1488,10 @@ Comprehensive comparison results</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

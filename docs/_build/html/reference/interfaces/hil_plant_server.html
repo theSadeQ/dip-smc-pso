@@ -492,6 +492,279 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p><em>No module docstring available.</em></p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="real-time-dynamics-simulation">
+<h3>Real-Time Dynamics Simulation<a class="headerlink" href="#real-time-dynamics-simulation" title="Link to this heading">¶</a></h3>
+<p>The plant server runs high-fidelity dynamics simulation with real-time constraints:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{\vec{x}}(t) = f(\vec{x}(t), u(t))\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{x} \in \mathbb{R}^6\)</span>: Full state (cart position, pendulum angles, velocities)</p></li>
+<li><p><span class="math notranslate nohighlight">\(u \in \mathbb{R}\)</span>: Control input from remote controller</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span>: Nonlinear dynamics function with all coupling effects</p></li>
+</ul>
+</section>
+<section id="communication-protocol">
+<h3>Communication Protocol<a class="headerlink" href="#communication-protocol" title="Link to this heading">¶</a></h3>
+<p>TCP socket communication with message framing:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Message} = \text{Header}(\text{size}, \text{type}) || \text{Payload}(\vec{x}, t)\]</div>
+</div>
+<p><strong>Message Format:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Header</strong>: 8 bytes (4-byte size + 4-byte type)</p></li>
+<li><p><strong>Payload</strong>: State vector + timestamp (56 bytes)</p></li>
+<li><p><strong>Total</strong>: 64 bytes per message</p></li>
+</ol>
+</section>
+<section id="latency-model">
+<h3>Latency Model<a class="headerlink" href="#latency-model" title="Link to this heading">¶</a></h3>
+<p>Total round-trip latency components:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{total}} = T_{\text{serialize}} + T_{\text{network}} + T_{\text{process}} + T_{\text{deserialize}}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_{\text{serialize}}\)</span>: JSON serialization time (~0.5 ms)</p></li>
+<li><p><span class="math notranslate nohighlight">\(T_{\text{network}}\)</span>: TCP round-trip time (configurable, default 5 ms)</p></li>
+<li><p><span class="math notranslate nohighlight">\(T_{\text{process}}\)</span>: Controller computation time (variable)</p></li>
+<li><p><span class="math notranslate nohighlight">\(T_{\text{deserialize}}\)</span>: JSON deserialization time (~0.5 ms)</p></li>
+</ul>
+<p><strong>Timing Constraint:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{total}} &lt; \Delta t \quad \text{(Control period constraint)}\]</div>
+</div>
+</section>
+<section id="sensor-noise-model">
+<h3>Sensor Noise Model<a class="headerlink" href="#sensor-noise-model" title="Link to this heading">¶</a></h3>
+<p>Additive Gaussian noise on state measurements:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tilde{\vec{x}}(t) = \vec{x}(t) + \vec{\eta}(t), \quad \vec{\eta} \sim \mathcal{N}(0, \sigma^2 I)\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tilde{\vec{x}}\)</span>: Noisy measurement</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{\eta}\)</span>: Gaussian noise vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Standard deviation (configurable, default 0.01)</p></li>
+</ul>
+</section>
+<section id="server-architecture">
+<h3>Server Architecture<a class="headerlink" href="#server-architecture" title="Link to this heading">¶</a></h3>
+<p><strong>Thread-Safe State Management:</strong></p>
+<ul class="simple">
+<li><p>Main dynamics thread: Runs simulation at fixed timestep</p></li>
+<li><p>Network thread: Handles TCP connections and message exchange</p></li>
+<li><p>Shared state: Protected by locks for thread safety</p></li>
+</ul>
+<p><strong>Graceful Degradation:</strong></p>
+<ul class="simple">
+<li><p>Connection timeout: 10 seconds</p></li>
+<li><p>Maximum steps: Prevents infinite loops</p></li>
+<li><p>Failsafe shutdown: Clean resource cleanup on errors</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[TCP Socket Listener] --&gt; B[Accept Connection]
+    B --&gt; C[Spawn Server Thread]
+    C --&gt; D{Receive Request}
+    D --&gt; E[Deserialize Message]
+    E --&gt; F[Extract Control Input]
+    F --&gt; G[Step Dynamics]
+    G --&gt; H[Add Sensor Noise]
+    H --&gt; I[Serialize State]
+    I --&gt; J[Send Response]
+    J --&gt; K{Connection Active?}
+    K --&gt;|Yes| D
+    K --&gt;|No| L[Cleanup &amp; Exit]
+
+    G --&gt; M[Dynamics Model]
+    M --&gt; N[Compute Derivatives]
+    N --&gt; O[Integrate Step]
+    O --&gt; P[Update State]
+
+    style G fill:#9cf
+    style H fill:#ff9
+    style M fill:#f9f
+    style L fill:#9f9
+        </div><p><strong>Data Flow:</strong></p>
+<ol class="arabic simple">
+<li><p>Listen for client connections on TCP socket</p></li>
+<li><p>Receive control input from client</p></li>
+<li><p>Step dynamics simulation with control</p></li>
+<li><p>Add configurable sensor noise</p></li>
+<li><p>Send noisy state back to client</p></li>
+<li><p>Repeat until simulation complete</p></li>
+</ol>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-hil-server-setup">
+<h3>Example 1: Basic HIL Server Setup<a class="headerlink" href="#example-1-basic-hil-server-setup" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlantServer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_config</span>
+
+<span class="c1"># Load configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+
+<span class="c1"># Initialize server</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">PlantServer</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>  <span class="c1"># 10 ms control period</span>
+    <span class="n">extra_latency_ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># 5 ms network latency</span>
+    <span class="n">sensor_noise_std</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>  <span class="c1"># 1% sensor noise</span>
+    <span class="n">max_steps</span><span class="o">=</span><span class="mi">5000</span>  <span class="c1"># 50 seconds simulation</span>
+<span class="p">)</span>
+
+<span class="c1"># Start server (blocks until client connects)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Server runs until client disconnects or max_steps reached</span>
+<span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-custom-dynamics-configuration">
+<h3>Example 2: Custom Dynamics Configuration<a class="headerlink" href="#example-2-custom-dynamics-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlantServer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.full</span><span class="w"> </span><span class="kn">import</span> <span class="n">FullDIPDynamics</span>
+
+<span class="c1"># Create high-fidelity dynamics model</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">FullDIPDynamics</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">enable_monitoring</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">enable_validation</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Server with custom dynamics</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">PlantServer</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>  <span class="c1"># Listen on all interfaces</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Override dynamics model</span>
+<span class="n">server</span><span class="o">.</span><span class="n">_dynamics</span> <span class="o">=</span> <span class="n">dynamics</span>
+
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-multi-client-testing">
+<h3>Example 3: Multi-Client Testing<a class="headerlink" href="#example-3-multi-client-testing" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlantServer</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_server</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">):</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">PlantServer</span><span class="p">(</span>
+        <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+        <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span>
+    <span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Run multiple servers for parallel testing</span>
+<span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5555</span><span class="p">,</span> <span class="mi">5556</span><span class="p">,</span> <span class="mi">5557</span><span class="p">]:</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run_server</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="mi">5000</span><span class="p">))</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Wait for all servers to complete</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All parallel tests complete&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-server-with-logging-and-monitoring">
+<h3>Example 4: Server with Logging and Monitoring<a class="headerlink" href="#example-4-server-with-logging-and-monitoring" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlantServer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Configure detailed logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;hil_server.log&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Server with logging</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">PlantServer</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">extra_latency_ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">sensor_noise_std</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Enable detailed monitoring</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;HIL.PlantServer&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting HIL plant server...&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Server error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Server shutdown complete&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-profiling">
+<h3>Example 5: Performance Profiling<a class="headerlink" href="#example-5-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlantServer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
+
+<span class="c1"># Metrics collection</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;step_times&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;memory_usage&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;cpu_usage&#39;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+
+<span class="c1"># Custom server with profiling</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">PlantServer</span><span class="p">(</span><span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c1"># Override step function for profiling</span>
+<span class="n">original_step</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">_step</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">profiled_step</span><span class="p">(</span><span class="n">control</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">original_step</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+    <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;step_times&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+    <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;memory_usage&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">Process</span><span class="p">()</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">rss</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_percent</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">server</span><span class="o">.</span><span class="n">_step</span> <span class="o">=</span> <span class="n">profiled_step</span>
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Analyze performance</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean step time: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;step_times&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max memory: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;memory_usage&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean CPU: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1138,6 +1411,23 @@
             <ul>
 <li><a class="reference internal" href="#">interfaces.hil.plant_server</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#real-time-dynamics-simulation">Real-Time Dynamics Simulation</a></li>
+<li><a class="reference internal" href="#communication-protocol">Communication Protocol</a></li>
+<li><a class="reference internal" href="#latency-model">Latency Model</a></li>
+<li><a class="reference internal" href="#sensor-noise-model">Sensor Noise Model</a></li>
+<li><a class="reference internal" href="#server-architecture">Server Architecture</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-hil-server-setup">Example 1: Basic HIL Server Setup</a></li>
+<li><a class="reference internal" href="#example-2-custom-dynamics-configuration">Example 2: Custom Dynamics Configuration</a></li>
+<li><a class="reference internal" href="#example-3-multi-client-testing">Example 3: Multi-Client Testing</a></li>
+<li><a class="reference internal" href="#example-4-server-with-logging-and-monitoring">Example 4: Server with Logging and Monitoring</a></li>
+<li><a class="reference internal" href="#example-5-performance-profiling">Example 5: Performance Profiling</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#plantserver"><code class="docutils literal notranslate"><span class="pre">PlantServer</span></code></a><ul>
@@ -1195,6 +1485,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

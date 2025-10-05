@@ -494,6 +494,137 @@
 <p>This module provides comprehensive metrics computation for validating
 control system performance, statistical analysis, and benchmarking.</p>
 </section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Simulation Result] --&gt; B[Time Vector t]
+    A --&gt; C[State Trajectory x_t_]
+    A --&gt; D[Control Signal u_t_]
+
+    B --&gt; E[Control Metrics]
+    C --&gt; E
+    E --&gt; F[ISE]
+    E --&gt; G[ITAE]
+    E --&gt; H[RMS Control]
+
+    B --&gt; I[Stability Metrics]
+    C --&gt; I
+    I --&gt; J[Overshoot]
+    I --&gt; K[Settling Time]
+    I --&gt; L[Damping Ratio]
+
+    B --&gt; M[Constraint Metrics]
+    D --&gt; M
+    M --&gt; N[Saturation Severity]
+    M --&gt; O[Violation Count]
+    M --&gt; P[Peak Violation]
+
+    F --&gt; Q[Metrics Dictionary]
+    G --&gt; Q
+    H --&gt; Q
+    J --&gt; Q
+    K --&gt; Q
+    L --&gt; Q
+    N --&gt; Q
+    O --&gt; Q
+    P --&gt; Q
+    Q --&gt; R[Validation Result]
+
+    style E fill:#9cf
+    style I fill:#fcf
+    style M fill:#ff9
+    style Q fill:#f9f
+    style R fill:#9f9
+        </div><p><strong>Data Flow:</strong></p>
+<ol class="arabic simple">
+<li><p>Extract time, state, control trajectories from simulation</p></li>
+<li><p><strong>Control Metrics Module</strong>: Compute ISE, ITAE, RMS</p></li>
+<li><p><strong>Stability Metrics Module</strong>: Compute overshoot, settling time, damping</p></li>
+<li><p><strong>Constraint Metrics Module</strong>: Compute violations and severity</p></li>
+<li><p>Aggregate all metrics into unified dictionary</p></li>
+<li><p>Return structured validation result</p></li>
+</ol>
+<p><strong>Metric Categories:</strong></p>
+<ul class="simple">
+<li><p><strong>Control Performance</strong>: Tracking accuracy, convergence speed</p></li>
+<li><p><strong>Stability Analysis</strong>: Overshoot, damping characteristics</p></li>
+<li><p><strong>Constraint Satisfaction</strong>: Actuator limits, physical constraints</p></li>
+</ul>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="performance-metric-theory">
+<h3>Performance Metric Theory<a class="headerlink" href="#performance-metric-theory" title="Link to this heading">¶</a></h3>
+<p>Rigorous performance metrics enable objective controller comparison and validation against specifications.</p>
+<section id="control-engineering-metrics">
+<h4>Control Engineering Metrics<a class="headerlink" href="#control-engineering-metrics" title="Link to this heading">¶</a></h4>
+<p><strong>Integral of Time-weighted Absolute Error (ITAE)</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[ITAE = \int_0^T t |\vec{x}(t)| dt\]</div>
+</div>
+<ul class="simple">
+<li><p><strong>Purpose</strong>: Penalizes long settling times</p></li>
+<li><p><strong>Property</strong>: Emphasizes late-time errors more than early errors</p></li>
+<li><p><strong>Interpretation</strong>: Lower ITAE → faster convergence</p></li>
+</ul>
+<p><strong>Overshoot</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[OS = \frac{\max(x(t)) - x_{\text{ref}}}{x_{\text{ref}}} \times 100\%\]</div>
+</div>
+<p><strong>Damping Ratio</strong> (estimated from overshoot):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\zeta \approx \frac{-\ln(OS/100)}{\sqrt{\pi^2 + \ln^2(OS/100)}}\]</div>
+</div>
+</section>
+<section id="constraint-violation-analysis">
+<h4>Constraint Violation Analysis<a class="headerlink" href="#constraint-violation-analysis" title="Link to this heading">¶</a></h4>
+<p><strong>Saturation Severity</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[SV = \int_0^T \max(0, |u(t)| - u_{\max}) dt\]</div>
+</div>
+<p><strong>Violation Frequency</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[VF = \frac{1}{T} \sum_{k=0}^{N} \mathbb{1}_{|u_k| &gt; u_{\max}}\]</div>
+</div>
+<p><strong>Peak Violation</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})\]</div>
+</div>
+</section>
+<section id="stability-metrics">
+<h4>Stability Metrics<a class="headerlink" href="#stability-metrics" title="Link to this heading">¶</a></h4>
+<p><strong>Lyapunov Exponent</strong> (numerical estimate):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\lambda = \lim_{T \to \infty} \frac{1}{T} \ln \frac{||\delta \vec{x}(T)||}{||\delta \vec{x}(0)||}\]</div>
+</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\lambda &lt; 0\)</span>: Asymptotically stable</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>: Unstable (chaos)</p></li>
+</ul>
+<p><strong>Energy Dissipation Rate</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{E} = \frac{dE}{dt} &lt; 0 \quad \forall t &gt; t_0\]</div>
+</div>
+<p>Required for Lyapunov stability.</p>
+</section>
+</section>
+<section id="statistical-properties">
+<h3>Statistical Properties<a class="headerlink" href="#statistical-properties" title="Link to this heading">¶</a></h3>
+<p><strong>Consistency</strong>: Metrics should be monotonic in performance (better control → lower ISE).</p>
+<p><strong>Sensitivity</strong>: Sufficient resolution to distinguish controller variants.</p>
+<p><strong>Robustness</strong>: Insensitive to numerical noise and discretization.</p>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../control_theory/performance_specifications</span></p>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1433,6 +1564,148 @@ Dictionary containing comprehensive metrics</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">warnings</span></code></p></li>
 </ul>
 </section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="compute-all-metrics-for-a-simulation">
+<h3>Compute All Metrics for a Simulation<a class="headerlink" href="#compute-all-metrics-for-a-simulation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_all_metrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines.simulation_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_simulation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_smc_for_pso</span><span class="p">,</span> <span class="n">SMCType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDynamics</span>
+
+<span class="c1"># Run simulation</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDynamics</span><span class="p">()</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">sim_time</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Compute comprehensive metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_all_metrics</span><span class="p">(</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">,</span>
+    <span class="n">u</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">,</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">include_advanced</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Access metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Control Performance:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ISE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ITAE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;itae&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  RMS Control: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;rms_control&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="n">Stability</span> <span class="n">Analysis</span><span class="p">:</span><span class="s2">&quot;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Settling Time: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;settling_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Overshoot: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;overshoot&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Damping Ratio: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;damping_ratio&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="n">Constraint</span> <span class="n">Violations</span><span class="p">:</span><span class="s2">&quot;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Saturation Count: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;saturation_count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Saturation Severity: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;saturation_severity&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="individual-metric-computation">
+<h3>Individual Metric Computation<a class="headerlink" href="#individual-metric-computation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.metrics.control_metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_ise</span><span class="p">,</span> <span class="n">compute_itae</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.metrics.stability_metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_overshoot</span><span class="p">,</span> <span class="n">compute_settling_time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.metrics.constraint_metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">count_control_violations</span>
+
+<span class="c1"># Control metrics</span>
+<span class="n">ise</span> <span class="o">=</span> <span class="n">compute_ise</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+<span class="n">itae</span> <span class="o">=</span> <span class="n">compute_itae</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+
+<span class="c1"># Stability metrics</span>
+<span class="n">overshoot</span> <span class="o">=</span> <span class="n">compute_overshoot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># First angle</span>
+<span class="n">settling_time</span> <span class="o">=</span> <span class="n">compute_settling_time</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="c1"># Constraint violations</span>
+<span class="n">violations</span><span class="p">,</span> <span class="n">severity</span><span class="p">,</span> <span class="n">peak</span> <span class="o">=</span> <span class="n">count_control_violations</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISE: </span><span class="si">{</span><span class="n">ise</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, ITAE: </span><span class="si">{</span><span class="n">itae</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Overshoot: </span><span class="si">{</span><span class="n">overshoot</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Settling: </span><span class="si">{</span><span class="n">settling_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Violations: </span><span class="si">{</span><span class="n">violations</span><span class="si">}</span><span class="s2">, Severity: </span><span class="si">{</span><span class="n">severity</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Peak: </span><span class="si">{</span><span class="n">peak</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="custom-metric-chattering-index">
+<h3>Custom Metric: Chattering Index<a class="headerlink" href="#custom-metric-chattering-index" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_chattering_index</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Quantify control chattering.&quot;&quot;&quot;</span>
+    <span class="c1"># Total variation of control signal</span>
+    <span class="n">tv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span> <span class="o">*</span> <span class="n">dt</span>
+    <span class="k">return</span> <span class="n">tv</span>
+
+<span class="n">chattering</span> <span class="o">=</span> <span class="n">compute_chattering_index</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chattering Index: </span><span class="si">{</span><span class="n">chattering</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compare chattering across controllers</span>
+<span class="n">controllers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Classical&#39;</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>
+    <span class="s1">&#39;STA&#39;</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">SUPER_TWISTING</span><span class="p">,</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]),</span>
+<span class="p">}</span>
+
+<span class="n">chattering_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ctrl</span> <span class="ow">in</span> <span class="n">controllers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">ctrl</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">chattering_results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_chattering_index</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ci</span> <span class="ow">in</span> <span class="n">chattering_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> Chattering: </span><span class="si">{</span><span class="n">ci</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="energy-based-metrics">
+<h3>Energy-Based Metrics<a class="headerlink" href="#energy-based-metrics" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Track energy conservation (for unforced natural dynamics)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_energy_drift</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Measure energy drift as validation check.&quot;&quot;&quot;</span>
+    <span class="n">energies</span> <span class="o">=</span> <span class="p">[</span><span class="n">dynamics</span><span class="o">.</span><span class="n">compute_total_energy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">]</span>
+    <span class="n">initial_energy</span> <span class="o">=</span> <span class="n">energies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span> <span class="o">-</span> <span class="n">initial_energy</span><span class="p">)</span> <span class="o">/</span> <span class="n">initial_energy</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">max_drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">drift</span><span class="p">)</span>
+    <span class="n">mean_drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">drift</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;max_drift_%&#39;</span><span class="p">:</span> <span class="n">max_drift</span><span class="p">,</span> <span class="s1">&#39;mean_drift_%&#39;</span><span class="p">:</span> <span class="n">mean_drift</span><span class="p">}</span>
+
+<span class="n">energy_metrics</span> <span class="o">=</span> <span class="n">compute_energy_drift</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Energy drift: </span><span class="si">{</span><span class="n">energy_metrics</span><span class="p">[</span><span class="s1">&#39;max_drift_%&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">% (max), &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">energy_metrics</span><span class="p">[</span><span class="s1">&#39;mean_drift_%&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">% (mean)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-metric-computation-for-trials">
+<h3>Batch Metric Computation for Trials<a class="headerlink" href="#batch-metric-computation-for-trials" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_all_metrics</span>
+
+<span class="c1"># Compute metrics for multiple trials</span>
+<span class="n">trials_results</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List of simulation results from multiple runs</span>
+
+<span class="n">metrics_collection</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">trials_results</span><span class="p">:</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_all_metrics</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span>
+    <span class="n">metrics_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+
+<span class="c1"># Aggregate statistics</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metrics_collection</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Metric Statistics Across Trials:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;ise&#39;</span><span class="p">,</span> <span class="s1">&#39;settling_time&#39;</span><span class="p">,</span> <span class="s1">&#39;overshoot&#39;</span><span class="p">,</span> <span class="s1">&#39;rms_control&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../performance_metrics/metric_definitions</span></p>
+</section>
+</section>
 </section>
 
         </article>
@@ -1475,6 +1748,17 @@ Dictionary containing comprehensive metrics</p>
             <ul>
 <li><a class="reference internal" href="#">analysis.validation.metrics</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#performance-metric-theory">Performance Metric Theory</a><ul>
+<li><a class="reference internal" href="#control-engineering-metrics">Control Engineering Metrics</a></li>
+<li><a class="reference internal" href="#constraint-violation-analysis">Constraint Violation Analysis</a></li>
+<li><a class="reference internal" href="#stability-metrics">Stability Metrics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#statistical-properties">Statistical Properties</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#functions">Functions</a><ul>
 <li><a class="reference internal" href="#compute-basic-metrics-data"><code class="docutils literal notranslate"><span class="pre">compute_basic_metrics(data)</span></code></a><ul>
@@ -1512,6 +1796,14 @@ Dictionary containing comprehensive metrics</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#compute-all-metrics-for-a-simulation">Compute All Metrics for a Simulation</a></li>
+<li><a class="reference internal" href="#individual-metric-computation">Individual Metric Computation</a></li>
+<li><a class="reference internal" href="#custom-metric-chattering-index">Custom Metric: Chattering Index</a></li>
+<li><a class="reference internal" href="#energy-based-metrics">Energy-Based Metrics</a></li>
+<li><a class="reference internal" href="#batch-metric-computation-for-trials">Batch Metric Computation for Trials</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1530,6 +1822,10 @@ Dictionary containing comprehensive metrics</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -495,6 +495,310 @@ This module provides comprehensive test automation capabilities including
 test case management, assertion validation, performance testing, and
 automated report generation for control system validation.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="automated-testing-framework">
+<h3>Automated Testing Framework<a class="headerlink" href="#automated-testing-framework" title="Link to this heading">¶</a></h3>
+<p>Systematic testing of control systems:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{T} = \{(\vec{x}_0^{(i)}, u_{\text{profile}}^{(i)}, \text{criteria}^{(i)})\}_{i=1}^{M}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{x}_0^{(i)}\)</span>: Initial condition for test <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(u_{\text{profile}}^{(i)}\)</span>: Reference control profile</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{criteria}^{(i)}\)</span>: Pass/fail criteria</p></li>
+</ul>
+</section>
+<section id="test-coverage-metrics">
+<h3>Test Coverage Metrics<a class="headerlink" href="#test-coverage-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>1. State Space Coverage:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[C_{\text{state}} = \frac{|\mathcal{X}_{\text{tested}}|}{|\mathcal{X}_{\text{total}}|}\]</div>
+</div>
+<p><strong>2. Input Space Coverage:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[C_{\text{input}} = \frac{|\mathcal{U}_{\text{tested}}|}{|\mathcal{U}_{\text{total}}|}\]</div>
+</div>
+<p><strong>3. Scenario Coverage:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[C_{\text{scenario}} = \frac{\text{Scenarios Tested}}{\text{Total Scenarios}}\]</div>
+</div>
+</section>
+<section id="test-case-generation">
+<h3>Test Case Generation<a class="headerlink" href="#test-case-generation" title="Link to this heading">¶</a></h3>
+<p><strong>1. Grid-Based Sampling:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{X}_{\text{test}} = \{\vec{x}_0^{(i,j,k)}\} = \{(x_i, \theta_{1,j}, \theta_{2,k})\}\]</div>
+</div>
+<p><strong>2. Latin Hypercube Sampling:</strong>
+Stratified random sampling for better coverage.</p>
+<p><strong>3. Boundary Testing:</strong>
+Test extreme values and edge cases:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{\text{boundary}} \in \partial \mathcal{X}\]</div>
+</div>
+</section>
+<section id="pass-fail-criteria">
+<h3>Pass/Fail Criteria<a class="headerlink" href="#pass-fail-criteria" title="Link to this heading">¶</a></h3>
+<p><strong>1. Stability Criterion:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{PASS} \Leftrightarrow \lim_{t \to \infty} \|\vec{x}(t)\| &lt; \epsilon_{\text{stable}}\]</div>
+</div>
+<p><strong>2. Performance Criterion:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{PASS} \Leftrightarrow \text{ITAE} &lt; \text{ITAE}_{\text{threshold}}\]</div>
+</div>
+<p><strong>3. Safety Criterion:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{PASS} \Leftrightarrow \forall t : |u(t)| \leq u_{\text{max}}\]</div>
+</div>
+</section>
+<section id="regression-testing">
+<h3>Regression Testing<a class="headerlink" href="#regression-testing" title="Link to this heading">¶</a></h3>
+<p><strong>Performance Regression Detection:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta P = P_{\text{current}} - P_{\text{baseline}}\]</div>
+</div>
+<p><strong>Statistical Significance Test:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[H_0 : \mu_{\text{current}} = \mu_{\text{baseline}}\]</div>
+</div>
+<p>Use t-test with significance level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>.</p>
+</section>
+<section id="continuous-integration-workflow">
+<h3>Continuous Integration Workflow<a class="headerlink" href="#continuous-integration-workflow" title="Link to this heading">¶</a></h3>
+<p><strong>1. Commit Trigger:</strong>
+Every code change triggers automated tests.</p>
+<p><strong>2. Test Execution:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Result} = \bigwedge_{i=1}^{M} \text{Test}_i(\text{Code})\]</div>
+</div>
+<p><strong>3. Report Generation:</strong></p>
+<ul class="simple">
+<li><p>Pass/fail summary</p></li>
+<li><p>Performance metrics</p></li>
+<li><p>Regression analysis</p></li>
+</ul>
+</section>
+<section id="test-execution-time">
+<h3>Test Execution Time<a class="headerlink" href="#test-execution-time" title="Link to this heading">¶</a></h3>
+<p><strong>Total Execution Time:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{total}} = \sum_{i=1}^{M} T_{\text{test}}^{(i)}\]</div>
+</div>
+<p><strong>Parallelization Speedup:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[S = \frac{T_{\text{sequential}}}{T_{\text{parallel}}}\]</div>
+</div>
+</section>
+<section id="test-reliability">
+<h3>Test Reliability<a class="headerlink" href="#test-reliability" title="Link to this heading">¶</a></h3>
+<p><strong>Flaky Test Detection:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[P(\text{flaky}) = \frac{\text{Inconsistent Results}}{\text{Total Runs}}\]</div>
+</div>
+<p><strong>Target:</strong> <span class="math notranslate nohighlight">\(P(\text{flaky}) &lt; 0.01\)</span> (1% flakiness)</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Test Suite] --&gt; B[Test Generator]
+    B --&gt; C{Generation Method}
+    C --&gt;|Grid| D[Grid Sampling]
+    C --&gt;|Random| E[Latin Hypercube]
+    C --&gt;|Boundary| F[Boundary Testing]
+
+    D --&gt; G[Test Case Pool]
+    E --&gt; G
+    F --&gt; G
+
+    G --&gt; H[Test Executor]
+    H --&gt; I[Run HIL Simulation]
+    I --&gt; J[Collect Results]
+    J --&gt; K{Pass/Fail}
+
+    K --&gt;|Pass| L[Success Log]
+    K --&gt;|Fail| M[Failure Analysis]
+
+    M --&gt; N[Debug Report]
+    M --&gt; O[Regression Check]
+
+    L --&gt; P[Test Report]
+    N --&gt; P
+    O --&gt; P
+
+    P --&gt; Q[CI Dashboard]
+
+    style H fill:#9cf
+    style K fill:#ff9
+    style P fill:#f9f
+    style Q fill:#9f9
+        </div><p><strong>Automated Testing Workflow:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Test Generation</strong>: Create test cases using sampling strategies</p></li>
+<li><p><strong>Test Execution</strong>: Run HIL simulations for each test case</p></li>
+<li><p><strong>Result Collection</strong>: Gather performance metrics and logs</p></li>
+<li><p><strong>Pass/Fail Evaluation</strong>: Check against acceptance criteria</p></li>
+<li><p><strong>Reporting</strong>: Generate comprehensive test report</p></li>
+<li><p><strong>Integration</strong>: Push results to CI dashboard</p></li>
+</ol>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-test-suite">
+<h3>Example 1: Basic Test Suite<a class="headerlink" href="#example-1-basic-test-suite" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.test_automation</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestSuite</span>
+
+<span class="c1"># Create test suite</span>
+<span class="n">suite</span> <span class="o">=</span> <span class="n">TestSuite</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;HIL_Controller_Tests&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define test cases</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_test</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;stability_test&quot;</span><span class="p">,</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">pass_criteria</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;max_angle&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="s2">&quot;settling_time&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">suite</span><span class="o">.</span><span class="n">add_test</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;disturbance_rejection&quot;</span><span class="p">,</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="n">disturbance</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="s2">&quot;magnitude&quot;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">},</span>
+    <span class="n">pass_criteria</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;recovery_time&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Run all tests</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">suite</span><span class="o">.</span><span class="n">run_all</span><span class="p">()</span>
+
+<span class="c1"># Report</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">print_report</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-grid-based-test-generation">
+<h3>Example 2: Grid-Based Test Generation<a class="headerlink" href="#example-2-grid-based-test-generation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.test_automation</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridTestGenerator</span>
+
+<span class="c1"># Generate test cases on grid</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="n">GridTestGenerator</span><span class="p">()</span>
+
+<span class="c1"># Define parameter ranges</span>
+<span class="n">theta1_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">theta2_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">test_cases</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+    <span class="n">theta1</span><span class="o">=</span><span class="n">theta1_values</span><span class="p">,</span>
+    <span class="n">theta2</span><span class="o">=</span><span class="n">theta2_values</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">],</span>  <span class="c1"># Fixed cart position</span>
+    <span class="n">velocities</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>  <span class="c1"># Zero initial velocity</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_cases</span><span class="p">)</span><span class="si">}</span><span class="s2"> test cases&quot;</span><span class="p">)</span>
+
+<span class="c1"># Run all generated tests</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">test_case</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_cases</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_hil_simulation</span><span class="p">(</span><span class="n">initial_state</span><span class="o">=</span><span class="n">test_case</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">stable</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-monte-carlo-robustness-testing">
+<h3>Example 3: Monte Carlo Robustness Testing<a class="headerlink" href="#example-3-monte-carlo-robustness-testing" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.test_automation</span><span class="w"> </span><span class="kn">import</span> <span class="n">MonteCarloTester</span>
+
+<span class="c1"># Monte Carlo test generator</span>
+<span class="n">tester</span> <span class="o">=</span> <span class="n">MonteCarloTester</span><span class="p">(</span><span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Define parameter distributions</span>
+<span class="n">tester</span><span class="o">.</span><span class="n">set_distribution</span><span class="p">(</span>
+    <span class="s2">&quot;theta1&quot;</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="p">)</span>
+<span class="n">tester</span><span class="o">.</span><span class="n">set_distribution</span><span class="p">(</span>
+    <span class="s2">&quot;theta2&quot;</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="p">)</span>
+<span class="n">tester</span><span class="o">.</span><span class="n">set_distribution</span><span class="p">(</span>
+    <span class="s2">&quot;noise&quot;</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.05</span>
+<span class="p">)</span>
+
+<span class="c1"># Run Monte Carlo tests</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Analyze results</span>
+<span class="n">success_rate</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">passed</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success rate: </span><span class="si">{</span><span class="n">success_rate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-continuous-integration-testing">
+<h3>Example 4: Continuous Integration Testing<a class="headerlink" href="#example-4-continuous-integration-testing" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.test_automation</span><span class="w"> </span><span class="kn">import</span> <span class="n">CITestRunner</span>
+
+<span class="c1"># CI test runner</span>
+<span class="n">ci_runner</span> <span class="o">=</span> <span class="n">CITestRunner</span><span class="p">(</span>
+    <span class="n">test_suite_path</span><span class="o">=</span><span class="s2">&quot;tests/hil_tests.yaml&quot;</span><span class="p">,</span>
+    <span class="n">report_path</span><span class="o">=</span><span class="s2">&quot;ci_report.json&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Run tests</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">ci_runner</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Check for regressions</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">has_regressions</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;REGRESSION DETECTED!&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">regressions</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">baseline_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s -&gt; </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">current_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All tests passed, no regressions&quot;</span><span class="p">)</span>
+<span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-adaptive-test-difficulty">
+<h3>Example 5: Adaptive Test Difficulty<a class="headerlink" href="#example-5-adaptive-test-difficulty" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.test_automation</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveTester</span>
+
+<span class="c1"># Adaptive tester</span>
+<span class="n">tester</span> <span class="o">=</span> <span class="n">AdaptiveTester</span><span class="p">(</span>
+    <span class="n">initial_difficulty</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">adjustment_rate</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="p">)</span>
+
+<span class="c1"># Run adaptive tests</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">test_case</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">generate_test</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_hil_simulation</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
+
+    <span class="c1"># Adjust difficulty based on result</span>
+    <span class="n">tester</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">passed</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: difficulty=</span><span class="si">{</span><span class="n">tester</span><span class="o">.</span><span class="n">current_difficulty</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;result=</span><span class="si">{</span><span class="s1">&#39;PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">passed</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Report final difficulty</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final difficulty: </span><span class="si">{</span><span class="n">tester</span><span class="o">.</span><span class="n">current_difficulty</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -1905,6 +2209,26 @@ performance testing, and report generation capabilities.</p>
             <ul>
 <li><a class="reference internal" href="#">interfaces.hil.test_automation</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#automated-testing-framework">Automated Testing Framework</a></li>
+<li><a class="reference internal" href="#test-coverage-metrics">Test Coverage Metrics</a></li>
+<li><a class="reference internal" href="#test-case-generation">Test Case Generation</a></li>
+<li><a class="reference internal" href="#pass-fail-criteria">Pass/Fail Criteria</a></li>
+<li><a class="reference internal" href="#regression-testing">Regression Testing</a></li>
+<li><a class="reference internal" href="#continuous-integration-workflow">Continuous Integration Workflow</a></li>
+<li><a class="reference internal" href="#test-execution-time">Test Execution Time</a></li>
+<li><a class="reference internal" href="#test-reliability">Test Reliability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-test-suite">Example 1: Basic Test Suite</a></li>
+<li><a class="reference internal" href="#example-2-grid-based-test-generation">Example 2: Grid-Based Test Generation</a></li>
+<li><a class="reference internal" href="#example-3-monte-carlo-robustness-testing">Example 3: Monte Carlo Robustness Testing</a></li>
+<li><a class="reference internal" href="#example-4-continuous-integration-testing">Example 4: Continuous Integration Testing</a></li>
+<li><a class="reference internal" href="#example-5-adaptive-test-difficulty">Example 5: Adaptive Test Difficulty</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#teststatus"><code class="docutils literal notranslate"><span class="pre">TestStatus</span></code></a><ul>
@@ -1991,6 +2315,10 @@ performance testing, and report generation capabilities.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -495,6 +495,309 @@ This module provides a comprehensive HIL framework with real-time capabilities,
 fault injection, automated testing, and integration with hardware interfaces
 for professional control system validation.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="enhanced-hil-capabilities">
+<h3>Enhanced HIL Capabilities<a class="headerlink" href="#enhanced-hil-capabilities" title="Link to this heading">¶</a></h3>
+<p>Advanced HIL features beyond basic simulation:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{HIL}_{\text{enhanced}} = \text{HIL}_{\text{basic}} + \mathcal{F}_{\text{advanced}}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathcal{F}_{\text{advanced}}\)</span> includes parameter variation, disturbance injection, and adaptive testing.</p>
+</section>
+<section id="parameter-variation-studies">
+<h3>Parameter Variation Studies<a class="headerlink" href="#parameter-variation-studies" title="Link to this heading">¶</a></h3>
+<p><strong>Systematic Parameter Sweep:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{P} = \{p_1, p_2, \ldots, p_n\} \times \{v_1, v_2, \ldots, v_m\}\]</div>
+</div>
+<p><strong>Monte Carlo Sampling:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[p_i \sim \mathcal{D}_i \quad \text{(Distribution for parameter } i\text{)}\]</div>
+</div>
+</section>
+<section id="disturbance-injection">
+<h3>Disturbance Injection<a class="headerlink" href="#disturbance-injection" title="Link to this heading">¶</a></h3>
+<p><strong>External Disturbances:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{\vec{x}} = f(\vec{x}, u) + g(\vec{x}) \vec{w}(t)\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(g(\vec{x})\)</span>: Disturbance coupling matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{w}(t)\)</span>: Disturbance signal</p></li>
+</ul>
+<p><strong>Common Disturbance Types:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Step</strong>: <span class="math notranslate nohighlight">\(w(t) = A \cdot \mathbb{1}(t \geq t_0)\)</span></p></li>
+<li><p><strong>Ramp</strong>: <span class="math notranslate nohighlight">\(w(t) = k \cdot t\)</span></p></li>
+<li><p><strong>Sinusoidal</strong>: <span class="math notranslate nohighlight">\(w(t) = A \sin(\omega t + \phi)\)</span></p></li>
+<li><p><strong>Random</strong>: <span class="math notranslate nohighlight">\(w(t) \sim \mathcal{N}(0, \sigma^2)\)</span></p></li>
+</ol>
+</section>
+<section id="adaptive-testing">
+<h3>Adaptive Testing<a class="headerlink" href="#adaptive-testing" title="Link to this heading">¶</a></h3>
+<p><strong>Difficulty Adaptation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Difficulty}(n+1) = \begin{cases}
+\text{Difficulty}(n) + \Delta &amp; \text{if PASS} \\
+\text{Difficulty}(n) - \Delta &amp; \text{if FAIL}
+\end{cases}\end{split}\]</div>
+</div>
+<p><strong>Exploration-Exploitation Tradeoff:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Test}(n) = \begin{cases}
+\text{Random} &amp; \text{with probability } \epsilon \\
+\text{Hardest Failed} &amp; \text{with probability } 1 - \epsilon
+\end{cases}\end{split}\]</div>
+</div>
+</section>
+<section id="multi-fidelity-simulation">
+<h3>Multi-Fidelity Simulation<a class="headerlink" href="#multi-fidelity-simulation" title="Link to this heading">¶</a></h3>
+<p><strong>Fidelity Levels:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{M} = \{M_{\text{low}}, M_{\text{medium}}, M_{\text{high}}\}\]</div>
+</div>
+<p><strong>Cost-Accuracy Tradeoff:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Total Cost} = \sum_{i} C_i \cdot N_i\]</div>
+</div>
+<p>Subject to accuracy constraint:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\|\text{Error}_{\text{total}}\| &lt; \epsilon_{\text{target}}\]</div>
+</div>
+</section>
+<section id="performance-profiling">
+<h3>Performance Profiling<a class="headerlink" href="#performance-profiling" title="Link to this heading">¶</a></h3>
+<p><strong>Execution Time Distribution:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{exec}} \sim \mathcal{D}_{\text{exec}}\]</div>
+</div>
+<p><strong>Percentile Analysis:</strong></p>
+<ul class="simple">
+<li><p>P50 (median)</p></li>
+<li><p>P95 (tail latency)</p></li>
+<li><p>P99 (worst-case)</p></li>
+</ul>
+</section>
+<section id="hardware-emulation">
+<h3>Hardware Emulation<a class="headerlink" href="#hardware-emulation" title="Link to this heading">¶</a></h3>
+<p><strong>Virtual Hardware Models:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Virtual Actuator}: u_{\text{actual}} = h(u_{\text{cmd}}, \vec{p}_{\text{hw}})\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\vec{p}_{\text{hw}}\)</span> includes hardware parameters (bandwidth, saturation, delay).</p>
+<p><strong>Sensor Emulation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[y = C\vec{x} + \vec{v}, \quad \vec{v} \sim \mathcal{N}(0, R)\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Enhanced HIL] --&gt; B[Parameter Variation]
+    B --&gt; C[Monte Carlo Sampling]
+    B --&gt; D[Grid Search]
+
+    A --&gt; E[Disturbance Injection]
+    E --&gt; F[Step Disturbance]
+    E --&gt; G[Sinusoidal Disturbance]
+    E --&gt; H[Random Disturbance]
+
+    A --&gt; I[Adaptive Testing]
+    I --&gt; J[Difficulty Adaptation]
+    I --&gt; K[Exploration/Exploitation]
+
+    A --&gt; L[Multi-Fidelity]
+    L --&gt; M[Low Fidelity Model]
+    L --&gt; N[Medium Fidelity Model]
+    L --&gt; O[High Fidelity Model]
+
+    C --&gt; P[Test Execution]
+    D --&gt; P
+    F --&gt; P
+    G --&gt; P
+    H --&gt; P
+    J --&gt; P
+    K --&gt; P
+    M --&gt; P
+    N --&gt; P
+    O --&gt; P
+
+    P --&gt; Q[Results Analysis]
+    Q --&gt; R[Performance Profiling]
+    Q --&gt; S[Robustness Assessment]
+
+    style A fill:#9cf
+    style P fill:#ff9
+    style Q fill:#f9f
+        </div><p><strong>Enhanced Features:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Parameter Variation</strong>: Systematic exploration of parameter space</p></li>
+<li><p><strong>Disturbance Injection</strong>: Test robustness under external disturbances</p></li>
+<li><p><strong>Adaptive Testing</strong>: Dynamically adjust test difficulty</p></li>
+<li><p><strong>Multi-Fidelity</strong>: Trade accuracy for speed using model hierarchy</p></li>
+</ol>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-parameter-variation-study">
+<h3>Example 1: Parameter Variation Study<a class="headerlink" href="#example-1-parameter-variation-study" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.enhanced_hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParameterSweep</span>
+
+<span class="c1"># Parameter sweep</span>
+<span class="n">sweep</span> <span class="o">=</span> <span class="n">ParameterSweep</span><span class="p">()</span>
+
+<span class="c1"># Define parameter ranges</span>
+<span class="n">sweep</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="s2">&quot;mass_cart&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sweep</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="s2">&quot;length_1&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Run sweep</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">sweep</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Analyze sensitivity</span>
+<span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">: sensitivity = </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">sensitivity</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-disturbance-injection">
+<h3>Example 2: Disturbance Injection<a class="headerlink" href="#example-2-disturbance-injection" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.enhanced_hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">DisturbanceInjector</span>
+
+<span class="c1"># Create disturbance injector</span>
+<span class="n">injector</span> <span class="o">=</span> <span class="n">DisturbanceInjector</span><span class="p">()</span>
+
+<span class="c1"># Add sinusoidal disturbance</span>
+<span class="n">injector</span><span class="o">.</span><span class="n">add_disturbance</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;sinusoidal&quot;</span><span class="p">,</span>
+    <span class="n">amplitude</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">start_time</span><span class="o">=</span><span class="mf">2.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulate with disturbance</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># Add disturbance</span>
+    <span class="n">disturbed_control</span> <span class="o">=</span> <span class="n">injector</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="n">plant</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">disturbed_control</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-multi-fidelity-simulation">
+<h3>Example 3: Multi-Fidelity Simulation<a class="headerlink" href="#example-3-multi-fidelity-simulation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.enhanced_hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiFidelitySimulator</span>
+
+<span class="c1"># Multi-fidelity simulator</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">MultiFidelitySimulator</span><span class="p">()</span>
+
+<span class="c1"># Define fidelity levels</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s2">&quot;low&quot;</span><span class="p">,</span> <span class="n">SimplifiedDynamics</span><span class="p">())</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="n">FullDynamics</span><span class="p">(</span><span class="n">accuracy</span><span class="o">=</span><span class="s2">&quot;medium&quot;</span><span class="p">))</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="n">FullDynamics</span><span class="p">(</span><span class="n">accuracy</span><span class="o">=</span><span class="s2">&quot;high&quot;</span><span class="p">))</span>
+
+<span class="c1"># Run with adaptive fidelity</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">run_adaptive</span><span class="p">(</span>
+    <span class="n">initial_fidelity</span><span class="o">=</span><span class="s2">&quot;low&quot;</span><span class="p">,</span>
+    <span class="n">accuracy_target</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">max_cost</span><span class="o">=</span><span class="mf">100.0</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final fidelity: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">final_fidelity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total cost: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">total_cost</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy achieved: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-hardware-emulation">
+<h3>Example 4: Hardware Emulation<a class="headerlink" href="#example-4-hardware-emulation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.enhanced_hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">HardwareEmulator</span>
+
+<span class="c1"># Hardware emulator</span>
+<span class="n">emulator</span> <span class="o">=</span> <span class="n">HardwareEmulator</span><span class="p">()</span>
+
+<span class="c1"># Configure actuator model</span>
+<span class="n">emulator</span><span class="o">.</span><span class="n">set_actuator_model</span><span class="p">(</span>
+    <span class="n">bandwidth</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span>  <span class="c1"># 50 Hz bandwidth</span>
+    <span class="n">saturation</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">delay</span><span class="o">=</span><span class="mf">0.01</span>  <span class="c1"># 10 ms delay</span>
+<span class="p">)</span>
+
+<span class="c1"># Configure sensor model</span>
+<span class="n">emulator</span><span class="o">.</span><span class="n">set_sensor_model</span><span class="p">(</span>
+    <span class="n">noise_std</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">bias</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span>
+    <span class="n">dropout_rate</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulate with hardware emulation</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+
+    <span class="c1"># Emulate sensor</span>
+    <span class="n">measured_state</span> <span class="o">=</span> <span class="n">emulator</span><span class="o">.</span><span class="n">sensor</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># Compute control</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">measured_state</span><span class="p">)</span>
+
+    <span class="c1"># Emulate actuator</span>
+    <span class="n">actual_control</span> <span class="o">=</span> <span class="n">emulator</span><span class="o">.</span><span class="n">actuator</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+
+    <span class="n">plant</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actual_control</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-profiling">
+<h3>Example 5: Performance Profiling<a class="headerlink" href="#example-5-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.interfaces.hil.enhanced_hil</span><span class="w"> </span><span class="kn">import</span> <span class="n">PerformanceProfiler</span>
+
+<span class="c1"># Performance profiler</span>
+<span class="n">profiler</span> <span class="o">=</span> <span class="n">PerformanceProfiler</span><span class="p">()</span>
+
+<span class="c1"># Profile simulation</span>
+<span class="n">profiler</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">profiler</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;dynamics&quot;</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">profiler</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;control&quot;</span><span class="p">):</span>
+        <span class="n">control</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">profiler</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;communication&quot;</span><span class="p">):</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">send_control</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+
+<span class="n">profiler</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+<span class="c1"># Report profiling results</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">profiler</span><span class="o">.</span><span class="n">generate_report</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+
+<span class="c1"># Identify bottlenecks</span>
+<span class="k">for</span> <span class="n">section</span><span class="p">,</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">sorted_sections</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms (</span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">percentage</span><span class="p">(</span><span class="n">section</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -2276,6 +2579,25 @@ and automated testing for professional control system validation.</p>
             <ul>
 <li><a class="reference internal" href="#">interfaces.hil.enhanced_hil</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#enhanced-hil-capabilities">Enhanced HIL Capabilities</a></li>
+<li><a class="reference internal" href="#parameter-variation-studies">Parameter Variation Studies</a></li>
+<li><a class="reference internal" href="#disturbance-injection">Disturbance Injection</a></li>
+<li><a class="reference internal" href="#adaptive-testing">Adaptive Testing</a></li>
+<li><a class="reference internal" href="#multi-fidelity-simulation">Multi-Fidelity Simulation</a></li>
+<li><a class="reference internal" href="#performance-profiling">Performance Profiling</a></li>
+<li><a class="reference internal" href="#hardware-emulation">Hardware Emulation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-parameter-variation-study">Example 1: Parameter Variation Study</a></li>
+<li><a class="reference internal" href="#example-2-disturbance-injection">Example 2: Disturbance Injection</a></li>
+<li><a class="reference internal" href="#example-3-multi-fidelity-simulation">Example 3: Multi-Fidelity Simulation</a></li>
+<li><a class="reference internal" href="#example-4-hardware-emulation">Example 4: Hardware Emulation</a></li>
+<li><a class="reference internal" href="#example-5-performance-profiling">Example 5: Performance Profiling</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#hilmode"><code class="docutils literal notranslate"><span class="pre">HILMode</span></code></a><ul>
@@ -2383,6 +2705,10 @@ and automated testing for professional control system validation.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

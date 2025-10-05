@@ -9,6 +9,138 @@ Statistical and validation metrics for analysis systems.
 This module provides comprehensive metrics computation for validating
 control system performance, statistical analysis, and benchmarking.
 
+
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Simulation Result] --> B[Time Vector t]
+    A --> C[State Trajectory x_t_]
+    A --> D[Control Signal u_t_]
+
+    B --> E[Control Metrics]
+    C --> E
+    E --> F[ISE]
+    E --> G[ITAE]
+    E --> H[RMS Control]
+
+    B --> I[Stability Metrics]
+    C --> I
+    I --> J[Overshoot]
+    I --> K[Settling Time]
+    I --> L[Damping Ratio]
+
+    B --> M[Constraint Metrics]
+    D --> M
+    M --> N[Saturation Severity]
+    M --> O[Violation Count]
+    M --> P[Peak Violation]
+
+    F --> Q[Metrics Dictionary]
+    G --> Q
+    H --> Q
+    J --> Q
+    K --> Q
+    L --> Q
+    N --> Q
+    O --> Q
+    P --> Q
+    Q --> R[Validation Result]
+
+    style E fill:#9cf
+    style I fill:#fcf
+    style M fill:#ff9
+    style Q fill:#f9f
+    style R fill:#9f9
+```
+
+**Data Flow:**
+1. Extract time, state, control trajectories from simulation
+2. **Control Metrics Module**: Compute ISE, ITAE, RMS
+3. **Stability Metrics Module**: Compute overshoot, settling time, damping
+4. **Constraint Metrics Module**: Compute violations and severity
+5. Aggregate all metrics into unified dictionary
+6. Return structured validation result
+
+**Metric Categories:**
+- **Control Performance**: Tracking accuracy, convergence speed
+- **Stability Analysis**: Overshoot, damping characteristics
+- **Constraint Satisfaction**: Actuator limits, physical constraints
+
+
+## Mathematical Foundation
+
+### Performance Metric Theory
+
+Rigorous performance metrics enable objective controller comparison and validation against specifications.
+
+#### Control Engineering Metrics
+
+**Integral of Time-weighted Absolute Error (ITAE)**:
+```{math}
+ITAE = \int_0^T t |\vec{x}(t)| dt
+```
+
+- **Purpose**: Penalizes long settling times
+- **Property**: Emphasizes late-time errors more than early errors
+- **Interpretation**: Lower ITAE → faster convergence
+
+**Overshoot**:
+```{math}
+OS = \frac{\max(x(t)) - x_{\text{ref}}}{x_{\text{ref}}} \times 100\%
+```
+
+**Damping Ratio** (estimated from overshoot):
+```{math}
+\zeta \approx \frac{-\ln(OS/100)}{\sqrt{\pi^2 + \ln^2(OS/100)}}
+```
+
+#### Constraint Violation Analysis
+
+**Saturation Severity**:
+```{math}
+SV = \int_0^T \max(0, |u(t)| - u_{\max}) dt
+```
+
+**Violation Frequency**:
+```{math}
+VF = \frac{1}{T} \sum_{k=0}^{N} \mathbb{1}_{|u_k| > u_{\max}}
+```
+
+**Peak Violation**:
+```{math}
+PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
+```
+
+#### Stability Metrics
+
+**Lyapunov Exponent** (numerical estimate):
+```{math}
+\lambda = \lim_{T \to \infty} \frac{1}{T} \ln \frac{||\delta \vec{x}(T)||}{||\delta \vec{x}(0)||}
+```
+
+- $\lambda < 0$: Asymptotically stable
+- $\lambda > 0$: Unstable (chaos)
+
+**Energy Dissipation Rate**:
+```{math}
+\dot{E} = \frac{dE}{dt} < 0 \quad \forall t > t_0
+```
+
+Required for Lyapunov stability.
+
+### Statistical Properties
+
+**Consistency**: Metrics should be monotonic in performance (better control → lower ISE).
+
+**Sensitivity**: Sufficient resolution to distinguish controller variants.
+
+**Robustness**: Insensitive to numerical noise and discretization.
+
+**See:** {doc}`../../../control_theory/performance_specifications`
+
+
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/analysis/validation/metrics.py
@@ -201,3 +333,147 @@ This module imports:
 - `import numpy as np`
 - `from scipy import stats`
 - `import warnings`
+
+
+## Usage Examples
+
+### Compute All Metrics for a Simulation
+
+```python
+from src.benchmarks.metrics import compute_all_metrics
+from src.simulation.engines.simulation_runner import run_simulation
+from src.controllers.factory import create_smc_for_pso, SMCType
+from src.plant.models.simplified import SimplifiedDynamics
+
+# Run simulation
+controller = create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5])
+dynamics = SimplifiedDynamics()
+
+result = run_simulation(
+    controller=controller,
+    dynamics_model=dynamics,
+    initial_state=[0.1, 0.05, 0, 0, 0, 0],
+    sim_time=10.0,
+    dt=0.01
+)
+
+# Compute comprehensive metrics
+metrics = compute_all_metrics(
+    t=result.time,
+    x=result.states,
+    u=result.control,
+    max_force=100.0,
+    include_advanced=True
+)
+
+# Access metrics
+print("Control Performance:")
+print(f"  ISE: {metrics['ise']:.4f}")
+print(f"  ITAE: {metrics['itae']:.4f}")
+print(f"  RMS Control: {metrics['rms_control']:.4f}")
+
+print("
+Stability Analysis:")
+print(f"  Settling Time: {metrics['settling_time']:.3f}s")
+print(f"  Overshoot: {metrics['overshoot']:.2f}%")
+print(f"  Damping Ratio: {metrics['damping_ratio']:.3f}")
+
+print("
+Constraint Violations:")
+print(f"  Saturation Count: {metrics['saturation_count']}")
+print(f"  Saturation Severity: {metrics['saturation_severity']:.4f}")
+```
+
+### Individual Metric Computation
+
+```python
+from src.benchmarks.metrics.control_metrics import compute_ise, compute_itae
+from src.benchmarks.metrics.stability_metrics import compute_overshoot, compute_settling_time
+from src.benchmarks.metrics.constraint_metrics import count_control_violations
+
+# Control metrics
+ise = compute_ise(result.time, result.states)
+itae = compute_itae(result.time, result.states)
+
+# Stability metrics
+overshoot = compute_overshoot(result.states[:, 0])  # First angle
+settling_time = compute_settling_time(result.time, result.states, threshold=0.02)
+
+# Constraint violations
+violations, severity, peak = count_control_violations(result.control, max_force=100.0)
+
+print(f"ISE: {ise:.4f}, ITAE: {itae:.4f}")
+print(f"Overshoot: {overshoot:.2f}%, Settling: {settling_time:.3f}s")
+print(f"Violations: {violations}, Severity: {severity:.4f}, Peak: {peak:.2f}")
+```
+
+### Custom Metric: Chattering Index
+
+```python
+import numpy as np
+
+def compute_chattering_index(u, dt):
+    """Quantify control chattering."""
+    # Total variation of control signal
+    tv = np.sum(np.abs(np.diff(u))) * dt
+    return tv
+
+chattering = compute_chattering_index(result.control, dt=0.01)
+print(f"Chattering Index: {chattering:.4f}")
+
+# Compare chattering across controllers
+controllers = {
+    'Classical': create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
+    'STA': create_smc_for_pso(SMCType.SUPER_TWISTING, [25, 10, 15, 12, 20, 15]),
+}
+
+chattering_results = {}
+for name, ctrl in controllers.items():
+    result = run_simulation(ctrl, dynamics, [0.1, 0.05, 0, 0, 0, 0], 10.0, 0.01)
+    chattering_results[name] = compute_chattering_index(result.control, 0.01)
+
+for name, ci in chattering_results.items():
+    print(f"{name} Chattering: {ci:.4f}")
+```
+
+### Energy-Based Metrics
+
+```python
+# Track energy conservation (for unforced natural dynamics)
+def compute_energy_drift(result, dynamics):
+    """Measure energy drift as validation check."""
+    energies = [dynamics.compute_total_energy(x) for x in result.states]
+    initial_energy = energies[0]
+    drift = np.abs(np.array(energies) - initial_energy) / initial_energy * 100
+    max_drift = np.max(drift)
+    mean_drift = np.mean(drift)
+    return {'max_drift_%': max_drift, 'mean_drift_%': mean_drift}
+
+energy_metrics = compute_energy_drift(result, dynamics)
+print(f"Energy drift: {energy_metrics['max_drift_%']:.3f}% (max), "
+      f"{energy_metrics['mean_drift_%']:.3f}% (mean)")
+```
+
+### Batch Metric Computation for Trials
+
+```python
+from src.benchmarks.metrics import compute_all_metrics
+
+# Compute metrics for multiple trials
+trials_results = []  # List of simulation results from multiple runs
+
+metrics_collection = []
+for result in trials_results:
+    metrics = compute_all_metrics(result.time, result.states, result.control, 100.0)
+    metrics_collection.append(metrics)
+
+# Aggregate statistics
+import pandas as pd
+df = pd.DataFrame(metrics_collection)
+
+print("Metric Statistics Across Trials:")
+print(df[['ise', 'settling_time', 'overshoot', 'rms_control']].describe())
+```
+
+**See:** {doc}`../../../performance_metrics/metric_definitions`
+

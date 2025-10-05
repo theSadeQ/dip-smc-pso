@@ -495,6 +495,113 @@
 analyzing system behavior under uncertainty, validating controller performance,
 and quantifying confidence in analysis results.</p>
 </section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Nominal Parameters] --&gt; B[Uncertainty Model]
+    B --&gt; C{For Each Sample i=1..N}
+    C --&gt; D[Perturb Parameters]
+    D --&gt; E[Create Scenario]
+    E --&gt; F[Run Simulation]
+    F --&gt; G[Evaluate Stability]
+    G --&gt; H{Stable?}
+    H --&gt;|Yes| I[Compute Performance]
+    H --&gt;|No| J[Record Failure]
+    I --&gt; K[Metrics Collection]
+    J --&gt; K
+    K --&gt; L{All Samples Done?}
+    L --&gt;|No| C
+    L --&gt;|Yes| M[Robustness Analysis]
+    M --&gt; N[Success Rate]
+    M --&gt; O[Worst-Case Metrics]
+    M --&gt; P[Percentile Analysis]
+    N --&gt; Q[Monte Carlo Report]
+    O --&gt; Q
+    P --&gt; Q
+
+    style D fill:#9cf
+    style G fill:#fcf
+    style M fill:#ff9
+    style Q fill:#9f9
+        </div><p><strong>Data Flow:</strong></p>
+<ol class="arabic simple">
+<li><p>Define uncertainty model (e.g., ±20% mass, ±10% length)</p></li>
+<li><p>Sample <span class="math notranslate nohighlight">\(N\)</span> parameter sets from uncertainty distribution</p></li>
+<li><p>For each sample: simulate system and evaluate stability</p></li>
+<li><p>Collect metrics for successful trials</p></li>
+<li><p>Robustness analysis: success rate, worst-case, percentiles</p></li>
+<li><p>Generate report with uncertainty quantification</p></li>
+</ol>
+<p><strong>Sampling Methods:</strong></p>
+<ul class="simple">
+<li><p><strong>Uniform</strong>: <span class="math notranslate nohighlight">\(\theta \sim \mathcal{U}(\theta_0(1-\epsilon), \theta_0(1+\epsilon))\)</span></p></li>
+<li><p><strong>Gaussian</strong>: <span class="math notranslate nohighlight">\(\theta \sim \mathcal{N}(\theta_0, \sigma^2)\)</span></p></li>
+<li><p><strong>Latin Hypercube</strong>: Stratified sampling for high dimensions</p></li>
+</ul>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="monte-carlo-validation-theory">
+<h3>Monte Carlo Validation Theory<a class="headerlink" href="#monte-carlo-validation-theory" title="Link to this heading">¶</a></h3>
+<p>Monte Carlo methods assess controller robustness by evaluating performance distributions across random perturbations.</p>
+<section id="uncertainty-propagation">
+<h4>Uncertainty Propagation<a class="headerlink" href="#uncertainty-propagation" title="Link to this heading">¶</a></h4>
+<p>Given parameter uncertainty <span class="math notranslate nohighlight">\(\vec{\theta} \sim P(\vec{\theta})\)</span>, estimate expected performance:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathbb{E}[J] = \int J(\vec{\theta}) P(\vec{\theta}) d\vec{\theta} \approx \frac{1}{N} \sum_{i=1}^{N} J(\vec{\theta}_i)\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\vec{\theta}_i \sim P(\vec{\theta})\)</span> are i.i.d. samples.</p>
+<p><strong>Convergence Rate</strong>: Error decreases as <span class="math notranslate nohighlight">\(O(1/\sqrt{N})\)</span> (independent of dimension).</p>
+</section>
+<section id="robustness-metrics">
+<h4>Robustness Metrics<a class="headerlink" href="#robustness-metrics" title="Link to this heading">¶</a></h4>
+<p><strong>Success Rate</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[SR = \frac{1}{N} \sum_{i=1}^{N} \mathbb{1}_{\text{stable}}(\vec{\theta}_i)\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathbb{1}_{\text{stable}} = 1\)</span> if system remains stable.</p>
+<p><strong>Worst-Case Performance</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[J_{\text{worst}} = \max_{i \in [1,N]} J(\vec{\theta}_i)\]</div>
+</div>
+<p>Critical for safety-critical systems.</p>
+<p><strong>Performance Percentiles</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[J_{p} = \text{quantile}(\{J(\vec{\theta}_i)\}_{i=1}^N, p)\]</div>
+</div>
+<p>Example: <span class="math notranslate nohighlight">\(J_{95}\)</span> = 95th percentile (worst 5% performance).</p>
+</section>
+<section id="sampling-strategies">
+<h4>Sampling Strategies<a class="headerlink" href="#sampling-strategies" title="Link to this heading">¶</a></h4>
+<p><strong>Uniform Perturbations</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\theta_i = \theta_0 (1 + \delta_i), \quad \delta_i \sim \mathcal{U}(-\epsilon, +\epsilon)\]</div>
+</div>
+<p><strong>Gaussian Perturbations</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\theta_i \sim \mathcal{N}(\theta_0, \sigma^2 \theta_0^2)\]</div>
+</div>
+<p><strong>Latin Hypercube Sampling</strong>: Ensures stratified coverage of parameter space (more efficient than uniform for high dimensions).</p>
+</section>
+</section>
+<section id="confidence-bounds">
+<h3>Confidence Bounds<a class="headerlink" href="#confidence-bounds" title="Link to this heading">¶</a></h3>
+<p>For estimated mean <span class="math notranslate nohighlight">\(\bar{J}\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}\]</div>
+</div>
+<p><strong>Rule of Thumb</strong>: <span class="math notranslate nohighlight">\(N \geq 30\)</span> trials for reliable statistics, <span class="math notranslate nohighlight">\(N \geq 100\)</span> for robust estimation.</p>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../validation/monte_carlo_methodology</span></p>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">   1</span><span class="c1">#======================================================================================\\\</span>
@@ -2714,6 +2821,157 @@ Configured Monte Carlo analyzer</p>
 </ul>
 <p><em>… and 1 more</em></p>
 </section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="basic-monte-carlo-robustness-analysis">
+<h3>Basic Monte Carlo Robustness Analysis<a class="headerlink" href="#basic-monte-carlo-robustness-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.validation.monte_carlo</span><span class="w"> </span><span class="kn">import</span> <span class="n">MonteCarloValidator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_smc_for_pso</span><span class="p">,</span> <span class="n">SMCType</span>
+
+<span class="c1"># Define controller</span>
+<span class="n">controller_factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span>
+    <span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Configure uncertainty model (±20% on masses, ±10% on lengths)</span>
+<span class="n">uncertainty</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)},</span>
+    <span class="s1">&#39;pole1_mass&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)},</span>
+    <span class="s1">&#39;pole2_mass&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)},</span>
+    <span class="s1">&#39;pole1_length&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)},</span>
+    <span class="s1">&#39;pole2_length&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)},</span>
+<span class="p">}</span>
+
+<span class="c1"># Run Monte Carlo validation</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">MonteCarloValidator</span><span class="p">(</span>
+    <span class="n">controller_factory</span><span class="o">=</span><span class="n">controller_factory</span><span class="p">,</span>
+    <span class="n">uncertainty_model</span><span class="o">=</span><span class="n">uncertainty</span><span class="p">,</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Analyze robustness</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success Rate: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;success_rate&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean ISE: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;mean_ise&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Worst-case ISE: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;worst_case_ise&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95th Percentile ISE: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;percentile_95_ise&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="gaussian-uncertainty-with-correlation">
+<h3>Gaussian Uncertainty with Correlation<a class="headerlink" href="#gaussian-uncertainty-with-correlation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Define correlated uncertainties (masses tend to vary together)</span>
+<span class="n">mean_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>  <span class="c1"># cart, pole1, pole2 masses</span>
+<span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">],</span>   <span class="c1"># cart mass variance and covariances</span>
+    <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.004</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">],</span>  <span class="c1"># pole1 mass</span>
+    <span class="p">[</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]</span>  <span class="c1"># pole2 mass</span>
+<span class="p">])</span>
+
+<span class="c1"># Gaussian Monte Carlo</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">MonteCarloValidator</span><span class="p">(</span>
+    <span class="n">controller_factory</span><span class="o">=</span><span class="n">controller_factory</span><span class="p">,</span>
+    <span class="n">uncertainty_model</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;masses&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">mean_params</span><span class="p">,</span>
+            <span class="s1">&#39;cov&#39;</span><span class="p">:</span> <span class="n">cov_matrix</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span>
+<span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Visualize uncertainty propagation</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;ise_samples&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;ISE&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Performance Distribution under Uncertainty&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;param_samples&#39;</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;ise_samples&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Cart Mass Perturbation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;ISE&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sensitivity to Cart Mass&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="latin-hypercube-sampling-for-high-dimensional-uncertainty">
+<h3>Latin Hypercube Sampling for High-Dimensional Uncertainty<a class="headerlink" href="#latin-hypercube-sampling-for-high-dimensional-uncertainty" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.validation.monte_carlo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatinHypercubeSampler</span>
+
+<span class="c1"># High-dimensional uncertainty (all 8 physics parameters)</span>
+<span class="n">uncertainty_full</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s1">&#39;pole1_mass&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s1">&#39;pole2_mass&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s1">&#39;pole1_length&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+    <span class="s1">&#39;pole2_length&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+    <span class="s1">&#39;friction_cart&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+    <span class="s1">&#39;friction_pole1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+    <span class="s1">&#39;friction_pole2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="c1"># Latin Hypercube Sampling (more efficient than random for high dimensions)</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">LatinHypercubeSampler</span><span class="p">(</span><span class="n">uncertainty_full</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+
+<span class="c1"># Run validation with LHS samples</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">MonteCarloValidator</span><span class="p">(</span>
+    <span class="n">controller_factory</span><span class="o">=</span><span class="n">controller_factory</span><span class="p">,</span>
+    <span class="n">param_samples</span><span class="o">=</span><span class="n">param_samples</span>  <span class="c1"># Pre-generated samples</span>
+<span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Analyze which parameters drive failures</span>
+<span class="n">failure_params</span> <span class="o">=</span> <span class="n">param_samples</span><span class="p">[</span><span class="o">~</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;stability_mask&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failure modes analysis:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Cart mass range in failures: [</span><span class="si">{</span><span class="n">failure_params</span><span class="p">[:,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">failure_params</span><span class="p">[:,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Pole1 length range in failures: [</span><span class="si">{</span><span class="n">failure_params</span><span class="p">[:,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">failure_params</span><span class="p">[:,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="robustness-comparison-across-controllers">
+<h3>Robustness Comparison Across Controllers<a class="headerlink" href="#robustness-comparison-across-controllers" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">controllers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Classical&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>
+    <span class="s1">&#39;Adaptive&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">create_smc_for_pso</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">ADAPTIVE</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]),</span>
+<span class="p">}</span>
+
+<span class="n">uncertainty</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)},</span>  <span class="c1"># Aggressive uncertainty</span>
+    <span class="s1">&#39;pole1_mass&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)},</span>
+<span class="p">}</span>
+
+<span class="n">robustness_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">factory</span> <span class="ow">in</span> <span class="n">controllers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">validator</span> <span class="o">=</span> <span class="n">MonteCarloValidator</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">robustness_results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Compare success rates</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">robustness_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Success Rate: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;success_rate&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean ISE (successful): </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;mean_ise&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Worst-case ISE: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;worst_case_ise&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>See:</strong> <span class="xref std std-doc">../../../validation/monte_carlo_robustness_guide</span></p>
+</section>
+</section>
 </section>
 
         </article>
@@ -2756,6 +3014,17 @@ Configured Monte Carlo analyzer</p>
             <ul>
 <li><a class="reference internal" href="#">analysis.validation.monte_carlo</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#monte-carlo-validation-theory">Monte Carlo Validation Theory</a><ul>
+<li><a class="reference internal" href="#uncertainty-propagation">Uncertainty Propagation</a></li>
+<li><a class="reference internal" href="#robustness-metrics">Robustness Metrics</a></li>
+<li><a class="reference internal" href="#sampling-strategies">Sampling Strategies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#confidence-bounds">Confidence Bounds</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#montecarloconfig"><code class="docutils literal notranslate"><span class="pre">MonteCarloConfig</span></code></a><ul>
@@ -2813,6 +3082,13 @@ Configured Monte Carlo analyzer</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#basic-monte-carlo-robustness-analysis">Basic Monte Carlo Robustness Analysis</a></li>
+<li><a class="reference internal" href="#gaussian-uncertainty-with-correlation">Gaussian Uncertainty with Correlation</a></li>
+<li><a class="reference internal" href="#latin-hypercube-sampling-for-high-dimensional-uncertainty">Latin Hypercube Sampling for High-Dimensional Uncertainty</a></li>
+<li><a class="reference internal" href="#robustness-comparison-across-controllers">Robustness Comparison Across Controllers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2831,6 +3107,10 @@ Configured Monte Carlo analyzer</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>
