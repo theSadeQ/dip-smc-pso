@@ -75,6 +75,21 @@ Welcome to the DIP SMC PSO framework documentation! This guide will help you nav
 - [**Utilities API**](api/utilities.md)
   Validation, control primitives, monitoring, analysis tools (434 lines)
 
+### 📐 Theory & Explanation
+**Understanding-oriented guides that explain the "why" behind the framework**
+
+- [**Theory Index**](theory/README.md)
+  Overview and navigation for all theory guides
+
+- [**Sliding Mode Control Theory**](theory/smc-theory.md)
+  SMC fundamentals, Lyapunov stability, chattering analysis, super-twisting mathematics (619 lines)
+
+- [**PSO Algorithm Theory**](theory/pso-theory.md)
+  Swarm intelligence principles, convergence theory, parameter selection, benchmarks (438 lines)
+
+- [**Double-Inverted Pendulum Dynamics**](theory/dip-dynamics.md)
+  Lagrangian derivation, equations of motion, linearization, controllability (501 lines)
+
 ---
 
 ## Documentation Structure
@@ -98,6 +113,11 @@ docs/guides/
 │   ├── configuration.md               (438 lines)
 │   ├── plant-models.md                (424 lines)
 │   └── utilities.md                   (434 lines)
+├── theory/                            # Theory & explanation guides
+│   ├── README.md                      (104 lines)
+│   ├── smc-theory.md                  (619 lines)
+│   ├── pso-theory.md                  (438 lines)
+│   └── dip-dynamics.md                (501 lines)
 └── tutorials/                         # Tutorial series
     ├── tutorial-01-first-simulation.md         (600 lines)
     ├── tutorial-02-controller-comparison.md    (797 lines)
@@ -106,7 +126,7 @@ docs/guides/
     └── tutorial-05-research-workflow.md        (640 lines)
 ```
 
-**Total: 10,863 lines of user documentation** (up from 7,578)
+**Total: 12,525 lines of user documentation** (up from 10,863 after adding theory guides)
 
 ---
 

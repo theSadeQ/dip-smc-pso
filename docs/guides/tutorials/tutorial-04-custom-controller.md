@@ -113,6 +113,9 @@ where `α, β ∈ (0, 1)` (e.g., 0.5, 0.7) create the terminal attractor.
 - **Singularity avoidance** (control can blow up if not handled carefully)
 - **More gains to tune** (4 surface gains + 2 exponents)
 
+> **📚 Theory Background:** For comprehensive SMC foundations before implementing custom controllers:
+> - [SMC Theory Guide](../theory/smc-theory.md) - Lyapunov stability, sliding surfaces, design guidelines
+
 ### Step 1: Create the Controller File
 
 Create `src/controllers/smc/terminal_smc.py`:
@@ -777,8 +780,23 @@ s = θ₁ + β₁·sign(dθ₁)·|dθ₁|^α + θ₂ + β₂·sign(dθ₂)·|dθ
 
 ## Next Steps
 
-- **Tutorial 05:** Research Workflow - End-to-end project from theory to publication
-- **Advanced Topics:** Adaptive laws, observer design, disturbance estimation
-- **Real Hardware:** Deploy custom controller on physical system
+**Next Tutorial:** [Tutorial 05: Research Workflows](tutorial-05-research-workflow.md) - End-to-end project from theory to publication
+
+**Related Guides:**
+- [Controllers API](../api/controllers.md): Factory integration and controller interfaces
+- [Testing & Validation How-To](../how-to/testing-validation.md): Comprehensive testing strategies
+
+**Theory & Foundations:**
+- [SMC Theory Guide](../theory/smc-theory.md): Design principles for custom controllers
+  - Practical design guidelines
+  - Gain selection via pole placement
+  - Robustness analysis
+  - Classical vs Super-Twisting comparison
+
+**Advanced Topics:**
+- Adaptive laws and parameter estimation
+- Observer design for state estimation
+- Disturbance estimation and rejection
+- Real hardware deployment (coming soon)
 
 **Congratulations!** You can now design and implement custom SMC controllers for the DIP system.

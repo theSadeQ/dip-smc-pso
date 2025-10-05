@@ -632,9 +632,29 @@ git push origin v1.0-robustness-study
 
 ## Next Steps
 
+**Related Guides:**
+- [Result Analysis How-To](../how-to/result-analysis.md): Advanced statistical analysis techniques
+- [Optimization Workflows How-To](../how-to/optimization-workflows.md): PSO tuning for research studies
+- [Testing & Validation How-To](../how-to/testing-validation.md): Comprehensive testing frameworks
+
+**Theory & Foundations (Essential for Publications):**
+- [DIP Dynamics Theory](../theory/dip-dynamics.md): Cite the mathematical model
+  - Lagrangian derivation
+  - Linearization validity
+  - Controllability analysis
+- [SMC Theory Guide](../theory/smc-theory.md): Reference control design principles
+  - Lyapunov stability proofs
+  - Chattering analysis
+  - Super-twisting mathematics
+- [PSO Algorithm Theory](../theory/pso-theory.md): Document optimization methodology
+  - Convergence guarantees
+  - Parameter selection rationale
+  - Benchmark comparisons
+
+**Advanced Topics:**
 - **Extend Study:** Add more controllers, scenarios, or metrics
 - **Real Hardware:** Validate simulation results on physical system
-- **Publications:** Submit to IEEE TCST, Automatica, or conferences
-- **Open Science:** Share on GitHub, Zenodo, arXiv
+- **Publications:** Submit to IEEE TCST, Automatica, or control conferences
+- **Open Science:** Share reproducible code on GitHub, datasets on Zenodo, preprints on arXiv
 
 **Congratulations!** You have completed a full end-to-end research project with publication-quality results and reproducibility.
