@@ -6,6 +6,159 @@
 
 Nelder-Mead simplex optimization algorithm.
 
+
+
+## Advanced Mathematical Theory
+
+### Nelder-Mead Simplex Method
+
+**Simplex:** Set of $n+1$ vertices in $\mathbb{R}^n$:
+
+```{math}
+S = \{\vec{x}_1, \ldots, \vec{x}_{n+1}\}
+```
+
+**Centroid** of best $n$ vertices:
+
+```{math}
+\bar{\vec{x}} = \frac{1}{n} \sum_{i=1}^{n} \vec{x}_i \quad (\text{excluding worst})
+```
+
+### Simplex Operations
+
+**Reflection:**
+
+```{math}
+\vec{x}_r = \bar{\vec{x}} + \alpha (\bar{\vec{x}} - \vec{x}_{n+1}), \quad \alpha = 1
+```
+
+**Expansion:**
+
+```{math}
+\vec{x}_e = \bar{\vec{x}} + \gamma (\vec{x}_r - \bar{\vec{x}}), \quad \gamma = 2
+```
+
+**Contraction (outside):**
+
+```{math}
+\vec{x}_c = \bar{\vec{x}} + \rho (\vec{x}_r - \bar{\vec{x}}), \quad \rho = 0.5
+```
+
+**Contraction (inside):**
+
+```{math}
+\vec{x}_{cc} = \bar{\vec{x}} - \rho (\bar{\vec{x}} - \vec{x}_{n+1}), \quad \rho = 0.5
+```
+
+**Shrink:**
+
+```{math}
+\vec{x}_i = \vec{x}_1 + \sigma (\vec{x}_i - \vec{x}_1), \quad \sigma = 0.5, \, i = 2, \ldots, n+1
+```
+
+### Algorithm Flow
+
+```
+1. Sort: f(x_1) ≤ f(x_2) ≤ ... ≤ f(x_{n+1})
+2. Reflect: x_r = centroid + α(centroid - x_{worst})
+3. If f(x_1) ≤ f(x_r) < f(x_n): Accept reflection
+4. If f(x_r) < f(x_1): Try expansion
+5. If f(x_r) ≥ f(x_n): Try contraction
+6. If contraction fails: Shrink simplex
+```
+
+### Convergence Properties
+
+**Theorem (Lagarias et al. 1998):** For strictly convex $f$ with bounded level sets:
+
+```{math}
+\lim_{k \to \infty} \text{diam}(S_k) = 0
+```
+
+**Limitation:** May converge to non-stationary points for non-convex functions.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Simplex] --> B[Sort Vertices]
+    B --> C[Compute Centroid]
+    C --> D[Reflection]
+
+    D --> E{f(x_r) Quality}
+    E -->|Best| F[Try Expansion]
+    E -->|Good| G[Accept Reflection]
+    E -->|Poor| H[Try Contraction]
+
+    F --> I{f(x_e) < f(x_r)?}
+    I -->|Yes| J[Accept Expansion]
+    I -->|No| G
+
+    H --> K{Outside or Inside?}
+    K -->|Outside| L[Contract Outside]
+    K -->|Inside| M[Contract Inside]
+
+    L --> N{Accept Contraction?}
+    M --> N
+    N -->|Yes| O[Update Simplex]
+    N -->|No| P[Shrink All]
+
+    G --> O
+    J --> O
+    P --> O
+
+    O --> Q{Converged?}
+    Q -->|No| B
+    Q -->|Yes| R[Return Best]
+
+    style E fill:#ff9
+    style K fill:#9cf
+    style R fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.algorithms import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/optimization/algorithms/gradient_based/nelder_mead.py
