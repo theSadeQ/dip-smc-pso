@@ -234,9 +234,9 @@ class MPCController:
             try:
                 kp, kd = float(fallback_pd_gains[0]), float(fallback_pd_gains[1])
                 self._pd_kp, self._pd_kd = kp, kd
-            except Exception:
+            except (ValueError, TypeError, IndexError) as e:  # P0: Handle invalid PD gains
                 logger.warning(
-                    "MPCController: invalid fallback_pd_gains provided; using default PD gains (20.0, 5.0)."
+                    f"MPCController: invalid fallback_pd_gains {fallback_pd_gains}: {e}. Using defaults (20.0, 5.0)"
                 )
         # Determine the boundary layer for the fallback SMC.  A user‑supplied
         # value overrides the default.  Otherwise scale a baseline layer
@@ -262,9 +262,9 @@ class MPCController:
                     boundary_layer=bl,
                     dynamics_model=self.model,
                 )
-            except Exception:
+            except (TypeError, AttributeError, ValueError) as e:  # P0: Handle SMC instantiation failure
                 logger.warning(
-                    "MPCController: failed to instantiate fallback ClassicalSMC with provided gains; falling back to PD."
+                    f"MPCController: failed to instantiate fallback ClassicalSMC with gains {fallback_smc_gains}: {e}. Falling back to PD."
                 )
                 self._fallback = None
         elif ClassicalSMC is not None:
@@ -276,9 +276,9 @@ class MPCController:
                     boundary_layer=bl,
                     dynamics_model=self.model,
                 )
-            except Exception:
-                # If SMC cannot be constructed, leave fallback as None
-                self._fallback = None
+            except (TypeError, AttributeError, ValueError) as e:  # P0: Handle default SMC instantiation failure
+                logger.debug(f"Could not instantiate default ClassicalSMC fallback: {e}")
+                self._fallback = None  # OK: PD control will be used instead
 
         # Choose discretization method
         self._discretize = _discretize_exact if use_exact_discretization else _discretize_forward_euler
