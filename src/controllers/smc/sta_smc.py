@@ -352,11 +352,12 @@ class SuperTwistingSMC:
             # Unpack z and ignore provided sigma; the sliding surface will
             # be recomputed below.
             z, _ = state_vars
-        except Exception:
+        except Exception as e:
             # Non‑iterable (e.g., float) provided: treat as z and
             # initialize sigma to zero.  Cast to float to avoid
             # unexpected types (e.g., numpy scalars).
-            z = float(state_vars) if state_vars is not None else 0.0
+            logging.debug(f"State unpacking failed (non-iterable), treating as scalar: {e}")
+            z = float(state_vars) if state_vars is not None else 0.0  # OK: Legacy input format
 
         u_eq = self._compute_equivalent_control(state)
 
@@ -539,8 +540,9 @@ class SuperTwistingSMC:
         q_dot = state[3:]
         try:
             M, C, G = self.dyn._compute_physics_matrices(state)
-        except Exception:
-            return 0.0
+        except Exception as e:
+            logging.warning(f"Physics matrix computation failed, returning safe zero control: {e}")
+            return 0.0  # OK: Safe fallback when dynamics unavailable
 
         # Regularise the inertia matrix using the configurable constant.  A
         # small diagonal offset guarantees invertibility of symmetric

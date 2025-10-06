@@ -59,9 +59,12 @@ alpha : float, optional
     Additional unused keyword arguments for forward compatibility.
 """
 
+import logging
 import numpy as np
 import weakref
 from typing import Dict, Tuple, Optional, List
+
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # Structured output type
@@ -317,10 +320,11 @@ class AdaptiveSMC:
         try:
             # Expecting a 3‑tuple: (K, last_u, time_in_sliding)
             prev_K, last_u, time_in_sliding = state_vars  # type: ignore[misc]
-        except Exception:
+        except Exception as e:
             # Fall back for legacy or malformed inputs.  Accept
             # sequences of varying length or scalar values.  Coerce
             # values to floats to avoid numpy scalar surprises.
+            logger.debug(f"Standard state unpacking failed, using legacy fallback: {e}")
             if isinstance(state_vars, (list, tuple)):
                 if len(state_vars) == 0:
                     prev_K, last_u, time_in_sliding = self.K_init, 0.0, 0.0

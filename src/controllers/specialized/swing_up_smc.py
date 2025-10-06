@@ -99,8 +99,9 @@ class SwingUpSMC:
                 self.E_bottom = 1.0
             else:
                 self.E_bottom = eb
-        except Exception:
-            self.E_bottom = 1.0
+        except Exception as e:
+            logging.getLogger(self.__class__.__name__).debug(f"Could not compute bottom energy, using default 1.0: {e}")
+            self.E_bottom = 1.0  # OK: Fallback energy scale for swing-up control
 
         self._mode: Mode = SWING_MODE
         self._t = 0.0
@@ -192,16 +193,18 @@ class SwingUpSMC:
         # crash when calling compute_control.
         try:
             E_current = float(self.dyn.total_energy(state))  # type: ignore[attr-defined]
-        except Exception:
-            E_current = 0.0
+        except Exception as e:
+            self.logger.debug(f"Could not compute current energy, using 0.0: {e}")
+            E_current = 0.0  # OK: Fallback for dynamics without total_energy method
         # Model’s energy is 0 at upright; measure “energy gained” relative to bottom:
         E_about_bottom = self.E_bottom - E_current
 
         # Telemetry: track normalized energy ratio relative to bottom
         try:
             history["E_ratio"] = float(E_about_bottom / self.E_bottom)
-        except Exception:
-            pass
+        except Exception as e:
+            self.logger.debug(f"Could not compute energy ratio for telemetry: {e}")
+            pass  # OK: Telemetry is optional, not critical for control
 
         t = history.get("t", self._t) + self.dt
         history["t"] = t

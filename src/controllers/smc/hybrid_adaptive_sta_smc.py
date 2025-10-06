@@ -5,10 +5,13 @@
 from __future__ import annotations
 from typing import Dict, Tuple, Any, List, Optional
 
+import logging
 import numpy as np
 import weakref
 
 from ...utils import HybridSTAOutput
+
+logger = logging.getLogger(__name__)
 
 # Changed: migrate from deprecated 'use_equivalent' to 'enable_equivalent'; added
 # DeprecationWarning handling when the alias is provided and allow overriding
@@ -483,8 +486,9 @@ class HybridAdaptiveSTASMC:
             try:
                 Minv_B = np.linalg.solve(M_reg, B)
                 Minv_rhs = np.linalg.solve(M_reg, Cvec + np.asarray(G, dtype=float))
-            except Exception:
-                return 0.0
+            except Exception as e:
+                logger.warning(f"Matrix solve failed in equivalent control computation, returning safe zero control: {e}")
+                return 0.0  # OK: Safe fallback when dynamics ill-conditioned
             denom = float(L @ Minv_B)
             if not np.isfinite(denom) or abs(denom) < 1e-6:
                 return 0.0
@@ -501,8 +505,9 @@ class HybridAdaptiveSTASMC:
             # guideline; users can adjust this multiplier if needed.
             clamp = 10.0 * self.max_force
             return float(np.clip(ueq, -clamp, clamp))
-        except Exception:
-            return 0.0
+        except Exception as e:
+            logger.warning(f"Equivalent control computation failed, returning safe zero control: {e}")
+            return 0.0  # OK: Safe fallback for control computation
 
     # -------------------- main control ---------------------
     def compute_control(
@@ -519,8 +524,9 @@ class HybridAdaptiveSTASMC:
         # Unpack internal vars
         try:
             k1_prev, k2_prev, u_int_prev = state_vars  # type: ignore[misc]
-        except Exception:
-            k1_prev, k2_prev, u_int_prev = self.initialize_state()
+        except Exception as e:
+            logger.debug(f"State unpacking failed, re-initializing: {e}")
+            k1_prev, k2_prev, u_int_prev = self.initialize_state()  # OK: Safe fallback to initial state
 
         if history is None:
             history = self.initialize_history()
