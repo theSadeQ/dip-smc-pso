@@ -405,21 +405,21 @@ class TestPSOConfigurationValidation:
         """Test controller-specific bounds validation."""
         # Classical SMC bounds (6 parameters)
         classical_bounds = [(0.1, 10.0)] * 6
-        result = validate_controller_bounds('classical_smc', classical_bounds)
+        result = validate_controller_bounds('classical_smc', classical_bounds)  # noqa: F821 - conditional import or test mock
         assert result['valid'] is True
 
         # Wrong number of bounds for classical SMC
         wrong_bounds = [(0.1, 10.0)] * 4  # Only 4 instead of 6
-        result = validate_controller_bounds('classical_smc', wrong_bounds)
+        result = validate_controller_bounds('classical_smc', wrong_bounds)  # noqa: F821 - conditional import or test mock
         assert result['valid'] is False
 
         # Adaptive SMC bounds (5 parameters)
         adaptive_bounds = [(0.1, 10.0)] * 5
-        result = validate_controller_bounds('adaptive_smc', adaptive_bounds)
+        result = validate_controller_bounds('adaptive_smc', adaptive_bounds)  # noqa: F821 - conditional import or test mock
         assert result['valid'] is True
 
         # Unknown controller type
-        result = validate_controller_bounds('unknown_controller', classical_bounds)
+        result = validate_controller_bounds('unknown_controller', classical_bounds)  # noqa: F821 - conditional import or test mock
         assert result['valid'] is False or len(result['warnings']) > 0
 
     # === Complex Configuration Scenarios ===

@@ -697,7 +697,7 @@ class TestSystemResilience:
                     if np.isfinite(control):
                         controls.append(control)
                         valid_controllers.append(i)
-                except:
+                except:  # noqa: E722 - intentional broad exception handling
                     continue
 
             if len(controls) == 0:

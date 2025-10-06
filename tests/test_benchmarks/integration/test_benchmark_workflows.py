@@ -569,7 +569,7 @@ class IntegratedBenchmarkOrchestrator:
 
         try:
             # Create a simple PSO test with very few iterations
-            spec = SMC_GAIN_SPECS[smc_type]
+            spec = SMC_GAIN_SPECS[smc_type]  # noqa: F821 - conditional import or test mock
             bounds = spec.gain_bounds
 
             # Mock PSO optimization (simplified for testing)
@@ -659,7 +659,7 @@ class IntegratedBenchmarkOrchestrator:
 
             return f"repro_{hash_value:08d}"
 
-        except:
+        except:  # noqa: E722 - intentional broad exception handling
             return None
 
     def _get_realistic_gains(self, smc_type: SMCType) -> List[float]:

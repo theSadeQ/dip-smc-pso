@@ -269,7 +269,7 @@ def test_pso_simulation_integration():
         lower_bounds, upper_bounds = get_gain_bounds_for_pso(smc_type)
 
         # Use middle values for gains
-        test_gains = [(l + u) / 2 for l, u in zip(lower_bounds, upper_bounds)]
+        test_gains = [(l + u) / 2 for l, u in zip(lower_bounds, upper_bounds)]  # noqa: E741
 
         # Create PSO controller
         pso_controller = create_smc_for_pso(smc_type, test_gains)

@@ -178,7 +178,7 @@ def _create_fast_config(src_config: Path, dst_config: Path):
             # Only override certain sections if they exist
             if 'fdi' in src_cfg:
                 cfg['fdi'] = src_cfg['fdi']
-        except:
+        except:  # noqa: E722 - intentional broad exception handling
             pass  # Use our defaults if we can't read the source
     
     with open(dst_config, 'w') as f:

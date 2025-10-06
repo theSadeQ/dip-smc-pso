@@ -33,7 +33,7 @@ from src.analysis.fault_detection.fdi import (
     FDIsystem
 )
 
-from src.analysis.performance.control_metrics import *
+from src.analysis.performance.control_metrics import *  # noqa: F403 - wildcard import for test convenience
 from src.analysis.core.interfaces import AnalysisResult, AnalysisStatus
 
 

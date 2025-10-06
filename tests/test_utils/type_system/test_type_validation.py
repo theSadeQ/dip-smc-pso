@@ -65,9 +65,9 @@ class TestControllerOutputTypes:
         assert 'history' in hints
 
         # Validate annotation types
-        assert hints['u'] == float
-        assert hints['state'] == Tuple[Any, ...]
-        assert hints['history'] == Dict[str, Any]
+        assert hints['u'] == float  # noqa: E721 - intentional type equality check
+        assert hints['state'] == Tuple[Any, ...]  # noqa: E721
+        assert hints['history'] == Dict[str, Any]  # noqa: E721
 
     def test_classical_smc_output_immutability(self):
         """Test ClassicalSMCOutput immutability (NamedTuple property)."""
@@ -131,10 +131,10 @@ class TestControllerOutputTypes:
         assert 'sigma' in hints
 
         # Validate annotation types
-        assert hints['u'] == float
-        assert hints['state'] == Tuple[float, ...]
-        assert hints['history'] == Dict[str, Any]
-        assert hints['sigma'] == float
+        assert hints['u'] == float  # noqa: E721 - intentional type equality check
+        assert hints['state'] == Tuple[float, ...]  # noqa: E721
+        assert hints['history'] == Dict[str, Any]  # noqa: E721
+        assert hints['sigma'] == float  # noqa: E721
 
     def test_sta_output_structure(self):
         """Test STAOutput type structure and validation."""
@@ -165,9 +165,9 @@ class TestControllerOutputTypes:
         assert 'history' in hints
 
         # Validate annotation types
-        assert hints['u'] == float
-        assert hints['state'] == Tuple[float, ...]
-        assert hints['history'] == Dict[str, Any]
+        assert hints['u'] == float  # noqa: E721 - intentional type equality check
+        assert hints['state'] == Tuple[float, ...]  # noqa: E721
+        assert hints['history'] == Dict[str, Any]  # noqa: E721
 
     def test_hybrid_sta_output_structure(self):
         """Test HybridSTAOutput type structure and validation."""
@@ -202,10 +202,10 @@ class TestControllerOutputTypes:
         assert 'sigma' in hints
 
         # Validate annotation types
-        assert hints['u'] == float
-        assert hints['state'] == Tuple[float, ...]
-        assert hints['history'] == Dict[str, Any]
-        assert hints['sigma'] == float
+        assert hints['u'] == float  # noqa: E721 - intentional type equality check
+        assert hints['state'] == Tuple[float, ...]  # noqa: E721
+        assert hints['history'] == Dict[str, Any]  # noqa: E721
+        assert hints['sigma'] == float  # noqa: E721
 
 
 class TestTypeSystemConsistency:
@@ -223,7 +223,7 @@ class TestTypeSystemConsistency:
         for output_type in output_types:
             hints = get_type_hints(output_type)
             assert 'u' in hints, f"{output_type.__name__} missing 'u' field"
-            assert hints['u'] == float, f"{output_type.__name__} 'u' field not float"
+            assert hints['u'] == float, f"{output_type.__name__} 'u' field not float"  # noqa: E721
 
     def test_all_output_types_have_state_field(self):
         """Ensure all controller outputs have a 'state' field."""
@@ -261,7 +261,7 @@ class TestTypeSystemConsistency:
         for output_type in sliding_mode_types:
             hints = get_type_hints(output_type)
             assert 'sigma' in hints, f"{output_type.__name__} missing 'sigma' field"
-            assert hints['sigma'] == float, f"{output_type.__name__} 'sigma' not float"
+            assert hints['sigma'] == float, f"{output_type.__name__} 'sigma' not float"  # noqa: E721
 
     def test_type_compatibility_across_components(self):
         """Test type compatibility when components interact."""
@@ -270,10 +270,10 @@ class TestTypeSystemConsistency:
         adaptive_output = AdaptiveSMCOutput(u=15.0, state=(0.1,), history={}, sigma=0.05)
 
         # All should have same 'u' type for actuator compatibility
-        assert type(classical_output.u) == type(adaptive_output.u)
+        assert type(classical_output.u) == type(adaptive_output.u)  # noqa: E721
 
         # All should have compatible history types
-        assert type(classical_output.history) == type(adaptive_output.history)
+        assert type(classical_output.history) == type(adaptive_output.history)  # noqa: E721
 
 
 class TestTypeSystemRobustness:

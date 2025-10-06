@@ -407,7 +407,7 @@ class EndToEndWorkflowValidator:
                                 steps_completed.append("Test Discovery Successful")
                                 # Count discovered tests from output
                                 lines = result.stdout.split('\n')
-                                test_lines = [l for l in lines if 'test' in l.lower() and '::' in l]
+                                test_lines = [l for l in lines if 'test' in l.lower() and '::' in l]  # noqa: E741
                                 if test_lines:
                                     performance_metrics['discovered_tests'] = len(test_lines)
 

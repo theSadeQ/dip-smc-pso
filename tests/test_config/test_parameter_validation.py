@@ -318,7 +318,7 @@ class TestNumericalStabilityParameterRanges:
             if 'simplified' in str(type(config).__name__).lower() or hasattr(config, 'pendulum1_mass'):
                 try:
                     dynamics = SimplifiedDIPDynamics(config)
-                except:
+                except:  # noqa: E722 - intentional broad exception handling
                     continue  # Skip if config doesn't work with SimplifiedDIPDynamics
 
                 # Test energy computation with small perturbation

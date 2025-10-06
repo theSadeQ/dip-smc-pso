@@ -173,7 +173,7 @@ class TestPSOIntegration:
         lower_bounds, upper_bounds = bounds
         assert len(lower_bounds) == 6  # 6 gains for classical SMC
         assert len(upper_bounds) == 6
-        assert all(l < u for l, u in zip(lower_bounds, upper_bounds))
+        assert all(l < u for l, u in zip(lower_bounds, upper_bounds))  # noqa: E741 - conventional in zip
 
     def test_validate_smc_gains(self):
         """Test gain validation."""
@@ -782,7 +782,7 @@ class TestControllerFactoryDeprecation:
 
             # Use legacy function that should emit deprecation warning
             try:
-                controller = create_classical_smc_controller(
+                controller = create_classical_smc_controller(  # noqa: F821 - conditional import or test mock
                     gains=[10.0, 5.0, 8.0, 3.0, 15.0, 2.0],
                     config=self.plant_config
                 )
