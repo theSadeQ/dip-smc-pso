@@ -368,7 +368,9 @@ class TestPerformanceAnalysisAccuracy:
         time_vector = np.linspace(0, 10, 1000)
 
         # Test Case 1: Stable exponential decay
-        stable_response = 2.0 * np.exp(-0.5 * time_vector)
+        # Scaled to 0.8 to ensure max_deviation < 1.0 for stability_margin > 0.5
+        # (stability_margin = 1.0 / (1.0 + max_deviation), so need max_deviation < 1.0)
+        stable_response = 0.8 * np.exp(-0.5 * time_vector)
         stable_states = np.column_stack([stable_response, -0.5 * stable_response,
                                         np.zeros_like(stable_response), np.zeros_like(stable_response)])
 
