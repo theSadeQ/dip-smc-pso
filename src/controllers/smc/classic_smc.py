@@ -205,8 +205,9 @@ class ClassicalSMC:
                 self._cond_threshold = float(self.dyn.p_model.singularity_cond_threshold)
             elif hasattr(self.dyn, "params") and hasattr(self.dyn.params, "singularity_cond_threshold"):
                 self._cond_threshold = float(self.dyn.params.singularity_cond_threshold)
-        except Exception:
-            self._cond_threshold = None
+        except Exception as e:
+            logging.getLogger(self.__class__.__name__).debug(f"Could not extract condition threshold, disabling monitoring: {e}")
+            self._cond_threshold = None  # OK: Monitoring is optional
 
         # Sliding surface uses only joint rates; cart input appears via B
         self.L = np.array([0.0, self.k1, self.k2], dtype=float)
@@ -349,8 +350,9 @@ class ClassicalSMC:
         # control is set to zero.
         try:
             M, C, G = self.dyn._compute_physics_matrices(state)
-        except Exception:
-            return 0.0
+        except Exception as e:
+            self.logger.warning(f"Physics matrix computation failed, returning safe zero control: {e}")
+            return 0.0  # OK: Safe fallback when dynamics unavailable
 
         # Apply Tikhonov regularisation to ensure the inertia matrix is
         # invertible.  Adding a small positive diagonal term improves

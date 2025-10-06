@@ -61,8 +61,9 @@ def _call_f(dyn: DoubleInvertedPendulum, x: np.ndarray, u: float | np.ndarray) -
             x = np.asarray(x, dtype=float)
             x2 = dyn.step(x, float(u), dt)  # type: ignore
             return (np.asarray(x2, dtype=float) - x) / dt
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug(f"Dynamics step() approximation failed: {e}")
+            pass  # OK: Will raise RuntimeError below
 
     raise RuntimeError(
         "Cannot evaluate dynamics; expected a method like f(x,u)->xdot or step(x,u,dt)."
@@ -248,8 +249,9 @@ class MPCController:
             else:
                 # Base layer of 0.05 scaled by max(1, dt) to avoid vanishing
                 bl = 0.05 * max(1.0, self.dt)
-        except Exception:
-            bl = 0.05 * max(1.0, self.dt)
+        except Exception as e:
+            logger.debug(f"Could not extract fallback boundary layer, using computed default: {e}")
+            bl = 0.05 * max(1.0, self.dt)  # OK: Use conservative default
 
         # Attempt to build the SMC fallback if gains and dependencies are available
         if fallback_smc_gains is not None and ClassicalSMC is not None:
@@ -399,14 +401,16 @@ class MPCController:
         try:
             if self._U_prev.size == N:
                 U.value = self._U_prev.reshape(1, -1)
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug(f"Could not apply warm start to MPC solver: {e}")
+            pass  # OK: Solver will run cold start
 
         # Solve (prefer OSQP; fall back to default if unavailable)
         try:
             prob.solve(solver=cp.OSQP, warm_start=True, verbose=False)
-        except Exception:
-            prob.solve(warm_start=True, verbose=False)
+        except Exception as e:
+            logger.debug(f"OSQP solver unavailable, using default solver: {e}")
+            prob.solve(warm_start=True, verbose=False)  # OK: Fallback to default CVXPY solver
 
         if prob.status not in (cp.OPTIMAL, cp.OPTIMAL_INACCURATE):
             logger.warning("MPC solve failed with status %s; using safe fallback.", prob.status)

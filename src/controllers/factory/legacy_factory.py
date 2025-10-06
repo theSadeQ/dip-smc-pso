@@ -354,19 +354,22 @@ def _as_dict(obj: Any) -> Dict[str, Any]:
     if hasattr(obj, "model_dump"):
         try:
             return obj.model_dump(exclude_unset=True)
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug(f"Config conversion via model_dump() failed: {e}")
+            pass  # OK: Try next conversion method
     if hasattr(obj, "dict"):
         try:
             return obj.dict(exclude_unset=True)
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug(f"Config conversion via dict() failed: {e}")
+            pass  # OK: Try next conversion method
     if hasattr(obj, "__dict__"):
         return dict(obj.__dict__)
     try:
         return dict(obj)
-    except Exception:
-        return {}
+    except Exception as e:
+        logger.debug(f"Config conversion via dict(obj) failed: {e}")
+        return {}  # OK: Return empty dict as final fallback
 
 def _get_default_gains(controller_name: str, config: Any, gains_override: Optional[List[float]]) -> List[float]:
     """Get gains from override, defaults, or raise error."""
@@ -380,8 +383,9 @@ def _get_default_gains(controller_name: str, config: Any, gains_override: Option
             return list(defaults["gains"])
         if hasattr(defaults, "gains"):
             return list(defaults.gains)
-    except Exception:
-        pass
+    except Exception as e:
+        logger.debug(f"Could not extract default gains for {controller_name}: {e}")
+        pass  # OK: Will raise FactoryConfigurationError below if no gains found
     
     raise FactoryConfigurationError(
         f"controllers.{controller_name}.gains: No gains provided and no defaults found. "
@@ -463,8 +467,9 @@ def build_controller(
             elif "gains" not in normalized_cfg and config is not None:
                 try:
                     normalized_cfg["gains"] = _get_default_gains(controller_name, config, None)
-                except Exception:
-                    pass  # Let the controller handle missing gains
+                except Exception as e:
+                    logger.debug(f"Could not get default gains for {controller_name}: {e}")
+                    pass  # OK: Let the controller handle missing gains
             
             # Try from_config method first, then constructor
             try:
@@ -617,8 +622,9 @@ def _legacy_create_controller(
         sim_cfg = getattr(config, "simulation", None)
         if sim_cfg is not None:
             use_full = bool(getattr(sim_cfg, "use_full_dynamics", False))
-    except Exception:
-        use_full = False
+    except Exception as e:
+        logger.debug(f"Could not determine dynamics model preference: {e}")
+        use_full = False  # OK: Default to simplified dynamics
     
     _ensure_dynamics_available(use_full)
     
@@ -643,15 +649,17 @@ def _legacy_create_controller(
                 dynamics_model = FullDIPDynamics(phys)
             else:
                 dynamics_model = DoubleInvertedPendulum(phys)
-    except Exception:
-        dynamics_model = None
+    except Exception as e:
+        logger.debug(f"Could not build dynamics model: {e}")
+        dynamics_model = None  # OK: Controller may not require dynamics
     
     # Get shared parameters
     try:
         sim_cfg = getattr(config, "simulation", None)
         sim_dt = getattr(sim_cfg, "dt", None) if sim_cfg is not None else None
-    except Exception:
-        sim_dt = None
+    except Exception as e:
+        logger.debug(f"Could not extract simulation dt parameter: {e}")
+        sim_dt = None  # OK: Controller may have dt in its own config
     
     dt_in_cfg = "dt" in ctrl_cfg_dict
     mf_in_cfg = "max_force" in ctrl_cfg_dict
