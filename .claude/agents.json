@@ -35,11 +35,17 @@
       "description": "Systematic code style enforcement, directory organization, ASCII header implementation, file placement optimization",
       "type": "general-purpose",
       "prompt_template": "code-beautification-directory-specialist.md"
+    },
+    "documentation-review": {
+      "name": "Documentation Review Specialist",
+      "description": "Technical documentation review for control systems, mathematical correctness, code example validation, cross-reference integrity",
+      "type": "general-purpose",
+      "prompt_template": "documentation-review-agent.md"
     }
   },
   "orchestration": {
-    "total_agents": 6,
-    "subordinate_specialists": 5,
+    "total_agents": 7,
+    "subordinate_specialists": 6,
     "parallel_execution_enabled": true,
     "quality_gates": {
       "system_health_threshold": 0.90,
