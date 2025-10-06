@@ -190,6 +190,16 @@ class BaseDynamicsModel(ABC):
         """Get control input dimension (default: 1 for DIP)."""
         return 1
 
+    @property
+    def state_dim(self) -> int:
+        """State vector dimension (property interface for benchmarking compatibility)."""
+        return self.get_state_dimension()
+
+    @property
+    def control_dim(self) -> int:
+        """Control input dimension (property interface for benchmarking compatibility)."""
+        return self.get_control_dimension()
+
     def reset_monitoring(self) -> None:
         """Reset monitoring statistics."""
         if hasattr(self, '_stability_monitor'):
