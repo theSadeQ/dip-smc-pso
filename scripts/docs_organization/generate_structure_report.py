@@ -30,7 +30,7 @@ import re
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Dict
 
 
 class DocumentationHealthAnalyzer:
@@ -122,7 +122,7 @@ class DocumentationHealthAnalyzer:
 
         if compliance_rate < 95:
             self.results['recommendations'].append(
-                f"Run validate_ascii_headers.py --fix to achieve 100% compliance"
+                "Run validate_ascii_headers.py --fix to achieve 100% compliance"
             )
 
         self.results['metrics']['ascii_header_compliance'] = f"{compliance_rate:.1f}%"

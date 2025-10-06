@@ -23,7 +23,7 @@ Usage:
 import argparse
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional
 from dataclasses import dataclass
 import ast
 
@@ -80,7 +80,7 @@ class APIDocEnhancer:
             # Extract source file path
             source_match = re.search(r'\*\*Source:\*\*\s+`([^`]+)`', content)
             if not source_match:
-                print(f"  WARNING: No source path found, skipping")
+                print("  WARNING: No source path found, skipping")
                 self.stats['skipped'] += 1
                 return False
 
@@ -119,7 +119,7 @@ class APIDocEnhancer:
             if not self.dry_run:
                 with open(doc_path, 'w', encoding='utf-8') as f:
                     f.write(enhanced_content)
-                print(f"  SUCCESS: Enhanced successfully")
+                print("  SUCCESS: Enhanced successfully")
             else:
                 print(f"  [DRY RUN] Would enhance {doc_path.name}")
 

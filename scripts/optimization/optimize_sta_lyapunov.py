@@ -13,19 +13,18 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import argparse
-import json
-import logging
-from typing import Dict, Any
-import time
+import argparse  # noqa: E402
+import json  # noqa: E402
+import logging  # noqa: E402
+import time  # noqa: E402
 
-import numpy as np
-from pyswarms.single import GlobalBestPSO
+import numpy as np  # noqa: E402
+from pyswarms.single import GlobalBestPSO  # noqa: E402
 
-from src.config import load_config
-from src.controllers.sta_smc import SuperTwistingSMC
-from src.core.dynamics import DoubleInvertedPendulum
-from src.core.vector_sim import simulate_system_batch
+from src.config import load_config  # noqa: E402
+from src.controllers.sta_smc import SuperTwistingSMC  # noqa: E402
+from src.core.dynamics import DoubleInvertedPendulum  # noqa: E402
+from src.core.vector_sim import simulate_system_batch  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -132,8 +131,8 @@ def optimize_sta_lyapunov(n_particles=50, iters=100, seed=42):
     logger.info("="*80)
     logger.info("PSO Optimization for STA-SMC Lyapunov Stability")
     logger.info("="*80)
-    logger.info(f"Target: Conftest.py physics parameters")
-    logger.info(f"Objective: Monotonic Lyapunov decrease")
+    logger.info("Target: Conftest.py physics parameters")
+    logger.info("Objective: Monotonic Lyapunov decrease")
     logger.info(f"PSO Config: {n_particles} particles, {iters} iterations, seed={seed}")
     logger.info("")
 

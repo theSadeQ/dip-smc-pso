@@ -14,11 +14,10 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import json
-import numpy as np
-import matplotlib.pyplot as plt
-from typing import Dict, List
-import argparse
+import json  # noqa: E402
+import matplotlib.pyplot as plt  # noqa: E402
+from typing import Dict  # noqa: E402
+import argparse  # noqa: E402
 
 
 def load_optimization_results(results_dir: Path) -> Dict:

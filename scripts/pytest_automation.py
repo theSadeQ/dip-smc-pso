@@ -17,8 +17,6 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, asdict
 from datetime import datetime
-import tempfile
-import shutil
 
 # Add project root to path for imports
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -528,7 +526,7 @@ class PytestIntegrationCoordinator:
         for rec in result.recommendations:
             report += f"- 💡 {rec}\n"
 
-        report += f"""
+        report += """
 ## Artifacts Generated
 
 """
@@ -574,7 +572,7 @@ def main():
 
         # Print summary
         print(f"\n{'='*80}")
-        print(f"TEST EXECUTION SUMMARY")
+        print("TEST EXECUTION SUMMARY")
         print(f"{'='*80}")
         print(f"Duration: {result.duration_seconds:.2f}s")
         print(f"Tests: {result.passed_tests}/{result.total_tests} passed")
@@ -582,7 +580,7 @@ def main():
         print(f"Production Ready: {'YES' if result.production_ready else 'NO'}")
 
         if result.blocking_issues:
-            print(f"\nBlocking Issues:")
+            print("\nBlocking Issues:")
             for issue in result.blocking_issues:
                 print(f"  - {issue}")
 

@@ -28,7 +28,7 @@ from datetime import datetime, timedelta
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from check_pso_completion import check_log_completion, check_json_results
+from check_pso_completion import check_log_completion  # noqa: E402
 
 
 def print_status_header():

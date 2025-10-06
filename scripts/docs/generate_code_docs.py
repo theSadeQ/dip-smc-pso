@@ -33,10 +33,8 @@ Examples:
 
 import ast
 import argparse
-import inspect
-import re
 from pathlib import Path
-from typing import List, Dict, Optional, Tuple, Any
+from typing import List, Optional
 from dataclasses import dataclass, field
 from collections import defaultdict
 
@@ -242,7 +240,7 @@ class DocumentationGenerator:
         if self.dry_run:
             print("\n[DRY RUN] No files were actually created.")
         else:
-            print(f"\n[SUCCESS] Documentation generation complete!")
+            print("\n[SUCCESS] Documentation generation complete!")
             print(f"   Generated docs in: {self.docs_root}")
 
     def _generate_module_docs(self, module_name: str, files: List[Path]):
@@ -527,7 +525,7 @@ Every Python file in the project is documented here with:
             relative = Path(os.path.relpath(source_file, doc_file.parent))
             # Convert to forward slashes for Sphinx compatibility
             return str(relative).replace('\\', '/')
-        except:
+        except Exception:  # noqa: E722
             # Fallback to absolute path
             return str(source_file)
 

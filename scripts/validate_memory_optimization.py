@@ -22,7 +22,7 @@ def measure_copy_overhead() -> Dict[str, Any]:
     """Measure memory overhead of array copy operations."""
 
     # Typical DIP state vector
-    state_dim = 6
+    # state_dim = 6  # Unused
     n_steps = 500  # 5 seconds at dt=0.01
 
     tracemalloc.start()
@@ -30,7 +30,7 @@ def measure_copy_overhead() -> Dict[str, Any]:
 
     # BASELINE: Pattern WITH unnecessary x0.copy()
     print("Measuring baseline (WITH x0.copy())...")
-    baseline_start_mem = tracemalloc.get_traced_memory()[0]
+    # baseline_start_mem =  # Unused tracemalloc.get_traced_memory()[0]
 
     x0_list_old = []
     for i in range(n_steps):
@@ -50,7 +50,7 @@ def measure_copy_overhead() -> Dict[str, Any]:
     # OPTIMIZED: Pattern WITHOUT unnecessary x0.copy()
     tracemalloc.reset_peak()
     print("Measuring optimized (WITHOUT x0.copy())...")
-    optimized_start_mem = tracemalloc.get_traced_memory()[0]
+    # optimized_start_mem =  # Unused tracemalloc.get_traced_memory()[0]
 
     x0_list_new = []
     for i in range(n_steps):
@@ -112,7 +112,7 @@ def validate_performance() -> Dict[str, float]:
     import time
 
     n_iterations = 10000
-    state_dim = 6
+    # state_dim = 6  # Unused
 
     # Baseline timing (WITH copy)
     start = time.perf_counter()
@@ -127,7 +127,7 @@ def validate_performance() -> Dict[str, float]:
     for i in range(n_iterations):
         x0 = np.array([1.0, 0.0, 0.1, 0.0, 0.2, 0.0], dtype=float)
         x_curr = x0
-        x_curr = np.array([1.1, 0.01, 0.11, 0.01, 0.21, 0.01], dtype=float)
+        x_curr = np.array([1.1, 0.01, 0.11, 0.01, 0.21, 0.01], dtype=float)  # noqa: F841
     optimized_time_ms = (time.perf_counter() - start) * 1000
 
     overhead_ms = optimized_time_ms - baseline_time_ms

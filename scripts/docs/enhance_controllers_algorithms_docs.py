@@ -114,7 +114,7 @@ class AlgorithmsDocEnhancer:
 
             # Check if already enhanced (look for our specific markers)
             if '## Advanced Mathematical Theory' in content:
-                print(f"  SKIPPED: Already enhanced with advanced theory")
+                print("  SKIPPED: Already enhanced with advanced theory")
                 return
 
             # Generate enhancements based on file type

@@ -20,20 +20,19 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import argparse
-import json
-import logging
-from typing import Dict, Any
-import time
+import argparse  # noqa: E402
+import json  # noqa: E402
+import logging  # noqa: E402
+from typing import Dict, Any  # noqa: E402
+import time  # noqa: E402
 
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.fft import fft, fftfreq
-from pyswarms.single import GlobalBestPSO
+import numpy as np  # noqa: E402
+from scipy.fft import fft, fftfreq  # noqa: E402
+from pyswarms.single import GlobalBestPSO  # noqa: E402
 
-from src.config import load_config
-from src.controllers.factory import create_controller
-from src.plant.models.dynamics import DoubleInvertedPendulum
+from src.config import load_config  # noqa: E402
+from src.controllers.factory import create_controller  # noqa: E402
+from src.plant.models.dynamics import DoubleInvertedPendulum  # noqa: E402
 
 
 logging.basicConfig(

@@ -117,8 +117,8 @@ class DocumentationScreenshotter:
             # Wait for Mermaid diagrams to render (if present)
             try:
                 await page.wait_for_selector(".mermaid svg", timeout=5000)
-                print(f"  ✅ Mermaid diagram detected and rendered")
-            except:
+                print("  ✅ Mermaid diagram detected and rendered")
+            except Exception:  # noqa: E722
                 pass  # No Mermaid diagrams on this page
 
             # Configure screenshot options based on format
@@ -172,7 +172,7 @@ class DocumentationScreenshotter:
             # Create page
             page = await context.new_page()
 
-            print(f"\n📸 Generating screenshots...\n")
+            print("\n📸 Generating screenshots...\n")
 
             # Capture screenshots
             for html_file in html_files:
@@ -233,11 +233,11 @@ async def main():
     # Verify docs exist
     if not docs_dir.exists():
         print(f"❌ Documentation directory not found: {docs_dir}")
-        print(f"   Run: sphinx-build -b html docs docs/_build/html")
+        print("   Run: sphinx-build -b html docs docs/_build/html")
         sys.exit(1)
 
     # Display configuration
-    print(f"📸 Screenshot Configuration:")
+    print("📸 Screenshot Configuration:")
     print(f"   Viewport: {args.viewport}")
     print(f"   Format: {args.format.upper()}")
     if args.format in ["jpeg", "webp"]:

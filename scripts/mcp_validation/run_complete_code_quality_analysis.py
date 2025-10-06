@@ -37,7 +37,6 @@ Created: 2025-10-06
 
 import argparse
 import json
-import sys
 import time
 from dataclasses import dataclass, asdict
 from datetime import datetime, timedelta
@@ -352,7 +351,7 @@ def run_vulture_analysis(
                     )
                 )
 
-            except (ValueError, IndexError) as e:
+            except (ValueError, IndexError):
                 print(f"    [WARN]  VULTURE parse error: {line[:50]}...")
                 continue
 

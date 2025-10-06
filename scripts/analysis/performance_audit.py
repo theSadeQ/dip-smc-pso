@@ -215,7 +215,7 @@ class PerformanceAuditor:
             browser = await p.chromium.launch(headless=True)
             page = await browser.new_page()
 
-            print(f"\n[*] Starting performance audit...")
+            print("\n[*] Starting performance audit...")
             print(f"[*] Auditing {len(html_files)} pages\n")
 
             for i, html_file in enumerate(html_files, 1):
@@ -318,7 +318,7 @@ async def main():
 
     if not docs_dir.exists():
         print(f"[ERROR] Documentation directory not found: {docs_dir}")
-        print(f"        Run: sphinx-build -b html docs docs/_build/html")
+        print("        Run: sphinx-build -b html docs docs/_build/html")
         sys.exit(1)
 
     auditor = PerformanceAuditor(docs_dir, output_file)

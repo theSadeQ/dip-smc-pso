@@ -23,7 +23,7 @@ Outputs:
 import json
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict
 from enum import Enum
 import re
@@ -293,7 +293,7 @@ class GapIdentifier:
             print(f"    Coverage Deficit: {deficit:.2f}%")
             print(f"    Missing Lines:    {len(gap.missing_lines)} lines")
             print(f"    Priority Score:   {gap.priority_score}/10")
-            print(f"\n    Suggested Tests:")
+            print("\n    Suggested Tests:")
             for j, test in enumerate(gap.suggested_tests[:3], 1):
                 print(f"      {j}. {test}")
             print()
@@ -371,7 +371,7 @@ def main():
 
         # Print summary
         total_hours = sum(plan.estimated_hours for plan in test_plans)
-        print(f"\nTest Plan Summary:")
+        print("\nTest Plan Summary:")
         print(f"  Total Files:       {len(test_plans)}")
         print(f"  Estimated Hours:   {total_hours:.1f}")
         print(f"  Safety-Critical:   {sum(1 for p in test_plans if p.level == 'SAFETY_CRITICAL')}")

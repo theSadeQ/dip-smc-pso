@@ -137,7 +137,7 @@ class AccessibilityAuditor:
 
             print("\n[*] Starting WCAG 2.1 AA Accessibility Audit...")
             print(f"[*] Auditing {len(html_files)} pages")
-            print(f"[*] Using axe-core for automated compliance checking\n")
+            print("[*] Using axe-core for automated compliance checking\n")
 
             for i, html_file in enumerate(html_files, 1):
                 result = await self.audit_page(page, html_file)

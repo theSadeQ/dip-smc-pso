@@ -23,9 +23,9 @@ import numpy as np
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from src.config import load_config
-from src.controllers.factory import create_controller
-from src.plant.models.simplified.dynamics import DoubleInvertedPendulum
+from src.config import load_config  # noqa: E402
+from src.controllers.factory import create_controller  # noqa: E402
+from src.plant.models.simplified.dynamics import DoubleInvertedPendulum  # noqa: E402
 
 
 def load_optimized_gains(controller: str) -> Optional[Dict]:
@@ -136,7 +136,7 @@ def validate_controller(controller_type: str, target_chattering: float = 2.0) ->
     chattering = result['chattering_index']
     tracking_error = result['tracking_error_rms']
 
-    print(f"Validation results:")
+    print("Validation results:")
     print(f"  Chattering index:    {chattering:.3f}")
     print(f"  Tracking error RMS:  {tracking_error:.4f} rad")
     print(f"  Control range:       [{result['control_range'][0]:.2f}, {result['control_range'][1]:.2f}] N")

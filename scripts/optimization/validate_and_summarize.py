@@ -12,15 +12,15 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import json
-import numpy as np
-from datetime import datetime
-from typing import Dict, List
-from scipy.fft import fft, fftfreq
+import json  # noqa: E402
+import numpy as np  # noqa: E402
+from datetime import datetime  # noqa: E402
+from typing import Dict, List  # noqa: E402
+from scipy.fft import fft, fftfreq  # noqa: E402
 
-from src.config import load_config
-from src.controllers.factory import create_controller
-from src.plant.models.dynamics import DoubleInvertedPendulum
+from src.config import load_config  # noqa: E402
+from src.controllers.factory import create_controller  # noqa: E402
+from src.plant.models.dynamics import DoubleInvertedPendulum  # noqa: E402
 
 
 def load_pso_results(controller: str) -> Dict:
@@ -160,7 +160,7 @@ def main():
         pso_data = load_pso_results(ctrl)
 
         if not pso_data['exists']:
-            print(f"  [SKIP] No results file found\n")
+            print("  [SKIP] No results file found\n")
             results[ctrl] = {'status': 'NO_RESULTS'}
             continue
 

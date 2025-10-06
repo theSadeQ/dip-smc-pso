@@ -25,7 +25,7 @@ except ImportError:
     print("Warning: psutil not available, using approximate memory tracking")
     psutil = None
 
-from src.utils.memory.memory_pool import MemoryPool
+from src.utils.memory.memory_pool import MemoryPool  # noqa: E402
 
 
 def get_memory_mb():
@@ -51,7 +51,7 @@ def validate_memory_pool():
     try:
         # Record initial memory
         gc.collect()
-        initial_memory = get_memory_mb()
+        # initial_memory =  # Unused get_memory_mb()
 
         print("=" * 80)
         print("MEMORY POOL VALIDATION - Issue #17 (CRIT-008)")
@@ -72,7 +72,7 @@ def validate_memory_pool():
                 allocated.append((i, block))
                 block[:] = np.random.randn(*block.shape)
 
-        print(f"Allocated 10 blocks")
+        print("Allocated 10 blocks")
         print(f"Pool state: {pool}")
         print()
 
@@ -81,7 +81,7 @@ def validate_memory_pool():
         print("-" * 80)
         efficiency = pool.get_efficiency()
         print(f"Current efficiency: {efficiency:.1f}%")
-        print(f"Target: >90% (will achieve during peak usage)")
+        print("Target: >90% (will achieve during peak usage)")
         print()
 
         # Test 3: Fragmentation and auto-coalescing
@@ -104,7 +104,7 @@ def validate_memory_pool():
         pool.coalesce()
         frag_after = pool.get_fragmentation()
         print(f"Fragmentation after coalesce: {frag_after:.1f}%")
-        print(f"Target: <10% [PASS]" if frag_after < 10.0 else f"Target: <10% [FAIL]")
+        print("Target: <10% [PASS]" if frag_after < 10.0 else "Target: <10% [FAIL]")
         print()
 
         # Test 4: Auto-coalescing trigger
@@ -177,11 +177,11 @@ def validate_memory_pool():
         memory_after_cycles = get_memory_mb()
         memory_growth = memory_after_cycles - memory_before_cycles
 
-        print(f"Completed 50 allocation/deallocation cycles")
+        print("Completed 50 allocation/deallocation cycles")
         print(f"Peak efficiency: {max_efficiency:.1f}%")
         print(f"Final fragmentation: {pool.get_fragmentation():.1f}%")
         print(f"Memory growth: {memory_growth:.1f} MB")
-        print(f"Target: <50 MB [PASS]" if memory_growth < 50 else f"Target: <50 MB [FAIL]")
+        print("Target: <50 MB [PASS]" if memory_growth < 50 else "Target: <50 MB [FAIL]")
         print()
 
         # Final acceptance criteria evaluation

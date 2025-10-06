@@ -112,7 +112,7 @@ class PlantDocEnhancer:
 
             # Check if already enhanced (look for our marker)
             if '<!-- Enhanced by Week 8 Phase 2 -->' in content:
-                print(f"  SKIPPED: Already enhanced")
+                print("  SKIPPED: Already enhanced")
                 return
 
             # Generate enhancements based on file type

@@ -14,13 +14,13 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.fft import fft, fftfreq
+import numpy as np  # noqa: E402
+import matplotlib.pyplot as plt  # noqa: E402
+from scipy.fft import fft, fftfreq  # noqa: E402
 
-from src.config import load_config
-from src.controllers.factory import create_controller
-from src.plant.models.dynamics import DoubleInvertedPendulum
+from src.config import load_config  # noqa: E402
+from src.controllers.factory import create_controller  # noqa: E402
+from src.plant.models.dynamics import DoubleInvertedPendulum  # noqa: E402
 
 
 def simulate_controller(controller_type: str, gains: list, dt: float = 0.01, t_sim: float = 15.0):
@@ -247,7 +247,7 @@ def main():
         classical_deriv_std = results['classical_smc']['metrics']['control_deriv_std']
         adaptive_deriv_std = results['adaptive_smc']['metrics']['control_deriv_std']
 
-        print(f"2. Control derivative STD comparison:")
+        print("2. Control derivative STD comparison:")
         print(f"   - Classical: {classical_deriv_std:.2f} N/s")
         print(f"   - Adaptive: {adaptive_deriv_std:.2f} N/s")
         print()

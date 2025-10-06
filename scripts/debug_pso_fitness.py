@@ -10,7 +10,6 @@ Diagnoses potential issues with PSO cost function including:
 - Cost sensitivity problems
 """
 
-import numpy as np
 import sys
 from pathlib import Path
 
@@ -40,13 +39,13 @@ def diagnose_normalization():
     print("=" * 90)
     print("PSO NORMALIZATION DIAGNOSTIC")
     print("=" * 90)
-    print(f"\nNormalization Constants:")
+    print("\nNormalization Constants:")
     print(f"  norm_ise:    {tuner.norm_ise:.6e}")
     print(f"  norm_u:      {tuner.norm_u:.6e}")
     print(f"  norm_du:     {tuner.norm_du:.6e}")
     print(f"  norm_sigma:  {tuner.norm_sigma:.6e}")
 
-    print(f"\nCost Weights:")
+    print("\nCost Weights:")
     print(f"  state_error:     {tuner.weights.state_error}")
     print(f"  control_effort:  {tuner.weights.control_effort}")
     print(f"  control_rate:    {tuner.weights.control_rate}")
@@ -72,7 +71,7 @@ def diagnose_normalization():
     du_n = du_sq_raw / tuner.norm_du if tuner.norm_du > 1e-12 else du_sq_raw
     sigma_n = sigma_sq_raw / tuner.norm_sigma if tuner.norm_sigma > 1e-12 else sigma_sq_raw
 
-    print(f"\nRaw Costs:")
+    print("\nRaw Costs:")
     print(f"  ISE:     {ise_raw:.4f}  ->  Normalized: {ise_n:.6e}")
     print(f"  U2:      {u_sq_raw:.4f}  ->  Normalized: {u_n:.6e}")
     print(f"  (DU)2:   {du_sq_raw:.4f}  ->  Normalized: {du_n:.6e}")
@@ -88,7 +87,7 @@ def diagnose_normalization():
 
     J_total = sum(J_components.values())
 
-    print(f"\nWeighted Cost Components:")
+    print("\nWeighted Cost Components:")
     for name, value in J_components.items():
         pct = (value / J_total * 100) if J_total > 0 else 0
         print(f"  {name:20s}: {value:.6e}  ({pct:.1f}%)")

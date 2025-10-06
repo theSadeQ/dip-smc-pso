@@ -88,7 +88,7 @@ async def verify_back_to_top_button():
 
         if page_height <= viewport_height:
             print(f"  [WARN] Page not scrollable (height: {page_height}px, viewport: {viewport_height}px)")
-            print(f"  [WARN] Skipping scroll test - page too short")
+            print("  [WARN] Skipping scroll test - page too short")
         else:
             # Scroll down significantly
             await page.evaluate("window.scrollTo(0, 1000)")

@@ -25,7 +25,7 @@ import shutil
 import tarfile
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Optional
 
 
 class LogArchiveManager:

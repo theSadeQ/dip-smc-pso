@@ -29,7 +29,6 @@ Validation (1 file):
 
 import re
 from pathlib import Path
-from typing import Dict, List
 
 class SimulationAdvancedDocsEnhancer:
     """Enhances simulation advanced documentation with mathematical theory."""

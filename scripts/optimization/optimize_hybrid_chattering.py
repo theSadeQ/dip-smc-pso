@@ -16,18 +16,18 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import argparse
-import json
-import logging
-from typing import Dict, Any, Tuple
-import time
+import argparse  # noqa: E402
+import json  # noqa: E402
+import logging  # noqa: E402
+from typing import Dict, Any  # noqa: E402
+import time  # noqa: E402
 
-import numpy as np
-from pyswarms.single import GlobalBestPSO
+import numpy as np  # noqa: E402
+from pyswarms.single import GlobalBestPSO  # noqa: E402
 
-from src.config import load_config
-from src.controllers.factory import create_controller
-from src.plant.models.dynamics import DoubleInvertedPendulum
+from src.config import load_config  # noqa: E402
+from src.controllers.factory import create_controller  # noqa: E402
+from src.plant.models.dynamics import DoubleInvertedPendulum  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -214,10 +214,10 @@ def main():
     ub = np.array([30.0, 10.0, 30.0, 5.0])  # Upper bounds
     bounds = (lb, ub)
 
-    logger.info(f"Search space: 4D [c1, λ1, c2, λ2]")
-    logger.info(f"  c1, c2 bounds: [5.0, 30.0] (surface weights)")
-    logger.info(f"  λ1 bounds: [0.5, 10.0] (slope parameter)")
-    logger.info(f"  λ2 bounds: [0.1, 5.0] (slope parameter)")
+    logger.info("Search space: 4D [c1, λ1, c2, λ2]")
+    logger.info("  c1, c2 bounds: [5.0, 30.0] (surface weights)")
+    logger.info("  λ1 bounds: [0.5, 10.0] (slope parameter)")
+    logger.info("  λ2 bounds: [0.1, 5.0] (slope parameter)")
 
     # Setup dynamics and initial state
     dynamics = DoubleInvertedPendulum(config=config.physics)
@@ -259,7 +259,7 @@ def main():
     logger.info("")
     logger.info("=" * 80)
     logger.info("")
-    logger.info(f"hybrid_adaptive_sta_smc:")
+    logger.info("hybrid_adaptive_sta_smc:")
     logger.info(f"  Chattering:  {best_result['chattering_index']:.3f} (target < 2.0)")
     logger.info(f"  Tracking:    {best_result['tracking_error_rms']:.4f} rad")
     logger.info(f"  Control RMS: {best_result['control_effort_rms']:.2f} N")

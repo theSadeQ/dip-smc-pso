@@ -23,8 +23,7 @@ import argparse
 import difflib
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Set, Optional
-from collections import defaultdict
+from typing import Dict, List, Tuple, Optional
 
 
 class RedundancyDetector:

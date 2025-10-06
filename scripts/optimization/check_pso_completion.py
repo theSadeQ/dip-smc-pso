@@ -13,7 +13,6 @@ import sys
 from pathlib import Path
 import re
 import subprocess
-import time
 from datetime import datetime
 
 def check_log_completion(log_file: Path) -> dict:
@@ -44,7 +43,7 @@ def check_log_completion(log_file: Path) -> dict:
 
         try:
             best_cost = float(best_cost_str)
-        except:
+        except (ValueError, TypeError):  # noqa: E722
             best_cost = None
 
         completed = current_iter >= total_iters
