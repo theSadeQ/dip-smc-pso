@@ -437,8 +437,12 @@ def simulate_system_batch(
                 else:
                     u_val = float(ctrl(t_now, x_curr))
                     sigma_val = 0.0
-            except Exception:
-                # On error computing control, treat as instability and stop
+            except Exception as e:
+                # CRITICAL FIX: Don't catch Warning exceptions (pytest may convert warnings to errors)
+                # Re-raise warnings so they propagate normally and don't terminate simulation
+                if isinstance(e, Warning):
+                    raise
+                # On actual error computing control, treat as instability and stop
                 H = i
                 u_b = u_b[:, :i]
                 x_b = x_b[:, : i + 1]
