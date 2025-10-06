@@ -13,7 +13,7 @@ or a Jupyter notebook) can decide how to display or save it.
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
-from typing import List, Tuple
+from typing import Tuple
 
 
 class Visualizer:

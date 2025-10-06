@@ -4,11 +4,10 @@
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import Optional, Tuple, List, Protocol, Union, Any, Dict
+from typing import Optional, Tuple, List, Protocol, Any, Dict
 import numpy as np
 import numpy.typing as npt
 import logging
-from pathlib import Path
 
 class DynamicsProtocol(Protocol):
     """Protocol defining the expected interface for dynamics models.

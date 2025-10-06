@@ -16,7 +16,7 @@ import json
 import h5py
 import numpy as np
 from dataclasses import dataclass, field
-from typing import Dict, Any, Optional, List, Union, BinaryIO
+from typing import Dict, Any, Optional, List
 from enum import Enum
 import logging
 from pathlib import Path

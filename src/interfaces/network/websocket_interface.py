@@ -17,7 +17,7 @@ from typing import Optional, Dict, Any, Tuple, Callable, Set
 import logging
 
 from ..core.protocols import CommunicationProtocol, MessageMetadata, ConnectionState, MessageType, Priority
-from ..core.data_types import Message, ConnectionInfo, InterfaceConfig, InterfaceType
+from ..core.data_types import InterfaceConfig
 
 
 class WebSocketInterface(CommunicationProtocol):

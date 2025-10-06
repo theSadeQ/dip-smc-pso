@@ -19,7 +19,7 @@ Features:
 
 import numpy as np
 import logging
-from typing import Dict, List, Tuple, Any, Optional, Union
+from typing import Dict, List, Tuple, Any
 from dataclasses import dataclass
 from enum import Enum
 import json

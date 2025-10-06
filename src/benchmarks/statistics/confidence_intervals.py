@@ -20,7 +20,7 @@ Statistical Methods:
 from __future__ import annotations
 
 import numpy as np
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple
 from scipy import stats
 from dataclasses import dataclass
 

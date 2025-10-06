@@ -10,7 +10,6 @@ applications and monitoring dashboards.
 """
 
 import asyncio
-import aiohttp
 import json
 import time
 from typing import Optional, Dict, Any, Tuple, Callable, List
@@ -18,7 +17,7 @@ import logging
 from aiohttp import web, ClientSession, ClientTimeout
 
 from ..core.protocols import CommunicationProtocol, MessageMetadata, ConnectionState, MessageType, Priority
-from ..core.data_types import Message, ConnectionInfo, InterfaceConfig, InterfaceType
+from ..core.data_types import InterfaceConfig
 
 
 class HTTPInterface(CommunicationProtocol):

@@ -13,7 +13,7 @@ from __future__ import annotations
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
-from typing import List, Tuple, Optional, Callable
+from typing import List, Tuple
 from matplotlib.patches import FancyArrowPatch, Rectangle
 
 class DIPAnimator:

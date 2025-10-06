@@ -11,11 +11,11 @@ simulation data, analysis results, and configuration parameters.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 from datetime import datetime
 
-from .interfaces import DataProtocol, AnalysisResult, AnalysisStatus
+from .interfaces import AnalysisResult, AnalysisStatus
 
 
 @dataclass

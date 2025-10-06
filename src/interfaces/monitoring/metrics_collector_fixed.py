@@ -20,14 +20,12 @@ CRITICAL: This fixes the memory leak that would crash production systems.
 
 import time
 import threading
-import statistics
 import psutil
 import os
-from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Any, Union, Callable, Iterator
+from typing import Dict, List, Optional, Any, Union, Callable
 from enum import Enum
-from collections import defaultdict, deque
+from collections import deque
 import logging
 
 

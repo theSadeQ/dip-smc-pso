@@ -11,15 +11,14 @@ rigor in control engineering applications.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any, Union
+from typing import Dict, List, Optional, Any, Union
 import numpy as np
 from scipy import stats
-import warnings
 from dataclasses import dataclass, field
 from enum import Enum
 
 from ..core.interfaces import StatisticalValidator, AnalysisResult, AnalysisStatus
-from ..core.data_structures import StatisticalTestResult, ConfidenceInterval
+from ..core.data_structures import StatisticalTestResult
 
 
 class TestType(Enum):
@@ -418,7 +417,7 @@ class StatisticalTestSuite(StatisticalValidator):
         alpha = self.config.significance_level
 
         # Approximate power for one-sample t-test
-        from scipy.stats import norm, t
+        from scipy.stats import t
 
         df = sample_size - 1
         t_critical = t.ppf(1 - alpha/2, df)
@@ -832,7 +831,7 @@ class StatisticalTestSuite(StatisticalValidator):
     def _calculate_required_sample_size(self, effect_size: float, power: float, alpha: float) -> int:
         """Calculate required sample size for given power."""
         # Simplified calculation for one-sample t-test
-        from scipy.stats import norm, t
+        from scipy.stats import norm
 
         z_alpha = norm.ppf(1 - alpha/2)
         z_beta = norm.ppf(power)

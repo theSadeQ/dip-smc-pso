@@ -12,7 +12,7 @@ headers, and metadata structures.
 import time
 import uuid
 from dataclasses import dataclass, field
-from typing import Any, Dict, Optional, List, Union, TypeVar, Generic
+from typing import Any, Dict, Optional, Union, TypeVar, Generic
 from enum import Enum
 import numpy as np
 

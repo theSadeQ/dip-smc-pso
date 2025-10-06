@@ -14,11 +14,10 @@ import sys
 import inspect
 import importlib
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Tuple, Set, Union
+from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import time
 
@@ -694,28 +693,28 @@ def main():
     results = matrix.analyze_full_system_compatibility()
 
     print(f"\n{'='*80}")
-    print(f"SYSTEM COMPATIBILITY ANALYSIS RESULTS")
+    print("SYSTEM COMPATIBILITY ANALYSIS RESULTS")
     print(f"{'='*80}")
     print(f"Overall Health Score: {results['system_health_score']:.1f}/100")
     print(f"Analysis Duration: {results['analysis_duration']:.2f}s")
     print(f"Production Ready: {results['production_readiness']['status']}")
 
-    print(f"\n🏥 DOMAIN HEALTH:")
+    print("\n🏥 DOMAIN HEALTH:")
     for domain, health in results['domain_health'].items():
         status_icon = "✅" if health['overall_health'] == "compatible" else "⚠️" if health['overall_health'] == "warning" else "❌"
         print(f"  {status_icon} {domain}: {health['overall_health']} ({health['component_count']} components)")
 
-    print(f"\n🔗 INTEGRATION POINTS:")
+    print("\n🔗 INTEGRATION POINTS:")
     for point in results['integration_points']:
         status_icon = "✅" if point['validation_status'] == "compatible" else "⚠️" if point['validation_status'] == "warning" else "❌"
         print(f"  {status_icon} {point['source_domain']} → {point['target_domain']}: {point['interface_type']}")
 
     if results['rule_violations']:
-        print(f"\n🚨 RULE VIOLATIONS:")
+        print("\n🚨 RULE VIOLATIONS:")
         for violation in results['rule_violations']:
             print(f"  - {violation['rule']}: {violation['description']}")
 
-    print(f"\n💡 RECOMMENDATIONS:")
+    print("\n💡 RECOMMENDATIONS:")
     for rec in results['recommendations']:
         print(f"  {rec}")
 

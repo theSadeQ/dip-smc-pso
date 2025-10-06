@@ -9,7 +9,7 @@ This module provides a factory pattern for instantiating different types
 of numerical integrators with proper configuration and parameter management.
 """
 
-from typing import Dict, Type, Any, Optional, Union
+from typing import Dict, Type, Any
 import logging
 
 from .base import BaseIntegrator

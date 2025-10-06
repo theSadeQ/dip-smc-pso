@@ -13,9 +13,8 @@ components.
 import time
 import threading
 import statistics
-from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Any, Union, Callable, Iterator
+from typing import Dict, List, Optional, Any, Union, Callable
 from enum import Enum
 from collections import defaultdict, deque
 import logging

@@ -10,7 +10,7 @@ configuration access patterns, enabling seamless integration between different
 configuration systems used throughout the project.
 """
 
-from typing import Dict, Any, Union, Optional
+from typing import Dict, Any, Union
 import warnings
 
 

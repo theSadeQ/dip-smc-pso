@@ -13,12 +13,12 @@ import asyncio
 import time
 import numpy as np
 from dataclasses import dataclass, field
-from typing import Dict, Any, Optional, List, Callable, Union
+from typing import Dict, Any, Optional, List
 from enum import Enum
 import logging
 
 from ..core.protocols import CommunicationProtocol
-from ..hardware.device_drivers import DeviceDriver, DeviceManager
+from ..hardware.device_drivers import DeviceManager
 from ..network.factory import NetworkInterfaceFactory
 
 

@@ -20,12 +20,10 @@ PRODUCTION SAFETY: No single points of failure, automatic recovery mechanisms.
 
 import threading
 import time
-import weakref
-from typing import Dict, Any, Optional, Type, Union, List, Callable
+from typing import Dict, Any, Optional, Union, List
 from enum import Enum
 import logging
 from dataclasses import dataclass, field
-from concurrent.futures import ThreadPoolExecutor
 import copy
 
 from .serializers import (
@@ -33,7 +31,6 @@ from .serializers import (
     JSONSerializer, MessagePackSerializer, PickleSerializer,
     BinarySerializer, CompressionSerializer
 )
-from .schemas import SchemaValidator, DataSchema, MessageSchema
 from .data_types import CompressionType
 
 
@@ -137,7 +134,7 @@ class ResilientSerializerFactory:
                 return fallback
 
             # If all else fails, use ultra-safe JSON
-            self._logger.error(f"All serializer creation attempts failed, using emergency JSON")
+            self._logger.error("All serializer creation attempts failed, using emergency JSON")
             return JSONSerializer(ensure_ascii=True, compact=True)
 
     def create_serializer_with_retry(self, format_type: Union[SerializationFormat, str],

@@ -14,13 +14,13 @@ import time
 import threading
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Any, AsyncIterator, Iterator, Optional, Dict, List, Callable, Union
+from typing import Any, Optional, Dict, List, Callable
 from enum import Enum
 import logging
 from collections import deque
 
-from .serializers import SerializerInterface, SerializationError
-from .data_types import DataMessage, MessageHeader, MessageType
+from .serializers import SerializerInterface
+from .data_types import DataMessage, MessageType
 
 
 class StreamMode(Enum):

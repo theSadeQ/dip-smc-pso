@@ -23,7 +23,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Callable, Union, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 import threading
 
 

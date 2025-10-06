@@ -12,7 +12,6 @@ import numpy as np
 
 from .base import BaseOrchestrator
 from ..core.interfaces import ResultContainer
-from ..results.containers import StandardResultContainer
 from ..safety.guards import apply_safety_guards
 
 
@@ -107,7 +106,7 @@ class SequentialOrchestrator(BaseOrchestrator):
                 states[i+1] = next_state
                 current_state = next_state
 
-            except Exception as e:
+            except Exception:
                 # Simulation failed, truncate results
                 times = times[:i+1]
                 states = states[:i+1]

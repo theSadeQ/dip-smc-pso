@@ -20,12 +20,11 @@ Key Features:
 
 import numpy as np
 import logging
-from typing import Dict, List, Tuple, Any, Optional, Union, Callable
-from dataclasses import dataclass, field
+from typing import Dict, List, Tuple, Any, Callable
+from dataclasses import dataclass
 from enum import Enum
 import time
 import json
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from scipy.optimize import differential_evolution, minimize
 import warnings
 warnings.filterwarnings("ignore", category=RuntimeWarning)
@@ -609,7 +608,7 @@ class PSOHyperparameterOptimizer:
                                objective: OptimizationObjective = OptimizationObjective.MULTI_OBJECTIVE
                                ) -> Dict[SMCType, OptimizationResult]:
         """Optimize hyperparameters for all controller types."""
-        self.logger.info(f"Optimizing PSO hyperparameters for all controllers")
+        self.logger.info("Optimizing PSO hyperparameters for all controllers")
 
         results = {}
         optimization_time_per_controller = self.max_optimization_time / 4

@@ -20,7 +20,7 @@ PRODUCTION SAFETY: All deadlocks resolved, safe for high-concurrency use.
 import time
 import threading
 from collections import deque
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Optional, Union, Any, Callable
 from enum import Enum
 import logging

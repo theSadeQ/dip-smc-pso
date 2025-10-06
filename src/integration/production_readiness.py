@@ -11,12 +11,11 @@ into a unified scoring framework aligned with CLAUDE.md quality standards.
 
 import sys
 import json
-import time
 import sqlite3
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timedelta
+from datetime import datetime
 from enum import Enum
 import logging
 
@@ -719,14 +718,14 @@ def main():
 
     # Display results
     print(f"\n{'='*80}")
-    print(f"PRODUCTION READINESS ASSESSMENT")
+    print("PRODUCTION READINESS ASSESSMENT")
     print(f"{'='*80}")
     print(f"Overall Score: {assessment.overall_score:.1f}/100")
     print(f"Readiness Level: {assessment.readiness_level.value.upper()}")
     print(f"Deployment Approved: {'YES' if assessment.deployment_approved else 'NO'}")
     print(f"Confidence: {assessment.confidence_level}")
 
-    print(f"\n📊 COMPONENT SCORES:")
+    print("\n📊 COMPONENT SCORES:")
     print(f"  Testing: {assessment.testing_score:.1f}/100")
     print(f"  Coverage: {assessment.coverage_score:.1f}/100")
     print(f"  Compatibility: {assessment.compatibility_score:.1f}/100")
@@ -735,11 +734,11 @@ def main():
     print(f"  Documentation: {assessment.documentation_score:.1f}/100")
 
     if assessment.blocking_issues:
-        print(f"\n🚨 BLOCKING ISSUES:")
+        print("\n🚨 BLOCKING ISSUES:")
         for issue in assessment.blocking_issues:
             print(f"  - {issue}")
 
-    print(f"\n💡 RECOMMENDATIONS:")
+    print("\n💡 RECOMMENDATIONS:")
     for rec in assessment.recommendations[:5]:  # Top 5 recommendations
         print(f"  {rec}")
 

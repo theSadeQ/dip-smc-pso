@@ -10,7 +10,6 @@ from typing import Any, Callable, Dict, List, Optional
 import numpy as np
 
 from ..core.interfaces import SimulationStrategy
-from ..orchestrators.parallel import ParallelOrchestrator
 
 
 class MonteCarloStrategy(SimulationStrategy):
@@ -108,7 +107,7 @@ class MonteCarloStrategy(SimulationStrategy):
             try:
                 result = simulation_fn(combined_params, **kwargs)
                 results.append(result)
-            except Exception as e:
+            except Exception:
                 results.append(None)  # Failed simulation
 
         return results
@@ -125,7 +124,7 @@ class MonteCarloStrategy(SimulationStrategy):
             try:
                 result = simulation_fn(combined_params, **kwargs)
                 results.append(result)
-            except Exception as e:
+            except Exception:
                 results.append(None)  # Failed simulation
 
         return results

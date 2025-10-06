@@ -24,8 +24,8 @@ import psutil
 import threading
 import time
 import weakref
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from dataclasses import dataclass
+from typing import Any, Callable, Dict, List, Optional, Union
 from collections import deque
 import numpy as np
 
@@ -314,7 +314,7 @@ class MemoryEfficientPSOTuner(PSOTuner):
 
             return result
 
-        except Exception as e:
+        except Exception:
             # Emergency cleanup on failure
             if self.memory_config.emergency_recovery_enabled:
                 self._emergency_memory_cleanup()

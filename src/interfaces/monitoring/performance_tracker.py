@@ -19,7 +19,6 @@ import statistics
 from collections import deque, defaultdict
 
 from src.interfaces.data_exchange.serializers import SerializerInterface, SerializationFormat
-from src.interfaces.data_exchange.data_types import SerializableData
 
 
 class MetricType(Enum):

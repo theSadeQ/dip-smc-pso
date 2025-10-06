@@ -14,7 +14,7 @@ import time
 import random
 import numpy as np
 from dataclasses import dataclass, field
-from typing import Dict, Any, Optional, List, Callable, Union
+from typing import Dict, Any, Optional, List
 from enum import Enum
 import logging
 
@@ -518,7 +518,7 @@ class FaultInjector:
         if profile.target_device in self._safety_limits:
             limits = self._safety_limits[profile.target_device]
             if profile.magnitude > limits.get('max_magnitude', float('inf')):
-                self._logger.error(f"Fault magnitude exceeds safety limits")
+                self._logger.error("Fault magnitude exceeds safety limits")
                 return False
 
         return True

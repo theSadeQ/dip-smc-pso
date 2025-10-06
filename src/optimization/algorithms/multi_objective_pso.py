@@ -28,7 +28,7 @@ from __future__ import annotations
 
 import logging
 import numpy as np
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
 import threading

@@ -11,17 +11,16 @@ and quantifying confidence in analysis results.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any, Union, Callable
+from typing import Dict, List, Optional, Any, Union, Callable
 import numpy as np
 from scipy import stats
 import warnings
 from dataclasses import dataclass, field
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 import multiprocessing
 from functools import partial
 
-from ..core.interfaces import StatisticalValidator, AnalysisResult, AnalysisStatus, DataProtocol
-from ..core.data_structures import ConfidenceInterval, StatisticalTestResult
+from ..core.interfaces import StatisticalValidator, AnalysisResult, AnalysisStatus
 
 
 @dataclass

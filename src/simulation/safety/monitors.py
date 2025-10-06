@@ -7,7 +7,7 @@
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 import numpy as np
 
 from ..core.interfaces import PerformanceMonitor

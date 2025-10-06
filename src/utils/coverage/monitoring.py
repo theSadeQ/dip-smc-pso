@@ -12,10 +12,10 @@ import time
 import json
 import sqlite3
 from dataclasses import dataclass, asdict
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from pathlib import Path
 import numpy as np
-from datetime import datetime, timedelta
+from datetime import datetime
 import logging
 
 # Configure logging
@@ -353,8 +353,8 @@ class CoverageMonitor:
 
         alert = f"{alert_icon} COVERAGE MONITORING ALERT\n"
         alert += f"**Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
-        alert += f"**Repository**: https://github.com/theSadeQ/dip-smc-pso.git\n"
-        alert += f"**Issue**: GitHub Issue #9 - Coverage Analysis Framework\n\n"
+        alert += "**Repository**: https://github.com/theSadeQ/dip-smc-pso.git\n"
+        alert += "**Issue**: GitHub Issue #9 - Coverage Analysis Framework\n\n"
 
         # Quality gate status
         if gate_results["failed_gates"]:
@@ -363,10 +363,10 @@ class CoverageMonitor:
                 gate = gate_results["gates"][gate_name]
                 alert += f"   - {gate_name}: {gate['current']:.1f}% (gap: {gate['gap']:+.1f}%)\n"
         else:
-            alert += f"✅ **ALL QUALITY GATES PASSED**\n"
+            alert += "✅ **ALL QUALITY GATES PASSED**\n"
 
         # Current metrics summary
-        alert += f"\n📊 **CURRENT COVERAGE STATUS**:\n"
+        alert += "\n📊 **CURRENT COVERAGE STATUS**:\n"
         for gate_name, gate in gate_results["gates"].items():
             status_icon = "✅" if gate['passed'] else "❌"
             alert += f"   - {gate_name.replace('_', ' ').title()}: {gate['current']:.1f}% {status_icon}\n"

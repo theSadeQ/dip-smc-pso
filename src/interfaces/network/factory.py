@@ -19,7 +19,7 @@ from .udp_interface import UDPInterface, UDPServer, UDPClient
 from .tcp_interface import TCPInterface, TCPServer, TCPClient
 from .http_interface import HTTPInterface, HTTPServer, HTTPClient
 from .websocket_interface import WebSocketInterface, WebSocketServer, WebSocketClient
-from .message_queue import MessageQueueInterface, ZeroMQInterface, RabbitMQInterface
+from .message_queue import ZeroMQInterface, RabbitMQInterface
 
 
 class NetworkInterfaceFactory:

@@ -9,7 +9,7 @@ This module provides comprehensive metrics computation for validating
 control system performance, statistical analysis, and benchmarking.
 """
 
-from typing import Dict, List, Tuple, Any, Optional, Union
+from typing import Dict, List, Tuple, Any, Optional
 import numpy as np
 from scipy import stats
 import warnings

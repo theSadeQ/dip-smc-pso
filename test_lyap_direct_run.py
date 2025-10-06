@@ -40,7 +40,7 @@ t, x_b, u_b, sigma_b = simulate_system_batch(
 )
 
 # Check results
-print(f"\nResults:")
+print("\nResults:")
 print(f"  sigma_b.shape: {sigma_b.shape}")
 
 if sigma_b.shape[1] == 0:
