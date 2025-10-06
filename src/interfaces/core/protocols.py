@@ -16,6 +16,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Callable, AsyncIterator
 from dataclasses import dataclass
 from enum import Enum
+from typing import Tuple
 
 
 class ConnectionState(Enum):

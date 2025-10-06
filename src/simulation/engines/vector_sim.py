@@ -28,6 +28,7 @@ from typing import Any, Callable, Optional, Tuple
 
 from .simulation_runner import step as _step_fn  # dispatches on config flag
 from ..context.safety_guards import _guard_no_nan, _guard_energy, _guard_bounds
+from collections.abc import Iterable
 try:
     from src.config.schemas import config  # type: ignore
 except Exception:

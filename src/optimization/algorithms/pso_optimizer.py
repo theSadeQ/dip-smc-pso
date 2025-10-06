@@ -48,6 +48,9 @@ from ...simulation.engines.vector_sim import simulate_system_batch
 # remain as sensible defaults but are no longer altered by PSOTuner.
 NORMALISATION_THRESHOLD: float = 1e-12
 
+# Initialize module logger
+logger = logging.getLogger(__name__)
+
 
 def _normalise(val: np.ndarray, denom: float) -> np.ndarray:
     """Safely normalise an array by a scalar denominator.

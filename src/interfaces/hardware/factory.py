@@ -17,6 +17,7 @@ from .sensors import SensorInterface, AnalogSensor, DigitalSensor, IMUSensor
 from .actuators import ActuatorInterface, ServoActuator, StepperMotor, PneumaticActuator
 from .daq_systems import DAQInterface, NIDAQInterface, AdcInterface, ChannelConfig
 from .serial_devices import ModbusDevice, CANDevice, ModbusRegister
+import asyncio
 
 
 class HardwareInterfaceFactory:
