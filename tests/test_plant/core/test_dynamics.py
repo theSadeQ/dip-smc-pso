@@ -119,7 +119,9 @@ def test_step_returns_nan_on_singular_params():
         joint1_friction=0.1,
         joint2_friction=0.1,
     )
-    x = np.zeros(6); u = 0.0; dt = 0.01
+    x = np.zeros(6)
+    u = 0.0
+    dt = 0.01
     x_next = step_rk4_numba(x, u, dt, p)
     assert np.any(np.isnan(x_next))
 

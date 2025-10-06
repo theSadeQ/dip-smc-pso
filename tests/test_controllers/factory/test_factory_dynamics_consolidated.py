@@ -13,8 +13,11 @@ def test_factory_and_dynamics_core(monkeypatch):
         def __init__(self, physics): pass
     monkeypatch.setattr(factory, "DoubleInvertedPendulum", Dyn, raising=False)
     class CfgA:
-        class Sim: use_full_dynamics = False; dt = 0.01
-        simulation = Sim(); controllers = {"zeta": {}, "alpha": {}, "beta": {}}
+        class Sim:
+            use_full_dynamics = False
+            dt = 0.01
+        simulation = Sim()
+        controllers = {"zeta": {}, "alpha": {}, "beta": {}}
         controller_defaults = {}
     with pytest.raises(ValueError) as e1:
         factory.create_controller("does_not_exist", config=CfgA(), gains=None)
@@ -27,7 +30,8 @@ def test_factory_and_dynamics_core(monkeypatch):
         assert controller in error_msg
 
     # b) empty controllers_map UX - new factory uses registry, so this test checks for unknown controller
-    class CfgEmpty: controllers = {}
+    class CfgEmpty:
+        controllers = {}
     with pytest.raises(ValueError) as e2:
         factory.create_controller("anything", config=CfgEmpty(), gains=None)
     # The new factory will show available controllers from registry, not "none configured"
@@ -35,16 +39,22 @@ def test_factory_and_dynamics_core(monkeypatch):
 
     # c) Test invalid gains for classical_smc (should have 6 gains, not 3)
     class CfgD:
-        class Sim: use_full_dynamics = False; dt = 0.01
-        simulation = Sim(); controllers = {"classical_smc": {"gains":[1,1,1], "boundary_layer": 0.05}}
+        class Sim:
+            use_full_dynamics = False
+            dt = 0.01
+        simulation = Sim()
+        controllers = {"classical_smc": {"gains":[1,1,1], "boundary_layer": 0.05}}
     with pytest.raises(ValueError):
         factory.create_controller("classical_smc", config=CfgD(), gains=[1,1,1])
 
     # d) Test successful controller creation with proper gains
     monkeypatch.setattr(factory, "DoubleInvertedPendulum", Dyn, raising=False)
     class CfgF:
-        class Sim: use_full_dynamics = True; dt = 0.01
-        simulation = Sim(); controllers = {"classical_smc": {"gains":[1,1,1,1,1,1], "boundary_layer": 0.05}}
+        class Sim:
+            use_full_dynamics = True
+            dt = 0.01
+        simulation = Sim()
+        controllers = {"classical_smc": {"gains":[1,1,1,1,1,1], "boundary_layer": 0.05}}
     # Should succeed with proper 6 gains
     controller = factory.create_controller("classical_smc", config=CfgF(), gains=[1,1,1,1,1,1])
     assert controller is not None
