@@ -12,8 +12,8 @@ Monte Carlo analysis validation.
 
 from __future__ import annotations
 import numpy as np
-from scipy.stats import t, f, chi2
-from typing import Tuple, Dict, List, Optional
+from scipy.stats import t, f
+from typing import Tuple, Dict, List
 import warnings
 
 def confidence_interval(
@@ -206,7 +206,7 @@ def one_way_anova(
     # Degrees of freedom
     df_between = k - 1
     df_within = N - k
-    df_total = N - 1
+    # Note: df_total = N - 1 available but not currently used in F-test
 
     # Mean squares
     MSB = SSB / df_between
