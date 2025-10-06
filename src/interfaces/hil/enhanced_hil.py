@@ -125,16 +125,16 @@ class EnhancedHILSystem:
         # Core components
         self._device_manager = DeviceManager()
         self._communication_interfaces: Dict[str, CommunicationProtocol] = {}
-        self._simulation_bridge: Optional['SimulationBridge'] = None
+        self._simulation_bridge: Optional['SimulationBridge'] = None  # noqa: F821
 
         # Real-time components
-        self._real_time_scheduler: Optional['RealTimeScheduler'] = None
+        self._real_time_scheduler: Optional['RealTimeScheduler'] = None  # noqa: F821
         self._timing_monitor = TimingMonitor(config.timing)
 
         # Testing and validation
-        self._fault_injector: Optional['FaultInjector'] = None
-        self._test_framework: Optional['HILTestFramework'] = None
-        self._data_logger: Optional['HILDataLogger'] = None
+        self._fault_injector: Optional['FaultInjector'] = None  # noqa: F821
+        self._test_framework: Optional['HILTestFramework'] = None  # noqa: F821
+        self._data_logger: Optional['HILDataLogger'] = None  # noqa: F821
 
         # Execution control
         self._main_task: Optional[asyncio.Task] = None

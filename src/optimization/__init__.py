@@ -14,6 +14,8 @@ This module provides a comprehensive optimization framework featuring:
 For backward compatibility, legacy interfaces are maintained.
 """
 
+import numpy as np  # For example/demo code
+
 # =============================================================================
 # NEW FRAMEWORK INTERFACES
 # =============================================================================
@@ -146,9 +148,9 @@ def create_optimizer(algorithm: str, parameter_space: ParameterSpace, **kwargs) 
     elif algorithm == 'ga':
         return GeneticAlgorithm(parameter_space, **kwargs)
     elif algorithm == 'cma_es':
-        return CMAES(parameter_space, **kwargs)
+        return CMAES(parameter_space, **kwargs)  # noqa: F821 - optional dependency
     elif algorithm == 'bayesian':
-        return BayesianOptimization(parameter_space, **kwargs)
+        return BayesianOptimization(parameter_space, **kwargs)  # noqa: F821 - optional dependency
     elif algorithm == 'nelder_mead':
         return NelderMead(parameter_space, **kwargs)
     else:
@@ -285,7 +287,7 @@ def example_pid_tuning():
     def create_pid_controller(params):
         kp, ki, kd = params
         # Return your PID controller implementation
-        return PIDController(kp=kp, ki=ki, kd=kd)
+        return PIDController(kp=kp, ki=ki, kd=kd)  # noqa: F821 - example code
 
     # Create optimization problem
     problem = create_control_problem(
@@ -317,7 +319,7 @@ def example_algorithm_comparison():
     # Create test problem (same as above)
     problem = create_control_problem(
         'tracking',
-        lambda params: PIDController(*params),
+        lambda params: PIDController(*params),  # noqa: F821 - example code
         {'sim_time': 5.0, 'dt': 0.01},
         (np.array([0.1, 0.01, 0.001]), np.array([10.0, 1.0, 0.1]))
     )

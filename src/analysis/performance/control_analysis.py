@@ -24,6 +24,24 @@ import numpy as np
 from src.controllers.mpc_controller import _numeric_linearize_continuous
 
 
+def _controllability_matrix(A: np.ndarray, B: np.ndarray) -> np.ndarray:
+    """Compute controllability matrix [B AB A²B ... A^(n-1)B]."""
+    n = A.shape[0]
+    C = B
+    for i in range(1, n):
+        C = np.hstack((C, np.linalg.matrix_power(A, i) @ B))
+    return C
+
+
+def _observability_matrix(A: np.ndarray, C: np.ndarray) -> np.ndarray:
+    """Compute observability matrix [C; CA; CA²; ...; CA^(n-1)]."""
+    n = A.shape[0]
+    O = C
+    for i in range(1, n):
+        O = np.vstack((O, C @ np.linalg.matrix_power(A, i)))
+    return O
+
+
 def linearize_dip(dyn: callable, x_eq: np.ndarray, u_eq: float) -> Tuple[np.ndarray, np.ndarray]:
     """Linearise the nonlinear dynamics around an equilibrium point.
 
@@ -118,12 +136,12 @@ class ControlAnalyzer:
     @staticmethod
     def controllability_matrix(A: np.ndarray, B: np.ndarray) -> np.ndarray:
         """Compute controllability matrix for LTI system."""
-        return controllability_mat(A, B)
+        return _controllability_matrix(A, B)
 
     @staticmethod
     def observability_matrix(A: np.ndarray, C: np.ndarray) -> np.ndarray:
         """Compute observability matrix for LTI system."""
-        return observability_mat(A, C)
+        return _observability_matrix(A, C)
 
     def is_controllable(self, A: np.ndarray, B: np.ndarray) -> bool:
         """Check if system is controllable using rank test."""

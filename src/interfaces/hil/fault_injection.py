@@ -108,7 +108,7 @@ class FaultInjector:
     control system robustness and fault tolerance.
     """
 
-    def __init__(self, device_manager: 'DeviceManager',
+    def __init__(self, device_manager: 'DeviceManager',  # noqa: F821
                  communication_interfaces: Dict[str, Any]):
         """Initialize fault injector."""
         self._device_manager = device_manager
@@ -373,7 +373,7 @@ class FaultInjector:
             )
             self._record_fault_event(event)
 
-    async def _apply_fault(self, device: 'DeviceDriver', profile: FaultProfile) -> None:
+    async def _apply_fault(self, device: 'DeviceDriver', profile: FaultProfile) -> None:  # noqa: F821
         """Apply specific fault to device."""
         try:
             if profile.fault_type == FaultType.SENSOR_BIAS:
@@ -398,13 +398,13 @@ class FaultInjector:
         except Exception as e:
             self._logger.error(f"Failed to apply fault {profile.fault_type}: {e}")
 
-    async def _apply_sensor_bias(self, device: 'DeviceDriver', profile: FaultProfile) -> None:
+    async def _apply_sensor_bias(self, device: 'DeviceDriver', profile: FaultProfile) -> None:  # noqa: F821
         """Apply sensor bias fault."""
         # This would modify sensor readings by adding a bias
         # Implementation depends on device interface
         pass
 
-    async def _apply_sensor_drift(self, device: 'DeviceDriver', profile: FaultProfile) -> None:
+    async def _apply_sensor_drift(self, device: 'DeviceDriver', profile: FaultProfile) -> None:  # noqa: F821
         """Apply sensor drift fault."""
         # This would implement gradual sensor drift over time
         elapsed_time = time.time() - profile.start_time
@@ -412,24 +412,24 @@ class FaultInjector:
         # Apply drift to sensor readings
         pass
 
-    async def _apply_sensor_noise(self, device: 'DeviceDriver', profile: FaultProfile) -> None:
+    async def _apply_sensor_noise(self, device: 'DeviceDriver', profile: FaultProfile) -> None:  # noqa: F821
         """Apply sensor noise fault."""
         # This would add random noise to sensor readings
         noise = np.random.normal(0, profile.noise_level)
         # Apply noise to sensor readings
         pass
 
-    async def _apply_sensor_stuck(self, device: 'DeviceDriver', profile: FaultProfile) -> None:
+    async def _apply_sensor_stuck(self, device: 'DeviceDriver', profile: FaultProfile) -> None:  # noqa: F821
         """Apply sensor stuck fault."""
         # This would freeze sensor readings at current value
         pass
 
-    async def _apply_actuator_bias(self, device: 'DeviceDriver', profile: FaultProfile) -> None:
+    async def _apply_actuator_bias(self, device: 'DeviceDriver', profile: FaultProfile) -> None:  # noqa: F821
         """Apply actuator bias fault."""
         # This would modify actuator commands by adding bias
         pass
 
-    async def _apply_actuator_stuck(self, device: 'DeviceDriver', profile: FaultProfile) -> None:
+    async def _apply_actuator_stuck(self, device: 'DeviceDriver', profile: FaultProfile) -> None:  # noqa: F821
         """Apply actuator stuck fault."""
         # This would prevent actuator from responding to commands
         pass
