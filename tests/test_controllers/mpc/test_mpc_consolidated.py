@@ -15,9 +15,18 @@ def test_mpc_optional_dep_and_param_validation(monkeypatch):
     # a) optional dependency guard
     monkeypatch.setattr("src.controllers.factory.legacy_factory.MPCController", None, raising=False)
     class CfgA:
-        class Sim: use_full_dynamics = False; dt = 0.01
-        class Physics: m_cart = 1.0; m_pole1 = 0.1; m_pole2 = 0.1; L1 = 0.5; L2 = 0.5; g = 9.81
-        simulation = Sim(); physics = Physics()
+        class Sim:
+            use_full_dynamics = False
+            dt = 0.01
+        class Physics:
+            m_cart = 1.0
+            m_pole1 = 0.1
+            m_pole2 = 0.1
+            L1 = 0.5
+            L2 = 0.5
+            g = 9.81
+        simulation = Sim()
+        physics = Physics()
         controllers = {"mpc_controller": {"horizon": 5, "q_x": 1.0, "q_theta": 1.0, "r_u": 0.1}}
         controller_defaults = {}
     with pytest.raises(ImportError) as e1:
@@ -31,9 +40,18 @@ def test_mpc_optional_dep_and_param_validation(monkeypatch):
 
     # - horizon type must be int
     class CfgBadHType:
-        class Sim: use_full_dynamics = False; dt = 0.01
-        class Physics: m_cart = 1.0; m_pole1 = 0.1; m_pole2 = 0.1; L1 = 0.5; L2 = 0.5; g = 9.81
-        simulation = Sim(); physics = Physics()
+        class Sim:
+            use_full_dynamics = False
+            dt = 0.01
+        class Physics:
+            m_cart = 1.0
+            m_pole1 = 0.1
+            m_pole2 = 0.1
+            L1 = 0.5
+            L2 = 0.5
+            g = 9.81
+        simulation = Sim()
+        physics = Physics()
         controllers = {"mpc_controller": {"horizon": 2.5}}
         controller_defaults = {}
     with pytest.raises(factory.ConfigValueError) as e2:
@@ -42,9 +60,18 @@ def test_mpc_optional_dep_and_param_validation(monkeypatch):
 
     # - horizon >= 1
     class CfgBadH:
-        class Sim: use_full_dynamics = False; dt = 0.01
-        class Physics: m_cart = 1.0; m_pole1 = 0.1; m_pole2 = 0.1; L1 = 0.5; L2 = 0.5; g = 9.81
-        simulation = Sim(); physics = Physics()
+        class Sim:
+            use_full_dynamics = False
+            dt = 0.01
+        class Physics:
+            m_cart = 1.0
+            m_pole1 = 0.1
+            m_pole2 = 0.1
+            L1 = 0.5
+            L2 = 0.5
+            g = 9.81
+        simulation = Sim()
+        physics = Physics()
         controllers = {"mpc_controller": {"horizon": 0}}
         controller_defaults = {}
     with pytest.raises(factory.ConfigValueError) as e3:
@@ -54,9 +81,18 @@ def test_mpc_optional_dep_and_param_validation(monkeypatch):
     # - geometry and weights ranges
     for mcp in [0.0, -1.0, float("inf")]:
         class CfgB:
-            class Sim: use_full_dynamics = False; dt = 0.01
-            class Physics: m_cart = 1.0; m_pole1 = 0.1; m_pole2 = 0.1; L1 = 0.5; L2 = 0.5; g = 9.81
-            simulation = Sim(); physics = Physics()
+            class Sim:
+                use_full_dynamics = False
+                dt = 0.01
+            class Physics:
+                m_cart = 1.0
+                m_pole1 = 0.1
+                m_pole2 = 0.1
+                L1 = 0.5
+                L2 = 0.5
+                g = 9.81
+            simulation = Sim()
+            physics = Physics()
             controllers = {"mpc_controller": {"max_cart_pos": mcp}}
             controller_defaults = {}
         with pytest.raises(factory.ConfigValueError) as e4:
@@ -65,9 +101,18 @@ def test_mpc_optional_dep_and_param_validation(monkeypatch):
 
     for wkey, val in [("q_x",-1.0), ("q_theta",-0.01), ("r_u",-1e-6)]:
         class CfgW:
-            class Sim: use_full_dynamics = False; dt = 0.01
-            class Physics: m_cart = 1.0; m_pole1 = 0.1; m_pole2 = 0.1; L1 = 0.5; L2 = 0.5; g = 9.81
-            simulation = Sim(); physics = Physics()
+            class Sim:
+                use_full_dynamics = False
+                dt = 0.01
+            class Physics:
+                m_cart = 1.0
+                m_pole1 = 0.1
+                m_pole2 = 0.1
+                L1 = 0.5
+                L2 = 0.5
+                g = 9.81
+            simulation = Sim()
+            physics = Physics()
             controllers = {"mpc_controller": {wkey: val}}
             controller_defaults = {}
         with pytest.raises(factory.ConfigValueError) as e5:
