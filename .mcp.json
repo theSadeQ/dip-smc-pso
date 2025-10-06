@@ -38,6 +38,43 @@
       ],
       "env": {},
       "description": "Browser automation for Streamlit dashboard testing"
+    },
+    "mcp-debugger": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\mcp-debugger\\bin\\mcp-debugger.js"
+      ],
+      "env": {},
+      "description": "Postman collection debugging and API testing"
+    },
+    "pytest-mcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\pytest-mcp-server\\dist\\cli.js"
+      ],
+      "env": {},
+      "description": "Pytest test failure tracking and debugging"
+    },
+    "git-mcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@cyanheads\\git-mcp-server\\dist\\index.js"
+      ],
+      "env": {},
+      "description": "Comprehensive Git operations and version control"
+    },
+    "sqlite-mcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\mcp-sqlite\\mcp-sqlite-server.js",
+        "D:\\Projects\\main\\logs\\pso_results.db"
+      ],
+      "env": {},
+      "description": "SQLite database operations for PSO results analysis"
     }
   },
   "project": {
@@ -47,7 +84,11 @@
       "filesystem": "Code analysis, log file inspection, documentation review",
       "github": "Issue tracking, PR reviews, commit history analysis",
       "sequential-thinking": "Systematic debugging, multi-step problem solving",
-      "puppeteer": "Streamlit dashboard testing, UI validation"
+      "puppeteer": "Streamlit dashboard testing, UI validation",
+      "mcp-debugger": "API endpoint testing, Postman collection execution",
+      "pytest-mcp": "Pytest failure analysis, test debugging workflows",
+      "git-mcp": "Advanced Git operations, commit analysis, branch management",
+      "sqlite-mcp": "PSO optimization results querying, convergence analysis"
     }
   }
 }
