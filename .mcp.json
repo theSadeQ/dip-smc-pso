@@ -75,6 +75,27 @@
       ],
       "env": {},
       "description": "SQLite database operations for PSO results analysis"
+    },
+    "mcp-analyzer": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-m", "mcp_server_analyzer"],
+      "env": {},
+      "description": "RUFF linting and VULTURE dead code detection"
+    },
+    "numpy-mcp": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["D:\\Projects\\main\\.mcp_servers\\numpy-mcp\\server.py"],
+      "env": {},
+      "description": "NumPy numerical computations and linear algebra"
+    },
+    "pandas-mcp": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["D:\\Projects\\main\\.mcp_servers\\pandas-mcp-server\\server.py"],
+      "env": {},
+      "description": "Pandas data analysis and visualization for PSO results"
     }
   },
   "project": {
@@ -88,7 +109,10 @@
       "mcp-debugger": "API endpoint testing, Postman collection execution",
       "pytest-mcp": "Pytest failure analysis, test debugging workflows",
       "git-mcp": "Advanced Git operations, commit analysis, branch management",
-      "sqlite-mcp": "PSO optimization results querying, convergence analysis"
+      "sqlite-mcp": "PSO optimization results querying, convergence analysis",
+      "mcp-analyzer": "Code quality checks with RUFF linter and VULTURE dead code detection",
+      "numpy-mcp": "Numerical computations, matrix operations, statistical analysis for control systems",
+      "pandas-mcp": "Advanced data analysis and visualization of PSO convergence and simulation results"
     }
   }
 }
