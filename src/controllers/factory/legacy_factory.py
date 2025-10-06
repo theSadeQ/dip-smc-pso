@@ -1044,9 +1044,9 @@ def _build_mpc_controller(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, 
     if fb_smc is not None:
         try:
             mpc_kwargs["fallback_smc_gains"] = [float(x) for x in fb_smc]
-        except Exception:
+        except (ValueError, TypeError) as e:  # P0: Handle invalid SMC gains format
             logger.warning(
-                f"controllers.{key}: fallback_smc_gains must be a sequence of floats; ignoring provided value {fb_smc!r}."
+                f"controllers.{key}: fallback_smc_gains must be numeric sequence, got {fb_smc!r}: {e}. Ignoring."
             )
     
     fb_kp = ctrl_cfg_dict.get("fallback_pd_kp", None)
@@ -1054,9 +1054,9 @@ def _build_mpc_controller(key: str, ctrl_cfg_dict: Dict[str, Any], config: Any, 
     if fb_kp is not None and fb_kd is not None:
         try:
             mpc_kwargs["fallback_pd_gains"] = (float(fb_kp), float(fb_kd))
-        except Exception:
+        except (ValueError, TypeError) as e:  # P0: Handle invalid PD gains
             logger.warning(
-                f"controllers.{key}: fallback_pd_kp/kd must be numeric; using default PD gains."
+                f"controllers.{key}: fallback_pd_kp/kd must be numeric, got kp={fb_kp}, kd={fb_kd}: {e}. Using defaults."
             )
     
     instance = current_mpc_controller(**mpc_kwargs)
