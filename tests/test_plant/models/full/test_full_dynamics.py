@@ -263,35 +263,35 @@ class TestFullDIPDynamicsStateValidation:
     def test_state_finite_values(self, dynamics):
         """Test that state validation rejects non-finite values."""
         # Test NaN values
-        nan_state = np.array([np.nan, 0.0, 0.0, 0.0, 0.0, 0.0])
+        np.array([np.nan, 0.0, 0.0, 0.0, 0.0, 0.0])
         # Should be rejected (when validation is implemented)
 
         # Test infinite values
-        inf_state = np.array([np.inf, 0.0, 0.0, 0.0, 0.0, 0.0])
+        np.array([np.inf, 0.0, 0.0, 0.0, 0.0, 0.0])
         # Should be rejected (when validation is implemented)
 
     def test_state_constraint_checking(self, config):
         """Test state constraint validation."""
-        dynamics = FullDIPDynamics(config, enable_validation=True)
+        FullDIPDynamics(config, enable_validation=True)
 
         # Test cart position limits
         assert config.cart_position_limits == (-2.0, 2.0)
 
         # State within limits should be valid
-        valid_state = np.array([1.0, 0.1, 0.1, 0.1, 0.1, 0.1])
+        np.array([1.0, 0.1, 0.1, 0.1, 0.1, 0.1])
 
         # State outside position limits should be invalid
-        invalid_state = np.array([3.0, 0.1, 0.1, 0.1, 0.1, 0.1])  # x > 2.0
+        np.array([3.0, 0.1, 0.1, 0.1, 0.1, 0.1])  # x > 2.0
 
     def test_state_velocity_limits(self, config):
         """Test velocity constraint validation."""
-        dynamics = FullDIPDynamics(config, enable_validation=True)
+        FullDIPDynamics(config, enable_validation=True)
 
         # Test cart velocity limits
         assert config.cart_velocity_limit == 5.0
 
         # High cart velocity should be flagged
-        high_cart_vel_state = np.array([0.0, 0.0, 0.0, 10.0, 0.0, 0.0])  # x_dot > 5.0
+        np.array([0.0, 0.0, 0.0, 10.0, 0.0, 0.0])  # x_dot > 5.0
 
         # High joint velocity should be flagged
-        high_joint_vel_state = np.array([0.0, 0.0, 0.0, 0.0, 15.0, 0.0])  # theta1_dot > 10.0
+        np.array([0.0, 0.0, 0.0, 0.0, 15.0, 0.0])  # theta1_dot > 10.0

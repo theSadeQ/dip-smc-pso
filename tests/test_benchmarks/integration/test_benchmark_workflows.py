@@ -321,7 +321,6 @@ class IntegratedBenchmarkOrchestrator:
         """Execute cross-controller comparison phase."""
 
         try:
-            comparison_results = {}
 
             # Create realistic test scenario
             scenario = self.parameter_validator.get_realistic_scenario_by_name("Desktop Lab Setup")

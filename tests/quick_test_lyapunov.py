@@ -95,7 +95,7 @@ def test_lyapunov_robustness():
     P4_sym = 0.5 * (P4 + P4.T)
 
     try:
-        L = np.linalg.cholesky(P4_sym)
+        np.linalg.cholesky(P4_sym)
         cholesky_succeeded = True
     except np.linalg.LinAlgError:
         cholesky_succeeded = False

@@ -128,7 +128,7 @@ class TestSlidingSurfaceComputation:
 
     def test_surface_gain_sensitivity(self, classical_smc_config):
         """Test surface sensitivity to gain changes."""
-        dynamics = MockDynamics()
+        MockDynamics()
 
         # Low gain configuration - create new config since dataclass is frozen
         low_gain_config = ClassicalSMCConfig(

@@ -171,11 +171,11 @@ class TestModernSafetyGuards:
 
         # Valid states should pass
         valid_state = np.array([1.0, 2.0, 3.0])
-        assert guard.check(valid_state, step_idx=0) == True
+        assert guard.check(valid_state, step_idx=0)
 
         # Invalid states should fail
         invalid_state = np.array([1.0, np.nan, 3.0])
-        assert guard.check(invalid_state, step_idx=0) == False
+        assert not guard.check(invalid_state, step_idx=0)
 
         # Check violation message
         message = guard.get_violation_message()
@@ -189,11 +189,11 @@ class TestModernSafetyGuards:
 
         # Low energy state should pass
         low_energy = np.array([1.0, 1.0, 1.0])  # Energy = 3.0
-        assert guard.check(low_energy, step_idx=0) == True
+        assert guard.check(low_energy, step_idx=0)
 
         # High energy state should fail
         high_energy = np.array([2.0, 2.0, 2.0])  # Energy = 12.0
-        assert guard.check(high_energy, step_idx=0) == False
+        assert not guard.check(high_energy, step_idx=0)
 
         # Check violation message is updated
         violation_message = guard.get_violation_message()
@@ -208,33 +208,33 @@ class TestModernSafetyGuards:
 
         # Valid state should pass
         valid_state = np.array([0.5, 1.0, 2.0])
-        assert guard.check(valid_state, step_idx=0) == True
+        assert guard.check(valid_state, step_idx=0)
 
         # Lower bound violation should fail
         lower_violation = np.array([-1.5, 0.0, 0.0])
-        assert guard.check(lower_violation, step_idx=0) == False
+        assert not guard.check(lower_violation, step_idx=0)
         assert "Lower bounds violated" in guard.get_violation_message()
 
         # Upper bound violation should fail
         upper_violation = np.array([0.0, 0.0, 3.5])
-        assert guard.check(upper_violation, step_idx=0) == False
+        assert not guard.check(upper_violation, step_idx=0)
         assert "Upper bounds violated" in guard.get_violation_message()
 
     def test_bounds_guard_partial_bounds(self):
         """Test BoundsGuard with only lower or upper bounds."""
         # Only lower bounds
         lower_only_guard = BoundsGuard(np.array([-1.0, -1.0]), None)
-        assert lower_only_guard.check(np.array([0.0, 0.0]), 0) == True
-        assert lower_only_guard.check(np.array([-2.0, 0.0]), 0) == False
+        assert lower_only_guard.check(np.array([0.0, 0.0]), 0)
+        assert not lower_only_guard.check(np.array([-2.0, 0.0]), 0)
 
         # Only upper bounds
         upper_only_guard = BoundsGuard(None, np.array([1.0, 1.0]))
-        assert upper_only_guard.check(np.array([0.0, 0.0]), 0) == True
-        assert upper_only_guard.check(np.array([0.0, 2.0]), 0) == False
+        assert upper_only_guard.check(np.array([0.0, 0.0]), 0)
+        assert not upper_only_guard.check(np.array([0.0, 2.0]), 0)
 
         # No bounds (everything should pass)
         no_bounds_guard = BoundsGuard(None, None)
-        assert no_bounds_guard.check(np.array([100.0, -100.0]), 0) == True
+        assert no_bounds_guard.check(np.array([100.0, -100.0]), 0)
 
 
 @pytest.mark.skipif(not IMPORTS_AVAILABLE, reason="Safety guard modules not available")
@@ -295,7 +295,7 @@ class TestSafetyGuardManager:
         # Valid state should pass all guards
         valid_state = np.array([1.0, 2.0])
         result = self.manager.check_all(valid_state, step_idx=0)
-        assert result == True
+        assert result
 
     def test_check_all_failure_nan(self):
         """Test check_all failure due to NaN guard."""
@@ -345,7 +345,7 @@ class TestSafetyGuardManager:
         # Should not raise any exceptions after clearing
         any_state = np.array([100.0, np.nan])  # Would normally violate NaN guard
         result = self.manager.check_all(any_state, step_idx=0)
-        assert result == True
+        assert result
 
 
 @pytest.mark.skipif(not IMPORTS_AVAILABLE, reason="Safety guard modules not available")
@@ -518,7 +518,7 @@ class TestSafetyGuardPerformance:
         # Perform many checks
         for _ in range(1000):
             result = guard.check(large_state, step_idx=0)
-            assert result == True
+            assert result
 
         elapsed_time = time.time() - start_time
 
@@ -536,7 +536,7 @@ class TestSafetyGuardPerformance:
         # Perform many checks
         for _ in range(1000):
             result = guard.check(large_state, step_idx=0)
-            assert result == True
+            assert result
 
         elapsed_time = time.time() - start_time
         assert elapsed_time < 1.0
@@ -556,7 +556,7 @@ class TestSafetyGuardPerformance:
         # Perform many checks
         for _ in range(1000):
             result = guard.check(large_state, step_idx=0)
-            assert result == True
+            assert result
 
         elapsed_time = time.time() - start_time
         assert elapsed_time < 2.0  # Allow more time for bounds checking
@@ -576,7 +576,7 @@ class TestSafetyGuardPerformance:
         # Perform many complete guard checks
         for _ in range(500):
             result = manager.check_all(test_state, step_idx=0)
-            assert result == True
+            assert result
 
         elapsed_time = time.time() - start_time
         assert elapsed_time < 2.0
@@ -592,37 +592,37 @@ class TestSafetyGuardEdgeCases:
 
         # NaN guard should handle empty state
         nan_guard = NaNGuard()
-        assert nan_guard.check(empty_state, step_idx=0) == True
+        assert nan_guard.check(empty_state, step_idx=0)
 
         # Energy guard should handle empty state (energy = 0)
         energy_guard = EnergyGuard(1.0)
-        assert energy_guard.check(empty_state, step_idx=0) == True
+        assert energy_guard.check(empty_state, step_idx=0)
 
         # Bounds guard should handle empty state
         bounds_guard = BoundsGuard(np.array([]), np.array([]))
-        assert bounds_guard.check(empty_state, step_idx=0) == True
+        assert bounds_guard.check(empty_state, step_idx=0)
 
     def test_single_element_states(self):
         """Test safety guards with single-element states."""
         single_state = np.array([0.5])
 
         # All guards should work with single elements
-        assert NaNGuard().check(single_state, 0) == True
-        assert EnergyGuard(1.0).check(single_state, 0) == True
-        assert BoundsGuard(np.array([0.0]), np.array([1.0])).check(single_state, 0) == True
+        assert NaNGuard().check(single_state, 0)
+        assert EnergyGuard(1.0).check(single_state, 0)
+        assert BoundsGuard(np.array([0.0]), np.array([1.0])).check(single_state, 0)
 
     def test_extreme_values(self):
         """Test safety guards with extreme but valid values."""
         # Very small values
         tiny_state = np.array([1e-10, -1e-10, 1e-15])
-        assert NaNGuard().check(tiny_state, 0) == True
-        assert EnergyGuard(1.0).check(tiny_state, 0) == True
+        assert NaNGuard().check(tiny_state, 0)
+        assert EnergyGuard(1.0).check(tiny_state, 0)
 
         # Very large values (but finite)
         large_state = np.array([1e6, -1e6, 1e8])
-        assert NaNGuard().check(large_state, 0) == True
+        assert NaNGuard().check(large_state, 0)
         # Energy guard should fail for large values
-        assert EnergyGuard(1.0).check(large_state, 0) == False
+        assert not EnergyGuard(1.0).check(large_state, 0)
 
     def test_zero_energy_limit(self):
         """Test energy guard with zero energy limit."""
@@ -630,11 +630,11 @@ class TestSafetyGuardEdgeCases:
 
         # Only zero state should pass
         zero_state = np.array([0.0, 0.0, 0.0])
-        assert zero_energy_guard.check(zero_state, 0) == True
+        assert zero_energy_guard.check(zero_state, 0)
 
         # Any non-zero state should fail
         tiny_state = np.array([1e-10, 0.0, 0.0])
-        assert zero_energy_guard.check(tiny_state, 0) == False
+        assert not zero_energy_guard.check(tiny_state, 0)
 
     def test_bounds_guard_equal_limits(self):
         """Test bounds guard where lower and upper bounds are equal."""
@@ -642,11 +642,11 @@ class TestSafetyGuardEdgeCases:
 
         # Only exact value should pass
         exact_state = np.array([1.0])
-        assert exact_bounds_guard.check(exact_state, 0) == True
+        assert exact_bounds_guard.check(exact_state, 0)
 
         # Slightly off should fail
         slightly_off = np.array([1.0001])
-        assert exact_bounds_guard.check(slightly_off, 0) == False
+        assert not exact_bounds_guard.check(slightly_off, 0)
 
 
 # Fallback tests when imports are not available

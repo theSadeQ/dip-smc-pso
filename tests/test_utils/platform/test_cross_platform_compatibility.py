@@ -339,7 +339,7 @@ class TestScientificComputingConsistency:
         """Test control system calculation consistency."""
         # Test matrix operations common in control theory
         A = np.array([[0, 1], [-2, -3]])  # System matrix
-        B = np.array([[0], [1]])          # Input matrix
+        np.array([[0], [1]])          # Input matrix
 
         # Eigenvalues (poles)
         eigenvals = np.linalg.eigvals(A)

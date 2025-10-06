@@ -78,13 +78,13 @@ def test_gain_validation() -> bool:
     valid_gains = [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]
     result = validate_smc_gains(SMCType.CLASSICAL, valid_gains)
     print(f"+ Valid gains passed: {result}")
-    assert result == True
+    assert result
 
     # Invalid gains (negative)
     invalid_gains = [-1.0, 5.0, 8.0, 3.0, 15.0, 2.0]
     result = validate_smc_gains(SMCType.CLASSICAL, invalid_gains)
     print(f"+ Invalid gains rejected: {result}")
-    assert result == False
+    assert not result
 
     return True
 
@@ -179,12 +179,12 @@ def main() -> bool:
 
     try:
         # Test individual components
-        controller = test_pso_controller_creation()
-        bounds = test_gain_bounds()
+        test_pso_controller_creation()
+        test_gain_bounds()
         test_gain_validation()
 
         # Test integrated functionality
-        fitness_func = test_pso_fitness_function()
+        test_pso_fitness_function()
         test_multiple_smc_types()
 
         print("\n" + "=" * 60)

@@ -331,7 +331,7 @@ class TestConvergenceProperties:
 
         # Analyze convergence
         lyapunov_analysis = controller.get_lyapunov_analysis()
-        energy_analysis = controller.get_energy_analysis()
+        controller.get_energy_analysis()
 
         assert lyapunov_analysis['converged'], "Lyapunov function should decrease to zero"
         assert lyapunov_analysis['final_value'] < 0.01, "Should converge close to zero"
@@ -361,7 +361,7 @@ class TestConvergenceProperties:
             for i in range(100):
                 # Add measurement noise
                 noisy_state = state + np.random.normal(0, 0.001, 6)
-                control = controller.compute_control(noisy_state)
+                controller.compute_control(noisy_state)
 
                 # Simple dynamics update
                 state = state * 0.98 + np.random.normal(0, 0.01, 6)

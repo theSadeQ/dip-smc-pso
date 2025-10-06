@@ -509,7 +509,7 @@ class TestStatisticalComparison:
             })
 
         # Power should generally increase with sample size
-        p_values = [r['p_value'] for r in power_results]
+        [r['p_value'] for r in power_results]
 
         # Larger sample sizes should generally give smaller p-values (higher power)
         # At least the largest sample should detect the difference

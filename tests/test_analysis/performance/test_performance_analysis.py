@@ -37,7 +37,7 @@ class TestControlPerformanceMetrics:
         """Test step response performance metrics."""
         # Generate ideal step response
         time_vector = np.linspace(0, 10, 1000)
-        dt = time_vector[1] - time_vector[0]
+        time_vector[1] - time_vector[0]
 
         # Second-order underdamped system response
         wn = 2.0  # Natural frequency

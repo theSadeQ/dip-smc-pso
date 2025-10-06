@@ -744,7 +744,7 @@ class TestEndToEndWorkflows:
                 with open(results_file_path, 'r') as rf:
                     loaded_results = json.load(rf)
 
-                assert loaded_results['success'] == True
+                assert loaded_results['success']
                 assert 'performance_metrics' in loaded_results
                 assert 'stability_analysis' in loaded_results
 

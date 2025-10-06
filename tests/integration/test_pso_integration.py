@@ -100,7 +100,7 @@ def test_pso_configuration_compatibility():
         ]
 
         # Create test config
-        test_config = ClassicalSMCConfig(
+        ClassicalSMCConfig(
             gains=test_gains,
             max_force=150.0,
             boundary_layer=0.02,
@@ -109,7 +109,7 @@ def test_pso_configuration_compatibility():
         print("[OK] ClassicalSMCConfig accepts PSO-bounded gains")
 
         # Test controller creation using backward-compatible interface
-        controller = ClassicalSMC(
+        ClassicalSMC(
             gains=test_gains,
             max_force=150.0,
             boundary_layer=0.02,
@@ -167,8 +167,7 @@ def test_fitness_function():
         )
 
         # Create test particles (small set for quick validation)
-        config = load_config("config.yaml")
-        bounds = config.pso.bounds.classical_smc
+        load_config("config.yaml")
 
         test_particles = np.array([
             [5.0, 5.0, 5.0, 5.0, 10.0, 1.0],  # Conservative gains

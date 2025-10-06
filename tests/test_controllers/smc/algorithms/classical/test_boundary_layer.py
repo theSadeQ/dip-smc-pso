@@ -52,7 +52,7 @@ class TestBoundaryLayerBehavior:
         """Test that boundary layer thickness affects control smoothness."""
         from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
 
-        dynamics = MockDynamics()
+        MockDynamics()
 
         # Thin boundary layer
         thin_config = ClassicalSMCConfig(

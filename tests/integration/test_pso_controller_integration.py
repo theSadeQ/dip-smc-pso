@@ -88,7 +88,7 @@ def test_pso_tuner_with_all_controllers():
             factory = create_pso_controller_factory(smc_type)
 
             # Create PSO tuner
-            tuner = PSOTuner(
+            PSOTuner(
                 controller_factory=factory,
                 config=config,
                 seed=42

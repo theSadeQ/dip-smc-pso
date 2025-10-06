@@ -188,9 +188,9 @@ def test_adaptive_controller_memory_growth():
     state = np.array([0.1, 0.2, 0.3, 0.05, 0.1, 0.15])
 
     # Adaptive controllers may grow parameters, but it should be bounded
-    initial_params = getattr(controller, 'parameters', None)
+    getattr(controller, 'parameters', None)
     if hasattr(controller, 'uncertainty_estimator'):
-        initial_estimates = controller.uncertainty_estimator.current_estimates.copy()
+        controller.uncertainty_estimator.current_estimates.copy()
 
     # Run adaptation for many steps
     for i in range(200):

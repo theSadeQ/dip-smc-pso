@@ -310,7 +310,7 @@ class TestNumericalPerformance:
 
         # Test matrices similar to those in control systems
         A = np.random.randn(6, 6)  # System matrix
-        B = np.random.randn(6, 1)  # Control matrix
+        np.random.randn(6, 1)  # Control matrix
         states = np.random.randn(1000, 6)  # Batch of states
 
         def matrix_computation():
@@ -485,7 +485,7 @@ class TestScalabilityPerformance:
             def control_computation():
                 return controller.compute_control(test_state)
 
-            result = benchmark.pedantic(
+            benchmark.pedantic(
                 control_computation,
                 rounds=100,
                 iterations=1
@@ -534,7 +534,7 @@ class TestScalabilityPerformance:
         # Sequential processing
         for step in range(n_steps):
             for i in range(n_controllers):
-                control = controller.compute_control(states[i])
+                controller.compute_control(states[i])
                 # Simple state update simulation
                 states[i] = states[i] * 0.99 + np.random.randn(6) * 0.01
 

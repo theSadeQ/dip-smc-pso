@@ -272,7 +272,7 @@ class SystemRegressionDetector:
 
         def cli_help_test():
             try:
-                start_time = time.perf_counter()
+                time.perf_counter()
                 result = subprocess.run([
                     sys.executable, str(self.repo_root / "simulate.py"), "--help"
                 ], capture_output=True, text=True, timeout=30, cwd=str(self.repo_root))

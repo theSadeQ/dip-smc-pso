@@ -261,7 +261,7 @@ class TestGeneralFailFast:
         # test file resides in a nested directory.  This avoids accidental
         # references to non‑existent modules under the ``tests`` folder.
         app_path = Path(__file__).resolve().parents[2] / "simulate.py"
-        streamlit_path = Path(__file__).resolve().parents[2] / "streamlit_app.py"
+        Path(__file__).resolve().parents[2] / "streamlit_app.py"
 
         # Check simulate.py
         with open(app_path, 'r') as f:

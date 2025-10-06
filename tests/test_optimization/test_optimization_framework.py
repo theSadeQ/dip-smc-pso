@@ -596,7 +596,7 @@ class TestOptimizationFramework:
 
             # Profile total fitness evaluation
             start_time = time.time()
-            fitness = tuner._fitness(test_particles)
+            tuner._fitness(test_particles)
             total_time = time.time() - start_time
 
             performance_metrics.update({

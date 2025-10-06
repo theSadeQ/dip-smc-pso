@@ -282,7 +282,7 @@ class TestMemoryUsage:
                 snapshot_after = profiler.take_snapshot()
 
                 # Memory growth should be roughly proportional to batch size
-                memory_growth = snapshot_after.rss_mb - snapshot_before.rss_mb
+                snapshot_after.rss_mb - snapshot_before.rss_mb
 
                 # Clean up to avoid accumulation
                 controller.cleanup_memory()
@@ -302,19 +302,19 @@ class TestMemoryUsage:
             for cycle in range(10):
                 # Allocate
                 controller.simulate_memory_intensive_operation(data_size=200)
-                snapshot_alloc = profiler.take_snapshot()
+                profiler.take_snapshot()
 
                 # Partial cleanup (simulate fragmentation)
                 if len(controller.data_storage) > 3:
                     # Remove every other item
                     controller.data_storage = controller.data_storage[::2]
 
-                snapshot_partial = profiler.take_snapshot()
+                profiler.take_snapshot()
 
                 # Full cleanup every few cycles
                 if cycle % 3 == 2:
                     controller.cleanup_memory()
-                    snapshot_cleanup = profiler.take_snapshot()
+                    profiler.take_snapshot()
 
         # Analysis
         growth_analysis = profiler.analyze_memory_growth()
@@ -375,7 +375,7 @@ class TestResourceManagement:
     def test_cpu_usage_monitoring(self):
         """Test CPU usage monitoring during operations."""
         # CPU monitoring
-        cpu_percent_before = psutil.cpu_percent(interval=0.1)
+        psutil.cpu_percent(interval=0.1)
 
         start_time = time.time()
 
@@ -471,7 +471,7 @@ class TestResourceManagement:
 
                 # Thread-local operations
                 for _ in range(5):
-                    snapshot = profiler.take_snapshot()
+                    profiler.take_snapshot()
                     controller.simulate_memory_intensive_operation(data_size=50)
 
                 # Estimate memory usage
@@ -616,17 +616,17 @@ class TestMemoryOptimization:
             mask = np.random.random((dense_size, dense_size)) < 0.1
             dense_matrix = dense_matrix * mask
 
-            dense_snapshot = profiler.take_snapshot()
+            profiler.take_snapshot()
 
             # Convert to sparse format
             sparse_matrix = sparse.csr_matrix(dense_matrix)
 
-            sparse_snapshot = profiler.take_snapshot()
+            profiler.take_snapshot()
 
             # Operations on sparse matrix
-            result = sparse_matrix @ sparse_matrix.T
+            sparse_matrix @ sparse_matrix.T
 
-            operation_snapshot = profiler.take_snapshot()
+            profiler.take_snapshot()
 
         # Sparse representation should be more memory efficient for sparse data
         # Note: Actual memory usage depends on sparsity level

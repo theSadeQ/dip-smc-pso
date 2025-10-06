@@ -566,12 +566,6 @@ def test_mathematical_foundation_validation():
     params = DIPParams.from_physics_config(config)
 
     # Mathematical foundation checks
-    foundation_tests = {
-        'Energy Conservation': 'Hamiltonian structure validation',
-        'Matrix Properties': 'Inertia matrix mathematical correctness',
-        'Integration Stability': 'Numerical method stability bounds',
-        'Physical Realism': 'Parameter bounds and consistency'
-    }
 
     print("\nMATHEMATICAL FOUNDATION TESTS:")
     print("-" * 50)

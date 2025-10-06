@@ -336,7 +336,7 @@ class TestLowRankPhysicsComputer:
 
             # Validation should pass for reasonable results
             is_valid = physics_computer.validate_computation(state, state_derivative)
-            assert is_valid == True
+            assert is_valid
 
     def test_computation_validation_failure_cases(self, physics_computer):
         """Test validation failure for problematic results."""
@@ -345,17 +345,17 @@ class TestLowRankPhysicsComputer:
         # Test with NaN in state derivative
         invalid_derivative_nan = np.array([0.0, 0.0, 0.0, np.nan, 0.0, 0.0])
         is_valid = physics_computer.validate_computation(state, invalid_derivative_nan)
-        assert is_valid == False
+        assert not is_valid
 
         # Test with infinite values in state derivative
         invalid_derivative_inf = np.array([0.0, 0.0, 0.0, np.inf, 0.0, 0.0])
         is_valid = physics_computer.validate_computation(state, invalid_derivative_inf)
-        assert is_valid == False
+        assert not is_valid
 
         # Test with excessively large accelerations
         invalid_derivative_large = np.array([0.0, 0.0, 0.0, 150.0, 0.0, 0.0])
         is_valid = physics_computer.validate_computation(state, invalid_derivative_large)
-        assert is_valid == False
+        assert not is_valid
 
     def test_different_approximation_modes_consistency(self, test_states):
         """Test consistency between different approximation modes."""
