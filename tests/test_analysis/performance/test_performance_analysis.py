@@ -14,10 +14,10 @@ import pytest
 import numpy as np
 
 # Performance analysis imports
-from src.analysis.performance.control_analysis import *
-from src.analysis.performance.control_metrics import *
-from src.analysis.performance.robustness import *
-from src.analysis.performance.stability_analysis import *
+from src.analysis.performance.control_analysis import *  # noqa: F403 - wildcard import for test convenience
+from src.analysis.performance.control_metrics import *  # noqa: F403 - wildcard import for test convenience
+from src.analysis.performance.robustness import *  # noqa: F403 - wildcard import for test convenience
+from src.analysis.performance.stability_analysis import *  # noqa: F403 - wildcard import for test convenience
 
 # Core analysis imports for validation
 from src.analysis.validation.metrics import (
@@ -516,7 +516,7 @@ class TestPerformanceAnalysisIntegration:
         dt = time_vector[1] - time_vector[0]
 
         # System parameters
-        m, l, g = 1.0, 1.0, 9.81  # Mass, length, gravity
+        m, l, g = 1.0, 1.0, 9.81  # Mass, length, gravity  # noqa: E741 - standard physics notation
         b = 0.1  # Damping
 
         # State vector: [theta, theta_dot]

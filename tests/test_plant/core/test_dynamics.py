@@ -104,7 +104,7 @@ def test_singularity_check(full_dynamics_model):
     assert abs(np.linalg.det(H_singular)) < 1e-9, "A known singular configuration was not detected."
 
 def test_step_returns_nan_on_singular_params():
-    p = FullDIPParams(
+    p = FullDIPParams(  # noqa: F821 - conditional import or test mock
         cart_mass=1.0,
         pendulum1_mass=1.0,
         pendulum2_mass=1e-12,     # force singularity

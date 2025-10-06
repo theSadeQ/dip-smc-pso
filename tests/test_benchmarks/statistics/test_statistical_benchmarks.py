@@ -150,7 +150,7 @@ def dummy_simulate_system_batch_stat(
     dt: float | None = None,
     u_max: float | None = None,
     seed: int | None = None,
-    params_list: Any = None,
+    params_list: Any = None,  # noqa: F821 - conditional import or test mock
 ) -> tuple:
     """Return random trajectories seeded by ``seed`` to emulate variability."""
     B = gains_batch.shape[0]

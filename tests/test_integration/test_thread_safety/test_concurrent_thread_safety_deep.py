@@ -699,7 +699,7 @@ class TestParallelProcessing:
             try:
                 result = result_queue.get_nowait()
                 results.append(result)
-            except:
+            except:  # noqa: E722 - intentional broad exception handling
                 break
 
         # Clean up
@@ -783,7 +783,7 @@ class TestParallelProcessing:
             try:
                 result = result_queue.get_nowait()
                 results.append(result)
-            except:
+            except:  # noqa: E722 - intentional broad exception handling
                 break
 
         # Clean up

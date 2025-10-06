@@ -276,7 +276,7 @@ class TestValidationFrameworkIntegration:
         m2 = require_positive(0.5, "pendulum_mass")
 
         # Lengths (must be positive)
-        l = require_positive(0.8, "pendulum_length")
+        length = require_positive(0.8, "pendulum_length")
 
         # Friction coefficients (non-negative)
         b = require_positive(0.1, "friction_coefficient", allow_zero=True)
@@ -287,7 +287,7 @@ class TestValidationFrameworkIntegration:
 
         assert m1 == 1.5
         assert m2 == 0.5
-        assert l == 0.8
+        assert length == 0.8
         assert b == 0.1
         assert x0 == 0.0
         assert theta0 == 0.1

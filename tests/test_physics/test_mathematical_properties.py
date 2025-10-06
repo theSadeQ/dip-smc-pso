@@ -611,7 +611,7 @@ def test_mathematical_foundation_validation():
             if not np.all(np.isfinite(test_state_stability)):
                 test_stable = False
                 break
-    except:
+    except:  # noqa: E722 - intentional broad exception handling
         test_stable = False
 
     print(f"Integration Stability: dt = {stable_dt}s", "✓" if test_stable else "✗")

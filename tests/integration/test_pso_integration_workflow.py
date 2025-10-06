@@ -65,7 +65,7 @@ def test_gain_bounds() -> Tuple[List[float], List[float]]:
 
     assert len(lower_bounds) == 6  # Classical SMC has 6 gains
     assert len(upper_bounds) == 6
-    assert all(l < u for l, u in zip(lower_bounds, upper_bounds))
+    assert all(l < u for l, u in zip(lower_bounds, upper_bounds))  # noqa: E741 - conventional in zip
 
     return bounds
 
