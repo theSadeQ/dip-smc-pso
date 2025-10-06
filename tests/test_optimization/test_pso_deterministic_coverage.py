@@ -386,7 +386,7 @@ class TestPSODeterministicCoverage:
 
         # Mock simulation for converging scenario
         t = np.linspace(0, 2.0, 201)
-        particles = np.array([[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]] * 8)
+        np.array([[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]] * 8)
         x_b = np.random.rand(8, 201, 6) * 0.01  # Small values for good cost
         u_b = np.random.rand(8, 201) * 0.01
         sigma_b = np.random.rand(8, 201) * 0.01
@@ -537,7 +537,7 @@ class TestPSOPerformanceValidation:
         import sys
 
         # Measure baseline memory
-        initial_memory = sys.getsizeof({})
+        sys.getsizeof({})
 
         tuner = PSOTuner(
             controller_factory=mock_controller_factory,

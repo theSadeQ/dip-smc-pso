@@ -275,7 +275,7 @@ def test_pso_simulation_integration():
         pso_controller = create_smc_for_pso(smc_type, test_gains)
 
         # Create dynamics
-        dynamics = create_simple_dynamics()
+        create_simple_dynamics()
 
         # Initial state
         initial_state = [0.05, 0.0, 0.1, 0.0, 0.05, 0.0]
@@ -361,7 +361,7 @@ def main():
 
             if isinstance(result, dict):
                 # For simulation results, check if any succeeded
-                success = any(r.get('status') == 'success' for r in result.values()) if result else False
+                any(r.get('status') == 'success' for r in result.values()) if result else False
                 results[test_name] = result
                 if result:  # Consider it passed if we got any results
                     passed_tests += 1

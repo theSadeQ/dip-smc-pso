@@ -48,9 +48,9 @@ class TestLowRankDIPConfig:
         assert config.joint_velocity_limits == 10.0
 
         # Check approximation flags
-        assert config.enable_linearization == True
-        assert config.enable_small_angle_approximation == True
-        assert config.enable_decoupled_dynamics == False
+        assert config.enable_linearization
+        assert config.enable_small_angle_approximation
+        assert not config.enable_decoupled_dynamics
 
     def test_custom_initialization(self):
         """Test initialization with custom parameters."""
@@ -77,8 +77,8 @@ class TestLowRankDIPConfig:
         assert config.friction_coefficient == 0.2
         assert config.damping_coefficient == 0.02
         assert config.force_limit == 30.0
-        assert config.enable_linearization == False
-        assert config.enable_small_angle_approximation == False
+        assert not config.enable_linearization
+        assert not config.enable_small_angle_approximation
 
     def test_derived_parameters_computation(self):
         """Test computation of derived parameters."""
@@ -307,7 +307,7 @@ class TestLowRankDIPConfig:
         assert config_dict['pendulum1_mass'] == 0.2
         assert config_dict['pendulum2_mass'] == 0.3
         assert config_dict['friction_coefficient'] == 0.15
-        assert config_dict['enable_linearization'] == False
+        assert not config_dict['enable_linearization']
 
         # Check that all expected keys are present
         expected_keys = [
@@ -346,8 +346,8 @@ class TestLowRankDIPConfig:
         assert config.pendulum2_length == 0.7
         assert config.friction_coefficient == 0.12
         assert config.damping_coefficient == 0.03
-        assert config.enable_linearization == False
-        assert config.enable_small_angle_approximation == True
+        assert not config.enable_linearization
+        assert config.enable_small_angle_approximation
 
     def test_dict_roundtrip_conversion(self):
         """Test roundtrip conversion: config -> dict -> config."""
@@ -386,10 +386,10 @@ class TestLowRankConfigFactoryMethods:
         assert isinstance(config, LowRankDIPConfig)
 
         # Should be optimized for speed
-        assert config.enable_linearization == True
-        assert config.enable_small_angle_approximation == True
-        assert config.enable_fast_math == True
-        assert config.use_simplified_matrices == True
+        assert config.enable_linearization
+        assert config.enable_small_angle_approximation
+        assert config.enable_fast_math
+        assert config.use_simplified_matrices
 
         # Should have reasonable default masses and lengths
         assert config.cart_mass == 1.0
@@ -409,9 +409,9 @@ class TestLowRankConfigFactoryMethods:
         assert isinstance(config, LowRankDIPConfig)
 
         # Should use more accurate physics for education
-        assert config.enable_linearization == False
-        assert config.enable_small_angle_approximation == False
-        assert config.enable_decoupled_dynamics == False
+        assert not config.enable_linearization
+        assert not config.enable_small_angle_approximation
+        assert not config.enable_decoupled_dynamics
 
         # Should have educational-friendly parameters
         assert config.cart_mass == 1.0

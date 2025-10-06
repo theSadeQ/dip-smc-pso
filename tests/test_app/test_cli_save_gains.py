@@ -133,7 +133,7 @@ def test_cli_save_gains_creates_file_and_logs(tmp_path: Path):
 
     out_path = tmp_path / "saved_gains.json"
 
-    cmd = [
+    [
         sys.executable, str(app),
         "--run-pso",
         "--controller", "classical_smc",

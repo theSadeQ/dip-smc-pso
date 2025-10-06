@@ -314,7 +314,7 @@ class TestSimulationRunnerErrorHandling:
         invalid_state = np.array([1.0, 2.0])  # Too few dimensions
 
         if hasattr(runner, 'run_simulation'):
-            result = runner.run_simulation(invalid_state)
+            runner.run_simulation(invalid_state)
             # Should handle gracefully (implementation dependent)
 
     def test_dynamics_failure_handling(self, simulation_runner_failing):
@@ -351,7 +351,7 @@ class TestSimulationRunnerErrorHandling:
         nan_state = np.array([np.nan, 0.0, 0.0, 0.0, 0.0, 0.0])
 
         if hasattr(runner, 'run_simulation'):
-            result = runner.run_simulation(nan_state)
+            runner.run_simulation(nan_state)
             # Should handle gracefully without crashing
 
 
@@ -391,7 +391,6 @@ class TestSimulationInterface:
     def test_interface_structure(self):
         """Test simulation interface structure."""
         # Interface should define required methods (when implemented)
-        interface_methods = ['run_simulation', 'reset', 'get_state']
 
         # This test verifies the interface concept exists
         # Actual method testing will depend on implementation

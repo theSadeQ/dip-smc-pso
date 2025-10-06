@@ -295,7 +295,7 @@ class BenchmarkInterfaceValidator:
             for test_name, gains in boundary_tests:
                 try:
                     config = SMCConfig(gains=gains, max_force=100.0)
-                    controller = SMCFactory.create_controller(smc_type, config)
+                    SMCFactory.create_controller(smc_type, config)
                     smc_results[test_name] = True
                 except Exception:
                     smc_results[test_name] = False

@@ -216,7 +216,7 @@ class TestAnalysisInfrastructureChain:
 
         # Simple simulation with noise
         for i in range(1, 500):
-            t = time_vector[i]
+            time_vector[i]
             # Simple PD control
             controls[i] = -2.0 * states[i-1, 0] - 0.5 * states[i-1, 1]
 

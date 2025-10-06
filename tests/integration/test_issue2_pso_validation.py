@@ -186,7 +186,6 @@ class Issue2PSOValidator:
         final_theta1 = theta1[-100:].mean() if len(theta1) > 100 else theta1[-1]
         final_theta2 = theta2[-100:].mean() if len(theta2) > 100 else theta2[-1]
 
-        settling_tolerance = 0.02  # 2% of final value or 0.02 rad, whichever is larger
         tolerance1 = max(abs(final_theta1) * 0.02, 0.02)
         tolerance2 = max(abs(final_theta2) * 0.02, 0.02)
 

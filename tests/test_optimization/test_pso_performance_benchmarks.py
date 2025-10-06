@@ -380,7 +380,7 @@ class TestPSOPerformanceBenchmarks:
         validation_factory.n_gains = 6
         validation_factory.controller_type = 'classical_smc'
 
-        tuner = PSOTuner(
+        PSOTuner(
             controller_factory=validation_factory,
             config=benchmark_config,
             seed=42

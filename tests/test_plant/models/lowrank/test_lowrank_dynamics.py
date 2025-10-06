@@ -75,8 +75,8 @@ class TestLowRankDIPDynamics:
         dynamics = LowRankDIPDynamics(default_config)
 
         assert dynamics.config == default_config
-        assert dynamics.enable_monitoring == False  # Default
-        assert dynamics.enable_validation == True   # Default
+        assert not dynamics.enable_monitoring  # Default
+        assert dynamics.enable_validation   # Default
         assert dynamics.physics is not None
         assert dynamics.computation_stats['total_computations'] == 0
 
@@ -88,8 +88,8 @@ class TestLowRankDIPDynamics:
             enable_validation=False
         )
 
-        assert dynamics.enable_monitoring == True
-        assert dynamics.enable_validation == False
+        assert dynamics.enable_monitoring
+        assert not dynamics.enable_validation
 
     def test_compute_dynamics_equilibrium(self, dynamics_model, test_states, test_controls):
         """Test dynamics computation at equilibrium."""
@@ -99,7 +99,7 @@ class TestLowRankDIPDynamics:
         )
 
         assert isinstance(result, DynamicsResult)
-        assert result.success == True
+        assert result.success
         assert result.state_derivative is not None
         assert result.state_derivative.shape == (6,)
 
@@ -113,7 +113,7 @@ class TestLowRankDIPDynamics:
             test_controls['small_positive']
         )
 
-        assert result.success == True
+        assert result.success
         assert result.state_derivative is not None
 
         # Position derivatives should match velocities
@@ -258,7 +258,7 @@ class TestLowRankDIPDynamics:
                 test_states['equilibrium'],
                 test_controls['zero']
             )
-            assert result.success == True
+            assert result.success
 
         # Check statistics update
         stats = dynamics_model.get_computation_statistics()
@@ -273,7 +273,7 @@ class TestLowRankDIPDynamics:
         invalid_state = np.array([1.0, 2.0, 3.0])  # Only 3 elements instead of 6
 
         result = dynamics_model.compute_dynamics(invalid_state, test_controls['zero'])
-        assert result.success == False
+        assert not result.success
         assert 'failure_reason' in result.info
 
     def test_input_validation_invalid_control(self, dynamics_model, test_states):
@@ -282,13 +282,13 @@ class TestLowRankDIPDynamics:
         invalid_control = np.array([1.0, 2.0])  # 2 elements instead of 1
 
         result = dynamics_model.compute_dynamics(test_states['equilibrium'], invalid_control)
-        assert result.success == False
+        assert not result.success
 
         # Control input too large
         excessive_control = np.array([100.0])  # Exceeds force limit
 
         result = dynamics_model.compute_dynamics(test_states['equilibrium'], excessive_control)
-        assert result.success == False
+        assert not result.success
 
     def test_numerical_instability_handling(self, dynamics_model):
         """Test handling of numerical instability."""
@@ -299,7 +299,7 @@ class TestLowRankDIPDynamics:
                 np.zeros(6), np.array([1.0])
             )
 
-            assert result.success == False
+            assert not result.success
             assert result.info['error_type'] == 'numerical_instability'
             assert 'Test instability' in result.info['failure_reason']
 
@@ -321,7 +321,7 @@ class TestLowRankDynamicsConfigurations:
 
         result = dynamics.compute_dynamics(state, control)
 
-        assert result.success == True
+        assert result.success
         assert np.all(np.isfinite(result.state_derivative))
 
     def test_small_angle_mode(self):
@@ -337,7 +337,7 @@ class TestLowRankDynamicsConfigurations:
 
         result = dynamics.compute_dynamics(state, control)
 
-        assert result.success == True
+        assert result.success
         assert np.all(np.isfinite(result.state_derivative))
 
     def test_nonlinear_mode(self):
@@ -353,7 +353,7 @@ class TestLowRankDynamicsConfigurations:
 
         result = dynamics.compute_dynamics(state, control)
 
-        assert result.success == True
+        assert result.success
         assert np.all(np.isfinite(result.state_derivative))
 
     def test_fast_prototype_configuration(self):
@@ -362,17 +362,17 @@ class TestLowRankDynamicsConfigurations:
         dynamics = LowRankDIPDynamics(config)
 
         # Should be optimized for speed
-        assert config.enable_linearization == True
-        assert config.enable_small_angle_approximation == True
-        assert config.enable_fast_math == True
-        assert config.use_simplified_matrices == True
+        assert config.enable_linearization
+        assert config.enable_small_angle_approximation
+        assert config.enable_fast_math
+        assert config.use_simplified_matrices
 
         # Should compute dynamics successfully
         result = dynamics.compute_dynamics(
             np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1]),
             np.array([3.0])
         )
-        assert result.success == True
+        assert result.success
 
     def test_educational_configuration(self):
         """Test educational configuration."""
@@ -380,16 +380,16 @@ class TestLowRankDynamicsConfigurations:
         dynamics = LowRankDIPDynamics(config)
 
         # Should use more accurate physics for educational purposes
-        assert config.enable_linearization == False
-        assert config.enable_small_angle_approximation == False
-        assert config.enable_decoupled_dynamics == False
+        assert not config.enable_linearization
+        assert not config.enable_small_angle_approximation
+        assert not config.enable_decoupled_dynamics
 
         # Should compute dynamics successfully
         result = dynamics.compute_dynamics(
             np.array([0.2, 0.3, 0.25, 0.15, 0.2, 0.18]),
             np.array([5.0])
         )
-        assert result.success == True
+        assert result.success
 
 
 @pytest.mark.skipif(not IMPORTS_AVAILABLE, reason="Low-rank dynamics modules not available")
@@ -416,7 +416,7 @@ class TestLowRankDynamicsPerformance:
 
         for _ in range(n_computations):
             result = dynamics.compute_dynamics(state, control)
-            assert result.success == True
+            assert result.success
 
         elapsed_time = time.time() - start_time
 
@@ -441,7 +441,7 @@ class TestLowRankDynamicsPerformance:
             control = np.array([np.random.randn() * 5])
 
             result = dynamics.compute_dynamics(state, control)
-            assert result.success == True
+            assert result.success
 
             # Occasionally force garbage collection
             if i % 20 == 0:
@@ -471,7 +471,7 @@ class TestLowRankDynamicsPerformance:
         for i in range(batch_size):
             result = dynamics.compute_dynamics(states[i], controls[i])
             results.append(result)
-            assert result.success == True
+            assert result.success
 
         elapsed_time = time.time() - start_time
 

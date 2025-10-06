@@ -76,7 +76,7 @@ class TestLyapunovStabilityVerification:
         assert np.all(np.real(eigenvals) < 0), "System should be stable"
 
         # Run Lyapunov analysis (should handle ill-conditioning gracefully)
-        with warnings.catch_warnings(record=True) as w:
+        with warnings.catch_warnings(record=True):
             warnings.simplefilter("always")
             result = analyzer._analyze_analytical_lyapunov(A)
 
@@ -234,7 +234,7 @@ class TestLyapunovStabilityVerification:
         P_sym = 0.5 * (P + P.T)  # Symmetrize
 
         try:
-            L = np.linalg.cholesky(P_sym)
+            np.linalg.cholesky(P_sym)
             cholesky_succeeded = True
         except np.linalg.LinAlgError:
             cholesky_succeeded = False
@@ -251,7 +251,7 @@ class TestLyapunovStabilityVerification:
         ])
 
         # Force fallback by creating conditions where direct solver might struggle
-        with warnings.catch_warnings(record=True) as w:
+        with warnings.catch_warnings(record=True):
             warnings.simplefilter("always")
             result = analyzer._analyze_analytical_lyapunov(A)
 

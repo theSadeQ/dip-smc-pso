@@ -587,7 +587,7 @@ class TestAlgorithmComparison:
 
         def dtlz2_objectives(x):
             """DTLZ2 multi-objective test function."""
-            k = len(x) - 2  # Number of position variables
+            len(x) - 2  # Number of position variables
 
             # Calculate g function
             g = np.sum((x[2:] - 0.5)**2)

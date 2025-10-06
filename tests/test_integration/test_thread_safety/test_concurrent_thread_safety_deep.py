@@ -176,8 +176,8 @@ class ConcurrentSimulator:
             controller_stats.append(stats)
 
         # Simple data race detection: check if operation counts make sense
-        total_expected_operations = sum(r.operations_completed for r in results)
-        total_actual_operations = sum(stats['operation_count'] for stats in controller_stats)
+        sum(r.operations_completed for r in results)
+        sum(stats['operation_count'] for stats in controller_stats)
 
         # Account for shared controllers
         expected_per_controller = {}

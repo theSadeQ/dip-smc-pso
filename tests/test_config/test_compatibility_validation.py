@@ -65,7 +65,7 @@ class TestConfigDictObjectConversion:
 
         # Test using get method for safe access
         gyro_effects = attr_dict.get('include_gyroscopic_effects', False)
-        assert gyro_effects == False, "Safe access should return default"
+        assert not gyro_effects, "Safe access should return default"
 
         # Test using 'in' operator for checking existence
         assert 'cart_mass' in attr_dict, "Existing key should be found"

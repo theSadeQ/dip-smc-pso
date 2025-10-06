@@ -561,7 +561,7 @@ class TestClassicalSMCIntegration:
         assert all(np.isfinite(c) for c in controls)
 
         # Control magnitude should generally decrease as state approaches equilibrium
-        control_magnitudes = [abs(c) for c in controls]
+        [abs(c) for c in controls]
 
         # Should have history tracking
         assert len(complete_controller.control_history) == len(states)

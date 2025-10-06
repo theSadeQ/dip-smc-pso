@@ -14,7 +14,7 @@ def benchmark_naive_lyapunov(A, Q, n_iterations=100):
     for _ in range(n_iterations):
         start = time.perf_counter()
         try:
-            P = linalg.solve_lyapunov(A.T, -Q)
+            linalg.solve_lyapunov(A.T, -Q)
             elapsed = time.perf_counter() - start
             times.append(elapsed)
         except Exception:

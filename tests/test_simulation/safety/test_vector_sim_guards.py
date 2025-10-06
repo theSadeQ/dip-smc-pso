@@ -38,7 +38,7 @@ def test_simulate_nan_guard_raises():
     # Build a trajectory that injects NaN at the second state (manually)
     # simulate checks guards on the provided state sequence, so create a control
     # sequence and then modify the state via a custom stop_fn to trigger NaN.
-    x0 = np.array([0.0, 0.0])
+    np.array([0.0, 0.0])
     u = np.array([0.0, 0.0])
 
     # There is no hook to inject states into simulate, so emulate the guard directly

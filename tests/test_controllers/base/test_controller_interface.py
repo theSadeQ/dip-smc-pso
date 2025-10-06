@@ -144,7 +144,7 @@ class TestConcreteControllerBase:
         assert 'saturated' in info
         assert 'control_raw' in info
         assert info['control_raw'] == expected_control
-        assert info['saturated'] == False  # Small control value shouldn't saturate
+        assert not info['saturated']  # Small control value shouldn't saturate
 
     def test_step_with_reference(self, controller, test_state):
         """Test step method with reference state."""
@@ -163,7 +163,7 @@ class TestConcreteControllerBase:
 
         # Should be saturated to -max_force (negative because of our -state[0] implementation)
         assert control == -controller.max_force
-        assert info['saturated'] == True
+        assert info['saturated']
         assert info['control_raw'] == -large_state[0]  # Raw value before saturation
 
     def test_force_saturation_negative(self, controller):
@@ -174,7 +174,7 @@ class TestConcreteControllerBase:
 
         # Should be saturated to +max_force (positive because of our -state[0] implementation)
         assert control == controller.max_force
-        assert info['saturated'] == True
+        assert info['saturated']
         assert info['control_raw'] == -large_state[0]  # Raw value before saturation
 
     def test_force_saturation_boundary(self, controller):
@@ -231,7 +231,7 @@ class TestConcreteControllerBase:
         control, info = controller.step(large_state)
 
         assert control == -max_force  # Should saturate to custom limit
-        assert info['saturated'] == True
+        assert info['saturated']
 
 
 class TestControllerInterfaceEdgeCases:
@@ -270,7 +270,7 @@ class TestControllerInterfaceEdgeCases:
         # Step method should still saturate infinite control values
         assert np.isfinite(control)
         assert abs(control) <= controller.max_force
-        assert info['saturated'] == True
+        assert info['saturated']
 
     def test_zero_max_force_edge_case(self):
         """Test edge case with zero max_force."""
@@ -281,7 +281,7 @@ class TestControllerInterfaceEdgeCases:
 
         # Should saturate to zero
         assert control == 0.0
-        assert info['saturated'] == True  # Any non-zero control would be saturated
+        assert info['saturated']  # Any non-zero control would be saturated
 
     def test_negative_max_force_behavior(self):
         """Test behavior with negative max_force (edge case)."""

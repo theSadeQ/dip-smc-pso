@@ -202,18 +202,18 @@ class CrossMissionIntegrationValidator:
                 components_tested.append("Analysis Pipeline")
 
                 # Test analysis component initialization
-                benchmark_suite = BenchmarkSuite()
+                BenchmarkSuite()
 
                 # Test stability analyzer integration
                 try:
-                    stability_analyzer = StabilityAnalyzer()
+                    StabilityAnalyzer()
                     components_tested.append("Stability Analysis")
                 except Exception as e:
                     error_messages.append(f"Stability analyzer integration failed: {str(e)}")
 
                 # Test FDI system integration
                 try:
-                    fdi_system = FDISystem()
+                    FDISystem()
                     components_tested.append("Fault Detection")
                 except Exception as e:
                     error_messages.append(f"FDI system integration failed: {str(e)}")
@@ -255,10 +255,10 @@ class CrossMissionIntegrationValidator:
                 components_tested.append("Benchmark Infrastructure")
 
                 # Test benchmark interface validator
-                interface_validator = BenchmarkInterfaceValidator()
+                BenchmarkInterfaceValidator()
 
                 # Test performance benchmark suite
-                benchmark_suite = PerformanceBenchmarkSuite()
+                PerformanceBenchmarkSuite()
 
                 # Test parameter validator
                 param_validator = EngineeringParameterValidator()
@@ -323,7 +323,7 @@ class CrossMissionIntegrationValidator:
                     monitor = LatencyMonitor(dt=0.01)
                     start = monitor.start()
                     time.sleep(0.001)  # Simulate brief computation
-                    missed = monitor.end(start)
+                    monitor.end(start)
 
                     performance_metrics['latency_monitoring_active'] = 1.0
                     components_tested.append("Latency Monitoring")

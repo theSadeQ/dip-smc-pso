@@ -179,7 +179,7 @@ class TestPSOCostSensitivity:
         tuner = PSOTuner(controller_factory, pso_config)
 
         # Test with reasonable gains
-        test_gains = np.array([[8.0, 4.0, 12.0, 6.0, 4.85, 3.43]])
+        np.array([[8.0, 4.0, 12.0, 6.0, 4.85, 3.43]])
 
         # Access internal cost components (need to replicate logic for testing)
         # This is a white-box test to ensure balance

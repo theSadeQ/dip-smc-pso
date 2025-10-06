@@ -109,7 +109,6 @@ class TestModularAdaptiveSMC:
         state = np.array([0.1, 0.2, 0.3, 0.1, 0.1, 0.1])
 
         # Get initial adaptive gain
-        initial_gain = controller._adaptation._K_current
 
         # Run several control steps using test interface
         for _ in range(10):
@@ -131,7 +130,7 @@ class TestModularAdaptiveSMC:
 
         for state in states:
             for _ in range(5):
-                control = controller.compute_control(state, dt=0.01)
+                controller.compute_control(state, dt=0.01)
                 # Parameters should remain bounded
                 gain = controller._adaptation._K_current
                 assert np.isfinite(gain)
@@ -146,7 +145,7 @@ class TestModularAdaptiveSMC:
         gain_history = []
 
         for i in range(trajectory_length):
-            control = controller.compute_control(state, dt=0.01)
+            controller.compute_control(state, dt=0.01)
             current_gain = controller._adaptation._K_current
             gain_history.append(current_gain)
 
@@ -246,13 +245,12 @@ class TestAdaptationScenarios:
         disturbance = np.array([1.0, 0.5, 0.2])
         state = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 
-        initial_gain = controller._adaptation._K_current
 
         # Apply consistent disturbance pattern
         for _ in range(30):
             # Add disturbance effect to state
             state[:3] += 0.001 * disturbance
-            control = controller.compute_control(state, dt=0.01)
+            controller.compute_control(state, dt=0.01)
 
         final_gain = controller._adaptation._K_current
 
@@ -274,7 +272,7 @@ class TestAdaptationScenarios:
 
             # Apply time-varying disturbance
             state[:3] += 0.001 * disturbance
-            control = controller.compute_control(state, dt=0.01)
+            controller.compute_control(state, dt=0.01)
 
             # Adaptive gain should remain bounded
             current_gain = controller._adaptation._K_current

@@ -109,7 +109,7 @@ class TestMultiObjectivePSO:
         """Create simulation mock for multi-objective testing."""
         def mock_simulate(*args, **kwargs):
             particles = args[1] if len(args) > 1 else kwargs.get('particles')
-            n_particles = particles.shape[0]
+            particles.shape[0]
             n_timesteps = 201
 
             t = np.linspace(0, 2.0, n_timesteps)
@@ -308,7 +308,7 @@ class TestMultiObjectivePSO:
         # Test with single point
         single_point = np.array([[2.0, 3.0]])
         single_hv = calculate_hypervolume_2d(single_point, reference_point)
-        expected_single = (2.0 - 5.0) * (5.0 - 3.0)  # Should be negative area
+        (2.0 - 5.0) * (5.0 - 3.0)  # Should be negative area
         assert single_hv >= 0  # Implementation should handle this case
 
         # Test with empty front

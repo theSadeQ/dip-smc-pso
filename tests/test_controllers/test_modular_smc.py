@@ -495,7 +495,7 @@ class TestModularSMCProperties:
             max_force=50.0,
             boundary_layer=0.1
         )
-        dynamics = MockDynamics(n_dof=n_dof)
+        MockDynamics(n_dof=n_dof)
         controller = ModularClassicalSMC(config=config)
 
         # Test control computation for 2-DOF system

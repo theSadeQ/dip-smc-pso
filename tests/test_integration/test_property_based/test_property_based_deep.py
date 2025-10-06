@@ -392,7 +392,7 @@ class TestControlSystemInvariants:
         # For small states, control should be reasonably small
         # This tests the "reasonable" behavior near equilibrium
         state_magnitude = np.linalg.norm(state)
-        expected_sigma_magnitude = np.linalg.norm(gains) * state_magnitude
+        np.linalg.norm(gains) * state_magnitude
 
         # Control should scale reasonably with state magnitude
         if state_magnitude < 0.1:  # Very small states

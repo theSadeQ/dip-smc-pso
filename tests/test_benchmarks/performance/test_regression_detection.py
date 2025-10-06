@@ -1007,7 +1007,7 @@ class TestPerformanceRegressionDetection:
             # Test historical data retrieval
             historical_data = history_manager.get_historical_data("TestController", "test_scenario")
             assert len(historical_data) == 1, "Should have one historical record"
-            assert historical_data[0]['success'] == True, "Historical record should match benchmark"
+            assert historical_data[0]['success'], "Historical record should match benchmark"
 
     def test_benchmark_success_rate_improvement(self, performance_benchmark_suite):
         """Test that benchmark success rate meets the 60% → 90%+ target."""

@@ -524,7 +524,7 @@ class TestPSOConvergenceValidation:
             seed=42
         )
 
-        result = tuner.optimise()
+        tuner.optimise()
 
         # Check that velocity clamping was configured
         call_kwargs = mock_pso_class.call_args[1]
@@ -595,7 +595,7 @@ class TestPSOConvergenceValidation:
 
         # Test without seed
         with _seeded_global_numpy(None):
-            val3 = np.random.random()
+            np.random.random()
 
         # Should restore state
         final_state = np.random.get_state()

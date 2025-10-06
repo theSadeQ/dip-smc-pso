@@ -109,7 +109,7 @@ class TestModularClassicalSMC:
         
         # Should be saturated to max_force
         assert abs(result['u']) <= modular_smc.config.max_force
-        assert result['saturation_active'] == True
+        assert result['saturation_active']
         assert result['total_before_saturation'] > modular_smc.config.max_force
 
     def test_gains_property(self, modular_smc):

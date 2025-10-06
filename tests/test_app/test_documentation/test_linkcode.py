@@ -223,21 +223,21 @@ class TestLinkcodeResolver:
 
         try:
             # Test property
-            result = linkcode_resolve('py', {
+            linkcode_resolve('py', {
                 'module': 'test_property_module',
                 'fullname': 'TestClass.test_property'
             })
             # Should handle property.fget
 
             # Test classmethod
-            result = linkcode_resolve('py', {
+            linkcode_resolve('py', {
                 'module': 'test_property_module',
                 'fullname': 'TestClass.test_classmethod'
             })
             # Should handle classmethod.__func__
 
             # Test staticmethod
-            result = linkcode_resolve('py', {
+            linkcode_resolve('py', {
                 'module': 'test_property_module',
                 'fullname': 'TestClass.test_staticmethod'
             })
@@ -297,7 +297,7 @@ class TestLinkcodeResolver:
         import re
         try:
             import tests.sample_module as sample_mod
-            obj = getattr(sample_mod, obj_name)
+            getattr(sample_mod, obj_name)
 
             result = linkcode_resolve('py', {
                 'module': 'tests.sample_module',

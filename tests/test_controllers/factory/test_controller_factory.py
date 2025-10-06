@@ -375,7 +375,7 @@ class TestAdvancedFactoryIntegration:
 
                 # Compute dynamics
                 result = dynamics.compute_dynamics(current_state, control)
-                assert result.success == True
+                assert result.success
 
                 # Euler integration step
                 current_state = current_state + dt * result.state_derivative
@@ -486,7 +486,7 @@ class TestAdvancedFactoryIntegration:
 
         # At least the nominal gains (scale=1.0) should work
         nominal_result = next(r for r in performance_results if r['scale'] == 1.0)
-        assert nominal_result['success'] == True
+        assert nominal_result['success']
 
         # Most gain variations should be stable
         success_count = sum(1 for r in performance_results if r['success'])
@@ -579,7 +579,7 @@ class TestAdvancedFactoryIntegration:
                 }
 
         # Controller should work with nominal plant (with more realistic expectations)
-        assert robustness_results['nominal']['success'] == True
+        assert robustness_results['nominal']['success']
         # Note: Stability may be challenging with large initial disturbances
         # assert robustness_results['nominal']['stable'] == True  # Commented out for realistic testing
 
@@ -590,7 +590,7 @@ class TestAdvancedFactoryIntegration:
         print(f"Robustness test: {stable_count}/{len(plant_variations)} scenarios stable, {success_count}/{len(plant_variations)} successful")
         assert success_count >= 1, "Controller shows insufficient robustness - no scenarios succeeded"
         # For realistic testing, allow challenging scenarios to be unstable but not crash
-        assert robustness_results['nominal']['success'] == True, "Nominal scenario must succeed"
+        assert robustness_results['nominal']['success'], "Nominal scenario must succeed"
 
     def test_saturation_and_constraint_handling(self):
         """Test controller behavior with control saturation and constraints."""
@@ -746,7 +746,7 @@ class TestControllerFactoryDeprecation:
         }
 
         # Should handle deprecated config gracefully
-        with warnings.catch_warnings(record=True) as w:
+        with warnings.catch_warnings(record=True):
             warnings.simplefilter("always")
 
             try:
@@ -777,7 +777,7 @@ class TestControllerFactoryDeprecation:
         """Test that deprecation warnings are properly emitted."""
         import warnings
 
-        with warnings.catch_warnings(record=True) as w:
+        with warnings.catch_warnings(record=True):
             warnings.simplefilter("always")
 
             # Use legacy function that should emit deprecation warning

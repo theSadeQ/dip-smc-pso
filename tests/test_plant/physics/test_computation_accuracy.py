@@ -483,13 +483,13 @@ def test_physics_computation_performance():
     # Manual energy computation
     start_time = time.time()
     for _ in range(n_iterations):
-        energy = compute_manual_energy_benchmark(test_state, config)
+        compute_manual_energy_benchmark(test_state, config)
     energy_time = time.time() - start_time
 
     # Manual inertia matrix computation
     start_time = time.time()
     for _ in range(n_iterations):
-        M = compute_inertia_matrix_benchmark(test_state[1], test_state[2], config)
+        compute_inertia_matrix_benchmark(test_state[1], test_state[2], config)
     inertia_time = time.time() - start_time
 
     print(f"Energy computation: {energy_time*1000/n_iterations:.3f} ms per call")

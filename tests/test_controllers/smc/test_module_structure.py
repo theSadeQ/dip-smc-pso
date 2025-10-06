@@ -183,10 +183,10 @@ class TestSMCAlgorithmBaseClassConsistency:
         from src.plant.configurations import ConfigurationFactory
 
         try:
-            plant_config = ConfigurationFactory.create_default_config("simplified")
+            ConfigurationFactory.create_default_config("simplified")
         except Exception:
             # If config factory fails, create minimal mock config
-            plant_config = MockConfig()
+            MockConfig()
 
         initialization_errors = []
 

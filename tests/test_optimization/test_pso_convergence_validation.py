@@ -176,13 +176,12 @@ class TestPSOConvergenceDetection:
         """Create simulation mock that shows converging behavior."""
         def mock_simulate(*args, **kwargs):
             particles = args[1] if len(args) > 1 else kwargs.get('particles')
-            n_particles = particles.shape[0]
+            particles.shape[0]
             n_timesteps = 201
 
             t = np.linspace(0, 2.0, n_timesteps)
 
             # Create converging trajectories based on particle quality
-            costs = []
             all_x, all_u, all_sigma = [], [], []
 
             for i, particle in enumerate(particles):
@@ -340,7 +339,7 @@ class TestPSOConvergenceDetection:
 
     def test_convergence_metrics_calculation(self, convergence_config, convergence_controller_factory):
         """Test calculation of convergence quality metrics."""
-        tuner = PSOTuner(
+        PSOTuner(
             controller_factory=convergence_controller_factory,
             config=convergence_config,
             seed=42

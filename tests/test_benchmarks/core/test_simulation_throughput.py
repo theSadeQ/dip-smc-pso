@@ -242,7 +242,7 @@ class TestSimulationEfficiency:
         start_time = time.perf_counter()
 
         try:
-            result = simulate_system_batch(
+            simulate_system_batch(
                 controller=controller,
                 initial_state=initial_state,
                 dt=dt,
@@ -285,7 +285,7 @@ def test_timestep_performance_scaling(dt, config):
     start_time = time.perf_counter()
 
     try:
-        result = simulate_system_batch(
+        simulate_system_batch(
             controller=controller,
             initial_state=initial_state,
             dt=dt,

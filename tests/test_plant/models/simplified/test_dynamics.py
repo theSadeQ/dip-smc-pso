@@ -79,45 +79,45 @@ class TestSimplifiedDIPDynamics:
         """Test control input validation with valid input."""
         valid_input = np.array([5.0])
         result = dynamics_model._validate_control_input(valid_input)
-        assert result == True
+        assert result
 
     def test_validate_control_input_wrong_shape(self, dynamics_model):
         """Test control input validation with wrong shape."""
         wrong_shape = np.array([1.0, 2.0])  # Should be (1,) not (2,)
         result = dynamics_model._validate_control_input(wrong_shape)
-        assert result == False
+        assert not result
 
     def test_validate_control_input_non_finite(self, dynamics_model):
         """Test control input validation with non-finite values."""
         nan_input = np.array([np.nan])
         inf_input = np.array([np.inf])
         
-        assert dynamics_model._validate_control_input(nan_input) == False
-        assert dynamics_model._validate_control_input(inf_input) == False
+        assert not dynamics_model._validate_control_input(nan_input)
+        assert not dynamics_model._validate_control_input(inf_input)
 
     def test_validate_control_input_excessive_force(self, dynamics_model):
         """Test control input validation with excessive force."""
         excessive_force = np.array([2000.0])  # > 1000.0 limit
         result = dynamics_model._validate_control_input(excessive_force)
-        assert result == False
+        assert not result
 
     def test_validate_state_derivative_valid(self, dynamics_model):
         """Test state derivative validation with valid input."""
         valid_derivative = np.array([0.1, 0.2, 0.0, -0.1, 0.05, -0.03])
         result = dynamics_model._validate_state_derivative(valid_derivative)
-        assert result == True
+        assert result
 
     def test_validate_state_derivative_wrong_shape(self, dynamics_model):
         """Test state derivative validation with wrong shape."""
         wrong_shape = np.array([1.0, 2.0, 3.0])  # Should be (6,) not (3,)
         result = dynamics_model._validate_state_derivative(wrong_shape)
-        assert result == False
+        assert not result
 
     def test_validate_state_derivative_non_finite(self, dynamics_model):
         """Test state derivative validation with non-finite values."""
         nan_derivative = np.array([0.1, np.nan, 0.0, -0.1, 0.05, -0.03])
         result = dynamics_model._validate_state_derivative(nan_derivative)
-        assert result == False
+        assert not result
 
     def test_get_equilibrium_states(self, dynamics_model):
         """Test retrieval of equilibrium states."""
