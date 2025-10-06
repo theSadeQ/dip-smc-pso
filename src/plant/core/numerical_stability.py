@@ -15,7 +15,7 @@ Extracted from monolithic dynamics for focused responsibility and testing.
 """
 
 from __future__ import annotations
-from typing import Tuple, Optional, Protocol
+from typing import Optional, Protocol
 import numpy as np
 import warnings
 
@@ -325,7 +325,8 @@ def fast_condition_estimate(matrix: np.ndarray) -> float:
 
     # Estimate using Frobenius norm and determinant
     frobenius_norm = np.sqrt(np.sum(matrix * matrix))
-    trace = np.trace(matrix)
+    # Note: trace computation available but not currently used in condition estimate
+    # trace = np.trace(matrix)
 
     # Rough condition estimate
     cond_estimate = (frobenius_norm / abs(det)**(1.0/n)) * n

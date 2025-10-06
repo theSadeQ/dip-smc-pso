@@ -10,7 +10,7 @@ across different dynamics implementations (simplified, full, low-rank).
 """
 
 from __future__ import annotations
-from typing import Protocol, Tuple, Optional, Dict, Any, NamedTuple
+from typing import Protocol, Tuple, Dict, Any, NamedTuple
 from abc import ABC, abstractmethod
 from enum import Enum
 import numpy as np

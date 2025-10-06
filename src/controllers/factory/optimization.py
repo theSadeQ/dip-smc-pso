@@ -14,15 +14,11 @@ Provides optimizations for:
 
 import time
 import threading
-from typing import Dict, Any, Optional, Type, Callable
+from typing import Dict, Any, Optional, Callable
 from functools import lru_cache, wraps
 import weakref
 
 # Import controller classes for pre-compilation
-from ..smc.algorithms.classical.controller import ModularClassicalSMC
-from ..smc.algorithms.super_twisting.controller import ModularSuperTwistingSMC
-from ..smc.algorithms.adaptive.controller import ModularAdaptiveSMC
-from ..smc.algorithms.hybrid.controller import ModularHybridSMC
 
 class ControllerPreCompiler:
     """Pre-compile controller configurations for faster instantiation."""

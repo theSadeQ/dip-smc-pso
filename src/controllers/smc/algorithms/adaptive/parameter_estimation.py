@@ -14,7 +14,6 @@ Mathematical Background:
 - Recursive least squares: parameter identification
 """
 
-from typing import List, Optional, Union, Dict, Any
 import numpy as np
 from collections import deque
 

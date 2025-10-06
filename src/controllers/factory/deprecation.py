@@ -11,7 +11,7 @@ parameter renames, and interface modifications to ensure smooth migration paths.
 
 import warnings
 import logging
-from typing import Dict, Any, List, Optional, Union
+from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 from enum import Enum
 
@@ -225,7 +225,7 @@ class ControllerDeprecationWarner:
             if param_name in deprecation_map:
                 mapping = deprecation_map[param_name]
                 if mapping.level == DeprecationLevel.ERROR:
-                    issues[param_name] = mapping.message or f"Parameter no longer supported"
+                    issues[param_name] = mapping.message or "Parameter no longer supported"
                 elif mapping.level == DeprecationLevel.WARNING:
                     issues[param_name] = f"Deprecated - {mapping.migration_guide}"
 

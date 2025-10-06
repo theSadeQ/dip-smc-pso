@@ -11,15 +11,14 @@ pendulum dynamics with numerical stability and performance optimizations.
 """
 
 from __future__ import annotations
-from typing import Tuple, Optional, Dict, Any, Union
+from typing import Tuple, Dict, Any, Union
 import numpy as np
 import warnings
 
 from ..base import BaseDynamicsModel, DynamicsResult
 from ...core import (
     DIPStateValidator,
-    NumericalInstabilityError,
-    NumericalStabilityMonitor
+    NumericalInstabilityError
 )
 from .config import SimplifiedDIPConfig
 from .physics import SimplifiedPhysicsComputer, compute_simplified_dynamics_numba
@@ -439,7 +438,7 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
         if hasattr(self, '_stability_monitor'):
             try:
                 cond_num = self.physics.get_matrix_conditioning(state)
-            except:
+            except Exception:
                 cond_num = np.inf
 
             self._stability_monitor.record_inversion(

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""
-═══════════════════════════════════════════════════════════════════════════════
+# -*- coding: utf-8 -*-
+r"""
+===============================================================================
 D:\Projects\main\scripts\mcp_validation\run_complete_code_quality_analysis.py
-═══════════════════════════════════════════════════════════════════════════════
+===============================================================================
 
 Complete Codebase Code Quality Analysis Script
 
@@ -10,7 +11,7 @@ Systematically analyzes all Python files in the DIP-SMC-PSO codebase using
 the mcp-analyzer MCP server (RUFF linting + VULTURE dead code detection).
 
 Features:
-- 4-phase execution strategy (critical → standard priority)
+- 4-phase execution strategy (critical -> standard priority)
 - Checkpoint/resume capability for long-running analysis
 - Parallel processing with configurable worker count
 - Comprehensive reporting (JSON + Markdown)
@@ -45,9 +46,9 @@ from typing import Dict, List, Optional, Tuple
 from collections import defaultdict
 import subprocess
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Configuration
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CHECKPOINT_DIR = PROJECT_ROOT / ".mcp_validation" / "checkpoints"
@@ -115,9 +116,9 @@ MAX_RETRIES = 3
 VULTURE_MIN_CONFIDENCE = 80
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Data Models
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 
 @dataclass
@@ -169,9 +170,9 @@ class PhaseResults:
     file_results: List[FileAnalysisResult]
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # File Discovery
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 
 def discover_python_files(phase_config: Dict) -> List[Path]:
@@ -210,9 +211,9 @@ def discover_python_files(phase_config: Dict) -> List[Path]:
     return sorted(files)
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # MCP Integration (RUFF & VULTURE)
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 
 def run_ruff_analysis(file_path: Path, fix: bool = False) -> Tuple[List[RuffIssue], bool]:
@@ -263,13 +264,13 @@ def run_ruff_analysis(file_path: Path, fix: bool = False) -> Tuple[List[RuffIssu
         return issues, True
 
     except subprocess.TimeoutExpired:
-        print(f"    ⚠️  RUFF timeout on {file_path.name}")
+        print(f"    [WARN]  RUFF timeout on {file_path.name}")
         return [], False
     except json.JSONDecodeError:
-        print(f"    ⚠️  RUFF JSON parse error on {file_path.name}")
+        print(f"    [WARN]  RUFF JSON parse error on {file_path.name}")
         return [], False
     except Exception as e:
-        print(f"    ⚠️  RUFF error on {file_path.name}: {e}")
+        print(f"    [WARN]  RUFF error on {file_path.name}: {e}")
         return [], False
 
 
@@ -352,22 +353,22 @@ def run_vulture_analysis(
                 )
 
             except (ValueError, IndexError) as e:
-                print(f"    ⚠️  VULTURE parse error: {line[:50]}...")
+                print(f"    [WARN]  VULTURE parse error: {line[:50]}...")
                 continue
 
         return items, True
 
     except subprocess.TimeoutExpired:
-        print(f"    ⚠️  VULTURE timeout on {directory.name}")
+        print(f"    [WARN]  VULTURE timeout on {directory.name}")
         return [], False
     except Exception as e:
-        print(f"    ⚠️  VULTURE error on {directory.name}: {e}")
+        print(f"    [WARN]  VULTURE error on {directory.name}: {e}")
         return [], False
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Checkpoint Management
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 
 def save_checkpoint(
@@ -386,7 +387,7 @@ def save_checkpoint(
     with open(checkpoint_file, "w") as f:
         json.dump(checkpoint_data, f, indent=2)
 
-    print(f"  💾 Checkpoint saved: {checkpoint_file.name}")
+    print(f"  [SAVE] Checkpoint saved: {checkpoint_file.name}")
 
 
 def load_checkpoint(timestamp: str) -> Optional[Dict]:
@@ -400,9 +401,9 @@ def load_checkpoint(timestamp: str) -> Optional[Dict]:
         return json.load(f)
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Progress Monitoring
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 
 def format_duration(seconds: float) -> str:
@@ -427,7 +428,7 @@ def print_progress(
     percentage = (current_file / total_files) * 100 if total_files > 0 else 0
     bar_width = 40
     filled = int(bar_width * current_file / total_files) if total_files > 0 else 0
-    bar = "█" * filled + "░" * (bar_width - filled)
+    bar = "#" * filled + "." * (bar_width - filled)
 
     # ETA calculation
     if current_file > 0:
@@ -448,9 +449,9 @@ def print_progress(
     )
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Main Analysis Engine
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 
 def analyze_phase(
@@ -468,19 +469,19 @@ def analyze_phase(
         PhaseResults object
     """
     phase_config = PHASES[phase_num]
-    print(f"\n{'═' * 80}")
+    print(f"\n{'=' * 80}")
     print(f"Phase {phase_num}: {phase_config['name']}")
     print(f"Priority: {phase_config['priority']}")
     print(f"Description: {phase_config['description']}")
-    print(f"{'═' * 80}\n")
+    print(f"{'=' * 80}\n")
 
     # Discover files
-    print("🔍 Discovering Python files...")
+    print("[SEARCH] Discovering Python files...")
     files = discover_python_files(phase_config)
     print(f"   Found {len(files)} Python files\n")
 
     if not files:
-        print("⚠️  No files found for this phase!\n")
+        print("[WARN]  No files found for this phase!\n")
         return PhaseResults(
             phase_number=phase_num,
             phase_name=phase_config["name"],
@@ -548,7 +549,7 @@ def analyze_phase(
             save_checkpoint(phase_num, i + 1, [phase_results], timestamp)
 
     # Run VULTURE once per directory
-    print("\n\n🔍 Running VULTURE dead code detection...")
+    print("\n\n[SEARCH] Running VULTURE dead code detection...")
     for directory in phase_config["directories"]:
         dir_path = PROJECT_ROOT / directory
         if not dir_path.exists():
@@ -579,9 +580,9 @@ def analyze_phase(
     )
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Report Generation
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 
 def generate_ruff_report(all_results: List[PhaseResults], timestamp: str) -> None:
@@ -648,7 +649,7 @@ def generate_ruff_report(all_results: List[PhaseResults], timestamp: str) -> Non
             f.write(f"- Total issues: {phase.ruff_total_issues}\n")
             f.write(f"- Duration: {format_duration(phase.duration_seconds)}\n\n")
 
-    print(f"✅ RUFF report generated: {report_file}")
+    print(f"[OK] RUFF report generated: {report_file}")
 
 
 def generate_vulture_report(all_results: List[PhaseResults], timestamp: str) -> None:
@@ -676,7 +677,7 @@ def generate_vulture_report(all_results: List[PhaseResults], timestamp: str) -> 
         f.write(f"# VULTURE Dead Code Detection - {timestamp}\n\n")
         f.write("## Summary Statistics\n\n")
         f.write(f"- **Total items found**: {total_items}\n")
-        f.write(f"- **High confidence (≥90%)**: {high_conf} ({high_conf/total_items*100:.1f}%)\n")
+        f.write(f"- **High confidence (>=90%)**: {high_conf} ({high_conf/total_items*100:.1f}%)\n")
         f.write(
             f"- **Medium confidence (70-89%)**: {medium_conf} ({medium_conf/total_items*100:.1f}%)\n"
         )
@@ -688,7 +689,7 @@ def generate_vulture_report(all_results: List[PhaseResults], timestamp: str) -> 
         for item_type, count in sorted(type_counts.items(), key=lambda x: x[1], reverse=True):
             f.write(f"| {item_type} | {count} | {count/total_items*100:.1f}% |\n")
 
-        f.write("\n## High-Confidence Findings (≥90%)\n\n")
+        f.write("\n## High-Confidence Findings (>=90%)\n\n")
         high_conf_items = [item for item in all_items if item.confidence >= 90]
         for item in sorted(high_conf_items, key=lambda x: x.confidence, reverse=True)[:50]:
             f.write(
@@ -702,7 +703,7 @@ def generate_vulture_report(all_results: List[PhaseResults], timestamp: str) -> 
             f.write(f"- Dead code items: {phase.vulture_total_items}\n")
             f.write(f"- Duration: {format_duration(phase.duration_seconds)}\n\n")
 
-    print(f"✅ VULTURE report generated: {report_file}")
+    print(f"[OK] VULTURE report generated: {report_file}")
 
 
 def generate_summary_json(all_results: List[PhaseResults], timestamp: str) -> None:
@@ -749,12 +750,12 @@ def generate_summary_json(all_results: List[PhaseResults], timestamp: str) -> No
     with open(summary_file, "w") as f:
         json.dump(summary, f, indent=2)
 
-    print(f"✅ Summary JSON generated: {summary_file}")
+    print(f"[OK] Summary JSON generated: {summary_file}")
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Main Entry Point
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 
 def main():
@@ -783,15 +784,15 @@ def main():
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    print("═" * 80)
+    print("=" * 80)
     print("Complete Codebase Code Quality Analysis")
     print("MCP Server: mcp-analyzer (RUFF + VULTURE)")
     print(f"Timestamp: {timestamp}")
-    print("═" * 80)
+    print("=" * 80)
 
     # Dry run mode
     if args.dry_run:
-        print("\n🔍 DRY RUN MODE - File Discovery Only\n")
+        print("\n[SEARCH] DRY RUN MODE - File Discovery Only\n")
         for phase_num, phase_config in PHASES.items():
             files = discover_python_files(phase_config)
             print(f"Phase {phase_num}: {phase_config['name']}")
@@ -813,13 +814,13 @@ def main():
             all_results.append(results)
 
     # Generate reports
-    print("\n📊 Generating reports...")
+    print("\n[REPORT] Generating reports...")
     generate_ruff_report(all_results, timestamp)
     generate_vulture_report(all_results, timestamp)
     generate_summary_json(all_results, timestamp)
 
-    print("\n✅ Analysis complete!")
-    print(f"📁 Results: {RESULTS_DIR}")
+    print("\n[OK] Analysis complete!")
+    print(f"[DIR] Results: {RESULTS_DIR}")
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import Callable, Optional, Tuple
+from typing import Callable, List, Optional, Tuple
 
 import numpy as np
 # cvxpy is an optional dependency.  Attempt to import it, but allow
@@ -106,7 +106,8 @@ def _numeric_linearize_continuous(
     """
     x_eq = np.asarray(x_eq, dtype=float)
     n = x_eq.size
-    f0 = _call_f(dyn, x_eq, u_eq)
+    # Note: f0 computed but not used in finite difference linearization
+    # f0 = _call_f(dyn, x_eq, u_eq)
     A = np.zeros((n, n), dtype=float)
     # Central difference for each state dimension with adaptive step [CITE:IntroFDM §2.4]
     for i in range(n):

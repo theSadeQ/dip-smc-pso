@@ -11,7 +11,6 @@ Replaces parameter validation scattered throughout the original 458-line control
 
 from typing import List, Optional, Literal
 from dataclasses import dataclass, field
-from pydantic import BaseModel, Field, validator
 import numpy as np
 
 

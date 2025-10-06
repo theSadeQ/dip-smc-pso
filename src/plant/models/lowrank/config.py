@@ -11,7 +11,7 @@ efficiency while maintaining essential system characteristics.
 
 from __future__ import annotations
 from typing import Optional, Tuple, Dict, Any
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import numpy as np
 
 from ...configurations.base_config import BaseDIPConfig

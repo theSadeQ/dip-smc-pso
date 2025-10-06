@@ -11,7 +11,7 @@ double inverted pendulum system.
 """
 
 from __future__ import annotations
-from typing import Tuple, Any, Optional
+from typing import Optional
 import numpy as np
 
 try:
@@ -91,7 +91,8 @@ class FullFidelityPhysicsComputer:
         """
         # Extract state components
         x, theta1, theta2, x_dot, theta1_dot, theta2_dot = state
-        position = np.array([x, theta1, theta2])
+        # Note: position vector available but not currently used in computation
+        # position = np.array([x, theta1, theta2])
         velocity = np.array([x_dot, theta1_dot, theta2_dot])
 
         try:

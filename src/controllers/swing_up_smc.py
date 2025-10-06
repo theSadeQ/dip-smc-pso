@@ -11,6 +11,6 @@ is re-exported from the actual implementation location.
 """
 
 # Import all swing-up SMC functionality from the actual location
-from .specialized.swing_up_smc import *
+from .specialized.swing_up_smc import *  # noqa: F403 (re-export module for backward compatibility)
 
 __all__ = []

@@ -49,7 +49,7 @@ except ImportError:
     pass
 
 try:
-    from src.core.simulation_context import SimulationContext
+    from src.core.simulation_context import SimulationContext  # noqa: F401
     from src.utils.config_compatibility import wrap_physics_config
 except ImportError as e:
     warnings.warn(f"Core components not available: {e}")
@@ -61,7 +61,7 @@ mission_components = {}
 try:
     from src.controllers.factory.smc_factory import SMCFactory, SMCType, SMCConfig
     from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
-    from src.plant.models.full.dynamics import FullDIPDynamics
+    from src.plant.models.full.dynamics import FullDIPDynamics  # noqa: F401
     mission_components['core'] = True
 except ImportError:
     mission_components['core'] = False

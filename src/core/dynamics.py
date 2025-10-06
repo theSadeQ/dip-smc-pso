@@ -8,6 +8,8 @@ This module re-exports the main dynamics class from its new modular location
 for backward compatibility with legacy import paths.
 """
 
+import numpy as np
+
 # Re-export main dynamics class from new location
 from ..plant.models.simplified.dynamics import SimplifiedDIPDynamics as DIPDynamics
 from ..plant.models.simplified.physics import compute_simplified_dynamics_numba
@@ -23,8 +25,6 @@ except ImportError:
         def decorator(func):
             return func
         return decorator
-
-import numpy as np
 
 
 @njit

@@ -15,7 +15,7 @@ from pathlib import Path
 warnings.filterwarnings("ignore", message=".*The NumPy module was reloaded.*", category=UserWarning)
 
 # Import matplotlib only after warning filters are set
-import matplotlib
+import matplotlib  # noqa: E402 - must import after warnings.filterwarnings
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"
@@ -47,7 +47,7 @@ def pytest_sessionstart(session):
 
 # 3) Runtime ban on plt.show(): monkeypatch at session scope.
 #    We patch directly instead of using the monkeypatch fixture to avoid scope constraints.
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # noqa: E402 - must import after matplotlib.use('Agg')
 
 _old_show = getattr(plt, "show", None)
 
@@ -61,7 +61,7 @@ plt.show = _no_show  # type: ignore[assignment]
 # Do NOT restore plt.show at teardown; enforcement should persist for the test session.
 
 # Import necessary modules for test fixtures
-import pytest
+import pytest  # noqa: E402 - imported after matplotlib backend setup
 
 @pytest.fixture(scope="session")
 def config():

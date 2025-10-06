@@ -34,7 +34,7 @@ try:
     from src.controllers.factory.smc_factory import SMCFactory, SMCType, SMCConfig
     from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
     from src.plant.models.full.dynamics import FullDIPDynamics
-    from src.simulation.engines.simulation_runner import SimulationRunner
+    from src.simulation.engines.simulation_runner import SimulationRunner  # noqa: F401
     from src.config import load_config
     from src.utils.config_compatibility import wrap_physics_config
 except ImportError as e:

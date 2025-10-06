@@ -319,7 +319,7 @@ class TestLinkcodeResolver:
     def test_methods_and_properties_have_stable_urls(self, obj_name):
         """Test that properties, classmethods, and staticmethods produce valid URLs."""
         try:
-            import tests.sample_module as sample_mod
+            import tests.sample_module as sample_mod  # noqa: F401 - testing module availability
 
             result = linkcode_resolve('py', {
                 'module': 'tests.sample_module',

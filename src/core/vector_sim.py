@@ -11,7 +11,7 @@ is re-exported from the actual implementation location.
 """
 
 # Import all components from the actual vector_sim location
-from src.simulation.engines.vector_sim import *
+from src.simulation.engines.vector_sim import *  # noqa: F403 (re-export module for backward compatibility)
 
 # Explicitly import key functions that actually exist
 from src.simulation.engines.vector_sim import (

@@ -43,10 +43,10 @@ sys.path.append(str(Path(__file__).parent.parent.parent.parent / "src"))
 try:
     from src.controllers.factory.smc_factory import SMCFactory, SMCType, SMCConfig
     from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
-    from src.plant.models.full.dynamics import FullDIPDynamics
-    from src.config import load_config
-    from src.utils.config_compatibility import wrap_physics_config
-    from src.utils.reproducibility.seed import set_global_seed
+    from src.plant.models.full.dynamics import FullDIPDynamics  # noqa: F401
+    from src.config import load_config  # noqa: F401
+    from src.utils.config_compatibility import wrap_physics_config  # noqa: F401
+    from src.utils.reproducibility.seed import set_global_seed  # noqa: F401
 except ImportError as e:
     pytest.skip(f"Required modules not available: {e}", allow_module_level=True)
 

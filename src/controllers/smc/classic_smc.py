@@ -11,7 +11,7 @@ import weakref
 # Import from new organized structure
 from ...utils import saturate
 from ...utils import ClassicalSMCOutput
-from typing import TYPE_CHECKING, List, Tuple, Dict, Optional, Union, Sequence, Any
+from typing import TYPE_CHECKING, List, Optional, Union, Sequence, Any
 
 # Avoid circular import at runtime
 if TYPE_CHECKING:

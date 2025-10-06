@@ -78,7 +78,7 @@ if os.path.exists(factory_py_path):
         create_pso_controller_factory = factory_module.create_pso_controller_factory
         get_expected_gain_count = factory_module.get_expected_gain_count
 
-    except Exception as e:
+    except Exception:
         # Fallback if the factory.py module can't be loaded
         def list_available_controllers() -> List[str]:
             """Fallback function when factory.py is not available."""

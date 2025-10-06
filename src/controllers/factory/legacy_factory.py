@@ -7,9 +7,9 @@
 # Standard library imports
 import logging
 import math
+import numbers
 import threading
 import warnings
-from collections.abc import MutableMapping
 from typing import Optional, List, Any, Dict, Callable, Union, Type, Mapping
 
 # Third-party imports
@@ -266,8 +266,7 @@ def apply_deprecation_mapping(
     """
     deprecation_map = DEPRECATED_PARAM_MAP.get(controller_name, {})
     normalized_params = {}
-    unknown_params = {}
-    
+
     # Track which normalized keys we've seen to detect collisions
     seen_normalized = {}
     
@@ -403,7 +402,6 @@ def _ensure_dynamics_available(use_full: bool) -> None:
             "DoubleInvertedPendulum is unavailable. Ensure 'src/core/dynamics.py' is importable."
         )
 
-import numbers
 def _validate_shared_params(controller_name: str, dt: float, max_force: float) -> None:
     """Validate common parameters shared by controllers."""
     if not (isinstance(dt, numbers.Real) and math.isfinite(float(dt)) and dt > 0):
