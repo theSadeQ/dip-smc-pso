@@ -12,6 +12,7 @@ with automatic configuration and optimization.
 from typing import Dict, Any, Optional, Union
 from enum import Enum
 import logging
+import pickle
 
 from .serializers import (
     SerializerInterface, SerializationFormat, JSONSerializer, MessagePackSerializer, PickleSerializer,
