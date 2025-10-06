@@ -96,11 +96,15 @@ class STAOutput(NamedTuple):
         algorithm and are needed to resume control in the next time step.
     history : Dict[str, Any]
         History information for diagnostics and plotting.
+    sigma : float
+        Current sliding surface value. Exposing sigma allows batch simulation
+        and Lyapunov validation tests to monitor convergence without re-computing.
     """
 
     u: float
     state: Tuple[float, ...]
     history: Dict[str, Any]
+    sigma: float
 
 
 class HybridSTAOutput(NamedTuple):
