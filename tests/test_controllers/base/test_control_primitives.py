@@ -9,7 +9,6 @@ SINGLE JOB: Test only the control primitive functions for validation and saturat
 
 import pytest
 import numpy as np
-import math
 import warnings
 
 from src.controllers.base.control_primitives import (

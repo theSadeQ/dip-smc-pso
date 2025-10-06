@@ -22,20 +22,15 @@ Test Coverage:
 import pytest
 import numpy as np
 import tempfile
-import json
 from pathlib import Path
-from typing import Dict, List, Any, Optional
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
 
 from src.optimization.algorithms.pso_optimizer import PSOTuner
-from src.optimization.algorithms.multi_objective_pso import MultiObjectivePSO, run_multi_objective_pso
-from src.optimization.validation.pso_bounds_validator import PSOBoundsValidator, validate_pso_configuration
+from src.optimization.algorithms.multi_objective_pso import run_multi_objective_pso
+from src.optimization.validation.pso_bounds_validator import PSOBoundsValidator
 from src.optimization.core.results_manager import (
-    OptimizationResultsManager, OptimizationResults, OptimizationMetadata,
-    create_optimization_metadata
+    OptimizationResultsManager, OptimizationResults, create_optimization_metadata
 )
-from src.controllers.factory import create_controller
-from src.config import load_config
 
 
 class TestPSOEndToEndIntegration:

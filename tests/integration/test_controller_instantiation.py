@@ -13,9 +13,8 @@ and integrated with the factory system. It performs comprehensive testing of:
 - PSO wrapper integration
 """
 
-import sys
 import traceback
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict
 import numpy as np
 
 def test_controller_instantiation() -> Dict[str, Any]:
@@ -44,7 +43,7 @@ def test_controller_instantiation() -> Dict[str, Any]:
 
     try:
         from src.controllers.factory import create_controller
-        print(f"[OK] Factory import successful")
+        print("[OK] Factory import successful")
     except Exception as e:
         print(f"[FAIL] CRITICAL: Factory import failed: {e}")
         return results
@@ -105,16 +104,16 @@ def test_controller_instantiation() -> Dict[str, Any]:
             results['error_details'][controller_type] = str(e)
 
     # Summary
-    print(f"\n" + "=" * 80)
-    print(f"CONTROLLER INSTANTIATION SUMMARY")
-    print(f"=" * 80)
+    print("\n" + "=" * 80)
+    print("CONTROLLER INSTANTIATION SUMMARY")
+    print("=" * 80)
     print(f"Controllers Tested: {len(results['controllers_tested'])}")
     print(f"Successful: {len(results['successful'])} - {results['successful']}")
     print(f"Failed: {len(results['failed'])} - {results['failed']}")
     print(f"Integration Score: {results['total_score']}/{results['max_score']}")
 
     if results['failed']:
-        print(f"\nFAILED CONTROLLERS:")
+        print("\nFAILED CONTROLLERS:")
         for controller in results['failed']:
             print(f"  [FAIL] {controller}: {results['error_details'][controller]}")
 
@@ -123,9 +122,9 @@ def test_controller_instantiation() -> Dict[str, Any]:
 def test_pso_integration() -> Dict[str, Any]:
     """Test PSO wrapper integration for all controllers."""
 
-    print(f"\n" + "=" * 80)
-    print(f"PSO INTEGRATION VALIDATION TEST")
-    print(f"=" * 80)
+    print("\n" + "=" * 80)
+    print("PSO INTEGRATION VALIDATION TEST")
+    print("=" * 80)
 
     results = {
         'controllers_tested': [],
@@ -138,7 +137,7 @@ def test_pso_integration() -> Dict[str, Any]:
 
     try:
         from src.controllers.factory import SMCType, create_smc_for_pso
-        print(f"[OK] PSO integration imports successful")
+        print("[OK] PSO integration imports successful")
     except Exception as e:
         print(f"[FAIL] CRITICAL: PSO integration import failed: {e}")
         return results
@@ -215,9 +214,9 @@ def test_pso_integration() -> Dict[str, Any]:
             results['error_details'][controller_name] = str(e)
 
     # Summary
-    print(f"\n" + "=" * 80)
-    print(f"PSO INTEGRATION SUMMARY")
-    print(f"=" * 80)
+    print("\n" + "=" * 80)
+    print("PSO INTEGRATION SUMMARY")
+    print("=" * 80)
     print(f"Controllers Tested: {len(results['controllers_tested'])}")
     print(f"Successful: {len(results['successful'])} - {results['successful']}")
     print(f"Failed: {len(results['failed'])} - {results['failed']}")
@@ -238,9 +237,9 @@ def main():
     pso_results = test_pso_integration()
 
     # Overall Summary
-    print(f"\n" + "=" * 80)
-    print(f"OVERALL INTEGRATION VALIDATION SUMMARY")
-    print(f"=" * 80)
+    print("\n" + "=" * 80)
+    print("OVERALL INTEGRATION VALIDATION SUMMARY")
+    print("=" * 80)
 
     total_score = instantiation_results['total_score'] + pso_results['total_score']
     max_total_score = instantiation_results['max_score'] + pso_results['max_score']
@@ -251,7 +250,7 @@ def main():
 
     # Determine integration health level
     if total_score == max_total_score:
-        print(f"[PERFECT] INTEGRATION STATUS: PERFECT (100%)")
+        print("[PERFECT] INTEGRATION STATUS: PERFECT (100%)")
     elif total_score >= max_total_score * 0.75:
         print(f"[EXCELLENT] INTEGRATION STATUS: EXCELLENT ({total_score/max_total_score*100:.1f}%)")
     elif total_score >= max_total_score * 0.5:
@@ -260,14 +259,14 @@ def main():
         print(f"[CRITICAL] INTEGRATION STATUS: CRITICAL ({total_score/max_total_score*100:.1f}%)")
 
     # Recommendations
-    print(f"\nRECOMMENDations:")
+    print("\nRECOMMENDations:")
     all_failed = set(instantiation_results['failed'] + pso_results['failed'])
     if not all_failed:
-        print(f"[OK] All controllers are fully integrated and functional")
-        print(f"[OK] System ready for production deployment")
+        print("[OK] All controllers are fully integrated and functional")
+        print("[OK] System ready for production deployment")
     else:
         print(f"[FIX] Controllers requiring attention: {list(all_failed)}")
-        print(f"[FIX] Focus on fixing failed controllers for complete integration")
+        print("[FIX] Focus on fixing failed controllers for complete integration")
 
     return {
         'instantiation': instantiation_results,

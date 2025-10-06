@@ -29,12 +29,10 @@ import json
 import time
 import subprocess
 import sys
-import os
-import hashlib
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Tuple, Union
+from typing import Dict, List, Any, Optional, Union
 from dataclasses import dataclass, asdict
-from datetime import datetime, timedelta
+from datetime import datetime
 import tempfile
 import warnings
 
@@ -395,7 +393,7 @@ class SystemRegressionDetector:
                                      key=lambda s: {"low": 1, "medium": 2, "high": 3, "critical": 4}.get(s, 0))
                     print(f"    {alert_count} regression(s) detected - Max severity: {max_severity.upper()}")
                 else:
-                    print(f"    No regressions detected")
+                    print("    No regressions detected")
 
                 # Track performance trends
                 if test_name.lower().replace(' ', '_') in self.baselines:

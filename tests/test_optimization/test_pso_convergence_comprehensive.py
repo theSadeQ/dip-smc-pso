@@ -9,12 +9,9 @@ Achieving 95%+ coverage for critical optimization algorithms.
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch, MagicMock
-from pathlib import Path
-import tempfile
-import time
+from unittest.mock import Mock, patch
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any
+from typing import List, Optional
 
 from src.optimization.algorithms.pso_optimizer import PSOTuner, _normalise, _seeded_global_numpy
 

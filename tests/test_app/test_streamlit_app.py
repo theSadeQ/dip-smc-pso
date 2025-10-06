@@ -2,7 +2,9 @@
 #======================== tests/test_app/test_streamlit_app.py ========================\\\
 #======================================================================================\\\
 
-import types, sys, io
+import types
+import sys
+import io
 import importlib
 
 class SessionState:

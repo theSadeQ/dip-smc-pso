@@ -10,8 +10,6 @@ COMPREHENSIVE JOB: Test mathematical properties with randomly generated inputs f
 import pytest
 import numpy as np
 from hypothesis import given, strategies as st, assume, settings, HealthCheck
-from hypothesis.extra.numpy import arrays, floating_dtypes
-import warnings
 
 # Test configuration
 MAX_EXAMPLES = 50  # Reduced for faster testing

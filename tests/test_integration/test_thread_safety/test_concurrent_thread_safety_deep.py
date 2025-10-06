@@ -13,12 +13,10 @@ import threading
 import time
 import queue
 import concurrent.futures
-from typing import Dict, List, Tuple, Any, Optional
+from typing import List, Any, Optional
 from dataclasses import dataclass
 import warnings
 import multiprocessing as mp
-from contextlib import contextmanager
-import gc
 
 
 @dataclass
@@ -714,7 +712,7 @@ class TestParallelProcessing:
         assert len(results) == num_processes, f"Expected {num_processes} results, got {len(results)}"
 
         successful_processes = [r for r in results if r['success']]
-        assert len(successful_processes) == num_processes, f"Some processes failed"
+        assert len(successful_processes) == num_processes, "Some processes failed"
 
         # Check isolation - each process should have completed its operations
         for result in successful_processes:

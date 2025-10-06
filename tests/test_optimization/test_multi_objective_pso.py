@@ -11,8 +11,7 @@ import pytest
 import numpy as np
 from unittest.mock import Mock, patch
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any, Tuple, Callable
-import warnings
+from typing import List
 
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 

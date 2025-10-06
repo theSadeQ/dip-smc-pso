@@ -17,7 +17,6 @@ import time
 from typing import List
 
 import numpy as np
-import pytest
 import logging
 
 from src.core.simulation_runner import run_simulation

@@ -20,14 +20,12 @@ Coverage Goals:
 import pytest
 import numpy as np
 import tempfile
-import json
 from pathlib import Path
-from typing import Dict, List, Any, Optional
-from unittest.mock import patch, MagicMock, PropertyMock
+from unittest.mock import patch, MagicMock
 
 from src.optimization.algorithms.pso_optimizer import PSOTuner, _normalise, _seeded_global_numpy
 from src.optimization.validation.pso_bounds_validator import PSOBoundsValidator, validate_pso_configuration
-from src.optimization.core.results_manager import OptimizationResultsManager, OptimizationResults
+from src.optimization.core.results_manager import OptimizationResultsManager
 from src.utils.seed import create_rng
 
 

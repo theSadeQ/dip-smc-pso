@@ -11,8 +11,6 @@ Tests mathematical properties, stability, convergence, and edge cases.
 
 import pytest
 import numpy as np
-from typing import Dict, Any, Optional
-from unittest.mock import Mock, patch
 
 from src.controllers.smc.hybrid_adaptive_sta_smc import (
     HybridAdaptiveSTASMC,

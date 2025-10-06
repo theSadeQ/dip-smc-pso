@@ -142,7 +142,6 @@ def test_cli_save_gains_creates_file_and_logs(tmp_path: Path):
         "--save-gains", str(out_path),
     ]
     # Monkeypatch PSOTuner.optimise to avoid heavy deps (e.g., pyswarms)
-    import src.optimizer.pso_optimizer as pso_mod
 
     class _Dummy:
         def optimise(self):  # noqa: D401

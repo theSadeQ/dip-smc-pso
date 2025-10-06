@@ -9,8 +9,6 @@ SINGLE JOB: Test only the classical SMC implementation and control law computati
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch
-from typing import Optional, Dict, Any
 
 # NOTE: These imports will fail until the corresponding src modules are implemented
 # This is expected based on the current state analysis

@@ -12,9 +12,7 @@ execution with comprehensive error handling and edge case robustness.
 
 import pytest
 import numpy as np
-from typing import Dict, List, Any, Optional, Callable, Tuple
-import warnings
-from unittest.mock import Mock, patch, MagicMock
+from typing import Dict, List, Any, Optional, Tuple
 import time
 
 # Core simulation imports
@@ -22,7 +20,6 @@ from src.simulation.engines.simulation_runner import run_simulation, step
 from src.simulation.integrators.fixed_step.euler import ForwardEuler
 from src.simulation.integrators.fixed_step.runge_kutta import RungeKutta4
 from src.simulation.integrators.adaptive.runge_kutta import DormandPrince45
-from src.simulation.core.interfaces import Integrator
 
 # Controller and plant imports for integration testing
 try:

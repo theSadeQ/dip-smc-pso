@@ -10,8 +10,7 @@ small-angle approximations, energy analysis, and stability metrics.
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch
-from typing import Dict, Any
+from unittest.mock import patch
 
 try:
     from src.plant.models.lowrank import LowRankDIPDynamics, LowRankDIPConfig
@@ -431,7 +430,6 @@ class TestLowRankDynamicsPerformance:
         dynamics = LowRankDIPDynamics(config)
 
         import gc
-        import sys
 
         # Get initial memory usage
         gc.collect()

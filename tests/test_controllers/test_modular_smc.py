@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
-from typing import Tuple, Dict, Any
+from typing import Tuple
 from dataclasses import dataclass
 
 # Test imports for modular controllers
@@ -31,26 +31,18 @@ from src.controllers.smc.algorithms import (
 
     # Adaptive SMC
     ModularAdaptiveSMC, AdaptiveSMCConfig,
-    AdaptationLaw, ModifiedAdaptationLaw,
-    UncertaintyEstimator, ParameterIdentifier, CombinedEstimator,
-
-    # Super-Twisting SMC
-    ModularSuperTwistingSMC, SuperTwistingSMCConfig,
+    AdaptationLaw, UncertaintyEstimator, ModularSuperTwistingSMC, SuperTwistingSMCConfig,
     SuperTwistingAlgorithm,
 
     # Hybrid SMC
     ModularHybridSMC, HybridSMCConfig,
-    HybridSwitchingLogic, SwitchingDecision, ControllerState,
-    HybridMode, SwitchingCriterion
+    HybridSwitchingLogic, HybridMode
 )
 
 # Test imports for core components
 from src.controllers.smc.core import (
     LinearSlidingSurface,
-    SwitchingFunction,
-    EquivalentControl,
-    validate_smc_gains,
-    SMCGainValidator
+    validate_smc_gains
 )
 
 
@@ -368,9 +360,8 @@ class TestPackageImports:
     def test_classical_smc_imports(self):
         """Test Classical SMC component imports."""
         from src.controllers.smc.algorithms.classical import (
-            ModularClassicalSMC, ClassicalSMCConfig
+            ClassicalSMCConfig
         )
-        from src.controllers.smc.core import LinearSlidingSurface, SwitchingFunction
 
         # Should be able to create instances
         config = ClassicalSMCConfig(
@@ -383,8 +374,7 @@ class TestPackageImports:
     def test_adaptive_smc_imports(self):
         """Test Adaptive SMC component imports."""
         from src.controllers.smc.algorithms.adaptive import (
-            ModularAdaptiveSMC, AdaptiveSMCConfig,
-            AdaptationLaw, UncertaintyEstimator
+            AdaptiveSMCConfig
         )
 
         # Should be able to create instances
@@ -399,8 +389,7 @@ class TestPackageImports:
     def test_super_twisting_smc_imports(self):
         """Test Super-Twisting SMC component imports."""
         from src.controllers.smc.algorithms.super_twisting import (
-            ModularSuperTwistingSMC, SuperTwistingSMCConfig,
-            SuperTwistingAlgorithm
+            SuperTwistingSMCConfig
         )
 
         # Should be able to create instances
@@ -414,8 +403,7 @@ class TestPackageImports:
     def test_hybrid_smc_imports(self):
         """Test Hybrid SMC component imports."""
         from src.controllers.smc.algorithms.hybrid import (
-            ModularHybridSMC, HybridSMCConfig,
-            HybridSwitchingLogic, HybridMode, SwitchingCriterion
+            HybridMode, SwitchingCriterion
         )
 
         # Should be able to create enums
@@ -441,7 +429,6 @@ class TestComponentIntegration:
 
     def test_sliding_surface_integration(self):
         """Test sliding surface integrates with controllers."""
-        from src.controllers.smc.core import LinearSlidingSurface
 
         lambda_gain = np.array([1.0, 1.0, 1.0, 1.0])  # Need 4 gains [k1, k2, lam1, lam2]
         surface = LinearSlidingSurface(lambda_gain)
@@ -454,7 +441,6 @@ class TestComponentIntegration:
 
     def test_gain_validation_integration(self):
         """Test gain validation integrates across components."""
-        from src.controllers.smc.core import validate_smc_gains
 
         # Valid gains should pass (classical SMC needs 6 gains)
         valid_gains = np.array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0])  # Need 6 gains for classical SMC

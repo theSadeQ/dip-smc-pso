@@ -11,7 +11,7 @@ with edge cases, error conditions, and performance validation.
 
 import pytest
 import numpy as np
-from typing import List, Dict, Any
+from typing import List
 
 from src.controllers.factory.core.validation import (
     ValidationResult,

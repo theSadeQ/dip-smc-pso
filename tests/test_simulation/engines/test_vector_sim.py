@@ -11,8 +11,7 @@ early stopping, and error handling for the vectorized simulation system.
 
 import pytest
 import numpy as np
-from typing import Optional, Callable, Tuple, Any
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 # Import vector simulation engine
 try:

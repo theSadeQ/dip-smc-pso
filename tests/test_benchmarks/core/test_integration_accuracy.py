@@ -16,12 +16,10 @@ physical correctness of different integration schemes. Tests focus on:
 
 from __future__ import annotations
 
-from typing import List
 import numpy as np
 import pytest
 
 from benchmarks.benchmark import IntegrationBenchmark
-from benchmarks.comparison import ComparisonScenario
 
 
 def test_rk4_reduces_euler_drift(integration_benchmark: IntegrationBenchmark):

@@ -117,7 +117,7 @@ def main():
     if np.isfinite(overhead3):
         print(f"  Overhead:      {overhead3:.1f}%")
     else:
-        print(f"  Overhead:      N/A (naive failed)")
+        print("  Overhead:      N/A (naive failed)")
 
     # Summary
     print("\n" + "=" * 70)
@@ -132,7 +132,7 @@ def main():
     else:
         print(f"WARNING: Performance overhead {avg_overhead:.1f}% exceeds 5% target")
 
-    print(f"\nRobustness improvement: 100% success rate across all test cases")
+    print("\nRobustness improvement: 100% success rate across all test cases")
 
 
 if __name__ == "__main__":

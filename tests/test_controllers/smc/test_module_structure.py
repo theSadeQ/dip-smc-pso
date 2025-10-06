@@ -14,7 +14,6 @@ import pytest
 import importlib
 import inspect
 import numpy as np
-from typing import Dict, Any, List, Tuple
 import sys
 import os
 
@@ -202,7 +201,7 @@ class TestSMCAlgorithmBaseClassConsistency:
 
         if initialization_errors:
             # Report but don't fail - these might be expected given missing dependencies
-            print(f"SMC initialization warnings:\n" + "\n".join(initialization_errors))
+            print("SMC initialization warnings:\n" + "\n".join(initialization_errors))
 
 
 class TestSMCControlComputationInterfaces:
@@ -267,7 +266,7 @@ class TestSMCControlComputationInterfaces:
                 signature_errors.append(f"{controller_type} creation/testing failed: {e}")
 
         if signature_errors:
-            print(f"SMC signature compatibility warnings:\n" + "\n".join(signature_errors))
+            print("SMC signature compatibility warnings:\n" + "\n".join(signature_errors))
 
     def test_smc_control_output_consistency(self):
         """Test that SMC controllers return consistent output formats."""

@@ -2,7 +2,6 @@
 #=================== tests/test_config/test_settings_precedence.py ====================\\\
 #======================================================================================\\\
 
-import os
 from pathlib import Path
 import pytest
 

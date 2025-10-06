@@ -10,10 +10,8 @@ that the optimization workflow functions correctly with mathematical fixes.
 """
 
 import numpy as np
-import json
 import sys
 from pathlib import Path
-from typing import Dict, Any
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
@@ -181,7 +179,7 @@ def test_fitness_function():
 
         # Evaluate fitness
         fitness_values = tuner._fitness(test_particles)
-        print(f"[OK] Fitness evaluation successful")
+        print("[OK] Fitness evaluation successful")
         print(f"[OK] Fitness values: {fitness_values}")
 
         # Validate fitness values

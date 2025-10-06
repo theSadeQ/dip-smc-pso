@@ -11,8 +11,7 @@ and the simulation runner to ensure they work together properly.
 
 import sys
 import logging
-import time
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any
 import numpy as np
 
 # Configure logging
@@ -385,7 +384,7 @@ def main():
     success_rate = passed_tests / total_tests * 100
 
     logger.info(f"\n{'='*60}")
-    logger.info(f"SIMULATION INTEGRATION TEST SUMMARY")
+    logger.info("SIMULATION INTEGRATION TEST SUMMARY")
     logger.info(f"{'='*60}")
     logger.info(f"Passed: {passed_tests}/{total_tests} ({success_rate:.1f}%)")
 

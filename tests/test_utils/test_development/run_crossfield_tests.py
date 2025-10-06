@@ -6,8 +6,9 @@
 #============================ tests/run_crossfield_tests.py ============================\\\
 #==========================================================================================\\\
 
-import json, sys
-import sys, os; sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+import json
+import sys
+import os; sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from validator import validate_research_plan
 
 def run_case(name, payload, want_codes_prefixes):

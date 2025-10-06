@@ -14,16 +14,10 @@ This test suite focuses specifically on validating rejection of unknown configur
 import pytest
 import yaml
 from pathlib import Path
-from tempfile import NamedTemporaryFile
 
 from src.config import (
     load_config,
-    ConfigSchema,
-    InvalidConfigurationError,
-    PhysicsConfig,
-    ControllersConfig,
-    PSOConfig,
-    SimulationConfig
+    InvalidConfigurationError
 )
 
 

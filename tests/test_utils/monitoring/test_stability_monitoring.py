@@ -13,7 +13,6 @@ Tests the Issue #1 resolution components:
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
 from src.utils.monitoring import (
     StabilityMonitoringSystem,
     DiagnosticChecklist,
@@ -189,7 +188,7 @@ def test_diagnostic_checklist():
 
     # Get summary
     summary = checklist.get_diagnostic_summary()
-    print(f"\nDiagnostic Summary:")
+    print("\nDiagnostic Summary:")
     print(f"  Primary cause: {summary['primary_cause']}")
     print(f"  Steps completed: {summary['total_steps']}")
     print(f"  Passed: {summary['passed_steps']}, Failed: {summary['failed_steps']}")

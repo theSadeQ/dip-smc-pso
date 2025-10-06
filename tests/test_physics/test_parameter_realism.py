@@ -15,9 +15,8 @@ SCIENTIFIC REALITY:
 STRATEGIC VALUE: Eliminate parameter-related debugging sessions (80% reduction target).
 """
 
-import pytest
 import numpy as np
-from typing import Dict, List, Tuple, Any, Optional
+from typing import Dict, List, Tuple
 import sys
 import os
 
@@ -132,7 +131,7 @@ class TestParameterRealism:
         cart_masses = [0.1, 0.5, 1.0, 2.4, 5.0, 10.0, 50.0]
         pendulum_mass = self.reference_params['pendulum1_mass']
 
-        print(f"\nCart-to-pendulum mass ratio analysis:")
+        print("\nCart-to-pendulum mass ratio analysis:")
         print(f"Fixed pendulum mass: {pendulum_mass:.3f} kg")
         print("-" * 50)
 
@@ -175,7 +174,7 @@ class TestParameterRealism:
         # Test different L2/L1 ratios
         length_ratios = [0.05, 0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0]
 
-        print(f"\nPendulum length ratio analysis:")
+        print("\nPendulum length ratio analysis:")
         print(f"Fixed L1: {L1:.3f} m")
         print("-" * 50)
 
@@ -226,7 +225,7 @@ class TestParameterRealism:
             {'mass': 1.0, 'length': 1.0, 'description': 'Very heavy, very long'},
         ]
 
-        print(f"\nInertia consistency analysis:")
+        print("\nInertia consistency analysis:")
         print("-" * 60)
 
         for config_data in test_configurations:
@@ -309,7 +308,7 @@ class TestParameterRealism:
             assert not overall_ok, \
                 f"Problematic combination '{combo_name}' was not detected as problematic"
 
-            print(f"  ✓ Problematic combination correctly detected")
+            print("  ✓ Problematic combination correctly detected")
 
     def test_parameter_realism_reference_guide(self):
         """
@@ -390,7 +389,7 @@ class TestParameterRealism:
                     print(f"  {param_name}: {param_info}")
 
         # Validate reference parameters
-        print(f"\nREFERENCE PARAMETER VALIDATION:")
+        print("\nREFERENCE PARAMETER VALIDATION:")
         print("-" * 40)
         reference_config = self._create_base_config()
         is_realistic, issues = self._test_configuration_realism(reference_config)
@@ -405,8 +404,8 @@ class TestParameterRealism:
             print(f"Issues with reference parameters: {', '.join(issues)}")
             assert False, "Reference parameters should be validated as realistic"
 
-        print(f"\n✅ Parameter realism reference guide created")
-        print(f"✅ Use these guidelines to prevent parameter-related simulation issues")
+        print("\n✅ Parameter realism reference guide created")
+        print("✅ Use these guidelines to prevent parameter-related simulation issues")
 
     def _create_base_config(self) -> SimplifiedDIPConfig:
         """Create base realistic configuration."""
@@ -594,13 +593,13 @@ def test_parameter_realism_quick_check():
 
     config = SimplifiedDIPConfig(**reference_params)
 
-    print(f"Testing reference parameters:")
+    print("Testing reference parameters:")
     for param, value in reference_params.items():
         if not param.endswith('_alpha') and not param.startswith('max_') and not param.startswith('min_') and not param.startswith('use_'):
             print(f"  {param}: {value}")
 
     # Quick realism checks
-    print(f"\nRealism checks:")
+    print("\nRealism checks:")
 
     # Mass ratios
     cart_to_pend = reference_params['cart_mass'] / reference_params['pendulum1_mass']
@@ -630,7 +629,7 @@ def test_parameter_realism_quick_check():
         print(f"  Energy computation: {energy:.6f} J ✓")
         print(f"  Matrix conditioning: {conditioning:.2e} ✓")
 
-        print(f"\n✅ Reference parameters validated as realistic")
+        print("\n✅ Reference parameters validated as realistic")
 
     except Exception as e:
         print(f"\n✗ Reference parameters failed validation: {e}")

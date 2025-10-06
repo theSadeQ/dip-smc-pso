@@ -2,7 +2,8 @@
 #================ tests/test_controllers/mpc/test_mpc_consolidated.py =================\\\
 #======================================================================================\\\
 
-import sys, pathlib, importlib, pytest
+import importlib
+import pytest
 
 factory = importlib.import_module("src.controllers.factory")
 
@@ -51,7 +52,6 @@ def test_mpc_optional_dep_and_param_validation(monkeypatch):
     assert "horizon must be" in str(e3.value) and "1 (got 0)" in str(e3.value)
 
     # - geometry and weights ranges
-    import math
     for mcp in [0.0, -1.0, float("inf")]:
         class CfgB:
             class Sim: use_full_dynamics = False; dt = 0.01

@@ -17,7 +17,7 @@ import os
 import gc
 import time
 import threading
-from typing import Dict, List, Tuple, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass
 import warnings
 import sys
@@ -644,7 +644,6 @@ class TestMemoryOptimization:
 @pytest.mark.slow
 def test_smc_memory_leak_detection():
     """Test for memory leaks in real SMC controllers (Issue #15)."""
-    import sys
     import os
     # Add project root to path for imports
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
@@ -757,7 +756,6 @@ def test_smc_8hour_continuous_operation():
     Issue #15: Validate no memory leaks in 8-hour continuous operation.
     WARNING: This test runs for 8 hours. Use pytest -m stress to run.
     """
-    import sys
     import os
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
 
@@ -822,7 +820,6 @@ def test_smc_8hour_continuous_operation():
 @pytest.mark.integration
 def test_cleanup_integration_all_controllers():
     """Integration test: Verify cleanup() works across all controllers."""
-    import sys
     import os
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
 

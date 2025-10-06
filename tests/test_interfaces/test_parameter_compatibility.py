@@ -11,7 +11,6 @@ that eliminate the "not enough values to unpack (expected 1, got 0)" category of
 
 import pytest
 import numpy as np
-from typing import Tuple, Any, Dict
 
 from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
 from src.plant.models.full.dynamics import FullDIPDynamics
@@ -274,8 +273,8 @@ class TestControllerParameterConsistency:
                 controller2 = create_controller(controller_type, dict_config, gains)
 
                 # Both should work without signature errors
-                assert controller1 is not None, f"Failed with AttributeDictionary config"
-                assert controller2 is not None, f"Failed with dict config"
+                assert controller1 is not None, "Failed with AttributeDictionary config"
+                assert controller2 is not None, "Failed with dict config"
 
                 # Both should have same interface
                 for controller in [controller1, controller2]:

@@ -19,16 +19,10 @@ Coverage Goals:
 
 import pytest
 import numpy as np
-import tempfile
-from pathlib import Path
-from typing import Dict, List, Any, Optional
-from unittest.mock import patch, MagicMock
 
 from src.optimization.validation.pso_bounds_validator import (
-    PSOBoundsValidator, validate_pso_configuration, BoundsValidationResult
+    PSOBoundsValidator, validate_pso_configuration
 )
-from src.optimization.core.parameters import ParameterBounds
-from src.config import ConfigSchema
 
 
 class TestPSOConfigurationValidation:

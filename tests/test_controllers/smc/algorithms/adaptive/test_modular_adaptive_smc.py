@@ -18,14 +18,12 @@ import numpy as np
 import pytest
 
 from tests.test_controllers.smc.test_fixtures import (
-    MockDynamics, SystemStateFixture, adaptive_smc_config,
-    validate_control_output, compute_tracking_error
+    MockDynamics
 )
 
 from src.controllers.smc.algorithms import (
     ModularAdaptiveSMC, AdaptiveSMCConfig,
-    AdaptationLaw, ModifiedAdaptationLaw,
-    UncertaintyEstimator, ParameterIdentifier, CombinedEstimator
+    AdaptationLaw, UncertaintyEstimator
 )
 
 

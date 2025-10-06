@@ -12,10 +12,7 @@ ensures fault detection systems meet scientific rigor standards.
 
 import pytest
 import numpy as np
-from typing import Dict, List, Any, Optional, Tuple
-import warnings
-from unittest.mock import Mock, patch, MagicMock
-import logging
+from unittest.mock import patch
 
 # Fault detection imports
 from src.analysis.fault_detection.fdi import (

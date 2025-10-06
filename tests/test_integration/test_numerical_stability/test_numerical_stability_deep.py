@@ -9,11 +9,8 @@ COMPREHENSIVE JOB: Test mathematical stability, convergence, and numerical robus
 
 import pytest
 import numpy as np
-import warnings
-from typing import List, Tuple, Dict, Callable, Any
+from typing import List, Dict, Any
 from scipy import linalg
-import matplotlib.pyplot as plt
-from collections import deque
 
 
 class NumericalStabilityAnalyzer:
@@ -917,7 +914,7 @@ class TestNumericalRobustness:
 
         # Print comprehensive results
         print(f"\n{'='*70}")
-        print(f"Matrix Regularization Test Results (Issue #14)")
+        print("Matrix Regularization Test Results (Issue #14)")
         print(f"{'='*70}")
         print(f"Singular Value Ratios Tested: {metrics['singular_value_ratios_tested']}")
         print(f"Condition Numbers Tested: {[f'{c:.2e}' for c in metrics['condition_numbers_tested']]}")
@@ -926,7 +923,7 @@ class TestNumericalRobustness:
         print(f"Max Condition Handled: {metrics['max_condition_handled']:.2e}")
         print(f"Min Singular Ratio Handled: {metrics['min_singular_ratio_handled']:.2e}")
         print(f"{'='*70}")
-        print(f"ACCEPTANCE CRITERIA:")
+        print("ACCEPTANCE CRITERIA:")
         print(f"[PASS] Consistent Regularization: {consistency_rate:.1%} >= 80%" if extreme_case_triggers else "N/A")
         print(f"[PASS] Adaptive Parameters: {metrics['min_singular_ratio_handled']:.2e} <= 1e-8")
         print(f"[PASS] Automatic Triggers: {metrics['max_condition_handled']:.2e} >= 1e12")

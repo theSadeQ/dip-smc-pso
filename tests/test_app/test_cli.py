@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 import pytest
 
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 
 # Note: A second definition of ``_run_cli`` existed in this file due to test
@@ -299,7 +299,7 @@ class TestGeneralFailFast:
         app_path = (Path(__file__).resolve().parents[2] / "simulate.py").resolve()
 
         # A script that blocks numpy and tries to import simulate.py
-        test_script = f"""
+        test_script = """
 import sys
 import os
 sys.modules['numpy'] = None

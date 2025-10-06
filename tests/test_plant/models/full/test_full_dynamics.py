@@ -9,8 +9,6 @@ SINGLE JOB: Test only the full-fidelity plant dynamics implementation and physic
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch
-import warnings
 
 # NOTE: These imports will fail until the corresponding src modules are implemented
 # This is expected based on the current state analysis

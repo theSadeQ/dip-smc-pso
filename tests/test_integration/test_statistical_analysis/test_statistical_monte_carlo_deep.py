@@ -13,10 +13,9 @@ COMPREHENSIVE JOB: Test statistical properties, Monte Carlo validation, and stoc
 import pytest
 import numpy as np
 import scipy.stats as stats
-from typing import Dict, List, Tuple, Callable, Optional, Any
+from typing import Dict, List, Tuple, Callable, Any
 from dataclasses import dataclass
 import warnings
-from collections import defaultdict
 
 
 @dataclass

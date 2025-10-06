@@ -10,14 +10,10 @@ COMPREHENSIVE JOB: Test error handling, recovery mechanisms, and system resilien
 import pytest
 import numpy as np
 import time
-import warnings
-from typing import Dict, List, Tuple, Any, Optional, Callable
+from typing import Dict, Any, Callable
 from dataclasses import dataclass
 from enum import Enum
-from contextlib import contextmanager
-import logging
 import traceback
-import sys
 
 
 class ErrorType(Enum):
@@ -236,7 +232,7 @@ class ResilientController:
 
                     return recovery_control
 
-            except Exception as recovery_error:
+            except Exception:
                 # Recovery strategy failed, try next one
                 continue
 

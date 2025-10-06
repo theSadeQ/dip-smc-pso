@@ -77,7 +77,7 @@ class BenchmarkInterfaceValidator:
         try:
             self.config = load_config(self.config_path, allow_unknown=True)
             self.physics_config = wrap_physics_config(self.config.physics.model_dump())
-        except Exception as e:
+        except Exception:
             # Fallback to minimal config for testing
             self.physics_config = self._create_minimal_physics_config()
 

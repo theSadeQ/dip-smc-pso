@@ -101,7 +101,7 @@ def test_lyapunov_robustness():
         cholesky_succeeded = False
 
     assert cholesky_succeeded, "Test 4: Cholesky should succeed"
-    print(f"  PASS: Cholesky decomposition succeeded")
+    print("  PASS: Cholesky decomposition succeeded")
 
     # Summary
     print("\n" + "=" * 70)
