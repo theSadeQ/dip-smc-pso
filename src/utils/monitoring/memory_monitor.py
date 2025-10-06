@@ -314,8 +314,8 @@ def monitor_controller_loop(
             controller.cleanup()
             gc.collect()
 
-        # Check memory
-        alert = monitor.check_memory()
+        # Check memory (alert logged internally by monitor)
+        _ = monitor.check_memory()
 
     # Final cleanup
     controller.cleanup()

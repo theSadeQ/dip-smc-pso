@@ -11,7 +11,7 @@ including LDR monitoring, saturation tracking, and dynamics conditioning.
 
 from __future__ import annotations
 import time
-from typing import List, Tuple, Dict, Any, Optional
+from typing import List, Dict, Any, Optional
 import numpy as np
 from collections import deque
 
@@ -358,7 +358,8 @@ class DynamicsConditioningMonitor:
                 self.condition_history.append(condition_num)
             else:
                 self.condition_history.append(1e12)  # Very high for invalid matrices
-        except:
+        except (np.linalg.LinAlgError, ValueError):
+            # Handle singular matrices or invalid values
             self.condition_history.append(1e12)
 
         # Track fallback usage
