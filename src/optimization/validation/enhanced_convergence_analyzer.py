@@ -361,7 +361,8 @@ class EnhancedConvergenceAnalyzer:
                 smoothed = savgol_filter(recent_fitness,
                                        min(len(recent_fitness), 3), 1)
                 velocity = float(smoothed[0] - smoothed[-1])  # Improvement over window
-            except:
+            except (ValueError, np.linalg.LinAlgError) as e:  # P2: Savgol filter can fail with small windows
+                logging.getLogger(__name__).debug(f"Savgol filter failed: {e}. Using raw fitness difference.")
                 velocity = float(recent_fitness[0] - recent_fitness[-1])
         else:
             velocity = float(recent_fitness[0] - recent_fitness[-1])
@@ -466,8 +467,8 @@ class EnhancedConvergenceAnalyzer:
                     predicted_iterations = int(remaining_log_improvement / decay_rate)
                     return max(0, min(predicted_iterations, 1000))  # Cap at 1000
 
-        except Exception:
-            pass
+        except (ValueError, RuntimeError, FloatingPointError) as e:  # P2: Convergence prediction is optional
+            logging.getLogger(__name__).debug(f"Convergence prediction failed: {e}")
 
         return -1  # Prediction failed
 
