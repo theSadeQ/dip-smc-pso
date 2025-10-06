@@ -11,12 +11,10 @@ crashes and similar configuration access failures that cause major debugging pai
 
 import pytest
 import numpy as np
-from typing import Dict, Any, Union
 
 from src.plant import ConfigurationFactory
 from src.utils.config_compatibility import AttributeDictionary, ensure_attribute_access
 from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
-from src.plant.models.full.dynamics import FullDIPDynamics
 
 
 class TestConfigDictObjectConversion:

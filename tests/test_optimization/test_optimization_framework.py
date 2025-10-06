@@ -9,17 +9,15 @@ Covers multi-objective optimization, constraint handling, and algorithm comparis
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch, MagicMock, call
+from unittest.mock import Mock, patch
 import time
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any, Tuple, Callable
-from concurrent.futures import ThreadPoolExecutor
+from typing import List, Optional
 import json
 import tempfile
 from pathlib import Path
 
 from src.optimization.algorithms.pso_optimizer import PSOTuner
-from src.plant.models.dynamics import DIPParams
 
 
 class TestOptimizationFramework:

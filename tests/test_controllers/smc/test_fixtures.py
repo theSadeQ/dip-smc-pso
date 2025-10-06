@@ -13,27 +13,18 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
-from typing import Tuple, Dict, Any
+from typing import Tuple
 from dataclasses import dataclass
 
 # Test imports for modular controllers
 from src.controllers.smc.algorithms import (
     # Classical SMC
-    ModularClassicalSMC, ClassicalSMCConfig,
+    ClassicalSMCConfig,
 
     # Adaptive SMC
-    ModularAdaptiveSMC, AdaptiveSMCConfig,
-    AdaptationLaw, ModifiedAdaptationLaw,
-    UncertaintyEstimator, ParameterIdentifier, CombinedEstimator,
-
-    # Super-Twisting SMC
-    ModularSuperTwistingSMC, SuperTwistingSMCConfig,
-    SuperTwistingAlgorithm,
-
-    # Hybrid SMC
-    ModularHybridSMC, HybridSMCConfig,
-    HybridSwitchingLogic, SwitchingDecision, ControllerState,
-    HybridMode, SwitchingCriterion
+    AdaptiveSMCConfig,
+    SuperTwistingSMCConfig,
+    HybridSMCConfig
 )
 
 

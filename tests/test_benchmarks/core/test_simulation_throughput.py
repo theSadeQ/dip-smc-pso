@@ -15,7 +15,6 @@ This test suite focuses on end-to-end simulation performance:
 import numpy as np
 import pytest
 
-from src.core.dynamics import DoubleInvertedPendulum
 from src.core.vector_sim import simulate_system_batch
 
 try:
@@ -24,7 +23,7 @@ except Exception:
     create_controller = None
 
 try:
-    from src.core.vector_sim import simulate_system_batch as _simulate_batch
+    pass
 except Exception:
     from src.core.vector_sim import _simulate_batch_numba_full as _simulate_fallback
 

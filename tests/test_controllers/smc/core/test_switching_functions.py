@@ -9,7 +9,6 @@ SINGLE JOB: Test only switching functions for chattering reduction and SMC contr
 
 import pytest
 import numpy as np
-import warnings
 
 from src.controllers.smc.core.switching_functions import (
     SwitchingMethod,

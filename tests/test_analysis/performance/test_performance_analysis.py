@@ -12,10 +12,6 @@ and scientific rigor in control performance evaluation.
 
 import pytest
 import numpy as np
-from typing import Dict, List, Any, Optional, Tuple
-import warnings
-from unittest.mock import Mock, patch
-import scipy.signal
 
 # Performance analysis imports
 from src.analysis.performance.control_analysis import *

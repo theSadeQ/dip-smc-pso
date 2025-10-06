@@ -19,7 +19,7 @@ from src.core.vector_sim import simulate_system_batch
 try:
     # Prefer the public factory
     from src.controllers.factory import create_controller
-except Exception as e:
+except Exception:
     create_controller = None
 
 # Try to import the public batch API; otherwise fall back to the numba kernel used internally.

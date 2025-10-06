@@ -17,10 +17,6 @@ COVERAGE TARGET: 100% (Safety-critical mechanism)
 from __future__ import annotations
 
 import pytest
-import math
-import numpy as np
-from typing import Union
-from unittest.mock import patch
 
 from src.utils.validation.parameter_validators import (
     require_positive,

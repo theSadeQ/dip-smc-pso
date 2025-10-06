@@ -59,7 +59,7 @@ def test_controller_type_bounds_mapping():
                 else:
                     print(f"  [INFO] Bounds dimensions mismatch: min={actual_min_dims}, max={actual_max_dims}, expected={expected_dims} (PSO will auto-adjust)")
             else:
-                print(f"  [WARN] No controller-specific bounds found, will use defaults")
+                print("  [WARN] No controller-specific bounds found, will use defaults")
 
         except Exception as e:
             print(f"  [ERROR] Error creating factory: {e}")
@@ -94,7 +94,7 @@ def test_pso_tuner_with_all_controllers():
                 seed=42
             )
 
-            print(f"  [OK] PSO tuner created successfully")
+            print("  [OK] PSO tuner created successfully")
             print(f"  [OK] Expected dimensions: {factory.n_gains}")
             print(f"  [OK] Controller type: {factory.controller_type}")
 
@@ -157,7 +157,7 @@ def test_controller_factory_validation():
 
             # Test controller creation
             controller_wrapper = factory(test_gains)
-            print(f"  [OK] Controller created successfully")
+            print("  [OK] Controller created successfully")
             print(f"  [OK] Type: {controller_wrapper.controller_type}")
             print(f"  [OK] Gains count: {controller_wrapper.n_gains}")
             print(f"  [OK] Max force: {controller_wrapper.max_force}")

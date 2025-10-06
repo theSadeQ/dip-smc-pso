@@ -17,7 +17,7 @@ Tests:
 4. End-to-end PSO optimization workflow
 """
 
-from typing import List, Callable, Tuple, Any
+from typing import List, Callable, Tuple
 import numpy as np
 from src.controllers.factory import (
     SMCType, create_smc_for_pso, get_gain_bounds_for_pso, validate_smc_gains, PSOControllerWrapper

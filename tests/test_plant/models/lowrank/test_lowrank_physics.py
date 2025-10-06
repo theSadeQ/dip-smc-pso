@@ -10,7 +10,6 @@ and different approximation modes for the low-rank model.
 
 import pytest
 import numpy as np
-from typing import Tuple
 
 try:
     from src.plant.models.lowrank import LowRankPhysicsComputer, LowRankDIPConfig

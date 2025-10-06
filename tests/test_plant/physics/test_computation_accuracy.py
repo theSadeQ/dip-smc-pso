@@ -13,7 +13,7 @@ Impact: Validates mathematical correctness, prevents physics errors.
 
 import pytest
 import numpy as np
-from typing import Dict, Any, Tuple, Optional
+from typing import Dict, Optional
 import sys
 import os
 

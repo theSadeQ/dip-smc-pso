@@ -10,8 +10,7 @@ energy limits, bounds checking, and the safety guard management system.
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch
-from typing import Dict, Any, Optional
+from unittest.mock import Mock
 
 try:
     # Import legacy guards

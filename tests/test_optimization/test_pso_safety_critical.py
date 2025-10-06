@@ -9,16 +9,13 @@ Targeting 100% coverage for safety-critical optimization mechanisms.
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch, MagicMock
-import threading
+from unittest.mock import Mock, patch
 import time
-import multiprocessing
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any, Callable
+from typing import List
 
 from src.optimization.algorithms.pso_optimizer import PSOTuner
-from src.plant.models.dynamics import DIPParams
 
 
 class TestPSOSafetyCritical:

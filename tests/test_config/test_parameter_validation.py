@@ -11,11 +11,9 @@ preventing debugging sessions caused by physics-violating parameters and 980% en
 
 import pytest
 import numpy as np
-from typing import Dict, Any, Tuple
 
 from src.plant import ConfigurationFactory
 from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
-from src.plant.models.full.dynamics import FullDIPDynamics
 
 
 class TestParameterBoundsValidation:

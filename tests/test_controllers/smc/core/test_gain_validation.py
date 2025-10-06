@@ -11,7 +11,6 @@ Tests all mathematical properties, boundary conditions, and stability requiremen
 
 import pytest
 import numpy as np
-from typing import List, Dict, Any
 
 from src.controllers.smc.core.gain_validation import (
     SMCGainValidator,

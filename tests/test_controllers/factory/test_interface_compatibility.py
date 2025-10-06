@@ -12,8 +12,6 @@ Impact: Would fix ~25% of current controller failures.
 
 import pytest
 import numpy as np
-from typing import Dict, Any, Union
-import logging
 
 # Import factory functions from the factory package (now includes needed functions)
 from src.controllers.factory import (

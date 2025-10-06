@@ -25,9 +25,8 @@ from __future__ import annotations
 
 import numpy as np
 import numpy.typing as npt
-from typing import Any
 
-from src.analysis.fault_detection.fdi import FDIsystem, DynamicsProtocol
+from src.analysis.fault_detection.fdi import FDIsystem
 
 
 class ZeroDynamics:

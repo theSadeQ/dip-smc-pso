@@ -29,14 +29,13 @@ import json
 import time
 import hashlib
 from pathlib import Path
-from typing import Dict, List, Any, Tuple, Optional, Union, NamedTuple
-from dataclasses import dataclass, asdict
+from typing import Dict, List, Any, Tuple, Optional
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import Enum
 import tempfile
 import sys
 import warnings
-import statistics
 
 # Add src to path for imports
 sys.path.append(str(Path(__file__).parent.parent.parent.parent / "src"))
@@ -1075,7 +1074,7 @@ class TestPerformanceRegressionDetection:
                     for metric_name in essential_metrics:
                         assert metric_name in baseline_metrics, f"Missing {metric_name} in {smc_type.value} baseline"
 
-            except Exception as e:
+            except Exception:
                 baselines_established[smc_type.value] = False
 
         # Should establish baselines for all controller types

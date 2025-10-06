@@ -184,8 +184,8 @@ def test_overshoot_comparison():
         orig = results['original']
         opt = results['optimized']
 
-        print(f"Metric                Original    Optimized    Improvement")
-        print(f"-" * 55)
+        print("Metric                Original    Optimized    Improvement")
+        print("-" * 55)
         print(f"Peak θ1 (deg)        {orig['theta1_peak']*180/np.pi:8.2f}    {opt['theta1_peak']*180/np.pi:8.2f}    {((orig['theta1_peak']-opt['theta1_peak'])/orig['theta1_peak']*100):6.1f}%")
         print(f"Peak θ2 (deg)        {orig['theta2_peak']*180/np.pi:8.2f}    {opt['theta2_peak']*180/np.pi:8.2f}    {((orig['theta2_peak']-opt['theta2_peak'])/orig['theta2_peak']*100):6.1f}%")
         print(f"Overshoot θ1 (%)     {orig['overshoot1_pct']:8.1f}    {opt['overshoot1_pct']:8.1f}    {orig['overshoot1_pct']-opt['overshoot1_pct']:6.1f}pp")
@@ -238,8 +238,8 @@ def test_overshoot_comparison():
         overshoot_reduction = orig['overshoot1_pct'] - opt['overshoot1_pct']
         settling_improvement = (orig['settling_time'] - opt['settling_time']) / orig['settling_time'] * 100
 
-        print(f"\nISSUE #2 RESOLUTION ASSESSMENT:")
-        print(f"="*60)
+        print("\nISSUE #2 RESOLUTION ASSESSMENT:")
+        print("="*60)
         if overshoot_reduction > 5:
             print(f"✅ OVERSHOOT SIGNIFICANTLY REDUCED: {overshoot_reduction:.1f} percentage points")
         elif overshoot_reduction > 0:

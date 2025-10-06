@@ -10,7 +10,6 @@ and factory methods for the low-rank DIP model.
 
 import pytest
 import numpy as np
-from typing import Tuple, Dict, Any
 
 try:
     from src.plant.models.lowrank.config import LowRankDIPConfig

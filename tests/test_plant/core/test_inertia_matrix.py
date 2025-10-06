@@ -15,8 +15,6 @@ SINGLE JOB: Test only inertia matrix mathematical properties and computation.
 import numpy as np
 import pytest
 
-from src.plant.core.dynamics import DoubleInvertedPendulum
-from src.plant.models.full import FullDIPDynamics
 
 
 class TestInertiaMatrixSymmetry:

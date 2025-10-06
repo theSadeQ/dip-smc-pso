@@ -11,7 +11,6 @@ and gain validation for all supported controller types.
 
 import pytest
 import numpy as np
-from typing import Dict, Any
 
 # Import controller factory components
 from src.controllers.factory import (
@@ -1076,7 +1075,6 @@ class TestControllerFactoryFallbacks:
 
     def test_validate_and_merge_configs(self):
         """Test configuration validation and merging."""
-        import sys
         import os
         import importlib.util
 

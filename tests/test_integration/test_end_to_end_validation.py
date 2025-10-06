@@ -27,12 +27,10 @@ SUCCESS CRITERIA - MISSION 10:
 import pytest
 import subprocess
 import sys
-import os
 import tempfile
-import json
 import yaml
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass
 import time
 from datetime import datetime
@@ -260,7 +258,7 @@ class EndToEndWorkflowValidator:
 
                             if result.returncode == 0:
                                 steps_completed.append(f"Command Execution Successful: {' '.join(cmd[-2:])}")
-                                performance_metrics[f'cmd_execution_time'] = time.perf_counter() - start_time
+                                performance_metrics['cmd_execution_time'] = time.perf_counter() - start_time
                             else:
                                 # Don't treat this as error for help command
                                 if "--help" not in cmd:
@@ -558,12 +556,12 @@ class EndToEndWorkflowValidator:
             report.append(f"   Execution Time: {result.execution_time:.2f}s")
 
             if result.steps_completed:
-                report.append(f"   Completed Steps:")
+                report.append("   Completed Steps:")
                 for step in result.steps_completed:
                     report.append(f"     • {step}")
 
             if result.error_messages:
-                report.append(f"   Issues Found:")
+                report.append("   Issues Found:")
                 for error in result.error_messages:
                     report.append(f"     • {error}")
 

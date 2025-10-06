@@ -9,8 +9,7 @@ SINGLE JOB: Test only the core simulation execution engine and state management.
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch
-from typing import Callable, Optional, Dict, Any
+from unittest.mock import Mock
 
 # NOTE: These imports will fail until the corresponding src modules are implemented
 # This is expected based on the current state analysis

@@ -15,10 +15,6 @@ import pytest
 import zipfile
 import io
 import csv
-from src.controllers.factory import create_controller
-from src.core.dynamics import DIPDynamics
-from src.core.simulation_runner import run_simulation
-from src.config import load_config
 
 def test_csv_export_includes_final_state(tmp_path):
     """

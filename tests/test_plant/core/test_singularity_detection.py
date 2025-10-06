@@ -15,8 +15,6 @@ SINGLE JOB: Test only singularity detection and handling in plant dynamics.
 import numpy as np
 import pytest
 
-from src.plant.core.dynamics import DoubleInvertedPendulum
-from src.plant.models.full import FullDIPDynamics
 
 
 class TestSingularityDetection:

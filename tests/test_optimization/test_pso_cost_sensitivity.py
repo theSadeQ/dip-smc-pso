@@ -17,7 +17,6 @@ Root Cause Context (Issue #10):
 
 import numpy as np
 import pytest
-from pathlib import Path
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.config import load_config
 

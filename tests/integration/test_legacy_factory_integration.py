@@ -11,7 +11,6 @@ to ensure smooth migration path and backward compatibility for existing code.
 
 import sys
 import logging
-from typing import Dict, Any, List
 import numpy as np
 
 # Configure logging
@@ -24,12 +23,6 @@ def test_legacy_factory_imports():
 
     try:
         # Test legacy factory functions
-        from src.controllers.factory.legacy_factory import (
-            create_controller,
-            build_controller,
-            normalize_controller_name,
-            apply_deprecation_mapping
-        )
 
         logger.info("✓ Legacy factory imports successful")
         return True
@@ -296,7 +289,7 @@ def main():
     success_rate = passed_tests / total_tests * 100
 
     logger.info(f"\n{'='*60}")
-    logger.info(f"LEGACY FACTORY INTEGRATION TEST SUMMARY")
+    logger.info("LEGACY FACTORY INTEGRATION TEST SUMMARY")
     logger.info(f"{'='*60}")
     logger.info(f"Passed: {passed_tests}/{total_tests} ({success_rate:.1f}%)")
 

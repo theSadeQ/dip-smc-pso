@@ -11,7 +11,6 @@ import pytest
 import numpy as np
 import time
 import gc
-from typing import List, Tuple, Dict, Any
 try:
     import psutil
 except ImportError:

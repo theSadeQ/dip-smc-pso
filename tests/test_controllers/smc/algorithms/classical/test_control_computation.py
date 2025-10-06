@@ -16,7 +16,7 @@ import numpy as np
 import pytest
 
 from tests.test_controllers.smc.test_fixtures import (
-    MockDynamics, classical_smc_config, validate_control_output
+    validate_control_output
 )
 from src.controllers.smc.algorithms import ModularClassicalSMC
 

@@ -14,7 +14,7 @@ import time
 import json
 from pathlib import Path
 from dataclasses import dataclass, asdict
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List
 
 from src.config import load_config
 from src.controllers.factory import create_controller
@@ -311,7 +311,7 @@ class Issue2PSOValidator:
         }
 
         print("\n--- STATISTICAL VALIDATION RESULTS ---")
-        print(f"Cost statistics:")
+        print("Cost statistics:")
         print(f"  Mean ± Std: {stats['cost_stats']['mean']:.3f} ± {stats['cost_stats']['std']:.3f}")
         print(f"  Range: [{stats['cost_stats']['min']:.3f}, {stats['cost_stats']['max']:.3f}]")
         print(f"Convergence success rate: {stats['convergence_success_rate']*100:.1f}%")
@@ -504,7 +504,7 @@ def main():
     print("\n" + "="*80)
     print("ISSUE #2 VALIDATION COMPLETE - SUMMARY")
     print("="*80)
-    print(f"✅ PSO Optimization executed with corrected bounds")
+    print("✅ PSO Optimization executed with corrected bounds")
     print(f"✅ lambda1 optimized from 20.0 to {pso_result.best_gains[4]:.3f}")
     print(f"✅ lambda2 optimized from 4.0 to {pso_result.best_gains[5]:.3f}")
     print(f"✅ Overshoot reduction: {comparison_results['improvements']['overshoot_reduction_percent']:.2f} percentage points")

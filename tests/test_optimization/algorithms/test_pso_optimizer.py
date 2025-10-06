@@ -9,13 +9,11 @@ Tests the main PSOTuner class for correctness, performance, and integration.
 
 import pytest
 import numpy as np
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 from pathlib import Path
-import tempfile
 import yaml
 
 from src.optimization.algorithms.pso_optimizer import PSOTuner
-from src.config import ConfigSchema
 
 
 class TestPSOTuner:
@@ -544,7 +542,7 @@ class TestPSOTunerProperties:
     def minimal_config(self):
         """Create minimal valid configuration for testing."""
         from dataclasses import dataclass
-        from typing import Any, List
+        from typing import List
 
         @dataclass
         class MockPhysics:

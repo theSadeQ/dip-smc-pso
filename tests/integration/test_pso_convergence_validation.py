@@ -15,7 +15,7 @@ Date: 2025-09-28
 
 import numpy as np
 import logging
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any
 import time
 import json
 
@@ -383,7 +383,7 @@ def main():
 
     # Print summary
     summary = results['summary']
-    print(f"\nVALIDATION SUMMARY:")
+    print("\nVALIDATION SUMMARY:")
     print(f"Status: {summary['status']}")
     print(f"Success Rate: {summary['success_rate']:.1f}%")
     print(f"Controllers Tested: {summary['successful_controllers']}/{summary['total_controllers_tested']}")

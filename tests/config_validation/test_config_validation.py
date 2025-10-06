@@ -15,17 +15,13 @@ This module tests the configuration validation system's ability to:
 import pytest
 import yaml
 from pathlib import Path
-from tempfile import NamedTemporaryFile
-from typing import Dict, Any
 
 from src.config import (
     load_config,
     ConfigSchema,
     InvalidConfigurationError,
     PhysicsConfig,
-    ControllersConfig,
-    PSOConfig,
-    SimulationConfig
+    ControllersConfig
 )
 
 

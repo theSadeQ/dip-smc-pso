@@ -25,14 +25,12 @@ SUCCESS CRITERIA - MISSION 10:
 
 import pytest
 import numpy as np
-import json
 import tempfile
 import subprocess
 import sys
-import os
 import time
 from pathlib import Path
-from typing import Dict, List, Any, Tuple, Optional, Union
+from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
 import warnings
@@ -45,7 +43,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 try:
     from production_core.config import ProductionConfig
     PRODUCTION_CORE_AVAILABLE = True
-except ImportError as e:
+except ImportError:
     PRODUCTION_CORE_AVAILABLE = False
     # Suppress warning during test collection
     pass

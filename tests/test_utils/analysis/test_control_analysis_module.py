@@ -16,8 +16,6 @@ from __future__ import annotations
 import numpy as np
 
 from src.utils.control_analysis import (
-    controllability_matrix,
-    observability_matrix,
     check_controllability_observability,
 )
 

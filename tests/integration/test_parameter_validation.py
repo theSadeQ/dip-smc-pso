@@ -8,7 +8,6 @@ Compares theoretical overshoot predictions for original vs current parameters.
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 def compute_damping_ratio(k, lam):
     """Compute damping ratio: ζ = λ/(2√k)"""
@@ -86,7 +85,7 @@ def main():
     effort_reduction = original_results['control_effort'] - current_results['control_effort']
 
     print(f"\n{'='*60}")
-    print(f"IMPROVEMENT ANALYSIS:")
+    print("IMPROVEMENT ANALYSIS:")
     print(f"{'='*60}")
     print(f"Overshoot reduction: {overshoot_improvement:+.1f}% ({original_results['overshoot_max']:.1f}% -> {current_results['overshoot_max']:.1f}%)")
     print(f"Settling time change: {settling_improvement:+.2f}s")
@@ -97,13 +96,13 @@ def main():
     zeta1_target_error = abs(current_results['zeta1'] - target_zeta)
     zeta2_target_error = abs(current_results['zeta2'] - target_zeta)
 
-    print(f"\nTHEORETICAL VALIDATION:")
+    print("\nTHEORETICAL VALIDATION:")
     print(f"Target damping ratio: {target_zeta}")
     print(f"zeta1 error from target: {zeta1_target_error:.3f} ({'OK' if zeta1_target_error < 0.1 else 'FAIL'})")
     print(f"zeta2 error from target: {zeta2_target_error:.3f} ({'OK' if zeta2_target_error < 0.1 else 'FAIL'})")
 
     # Overall assessment
-    print(f"\nOVERALL ASSESSMENT:")
+    print("\nOVERALL ASSESSMENT:")
     if current_results['overshoot_max'] < 15.0 and overshoot_improvement > 0:
         print("OK OVERSHOOT TARGET ACHIEVED: <15% overshoot target met")
     else:
@@ -119,7 +118,7 @@ def main():
     else:
         print("FAIL CONTROL EFFORT INCREASED")
 
-    print(f"\nCONCLUSION:")
+    print("\nCONCLUSION:")
     if (current_results['overshoot_max'] < original_results['overshoot_max'] and
         current_results['overshoot_max'] < 15.0):
         print("SUCCESS PARAMETER OPTIMIZATION SUCCESSFUL")

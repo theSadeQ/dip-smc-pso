@@ -52,7 +52,7 @@ def test_sta_smc_with_optimized_gains():
 
         result = controller.compute_control(state, initial_state, history)
 
-        print(f"[SUCCESS] Control computation successful")
+        print("[SUCCESS] Control computation successful")
         print(f"Control output: {result.u:.3f}")
         print(f"Sliding surface: {result.state[1]:.6f}")
 
@@ -60,7 +60,7 @@ def test_sta_smc_with_optimized_gains():
         zeta1 = controller.surf_lam1 / (2 * np.sqrt(controller.surf_gain_k1))
         zeta2 = controller.surf_lam2 / (2 * np.sqrt(controller.surf_gain_k2))
 
-        print(f"\n[THEORETICAL] Validation:")
+        print("\n[THEORETICAL] Validation:")
         print(f"zeta1 = {zeta1:.3f} (target: 0.7 +/- 0.1)")
         print(f"zeta2 = {zeta2:.3f} (target: 0.7 +/- 0.1)")
 
@@ -153,7 +153,7 @@ def compare_with_problematic_gains():
     print(f"Original gains:  {original_gains}")
     print(f"Optimized gains: {optimized_gains}")
 
-    print(f"\nChanges:")
+    print("\nChanges:")
     changes = [
         ("K1 (algorithmic)", original_gains[0], optimized_gains[0]),
         ("K2 (algorithmic)", original_gains[1], optimized_gains[1]),
@@ -178,15 +178,15 @@ def compare_with_problematic_gains():
     opt_zeta1 = compute_damping(optimized_gains[2], optimized_gains[4])
     opt_zeta2 = compute_damping(optimized_gains[3], optimized_gains[5])
 
-    print(f"\nDamping ratio comparison:")
+    print("\nDamping ratio comparison:")
     print(f"  Original zeta1 = {orig_zeta1:.3f}  ->  Optimized zeta1 = {opt_zeta1:.3f}")
     print(f"  Original zeta2 = {orig_zeta2:.3f}  ->  Optimized zeta2 = {opt_zeta2:.3f}")
-    print(f"  Target: zeta = 0.7 +/- 0.1")
+    print("  Target: zeta = 0.7 +/- 0.1")
 
     orig_overshoot_risk = "HIGH" if (orig_zeta1 < 0.6 or orig_zeta2 < 0.6) else "MODERATE"
     opt_overshoot_risk = "LOW" if (0.6 <= opt_zeta1 <= 0.8 and 0.6 <= opt_zeta2 <= 0.8) else "MODERATE"
 
-    print(f"\nOvershoot risk assessment:")
+    print("\nOvershoot risk assessment:")
     print(f"  Original configuration:  {orig_overshoot_risk}")
     print(f"  Optimized configuration: {opt_overshoot_risk}")
 

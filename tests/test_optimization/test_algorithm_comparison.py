@@ -11,11 +11,9 @@ import pytest
 import numpy as np
 from unittest.mock import Mock, patch
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any, Callable
-import time
+from typing import List
 from scipy import stats
 
-from src.optimization.algorithms.pso_optimizer import PSOTuner
 
 
 class TestAlgorithmComparison:

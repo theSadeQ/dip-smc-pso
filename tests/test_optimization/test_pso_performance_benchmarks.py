@@ -10,9 +10,8 @@ Restores performance regression detection for optimization algorithms.
 import pytest
 import numpy as np
 from unittest.mock import Mock, patch
-import time
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any
+from typing import List
 
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 

@@ -32,13 +32,11 @@ SUCCESS CRITERIA:
 import pytest
 import numpy as np
 from pathlib import Path
-from typing import Dict, List, Any, Tuple, Optional, Union, NamedTuple
-from dataclasses import dataclass, field
+from typing import Dict, List, Tuple, Optional
+from dataclasses import dataclass
 from enum import Enum
 import sys
 import warnings
-from scipy import stats
-import math
 
 # Add src to path for imports
 sys.path.append(str(Path(__file__).parent.parent.parent.parent / "src"))

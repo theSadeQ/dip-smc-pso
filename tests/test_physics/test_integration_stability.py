@@ -15,9 +15,8 @@ SCIENTIFIC REALITY:
 STRATEGIC VALUE: Prevent unstable simulation parameters and establish safe operating bounds.
 """
 
-import pytest
 import numpy as np
-from typing import Dict, List, Tuple, Any, Optional
+from typing import Tuple
 import sys
 import os
 
@@ -202,12 +201,12 @@ class TestIntegrationStability:
 
             # Compare with expected boundary
             if dt_stable >= scenario['expected_stable_dt_max'] * 0.5:
-                print(f"  ✓ Boundary within expected range")
+                print("  ✓ Boundary within expected range")
             else:
-                print(f"  ⚠ Boundary more restrictive than expected")
+                print("  ⚠ Boundary more restrictive than expected")
 
         # Document findings
-        print(f"\nSTABILITY BOUNDARY SUMMARY:")
+        print("\nSTABILITY BOUNDARY SUMMARY:")
         print("-" * 40)
         for scenario_name, dt_boundary in boundary_results.items():
             scenario_desc = self.stability_scenarios[scenario_name]['description']
@@ -263,7 +262,7 @@ class TestIntegrationStability:
 
             print(f"{dt:8.3f} {rk4_status:>10s} {euler_status:>10s} {advantage:>15s}")
 
-        print(f"\nSUMMARY:")
+        print("\nSUMMARY:")
         print(f"RK4 maximum stable dt:   {rk4_max_stable:.3f}s")
         print(f"Euler maximum stable dt: {euler_max_stable:.3f}s")
         print(f"RK4 stability advantage: {rk4_max_stable / euler_max_stable:.1f}x" if euler_max_stable > 0 else "RK4 stability advantage: Significant")
@@ -318,7 +317,7 @@ class TestIntegrationStability:
             print(f"  Use cases: {', '.join(guidelines['use_cases'])}")
 
         # Quick validation of guidelines
-        print(f"\nVALIDATION TEST:")
+        print("\nVALIDATION TEST:")
         print("-" * 20)
         test_state = np.array([0.0, 0.15, 0.15, 0.0, 0.0, 0.0])
 
@@ -331,8 +330,8 @@ class TestIntegrationStability:
                 status = "✓ Stable" if is_stable else "✗ Unstable"
                 print(f"{category:35s}: {status}")
 
-        print(f"\n✅ Integration stability boundaries documented")
-        print(f"✅ Practical guidelines established for parameter selection")
+        print("\n✅ Integration stability boundaries documented")
+        print("✅ Practical guidelines established for parameter selection")
 
     def _test_integration_stability(
         self,
@@ -515,9 +514,9 @@ def test_integration_stability_quick_reference():
         (0.5, "DANGER")
     ]
 
-    print(f"\nDEMONSTRATION - Standard test scenario:")
+    print("\nDEMONSTRATION - Standard test scenario:")
     print(f"Initial state: {test_state}")
-    print(f"Simulation: 3s with RK4 integration")
+    print("Simulation: 3s with RK4 integration")
     print("-" * 40)
 
     for dt, category in test_cases:
@@ -543,5 +542,5 @@ def test_integration_stability_quick_reference():
         except Exception as e:
             print(f"dt = {dt:5.3f}s ({category:8s}): ✗ FAILED ({type(e).__name__})")
 
-    print(f"\n✅ Integration stability reference validated")
+    print("\n✅ Integration stability reference validated")
     print("Use dt ≤ 0.01s for reliable, stable simulations")

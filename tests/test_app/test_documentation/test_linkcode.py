@@ -63,7 +63,6 @@ class TestLinkcodeResolver:
     def test_linkcode_resolve_url_format(self):
         """Test that generated URLs have the correct format."""
         # We'll create a simple test case that we know will work
-        import tempfile
         import types
 
         # Create a temporary module for testing
@@ -97,7 +96,6 @@ class TestLinkcodeResolver:
     def test_linkcode_resolve_line_numbers(self):
         """Test that line numbers are included in URLs."""
         # Similar to above but focusing on line number format
-        import tempfile
         import types
 
         test_module = types.ModuleType('test_module')
@@ -257,7 +255,6 @@ class TestLinkcodeResolver:
 
     def test_path_normalization(self):
         """Test that Windows paths are properly normalized to POSIX for URLs."""
-        import tempfile
         import types
 
         # Create a temporary module to test path handling

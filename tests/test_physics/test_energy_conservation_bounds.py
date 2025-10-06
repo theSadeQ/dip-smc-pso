@@ -15,9 +15,7 @@ SCIENTIFIC REALITY:
 STRATEGIC VALUE: Eliminate "Is 70% energy error a bug or realistic RK4 behavior?" confusion.
 """
 
-import pytest
 import numpy as np
-from typing import Dict, List, Tuple, Any
 import sys
 import os
 
@@ -337,7 +335,7 @@ class TestEnergyConservationBounds:
         expected_drift = documentation["Medium-term simulations (5s, dt=0.01)"]["RK4_expected_drift_percent"]
         tolerance = documentation["Medium-term simulations (5s, dt=0.01)"]["test_tolerance_percent"]
 
-        print(f"VERIFICATION - Medium-term simulation:")
+        print("VERIFICATION - Medium-term simulation:")
         print(f"  Actual drift: {actual_drift:.1f}%")
         print(f"  Expected: ~{expected_drift:.1f}%")
         print(f"  Tolerance: {tolerance:.1f}%")
@@ -423,8 +421,8 @@ def test_energy_conservation_reality_check():
     final_energy = physics.compute_total_energy(state)
     drift_percent = abs(final_energy - initial_energy) / initial_energy * 100
 
-    print(f"\nDEMONSTRATION CASE:")
-    print(f"Simulation: 10s with dt=0.01 using Euler integration")
+    print("\nDEMONSTRATION CASE:")
+    print("Simulation: 10s with dt=0.01 using Euler integration")
     print(f"Initial energy: {initial_energy:.6f} J")
     print(f"Final energy: {final_energy:.6f} J")
     print(f"Energy drift: {drift_percent:.1f}%")
@@ -441,6 +439,6 @@ def test_energy_conservation_reality_check():
     assert drift_percent >= 10.0, f"Energy drift {drift_percent:.1f}% seems unrealistically low"
     assert drift_percent <= 10000.0, f"Energy drift {drift_percent:.1f}% exceeds realistic bounds"
 
-    print(f"\n[MISSION ACCOMPLISHED] Documented realistic energy conservation bounds")
-    print(f"[SCIENTIFIC RIGOR] Established foundation for energy-related testing")
+    print("\n[MISSION ACCOMPLISHED] Documented realistic energy conservation bounds")
+    print("[SCIENTIFIC RIGOR] Established foundation for energy-related testing")
     print("="*90)

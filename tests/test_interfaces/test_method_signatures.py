@@ -12,12 +12,11 @@ CRITICAL HIGH-ROI TESTS: These tests prevent 'SimplifiedDIPDynamics' object has 
 import pytest
 import numpy as np
 import inspect
-from typing import get_type_hints
 
 from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
 from src.plant.models.full.dynamics import FullDIPDynamics
 from src.plant.models.lowrank.dynamics import LowRankDIPDynamics
-from src.plant.models.base.dynamics_interface import BaseDynamicsModel, DynamicsModel
+from src.plant.models.base.dynamics_interface import BaseDynamicsModel
 from src.plant import ConfigurationFactory
 
 

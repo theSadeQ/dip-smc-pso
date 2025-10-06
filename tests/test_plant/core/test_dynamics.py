@@ -18,7 +18,6 @@ import pytest
 # PSOBounds are not available in src.config, so they are no longer imported here.
 from src.config import load_config, PhysicsConfig
 from src.plant.models.full.dynamics import FullDIPDynamics
-from src.plant.models.full.config import FullDIPConfig
 from src.core.dynamics import step_rk4_numba
 from src.utils.config_compatibility import wrap_physics_config
 
@@ -246,9 +245,7 @@ def test_pso_fitness_penalises_nan(monkeypatch):
 Test simplified vs. full dynamics model trajectories using shared fixtures.
 """
 
-import numpy as np
 import pytest
-from typing import Callable
 
 # The test uses the shared 'dynamics' and 'full_dynamics' fixtures from conftest.py.
 def test_simplified_vs_full_model_error(dynamics, full_dynamics):
@@ -284,7 +281,6 @@ def test_simplified_vs_full_model_error(dynamics, full_dynamics):
 # BEGIN: test_dynamics_ill_conditioned.py
 # tests/test_dynamics_ill_conditioned.py ==============================================================\\\
 # A new test to verify that the dynamics model correctly handles ill-conditioned inertia matrices.
-import numpy as np
 from src.core.dynamics import rhs_numba, DIPParams
 
 def test_rhs_returns_nan_for_ill_conditioned_matrix():
@@ -313,9 +309,7 @@ def test_rhs_returns_nan_for_ill_conditioned_matrix():
 # BEGIN: test_linalg_fix.py
 # tests/test_linalg_fix.py ====================================================\\\
 
-import numpy as np
 import pytest
-from src.core.dynamics import rhs_numba, DIPParams
 
 def test_rhs_handles_singularity_gracefully():
     """

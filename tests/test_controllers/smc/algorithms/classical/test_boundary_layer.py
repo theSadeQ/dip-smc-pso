@@ -15,7 +15,7 @@ SINGLE JOB: Test only boundary layer chattering reduction for Classical SMC cont
 import numpy as np
 import pytest
 
-from tests.test_controllers.smc.test_fixtures import MockDynamics, classical_smc_config
+from tests.test_controllers.smc.test_fixtures import MockDynamics
 from src.controllers.smc.algorithms import ModularClassicalSMC
 
 

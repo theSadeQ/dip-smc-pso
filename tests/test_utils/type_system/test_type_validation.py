@@ -17,8 +17,7 @@ COVERAGE TARGET: 100% (Safety-critical mechanism)
 from __future__ import annotations
 
 import pytest
-from typing import Any, Dict, Tuple, NamedTuple, get_type_hints
-from unittest.mock import Mock
+from typing import Any, Dict, Tuple, get_type_hints
 
 from src.utils.types.control_outputs import (
     ClassicalSMCOutput,

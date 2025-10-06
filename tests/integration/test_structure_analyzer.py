@@ -6,7 +6,7 @@
 
 import os
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List
 
 def analyze_directory_structure() -> Dict[str, any]:
     """Analyze current directory structure for test organization."""
@@ -231,31 +231,31 @@ if __name__ == "__main__":
     # Generate recommendations
     recommendations = generate_test_structure_recommendations()
 
-    print(f"\nStructural Coverage Statistics:")
+    print("\nStructural Coverage Statistics:")
     print(f"  Source files: {recommendations['statistics']['src_files']}")
     print(f"  Test files: {recommendations['statistics']['test_files']}")
     print(f"  Test ratio: {recommendations['statistics']['test_ratio']:.2f}")
 
-    print(f"\nRecommendations Summary:")
+    print("\nRecommendations Summary:")
     print(f"  High priority: {len(recommendations['high_priority'])}")
     print(f"  Medium priority: {len(recommendations['medium_priority'])}")
     print(f"  Low priority: {len(recommendations['low_priority'])}")
 
     # Show high priority recommendations
-    print(f"\nHigh Priority Recommendations:")
+    print("\nHigh Priority Recommendations:")
     for i, rec in enumerate(recommendations['high_priority'][:5], 1):
         print(f"  {i}. Create test structure for '{rec['src_dir']}'")
         print(f"     Suggested: {rec['suggested_test_dir']}")
 
     # Show medium priority recommendations
-    print(f"\nMedium Priority Test Files Needed:")
+    print("\nMedium Priority Test Files Needed:")
     for i, rec in enumerate(recommendations['medium_priority'][:5], 1):
         print(f"  {i}. {rec['src_file']} -> {rec['suggested_test_file']}")
 
     # Create improvement plan
     plan = create_test_structure_improvement_plan()
 
-    print(f"\nTest Structure Improvement Plan:")
+    print("\nTest Structure Improvement Plan:")
     print(f"  Immediate actions: {len(plan['immediate_actions'])}")
     print(f"  Short-term actions: {len(plan['short_term_actions'])}")
     print(f"  Long-term actions: {len(plan['long_term_actions'])}")

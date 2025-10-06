@@ -14,7 +14,6 @@ Validates GitHub Issue #11 resolution:
 
 import pytest
 import numpy as np
-from scipy import linalg
 import warnings
 
 from src.analysis.performance.stability_analysis import StabilityAnalyzer, StabilityAnalysisConfig
