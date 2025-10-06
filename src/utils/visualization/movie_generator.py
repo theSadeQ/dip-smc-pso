@@ -13,8 +13,7 @@ quality animations and analysis visualizations.
 from __future__ import annotations
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-import numpy as np
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any
 import os
 from dataclasses import dataclass
 from .animation import DIPAnimator, MultiSystemAnimator

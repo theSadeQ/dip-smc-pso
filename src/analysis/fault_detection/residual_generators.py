@@ -10,11 +10,11 @@ including observer-based, parity-based, and parameter estimation approaches.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any, Protocol, Callable
+from typing import Dict, List, Optional, Tuple, Any, Protocol
 import numpy as np
 from scipy import linalg, signal
 import warnings
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from abc import ABC, abstractmethod
 
 from ..core.interfaces import DataProtocol

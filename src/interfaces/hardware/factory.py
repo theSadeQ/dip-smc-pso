@@ -9,14 +9,14 @@ configuring various types of hardware interfaces for control systems,
 including sensors, actuators, DAQ systems, and communication devices.
 """
 
-from typing import Dict, Any, Type, Optional, Union, List
+from typing import Dict, Any, Type, Optional, List
 import logging
 
 from .device_drivers import DeviceDriver, DeviceConfig, DeviceManager
-from .sensors import SensorInterface, AnalogSensor, DigitalSensor, IMUSensor, SensorType
-from .actuators import ActuatorInterface, ServoActuator, StepperMotor, PneumaticActuator, ActuatorType
-from .daq_systems import DAQInterface, NIDAQInterface, AdcInterface, ChannelConfig, ChannelType
-from .serial_devices import SerialDevice, ModbusDevice, CANDevice, SerialProtocol, ModbusRegister, DataType
+from .sensors import SensorInterface, AnalogSensor, DigitalSensor, IMUSensor
+from .actuators import ActuatorInterface, ServoActuator, StepperMotor, PneumaticActuator
+from .daq_systems import DAQInterface, NIDAQInterface, AdcInterface, ChannelConfig
+from .serial_devices import ModbusDevice, CANDevice, ModbusRegister
 
 
 class HardwareInterfaceFactory:

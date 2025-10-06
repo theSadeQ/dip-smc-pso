@@ -10,14 +10,13 @@ Lyapunov analysis, eigenvalue analysis, and stability margin computation.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any, Union
+from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
 from scipy import linalg, signal
 import warnings
 from dataclasses import dataclass
 
 from ..core.interfaces import PerformanceAnalyzer, AnalysisResult, AnalysisStatus, DataProtocol
-from ..core.data_structures import MetricResult, PerformanceMetrics
 
 
 @dataclass
@@ -694,8 +693,7 @@ class StabilityAnalyzer(PerformanceAnalyzer):
         try:
             # Import robust numerical stability utilities
             from src.plant.core.numerical_stability import (
-                AdaptiveRegularizer,
-                NumericalInstabilityError
+                AdaptiveRegularizer
             )
 
             # Use cached regularizer for performance (avoid repeated initialization)

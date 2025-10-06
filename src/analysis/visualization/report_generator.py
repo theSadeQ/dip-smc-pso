@@ -13,14 +13,12 @@ professional reports.
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import numpy as np
-import pandas as pd
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Union
+from typing import Dict, Optional, Any
 import json
 
-from ..core.interfaces import AnalysisResult, DataProtocol
-from ..core.data_structures import SimulationData, PerformanceMetrics, MetricResult
+from ..core.data_structures import SimulationData, PerformanceMetrics
 from .analysis_plots import AnalysisPlotter
 from .statistical_plots import StatisticalPlotter
 from .diagnostic_plots import DiagnosticPlotter

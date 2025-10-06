@@ -11,9 +11,8 @@ applications and statistical rigor.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Optional, Tuple
 import numpy as np
-from scipy import signal, integrate
 import warnings
 
 from .interfaces import MetricCalculator, DataProtocol

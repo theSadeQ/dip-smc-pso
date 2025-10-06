@@ -7,13 +7,12 @@
 from __future__ import annotations
 
 import time
-from typing import Any, Callable, Optional
+from typing import Any
 import numpy as np
 
 from .base import BaseOrchestrator
 from ..core.interfaces import ResultContainer
 from ..core.time_domain import RealTimeScheduler
-from ..results.containers import StandardResultContainer
 
 
 class RealTimeOrchestrator(BaseOrchestrator):
@@ -117,7 +116,7 @@ class RealTimeOrchestrator(BaseOrchestrator):
             if controller is not None:
                 try:
                     control = self._compute_control(controller, times[i], current_state, i)
-                except Exception as e:
+                except Exception:
                     if deadline_miss_handler:
                         control = deadline_miss_handler(times[i], current_state)
                     else:

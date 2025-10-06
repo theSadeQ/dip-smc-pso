@@ -13,15 +13,12 @@ industrial communication standards commonly used in control systems.
 
 import asyncio
 import serial
-import struct
-import time
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from typing import Dict, Any, Optional, List, Tuple, Union
+from dataclasses import dataclass
+from typing import Dict, Any, Optional, List, Union
 from enum import Enum
-import logging
 
-from .device_drivers import DeviceDriver, DeviceConfig, DeviceCapability, DeviceState
+from .device_drivers import DeviceDriver, DeviceConfig, DeviceCapability
 
 try:
     import serial_asyncio

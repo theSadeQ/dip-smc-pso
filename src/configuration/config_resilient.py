@@ -17,12 +17,11 @@ PRODUCTION SAFETY: System can operate even if config.yaml is deleted or corrupte
 
 import os
 import yaml
-import json
 import copy
 import time
 import threading
 from pathlib import Path
-from typing import Dict, Any, List, Optional, Union, Callable
+from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 import logging

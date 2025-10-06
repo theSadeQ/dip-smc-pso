@@ -7,7 +7,7 @@
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List, Optional, Tuple, Callable
+from typing import Any, Dict, Optional, Tuple
 import numpy as np
 
 

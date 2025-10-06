@@ -13,7 +13,6 @@ from __future__ import annotations
 import matplotlib.pyplot as plt
 import numpy as np
 from typing import List, Dict, Any, Optional, Tuple
-import matplotlib.patches as patches
 
 class ControlPlotter:
     """Static plotting utilities for control system analysis."""

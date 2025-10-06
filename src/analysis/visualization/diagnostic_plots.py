@@ -12,12 +12,9 @@ and control performance visualization.
 
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 from scipy import signal, fft
-from typing import Dict, List, Optional, Tuple, Any, Union
-import warnings
+from typing import List, Optional, Tuple
 
-from ..core.interfaces import DataProtocol
 from ..core.data_structures import SimulationData, PerformanceMetrics
 
 

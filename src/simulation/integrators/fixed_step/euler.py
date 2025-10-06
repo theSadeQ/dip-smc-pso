@@ -144,7 +144,7 @@ class BackwardEuler(BaseIntegrator):
 
             return new_state
 
-        except Exception as e:
+        except Exception:
             # Fallback to forward Euler if implicit solver fails
             new_state = state + dt * dynamics_fn(t, state, control)
             self._update_stats(True, 2)  # One eval for forward Euler + one failed attempt

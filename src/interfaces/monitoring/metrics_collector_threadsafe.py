@@ -27,7 +27,6 @@ from typing import Dict, List, Optional, Union, Any, Callable
 from enum import Enum
 import logging
 from concurrent.futures import ThreadPoolExecutor
-import weakref
 
 
 class MetricType(Enum):

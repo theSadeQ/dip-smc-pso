@@ -9,7 +9,7 @@ This module provides statistical functions for analyzing experimental results,
 computing confidence intervals, and performing hypothesis testing.
 """
 
-from typing import Dict, List, Tuple, Any, Optional, Union
+from typing import Dict, Any, Optional
 import numpy as np
 from scipy import stats
 import warnings

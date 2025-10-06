@@ -28,7 +28,7 @@ Usage remains identical to the original:
 
 from __future__ import annotations
 
-from typing import Callable, Dict, Any, List, Tuple, Optional
+from typing import Callable, Dict, Any, List, Tuple
 import numpy as np
 
 # Import from new modular structure

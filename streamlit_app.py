@@ -35,7 +35,6 @@ except Exception:
     st = _StreamlitStub()  # type: ignore
 import yaml
 import zipfile
-from pathlib import Path
 from typing import Callable, Optional
 
 from src.config import load_config

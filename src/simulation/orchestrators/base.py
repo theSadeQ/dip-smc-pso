@@ -6,8 +6,8 @@
 
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
-from typing import Any, Dict, Optional, Callable
+from abc import abstractmethod
+from typing import Any, Dict
 import numpy as np
 
 from ..core.interfaces import Orchestrator, ResultContainer, SimulationEngine

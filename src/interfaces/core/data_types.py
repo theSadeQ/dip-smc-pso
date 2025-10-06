@@ -13,11 +13,10 @@ for configuration, monitoring, and data exchange.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Union, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from enum import Enum
 import time
 import uuid
-from datetime import datetime
 
 
 class InterfaceType(Enum):

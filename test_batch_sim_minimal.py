@@ -40,7 +40,7 @@ try:
         dt=dt
     )
 
-    print(f"\nBatch simulation completed!")
+    print("\nBatch simulation completed!")
     print(f"  Time points: {len(t)}")
     print(f"  States shape: {x_b.shape}")
     print(f"  Controls shape: {u_b.shape}")

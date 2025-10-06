@@ -51,7 +51,7 @@ t, x_b, u_b, sigma_b = simulate_system_batch(
     dt=dt
 )
 
-print(f"\nSimulation completed!")
+print("\nSimulation completed!")
 print(f"  sigma_b shape: {sigma_b.shape}")
 
 if sigma_b.shape[1] == 0:
@@ -68,12 +68,12 @@ else:
     tolerance = 1e-5
 
     if np.all(delta_V <= tolerance):
-        print(f"[PASS] Lyapunov function decreased monotonically")
+        print("[PASS] Lyapunov function decreased monotonically")
     else:
         print(f"[FAIL] Lyapunov function increased. Max increase: {np.max(delta_V):.2e}")
 
     # Check convergence
     if np.all(V_history[:, -1] < 1e-6):
-        print(f"[PASS] Final V converged to < 1e-6")
+        print("[PASS] Final V converged to < 1e-6")
     else:
         print(f"[FAIL] Final V did not converge. Max final V: {np.max(V_history[:, -1]):.2e}")

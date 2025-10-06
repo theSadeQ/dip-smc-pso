@@ -13,12 +13,12 @@ import asyncio
 import time
 import json
 import pickle
-from typing import Optional, Dict, Any, Tuple, Callable, List
+from typing import Optional, Dict, Any, Tuple, Callable
 import logging
 from abc import ABC, abstractmethod
 
 from ..core.protocols import CommunicationProtocol, MessageMetadata, ConnectionState, MessageType, Priority
-from ..core.data_types import Message, ConnectionInfo, InterfaceConfig, InterfaceType
+from ..core.data_types import InterfaceConfig
 
 try:
     import zmq

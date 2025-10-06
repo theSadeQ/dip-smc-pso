@@ -13,12 +13,11 @@ import asyncio
 import time
 import numpy as np
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from typing import Dict, Any, Optional, List, Tuple
+from dataclasses import dataclass
+from typing import Dict, Any, Optional, List
 from enum import Enum
-import logging
 
-from .device_drivers import DeviceDriver, DeviceConfig, DeviceCapability, DeviceState
+from .device_drivers import DeviceDriver, DeviceConfig, DeviceCapability
 
 
 class SensorType(Enum):

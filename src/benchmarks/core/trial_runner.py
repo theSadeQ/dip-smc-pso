@@ -19,7 +19,7 @@ a normal distribution. By default, 30 trials are executed.
 
 from __future__ import annotations
 
-from typing import Callable, Any, List, Dict, Tuple, Optional
+from typing import Callable, Any, List, Dict, Optional
 import numpy as np
 
 from src.core.vector_sim import simulate_system_batch

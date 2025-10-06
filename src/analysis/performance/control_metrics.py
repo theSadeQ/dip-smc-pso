@@ -11,13 +11,12 @@ evaluation of controller performance.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any, Union
+from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
-from scipy import signal, optimize, integrate
+from scipy import signal, optimize
 import warnings
 
 from ..core.interfaces import PerformanceAnalyzer, AnalysisResult, AnalysisStatus, DataProtocol
-from ..core.data_structures import MetricResult, PerformanceMetrics, SimulationData
 from ..core.metrics import ControlPerformanceMetrics
 
 

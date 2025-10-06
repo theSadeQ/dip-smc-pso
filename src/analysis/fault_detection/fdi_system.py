@@ -11,7 +11,7 @@ detection methods, and statistical analysis.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any, Union, Callable
+from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
 from scipy import signal, stats
 import warnings
@@ -20,7 +20,6 @@ from enum import Enum
 from datetime import datetime
 
 from ..core.interfaces import FaultDetector, AnalysisResult, AnalysisStatus, DataProtocol
-from ..core.data_structures import FaultDetectionResult, StatisticalTestResult, ConfidenceInterval
 
 
 class FaultType(Enum):

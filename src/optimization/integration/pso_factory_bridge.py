@@ -16,7 +16,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 from src.controllers.factory import (
-    SMCType, SMCFactory, create_smc_for_pso, get_gain_bounds_for_pso,
+    SMCType, create_smc_for_pso, get_gain_bounds_for_pso,
     validate_smc_gains, get_expected_gain_count
 )
 from src.optimization.algorithms.pso_optimizer import PSOTuner

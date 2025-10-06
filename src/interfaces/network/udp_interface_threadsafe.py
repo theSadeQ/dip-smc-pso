@@ -27,10 +27,9 @@ import threading
 from typing import Optional, Dict, Any, Tuple, Callable
 import logging
 from concurrent.futures import ThreadPoolExecutor
-from contextlib import contextmanager
 
 from ..core.protocols import CommunicationProtocol, MessageMetadata, ConnectionState, MessageType, Priority
-from ..core.data_types import Message, ConnectionInfo, InterfaceConfig, InterfaceType, TransportType
+from ..core.data_types import InterfaceConfig
 
 
 class ThreadSafeUDPInterface(CommunicationProtocol):

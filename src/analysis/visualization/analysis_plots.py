@@ -10,11 +10,9 @@ including performance plots, comparison charts, and interactive visualizations.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any, Union
+from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-from matplotlib.patches import Ellipse
 # Use matplotlib directly instead of seaborn for minimal dependencies
 # Set style to match common seaborn defaults
 plt.style.use('default')
@@ -27,10 +25,8 @@ plt.rcParams.update({
 })
 from scipy import stats
 import warnings
-from pathlib import Path
 
 from ..core.interfaces import VisualizationGenerator, AnalysisResult
-from ..core.data_structures import PerformanceMetrics, MetricResult
 
 
 class AnalysisPlotter(VisualizationGenerator):

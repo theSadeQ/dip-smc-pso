@@ -13,11 +13,10 @@ import asyncio
 import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Dict, Any, Optional, List, Callable, Union
+from typing import Dict, Any, Optional, List, Callable
 from enum import Enum
 import logging
 
-from ..core.data_types import DeviceInfo, InterfaceType
 
 
 class DeviceState(Enum):

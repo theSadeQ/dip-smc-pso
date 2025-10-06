@@ -82,10 +82,8 @@ def mean_squared_error(y_true, y_pred):
 def mean_absolute_error(y_true, y_pred):
     """Compute mean absolute error."""
     return float(np.mean(np.abs(y_true - y_pred)))
-import itertools
 
-from ..core.interfaces import StatisticalValidator, AnalysisResult, AnalysisStatus, DataProtocol
-from ..core.data_structures import StatisticalTestResult, ConfidenceInterval
+from ..core.interfaces import StatisticalValidator, AnalysisResult, AnalysisStatus
 
 
 @dataclass

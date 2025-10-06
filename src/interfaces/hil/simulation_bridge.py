@@ -14,7 +14,7 @@ import time
 import numpy as np
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Dict, Any, Optional, List, Callable, Union
+from typing import Dict, Any, Optional, List, Callable
 from enum import Enum
 import logging
 

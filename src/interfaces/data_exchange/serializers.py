@@ -14,10 +14,8 @@ import pickle
 import gzip
 import zlib
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Optional, Union, Type, TypeVar
+from typing import Any, Dict, Optional, Type, TypeVar
 from enum import Enum
-import logging
-import time
 
 try:
     import msgpack

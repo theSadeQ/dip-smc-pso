@@ -10,11 +10,10 @@ plots, and data from Jupyter notebooks in various formats.
 """
 
 import json
-import pickle
 import zipfile
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List
 
 import matplotlib.pyplot as plt
 import numpy as np

@@ -25,9 +25,8 @@ from __future__ import annotations
 
 import logging
 import numpy as np
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 from dataclasses import dataclass
-import warnings
 
 from src.config import ConfigSchema
 from src.utils.numerical_stability import EPSILON_DIV
@@ -466,7 +465,7 @@ Parameter Information:
             report += f"  {i+1}. {param_name} ({role})\n"
             report += f"     Recommended range: [{rec_range[0]:.1f}, {rec_range[1]:.1f}]\n"
 
-        report += f"""
+        report += """
 Stability Considerations:
   - All gains must be positive for stability
   - Switching gains should be large enough to overcome uncertainties

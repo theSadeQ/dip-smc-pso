@@ -10,16 +10,13 @@ displays, alert management interface, and customizable monitoring
 views for all interface components.
 """
 
-import asyncio
 import json
 import logging
-import time
 import webbrowser
-from collections import defaultdict, deque
+from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple, Callable
+from typing import Dict, List, Optional, Tuple
 import threading
 
 

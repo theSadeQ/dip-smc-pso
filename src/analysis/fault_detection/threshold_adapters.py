@@ -11,15 +11,14 @@ system uncertainties.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any, Callable
+from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
-from scipy import stats, signal
+from scipy import stats
 import warnings
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from collections import deque
 
-from ..core.data_structures import ConfidenceInterval
 
 
 @dataclass

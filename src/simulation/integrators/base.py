@@ -6,8 +6,8 @@
 
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, Optional, Tuple
+from abc import abstractmethod
+from typing import Any, Callable, Dict, Optional
 import numpy as np
 
 from ..core.interfaces import Integrator

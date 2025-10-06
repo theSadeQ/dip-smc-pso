@@ -7,7 +7,7 @@
 from __future__ import annotations
 
 import numpy as np
-from typing import Any, Tuple, Optional, Dict, Union
+from typing import Any, Tuple, Optional, Dict
 
 from ..core.interfaces import SafetyGuard
 

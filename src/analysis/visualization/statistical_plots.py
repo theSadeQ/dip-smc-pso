@@ -11,7 +11,6 @@ and Monte Carlo simulation visualizations.
 """
 
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 import numpy as np
 import pandas as pd
 # Use matplotlib directly instead of seaborn for minimal dependencies
@@ -26,10 +25,7 @@ plt.rcParams.update({
 })
 from scipy import stats
 from typing import Dict, List, Optional, Tuple, Any, Union
-import warnings
 
-from ..core.interfaces import DataProtocol
-from ..core.data_structures import MetricResult
 
 
 class StatisticalPlotter:

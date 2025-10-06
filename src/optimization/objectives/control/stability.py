@@ -6,7 +6,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional, Union, Callable, Tuple
+from typing import Any, Dict, Optional, Callable
 import numpy as np
 import warnings
 
