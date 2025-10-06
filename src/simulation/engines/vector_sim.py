@@ -384,12 +384,22 @@ def simulate_system_batch(
         try:
             if hasattr(ctrl, "initialize_state"):
                 state_vars[j] = ctrl.initialize_state()  # type: ignore[assignment]
-        except Exception:
+        except Exception as e:
+            # OK: initialize_state is optional - graceful fallback to None
+            import logging
+            logging.getLogger(__name__).debug(
+                f"Controller {j} ({type(ctrl).__name__}) doesn't support state initialization: {e}"
+            )
             state_vars[j] = None
         try:
             if hasattr(ctrl, "initialize_history"):
                 histories[j] = ctrl.initialize_history()  # type: ignore[assignment]
-        except Exception:
+        except Exception as e:
+            # OK: initialize_history is optional - graceful fallback to None
+            import logging
+            logging.getLogger(__name__).debug(
+                f"Controller {j} ({type(ctrl).__name__}) doesn't support history initialization: {e}"
+            )
             histories[j] = None
     # Determine per-particle saturation limits
     u_limits = _np.full(B, _np.inf, dtype=float)
@@ -454,8 +464,13 @@ def simulate_system_batch(
                     if hist is not None:
                         try:
                             setattr(c, "_last_history", hist)
-                        except Exception:
-                            pass
+                        except Exception as e:
+                            # OK: _last_history attachment is optional feature
+                            import logging
+                            logging.getLogger(__name__).debug(
+                                f"Could not attach history to controller {jj}: {e}"
+                            )
+                            # Continue without history attachment
                 if params_list is not None:
                     return [(_np.copy(times), _np.copy(x_b), _np.copy(u_b), _np.copy(sigma_b)) for _ in params_list]
                 return times, x_b, u_b, sigma_b
