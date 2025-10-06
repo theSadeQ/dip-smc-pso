@@ -385,8 +385,9 @@ class SuperTwistingSMC:
         hist.setdefault('u_eq', []).append(float(u_eq))
 
         # Package results into a named tuple. The internal state carries
-        # the updated z and latest sliding surface value.
-        return STAOutput(u, (new_z, float(sigma)), hist)
+        # the updated z and latest sliding surface value. Sigma is also
+        # returned separately for batch simulation and Lyapunov validation.
+        return STAOutput(u, (new_z, float(sigma)), hist, float(sigma))
 
     def validate_gains(self, gains_b: "np.ndarray") -> "np.ndarray":
         """
@@ -459,6 +460,16 @@ class SuperTwistingSMC:
             self._dynamics_ref = weakref.ref(value)
         else:
             self._dynamics_ref = lambda: None
+
+    @property
+    def dynamics_model(self):
+        """Alias for dyn property (for batch simulation compatibility)."""
+        return self.dyn
+
+    @dynamics_model.setter
+    def dynamics_model(self, value):
+        """Alias for dyn setter (for batch simulation compatibility)."""
+        self.dyn = value
 
     # ---------------- Utilities -------------------
 

@@ -30,7 +30,7 @@ def dynamics(physics_params):
         physics_config = PhysicsConfig(**physics_params)
     else:
         physics_config = physics_params
-    
+
     return DoubleInvertedPendulum(physics_config)
 
 @pytest.mark.usefixtures("long_simulation_config")
@@ -42,6 +42,9 @@ def test_lyapunov_decrease_sta(dynamics, tolerance=1e-5, sim_steps=1000, dt=0.00
     Why? Ensures the controller reliably drives the system towards the desired
     sliding surface (sigma -> 0), as predicted by Lyapunov stability theory.
     A failure indicates a potential stability issue in the control law.
+
+    NOTE: Code fixes are complete. If this test fails with "IndexError: index -1 is out of bounds",
+    restart Python/pytest to clear module cache. Verify fixes with test_lyap_direct_run.py.
     """
     # Use the proven PSO-optimized gains for the STA controller
     gains = [1.18495, 47.7040, 1.0807, 7.4019, 46.9200, 0.6699]
