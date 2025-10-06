@@ -18,7 +18,7 @@ import argparse
 import time
 import sys
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict
 import json
 
 

@@ -80,7 +80,7 @@ def extract_results():
                 'chattering': chattering,
                 'gains': gains
             }
-        except:
+        except Exception:  # noqa: E722
             results[ctrl] = {'status': 'ERROR', 'chattering': None}
 
     return results

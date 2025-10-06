@@ -35,7 +35,7 @@ async def capture_with_optimized_settings(page, html_file: Path, screenshot_path
         print(f"\n🔄 Attempting: {html_file.name}")
 
         # Strategy 1: Use 'domcontentloaded' instead of 'networkidle'
-        print(f"  Strategy: domcontentloaded (60s timeout)")
+        print("  Strategy: domcontentloaded (60s timeout)")
         await page.goto(file_url, wait_until="domcontentloaded", timeout=60000)
 
         # Wait for body to be ready
@@ -55,7 +55,7 @@ async def capture_with_optimized_settings(page, html_file: Path, screenshot_path
 
         # Fallback: Try with 'load' strategy
         try:
-            print(f"  🔄 Fallback: load strategy")
+            print("  🔄 Fallback: load strategy")
             await page.goto(file_url, wait_until="load", timeout=90000)
             await asyncio.sleep(3)
             await page.screenshot(path=str(screenshot_path), full_page=True)

@@ -12,7 +12,7 @@ Validates all user-facing documentation for:
 
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Set
+from typing import List
 import json
 
 class DocumentationValidator:
@@ -223,13 +223,13 @@ class DocumentationValidator:
                 references[file_path.name] = tutorial_refs
 
         # Verify tutorial progression
-        tutorial_order = [
-            'tutorial-01-first-simulation.md',
-            'tutorial-02-controller-comparison.md',
-            'tutorial-03-pso-optimization.md',
-            'tutorial-04-custom-controller.md',
-            'tutorial-05-research-workflow.md',
-        ]
+        # tutorial_order = [  # noqa: F841 - Unused, kept for reference
+        #     'tutorial-01-first-simulation.md',
+        #     'tutorial-02-controller-comparison.md',
+        #     'tutorial-03-pso-optimization.md',
+        #     'tutorial-04-custom-controller.md',
+        #     'tutorial-05-research-workflow.md',
+        # ]
 
         self.stats['cross_references'] = sum(len(refs) for refs in references.values())
         print(f"   [OK] {self.stats['cross_references']} cross-references found")

@@ -21,7 +21,7 @@ from datetime import datetime
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from check_pso_completion import check_log_completion
+from check_pso_completion import check_log_completion  # noqa: E402
 
 
 def clear_screen():
@@ -85,7 +85,7 @@ def print_dashboard(controllers):
     print("=" * 80)
 
     # Overall progress
-    overall_pct = 100 * total_current / total_max if total_max > 0 else 0
+    # overall_pct =  # Unused 100 * total_current / total_max if total_max > 0 else 0
     overall_bar = draw_progress_bar(total_current, total_max, width=50)
     print(f"OVERALL: {overall_bar}")
 

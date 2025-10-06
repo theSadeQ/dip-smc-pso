@@ -17,7 +17,7 @@ Usage:
 import argparse
 import re
 from pathlib import Path
-from typing import List, Dict, Tuple, Set
+from typing import List, Dict
 from dataclasses import dataclass
 import sys
 
@@ -270,7 +270,7 @@ class DocumentationValidator:
             print(f"  {result.message}")
 
             if result.details:
-                print(f"\n  Details:")
+                print("\n  Details:")
                 for detail in result.details[:10]:  # Show first 10 details
                     print(f"    - {detail}")
                 if len(result.details) > 10:

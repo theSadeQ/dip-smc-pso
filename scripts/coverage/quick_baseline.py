@@ -3,7 +3,6 @@ Generates approximate baseline metrics without running full test suite.
 """
 import ast
 from pathlib import Path
-from collections import defaultdict
 
 def count_lines_and_functions(file_path):
     """Count lines and functions in a Python file."""
@@ -11,7 +10,7 @@ def count_lines_and_functions(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        lines = [l for l in content.split('\n') if l.strip() and not l.strip().startswith('#')]
+        lines = [line for line in content.split('\n') if line.strip() and not line.strip().startswith('#')]  # noqa: E741
         tree = ast.parse(content)
 
         functions = []

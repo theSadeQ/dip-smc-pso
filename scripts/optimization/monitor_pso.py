@@ -2,7 +2,6 @@
 """Live PSO monitoring dashboard."""
 import re
 import time
-import sys
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -26,7 +25,7 @@ def parse_log(log_file):
             val = float(c)
             if val < 1e5:  # Filter out failure costs
                 clean_costs.append(val)
-        except:
+        except Exception:  # noqa: E722
             pass
 
     best_cost = clean_costs[-1] if clean_costs else 'FAIL'

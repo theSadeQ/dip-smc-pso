@@ -16,20 +16,20 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import argparse
-import json
-import logging
-from typing import Dict, Any, Tuple
-import time
+import argparse  # noqa: E402
+import json  # noqa: E402
+import logging  # noqa: E402
+from typing import Dict, Any  # noqa: E402
+import time  # noqa: E402
 
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.fft import fft, fftfreq
-from pyswarms.single import GlobalBestPSO
+import numpy as np  # noqa: E402
+import matplotlib.pyplot as plt  # noqa: E402
+from scipy.fft import fft, fftfreq  # noqa: E402
+from pyswarms.single import GlobalBestPSO  # noqa: E402
 
-from src.config import load_config
-from src.controllers.factory import create_controller
-from src.plant.models.dynamics import DoubleInvertedPendulum
+from src.config import load_config  # noqa: E402
+from src.controllers.factory import create_controller  # noqa: E402
+from src.plant.models.dynamics import DoubleInvertedPendulum  # noqa: E402
 
 
 logging.basicConfig(
@@ -133,7 +133,7 @@ def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
             break
 
         control_history.append(control_output)
-        last_control = control_output
+        last_control = control_output  # noqa: F841 - kept for future use
 
         # Update dynamics
         control_array = np.array([control_output])
@@ -292,7 +292,7 @@ def optimize_controller(controller_type: str, config_path: str, n_particles: int
     logger.info("\nValidating optimized gains...")
     validation_metrics = simulate_and_evaluate(best_gains, controller_type, config, dynamics)
 
-    logger.info(f"\nValidation Metrics:")
+    logger.info("\nValidation Metrics:")
     logger.info(f"  Chattering Index:       {validation_metrics['chattering_index']:.3f} / 2.0")
     logger.info(f"  Tracking Error RMS:     {validation_metrics['tracking_error_rms']:.4f} rad")
     logger.info(f"  Control Effort RMS:     {validation_metrics['control_effort_rms']:.2f} N")

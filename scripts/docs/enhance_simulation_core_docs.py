@@ -23,7 +23,6 @@ Engines (4 files):
 
 import re
 from pathlib import Path
-from typing import Dict, List
 
 class SimulationCoreDocsEnhancer:
     """Enhances simulation core documentation with mathematical theory."""

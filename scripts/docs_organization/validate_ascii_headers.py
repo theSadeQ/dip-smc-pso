@@ -24,7 +24,6 @@ Expected Header Format (Markdown):
 """
 
 import argparse
-import os
 import re
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional

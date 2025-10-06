@@ -26,9 +26,8 @@ import subprocess
 import sys
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional
 from dataclasses import dataclass, asdict
-import shutil
 
 
 @dataclass
@@ -187,12 +186,12 @@ class CoverageReportGenerator:
                 color_code = ""  # Green in terminals that support it
             elif delta_percent < 0:
                 direction = "↓"
-                color_code = ""
+                color_code = ""  # noqa: F841 - color_code unused
             else:
                 direction = "="
-                color_code = ""
+                color_code = ""  # noqa: F841 - color_code unused
 
-            print(f"\nChange from Baseline:")
+            print("\nChange from Baseline:")
             print(f"  Percentage:        {direction} {delta_percent:+.2f}%")
             print(f"  Lines:             {direction} {delta_lines:+d} lines")
 

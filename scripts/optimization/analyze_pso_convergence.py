@@ -14,11 +14,11 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import re
-import numpy as np
-import matplotlib.pyplot as plt
-from typing import Dict, List, Tuple
-import argparse
+import re  # noqa: E402
+import numpy as np  # noqa: E402
+import matplotlib.pyplot as plt  # noqa: E402
+from typing import Dict, List, Tuple  # noqa: E402
+import argparse  # noqa: E402
 
 
 def extract_convergence_data(log_file: Path) -> Tuple[List[int], List[float]]:
@@ -221,7 +221,7 @@ def generate_convergence_report(results: Dict[str, Dict], output_dir: Path):
         if data['converged_at'] > 0:
             md_content += f"- **Converged At**: Iteration {data['converged_at']}\n"
         else:
-            md_content += f"- **Converged At**: Not yet converged\n"
+            md_content += "- **Converged At**: Not yet converged\n"
 
         if data['conv_rate_95'] > 0:
             md_content += f"- **95% Convergence Rate**: Iteration {data['conv_rate_95']}\n"
@@ -230,9 +230,9 @@ def generate_convergence_report(results: Dict[str, Dict], output_dir: Path):
 
         # Pass/fail assessment
         if data['final_cost'] and data['final_cost'] < 2.0:
-            md_content += f"- **Assessment**: ✅ **PASS** (chattering target < 2.0 met)\n"
+            md_content += "- **Assessment**: ✅ **PASS** (chattering target < 2.0 met)\n"
         else:
-            md_content += f"- **Assessment**: ❌ **FAIL** (chattering target < 2.0 not met)\n"
+            md_content += "- **Assessment**: ❌ **FAIL** (chattering target < 2.0 not met)\n"
 
         md_content += "\n"
 

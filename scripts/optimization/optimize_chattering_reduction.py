@@ -367,7 +367,7 @@ def optimize_controller_gains(controller_type: str, config_path: str,
     baseline_tracking = 0.05  # Conservative baseline
     performance_degradation = max(0.0, (tracking_error_rms - baseline_tracking) / baseline_tracking)
 
-    logger.info(f"\nValidation Metrics:")
+    logger.info("\nValidation Metrics:")
     logger.info(f"  Chattering Index:          {chattering_metrics['chattering_index']:.3f} / 2.0 (target)")
     logger.info(f"  Tracking Error RMS:        {tracking_error_rms:.4f} rad")
     logger.info(f"  Control Effort RMS:        {control_effort_rms:.2f} N")

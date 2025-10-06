@@ -6,7 +6,6 @@ diagrams, and examples.
 """
 
 from pathlib import Path
-from typing import List
 
 
 def get_types_init_theory() -> str:

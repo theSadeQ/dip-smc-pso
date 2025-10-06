@@ -18,7 +18,7 @@ Usage:
 
 import re
 from pathlib import Path
-from typing import Dict, List
+from typing import List
 from dataclasses import dataclass
 
 @dataclass
@@ -83,7 +83,7 @@ class HILDocEnhancer:
 
             # Check if already enhanced
             if '## Mathematical Foundation' in content:
-                print(f"  SKIPPED: Already enhanced")
+                print("  SKIPPED: Already enhanced")
                 return
 
             # Generate enhancements based on file type
