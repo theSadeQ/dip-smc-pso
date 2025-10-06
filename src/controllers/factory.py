@@ -360,8 +360,9 @@ def _resolve_controller_gains(
                     controller_config = getattr(controllers, controller_type)
                     if hasattr(controller_config, 'gains'):
                         return controller_config.gains
-        except Exception:
-            pass  # Fall back to default gains
+        except Exception as e:
+            # OK: Config loading optional - fall back to default gains
+            logger.debug(f"Could not load config gains for {controller_type}, using defaults: {e}")
 
     return controller_info['default_gains']
 
@@ -458,8 +459,9 @@ def _extract_controller_parameters(
                     for attr in dir(controller_config)
                     if not attr.startswith('_') and not callable(getattr(controller_config, attr))
                 }
-    except Exception:
-        pass  # Return empty params on any error
+    except Exception as e:
+        # OK: Config introspection optional - return empty params
+        logger.debug(f"Could not extract controller params from config: {e}")
 
     return controller_params
 
@@ -963,9 +965,10 @@ class PSOControllerWrapper:
                     controller.set_dynamics(self.dynamics_model)
                 else:
                     controller.dynamics_model = self.dynamics_model
-            except Exception:
-                # Fallback: create minimal dynamics
-                pass
+            except Exception as e:
+                # OK: Dynamics attachment optional for some controllers
+                logger.debug(f"Could not attach dynamics model to controller: {e}")
+                # Fallback: controller will use built-in dynamics if needed
 
         # Ensure dynamics model has step method for simulation
         if self.dynamics_model and not hasattr(self.dynamics_model, 'step'):
@@ -1003,8 +1006,9 @@ class PSOControllerWrapper:
 
                 return next_state
 
-            except Exception:
-                # Return previous state if any error occurs
+            except Exception as e:
+                # OK: Fallback to previous state on integration failure
+                logger.warning(f"Dynamics integration failed, returning previous state: {e}")
                 return np.asarray(state, dtype=np.float64)
 
         # Attach the step method to the dynamics model
@@ -1065,7 +1069,9 @@ class PSOControllerWrapper:
                         valid_mask[i] = False
                         continue
 
-            except Exception:
+            except Exception as e:
+                # OK: Mark particle as invalid on validation error
+                logger.debug(f"Gains validation failed for particle {i}: {e}")
                 valid_mask[i] = False
 
         return valid_mask
