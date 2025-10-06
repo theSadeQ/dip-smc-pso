@@ -1,0 +1,53 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-filesystem\\dist\\index.js",
+        "D:\\Projects\\main"
+      ],
+      "env": {},
+      "description": "File system access for code and log analysis"
+    },
+    "github": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-github\\dist\\index.js"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub integration for issue tracking and repository management"
+    },
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-sequential-thinking\\dist\\index.js"
+      ],
+      "env": {},
+      "description": "Methodical problem-solving and debugging workflows"
+    },
+    "puppeteer": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-puppeteer\\dist\\index.js"
+      ],
+      "env": {},
+      "description": "Browser automation for Streamlit dashboard testing"
+    }
+  },
+  "project": {
+    "name": "DIP-SMC-PSO",
+    "description": "Double Inverted Pendulum Sliding Mode Control with PSO Optimization",
+    "mcp_usage": {
+      "filesystem": "Code analysis, log file inspection, documentation review",
+      "github": "Issue tracking, PR reviews, commit history analysis",
+      "sequential-thinking": "Systematic debugging, multi-step problem solving",
+      "puppeteer": "Streamlit dashboard testing, UI validation"
+    }
+  }
+}
