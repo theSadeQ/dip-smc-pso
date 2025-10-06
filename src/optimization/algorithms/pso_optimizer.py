@@ -87,7 +87,8 @@ def _seeded_global_numpy(seed: int | None):
     state = None
     try:
         state = np.random.get_state()
-    except Exception:
+    except (AttributeError, ValueError) as e:  # P2: Handle RNG state access failure
+        logging.getLogger(__name__).debug(f"Could not save RNG state: {e}")
         state = None
     try:
         np.random.seed(int(seed))
@@ -96,8 +97,8 @@ def _seeded_global_numpy(seed: int | None):
         if state is not None:
             try:
                 np.random.set_state(state)
-            except Exception:
-                pass
+            except (AttributeError, ValueError, TypeError) as e:  # P2: Handle RNG state restoration failure
+                logging.getLogger(__name__).debug(f"Could not restore RNG state: {e}")
 
 
 class PSOTuner:
@@ -210,7 +211,10 @@ class PSOTuner:
         if explicit_penalty is not None:
             try:
                 self.instability_penalty: float = float(explicit_penalty)
-            except Exception:
+            except (ValueError, TypeError) as e:  # P2: Handle invalid penalty value
+                logging.getLogger(__name__).warning(
+                    f"Invalid instability_penalty '{explicit_penalty}': {e}. Using default factor {self.instability_penalty_factor}"
+                )
                 self.instability_penalty = float(self.instability_penalty_factor)
         else:
             self.instability_penalty = None  # to be computed from norms
@@ -253,7 +257,10 @@ class PSOTuner:
                 try:
                     baseline_ctrl = controller_factory(baseline_particles[0])
                     u_max_val = float(getattr(baseline_ctrl, "max_force", 150.0))
-                except Exception:
+                except (TypeError, AttributeError, ValueError) as e:  # P2: Handle baseline controller creation failure
+                    logging.getLogger(__name__).debug(
+                        f"Could not create baseline controller for u_max extraction: {e}. Using default 150.0"
+                    )
                     u_max_val = 150.0
                 res = simulate_system_batch(
                     controller_factory=controller_factory,
@@ -285,8 +292,10 @@ class PSOTuner:
                 self.norm_u = max(u_sq_base, 1e-12)
                 self.norm_du = max(du_sq_base, 1e-12)
                 self.norm_sigma = max(sigma_sq_base, 1e-12)
-        except Exception:
-            pass
+        except (ValueError, IndexError, TypeError, AttributeError) as e:  # P2: Baseline normalization is optional
+            logging.getLogger(__name__).debug(
+                f"Automatic baseline normalization failed: {e}. Using default normalization constants."
+            )
 
         # Overrides for combine_weights and normalization_threshold
         # Instance-level combine weights and normalisation threshold.  Earlier
