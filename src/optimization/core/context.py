@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Optional, Union
 import numpy as np
 from pathlib import Path
 
-from .interfaces import OptimizationProblem, Optimizer, ConvergenceMonitor
+from .interfaces import OptimizationProblem, Optimizer, ConvergenceMonitor, OptimizationResult
 
 
 class OptimizationContext:

@@ -102,7 +102,7 @@ class HILTestFramework:
     performance testing, and report generation capabilities.
     """
 
-    def __init__(self, hil_system: 'EnhancedHILSystem', test_scenarios: Optional[List['TestScenario']] = None):
+    def __init__(self, hil_system: 'EnhancedHILSystem', test_scenarios: Optional[List['TestScenario']] = None):  # noqa: F821
         """Initialize HIL test framework."""
         self._hil_system = hil_system
         self._test_scenarios = test_scenarios or []

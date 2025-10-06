@@ -460,8 +460,8 @@ class EnhancedConvergenceAnalyzer:
 
                 if current_fitness > target_fitness:
                     remaining_log_improvement = np.log(
-                        (current_fitness - target_fitness + epsilon) /
-                        (current_fitness - min_fitness + epsilon)
+                        (current_fitness - target_fitness + EPSILON_DIV) /
+                        (current_fitness - min_fitness + EPSILON_DIV)
                     )
                     predicted_iterations = int(remaining_log_improvement / decay_rate)
                     return max(0, min(predicted_iterations, 1000))  # Cap at 1000
