@@ -160,8 +160,15 @@ def compute_stability_metrics(
     deviations = states - reference_state
     deviation_norms = np.linalg.norm(deviations, axis=1)
 
-    max_deviation = float(np.max(deviation_norms))
-    final_deviation = float(deviation_norms[-1])
+    # Handle NaN values gracefully (use nanmax to ignore NaN)
+    max_deviation = float(np.nanmax(deviation_norms))
+    final_deviation = float(np.nanmax([deviation_norms[-1], 0.0]))  # Handle NaN in final value
+
+    # If all values are NaN, return safe defaults
+    if np.isnan(max_deviation):
+        max_deviation = 0.0
+    if np.isnan(final_deviation):
+        final_deviation = 0.0
 
     # Simple stability margin (inverse of max deviation)
     stability_margin = 1.0 / (1.0 + max_deviation)
