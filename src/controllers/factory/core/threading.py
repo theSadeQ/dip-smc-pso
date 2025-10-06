@@ -12,7 +12,7 @@ and performance monitoring for concurrent controller creation.
 import threading
 import time
 import logging
-from typing import Any, Callable, Optional, TypeVar, ParamSpec
+from typing import Callable, Optional, TypeVar, ParamSpec
 from functools import wraps
 from contextlib import contextmanager
 

@@ -16,7 +16,7 @@ try:
     from src.controllers.smc.classical.classical_smc import ClassicalSMC
     from src.controllers.smc.core.sliding_surface import LinearSlidingSurface
     from src.controllers.smc.core.switching_functions import SwitchingFunction
-    from src.controllers.base.controller_interface import ControllerInterface
+    from src.controllers.base.controller_interface import ControllerInterface  # noqa: F401
     IMPORTS_AVAILABLE = True
 except ImportError:
     # Create mock classes for testing structure until real implementation exists

@@ -15,7 +15,7 @@ Mathematical Background:
 - Switching function approximates sign(s) with continuous function within ±ε
 """
 
-from typing import Union, Callable, Optional
+from typing import Union, Optional
 import numpy as np
 from ...core.switching_functions import SwitchingFunction
 

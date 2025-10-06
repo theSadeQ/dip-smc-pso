@@ -17,7 +17,7 @@ Mathematical Background:
 - Performance indices guide optimal controller selection
 """
 
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, Optional, Any
 import numpy as np
 from collections import deque
 from enum import Enum
@@ -163,7 +163,8 @@ class HybridSwitchingLogic:
         })
 
         # Execute switch
-        previous_controller = self.current_controller
+        # Note: previous_controller available for logging/diagnostics if needed
+        # previous_controller = self.current_controller
         self.current_controller = decision.target_controller
         self.last_switch_time = current_time
 

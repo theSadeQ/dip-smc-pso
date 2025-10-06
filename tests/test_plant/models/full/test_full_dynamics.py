@@ -15,7 +15,7 @@ import numpy as np
 try:
     from src.plant.models.full.dynamics import FullDIPDynamics
     from src.plant.models.full.config import FullDIPConfig
-    from src.plant.models.base.dynamics_interface import DynamicsResult, IntegrationMethod
+    from src.plant.models.base.dynamics_interface import DynamicsResult, IntegrationMethod  # noqa: F401
     from src.plant.core import NumericalInstabilityError
     IMPORTS_AVAILABLE = True
 except ImportError:

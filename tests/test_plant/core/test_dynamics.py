@@ -247,7 +247,7 @@ def test_pso_fitness_penalises_nan(monkeypatch):
 Test simplified vs. full dynamics model trajectories using shared fixtures.
 """
 
-import pytest
+import pytest  # noqa: E402 - consolidated test file with multiple sections
 
 # The test uses the shared 'dynamics' and 'full_dynamics' fixtures from conftest.py.
 def test_simplified_vs_full_model_error(dynamics, full_dynamics):
@@ -283,7 +283,7 @@ def test_simplified_vs_full_model_error(dynamics, full_dynamics):
 # BEGIN: test_dynamics_ill_conditioned.py
 # tests/test_dynamics_ill_conditioned.py ==============================================================\\\
 # A new test to verify that the dynamics model correctly handles ill-conditioned inertia matrices.
-from src.core.dynamics import rhs_numba, DIPParams
+from src.core.dynamics import rhs_numba, DIPParams  # noqa: E402 - consolidated test file
 
 def test_rhs_returns_nan_for_ill_conditioned_matrix():
     # Tiny m2/I2 -> near-singular inertia in certain poses
@@ -311,7 +311,7 @@ def test_rhs_returns_nan_for_ill_conditioned_matrix():
 # BEGIN: test_linalg_fix.py
 # tests/test_linalg_fix.py ====================================================\\\
 
-import pytest
+import pytest  # noqa: E402 - consolidated test file with multiple sections
 
 def test_rhs_handles_singularity_gracefully():
     """

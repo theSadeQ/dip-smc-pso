@@ -14,10 +14,9 @@ Provides:
 
 import threading
 import time
-from typing import Dict, Any, Optional, Callable, ContextManager
+from typing import Dict, Any, Optional, ContextManager
 from contextlib import contextmanager
 from collections import deque
-import weakref
 
 class LockFreeRegistry:
     """Lock-free controller registry using immutable data structures."""

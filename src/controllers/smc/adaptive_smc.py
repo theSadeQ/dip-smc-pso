@@ -61,8 +61,7 @@ alpha : float, optional
 
 import logging
 import numpy as np
-import weakref
-from typing import Dict, Tuple, Optional, List
+from typing import Dict, Tuple, List
 
 logger = logging.getLogger(__name__)
 
@@ -343,7 +342,7 @@ class AdaptiveSMC:
             else:
                 # Scalar or None: treat as K and initialize others to zero
                 prev_K = float(state_vars) if state_vars is not None else self.K_init
-                last_u, time_in_sliding = 0.0, 0.0
+                last_u, time_in_sliding = 0.0, 0.0  # noqa: F841 (last_u for future use)
         x, theta1, theta2, x_dot, theta1_dot, theta2_dot = state
         
         # Compute sliding surface (consistent with classical SMC formulation)

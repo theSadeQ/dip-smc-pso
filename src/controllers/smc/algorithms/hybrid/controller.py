@@ -23,7 +23,7 @@ from ..classical.controller import ModularClassicalSMC
 from ..adaptive.controller import ModularAdaptiveSMC
 from ..super_twisting.controller import ModularSuperTwistingSMC
 from .switching_logic import HybridSwitchingLogic, ControllerState
-from .config import HybridSMCConfig
+from .config import HybridSMCConfig, HybridMode
 
 
 class TransitionFilter:

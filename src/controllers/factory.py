@@ -30,8 +30,6 @@ import logging
 import threading
 from enum import Enum
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union, Protocol, TypeVar
-from dataclasses import dataclass
-from abc import ABC, abstractmethod
 
 # Third-party imports
 import numpy as np
@@ -41,15 +39,15 @@ from numpy.typing import NDArray
 from src.core.dynamics import DIPDynamics
 
 # Local imports - Controller implementations
-from src.controllers.smc.algorithms.classical.controller import ModularClassicalSMC
-from src.controllers.smc.algorithms.super_twisting.controller import ModularSuperTwistingSMC
-from src.controllers.smc.algorithms.adaptive.controller import ModularAdaptiveSMC
 from src.controllers.smc.algorithms.hybrid.controller import ModularHybridSMC
 
 # Import legacy interface classes for backwards compatibility (Integration Coordinator reconciliation)
 from src.controllers.classic_smc import ClassicalSMC
 from src.controllers.sta_smc import SuperTwistingSMC
 from src.controllers.adaptive_smc import AdaptiveSMC
+
+# Import exceptions from legacy factory
+from src.controllers.factory.legacy_factory import FactoryConfigurationError
 
 # Optional MPC controller import
 try:
@@ -83,6 +81,12 @@ except ImportError:
         HybridAdaptiveSTASMCConfig
     )
 
+# =============================================================================
+# MODULE-LEVEL LOGGER
+# =============================================================================
+
+# Initialize module-level logger for use across all functions
+logger = logging.getLogger(__name__)
 
 # =============================================================================
 # THREAD SAFETY AND CONFIGURATION DEFINITIONS
@@ -527,8 +531,6 @@ def create_controller(controller_type: str,
         ImportError: If required dependencies are missing
     """
     with _factory_lock:
-        logger = logging.getLogger(__name__)
-
         # Normalize/alias controller type
         controller_type = _canonicalize_controller_type(controller_type)
 
@@ -912,7 +914,6 @@ def create_controller_legacy(controller_type: str, config: Optional[Any] = None,
 
 
 # Placeholder classes and functions for the existing __init__.py structure
-from enum import Enum
 
 class SMCType(Enum):
     """SMC Controller types enumeration."""
@@ -1112,7 +1113,7 @@ class PSOControllerWrapper:
                 u_saturated = np.clip(float(u), -self.max_force, self.max_force)
                 return np.array([u_saturated])
 
-        except Exception as e:
+        except Exception:
             # Safe fallback control
             return np.array([0.0])
 
@@ -1120,7 +1121,7 @@ class PSOControllerWrapper:
 def create_smc_for_pso(smc_type: SMCType, gains: Union[list, np.ndarray], plant_config_or_model: Optional[Any] = None, **kwargs: Any) -> Any:
     """Create SMC controller optimized for PSO usage."""
     # Handle different calling patterns for backward compatibility
-    dynamics_model = kwargs.get('dynamics_model', plant_config_or_model)
+    # Note: dynamics_model and plant_config_or_model are kept for API compatibility but not currently used
     # Extract configuration parameters from kwargs
     max_force = kwargs.get('max_force', 150.0)
     dt = kwargs.get('dt', 0.001)

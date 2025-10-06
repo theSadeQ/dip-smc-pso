@@ -15,9 +15,9 @@ from pathlib import Path
 src_path = Path(__file__).parent / "src"
 sys.path.insert(0, str(src_path))
 
-from src.controllers.factory import create_pso_controller_factory, SMCType
-from src.optimization.algorithms.pso_optimizer import PSOTuner
-from src.config import load_config
+from src.controllers.factory import create_pso_controller_factory, SMCType  # noqa: E402
+from src.optimization.algorithms.pso_optimizer import PSOTuner  # noqa: E402
+from src.config import load_config  # noqa: E402
 
 
 def test_controller_type_bounds_mapping():

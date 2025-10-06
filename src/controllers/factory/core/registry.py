@@ -9,7 +9,7 @@ Manages the central registry of available controllers with comprehensive metadat
 validation rules, and type-safe access patterns.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 import logging
 
 # Import controller classes with fallback handling

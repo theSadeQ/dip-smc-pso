@@ -11,9 +11,8 @@ integration features.
 """
 
 from __future__ import annotations
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any
 from dataclasses import dataclass, field
-import numpy as np
 
 
 @dataclass(frozen=True)
@@ -293,13 +292,20 @@ class FullDIPConfig:
         """Get complexity level description."""
         complexity_score = 0
 
-        if self.include_coriolis_effects: complexity_score += 1
-        if self.include_centrifugal_effects: complexity_score += 1
-        if self.include_gyroscopic_effects: complexity_score += 1
-        if self.include_aerodynamic_forces: complexity_score += 2
-        if self.include_joint_flexibility: complexity_score += 2
-        if self.wind_model_enabled: complexity_score += 1
-        if self.base_excitation_enabled: complexity_score += 1
+        if self.include_coriolis_effects:
+            complexity_score += 1
+        if self.include_centrifugal_effects:
+            complexity_score += 1
+        if self.include_gyroscopic_effects:
+            complexity_score += 1
+        if self.include_aerodynamic_forces:
+            complexity_score += 2
+        if self.include_joint_flexibility:
+            complexity_score += 2
+        if self.wind_model_enabled:
+            complexity_score += 1
+        if self.base_excitation_enabled:
+            complexity_score += 1
 
         if complexity_score <= 2:
             return "Basic Full Model"

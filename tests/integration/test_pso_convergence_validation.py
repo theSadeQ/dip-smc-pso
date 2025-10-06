@@ -24,10 +24,10 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Import dependencies
-from src.controllers.factory import create_pso_controller_factory, SMCType
-from src.optimization.algorithms.pso_optimizer import PSOTuner
-from src.config import load_config
-from src.utils.seed import set_global_seed
+from src.controllers.factory import create_pso_controller_factory, SMCType  # noqa: E402
+from src.optimization.algorithms.pso_optimizer import PSOTuner  # noqa: E402
+from src.config import load_config  # noqa: E402
+from src.utils.seed import set_global_seed  # noqa: E402
 
 
 class PSOConvergenceValidator:

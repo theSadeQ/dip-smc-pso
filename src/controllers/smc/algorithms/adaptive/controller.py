@@ -153,7 +153,7 @@ class ModularAdaptiveSMC:
                         return np.zeros(2)
                     else:  # 3-DOF or DIP system
                         return np.zeros(3)
-                except:
+                except Exception:
                     return np.zeros(3)  # Default to 3-DOF
             else:
                 # Standard interface: return error dictionary

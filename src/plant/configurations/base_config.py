@@ -151,7 +151,7 @@ class BasePhysicsConfig(ABC):
 
         # Check positive lengths
         lengths = self.get_length_properties()
-        checks['positive_lengths'] = all(l > 0 for l in lengths.values())
+        checks['positive_lengths'] = all(length > 0 for length in lengths.values())
 
         # Check non-negative friction
         frictions = self.get_friction_properties()
@@ -159,7 +159,7 @@ class BasePhysicsConfig(ABC):
 
         # Check positive inertias
         inertias = self.get_inertia_properties()
-        checks['positive_inertias'] = all(I > 0 for I in inertias.values())
+        checks['positive_inertias'] = all(inertia > 0 for inertia in inertias.values())
 
         return checks
 
@@ -171,14 +171,16 @@ class BasePhysicsConfig(ABC):
             Dictionary with dimensionless parameter combinations
         """
         scales = self.estimate_characteristic_scales()
-        physical_params = self.get_physical_parameters()
+        # Note: physical_params available but not currently used in dimensionless calculations
+        # physical_params = self.get_physical_parameters()
 
         dimensionless = {}
 
         # Mass ratios
         masses = self.get_mass_properties()
         if len(masses) > 1:
-            mass_values = list(masses.values())
+            # Note: mass_values available but individual ratios computed directly
+            # mass_values = list(masses.values())
             for i, (name, mass) in enumerate(masses.items()):
                 dimensionless[f'{name}_ratio'] = mass / scales['characteristic_mass']
 

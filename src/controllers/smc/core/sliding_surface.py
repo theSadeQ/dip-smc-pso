@@ -15,7 +15,7 @@ Mathematical Background:
 - Coefficients c₁, c₂, λ₁, λ₂ must be positive for stability (Hurwitz requirement)
 """
 
-from typing import List, Optional, Union, Sequence
+from typing import List, Union
 import numpy as np
 from abc import ABC, abstractmethod
 

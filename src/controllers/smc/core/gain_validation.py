@@ -15,7 +15,7 @@ Mathematical Requirements:
 - Adaptation gains must satisfy boundedness conditions
 """
 
-from typing import List, Union, Dict, Optional, Sequence
+from typing import List, Union, Dict
 import numpy as np
 from dataclasses import dataclass
 from enum import Enum

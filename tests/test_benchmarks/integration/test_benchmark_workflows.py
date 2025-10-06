@@ -39,10 +39,10 @@ sys.path.append(str(Path(__file__).parent.parent.parent.parent / "src"))
 try:
     from src.controllers.factory.smc_factory import SMCFactory, SMCType, SMCConfig
     from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
-    from src.plant.models.full.dynamics import FullDIPDynamics
-    from src.simulation.engines.simulation_runner import SimulationRunner
+    from src.plant.models.full.dynamics import FullDIPDynamics  # noqa: F401
+    from src.simulation.engines.simulation_runner import SimulationRunner  # noqa: F401
     # from src.optimization.algorithms.pso_optimizer import PSOOptimizer  # May not exist
-    from src.config import load_config
+    from src.config import load_config  # noqa: F401
     from src.utils.config_compatibility import wrap_physics_config
     # from src.utils.analysis.statistics import StatisticalAnalyzer  # May not exist
     from src.utils.reproducibility.seed import set_global_seed
@@ -52,8 +52,8 @@ except ImportError as e:
 # Import our benchmark infrastructure
 try:
     from ..core.test_benchmark_interfaces import BenchmarkInterfaceValidator
-    from ..performance.test_regression_detection import PerformanceBenchmarkSuite, PerformanceHistoryManager
-    from ..validation.test_parameter_realism import EngineeringParameterValidator, RealisticScenario
+    from ..performance.test_regression_detection import PerformanceBenchmarkSuite, PerformanceHistoryManager  # noqa: F401
+    from ..validation.test_parameter_realism import EngineeringParameterValidator, RealisticScenario  # noqa: F401
 except ImportError as e:
     pytest.skip(f"Benchmark infrastructure not available: {e}", allow_module_level=True)
 

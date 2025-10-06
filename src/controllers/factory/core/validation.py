@@ -10,12 +10,12 @@ with detailed error reporting and recovery mechanisms.
 """
 
 import logging
-from typing import Dict, Any, List, Optional, Union
+from typing import Dict, Any, List, Union
 import numpy as np
 from numpy.typing import NDArray
 
-from .protocols import GainsArray, ConfigDict
-from .registry import get_controller_info, CONTROLLER_REGISTRY
+from .protocols import GainsArray
+from .registry import get_controller_info
 
 
 logger = logging.getLogger(__name__)

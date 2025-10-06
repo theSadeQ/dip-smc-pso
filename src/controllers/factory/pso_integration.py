@@ -13,7 +13,6 @@ import logging
 import time
 from typing import Any, Callable, Dict, List, Optional, Protocol, Tuple, Union
 from dataclasses import dataclass
-from abc import ABC, abstractmethod
 
 import numpy as np
 
@@ -420,8 +419,8 @@ def get_optimized_pso_bounds(
         upper = [1.5 * x for x in upper]
     elif performance_target == 'conservative':
         # Narrower bounds for stable operation
-        center = [(l + u) / 2 for l, u in zip(lower, upper)]
-        width = [(u - l) * 0.6 for l, u in zip(lower, upper)]
+        center = [(low + up) / 2 for low, up in zip(lower, upper)]
+        width = [(up - low) * 0.6 for low, up in zip(lower, upper)]
         lower = [c - w/2 for c, w in zip(center, width)]
         upper = [c + w/2 for c, w in zip(center, width)]
     # 'balanced' uses base bounds as-is

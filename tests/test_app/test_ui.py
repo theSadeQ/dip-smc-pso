@@ -22,7 +22,7 @@ def mock_st():
     return st
 
 # Assuming _parse_initial_state is in streamlit_app.py
-from streamlit_app import _parse_initial_state
+from streamlit_app import _parse_initial_state  # noqa: E402 - import after pytest fixtures
 
 def test_parse_initial_state_raises_on_unexpected_error(mock_st):
     """

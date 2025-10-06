@@ -9,7 +9,7 @@ Type-safe configuration for Adaptive Sliding Mode Control with online gain adapt
 Replaces parameter validation from the original 427-line monolithic controller.
 """
 
-from typing import List, Optional
+from typing import List
 from dataclasses import dataclass, field
 import numpy as np
 

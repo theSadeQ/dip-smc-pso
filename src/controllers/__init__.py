@@ -65,13 +65,13 @@ except ImportError:
 
 # Only import if you need them for comparison studies
 try:
-    from .mpc.mpc_controller import MPCController, MPCWeights
+    from .mpc.mpc_controller import MPCController, MPCWeights  # noqa: F401 (used in __all__ below)
     _HAS_MPC = True
 except ImportError:
     _HAS_MPC = False
 
 try:
-    from .specialized.swing_up_smc import SwingUpSMC
+    from .specialized.swing_up_smc import SwingUpSMC  # noqa: F401 (used in __all__ below)
     _HAS_SWING_UP = True
 except ImportError:
     _HAS_SWING_UP = False
