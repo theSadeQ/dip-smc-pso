@@ -495,16 +495,16 @@ k2_fine = np.linspace(k2_best-5, k2_best+5, 20)
 
 ### For Monte Carlo Users:
 ✅ **Completed**: Basic batch simulation structure
-➡️ **Next**: [Monte Carlo Validation Guide](monte-carlo-validation.md)
-➡️ **Next**: [Statistical Analysis Workflows](statistical-analysis.md)
+➡️ **Next**: [Monte Carlo Validation Quickstart](monte-carlo-validation-quickstart.md)
+➡️ **Next**: [Statistical Benchmarks](../../reference/benchmarks/statistical_benchmarks_v2.md)
 
 ### For Parameter Sweep Users:
 ➡️ **Next**: [PSO vs Grid Search Comparison](pso-vs-grid-search.md)
-➡️ **Next**: [Multi-Objective Optimization](multi-objective-optimization.md)
+➡️ **Next**: [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
 
 ### For Advanced Users:
-➡️ **Next**: [Parallel Batch Execution](parallel-batch.md)
-➡️ **Next**: [Custom Dynamics Integration](custom-dynamics.md)
+➡️ **Next**: [Batch Orchestrators](../../reference/simulation/orchestrators_batch.md)
+➡️ **Next**: [Full Dynamics Model](../../reference/core/dynamics_full.md)
 
 ---
 
