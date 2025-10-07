@@ -495,10 +495,10 @@ hil:
 
 ## Next Steps
 
-- [Tutorial 01: Getting Started](../tutorials/01_getting_started.md)
-- [Tutorial 02: Controller Comparison](../tutorials/02_controller_performance_comparison.md)
-- [Configuration Schema Reference](../reference/configuration_schema.md)
-- [PSO Optimization Guide](pso_optimization.md)
+- [Tutorial 01: Getting Started](tutorials/tutorial-01-first-simulation.md)
+- [Tutorial 02: Controller Comparison](tutorials/tutorial-02-controller-comparison.md)
+- [Configuration Schema Reference](../api/configuration_schema.md)
+- [PSO Optimization Workflow](workflows/pso-optimization-workflow.md)
 
 ## Configuration Troubleshooting
 

@@ -337,4 +337,4 @@ Charts inherit Furo theme colors automatically. For custom styling, extend the C
 - [Chart.js Official Documentation](https://www.chartjs.org/docs/latest/)
 - [Sphinx Custom Directives Guide](https://www.sphinx-doc.org/en/master/development/tutorials/helloworld.html)
 - [DIP_SMC_PSO Controller Documentation](../reference/controllers/index.md)
-- [PSO Optimization Guide](../guides/pso_optimization.md)
+- [PSO Optimization Workflow](workflows/pso-optimization-workflow.md)

@@ -685,7 +685,7 @@ Write-Host "`n===== All Gates Passed =====" -ForegroundColor Green
 ## Related Documents
 
 - [../citation_system/00_master_roadmap.md](../citation_system/00_master_roadmap.md) - Citation system implementation
-- [../CLAUDE.md](../CLAUDE.md) - Project conventions and agent pool
+- [../../CLAUDE.md](../../CLAUDE.md) - Project conventions and agent pool
 
 ---
 
