@@ -431,8 +431,8 @@ git push --tags
 
 ### For Classical SMC Users:
 ✅ **Completed**: Basic PSO optimization workflow
-➡️ **Next**: [Controller Comparison Guide](controller-comparison-workflow.md)
-➡️ **Next**: [Robustness Testing](robustness-testing-workflow.md)
+➡️ **Next**: [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md)
+➡️ **Next**: [Robustness Analysis](../../reference/analysis/performance_robustness.md)
 
 ### For Multiple Controller Types:
 ➡️ **Next**: [STA-SMC Optimization](pso-sta-smc.md)
@@ -441,8 +441,8 @@ git push --tags
 
 ### For Advanced Users:
 ➡️ **Next**: [Custom Cost Functions](custom-cost-functions.md)
-➡️ **Next**: [Multi-Objective Optimization](multi-objective-pso.md)
-➡️ **Next**: [Batch Optimization Workflows](batch-optimization.md)
+➡️ **Next**: [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
+➡️ **Next**: [Batch Simulation Workflows](batch-simulation-workflow.md)
 
 ---
 

@@ -483,12 +483,12 @@ git push --tags
 
 ### Advanced Topics:
 ➡️ [Custom Cost Functions](custom-cost-functions.md)
-➡️ [Multi-Objective PSO](multi-objective-pso.md)
-➡️ [Robust Optimization](robust-optimization.md)
+➡️ [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
+➡️ [Robustness Objectives](../../reference/optimization/objectives_control_robustness.md)
 
 ### Performance Analysis:
-➡️ [Controller Comparison](controller-comparison.md)
-➡️ [Benchmark Results](benchmark-results.md)
+➡️ [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md)
+➡️ [Performance Benchmarks](../../benchmarks/controller_performance_benchmarks.md)
 
 ---
 
