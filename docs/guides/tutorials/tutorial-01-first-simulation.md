@@ -183,7 +183,7 @@ simulation:
 Execute the simulation with Classical SMC:
 
 ```bash
-python simulate.py --ctrl classical_smc --plot
+python simulate.py --controller classical_smc --plot
 ```
 
 **What's happening:**
@@ -215,30 +215,14 @@ python simulate.py --ctrl classical_smc --plot
 **Expected terminal output:**
 
 ```
-[INFO] 2025-10-05 15:30:12 - Loading configuration from config.yaml
-[INFO] 2025-10-05 15:30:12 - Configuration hash: a8f3c2d1
-[INFO] 2025-10-05 15:30:12 - Global seed: 42
-[INFO] 2025-10-05 15:30:12 - Creating Classical SMC controller
-[INFO] 2025-10-05 15:30:12 - Controller gains: [5.0, 5.0, 5.0, 0.5, 0.5, 0.5]
-[INFO] 2025-10-05 15:30:12 - Max force: 150.0 N
-[INFO] 2025-10-05 15:30:12 - Boundary layer: 0.3
-[INFO] 2025-10-05 15:30:12 - Initializing DIP dynamics (simplified model)
-[INFO] 2025-10-05 15:30:12 - Running simulation
-[INFO] 2025-10-05 15:30:12 - Duration: 5.0 s, dt: 0.001 s, steps: 5000
-[INFO] 2025-10-05 15:30:14 - Simulation complete in 2.3s
-[INFO] 2025-10-05 15:30:14 - Computing performance metrics...
-[INFO] 2025-10-05 15:30:14 - Performance Metrics:
-       Settling Time: 2.45 s
-       Max Overshoot: 3.2 %
-       Steady-State Error: 0.008 rad (0.46°)
-       RMS Control Effort: 12.4 N
-       Peak Control: 45.3 N
-       Control Saturation: 0.0% (no saturation events)
-[INFO] 2025-10-05 15:30:14 - Generating plots...
-[INFO] 2025-10-05 15:30:15 - Displaying plots
+INFO:root:Provenance configured: commit=<hash>, cfg_hash=<hash>, seed=0
+D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization
+  warnings.warn("State vector was modified during sanitization", UserWarning)
 ```
 
-**⏱️ Total Time:** ~3-5 seconds
+**Note:** The simulation runs with minimal terminal output. The provenance line confirms the simulation configuration is tracked for reproducibility. The state sanitization warning is normal and indicates the simulator is ensuring numerical stability.
+
+**⏱️ Total Time:** ~10-15 seconds (includes initialization and plotting)
 
 ### Step 4: Interpret Results
 
@@ -521,7 +505,7 @@ simulation:
 
 Run simulation:
 ```bash
-python simulate.py --ctrl classical_smc --plot
+python simulate.py --controller classical_smc --plot
 ```
 
 **Expected changes:**
@@ -550,7 +534,7 @@ controller_defaults:
 
 Run simulation:
 ```bash
-python simulate.py --ctrl classical_smc --plot
+python simulate.py --controller classical_smc --plot
 ```
 
 **Expected changes:**
@@ -573,7 +557,7 @@ controllers:
 
 Run simulation:
 ```bash
-python simulate.py --ctrl classical_smc --plot
+python simulate.py --controller classical_smc --plot
 ```
 
 **Expected changes:**
@@ -595,7 +579,7 @@ simulation:
 
 Run simulation:
 ```bash
-python simulate.py --ctrl classical_smc --plot
+python simulate.py --controller classical_smc --plot
 ```
 
 **Expected changes:**
