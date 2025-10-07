@@ -902,7 +902,7 @@ For implementation examples, see:
 
 **Next Steps:**
 - Review [Control Primitives Reference](control_primitives_reference.md) for utility functions
-- Explore [PSO Optimization Guide](../optimization/pso_optimization_guide.md) for tuning workflows
+- Explore [PSO Optimization Workflow](../guides/workflows/pso-optimization-workflow.md) for tuning workflows
 - Study [Classical SMC Technical Guide](classical_smc_technical_guide.md) for controller details
 
 ---

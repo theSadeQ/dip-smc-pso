@@ -2549,7 +2549,7 @@ Integration patterns between PSO optimization and controller factory:
   - Statistical performance analysis
 
 **User Guides:**
-- [Phase 5.3: PSO Optimization Workflow Guide](../../guides/pso_optimization_workflow.md)
+- [Phase 5.3: PSO Optimization Workflow Guide](../guides/workflows/pso-optimization-workflow.md)
   - Step-by-step PSO optimization tutorial
   - Troubleshooting common issues
 
