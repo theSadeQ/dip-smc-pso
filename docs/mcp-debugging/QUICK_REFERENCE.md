@@ -335,13 +335,13 @@ which python
 
 ### Workflows
 - [Complete Debugging Workflow](workflows/complete-debugging-workflow.md)
-- [PSO Optimization Workflows](../../optimization/pso_workflows.md)
-- [Controller Testing Guide](../../testing/controller_testing.md)
+- [PSO Optimization Workflow](../guides/workflows/pso-optimization-workflow.md)
+- [Controller Testing Guide](../testing/guides/control_systems_unit_testing.md)
 
 ### Configuration
-- [MCP Configuration](.mcp.json)
+- MCP Configuration: See `.mcp.json` in project root
 - [Pytest Configuration](../../pytest.ini)
-- [Environment Variables](../../.env.example)
+- Environment Variables: See `.env.example` in project root
 
 ### Slash Commands
 - [Analyze Logs](../../.claude/commands/analyze-logs.md)

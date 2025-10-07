@@ -132,9 +132,10 @@ export GITHUB_TOKEN="your_personal_access_token"
 
 ## 📚 Further Reading
 
-- [MCP Server Filesystem Documentation](server-configs/filesystem-server-setup.md)
-- [MCP Server GitHub Documentation](server-configs/github-server-setup.md)
-- [MCP Inspector Guide](inspector-guide/mcp-inspector-quickstart.md)
+**MCP Server Configuration:**
+- Filesystem Server: See `.mcp.json` configuration in project root
+- GitHub Server: Configured via MCP server settings
+- MCP Inspector: Run `/inspect-server` slash command for interactive debugging
 
 ---
 
