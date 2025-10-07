@@ -67,7 +67,7 @@ Comprehensive audit of **1,305 cross-references** (1,211 internal + 94 external)
    - **Fix:** Remove or replace with documentation equivalents
 
 4. **Placeholder Links** (18 links, 12.2%)
-   - `[text](other-page.md)`, `[controller_type](config)`, `[key](value)`
+   - Examples: `[text](other-page.md)`, `[controller_type](config)`, `[key](value)` (shown as text only)
    - **Cause:** Template examples or incomplete documentation
    - **Fix:** Replace with real links or mark as examples
 
@@ -330,7 +330,7 @@ pytest tests/test_documentation/test_cross_references.py -v
 
 ### Pattern 1: Missing Documentation Stubs
 
-```markdown
+```text
 # Before (broken)
 [Controller Theory](controller_theory.md)
 
@@ -343,7 +343,7 @@ pytest tests/test_documentation/test_cross_references.py -v
 
 ### Pattern 2: Incorrect Relative Paths
 
-```markdown
+```text
 # Before (broken)
 [PSO Guide](../optimization/pso_optimization_guide.md)
 
@@ -353,7 +353,7 @@ pytest tests/test_documentation/test_cross_references.py -v
 
 ### Pattern 3: External Directory References
 
-```markdown
+```text
 # Before (broken - links outside docs/)
 [Source Code](../src/controllers/classical_smc.py)
 
@@ -363,7 +363,7 @@ pytest tests/test_documentation/test_cross_references.py -v
 
 ### Pattern 4: Placeholder Examples
 
-```markdown
+```text
 # Before (broken - template example)
 For more details, see [other page](other-page.md).
 
@@ -371,8 +371,6 @@ For more details, see [other page](other-page.md).
 For more details, see [User Guide](../guides/user-guide.md).
 
 # Or (fixed - mark as example)
-```python
 # Example template (not a real link):
 # See [documentation](your-doc.md) for details.
-```
 ```
