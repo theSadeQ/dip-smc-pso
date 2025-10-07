@@ -671,12 +671,12 @@ while True:
 
 ### For Advanced Users:
 ➡️ **Next**: [Multi-Machine HIL Setup](hil-multi-machine.md)
-➡️ **Next**: [Real-Time Performance Tuning](hil-real-time-tuning.md)
-➡️ **Next**: [Fault Injection Testing](hil-fault-injection.md)
+➡️ **Next**: [Real-Time Synchronization](../../reference/interfaces/hil_real_time_sync.md)
+➡️ **Next**: [Fault Injection Testing](../../reference/interfaces/hil_fault_injection.md)
 
 ### For Production Deployment:
 ➡️ **Next**: [HIL Production Checklist](hil-production-checklist.md)
-➡️ **Next**: [Continuous Monitoring](hil-monitoring.md)
+➡️ **Next**: [HIL Data Logging & Monitoring](../../reference/interfaces/hil_data_logging.md)
 ➡️ **Next**: [Disaster Recovery](hil-disaster-recovery.md)
 
 ---
