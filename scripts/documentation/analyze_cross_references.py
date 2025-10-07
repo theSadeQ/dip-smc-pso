@@ -52,11 +52,43 @@ class CrossReferenceAnalyzer:
         # Pattern: [text](url)
         pattern = r'\[([^\]]+)\]\(([^)]+)\)'
 
+        # Track if we're inside a code block
+        in_code_block = False
+
         for line_num, line in enumerate(content.splitlines(), 1):
-            for match in re.finditer(pattern, line):
-                link_text = match.group(1).strip()
-                link_target = match.group(2).strip()
-                links.append((link_text, link_target, line_num))
+            # Check for code block markers
+            if line.strip().startswith('```'):
+                in_code_block = not in_code_block
+                continue
+
+            # Skip links inside code blocks
+            if in_code_block:
+                continue
+
+            # Also skip links inside inline code (backticks)
+            # Simple heuristic: if line has more backticks than link patterns, likely in code
+            if line.count('`') >= 2:
+                # Check if the link is inside backticks
+                temp_line = line
+                while '`' in temp_line:
+                    start = temp_line.find('`')
+                    end = temp_line.find('`', start + 1)
+                    if end == -1:
+                        break
+                    # Remove the inline code section
+                    temp_line = temp_line[:start] + temp_line[end+1:]
+
+                # Only search for links in the non-code parts
+                for match in re.finditer(pattern, temp_line):
+                    link_text = match.group(1).strip()
+                    link_target = match.group(2).strip()
+                    links.append((link_text, link_target, line_num))
+            else:
+                # No inline code, process normally
+                for match in re.finditer(pattern, line):
+                    link_text = match.group(1).strip()
+                    link_target = match.group(2).strip()
+                    links.append((link_text, link_target, line_num))
 
         return links
 
