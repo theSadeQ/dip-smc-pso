@@ -15,8 +15,10 @@ build:
       - pip install --upgrade pip
       - pip install -r docs/requirements.txt
     post_build:
-      # Optional: run link check after build
+      # Optional: run link check after build (non-blocking)
       - cd docs && sphinx-build -b linkcheck . _build/linkcheck || true
+      # Generate build statistics
+      - echo "Documentation build completed at $(date)"
 
 # Sphinx configuration
 sphinx:
