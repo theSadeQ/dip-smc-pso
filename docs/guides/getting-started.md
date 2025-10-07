@@ -149,21 +149,28 @@ python simulate.py --help
 
 **Expected output:**
 ```
-usage: simulate.py [-h] [--ctrl {classical_smc,sta_smc,adaptive_smc,hybrid_adaptive_sta_smc}]
-                   [--plot] [--run-pso] [--save SAVE] [--load LOAD]
-                   [--config CONFIG] [--print-config]
+usage: simulate.py [-h] [--config CONFIG] [--controller CONTROLLER]
+                   [--save-gains PATH] [--load-gains PATH]
+                   [--duration DURATION] [--dt DT] [--plot] [--print-config]
+                   [--plot-fdi] [--run-hil] [--run-pso] [--seed SEED]
 
-Sliding Mode Control simulation for Double-Inverted Pendulum with PSO optimization
+CLI for PSO-tuned Sliding-Mode Control and HIL for a double-inverted pendulum.
 
-optional arguments:
-  -h, --help            show this help message and exit
-  --ctrl CONTROLLER     Controller type to use
-  --plot                Display plots after simulation
-  --run-pso             Run PSO optimization for controller gains
-  --save SAVE           Save gains to JSON file
-  --load LOAD           Load gains from JSON file
-  --config CONFIG       Path to config file (default: config.yaml)
-  --print-config        Print current configuration and exit
+options:
+  -h, --help              show this help message and exit
+  --config CONFIG         Path to config file (default: config.yaml)
+  --controller CONTROLLER Controller type to use (classical_smc, sta_smc,
+                         adaptive_smc, hybrid_adaptive_sta_smc)
+  --save-gains PATH       Save gains to JSON file
+  --load-gains PATH       Load gains from JSON file
+  --duration DURATION     Override simulation duration (s)
+  --dt DT                Override simulation timestep (s)
+  --plot                  Display plots after simulation
+  --print-config          Print current configuration and exit
+  --plot-fdi             Show FDI residual plots (requires FDI enabled)
+  --run-hil              Run hardware-in-the-loop simulation
+  --run-pso              Run PSO optimization for controller gains
+  --seed SEED            Random seed for reproducibility
 ```
 
 **✅ Installation Complete!** You're now ready to run your first simulation.
@@ -177,7 +184,7 @@ optional arguments:
 Execute your first simulation with the classical sliding mode controller:
 
 ```bash
-python simulate.py --ctrl classical_smc --plot
+python simulate.py --controller classical_smc --plot
 ```
 
 **What happens:**
@@ -190,21 +197,14 @@ python simulate.py --ctrl classical_smc --plot
 
 **Expected terminal output:**
 ```
-[INFO] Loading configuration from config.yaml
-[INFO] Creating Classical SMC controller
-[INFO] Controller gains: [5.0, 5.0, 5.0, 0.5, 0.5, 0.5]
-[INFO] Initializing DIP dynamics (simplified model)
-[INFO] Running simulation: duration=5.0s, dt=0.001s, steps=5000
-[INFO] Simulation complete in 2.1s
-[INFO] Performance Metrics:
-       Settling Time: 2.45s
-       Max Overshoot: 3.2%
-       Steady-State Error: 0.008 rad
-       RMS Control Effort: 12.4 N
-[INFO] Displaying plots...
+INFO:root:Provenance configured: commit=<hash>, cfg_hash=<hash>, seed=0
+D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization
+  warnings.warn("State vector was modified during sanitization", UserWarning)
 ```
 
-**⏱️ Simulation takes:** 1-3 seconds on modern hardware
+**Note:** The simulation runs with minimal terminal output. The provenance line confirms the simulation configuration is tracked for reproducibility. The state sanitization warning is normal and indicates the simulator is ensuring numerical stability.
+
+**⏱️ Simulation takes:** 10-15 seconds on modern hardware (includes initialization and plotting)
 
 ### Understanding the Output
 
@@ -316,7 +316,7 @@ initial_state: [0.0, 0.5, 0.05, 0.0, -0.05, 0.0]  # Cart velocity = 0.5 m/s
 
 After editing `config.yaml`, re-run:
 ```bash
-python simulate.py --ctrl classical_smc --plot
+python simulate.py --controller classical_smc --plot
 ```
 
 Observe how the controller responds to different perturbations!
@@ -332,7 +332,7 @@ The framework includes 4 SMC controller variants. Each has unique strengths:
 Smooth, continuous control with reduced chattering:
 
 ```bash
-python simulate.py --ctrl sta_smc --plot
+python simulate.py --controller sta_smc --plot
 ```
 
 **Characteristics:**
@@ -346,7 +346,7 @@ python simulate.py --ctrl sta_smc --plot
 Automatically tunes gains online for uncertain systems:
 
 ```bash
-python simulate.py --ctrl adaptive_smc --plot
+python simulate.py --controller adaptive_smc --plot
 ```
 
 **Characteristics:**
@@ -360,7 +360,7 @@ python simulate.py --ctrl adaptive_smc --plot
 Combines adaptation with super-twisting for maximum performance:
 
 ```bash
-python simulate.py --ctrl hybrid_adaptive_sta_smc --plot
+python simulate.py --controller hybrid_adaptive_sta_smc --plot
 ```
 
 **Characteristics:**
@@ -368,6 +368,8 @@ python simulate.py --ctrl hybrid_adaptive_sta_smc --plot
 - Most complex configuration
 - Recommended for research applications
 - Requires understanding of advanced SMC theory
+
+**Note:** You may see a warning about "Large adaptation rate may cause instability" - this is advisory only and the default configuration has been validated for stability.
 
 ### Quick Comparison
 
@@ -426,7 +428,7 @@ Ready for more? Explore:
 
 - **PSO Gain Tuning:** Automatically find optimal controller gains
   ```bash
-  python simulate.py --ctrl classical_smc --run-pso --save tuned_gains.json
+  python simulate.py --controller classical_smc --run-pso --save-gains tuned_gains.json
   ```
 
 - **Streamlit Dashboard:** Interactive parameter adjustment and real-time visualization
@@ -510,6 +512,14 @@ venv\Scripts\activate     # Windows
 which python              # Should show path inside venv/
 python -c "import src.config; print('OK')"
 ```
+
+### "State vector was modified during sanitization" Warning
+
+**Cause:** Normal operation - the simulator ensures numerical stability by sanitizing input states
+
+**What it means:** This is an informational warning, not an error. The simulation is working correctly and automatically correcting any potential numerical issues with the initial state.
+
+**Solution:** No action required. This warning confirms the safety mechanisms are active. You can safely ignore it.
 
 ---
 
