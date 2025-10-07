@@ -1505,8 +1505,8 @@ controller_integration_patterns
 
 ## Mathematical Foundations
 
-- [PSO Algorithm Theory](../mathematical_foundations/pso_algorithm_theory.md)
-- [Optimization Landscape Analysis](../mathematical_foundations/optimization_landscape_analysis.md)
+- [PSO Algorithm Theory](../../mathematical_foundations/pso_algorithm_theory.md)
+- [Optimization Landscape Analysis](../../mathematical_foundations/pso_algorithm_theory.md#optimization-landscape) (see PSO theory sections)
 
 ## Tutorials
 
@@ -1522,10 +1522,10 @@ controller_integration_patterns
 
 ## Code Examples
 
-- [Basic PSO](../examples/optimization/basic_pso.py)
-- [Multi-Objective PSO](../examples/optimization/multi_objective_pso.py)
-- [Custom Fitness Functions](../examples/optimization/custom_fitness.py)
-- ... (full list)
+See code examples in:
+- `src/optimization/algorithms/swarm/pso.py` - Core PSO implementation
+- `tests/test_optimizer/test_pso_optimizer.py` - PSO usage examples
+- [PSO Optimization Workflow Guide](../../guides/workflows/pso-optimization-workflow.md) - Complete examples
 
 ## API Reference
 
@@ -1554,19 +1554,19 @@ api/integration
 
 **In PSO documentation:**
 ```markdown
-See [Classical SMC Technical Guide](../controllers/classical_smc_technical_guide.md)
+See [Classical SMC Technical Guide](../../controllers/classical_smc_technical_guide.md)
 for controller-specific gain tuning requirements.
 ```
 
 **In Controllers documentation:**
 ```markdown
-For automated gain tuning, see [PSO Core Algorithm Guide](../optimization/pso_core_algorithm_guide.md).
+For automated gain tuning, see [PSO Core Algorithm Guide](../../optimization/pso_core_algorithm_guide.md).
 ```
 
 **Mathematical Foundations Links:**
 ```markdown
 The PSO convergence proof relies on Lyapunov theory, similar to
-[SMC stability analysis](./smc_complete_theory.md#lyapunov-stability).
+[SMC stability analysis](../../theory/smc_theory_complete.md#lyapunov-stability).
 ```
 
 ---
@@ -1761,7 +1761,7 @@ After completing this tutorial, you will be able to:
 
 **Required Knowledge:**
 - Basic Python programming
-- Understanding of SMC controllers (see [Controllers Module](../controllers/index.md))
+- Understanding of SMC controllers (see [Controllers Module](../../controllers/index.md))
 - Familiarity with optimization concepts
 
 **Required Software:**
