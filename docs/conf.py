@@ -60,6 +60,9 @@ extensions = [
     'sphinx.ext.duration',
     # 'sphinx_gallery.gen_gallery', # Temporarily disabled for testing
     # 'traceability',               # Temporarily disabled for testing
+
+    # Custom extensions
+    'chartjs_extension',          # Chart.js interactive visualizations
 ]
 
 # MyST Parser configuration - quality-of-life features
