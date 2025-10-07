@@ -503,8 +503,8 @@ git push origin main --tags
 
 ### Documentation
 - [MCP Debugging Quick Start](../README.md)
-- [Controller Testing Guide](../../testing/controller_testing.md)
-- [PSO Optimization Workflows](../../optimization/pso_workflows.md)
+- [Controller Testing Guide](../../testing/guides/control_systems_unit_testing.md)
+- [PSO Optimization Workflow](../../guides/workflows/pso-optimization-workflow.md)
 
 ### Slash Commands
 - [Analyze Logs](../../../.claude/commands/analyze-logs.md)
@@ -512,9 +512,9 @@ git push origin main --tags
 - [Test Controller](../../../.claude/commands/test-controller.md)
 
 ### Configuration
-- [.mcp.json](../../../.mcp.json) - Server configuration
+- MCP Configuration: See `.mcp.json` in project root
 - [pytest.ini](../../../pytest.ini) - Test configuration
-- [.env.example](../../../.env.example) - Environment variables
+- Environment Variables: See `.env.example` in project root
 
 ---
 
