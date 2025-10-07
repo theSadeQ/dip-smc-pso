@@ -82,6 +82,9 @@ IntegratorConfig = {
 ### Factory Implementation Pattern
 
 ```python
+# example-metadata:
+# runnable: false
+
 class IntegratorFactory:
     _registry = {}
 

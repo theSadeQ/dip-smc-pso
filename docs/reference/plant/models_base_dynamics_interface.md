@@ -130,6 +130,9 @@ For inverted pendulum: $x_{eq} = [0, 0, 0, 0, 0, 0]^T$ (upright).
 Initialize and use the Models Base Dynamics Interface module:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.plant.models.base.dynamics_interface import *
 import numpy as np
 

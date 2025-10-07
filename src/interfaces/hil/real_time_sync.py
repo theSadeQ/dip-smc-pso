@@ -25,11 +25,9 @@ except ImportError:
     PSUTIL_AVAILABLE = False
 
 try:
-    # Linux-specific real-time capabilities
-    import ctypes
-    import ctypes.util
+    # Linux-specific real-time capabilities available
     RT_AVAILABLE = os.name == 'posix'
-except ImportError:
+except Exception:
     RT_AVAILABLE = False
 
 

@@ -89,6 +89,9 @@ src/controllers/factory.py
 The factory uses a module-level reentrant lock (`_factory_lock`) with a 10-second timeout to ensure thread-safe operations:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Thread-safe factory operations with timeout protection
 _factory_lock = threading.RLock()
 _LOCK_TIMEOUT = 10.0  # seconds
@@ -145,6 +148,9 @@ def create_controller(
 The factory automatically normalizes common variations:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_ALIASES = {
     'classic_smc': 'classical_smc',
     'smc_classical': 'classical_smc',
@@ -174,6 +180,9 @@ The factory resolves gains from multiple sources with clear priority:
 3. **Registry default gains** (fallback, always available)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Priority demonstration
 config = load_config("config.yaml")  # config.controllers.classical_smc.gains = [5,5,5,0.5,0.5,0.5]
 
@@ -195,6 +204,9 @@ controller = create_controller('classical_smc')
 Returns a controller instance implementing the `ControllerProtocol` interface:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerProtocol(Protocol):
     def compute_control(
         self,
@@ -335,6 +347,9 @@ assert type(controller1) == type(controller2) == type(controller3)
 #### Signature
 
 ```python
+# example-metadata:
+# runnable: false
+
 def list_available_controllers() -> list
 ```
 
@@ -397,6 +412,9 @@ print(df.sort_values('cost'))
 #### Signature
 
 ```python
+# example-metadata:
+# runnable: false
+
 def list_all_controllers() -> list
 ```
 
@@ -425,6 +443,9 @@ Returns list of all controller types in the registry, including those with missi
 #### Signature
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_default_gains(controller_type: str) -> list
 ```
 
@@ -457,6 +478,9 @@ Returns a **copy** of the default gain vector from the registry. Modifications t
 **Example 1: Query Before Optimization**
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.controllers.factory import get_default_gains
 
 # Get baseline gains
@@ -499,6 +523,9 @@ The controller registry (`CONTROLLER_REGISTRY`) is a comprehensive metadata data
 ### Registry Structure
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY: Dict[str, Dict[str, Any]] = {
     'controller_type': {
         'class': ControllerClass,              # Controller class reference
@@ -683,6 +710,9 @@ The factory system provides deep integration with Particle Swarm Optimization (P
 Wraps controller instances with PSO-compatible interface:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """Wrapper for SMC controllers to provide PSO-compatible interface."""
 
@@ -715,6 +745,9 @@ class PSOControllerWrapper:
 Creates PSO-wrapped controller instances:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_smc_for_pso(
     smc_type: SMCType,
     gains: Union[list, np.ndarray],
@@ -761,6 +794,9 @@ control = controller_wrapper.compute_control(state)
 Creates factory functions with PSO-required metadata:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_pso_controller_factory(
     smc_type: SMCType,
     plant_config: Optional[Any] = None,
@@ -827,6 +863,9 @@ def get_expected_gain_count(smc_type: SMCType) -> int:
 Returns PSO search bounds for controller types:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]]:
     """Get PSO gain bounds for a controller type.
 
@@ -858,6 +897,9 @@ def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]
 ### Complete PSO Optimization Workflow
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.controllers.factory import SMCType, create_pso_controller_factory
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.config import load_config
@@ -917,6 +959,9 @@ print(f"Improvement over baseline: {improvement:.1f}%")
 The `SMC_GAIN_SPECS` dictionary provides detailed gain specifications for PSO:
 
 ```python
+# example-metadata:
+# runnable: false
+
 SMC_GAIN_SPECS = {
     SMCType.CLASSICAL: SMCGainSpec(
         gain_names=['k1', 'k2', 'lambda1', 'lambda2', 'K', 'kd'],
@@ -1051,6 +1096,9 @@ controllers:
 ```
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Maps to ClassicalSMC initialization:
 controller = ClassicalSMC(
     gains=[25.0, 18.0, 14.0, 10.0, 42.0, 6.0],
@@ -1092,6 +1140,9 @@ controllers:
 ```
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Maps to SuperTwistingSMC initialization:
 controller = SuperTwistingSMC(
     gains=[30.0, 18.0, 22.0, 14.0, 9.0, 7.0],
@@ -1138,6 +1189,9 @@ controllers:
 ```
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Maps to AdaptiveSMC initialization:
 controller = AdaptiveSMC(
     gains=[28.0, 20.0, 16.0, 12.0, 5.0],
@@ -1243,6 +1297,9 @@ All controllers must satisfy:
 
 **Validation Code:**
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_controller_gains(gains, controller_info, controller_type):
     expected_count = controller_info['gain_count']
     if len(gains) != expected_count:
@@ -1308,6 +1365,9 @@ if controller_type == 'adaptive_smc' and len(gains) != 5:
 #### MPC-Specific Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_mpc_parameters(config_params, controller_params):
     all_params = {**config_params, **controller_params}
 
@@ -1440,6 +1500,9 @@ except ValueError as e:
 #### Pattern 2: Registry Lookup with Availability Check
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _get_controller_info(controller_type: str) -> Dict[str, Any]:
     if controller_type not in CONTROLLER_REGISTRY:
         available = list(CONTROLLER_REGISTRY.keys())
@@ -1473,6 +1536,9 @@ except ValueError as e:
 #### Pattern 3: Graceful Degradation with Fallback
 
 ```python
+# example-metadata:
+# runnable: false
+
 try:
     controller_config = config_class(**config_params)
 except Exception as e:
@@ -1497,6 +1563,9 @@ except Exception as e:
 #### Pattern 4: Automatic Correction
 
 ```python
+# example-metadata:
+# runnable: false
+
 try:
     _validate_controller_gains(controller_gains, controller_info, controller_type)
 except ValueError as e:
@@ -1617,6 +1686,9 @@ The factory system is designed for easy extension with new controller types.
 Create a controller class implementing the `ControllerProtocol`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/controllers/new_controller.py
 
 import numpy as np
@@ -1669,6 +1741,9 @@ class NewController:
 #### Step 2: Create Configuration Class
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/controllers/new_controller_config.py
 
 from dataclasses import dataclass
@@ -1743,6 +1818,9 @@ controller_defaults:
 #### Step 6: Add PSO Support (Optional)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Add to SMCType enum
 class SMCType(Enum):
     CLASSICAL = "classical_smc"
@@ -1871,6 +1949,9 @@ if __name__ == '__main__':
 ### Example 2: PSO-Optimized Controller Creation
 
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Example 2: PSO-Optimized Controller Creation
 Demonstrates complete PSO workflow for gain optimization.
@@ -1963,6 +2044,9 @@ if __name__ == '__main__':
 ### Example 3: Batch Controller Comparison
 
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Example 3: Batch Controller Comparison
 Demonstrates creating multiple controller types for benchmarking.

@@ -2,14 +2,14 @@
 #===================== src/interfaces/hardware/serial_devices.py ======================\\\
 #======================================================================================\\\
 
-from __future__ import annotations
-
 """
 Serial communication device interfaces for control systems.
 This module provides standardized interfaces for serial communication
 protocols including RS232/485, Modbus RTU/TCP, CAN bus, and other
 industrial communication standards commonly used in control systems.
 """
+
+from __future__ import annotations
 
 import asyncio
 import serial

@@ -215,6 +215,9 @@ Phase 4.3 analysis is **COMPLETE** with comprehensive review of:
 **Docstring Enhancement Pattern (Phase 4.2 Standard):**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def optimize_bounds_for_controller(
     self,
     controller_type: SMCType,

@@ -41,6 +41,9 @@ Where:
 #### **Migration Parameter Mapping**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_classical_smc_parameters_mathematical(old_params: Dict[str, Any]) -> Dict[str, Any]:
     """
     Mathematically sound migration for Classical SMC parameters.
@@ -143,6 +146,9 @@ Where:
 #### **Migration Parameter Mapping**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_adaptive_smc_parameters_mathematical(old_params: Dict[str, Any]) -> Dict[str, Any]:
     """
     Mathematically sound migration for Adaptive SMC parameters.
@@ -272,6 +278,9 @@ Where:
 #### **Migration Parameter Mapping**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_sta_smc_parameters_mathematical(old_params: Dict[str, Any]) -> Dict[str, Any]:
     """
     Mathematically sound migration for Super-Twisting SMC parameters.
@@ -402,6 +411,9 @@ Where the surface coefficients are shared across all modes for seamless switchin
 #### **Migration Parameter Mapping**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_hybrid_smc_parameters_mathematical(old_params: Dict[str, Any]) -> Dict[str, Any]:
     """
     Mathematically sound migration for Hybrid SMC parameters.
@@ -534,6 +546,9 @@ print("Migrated Hybrid SMC config:", migrated_config)
 ### 1. **Stability Preservation Validation**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class StabilityValidator:
     """Validate stability preservation during parameter migration."""
 
@@ -678,6 +693,9 @@ print("Stability validation:", validation)
 ### 2. **Performance Preservation Analysis**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PerformanceAnalyzer:
     """Analyze performance preservation during migration."""
 
@@ -756,6 +774,9 @@ print("Settling time analysis:", settling_analysis)
 ### **Comprehensive Migration Testing**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class MigrationValidationSuite:
     """Comprehensive test suite for migration validation."""
 

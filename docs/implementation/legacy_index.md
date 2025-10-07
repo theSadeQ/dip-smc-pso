@@ -103,6 +103,9 @@ Every implementation component directly corresponds to theoretical concepts:
 Code implementations include explicit references to theoretical equations:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def sliding_surface(self, x: np.ndarray) -> float:
     """
     Compute sliding surface value s(x) = Sx.
@@ -147,6 +150,9 @@ def sliding_surface(self, x: np.ndarray) -> float:
 All public APIs use comprehensive type hints and runtime validation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from typing import Protocol, TypeVar, Generic
 from pydantic import BaseModel, validator
 
@@ -207,6 +213,9 @@ pso:
 Comprehensive error handling with domain-specific exceptions:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControlSystemError(Exception):
     """Base exception for control system errors."""
     pass

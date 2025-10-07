@@ -15,6 +15,9 @@ Core interfaces for professional optimization framework.
 **Type-safe interfaces** using Python protocols:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class OptimizationAlgorithm(Protocol):
     def optimize(self, problem: OptimizationProblem) -> OptimizationResult:
         ...

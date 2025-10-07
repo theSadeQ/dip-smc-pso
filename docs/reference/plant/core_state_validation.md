@@ -244,6 +244,9 @@ except ConfigurationError as e:
 Optimize for computational efficiency:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Performance optimization
 import cProfile
 import pstats

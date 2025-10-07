@@ -391,6 +391,9 @@ pytest tests/ --cov=src --cov-report=html --cov-report=term
 #### 1.3.3 Coverage Reporting
 
 ```python
+# example-metadata:
+# runnable: false
+
 # .coveragerc configuration
 [run]
 source = src
@@ -737,6 +740,9 @@ pytest tests/ -n auto --cov=src --cov-report=html
 #### 3.1.1 Initialization Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestClassicalSMCInitialization:
     """Test Classical SMC controller initialization."""
 
@@ -801,6 +807,9 @@ class TestClassicalSMCInitialization:
 #### 3.1.2 Control Computation Tests
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestClassicalSMCControlComputation:
     """Test Classical SMC control computation."""
 
@@ -1197,6 +1206,9 @@ class TestHILIntegration:
 ### 5.1 Custom Assertions
 
 ```python
+# example-metadata:
+# runnable: false
+
 # tests/utils/assertions.py
 
 def assert_stabilized(final_state, tolerance=0.05):
@@ -1228,6 +1240,9 @@ def assert_convergence(states, final_tolerance=0.01, settling_time=5.0, dt=0.01)
 ### 5.2 Test Data Generators
 
 ```python
+# example-metadata:
+# runnable: false
+
 # tests/utils/generators.py
 
 def generate_initial_conditions(n_samples=100, max_deviation=0.2):
@@ -1276,6 +1291,9 @@ def generate_disturbance_profiles(duration, dt, disturbance_types=['impulse', 's
 ### 5.3 Mock and Stub Patterns
 
 ```python
+# example-metadata:
+# runnable: false
+
 # tests/mocks/mock_controller.py
 
 class MockController:
@@ -1310,6 +1328,9 @@ class MockDynamics:
 ### 5.4 Error Injection Framework
 
 ```python
+# example-metadata:
+# runnable: false
+
 # tests/utils/error_injection.py
 
 class ErrorInjector:

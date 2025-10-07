@@ -139,6 +139,9 @@ Use these visual patterns from react-bits:
 ### Code Snippets
 ```markdown
 ​```python
+# example-metadata:
+# runnable: false
+
 # Context comment
 from src.controllers import ClassicalSMC
 

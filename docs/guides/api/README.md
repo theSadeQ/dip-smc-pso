@@ -173,6 +173,9 @@ dynamics = DoubleInvertedPendulum(m0=1.0, m1=0.1, m2=0.1, l1=0.5, l2=0.5)
 **Helper functions and tools**
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.utils import validate_state, saturation, PerformanceMonitor
 ```
 

@@ -442,6 +442,9 @@ def extract_theorems(file_content):
 
 **✅ Good Practice (optimal):**
 ```python
+# example-metadata:
+# runnable: false
+
 class FormalClaimExtractor:
     def __init__(self):
         # Compile once in constructor
@@ -503,6 +506,9 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 
 **Expected Extraction:**
 ```python
+# example-metadata:
+# runnable: false
+
 {
     "type": "theorem",
     "number": 1,
@@ -534,6 +540,9 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 
 **Expected Extraction:**
 ```python
+# example-metadata:
+# runnable: false
+
 {
     "type": "lemma",
     "number": None,
@@ -563,6 +572,9 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 
 **Expected Extraction:**
 ```python
+# example-metadata:
+# runnable: false
+
 {
     "type": "corollary",
     "number": 2,

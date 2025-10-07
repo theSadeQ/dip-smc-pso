@@ -338,9 +338,9 @@ class ParitySpaceGenerator(ResidualGenerator):
         p = self.B.shape[1]
 
         # Build observability matrix
-        O = np.zeros((m * (s + 1), n))
+        observability_matrix = np.zeros((m * (s + 1), n))
         for i in range(s + 1):
-            O[i*m:(i+1)*m, :] = self.C @ linalg.matrix_power(self.A, i)
+            observability_matrix[i*m:(i+1)*m, :] = self.C @ linalg.matrix_power(self.A, i)
 
         # Build control influence matrix
         Gamma = np.zeros((m * (s + 1), p * s))
@@ -351,12 +351,12 @@ class ParitySpaceGenerator(ResidualGenerator):
                 col_start = (i - j) * p
                 col_end = (i - j + 1) * p
 
-                if row_start < O.shape[0] and col_start < Gamma.shape[1]:
+                if row_start < observability_matrix.shape[0] and col_start < Gamma.shape[1]:
                     Gamma[row_start:row_end, col_start:col_end] = self.C @ linalg.matrix_power(self.A, j) @ self.B
 
         # Compute parity vector (left null space of observability matrix)
         try:
-            U, s_vals, Vt = linalg.svd(O)
+            U, s_vals, Vt = linalg.svd(observability_matrix)
 
             # Find null space
             tol = 1e-10
@@ -513,7 +513,7 @@ class ParameterEstimationGenerator(ResidualGenerator):
 
         # Compute state derivatives using finite differences
         dt = np.mean(np.diff(times))
-        state_derivatives = np.gradient(states, dt, axis=0)
+        np.gradient(states, dt, axis=0)
 
         # Simple linear regression for demonstration
         # This would be replaced with proper system identification

@@ -39,6 +39,9 @@ Where $\Delta E$ is perceptual color difference (CIELAB).
 **Unified plotting interface:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class Visualizer:
     def plot_time_series(data) -> Figure
     def plot_phase_portrait(states) -> Figure

@@ -106,6 +106,9 @@ S = \frac{|\lambda_{\max}|}{|\lambda_{\min}|}
 ### Error Control Algorithm
 
 ```python
+# example-metadata:
+# runnable: false
+
 while t < t_final:
     # Attempt integration step
     y_new, y_hat = integrate_step(t, y, dt)

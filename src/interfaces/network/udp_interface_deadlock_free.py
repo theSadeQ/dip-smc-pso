@@ -29,8 +29,8 @@ from concurrent.futures import ThreadPoolExecutor
 import queue
 
 try:
-    from ..core.protocols import CommunicationProtocol, MessageMetadata, ConnectionState, MessageType, Priority
-    from ..core.data_types import Message, ConnectionInfo, InterfaceConfig, InterfaceType, TransportType
+    from ..core.protocols import MessageMetadata, ConnectionState, MessageType, Priority
+    from ..core.data_types import Message, InterfaceConfig
 except ImportError:
     # Standalone mode - define minimal required enums
     from enum import Enum
@@ -203,7 +203,7 @@ class DeadlockFreeUDPInterface:
                 if self._socket:
                     try:
                         self._socket.close()
-                    except:
+                    except Exception:
                         pass
                     self._socket = None
 

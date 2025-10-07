@@ -235,6 +235,6 @@ def validate_trial_configuration(
     # Test controller instantiation
     try:
         test_gains = np.zeros(controller_factory.n_gains)
-        test_ctrl = controller_factory(test_gains)
+        controller_factory(test_gains)
     except Exception as e:
         raise ValueError(f"Failed to create test controller: {e}")

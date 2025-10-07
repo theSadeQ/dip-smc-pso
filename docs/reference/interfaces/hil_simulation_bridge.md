@@ -214,6 +214,9 @@ bridge.start()
 ### Example 4: Fault-Tolerant Bridge
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.interfaces.hil.simulation_bridge import SimulationBridge
 import logging
 

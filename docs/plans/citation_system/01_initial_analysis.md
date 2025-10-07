@@ -273,6 +273,9 @@ finite-time convergence and inherent disturbance rejection capabilities.
 ### **Priority Assignment Logic**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def assign_priority(claim: Dict) -> str:
     """
     CRITICAL: Uncited formal theorems/lemmas (scientific credibility risk)
@@ -388,6 +391,9 @@ Token Usage: Optimal (reusing 2 existing agents)
 ### **Agent Reuse vs Creation Decision Matrix**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class AgentSelectionStrategy:
     """
     Decision framework for optimal agent configuration.
@@ -483,6 +489,9 @@ class AgentSelectionStrategy:
 
 **Integration Algorithm:**
 ```python
+# example-metadata:
+# runnable: false
+
 def integrate_artifacts(agent_outputs: List[Dict]) -> Dict:
     """
     Merge outputs from multiple agents.

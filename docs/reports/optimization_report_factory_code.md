@@ -31,6 +31,9 @@ Successfully completed comprehensive factory code optimization with enterprise-g
 
 **Header Format Enforced:**
 ```python
+# example-metadata:
+# runnable: false
+
 #==========================================================================================\\\
 #====================== src/controllers/factory/module_name.py =======================\\\
 #==========================================================================================\\\
@@ -56,6 +59,9 @@ Successfully completed comprehensive factory code optimization with enterprise-g
 
 **Standardized Import Structure:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Standard library imports
 import logging
 import threading

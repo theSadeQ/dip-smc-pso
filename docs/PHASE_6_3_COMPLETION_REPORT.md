@@ -285,6 +285,9 @@ Generates:
 
 **Location:** `docs/conf.py`
 ```python
+# example-metadata:
+# runnable: false
+
 extensions = [
     # ... other extensions ...
     'chartjs_extension',  # Chart.js interactive visualizations

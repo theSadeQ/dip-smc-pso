@@ -75,7 +75,7 @@ class DiagnosticPlotter:
         if variables is None:
             # Determine key variables based on available data
             n_states = states.shape[1] if states is not None else 0
-            n_inputs = control_inputs.shape[1] if control_inputs is not None else 0
+            control_inputs.shape[1] if control_inputs is not None else 0
             variables = []
 
             if n_states >= 4:  # Assume double pendulum: [θ1, θ1_dot, θ2, θ2_dot]

@@ -45,6 +45,9 @@ Controller instantiation requires complex configuration handling, parameter vali
 #### Implementation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/controllers/factory.py (lines 507-543)
 
 def create_controller(controller_type: str,
@@ -89,6 +92,9 @@ controller = create_controller('adaptive_smc', config=app_config, gains=optimize
 #### Registry-Based Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Controller registry with comprehensive metadata (lines 181-218)
 CONTROLLER_REGISTRY = {
     'classical_smc': {
@@ -204,6 +210,9 @@ Real-time monitoring requires decoupled notification of system health changes to
 #### Implementation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/interfaces/monitoring/health_monitor.py (lines 85-100)
 
 @dataclass
@@ -261,6 +270,9 @@ Legacy controller interfaces need to work with modern PSO optimization and simul
 #### Implementation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/controllers/factory.py (lines 942-1012)
 
 class PSOControllerWrapper:
@@ -289,6 +301,9 @@ class PSOControllerWrapper:
 
 **Usage Pattern:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Legacy controller
 legacy_controller = ClassicalSMC(gains=[...])
 
@@ -349,6 +364,9 @@ Sliding mode controllers have complex behaviors that are better composed from fo
 #### Implementation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # OLD APPROACH (Inheritance - 427 lines, hard to test):
 class AdaptiveSMC(BaseSMC):
     def compute_control(self, state):
@@ -430,6 +448,9 @@ Controllers need plant dynamics models, but hardcoding this coupling would:
 #### Implementation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # BAD: Tight coupling (hardcoded dependency)
 class ClassicalSMC:
     def __init__(self, gains):
@@ -454,6 +475,9 @@ class ClassicalSMC:
 
 **Usage in Factory:**
 ```python
+# example-metadata:
+# runnable: false
+
 # src/controllers/factory.py (lines 569-580)
 
 def create_controller(controller_type: str, config: Optional[Any] = None):
@@ -535,6 +559,9 @@ Clients should not be forced to depend on interfaces they don't use. Create smal
 #### Implementation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/controllers/factory.py (lines 114-134)
 
 class ControllerProtocol(Protocol):
@@ -561,6 +588,9 @@ class ControllerProtocol(Protocol):
 
 **Additional Protocols:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Optional protocols for advanced features
 class DynamicsAwareController(Protocol):
     """Protocol for controllers that use plant dynamics."""
@@ -637,6 +667,9 @@ with memory_tracking(threshold_mb=100.0) as process:
 #### Implementation Examples
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/utils/validation/parameter_validators.py
 
 def validate_gains(n_expected: int):
@@ -674,6 +707,9 @@ class ClassicalSMC:
 #### Implementation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/controllers/factory.py (lines 95-102)
 
 from typing import Any, Callable, Dict, List, Optional, Union, Protocol
@@ -714,6 +750,9 @@ Patterns specific to numerical computing and scientific software.
 #### Implementation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/simulation/engines/vector_sim.py
 
 def run_batch_simulation(controller, dynamics, initial_conditions_batch, dt=0.001):

@@ -454,7 +454,7 @@ class ParetoObjective(SimulationBasedObjective):
                 else:
                     value = 0.0
                 objective_values.append(value)
-            except:
+            except Exception:
                 objective_values.append(float('inf'))
 
         objective_values = np.array(objective_values)
@@ -597,7 +597,7 @@ class ParetoObjective(SimulationBasedObjective):
             return 0.0
 
         # Check how many evaluations since last frontier change
-        recent_frontier_size = len(self._pareto_solutions)
+        len(self._pareto_solutions)
         evaluations_since_change = 0
 
         for eval_data in reversed(self._evaluation_history[-20:]):

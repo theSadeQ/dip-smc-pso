@@ -9,6 +9,10 @@ mathematical_references
 system_dynamics_complete
 smc_theory_complete
 pso_optimization_complete
+lyapunov_stability_analysis
+pso_algorithm_foundations
+pso_convergence_analysis
+numerical_stability_methods
 ```
 
 This section provides comprehensive theoretical coverage of the double-inverted pendulum control system, including mathematical foundations, control theory, and optimization algorithms.
@@ -42,6 +46,34 @@ Complete derivation of double-inverted pendulum dynamics from first principles t
 :link-type: doc
 
 Sliding mode control theory, Lyapunov stability analysis, and chattering mitigation strategies.
+:::
+
+:::{grid-item-card} **Lyapunov Stability Analysis**
+:link: lyapunov_stability_analysis
+:link-type: doc
+
+Research-grade stability proofs for DIP-SMC with computational validation.
+:::
+
+:::{grid-item-card} **PSO Algorithm Foundations**
+:link: pso_algorithm_foundations
+:link-type: doc
+
+Mathematical foundations of Particle Swarm Optimization with NumPy validation.
+:::
+
+:::{grid-item-card} **PSO Convergence Analysis**
+:link: pso_convergence_analysis
+:link-type: doc
+
+Research-grade convergence analysis for PSO with multi-swarm strategies and computational validation.
+:::
+
+:::{grid-item-card} **Numerical Stability Methods**
+:link: numerical_stability_methods
+:link-type: doc
+
+Comprehensive numerical methods analysis: integration, matrix conditioning, precision, discrete SMC, PSO regularization.
 :::
 ::::
 

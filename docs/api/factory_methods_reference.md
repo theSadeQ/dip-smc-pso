@@ -168,6 +168,9 @@ controller = create_controller('mpc_controller')  # Uses defaults
 **Get list of currently available controller types.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def list_available_controllers() -> List[str]
 ```
 
@@ -193,6 +196,9 @@ print("Available controllers:", available)
 **Get list of all registered controller types, including unavailable ones.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def list_all_controllers() -> List[str]
 ```
 
@@ -221,6 +227,9 @@ if unavailable:
 **Get default gains for a specific controller type.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_default_gains(controller_type: str) -> List[float]
 ```
 
@@ -241,6 +250,9 @@ def get_default_gains(controller_type: str) -> List[float]
 #### Example Usage
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Get default gains for different controllers
 classical_gains = get_default_gains('classical_smc')
 print(f"Classical SMC defaults: {classical_gains}")
@@ -371,6 +383,9 @@ def create_pso_controller_factory(
 #### Example Usage
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Create factory once (expensive operation)
 factory = create_pso_controller_factory(
     SMCType.CLASSICAL,
@@ -403,6 +418,9 @@ best_gains, best_fitness = tuner.optimize()
 **Get PSO optimization bounds for controller gains.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]]
 ```
 
@@ -450,6 +468,9 @@ upper_bounds = [30.0, 30.0, 20.0, 20.0]
 #### Example Usage
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Get bounds for PSO optimization
 bounds = get_gain_bounds_for_pso(SMCType.CLASSICAL)
 lower_bounds, upper_bounds = bounds
@@ -476,6 +497,9 @@ assert all(l < u for l, u in zip(lower_bounds, upper_bounds))
 **Validate gains for a specific controller type.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_smc_gains(smc_type: SMCType, gains: Union[list, np.ndarray]) -> bool
 ```
 
@@ -498,6 +522,9 @@ def validate_smc_gains(smc_type: SMCType, gains: Union[list, np.ndarray]) -> boo
 #### Example Usage
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Validate gains before expensive simulation
 def robust_fitness_function(gains):
     if not validate_smc_gains(SMCType.CLASSICAL, gains):
@@ -530,6 +557,9 @@ for i, gains in enumerate(test_gains):
 **Internal function to get controller registry information.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _get_controller_info(controller_type: str) -> Dict[str, Any]
 ```
 
@@ -540,6 +570,9 @@ def _get_controller_info(controller_type: str) -> Dict[str, Any]
 The `CONTROLLER_REGISTRY` contains comprehensive metadata for each controller:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'controller_type': {
         'class': ControllerClass,              # Implementation class
@@ -558,6 +591,9 @@ CONTROLLER_REGISTRY = {
 The following aliases are supported for backward compatibility:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_ALIASES = {
     'classic_smc': 'classical_smc',
     'smc_classical': 'classical_smc',
@@ -668,6 +704,9 @@ def _validate_mpc_parameters(
 #### MPC Validation Rules
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Horizon must be positive integer
 if 'horizon' in params and (not isinstance(params['horizon'], int) or params['horizon'] < 1):
     raise ConfigValueError("horizon must be ≥ 1")
@@ -707,6 +746,9 @@ ControllerT = TypeVar('ControllerT')
 **Standard interface that all controllers must implement.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerProtocol(Protocol):
     """Protocol defining the standard controller interface."""
 
@@ -788,6 +830,9 @@ except ConfigValueError as e:
 **Raised for invalid controller types or parameters.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Unknown controller type
 try:
     controller = create_controller('invalid_controller')
@@ -808,6 +853,9 @@ except ValueError as e:
 **Raised for missing dependencies or unavailable controllers.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # MPC without optional dependencies
 try:
     controller = create_controller('mpc_controller')
@@ -821,6 +869,9 @@ except ImportError as e:
 #### Robust Error Handling
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller_safely(controller_type: str, **kwargs) -> Optional[Any]:
     """Create controller with comprehensive error handling."""
     try:
@@ -839,6 +890,9 @@ def create_controller_safely(controller_type: str, **kwargs) -> Optional[Any]:
 #### Graceful Degradation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_best_available_controller(preferred_types: List[str]) -> Any:
     """Create first available controller from preference list."""
     available = list_available_controllers()

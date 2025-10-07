@@ -55,6 +55,9 @@ def create_controller(
 
 ### 🔧 Import Organization Optimization
 ```python
+# example-metadata:
+# runnable: false
+
 # Standard library imports (grouped and sorted)
 import logging
 import threading
@@ -83,6 +86,9 @@ from src.controllers.smc.algorithms.classical.controller import ModularClassical
 
 ### 🏗️ Factory Pattern Compliance
 ```python
+# example-metadata:
+# runnable: false
+
 # Registry-based factory with metadata
 CONTROLLER_REGISTRY = {
     'classical_smc': {
@@ -99,6 +105,9 @@ CONTROLLER_REGISTRY = {
 
 ### 🏗️ Protocol-Based Design
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerProtocol(Protocol):
     """Protocol defining the standard controller interface."""
 
@@ -114,6 +123,9 @@ class ControllerProtocol(Protocol):
 
 ### 🏗️ Thread Safety Implementation
 ```python
+# example-metadata:
+# runnable: false
+
 # Thread-safe factory operations with timeout protection
 _factory_lock = threading.RLock()
 _LOCK_TIMEOUT = 10.0  # seconds
@@ -127,6 +139,9 @@ def create_controller(...) -> ControllerProtocol:
 
 ### 🎯 PSO Controller Wrapper
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """Wrapper for SMC controllers to provide PSO-compatible interface."""
 
@@ -147,6 +162,9 @@ class PSOControllerWrapper:
 
 ### 🎯 Gain Specification System
 ```python
+# example-metadata:
+# runnable: false
+
 class SMCGainSpec:
     """SMC gain specification with expected interface."""
     def __init__(self, gain_names: List[str], gain_bounds: List[Tuple[float, float]],
@@ -237,6 +255,9 @@ tests/test_controllers/factory/
 
 ### 🔄 Legacy Function Support
 ```python
+# example-metadata:
+# runnable: false
+
 # Backwards compatibility aliases
 def create_classical_smc_controller(
     config: Optional[Any] = None,
@@ -256,6 +277,9 @@ def create_controller_legacy(
 
 ### 🔄 Enum-Based Interface
 ```python
+# example-metadata:
+# runnable: false
+
 class SMCType(Enum):
     """SMC Controller types enumeration."""
     CLASSICAL = "classical_smc"
@@ -277,6 +301,9 @@ class SMCFactory:
 All Python files now feature the standardized 90-character ASCII header:
 
 ```python
+# example-metadata:
+# runnable: false
+
 #==========================================================================================\\\
 #============================== src/controllers/factory.py =============================\\\
 #==========================================================================================\\\

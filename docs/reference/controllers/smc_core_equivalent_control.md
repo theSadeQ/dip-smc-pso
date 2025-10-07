@@ -200,6 +200,9 @@ else:
 ### Example 3: Regularization Adjustment
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Adaptive regularization based on conditioning
 def adaptive_regularization(cond_number):
     if cond_number < 1e3:

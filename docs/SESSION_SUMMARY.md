@@ -61,6 +61,9 @@
 **Problem:** PSO did NOT optimize for chattering!
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Original (WRONG):
 fitness = tracking_error_rms + chattering_penalty + ...
 # chattering_penalty = 0 if chattering < 2.0 ← ALWAYS ZERO!

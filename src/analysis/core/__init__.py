@@ -20,7 +20,7 @@ from .interfaces import (
 from .data_structures import (
     SimulationData, MetricResult, PerformanceMetrics,
     FaultDetectionResult, StatisticalTestResult, ConfidenceInterval,
-    ComparisonResult, AnalysisConfiguration,
+    ComparisonResult,
     create_simulation_data_from_arrays, create_analysis_result
 )
 

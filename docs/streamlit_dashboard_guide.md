@@ -194,6 +194,9 @@ d(t) = { 0           if t < start_time
 
 **Export Current Settings**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Settings are saved automatically in browser session
 # Manual export via JSON download (if implemented)
 ```

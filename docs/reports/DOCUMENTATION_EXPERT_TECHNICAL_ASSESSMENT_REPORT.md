@@ -54,6 +54,9 @@ Based on SMC theory requirements:
 
 #### Sliding Surface Design:
 ```python
+# example-metadata:
+# runnable: false
+
 # Surface computation: s = λ₁ė₁ + c₁e₁ + λ₂ė₂ + c₂e₂
 # Mathematical Background documented with stability guarantees
 ```
@@ -70,6 +73,9 @@ Based on SMC theory requirements:
 
 **Example Excellence:**
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Particle Swarm Optimisation (PSO) tuner for sliding-mode controllers.
 
@@ -103,6 +109,9 @@ and configurable cost normalisation.
 
 #### Monte Carlo Validation:
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class MonteCarloConfig:
     """Configuration for Monte Carlo analysis."""
@@ -128,6 +137,9 @@ class MonteCarloConfig:
 
 #### Control Performance Metrics:
 ```python
+# example-metadata:
+# runnable: false
+
 # ISE = ∫₀ᵀ ||x(t)||² dt
 # ITAE = ∫₀ᵀ t·||x(t)||₁ dt
 ```
@@ -166,6 +178,9 @@ class MonteCarloConfig:
 
 #### Docstring Standard Compliance:
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state: np.ndarray, state_vars: Any, history: Dict[str, Any]) -> Dict[str, Any]:
     """
     Compute classical SMC control law.

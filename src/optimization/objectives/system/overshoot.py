@@ -152,11 +152,9 @@ class OvershootObjective(SimulationBasedObjective):
         if final_value > initial_value:  # Positive step
             peak_value = np.max(output)
             overshoot_amount = peak_value - final_value
-            direction = 1
         else:  # Negative step
             peak_value = np.min(output)
             overshoot_amount = final_value - peak_value
-            direction = -1
 
         # Find undershoot if applicable
         if final_value > initial_value:

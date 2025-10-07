@@ -30,6 +30,9 @@ This comprehensive troubleshooting guide addresses common issues encountered whe
 When encountering factory issues, run this quick diagnostic sequence:
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """Factory integration quick diagnostic tool."""
 
@@ -156,6 +159,9 @@ controller = create_controller('classical_smc')  # ✅ Correct
 
 **Solution 2: Use Controller Aliases**
 ```python
+# example-metadata:
+# runnable: false
+
 # These aliases are supported for backward compatibility
 valid_names = {
     'classical_smc': ['classical_smc', 'classic_smc', 'smc_classical', 'smc_v1'],
@@ -171,6 +177,9 @@ controller = create_controller('super_twisting')   # ✅ Alias works
 
 **Solution 3: Defensive Programming**
 ```python
+# example-metadata:
+# runnable: false
+
 def safe_create_controller(preferred_types, **kwargs):
     """Create controller with fallback options."""
     available = list_available_controllers()
@@ -236,6 +245,9 @@ python -c "from src.controllers.mpc.controller import MPCController; print('MPC 
 
 **Solution 3: Dynamic Controller Availability**
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller_with_fallback(preferred_type, fallback_type, **kwargs):
     """Create controller with automatic fallback."""
 
@@ -385,6 +397,9 @@ if verify_pso_factory(SMCType.CLASSICAL):
 
 **Solution 2: Debug Factory Creation**
 ```python
+# example-metadata:
+# runnable: false
+
 def debug_pso_factory_creation(smc_type):
     """Debug PSO factory creation step by step."""
 
@@ -754,6 +769,9 @@ gains = debug_configuration_priority(
 
 **Solution 2: Configuration Validation and Cleanup**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_and_clean_config(controller_type, config):
     """Validate and clean configuration object."""
 
@@ -1098,6 +1116,9 @@ for controller_type in ['classical_smc', 'adaptive_smc', 'sta_smc']:
 
 **Solution 2: Performance Optimization**
 ```python
+# example-metadata:
+# runnable: false
+
 class OptimizedControllerFactory:
     """Optimized controller factory with caching and pooling."""
 
@@ -1279,6 +1300,9 @@ monitor.print_summary()
 
 **Solution 2: Explicit Memory Management**
 ```python
+# example-metadata:
+# runnable: false
+
 import gc
 import weakref
 
@@ -1423,6 +1447,9 @@ fix_python_path()
 
 **Solution 2: Dependency Checker**
 ```python
+# example-metadata:
+# runnable: false
+
 def check_dependencies():
     """Check all project dependencies."""
 
@@ -1482,6 +1509,9 @@ check_dependencies()
 
 **Solution 3: Import Debugging**
 ```python
+# example-metadata:
+# runnable: false
+
 def debug_import_issues():
     """Debug specific import issues."""
 
@@ -1537,6 +1567,9 @@ Concurrent controller creation hanging
 
 **Solution 1: Reduce Factory Contention**
 ```python
+# example-metadata:
+# runnable: false
+
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -1586,6 +1619,9 @@ results = parallel_controller_creation_safe(configs)
 
 **Solution 2: Lock-Free Factory Operations**
 ```python
+# example-metadata:
+# runnable: false
+
 class LockFreeControllerCache:
     """Lock-free controller cache using pre-created controllers."""
 
@@ -1683,6 +1719,9 @@ Race conditions in control computation
 
 **Solution 1: Controller State Isolation**
 ```python
+# example-metadata:
+# runnable: false
+
 class IsolatedControllerWrapper:
     """Wrapper to ensure controller state isolation."""
 
@@ -1768,6 +1807,9 @@ def isolated_fitness_function(gains):
 ### Comprehensive Debugging Suite
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """Comprehensive factory debugging suite."""
 

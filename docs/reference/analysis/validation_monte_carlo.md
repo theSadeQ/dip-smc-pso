@@ -727,6 +727,9 @@ print(f"  Pole1 length range in failures: [{failure_params[:, 3].min():.3f}, {fa
 ### Robustness Comparison Across Controllers
 
 ```python
+# example-metadata:
+# runnable: false
+
 controllers = {
     'Classical': lambda: create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
     'Adaptive': lambda: create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]),

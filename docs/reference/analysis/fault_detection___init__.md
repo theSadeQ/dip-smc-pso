@@ -46,6 +46,9 @@ Fault detection and diagnosis tools.
 **Unified FDI interface:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FDISystem:
     def generate_residual(y, u) -> r
     def adapt_threshold(r) -> tau

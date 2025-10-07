@@ -429,7 +429,7 @@ class HILTestFramework:
         """Get current value of specified signal."""
         try:
             # Get signal from HIL system data
-            hil_status = await self._hil_system.get_system_status()
+            await self._hil_system.get_system_status()
 
             # Search in input/output data
             if signal_name in self._hil_system._input_data:

@@ -86,11 +86,17 @@ def batch_simulate(x0_batch, u_batch, dt, steps):
 
 **Array-of-Structures (AoS):**
 ```python
+# example-metadata:
+# runnable: false
+
 states = [(x1, theta1, theta2, ...), ...]  # Poor cache locality
 ```
 
 **Structure-of-Arrays (SoA):**
 ```python
+# example-metadata:
+# runnable: false
+
 x = [x1, x2, ..., xB]           # Excellent cache locality
 theta1 = [θ1_1, θ1_2, ..., θ1_B]  # Contiguous memory
 ```

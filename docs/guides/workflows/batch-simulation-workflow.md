@@ -255,6 +255,9 @@ plt.savefig('monte_carlo_distributions.png', dpi=150)
 ### 4.1 Controller Gain Sweep
 
 ```python
+# example-metadata:
+# runnable: false
+
 import numpy as np
 from src.simulation.engines.vector_sim import simulate
 from src.controllers.factory import create_controller
@@ -399,6 +402,9 @@ MemoryError: Unable to allocate array
 
 **Solution**: Reduce batch size or use chunked execution:
 ```python
+# example-metadata:
+# runnable: false
+
 # Instead of batch_size=10000
 batch_size = 1000
 n_chunks = 10
@@ -452,6 +458,9 @@ results = simulate(initial_states, controls, dt, horizon)
 
 **Statistical Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Check convergence of mean estimate
 def check_convergence(samples, window=100):
     """Check if mean estimate has converged."""
@@ -474,6 +483,9 @@ print(f"Convergence: {'✓' if converged else '✗'}")
 
 **Adaptive Refinement:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Coarse sweep first
 k1_coarse = np.linspace(5, 30, 5)
 k2_coarse = np.linspace(5, 30, 5)

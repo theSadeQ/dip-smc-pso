@@ -200,6 +200,9 @@ class TestMyController:
 ### Parametrized Tests
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.parametrize("gains,expected_valid", [
     ([10, 8, 15, 12, 50, 5], True),   # Valid
     ([0, 8, 15, 12, 50, 5], False),   # k1 = 0 invalid
@@ -516,6 +519,9 @@ test_classical_smc_benchmark
 3. **Refactor** (clean)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Write failing test
 def test_new_feature():
     controller = MyController(...)

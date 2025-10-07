@@ -26,6 +26,9 @@ This guide provides comprehensive testing patterns for sliding mode control (SMC
 Every SMC controller must pass basic initialization tests to ensure proper parameter handling:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_classical_smc_initialization():
     """Test Classical SMC initialization with valid parameters."""
     # Optimal gains from PSO optimization (report.log line 2)
@@ -66,6 +69,9 @@ def test_classical_smc_initialization():
 Test enforcement of SMC theoretical constraints (F-4.SMCDesign.2 / RC-04):
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_gain_positivity_enforcement():
     """Test strict positivity requirements for SMC gains."""
     boundary_layer = 0.1
@@ -133,6 +139,9 @@ def test_gain_positivity_enforcement():
 ### 2.1 State Vector Dimension Testing
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_state_vector_validation():
     """Test proper handling of state vectors with correct dimensions."""
     controller = create_test_controller()
@@ -167,6 +176,9 @@ def test_state_vector_validation():
 ### 2.2 Physical State Bounds Testing
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_physical_state_bounds():
     """Test controller behavior within and beyond physical limits."""
     controller = create_test_controller()
@@ -208,6 +220,9 @@ def test_physical_state_bounds():
 Test that the Lyapunov candidate function $V = \frac{1}{2}\sigma^2$ decreases along trajectories:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_lyapunov_decrease_property():
     """Test Lyapunov decrease property: V̇ < 0 when |σ| > 0."""
     controller = create_test_controller()
@@ -299,6 +314,9 @@ def test_lyapunov_decrease_ratio_monitoring():
 From `report.log` line 16, the optimal gains are: `[77.62, 44.45, 17.31, 14.25, 18.66, 9.76]`
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_optimal_gains_performance():
     """Test performance characteristics of PSO-optimized gains."""
     # PSO optimal gains
@@ -346,6 +364,9 @@ def test_optimal_gains_performance():
 ### 4.2 Chattering Analysis with Optimal Gains
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_chattering_reduction_with_large_boundary_layer():
     """Test that large boundary layer (9.76) effectively reduces chattering."""
     optimal_gains = [77.62, 44.45, 17.31, 14.25, 18.66, 9.76]
@@ -397,6 +418,9 @@ def test_chattering_reduction_with_large_boundary_layer():
 ### 5.1 Standard Interface Methods
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_controller_interface_compliance():
     """Test compliance with BaseController interface."""
     controller = create_test_controller()
@@ -424,6 +448,9 @@ def test_controller_interface_compliance():
 ### 5.2 History Tracking
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_history_telemetry():
     """Test that controller properly tracks telemetry in history."""
     controller = create_test_controller()
@@ -455,6 +482,9 @@ def test_history_telemetry():
 ### 6.1 Performance Benchmarks
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.benchmark
 def test_compute_control_performance(benchmark):
     """Benchmark control computation for real-time requirements."""
@@ -477,6 +507,9 @@ def test_compute_control_performance(benchmark):
 ### 6.2 Numerical Stability Testing
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_numerical_stability():
     """Test controller numerical stability under edge cases."""
     controller = create_test_controller()
@@ -500,6 +533,9 @@ def test_numerical_stability():
 ### 6.3 Monte Carlo Robustness Testing
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_monte_carlo_robustness():
     """Test controller robustness with random state sampling."""
     controller = create_test_controller()
@@ -539,6 +575,9 @@ def test_monte_carlo_robustness():
 ## Helper Functions
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_test_controller():
     """Create controller with optimal gains for testing."""
     optimal_gains = [77.62, 44.45, 17.31, 14.25, 18.66, 9.76]

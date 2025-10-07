@@ -466,7 +466,7 @@ class StatisticalTestSuite(StatisticalValidator):
         # Simplified implementation - in practice would use statsmodels
         try:
             # Simple regression: diff(y) = alpha + beta*y_lag + error
-            y = data[1:]
+            data[1:]
             y_lag = data[:-1]
             y_diff = np.diff(data)
 

@@ -586,7 +586,7 @@ class StabilityAnalyzer(PerformanceAnalyzer):
             time_indices = np.arange(len(signal))
             growth_rate = np.polyfit(time_indices, log_signal, 1)[0]
             return float(growth_rate)
-        except:
+        except Exception:
             return 0.0
 
     def _estimate_convergence_rate(self, times: np.ndarray, magnitude: np.ndarray) -> float:
@@ -611,7 +611,7 @@ class StabilityAnalyzer(PerformanceAnalyzer):
             convergence_rate = -np.polyfit(t_fit, log_y, 1)[0]
             return float(max(0.0, convergence_rate))
 
-        except:
+        except Exception:
             return 0.0
 
     def _analyze_asymptotic_behavior(self, times: np.ndarray, magnitude: np.ndarray) -> Dict[str, float]:
@@ -869,7 +869,7 @@ class StabilityAnalyzer(PerformanceAnalyzer):
             else:
                 return 0.0
 
-        except:
+        except Exception:
             return 0.0
 
     def _compute_stability_index(self, states: np.ndarray) -> float:
@@ -982,7 +982,7 @@ class StabilityAnalyzer(PerformanceAnalyzer):
             max_sensitivity = np.max(condition_numbers)
             avg_sensitivity = np.mean(condition_numbers)
 
-        except:
+        except Exception:
             max_sensitivity = np.inf
             avg_sensitivity = np.inf
 
@@ -1048,7 +1048,7 @@ class StabilityAnalyzer(PerformanceAnalyzer):
         # Analyze robustness
         if 'robustness' in results:
             robustness = results['robustness']
-            if robustness.get('robustness_margins', {}).get('is_robustly_stable', True) == False:
+            if not robustness.get('robustness_margins', {}).get('is_robustly_stable', True):
                 assessment['confidence_level'] = 'low'
                 assessment['recommendations'].append('Improve robustness margins')
 

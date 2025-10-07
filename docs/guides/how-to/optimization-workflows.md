@@ -244,6 +244,9 @@ pso:
 Create `custom_cost.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def minimal_settling_time_cost(metrics, config):
     """
     Custom cost emphasizing fast settling.
@@ -358,6 +361,9 @@ plt.show()
 ### Constraint Handling
 
 ```python
+# example-metadata:
+# runnable: false
+
 def constrained_cost(metrics, config):
     """
     Cost function with strict constraints.
@@ -422,6 +428,9 @@ if 'pso_history' in data:
 
 **Diagnosis:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Check if swarm collapsed
 if 'pso_history' in data:
     final_best = best_costs[-1]
@@ -469,6 +478,9 @@ if volatility > 0.1 * np.mean(best_costs):
 ### Restart Strategies
 
 ```python
+# example-metadata:
+# runnable: false
+
 def multi_start_pso(n_restarts=3):
     """
     Run PSO multiple times with different initializations.
@@ -695,6 +707,9 @@ python simulate.py --ctrl classical_smc --run-pso \
 ### Optimized Gains Cause Instability
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Check gains for physical plausibility
 with open('optimized_gains.json') as f:
     gains = json.load(f)['gains']

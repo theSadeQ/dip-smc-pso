@@ -335,7 +335,6 @@ class RobustnessObjective(SimulationBasedObjective):
 
     def _generate_extreme_variations(self) -> List[Dict[str, float]]:
         """Generate extreme parameter variations for worst-case analysis."""
-        variations = []
 
         # Generate all combinations of extreme values
         extreme_params = ['cart_mass', 'pend1_mass', 'pend2_mass', 'pend1_length', 'pend2_length']

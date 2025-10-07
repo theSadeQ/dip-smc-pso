@@ -327,6 +327,9 @@ if __name__ == "__main__":
 
 #### Coverage Gap Identification Script
 ```python
+# example-metadata:
+# runnable: false
+
 # scripts/coverage_gap_analyzer.py
 #==========================================================================================\\\
 #=============================== coverage_gap_analyzer.py =============================\\\
@@ -432,6 +435,9 @@ class CoverageGapAnalyzer:
 
 #### Test Coverage Requirements by Component Type
 ```python
+# example-metadata:
+# runnable: false
+
 # Test development guidelines with mathematical validation
 
 class TestCoverageStandards:

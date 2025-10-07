@@ -107,6 +107,9 @@ The controller factory pattern implementation for the DIP-SMC-PSO project has be
 
 #### Factory Registration Pattern
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,

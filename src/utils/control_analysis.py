@@ -10,12 +10,19 @@ control analysis utilities at src.utils.control_analysis. All functionality
 is re-exported from the actual implementation location.
 """
 
-# Import all control analysis functionality
-from ..analysis.performance.control_analysis import *
-
-# Explicitly import key classes for clarity
-from ..analysis.performance.control_analysis import ControlAnalyzer
+# Import control analysis functionality
+from ..analysis.performance.control_analysis import (
+    ControlAnalyzer,
+    controllability_matrix,
+    observability_matrix,
+    check_controllability_observability,
+    linearize_dip,
+)
 
 __all__ = [
     'ControlAnalyzer',
+    'controllability_matrix',
+    'observability_matrix',
+    'check_controllability_observability',
+    'linearize_dip',
 ]

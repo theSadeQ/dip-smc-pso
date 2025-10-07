@@ -796,6 +796,9 @@ controller = create_controller('classical_smc')  # No config
 The factory uniquely implements **automatic correction for invalid default gains**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Scenario: Registry defaults violate STA constraint K1 > K2
 CONTROLLER_REGISTRY['sta_smc']['default_gains'] = [15.0, 20.0, ...]  # K1=15 ≤ K2=20 ✗
 
@@ -863,6 +866,9 @@ wrapper.compute_control(state)  # Returns np.ndarray
 The factory uses a **reentrant lock with timeout** to ensure thread safety:
 
 ```python
+# example-metadata:
+# runnable: false
+
 _factory_lock = threading.RLock()  # Reentrant allows nested calls
 _LOCK_TIMEOUT = 10.0  # Prevents deadlocks
 
@@ -903,6 +909,9 @@ def create_controller(controller_type, config=None, gains=None):
 
 #### Enhancement 1: Dynamic Plugin System
 ```python
+# example-metadata:
+# runnable: false
+
 # Future API
 from src.controllers.factory import register_controller
 

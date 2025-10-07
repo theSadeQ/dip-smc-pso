@@ -106,6 +106,9 @@
 
 **PSO Configuration (Validated):**
 ```python
+# example-metadata:
+# runnable: false
+
 # Multi-objective fitness function
 fitness = tracking_error_rms + 10.0 * max(0, chattering_index - 2.0)
 
@@ -660,6 +663,9 @@ setattr(config.controllers, 'classical_smc', updated)
 
 **Must match validation test exactly:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Time domain: RMS of control derivative
 control_derivative = np.gradient(control_history, dt)
 time_domain_index = np.sqrt(np.mean(control_derivative**2))

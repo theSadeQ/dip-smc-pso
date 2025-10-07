@@ -371,6 +371,9 @@ print(f"Final tracking error: {np.linalg.norm(result.states[-1, :2]):.4f}")
 ### Batch Simulation for Parameter Sweeps
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.simulation.engines.vector_sim import simulate_system_batch
 import numpy as np
 
@@ -399,6 +402,9 @@ print(f"Mean settling time: {np.mean(settling_times):.2f}s")
 ### Numba JIT Acceleration Pattern
 
 ```python
+# example-metadata:
+# runnable: false
+
 from numba import jit
 from src.simulation.engines.simulation_runner import SimulationRunner
 

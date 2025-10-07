@@ -166,6 +166,9 @@ T_reach ≤ 2·1.0^(1/2) / 25^(1/2) = 0.4 seconds
 ### 1. Modular Controller Structure
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SuperTwistingSMC:
     """
     Second-order sliding mode controller (STA):
@@ -252,6 +255,9 @@ class SuperTwistingSMC:
 
 **Accelerated Operations**:
 ```python
+# example-metadata:
+# runnable: false
+
 @numba.njit(cache=True)
 def _sta_smc_core(...):
     # Sliding surface (inline)
@@ -280,6 +286,9 @@ def _sta_smc_core(...):
 #### 1.1 Complete Numba Core
 
 ```python
+# example-metadata:
+# runnable: false
+
 @numba.njit(cache=True)
 def _sta_smc_core(
     z, sigma, sgn_sigma,
@@ -323,6 +332,9 @@ def _sta_smc_core(
 #### 1.2 Main Control Method
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars, history):
     """Compute STA-SMC control with Numba acceleration."""
 
@@ -537,6 +549,9 @@ for t in simulation_time:
 ### 2. Monitoring STA-Specific Metrics
 
 ```python
+# example-metadata:
+# runnable: false
+
 def monitor_sta_performance(controller, result, history):
     """Monitor STA-specific performance indicators."""
 
@@ -690,6 +705,9 @@ max_force: 200.0  # From 150.0
 ### 2. Diagnostic Tools
 
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_sta_health(controller, history):
     """Diagnose STA SMC health."""
 

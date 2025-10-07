@@ -14,4 +14,6 @@ Usage:
 """
 
 # Re-export everything from the actual location
-from ..analysis.fault_detection import *
+from ..analysis.fault_detection import FaultDetectionInterface
+
+__all__ = ["FaultDetectionInterface"]

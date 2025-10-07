@@ -292,6 +292,9 @@ graph TB
 
 **Implementation**:
 ```python
+# example-metadata:
+# runnable: false
+
 def _numeric_linearize_continuous(dyn, x_eq, u_eq, eps=1e-6):
     """
     Compute Jacobian matrices A, B around (x_eq, u_eq).
@@ -333,6 +336,9 @@ def _numeric_linearize_continuous(dyn, x_eq, u_eq, eps=1e-6):
 
 **Zero-Order Hold Method**:
 ```python
+# example-metadata:
+# runnable: false
+
 def _discretize_exact(A_c, B_c, dt):
     """
     Exact ZOH discretization via matrix exponential.
@@ -367,6 +373,9 @@ def _discretize_exact(A_c, B_c, dt):
 
 **Setup Phase**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Decision variables
 X = cp.Variable((6, N+1))  # State trajectory
 U = cp.Variable((1, N))    # Control sequence
@@ -445,6 +454,9 @@ When QP fails or cvxpy unavailable:
 
 **Fallback Logic** (source: `mpc_controller.py:428-463`):
 ```python
+# example-metadata:
+# runnable: false
+
 def _safe_fallback(self, x₀):
     # Prefer SMC if instantiated
     if self._fallback is not None:
@@ -501,6 +513,9 @@ if max_du is not None:
 **Key Classes and Functions**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class MPCWeights:
     """Cost function weights for MPC optimization."""
@@ -544,6 +559,9 @@ class MPCController:
 #### 2.1 Linearization (Lines 72-131)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _numeric_linearize_continuous(dyn, x_eq, u_eq, eps=1e-6):
     """
     Central finite difference Jacobian computation.
@@ -594,6 +612,9 @@ def _numeric_linearize_continuous(dyn, x_eq, u_eq, eps=1e-6):
 #### 2.2 Discretization (Lines 142-153)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _discretize_exact(Ac, Bc, dt):
     """
     Zero-order hold discretization via matrix exponential.
@@ -641,6 +662,9 @@ Thus: A_d = exp(A Δt), B_d = ∫₀^Δt exp(Aτ)dτ B
 #### 2.3 QP Formulation (Lines 362-396)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Decision variables
 X = cp.Variable((nx, N+1))  # States: 6 × (N+1)
 U = cp.Variable((nu, N))    # Controls: 1 × N
@@ -686,6 +710,9 @@ prob.solve(solver=cp.OSQP, warm_start=True)
 #### 2.4 Solver and Fallback (Lines 407-463)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Solve with warm start
 try:
     prob.solve(solver=cp.OSQP, warm_start=True, verbose=False)
@@ -876,6 +903,9 @@ mpc = MPCController(
 #### 3.1 High-Performance MPC
 
 ```python
+# example-metadata:
+# runnable: false
+
 weights = MPCWeights(
     q_x=0.5,          # Less emphasis on cart position
     q_theta=20.0,     # Strong angle penalty
@@ -897,6 +927,9 @@ mpc = MPCController(
 #### 3.2 Real-Time Optimized MPC
 
 ```python
+# example-metadata:
+# runnable: false
+
 weights = MPCWeights(
     q_theta=10.0,
     r_u=1e-2
@@ -965,6 +998,9 @@ mpc = MPCController(
 #### 1.2 Control Loop Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Simulation loop
 t = 0.0
 dt = 0.02
@@ -1261,6 +1297,9 @@ N=50:  ~15 ms
 
 **Solutions**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Relax angle constraints
 mpc = MPCController(
     dynamics,

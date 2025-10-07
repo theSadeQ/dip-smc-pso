@@ -22,6 +22,9 @@ Abstract base controller interface for the double inverted pendulum system.
 **Minimal interface** all controllers must implement:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerProtocol(Protocol):
     def compute_control(
         self,
@@ -53,6 +56,9 @@ class ControllerProtocol(Protocol):
 **Contravariant input types:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class Controller(ABC):
     def compute_control(
         self,
@@ -65,6 +71,9 @@ class Controller(ABC):
 **Covariant return types:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class Controller(ABC):
     def compute_control(...) -> Tuple[float, Dict, Dict]:  # Subclasses can return more specific types
         ...
@@ -110,6 +119,9 @@ def simulate(controller: ControllerProtocol):
 **Solution:** Return updated state variables:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(
     self,
     state: np.ndarray,
@@ -210,6 +222,9 @@ graph TD
 ### Example 1: Basic Controller Protocol Usage
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.controllers.base.controller_interface import ControllerProtocol
 import numpy as np
 
@@ -244,6 +259,9 @@ result_adaptive = simulate(adaptive, duration=5.0)
 ### Example 2: Duck Typing vs Explicit Protocol
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Duck typing (no type checking)
 def simulate_duck(controller):  # No type hint
     u = controller.compute_control(state, {}, {})  # Hope it works!
@@ -283,6 +301,9 @@ history_adaptive = reset_controller(adaptive)    # Works
 ### Example 4: State Variable Pattern
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Controller with internal state (e.g., adaptation)
 class AdaptiveController(Controller):
     def compute_control(self, state, state_vars, history):

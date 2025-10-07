@@ -218,6 +218,9 @@ python -m pytest tests/test_controllers/smc/core/ \
 
 ### Critical Components (≥95% Required)
 ```python
+# example-metadata:
+# runnable: false
+
 CRITICAL_COMPONENT_PATTERNS = [
     'controllers/smc',
     'controllers/adaptive_smc',
@@ -353,6 +356,9 @@ python scripts/coverage_validator.py --verbose --coverage-xml coverage.xml --out
 
 #### 2. Systematic Coverage Improvement
 ```python
+# example-metadata:
+# runnable: false
+
 # Coverage improvement workflow:
 # 1. Identify lowest coverage modules
 # 2. Focus on critical components first

@@ -227,6 +227,9 @@ if margin < 0.1 * u_max:
 ### Example 3: Frequency Bounds Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Compute natural frequencies
 omega_n1 = np.sqrt(c1 / lambda1)
 omega_n2 = np.sqrt(c2 / lambda2)
@@ -251,6 +254,9 @@ else:
 ### Example 4: Robustness Margin
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Model uncertainty bound
 Delta_max = 20.0  # N (maximum disturbance/uncertainty)
 

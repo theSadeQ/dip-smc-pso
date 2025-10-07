@@ -62,6 +62,9 @@ from controllers.factory.monitoring import (
 ### SMCType Enumeration
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SMCType(Enum):
     """
     Enumeration of supported SMC controller types for PSO optimization.
@@ -174,6 +177,9 @@ class SMCType(Enum):
 ### SMCGainSpec Specification Class
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SMCGainSpec:
     """
@@ -304,6 +310,9 @@ class SMCGainSpec:
 ### create_smc_for_pso
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_smc_for_pso(smc_type: SMCType,
                       gains: List[float],
                       max_force: float = 100.0,
@@ -684,6 +693,9 @@ def get_gain_bounds_for_pso(smc_type: SMCType,
 ### validate_smc_gains
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_smc_gains(smc_type: SMCType,
                       gains: List[float],
                       strict: bool = True,
@@ -1034,6 +1046,9 @@ def validate_smc_gains(smc_type: SMCType,
 ### PSOControllerWrapper Class
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """
     PSO-optimized wrapper providing simplified interface for SMC controllers.
@@ -1388,6 +1403,9 @@ class PSOControllerWrapper:
 ### SMC_GAIN_SPECS Registry
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Global registry of SMC gain specifications
 SMC_GAIN_SPECS: Dict[SMCType, SMCGainSpec] = {
 
@@ -1511,6 +1529,9 @@ SMC_GAIN_SPECS: Dict[SMCType, SMCGainSpec] = {
 ### Constraint Validation Functions
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_mathematical_constraints(smc_type: SMCType,
                                     gains: List[float],
                                     tolerance: float = 1e-8
@@ -1631,6 +1652,9 @@ def estimate_stability_properties(smc_type: SMCType,
 ### Factory Configuration Classes
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class PSOFactoryConfig:
     """
@@ -1723,6 +1747,9 @@ def load_factory_config(config_dict: Dict[str, Any]) -> PSOFactoryConfig:
 ### Multi-Objective PSO Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def multi_objective_pso_optimization(
     controller_types: List[SMCType],
     simulation_config: Dict[str, Any],
@@ -2134,6 +2161,9 @@ class PSOConvergenceDetector:
 ### Real-Time Performance Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOPerformanceMonitor:
     """
     Real-time performance monitoring for PSO-Factory integration.
@@ -2513,6 +2543,9 @@ def timeout_context(seconds: float):
 ### Complete PSO Optimization Workflow
 
 ```python
+# example-metadata:
+# runnable: false
+
 def complete_pso_optimization_example():
     """
     Complete example demonstrating PSO-Factory integration.

@@ -523,6 +523,9 @@ python simulate.py --load gains_classical.json \
 **Robustness Check:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 scenarios = ['small', 'large', 'cart', 'velocity']
 results = {}
 
@@ -579,6 +582,9 @@ pso:
 
 Create `custom_cost.py`:
 ```python
+# example-metadata:
+# runnable: false
+
 def custom_cost_function(metrics: dict, config: dict) -> float:
     """
     Custom cost emphasizing settling time with hard constraints.
@@ -887,6 +893,9 @@ Example: 30 × 100 × (5.0 / 0.01) × 0.001 = 1500 seconds ≈ 25 minutes
 
 **Diagnosis:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Check if any particles are improving
 pso_log = json.load(open('optimized_gains.json'))
 if 'pso_history' in pso_log:

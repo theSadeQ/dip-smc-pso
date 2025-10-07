@@ -133,6 +133,9 @@ for metric, (mean, ci_width) in ci_results.items():
 #### 2.2.1 Control Metrics
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/benchmarks/metrics/control_metrics.py
 
 def compute_ise(t: np.ndarray, x: np.ndarray) -> float:
@@ -416,6 +419,9 @@ def compute_damping_ratio(x: np.ndarray, t: np.ndarray) -> float:
 #### 2.2.3 Constraint Metrics
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/benchmarks/metrics/constraint_metrics.py
 
 def count_control_violations(u: np.ndarray, max_force: float) -> int:
@@ -551,6 +557,9 @@ def compute_basic_metrics(t: np.ndarray, x: np.ndarray, u: np.ndarray) -> dict:
 ### 2.3 Core Trial Execution (`src/benchmarks/core/`)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/benchmarks/core/trial_runner.py
 
 def run_multiple_trials(controller_factory: Callable,
@@ -639,6 +648,9 @@ def run_multiple_trials(controller_factory: Callable,
 ### 2.4 Statistical Analysis (`src/benchmarks/statistics/`)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/benchmarks/statistics/confidence_intervals.py
 
 def compute_t_confidence_intervals(metrics_list: List[dict],
@@ -818,6 +830,9 @@ def compare_controllers(metrics_a: List[dict], metrics_b: List[dict],
 ### 2.5 Main Benchmarking Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 # src/benchmarks/statistical_benchmarks_v2.py
 
 def run_trials(controller_factory: Callable,
@@ -1103,6 +1118,9 @@ class AdaptiveRK45Integrator:
 ### 3.2 Accuracy Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 # benchmarks/analysis/accuracy_metrics.py
 
 def compute_energy_conservation(t: np.ndarray, x: np.ndarray,

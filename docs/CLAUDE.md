@@ -251,6 +251,9 @@ When approaching token limit (automatically detected or explicit):
 
 **Key Functions:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Check for continuable session
 has_recent_session(threshold_hours=24) -> bool
 
@@ -737,6 +740,9 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 
 **Example: End-to-End PSO Workflow**
 ```python
+# example-metadata:
+# runnable: false
+
 # scripts/optimization/monitor_and_validate.py pattern:
 # 1. Monitor PSO logs for completion
 # 2. Auto-trigger validation when done
@@ -746,6 +752,9 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 
 **Example: Validation Pipeline**
 ```python
+# example-metadata:
+# runnable: false
+
 # scripts/optimization/validate_and_summarize.py pattern:
 # 1. Load optimized gains from JSON
 # 2. Re-simulate with exact PSO metrics
@@ -780,6 +789,9 @@ All SMC controllers implement explicit memory cleanup to prevent leaks in long-r
 #### 1. Weakref for Model References
 Controllers use `weakref.ref()` to break circular references between controller and dynamics model:
 ```python
+# example-metadata:
+# runnable: false
+
 # ClassicalSMC implementation
 if dynamics_model is not None:
     self._dynamics_ref = weakref.ref(dynamics_model)
@@ -796,6 +808,9 @@ def dyn(self):
 
 #### 2. Explicit Cleanup
 ```python
+# example-metadata:
+# runnable: false
+
 from src.controllers.smc import ClassicalSMC
 
 controller = ClassicalSMC(gains=[...], max_force=100, boundary_layer=0.01)
@@ -806,6 +821,9 @@ del controller
 
 #### 3. Automatic Cleanup (Destructor)
 ```python
+# example-metadata:
+# runnable: false
+
 # Automatic cleanup when controller goes out of scope
 def run_simulation():
     controller = ClassicalSMC(...)
@@ -854,6 +872,9 @@ result = simulate(controller)
 
 **Long-running (server deployment):**
 ```python
+# example-metadata:
+# runnable: false
+
 controller = HybridAdaptiveSTASMC(gains=[...], dt=0.01, max_force=100, ...)
 history = controller.initialize_history()
 
@@ -868,6 +889,9 @@ while running:
 
 **Batch operations (PSO optimization):**
 ```python
+# example-metadata:
+# runnable: false
+
 for i in range(10000):
     controller = AdaptiveSMC(gains=candidates[i], ...)
     fitness[i] = evaluate(controller)
@@ -901,6 +925,9 @@ pytest tests/test_integration/test_memory_management/ -m stress -v
 ## 12) Controller Factory & Example Snippets
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.controllers.factory import create_controller
 controller = create_controller(
   'classical_smc',

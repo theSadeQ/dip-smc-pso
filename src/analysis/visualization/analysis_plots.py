@@ -13,6 +13,11 @@ from __future__ import annotations
 from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import stats
+import warnings
+
+from ..core.interfaces import VisualizationGenerator, AnalysisResult
+
 # Use matplotlib directly instead of seaborn for minimal dependencies
 # Set style to match common seaborn defaults
 plt.style.use('default')
@@ -23,10 +28,6 @@ plt.rcParams.update({
     'axes.grid': True,
     'grid.alpha': 0.3
 })
-from scipy import stats
-import warnings
-
-from ..core.interfaces import VisualizationGenerator, AnalysisResult
 
 
 class AnalysisPlotter(VisualizationGenerator):
@@ -380,7 +381,7 @@ class AnalysisPlotter(VisualizationGenerator):
             x = np.linspace(np.min(dist_data), np.max(dist_data), 100)
             y = stats.norm.pdf(x, mu, sigma)
             ax.plot(x, y, 'r-', linewidth=2, label=f'Normal fit (μ={mu:.3f}, σ={sigma:.3f})')
-        except:
+        except Exception:
             pass
 
         ax.set_xlabel('Value')
@@ -462,7 +463,7 @@ class AnalysisPlotter(VisualizationGenerator):
 
         # Create significance plot
         colors = ['red' if p < 0.05 else 'gray' for p in p_values]
-        bars = ax.barh(range(len(comparisons)), [-np.log10(p) for p in p_values], color=colors, alpha=0.7)
+        ax.barh(range(len(comparisons)), [-np.log10(p) for p in p_values], color=colors, alpha=0.7)
 
         ax.axvline(x=-np.log10(0.05), color='red', linestyle='--', label='α = 0.05')
         ax.set_xlabel('-log₁₀(p-value)')
@@ -497,7 +498,7 @@ class AnalysisPlotter(VisualizationGenerator):
             else:
                 colors.append('red')        # Large
 
-        bars = ax.barh(range(len(comparisons)), effect_sizes, color=colors, alpha=0.7)
+        ax.barh(range(len(comparisons)), effect_sizes, color=colors, alpha=0.7)
 
         ax.axvline(x=0, color='black', linestyle='-', alpha=0.5)
         ax.axvline(x=0.2, color='blue', linestyle='--', alpha=0.5, label='Small')
@@ -593,7 +594,7 @@ class AnalysisPlotter(VisualizationGenerator):
                 params = dist.fit(dist_data)
                 y = dist.pdf(x, *params)
                 ax.plot(x, y, color=color, linewidth=2, label=f'{dist.name} fit')
-            except:
+            except Exception:
                 continue
 
         ax.set_xlabel('Value')
@@ -681,7 +682,7 @@ class AnalysisPlotter(VisualizationGenerator):
         n_vars = correlation_data.shape[0]
         for i in range(n_vars):
             for j in range(n_vars):
-                text = ax.text(j, i, f'{correlation_data[i, j]:.2f}',
+                ax.text(j, i, f'{correlation_data[i, j]:.2f}',
                              ha="center", va="center", color="black" if abs(correlation_data[i, j]) < 0.5 else "white")
 
         ax.set_title('Correlation Matrix')
@@ -760,7 +761,7 @@ class AnalysisPlotter(VisualizationGenerator):
                     y_values = np.array(value)
                     x_values = np.arange(len(y_values))
                     time_series[key] = (x_values, y_values)
-                except:
+                except Exception:
                     continue
 
         return time_series
@@ -774,7 +775,7 @@ class AnalysisPlotter(VisualizationGenerator):
                     dist_data = np.array(value).flatten()
                     if len(dist_data) > 10 and np.all(np.isfinite(dist_data)):
                         return dist_data
-                except:
+                except Exception:
                     continue
 
         return None

@@ -52,6 +52,9 @@ Controller instance implementing the `ControllerProtocol`
 #### Examples
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Basic controller creation
 controller = create_controller(
     'classical_smc',
@@ -73,6 +76,9 @@ controller = create_controller('classic_smc', gains=[...])  # Alias for classica
 
 #### Signature
 ```python
+# example-metadata:
+# runnable: false
+
 def list_available_controllers() -> List[str]
 ```
 
@@ -92,6 +98,9 @@ print(available)
 
 #### Signature
 ```python
+# example-metadata:
+# runnable: false
+
 def get_default_gains(controller_type: str) -> List[float]
 ```
 
@@ -120,6 +129,9 @@ print(defaults)
 **Protocol defining the standard controller interface.**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerProtocol(Protocol):
     def compute_control(
         self,
@@ -228,6 +240,9 @@ controller = create_controller(
 
 #### Required Parameters
 ```python
+# example-metadata:
+# runnable: false
+
 adaptive_params = {
     'gains': List[float],           # [k1, k2, λ1, λ2, γ] - 5 elements
     'max_force': float,             # Maximum control force [N]
@@ -254,6 +269,9 @@ adaptive_params = {
 
 #### Example
 ```python
+# example-metadata:
+# runnable: false
+
 controller = create_controller(
     'adaptive_smc',
     gains=[25.0, 18.0, 15.0, 10.0, 4.0],
@@ -345,6 +363,9 @@ optimized_gains = pso_optimizer.optimize(factory_func)
 
 #### Signature
 ```python
+# example-metadata:
+# runnable: false
+
 def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]]
 ```
 
@@ -381,6 +402,9 @@ print(f"Upper bounds: {upper}")
 
 #### Signature
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_smc_gains(smc_type: SMCType, gains: Union[List[float], np.ndarray]) -> bool
 ```
 
@@ -500,6 +524,9 @@ migrated_config = check_deprecated_config('classical_smc', old_config)
 
 #### Signature
 ```python
+# example-metadata:
+# runnable: false
+
 def get_controller_migration_guide(controller_type: str) -> List[str]
 ```
 
@@ -562,6 +589,9 @@ for thread in threads:
 ### Exception Hierarchy
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Factory-specific exceptions
 ValueError:
   ├── Unknown controller type

@@ -27,12 +27,13 @@ import time
 import json
 from scipy.optimize import differential_evolution, minimize
 import warnings
-warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 from src.controllers.factory import SMCType, create_smc_for_pso
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.config import load_config
 from src.utils.seed import set_global_seed
+
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 
 class OptimizationObjective(Enum):

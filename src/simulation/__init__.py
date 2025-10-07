@@ -55,7 +55,6 @@ from .strategies import (
 
 # Legacy imports from old structure (maintaining exact same interface)
 from .orchestrators.sequential import get_step_fn, step, run_simulation
-from .core.simulation_context import SimulationContext
 
 # Legacy vector simulation interface
 from .orchestrators.batch import simulate_batch as simulate
@@ -102,6 +101,7 @@ __all__ = [
     "run_simulation",        # Original simulation runner
     "simulate",              # Original vector simulation function
     "rk45_step",             # Original adaptive integration function
+    "_guard_no_nan", "_guard_energy", "_guard_bounds",  # Legacy safety guards
 ]
 
 # =============================================================================

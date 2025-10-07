@@ -329,6 +329,9 @@ The hybrid controller uses **shared surface coefficients**:
 ### 6.1 Real-Time Bounds Checking
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_smc_stability_realtime(gains: np.ndarray, controller_type: str) -> bool:
     """
     Real-time stability validation for PSO-generated gains.
@@ -388,6 +391,9 @@ def validate_smc_stability_realtime(gains: np.ndarray, controller_type: str) -> 
 
 **Software Safety Checks:**
 ```python
+# example-metadata:
+# runnable: false
+
 class SafetyBoundsEnforcer:
     """
     Hardware and safety constraint enforcement for PSO optimization.
@@ -434,6 +440,9 @@ class SafetyBoundsEnforcer:
 For parameters spanning multiple orders of magnitude, use log-space PSO:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def log_space_pso_bounds(linear_bounds: tuple) -> tuple:
     """
     Convert linear bounds to log-space for better PSO exploration.
@@ -462,6 +471,9 @@ def transform_gains_from_log(log_gains: np.ndarray) -> np.ndarray:
 
 **Penalty Method for Constraint Violations:**
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_constraint_penalty(gains: np.ndarray, controller_type: str) -> float:
     """
     Compute penalty for constraint violations in PSO fitness function.
@@ -517,6 +529,9 @@ PO = 100 × exp(-ζπ/√(1-ζ²))   [%]
 
 **Mathematical Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def verify_issue2_compliance(lambda1: float, lambda2: float) -> tuple:
     """
     Verify Issue #2 overshoot compliance through theoretical analysis.
@@ -556,6 +571,9 @@ sta_smc_issue2_compliant_bounds:
 
 **Constraint Functions for PSO:**
 ```python
+# example-metadata:
+# runnable: false
+
 def issue2_compliant_constraints(gains: np.ndarray) -> bool:
     """
     Issue #2 specific constraints for STA-SMC optimization.
@@ -584,6 +602,9 @@ def issue2_compliant_constraints(gains: np.ndarray) -> bool:
 ### 9.1 Efficient Bounds Checking for PSO
 
 ```python
+# example-metadata:
+# runnable: false
+
 class VectorizedBoundsValidator:
     """
     Optimized bounds validation for PSO swarm evaluation.

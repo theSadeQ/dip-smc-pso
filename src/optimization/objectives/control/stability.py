@@ -14,8 +14,7 @@ from ..base import SimulationBasedObjective
 
 # Try to import control library functions, fallback to basic implementations
 try:
-    from scipy import signal
-    from scipy.linalg import eigvals
+    pass  # scipy signal and eigvals not currently used
     HAS_SCIPY = True
 except ImportError:
     HAS_SCIPY = False
@@ -184,7 +183,7 @@ class StabilityMarginObjective(SimulationBasedObjective):
 
                 if len(input_signal) > 10 and np.std(input_signal) > 1e-6:
                     # Cross-correlation method for frequency response estimation
-                    dt = times[1] - times[0]
+                    times[1] - times[0]
 
                     # Simplified margin estimation using trajectory characteristics
                     # Look for oscillatory behavior and growth rates

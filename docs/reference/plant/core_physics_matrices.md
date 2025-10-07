@@ -254,6 +254,9 @@ SimplifiedDIPPhysicsMatrices
 The module uses `@njit` decorator for **JIT (Just-In-Time) compilation**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 @staticmethod
 @njit
 def _compute_inertia_matrix_numba(theta1, theta2, m0, m1, m2, ...):
@@ -644,6 +647,9 @@ print(f"Speedup: {full_time / simplified_time:.2f}×")
 ### Matrix Property Verification
 
 ```python
+# example-metadata:
+# runnable: false
+
 def verify_inertia_matrix_properties(physics, state):
     """Verify mathematical properties of M(q)."""
     M = physics.compute_inertia_matrix(state)
@@ -670,6 +676,9 @@ verify_inertia_matrix_properties(physics, state)
 ### Energy Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_kinetic_energy(state, physics):
     """Compute kinetic energy using M(q)."""
     M = physics.compute_inertia_matrix(state)

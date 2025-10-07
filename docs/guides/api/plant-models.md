@@ -375,6 +375,9 @@ class CoulombFrictionDynamics(FullDynamics):
 **Example: Adding disturbance**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class DisturbedDynamics(FullDynamics):
     """Dynamics with external disturbance."""
 
@@ -409,6 +412,9 @@ print(f"ISE with Coulomb friction: {result['metrics']['ise']:.4f}")
 ### Validation of Custom Models
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_custom_dynamics(dynamics):
     """Ensure custom dynamics satisfy basic properties."""
     state = np.array([0, 0, 0.1, 0, 0.15, 0])
@@ -436,6 +442,9 @@ validate_custom_dynamics(custom_dynamics)
 ### Pattern 1: Model Switching
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Optimize with simplified dynamics (fast)
 config.simulation.use_full_dynamics = False
 dynamics_simple = SimplifiedDynamics(config.dip_params)
@@ -458,6 +467,9 @@ print(f"Validation ISE: {result['metrics']['ise']:.4f}")
 ### Pattern 2: Model Comparison
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Compare simplified vs full dynamics
 results_comparison = {}
 

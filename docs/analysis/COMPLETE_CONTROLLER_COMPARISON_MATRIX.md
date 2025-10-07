@@ -187,6 +187,9 @@ hybrid_adaptive_sta_smc:
 ### PSO Convergence Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 pso_performance_matrix = {
     'classical_smc': {
         'convergence_quality': 'EXCELLENT',
@@ -298,6 +301,9 @@ Disturbance Rejection Analysis:
 ### Interface Compliance
 
 ```python
+# example-metadata:
+# runnable: false
+
 # All controllers implement the standardized interface:
 class SMCInterface(Protocol):
     def compute_control(self, state: np.ndarray,
@@ -407,6 +413,9 @@ Complexity      │                 │
 ### Decision Tree
 
 ```python
+# example-metadata:
+# runnable: false
+
 def select_smc_controller(requirements):
     """Decision tree for SMC controller selection."""
 

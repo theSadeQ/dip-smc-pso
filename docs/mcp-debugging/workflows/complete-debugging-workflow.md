@@ -242,6 +242,9 @@ grep -n "np.linalg.inv\|np.linalg.solve" src/models/dynamics.py
 ### Phase 4: Implement Regularization (filesystem)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Add to src/utils/numerical_stability.py
 
 def safe_matrix_inverse(M: np.ndarray, eps: float = 1e-10) -> np.ndarray:

@@ -82,11 +82,12 @@ __all__ = [
 
     # Algorithms
     "ParticleSwarmOptimizer", "DifferentialEvolution", "GeneticAlgorithm",
-    "BayesianOptimization", "NelderMead", "CMAES",
+    "BayesianOptimization", "NelderMead", "CMAES", "BFGSOptimizer",
 
     # Objectives
     "TrackingErrorObjective", "EnergyConsumptionObjective", "StabilityMarginObjective",
-    "SettlingTimeObjective", "OvershootObjective", "SteadyStateErrorObjective",
+    "RobustnessObjective", "SettlingTimeObjective", "OvershootObjective",
+    "SteadyStateErrorObjective", "WeightedSumObjective", "ParetoObjective",
     "SimulationBasedObjective", "AnalyticalObjective", "CompositeObjective",
 
     # Constraints
@@ -299,7 +300,7 @@ def example_pid_tuning():
     )
 
     # Create PSO optimizer
-    optimizer = create_optimizer('pso', problem.parameter_space, population_size=50)
+    create_optimizer('pso', problem.parameter_space, population_size=50)
 
     # Run optimization
     result = optimize(problem, 'pso', random_seed=42)

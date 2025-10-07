@@ -225,6 +225,9 @@ def parallel_multi_objective_pso():
 ### Basic PSO Workflow
 
 ```python
+# example-metadata:
+# runnable: false
+
 def basic_pso_optimization(controller_type: SMCType) -> Tuple[np.ndarray, float]:
     """Standard PSO optimization workflow for SMC controllers."""
 
@@ -300,6 +303,9 @@ def basic_pso_optimization(controller_type: SMCType) -> Tuple[np.ndarray, float]
 ### Advanced PSO Workflow with Constraints
 
 ```python
+# example-metadata:
+# runnable: false
+
 def constrained_pso_optimization(controller_type: SMCType) -> Tuple[np.ndarray, float]:
     """Advanced PSO with stability constraints and adaptive bounds."""
 
@@ -421,6 +427,9 @@ def constrained_pso_optimization(controller_type: SMCType) -> Tuple[np.ndarray, 
 ### Multi-Stage PSO Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 def multi_stage_pso_optimization(controller_type: SMCType) -> Tuple[np.ndarray, float]:
     """Multi-stage PSO with progressive refinement."""
 
@@ -643,6 +652,9 @@ def high_performance_pso_integration():
 ### Control Theory Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_pso_optimized_controller(gains: np.ndarray, controller_type: SMCType) -> Dict[str, Any]:
     """Comprehensive validation of PSO-optimized controller."""
 
@@ -829,6 +841,9 @@ def multi_objective_pso_optimization(controller_type: SMCType) -> Dict[str, Any]
 ### Adaptive PSO with Factory Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def adaptive_pso_optimization(controller_type: SMCType) -> Tuple[np.ndarray, float]:
     """Adaptive PSO with dynamic parameter adjustment."""
 
@@ -951,6 +966,9 @@ def fitness_function(gains):
 ### 2. Gain Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # ✅ Good: Validate gains before expensive simulation
 def robust_fitness_function(gains):
     if not validate_smc_gains(controller_type, gains):
@@ -968,6 +986,9 @@ def fragile_fitness_function(gains):
 ### 3. Error Handling
 
 ```python
+# example-metadata:
+# runnable: false
+
 # ✅ Good: Comprehensive error handling
 def robust_fitness_function(gains):
     try:
@@ -999,6 +1020,9 @@ def robust_fitness_function(gains):
 ### 4. Performance Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 # ✅ Good: Monitor PSO progress and performance
 class PSO_Monitor:
     def __init__(self):
@@ -1032,6 +1056,9 @@ def monitored_fitness_function(gains):
 ### 5. Configuration Management
 
 ```python
+# example-metadata:
+# runnable: false
+
 # ✅ Good: Centralized PSO configuration
 PSO_CONFIGS = {
     SMCType.CLASSICAL: {
@@ -1113,6 +1140,9 @@ if __name__ == "__main__":
 ### Example 2: Comparative Controller Study
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """Comparative study of different SMC controllers."""
 

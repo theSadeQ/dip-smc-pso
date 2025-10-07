@@ -21,6 +21,9 @@ If $S <: T$, then objects of type $T$ may be replaced with objects of type $S$ w
 **Protocol definition:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class Analyzer(Protocol):
     def analyze(self, data: Data) -> Result:
         ...

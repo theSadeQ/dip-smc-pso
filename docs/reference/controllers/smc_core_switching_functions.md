@@ -245,6 +245,9 @@ for beta in slopes:
 ### Example 4: Dead Zone Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def dead_zone_switching(s, epsilon, delta, K):
     """Switching with dead zone to avoid chattering near origin."""
     if abs(s) < delta:

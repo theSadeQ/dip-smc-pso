@@ -70,6 +70,9 @@ Controller Configuration
 The controller registry (`CONTROLLER_REGISTRY`) provides metadata for all available controllers:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,
@@ -103,6 +106,9 @@ CONTROLLER_REGISTRY = {
 ### Schema Definition
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class ClassicalSMCConfig:
     """Type-safe configuration for Classical SMC controller."""
@@ -179,6 +185,9 @@ class ClassicalSMCConfig:
 The configuration automatically validates parameters based on SMC theory:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_gains(self) -> None:
     """Validate gain vector according to SMC theory."""
 
@@ -232,6 +241,9 @@ performance_config = ClassicalSMCConfig(
 ### Schema Definition
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SuperTwistingSMCConfig:
     """Configuration for Super-Twisting (STA) SMC controller."""
@@ -329,6 +341,9 @@ optimized_sta_config = SuperTwistingSMCConfig(
 ### Schema Definition
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class AdaptiveSMCConfig:
     """Configuration for Adaptive SMC with parameter estimation."""
@@ -405,6 +420,9 @@ Where:
 
 #### Robust Adaptation Configuration
 ```python
+# example-metadata:
+# runnable: false
+
 robust_adaptive_config = AdaptiveSMCConfig(
     gains=[15.0, 12.0, 8.0, 6.0, 2.0],  # Conservative adaptation rate
     max_force=150.0,
@@ -420,6 +438,9 @@ robust_adaptive_config = AdaptiveSMCConfig(
 
 #### Fast Adaptation Configuration
 ```python
+# example-metadata:
+# runnable: false
+
 fast_adaptive_config = AdaptiveSMCConfig(
     gains=[20.0, 15.0, 10.0, 8.0, 5.0],  # Aggressive adaptation rate
     max_force=150.0,
@@ -440,6 +461,9 @@ fast_adaptive_config = AdaptiveSMCConfig(
 ### Schema Definition
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class HybridSMCConfig:
     """Configuration for Hybrid Adaptive STA-SMC controller."""
@@ -696,6 +720,9 @@ adaptive_controller = create_controller('adaptive_smc', config=adaptive_config)
 ### Configuration Validation Test
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_all_configurations():
     """Test configuration validation for all controller types."""
 

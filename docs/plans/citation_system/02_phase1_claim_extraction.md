@@ -36,6 +36,9 @@ Different claim types require different extraction strategies:
 
 **Anti-Pattern (Rejected):**
 ```python
+# example-metadata:
+# runnable: false
+
 class MonolithicExtractor:  # ❌ Don't do this
     def extract_all(self, files):
         # 2000+ lines mixing docs + code + math
@@ -44,6 +47,9 @@ class MonolithicExtractor:  # ❌ Don't do this
 
 **Chosen Pattern:**
 ```python
+# example-metadata:
+# runnable: false
+
 class FormalClaimExtractor:    # ✅ Specialized, 200 lines, 95% precision
 class CodeClaimExtractor:      # ✅ Specialized, 180 lines, 85% precision
 class ClaimDatabaseMerger:     # ✅ Integration, 100 lines, conflict resolution
@@ -130,6 +136,9 @@ class FormalClaimExtractor:
 #### **Confidence Scoring Algorithm**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _calculate_confidence(match, has_cite, has_proof, has_math):
     """
     Calculate extraction confidence [0, 1].
@@ -156,6 +165,9 @@ def _calculate_confidence(match, has_cite, has_proof, has_math):
 ### **Data Model**
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class FormalClaim:
     # Identity
@@ -220,6 +232,9 @@ class FormalClaim:
 ### **Unit Tests**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_extract_numbered_theorem():
     text = """
     **Theorem 1** (Convergence)
@@ -312,6 +327,9 @@ class CodeClaimExtractor(ast.NodeVisitor):
 #### **Citation Pattern Detection**
 
 ```python
+# example-metadata:
+# runnable: false
+
 PATTERNS = {
     'implements': re.compile(
         r'(?:Implements?|Implementation of|Based on)\s+'
@@ -335,6 +353,9 @@ PATTERNS = {
 ### **Data Model**
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class CodeClaim:
     id: str
@@ -407,6 +428,9 @@ def merge_claims():
 #### **2. Assign Priorities**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def assign_priority(claim: Dict) -> str:
     """
     CRITICAL: Uncited formal theorems/lemmas (scientific risk)
@@ -436,6 +460,9 @@ MEDIUM: 335 claims (67.0%)   → Research last
 #### **3. Deduplication with Fuzzy Matching**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def deduplicate_claims(claims: List[Dict]) -> List[Dict]:
     """
     Remove near-duplicates using Jaccard similarity.

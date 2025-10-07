@@ -203,6 +203,9 @@ emergency_reset = (
 
 #### Controller Factory Integration
 ```python
+# example-metadata:
+# runnable: false
+
 # All controller types successfully instantiated
 test_results = {
     'classical_smc': ✅ SUCCESS,

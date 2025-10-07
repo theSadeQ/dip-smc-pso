@@ -13,6 +13,9 @@ and Monte Carlo simulation visualizations.
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy import stats
+from typing import Dict, List, Optional, Tuple, Any, Union
+
 # Use matplotlib directly instead of seaborn for minimal dependencies
 # Set style to match common seaborn defaults
 plt.style.use('default')
@@ -23,8 +26,6 @@ plt.rcParams.update({
     'axes.grid': True,
     'grid.alpha': 0.3
 })
-from scipy import stats
-from typing import Dict, List, Optional, Tuple, Any, Union
 
 
 

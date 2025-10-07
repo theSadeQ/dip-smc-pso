@@ -294,6 +294,9 @@ class ThreadPerformanceMonitor:
 
 #### 1. Hybrid Controller Stability Validation
 ```python
+# example-metadata:
+# runnable: false
+
 # PRIORITY: Fix hybrid controller stability validation
 # Current Issue: Surface gain validation incomplete
 # Solution: Implement proper 4-gain validation logic
@@ -301,6 +304,9 @@ class ThreadPerformanceMonitor:
 
 #### 2. Dynamics Integration Enhancement
 ```python
+# example-metadata:
+# runnable: false
+
 # PRIORITY: Enhance dynamics model integration
 # Current Issue: Simplified fallback dynamics in accuracy tests
 # Solution: Full DIPDynamics integration for realistic control testing

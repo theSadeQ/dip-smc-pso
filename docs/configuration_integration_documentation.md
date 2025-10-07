@@ -122,6 +122,9 @@ controller = create_controller(
 
 #### 2. Configuration Object Attributes
 ```python
+# example-metadata:
+# runnable: false
+
 # Second priority - extracted from configuration objects
 class CustomConfig:
     def __init__(self):
@@ -150,6 +153,9 @@ controllers:
 
 #### 4. Registry Defaults
 ```python
+# example-metadata:
+# runnable: false
+
 # Fourth priority - built-in defaults
 CONTROLLER_REGISTRY = {
     'classical_smc': {
@@ -317,6 +323,9 @@ monitoring:
 The YAML configuration is validated using Pydantic models:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from pydantic import BaseModel, Field, validator
 from typing import List, Dict, Optional, Literal
 
@@ -500,6 +509,9 @@ class ClassicalSMCConfig:
 #### Adaptive SMC Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class AdaptiveSMCConfig:
     """Type-safe configuration for Adaptive SMC controller."""
@@ -583,6 +595,9 @@ class AdaptiveSMCConfig:
 #### Super-Twisting SMC Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SuperTwistingSMCConfig:
     """Type-safe configuration for Super-Twisting SMC controller."""
@@ -665,6 +680,9 @@ class SuperTwistingSMCConfig:
 The factory implements sophisticated parameter resolution to handle multiple configuration sources:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _resolve_controller_gains(
     gains: Optional[Union[List[float], np.ndarray]],
     config: Optional[Any],
@@ -756,6 +774,9 @@ controller = create_controller('classical_smc', config=config)
 #### Pattern 2: Nested Dictionary Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Nested dictionary configuration
 config = {
     'controllers': {
@@ -781,6 +802,9 @@ controller = create_controller('classical_smc', config=config)
 #### Pattern 3: Attribute-Based Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 class AttributeConfig:
     """Configuration using attributes."""
 
@@ -900,6 +924,9 @@ config_manager.register_observer(config_change_handler)
 ### Comprehensive Configuration Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationValidator:
     """Comprehensive configuration validation system."""
 
@@ -1563,6 +1590,9 @@ print(config_yaml)
 ### Automatic Parameter Migration
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationMigrationManager:
     """Handle configuration parameter migrations and deprecations."""
 

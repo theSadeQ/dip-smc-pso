@@ -36,10 +36,10 @@ def _controllability_matrix(A: np.ndarray, B: np.ndarray) -> np.ndarray:
 def _observability_matrix(A: np.ndarray, C: np.ndarray) -> np.ndarray:
     """Compute observability matrix [C; CA; CA²; ...; CA^(n-1)]."""
     n = A.shape[0]
-    O = C
+    obs_matrix = C
     for i in range(1, n):
-        O = np.vstack((O, C @ np.linalg.matrix_power(A, i)))
-    return O
+        obs_matrix = np.vstack((obs_matrix, C @ np.linalg.matrix_power(A, i)))
+    return obs_matrix
 
 
 def linearize_dip(dyn: callable, x_eq: np.ndarray, u_eq: float) -> Tuple[np.ndarray, np.ndarray]:

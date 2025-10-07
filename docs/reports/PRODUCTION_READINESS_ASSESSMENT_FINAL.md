@@ -34,6 +34,9 @@ The double-inverted pendulum sliding mode control system has achieved **exceptio
 Each component is scored on a 10-point scale with weighted importance for production deployment:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def calculate_production_readiness_v3():
     """Enhanced production readiness calculation with hybrid SMC fix validation."""
 
@@ -242,6 +245,9 @@ Factory Integration Test Results:
 
 **Quality Assessment**:
 ```python
+# example-metadata:
+# runnable: false
+
 code_quality_metrics = {
     'ascii_header_compliance': 100,      # All files have proper headers
     'type_annotation_coverage': 95,      # Near-complete type hints
@@ -329,6 +335,9 @@ Test Coverage Matrix:
 #### Before vs. After Comparison
 
 ```python
+# example-metadata:
+# runnable: false
+
 # BEFORE FIX (Broken)
 def compute_control(self, state, state_vars, history):
     # ... 674 lines of implementation ...

@@ -95,6 +95,9 @@ def test_full_dynamics_performance(benchmark):
 
 **Example**:
 ```python
+# example-metadata:
+# runnable: false
+
 def test_pso_optimization_benchmark(benchmark):
     """Benchmark PSO convergence speed"""
     tuner = PSOTuner(
@@ -315,6 +318,9 @@ def test_with_warmup(benchmark):
 ### 3. Control Interference
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.benchmark(
     disable_gc=True,  # Disable garbage collector
     min_rounds=10,    # Ensure statistical significance

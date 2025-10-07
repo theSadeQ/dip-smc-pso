@@ -341,6 +341,9 @@ H = ½(I₁θ̇₁² + I₂θ̇₂² + mẋ²) + mg(L₁cosθ₁ + L₂cosθ₂)
 
 **Convergence Order Estimation:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Richardson extrapolation
 def estimate_convergence_order(method, x0, t_span, dt_values):
     errors = []
@@ -527,6 +530,9 @@ velocity += social
 
 **Lines 120-135: Fitness Evaluation**
 ```python
+# example-metadata:
+# runnable: false
+
 def evaluate_fitness(self, gains):
     # Create controller from gains
     controller = self.factory.create(gains)
@@ -717,6 +723,9 @@ def compute_control_effort(control_signal, dt):
 
 **Weighted Sum Approach:**
 ```python
+# example-metadata:
+# runnable: false
+
 class MultiObjectiveFitness:
     def __init__(self, weights):
         self.w_ise = weights['ise']
@@ -751,6 +760,9 @@ def pareto_front(objectives):
 
 **Penalty Methods:**
 ```python
+# example-metadata:
+# runnable: false
+
 def penalized_fitness(gains, base_fitness):
     """Add penalty for constraint violations."""
     penalty = 0.0
@@ -770,6 +782,9 @@ def penalized_fitness(gains, base_fitness):
 
 **2D Slices:**
 ```python
+# example-metadata:
+# runnable: false
+
 def plot_fitness_landscape(optimizer, fixed_gains, vary_indices):
     """Visualize fitness function in 2D slice."""
     k1_range = np.linspace(0.1, 50, 50)
@@ -838,6 +853,9 @@ def plot_fitness_landscape(optimizer, fixed_gains, vary_indices):
 
 **End-to-End Optimization:**
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Define optimization problem
 problem = OptimizationProblem(
     controller_type='classical_smc',
@@ -911,6 +929,9 @@ graph TB
 
 **Main Simulation Loop (lines 120-180):**
 ```python
+# example-metadata:
+# runnable: false
+
 def run(self, controller, dynamics, duration, dt):
     # Initialize state
     x = self.initial_state
@@ -950,6 +971,9 @@ def run(self, controller, dynamics, duration, dt):
 
 **Unified State Management:**
 ```python
+# example-metadata:
+# runnable: false
+
 class SimulationContext:
     """Centralized simulation state and configuration."""
 
@@ -971,6 +995,9 @@ class SimulationContext:
 
 **Standard Workflow:**
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Configure simulation
 config = SimulationConfig(
     duration=5.0,
@@ -1047,6 +1074,9 @@ def compute_derivative(self, x, u):
 
 **Mass Matrix Computation (lines 67-95):**
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_mass_matrix(self, q):
     """
     M(q) ∈ ℝ³ˣ³ - Configuration-dependent mass matrix
@@ -1079,6 +1109,9 @@ def compute_mass_matrix(self, q):
 
 **Coriolis/Centrifugal Terms (lines 97-120):**
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_coriolis(self, q, qdot):
     """
     C(q,q̇)q̇ - Velocity-dependent forces
@@ -1107,6 +1140,9 @@ def compute_coriolis(self, q, qdot):
 
 **Gravity Vector (lines 122-135):**
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_gravity(self, q):
     """
     G(q) - Potential energy gradient
@@ -1240,6 +1276,9 @@ RK45      | 6 per step (avg)| 6x (adaptive)
 
 **Key Optimization (lines 78-95):**
 ```python
+# example-metadata:
+# runnable: false
+
 @numba.jit(nopython=True, parallel=True)
 def batch_integrate(x0_batch, gains_batch, duration, dt):
     """
@@ -1333,6 +1372,9 @@ fitness = np.sum(metrics_batch * weights, axis=1)
 
 **Working Example:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Complete runnable script
 from src.optimization import PSOCore
 from src.controllers.factory import create_controller

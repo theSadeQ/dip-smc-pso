@@ -513,22 +513,119 @@ def _validate_mpc_parameters(config_params: Dict[str, Any], controller_params: D
 def create_controller(controller_type: str,
                      config: Optional[Any] = None,
                      gains: Optional[Union[list, np.ndarray]] = None) -> Any:
-    """
-    Create a controller instance of the specified type.
+    """Create controller instance using the factory pattern with robust configuration.
 
-    This function is thread-safe and can be called concurrently from multiple threads.
+    This is the primary factory function for creating sliding mode control (SMC) and model
+    predictive control (MPC) instances. It provides a unified interface for controller
+    instantiation with automatic gain validation, configuration resolution, and error handling.
+
+    The factory supports multiple controller types with automatic parameter resolution from
+    multiple sources (explicit gains, config file, or registry defaults) and comprehensive
+    validation of controller-specific requirements.
+
+    Thread Safety:
+        This function is thread-safe and can be called concurrently from multiple threads
+        using a module-level reentrant lock (_factory_lock).
+
+    Supported Controller Types:
+        - 'classical_smc': Classical sliding mode control with boundary layer
+        - 'sta_smc': Super-twisting algorithm (second-order SMC)
+        - 'adaptive_smc': Adaptive SMC with online parameter estimation
+        - 'hybrid_adaptive_sta_smc': Hybrid adaptive super-twisting control
+        - 'mpc_controller': Model predictive control (requires optional dependencies)
+
+    Type Aliases:
+        The factory normalizes common controller type variations:
+        - 'classic_smc', 'smc_classical', 'smc_v1' → 'classical_smc'
+        - 'super_twisting', 'sta' → 'sta_smc'
+        - 'adaptive' → 'adaptive_smc'
+        - 'hybrid', 'hybrid_sta' → 'hybrid_adaptive_sta_smc'
+
+    Gain Resolution Priority:
+        1. Explicit gains parameter (if provided)
+        2. Configuration object gains (config.controllers[type].gains)
+        3. Registry default gains (CONTROLLER_REGISTRY[type]['default_gains'])
 
     Args:
-        controller_type: Type of controller ('classical_smc', 'sta_smc', etc.)
-        config: Configuration object (optional)
-        gains: Controller gains array (optional)
+        controller_type: Controller type identifier string. Case-insensitive with automatic
+            normalization of aliases (e.g., 'classic_smc' → 'classical_smc'). Must be a
+            non-empty string matching a registered controller type or alias.
+        config: Optional configuration object or dictionary containing controller parameters.
+            The factory attempts to extract parameters from multiple configuration structures:
+            - config.controllers[controller_type]: Controller-specific configuration
+            - config.physics: Physics parameters for dynamics model creation
+            - config.dynamics_model: Pre-existing dynamics model instance
+            If None, uses registry defaults with fallback configurations.
+        gains: Optional gain vector for controller tuning. If provided as numpy array, it is
+            converted to a list. Must match the expected gain count for the controller type:
+            - Classical SMC: 6 gains [k1, k2, λ1, λ2, K, kd]
+            - STA SMC: 6 gains [K1, K2, k1, k2, λ1, λ2] (must satisfy K1 > K2)
+            - Adaptive SMC: 5 gains [k1, k2, λ1, λ2, γ]
+            - Hybrid SMC: 4 gains [c1, λ1, c2, λ2]
+            - MPC: No gains (uses cost matrices instead)
 
     Returns:
-        Configured controller instance
+        Controller instance implementing the BaseController interface with methods:
+        - compute_control(state, last_control, history): Compute control output
+        - reset(): Reset internal controller state
+        - gains property: Access to controller gain vector
 
     Raises:
-        ValueError: If controller_type is not recognized
-        ImportError: If required dependencies are missing
+        ValueError: If controller_type is not recognized, is empty, is not a string, or if
+            gains have invalid length, non-finite values, or violate controller-specific
+            constraints (e.g., K1 <= K2 for STA SMC).
+        ImportError: If controller type requires missing optional dependencies (e.g., MPC
+            controller without cvxpy installation). Error message includes list of available
+            controllers.
+        FactoryConfigurationError: If configuration building fails due to invalid parameter
+            values, missing required parameters, or incompatible configuration structure.
+
+    Examples:
+        >>> from src.controllers.factory import create_controller
+        >>> from src.config import load_config
+        >>>
+        >>> # Example 1: Create with default gains from config file
+        >>> config = load_config("config.yaml")
+        >>> controller = create_controller('classical_smc', config)
+        >>> print(controller.gains)
+        [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+        >>>
+        >>> # Example 2: Create with PSO-optimized gains
+        >>> optimized_gains = [25.3, 18.7, 14.2, 10.8, 42.6, 6.1]
+        >>> controller = create_controller('classical_smc', config, gains=optimized_gains)
+        >>>
+        >>> # Example 3: Create without config (uses registry defaults)
+        >>> controller = create_controller('sta_smc')
+        >>> print(controller.gains)
+        [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+        >>>
+        >>> # Example 4: Type alias usage
+        >>> controller = create_controller('super_twisting', config)  # Normalized to 'sta_smc'
+        >>>
+        >>> # Example 5: Batch creation for comparison studies
+        >>> controller_types = ['classical_smc', 'sta_smc', 'adaptive_smc']
+        >>> controllers = [create_controller(ct, config) for ct in controller_types]
+
+    See Also:
+        - list_available_controllers(): Query available controller types
+        - get_default_gains(controller_type): Get default gains for a type
+        - CONTROLLER_REGISTRY: Registry of all supported controllers with metadata
+        - src.optimization.integration.pso_factory_bridge: PSO integration for gain optimization
+        - config.yaml: Configuration schema for controller parameters
+
+    Notes:
+        - The factory automatically validates gain constraints (e.g., K1 > K2 for STA SMC)
+        - Dynamics models are created automatically if physics parameters are in config
+        - Deprecated parameters are migrated automatically with warnings logged
+        - For invalid default gains, the factory attempts automatic correction before failing
+        - Controller-specific parameters (boundary_layer, dt, etc.) are extracted from config
+          or set to safe defaults
+        - MPC controller creation follows different patterns (no gains, requires horizon/costs)
+
+    References:
+        [1] Utkin, V. "Sliding Modes in Control and Optimization", Springer, 1992
+        [2] Levant, A. "Higher-order sliding modes", IEEE TAC, 1993
+        [3] Shtessel, Y. et al. "Sliding Mode Control and Observation", Birkhauser, 2014
     """
     with _factory_lock:
         # Normalize/alias controller type
@@ -847,11 +944,45 @@ def create_controller(controller_type: str,
 
 
 def list_available_controllers() -> list:
-    """
-    Get list of available controller types.
+    """Get list of currently available controller types that can be instantiated.
+
+    This function queries the controller registry and returns only those controller types
+    for which all required dependencies are available. Controllers that require missing
+    optional dependencies (e.g., MPC without cvxpy) are excluded from the list.
 
     Returns:
-        List of controller type names that can actually be instantiated
+        List[str]: Sorted list of controller type names that can be created via
+            create_controller(). Each name is a canonical controller type identifier:
+            ['adaptive_smc', 'classical_smc', 'hybrid_adaptive_sta_smc', 'sta_smc']
+            (if MPC dependencies are missing, 'mpc_controller' is excluded)
+
+    Examples:
+        >>> from src.controllers.factory import list_available_controllers, create_controller
+        >>>
+        >>> # Query available controllers before creation
+        >>> available = list_available_controllers()
+        >>> print(available)
+        ['adaptive_smc', 'classical_smc', 'hybrid_adaptive_sta_smc', 'sta_smc']
+        >>>
+        >>> # Dynamically create all available controllers for benchmarking
+        >>> controllers = {}
+        >>> for controller_type in list_available_controllers():
+        ...     controllers[controller_type] = create_controller(controller_type)
+        >>>
+        >>> # Check if specific controller is available
+        >>> if 'mpc_controller' in list_available_controllers():
+        ...     mpc = create_controller('mpc_controller')
+
+    See Also:
+        - list_all_controllers(): Returns all registered types including unavailable ones
+        - CONTROLLER_REGISTRY: Complete registry with availability metadata
+        - create_controller(): Primary factory function for controller instantiation
+
+    Notes:
+        - This function performs live availability checks of controller classes
+        - The returned list may change if optional dependencies are installed/uninstalled
+        - Use this function to avoid ImportError exceptions from create_controller()
+        - The list is sorted alphabetically for consistent iteration order
     """
     available_controllers = []
     for controller_type, controller_info in CONTROLLER_REGISTRY.items():
@@ -872,17 +1003,64 @@ def list_all_controllers() -> list:
 
 
 def get_default_gains(controller_type: str) -> list:
-    """
-    Get default gains for a controller type.
+    """Get default gain vector for a specific controller type from the registry.
+
+    This function retrieves the registry-defined default gains for a controller type,
+    which serve as baseline values when gains are not explicitly provided to
+    create_controller() or not found in the configuration file.
+
+    The default gains are carefully tuned for the double-inverted pendulum (DIP)
+    system and provide reasonable baseline performance. For optimal performance,
+    use PSO optimization to tune gains for specific plant configurations.
 
     Args:
-        controller_type: Type of controller
+        controller_type: Controller type identifier (must be canonical name, not alias).
+            Valid types: 'classical_smc', 'sta_smc', 'adaptive_smc',
+            'hybrid_adaptive_sta_smc', 'mpc_controller'
 
     Returns:
-        Default gains list
+        List[float]: Copy of the default gain vector for the controller type:
+            - Classical SMC: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+            - STA SMC: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+            - Adaptive SMC: [25.0, 18.0, 15.0, 10.0, 4.0]
+            - Hybrid SMC: [18.0, 12.0, 10.0, 8.0]
+            - MPC: [] (MPC uses cost matrices instead of gains)
 
     Raises:
-        ValueError: If controller_type is not recognized
+        ValueError: If controller_type is not in the registry. Error message includes
+            list of all registered controller types.
+
+    Examples:
+        >>> from src.controllers.factory import get_default_gains, create_controller
+        >>>
+        >>> # Example 1: Query default gains before optimization
+        >>> default_gains = get_default_gains('classical_smc')
+        >>> print(f"Default gains: {default_gains}")
+        Default gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+        >>>
+        >>> # Example 2: Use defaults as PSO initialization
+        >>> from src.optimization.integration.pso_factory_bridge import create_optimized_controller_factory
+        >>> initial_guess = get_default_gains('sta_smc')
+        >>> # PSO optimization starts from initial_guess...
+        >>>
+        >>> # Example 3: Compare controller with defaults vs. optimized gains
+        >>> controller_default = create_controller('classical_smc')  # Uses defaults
+        >>> controller_tuned = create_controller('classical_smc', gains=[25.0, 18.0, 14.0, 10.0, 42.0, 6.0])
+        >>> print(f"Default cost: {evaluate(controller_default)}")
+        >>> print(f"Tuned cost: {evaluate(controller_tuned)}")
+
+    See Also:
+        - CONTROLLER_REGISTRY: Complete registry with default gains and metadata
+        - create_controller(): Uses these defaults when gains are not provided
+        - src.optimization.algorithms.pso_optimizer: PSO-based gain optimization
+        - config.yaml: Override defaults via configuration file
+
+    Notes:
+        - Returns a copy of the gains list to prevent accidental modification of registry
+        - Default gains are optimized for nominal DIP parameters in config.yaml
+        - For plant variations or uncertainty, use PSO optimization or robust tuning
+        - Gains are ordered according to controller-specific conventions (see controller docs)
+        - MPC controller returns empty list as it uses horizon/cost matrices instead
     """
     if controller_type not in CONTROLLER_REGISTRY:
         available = list(CONTROLLER_REGISTRY.keys())

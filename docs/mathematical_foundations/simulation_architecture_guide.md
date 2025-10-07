@@ -125,6 +125,9 @@ The `simulate()` function is the unified entry point for all simulations, handli
 #### Signature
 
 ```python
+# example-metadata:
+# runnable: false
+
 def simulate(
     initial_state: Any,
     control_inputs: Any,
@@ -170,6 +173,9 @@ print(f"Final state: {states[-1]}")
 **Batch Simulation (PSO Use Case):**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Simulate 30 particles with different initial conditions
 n_particles = 30
 x0_batch = np.random.randn(n_particles, 6) * 0.1  # (30, 6)
@@ -287,6 +293,9 @@ High-level trajectory generation with controller integration.
 #### Signature
 
 ```python
+# example-metadata:
+# runnable: false
+
 def run_simulation(
     *,
     controller: Any,
@@ -350,6 +359,9 @@ Centralizes configuration loading, dynamics selection, and controller creation.
 #### Architecture
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SimulationContext:
     """Simulation setup and configuration management."""
 
@@ -565,6 +577,9 @@ x_array = np.array(x, dtype=float)  # Always creates new array
 **2. Pre-allocation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # GOOD: Pre-allocate result array
 states = np.zeros((batch_size, horizon + 1, state_dim), dtype=float)
 states[:, 0, :] = initial_state
@@ -649,6 +664,9 @@ profiler.print_stats(sort='cumtime')
 ### 1. Choose the Right Orchestrator
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Single trajectory → SequentialOrchestrator
 # PSO (30 particles) → BatchOrchestrator (25x faster)
 # Monte Carlo (1000 runs) → ParallelOrchestrator (4 cores)
@@ -671,6 +689,9 @@ states = simulate(x0, u, dt, horizon=horizon)
 ### 3. Use Safety Guards in Production
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Development: Permissive limits for debugging
 states_dev = simulate(x0, u, dt, energy_limits=1e6, state_bounds=(None, None))
 
@@ -688,6 +709,9 @@ states_prod = simulate(
 ### 4. Handle Early Stopping Gracefully
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Wrap simulation in try-except for safety guard violations
 try:
     states = simulate(x0, u, dt, energy_limits=100.0)
@@ -709,6 +733,9 @@ states = simulate(x0, u, dt, stop_fn=soft_stop)
 ### 5. Leverage Vectorization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # PSO fitness evaluation (30 particles)
 
 # BAD: Sequential loop (slow)

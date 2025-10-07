@@ -126,6 +126,9 @@ class TestSlidingSurfaceLinearity:
 **Theoretical Requirement**: For linear sliding surface, σ(α·x) = α·σ(x) for any scalar α.
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestSlidingSurfaceHomogeneity:
     """Validate homogeneity property of sliding surfaces."""
 
@@ -166,6 +169,9 @@ class TestSlidingSurfaceHomogeneity:
 **Theoretical Requirement**: Sliding surface must respond proportionally to gain changes.
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestSlidingSurfaceGainSensitivity:
     """Validate gain sensitivity of sliding surfaces."""
 
@@ -245,6 +251,9 @@ class TestBoundaryLayerContinuity:
 **Theoretical Requirement**: Switching function must be strictly monotonic increasing.
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestBoundaryLayerMonotonicity:
     """Validate monotonicity of switching functions."""
 
@@ -279,6 +288,9 @@ class TestBoundaryLayerMonotonicity:
 **Theoretical Requirement**: Switching function must approach ±1 for large |σ|.
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestBoundaryLayerAsymptoticBehavior:
     """Validate asymptotic limits of switching functions."""
 

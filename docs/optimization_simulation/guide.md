@@ -319,6 +319,9 @@ print(f"Max control: {np.max(np.abs(u_arr)):.2f} N")
 The runner supports real-time deadline monitoring:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def fallback_controller(t, x):
     """Simple PD controller as fallback."""
     return -10 * x[0] - 5 * x[3]  # Proportional to cart position and velocity
@@ -355,6 +358,9 @@ Vectorized batch simulation enables efficient parallel evaluation of multiple co
 ### API: `simulate_system_batch`
 
 ```python
+# example-metadata:
+# runnable: false
+
 def simulate_system_batch(
     *,
     controller_factory: Callable[[np.ndarray], Any],
@@ -1062,6 +1068,9 @@ dynamics = SimplifiedDIPDynamics(
 Always use batch simulation for PSO instead of sequential loops:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # FAST: Vectorized batch evaluation
 t, x_batch, u_batch, sigma_batch = simulate_system_batch(
     controller_factory=factory,
@@ -1102,6 +1111,9 @@ t, x_batch, u_batch, sigma_batch = simulate_system_batch(
 **Location:** [`src/optimization/algorithms/pso_optimizer.py`](../../src/optimization/algorithms/pso_optimizer.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOTuner:
     """High-throughput, vectorized tuner for sliding-mode controllers."""
 
@@ -1167,6 +1179,9 @@ class PSOTuner:
 **Location:** [`src/simulation/engines/simulation_runner.py`](../../src/simulation/engines/simulation_runner.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def run_simulation(
     *,
     controller: Any,
@@ -1217,6 +1232,9 @@ def run_simulation(
 **Location:** [`src/simulation/engines/vector_sim.py`](../../src/simulation/engines/vector_sim.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def simulate_system_batch(
     *,
     controller_factory: Callable[[np.ndarray], Any],
@@ -1275,6 +1293,9 @@ def simulate_system_batch(
 **Location:** [`src/simulation/core/simulation_context.py`](../../src/simulation/core/simulation_context.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SimulationContext:
     """Enhanced simulation context with framework integration."""
 

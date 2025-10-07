@@ -29,6 +29,9 @@ Comprehensive scan of 364 `.copy()` occurrences across 109 files revealed:
 
 **Example**:
 ```python
+# example-metadata:
+# runnable: false
+
 # BEFORE (35 occurrences across 3 files)
 return self._create_failure_result(
     "Invalid inputs",
@@ -64,6 +67,9 @@ return self._create_failure_result(
 
 **Example**:
 ```python
+# example-metadata:
+# runnable: false
+
 # BEFORE
 def get_statistics(self) -> Dict[str, Any]:
     stats = self._stats.copy()  # ❌ Defensive copy

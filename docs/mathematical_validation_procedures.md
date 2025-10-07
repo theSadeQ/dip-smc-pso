@@ -29,6 +29,9 @@ $$\dot{V}(s) = s \cdot \dot{s} < 0 \quad \forall s \neq 0$$
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_lyapunov_stability(controller: SMCController,
                               test_scenarios: List[TestScenario]) -> LyapunovValidationResult:
     """
@@ -133,6 +136,9 @@ where $\eta > 0$ is the reaching rate parameter.
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_sliding_surface_reachability(controller: SMCController,
                                         test_scenarios: List[TestScenario]) -> ReachabilityValidationResult:
     """
@@ -226,6 +232,9 @@ where $u_{avg}(t)$ is the averaged control signal.
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_chattering_characteristics(controller: SMCController,
                                       test_scenarios: List[TestScenario]) -> ChatteringValidationResult:
     """
@@ -320,6 +329,9 @@ where $\phi = c_1 + c_2 > 4$ ensures convergence.
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_pso_convergence_properties(pso_optimizer: PSOOptimizer,
                                        benchmark_functions: List[BenchmarkFunction]) -> PSOConvergenceValidationResult:
     """
@@ -411,6 +423,9 @@ $$\text{Pareto Optimal: } \nexists x \text{ such that } f_i(x) \leq f_i(x^*) \fo
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_multi_objective_pso(multi_obj_optimizer: MultiObjectivePSOOptimizer,
                                test_problems: List[MultiObjectiveTestProblem]) -> MultiObjectiveValidationResult:
     """
@@ -478,6 +493,9 @@ for conservative systems.
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_numerical_integration_stability(integrators: List[NumericalIntegrator],
                                            test_scenarios: List[IntegrationTestScenario]) -> NumericalStabilityResult:
     """
@@ -598,6 +616,9 @@ where $\kappa(A) > 10^{12}$ indicates ill-conditioning for double precision.
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_matrix_conditioning(matrices: Dict[str, np.ndarray],
                                operations: List[MatrixOperation]) -> ConditioningValidationResult:
     """
@@ -687,6 +708,9 @@ where $C_i$ is execution time, $T_i$ is period, and $U_{bound}$ is utilization b
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_real_time_constraints(control_system: ControlSystem,
                                  timing_requirements: TimingRequirements) -> RealTimeValidationResult:
     """
@@ -775,6 +799,9 @@ $$P(\text{jitter} > J_{max}) \leq \epsilon_{acceptable}$$
 
 **Implementation Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_timing_jitter_and_latency(control_loop: ControlLoop,
                                      jitter_requirements: JitterRequirements) -> JitterValidationResult:
     """
@@ -1011,6 +1038,9 @@ def test_numerical_integration_energy_conservation(dt: float, simulation_time: f
 ### 6.1 Integrated Mathematical Test Suite
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ComprehensiveMathematicalValidator:
     """Comprehensive mathematical validation for control systems."""
 

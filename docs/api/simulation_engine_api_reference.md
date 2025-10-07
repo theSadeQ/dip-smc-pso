@@ -241,6 +241,9 @@ PSO Tuner
 All major components define protocols for extensibility:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from typing import Protocol
 
 class DynamicsModel(Protocol):
@@ -297,6 +300,9 @@ Advantages:
 The simulation engine maintains 100% backward compatibility with the original `simulation_runner.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Legacy imports work unchanged
 from src.simulation import run_simulation, step, get_step_fn, simulate
 
@@ -354,6 +360,9 @@ The main simulation function providing backward-compatible interface for control
 #### 2.1.1 Function Signature
 
 ```python
+# example-metadata:
+# runnable: false
+
 def run_simulation(
     *,
     controller: Any,
@@ -452,6 +461,9 @@ class MyDynamics:
 #### 2.1.6 Control Saturation Logic
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Priority hierarchy:
 # 1. Explicit u_max parameter
 if u_max is not None:
@@ -478,6 +490,9 @@ if u_limit is not None:
 
 **Example Use Case:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Simple PD fallback controller
 def pd_fallback(t, x):
     return -10 * x[0] - 5 * x[3]  # -Kp*x - Kd*x_dot
@@ -730,6 +745,9 @@ Protocol defining the interface all dynamics models must implement.
 #### 3.1.1 Protocol Definition
 
 ```python
+# example-metadata:
+# runnable: false
+
 class DynamicsModel(Protocol):
     """Protocol for plant dynamics models."""
 
@@ -775,6 +793,9 @@ class DynamicsResult(NamedTuple):
 
 **Factory Methods:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Create successful result
 result = DynamicsResult.success_result(
     state_derivative=dx_dt,
@@ -813,6 +834,9 @@ class BaseDynamicsModel(ABC):
 #### 3.2.2 Abstract Methods (Must Implement)
 
 ```python
+# example-metadata:
+# runnable: false
+
 @abstractmethod
 def compute_dynamics(
     self,
@@ -842,6 +866,9 @@ def _setup_validation(self) -> None:
 
 **State Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_state(self, state: np.ndarray) -> bool:
     """Validate state vector using configured validator."""
     if hasattr(self, '_state_validator'):
@@ -868,6 +895,9 @@ def get_control_dimension(self) -> int:
 
 **Monitoring:**
 ```python
+# example-metadata:
+# runnable: false
+
 def reset_monitoring(self) -> None:
     """Reset monitoring statistics."""
     if hasattr(self, '_stability_monitor'):
@@ -1036,6 +1066,9 @@ class LinearDynamicsModel(BaseDynamicsModel):
 #### 3.4.2 Linear Dynamics Computation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_dynamics(
     self,
     state: np.ndarray,
@@ -1096,6 +1129,9 @@ t, x, u = run_simulation(
 Base interface defining execution strategy protocol.
 
 ```python
+# example-metadata:
+# runnable: false
+
 class Orchestrator(ABC):
     """Base interface for simulation execution strategies."""
 
@@ -1123,6 +1159,9 @@ Single-threaded step-by-step execution for standard simulations.
 #### 4.2.1 Class Definition
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SequentialOrchestrator(BaseOrchestrator):
     """Sequential simulation orchestrator for single-threaded execution."""
 
@@ -1197,6 +1236,9 @@ Vectorized execution for multiple simultaneous simulations (PSO optimization, Mo
 #### 4.3.1 Class Definition
 
 ```python
+# example-metadata:
+# runnable: false
+
 class BatchOrchestrator(BaseOrchestrator):
     """Batch simulation orchestrator for vectorized execution."""
 
@@ -1440,6 +1482,9 @@ orchestrator = SequentialOrchestrator(dynamics, rk4)
 
 **list_available_integrators()**
 ```python
+# example-metadata:
+# runnable: false
+
 IntegratorFactory.list_available_integrators()
 # Returns: ['euler', 'forward_euler', 'backward_euler', 'rk2', 'rk4', ...]
 ```
@@ -1459,6 +1504,9 @@ info = IntegratorFactory.get_integrator_info('rk4')
 
 **register_integrator()** (Advanced)
 ```python
+# example-metadata:
+# runnable: false
+
 from src.simulation.integrators.base import BaseIntegrator
 
 class MyCustomIntegrator(BaseIntegrator):
@@ -1742,6 +1790,9 @@ Low Accuracy                               Euler (dt=0.01)
 Abstract base class defining result storage protocol.
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ResultContainer(ABC):
     """Base interface for simulation result containers."""
 
@@ -1856,6 +1907,9 @@ self.metadata: Dict[str, Any]               # Global metadata
 
 **Structure:**
 ```python
+# example-metadata:
+# runnable: false
+
 {
     0: {
         'states': np.ndarray (n_steps+1, state_dim),
@@ -2045,6 +2099,9 @@ def _guard_energy(state: np.ndarray, config: Any) -> None:
 
 **_guard_bounds()**
 ```python
+# example-metadata:
+# runnable: false
+
 def _guard_bounds(state: np.ndarray, config: Any) -> None:
     """Check state within configured bounds."""
     bounds = config.safety.state_bounds  # [x_min, x_max, theta_min, theta_max, ...]
@@ -2083,6 +2140,9 @@ Tracks execution time and throughput for orchestrators and integrators.
 
 **Methods:**
 ```python
+# example-metadata:
+# runnable: false
+
 monitor = PerformanceMonitor()
 
 monitor.start_timing('simulation')
@@ -2105,6 +2165,9 @@ stats = monitor.get_statistics()
 
 **Usage in Orchestrator:**
 ```python
+# example-metadata:
+# runnable: false
+
 class SequentialOrchestrator(BaseOrchestrator):
     def execute(self, ...):
         self.monitor.start_timing('orchestrator_execute')

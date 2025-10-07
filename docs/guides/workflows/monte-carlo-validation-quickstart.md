@@ -25,6 +25,9 @@ This guide provides **working code examples** for Monte Carlo validation and sta
 ### Minimal Working Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python
 """Quick Monte Carlo validation: 10 trials × 2 controllers × 1 scenario."""
 

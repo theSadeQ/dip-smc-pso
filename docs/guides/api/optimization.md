@@ -204,6 +204,9 @@ def energy_efficient_cost(gains):
 
 **Example 3: Multi-objective (weighted sum)**
 ```python
+# example-metadata:
+# runnable: false
+
 def multi_objective_cost(gains, w_ise=0.6, w_energy=0.3, w_time=0.1):
     """Balance tracking, energy, and speed."""
     controller = create_smc_for_pso(SMCType.CLASSICAL, gains)
@@ -233,6 +236,9 @@ tuner = PSOTuner(
 
 **Hard constraints (invalid gains → infinite cost):**
 ```python
+# example-metadata:
+# runnable: false
+
 def constrained_cost(gains):
     """Enforce stability constraints."""
     # Constraint: First gain must be larger than second
@@ -251,6 +257,9 @@ def constrained_cost(gains):
 
 **Soft constraints (penalty-based):**
 ```python
+# example-metadata:
+# runnable: false
+
 def penalty_based_cost(gains):
     """Use penalties for soft constraints."""
     controller = create_smc_for_pso(SMCType.CLASSICAL, gains)
@@ -275,6 +284,9 @@ def penalty_based_cost(gains):
 
 **Test across multiple scenarios:**
 ```python
+# example-metadata:
+# runnable: false
+
 def robust_cost(gains):
     """Optimize for robustness across scenarios."""
     controller = create_smc_for_pso(SMCType.CLASSICAL, gains)
@@ -329,6 +341,9 @@ bounds_hybrid = get_gain_bounds_for_pso(SMCType.HYBRID)
 
 **Narrower bounds for faster convergence:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Instead of wide bounds [0.1, 50]
 wide_bounds = get_gain_bounds_for_pso(SMCType.CLASSICAL)
 
@@ -429,6 +444,9 @@ for ctrl_type, gains, cost in results:
 
 **Optimize PSO hyperparameters:**
 ```python
+# example-metadata:
+# runnable: false
+
 def tune_pso_hyperparameters():
     """Find best PSO settings for your problem."""
     best_overall_cost = float('inf')
@@ -470,6 +488,9 @@ print(f"Optimal PSO config: {optimal_pso_config}")
 ### Convergence Diagnostics
 
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_convergence(history):
     """Analyze PSO convergence quality."""
     convergence = history['convergence']
@@ -593,6 +614,9 @@ print(f"Validation ISE: {result['metrics']['ise']:.4f}")
 ### Pattern 2: Iterative Refinement
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Coarse optimization with wide bounds
 initial_bounds = get_gain_bounds_for_pso(SMCType.CLASSICAL)
 tuner_coarse = PSOTuner(SMCType.CLASSICAL, initial_bounds, n_particles=50, iters=50)
@@ -611,6 +635,9 @@ print(f"Final cost: {fine_cost:.4f}")
 ### Pattern 3: Robustness Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Define robust cost function
 def robust_cost(gains):
     controller = create_smc_for_pso(SMCType.CLASSICAL, gains)
@@ -649,6 +676,9 @@ else:
 ### 2. Set Iteration Budget Wisely
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Iteration count based on convergence needs
 tuner_fast = PSOTuner(..., iters=50)    # Quick prototyping
 tuner_standard = PSOTuner(..., iters=100)  # Standard optimization
@@ -658,6 +688,9 @@ tuner_thorough = PSOTuner(..., iters=200)  # Publication-quality
 ### 3. Use Batch Evaluation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Expensive to evaluate one controller at a time
 def slow_cost(gains):
     for ic in scenarios:  # Sequential

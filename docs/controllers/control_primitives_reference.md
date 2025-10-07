@@ -55,6 +55,9 @@ src/utils/
 **Location:** `src/utils/control/saturation.py`
 
 ```python
+# example-metadata:
+# runnable: false
+
 def saturate(
     sigma: Union[float, np.ndarray],
     epsilon: float,
@@ -156,6 +159,9 @@ switch_signal = -K * smooth_sign(sigma, epsilon=0.02)
 ### 2.3 Dead Zone Function
 
 ```python
+# example-metadata:
+# runnable: false
+
 def dead_zone(
     x: Union[float, np.ndarray],
     threshold: float
@@ -219,6 +225,9 @@ All controllers return **NamedTuple** instances instead of bare tuples for:
 ### 3.2 Classical SMC Output
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ClassicalSMCOutput(NamedTuple):
     """Return type for ClassicalSMC.compute_control().
 
@@ -252,6 +261,9 @@ u, state, history = result
 ### 3.3 Adaptive SMC Output
 
 ```python
+# example-metadata:
+# runnable: false
+
 class AdaptiveSMCOutput(NamedTuple):
     """Return type for AdaptiveSMC.compute_control().
 
@@ -285,6 +297,9 @@ if abs(result.sigma) < 0.01:
 ### 3.4 Super-Twisting SMC Output
 
 ```python
+# example-metadata:
+# runnable: false
+
 class STAOutput(NamedTuple):
     """Return type for SuperTwistingSMC.compute_control().
 
@@ -317,6 +332,9 @@ for t, state in simulation_loop:
 ### 3.5 Hybrid Adaptive-STA SMC Output
 
 ```python
+# example-metadata:
+# runnable: false
+
 class HybridSTAOutput(NamedTuple):
     """Return type for HybridAdaptiveSTASMC.compute_control().
 
@@ -363,6 +381,9 @@ for t, state in simulation_loop:
 ### 4.1 Positive Parameter Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def require_positive(
     value: Union[float, int, None],
     name: str,
@@ -408,6 +429,9 @@ class ClassicalSMC:
 ### 4.2 Finite Value Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def require_finite(
     value: Union[float, int, None],
     name: str
@@ -451,6 +475,9 @@ def compute_control_law(state, gains):
 ### 5.1 Safe Division
 
 ```python
+# example-metadata:
+# runnable: false
+
 def safe_divide(
     numerator: NumericType,
     denominator: NumericType,
@@ -503,6 +530,9 @@ def safe_reciprocal(
 ### 5.3 Safe Square Root
 
 ```python
+# example-metadata:
+# runnable: false
+
 def safe_sqrt(
     x: NumericType,
     min_value: float = 1e-15,
@@ -554,6 +584,9 @@ cost = ise + 1000 * safe_log(1 + instability_penalty)
 ### 5.5 Safe Exponential
 
 ```python
+# example-metadata:
+# runnable: false
+
 def safe_exp(
     x: NumericType,
     max_value: float = 700.0,
@@ -574,6 +607,9 @@ def safe_exp(
 **Safe Norm:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def safe_norm(
     vector: np.ndarray,
     ord: Optional[Union[int, float, str]] = 2,
@@ -590,6 +626,9 @@ def safe_norm(
 **Safe Normalize:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def safe_normalize(
     vector: np.ndarray,
     ord: Optional[Union[int, float, str]] = 2,

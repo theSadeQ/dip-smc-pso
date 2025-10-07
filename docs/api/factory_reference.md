@@ -98,6 +98,9 @@ gains = get_default_gains('classical_smc')
 The factory maintains a comprehensive registry of controller specifications:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,
@@ -169,6 +172,9 @@ lower_bounds, upper_bounds = get_gain_bounds_for_pso(SMCType.CLASSICAL)
 #### SMC Gain Specifications
 
 ```python
+# example-metadata:
+# runnable: false
+
 SMC_GAIN_SPECS = {
     SMCType.CLASSICAL: SMCGainSpec(
         gain_names=['k1', 'k2', 'lambda1', 'lambda2', 'K', 'kd'],

@@ -86,6 +86,9 @@ These are second-order linear systems with:
 **Solution:** Implemented strict validation in `ClassicalSMCConfig`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_gains(self) -> None:
     """Validate gain vector according to SMC theory."""
     if len(self.gains) != 6:
@@ -113,6 +116,9 @@ def _validate_gains(self) -> None:
 **Solution:** Unified surface computation in `LinearSlidingSurface` class:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute(self, state: np.ndarray) -> float:
     """
     Compute linear sliding surface value.
@@ -146,6 +152,9 @@ def compute(self, state: np.ndarray) -> float:
 **Solution:** Explicit derivative computation method:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_derivative(self, state: np.ndarray, state_dot: np.ndarray) -> float:
     """
     Compute sliding surface derivative ds/dt.

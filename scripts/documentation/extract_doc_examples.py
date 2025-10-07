@@ -58,7 +58,11 @@ def extract_examples_from_file(md_file: Path) -> List[Dict[str, Any]]:
         metadata = extract_metadata(code)
 
         # Determine if example is runnable
-        is_runnable = is_example_runnable(code)
+        # Metadata takes precedence over heuristics
+        if metadata['runnable'] is not None:
+            is_runnable = metadata['runnable']
+        else:
+            is_runnable = is_example_runnable(code)
 
         try:
             relative_path = str(md_file.relative_to(Path.cwd()))

@@ -26,6 +26,9 @@ This comprehensive manual provides detailed troubleshooting procedures, maintena
 
 **Comprehensive System Status Assessment:**
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """PSO System Health Checker"""
 
@@ -627,6 +630,9 @@ print(f"At upper bound: {[g >= b-0.001 for g, b in zip(gains, bounds.get('upper'
 
 *Diagnostic Steps:*
 ```python
+# example-metadata:
+# runnable: false
+
 # Profile optimization performance
 import time
 import psutil
@@ -689,6 +695,9 @@ profile_pso_iteration()
 
 *Diagnostic Steps:*
 ```python
+# example-metadata:
+# runnable: false
+
 import gc
 import psutil
 import matplotlib.pyplot as plt
@@ -725,6 +734,9 @@ plt.show()
 *Solutions:*
 1. **Force Garbage Collection:**
    ```python
+# example-metadata:
+# runnable: false
+
    import gc
 
    def cleanup_callback(iteration, **kwargs):
@@ -810,6 +822,9 @@ diagnose_controller_stability([5.0, 3.0, 7.0, 2.0, 25.0, 1.0], 'classical_smc')
 *Solutions:*
 1. **Constrain Gain Ratios:**
    ```python
+# example-metadata:
+# runnable: false
+
    def validate_gain_ratios(particles, controller_type):
        """Enhanced gain validation with ratio constraints."""
        valid = np.ones(particles.shape[0], dtype=bool)
@@ -854,6 +869,9 @@ diagnose_controller_stability([5.0, 3.0, 7.0, 2.0, 25.0, 1.0], 'classical_smc')
 **Convergence Speed Optimization:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class OptimizedPSOConfig:
     """Optimized PSO configurations for different scenarios."""
 
@@ -915,6 +933,9 @@ def optimize_with_config(controller_type, config_type='balanced'):
 **Adaptive PSO Implementation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class AdaptivePSOTuner(PSOTuner):
     """PSO tuner with adaptive parameter adjustment."""
 
@@ -1045,6 +1066,9 @@ def parallel_optimization(controller_type, n_processes=4):
 **Memory-Efficient Implementation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class MemoryEfficientPSO:
     """PSO implementation optimized for memory usage."""
 
@@ -1125,6 +1149,9 @@ optimize_simulation_performance()
 **Adaptive Time Step Control:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class AdaptiveSimulation:
     """Simulation with adaptive time step for efficiency."""
 
@@ -1566,6 +1593,9 @@ esac
 **Log Rotation and Cleanup:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 import logging
 import logging.handlers
 from pathlib import Path

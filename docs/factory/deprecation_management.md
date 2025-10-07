@@ -41,6 +41,9 @@ class DeprecationLevel(Enum):
 ### Deprecation Mapping System
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class DeprecationMapping:
     """Complete deprecation specification for a parameter or feature."""
@@ -60,6 +63,9 @@ class DeprecationMapping:
 ### Classical SMC Deprecation Map
 
 ```python
+# example-metadata:
+# runnable: false
+
 CLASSICAL_SMC_DEPRECATIONS = {
     'gamma': DeprecationMapping(
         old_name='gamma',
@@ -124,6 +130,9 @@ CLASSICAL_SMC_DEPRECATIONS = {
 ### Adaptive SMC Deprecation Map
 
 ```python
+# example-metadata:
+# runnable: false
+
 ADAPTIVE_SMC_DEPRECATIONS = {
     'boundary_layer_thickness': DeprecationMapping(
         old_name='boundary_layer_thickness',
@@ -186,6 +195,9 @@ ADAPTIVE_SMC_DEPRECATIONS = {
 ### Super-Twisting SMC Deprecation Map
 
 ```python
+# example-metadata:
+# runnable: false
+
 STA_SMC_DEPRECATIONS = {
     'K1': DeprecationMapping(
         old_name='K1',
@@ -249,6 +261,9 @@ STA_SMC_DEPRECATIONS = {
 ### Hybrid SMC Deprecation Map
 
 ```python
+# example-metadata:
+# runnable: false
+
 HYBRID_SMC_DEPRECATIONS = {
     'mode': DeprecationMapping(
         old_name='mode',
@@ -900,6 +915,9 @@ class ValidationResult:
 
 3. **Automatic Migration Safety:**
    ```python
+# example-metadata:
+# runnable: false
+
    # Safe for automatic migration
    simple_rename = DeprecationMapping(
        old_name='old_name',
@@ -919,6 +937,9 @@ class ValidationResult:
 ### Usage and Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Global deprecation warner instance
 _deprecation_warner = ControllerDeprecationWarner()
 

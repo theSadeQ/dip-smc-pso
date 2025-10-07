@@ -873,6 +873,9 @@ print(f"Failure rate: {stats['failed_count'] / stats['total_inversions'] * 100:.
 ### Custom Regularization Strategy
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Conservative (research-grade precision)
 conservative_reg = AdaptiveRegularizer(
     regularization_alpha=1e-6,  # Minimal regularization

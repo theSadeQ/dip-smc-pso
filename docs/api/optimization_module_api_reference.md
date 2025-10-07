@@ -595,6 +595,9 @@ $$
 For advanced users, custom fitness functions can be designed:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def custom_fitness(particles: np.ndarray) -> np.ndarray:
     """
     Custom fitness function for specific control objectives.
@@ -721,6 +724,9 @@ class EnhancedConvergenceAnalyzer:
 **Dataclass Definition:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class ConvergenceMetrics:
     """Comprehensive convergence metrics."""
@@ -773,6 +779,9 @@ class ConvergenceMetrics:
 **Dataclass Definition:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class ConvergenceCriteria:
     """Adaptive convergence criteria configuration."""
@@ -846,6 +855,9 @@ The analyzer declares convergence when **at least 3 out of 5** criteria are sati
 **Method:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def check_convergence(
     self,
     iteration: int,
@@ -869,6 +881,9 @@ def check_convergence(
 **Example: Integration with PSO Loop**
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.optimization.validation.enhanced_convergence_analyzer import (
     EnhancedConvergenceAnalyzer,
     ConvergenceCriteria,
@@ -994,6 +1009,9 @@ Each controller type has specific parameter bounds derived from stability analys
 **Method:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_bounds(
     self,
     controller_type: str,
@@ -1173,6 +1191,9 @@ class BoundsOptimizationStrategy(Enum):
 **Optimization Method:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def optimize_bounds_for_controller(
     self,
     controller_type: SMCType,
@@ -1337,6 +1358,9 @@ class OptimizationObjective(Enum):
 **Method:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def optimize_hyperparameters(
     self,
     controller_type: SMCType,
@@ -1544,6 +1568,9 @@ print(df.to_string(index=False))
 **Objective:** Optimize Classical SMC controller gains for double inverted pendulum.
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """
 Example 1: Basic PSO Optimization for Classical SMC
@@ -1661,6 +1688,9 @@ Optimized gains saved: optimized_gains_classical_smc.npy
 **Objective:** Monitor PSO optimization with detailed convergence analysis.
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """
 Example 2: Real-Time Convergence Monitoring
@@ -1839,6 +1869,9 @@ Convergence monitoring plot saved: pso_convergence_monitoring.png
 **Objective:** Validate PSO bounds and automatically adjust if necessary.
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """
 Example 3: Bounds Validation and Automatic Adjustment
@@ -1978,6 +2011,9 @@ if __name__ == "__main__":
 **Objective:** Meta-optimize PSO hyperparameters for best controller performance.
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """
 Example 4: PSO Hyperparameter Optimization
@@ -2126,6 +2162,9 @@ if __name__ == "__main__":
 **Objective:** End-to-end workflow from configuration to deployed controller.
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """
 Example 5: Complete Optimization Pipeline

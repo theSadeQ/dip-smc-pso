@@ -84,6 +84,9 @@
 ### **Decision Matrix: Reuse vs Create**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class AgentSelectionStrategy:
     """
     Decision framework for optimal agent configuration.
@@ -215,6 +218,9 @@ All agents produce JSON artifacts with standardized structure:
 ### **Integration Algorithm**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def integrate_artifacts(agent_outputs: List[Dict]) -> Dict:
     """
     Reconcile multiple agent outputs.

@@ -102,6 +102,9 @@ is_valid = validate_state(x)              # Validation
 Components combine to form complete dynamics:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def dynamics_step(x, u, params):
     q, q_dot = extract_coordinates(x)
     M = compute_mass_matrix(q, params)
@@ -119,6 +122,9 @@ def dynamics_step(x, u, params):
 Numba JIT compilation for critical paths:
 
 ```python
+# example-metadata:
+# runnable: false
+
 @njit(cache=True, fastmath=True)
 def compute_physics_matrices_numba(q, q_dot, params):
     # Hot loop - compiled to machine code
@@ -139,6 +145,9 @@ def compute_physics_matrices_numba(q, q_dot, params):
 Initialize and use the Core   Init   module:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.plant.core.__init__ import *
 import numpy as np
 
@@ -152,6 +161,9 @@ import numpy as np
 Configure with custom parameters:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Advanced configuration
 # ... custom parameters ...
 ```
@@ -192,6 +204,9 @@ except ConfigurationError as e:
 Optimize for computational efficiency:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Performance optimization
 import cProfile
 import pstats

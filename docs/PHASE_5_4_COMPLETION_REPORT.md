@@ -110,6 +110,9 @@ Expected Performance (estimates):
 
 **Statistical Templates Provided:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Confidence Intervals (t-distribution)
 def compute_statistics(data, metric='ise', confidence=0.95):
     mean, std = data.mean(), data.std()

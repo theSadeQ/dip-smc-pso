@@ -24,6 +24,9 @@
 **Workflow**: Write failing test → Implement code → Refactor → Repeat
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Step 1: RED - Write failing test
 # tests/test_controllers/smc/algorithms/classical/test_new_feature.py
 
@@ -55,6 +58,9 @@ def test_chattering_reduction_effectiveness():
 ```
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Step 2: GREEN - Implement minimal code to pass
 # src/controllers/smc/classic_smc.py
 
@@ -85,6 +91,9 @@ class ClassicalSMC:
 ```
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Step 3: REFACTOR - Clean up implementation
 class ChatteringReduction:
     """Encapsulate chattering reduction logic."""
@@ -130,6 +139,9 @@ class ClassicalSMC:
 **Scenario**: Implementing a new Adaptive Super-Twisting SMC controller
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Step 1: Write interface tests FIRST
 # tests/test_controllers/smc/algorithms/adaptive_sta/test_adaptive_sta_interface.py
 
@@ -605,6 +617,9 @@ pytest tests/test_controllers/ --cov=src.controllers.smc.classic_smc --cov-repor
 #### 4.1.2 Closing Coverage Gaps
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Identify uncovered code
 # src/controllers/smc/classic_smc.py:89-92 not covered
 
@@ -639,6 +654,9 @@ def test_inf_state_rejection():
 ### 4.2 Mutation Testing
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Install mutpy
 pip install mutpy
 
@@ -683,6 +701,9 @@ mut.py --target src.controllers.smc.classic_smc --unit-test tests.test_controlle
 ### 4.4 Test Quality Metrics
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Metric 1: Test-to-Code Ratio
 test_loc = count_lines_of_code('tests/')
 src_loc = count_lines_of_code('src/')

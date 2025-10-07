@@ -462,6 +462,9 @@ reproducibility:
 Create `experiments/robustness_study/generate_report.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python
 """Generate automated research report."""
 

@@ -293,6 +293,9 @@ $$\text{Stability Margin} = \frac{\text{upper} - \text{lower}}{2} = \frac{0.165 
 **Modified Dataclass** (`src/analysis/fault_detection/fdi.py`):
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class FDIsystem:
     # Core parameters
@@ -312,6 +315,9 @@ class FDIsystem:
 **Check Method Logic** (lines 320-327):
 
 ```python
+# example-metadata:
+# runnable: false
+
 def check(self, t, meas, u, dt, dynamics_model):
     # ... residual computation ...
 
@@ -363,6 +369,9 @@ fault_detection:
 **Updated Test** (`tests/test_analysis/fault_detection/test_fdi_infrastructure.py`):
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_fixed_threshold_operation():
     """Verify FDI operates with fixed threshold."""
     fdi = FDIsystem(

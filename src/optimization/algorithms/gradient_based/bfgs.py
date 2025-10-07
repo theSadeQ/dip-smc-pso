@@ -241,10 +241,10 @@ class BFGSOptimizer(OptimizationAlgorithm):
 
         # BFGS update formula
         rho = 1.0 / sy
-        I = np.eye(self.dimension)
+        identity_matrix = np.eye(self.dimension)
 
         # Two-step BFGS update
-        V = I - rho * np.outer(s, y)
+        V = identity_matrix - rho * np.outer(s, y)
         self.hessian_inv = V.T @ self.hessian_inv @ V + rho * np.outer(s, s)
 
         # Ensure positive definiteness
@@ -253,7 +253,7 @@ class BFGSOptimizer(OptimizationAlgorithm):
             warnings.warn("Hessian approximation not positive definite, regularizing")
             min_eigenval = np.min(eigenvals)
             regularization = abs(min_eigenval) + 1e-6
-            self.hessian_inv += regularization * I
+            self.hessian_inv += regularization * np.eye(self.dimension)
 
     def _line_search(self,
                     x: np.ndarray,
@@ -394,7 +394,7 @@ class BFGSOptimizer(OptimizationAlgorithm):
                 return np.max(eigenvals) / np.min(eigenvals)
             else:
                 return float('inf')
-        except:
+        except Exception:
             return float('inf')
 
     def get_optimization_info(self) -> Dict[str, Any]:
@@ -439,7 +439,7 @@ class BFGSOptimizer(OptimizationAlgorithm):
                 return np.mean(ratios)
             else:
                 return 0.0
-        except:
+        except Exception:
             return 0.0
 
     def reset_hessian(self):
@@ -454,7 +454,7 @@ class BFGSOptimizer(OptimizationAlgorithm):
 
         try:
             return np.linalg.eigvals(self.hessian_inv)
-        except:
+        except Exception:
             return np.array([])
 
     def get_search_direction(self) -> Optional[np.ndarray]:

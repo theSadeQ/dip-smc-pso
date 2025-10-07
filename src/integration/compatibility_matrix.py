@@ -379,7 +379,7 @@ class CompatibilityMatrix:
     def _validate_compatibility_rule(self, rule_name: str, rule_config: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Validate a specific compatibility rule."""
         domains = rule_config["domains"]
-        constraint = rule_config["constraint"]
+        rule_config["constraint"]
         threshold = rule_config["threshold"]
 
         # Simplified rule validation - in practice, would implement specific checks
@@ -465,11 +465,14 @@ class CompatibilityMatrix:
 
         # Check parameter bounds compatibility
         try:
-            # Try to import both domains
-            from src.controllers.factory import SMCFactory
-            from src.optimizer.pso_optimizer import PSOTuner
+            # Check if both domains are available
+            import importlib.util
+            has_controllers = importlib.util.find_spec('src.controllers.factory') is not None
+            has_optimizer = importlib.util.find_spec('src.optimizer.pso_optimizer') is not None
 
             # Check if gain bounds are compatible
+            if not (has_controllers and has_optimizer):
+                return CompatibilityLevel.INCOMPATIBLE
             # This is a simplified check - would implement detailed validation
             issues.append(CompatibilityIssue(
                 domain_a=DomainType.CONTROLLERS,

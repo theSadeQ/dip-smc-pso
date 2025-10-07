@@ -62,6 +62,9 @@ cost_function:
 #### **Baseline Normalization Logic** (Lines 236-282)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Automatic baseline normalization
 baseline_particles = np.asarray(gains_list, dtype=float).reshape(1, -1)
 res = simulate_system_batch(
@@ -92,6 +95,9 @@ self.norm_sigma = max(sigma_sq_base, 1e-12)
 #### **Cost Computation with Normalization** (Lines 416-438)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # State error integration
 ise = np.sum((x_b[:, :-1, :] ** 2 * dt_b) * time_mask, axis=(1, 2))
 ise_n = self._normalise(ise, self.norm_ise)  # ⚠️  Division by large baseline
@@ -427,6 +433,9 @@ python scripts/debug_pso_fitness.py
 
 Add to `src/config.py`:
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_cost_function_config(cost_cfg):
     """Validate cost function configuration"""
     # Check weight balance
@@ -465,6 +474,9 @@ if logger.isEnabledFor(logging.DEBUG):
 **Create**: `tests/test_optimizer/test_pso_cost_sensitivity.py`
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_cost_sensitivity():
     """Verify PSO cost function distinguishes good/bad controllers"""
     # Test that different gains produce different costs

@@ -797,7 +797,6 @@ class PSOConvergenceValidator:
         )
 
         # Mock PSO run for convergence testing
-        iteration_count = 0
         converged = False
         convergence_iteration = None
 

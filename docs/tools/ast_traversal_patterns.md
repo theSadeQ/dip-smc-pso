@@ -51,6 +51,9 @@ AST-based code claim extraction provides **scope-aware parsing** of Python sourc
 Consider the following Python code with nested docstrings:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ClassicalSMC:
     """
     Implements classical SMC from Utkin (1992).
@@ -297,6 +300,9 @@ CITATION_PATTERNS = {
 **Strategy:** Apply all patterns to each docstring, aggregate results
 
 ```python
+# example-metadata:
+# runnable: false
+
 def extract_all_citations(docstring: str) -> List[Dict]:
     citations = []
 
@@ -314,6 +320,9 @@ def extract_all_citations(docstring: str) -> List[Dict]:
 
 **Example Output:**
 ```python
+# example-metadata:
+# runnable: false
+
 docstring = """
 Implements super-twisting algorithm from Levant (2003).
 Finite-time convergence proven in [12]. DOI: 10.1016/j.automatica.2003.09.014
@@ -536,6 +545,9 @@ def triple_single():
 
 **✅ Nested Functions:**
 ```python
+# example-metadata:
+# runnable: false
+
 class Outer:
     def method(self):
         def inner():
@@ -590,6 +602,9 @@ def method() -> "Returns SMC control from Utkin":  # ❌ Not extracted
 **Robust Extraction Pipeline:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def extract_from_file(file_path: str) -> List[Dict]:
     try:
         source = Path(file_path).read_text(encoding='utf-8')

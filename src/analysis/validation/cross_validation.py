@@ -16,6 +16,7 @@ import numpy as np
 from scipy import stats
 import warnings
 from dataclasses import dataclass, field
+from ..core.interfaces import StatisticalValidator, AnalysisResult, AnalysisStatus
 # Minimal sklearn replacements for basic cross-validation functionality
 # This avoids heavyweight sklearn dependency while providing core interfaces
 
@@ -82,8 +83,6 @@ def mean_squared_error(y_true, y_pred):
 def mean_absolute_error(y_true, y_pred):
     """Compute mean absolute error."""
     return float(np.mean(np.abs(y_true - y_pred)))
-
-from ..core.interfaces import StatisticalValidator, AnalysisResult, AnalysisStatus
 
 
 @dataclass
@@ -319,7 +318,7 @@ class CrossValidator(StatisticalValidator):
 
         elif self.config.cv_method == "stratified":
             # For regression, we bin the targets
-            y_binned = np.digitize(y, np.percentile(y, np.linspace(0, 100, self.config.n_splits + 1)))
+            np.digitize(y, np.percentile(y, np.linspace(0, 100, self.config.n_splits + 1)))
             return StratifiedKFold(n_splits=self.config.n_splits, shuffle=self.config.shuffle, random_state=self.config.random_state)
 
         elif self.config.cv_method == "time_series":

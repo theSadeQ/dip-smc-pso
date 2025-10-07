@@ -100,6 +100,9 @@ $$
 Initialize and use the Models Base   Init   module:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.plant.models.base.__init__ import *
 import numpy as np
 
@@ -113,6 +116,9 @@ import numpy as np
 Configure with custom parameters:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Advanced configuration
 # ... custom parameters ...
 ```
@@ -153,6 +159,9 @@ except ConfigurationError as e:
 Optimize for computational efficiency:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Performance optimization
 import cProfile
 import pstats
