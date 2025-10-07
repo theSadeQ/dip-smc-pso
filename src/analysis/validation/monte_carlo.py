@@ -234,7 +234,7 @@ class MonteCarloAnalyzer(StatisticalValidator):
         param_names = list(parameter_distributions.keys())
 
         # Generate LHS matrix
-        intervals = np.arange(0, self.config.n_samples + 1) / self.config.n_samples
+        np.arange(0, self.config.n_samples + 1) / self.config.n_samples
         lhs_matrix = np.zeros((self.config.n_samples, n_params))
 
         for i in range(n_params):
@@ -260,7 +260,7 @@ class MonteCarloAnalyzer(StatisticalValidator):
         """Sobol sequence sampling (simplified implementation)."""
         # Simplified Sobol - in practice would use scipy.stats.qmc
         param_names = list(parameter_distributions.keys())
-        n_params = len(param_names)
+        len(param_names)
 
         # Generate quasi-random sequences (simplified)
         samples = []

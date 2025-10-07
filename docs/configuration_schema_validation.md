@@ -115,6 +115,9 @@ hil:
 
 #### System Configuration Schema
 ```python
+# example-metadata:
+# runnable: false
+
 from pydantic import BaseModel, Field, validator
 from typing import List, Optional, Union
 import numpy as np
@@ -136,6 +139,9 @@ class SystemConfig(BaseModel):
 
 #### Physics Configuration Schema
 ```python
+# example-metadata:
+# runnable: false
+
 class PhysicsConfig(BaseModel):
     """Physical system parameters schema."""
     pendulum_length_1: float = Field(..., gt=0.1, le=2.0, description="Pendulum 1 length (m)")
@@ -166,6 +172,9 @@ class PhysicsConfig(BaseModel):
 
 #### Controller Configuration Schema
 ```python
+# example-metadata:
+# runnable: false
+
 class ClassicalSMCConfig(BaseModel):
     """Classical SMC controller configuration schema."""
     gains: List[float] = Field(..., min_items=6, max_items=6, description="SMC gains [λ₁, λ₂, x, θ̇₁, θ̇₂, ẋ]")
@@ -259,6 +268,9 @@ class AdaptiveSMCConfig(BaseModel):
 
 #### Optimization Configuration Schema
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOConfig(BaseModel):
     """PSO optimization configuration schema."""
     n_particles: int = Field(..., ge=10, le=200, description="Number of particles in swarm")
@@ -327,6 +339,9 @@ class PSOConfig(BaseModel):
 
 #### Simulation Configuration Schema
 ```python
+# example-metadata:
+# runnable: false
+
 class SimulationConfig(BaseModel):
     """Simulation configuration schema."""
     dt: float = Field(..., gt=0.0001, le=0.1, description="Integration time step (s)")
@@ -394,6 +409,9 @@ class SimulationConfig(BaseModel):
 
 #### Hardware-in-the-Loop Configuration Schema
 ```python
+# example-metadata:
+# runnable: false
+
 class HILConfig(BaseModel):
     """Hardware-in-the-loop configuration schema."""
     enabled: bool = Field(False, description="Enable HIL communication")
@@ -435,6 +453,9 @@ class HILConfig(BaseModel):
 
 ### Master Configuration Schema
 ```python
+# example-metadata:
+# runnable: false
+
 class MasterConfig(BaseModel):
     """Master configuration schema with cross-validation."""
     system: SystemConfig
@@ -500,6 +521,9 @@ class MasterConfig(BaseModel):
 
 #### Lyapunov Stability Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_lyapunov_stability_constraints(controller_config: dict, physics_config: dict) -> bool:
     """Validate Lyapunov stability mathematical constraints."""
 
@@ -531,6 +555,9 @@ def validate_lyapunov_stability_constraints(controller_config: dict, physics_con
 
 #### PSO Convergence Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_pso_convergence_constraints(pso_config: dict) -> bool:
     """Validate PSO convergence mathematical constraints."""
 
@@ -570,6 +597,9 @@ def validate_pso_convergence_constraints(pso_config: dict) -> bool:
 
 #### Numerical Stability Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_numerical_stability(simulation_config: dict, controller_config: dict) -> bool:
     """Validate numerical stability constraints."""
 
@@ -605,6 +635,9 @@ def validate_numerical_stability(simulation_config: dict, controller_config: dic
 
 #### Physics-Controller Compatibility
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_physics_controller_compatibility(physics_config: dict, controller_config: dict) -> bool:
     """Validate compatibility between physics and controller parameters."""
 
@@ -639,6 +672,9 @@ def validate_physics_controller_compatibility(physics_config: dict, controller_c
 
 #### Optimization-Controller Compatibility
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_optimization_controller_compatibility(opt_config: dict, ctrl_configs: dict) -> bool:
     """Validate optimization bounds with controller requirements."""
 
@@ -672,6 +708,9 @@ def validate_optimization_controller_compatibility(opt_config: dict, ctrl_config
 
 #### Simulation-System Compatibility
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_simulation_system_compatibility(sim_config: dict, physics_config: dict) -> bool:
     """Validate simulation parameters with physical system."""
 
@@ -800,6 +839,9 @@ class RuntimeConfigValidator:
 
 #### Configuration Hot-Reloading
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationHotReloader:
     """Hot-reload configuration with validation."""
 
@@ -866,6 +908,9 @@ class ConfigurationHotReloader:
 
 #### Schema Migration System
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationMigrator:
     """Handle configuration schema migrations."""
 
@@ -965,6 +1010,9 @@ class ConfigurationMigrator:
 
 #### Backward Compatibility Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_backward_compatibility(old_config: dict, new_config: dict) -> bool:
     """Validate backward compatibility between configuration versions."""
 
@@ -993,6 +1041,9 @@ def validate_backward_compatibility(old_config: dict, new_config: dict) -> bool:
 
 #### Configuration Test Suite
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationTestSuite:
     """Comprehensive configuration validation test suite."""
 

@@ -133,6 +133,9 @@ t_{reach} \leq \frac{|s(0)|}{\eta}
 **Code Verification**: The implementation in `src/controllers/classic_smc.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state: np.ndarray, target: np.ndarray) -> float:
     """Compute SMC control signal."""
     # Extract state variables
@@ -249,6 +252,9 @@ T \leq \frac{2V(0)^{1/2}}{\mu} = \frac{2V(0)^{1/2}}{\alpha_1 \alpha_2^{1/2}}
 **Code Verification**: The implementation in `src/controllers/sta_smc.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state: np.ndarray, target: np.ndarray) -> float:
     """Compute Super-Twisting control signal."""
     # Compute sliding surface
@@ -435,6 +441,9 @@ These conditions are satisfied when:
 **Code Verification**: The implementation in `src/optimizer/pso_optimizer.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def update_particles(self):
     """Update particle velocities and positions."""
     for i in range(self.n_particles):
@@ -590,6 +599,9 @@ u & \text{otherwise}
 **Code Verification**: Numerical stability checks in implementation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_numerical_stability(self, dt: float, control_signal: float) -> bool:
     """Validate numerical stability conditions."""
     # Check sampling time constraint
@@ -658,6 +670,9 @@ Since the uncertainty enters through the control channel, it can be completely r
 **Implementation**: Statistical validation through Monte Carlo simulation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def monte_carlo_validation(n_trials: int = 10000) -> Dict[str, float]:
     """Monte Carlo validation of algorithm robustness."""
     success_rate = 0
@@ -722,6 +737,9 @@ def update_velocity(self, particle_idx):
 ### 8.2 Unit Test Mathematical Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestMathematicalCorrectness:
     """Test mathematical properties of implementations."""
 
@@ -767,6 +785,9 @@ class TestMathematicalCorrectness:
 ### 8.3 Integration Test Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_end_to_end_mathematical_properties():
     """Test mathematical properties in complete system."""
 

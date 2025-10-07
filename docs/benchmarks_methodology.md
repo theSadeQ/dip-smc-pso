@@ -196,6 +196,9 @@ metrics_robust, ci_robust = run_trials(
 ### Controller Comparison
 
 ```python
+# example-metadata:
+# runnable: false
+
 controllers = ['classical_smc', 'sta_smc', 'adaptive_smc']
 results = {}
 
@@ -267,6 +270,9 @@ Where normalization prevents metric dominance and penalties handle constraint vi
 ### Result Documentation
 
 ```python
+# example-metadata:
+# runnable: false
+
 benchmark_metadata = {
     'timestamp': datetime.now().isoformat(),
     'config_hash': hashlib.md5(config_content).hexdigest(),

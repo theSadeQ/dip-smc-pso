@@ -554,7 +554,7 @@ class AdvancedControlMetrics(PerformanceAnalyzer):
 
     def _analyze_settling_behavior(self, times: np.ndarray, output: np.ndarray) -> Dict[str, Any]:
         """Analyze settling behavior in detail."""
-        final_value = output[-1]
+        output[-1]
 
         # Multiple tolerance bands
         tolerances = [0.01, 0.02, 0.05]  # 1%, 2%, 5%

@@ -37,6 +37,9 @@ This document provides **complete validation procedures** for all 11 MCP servers
 **MCP Server**: `mcp-analyzer`
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude via MCP:
 "Use mcp-analyzer to run RUFF linting on src/controllers/classical_smc.py"
 
@@ -65,6 +68,9 @@ Fixable: 2
 ### Step 2: Detect Dead Code with VULTURE
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use mcp-analyzer to find dead code in src/utils/validation/"
 
@@ -92,6 +98,9 @@ Total dead code: 3 items
 ### Step 3: Apply Automatic Fixes
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use mcp-analyzer to auto-fix RUFF issues in classical_smc.py"
 
@@ -123,6 +132,9 @@ Total dead code: 3 items
 **MCP Server**: `numpy-mcp`
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use numpy-mcp to calculate the condition number of the inertia matrix:
 [[1.5, 0.2], [0.2, 0.8]]"
@@ -150,6 +162,9 @@ Total dead code: 3 items
 ### Step 2: Eigenvalue Decomposition for Stability
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use numpy-mcp to compute eigenvalues of system matrix A:
 [[0, 1], [-2, -3]]"
@@ -177,6 +192,9 @@ Total dead code: 3 items
 ### Step 3: Statistical Analysis of PSO Convergence
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use numpy-mcp to analyze these PSO fitness values:
 [150.2, 145.8, 142.1, 140.5, 139.8, 139.3, 139.1, 139.0]"
@@ -251,6 +269,9 @@ Total dead code: 3 items
 ### Step 2: Analyze with Pandas (pandas-mcp)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use pandas-mcp to calculate average fitness by controller type from the PSO results"
 
@@ -276,6 +297,9 @@ sta_smc            140.5   4.5   133.2   148.9
 ### Step 3: Generate Visualization (pandas-mcp)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use pandas-mcp to create a bar chart comparing average fitness by controller type"
 
@@ -322,6 +346,9 @@ Interactive features:
 **MCP Server**: `pytest-mcp`
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use pytest-mcp to list the last 5 test failures"
 
@@ -359,6 +386,9 @@ Interactive features:
 ### Step 2: Analyze Failing Test Code (mcp-analyzer)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use mcp-analyzer to lint the failing test file tests/test_controllers/test_classical_smc.py"
 
@@ -389,6 +419,9 @@ Suggestions:
 ### Step 3: Get Failure Pattern Analysis (pytest-mcp)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Ask Claude:
 "Use pytest-mcp to analyze failure patterns grouped by test name"
 
@@ -514,6 +547,9 @@ read_file({ path: "src/controllers/classical_smc.py" })
 
 **Step 4c**: Apply code fixes (mcp-analyzer)
 ```python
+# example-metadata:
+# runnable: false
+
 run_ruff({ file_path: "...", fix: true })
 ```
 
@@ -527,6 +563,9 @@ track_test({ name: "test_stability" })
 
 **Step 5b**: Verify PSO performance (pandas-mcp + numpy-mcp)
 ```python
+# example-metadata:
+# runnable: false
+
 # Pandas: Analyze new run
 # NumPy: Verify condition number < 1e6
 ```
@@ -609,6 +648,9 @@ cat logs/mcp_server.log
 
 ### Tool Execution Errors
 ```python
+# example-metadata:
+# runnable: false
+
 # Verify tool parameters match schema
 # Check server README for correct parameter format
 # Ensure file paths are absolute
@@ -617,6 +659,9 @@ cat logs/mcp_server.log
 
 ### Integration Issues
 ```python
+# example-metadata:
+# runnable: false
+
 # Validate data format between servers
 # Ensure output of Server A matches input of Server B
 # Check for encoding issues (UTF-8 vs ASCII)

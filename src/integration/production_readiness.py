@@ -25,8 +25,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 try:
-    from src.utils.coverage.monitoring import CoverageMonitor, CoverageMetrics
-    from src.integration.compatibility_matrix import CompatibilityMatrix, CompatibilityLevel
+    from src.utils.coverage.monitoring import CoverageMonitor
+    from src.integration.compatibility_matrix import CompatibilityMatrix
     from scripts.pytest_automation import PytestIntegrationCoordinator, TestExecutionResult
 except ImportError as e:
     logging.warning(f"Optional import failed: {e}")

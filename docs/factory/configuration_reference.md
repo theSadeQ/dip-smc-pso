@@ -21,6 +21,9 @@ src/controllers/factory/
 The factory implements thread-safe operations using `threading.RLock()`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Thread-safe factory operations
 _factory_lock = threading.RLock()
 
@@ -43,6 +46,9 @@ def create_controller(controller_type: str, config: Optional[Any] = None,
 The factory maintains a comprehensive controller registry with standardized metadata:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,
@@ -79,6 +85,9 @@ def _resolve_controller_gains(
 #### Comprehensive Gain Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_controller_gains(
     gains: List[float],
     controller_info: Dict[str, Any]
@@ -117,6 +126,9 @@ config_params = {
 #### Adaptive SMC Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Adaptive SMC with parameter estimation
 config_params = {
     'gains': controller_gains,           # [k1, k2, λ1, λ2, γ]
@@ -135,6 +147,9 @@ config_params = {
 #### Super-Twisting SMC Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Super-Twisting Algorithm (STA) SMC
 config_params = {
     'gains': controller_gains,           # [K1, K2, k1, k2, λ1, λ2]
@@ -151,6 +166,9 @@ config_params = {
 #### Hybrid Adaptive-STA SMC Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Hybrid controller requires sub-configurations
 classical_config = ClassicalSMCConfig(
     gains=[8.0, 6.0, 4.0, 3.0, 15.0, 2.0],
@@ -192,6 +210,9 @@ All controllers require:
 ### Validation Workflow
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_configuration(controller_type: str, config_params: Dict[str, Any]) -> None:
     """Comprehensive configuration validation."""
 
@@ -224,6 +245,9 @@ def validate_configuration(controller_type: str, config_params: Dict[str, Any]) 
 ### Configuration Fallback Mechanism
 
 ```python
+# example-metadata:
+# runnable: false
+
 try:
     # Attempt full configuration
     controller_config = config_class(**config_params)
@@ -260,6 +284,9 @@ except ImportError:
 ### Runtime Error Recovery
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller_with_recovery(controller_type: str, config: Any, gains: Any) -> Any:
     """Create controller with automatic error recovery."""
 
@@ -282,6 +309,9 @@ def create_controller_with_recovery(controller_type: str, config: Any, gains: An
 ### Backwards Compatibility Aliases
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_ALIASES = {
     'classic_smc': 'classical_smc',
     'smc_classical': 'classical_smc',
@@ -306,6 +336,9 @@ def _canonicalize_controller_type(name: str) -> str:
 ### Optional Plant Model Support
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _create_dynamics_model(config: Any) -> Optional[Any]:
     """Create dynamics model from configuration with fallback handling."""
 

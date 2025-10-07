@@ -202,6 +202,9 @@ print(f"STA-SMC:       {ise_sta:.4f}")
 ### Monte Carlo Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Load multiple trials
 n_trials = 50
 ise_classical_trials = []
@@ -259,6 +262,9 @@ else:
 #### Effect Size (Cohen's d)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Compute Cohen's d (effect size)
 mean_diff = np.mean(ise_classical_trials) - np.mean(ise_sta_trials)
 pooled_std = np.sqrt(
@@ -279,6 +285,9 @@ else:
 ### Confidence Intervals
 
 ```python
+# example-metadata:
+# runnable: false
+
 # 95% Confidence Interval for mean ISE
 confidence_level = 0.95
 alpha = 1 - confidence_level
@@ -381,6 +390,9 @@ plt.show()
 ### Comparative Visualization (Multiple Controllers)
 
 ```python
+# example-metadata:
+# runnable: false
+
 controllers = ['classical_smc', 'sta_smc', 'adaptive_smc', 'hybrid_adaptive_sta_smc']
 colors = ['blue', 'red', 'green', 'purple']
 labels = ['Classical', 'Super-Twisting', 'Adaptive', 'Hybrid']
@@ -411,6 +423,9 @@ plt.show()
 ### Phase Portrait
 
 ```python
+# example-metadata:
+# runnable: false
+
 fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
 # First pendulum phase portrait
@@ -538,6 +553,9 @@ print("Exported to simulation_results.mat")
 ### Generate LaTeX Table
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Create metrics table for LaTeX
 metrics_table = []
 for ctrl, label in zip(controllers, labels):

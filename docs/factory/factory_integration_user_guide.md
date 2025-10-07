@@ -133,6 +133,9 @@ controller = create_controller('classical_smc', **classical_config)
 **Required Parameters**: `gains`, `max_force`, `dt`
 
 ```python
+# example-metadata:
+# runnable: false
+
 sta_config = {
     'gains': [25.0, 15.0, 20.0, 12.0, 8.0, 6.0],
     'max_force': 150.0,
@@ -152,6 +155,9 @@ controller = create_controller('sta_smc', **sta_config)
 **Required Parameters**: `gains`, `max_force`, `dt`
 
 ```python
+# example-metadata:
+# runnable: false
+
 adaptive_config = {
     'gains': [25.0, 18.0, 15.0, 10.0, 4.0],
     'max_force': 150.0,
@@ -350,6 +356,9 @@ ensemble = create_controller_ensemble(gains_ensemble, config)
 ### 1. **Always Specify Required Parameters**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Good: Complete parameter specification
 controller_config = {
     'gains': [20.0, 15.0, 12.0, 8.0, 35.0, 5.0],
@@ -432,6 +441,9 @@ def get_or_create_controller(controller_type, gains, config):
 ### 2. **Lazy Loading for Large Ensembles**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class LazyControllerEnsemble:
     """Lazy-loaded controller ensemble for memory efficiency."""
 
@@ -573,6 +585,9 @@ validated_gains = validate_gains([20.0, 15.0, 12.0, 8.0, 35.0, 5.0])
 **Solution**: Factory is thread-safe by default, but avoid shared mutable state
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Thread-safe controller creation
 import threading
 

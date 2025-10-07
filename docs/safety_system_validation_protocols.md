@@ -95,6 +95,9 @@ u(t) & \text{otherwise}
 
 **Test Coverage Requirements**:
 ```python
+# example-metadata:
+# runnable: false
+
 # MANDATORY: 100% line coverage
 def test_saturation_boundary_conditions():
     """Test control signal saturation at exact limits."""
@@ -234,6 +237,9 @@ class TestSafetyComponent:
 
 #### Safety Integration Test Framework
 ```python
+# example-metadata:
+# runnable: false
+
 class SafetyIntegrationTest:
     """Integration testing for safety-critical subsystems."""
 
@@ -260,6 +266,9 @@ class SafetyIntegrationTest:
 
 #### Mathematical Property Validation
 ```python
+# example-metadata:
+# runnable: false
+
 @hypothesis.given(
     theta1=st.floats(min_value=-π, max_value=π),
     theta2=st.floats(min_value=-π, max_value=π),
@@ -351,6 +360,9 @@ pytest tests/test_monitoring/ --cov=src/utils/monitoring \
 
 #### Branch Coverage Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def verify_safety_branch_coverage():
     """Verify all safety-critical branches are tested."""
     safety_modules = [
@@ -400,6 +412,9 @@ mutmut run --paths-to-mutate=src/utils/safety/emergency_stop.py
 
 #### Critical Safety Indicators
 ```python
+# example-metadata:
+# runnable: false
+
 class SafetyDashboard:
     """Real-time safety monitoring dashboard."""
 
@@ -437,6 +452,9 @@ class SafetyDashboard:
 
 #### Runtime Safety Assertions
 ```python
+# example-metadata:
+# runnable: false
+
 def runtime_safety_check(state, control_signal, parameters):
     """Continuous runtime safety validation."""
 
@@ -486,6 +504,9 @@ def runtime_safety_check(state, control_signal, parameters):
 
 #### Automated Recovery
 ```python
+# example-metadata:
+# runnable: false
+
 class EmergencyRecoverySystem:
     """Automated emergency recovery procedures."""
 

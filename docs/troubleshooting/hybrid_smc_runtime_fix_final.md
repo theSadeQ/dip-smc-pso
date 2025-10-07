@@ -38,6 +38,9 @@ The hybrid SMC controller's `compute_control()` method was experiencing a code p
 
 #### 2. Type Mismatch Propagation
 ```python
+# example-metadata:
+# runnable: false
+
 # Before Fix - Problematic Flow:
 def compute_control(self, state, ...):
     # ... complex control logic ...
@@ -75,6 +78,9 @@ The hybrid controller violated the expected return type contract:
 
 #### 1. Enhanced Result Normalization (Lines 161-205)
 ```python
+# example-metadata:
+# runnable: false
+
 # Added comprehensive result normalization with array detection
 def _normalize_result(self, result):
     """Ensure result is properly formatted as HybridSTAOutput."""
@@ -108,6 +114,9 @@ else:
 
 #### 3. Consistent Return Statement Enforcement
 ```python
+# example-metadata:
+# runnable: false
+
 # Ensured all code paths have explicit returns
 def compute_control(self, state, state_vars=None, history=None):
     # ... control computation logic ...
@@ -123,6 +132,9 @@ def compute_control(self, state, state_vars=None, history=None):
 
 #### 4. Robust Error Handling
 ```python
+# example-metadata:
+# runnable: false
+
 # Added emergency reset conditions
 emergency_reset = (
     not np.isfinite(u_sat) or abs(u_sat) > self.max_force * 2 or
@@ -247,6 +259,9 @@ def is_valid_control_output(obj: Any) -> TypeGuard[HybridSTAOutput]:
 
 #### Controller Output Validation
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerValidator:
     """Validate controller outputs meet interface contracts."""
 
@@ -265,6 +280,9 @@ class ControllerValidator:
 
 #### Integration Testing Requirements
 ```python
+# example-metadata:
+# runnable: false
+
 def test_controller_interface_compliance():
     """Comprehensive interface compliance testing."""
     controllers = ['classical_smc', 'adaptive_smc', 'sta_smc', 'hybrid_adaptive_sta_smc']
@@ -288,6 +306,9 @@ def test_controller_interface_compliance():
 
 #### Method Documentation Template
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state: np.ndarray, ...) -> HybridSTAOutput:
     """Compute hybrid adaptive STA-SMC control action.
 
@@ -331,6 +352,9 @@ def compute_control(self, state: np.ndarray, ...) -> HybridSTAOutput:
 
 ### Production Readiness Score Calculation
 ```python
+# example-metadata:
+# runnable: false
+
 def calculate_production_readiness():
     component_scores = {
         'mathematical_algorithms': 10/10,    # All 4 controllers working

@@ -216,6 +216,9 @@ hil:
 
 **1. Physics Parameters (dip_params)**
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class DIPParams:
     """Double-inverted pendulum physics parameters."""
@@ -241,6 +244,9 @@ class DIPParams:
 
 **2. Controller Configuration**
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class ClassicalSMCConfig:
     """Classical SMC configuration."""
@@ -260,6 +266,9 @@ class AdaptiveSMCConfig:
 
 **3. Simulation Settings**
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class SimulationConfig:
     """Simulation parameters."""
@@ -398,6 +407,9 @@ class ConfigMetadata:
 
 **Provide sensible defaults:**
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class PSOConfig:
     """PSO configuration with sensible defaults."""
@@ -418,6 +430,9 @@ class PSOConfig:
 ### 3. Parameter Bounds Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_physics_params(params: DIPParams):
     """Validate physical constraints."""
     # Positive masses
@@ -469,6 +484,9 @@ dip_params:
 ### Pattern 1: Development vs Production Configs
 
 ```python
+# example-metadata:
+# runnable: false
+
 # development.yaml
 simulation:
   duration: 2.0              # Shorter for faster iteration
@@ -502,6 +520,9 @@ config = load_config(config_file)
 ### Pattern 2: Scenario-Based Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # scenarios/baseline.yaml
 initial_conditions:
   theta1_0: 0.1    # 5.7 degrees

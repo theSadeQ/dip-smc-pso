@@ -445,6 +445,9 @@ This repository uses **PySwarms (GlobalBestPSO)** as the underlying PSO implemen
 
 **Core Engine**:
 ```python
+# example-metadata:
+# runnable: false
+
 from pyswarms.single import GlobalBestPSO
 ```
 

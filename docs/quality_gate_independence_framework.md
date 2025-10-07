@@ -17,6 +17,9 @@ The Quality Gate Independence Framework establishes resilient, parallel validati
 The framework implements **four parallel, independent validation paths** that can operate and report results independently:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class IndependentValidationPaths:
     """Four independent validation paths preventing cascade failures."""
 
@@ -55,6 +58,9 @@ class IndependentValidationPaths:
 
 #### **Path 1: Coverage Validation**
 ```python
+# example-metadata:
+# runnable: false
+
 class CoverageValidationPath:
     """Independent coverage analysis with failure tolerance."""
 
@@ -110,6 +116,9 @@ class CoverageValidationPath:
 
 #### **Path 2: Mathematical Validation**
 ```python
+# example-metadata:
+# runnable: false
+
 class MathematicalValidationPath:
     """Independent mathematical property validation."""
 
@@ -209,6 +218,9 @@ class MathematicalValidationPath:
 
 #### **Path 3: Performance Validation**
 ```python
+# example-metadata:
+# runnable: false
+
 class PerformanceValidationPath:
     """Independent performance and benchmark validation."""
 
@@ -309,6 +321,9 @@ class PerformanceValidationPath:
 
 #### **Path 4: Compliance Validation**
 ```python
+# example-metadata:
+# runnable: false
+
 class ComplianceValidationPath:
     """Independent CLAUDE.md compliance validation."""
 
@@ -388,6 +403,9 @@ class ComplianceValidationPath:
 ### 2.1 Graceful Degradation Strategy
 
 ```python
+# example-metadata:
+# runnable: false
+
 class GracefulDegradationManager:
     """Manages graceful degradation when validation paths fail."""
 
@@ -487,6 +505,9 @@ class GracefulDegradationManager:
 ### 2.2 Partial Success Reporting
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PartialSuccessReporter:
     """Reports partial validation success with specific gap identification."""
 
@@ -594,6 +615,9 @@ class PartialSuccessReporter:
 ### 3.1 Multi-Criteria Deployment Decision
 
 ```python
+# example-metadata:
+# runnable: false
+
 class DeploymentDecisionEngine:
     """Makes deployment decisions based on independent validation results."""
 
@@ -747,6 +771,9 @@ class DeploymentDecisionEngine:
 ### 3.2 Risk Assessment and Mitigation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class RiskAssessmentEngine:
     """Assesses deployment risks and generates mitigation strategies."""
 
@@ -896,6 +923,9 @@ class RiskAssessmentEngine:
 ### 4.1 Integration with Existing Systems
 
 ```python
+# example-metadata:
+# runnable: false
+
 class QualityGateIntegrator:
     """Integrates quality gate independence framework with existing systems."""
 
@@ -1065,6 +1095,9 @@ fi
 ### 5.1 Framework Health Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FrameworkHealthMonitor:
     """Monitors the health and effectiveness of the quality gate framework."""
 
@@ -1155,6 +1188,9 @@ class FrameworkHealthMonitor:
 ### 5.2 Continuous Framework Improvement
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FrameworkImprovementEngine:
     """Continuously improves the quality gate framework based on experience."""
 

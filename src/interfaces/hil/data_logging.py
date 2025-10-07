@@ -410,7 +410,7 @@ class HILDataLogger:
             for entry in entries:
                 all_keys.update(entry.data.keys())
 
-            fieldnames = sorted(all_keys)
+            sorted(all_keys)
 
             # Write entries
             for entry in entries:

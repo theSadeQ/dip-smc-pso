@@ -177,6 +177,9 @@ python scripts/docs/validate_code_docs.py --check-syntax
 **Enhancements**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Syntax highlighting style
 pygments_style = 'monokai'  # Dark theme for code
 

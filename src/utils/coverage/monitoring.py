@@ -205,7 +205,7 @@ class CoverageMonitor:
             if len(x) < 2 or len(y) < 2:
                 return 0.0
 
-            n = len(x)
+            len(x)
             x_mean = np.mean(x)
             y_mean = np.mean(y)
 

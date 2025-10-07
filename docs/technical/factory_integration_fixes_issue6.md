@@ -221,6 +221,9 @@ controller = create_controller(
 #### `ClassicalSMCConfig` - Complete Parameter Reference
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class ClassicalSMCConfig:
     """Type-safe configuration for Classical SMC controller."""
@@ -253,6 +256,9 @@ class ClassicalSMCConfig:
 #### Configuration Examples
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Stability-focused configuration
 stability_config = ClassicalSMCConfig(
     gains=[5.0, 5.0, 3.0, 3.0, 10.0, 1.0],  # Conservative gains
@@ -286,6 +292,9 @@ research_config = ClassicalSMCConfig(
 #### `SuperTwistingSMCConfig` - Algorithm-Specific Parameters
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SuperTwistingSMCConfig:
     """Configuration for Super-Twisting (STA) SMC controller."""
@@ -339,6 +348,9 @@ reduced_overshoot_config = SuperTwistingSMCConfig(
 #### `AdaptiveSMCConfig` - Self-Tuning Parameters
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class AdaptiveSMCConfig:
     """Configuration for Adaptive SMC with parameter estimation."""
@@ -381,6 +393,9 @@ Where:
 #### `HybridSMCConfig` - Advanced Multi-Mode Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class HybridSMCConfig:
     """Configuration for Hybrid Adaptive STA-SMC controller."""
@@ -453,6 +468,9 @@ result = pso_factory.optimize_controller()
 #### Complete Optimization Pipeline
 
 ```python
+# example-metadata:
+# runnable: false
+
 def optimize_controller_comprehensive():
     """Complete PSO optimization workflow example."""
 
@@ -497,6 +515,9 @@ def optimize_controller_comprehensive():
 The enhanced PSO bridge evaluates controllers across multiple test scenarios:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Automatic test scenarios in fitness evaluation:
 test_scenarios = [
     {
@@ -588,12 +609,18 @@ else:
 
 **Problem:**
 ```python
+# example-metadata:
+# runnable: false
+
 controller = create_controller('classical', gains=[...])
 # ValueError: Unknown controller type 'classical'. Available: [...]
 ```
 
 **Solution:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Use correct controller type names
 controller = create_controller('classical_smc', gains=[...])
 
@@ -609,12 +636,18 @@ print(list_available_controllers())
 
 **Problem:**
 ```python
+# example-metadata:
+# runnable: false
+
 # ClassicalSMCConfig validation error: Surface gains must be positive
 config = ClassicalSMCConfig(gains=[0, 5, 3, 2, 10, 1], ...)
 ```
 
 **Solution:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Ensure all surface gains are positive
 config = ClassicalSMCConfig(
     gains=[1.0, 5.0, 3.0, 2.0, 10.0, 1.0],  # k1 > 0
@@ -633,6 +666,9 @@ config = ClassicalSMCConfig(
 
 **Problem:**
 ```python
+# example-metadata:
+# runnable: false
+
 # TypeError: HybridSMCConfig() missing required arguments
 controller = create_controller('hybrid_adaptive_sta_smc', gains=[...])
 ```
@@ -688,6 +724,9 @@ result = pso_factory.optimize_controller()
 **Diagnosis and Solutions:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Check parameter bounds
 bounds = get_gain_bounds_for_pso(SMCType.CLASSICAL)
 print(f"Bounds: {bounds}")
@@ -714,12 +753,18 @@ print(f"Parameter violations: {diagnostics['validation_statistics']['parameter_v
 
 **Problem:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Fitness evaluation fails with dynamics errors
 # RuntimeError: Matrix inversion failed during dynamics computation
 ```
 
 **Solution:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Use enhanced PSO factory with robust evaluation
 pso_config = PSOFactoryConfig(
     controller_type=ControllerType.CLASSICAL_SMC,
@@ -749,6 +794,9 @@ controller = create_controller('classical_smc', config=global_config)
 
 **Solution:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Ensure config.yaml has proper structure:
 # controller_defaults:
 #   classical_smc:
@@ -773,11 +821,17 @@ controller = create_controller(
 
 **Problem:**
 ```python
+# example-metadata:
+# runnable: false
+
 # ImportError: Could not import DoubleInvertedPendulum from any expected location
 ```
 
 **Solution:**
 ```python
+# example-metadata:
+# runnable: false
+
 # The factory has robust import fallbacks:
 # 1. src.core.dynamics.DIPDynamics (preferred)
 # 2. src.core.dynamics.DIPDynamics (alternative)

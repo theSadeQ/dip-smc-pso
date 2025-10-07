@@ -28,6 +28,9 @@ Advanced PSO-Factory Integration Bridge.
 **Controller creation from PSO particle:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def particle_to_controller(particle: np.ndarray) -> Controller:
     gains = {
         'k1': particle[0],

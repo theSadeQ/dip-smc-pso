@@ -571,7 +571,7 @@ class GeneticAlgorithm(OptimizationAlgorithm):
         try:
             slope, _ = np.polyfit(x, y, 1)
             return abs(slope)
-        except:
+        except Exception:
             return 0.0
 
     def _calculate_selection_pressure(self) -> float:

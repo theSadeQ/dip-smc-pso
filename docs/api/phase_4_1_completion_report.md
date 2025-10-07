@@ -354,6 +354,9 @@
 
 **ClassicalSMC:**
 ```python
+# example-metadata:
+# runnable: false
+
 See Also
 --------
 Theory Documentation
@@ -370,6 +373,9 @@ Configuration
 
 **SuperTwistingSMC:**
 ```python
+# example-metadata:
+# runnable: false
+
 See Also
 --------
 Theory Documentation
@@ -386,6 +392,9 @@ Configuration
 
 **AdaptiveSMC:**
 ```python
+# example-metadata:
+# runnable: false
+
 See Also
 --------
 Theory Documentation
@@ -420,6 +429,9 @@ Configuration
 ### Suggested Doctest Format
 
 ```python
+# example-metadata:
+# runnable: false
+
 Examples
 --------
 >>> from src.controllers.smc import ClassicalSMC

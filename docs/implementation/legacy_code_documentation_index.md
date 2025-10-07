@@ -227,6 +227,9 @@ Each API page includes:
 All public APIs follow NumPy docstring conventions with mathematical enhancement:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, x: np.ndarray, x_ref: np.ndarray, t: float) -> float:
     """
     Compute sliding mode control input.
@@ -278,6 +281,9 @@ def compute_control(self, x: np.ndarray, x_ref: np.ndarray, t: float) -> float:
 All implementations include comprehensive type hints and runtime validation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from typing import Protocol, Optional, Tuple
 from pydantic import BaseModel, validator, Field
 import numpy as np
@@ -320,6 +326,9 @@ class SMCParameters(BaseModel):
 Every algorithm implementation includes unit tests that verify theoretical properties:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_sliding_surface_stability():
     """Verify that sliding surface has stable dynamics."""
     controller = ClassicalSMC(c=[1, 2, 3], eta=1.0, epsilon=0.1)

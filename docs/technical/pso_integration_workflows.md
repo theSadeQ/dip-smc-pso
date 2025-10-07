@@ -84,6 +84,9 @@ class EnhancedPSOFactory:
 Type-safe configuration for PSO optimization parameters:
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass
 class PSOFactoryConfig:
     """Configuration for PSO-Factory integration."""
@@ -154,6 +157,9 @@ else:
 #### Super-Twisting SMC Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Optimize STA-SMC with Issue #2 considerations
 pso_config = PSOFactoryConfig(
     controller_type=ControllerType.STA_SMC,
@@ -181,6 +187,9 @@ if result['success']:
 For quick optimization, use the convenience functions:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.optimization.integration.pso_factory_bridge import (
     optimize_classical_smc, optimize_adaptive_smc, optimize_sta_smc
 )
@@ -214,6 +223,9 @@ optimized_controllers = {
 ### 3. Custom PSO Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Advanced PSO configuration example
 custom_pso_config = PSOFactoryConfig(
     controller_type=ControllerType.ADAPTIVE_SMC,
@@ -259,6 +271,9 @@ if result['success']:
 ### 1. Multi-Objective Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Configure PSO for multi-objective optimization
 multi_objective_config = PSOFactoryConfig(
     controller_type=ControllerType.CLASSICAL_SMC,
@@ -318,6 +333,9 @@ result = pso_factory.optimize_controller()
 ### 3. Adaptive PSO Parameters
 
 ```python
+# example-metadata:
+# runnable: false
+
 # PSO with adaptive parameters
 adaptive_config = PSOFactoryConfig(
     controller_type=ControllerType.STA_SMC,
@@ -353,6 +371,9 @@ print(f"Adaptive bounds enabled: {diagnostics['configuration']['enable_adaptive_
 The enhanced PSO factory evaluates controllers across multiple test scenarios:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Automatic test scenarios (built into enhanced fitness function):
 test_scenarios = [
     {
@@ -381,6 +402,9 @@ test_scenarios = [
 The enhanced fitness function computes weighted costs:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _evaluate_controller_performance(self, controller, gains):
     """Multi-scenario performance evaluation."""
 
@@ -402,6 +426,9 @@ def _evaluate_controller_performance(self, controller, gains):
 ### 3. Robustness Evaluation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Configure PSO for robustness optimization
 robust_config = PSOFactoryConfig(
     controller_type=ControllerType.ADAPTIVE_SMC,
@@ -436,6 +463,9 @@ if result['success']:
 ### 1. Real-Time Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.optimization.integration.pso_factory_bridge import EnhancedPSOFactory
 
 # Create PSO factory with monitoring
@@ -461,6 +491,9 @@ print(f"  Evaluation success rate: {success_rate:.1%}")
 ### 2. Convergence Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 def analyze_convergence(optimization_result):
     """Analyze PSO convergence characteristics."""
 
@@ -507,6 +540,9 @@ analyze_convergence(result)
 ### 3. Performance Diagnostics
 
 ```python
+# example-metadata:
+# runnable: false
+
 def comprehensive_diagnostics(pso_factory, optimization_result):
     """Generate comprehensive optimization diagnostics."""
 
@@ -661,6 +697,9 @@ history_analysis = analyze_optimization_history(result)
 ### 2. Controller Performance Comparison
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compare_controller_performance():
     """Compare optimized controllers across different types."""
 
@@ -853,6 +892,9 @@ adaptive_result = production_optimization_pipeline('adaptive_smc', output_path='
 ### 2. Batch Optimization Workflow
 
 ```python
+# example-metadata:
+# runnable: false
+
 def batch_optimization_workflow(controller_types: List[str],
                               optimization_configs: Dict[str, Dict] = None):
     """Batch optimization workflow for multiple controllers."""
@@ -978,6 +1020,9 @@ batch_results = batch_optimization_workflow(controllers_to_optimize, custom_conf
 ### 1. Complete Research Workflow
 
 ```python
+# example-metadata:
+# runnable: false
+
 def complete_research_workflow():
     """Complete research workflow demonstrating PSO-factory integration."""
 
@@ -1088,6 +1133,9 @@ workflow_results = complete_research_workflow()
 ### 2. Real-Time Optimization Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def real_time_optimization_integration():
     """Demonstrate real-time optimization with live feedback."""
 
@@ -1204,6 +1252,9 @@ real_time_result = real_time_optimization_integration()
 
 #### Population Size Selection
 ```python
+# example-metadata:
+# runnable: false
+
 # Guidelines for population size selection:
 population_guidelines = {
     'small_problems': {
@@ -1246,6 +1297,9 @@ def get_recommended_population_size(controller_type: ControllerType) -> int:
 #### Convergence Criteria
 
 ```python
+# example-metadata:
+# runnable: false
+
 def configure_convergence_criteria(controller_type: ControllerType,
                                  optimization_goal: str) -> PSOFactoryConfig:
     """Configure convergence criteria based on optimization goals."""
@@ -1288,6 +1342,9 @@ production_config = configure_convergence_criteria(ControllerType.ADAPTIVE_SMC, 
 ### 2. Error Handling Best Practices
 
 ```python
+# example-metadata:
+# runnable: false
+
 def robust_pso_optimization(controller_type: ControllerType,
                           max_retries: int = 3) -> Dict[str, Any]:
     """Robust PSO optimization with automatic retry logic."""
@@ -1409,6 +1466,9 @@ performance_results = performance_optimized_workflow(controller_types, parallel_
 ### 4. Validation and Quality Assurance
 
 ```python
+# example-metadata:
+# runnable: false
+
 def comprehensive_validation_workflow(optimization_result: Dict[str, Any]) -> Dict[str, Any]:
     """Comprehensive validation workflow for optimized controllers."""
 

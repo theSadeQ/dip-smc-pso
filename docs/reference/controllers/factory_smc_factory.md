@@ -61,6 +61,9 @@ class SMCType(Enum):
 **Compile-time validation:** Python type checker (mypy) validates:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller(ctrl_type: SMCType, ...) -> Controller:
     ...
 ```
@@ -103,6 +106,9 @@ with _registry_lock:
 **Inversion of Control:** Factory receives dependencies rather than creating them:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller(
     ctrl_type: SMCType,
     gains: List[float],
@@ -151,6 +157,9 @@ def validate_gains(ctrl_type: SMCType, gains: List[float]) -> bool:
 **Type-safe configuration:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SMCConfig:
     gains: List[float]
@@ -175,6 +184,9 @@ class SMCConfig:
 For complex configurations:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SMCConfigBuilder:
     def __init__(self):
         self._config = {}

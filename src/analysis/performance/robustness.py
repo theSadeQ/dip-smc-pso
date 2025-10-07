@@ -460,7 +460,7 @@ class RobustnessAnalyzer(PerformanceAnalyzer):
                 A_pert = A.copy()
                 A_pert[i, j] += perturbation
                 return (A_pert, B, C, D)
-            except:
+            except Exception:
                 pass
         elif param_name.startswith('B_'):
             try:
@@ -468,7 +468,7 @@ class RobustnessAnalyzer(PerformanceAnalyzer):
                 B_pert = B.copy()
                 B_pert[i, j] += perturbation
                 return (A, B_pert, C, D)
-            except:
+            except Exception:
                 pass
 
         # Global perturbation as fallback
@@ -536,7 +536,7 @@ class RobustnessAnalyzer(PerformanceAnalyzer):
                 # Placeholder: would simulate with sample parameters
                 result = performance_func(data)
                 results.append(result)
-            except:
+            except Exception:
                 results.append(None)
         return results
 
@@ -735,7 +735,7 @@ class RobustnessAnalyzer(PerformanceAnalyzer):
             # Bootstrap sampling (with replacement)
             if hasattr(data, 'states') and len(data.states) > 10:
                 n_samples = len(data.states)
-                indices = np.random.choice(n_samples, n_samples, replace=True)
+                np.random.choice(n_samples, n_samples, replace=True)
 
                 # Create bootstrap sample (simplified)
                 bootstrap_performance = performance_func(data)

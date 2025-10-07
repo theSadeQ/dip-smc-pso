@@ -341,7 +341,6 @@ class EnhancedPSOFactory:
         )
 
         # Override fitness function with enhanced version
-        original_fitness = tuner._fitness
         enhanced_fitness = self.create_enhanced_fitness_function(controller_factory)
         tuner._fitness = enhanced_fitness
 

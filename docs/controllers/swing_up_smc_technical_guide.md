@@ -309,6 +309,9 @@ graph TB
 
 **Implementation**:
 ```python
+# example-metadata:
+# runnable: false
+
 def total_energy(self, state):
     """
     Compute total mechanical energy.
@@ -353,6 +356,9 @@ E_upright = dynamics.total_energy(state_upright)  # = -(m₁+m₂)g(L₁+L₂)
 **Helper Functions** (source: `swing_up_smc.py:127-152`):
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _should_switch_to_stabilize(self, E_about_bottom, θ₁, θ₂):
     """
     Check if conditions met for swing → stabilize.
@@ -384,6 +390,9 @@ def _should_switch_to_swing(self, E_about_bottom, θ₁, θ₂):
 
 **Centralized Update** (lines 154-181):
 ```python
+# example-metadata:
+# runnable: false
+
 def _update_mode(self, E_about_bottom, θ₁, θ₂, t, history):
     """Evaluate and execute mode transitions."""
     if self._mode == SWING_MODE:
@@ -405,6 +414,9 @@ def _update_mode(self, E_about_bottom, θ₁, θ₂, t, history):
 **Main Control Method** (source: `swing_up_smc.py:185-233`):
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars, history):
     """
     Compute control based on current mode.
@@ -493,6 +505,9 @@ def compute_control(self, state, state_vars, history):
 
 2. **Optional Methods** (for proper initialization):
    ```python
+# example-metadata:
+# runnable: false
+
    def initialize_state(self) -> Tuple:
        """Return initial controller state."""
        ...
@@ -549,6 +564,9 @@ history = {
 **Key Classes and Functions**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SwingUpSMC:
     """
     Energy-based swing-up with hysteresis handoff.
@@ -641,6 +659,9 @@ if self._mode == SWING_MODE:
 #### 2.3 Stabilizer Delegation (Lines 220-233)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Lazy initialization on first stabilize entry
 if not self._stabilizer_initialized:
     if hasattr(self.stabilizer, "initialize_state"):
@@ -676,6 +697,9 @@ return float(u), state_vars, history
 #### 2.4 Hysteresis Validation (Lines 79-83)
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Validate hysteresis band
 if self.exit_energy_factor >= self.switch_energy_factor:
     raise ValueError(
@@ -696,6 +720,9 @@ if self.reentry_angle_tol < self.switch_angle_tol:
 
 **Example Invalid Config**:
 ```python
+# example-metadata:
+# runnable: false
+
 # This will raise ValueError:
 SwingUpSMC(
     ...,
@@ -795,6 +822,9 @@ Band = (switch_energy_factor - exit_energy_factor) · E_bottom
 
 **Asymmetric Example**:
 ```python
+# example-metadata:
+# runnable: false
+
 SwingUpSMC(
     ...,
     switch_angle_tolerance=0.35,    # 20° for handoff
@@ -823,6 +853,9 @@ SwingUpSMC(
 
 **Classical SMC Example**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Conservative gains for handoff robustness
 stabilizer = ClassicalSMC(
     gains=[8, 8, 12, 12, 40, 3],  # [k1, k2, λ1, λ2, K, kd]
@@ -839,6 +872,9 @@ swing_up = SwingUpSMC(
 
 **Super-Twisting SMC Example**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Aggressive finite-time convergence
 stabilizer = SuperTwistingSMC(
     gains=[25, 10, 15, 12, 20, 15],  # [K1, K2, k1, k2, λ1, λ2]
@@ -934,6 +970,9 @@ swing_up = SwingUpSMC(
 #### 1.2 Simulation Loop
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Initial state: down-down (fully inverted)
 x = np.array([0.0, np.pi, np.pi, 0.0, 0.0, 0.0])
 
@@ -1017,6 +1056,9 @@ swing_up = SwingUpSMC(
 #### 2.2 Wrapped Factory Method (Custom)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_swing_up_controller(
     stabilizer_type: str,
     stabilizer_gains: List[float],
@@ -1060,6 +1102,9 @@ swing_up = create_swing_up_controller(
 **Idea**: Use different stabilizers for different regions
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Aggressive stabilizer for near-upright
 stabilizer_near = SuperTwistingSMC(gains=[...], max_force=20.0)
 
@@ -1278,6 +1323,9 @@ print(f"E_current: {E_current}, E_bottom: {swing_up.E_bottom}")
 
 **Solutions**:
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Widen hysteresis band
 swing_up.exit_energy_factor = 0.85  # From 0.90 (wider band)
 
@@ -1302,6 +1350,9 @@ E_filtered = 0.9 * E_prev + 0.1 * E_current  # Low-pass filter
 
 **Solutions**:
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Use smoother stabilizer
 stabilizer = SuperTwistingSMC(...)  # Continuous control
 
@@ -1329,6 +1380,9 @@ else:
 
 **Solutions**:
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Implement total_energy() in dynamics
 class MyDynamics:
     def total_energy(self, state):
@@ -1368,6 +1422,9 @@ if not np.isfinite(E):
 
 **Energy Monitoring**:
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_energy(swing_up, state):
     """Print detailed energy diagnostics."""
     E_current = swing_up.dyn.total_energy(state)
@@ -1388,6 +1445,9 @@ def diagnose_energy(swing_up, state):
 
 **Mode Transition Analysis**:
 ```python
+# example-metadata:
+# runnable: false
+
 def analyze_transitions(history_list):
     """Analyze mode switching behavior."""
     transitions = []

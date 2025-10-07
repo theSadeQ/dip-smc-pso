@@ -192,7 +192,7 @@ class ResilientSerializerFactory:
                 self._stats['recoveries'] += 1
 
             # Test recovery by creating a simple serializer
-            test_serializer = self._create_serializer_safe(SerializationFormat.JSON, None, {})
+            self._create_serializer_safe(SerializationFormat.JSON, None, {})
 
             with self._health_lock:
                 self._health.state = FactoryState.HEALTHY

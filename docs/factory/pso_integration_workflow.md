@@ -30,6 +30,9 @@ This document provides comprehensive guidance for integrating the SMC Controller
 ### PSO-Compatible Controller Factory Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOFactoryInterface:
     """
     Specialized interface for PSO optimization integration.
@@ -748,6 +751,9 @@ def evaluate_sta_robustness_performance(
 ### Parallel PSO Evaluation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ParallelPSOEvaluator:
     """
     Thread-safe parallel evaluation system for PSO optimization.
@@ -898,6 +904,9 @@ class ParallelPSOEvaluator:
 ### PSO Progress Monitoring and Early Termination
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOProgressMonitor:
     """
     Comprehensive PSO optimization progress monitoring.

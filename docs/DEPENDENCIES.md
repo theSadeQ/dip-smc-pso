@@ -593,6 +593,9 @@ See [DEPENDENCIES.md](DEPENDENCIES.md) for complete attribution.
 
 **In Source Code Headers:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Uses PySwarms for PSO optimization (Miranda 2018)
 # Citation: https://doi.org/10.21105/joss.00433
 from pyswarms.single import GlobalBestPSO

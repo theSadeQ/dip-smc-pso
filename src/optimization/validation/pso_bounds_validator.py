@@ -360,11 +360,11 @@ class PSOBoundsValidator:
                                                      physics.pendulum2_length))
 
             # Scale gains based on system characteristics
-            inertia_scale = max(physics.pendulum1_inertia, physics.pendulum2_inertia)
+            max(physics.pendulum1_inertia, physics.pendulum2_inertia)
             mass_scale = physics.cart_mass + physics.pendulum1_mass + physics.pendulum2_mass
 
             scale_factor = np.sqrt(mass_scale * char_freq)
-        except:
+        except Exception:
             scale_factor = 1.0
 
         improved_bounds = {}

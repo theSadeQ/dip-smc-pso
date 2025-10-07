@@ -266,6 +266,9 @@ print(f"P99 latency: {np.percentile(latencies, 99):.2f} ms")
 ### Example 5: Robust Client with Retry Logic
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.interfaces.hil import HILControllerClient
 import time
 

@@ -58,6 +58,9 @@ The PSO integration system suffered from multiple critical failures that rendere
 **Resolution Strategy**: Complete engine rebuild with enhanced interface design
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOTuner:
     """
     Rebuilt PSO optimization engine with robust controller integration.
@@ -97,6 +100,9 @@ class PSOTuner:
 The PSO engine now incorporates rigorous mathematical validation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_pso_parameters(self) -> bool:
     """
     Validate PSO parameters for mathematical consistency.
@@ -192,6 +198,9 @@ class PSOControllerWrapper:
 **PSO Convenience Functions:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_smc_for_pso(
     smc_type: Union[SMCType, str],
     gains: Union[List[float], np.ndarray],
@@ -318,6 +327,9 @@ pso:
 **Configuration Validation Framework:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSO_ConfigurationValidator:
     """Comprehensive PSO configuration validation."""
 
@@ -432,6 +444,9 @@ Constraints:
 **Multi-Objective Cost Function:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def cost_function(gains: np.ndarray) -> float:
     """
     Comprehensive cost function for SMC parameter optimization.
@@ -567,6 +582,9 @@ ALL PSO INTEGRATION TESTS PASSED!
 **Production Safety Verification:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def production_safety_check() -> dict:
     """Verify production safety for PSO optimization system."""
     safety_report = {

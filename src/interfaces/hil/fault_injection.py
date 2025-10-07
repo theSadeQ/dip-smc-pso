@@ -408,14 +408,14 @@ class FaultInjector:
         """Apply sensor drift fault."""
         # This would implement gradual sensor drift over time
         elapsed_time = time.time() - profile.start_time
-        drift_value = profile.magnitude * elapsed_time / 3600.0  # per hour
+        profile.magnitude * elapsed_time / 3600.0  # per hour
         # Apply drift to sensor readings
         pass
 
     async def _apply_sensor_noise(self, device: 'DeviceDriver', profile: FaultProfile) -> None:  # noqa: F821
         """Apply sensor noise fault."""
         # This would add random noise to sensor readings
-        noise = np.random.normal(0, profile.noise_level)
+        np.random.normal(0, profile.noise_level)
         # Apply noise to sensor readings
         pass
 

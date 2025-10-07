@@ -64,6 +64,9 @@ tests/
 All PSO modules now comply with the 90-character ASCII header standard:
 
 ```python
+# example-metadata:
+# runnable: false
+
 #==========================================================================================\\\
 #======================== src/optimization/algorithms/pso_optimizer.py =================\\\
 #==========================================================================================\\\
@@ -198,6 +201,9 @@ Some circular dependency risks
 
 #### After Optimization
 ```python
+# example-metadata:
+# runnable: false
+
 # Standard library imports (alphabetical)
 from __future__ import annotations
 import logging
@@ -282,6 +288,9 @@ tests/test_optimization/
 ### 6.3 Test Quality Metrics
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Example high-quality test with comprehensive coverage
 def test_pso_tuner_initialization(self, minimal_config, mock_controller_factory):
     """Test PSOTuner initialization with comprehensive validation."""
@@ -345,6 +354,9 @@ def test_pso_tuner_initialization(self, minimal_config, mock_controller_factory)
 
 1. **Function Decomposition** (Legacy PSOTuner):
    ```python
+# example-metadata:
+# runnable: false
+
    # BEFORE: High complexity __init__ method (CC=42)
    def __init__(self, controller_factory, config, seed=None, ...):
        # 150+ lines of complex initialization
@@ -359,6 +371,9 @@ def test_pso_tuner_initialization(self, minimal_config, mock_controller_factory)
 
 2. **Memory Optimization**:
    ```python
+# example-metadata:
+# runnable: false
+
    # Reduce copy operations in critical paths
    # Implement object pooling for frequently allocated arrays
    # Use in-place operations where possible

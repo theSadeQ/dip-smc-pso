@@ -263,7 +263,7 @@ class StabilityMetrics(BaseMetricCalculator):
                 return float(np.mean(log_divergence[valid_idx]))
             else:
                 return 0.0
-        except:
+        except Exception:
             return 0.0
 
     def _compute_bounded_states(self, data: DataProtocol, bounds: Optional[Dict[str, Tuple[float, float]]]) -> float:

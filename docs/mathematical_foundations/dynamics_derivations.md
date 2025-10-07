@@ -676,6 +676,9 @@ $$
 **Safe inversion:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def safe_invert_mass_matrix(M, regularization=1e-10):
     """Invert mass matrix with regularization."""
     # Add small diagonal term for numerical stability
@@ -701,6 +704,9 @@ def safe_invert_mass_matrix(M, regularization=1e-10):
 **Avoid repeated computations:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Bad: Recompute sin/cos multiple times
 M11 = ... + m2 * L1 * L2 * np.cos(theta2 - theta1)
 C12 = -m2 * L1 * L2 * np.sin(theta2 - theta1) * dtheta2
@@ -717,6 +723,9 @@ C12 = -m2 * L1 * L2 * s12 * dtheta2
 **Numba JIT compilation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 import numba
 
 @numba.jit(nopython=True)
@@ -767,6 +776,9 @@ $$
 ### Typical Parameters
 
 ```python
+# example-metadata:
+# runnable: false
+
 physics_params = {
     'M': 1.0,      # Cart mass (kg)
     'm1': 0.1,     # Link 1 mass (kg)

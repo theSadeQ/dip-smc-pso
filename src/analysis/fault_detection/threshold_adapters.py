@@ -576,20 +576,6 @@ class AdaptiveThresholdManager:
         for adapter in self.adapters.values():
             adapter.reset()
 
-    def update(self, residual: float, timestamp: Optional[float] = None) -> float:
-        """Update and return consensus threshold."""
-        # Update all adapters
-        individual_thresholds = {}
-        for method, adapter in self.adapters.items():
-            try:
-                threshold = adapter.update(residual, timestamp)
-                individual_thresholds[method] = threshold
-            except Exception as e:
-                warnings.warn(f"Adapter {method} failed: {e}")
-                individual_thresholds[method] = adapter.current_threshold
-
-        # Return consensus threshold
-        return self.get_consensus_threshold()
 
     @property
     def current_threshold(self) -> float:

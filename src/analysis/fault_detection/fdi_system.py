@@ -11,13 +11,14 @@ detection methods, and statistical analysis.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Optional, Tuple, Any, Protocol
 import numpy as np
 from scipy import signal, stats
 import warnings
 from dataclasses import dataclass, field
 from enum import Enum
 from datetime import datetime
+import logging
 
 from ..core.interfaces import FaultDetector, AnalysisResult, AnalysisStatus, DataProtocol
 
@@ -569,7 +570,7 @@ class EnhancedFaultDetector(FaultDetector):
                 'p_value': float(p_value),
                 'is_normal': bool(p_value > 0.05)
             }
-        except:
+        except Exception:
             return {'p_value': 1.0, 'is_normal': True, 'test_statistic': 0.0}
 
     def _test_stationarity(self, data: np.ndarray) -> Dict[str, Any]:
@@ -595,7 +596,7 @@ class EnhancedFaultDetector(FaultDetector):
                 'is_stationary': bool(p_value > 0.05),
                 'chunk_variances': variances
             }
-        except:
+        except Exception:
             return {'is_stationary': True, 'p_value': 1.0}
 
     def _detect_outliers(self, data: np.ndarray) -> Dict[str, Any]:
@@ -640,7 +641,7 @@ class EnhancedFaultDetector(FaultDetector):
                 _, p_value = stats.ttest_ind(before, after)
                 if p_value < self.config.change_point_sensitivity:
                     change_points.append(i)
-            except:
+            except Exception:
                 continue
 
         return change_points
@@ -1039,12 +1040,8 @@ def create_enhanced_fault_detector(config: Optional[Dict[str, Any]] = None) -> E
     return EnhancedFaultDetector(detection_config)
 
 
-# Legacy compatibility: Import the original FDIsystem class
-from typing import Protocol as TypingProtocol
-import logging
-
-
-class DynamicsProtocol(TypingProtocol):
+# Legacy compatibility: Define protocol for dynamics models
+class DynamicsProtocol(Protocol):
     """Protocol defining the expected interface for dynamics models."""
     def step(self, state: np.ndarray, u: float, dt: float) -> np.ndarray:
         """Advance the system dynamics by one timestep."""

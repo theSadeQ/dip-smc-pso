@@ -36,6 +36,9 @@ docs/
 
 **Configuration Updates for `docs/conf.py`:**
 ```python
+# example-metadata:
+# runnable: false
+
 extensions = [
     # ... existing extensions
     "sphinxcontrib.bibtex",

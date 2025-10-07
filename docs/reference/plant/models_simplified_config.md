@@ -89,6 +89,9 @@ where $\omega_n$ is the desired natural frequency.
 **Standard Laboratory DIP:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 default_config = SimplifiedDIPConfig(
     m0=1.0,   # 1 kg cart
     m1=0.2,   # 200g link 1
@@ -141,6 +144,9 @@ if config.is_valid():
 Configure with custom parameters:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Advanced configuration
 # ... custom parameters ...
 ```
@@ -181,6 +187,9 @@ except ConfigurationError as e:
 Optimize for computational efficiency:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Performance optimization
 import cProfile
 import pstats

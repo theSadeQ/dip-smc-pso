@@ -54,6 +54,9 @@ Overall Quality Score: 0.75 (Grade: C)
 ### 2. Import Organization
 **Standardized Pattern Applied:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Standard library imports (alphabetical)
 import logging
 from typing import Dict, List, Optional

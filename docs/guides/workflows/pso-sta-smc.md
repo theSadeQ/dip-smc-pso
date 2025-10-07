@@ -97,6 +97,9 @@ default_gains = [
 
 **Post-Optimization (PSO Gains):**
 ```python
+# example-metadata:
+# runnable: false
+
 optimized_gains = [
     23.67,  # K1: 2.96× increase → stronger convergence
     13.29,  # K2: 3.32× increase → better robustness
@@ -257,6 +260,9 @@ bounds:
 
 **Check K2/K1 Ratio:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Load optimized gains
 with open('optimized_gains_sta_smc_phase53.json', 'r') as f:
     gains = json.load(f)['sta_smc']
@@ -395,6 +401,9 @@ if K2 < 0.5 * K1:
 **Balance performance vs smoothness:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def sta_smc_cost_function(gains):
     """
     Custom cost for STA-SMC optimization.

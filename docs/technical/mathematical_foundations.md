@@ -103,6 +103,9 @@ where:
 The factory validates the following mathematical constraints:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_classical_smc_gains(gains):
     """Validate Classical SMC gains against mathematical requirements."""
 
@@ -182,6 +185,9 @@ where k_min is the minimum eigenvalue of the stability matrix.
 ### Factory Validation for Super-Twisting
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_super_twisting_gains(gains):
     """Validate Super-Twisting SMC gains for finite-time stability."""
 
@@ -257,6 +263,9 @@ where proj[·] denotes projection onto the feasible parameter space.
 ### Factory Implementation for Adaptive SMC
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_adaptive_smc_parameters(config):
     """Validate adaptive SMC parameters for stability."""
 
@@ -321,6 +330,9 @@ t_{k+1} - t_k ≥ τ_d > 0
 ### Factory Validation for Hybrid Controllers
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_hybrid_smc_configuration(config):
     """Validate hybrid SMC configuration for stability."""
 
@@ -363,6 +375,9 @@ where:
 The factory generates stability certificates for each created controller:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class StabilityCertificate:
     """Mathematical stability certificate for factory-created controllers."""
 
@@ -420,6 +435,9 @@ where δ_i are uncertainty parameters and φ_i(x) are basis functions.
 where γ is the robustness margin.
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_robustness_margin(controller, uncertainty_model):
     """Compute robustness margin for controller."""
 
@@ -521,6 +539,9 @@ where g_i represent stability constraints (e.g., Hurwitz conditions).
 ### Factory-PSO Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOOptimizedFactory:
     """Factory with integrated PSO optimization."""
 
@@ -611,6 +632,9 @@ where λ_max is the maximum eigenvalue of the linearized system.
 ### Implementation Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_numerical_implementation(controller, test_conditions):
     """Validate numerical properties of controller implementation."""
 
@@ -646,6 +670,9 @@ def validate_numerical_implementation(controller, test_conditions):
 The factory implements formal verification of mathematical properties:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def formal_verification_suite(controller_type, gains):
     """Formal verification of mathematical properties."""
 

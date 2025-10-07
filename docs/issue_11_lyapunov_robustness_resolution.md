@@ -131,6 +131,9 @@ is_stable = is_positive_definite and residual_relative < 1e-6
 For cases where direct methods fail:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _solve_lyapunov_svd(self, A, Q, regularizer):
     # Vectorize: (I ⊗ A^T + A^T ⊗ I) vec(P) = -vec(Q)
     n = A.shape[0]

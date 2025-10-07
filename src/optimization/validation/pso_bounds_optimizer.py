@@ -188,7 +188,7 @@ class PSOBoundsOptimizer:
         original_bounds = (original_lower, original_upper)
 
         # Get controller specifications
-        controller_spec = self.controller_specs[controller_type]
+        self.controller_specs[controller_type]
 
         # Generate bounds candidates based on strategy
         bounds_candidates = self._generate_bounds_candidates(
@@ -255,12 +255,12 @@ class PSOBoundsOptimizer:
             candidates.append((physics_lower, physics_upper))
 
             # Conservative physics bounds (tighter)
-            conservative_lower = [l * 1.5 for l in physics_lower]
+            conservative_lower = [lower_val * 1.5 for lower_val in physics_lower]
             conservative_upper = [u * 0.8 for u in physics_upper]
             candidates.append((conservative_lower, conservative_upper))
 
             # Aggressive physics bounds (wider)
-            aggressive_lower = [l * 0.7 for l in physics_lower]
+            aggressive_lower = [lower_val * 0.7 for lower_val in physics_lower]
             aggressive_upper = [u * 1.3 for u in physics_upper]
             candidates.append((aggressive_lower, aggressive_upper))
 
@@ -278,7 +278,7 @@ class PSOBoundsOptimizer:
         valid_candidates = []
         for lower, upper in candidates:
             if len(lower) == len(param_names) and len(upper) == len(param_names):
-                if all(l < u for l, u in zip(lower, upper)):
+                if all(lower_val < upper_val for lower_val, upper_val in zip(lower, upper)):
                     # Check for duplicates
                     is_duplicate = any(
                         np.allclose(lower, existing[0]) and np.allclose(upper, existing[1])

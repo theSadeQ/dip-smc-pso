@@ -455,7 +455,7 @@ class NelderMead(OptimizationAlgorithm):
 
             slope, _ = np.polyfit(x, log_y, 1)
             return abs(slope)
-        except:
+        except Exception:
             return 0.0
 
     def restart_simplex(self, perturbation_factor: float = 0.1):

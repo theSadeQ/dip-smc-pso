@@ -200,6 +200,9 @@ $$
 **Implementation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def update_velocity(self, particle_idx: int) -> np.ndarray:
     """Update velocity for a single particle.
 
@@ -279,6 +282,9 @@ $$
 **Implementation with Boundary Handling:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def update_position(self, particle_idx: int) -> np.ndarray:
     """Update position for a single particle.
 
@@ -323,6 +329,9 @@ def update_position(self, particle_idx: int) -> np.ndarray:
 ### Fitness Evaluation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def evaluate_population(self) -> np.ndarray:
     """Evaluate fitness for all particles.
 
@@ -357,6 +366,9 @@ def evaluate_population(self) -> np.ndarray:
 **For SMC Gain Tuning:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def objective_function_smc(gains: np.ndarray) -> float:
     """Fitness function for SMC gain tuning.
 
@@ -407,6 +419,9 @@ $$
 **Implementation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def update_adaptive_parameters(self, iteration: int) -> None:
     """Update PSO parameters based on iteration progress.
 
@@ -460,6 +475,9 @@ Iteration    ω      c1     c2     Effect
 **Based on Swarm Diversity:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def adaptive_strategy(self, diversity: float) -> None:
     """Adjust parameters based on swarm diversity.
 
@@ -491,6 +509,9 @@ def adaptive_strategy(self, diversity: float) -> None:
 ### Fitness Stagnation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def check_convergence(self) -> Tuple[bool, str]:
     """Check if optimization has converged.
 
@@ -526,6 +547,9 @@ D(t) = \frac{1}{N \cdot n} \sum_{i=1}^N \|x_i^t - \bar{x}^t\|
 $$
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_diversity(self) -> float:
     """Compute swarm diversity metric.
 
@@ -556,6 +580,9 @@ def compute_diversity(self) -> float:
 ### Fitness History Tracking
 
 ```python
+# example-metadata:
+# runnable: false
+
 def log_iteration_statistics(self, iteration: int, fitness: np.ndarray) -> None:
     """Log statistics for current iteration.
 
@@ -671,6 +698,9 @@ print(f"Convergence reason: {result.convergence_status}")
 ### Advanced Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Custom PSO configuration for difficult landscape
 pso_advanced = ParticleSwarmOptimizer(
     parameter_space=param_space,
@@ -698,6 +728,9 @@ result = pso_advanced.optimize(fitness_function)
 ### Multi-Start PSO
 
 ```python
+# example-metadata:
+# runnable: false
+
 def multi_start_pso(n_runs: int = 5) -> dict:
     """Run PSO multiple times and select best result.
 
@@ -888,6 +921,9 @@ plt.scatter(global_best_position[0], global_best_position[1],
 ### Configuration Template
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Production-ready PSO configuration
 pso_config = {
     'population_size': 30,

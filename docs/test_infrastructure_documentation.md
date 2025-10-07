@@ -157,6 +157,9 @@ def test_rk45_energy_conservation():
 - Finite-time convergence analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.convergence
 @pytest.mark.property_based
 def test_sliding_mode_reachability(initial_state):
@@ -182,6 +185,9 @@ def test_sliding_mode_reachability(initial_state):
 - Disturbance rejection capabilities
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.numerical_robustness
 @pytest.mark.statistical
 def test_controller_robustness_monte_carlo():
@@ -210,6 +216,9 @@ def test_controller_robustness_monte_carlo():
 - Cross-coupling dynamics
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.full_dynamics
 @pytest.mark.benchmark
 def test_full_vs_simplified_dynamics():
@@ -282,6 +291,9 @@ def test_simulation_memory_usage():
 **⚠️ Current Status**: Known issues - tests may fail due to thread safety concerns
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.concurrent
 @pytest.mark.xfail(reason="Thread safety validation in progress")
 def test_parallel_pso_optimization():
@@ -306,6 +318,9 @@ def test_parallel_pso_optimization():
 **Integration**: Uses Hypothesis library for property-based testing
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.property_based
 @given(
     gains=lists(floats(min_value=0.1, max_value=50.0), min_size=6, max_size=6),
@@ -326,6 +341,9 @@ def test_controller_output_bounds(gains, initial_state):
 **Scientific Context**: Confidence intervals, significance testing, Monte Carlo validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.statistical
 def test_optimization_performance_distribution():
     """Statistical analysis of optimization performance distribution."""
@@ -350,6 +368,9 @@ def test_optimization_performance_distribution():
 **Scientific Context**: Full system validation from configuration to results
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.end_to_end
 @pytest.mark.slow
 def test_complete_optimization_workflow():

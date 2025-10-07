@@ -105,6 +105,9 @@ print(f"Memory usage: {memory_mb:.1f}MB")
 
 ### Production Monitor
 ```python
+# example-metadata:
+# runnable: false
+
 class MemoryMonitor:
     def __init__(self, threshold_mb=500):
         self.threshold_mb = threshold_mb

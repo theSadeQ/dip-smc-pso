@@ -139,6 +139,9 @@ class PlantModelInterface(ABC):
 The factory supports dynamic plant model registration:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PlantModelRegistry:
     """Registry for plant models with validation."""
 
@@ -175,6 +178,9 @@ PlantModelRegistry.register('low_rank_dip', LowRankDIPDynamics)
 ### Controller-Plant Communication Protocol
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerPlantBridge:
     """Bridge for controller-plant communication."""
 
@@ -241,6 +247,9 @@ class ControllerPlantBridge:
 The PSO integration provides seamless optimization of controller parameters:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOFactoryIntegration:
     """PSO-Factory integration layer."""
 
@@ -342,6 +351,9 @@ class PSOFactoryIntegration:
 ### Multi-Objective Optimization Support
 
 ```python
+# example-metadata:
+# runnable: false
+
 class MultiObjectivePSOIntegration:
     """Multi-objective PSO integration for controller optimization."""
 
@@ -380,6 +392,9 @@ class MultiObjectivePSOIntegration:
 The factory integrates with high-performance vector simulation engines:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class VectorSimulationIntegration:
     """Integration with vectorized simulation engines."""
 
@@ -454,6 +469,9 @@ class VectorSimulationIntegration:
 ### Real-Time Simulation Support
 
 ```python
+# example-metadata:
+# runnable: false
+
 class RealTimeSimulationBridge:
     """Bridge for real-time simulation integration."""
 
@@ -509,6 +527,9 @@ class RealTimeSimulationBridge:
 ### Hardware Interface Protocol
 
 ```python
+# example-metadata:
+# runnable: false
+
 class HILIntegrationProtocol:
     """Hardware-in-the-loop integration protocol."""
 
@@ -804,6 +825,9 @@ class OptimizationResult:
 ### Data Exchange Protocol
 
 ```python
+# example-metadata:
+# runnable: false
+
 class DataExchangeBus:
     """Central data exchange bus for cross-domain communication."""
 
@@ -847,6 +871,9 @@ data_bus = DataExchangeBus()
 ### Contract Validation Framework
 
 ```python
+# example-metadata:
+# runnable: false
+
 class InterfaceContract:
     """Interface contract specification and validation."""
 
@@ -932,6 +959,9 @@ PLANT_MODEL_CONTRACT = InterfaceContract(
 ### Contract Testing Framework
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ContractTester:
     """Automated testing framework for interface contracts."""
 

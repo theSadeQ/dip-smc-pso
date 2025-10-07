@@ -612,7 +612,7 @@ class AlertManager:
         while self.is_running:
             try:
                 # Evaluate rules
-                new_alerts = await self.evaluate_rules()
+                await self.evaluate_rules()
 
                 # Check escalations
                 await self.check_escalations()

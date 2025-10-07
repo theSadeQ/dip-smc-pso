@@ -638,7 +638,7 @@ class EnhancedHILSystem:
 
         # Check expected results against tolerance
         for key, expected in scenario.expected_results.items():
-            tolerance = scenario.tolerance.get(key, 0.01)
+            scenario.tolerance.get(key, 0.01)
             # Analysis logic would be implemented here based on requirements
 
         return results

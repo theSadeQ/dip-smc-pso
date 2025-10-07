@@ -23,6 +23,9 @@ This document provides standards and examples for mathematical notation in the D
 
 ### 2.1 Sliding Mode Control
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Classical SMC sliding surface definition:
 
@@ -61,6 +64,9 @@ where f_eq is the equivalent control and δ > 0 accounts for uncertainties.
 
 ### 2.3 Super-Twisting Algorithm
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Second-order sliding mode (Super-Twisting) control law:
 
@@ -81,6 +87,9 @@ where L is the Lipschitz constant of the uncertainty.
 
 ### 3.1 PSO Dynamics
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Particle Swarm Optimization update equations:
 
@@ -102,6 +111,9 @@ Convergence requires: w < 1 and c₁ + c₂ < 4(1 + w)
 
 ### 3.2 Cost Function Definition
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Multi-objective cost function for controller optimization:
 
@@ -120,6 +132,9 @@ where:
 
 ### 4.1 Standard Control Metrics
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Performance Metrics for Control Systems:
 
@@ -147,6 +162,9 @@ Performance Metrics for Control Systems:
 
 ### 5.1 Monte Carlo Validation
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Monte Carlo Uncertainty Quantification:
 
@@ -165,6 +183,9 @@ where t_{N-1,α/2} is the (1-α/2) quantile of the t-distribution with N-1 degre
 
 ### 5.2 Hypothesis Testing
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Welch's t-test for comparing controller performance:
 
@@ -206,6 +227,9 @@ display(Math(r's = \lambda_1 e_1 + \lambda_2 e_2 + \dot{e}_1 + \dot{e}_2'))
 
 ### 7.1 Function Documentation with Math
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_sliding_surface(self, state: np.ndarray, target: np.ndarray) -> float:
     """Compute the sliding surface value for classical SMC.
 
@@ -243,6 +267,9 @@ def compute_sliding_surface(self, state: np.ndarray, target: np.ndarray) -> floa
 
 ### 7.2 Class Documentation with Theory
 ```python
+# example-metadata:
+# runnable: false
+
 class ClassicalSMC:
     """Classical Sliding Mode Controller for double-inverted pendulum.
 

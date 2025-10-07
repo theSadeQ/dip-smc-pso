@@ -361,7 +361,6 @@ class BenchmarkSuite(StatisticalValidator):
 
     def _perform_performance_comparison(self, results: Dict[str, Any], **kwargs) -> Dict[str, Any]:
         """Perform performance comparison between methods."""
-        comparison_results = {}
 
         # Extract performance data for each method
         method_performance = self._extract_method_performance(results)
@@ -588,8 +587,8 @@ class BenchmarkSuite(StatisticalValidator):
         """Compare two methods on a single metric."""
         mean_a = perf_a['mean']
         mean_b = perf_b['mean']
-        std_a = perf_a.get('std', 0)
-        std_b = perf_b.get('std', 0)
+        perf_a.get('std', 0)
+        perf_b.get('std', 0)
 
         # Relative improvement
         if mean_b != 0:

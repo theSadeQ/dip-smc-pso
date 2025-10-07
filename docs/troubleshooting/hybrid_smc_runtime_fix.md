@@ -74,6 +74,9 @@ Traceback Analysis:
 
 **Expected Execution Flow**:
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(...) -> HybridSTAOutput:
     # ... 674 lines of control logic ...
     return HybridSTAOutput(u_sat, state_vars, history, s)
@@ -81,6 +84,9 @@ def compute_control(...) -> HybridSTAOutput:
 
 **Actual Execution Flow (Broken)**:
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(...) -> HybridSTAOutput:
     # ... 674 lines of control logic ...
     # MISSING: return statement
@@ -126,6 +132,9 @@ error_propagation = {
 #### 1.1 File Structure Before Fix
 
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/smc/hybrid_adaptive_sta_smc.py
 # Lines: 690 total
 
@@ -223,6 +232,9 @@ except Exception as e:
 #### 2.2 PSO Fitness Conversion
 
 ```python
+# example-metadata:
+# runnable: false
+
 # PSO fitness function error handling
 def fitness_function(gains):
     try:
@@ -248,6 +260,9 @@ def fitness_function(gains):
 #### 1.1 Before Fix (Broken)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars, history):
     # ... 674 lines of implementation ...
 
@@ -265,6 +280,9 @@ def reset(self) -> None:
 #### 1.2 After Fix (Corrected)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars, history):
     # ... 674 lines of implementation ...
 
@@ -303,6 +321,9 @@ def reset(self) -> None:
 #### 2.2 Type Safety Verification
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Return type validation
 def compute_control(self, state, state_vars, history) -> HybridSTAOutput:
     # Implementation ensures return type matches annotation
@@ -327,6 +348,9 @@ def compute_control(self, state, state_vars, history) -> HybridSTAOutput:
 #### 1.1 Direct Function Test
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Test 1: Direct method call
 controller = HybridAdaptiveSTASMC(gains=[77.6, 44.4, 17.3, 14.3])
 state = np.array([0.01, 0.05, -0.02, 0.0, 0.0, 0.0])
@@ -391,6 +415,9 @@ python simulate.py --controller hybrid_adaptive_sta_smc --run-pso --seed 42
 #### 2.2 Computational Performance
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Performance timing comparison
 timing_results = {
     'before_fix': {
@@ -415,6 +442,9 @@ timing_results = {
 #### 1.1 Type Checking with mypy
 
 ```python
+# example-metadata:
+# runnable: false
+
 # .mypy.ini configuration
 [mypy]
 python_version = 3.9
@@ -475,6 +505,9 @@ if __name__ == "__main__":
 #### 2.1 Return Type Assertions
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Enhanced HybridAdaptiveSTASMC with runtime validation
 def compute_control(self, state, state_vars, history) -> HybridSTAOutput:
     """Compute control with runtime type validation."""
@@ -498,6 +531,9 @@ def compute_control(self, state, state_vars, history) -> HybridSTAOutput:
 #### 2.2 Factory-Level Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Enhanced factory with type checking
 def create_controller(controller_type: str, **kwargs):
     """Create controller with enhanced validation."""
@@ -838,6 +874,9 @@ jobs:
 **Key Insight**: Runtime type checking could have caught this issue earlier.
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Recommendation: Always use runtime type validation in development
 def compute_control(self, ...) -> HybridSTAOutput:
     # ... implementation ...
@@ -857,6 +896,9 @@ def compute_control(self, ...) -> HybridSTAOutput:
 
 **Before (Problematic)**:
 ```python
+# example-metadata:
+# runnable: false
+
 try:
     result = controller.compute_control(...)
 except Exception:
@@ -865,6 +907,9 @@ except Exception:
 
 **After (Improved)**:
 ```python
+# example-metadata:
+# runnable: false
+
 try:
     result = controller.compute_control(...)
     if result is None:
@@ -880,6 +925,9 @@ except Exception as e:
 **Key Insight**: Unit tests should validate return types explicitly.
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Essential test pattern
 def test_controller_return_type():
     controller = create_controller(...)

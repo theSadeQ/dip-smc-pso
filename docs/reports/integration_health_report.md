@@ -153,6 +153,9 @@ controllers:
 
 ### Priority 2: HIGH - Fix Factory Parameter Mapping
 ```python
+# example-metadata:
+# runnable: false
+
 # Required Fix: src/controllers/factory.py
 # Add parameter validation and mapping logic
 
@@ -173,6 +176,9 @@ def validate_controller_config(controller_type: str, config_params: Dict[str, An
 
 ### Priority 3: MEDIUM - Fix Hybrid Controller Runtime
 ```python
+# example-metadata:
+# runnable: false
+
 # Required Fix: ModularHybridSMC control computation
 # Location: src/controllers/smc/algorithms/hybrid/controller.py
 
@@ -182,6 +188,9 @@ def validate_controller_config(controller_type: str, config_params: Dict[str, An
 
 ### Priority 4: LOW - Improve Configuration Validation
 ```python
+# example-metadata:
+# runnable: false
+
 # Enhancement: Add comprehensive configuration validation
 # - Pre-validate config schema against controller constructors
 # - Provide clear error messages for parameter mismatches

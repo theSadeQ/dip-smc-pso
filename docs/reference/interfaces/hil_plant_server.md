@@ -202,6 +202,9 @@ print("All parallel tests complete")
 ### Example 4: Server with Logging and Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.interfaces.hil import PlantServer
 import logging
 

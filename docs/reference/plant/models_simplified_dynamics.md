@@ -300,6 +300,9 @@ print(f"Energy drift: {energy_drift:.2f}%")
 ### Linearization at Equilibrium
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Linearize around upright equilibrium
 equilibrium_state = [0, 0, 0, 0, 0, 0]  # Upright, stationary
 equilibrium_control = 0.0

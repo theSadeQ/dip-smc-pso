@@ -656,6 +656,9 @@ python simulate.py --ctrl sta_smc --save sta_baseline.json
 
 **Analysis:**
 ```python
+# example-metadata:
+# runnable: false
+
 boundary_layers = [0.001, 0.01, 0.1]
 chattering_indices = []
 

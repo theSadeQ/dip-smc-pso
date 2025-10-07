@@ -546,6 +546,9 @@ hil:
 ### HIL Latency Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Analyze HIL latency from results
 hil_data = json.load(open('hil_results.json'))
 latencies = np.array(hil_data['latency_log'])
@@ -571,6 +574,9 @@ plt.show()
 
 **Script for batch experiments:**
 ```python
+# example-metadata:
+# runnable: false
+
 # batch_experiment.py
 import subprocess
 import json
@@ -611,6 +617,9 @@ for ctrl in controllers:
 ### Parallel Batch Processing
 
 ```python
+# example-metadata:
+# runnable: false
+
 # parallel_batch.py
 from multiprocessing import Pool
 import subprocess

@@ -36,6 +36,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 2. **Improved Switching Function Implementation:**
    ```python
+# example-metadata:
+# runnable: false
+
    def compute_switching_function(self, surface_value: float) -> float:
        """Compute continuous switching function with adaptive boundary layer."""
 
@@ -76,6 +79,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 1. **Unified Surface Computation:**
    ```python
+# example-metadata:
+# runnable: false
+
    def compute(self, state: np.ndarray) -> float:
        """Compute linear sliding surface with numerical safeguards."""
 
@@ -101,6 +107,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 2. **Stability Analysis Integration:**
    ```python
+# example-metadata:
+# runnable: false
+
    def _validate_gains(self) -> None:
        """Validate gains according to Hurwitz stability requirements."""
 
@@ -141,6 +150,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 1. **Comprehensive Parameter Validation:**
    ```python
+# example-metadata:
+# runnable: false
+
    @dataclass(frozen=True)
    class ClassicalSMCConfig:
        """Type-safe configuration with mathematical validation."""
@@ -211,6 +223,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 1. **Sliding Surface Properties:**
    ```python
+# example-metadata:
+# runnable: false
+
    @given(
        gains=st.lists(st.floats(min_value=0.1, max_value=50.0), min_size=4, max_size=4),
        state=st.lists(st.floats(min_value=-10.0, max_value=10.0), min_size=6, max_size=6)
@@ -232,6 +247,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 2. **Boundary Layer Monotonicity:**
    ```python
+# example-metadata:
+# runnable: false
+
    def test_boundary_layer_monotonicity_all_methods(self):
        """Test monotonicity for all switching methods."""
        methods = ["tanh", "linear", "sign"]
@@ -249,6 +267,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 3. **Configuration Validation Coverage:**
    ```python
+# example-metadata:
+# runnable: false
+
    class TestConfigurationValidationCoverage:
        """Comprehensive coverage of all validation rules."""
 
@@ -277,6 +298,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 1. **Extreme Value Testing:**
    ```python
+# example-metadata:
+# runnable: false
+
    def test_numerical_stability_extreme_values(self):
        """Test behavior with extreme but valid parameter values."""
 
@@ -305,6 +329,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 
 2. **Precision Consistency Testing:**
    ```python
+# example-metadata:
+# runnable: false
+
    def test_computation_precision_consistency(self):
        """Test that repeated computations maintain precision."""
        config = ClassicalSMCConfig(
@@ -361,6 +388,9 @@ The SMC mathematical foundation has been completely restructured and validated w
 **Unified Interfaces for Mathematical Components:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SlidingSurface(ABC):
     """Abstract interface for sliding surface calculations."""
 
@@ -446,6 +476,9 @@ class BoundaryLayer:
 
 **Complete Mathematical Docstrings:**
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_sliding_surface(self, state: np.ndarray, target: np.ndarray) -> float:
     """Compute sliding surface value for classical SMC.
 
@@ -528,6 +561,9 @@ python scripts/update_math_references.py
 
 **Template for New SMC Variants:**
 ```python
+# example-metadata:
+# runnable: false
+
 class NewSMCAlgorithm:
     """Template for implementing new SMC algorithms."""
 

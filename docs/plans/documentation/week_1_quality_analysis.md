@@ -258,6 +258,9 @@ print(preview)
 
 **Examples**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Generator fallback
 try:
     relative = os.path.relpath(source_file, doc_file.parent)
@@ -345,6 +348,9 @@ class ValidationResult:
 
 **Generator Structure**:
 ```python
+# example-metadata:
+# runnable: false
+
 class DocumentationGenerator:
     # Core functionality
     def generate_all()         # Main entry point
@@ -399,6 +405,9 @@ def extract_docstring(self, tree: ast.Module) -> Optional[str]:
 
 **Type Hint Quality**:
 ```python
+# example-metadata:
+# runnable: false
+
 def _parse_file(self, filepath: Path) -> Dict[str, Any]:
     """Parse Python file and extract information."""
     ...
@@ -424,6 +433,9 @@ def validate_literalinclude_paths(self) -> ValidationResult:
 
 **Current Design**:
 ```python
+# example-metadata:
+# runnable: false
+
 class DocumentationValidator:
     def validate_literalinclude_paths(self) -> ValidationResult:
         ...

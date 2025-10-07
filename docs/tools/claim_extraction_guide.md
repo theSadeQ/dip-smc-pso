@@ -390,6 +390,9 @@ def adaptive_gain(self, error: float) -> float:
 **Decision Tree:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def assign_priority(claim: Dict) -> str:
     """Priority assignment based on claim attributes."""
 
@@ -654,6 +657,9 @@ $$\text{Recall} = \frac{\text{Extracted Claims}}{\text{Expected Claims}}$$
 
 **Example Test:**
 ```python
+# example-metadata:
+# runnable: false
+
 def test_ground_truth_recall():
     # Ground truth: docs/theory/smc_theory_complete.md
     expected_claims = [
@@ -1006,6 +1012,9 @@ A: Confidence scores prioritize manual review effort. Low-confidence CRITICAL cl
 A: Yes. Edit `assign_priority()` function in `.dev_tools/claim_extraction/merge_claims.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def assign_priority(claim: Dict) -> str:
     # Example: Treat all controller claims as HIGH
     if "controller" in claim["file"].lower():
@@ -1037,6 +1046,9 @@ Fix syntax errors manually, then re-run extraction.
 A: Add regex pattern to `CITATION_PATTERNS` in `code_extractor.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CITATION_PATTERNS = {
     # Existing patterns...
     'rfc': re.compile(r'RFC\s+(\d{4})', re.IGNORECASE),  # New: RFC citations
@@ -1060,6 +1072,9 @@ For our quality requirements (≥90% precision), AST is necessary.
 A: Current tools support `.py` and `.md` only. For `.ipynb` support:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Add to code_extractor.py
 import nbformat
 

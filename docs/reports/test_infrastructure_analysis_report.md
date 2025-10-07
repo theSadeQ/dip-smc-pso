@@ -133,6 +133,9 @@ Marker application coverage: ~85% of test files
 
 **BEFORE**:
 ```python
+# example-metadata:
+# runnable: false
+
 # tests/test_utils/test_control_primitives.py
 import numpy as np
 import pytest
@@ -163,6 +166,9 @@ from src.utils import saturate
 
 **Example of excellent import organization** from `test_controller_interface.py`:
 ```python
+# example-metadata:
+# runnable: false
+
 import pytest
 import numpy as np
 from abc import ABC
@@ -182,6 +188,9 @@ from src.controllers.base.controller_interface import ControllerInterface
 
 ### ✅ **STANDARD ASCII HEADER FORMAT**:
 ```python
+# example-metadata:
+# runnable: false
+
 #==========================================================================================\\\
 #========================== tests/path/to/test_file.py ==================================\\\
 #==========================================================================================\\\
@@ -272,6 +281,9 @@ No import failures or collection errors
 
 ### ✅ **MATPLOTLIB ENFORCEMENT SYSTEM**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Force Agg backend before any figures created
 os.environ.setdefault("MPLBACKEND", "Agg")
 matplotlib.use("Agg", force=True)

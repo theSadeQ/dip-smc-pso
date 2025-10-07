@@ -456,6 +456,9 @@ plt.show()
 ### Robustness-Focused Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Optimize for robustness across parameter uncertainty
 def robust_cost(gains):
     controller_factory = lambda: create_smc_for_pso(SMCType.ADAPTIVE, gains)

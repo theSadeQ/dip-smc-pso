@@ -195,6 +195,9 @@ except ValueError as e:
 ### Example 4: Frequency Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Compute characteristic frequencies
 c1, c2, lambda1, lambda2 = gains
 omega_n1 = np.sqrt(c1 / lambda1)  # rad/s

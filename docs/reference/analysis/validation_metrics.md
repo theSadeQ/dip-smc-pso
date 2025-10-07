@@ -629,6 +629,9 @@ for name, ci in chattering_results.items():
 ### Energy-Based Metrics
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Track energy conservation (for unforced natural dynamics)
 def compute_energy_drift(result, dynamics):
     """Measure energy drift as validation check."""

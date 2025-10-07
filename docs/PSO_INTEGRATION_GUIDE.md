@@ -106,6 +106,9 @@ control_output = controller.compute_control(state, state_vars, history)
 Default optimization bounds for each SMC type:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Classical SMC bounds
 CLASSICAL_BOUNDS = {
     'k1': (0.1, 50.0),      # Surface gain 1

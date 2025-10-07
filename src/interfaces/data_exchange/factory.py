@@ -397,7 +397,7 @@ class SerializerFactory:
         # Deserialization benchmark
         start_time = time.perf_counter()
         for _ in range(iterations):
-            deserialized = serializer.deserialize(serialized)
+            serializer.deserialize(serialized)
         deserialize_time = (time.perf_counter() - start_time) / iterations
 
         # Size measurement

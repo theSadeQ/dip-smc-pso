@@ -88,6 +88,9 @@ PSO creates 40 particles, each representing a candidate set of gains:
 
 **Example Initial Particles (from real run):**
 ```python
+# example-metadata:
+# runnable: false
+
 Particle  1: [23.67, 14.29,  8.87, 3.55,  6.52, 2.93]
 Particle  2: [23.31, 24.01,  3.02, 2.36, 19.80, 2.78]
 Particle  3: [20.03, 25.04,  5.55, 1.29, 28.62, 0.24]

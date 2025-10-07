@@ -65,6 +65,9 @@ Where:
 **Closure-based fitness function:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_fitness_function(
     ctrl_type: SMCType,
     config: Config
@@ -212,6 +215,9 @@ print(f"Best fitness:  {best_fitness:.4f}")
 ### Example 2: Multi-Objective Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Multi-objective cost function
 def multi_objective_fitness(gains):
     controller = create_smc_for_pso(SMCType.CLASSICAL, gains)
@@ -242,6 +248,9 @@ best_gains, best_cost = pso.optimize(max_iterations=100)
 ### Example 3: Convergence Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 # PSO with convergence callback
 def convergence_callback(iteration, best_fitness, diversity):
     print(f"Iteration {iteration:3d}: "

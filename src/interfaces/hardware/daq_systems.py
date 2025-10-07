@@ -21,7 +21,6 @@ from .device_drivers import DeviceDriver, DeviceConfig, DeviceCapability
 
 try:
     import nidaqmx
-    from nidaqmx.constants import AcquisitionType, TerminalConfiguration
     NIDAQMX_AVAILABLE = True
 except ImportError:
     NIDAQMX_AVAILABLE = False
@@ -384,7 +383,6 @@ class NIDAQInterface(DAQInterface):
     async def configure_channel(self, channel_config: ChannelConfig) -> bool:
         """Configure NI-DAQ channel."""
         try:
-            physical_channel = f"{self._device_name}/{channel_config.physical_channel}"
 
             # Add capability based on channel type
             if channel_config.channel_type == ChannelType.ANALOG_INPUT:
@@ -553,7 +551,7 @@ class NIDAQInterface(DAQInterface):
                 # Read from all input channels
                 for channel_name, channel_config in input_channels:
                     try:
-                        sample = await self.read_channel(channel_name)
+                        await self.read_channel(channel_name)
                         # Sample is already stored by read_channel
                     except Exception as e:
                         self._logger.warning(f"Error reading channel {channel_name}: {e}")
@@ -733,7 +731,7 @@ class AdcInterface(DAQInterface):
     async def _read_adc_raw(self, channel_name: str) -> int:
         """Read raw ADC value."""
         # Simulate ADC reading with some noise
-        channel_index = int(channel_name.split('_')[-1]) if '_' in channel_name else 0
+        int(channel_name.split('_')[-1]) if '_' in channel_name else 0
         base_value = (hash(f"{channel_name}_{time.time()}") % (2**self._resolution))
         noise = np.random.randint(-10, 11)
         return max(0, min(2**self._resolution - 1, base_value + noise))

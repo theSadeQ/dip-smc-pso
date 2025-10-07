@@ -102,6 +102,9 @@ print(f"Final state: {result['state'][-1]}")
 ### Result Structure
 
 ```python
+# example-metadata:
+# runnable: false
+
 result = {
     't': np.ndarray,          # Time vector, shape (N+1,)
     'state': np.ndarray,      # State trajectories, shape (N+1, 6)
@@ -442,6 +445,9 @@ print(f"Batch results shape: {batch_results.shape}")
 ### Monte Carlo Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Monte Carlo simulation for statistical analysis
 n_samples = 1000
 
@@ -501,6 +507,9 @@ best_gains, best_cost = tuner.optimize()
 
 **Numba compilation:**
 ```python
+# example-metadata:
+# runnable: false
+
 # First call compiles the function (slow)
 batch_results = run_batch_simulation(...)  # ~2 seconds
 
@@ -510,6 +519,9 @@ batch_results = run_batch_simulation(...)  # ~0.1 seconds
 
 **Batch size optimization:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Too small: Compilation overhead dominates
 run_batch_simulation(..., n_trials=10)  # Not efficient
 
@@ -603,6 +615,9 @@ plt.show()
 ### 1. Choosing the Right Dynamics Model
 
 ```python
+# example-metadata:
+# runnable: false
+
 # PSO optimization: Use simplified dynamics for speed
 config.simulation.use_full_dynamics = False
 runner = SimulationRunner(config)
@@ -685,6 +700,9 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
 
 3. **Use batch processing for multiple runs:**
    ```python
+# example-metadata:
+# runnable: false
+
    batch_results = run_batch_simulation(...)  # Numba acceleration
    ```
 
@@ -716,6 +734,9 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
 **Solutions:**
 1. **Reduce batch size:**
    ```python
+# example-metadata:
+# runnable: false
+
    # Instead of 10000 trials
    batch_size = 1000
    results = run_batch_simulation(..., initial_conditions=ic[:batch_size])

@@ -70,6 +70,9 @@ tests/
 
 **Standards**:
 ```python
+# example-metadata:
+# runnable: false
+
 def test_classical_smc_control_computation_valid_input():
     """Test classical SMC control computation with valid state input."""
     # Setup
@@ -151,6 +154,9 @@ def test_lyapunov_stability_property(initial_state):
 
 **Standards**:
 ```python
+# example-metadata:
+# runnable: false
+
 def test_complete_pso_optimization_workflow():
     """Test complete PSO optimization workflow from CLI to results."""
     # Setup configuration
@@ -228,6 +234,9 @@ def test_batch_simulation_scaling(benchmark):
 
 **Standards**:
 ```python
+# example-metadata:
+# runnable: false
+
 def test_sliding_surface_design_theory():
     """Validate sliding surface design follows control theory principles."""
     gains = [10, 8, 15, 12, 50, 5]  # k1, k2, λ1, λ2, K, η
@@ -369,6 +378,9 @@ def test_energy_conservation_in_simulation():
 ### Synthetic Data Generation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Example: Generate valid SMC parameters
 @pytest.fixture
 def valid_smc_gains():
@@ -408,6 +420,9 @@ def test_trajectories():
 ### Example Documentation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_sliding_surface_convergence():
     """Test that states converge to sliding surface under classical SMC.
 

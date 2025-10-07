@@ -127,6 +127,9 @@ src/plant/models/
 All dynamics models must implement this protocol:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from typing import Protocol, Tuple
 import numpy as np
 
@@ -312,6 +315,9 @@ Each model uses a type-safe dataclass-based configuration with comprehensive val
 **Source:** [`src/plant/models/simplified/config.py`](../../src/plant/models/simplified/config.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SimplifiedDIPConfig:
     """Type-safe configuration for simplified DIP."""
@@ -372,6 +378,9 @@ Where:
 Configurations provide convenient factory methods:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Default parameters (balanced for general use)
 config = SimplifiedDIPConfig.create_default()
 
@@ -421,6 +430,9 @@ Physics computation is delegated to specialized classes for modularity and testa
 The simplified physics computer handles matrix computation with numerical stability:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SimplifiedPhysicsComputer:
     """Simplified physics computation for DIP."""
 
@@ -452,6 +464,9 @@ The dynamics equation solution involves:
 **Implementation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_dynamics_rhs(
     self,
     state: np.ndarray,
@@ -486,6 +501,9 @@ def compute_dynamics_rhs(
 For maximum performance, a JIT-compiled version is available:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from numba import njit
 
 @njit
@@ -522,6 +540,9 @@ $$
 Where $\alpha_{\text{adaptive}}$ is computed based on matrix conditioning:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class AdaptiveRegularizer:
     """Adaptive regularization for matrix conditioning."""
 
@@ -545,6 +566,9 @@ class AdaptiveRegularizer:
 The matrix inverter provides robust inversion with error recovery:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class MatrixInverter:
     """Robust matrix inversion with regularization."""
 
@@ -576,6 +600,9 @@ class MatrixInverter:
 Numerical stability is tracked for diagnostics:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class NumericalStabilityMonitor:
     """Monitor numerical stability statistics."""
 
@@ -774,6 +801,9 @@ print(f"Unstable: {unstable}")
 ### Example 4: Model Comparison
 
 ```python
+# example-metadata:
+# runnable: false
+
 from src.plant.models.simplified import SimplifiedDIPDynamics
 from src.plant.models.full import FullDIPDynamics
 from src.plant.models.lowrank import LowRankDIPDynamics
@@ -876,6 +906,9 @@ physics.set_simplified_inertia(True)
 **Location:** [`src/plant/models/simplified/dynamics.py`](../../src/plant/models/simplified/dynamics.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SimplifiedDIPDynamics(BaseDynamicsModel):
     """Simplified DIP dynamics with balanced speed and accuracy."""
 
@@ -925,6 +958,9 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
 **Location:** [`src/plant/models/full/dynamics.py`](../../src/plant/models/full/dynamics.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FullDIPDynamics(BaseDynamicsModel):
     """Full-fidelity DIP dynamics with comprehensive physics."""
 
@@ -960,6 +996,9 @@ class FullDIPDynamics(BaseDynamicsModel):
 **Location:** [`src/plant/models/lowrank/dynamics.py`](../../src/plant/models/lowrank/dynamics.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 class LowRankDIPDynamics(BaseDynamicsModel):
     """Low-rank DIP dynamics for fast prototyping."""
 

@@ -63,6 +63,9 @@ def _compute_equivalent_control(self, state: np.ndarray) -> float:
 
 **Example from SuperTwistingSMC:**
 ```python
+# example-metadata:
+# runnable: false
+
 @numba.njit(cache=True)
 def _sta_smc_control_numba(
     state: np.ndarray,
@@ -153,6 +156,9 @@ def _compute_equivalent_control(self, state: np.ndarray):
 ### Memory Access Speed Comparison
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Benchmark results (100,000 iterations):
 # - Copy access:  1.617 μs/iteration
 # - View access:  0.723 μs/iteration
@@ -249,6 +255,9 @@ $ pytest tests/test_controllers/ -v
 ### Memory Profiling
 
 ```python
+# example-metadata:
+# runnable: false
+
 # No memory leaks detected in 8-hour stress test
 # See: tests/test_integration/test_memory_management/
 # Result: ✅ Memory growth < 1MB per 1000 instantiations

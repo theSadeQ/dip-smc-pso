@@ -78,6 +78,9 @@ graph TD
 ### 2.1 Configuration Loading and Parsing
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationLoader:
     """
     Robust configuration loading with comprehensive validation.
@@ -199,6 +202,9 @@ class ConfigurationLoader:
 ### 2.2 Bounds Validation and Constraint Propagation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class BoundsValidator:
     """
     Advanced bounds validation with constraint propagation.
@@ -337,6 +343,9 @@ class BoundsValidator:
 ### 3.1 PSO Tuner Initialization and Setup
 
 ```python
+# example-metadata:
+# runnable: false
+
 class OptimizationWorkflowManager:
     """
     Comprehensive management of PSO optimization workflow execution.
@@ -493,6 +502,9 @@ class OptimizationWorkflowManager:
 ### 3.2 Real-Time Monitoring and Adaptation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class OptimizationMonitor:
     """
     Real-time monitoring system for PSO optimization with adaptive capabilities.
@@ -901,6 +913,9 @@ class PostOptimizationValidator:
 ### 5.1 Automated Quality Gate System
 
 ```python
+# example-metadata:
+# runnable: false
+
 class QualityGateSystem:
     """
     Automated quality gate system for PSO optimization workflow.
@@ -1049,6 +1064,9 @@ class Issue2ComplianceQualityGate(QualityGate):
 ### 6.1 Workflow Error Classification and Recovery
 
 ```python
+# example-metadata:
+# runnable: false
+
 class WorkflowErrorHandler:
     """
     Comprehensive error handling and recovery for PSO optimization workflow.
@@ -1193,6 +1211,9 @@ performance_monitoring:
 ### 7.2 Adaptive Performance Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 class WorkflowPerformanceOptimizer:
     """
     Adaptive optimization of workflow performance based on runtime metrics.
@@ -1270,6 +1291,9 @@ class WorkflowPerformanceOptimizer:
 ### 8.1 Integration with Multi-Agent System
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSO_WorkflowOrchestrator:
     """
     Integration point for PSO optimization workflow within multi-agent system.

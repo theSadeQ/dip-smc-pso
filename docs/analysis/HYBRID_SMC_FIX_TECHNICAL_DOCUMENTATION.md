@@ -38,6 +38,9 @@ The Hybrid Adaptive Super-Twisting SMC controller experienced a critical runtime
 
 #### The Missing Return Statement Problem
 ```python
+# example-metadata:
+# runnable: false
+
 # BEFORE FIX - Broken Implementation
 def compute_control(self, state, state_vars, history):
     # ... 674 lines of complex control algorithm implementation ...
@@ -83,6 +86,9 @@ graph TD
 
 #### AFTER FIX - Corrected Implementation
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars, history):
     # ... 674 lines of complex control algorithm implementation ...
 
@@ -108,6 +114,9 @@ The fix also included comprehensive error handling to prevent similar issues:
 
 #### 1. Result Normalization (Lines 161-205)
 ```python
+# example-metadata:
+# runnable: false
+
 def _normalize_result(self, result):
     """Ensure result is properly formatted as HybridSTAOutput."""
     if result is None:
@@ -140,6 +149,9 @@ else:
 
 #### 3. Emergency Reset Conditions
 ```python
+# example-metadata:
+# runnable: false
+
 emergency_reset = (
     not np.isfinite(u_sat) or abs(u_sat) > self.max_force * 2 or
     not np.isfinite(k1_new) or k1_new > self.k1_max * 0.9 or
@@ -205,6 +217,9 @@ INFO: PSO Optimization Complete - Best Cost: 0.000000
 
 #### Before Fix: 7.8/10
 ```python
+# example-metadata:
+# runnable: false
+
 production_readiness_components = {
     'mathematical_algorithms': 7.5/10,     # 3/4 controllers working
     'pso_integration': 7.5/10,            # Partial failure with hybrid
@@ -220,6 +235,9 @@ production_readiness_components = {
 
 #### After Fix: 9.5/10
 ```python
+# example-metadata:
+# runnable: false
+
 production_readiness_components = {
     'mathematical_algorithms': 10.0/10,    # All 4 controllers working ✅
     'pso_integration': 10.0/10,           # Complete optimization success ✅
@@ -346,6 +364,9 @@ assert fitness >= 0, f"Invalid fitness: {fitness}"
 
 **Resolution**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Add runtime type validation
 def compute_control(self, ...) -> HybridSTAOutput:
     # ... implementation ...
@@ -389,6 +410,9 @@ mypy src/controllers/ --strict --warn-return-any
 
 #### Controller Output Validator
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerValidator:
     @staticmethod
     def validate_control_output(output, controller_name: str):
@@ -407,6 +431,9 @@ class ControllerValidator:
 
 #### Essential Test Patterns
 ```python
+# example-metadata:
+# runnable: false
+
 def test_controller_return_types():
     """Comprehensive return type validation tests."""
     controllers = ['classical_smc', 'adaptive_smc', 'sta_smc', 'hybrid_adaptive_sta_smc']

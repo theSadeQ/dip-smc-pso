@@ -116,6 +116,9 @@ algorithm_params:
 **Mathematical Validation Rules:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_pso_algorithm_params(params: dict) -> ValidationResult:
     """
     Validate core PSO algorithm parameters for mathematical consistency.
@@ -246,6 +249,9 @@ bounds:
 ### 3.2 Dynamic Bounds Selection
 
 ```python
+# example-metadata:
+# runnable: false
+
 class DynamicBoundsSelector:
     """
     Intelligent bounds selection based on controller type and system requirements.
@@ -364,6 +370,9 @@ Additional Constraints (Issue #2):
 ### 4.2 Constraint Propagation Algorithm
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ConstraintPropagator:
     """
     Intelligent constraint propagation for interdependent PSO parameters.
@@ -490,6 +499,9 @@ class ConstraintPropagator:
 ### 5.1 Multi-Level Validation Architecture
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSO_ConfigurationValidator:
     """
     Comprehensive PSO configuration validation with mathematical rigor.
@@ -642,6 +654,9 @@ class PSO_ConfigurationValidator:
 ### 5.2 Real-Time Configuration Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationMonitor:
     """
     Real-time monitoring of PSO configuration performance and adaptation.
@@ -771,6 +786,9 @@ legacy_mappings:
 ### 6.2 Automatic Migration Framework
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationMigrator:
     """
     Automatic migration framework for PSO configuration schema evolution.
@@ -962,6 +980,9 @@ performance_database:
 ### 7.2 Adaptive Parameter Tuning
 
 ```python
+# example-metadata:
+# runnable: false
+
 class AdaptivePSOTuner:
     """
     Adaptive PSO parameter tuning based on real-time performance feedback.
@@ -1093,6 +1114,9 @@ class AdaptivePSOTuner:
 ### 8.1 Configuration Error Classification
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationErrorHandler:
     """
     Comprehensive error handling and diagnostic system for PSO configuration.

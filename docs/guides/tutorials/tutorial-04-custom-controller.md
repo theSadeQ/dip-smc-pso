@@ -29,6 +29,9 @@ By the end of this tutorial, you will:
 All controllers in this framework implement a **consistent interface**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class MyCustomController:
     def __init__(self, gains, max_force, **kwargs):
         """Initialize controller with gains and parameters."""
@@ -121,6 +124,9 @@ where `α, β ∈ (0, 1)` (e.g., 0.5, 0.7) create the terminal attractor.
 Create `src/controllers/smc/terminal_smc.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 #======================================================================================\\\
 #======================== src/controllers/smc/terminal_smc.py ========================\\\
 #======================================================================================\\\
@@ -362,6 +368,9 @@ class TerminalSMCOutput:
 Edit `src/controllers/factory/smc_factory.py`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 from ..smc.terminal_smc import TerminalSMC  # Add import
 
 class SMCType(str, Enum):
@@ -586,6 +595,9 @@ print(f'Improvement: {(1 - terminal[\"metrics\"][\"ise\"]/classical[\"metrics\"]
 For better performance, add model-based equivalent control:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_equivalent_control(self, state: np.ndarray) -> float:
     """
     Compute model-based equivalent control.
@@ -623,6 +635,9 @@ def compute_equivalent_control(self, state: np.ndarray) -> float:
 ### Adding State Variables (e.g., Integral Term)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def __init__(self, ...):
     # ... existing code ...
     self.use_integral = True
@@ -658,6 +673,9 @@ def compute_control(self, state, state_vars, history):
 **Always validate gains in `__init__`:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def __init__(self, gains, ...):
     # Check count
     if len(gains) != expected_count:
@@ -697,6 +715,9 @@ except np.linalg.LinAlgError:
 ### 3. Logging and Debugging
 
 ```python
+# example-metadata:
+# runnable: false
+
 import logging
 logger = logging.getLogger(__name__)
 

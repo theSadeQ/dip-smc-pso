@@ -293,6 +293,9 @@ controllers:
 **Example:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Create super-twisting controller
 controller = create_smc_for_pso(
     SMCType.SUPER_TWISTING,
@@ -359,6 +362,9 @@ controllers:
 **Example:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Create adaptive controller
 controller = create_smc_for_pso(
     SMCType.ADAPTIVE,
@@ -423,6 +429,9 @@ controllers:
 **Example:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Create hybrid controller
 controller = create_smc_for_pso(
     SMCType.HYBRID,

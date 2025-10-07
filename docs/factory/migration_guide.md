@@ -20,6 +20,9 @@ The factory integration fixes address several critical areas:
 ### Migration Impact Assessment
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Pre-Migration Configuration (v1.x)
 old_config = {
     'classical_smc': {
@@ -165,6 +168,9 @@ migrate_project_configurations("./my_smc_project")
 ### Interactive Migration Wizard
 
 ```python
+# example-metadata:
+# runnable: false
+
 def interactive_migration_wizard() -> None:
     """
     Interactive step-by-step migration wizard for complex configurations.
@@ -269,6 +275,9 @@ interactive_migration_wizard()
 ### Classical SMC Migration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_classical_smc_manually(old_config: Dict[str, Any]) -> Dict[str, Any]:
     """
     Manual migration procedure for Classical SMC configurations.
@@ -344,6 +353,9 @@ print("Migrated Classical SMC config:", new_classical_config)
 ### Adaptive SMC Migration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_adaptive_smc_manually(old_config: Dict[str, Any]) -> Dict[str, Any]:
     """
     Manual migration procedure for Adaptive SMC configurations.
@@ -435,6 +447,9 @@ print("Migrated Adaptive SMC config:", new_adaptive_config)
 ### Super-Twisting SMC Migration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_sta_smc_manually(old_config: Dict[str, Any]) -> Dict[str, Any]:
     """
     Manual migration procedure for Super-Twisting SMC configurations.
@@ -521,6 +536,9 @@ print("Migrated STA-SMC config:", new_sta_config)
 ### Hybrid SMC Migration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_hybrid_smc_manually(old_config: Dict[str, Any]) -> Dict[str, Any]:
     """
     Manual migration procedure for Hybrid SMC configurations.
@@ -815,6 +833,9 @@ validation_passed = validate_migrated_configuration("config_migrated.yaml")
 ### Migration Testing Suite
 
 ```python
+# example-metadata:
+# runnable: false
+
 def run_migration_test_suite() -> None:
     """
     Comprehensive test suite for migration functionality.
@@ -891,6 +912,9 @@ run_migration_test_suite()
 
 **Solution**:
 ```python
+# example-metadata:
+# runnable: false
+
 def fix_missing_parameters(controller_type: str, config: Dict[str, Any]) -> Dict[str, Any]:
     """Add missing required parameters with safe defaults."""
 
@@ -933,6 +957,9 @@ def fix_missing_parameters(controller_type: str, config: Dict[str, Any]) -> Dict
 
 **Solution**:
 ```python
+# example-metadata:
+# runnable: false
+
 def fix_gain_array_length(controller_type: str, gains: List[float]) -> List[float]:
     """Fix gain array length to match controller requirements."""
 
@@ -970,6 +997,9 @@ def fix_gain_array_length(controller_type: str, gains: List[float]) -> List[floa
 
 **Solution**:
 ```python
+# example-metadata:
+# runnable: false
+
 def convert_legacy_format(old_config: Dict[str, Any]) -> Dict[str, Any]:
     """Convert legacy configuration format to new structure."""
 
@@ -1039,6 +1069,9 @@ for scenario in test_scenarios:
 ### 4. Document Migration Changes
 
 ```python
+# example-metadata:
+# runnable: false
+
 def document_migration_changes(migration_log: List[str]) -> str:
     """Create documentation of migration changes for reference."""
 

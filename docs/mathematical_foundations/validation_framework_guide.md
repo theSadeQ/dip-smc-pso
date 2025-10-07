@@ -390,6 +390,9 @@ for gain_name, (min_val, max_val) in bounds.items():
 ### Validation Results Structure
 
 ```python
+# example-metadata:
+# runnable: false
+
 {
     'valid': bool,                        # Overall validation result
     'violations': List[Dict],             # List of violations (if any)
@@ -585,6 +588,9 @@ class SimulationConfig:
 1. **Validate at Construction:** Perform validation once at object creation, not in hot loops
 
 ```python
+# example-metadata:
+# runnable: false
+
 # ✅ GOOD: Validate once at construction
 class Controller:
     def __init__(self, gains):
