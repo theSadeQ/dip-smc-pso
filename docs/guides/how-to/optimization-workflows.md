@@ -714,6 +714,12 @@ print(f"  ε (should be small):     {gains[5]:.4f}")
 
 ## Next Steps
 
+### Related Workflows
+- [PSO Optimization Workflow](../workflows/pso-optimization-workflow.md): Step-by-step PSO workflow
+- [Batch Simulation Workflow](../workflows/batch-simulation-workflow.md): Monte Carlo and parameter sweeps
+- [Monte Carlo Validation](../workflows/monte-carlo-validation-quickstart.md): Statistical validation quickstart
+
+### Related Guides
 - [How-To: Result Analysis](result-analysis.md): Validate optimized controllers
 - [Tutorial 03: PSO Optimization](../tutorials/tutorial-03-pso-optimization.md): Comprehensive PSO guide
 - [How-To: Testing & Validation](testing-validation.md): Test optimized controllers
