@@ -50,6 +50,34 @@ Welcome to the Theory & Explanation section—the bridge between practical tutor
 
 ---
 
+### [Numerical Stability Methods](../../theory/numerical_stability_methods.md)
+**Advanced numerical techniques for robust control systems**
+
+- Condition number analysis
+- Matrix regularization techniques
+- Adaptive numerical methods
+- Numerical error mitigation strategies
+
+**Prerequisites**: [SMC Theory](smc-theory.md), [Tutorial 04](../tutorials/tutorial-04-custom-controller.md)
+
+**Leads to**: [Numerical Stability Reference](../../reference/utils/numerical_stability_safe_operations.md), Advanced controller implementation
+
+---
+
+### [Lyapunov Stability Analysis](../../theory/lyapunov_stability_analysis.md)
+**Rigorous mathematical stability proofs for control systems**
+
+- Lyapunov function design
+- Stability margin computation
+- Region of attraction analysis
+- Robustness certification
+
+**Prerequisites**: [SMC Theory](smc-theory.md), Linear algebra background
+
+**Leads to**: [Lyapunov Testing](../../testing/theory/lyapunov_stability_testing.md), Research-level controller validation
+
+---
+
 ## 🎯 Learning Path
 
 ```
