@@ -661,11 +661,14 @@ def _run_hil(cfg_path: Path, do_plot: bool) -> int:
         # Launch client only after the server is ready
         client_cmd = [
             sys.executable,
-            str(REPO_ROOT / "src/hil/controller_client.py"),
+            str(REPO_ROOT / "src/interfaces/hil/controller_client.py"),
             "--config",
             str(cfg_path),
         ]
-        client_proc = subprocess.Popen(client_cmd, cwd=str(REPO_ROOT))
+        # Create environment with PYTHONPATH set to REPO_ROOT
+        client_env = os.environ.copy()
+        client_env["PYTHONPATH"] = str(REPO_ROOT)
+        client_proc = subprocess.Popen(client_cmd, cwd=str(REPO_ROOT), env=client_env)
 
         # Bounded wait with graceful timeout. If the process times out, we
         # raise a RuntimeError to propagate the failure.
@@ -682,7 +685,7 @@ def _run_hil(cfg_path: Path, do_plot: bool) -> int:
                 import numpy as _np  # type: ignore
                 out_path = REPO_ROOT / "out" / "hil_results.npz"
                 data = _np.load(out_path)
-                th, xh, uh = data["t"], data["x"], data["u"]
+                th, xh, _uh = data["t"], data["x"], data["u"]
                 fig1, ax1 = plt.subplots(figsize=(9, 5))
                 ax1.plot(th, xh[:, 1], label="HIL q1")
                 ax1.plot(th, xh[:, 2], label="HIL q2")

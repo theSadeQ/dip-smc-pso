@@ -33,7 +33,7 @@ def _load_config(cfg_path: Path) -> dict:
         return cfg_obj.model_dump()
     if yaml is None:
         raise RuntimeError("Neither validated loader nor PyYAML is available.")
-    with open(cfg_path, "r") as f:
+    with open(cfg_path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
 
 def _get(cfg: dict, dotted: str, default=None):

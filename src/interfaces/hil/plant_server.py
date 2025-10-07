@@ -24,7 +24,7 @@ except Exception:
 def _load_config(cfg_path: Path) -> dict:
     if yaml is None:
         raise RuntimeError("PyYAML must be available to read config.yaml")
-    with open(cfg_path, "r") as f:
+    with open(cfg_path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
 
 def _get(cfg: dict, dotted: str, default=None):
