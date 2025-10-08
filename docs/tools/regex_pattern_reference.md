@@ -767,4 +767,4 @@ where $P \succ 0$. If $\dot{V}(x) \leq -\alpha V(x)$ for all $x \neq 0$ and some
 **See Also:**
 - [AST Traversal Patterns](./ast_traversal_patterns.md) - Code claim extraction
 - [Claim Extraction Guide](./claim_extraction_guide.md) - End-to-end usage
-- [Quality Report Schema](../../artifacts/quality_report_schema.json) - Validation structure
+- **Quality Report Schema** - See `.test_artifacts/` directory for validation structures

@@ -35,7 +35,7 @@ This document will contain comprehensive performance benchmarking documentation 
 Until this document is complete, please refer to:
 - [Controller Performance Benchmarks](../benchmarks/controller_performance_benchmarks.md)
 - [Benchmarks Methodology](../benchmarks_methodology.md)
-- [Performance Analysis](../analysis/performance/)
+- [Performance Analysis Reference](../reference/analysis/performance_control_analysis.md)
 
 ---
 

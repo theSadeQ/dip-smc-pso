@@ -1040,8 +1040,8 @@ class LowRankDIPDynamics(BaseDynamicsModel):
 
 - [**Dynamics Derivations**](../mathematical_foundations/dynamics_derivations.md) - Complete Lagrangian mechanics derivation
 - [**Numerical Integration Theory**](../mathematical_foundations/numerical_integration_theory.md) - Integration methods and energy conservation
-- [**Plant Configurations Guide**](configurations_guide.md) - Configuration system details
-- [**State Validation Guide**](validation_guide.md) - State validation and sanitization
+- [**Plant Configurations Reference**](../reference/plant/configurations_base_config.md) - Configuration system details
+- [**State Validation Reference**](../reference/plant/core_state_validation.md) - State validation and sanitization
 - [**Controller Integration**](../controllers/index.md) - Using models with SMC controllers
 
 ---

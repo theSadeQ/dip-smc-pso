@@ -509,7 +509,7 @@ def test_cost_sensitivity():
 
 ## 🔗 Navigation
 
-[⬅️ Back to Reports](../reports/) | [🏠 Testing Home](../../README.md) | [📊 PSO Convergence Analysis](pso_convergence_analysis.md)
+[🏠 Testing Home](../../README.md) | [📊 PSO Convergence Analysis](pso_convergence_analysis.md)
 
 ---
 

@@ -328,7 +328,7 @@ Both dashboard and CLI use the same `config.yaml` file, ensuring consistent beha
 ## Related Documentation
 
 - [Main README](README.md) - Project overview and installation
-- [CLI Guide](simulate.py --help) - Command-line interface
+- **CLI Guide** - Run `python simulate.py --help` for command-line interface documentation
 - [Configuration Reference](api/index.md) - Complete configuration options
 - [Controller Theory](theory/smc_theory_complete.md) - Mathematical foundations
 - [PSO Optimization](theory/pso_optimization_complete.md) - Optimization theory

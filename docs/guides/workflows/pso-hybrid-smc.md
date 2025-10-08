@@ -53,7 +53,7 @@ This document will contain comprehensive guidance on optimizing Hybrid Adaptive 
 
 Until this document is complete, please refer to:
 - [PSO Optimization Workflow](pso-optimization-workflow.md)
-- [Hybrid Adaptive STA-SMC Technical Guide](../../controllers/hybrid_adaptive_sta_smc_technical_guide.md)
+- [Hybrid Adaptive STA-SMC Technical Guide](../../controllers/hybrid_smc_technical_guide.md)
 - [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md)
 - [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
 
