@@ -68,7 +68,7 @@ When the system is constrained to the sliding surface $s = 0$, the reduced-order
 
 where $\mat{C} = \text{diag}(c_x, c_{\theta_1}, c_{\theta_2})$.
 
-**Theorem 1 (Surface Stability)**: If all sliding surface parameters $c_i > 0$, then the sliding surface dynamics are exponentially stable with convergence rates determined by $c_i$.
+**Theorem 1 (Surface Stability)**: If all sliding surface parameters $c_i > 0$, then the sliding surface dynamics are exponentially stable with convergence rates determined by $c_i$ {cite}`smc_bucak_2020_analysis_robotics,smc_edardar_2015_hysteresis_compensation,smc_farrell_2006_adaptive_approximation`.
 
 *Proof*: The characteristic polynomial of each error component is $s + c_i = 0$, yielding eigenvalues $\lambda_i = -c_i < 0$ for $c_i > 0$. □
 
@@ -129,7 +129,7 @@ s \cdot \dot{s} \leq -\alpha |s|
 
 for some $\alpha > 0$.
 
-**Theorem 2 (Finite-Time Reaching)**: Under the reaching condition {eq}`eq:reaching_condition`, the system reaches the sliding surface in finite time bounded by:
+**Theorem 2 (Finite-Time Reaching)**: Under the reaching condition {eq}`eq:reaching_condition`, the system reaches the sliding surface in finite time bounded by {cite}`smc_khalil_lecture32_sliding_mode,smc_kunusch_2012_pem_fuel_cells,smc_slavik_2001_delay`:
 
 ```{math}
 :label: eq:reaching_time_bound
@@ -157,7 +157,7 @@ V(s) = \frac{1}{2}s^2
 
 ### Stability Proof
 
-**Theorem 3 (Classical SMC Stability)**: The classical SMC law {eq}`eq:classical_smc_structure` with switching gain $\eta > \rho$ (where $\rho$ is the uncertainty bound) ensures global finite-time convergence to the sliding surface.
+**Theorem 3 (Classical SMC Stability)**: The classical SMC law {eq}`eq:classical_smc_structure` with switching gain $\eta > \rho$ (where $\rho$ is the uncertainty bound) ensures global finite-time convergence to the sliding surface {cite}`smc_khalil_lecture33_sliding_mode,smc_orlov_2018_analysis_tools,smc_slotine_li_1991_applied_nonlinear_control`.
 
 *Proof*: Consider the Lyapunov function derivative:
 
@@ -203,7 +203,7 @@ where $\alpha > 0$ and $\beta > 0$ are tuning parameters.
 
 ### Lyapunov Analysis for Super-Twisting
 
-**Theorem 4 (Super-Twisting Stability)**: The super-twisting algorithm ensures finite-time convergence to the second-order sliding set $\{s = 0, \dot{s} = 0\}$ if the parameters satisfy:
+**Theorem 4 (Super-Twisting Stability)**: The super-twisting algorithm ensures finite-time convergence to the second-order sliding set $\{s = 0, \dot{s} = 0\}$ if the parameters satisfy {cite}`smc_levant_2003_higher_order_introduction,smc_moreno_2008_lyapunov_sta,smc_seeber_2017_sta_parameter_setting`:
 
 ```{math}
 :label: eq:supertwisting_conditions
@@ -267,7 +267,7 @@ where:
 
 ### Adaptive Stability Analysis
 
-**Theorem 5 (Adaptive SMC Stability)**: The adaptive control law {eq}`eq:adaptive_smc_law` ensures:
+**Theorem 5 (Adaptive SMC Stability)**: The adaptive control law {eq}`eq:adaptive_smc_law` ensures {cite}`smc_plestan_2010_adaptive_methodologies,smc_roy_2020_adaptive_unbounded`:
 1. Global boundedness of all signals
 2. Convergence of the sliding variable: $\lim_{t \rightarrow \infty} s(t) = 0$
 3. Parameter convergence under persistence of excitation
@@ -319,7 +319,7 @@ s/\epsilon & \text{if } |s| \leq \epsilon \\
 \end{cases}
 ```
 
-**Theorem 6 (Boundary Layer Convergence)**: With the boundary layer method, the tracking error is ultimately bounded by:
+**Theorem 6 (Boundary Layer Convergence)**: With the boundary layer method, the tracking error is ultimately bounded by {cite}`smc_edardar_2015_hysteresis_compensation,smc_sahamijoo_2016_chattering_attenuation,smc_burton_1986_continuous`:
 
 ```{math}
 :label: eq:boundary_layer_bound

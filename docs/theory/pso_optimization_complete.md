@@ -83,7 +83,7 @@ Consider the simplified case without randomness ($r_1 = r_2 = 1$). The particle 
 \vec{v}_i^{(k+1)} = w\vec{v}_i^{(k)} + c_1(\vec{p}_i - \vec{x}_i^{(k)}) + c_2(\vec{g} - \vec{x}_i^{(k)})
 ```
 
-**Theorem 1 (Stability Condition)**: The particle converges to a stable trajectory if:
+**Theorem 1 (Stability Condition)**: The particle converges to a stable trajectory if {cite}`pso_trelea_2003_convergence,pso_van_den_bergh_2001_analysis,pso_gopal_2019_stability_analysis`:
 
 ```{math}
 :label: eq:stability_condition
@@ -112,7 +112,7 @@ In the presence of randomness, convergence analysis requires stochastic techniqu
 
 where $\vec{x}^*$ is the global optimum.
 
-**Theorem 2 (Stochastic Convergence)**: Under the stability condition and with decreasing inertia weight, PSO converges to the global optimum with probability 1 for unimodal functions.
+**Theorem 2 (Stochastic Convergence)**: Under the stability condition and with decreasing inertia weight, PSO converges to the global optimum with probability 1 for unimodal functions {cite}`pso_nigatu_2024_convergence_constriction,pso_schmitt_2015_convergence_analysis`.
 
 ### No Free Lunch Theorem
 
