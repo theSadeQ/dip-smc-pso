@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,205 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Base integrator interface and common utilities.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="numerical-integration-interface">
+<h3>Numerical Integration Interface<a class="headerlink" href="#numerical-integration-interface" title="Link to this heading">¶</a></h3>
+<p>Abstract base class defining the integration protocol for ODE systems.</p>
+</section>
+<section id="ode-formulation">
+<h3>ODE Formulation<a class="headerlink" href="#ode-formulation" title="Link to this heading">¶</a></h3>
+<p><strong>Initial Value Problem (IVP):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+\dot{\vec{x}}(t) = \vec{f}(\vec{x}(t), \vec{u}(t), t) \\
+\vec{x}(t_0) = \vec{x}_0
+\end{cases}\end{split}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{x} \in \mathbb{R}^n\)</span>: State vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{f}: \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R} \to \mathbb{R}^n\)</span>: Dynamics function</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{u} \in \mathbb{R}^m\)</span>: Control input</p></li>
+<li><p><span class="math notranslate nohighlight">\(t \in [t_0, t_f]\)</span>: Time domain</p></li>
+</ul>
+</section>
+<section id="integrator-properties">
+<h3>Integrator Properties<a class="headerlink" href="#integrator-properties" title="Link to this heading">¶</a></h3>
+<p><strong>1. Order of Accuracy</strong></p>
+<p>Local truncation error: <span class="math notranslate nohighlight">\(\tau_n = O(\Delta t^{p+1})\)</span>
+Global error: <span class="math notranslate nohighlight">\(e_N = O(\Delta t^p)\)</span></p>
+<p><strong>2. Stability</strong></p>
+<p>Absolute stability region <span class="math notranslate nohighlight">\(S \subseteq \mathbb{C}\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[S = \{z \in \mathbb{C} : |R(z)| \leq 1\}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(R(z)\)</span> is the stability function.</p>
+<p><strong>3. Consistency</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\lim_{\Delta t \to 0} \frac{\Phi(x_n, t_n, \Delta t) - x_n}{\Delta t} = f(x_n, t_n)\]</div>
+</div>
+</section>
+<section id="integrator-classification">
+<h3>Integrator Classification<a class="headerlink" href="#integrator-classification" title="Link to this heading">¶</a></h3>
+<p><strong>Fixed-Step Methods:</strong></p>
+<ul class="simple">
+<li><p>Constant time step <span class="math notranslate nohighlight">\(\Delta t\)</span></p></li>
+<li><p>Predictable computational cost</p></li>
+<li><p>Examples: Euler, RK2, RK4</p></li>
+</ul>
+<p><strong>Adaptive Methods:</strong></p>
+<ul class="simple">
+<li><p>Variable time step <span class="math notranslate nohighlight">\(\Delta t_n\)</span></p></li>
+<li><p>Error-controlled accuracy</p></li>
+<li><p>Examples: RK45, Dormand-Prince</p></li>
+</ul>
+<p><strong>Explicit Methods:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{n+1} = x_n + \Delta t \cdot \Phi(x_n, t_n, \Delta t)\]</div>
+</div>
+<p><strong>Implicit Methods:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{n+1} = x_n + \Delta t \cdot \Phi(x_n, x_{n+1}, t_n, \Delta t)\]</div>
+</div>
+</section>
+<section id="integration-interface-protocol">
+<h3>Integration Interface Protocol<a class="headerlink" href="#integration-interface-protocol" title="Link to this heading">¶</a></h3>
+<p><strong>Required Methods:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>integrate(dynamics_fn, state, control, dt, t) → state_new</strong></p>
+<ul class="simple">
+<li><p>Single integration step</p></li>
+<li><p>Returns updated state</p></li>
+</ul>
+</li>
+<li><p><strong>order() → int</strong></p>
+<ul class="simple">
+<li><p>Method accuracy order</p></li>
+</ul>
+</li>
+<li><p><strong>adaptive() → bool</strong></p>
+<ul class="simple">
+<li><p>Whether step size is adaptive</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Optional Methods:</strong></p>
+<ol class="arabic simple" start="4">
+<li><p><strong>reset()</strong></p>
+<ul class="simple">
+<li><p>Clear internal state/cache</p></li>
+</ul>
+</li>
+<li><p><strong>get_statistics() → dict</strong></p>
+<ul class="simple">
+<li><p>Performance metrics (steps, rejections, etc.)</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="convergence-theorem-lax-equivalence">
+<h3>Convergence Theorem (Lax Equivalence)<a class="headerlink" href="#convergence-theorem-lax-equivalence" title="Link to this heading">¶</a></h3>
+<p>For a consistent numerical method applied to a well-posed linear IVP:</p>
+<p><strong>Stability + Consistency ⟹ Convergence</strong></p>
+</section>
+<section id="performance-characteristics">
+<h3>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Fixed-Step</p></th>
+<th class="head"><p>Adaptive</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Cost per step</p></td>
+<td><p>Constant</p></td>
+<td><p>Variable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Accuracy control</p></td>
+<td><p>Manual</p></td>
+<td><p>Automatic</p></td>
+</tr>
+<tr class="row-even"><td><p>Stiff systems</p></td>
+<td><p>Poor</p></td>
+<td><p>Better</p></td>
+</tr>
+<tr class="row-odd"><td><p>Real-time suitability</p></td>
+<td><p>Excellent</p></td>
+<td><p>Moderate</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph LR
+    A[Input] --&gt; B[Integrators Processing]
+    B --&gt; C[Output]
+
+    style B fill:#9cf
+    style C fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegratorsBase</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">IntegratorsBase</span><span class="p">()</span>
+
+<span class="c1"># Execute</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">IntegratorsBase</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-profiling">
+<h3>Example 4: Performance Profiling<a class="headerlink" href="#example-4-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-other-components">
+<h3>Example 5: Integration with Other Components<a class="headerlink" href="#example-5-integration-with-other-components" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine with other simulation components</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -502,8 +727,8 @@
 <span class="linenos">  6</span>
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
-<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">Integrator</span>
@@ -964,7 +1189,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -987,6 +1212,25 @@
             <ul>
 <li><a class="reference internal" href="#">simulation.integrators.base</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#numerical-integration-interface">Numerical Integration Interface</a></li>
+<li><a class="reference internal" href="#ode-formulation">ODE Formulation</a></li>
+<li><a class="reference internal" href="#integrator-properties">Integrator Properties</a></li>
+<li><a class="reference internal" href="#integrator-classification">Integrator Classification</a></li>
+<li><a class="reference internal" href="#integration-interface-protocol">Integration Interface Protocol</a></li>
+<li><a class="reference internal" href="#convergence-theorem-lax-equivalence">Convergence Theorem (Lax Equivalence)</a></li>
+<li><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-profiling">Example 4: Performance Profiling</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-other-components">Example 5: Integration with Other Components</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#baseintegrator"><code class="docutils literal notranslate"><span class="pre">BaseIntegrator</span></code></a><ul>
@@ -1035,6 +1279,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -255,6 +255,9 @@ $$
 ### Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def euler_step(x, u, dynamics, dt):
     """Single Euler integration step.
 
@@ -392,6 +395,9 @@ Slightly better than Euler, but still restrictive for stiff systems.
 ### Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def rk4_step(x, u, dynamics, dt):
     """Single RK4 integration step.
 
@@ -524,6 +530,9 @@ Typical safety factors:
 ### Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def rk45_adaptive_step(x, u, dynamics, t, dt, tol=1e-6):
     """Adaptive RK45 step with error control.
 
@@ -766,6 +775,9 @@ Specify tolerance:
 ### Configuration Examples
 
 ```python
+# example-metadata:
+# runnable: false
+
 # PSO optimization (speed critical)
 simulation_config_pso = {
     'method': 'euler',

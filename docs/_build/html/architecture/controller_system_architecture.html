@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -579,7 +605,10 @@
 <p>The controller factory serves as the central orchestration point for all SMC controller instantiation, providing type safety, configuration validation, and error handling.</p>
 <section id="core-factory-components">
 <h4>Core Factory Components<a class="headerlink" href="#core-factory-components" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Factory Registry Architecture</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Factory Registry Architecture</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ControllerRegistry</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Central registry for all SMC controller types.&quot;&quot;&quot;</span>
 
@@ -608,7 +637,10 @@
 </section>
 <section id="factory-method-implementation">
 <h4>Factory Method Implementation<a class="headerlink" href="#factory-method-implementation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_controller</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_controller</span><span class="p">(</span>
     <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">gains</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -656,7 +688,10 @@
 <h3>Factory Integration Points<a class="headerlink" href="#factory-integration-points" title="Link to this heading">¶</a></h3>
 <section id="configuration-bridge">
 <h4>Configuration Bridge<a class="headerlink" href="#configuration-bridge" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationBridge</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationBridge</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Bridge between YAML configuration and controller parameters.&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
@@ -683,7 +718,10 @@
 </section>
 <section id="type-safety-enforcement">
 <h4>Type Safety Enforcement<a class="headerlink" href="#type-safety-enforcement" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TypeSafetyValidator</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TypeSafetyValidator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive type safety validation for controller interfaces.&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
@@ -738,7 +776,10 @@
 <p>The PSO (Particle Swarm Optimization) integration provides seamless parameter tuning for all controller types with a unified interface and consistent optimization strategies.</p>
 <section id="pso-core-architecture">
 <h4>PSO Core Architecture<a class="headerlink" href="#pso-core-architecture" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PSOOptimizer</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PSOOptimizer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Universal PSO optimizer for all SMC controller types.</span>
 
@@ -790,7 +831,10 @@
 </section>
 <section id="controller-specific-fitness-functions">
 <h4>Controller-Specific Fitness Functions<a class="headerlink" href="#controller-specific-fitness-functions" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FitnessEvaluator</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FitnessEvaluator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Controller-specific fitness evaluation strategies.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
@@ -846,7 +890,10 @@
 </section>
 <section id="optimization-pipeline-integration">
 <h4>Optimization Pipeline Integration<a class="headerlink" href="#optimization-pipeline-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">OptimizationPipeline</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OptimizationPipeline</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;End-to-end optimization pipeline for SMC controllers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">run_optimization_workflow</span><span class="p">(</span>
@@ -897,7 +944,10 @@
 <p>All system components adhere to standardized interfaces ensuring consistent behavior and interoperability.</p>
 <section id="controller-interface-contract">
 <h4>Controller Interface Contract<a class="headerlink" href="#controller-interface-contract" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControllerInterface</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerInterface</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Standardized interface for all SMC controllers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
@@ -931,7 +981,10 @@
 </section>
 <section id="configuration-interface">
 <h4>Configuration Interface<a class="headerlink" href="#configuration-interface" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationInterface</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationInterface</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Standardized configuration management across all components.&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -967,7 +1020,10 @@
 <h3>Error Handling and Recovery<a class="headerlink" href="#error-handling-and-recovery" title="Link to this heading">¶</a></h3>
 <section id="hierarchical-error-handling">
 <h4>Hierarchical Error Handling<a class="headerlink" href="#hierarchical-error-handling" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ErrorHandlingFramework</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ErrorHandlingFramework</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive error handling with recovery strategies.&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
@@ -1027,7 +1083,10 @@
 </section>
 <section id="graceful-degradation">
 <h4>Graceful Degradation<a class="headerlink" href="#graceful-degradation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">GracefulDegradationManager</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GracefulDegradationManager</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage system degradation under error conditions.&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
@@ -1071,7 +1130,10 @@
 <h2>Data Flow Architecture<a class="headerlink" href="#data-flow-architecture" title="Link to this heading">¶</a></h2>
 <section id="control-loop-data-flow">
 <h3>Control Loop Data Flow<a class="headerlink" href="#control-loop-data-flow" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Primary Control Flow</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Primary Control Flow</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">control_loop_data_flow</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Illustrates the complete data flow through the control system.</span>
@@ -1118,7 +1180,10 @@
 </section>
 <section id="pso-optimization-data-flow">
 <h3>PSO Optimization Data Flow<a class="headerlink" href="#pso-optimization-data-flow" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pso_optimization_data_flow</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pso_optimization_data_flow</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Data flow through PSO optimization process.</span>
 
@@ -1221,7 +1286,10 @@
 </section>
 <section id="memory-management">
 <h4>Memory Management<a class="headerlink" href="#memory-management" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryEfficientController</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MemoryEfficientController</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Memory-efficient controller with bounded collections.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_history_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">):</span>
@@ -1260,7 +1328,10 @@
 <h3>Scalability Architecture<a class="headerlink" href="#scalability-architecture" title="Link to this heading">¶</a></h3>
 <section id="horizontal-scaling-design">
 <h4>Horizontal Scaling Design<a class="headerlink" href="#horizontal-scaling-design" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DistributedControllerManager</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DistributedControllerManager</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Manager for distributed controller deployment.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cluster_config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
@@ -1312,7 +1383,10 @@
 <h3>Safety-Critical Design Patterns<a class="headerlink" href="#safety-critical-design-patterns" title="Link to this heading">¶</a></h3>
 <section id="fail-safe-mechanisms">
 <h4>Fail-Safe Mechanisms<a class="headerlink" href="#fail-safe-mechanisms" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SafetyManager</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SafetyManager</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive safety management for control systems.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">safety_config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
@@ -1396,7 +1470,10 @@
 </section>
 <section id="security-hardening">
 <h4>Security Hardening<a class="headerlink" href="#security-hardening" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SecurityManager</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SecurityManager</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Security management for production deployment.&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
@@ -1462,7 +1539,10 @@
 <h2>Monitoring and Observability Architecture<a class="headerlink" href="#monitoring-and-observability-architecture" title="Link to this heading">¶</a></h2>
 <section id="real-time-monitoring-framework">
 <h3>Real-Time Monitoring Framework<a class="headerlink" href="#real-time-monitoring-framework" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SystemMonitor</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SystemMonitor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive system monitoring and observability.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monitoring_config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
@@ -1528,7 +1608,10 @@
 </section>
 <section id="performance-analytics">
 <h3>Performance Analytics<a class="headerlink" href="#performance-analytics" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PerformanceAnalyzer</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PerformanceAnalyzer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Advanced performance analysis and trend detection.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">analyze_system_performance</span><span class="p">(</span>
@@ -1774,7 +1857,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

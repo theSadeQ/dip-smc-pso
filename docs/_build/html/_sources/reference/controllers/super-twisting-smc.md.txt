@@ -147,6 +147,6 @@ Under proper gain selection, the algorithm achieves:
 
 ## Related Documentation
 
-- [SMC Theory Complete](../theory/smc_theory_complete.md) - Mathematical foundations
+- [SMC Theory Complete](../../guides/theory/smc-theory.md) - Mathematical foundations
 - [Classical SMC](classical-smc.md) - Comparison with traditional approach
 - [Results Discussion](../presentation/results-discussion.md) - Performance analysis

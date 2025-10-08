@@ -16,6 +16,132 @@ second-order sliding mode dynamics.
 
 
 
+
+## Advanced Mathematical Theory
+
+### STA-SMC Complete Workflow
+
+**Algorithm steps:**
+1. Compute sliding surface $s$
+2. Compute $u_1 = -K_1 |s|^{0.5} \text{sign}(s)$
+3. Update integral $u_2 = u_2 + (-K_2 \text{sign}(s)) \Delta t$
+4. Total control: $u = u_1 + u_2$
+5. Apply saturation and output
+
+### Performance vs Classical SMC
+
+| Metric | Classical SMC | Super-Twisting SMC |
+|--------|---------------|-------------------|
+| **Convergence** | Asymptotic | Finite-time |
+| **Chattering** | Moderate | Minimal |
+| **Accuracy** | $O(\epsilon)$ | $O(\epsilon^2)$ |
+| **Complexity** | O(n) | O(n) |
+| **Tuning** | Medium | Hard |
+
+### Gain Tuning Heuristics
+
+**Start with:**
+
+```{math}
+\begin{align}
+K_1 &= 2 \sqrt{|\Delta|_{max}} \\
+K_2 &= 1.5 |\Delta|_{max} \\
+\alpha &= 0.5
+\end{align}
+```
+
+**Adjust based on:**
+- Larger $K_1$ → Faster convergence, more control effort
+- Larger $K_2$ → Better disturbance rejection
+- Smaller $\alpha$ → Smoother control
+
+### Anti-Windup for Integral Term
+
+**Conditional integration:**
+
+```{math}
+\dot{u}_2 = \begin{cases}
+-K_2 \text{sign}(s), & |u_1 + u_2| \leq u_{max} \\
+0, & \text{otherwise}
+\end{cases}
+```
+
+### Regularization for Practical Implementation
+
+**Smooth sign approximation:**
+
+```{math}
+\text{sign}(s) \approx \frac{s}{|s| + \delta}, \quad \delta = 10^{-6}
+```
+
+Avoids division by zero when $s = 0$.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State x] --> B[Sliding Surface s]
+    B --> C[u₁: -K₁|s|^0.5 sign_s_]
+    B --> D[u₂: -K₂ ∫sign_s_dt]
+
+    C --> E[Sum: u = u₁ + u₂]
+    D --> E
+
+    E --> F[Saturation]
+    F --> G[Control Output u]
+
+    B --> H{|s| → 0?}
+    H -->|Yes| I[Finite-Time Convergence]
+
+    style E fill:#9cf
+    style I fill:#9f9
+    style G fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.controllers.smc.algorithms.super_twisting import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Controller
+
+```python
+# Use in complete control loop
+controller = create_controller(ctrl_type, config)
+result = simulate(controller, duration=5.0)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(state)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"ITAE: {metrics.itae:.3f}")
+```
+
 ## Architecture Diagram
 
 ```{mermaid}

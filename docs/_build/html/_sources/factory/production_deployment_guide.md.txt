@@ -58,6 +58,9 @@ This comprehensive production deployment guide covers the deployment, monitoring
 ### 1. **System Validation**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def production_readiness_check():
     """Comprehensive production readiness validation."""
 
@@ -322,6 +325,9 @@ export FACTORY_CACHE_SIZE=1000
 ### 3. **Dependency Verification**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def verify_production_dependencies():
     """Verify all required dependencies are available."""
 
@@ -368,6 +374,9 @@ dependencies_ok = verify_production_dependencies()
 ### 1. **Rolling Deployment Strategy**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ProductionFactoryDeployment:
     """Production deployment manager for factory system."""
 
@@ -449,6 +458,9 @@ deployment.deploy_with_canary()
 ### 2. **Blue-Green Deployment**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def blue_green_deployment():
     """Blue-green deployment strategy."""
 
@@ -814,6 +826,9 @@ def health_check_endpoint():
 ### 3. **Alerting and Notification**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FactoryAlertManager:
     """Production alerting for factory system."""
 
@@ -919,6 +934,9 @@ alert_manager = FactoryAlertManager(production_config)
 ### 1. **Regular Maintenance Tasks**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FactoryMaintenanceManager:
     """Production maintenance for factory system."""
 

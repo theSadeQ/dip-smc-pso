@@ -560,6 +560,9 @@ python simulate.py --ctrl classical_smc --run-pso --seed 123
 
 *Solutions:*
 ```python
+# example-metadata:
+# runnable: false
+
 # Tighten parameter bounds
 custom_bounds = {
     'lower': [1.0, 1.0, 1.0, 1.0, 5.0, 0.5],   # More conservative
@@ -684,6 +687,9 @@ python simulate.py --ctrl classical_smc --run-pso \
 
 **HIL Validation Workflow:**
 ```python
+# example-metadata:
+# runnable: false
+
 # HIL optimization with realistic constraints
 hil_config = {
     'max_control_time': 0.001,  # 1ms control computation limit
@@ -704,6 +710,9 @@ results = pso_tuner.optimize(
 
 **Pre-Deployment Checklist:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_optimized_controller(gains_file):
     """Comprehensive validation before deployment."""
 
@@ -785,6 +794,9 @@ selected_solution = mo_pso.select_solution(
 
 **Dynamic Parameter Adaptation:**
 ```python
+# example-metadata:
+# runnable: false
+
 class AdaptivePSO(PSOTuner):
     """PSO with adaptive parameters based on convergence."""
 
@@ -851,6 +863,9 @@ def hybrid_pso_local_search(controller_factory, config):
 
 **Progress Tracking:**
 ```python
+# example-metadata:
+# runnable: false
+
 def optimization_callback(iteration, best_cost, best_position, **kwargs):
     """Real-time optimization monitoring callback."""
 
@@ -886,6 +901,9 @@ results = pso_tuner.optimize(
 
 **Statistical Convergence Assessment:**
 ```python
+# example-metadata:
+# runnable: false
+
 def analyze_convergence(cost_history, window_size=10):
     """Analyze PSO convergence characteristics."""
 
@@ -1005,6 +1023,9 @@ python simulate.py --ctrl classical_smc --run-pso \
 
 **2. Systematic Parameter Exploration:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Systematic bounds exploration
 bounds_sets = [
     ([0.1, 0.1, 0.1, 0.1, 0.1, 0.1], [10, 10, 10, 10, 50, 5]),    # Conservative
@@ -1060,6 +1081,9 @@ print(f"Overall best cost: {best_cost:.3f}")
 
 **Optimization Documentation Template:**
 ```python
+# example-metadata:
+# runnable: false
+
 optimization_report = {
     'metadata': {
         'date': '2024-01-15',
@@ -1164,6 +1188,9 @@ A: Several solutions:
 **Q: How to handle different controller types in batch optimization?**
 A: Use controller-specific configurations:
 ```python
+# example-metadata:
+# runnable: false
+
 controller_configs = {
     'classical_smc': {'bounds': [...], 'weights': {...}},
     'sta_smc': {'bounds': [...], 'weights': {...}},

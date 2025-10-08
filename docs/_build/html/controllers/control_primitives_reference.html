@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Complete Sliding Mode Control Mathematical Theory" href="../mathematical_foundations/smc_complete_theory.html" /><link rel="prev" title="SMC Controller Factory System Guide" href="factory_system_guide.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -540,7 +566,10 @@
 <section id="core-saturation-function">
 <h3>2.1 Core Saturation Function<a class="headerlink" href="#core-saturation-function" title="Link to this heading">¶</a></h3>
 <p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/control/saturation.py</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">saturate</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">saturate</span><span class="p">(</span>
     <span class="n">sigma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
     <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">method</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span> <span class="s2">&quot;linear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;tanh&quot;</span><span class="p">,</span>
@@ -655,7 +684,10 @@
 </section>
 <section id="dead-zone-function">
 <h3>2.3 Dead Zone Function<a class="headerlink" href="#dead-zone-function" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dead_zone</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dead_zone</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
     <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
@@ -716,7 +748,10 @@
 </section>
 <section id="classical-smc-output">
 <h3>3.2 Classical SMC Output<a class="headerlink" href="#classical-smc-output" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMCOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMCOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type for ClassicalSMC.compute_control().</span>
 
 <span class="sd">    Attributes:</span>
@@ -747,7 +782,10 @@
 </section>
 <section id="adaptive-smc-output">
 <h3>3.3 Adaptive SMC Output<a class="headerlink" href="#adaptive-smc-output" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMCOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMCOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type for AdaptiveSMC.compute_control().</span>
 
 <span class="sd">    Attributes:</span>
@@ -777,7 +815,10 @@
 </section>
 <section id="super-twisting-smc-output">
 <h3>3.4 Super-Twisting SMC Output<a class="headerlink" href="#super-twisting-smc-output" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">STAOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">STAOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type for SuperTwistingSMC.compute_control().</span>
 
 <span class="sd">    Attributes:</span>
@@ -807,7 +848,10 @@
 </section>
 <section id="hybrid-adaptive-sta-smc-output">
 <h3>3.5 Hybrid Adaptive-STA SMC Output<a class="headerlink" href="#hybrid-adaptive-sta-smc-output" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HybridSTAOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HybridSTAOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type for HybridAdaptiveSTASMC.compute_control().</span>
 
 <span class="sd">    Attributes:</span>
@@ -850,7 +894,10 @@
 <p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/validation/parameter_validators.py</span></code></p>
 <section id="positive-parameter-validation">
 <h3>4.1 Positive Parameter Validation<a class="headerlink" href="#positive-parameter-validation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">require_positive</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">require_positive</span><span class="p">(</span>
     <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -894,7 +941,10 @@
 </section>
 <section id="finite-value-validation">
 <h3>4.2 Finite Value Validation<a class="headerlink" href="#finite-value-validation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">require_finite</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">require_finite</span><span class="p">(</span>
     <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -934,7 +984,10 @@
 <p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/numerical_stability/safe_operations.py</span></code></p>
 <section id="safe-division">
 <h3>5.1 Safe Division<a class="headerlink" href="#safe-division" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_divide</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_divide</span><span class="p">(</span>
     <span class="n">numerator</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
     <span class="n">denominator</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
     <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-12</span><span class="p">,</span>
@@ -984,7 +1037,10 @@
 </section>
 <section id="safe-square-root">
 <h3>5.3 Safe Square Root<a class="headerlink" href="#safe-square-root" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_sqrt</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_sqrt</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-15</span><span class="p">,</span>
     <span class="n">warn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1031,7 +1087,10 @@
 </section>
 <section id="safe-exponential">
 <h3>5.5 Safe Exponential<a class="headerlink" href="#safe-exponential" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_exp</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_exp</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">700.0</span><span class="p">,</span>
     <span class="n">warn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1050,7 +1109,10 @@
 <section id="safe-vector-operations">
 <h3>5.6 Safe Vector Operations<a class="headerlink" href="#safe-vector-operations" title="Link to this heading">¶</a></h3>
 <p><strong>Safe Norm:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_norm</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_norm</span><span class="p">(</span>
     <span class="n">vector</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="nb">ord</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
     <span class="n">axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1064,7 +1126,10 @@
 </pre></div>
 </div>
 <p><strong>Safe Normalize:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_normalize</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_normalize</span><span class="p">(</span>
     <span class="n">vector</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="nb">ord</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
     <span class="n">axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1353,7 +1418,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

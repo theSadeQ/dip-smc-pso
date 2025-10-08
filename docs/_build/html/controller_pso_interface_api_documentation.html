@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -504,7 +530,10 @@
 <section id="controller-factory-interface">
 <h3>1.1 Controller Factory Interface<a class="headerlink" href="#controller-factory-interface" title="Link to this heading">¶</a></h3>
 <p><strong>Function Signature:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">controller_factory</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseController</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">controller_factory</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseController</span>
 </pre></div>
 </div>
 <p><strong>Mathematical Foundation:</strong>
@@ -654,7 +683,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="classical-smc-interface">
 <h3>2.1 Classical SMC Interface<a class="headerlink" href="#classical-smc-interface" title="Link to this heading">¶</a></h3>
 <p><strong>Gain Vector Specification:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Classical SMC Gains: [c1, λ1, c2, λ2, K, kd] ∈ ℝ⁶</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Classical SMC Gains: [c1, λ1, c2, λ2, K, kd] ∈ ℝ⁶</span>
 <span class="n">CLASSICAL_SMC_GAINS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;c1&#39;</span><span class="p">:</span> <span class="s1">&#39;Sliding surface gain for θ₁ error&#39;</span><span class="p">,</span>
     <span class="s1">&#39;lambda1&#39;</span><span class="p">:</span> <span class="s1">&#39;Sliding surface coefficient for θ₁&#39;</span><span class="p">,</span>
@@ -672,7 +704,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 </pre></div>
 </div>
 <p><strong>Implementation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Classical Sliding Mode Controller with PSO interface.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -769,7 +804,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="super-twisting-smc-interface">
 <h3>2.2 Super-Twisting SMC Interface<a class="headerlink" href="#super-twisting-smc-interface" title="Link to this heading">¶</a></h3>
 <p><strong>Gain Vector Specification:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># STA-SMC Gains: [K1, K2, k1, k2, λ1, λ2] ∈ ℝ⁶</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># STA-SMC Gains: [K1, K2, k1, k2, λ1, λ2] ∈ ℝ⁶</span>
 <span class="n">STA_SMC_GAINS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;K1&#39;</span><span class="p">:</span> <span class="s1">&#39;First-order sliding mode gain&#39;</span><span class="p">,</span>
     <span class="s1">&#39;K2&#39;</span><span class="p">:</span> <span class="s1">&#39;Second-order sliding mode gain&#39;</span><span class="p">,</span>
@@ -787,7 +825,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 </pre></div>
 </div>
 <p><strong>Implementation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">STASMC</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">STASMC</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Super-Twisting Algorithm Sliding Mode Controller.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -893,7 +934,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="adaptive-smc-interface">
 <h3>2.3 Adaptive SMC Interface<a class="headerlink" href="#adaptive-smc-interface" title="Link to this heading">¶</a></h3>
 <p><strong>Gain Vector Specification:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adaptive SMC Gains: [c1, λ1, c2, λ2, γ] ∈ ℝ⁵</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Adaptive SMC Gains: [c1, λ1, c2, λ2, γ] ∈ ℝ⁵</span>
 <span class="n">ADAPTIVE_SMC_GAINS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;c1&#39;</span><span class="p">:</span> <span class="s1">&#39;Sliding surface gain for θ₁&#39;</span><span class="p">,</span>
     <span class="s1">&#39;lambda1&#39;</span><span class="p">:</span> <span class="s1">&#39;Sliding surface coefficient for θ₁&#39;</span><span class="p">,</span>
@@ -909,7 +953,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 </pre></div>
 </div>
 <p><strong>Implementation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMC</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMC</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adaptive Sliding Mode Controller with uncertainty estimation.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1004,7 +1051,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="hybrid-adaptive-sta-smc-interface">
 <h3>2.4 Hybrid Adaptive STA-SMC Interface<a class="headerlink" href="#hybrid-adaptive-sta-smc-interface" title="Link to this heading">¶</a></h3>
 <p><strong>Gain Vector Specification:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hybrid Adaptive STA-SMC Gains: [c1, λ1, c2, λ2] ∈ ℝ⁴</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Hybrid Adaptive STA-SMC Gains: [c1, λ1, c2, λ2] ∈ ℝ⁴</span>
 <span class="n">HYBRID_ADAPTIVE_STA_SMC_GAINS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;c1&#39;</span><span class="p">:</span> <span class="s1">&#39;Proportional-like sliding surface gain&#39;</span><span class="p">,</span>
     <span class="s1">&#39;lambda1&#39;</span><span class="p">:</span> <span class="s1">&#39;Integral-like sliding surface coefficient&#39;</span><span class="p">,</span>
@@ -1019,7 +1069,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 </pre></div>
 </div>
 <p><strong>Implementation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HybridAdaptiveSTASMC</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HybridAdaptiveSTASMC</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Hybrid Adaptive Super-Twisting SMC with dual adaptation.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1126,7 +1179,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="pso-tuner-interface">
 <h3>3.1 PSO Tuner Interface<a class="headerlink" href="#pso-tuner-interface" title="Link to this heading">¶</a></h3>
 <p><strong>Class Definition:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PSOTuner</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PSOTuner</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;High-performance PSO tuner for SMC controllers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -1229,7 +1285,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="parameter-validation-api">
 <h3>4.1 Parameter Validation API<a class="headerlink" href="#parameter-validation-api" title="Link to this heading">¶</a></h3>
 <p><strong>Validation Framework:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="nd">@dataclass</span>
@@ -1301,7 +1360,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="runtime-error-handling">
 <h3>4.2 Runtime Error Handling<a class="headerlink" href="#runtime-error-handling" title="Link to this heading">¶</a></h3>
 <p><strong>Exception Hierarchy:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PSO_ControllerError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PSO_ControllerError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base exception for PSO-controller interface errors.&quot;&quot;&quot;</span>
     <span class="k">pass</span>
 
@@ -1323,7 +1385,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 </pre></div>
 </div>
 <p><strong>Error Recovery Strategies:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">robust_controller_factory</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">robust_controller_factory</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
                             <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                             <span class="n">fallback_gains</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PSO_ControllerInterface</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Robust controller factory with error recovery.</span>
@@ -1425,7 +1490,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="benchmarking-api">
 <h3>5.2 Benchmarking API<a class="headerlink" href="#benchmarking-api" title="Link to this heading">¶</a></h3>
 <p><strong>Benchmark Suite:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControllerBenchmark</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerBenchmark</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Standardized controller benchmarking.&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
@@ -1615,7 +1683,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="usage-examples">
 <h3>7.1 Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h3>
 <p><strong>Basic PSO Optimization:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1">#!/usr/bin/env python3</span>
 <span class="sd">&quot;&quot;&quot;Example: PSO optimization for Classical SMC.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1740,7 +1811,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="legacy-interface-support">
 <h3>8.1 Legacy Interface Support<a class="headerlink" href="#legacy-interface-support" title="Link to this heading">¶</a></h3>
 <p><strong>Backward Compatibility Layer:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">legacy_controller_adapter</span><span class="p">(</span><span class="n">legacy_controller_class</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">legacy_controller_adapter</span><span class="p">(</span><span class="n">legacy_controller_class</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adapter for legacy controllers without PSO interface.&quot;&quot;&quot;</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">PSO_CompatibleAdapter</span><span class="p">(</span><span class="n">PSO_ControllerInterface</span><span class="p">):</span>
@@ -1771,7 +1845,10 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
 <section id="version-migration-tools">
 <h3>8.2 Version Migration Tools<a class="headerlink" href="#version-migration-tools" title="Link to this heading">¶</a></h3>
 <p><strong>API Version Checker:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">check_controller_api_version</span><span class="p">(</span><span class="n">controller_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_controller_api_version</span><span class="p">(</span><span class="n">controller_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check controller API version compatibility.&quot;&quot;&quot;</span>
 
     <span class="c1"># Check for PSO interface compliance</span>
@@ -1840,7 +1917,7 @@ The factory function <span class="math notranslate nohighlight">\(\mathcal{F}: \
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

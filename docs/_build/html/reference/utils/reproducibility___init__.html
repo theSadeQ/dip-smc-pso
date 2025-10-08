@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -597,6 +623,264 @@ reproducible results across experiments and simulations.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.seed</span> <span class="pre">import</span> <span class="pre">set_global_seed,</span> <span class="pre">SeedManager,</span> <span class="pre">create_rng</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="reproducibility-theory">
+<h3>Reproducibility Theory<a class="headerlink" href="#reproducibility-theory" title="Link to this heading">¶</a></h3>
+<p>Scientific reproducibility requires deterministic algorithms and proper random seed management.</p>
+<section id="pseudo-random-number-generation">
+<h4>Pseudo-Random Number Generation<a class="headerlink" href="#pseudo-random-number-generation" title="Link to this heading">¶</a></h4>
+<p><strong>Linear Congruential Generator (LCG):</strong>
+$<span class="math notranslate nohighlight">\(
+X_{n+1} = (a X_n + c) \mod m
+\)</span>$</p>
+<p><strong>Mersenne Twister</strong> (period <span class="math notranslate nohighlight">\(2^{19937} - 1\)</span>):
+$<span class="math notranslate nohighlight">\(
+X_{n+k} = X_n \oplus (X_n \gg u) \oplus ((X_n \ll s) \wedge b)
+\)</span>$</p>
+<p><strong>Seed determines entire sequence:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{seed} \rightarrow \{X_0, X_1, X_2, \ldots\}
+\)</span>$</p>
+<p><strong>Reproducibility guarantee:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{seed}_A = \text{seed}_B \Rightarrow \text{sequence}_A = \text{sequence}_B
+\)</span>$</p>
+</section>
+<section id="hash-based-seeding">
+<h4>Hash-Based Seeding<a class="headerlink" href="#hash-based-seeding" title="Link to this heading">¶</a></h4>
+<p><strong>Combine multiple seed sources:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{seed}_{\text{combined}} = \text{hash}(\text{seed}_{\text{base}} \| \text{pid} \| \text{time} \| \text{counter})
+\)</span>$</p>
+<p><strong>SHA-256 hash truncation:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{seed} = \text{SHA-256}(\text{input}) \mod 2^{32}
+\)</span>$</p>
+</section>
+<section id="statistical-reproducibility">
+<h4>Statistical Reproducibility<a class="headerlink" href="#statistical-reproducibility" title="Link to this heading">¶</a></h4>
+<p><strong>Mean convergence</strong> (Law of Large Numbers):
+$<span class="math notranslate nohighlight">\(
+\lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n X_i = \mu
+\)</span>$</p>
+<p><strong>Distribution convergence</strong> (Central Limit Theorem):
+$<span class="math notranslate nohighlight">\(
+\frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)
+\)</span>$</p>
+<p><strong>Monte Carlo reproducibility:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Same seed} \Rightarrow \text{Same } \{X_i\}_{i=1}^N \Rightarrow \text{Same } \bar{X}_N
+\)</span>$</p>
+</section>
+<section id="entropy-sources">
+<h4>Entropy Sources<a class="headerlink" href="#entropy-sources" title="Link to this heading">¶</a></h4>
+<p><strong>System entropy:</strong>
+$<span class="math notranslate nohighlight">\(
+E_{\text{system}} = \text{time}() + \text{pid}() + \text{counter}
+\)</span>$</p>
+<p><strong>User-provided seed:</strong>
+$<span class="math notranslate nohighlight">\(
+E_{\text{user}} = \text{integer in } [0, 2^{32} - 1]
+\)</span>$</p>
+<p><strong>Combined entropy:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{seed} = \text{combine}(E_{\text{user}}, E_{\text{system}})
+\)</span>$</p>
+</section>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Reproducibility System] --&gt; B[Seed Management]
+    A --&gt; C[PRNG Initialization]
+    A --&gt; D[State Capture]
+
+    B --&gt; E{Seed Source}
+    E --&gt;|User-Provided| F[Fixed Seed]
+    E --&gt;|System-Generated| G[Entropy Pool]
+
+    F --&gt; H[Hash Combination]
+    G --&gt; H
+
+    H --&gt; I[Initialize PRNG]
+    I --&gt; J[NumPy Generator]
+    I --&gt; K[Python random]
+
+    J --&gt; L[Generate Sequence]
+    K --&gt; L
+
+    L --&gt; M{Reproducibility Check}
+    M --&gt;|Same Seed| N[Same Sequence ✓]
+    M --&gt;|Different Seed| O[Different Sequence]
+
+    D --&gt; P[Save State]
+    P --&gt; Q[JSON Snapshot]
+    Q --&gt; R[Restore State]
+    R --&gt; I
+
+    style E fill:#fff4e1
+    style M fill:#fff4e1
+    style N fill:#e8f5e9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-seed-setting">
+<h3>Example 1: Basic Seed Setting<a class="headerlink" href="#example-1-basic-seed-setting" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.reproducibility</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_seed</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Set global seed for reproducibility</span>
+<span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Generate random numbers</span>
+<span class="n">random_values_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Reset seed - get same sequence</span>
+<span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">random_values_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Verify reproducibility</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">random_values_1</span><span class="p">,</span> <span class="n">random_values_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Reproducibility verified&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-monte-carlo-with-reproducibility">
+<h3>Example 2: Monte Carlo with Reproducibility<a class="headerlink" href="#example-2-monte-carlo-with-reproducibility" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.reproducibility</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_seed</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">monte_carlo_simulation</span><span class="p">(</span><span class="n">n_trials</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="c1"># Set seed for reproducible Monte Carlo</span>
+    <span class="n">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trials</span><span class="p">):</span>
+        <span class="c1"># Simulate with random initial conditions</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="c1"># Run twice with same seed - get identical results</span>
+<span class="n">mean1</span><span class="p">,</span> <span class="n">std1</span> <span class="o">=</span> <span class="n">monte_carlo_simulation</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">mean2</span><span class="p">,</span> <span class="n">std2</span> <span class="o">=</span> <span class="n">monte_carlo_simulation</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">mean1</span> <span class="o">==</span> <span class="n">mean2</span> <span class="ow">and</span> <span class="n">std1</span> <span class="o">==</span> <span class="n">std2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Monte Carlo reproducibility confirmed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-pso-optimization-reproducibility">
+<h3>Example 3: PSO Optimization Reproducibility<a class="headerlink" href="#example-3-pso-optimization-reproducibility" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.reproducibility</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_seed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSOTuner</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">reproducible_pso_tuning</span><span class="p">(</span><span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="c1"># Set seed before PSO initialization</span>
+    <span class="n">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="c1"># Create PSO tuner</span>
+    <span class="n">tuner</span> <span class="o">=</span> <span class="n">PSOTuner</span><span class="p">(</span>
+        <span class="n">n_particles</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">iters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">6</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Optimize (deterministic with fixed seed)</span>
+    <span class="n">best_gains</span><span class="p">,</span> <span class="n">best_fitness</span> <span class="o">=</span> <span class="n">tuner</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">fitness_function</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">best_gains</span>
+
+<span class="c1"># Verify PSO reproducibility</span>
+<span class="n">gains_run1</span> <span class="o">=</span> <span class="n">reproducible_pso_tuning</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">gains_run2</span> <span class="o">=</span> <span class="n">reproducible_pso_tuning</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gains_run1</span><span class="p">,</span> <span class="n">gains_run2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ PSO optimization is reproducible&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-state-capture-and-restore">
+<h3>Example 4: State Capture and Restore<a class="headerlink" href="#example-4-state-capture-and-restore" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.reproducibility</span><span class="w"> </span><span class="kn">import</span> <span class="n">capture_random_state</span><span class="p">,</span> <span class="n">restore_random_state</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Generate some random numbers</span>
+<span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">values_before</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Capture current RNG state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">capture_random_state</span><span class="p">()</span>
+
+<span class="c1"># Generate more numbers (changes state)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Restore previous state</span>
+<span class="n">restore_random_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Continue from captured state</span>
+<span class="n">values_after</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Should match continuation from before</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;State restoration allows sequence continuation&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-experiment-reproducibility-framework">
+<h3>Example 5: Experiment Reproducibility Framework<a class="headerlink" href="#example-5-experiment-reproducibility-framework" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.reproducibility</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_seed</span><span class="p">,</span> <span class="n">capture_random_state</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ReproducibleExperiment</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="n">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">capture_random_state</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Restore initial state for clean run</span>
+        <span class="n">restore_random_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">)</span>
+
+        <span class="c1"># Run experiment</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_experiment</span><span class="p">()</span>
+
+        <span class="c1"># Save results with metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">):</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;experiment&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">,</span>
+            <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="n">results</span>
+        <span class="p">}</span>
+
+        <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;results/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">_seed</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Run reproducible experiment</span>
+<span class="n">exp</span> <span class="o">=</span> <span class="n">ReproducibleExperiment</span><span class="p">(</span><span class="s2">&quot;controller_comparison&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Re-run with same seed - identical results guaranteed</span>
+<span class="n">exp2</span> <span class="o">=</span> <span class="n">ReproducibleExperiment</span><span class="p">(</span><span class="s2">&quot;controller_comparison&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">results2</span> <span class="o">=</span> <span class="n">exp2</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="k">assert</span> <span class="n">results</span> <span class="o">==</span> <span class="n">results2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Full experiment reproducibility achieved&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
         </article>
@@ -616,7 +900,7 @@ reproducible results across experiments and simulations.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -652,6 +936,25 @@ reproducible results across experiments and simulations.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#reproducibility-theory">Reproducibility Theory</a><ul>
+<li><a class="reference internal" href="#pseudo-random-number-generation">Pseudo-Random Number Generation</a></li>
+<li><a class="reference internal" href="#hash-based-seeding">Hash-Based Seeding</a></li>
+<li><a class="reference internal" href="#statistical-reproducibility">Statistical Reproducibility</a></li>
+<li><a class="reference internal" href="#entropy-sources">Entropy Sources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-seed-setting">Example 1: Basic Seed Setting</a></li>
+<li><a class="reference internal" href="#example-2-monte-carlo-with-reproducibility">Example 2: Monte Carlo with Reproducibility</a></li>
+<li><a class="reference internal" href="#example-3-pso-optimization-reproducibility">Example 3: PSO Optimization Reproducibility</a></li>
+<li><a class="reference internal" href="#example-4-state-capture-and-restore">Example 4: State Capture and Restore</a></li>
+<li><a class="reference internal" href="#example-5-experiment-reproducibility-framework">Example 5: Experiment Reproducibility Framework</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -670,6 +973,10 @@ reproducible results across experiments and simulations.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

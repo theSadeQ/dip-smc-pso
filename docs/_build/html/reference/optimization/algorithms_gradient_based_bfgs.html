@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,143 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>BFGS quasi-Newton optimization algorithm with numerical gradients.</p>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="bfgs-quasi-newton-method">
+<h3>BFGS Quasi-Newton Method<a class="headerlink" href="#bfgs-quasi-newton-method" title="Link to this heading">¶</a></h3>
+<p><strong>Quasi-Newton update:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}^{t+1} = \vec{x}^t - \alpha_t B_k^{-1} \nabla f(\vec{x}^t)\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(B_k\)</span> approximates Hessian <span class="math notranslate nohighlight">\(\nabla^2 f\)</span>.</p>
+</section>
+<section id="hessian-approximation">
+<h3>Hessian Approximation<a class="headerlink" href="#hessian-approximation" title="Link to this heading">¶</a></h3>
+<p><strong>BFGS update formula:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[B_{k+1} = B_k + \frac{y_k y_k^T}{y_k^T s_k} - \frac{B_k s_k s_k^T B_k}{s_k^T B_k s_k}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s_k = \vec{x}^{k+1} - \vec{x}^k\)</span>: Step</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_k = \nabla f(\vec{x}^{k+1}) - \nabla f(\vec{x}^k)\)</span>: Gradient change</p></li>
+</ul>
+<p><strong>Inverse Hessian update</strong> (more efficient):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[H_{k+1} = \left(I - \frac{s_k y_k^T}{y_k^T s_k}\right) H_k \left(I - \frac{y_k s_k^T}{y_k^T s_k}\right) + \frac{s_k s_k^T}{y_k^T s_k}\]</div>
+</div>
+</section>
+<section id="line-search">
+<h3>Line Search<a class="headerlink" href="#line-search" title="Link to this heading">¶</a></h3>
+<p><strong>Wolfe conditions</strong> for step size <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+f(\vec{x}^k + \alpha \vec{p}_k) &amp;\leq f(\vec{x}^k) + c_1 \alpha \nabla f(\vec{x}^k)^T \vec{p}_k \quad \text{(Armijo)} \\
+\nabla f(\vec{x}^k + \alpha \vec{p}_k)^T \vec{p}_k &amp;\geq c_2 \nabla f(\vec{x}^k)^T \vec{p}_k \quad \text{(Curvature)}
+\end{align}\end{split}\]</div>
+</div>
+<p>Typical: <span class="math notranslate nohighlight">\(c_1 = 10^{-4}, c_2 = 0.9\)</span>.</p>
+</section>
+<section id="convergence-analysis">
+<h3>Convergence Analysis<a class="headerlink" href="#convergence-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Theorem (Dennis &amp; Moré):</strong> If <span class="math notranslate nohighlight">\(\nabla^2 f\)</span> is Lipschitz continuous and <span class="math notranslate nohighlight">\(\nabla^2 f(\vec{x}^*)\)</span> positive definite:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\|\vec{x}^{k+1} - \vec{x}^*\| = O(\|\vec{x}^k - \vec{x}^*\|^{1+\mu})\]</div>
+</div>
+<p><strong>Superlinear convergence</strong> with <span class="math notranslate nohighlight">\(\mu \in (0, 1]\)</span>.</p>
+</section>
+<section id="limited-memory-bfgs-l-bfgs">
+<h3>Limited-Memory BFGS (L-BFGS)<a class="headerlink" href="#limited-memory-bfgs-l-bfgs" title="Link to this heading">¶</a></h3>
+<p><strong>Store only last <span class="math notranslate nohighlight">\(m\)</span> updates:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M_{storage} = O(m \cdot n) \quad \text{vs} \quad O(n^2) \text{ for full BFGS}\]</div>
+</div>
+<p>Typical: <span class="math notranslate nohighlight">\(m = 5\)</span> to <span class="math notranslate nohighlight">\(20\)</span>.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Current Point x] --&gt; B[Compute Gradient]
+    B --&gt; C[Compute Search Direction]
+    C --&gt; D[p = -H * grad_f]
+
+    D --&gt; E[Line Search]
+    E --&gt; F{Wolfe Conditions}
+    F --&gt;|Not Met| G[Reduce Step Size]
+    F --&gt;|Met| H[Update x]
+
+    G --&gt; E
+    H --&gt; I[Compute s and y]
+    I --&gt; J[Update Hessian Approx]
+
+    J --&gt; K{BFGS Update}
+    K --&gt;|Full| L[Update n×n H]
+    K --&gt;|L-BFGS| M[Store m vectors]
+
+    L --&gt; N[Convergence Check]
+    M --&gt; N
+
+    N --&gt; O{||grad_f|| &lt; ε?}
+    O --&gt;|No| B
+    O --&gt;|Yes| P[Return x]
+
+    style F fill:#ff9
+    style K fill:#9cf
+    style P fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-optimization">
+<h3>Example 3: Integration with Optimization<a class="headerlink" href="#example-3-integration-with-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete optimization loop</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">create_optimizer</span><span class="p">(</span><span class="n">opt_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best fitness: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">best_fitness</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -502,7 +665,7 @@
 <span class="linenos">  6</span>
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
-<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="linenos"> 10</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="linenos"> 12</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
@@ -737,10 +900,10 @@
 <span class="linenos">241</span>
 <span class="linenos">242</span>        <span class="c1"># BFGS update formula</span>
 <span class="linenos">243</span>        <span class="n">rho</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">sy</span>
-<span class="linenos">244</span>        <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
+<span class="linenos">244</span>        <span class="n">identity_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
 <span class="linenos">245</span>
 <span class="linenos">246</span>        <span class="c1"># Two-step BFGS update</span>
-<span class="linenos">247</span>        <span class="n">V</span> <span class="o">=</span> <span class="n">I</span> <span class="o">-</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="linenos">247</span>        <span class="n">V</span> <span class="o">=</span> <span class="n">identity_matrix</span> <span class="o">-</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="linenos">248</span>        <span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span> <span class="o">=</span> <span class="n">V</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span> <span class="o">@</span> <span class="n">V</span> <span class="o">+</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
 <span class="linenos">249</span>
 <span class="linenos">250</span>        <span class="c1"># Ensure positive definiteness</span>
@@ -749,7 +912,7 @@
 <span class="linenos">253</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Hessian approximation not positive definite, regularizing&quot;</span><span class="p">)</span>
 <span class="linenos">254</span>            <span class="n">min_eigenval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">)</span>
 <span class="linenos">255</span>            <span class="n">regularization</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">min_eigenval</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-6</span>
-<span class="linenos">256</span>            <span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span> <span class="o">+=</span> <span class="n">regularization</span> <span class="o">*</span> <span class="n">I</span>
+<span class="linenos">256</span>            <span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span> <span class="o">+=</span> <span class="n">regularization</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
 <span class="linenos">257</span>
 <span class="linenos">258</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_line_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <span class="linenos">259</span>                    <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
@@ -890,7 +1053,7 @@
 <span class="linenos">394</span>                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">)</span>
 <span class="linenos">395</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">396</span>                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
-<span class="linenos">397</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">397</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">398</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
 <span class="linenos">399</span>
 <span class="linenos">400</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_optimization_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
@@ -935,7 +1098,7 @@
 <span class="linenos">439</span>                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ratios</span><span class="p">)</span>
 <span class="linenos">440</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">441</span>                <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">442</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">442</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">443</span>            <span class="k">return</span> <span class="mf">0.0</span>
 <span class="linenos">444</span>
 <span class="linenos">445</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset_hessian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -950,7 +1113,7 @@
 <span class="linenos">454</span>
 <span class="linenos">455</span>        <span class="k">try</span><span class="p">:</span>
 <span class="linenos">456</span>            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span><span class="p">)</span>
-<span class="linenos">457</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">457</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">458</span>            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 <span class="linenos">459</span>
 <span class="linenos">460</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_search_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
@@ -1216,10 +1379,10 @@ convergence near the optimum.</p>
 <span class="linenos">205</span>
 <span class="linenos">206</span>        <span class="c1"># BFGS update formula</span>
 <span class="linenos">207</span>        <span class="n">rho</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">sy</span>
-<span class="linenos">208</span>        <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
+<span class="linenos">208</span>        <span class="n">identity_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
 <span class="linenos">209</span>
 <span class="linenos">210</span>        <span class="c1"># Two-step BFGS update</span>
-<span class="linenos">211</span>        <span class="n">V</span> <span class="o">=</span> <span class="n">I</span> <span class="o">-</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="linenos">211</span>        <span class="n">V</span> <span class="o">=</span> <span class="n">identity_matrix</span> <span class="o">-</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="linenos">212</span>        <span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span> <span class="o">=</span> <span class="n">V</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span> <span class="o">@</span> <span class="n">V</span> <span class="o">+</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
 <span class="linenos">213</span>
 <span class="linenos">214</span>        <span class="c1"># Ensure positive definiteness</span>
@@ -1228,7 +1391,7 @@ convergence near the optimum.</p>
 <span class="linenos">217</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Hessian approximation not positive definite, regularizing&quot;</span><span class="p">)</span>
 <span class="linenos">218</span>            <span class="n">min_eigenval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">)</span>
 <span class="linenos">219</span>            <span class="n">regularization</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">min_eigenval</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-6</span>
-<span class="linenos">220</span>            <span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span> <span class="o">+=</span> <span class="n">regularization</span> <span class="o">*</span> <span class="n">I</span>
+<span class="linenos">220</span>            <span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span> <span class="o">+=</span> <span class="n">regularization</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
 <span class="linenos">221</span>
 <span class="linenos">222</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_line_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <span class="linenos">223</span>                    <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
@@ -1369,7 +1532,7 @@ convergence near the optimum.</p>
 <span class="linenos">358</span>                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">)</span>
 <span class="linenos">359</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">360</span>                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
-<span class="linenos">361</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">361</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">362</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
 <span class="linenos">363</span>
 <span class="linenos">364</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_optimization_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
@@ -1414,7 +1577,7 @@ convergence near the optimum.</p>
 <span class="linenos">403</span>                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ratios</span><span class="p">)</span>
 <span class="linenos">404</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">405</span>                <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">406</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">406</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">407</span>            <span class="k">return</span> <span class="mf">0.0</span>
 <span class="linenos">408</span>
 <span class="linenos">409</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset_hessian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1429,7 +1592,7 @@ convergence near the optimum.</p>
 <span class="linenos">418</span>
 <span class="linenos">419</span>        <span class="k">try</span><span class="p">:</span>
 <span class="linenos">420</span>            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hessian_inv</span><span class="p">)</span>
-<span class="linenos">421</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">421</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">422</span>            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 <span class="linenos">423</span>
 <span class="linenos">424</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_search_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
@@ -1560,7 +1723,7 @@ convergence near the optimum.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1583,6 +1746,23 @@ convergence near the optimum.</p>
             <ul>
 <li><a class="reference internal" href="#">optimization.algorithms.gradient_based.bfgs</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#bfgs-quasi-newton-method">BFGS Quasi-Newton Method</a></li>
+<li><a class="reference internal" href="#hessian-approximation">Hessian Approximation</a></li>
+<li><a class="reference internal" href="#line-search">Line Search</a></li>
+<li><a class="reference internal" href="#convergence-analysis">Convergence Analysis</a></li>
+<li><a class="reference internal" href="#limited-memory-bfgs-l-bfgs">Limited-Memory BFGS (L-BFGS)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-optimization">Example 3: Integration with Optimization</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#bfgsconfig"><code class="docutils literal notranslate"><span class="pre">BFGSConfig</span></code></a><ul>
@@ -1633,6 +1813,10 @@ convergence near the optimum.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

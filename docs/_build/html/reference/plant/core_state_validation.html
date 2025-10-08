@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -487,6 +513,7 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="plant-core-state-validation">
 <h1>plant.core.state_validation<a class="headerlink" href="#plant-core-state-validation" title="Link to this heading">¶</a></h1>
+<!-- Enhanced by Week 8 Phase 2 -->
 <p><strong>Source:</strong> <code class="docutils literal notranslate"><span class="pre">src\plant\core\state_validation.py</span></code></p>
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
@@ -499,6 +526,289 @@
 <li><p>Constraint enforcement</p></li>
 </ul>
 <p>Ensures robust dynamics computation by catching invalid states early.</p>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[State x] --&gt; B{NaN/Inf Check}
+    B --&gt;|Found| Z[INVALID]
+    B --&gt;|Pass| C{Position Bounds}
+    C --&gt;|Violated| Z
+    C --&gt;|Pass| D{Velocity Bounds}
+    D --&gt;|Violated| Z
+    D --&gt;|Pass| E{Energy Conservation}
+    E --&gt;|Violated| W[WARNING]
+    E --&gt;|Pass| V[VALID]
+    Z --&gt; X[Log Violation]
+    W --&gt; Y[Log Warning]
+    V --&gt; O[Return ValidationResult]
+    X --&gt; O
+    Y --&gt; O
+
+    style Z fill:#f99
+    style W fill:#ff9
+    style V fill:#9f9
+        </div></section>
+<section id="enhanced-mathematical-foundation">
+<h2>Enhanced Mathematical Foundation<a class="headerlink" href="#enhanced-mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="physical-constraint-theory">
+<h3>Physical Constraint Theory<a class="headerlink" href="#physical-constraint-theory" title="Link to this heading">¶</a></h3>
+<p><strong>State Space Definition:</strong></p>
+<p>The admissible state space <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> is defined by physical constraints:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\mathcal{X} = \{x \in \mathbb{R}^6 : h_i(x) \leq 0, \forall i \in \mathcal{I}\}
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(h_i(x)\)</span> are inequality constraint functions.</p>
+<p><strong>Constraint Types:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Position Bounds:</strong> <span class="math notranslate nohighlight">\(|x| \leq x_{\max}\)</span>, <span class="math notranslate nohighlight">\(|\theta_i| \leq \theta_{\max}\)</span></p></li>
+<li><p><strong>Velocity Bounds:</strong> <span class="math notranslate nohighlight">\(|\dot{x}| \leq v_{\max}\)</span>, <span class="math notranslate nohighlight">\(|\dot{\theta}_i| \leq \omega_{\max}\)</span></p></li>
+<li><p><strong>Energy Bounds:</strong> <span class="math notranslate nohighlight">\(E(x) \leq E_{\max}\)</span></p></li>
+<li><p><strong>Configuration Constraints:</strong> Joint limits, workspace boundaries</p></li>
+</ol>
+</section>
+<section id="energy-conservation-validation">
+<h3>Energy Conservation Validation<a class="headerlink" href="#energy-conservation-validation" title="Link to this heading">¶</a></h3>
+<p><strong>Total Energy:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+E(x) = T(x) + V(x) = \frac{1}{2}\dot{q}^T M(q) \dot{q} + V(q)
+\]</div>
+</div>
+<p><strong>Numerical Drift Detection:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\Delta E(t) = |E(x(t)) - E(x_0)| / E(x_0)
+\]</div>
+</div>
+<p><strong>Acceptance Criterion:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\Delta E(t) &lt; \epsilon_{\text{tol}} \quad \text{(typical: } \epsilon_{\text{tol}} = 0.05\text{)}
+\]</div>
+</div>
+<p>Violations indicate:</p>
+<ul class="simple">
+<li><p>Excessive integration timestep</p></li>
+<li><p>Numerical instability</p></li>
+<li><p>Non-conservative external forces</p></li>
+</ul>
+</section>
+<section id="nan-inf-detection">
+<h3>NaN/Inf Detection<a class="headerlink" href="#nan-inf-detection" title="Link to this heading">¶</a></h3>
+<p><strong>IEEE 754 Special Values:</strong></p>
+<ul class="simple">
+<li><p><strong>NaN (Not-a-Number):</strong> Result of undefined operations (e.g., 0/0, ∞ - ∞)</p></li>
+<li><p><strong>Inf (Infinity):</strong> Result of overflow or division by zero</p></li>
+</ul>
+<p><strong>Detection Strategy:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\text{is\_valid}(x) = \neg \left(\bigvee_{i=1}^{6} \text{isnan}(x_i) \lor \text{isinf}(x_i)\right)
+\]</div>
+</div>
+<p><strong>Common Causes in DIP:</strong></p>
+<ol class="arabic simple">
+<li><p>Matrix inversion with near-singular <span class="math notranslate nohighlight">\(M(q)\)</span></p></li>
+<li><p>Trigonometric overflow for large angles</p></li>
+<li><p>Timestep too large causing blow-up</p></li>
+</ol>
+</section>
+<section id="runtime-verification">
+<h3>Runtime Verification<a class="headerlink" href="#runtime-verification" title="Link to this heading">¶</a></h3>
+<p><strong>Temporal Logic Specification:</strong></p>
+<p>Safety property: “State always remains in valid region”</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\square (x(t) \in \mathcal{X})
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\square\)</span> is the “always” temporal operator.</p>
+<p><strong>Monitor Implementation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">runtime_monitor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">StateValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;State violation at t=</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">energy_drift</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+        <span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Energy drift detected: </span><span class="si">{</span><span class="n">energy_drift</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="constraint-violation-handling">
+<h3>Constraint Violation Handling<a class="headerlink" href="#constraint-violation-handling" title="Link to this heading">¶</a></h3>
+<p><strong>Violation Severity:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\text{severity}(x) = \max_i \left(\frac{|h_i(x)|}{h_{i,\text{max}}}\right)
+\]</div>
+</div>
+<p><strong>Response Strategy:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Minor (severity &lt; 0.1):</strong> Log warning, continue</p></li>
+<li><p><strong>Moderate (0.1 ≤ severity &lt; 0.5):</strong> Clip state to bounds</p></li>
+<li><p><strong>Severe (severity ≥ 0.5):</strong> Terminate simulation, raise exception</p></li>
+</ol>
+<p><strong>State Clipping:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+x_{\text{clipped}} = \text{proj}_{\mathcal{X}}(x) = \arg\min_{y \in \mathcal{X}} \|y - x\|_2
+\]</div>
+</div>
+<p>For box constraints:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+x_{i,\text{clipped}} = \text{clip}(x_i, x_{i,\min}, x_{i,\max})
+\]</div>
+</div>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Betts</strong> (2010). <em>Practical Methods for Optimal Control</em>. SIAM. Chapter 2 (Constraints).</p></li>
+<li><p><strong>Khalil</strong> (2002). <em>Nonlinear Systems</em> (3rd ed.). Prentice Hall. Section 4.6.</p></li>
+<li><p><strong>Leucker &amp; Schallhart</strong> (2009). “A brief account of runtime verification.” <em>J. Log. Algebr. Program.</em> 78(5).</p></li>
+</ol>
+</section>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>Initialize and use the Core State Validation module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.state_validation</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Basic initialization</span>
+<span class="c1"># Validate state and detect violations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.state_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateValidator</span><span class="p">,</span> <span class="n">ValidationResult</span>
+
+<span class="n">validator</span> <span class="o">=</span> <span class="n">StateValidator</span><span class="p">()</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
+
+<span class="n">result</span><span class="p">:</span> <span class="n">ValidationResult</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;State is physically valid&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Violations: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">violations</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>Configure with custom parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.state_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationConfig</span>
+
+<span class="c1"># Custom validation constraints</span>
+<span class="n">validation_config</span> <span class="o">=</span> <span class="n">ValidationConfig</span><span class="p">(</span>
+    <span class="n">max_position</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>        <span class="c1"># ±2m cart position</span>
+    <span class="n">max_angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>       <span class="c1"># ±90° joint angles</span>
+    <span class="n">max_velocity</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>        <span class="c1"># 5 m/s cart velocity</span>
+    <span class="n">max_angular_velocity</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>  <span class="c1"># 10 rad/s joint velocities</span>
+    <span class="n">energy_conservation_tol</span><span class="o">=</span><span class="mf">0.05</span>  <span class="c1"># 5% energy drift tolerance</span>
+<span class="p">)</span>
+
+<span class="n">validator</span> <span class="o">=</span> <span class="n">StateValidator</span><span class="p">(</span><span class="n">validation_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<p>Robust error handling and recovery:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NumericalInstabilityError</span><span class="p">,</span>
+    <span class="n">StateValidationError</span><span class="p">,</span>
+    <span class="n">ConfigurationError</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Risky operation</span>
+    <span class="n">state_dot</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">NumericalInstabilityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Numerical instability detected: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: reduce timestep, increase regularization</span>
+    <span class="n">dynamics</span><span class="o">.</span><span class="n">reset_numerical_params</span><span class="p">(</span><span class="n">stronger_regularization</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">StateValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid state: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: clip state to valid bounds</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">clip_to_valid</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">ConfigurationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: use default configuration</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_default_config</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-optimization">
+<h3>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h3>
+<p>Optimize for computational efficiency:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Performance optimization</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cProfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pstats</span>
+
+<span class="c1"># Profile critical code path</span>
+<span class="n">profiler</span> <span class="o">=</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
+<span class="n">profiler</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="c1"># ... run intensive operations ...</span>
+
+<span class="n">profiler</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">pstats</span><span class="o">.</span><span class="n">Stats</span><span class="p">(</span><span class="n">profiler</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="s1">&#39;cumulative&#39;</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">print_stats</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Top 10 time consumers</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-controllers">
+<h3>Example 5: Integration with Controllers<a class="headerlink" href="#example-5-integration-with-controllers" title="Link to this heading">¶</a></h3>
+<p>Integrate with control systems:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.core.simulation_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Create dynamics model</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDIPDynamics</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Create controller</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Run closed-loop simulation</span>
+<span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final state: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Settling time: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">settling_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control effort: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">control_effort</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -1393,7 +1703,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1416,6 +1726,24 @@
             <ul>
 <li><a class="reference internal" href="#">plant.core.state_validation</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#physical-constraint-theory">Physical Constraint Theory</a></li>
+<li><a class="reference internal" href="#energy-conservation-validation">Energy Conservation Validation</a></li>
+<li><a class="reference internal" href="#nan-inf-detection">NaN/Inf Detection</a></li>
+<li><a class="reference internal" href="#runtime-verification">Runtime Verification</a></li>
+<li><a class="reference internal" href="#constraint-violation-handling">Constraint Violation Handling</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-controllers">Example 5: Integration with Controllers</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#statevalidationerror"><code class="docutils literal notranslate"><span class="pre">StateValidationError</span></code></a><ul>
@@ -1482,6 +1810,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

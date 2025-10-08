@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -564,7 +590,10 @@
 <section id="category-2-stability-properties">
 <h3>Category 2: Stability Properties<a class="headerlink" href="#category-2-stability-properties" title="Link to this heading">¶</a></h3>
 <p><strong>Definition</strong>: System energy decreases or remains bounded</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_lyapunov_decrease</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Lyapunov function decreases along trajectories&quot;&quot;&quot;</span>
     <span class="c1"># Compute V(x) at current state</span>
@@ -585,7 +614,10 @@
 <section id="category-3-continuity-properties">
 <h3>Category 3: Continuity Properties<a class="headerlink" href="#category-3-continuity-properties" title="Link to this heading">¶</a></h3>
 <p><strong>Definition</strong>: Small state changes → small control changes</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@given</span><span class="p">(</span>
     <span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">(),</span>
     <span class="n">perturbation</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 <span class="p">)</span>
@@ -607,7 +639,10 @@
 <section id="category-4-robustness-properties">
 <h3>Category 4: Robustness Properties<a class="headerlink" href="#category-4-robustness-properties" title="Link to this heading">¶</a></h3>
 <p><strong>Definition</strong>: Performance maintained under uncertainties</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@given</span><span class="p">(</span>
     <span class="n">mass_error</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">1.2</span><span class="p">),</span>  <span class="c1"># ±20%</span>
     <span class="n">friction_error</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">1.5</span><span class="p">),</span>  <span class="c1"># ±50%</span>
     <span class="n">initial_state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">()</span>
@@ -678,7 +713,10 @@
 <hr class="docutils" />
 <section id="strategy-2-gain-strategies">
 <h3>Strategy 2: Gain Strategies<a class="headerlink" href="#strategy-2-gain-strategies" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">positive_gains</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">positive_gains</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate valid controller gains&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span>
         <span class="n">min_value</span><span class="o">=</span><span class="n">min_value</span><span class="p">,</span>
@@ -759,7 +797,10 @@
 <hr class="docutils" />
 <section id="pattern-3-regression-property-testing">
 <h3>Pattern 3: Regression Property Testing<a class="headerlink" href="#pattern-3-regression-property-testing" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_no_regression_from_baseline</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Current controller performs at least as well as baseline&quot;&quot;&quot;</span>
     <span class="c1"># Baseline controller (e.g., from v1.0)</span>
@@ -781,7 +822,10 @@
 <h2>🏗️ Real-World Examples<a class="headerlink" href="#real-world-examples" title="Link to this heading">¶</a></h2>
 <section id="example-1-sliding-surface-property">
 <h3>Example 1: Sliding Surface Property<a class="headerlink" href="#example-1-sliding-surface-property" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_sliding_surface_attractivity</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sliding surface must be attractive from any state&quot;&quot;&quot;</span>
     <span class="n">sigma_values</span> <span class="o">=</span> <span class="p">[]</span>
@@ -805,7 +849,10 @@
 <hr class="docutils" />
 <section id="example-2-chattering-bound">
 <h3>Example 2: Chattering Bound<a class="headerlink" href="#example-2-chattering-bound" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@given</span><span class="p">(</span>
     <span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">(),</span>
     <span class="n">boundary_layer</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="p">)</span>
@@ -834,7 +881,10 @@
 <h2>🛠️ Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
 <section id="use-assume-for-preconditions">
 <h3>1. Use <code class="docutils literal notranslate"><span class="pre">assume()</span></code> for Preconditions<a class="headerlink" href="#use-assume-for-preconditions" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_property</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="c1"># Filter out uninteresting cases</span>
     <span class="n">assume</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># Skip near-equilibrium</span>
@@ -867,7 +917,10 @@
 <hr class="docutils" />
 <section id="profile-with-settings">
 <h3>4. Profile with <code class="docutils literal notranslate"><span class="pre">settings</span></code><a class="headerlink" href="#profile-with-settings" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span><span class="p">,</span> <span class="n">HealthCheck</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span><span class="p">,</span> <span class="n">HealthCheck</span>
 
 <span class="nd">@given</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">valid_states</span><span class="p">())</span>
 <span class="nd">@settings</span><span class="p">(</span>
@@ -918,7 +971,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

@@ -67,6 +67,9 @@ def test_lyapunov_positive_definite(state):
 ### Test 2: Negative Derivative
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(state=valid_states())
 def test_lyapunov_decrease(state):
     """dV/dt ≤ 0 along trajectories"""
@@ -89,6 +92,9 @@ def test_lyapunov_decrease(state):
 ### Test 3: Finite-Time Reaching
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_finite_time_reaching():
     """Sliding surface reached in finite time"""
     initial_state = np.array([0.5, -0.3, 1.0, -0.8])
@@ -121,6 +127,9 @@ def test_finite_time_reaching():
 ### Regional Stability
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_region_of_attraction():
     """Verify estimated region of attraction"""
     # Sample initial states from estimated ROA
@@ -141,6 +150,9 @@ def test_region_of_attraction():
 ### Robustness to Disturbances
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(
     state=valid_states(),
     disturbance=st.floats(min_value=-0.5, max_value=0.5)
@@ -193,6 +205,9 @@ def test_lyapunov_with_tolerance(state):
 
 **Mitigation**:
 ```python
+# example-metadata:
+# runnable: false
+
 def test_lyapunov_averaged_decrease(state):
     """Check V decreases on average over window"""
     window_size = 10  # Average over 10 steps

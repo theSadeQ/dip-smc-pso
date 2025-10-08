@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -567,7 +593,10 @@
 </section>
 <section id="comprehensive-performance-analysis-lines-236-323">
 <h4>1.2 Comprehensive Performance Analysis (Lines 236-323)<a class="headerlink" href="#comprehensive-performance-analysis-lines-236-323" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surface_history</span><span class="p">,</span> <span class="n">control_history</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">state_history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surface_history</span><span class="p">,</span> <span class="n">control_history</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">state_history</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive chattering reduction metrics.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s1">&#39;chattering_index&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>                <span class="c1"># Enhanced FFT-based metric</span>
@@ -588,7 +617,10 @@
 <p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">src/controllers/smc/core/switching_functions.py</span></code></p>
 <section id="optimized-tanh-switching-lines-88-123">
 <h4>2.1 Optimized Tanh Switching (Lines 88-123)<a class="headerlink" href="#optimized-tanh-switching-lines-88-123" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_tanh_switching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">3.0</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_tanh_switching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">3.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configurable slope for tunable smoothness.</span>
 
 <span class="sd">    Formula: tanh((slope * s) / ε)</span>
@@ -657,7 +689,10 @@
 <p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_integration/test_numerical_stability/test_numerical_stability_deep.py</span></code></p>
 <section id="test-implementation-lines-723-896">
 <h4>4.1 Test Implementation (Lines 723-896)<a class="headerlink" href="#test-implementation-lines-723-896" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">chattering_reduction</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">chattering_reduction</span>
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;controller_type&quot;</span><span class="p">,</span> <span class="p">[</span>
     <span class="s2">&quot;classical_smc&quot;</span><span class="p">,</span> <span class="s2">&quot;adaptive_smc&quot;</span><span class="p">,</span> <span class="s2">&quot;sta_smc&quot;</span><span class="p">,</span> <span class="s2">&quot;hybrid_adaptive_sta_smc&quot;</span>
 <span class="p">])</span>
@@ -858,7 +893,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

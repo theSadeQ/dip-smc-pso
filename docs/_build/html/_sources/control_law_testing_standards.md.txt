@@ -23,6 +23,9 @@ This document establishes comprehensive testing standards for control law valida
 
 **Test Design Framework:**
 ```python
+# example-metadata:
+# runnable: false
+
 class LyapunovStabilityTestSuite:
     """Comprehensive Lyapunov stability test suite for SMC controllers."""
 
@@ -170,6 +173,9 @@ class LyapunovStabilityTestSuite:
 
 **Implementation Standards:**
 ```python
+# example-metadata:
+# runnable: false
+
 class SlidingSurfaceReachabilityTestSuite:
     """Test suite for sliding surface reachability verification."""
 
@@ -244,6 +250,9 @@ class SlidingSurfaceReachabilityTestSuite:
 
 **Test Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 class ConvergenceRateTestSuite:
     """Test suite for convergence rate verification."""
 
@@ -336,6 +345,9 @@ class ConvergenceRateTestSuite:
 
 **Safety Testing Protocol:**
 ```python
+# example-metadata:
+# runnable: false
+
 class ControlSaturationTestSuite:
     """Safety-critical testing for control input saturation."""
 
@@ -432,6 +444,9 @@ class ControlSaturationTestSuite:
 
 **Implementation Protocol:**
 ```python
+# example-metadata:
+# runnable: false
+
 class StateConstraintTestSuite:
     """Test suite for state constraint verification."""
 
@@ -545,6 +560,9 @@ class StateConstraintTestSuite:
 
 **Performance Testing Framework:**
 ```python
+# example-metadata:
+# runnable: false
+
 class ControlObjectiveTestSuite:
     """Test suite for control objective verification."""
 
@@ -660,6 +678,9 @@ class ControlObjectiveTestSuite:
 
 **Robustness Testing Protocol:**
 ```python
+# example-metadata:
+# runnable: false
+
 class RobustnessTestSuite:
     """Test suite for control robustness verification."""
 
@@ -753,6 +774,9 @@ class RobustnessTestSuite:
 
 **Numerical Testing Framework:**
 ```python
+# example-metadata:
+# runnable: false
+
 class NumericalPrecisionTestSuite:
     """Test suite for numerical precision and stability."""
 
@@ -841,6 +865,9 @@ class NumericalPrecisionTestSuite:
 
 **Edge Case Testing Protocol:**
 ```python
+# example-metadata:
+# runnable: false
+
 class EdgeCaseTestSuite:
     """Test suite for edge case verification."""
 
@@ -937,6 +964,9 @@ class EdgeCaseTestSuite:
 
 **Integration Testing Framework:**
 ```python
+# example-metadata:
+# runnable: false
+
 class SystemIntegrationTestSuite:
     """Test suite for system-level integration verification."""
 
@@ -1022,6 +1052,9 @@ class SystemIntegrationTestSuite:
 
 **Factory Testing Protocol:**
 ```python
+# example-metadata:
+# runnable: false
+
 class FactoryConfigurationTestSuite:
     """Test suite for factory and configuration verification."""
 
@@ -1087,6 +1120,9 @@ class FactoryConfigurationTestSuite:
 
 **Test Execution Framework:**
 ```python
+# example-metadata:
+# runnable: false
+
 class ControlLawTestOrchestrator:
     """Orchestrates comprehensive control law testing."""
 
@@ -1182,6 +1218,9 @@ class ControlLawTestOrchestrator:
 
 **Regression Testing Protocol:**
 ```python
+# example-metadata:
+# runnable: false
+
 class RegressionTestingFramework:
     """Framework for continuous regression testing."""
 

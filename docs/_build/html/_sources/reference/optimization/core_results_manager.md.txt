@@ -6,6 +6,156 @@
 
 PSO Optimization Results Management and Serialization.
 
+
+
+## Advanced Mathematical Theory
+
+### Results Aggregation
+
+**Statistical summary** across $M$ optimization runs:
+
+```{math}
+\begin{align}
+\mu_f &= \frac{1}{M} \sum_{i=1}^{M} f_i^* \\
+\sigma_f^2 &= \frac{1}{M-1} \sum_{i=1}^{M} (f_i^* - \mu_f)^2
+\end{align}
+```
+
+### Convergence Tracking
+
+**Best-so-far curve:**
+
+```{math}
+f_{best}^t = \min_{\tau=0,\ldots,t} f(\vec{x}^{\tau})
+```
+
+**Average fitness over population:**
+
+```{math}
+\bar{f}^t = \frac{1}{N} \sum_{i=1}^{N} f(\vec{x}_i^t)
+```
+
+### Statistical Analysis
+
+**Confidence intervals** for mean fitness:
+
+```{math}
+\text{CI}_{95\%} = \mu_f \pm 1.96 \frac{\sigma_f}{\sqrt{M}}
+```
+
+**Hypothesis testing** for algorithm comparison:
+
+```{math}
+H_0: \mu_A = \mu_B \quad \text{vs} \quad H_1: \mu_A \neq \mu_B
+```
+
+Use Welch's t-test:
+
+```{math}
+t = \frac{\bar{f}_A - \bar{f}_B}{\sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}}}
+```
+
+### Convergence Detection
+
+**Plateau detection:**
+
+```{math}
+\text{Plateau if } \max_{t-w \leq \tau \leq t} f_{best}^{\tau} - f_{best}^t < \epsilon \text{ for window } w
+```
+
+**Stagnation metric:**
+
+```{math}
+S^t = \frac{1}{w} \sum_{\tau=t-w}^{t} |f_{best}^{\tau+1} - f_{best}^{\tau}|
+```
+
+### Performance Profiling
+
+**Function evaluation budget:**
+
+```{math}
+\text{FE}_{total} = N_{pop} \times T_{iter}
+```
+
+**Success rate** across runs:
+
+```{math}
+P_{success} = \frac{\#\{f_i^* < f_{target}\}}{M}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Optimization Results] --> B[Store Best Solution]
+    B --> C[Store Convergence History]
+    C --> D[Compute Statistics]
+
+    D --> E[Mean Fitness]
+    D --> F[Std Deviation]
+    D --> G[Confidence Intervals]
+
+    E --> H[Statistical Analysis]
+    F --> H
+    G --> H
+
+    H --> I{Multiple Runs?}
+    I -->|Yes| J[Compare Algorithms]
+    I -->|No| K[Single Run Report]
+
+    J --> L[Hypothesis Testing]
+    K --> L
+
+    L --> M[Results Summary]
+
+    style D fill:#9cf
+    style H fill:#ff9
+    style M fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.core import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 This module provides comprehensive management of PSO optimization results including
 serialization, loading, analysis, and comparison capabilities. It ensures reproducible
 optimization workflows and enables advanced result analysis.

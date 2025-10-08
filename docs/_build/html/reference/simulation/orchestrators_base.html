@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,199 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Base orchestrator interface and common functionality.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="orchestrator-design-pattern">
+<h3>Orchestrator Design Pattern<a class="headerlink" href="#orchestrator-design-pattern" title="Link to this heading">¶</a></h3>
+<p>Abstract interface for simulation execution strategies.</p>
+</section>
+<section id="strategy-pattern">
+<h3>Strategy Pattern<a class="headerlink" href="#strategy-pattern" title="Link to this heading">¶</a></h3>
+<p><strong>Intent:</strong> Define a family of algorithms (orchestrators), encapsulate each one, and make them interchangeable.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Orchestrator}: (\text{config}, \text{context}) \mapsto \text{execute}(\ldots) \to \text{Results}\]</div>
+</div>
+</section>
+<section id="execution-strategies">
+<h3>Execution Strategies<a class="headerlink" href="#execution-strategies" title="Link to this heading">¶</a></h3>
+<p><strong>1. Sequential:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T = \sum_{i=1}^{M} T_{\text{sim}}^{(i)}\]</div>
+</div>
+<p><strong>2. Parallel:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T = \max_{j=1}^{N} \sum_{i \in W_j} T_{\text{sim}}^{(i)} + T_{\text{overhead}}\]</div>
+</div>
+<p><strong>3. Batch:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T = \sum_{b=1}^{\lceil M/B \rceil} T_{\text{batch}}(B)\]</div>
+</div>
+<p><strong>4. Real-Time:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{step}} \leq \Delta t_{\text{deadline}}\]</div>
+</div>
+</section>
+<section id="interface-contract">
+<h3>Interface Contract<a class="headerlink" href="#interface-contract" title="Link to this heading">¶</a></h3>
+<p><strong>Required Methods:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>execute(initial_state, control, dt, horizon) → Result</strong></p>
+<ul class="simple">
+<li><p>Primary execution method</p></li>
+<li><p>Returns simulation results</p></li>
+</ul>
+</li>
+<li><p><strong>configure(context)</strong></p>
+<ul class="simple">
+<li><p>Set execution environment</p></li>
+<li><p>Validate configuration</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Optional Methods:</strong></p>
+<ol class="arabic simple" start="3">
+<li><p><strong>get_capabilities() → dict</strong></p>
+<ul class="simple">
+<li><p>Report parallelism support</p></li>
+<li><p>Memory requirements</p></li>
+<li><p>Real-time constraints</p></li>
+</ul>
+</li>
+<li><p><strong>get_statistics() → dict</strong></p>
+<ul class="simple">
+<li><p>Performance metrics</p></li>
+<li><p>Resource utilization</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="orchestrator-properties">
+<h3>Orchestrator Properties<a class="headerlink" href="#orchestrator-properties" title="Link to this heading">¶</a></h3>
+<p><strong>Determinism:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Deterministic} \Leftrightarrow \forall s : \text{execute}(s, \ldots) \text{ yields same result}\]</div>
+</div>
+<p><strong>Idempotence:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{execute}(\ldots) = \text{execute}(\ldots) \quad \text{(given same inputs)}\]</div>
+</div>
+<p><strong>Composability:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Result}_{\text{total}} = \text{execute}(\text{Result}_1) \circ \text{execute}(\text{Result}_2)\]</div>
+</div>
+</section>
+<section id="resource-management">
+<h3>Resource Management<a class="headerlink" href="#resource-management" title="Link to this heading">¶</a></h3>
+<p><strong>Resource abstraction:</strong></p>
+<ul class="simple">
+<li><p>Thread pools</p></li>
+<li><p>Process pools</p></li>
+<li><p>GPU devices</p></li>
+<li><p>Distributed clusters</p></li>
+</ul>
+<p><strong>Resource allocation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[R_{\text{allocated}} = f(\text{workload}, \text{available}, \text{constraints})\]</div>
+</div>
+</section>
+<section id="performance-model">
+<h3>Performance Model<a class="headerlink" href="#performance-model" title="Link to this heading">¶</a></h3>
+<p><strong>Execution time prediction:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{predicted}} = \alpha \cdot N_{\text{steps}} + \beta \cdot N_{\text{sims}} + \gamma\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: Step overhead</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span>: Simulation overhead</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma\)</span>: Fixed overhead</p></li>
+</ul>
+</section>
+<section id="error-handling">
+<h3>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">¶</a></h3>
+<p><strong>Graceful degradation:</strong></p>
+<ol class="arabic simple">
+<li><p>Attempt parallel execution</p></li>
+<li><p>On failure, fall back to sequential</p></li>
+<li><p>Log error and continue</p></li>
+</ol>
+<p><strong>Fault isolation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Failure}(\text{Sim}_i) \not\Rightarrow \text{Failure}(\text{Sim}_j) \quad \forall j \neq i\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph LR
+    A[Input] --&gt; B[Orchestrators Processing]
+    B --&gt; C[Output]
+
+    style B fill:#9cf
+    style C fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.orchestrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrchestratorsBase</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">OrchestratorsBase</span><span class="p">()</span>
+
+<span class="c1"># Execute</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">OrchestratorsBase</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-profiling">
+<h3>Example 4: Performance Profiling<a class="headerlink" href="#example-4-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-other-components">
+<h3>Example 5: Integration with Other Components<a class="headerlink" href="#example-5-integration-with-other-components" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine with other simulation components</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -502,8 +721,8 @@
 <span class="linenos">  6</span>
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
-<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">Orchestrator</span><span class="p">,</span> <span class="n">ResultContainer</span><span class="p">,</span> <span class="n">SimulationEngine</span>
@@ -935,7 +1154,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -958,6 +1177,26 @@
             <ul>
 <li><a class="reference internal" href="#">simulation.orchestrators.base</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#orchestrator-design-pattern">Orchestrator Design Pattern</a></li>
+<li><a class="reference internal" href="#strategy-pattern">Strategy Pattern</a></li>
+<li><a class="reference internal" href="#execution-strategies">Execution Strategies</a></li>
+<li><a class="reference internal" href="#interface-contract">Interface Contract</a></li>
+<li><a class="reference internal" href="#orchestrator-properties">Orchestrator Properties</a></li>
+<li><a class="reference internal" href="#resource-management">Resource Management</a></li>
+<li><a class="reference internal" href="#performance-model">Performance Model</a></li>
+<li><a class="reference internal" href="#error-handling">Error Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-profiling">Example 4: Performance Profiling</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-other-components">Example 5: Integration with Other Components</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#baseorchestrator"><code class="docutils literal notranslate"><span class="pre">BaseOrchestrator</span></code></a><ul>
@@ -999,6 +1238,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -510,10 +536,10 @@ automated alerting, and integration with the <a class="reference external" href=
 <span class="linenos"> 12</span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="linenos"> 13</span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
 <span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">asdict</span>
-<span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="linenos"> 17</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="linenos"> 19</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="linenos"> 20</span>
 <span class="linenos"> 21</span><span class="c1"># Configure logging</span>
@@ -703,7 +729,7 @@ automated alerting, and integration with the <a class="reference external" href=
 <span class="linenos">205</span>            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">206</span>                <span class="k">return</span> <span class="mf">0.0</span>
 <span class="linenos">207</span>
-<span class="linenos">208</span>            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">208</span>            <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="linenos">209</span>            <span class="n">x_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="linenos">210</span>            <span class="n">y_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="linenos">211</span>
@@ -851,8 +877,8 @@ automated alerting, and integration with the <a class="reference external" href=
 <span class="linenos">353</span>
 <span class="linenos">354</span>        <span class="n">alert</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alert_icon</span><span class="si">}</span><span class="s2"> COVERAGE MONITORING ALERT</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="linenos">355</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;**Generated**: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="linenos">356</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;**Repository**: https://github.com/theSadeQ/dip-smc-pso.git</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="linenos">357</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;**Issue**: GitHub Issue #9 - Coverage Analysis Framework</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+<span class="linenos">356</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;**Repository**: https://github.com/theSadeQ/dip-smc-pso.git</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="linenos">357</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;**Issue**: GitHub Issue #9 - Coverage Analysis Framework</span><span class="se">\n\n</span><span class="s2">&quot;</span>
 <span class="linenos">358</span>
 <span class="linenos">359</span>        <span class="c1"># Quality gate status</span>
 <span class="linenos">360</span>        <span class="k">if</span> <span class="n">gate_results</span><span class="p">[</span><span class="s2">&quot;failed_gates&quot;</span><span class="p">]:</span>
@@ -861,10 +887,10 @@ automated alerting, and integration with the <a class="reference external" href=
 <span class="linenos">363</span>                <span class="n">gate</span> <span class="o">=</span> <span class="n">gate_results</span><span class="p">[</span><span class="s2">&quot;gates&quot;</span><span class="p">][</span><span class="n">gate_name</span><span class="p">]</span>
 <span class="linenos">364</span>                <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;   - </span><span class="si">{</span><span class="n">gate_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">gate</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% (gap: </span><span class="si">{</span><span class="n">gate</span><span class="p">[</span><span class="s1">&#39;gap&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">%)</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="linenos">365</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">366</span>            <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;✅ **ALL QUALITY GATES PASSED**</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="linenos">366</span>            <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;✅ **ALL QUALITY GATES PASSED**</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="linenos">367</span>
 <span class="linenos">368</span>        <span class="c1"># Current metrics summary</span>
-<span class="linenos">369</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 **CURRENT COVERAGE STATUS**:</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="linenos">369</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 **CURRENT COVERAGE STATUS**:</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="linenos">370</span>        <span class="k">for</span> <span class="n">gate_name</span><span class="p">,</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">gate_results</span><span class="p">[</span><span class="s2">&quot;gates&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 <span class="linenos">371</span>            <span class="n">status_icon</span> <span class="o">=</span> <span class="s2">&quot;✅&quot;</span> <span class="k">if</span> <span class="n">gate</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;❌&quot;</span>
 <span class="linenos">372</span>            <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;   - </span><span class="si">{</span><span class="n">gate_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">gate</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% </span><span class="si">{</span><span class="n">status_icon</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -1207,7 +1233,7 @@ alerting for threshold violations and quality gate enforcement.</p>
 <span class="linenos">152</span>            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">153</span>                <span class="k">return</span> <span class="mf">0.0</span>
 <span class="linenos">154</span>
-<span class="linenos">155</span>            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">155</span>            <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="linenos">156</span>            <span class="n">x_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="linenos">157</span>            <span class="n">y_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="linenos">158</span>
@@ -1355,8 +1381,8 @@ alerting for threshold violations and quality gate enforcement.</p>
 <span class="linenos">300</span>
 <span class="linenos">301</span>        <span class="n">alert</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alert_icon</span><span class="si">}</span><span class="s2"> COVERAGE MONITORING ALERT</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="linenos">302</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;**Generated**: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="linenos">303</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;**Repository**: https://github.com/theSadeQ/dip-smc-pso.git</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="linenos">304</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;**Issue**: GitHub Issue #9 - Coverage Analysis Framework</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+<span class="linenos">303</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;**Repository**: https://github.com/theSadeQ/dip-smc-pso.git</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="linenos">304</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;**Issue**: GitHub Issue #9 - Coverage Analysis Framework</span><span class="se">\n\n</span><span class="s2">&quot;</span>
 <span class="linenos">305</span>
 <span class="linenos">306</span>        <span class="c1"># Quality gate status</span>
 <span class="linenos">307</span>        <span class="k">if</span> <span class="n">gate_results</span><span class="p">[</span><span class="s2">&quot;failed_gates&quot;</span><span class="p">]:</span>
@@ -1365,10 +1391,10 @@ alerting for threshold violations and quality gate enforcement.</p>
 <span class="linenos">310</span>                <span class="n">gate</span> <span class="o">=</span> <span class="n">gate_results</span><span class="p">[</span><span class="s2">&quot;gates&quot;</span><span class="p">][</span><span class="n">gate_name</span><span class="p">]</span>
 <span class="linenos">311</span>                <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;   - </span><span class="si">{</span><span class="n">gate_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">gate</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% (gap: </span><span class="si">{</span><span class="n">gate</span><span class="p">[</span><span class="s1">&#39;gap&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">%)</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="linenos">312</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">313</span>            <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;✅ **ALL QUALITY GATES PASSED**</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="linenos">313</span>            <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;✅ **ALL QUALITY GATES PASSED**</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="linenos">314</span>
 <span class="linenos">315</span>        <span class="c1"># Current metrics summary</span>
-<span class="linenos">316</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 **CURRENT COVERAGE STATUS**:</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="linenos">316</span>        <span class="n">alert</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 **CURRENT COVERAGE STATUS**:</span><span class="se">\n</span><span class="s2">&quot;</span>
 <span class="linenos">317</span>        <span class="k">for</span> <span class="n">gate_name</span><span class="p">,</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">gate_results</span><span class="p">[</span><span class="s2">&quot;gates&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 <span class="linenos">318</span>            <span class="n">status_icon</span> <span class="o">=</span> <span class="s2">&quot;✅&quot;</span> <span class="k">if</span> <span class="n">gate</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;❌&quot;</span>
 <span class="linenos">319</span>            <span class="n">alert</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;   - </span><span class="si">{</span><span class="n">gate_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">gate</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% </span><span class="si">{</span><span class="n">status_icon</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -1575,7 +1601,7 @@ Recorded CoverageMetrics</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

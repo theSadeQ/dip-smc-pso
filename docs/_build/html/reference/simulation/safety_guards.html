@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,209 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Enhanced safety guard functions for simulation framework.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="safety-guard-systems">
+<h3>Safety Guard Systems<a class="headerlink" href="#safety-guard-systems" title="Link to this heading">¶</a></h3>
+<p>Runtime monitoring and enforcement of safety invariants.</p>
+</section>
+<section id="safety-invariants">
+<h3>Safety Invariants<a class="headerlink" href="#safety-invariants" title="Link to this heading">¶</a></h3>
+<p><strong>State space constraints:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{S}_{\text{safe}} = \{\vec{x} \in \mathbb{R}^n : h(\vec{x}) \leq 0\}\]</div>
+</div>
+<p><strong>Invariant preservation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_0 \in \mathcal{S}_{\text{safe}} \land \dot{\vec{x}} = f(\vec{x}, \vec{u}) \Rightarrow \vec{x}(t) \in \mathcal{S}_{\text{safe}} \quad \forall t\]</div>
+</div>
+</section>
+<section id="guard-types">
+<h3>Guard Types<a class="headerlink" href="#guard-types" title="Link to this heading">¶</a></h3>
+<section id="nan-guard">
+<h4><strong>1. NaN Guard</strong><a class="headerlink" href="#nan-guard" title="Link to this heading">¶</a></h4>
+<p>Detect numerical instabilities:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{NaN}(x_i) \lor \text{Inf}(x_i) \Rightarrow \text{VIOLATION}\]</div>
+</div>
+<p><strong>Detection:</strong> <code class="docutils literal notranslate"><span class="pre">np.isnan(x)</span> <span class="pre">or</span> <span class="pre">np.isinf(x)</span></code></p>
+</section>
+<section id="energy-guard">
+<h4><strong>2. Energy Guard</strong><a class="headerlink" href="#energy-guard" title="Link to this heading">¶</a></h4>
+<p>Prevent unrealistic energy growth:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[E(\vec{x}) = \frac{1}{2} m \dot{x}^2 + mgh \leq E_{\max}\]</div>
+</div>
+<p><strong>Violation condition:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[E(\vec{x}_k) &gt; (1 + \epsilon) E_0 \quad \text{where } E_0 = E(\vec{x}_0)\]</div>
+</div>
+<p>Typical: <span class="math notranslate nohighlight">\(\epsilon = 5.0\)</span> (500% energy growth threshold)</p>
+</section>
+<section id="state-bounds-guard">
+<h4><strong>3. State Bounds Guard</strong><a class="headerlink" href="#state-bounds-guard" title="Link to this heading">¶</a></h4>
+<p>Enforce physical limits:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{\min} \leq \vec{x}(t) \leq \vec{x}_{\max}\]</div>
+</div>
+<p><strong>Component-wise constraints:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+|x| &amp;\leq x_{\max} \quad \text{(cart position)} \\
+|\theta_1|, |\theta_2| &amp;\leq \pi \quad \text{(pendulum angles)} \\
+|\dot{x}|, |\dot{\theta}_1|, |\dot{\theta}_2| &amp;\leq v_{\max} \quad \text{(velocities)}
+\end{align}\end{split}\]</div>
+</div>
+</section>
+<section id="control-saturation-guard">
+<h4><strong>4. Control Saturation Guard</strong><a class="headerlink" href="#control-saturation-guard" title="Link to this heading">¶</a></h4>
+<p>Verify actuator limits:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[|u(t)| \leq u_{\max}\]</div>
+</div>
+</section>
+</section>
+<section id="formal-verification">
+<h3>Formal Verification<a class="headerlink" href="#formal-verification" title="Link to this heading">¶</a></h3>
+<p><strong>Runtime assertion checking:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{assert}(\phi(\vec{x}_k)) \quad \text{at each step } k\]</div>
+</div>
+<p><strong>Temporal logic properties:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\square (\vec{x} \in \mathcal{S}_{\text{safe}}) \quad \text{(Always safe)}\]</div>
+</div>
+</section>
+<section id="recovery-strategies">
+<h3>Recovery Strategies<a class="headerlink" href="#recovery-strategies" title="Link to this heading">¶</a></h3>
+<p><strong>1. State Clamping</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{\text{safe}} = \text{clip}(\vec{x}, \vec{x}_{\min}, \vec{x}_{\max})\]</div>
+</div>
+<p><strong>2. Simulation Termination</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{VIOLATION} \Rightarrow \text{STOP}, \text{LOG}, \text{REPORT}\]</div>
+</div>
+<p><strong>3. Emergency Controller</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u_{\text{emergency}} = -K_p \vec{x} - K_d \dot{\vec{x}}\]</div>
+</div>
+</section>
+<section id="monitor-composition">
+<h3>Monitor Composition<a class="headerlink" href="#monitor-composition" title="Link to this heading">¶</a></h3>
+<p><strong>Sequential guards:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{GuardChain} = \text{NaN} \to \text{Bounds} \to \text{Energy}\]</div>
+</div>
+<p><strong>Parallel guards:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Violation} = \bigvee_{i=1}^{N} \text{Guard}_i(\vec{x})\]</div>
+</div>
+</section>
+<section id="performance-overhead">
+<h3>Performance Overhead<a class="headerlink" href="#performance-overhead" title="Link to this heading">¶</a></h3>
+<p><strong>Guard checking cost:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{guard}} = \sum_{i=1}^{N} T_{\text{check}}^{(i)}\]</div>
+</div>
+<p><strong>Typical overhead:</strong> &lt;1% of total simulation time</p>
+</section>
+<section id="watchdog-timers">
+<h3>Watchdog Timers<a class="headerlink" href="#watchdog-timers" title="Link to this heading">¶</a></h3>
+<p><strong>Deadlock detection:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t - t_{\text{last\_update}} &gt; T_{\text{watchdog}} \Rightarrow \text{TIMEOUT}\]</div>
+</div>
+<p>Typical: <span class="math notranslate nohighlight">\(T_{\text{watchdog}} = 10 \times \Delta t\)</span></p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[State x_k_] --&gt; B{NaN/Inf Check}
+    B --&gt;|Pass| C{Bounds Check}
+    B --&gt;|Fail| Z[VIOLATION]
+    C --&gt;|Pass| D{Energy Check}
+    C --&gt;|Fail| Z
+    D --&gt;|Pass| E[Safe State]
+    D --&gt;|Fail| Z
+    Z --&gt; F[Log Error]
+    F --&gt; G[Recovery/Terminate]
+
+    style B fill:#9cf
+    style C fill:#9cf
+    style D fill:#9cf
+    style E fill:#9f9
+    style Z fill:#f99
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.safety</span><span class="w"> </span><span class="kn">import</span> <span class="n">SafetyGuards</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">SafetyGuards</span><span class="p">()</span>
+
+<span class="c1"># Execute</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">SafetyGuards</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-profiling">
+<h3>Example 4: Performance Profiling<a class="headerlink" href="#example-4-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-other-components">
+<h3>Example 5: Integration with Other Components<a class="headerlink" href="#example-5-integration-with-other-components" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine with other simulation components</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -503,7 +732,7 @@
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
 <span class="linenos">  9</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="linenos"> 11</span>
 <span class="linenos"> 12</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">SafetyGuard</span>
 <span class="linenos"> 13</span>
@@ -1414,7 +1643,7 @@ Configured safety guard manager</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1437,6 +1666,32 @@ Configured safety guard manager</p>
             <ul>
 <li><a class="reference internal" href="#">simulation.safety.guards</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#safety-guard-systems">Safety Guard Systems</a></li>
+<li><a class="reference internal" href="#safety-invariants">Safety Invariants</a></li>
+<li><a class="reference internal" href="#guard-types">Guard Types</a><ul>
+<li><a class="reference internal" href="#nan-guard"><strong>1. NaN Guard</strong></a></li>
+<li><a class="reference internal" href="#energy-guard"><strong>2. Energy Guard</strong></a></li>
+<li><a class="reference internal" href="#state-bounds-guard"><strong>3. State Bounds Guard</strong></a></li>
+<li><a class="reference internal" href="#control-saturation-guard"><strong>4. Control Saturation Guard</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#formal-verification">Formal Verification</a></li>
+<li><a class="reference internal" href="#recovery-strategies">Recovery Strategies</a></li>
+<li><a class="reference internal" href="#monitor-composition">Monitor Composition</a></li>
+<li><a class="reference internal" href="#performance-overhead">Performance Overhead</a></li>
+<li><a class="reference internal" href="#watchdog-timers">Watchdog Timers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-profiling">Example 4: Performance Profiling</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-other-components">Example 5: Integration with Other Components</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#safetyviolationerror"><code class="docutils literal notranslate"><span class="pre">SafetyViolationError</span></code></a><ul>
@@ -1541,6 +1796,10 @@ Configured safety guard manager</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

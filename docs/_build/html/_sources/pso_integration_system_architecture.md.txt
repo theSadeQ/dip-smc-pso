@@ -84,6 +84,9 @@ This document provides comprehensive architectural documentation for the Particl
 **Module**: `src/optimization/algorithms/pso_optimizer.py`
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOTuner:
     """High-throughput, vectorised tuner for sliding-mode controllers."""
 
@@ -127,6 +130,9 @@ class PSOTuner:
 **Module**: `src/controllers/factory.py`
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller(controller_type: str, gains: np.ndarray, **kwargs) -> Controller:
     """
     PSO-compatible factory interface.
@@ -165,6 +171,9 @@ class AdaptiveSMC:
 **Module**: `src/simulation/engines/vector_sim.py`
 
 ```python
+# example-metadata:
+# runnable: false
+
 def simulate_system_batch(
     controller_factory: Callable,
     particles: np.ndarray,
@@ -274,6 +283,9 @@ def _compute_cost_from_traj(self, t, x_b, u_b, sigma_b) -> np.ndarray:
 
 **Required Controller Attributes:**
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerInterface:
     def __init__(self, gains: np.ndarray):
         """Initialize with gain vector from PSO particle."""

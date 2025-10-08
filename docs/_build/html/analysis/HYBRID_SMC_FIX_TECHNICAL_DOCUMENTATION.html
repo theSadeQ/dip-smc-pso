@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -527,7 +553,10 @@
 <h3>Root Cause Analysis<a class="headerlink" href="#root-cause-analysis" title="Link to this heading">¶</a></h3>
 <section id="the-missing-return-statement-problem">
 <h4>The Missing Return Statement Problem<a class="headerlink" href="#the-missing-return-statement-problem" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># BEFORE FIX - Broken Implementation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># BEFORE FIX - Broken Implementation</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
     <span class="c1"># ... 674 lines of complex control algorithm implementation ...</span>
 
@@ -574,7 +603,10 @@
 <h3>The Fix Implementation<a class="headerlink" href="#the-fix-implementation" title="Link to this heading">¶</a></h3>
 <section id="after-fix-corrected-implementation">
 <h4>AFTER FIX - Corrected Implementation<a class="headerlink" href="#after-fix-corrected-implementation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
     <span class="c1"># ... 674 lines of complex control algorithm implementation ...</span>
 
     <span class="c1"># Calculate final control values</span>
@@ -600,7 +632,10 @@
 <p>The fix also included comprehensive error handling to prevent similar issues:</p>
 <section id="result-normalization-lines-161-205">
 <h4>1. Result Normalization (Lines 161-205)<a class="headerlink" href="#result-normalization-lines-161-205" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_normalize_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure result is properly formatted as HybridSTAOutput.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Emergency fallback for None returns</span>
@@ -634,7 +669,10 @@
 </section>
 <section id="emergency-reset-conditions">
 <h4>3. Emergency Reset Conditions<a class="headerlink" href="#emergency-reset-conditions" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">emergency_reset</span> <span class="o">=</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">emergency_reset</span> <span class="o">=</span> <span class="p">(</span>
     <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">u_sat</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_sat</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">*</span> <span class="mi">2</span> <span class="ow">or</span>
     <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">k1_new</span><span class="p">)</span> <span class="ow">or</span> <span class="n">k1_new</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1_max</span> <span class="o">*</span> <span class="mf">0.9</span> <span class="ow">or</span>
     <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">k2_new</span><span class="p">)</span> <span class="ow">or</span> <span class="n">k2_new</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2_max</span> <span class="o">*</span> <span class="mf">0.9</span> <span class="ow">or</span>
@@ -739,7 +777,10 @@
 <h3>Updated Production Readiness Framework<a class="headerlink" href="#updated-production-readiness-framework" title="Link to this heading">¶</a></h3>
 <section id="before-fix-7-8-10">
 <h4>Before Fix: 7.8/10<a class="headerlink" href="#before-fix-7-8-10" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">production_readiness_components</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">production_readiness_components</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;mathematical_algorithms&#39;</span><span class="p">:</span> <span class="mf">7.5</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span>     <span class="c1"># 3/4 controllers working</span>
     <span class="s1">&#39;pso_integration&#39;</span><span class="p">:</span> <span class="mf">7.5</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span>            <span class="c1"># Partial failure with hybrid</span>
     <span class="s1">&#39;runtime_stability&#39;</span><span class="p">:</span> <span class="mf">6.0</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span>          <span class="c1"># Runtime errors present</span>
@@ -755,7 +796,10 @@
 </section>
 <section id="after-fix-9-5-10">
 <h4>After Fix: 9.5/10<a class="headerlink" href="#after-fix-9-5-10" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">production_readiness_components</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">production_readiness_components</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;mathematical_algorithms&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span>    <span class="c1"># All 4 controllers working ✅</span>
     <span class="s1">&#39;pso_integration&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span>           <span class="c1"># Complete optimization success ✅</span>
     <span class="s1">&#39;runtime_stability&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span>         <span class="c1"># Zero error rate ✅</span>
@@ -909,7 +953,10 @@
 <li><p>Interface compatibility failures</p></li>
 </ul>
 <p><strong>Resolution</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add runtime type validation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Add runtime type validation</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HybridSTAOutput</span><span class="p">:</span>
     <span class="c1"># ... implementation ...</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">HybridSTAOutput</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -956,7 +1003,10 @@ mypy<span class="w"> </span>src/controllers/<span class="w"> </span>--strict<spa
 <h3>2. Runtime Validation Framework<a class="headerlink" href="#runtime-validation-framework" title="Link to this heading">¶</a></h3>
 <section id="controller-output-validator">
 <h4>Controller Output Validator<a class="headerlink" href="#controller-output-validator" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControllerValidator</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerValidator</span><span class="p">:</span>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_control_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">controller_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate controller output structure and types.&quot;&quot;&quot;</span>
@@ -976,7 +1026,10 @@ mypy<span class="w"> </span>src/controllers/<span class="w"> </span>--strict<spa
 <h3>3. Comprehensive Testing Strategy<a class="headerlink" href="#comprehensive-testing-strategy" title="Link to this heading">¶</a></h3>
 <section id="essential-test-patterns">
 <h4>Essential Test Patterns<a class="headerlink" href="#essential-test-patterns" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_controller_return_types</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_controller_return_types</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive return type validation tests.&quot;&quot;&quot;</span>
     <span class="n">controllers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;sta_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">]</span>
 
@@ -1287,7 +1340,7 @@ mypy<span class="w"> </span>src/controllers/<span class="w"> </span>--strict<spa
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

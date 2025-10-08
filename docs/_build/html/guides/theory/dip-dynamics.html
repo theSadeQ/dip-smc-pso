@@ -1,0 +1,1106 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Double-Inverted Pendulum Dynamics - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/guides/theory/dip-dynamics.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/guides/theory/dip-dynamics.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="double-inverted-pendulum-dynamics">
+<h1>Double-Inverted Pendulum Dynamics<a class="headerlink" href="#double-inverted-pendulum-dynamics" title="Link to this heading">¶</a></h1>
+<p><strong>Understanding the Physics and Mathematics of the DIP System</strong></p>
+<p>This guide derives the mathematical model of the double-inverted pendulum from first principles. You’ll learn how Lagrangian mechanics produces the equations of motion, when linearization is valid, and why the system is controllable despite underactuation.</p>
+<hr class="docutils" />
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#system-overview">System Overview</a></p></li>
+<li><p><a class="reference internal" href="#lagrangian-derivation">Lagrangian Derivation</a></p></li>
+<li><p><a class="reference internal" href="#equations-of-motion">Equations of Motion</a></p></li>
+<li><p><a class="reference internal" href="#linearization-for-control">Linearization for Control</a></p></li>
+<li><p><a class="reference internal" href="#controllability-analysis">Controllability Analysis</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="system-overview">
+<h2>System Overview<a class="headerlink" href="#system-overview" title="Link to this heading">¶</a></h2>
+<section id="physical-description">
+<h3>Physical Description<a class="headerlink" href="#physical-description" title="Link to this heading">¶</a></h3>
+<p>The double-inverted pendulum (DIP) consists of:</p>
+<ul class="simple">
+<li><p><strong>Cart</strong> (mass <code class="docutils literal notranslate"><span class="pre">m₀</span></code>): Moves horizontally on track</p></li>
+<li><p><strong>First Pendulum</strong> (mass <code class="docutils literal notranslate"><span class="pre">m₁</span></code>, length <code class="docutils literal notranslate"><span class="pre">l₁</span></code>): Hinged to cart</p></li>
+<li><p><strong>Second Pendulum</strong> (mass <code class="docutils literal notranslate"><span class="pre">m₂</span></code>, length <code class="docutils literal notranslate"><span class="pre">l₂</span></code>): Hinged to tip of first pendulum</p></li>
+</ul>
+<p><strong>Control Objective</strong>: Balance both pendulums upright (<code class="docutils literal notranslate"><span class="pre">θ₁</span> <span class="pre">=</span> <span class="pre">θ₂</span> <span class="pre">=</span> <span class="pre">0</span></code>) using horizontal cart force <code class="docutils literal notranslate"><span class="pre">u</span></code>.</p>
+<p><strong>Physical System Diagram</strong>:</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph TD
+    subgraph &quot;Double-Inverted Pendulum System&quot;
+        CART[&quot;Cart (m₀)&lt;br/&gt;Position: x&quot;] --&gt;|Hinge| P1[&quot;First Pendulum (m₁, l₁)&lt;br/&gt;Angle: θ₁ from vertical&quot;]
+        P1 --&gt;|Hinge| P2[&quot;Second Pendulum (m₂, l₂)&lt;br/&gt;Angle: θ₂ from vertical&quot;]
+
+        FORCE[&quot;Control Force u&lt;br/&gt;(Horizontal)&quot;] --&gt;|Applied to| CART
+
+        TRACK[&quot;Frictionless Track&quot;] -.-&gt;|Constrained| CART
+    end
+
+    style CART fill:#ccccff
+    style P1 fill:#ffcccc
+    style P2 fill:#ccffcc
+    style FORCE fill:#ffffcc
+</pre></div>
+</div>
+<p><strong>System Components</strong>:</p>
+<ul class="simple">
+<li><p>🔵 <strong>Cart</strong>: Movable platform (1 DOF: position x)</p></li>
+<li><p>🔴 <strong>Pendulum 1</strong>: First link (1 DOF: angle θ₁)</p></li>
+<li><p>🟢 <strong>Pendulum 2</strong>: Second link (1 DOF: angle θ₂)</p></li>
+<li><p>🟡 <strong>Control</strong>: Horizontal force u (single actuator)</p></li>
+</ul>
+</section>
+<section id="state-variables">
+<h3>State Variables<a class="headerlink" href="#state-variables" title="Link to this heading">¶</a></h3>
+<p><strong>Generalized Coordinates</strong> (3 DOF):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">θ</span><span class="err">₁</span><span class="p">,</span> <span class="n">θ</span><span class="err">₂</span><span class="p">]</span><span class="n">ᵀ</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: Cart position (m)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">θ₁</span></code>: First pendulum angle from vertical (rad, 0 = upright)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">θ₂</span></code>: Second pendulum angle from vertical (rad, 0 = upright)</p></li>
+</ul>
+<p><strong>Full State Vector</strong> (6 dimensions):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">ẋ</span><span class="p">,</span> <span class="n">θ</span><span class="err">₁</span><span class="p">,</span> <span class="n">θ̇</span><span class="err">₁</span><span class="p">,</span> <span class="n">θ</span><span class="err">₂</span><span class="p">,</span> <span class="n">θ̇</span><span class="err">₂</span><span class="p">]</span><span class="n">ᵀ</span>
+</pre></div>
+</div>
+<p><strong>Control Input</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">horizontal</span> <span class="n">force</span> <span class="n">on</span> <span class="n">cart</span> <span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>State-Space Representation</strong>:</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
+    subgraph STATE[&quot;State Vector (6D)&quot;]
+        direction TB
+        X[&quot;x&lt;br/&gt;(position)&quot;]
+        DX[&quot;ẋ&lt;br/&gt;(velocity)&quot;]
+        T1[&quot;θ₁&lt;br/&gt;(angle 1)&quot;]
+        DT1[&quot;θ̇₁&lt;br/&gt;(angular vel 1)&quot;]
+        T2[&quot;θ₂&lt;br/&gt;(angle 2)&quot;]
+        DT2[&quot;θ̇₂&lt;br/&gt;(angular vel 2)&quot;]
+    end
+
+    CONTROL[&quot;u&lt;br/&gt;(force)&quot;] --&gt; DYNAMICS[&quot;DIP Dynamics&lt;br/&gt;M(q)q̈ + C(q,q̇)q̇ + G(q) = Qu&quot;]
+    STATE --&gt; DYNAMICS
+    DYNAMICS --&gt; NEXT[&quot;Next State&lt;br/&gt;(Integration)&quot;]
+    NEXT --&gt; STATE
+
+    style CONTROL fill:#ffffcc
+    style DYNAMICS fill:#ffcccc
+    style STATE fill:#ccffcc
+</pre></div>
+</div>
+<p><strong>Dimensions</strong>:</p>
+<ul class="simple">
+<li><p><strong>State space</strong>: 6D (position + velocity for 3 coordinates)</p></li>
+<li><p><strong>Control space</strong>: 1D (horizontal force only)</p></li>
+<li><p><strong>Underactuated</strong>: 6 states, 1 control → dynamic coupling essential</p></li>
+</ul>
+</section>
+<section id="why-this-system-is-challenging">
+<h3>Why This System is Challenging<a class="headerlink" href="#why-this-system-is-challenging" title="Link to this heading">¶</a></h3>
+<p><strong>Underactuated</strong>: 3 DOF, 1 control input</p>
+<ul class="simple">
+<li><p>Cannot independently control all coordinates</p></li>
+<li><p>Must exploit dynamic coupling</p></li>
+</ul>
+<p><strong>Unstable Equilibrium</strong>: Upright position</p>
+<ul class="simple">
+<li><p>Small perturbations → pendulums fall</p></li>
+<li><p>Requires active stabilization</p></li>
+</ul>
+<p><strong>Nonlinear Dynamics</strong>: Trigonometric functions</p>
+<ul class="simple">
+<li><p>Linear control design requires approximations</p></li>
+<li><p>Full dynamics needed for large angles</p></li>
+</ul>
+<p><strong>Coupled System</strong>: Motion of one affects others</p>
+<ul class="simple">
+<li><p>Cart motion affects both pendulums</p></li>
+<li><p>Second pendulum motion affects first</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="lagrangian-derivation">
+<h2>Lagrangian Derivation<a class="headerlink" href="#lagrangian-derivation" title="Link to this heading">¶</a></h2>
+<section id="why-lagrangian-mechanics">
+<h3>Why Lagrangian Mechanics?<a class="headerlink" href="#why-lagrangian-mechanics" title="Link to this heading">¶</a></h3>
+<p><strong>Newton’s Laws</strong>: Force-based approach</p>
+<ul class="simple">
+<li><p>Require constraint forces (reaction forces at joints)</p></li>
+<li><p>Complex for multi-body systems</p></li>
+</ul>
+<p><strong>Lagrangian Mechanics</strong>: Energy-based approach</p>
+<ul class="simple">
+<li><p>Automatically handles constraints</p></li>
+<li><p>Natural for deriving equations of motion</p></li>
+<li><p>Uses <code class="docutils literal notranslate"><span class="pre">L</span> <span class="pre">=</span> <span class="pre">T</span> <span class="pre">-</span> <span class="pre">V</span></code> (kinetic - potential energy)</p></li>
+</ul>
+<p><strong>Lagrangian Derivation Process</strong>:</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart TD
+    START[&quot;System Description&lt;br/&gt;(Masses, lengths, constraints)&quot;] --&gt; KE[&quot;Compute Kinetic Energy T&lt;br/&gt;½m₀ẋ² + ½m₁(ẋ₁²+ż₁²) + ½m₂(ẋ₂²+ż₂²)&quot;]
+    KE --&gt; PE[&quot;Compute Potential Energy V&lt;br/&gt;m₁gl₁cos(θ₁) + m₂g[l₁cos(θ₁)+l₂cos(θ₂)]&quot;]
+
+    PE --&gt; LAG[&quot;Form Lagrangian&lt;br/&gt;L = T - V&quot;]
+
+    LAG --&gt; EL[&quot;Apply Euler-Lagrange&lt;br/&gt;d/dt(∂L/∂q̇ᵢ) - ∂L/∂qᵢ = Qᵢ&quot;]
+
+    EL --&gt; EOM[&quot;Equations of Motion&lt;br/&gt;M(q)q̈ + C(q,q̇)q̇ + G(q) = Qu&quot;]
+
+    style START fill:#ccccff
+    style LAG fill:#ffffcc
+    style EOM fill:#ccffcc
+</pre></div>
+</div>
+<p><strong>Advantages</strong>:</p>
+<ul class="simple">
+<li><p>🔵 <strong>Systematic</strong>: No need to derive constraint forces</p></li>
+<li><p>🟡 <strong>Lagrangian</strong> L = T - V: Single scalar function</p></li>
+<li><p>🟢 <strong>Result</strong>: Configuration-dependent dynamics M(q)</p></li>
+</ul>
+</section>
+<section id="kinetic-energy">
+<h3>Kinetic Energy<a class="headerlink" href="#kinetic-energy" title="Link to this heading">¶</a></h3>
+<p><strong>Cart</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="err">₀</span> <span class="o">=</span> <span class="err">½</span><span class="n">m</span><span class="err">₀</span><span class="n">ẋ</span><span class="err">²</span>
+</pre></div>
+</div>
+<p><strong>First Pendulum</strong> (center of mass at <code class="docutils literal notranslate"><span class="pre">l₁/2</span></code>):</p>
+<p>Position of COM:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="err">₁</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>
+<span class="n">z</span><span class="err">₁</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Velocity:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ẋ</span><span class="err">₁</span> <span class="o">=</span> <span class="n">ẋ</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">θ̇</span><span class="err">₁</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>
+<span class="n">ż</span><span class="err">₁</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">θ̇</span><span class="err">₁</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Kinetic energy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="err">₁</span> <span class="o">=</span> <span class="err">½</span><span class="n">m</span><span class="err">₁</span><span class="p">(</span><span class="n">ẋ</span><span class="err">₁²</span> <span class="o">+</span> <span class="n">ż</span><span class="err">₁²</span><span class="p">)</span> <span class="o">+</span> <span class="err">½</span><span class="n">I</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁²</span>
+   <span class="o">=</span> <span class="err">½</span><span class="n">m</span><span class="err">₁</span><span class="p">[</span><span class="n">ẋ</span><span class="err">²</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="err">²</span><span class="n">θ̇</span><span class="err">₁²</span> <span class="o">+</span> <span class="n">l</span><span class="err">₁</span><span class="n">ẋθ̇</span><span class="err">₁</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)]</span> <span class="o">+</span> <span class="err">½</span><span class="n">I</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁²</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">I₁</span> <span class="pre">=</span> <span class="pre">(1/3)m₁l₁²</span></code> (inertia of rod about end)</p>
+<p><strong>Second Pendulum</strong> (center of mass at <code class="docutils literal notranslate"><span class="pre">l₁</span> <span class="pre">+</span> <span class="pre">l₂/2</span></code> from cart):</p>
+<p>Position:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="err">₂</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">l</span><span class="err">₁</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
+<span class="n">z</span><span class="err">₂</span> <span class="o">=</span> <span class="n">l</span><span class="err">₁</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Velocity (chain rule):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ẋ</span><span class="err">₂</span> <span class="o">=</span> <span class="n">ẋ</span> <span class="o">+</span> <span class="n">l</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">θ̇</span><span class="err">₂</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
+<span class="n">ż</span><span class="err">₂</span> <span class="o">=</span> <span class="o">-</span><span class="n">l</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">θ̇</span><span class="err">₂</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Kinetic energy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="err">₂</span> <span class="o">=</span> <span class="err">½</span><span class="n">m</span><span class="err">₂</span><span class="p">(</span><span class="n">ẋ</span><span class="err">₂²</span> <span class="o">+</span> <span class="n">ż</span><span class="err">₂²</span><span class="p">)</span> <span class="o">+</span> <span class="err">½</span><span class="n">I</span><span class="err">₂</span><span class="n">θ̇</span><span class="err">₂²</span>
+</pre></div>
+</div>
+<p><strong>Total Kinetic Energy</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">T</span><span class="err">₀</span> <span class="o">+</span> <span class="n">T</span><span class="err">₁</span> <span class="o">+</span> <span class="n">T</span><span class="err">₂</span>
+</pre></div>
+</div>
+</section>
+<section id="potential-energy">
+<h3>Potential Energy<a class="headerlink" href="#potential-energy" title="Link to this heading">¶</a></h3>
+<p>Choose zero at cart level:</p>
+<p><strong>First Pendulum</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span><span class="err">₁</span> <span class="o">=</span> <span class="n">m</span><span class="err">₁</span><span class="n">g</span><span class="p">(</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Second Pendulum</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span><span class="err">₂</span> <span class="o">=</span> <span class="n">m</span><span class="err">₂</span><span class="n">g</span><span class="p">[</span><span class="n">l</span><span class="err">₁</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p><strong>Total Potential Energy</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">V</span><span class="err">₁</span> <span class="o">+</span> <span class="n">V</span><span class="err">₂</span>
+  <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="err">₁</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₁</span><span class="p">)</span><span class="n">g·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">g·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="lagrangian">
+<h3>Lagrangian<a class="headerlink" href="#lagrangian" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">T</span> <span class="o">-</span> <span class="n">V</span>
+  <span class="o">=</span> <span class="p">(</span><span class="n">kinetic</span> <span class="n">energy</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">potential</span> <span class="n">energy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After substitution and simplification:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="err">½</span><span class="p">(</span><span class="n">m</span><span class="err">₀</span> <span class="o">+</span> <span class="n">m</span><span class="err">₁</span> <span class="o">+</span> <span class="n">m</span><span class="err">₂</span><span class="p">)</span><span class="n">ẋ</span><span class="err">²</span>
+  <span class="o">+</span> <span class="err">½</span><span class="p">(</span><span class="n">I</span><span class="err">₁</span> <span class="o">+</span> <span class="n">m</span><span class="err">₁</span><span class="n">l</span><span class="err">₁²</span><span class="o">/</span><span class="mi">4</span> <span class="o">+</span> <span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₁²</span><span class="p">)</span><span class="n">θ̇</span><span class="err">₁²</span>
+  <span class="o">+</span> <span class="err">½</span><span class="p">(</span><span class="n">I</span><span class="err">₂</span> <span class="o">+</span> <span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₂²</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="n">θ̇</span><span class="err">₂²</span>
+  <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="err">₁</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₁</span><span class="p">)</span><span class="n">ẋθ̇</span><span class="err">₁</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>
+  <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">ẋθ̇</span><span class="err">₂</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
+  <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₁</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">θ̇</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₂</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span> <span class="o">-</span> <span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
+  <span class="o">-</span> <span class="p">(</span><span class="n">m</span><span class="err">₁</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₁</span><span class="p">)</span><span class="n">g·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>
+  <span class="o">-</span> <span class="p">(</span><span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">g·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: This is a complex expression due to coupling terms!</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="equations-of-motion">
+<h2>Equations of Motion<a class="headerlink" href="#equations-of-motion" title="Link to this heading">¶</a></h2>
+<section id="euler-lagrange-equations">
+<h3>Euler-Lagrange Equations<a class="headerlink" href="#euler-lagrange-equations" title="Link to this heading">¶</a></h3>
+<p>For each generalized coordinate <code class="docutils literal notranslate"><span class="pre">qᵢ</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">/</span><span class="n">dt</span><span class="p">(</span><span class="err">∂</span><span class="n">L</span><span class="o">/</span><span class="err">∂</span><span class="n">q̇ᵢ</span><span class="p">)</span> <span class="o">-</span> <span class="err">∂</span><span class="n">L</span><span class="o">/</span><span class="err">∂</span><span class="n">qᵢ</span> <span class="o">=</span> <span class="n">Qᵢ</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">Qᵢ</span></code> are generalized forces.</p>
+<p><strong>For DIP</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">q₁</span> <span class="pre">=</span> <span class="pre">x</span></code>: Generalized force = <code class="docutils literal notranslate"><span class="pre">u</span></code> (cart force)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">q₂</span> <span class="pre">=</span> <span class="pre">θ₁</span></code>: Generalized force = <code class="docutils literal notranslate"><span class="pre">0</span></code> (no direct torque)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">q₃</span> <span class="pre">=</span> <span class="pre">θ₂</span></code>: Generalized force = <code class="docutils literal notranslate"><span class="pre">0</span></code> (no direct torque)</p></li>
+</ul>
+</section>
+<section id="matrix-form">
+<h3>Matrix Form<a class="headerlink" href="#matrix-form" title="Link to this heading">¶</a></h3>
+<p>After applying Euler-Lagrange and simplifying:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="n">q̈</span> <span class="o">+</span> <span class="n">C</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">q̇</span><span class="p">)</span><span class="n">q̇</span> <span class="o">+</span> <span class="n">G</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">=</span> <span class="n">Qu</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">M(q)</span></code>: <strong>Inertia matrix</strong> (3×3, configuration-dependent)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C(q,</span> <span class="pre">q̇)</span></code>: <strong>Coriolis/centrifugal matrix</strong> (3×3)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">G(q)</span></code>: <strong>Gravitational vector</strong> (3×1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Q</span></code>: <strong>Input matrix</strong> (3×1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u</span></code>: <strong>Control force</strong> (scalar)</p></li>
+</ul>
+<p><strong>Inertia Matrix</strong> (simplified):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="n">m_total</span>           <span class="n">m_c1·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>      <span class="n">m_c2·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>    <span class="p">]</span>
+    <span class="p">[</span><span class="n">m_c1·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>      <span class="n">I_eff1</span>            <span class="n">m_12·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="o">-</span><span class="n">θ</span><span class="err">₂</span><span class="p">)]</span>
+    <span class="p">[</span><span class="n">m_c2·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>      <span class="n">m_12·cos</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="o">-</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>   <span class="n">I_eff2</span>          <span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Gravitational Vector</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="p">[</span>    <span class="mi">0</span>                            <span class="p">]</span>
+    <span class="p">[(</span><span class="n">m</span><span class="err">₁</span><span class="n">l</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₁</span><span class="p">)</span><span class="n">g·sin</span><span class="p">(</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span>        <span class="p">]</span>
+    <span class="p">[(</span><span class="n">m</span><span class="err">₂</span><span class="n">l</span><span class="err">₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="n">g·sin</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>                <span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Input Matrix</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="n">ᵀ</span>
+</pre></div>
+</div>
+</section>
+<section id="properties-of-the-dynamics">
+<h3>Properties of the Dynamics<a class="headerlink" href="#properties-of-the-dynamics" title="Link to this heading">¶</a></h3>
+<p><strong>1. M(q) is Symmetric and Positive Definite</strong></p>
+<ul class="simple">
+<li><p>Always invertible (except at singularities)</p></li>
+<li><p>Energy considerations guarantee this</p></li>
+</ul>
+<p><strong>2. Configuration-Dependent Inertia</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> depends on <code class="docutils literal notranslate"><span class="pre">θ₁,</span> <span class="pre">θ₂</span></code> (not constant!)</p></li>
+<li><p>Coupling changes with pendulum angles</p></li>
+</ul>
+<p><strong>3. Coriolis Matrix is Skew-Symmetric</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ṁ</span> <span class="pre">-</span> <span class="pre">2C</span></code> is skew-symmetric</p></li>
+<li><p>Important for energy-based control</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="linearization-for-control">
+<h2>Linearization for Control<a class="headerlink" href="#linearization-for-control" title="Link to this heading">¶</a></h2>
+<section id="small-angle-approximation">
+<h3>Small Angle Approximation<a class="headerlink" href="#small-angle-approximation" title="Link to this heading">¶</a></h3>
+<p>Near upright position (<code class="docutils literal notranslate"><span class="pre">θ₁</span> <span class="pre">≈</span> <span class="pre">0,</span> <span class="pre">θ₂</span> <span class="pre">≈</span> <span class="pre">0</span></code>):</p>
+<p><strong>Trigonometric Approximations</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="err">≈</span> <span class="n">θ</span>
+<span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="err">≈</span> <span class="mi">1</span>
+<span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="err">≈</span> <span class="n">θ</span>
+</pre></div>
+</div>
+<p><strong>Validity</strong>:</p>
+<ul class="simple">
+<li><p>|θ| &lt; 0.2 rad (≈ 11°): Error &lt; 2%</p></li>
+<li><p>|θ| &lt; 0.3 rad (≈ 17°): Error &lt; 5%</p></li>
+<li><p>|θ| &gt; 0.5 rad (≈ 29°): Approximation breaks down</p></li>
+</ul>
+</section>
+<section id="simplified-dynamics">
+<h3>Simplified Dynamics<a class="headerlink" href="#simplified-dynamics" title="Link to this heading">¶</a></h3>
+<p><strong>Assumptions</strong>:</p>
+<ol class="arabic simple">
+<li><p>Small angles: <code class="docutils literal notranslate"><span class="pre">θ₁,</span> <span class="pre">θ₂</span> <span class="pre">≪</span> <span class="pre">1</span></code></p></li>
+<li><p>Small velocities: <code class="docutils literal notranslate"><span class="pre">θ̇₁,</span> <span class="pre">θ̇₂</span> <span class="pre">≪</span> <span class="pre">1</span></code></p></li>
+<li><p>Neglect products: <code class="docutils literal notranslate"><span class="pre">θᵢθⱼ</span> <span class="pre">≈</span> <span class="pre">0</span></code></p></li>
+</ol>
+<p><strong>Result</strong>: Linearized equations</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M_lin·q̈</span> <span class="o">+</span> <span class="n">G_lin·q</span> <span class="o">=</span> <span class="n">Q·u</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">M_lin</span></code>: Constant inertia matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">G_lin</span></code>: Constant gravitational matrix (no sin/cos)</p></li>
+</ul>
+<p><strong>State-Space Form</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ẋ</span> <span class="o">=</span> <span class="n">Ax</span> <span class="o">+</span> <span class="n">Bu</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span>   <span class="n">I</span>  <span class="p">]</span>    <span class="n">B</span> <span class="o">=</span> <span class="p">[</span>  <span class="mi">0</span>      <span class="p">]</span>
+    <span class="p">[</span><span class="n">M</span><span class="err">⁻¹</span><span class="n">G</span> <span class="mi">0</span><span class="p">]</span>        <span class="p">[</span><span class="n">M</span><span class="err">⁻¹</span><span class="n">Q</span>    <span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Control Design Benefits</strong>:</p>
+<ul class="simple">
+<li><p>Linear system → linear control methods (LQR, pole placement)</p></li>
+<li><p>Constant matrices → easier analysis</p></li>
+<li><p>Superposition applies → simple design</p></li>
+</ul>
+</section>
+<section id="limitations-of-linearization">
+<h3>Limitations of Linearization<a class="headerlink" href="#limitations-of-linearization" title="Link to this heading">¶</a></h3>
+<p><strong>Invalid for</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Large angles</strong>: Swing-up control (θ &gt; 90°)</p></li>
+<li><p><strong>Fast motion</strong>: Large θ̇ violates small velocity assumption</p></li>
+<li><p><strong>Extreme conditions</strong>: Actuator saturation, disturbances</p></li>
+</ol>
+<p><strong>When to Use Full Nonlinear</strong>:</p>
+<ul class="simple">
+<li><p>Final validation</p></li>
+<li><p>Hardware testing</p></li>
+<li><p>Large disturbance scenarios</p></li>
+<li><p>Research publications</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="controllability-analysis">
+<h2>Controllability Analysis<a class="headerlink" href="#controllability-analysis" title="Link to this heading">¶</a></h2>
+<section id="controllability-matrix">
+<h3>Controllability Matrix<a class="headerlink" href="#controllability-matrix" title="Link to this heading">¶</a></h3>
+<p><strong>Definition</strong>: System is controllable if we can reach any state from any initial state.</p>
+<p><strong>Test</strong>: Controllability matrix has full rank:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="n">B</span>  <span class="n">AB</span>  <span class="n">A</span><span class="err">²</span><span class="n">B</span>  <span class="o">...</span>  <span class="n">A</span><span class="err">⁵</span><span class="n">B</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For 6-state system, need rank(C) = 6.</p>
+</section>
+<section id="dip-controllability">
+<h3>DIP Controllability<a class="headerlink" href="#dip-controllability" title="Link to this heading">¶</a></h3>
+<p><strong>Result</strong>: DIP is controllable (rank = 6) despite underactuation!</p>
+<p><strong>Why?</strong></p>
+<ul class="simple">
+<li><p>Cart force <code class="docutils literal notranslate"><span class="pre">u</span></code> affects cart acceleration: <code class="docutils literal notranslate"><span class="pre">ẍ</span> <span class="pre">∝</span> <span class="pre">u</span></code></p></li>
+<li><p>Cart motion couples to pendulums via inertia matrix</p></li>
+<li><p>Dynamic coupling propagates control to all states</p></li>
+</ul>
+<p><strong>Physical Intuition</strong>:</p>
+<ul class="simple">
+<li><p>Move cart right → first pendulum tilts left (inertia)</p></li>
+<li><p>First pendulum motion → affects second pendulum</p></li>
+<li><p>Clever sequencing → control all angles</p></li>
+</ul>
+<p><strong>Proof Sketch</strong>:</p>
+<ol class="arabic simple">
+<li><p>Direct effect: <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">→</span> <span class="pre">ẍ</span></code> (cart acceleration)</p></li>
+<li><p>First-order coupling: <code class="docutils literal notranslate"><span class="pre">ẍ</span> <span class="pre">→</span> <span class="pre">θ̈₁</span></code> (first pendulum)</p></li>
+<li><p>Second-order coupling: <code class="docutils literal notranslate"><span class="pre">θ̈₁</span> <span class="pre">→</span> <span class="pre">θ̈₂</span></code> (second pendulum)</p></li>
+<li><p>Three integration steps → reach all position states</p></li>
+<li><p>Controllability matrix full rank ✓</p></li>
+</ol>
+<p><strong>Control Propagation Diagram</strong>:</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart TD
+    U[&quot;Control Force u&quot;] --&gt; CART_ACC[&quot;Cart Acceleration ẍ&lt;br/&gt;(Direct effect)&quot;]
+
+    CART_ACC --&gt; INERTIA1[&quot;Inertial Coupling&lt;br/&gt;to Pendulum 1&quot;]
+    INERTIA1 --&gt; P1_ACC[&quot;θ̈₁&lt;br/&gt;(First pendulum acceleration)&quot;]
+
+    P1_ACC --&gt; INERTIA2[&quot;Inertial Coupling&lt;br/&gt;to Pendulum 2&quot;]
+    INERTIA2 --&gt; P2_ACC[&quot;θ̈₂&lt;br/&gt;(Second pendulum acceleration)&quot;]
+
+    CART_ACC --&gt; CART_VEL[&quot;∫ → ẋ&lt;br/&gt;(Cart velocity)&quot;] --&gt; CART_POS[&quot;∫ → x&lt;br/&gt;(Cart position)&quot;]
+    P1_ACC --&gt; P1_VEL[&quot;∫ → θ̇₁&lt;br/&gt;(Angular velocity 1)&quot;] --&gt; P1_POS[&quot;∫ → θ₁&lt;br/&gt;(Angle 1)&quot;]
+    P2_ACC --&gt; P2_VEL[&quot;∫ → θ̇₂&lt;br/&gt;(Angular velocity 2)&quot;] --&gt; P2_POS[&quot;∫ → θ₂&lt;br/&gt;(Angle 2)&quot;]
+
+    style U fill:#ffffcc
+    style CART_ACC fill:#ccffcc
+    style P1_ACC fill:#ffcccc
+    style P2_ACC fill:#ccccff
+</pre></div>
+</div>
+<p><strong>Key Insight</strong>: Single control input reaches all 6 states via:</p>
+<ul class="simple">
+<li><p>🟡 <strong>Direct</strong> effect on cart</p></li>
+<li><p>🟢 <strong>Inertial coupling</strong> to pendulum 1</p></li>
+<li><p>🔴 <strong>Secondary coupling</strong> to pendulum 2</p></li>
+<li><p>🔵 <strong>Integration</strong> for position control</p></li>
+</ul>
+<p><strong>Controllability Matrix</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rank</span><span class="p">([</span><span class="n">B</span>  <span class="n">AB</span>  <span class="n">A</span><span class="err">²</span><span class="n">B</span>  <span class="n">A</span><span class="err">³</span><span class="n">B</span>  <span class="n">A</span><span class="err">⁴</span><span class="n">B</span>  <span class="n">A</span><span class="err">⁵</span><span class="n">B</span><span class="p">])</span> <span class="o">=</span> <span class="mi">6</span>  <span class="err">✓</span>
+</pre></div>
+</div>
+<p>System is <strong>fully controllable</strong> despite underactuation!</p>
+</section>
+<section id="observability">
+<h3>Observability<a class="headerlink" href="#observability" title="Link to this heading">¶</a></h3>
+<p><strong>State Measurement</strong>:</p>
+<ul class="simple">
+<li><p>Typically measure: <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">θ₁,</span> <span class="pre">θ₂]</span></code> (positions only)</p></li>
+<li><p>Velocities: Computed from position derivatives</p></li>
+</ul>
+<p><strong>Observability Test</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">O</span> <span class="o">=</span> <span class="p">[</span><span class="n">C</span>  <span class="n">CA</span>  <span class="n">CA</span><span class="err">²</span>  <span class="o">...</span>  <span class="n">CA</span><span class="err">⁵</span><span class="p">]</span><span class="n">ᵀ</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0;</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0;</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0]</span></code> (measure positions)</p>
+<p><strong>Result</strong>: Observable (rank = 6)</p>
+<p><strong>Meaning</strong>: Can estimate full state from position measurements</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
+<p><strong>Key Takeaways</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Lagrangian Derivation</strong>: Energy method naturally handles constraints</p></li>
+<li><p><strong>Matrix Form</strong>: <code class="docutils literal notranslate"><span class="pre">M(q)q̈</span> <span class="pre">+</span> <span class="pre">C(q,q̇)q̇</span> <span class="pre">+</span> <span class="pre">G(q)</span> <span class="pre">=</span> <span class="pre">Qu</span></code> (configuration-dependent)</p></li>
+<li><p><strong>Linearization</strong>: Valid for |θ| &lt; 15°, enables linear control design</p></li>
+<li><p><strong>Controllability</strong>: Underactuated but controllable via dynamic coupling</p></li>
+<li><p><strong>Observability</strong>: Full state observable from position measurements</p></li>
+</ol>
+<p><strong>Design Implications</strong>:</p>
+<ul class="simple">
+<li><p><strong>Small angles</strong>: Use simplified dynamics for fast control design</p></li>
+<li><p><strong>Large angles</strong>: Must use full nonlinear dynamics</p></li>
+<li><p><strong>Control</strong>: Exploit coupling to control all DOFs with one input</p></li>
+<li><p><strong>Estimation</strong>: State observer feasible from position measurements</p></li>
+</ul>
+<p><strong>Next Steps</strong>:</p>
+<ul class="simple">
+<li><p>See linearization in action: <a class="reference internal" href="../tutorials/tutorial-01-first-simulation.html"><span class="std std-doc">Tutorial 01</span></a></p></li>
+<li><p>Implement dynamics models: <a class="reference internal" href="../api/plant-models.html"><span class="std std-doc">Plant Models API</span></a></p></li>
+<li><p>Deep dive: <a class="reference internal" href="../../mathematical_foundations/dynamics_derivations.html"><span class="std std-doc">Dynamics Derivations</span></a></p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Further Reading</strong>:</p>
+<ul class="simple">
+<li><p>Goldstein, H. (2002). <em>Classical Mechanics</em>. Addison-Wesley.</p></li>
+<li><p>Spong, M. W., et al. (2006). <em>Robot Modeling and Control</em>. Wiley.</p></li>
+<li><p>Khalil, H. K. (2002). <em>Nonlinear Systems</em>. Prentice Hall.</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Last Updated</strong>: October 2025</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 08, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Double-Inverted Pendulum Dynamics</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#system-overview">System Overview</a><ul>
+<li><a class="reference internal" href="#physical-description">Physical Description</a></li>
+<li><a class="reference internal" href="#state-variables">State Variables</a></li>
+<li><a class="reference internal" href="#why-this-system-is-challenging">Why This System is Challenging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lagrangian-derivation">Lagrangian Derivation</a><ul>
+<li><a class="reference internal" href="#why-lagrangian-mechanics">Why Lagrangian Mechanics?</a></li>
+<li><a class="reference internal" href="#kinetic-energy">Kinetic Energy</a></li>
+<li><a class="reference internal" href="#potential-energy">Potential Energy</a></li>
+<li><a class="reference internal" href="#lagrangian">Lagrangian</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#equations-of-motion">Equations of Motion</a><ul>
+<li><a class="reference internal" href="#euler-lagrange-equations">Euler-Lagrange Equations</a></li>
+<li><a class="reference internal" href="#matrix-form">Matrix Form</a></li>
+<li><a class="reference internal" href="#properties-of-the-dynamics">Properties of the Dynamics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linearization-for-control">Linearization for Control</a><ul>
+<li><a class="reference internal" href="#small-angle-approximation">Small Angle Approximation</a></li>
+<li><a class="reference internal" href="#simplified-dynamics">Simplified Dynamics</a></li>
+<li><a class="reference internal" href="#limitations-of-linearization">Limitations of Linearization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#controllability-analysis">Controllability Analysis</a><ul>
+<li><a class="reference internal" href="#controllability-matrix">Controllability Matrix</a></li>
+<li><a class="reference internal" href="#dip-controllability">DIP Controllability</a></li>
+<li><a class="reference internal" href="#observability">Observability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

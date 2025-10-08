@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.smc.core.switching_functions" href="smc_core_switching_functions.html" /><link rel="prev" title="controllers.smc.core.gain_validation" href="smc_core_gain_validation.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -501,6 +527,216 @@ mathematical foundations.</p>
 <li><p>Coefficients c₁, c₂, λ₁, λ₂ must be positive for stability (Hurwitz requirement)</p></li>
 </ul>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="sliding-mode-control-theory">
+<h3>Sliding Mode Control Theory<a class="headerlink" href="#sliding-mode-control-theory" title="Link to this heading">¶</a></h3>
+<p>Sliding mode control forces system trajectories onto a <strong>sliding surface</strong> where desired dynamics are exhibited.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s(\vec{x}, t) = 0\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(s: \mathbb{R}^n \times \mathbb{R}_+ \to \mathbb{R}^m\)</span> is the sliding surface function.</p>
+</section>
+<section id="linear-sliding-surface-for-dip">
+<h3>Linear Sliding Surface for DIP<a class="headerlink" href="#linear-sliding-surface-for-dip" title="Link to this heading">¶</a></h3>
+<p>For the double-inverted pendulum with state <span class="math notranslate nohighlight">\(\vec{x} = [x, \dot{x}, \theta_1, \dot{\theta}_1, \theta_2, \dot{\theta}_2]^T\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s = \lambda_1 \dot{\theta}_1 + c_1 \theta_1 + \lambda_2 \dot{\theta}_2 + c_2 \theta_2\]</div>
+</div>
+<p><strong>Physical Interpretation:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\theta_1, \theta_2\)</span>: Angular errors (desired = 0 for stabilization)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dot{\theta}_1, \dot{\theta}_2\)</span>: Angular velocity errors</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_1, c_2 &gt; 0\)</span>: Position feedback gains</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_1, \lambda_2 &gt; 0\)</span>: Velocity feedback gains</p></li>
+</ul>
+</section>
+<section id="hurwitz-stability-criterion">
+<h3>Hurwitz Stability Criterion<a class="headerlink" href="#hurwitz-stability-criterion" title="Link to this heading">¶</a></h3>
+<p>For the sliding surface to ensure exponential convergence when <span class="math notranslate nohighlight">\(s = 0\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{s} = 0 \quad \Rightarrow \quad \lambda_i \ddot{\theta}_i + c_i \dot{\theta}_i = 0, \quad i = 1, 2\]</div>
+</div>
+<p>This gives characteristic polynomial:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[p(r) = r + \frac{c_i}{\lambda_i}\]</div>
+</div>
+<p><strong>Hurwitz criterion</strong> requires all roots to have negative real parts:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{c_i}{\lambda_i} &gt; 0 \quad \Rightarrow \quad c_i, \lambda_i &gt; 0\]</div>
+</div>
+<p>This ensures <strong>exponential convergence</strong> to zero:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\theta_i(t) = \theta_i(0) e^{-\frac{c_i}{\lambda_i} t}\]</div>
+</div>
+</section>
+<section id="lyapunov-stability">
+<h3>Lyapunov Stability<a class="headerlink" href="#lyapunov-stability" title="Link to this heading">¶</a></h3>
+<p><strong>Lyapunov function:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V(s) = \frac{1}{2} s^2\]</div>
+</div>
+<p><strong>Sliding condition</strong> (Lyapunov stability):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{V} = s \dot{s} &lt; 0 \quad \text{for} \quad s \neq 0\]</div>
+</div>
+<p>This ensures trajectories are attracted to the sliding surface and remain there.</p>
+</section>
+<section id="reaching-condition">
+<h3>Reaching Condition<a class="headerlink" href="#reaching-condition" title="Link to this heading">¶</a></h3>
+<p><strong>Finite-time reaching</strong> requires:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s \dot{s} \leq -\eta |s|, \quad \eta &gt; 0\]</div>
+</div>
+<p><strong>Reaching time bound:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t_{reach} \leq \frac{|s(0)|}{\eta}\]</div>
+</div>
+</section>
+<section id="sliding-surface-design-guidelines">
+<h3>Sliding Surface Design Guidelines<a class="headerlink" href="#sliding-surface-design-guidelines" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Hurwitz requirement:</strong> All gains <span class="math notranslate nohighlight">\(c_i, \lambda_i &gt; 0\)</span></p></li>
+<li><p><strong>Convergence rate:</strong> Larger <span class="math notranslate nohighlight">\(c_i/\lambda_i\)</span> → faster convergence</p></li>
+<li><p><strong>Overshoot control:</strong> Smaller <span class="math notranslate nohighlight">\(c_i/\lambda_i\)</span> → less overshoot</p></li>
+<li><p><strong>Typical range:</strong> <span class="math notranslate nohighlight">\(c_i/\lambda_i \in [0.5, 5.0]\)</span> rad/s</p></li>
+</ol>
+</section>
+<section id="higher-order-sliding-surfaces">
+<h3>Higher-Order Sliding Surfaces<a class="headerlink" href="#higher-order-sliding-surfaces" title="Link to this heading">¶</a></h3>
+<p><strong>Super-Twisting (2nd order):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s = \sigma, \quad \dot{\sigma} = \lambda_1 \dot{\theta}_1 + c_1 \theta_1 + \lambda_2 \dot{\theta}_2 + c_2 \theta_2\]</div>
+</div>
+<p>Provides <strong>finite-time convergence</strong> and <strong>continuous control</strong> (no chattering).</p>
+</section>
+<section id="computational-complexity">
+<h3>Computational Complexity<a class="headerlink" href="#computational-complexity" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Linear surface evaluation:</strong> <span class="math notranslate nohighlight">\(O(n)\)</span> multiply-adds</p></li>
+<li><p><strong>Surface derivative:</strong> <span class="math notranslate nohighlight">\(O(n^2)\)</span> if Jacobian needed</p></li>
+<li><p><strong>Memory:</strong> <span class="math notranslate nohighlight">\(O(n)\)</span> for gains and state</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[State Vector x] --&gt; B[Extract Errors: θ₁, θ₂, θ̇₁, θ̇₂]
+    B --&gt; C[Compute s = λ₁θ̇₁ + c₁θ₁ + λ₂θ̇₂ + c₂θ₂]
+    C --&gt; D{|s| &lt; ε?}
+    D --&gt;|Yes| E[On Sliding Surface]
+    D --&gt;|No| F[Off Sliding Surface]
+    E --&gt; G[Sliding Mode Reached]
+    F --&gt; H[Reaching Phase]
+
+    B --&gt; I[Validate Gains: c₁, c₂, λ₁, λ₂ &gt; 0]
+    I --&gt;|Invalid| J[Raise ValueError]
+    I --&gt;|Valid| C
+
+    style C fill:#9cf
+    style E fill:#9f9
+    style F fill:#ff9
+    style J fill:#f99
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-linear-sliding-surface">
+<h3>Example 1: Basic Linear Sliding Surface<a class="headerlink" href="#example-1-basic-linear-sliding-surface" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.core.sliding_surface</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSlidingSurface</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Define gains (c1, c2, λ1, λ2)</span>
+<span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">]</span>
+<span class="n">surface</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
+
+<span class="c1"># Compute surface value for state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>  <span class="c1"># [x, ẋ, θ₁, θ̇₁, θ₂, θ̇₂]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sliding surface value: </span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-surface-derivative-computation">
+<h3>Example 2: Surface Derivative Computation<a class="headerlink" href="#example-2-surface-derivative-computation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute surface derivative ds/dt</span>
+<span class="n">state_dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">])</span>
+<span class="n">s_dot</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute_derivative</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_dot</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Surface derivative: </span><span class="si">{</span><span class="n">s_dot</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check sliding condition</span>
+<span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">*</span> <span class="n">s_dot</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sliding mode reached and maintained&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-gain-validation">
+<h3>Example 3: Gain Validation<a class="headerlink" href="#example-3-gain-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.core.sliding_surface</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_sliding_surface_gains</span>
+
+<span class="c1"># Valid gains (all positive)</span>
+<span class="n">gains_valid</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">]</span>
+<span class="n">is_valid</span> <span class="o">=</span> <span class="n">validate_sliding_surface_gains</span><span class="p">(</span><span class="n">gains_valid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valid gains: </span><span class="si">{</span><span class="n">is_valid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># True</span>
+
+<span class="c1"># Invalid gains (c2 negative)</span>
+<span class="n">gains_invalid</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">]</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">surface_bad</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">gains_invalid</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-frequency-analysis">
+<h3>Example 4: Frequency Analysis<a class="headerlink" href="#example-4-frequency-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Compute characteristic frequencies</span>
+<span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">lambda2</span> <span class="o">=</span> <span class="n">gains</span>
+<span class="n">omega_n1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c1</span> <span class="o">/</span> <span class="n">lambda1</span><span class="p">)</span>  <span class="c1"># rad/s</span>
+<span class="n">omega_n2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c2</span> <span class="o">/</span> <span class="n">lambda2</span><span class="p">)</span>  <span class="c1"># rad/s</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Natural frequency 1: </span><span class="si">{</span><span class="n">omega_n1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> rad/s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Natural frequency 2: </span><span class="si">{</span><span class="n">omega_n2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> rad/s&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check Nyquist criterion (sampling frequency 100 Hz)</span>
+<span class="n">omega_s</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># rad/s</span>
+<span class="k">if</span> <span class="n">omega_n1</span> <span class="o">&lt;</span> <span class="n">omega_s</span> <span class="o">/</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">omega_n2</span> <span class="o">&lt;</span> <span class="n">omega_s</span> <span class="o">/</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequencies safe for 100 Hz sampling&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-higher-order-surface-super-twisting">
+<h3>Example 5: Higher-Order Surface (Super-Twisting)<a class="headerlink" href="#example-5-higher-order-surface-super-twisting" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.core.sliding_surface</span><span class="w"> </span><span class="kn">import</span> <span class="n">HigherOrderSlidingSurface</span>
+
+<span class="c1"># Define 6 gains for 2nd order surface</span>
+<span class="n">gains_ho</span> <span class="o">=</span> <span class="p">[</span><span class="mf">25.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">]</span>
+<span class="n">surface_ho</span> <span class="o">=</span> <span class="n">HigherOrderSlidingSurface</span><span class="p">(</span><span class="n">gains_ho</span><span class="p">)</span>
+
+<span class="c1"># Compute surface and its derivative</span>
+<span class="n">s_ho</span> <span class="o">=</span> <span class="n">surface_ho</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">s_dot_ho</span> <span class="o">=</span> <span class="n">surface_ho</span><span class="o">.</span><span class="n">compute_derivative</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_dot</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Higher-order surface: s=</span><span class="si">{</span><span class="n">s_ho</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, ṡ=</span><span class="si">{</span><span class="n">s_dot_ho</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -520,7 +756,7 @@ mathematical foundations.</p>
 <span class="linenos"> 15</span><span class="sd">- Coefficients c₁, c₂, λ₁, λ₂ must be positive for stability (Hurwitz requirement)</span>
 <span class="linenos"> 16</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos"> 17</span>
-<span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 <span class="linenos"> 19</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 20</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="linenos"> 21</span>
@@ -1161,7 +1397,7 @@ Appropriate sliding surface instance</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1184,6 +1420,26 @@ Appropriate sliding surface instance</p>
             <ul>
 <li><a class="reference internal" href="#">controllers.smc.core.sliding_surface</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#sliding-mode-control-theory">Sliding Mode Control Theory</a></li>
+<li><a class="reference internal" href="#linear-sliding-surface-for-dip">Linear Sliding Surface for DIP</a></li>
+<li><a class="reference internal" href="#hurwitz-stability-criterion">Hurwitz Stability Criterion</a></li>
+<li><a class="reference internal" href="#lyapunov-stability">Lyapunov Stability</a></li>
+<li><a class="reference internal" href="#reaching-condition">Reaching Condition</a></li>
+<li><a class="reference internal" href="#sliding-surface-design-guidelines">Sliding Surface Design Guidelines</a></li>
+<li><a class="reference internal" href="#higher-order-sliding-surfaces">Higher-Order Sliding Surfaces</a></li>
+<li><a class="reference internal" href="#computational-complexity">Computational Complexity</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-linear-sliding-surface">Example 1: Basic Linear Sliding Surface</a></li>
+<li><a class="reference internal" href="#example-2-surface-derivative-computation">Example 2: Surface Derivative Computation</a></li>
+<li><a class="reference internal" href="#example-3-gain-validation">Example 3: Gain Validation</a></li>
+<li><a class="reference internal" href="#example-4-frequency-analysis">Example 4: Frequency Analysis</a></li>
+<li><a class="reference internal" href="#example-5-higher-order-surface-super-twisting">Example 5: Higher-Order Surface (Super-Twisting)</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#slidingsurface"><code class="docutils literal notranslate"><span class="pre">SlidingSurface</span></code></a><ul>
@@ -1249,6 +1505,10 @@ Appropriate sliding surface instance</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

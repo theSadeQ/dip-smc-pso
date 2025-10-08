@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -543,6 +569,298 @@ latency tracking, stability monitoring, and real-time constraint verification.</
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.diagnostics</span> <span class="pre">import</span> <span class="pre">DiagnosticChecklist,</span> <span class="pre">InstabilityType,</span> <span class="pre">DiagnosticResult</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="real-time-monitoring-infrastructure">
+<h3>Real-Time Monitoring Infrastructure<a class="headerlink" href="#real-time-monitoring-infrastructure" title="Link to this heading">¶</a></h3>
+<p>The monitoring subsystem provides comprehensive real-time tracking for control loop performance, stability, and resource utilization.</p>
+<section id="monitoring-hierarchy">
+<h4>Monitoring Hierarchy<a class="headerlink" href="#monitoring-hierarchy" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{Monitor} = \begin{cases}
+\text{Latency} &amp; \text{(Execution time, deadlines)} \\
+\text{Stability} &amp; \text{(Lyapunov, saturation, conditioning)} \\
+\text{Diagnostics} &amp; \text{(Instability detection)} \\
+\text{Memory} &amp; \text{(Resource tracking)}
+\end{cases}
+\end{split}\]</div>
+</div>
+</section>
+<section id="performance-metrics">
+<h4>Performance Metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">¶</a></h4>
+<p><strong>Execution time:</strong>
+$<span class="math notranslate nohighlight">\(
+t_{\text{exec}} = t_{\text{end}} - t_{\text{start}}
+\)</span>$</p>
+<p><strong>Deadline monitoring:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Violation} = \mathbb{1}\{t_{\text{exec}} &gt; t_{\text{deadline}}\}
+\)</span>$</p>
+<p><strong>Statistical latency:</strong>
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+\mu &amp;= \frac{1}{N}\sum_{i=1}^N t_i \\
+\sigma^2 &amp;= \frac{1}{N}\sum_{i=1}^N (t_i - \mu)^2 \\
+p_{95} &amp;= \inf\{x : F(x) \geq 0.95\}
+\end{aligned}
+\)</span>$</p>
+</section>
+</section>
+<section id="monitoring-integration">
+<h3>Monitoring Integration<a class="headerlink" href="#monitoring-integration" title="Link to this heading">¶</a></h3>
+<p>The monitoring system integrates with:</p>
+<ul class="simple">
+<li><p><strong>Simulation loops</strong>: Real-time performance tracking</p></li>
+<li><p><strong>Controllers</strong>: Stability and saturation monitoring</p></li>
+<li><p><strong>Optimization</strong>: Convergence and numerical stability</p></li>
+<li><p><strong>Safety systems</strong>: Constraint violation detection</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Monitoring Package] –&gt; B[Latency Monitor]
+A –&gt; C[Stability Monitor]
+A –&gt; D[Diagnostics]
+A –&gt; E[Memory Monitor]</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>B --&gt; F[Execution Timing]
+B --&gt; G[Deadline Checking]
+B --&gt; H[Statistics]
+
+C --&gt; I[Lyapunov Decrease]
+C --&gt; J[Saturation Detection]
+C --&gt; K[Conditioning Analysis]
+
+D --&gt; L[Instability Type]
+D --&gt; M[Diagnostic Checklist]
+D --&gt; N[Remediation]
+
+E --&gt; O[Memory Allocation]
+E --&gt; P[Usage Tracking]
+E --&gt; Q[Leak Detection]
+
+style A fill:#e1f5ff
+style C fill:#fff4e1
+style D fill:#ffebee
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-latency-monitoring">
+<h3>Example 1: Basic Latency Monitoring<a class="headerlink" href="#example-1-basic-latency-monitoring" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.utils.monitoring import LatencyMonitor</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-latency-monitor">
+<h1>Create latency monitor<a class="headerlink" href="#create-latency-monitor" title="Link to this heading">¶</a></h1>
+<p>monitor = LatencyMonitor(dt=0.01)  # 100 Hz control loop</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="monitor-control-loop">
+<h1>Monitor control loop<a class="headerlink" href="#monitor-control-loop" title="Link to this heading">¶</a></h1>
+<p>for k in range(1000):
+start = monitor.start()</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Control computation
+u = controller.compute_control(x, state_vars, history)
+x = integrator.integrate(dynamics, x, u, t)
+
+# Check deadline
+missed = monitor.end(start)
+if missed:
+    print(f&quot;Deadline violation at step {k}&quot;)
+
+t += 0.01
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="get-statistics">
+<h1>Get statistics<a class="headerlink" href="#get-statistics" title="Link to this heading">¶</a></h1>
+<p>print(f”Mean latency: {monitor.mean_latency:.6f}s”)
+print(f”95th percentile: {monitor.p95_latency:.6f}s”)
+```</p>
+<section id="example-2-integrated-stability-monitoring">
+<h2>Example 2: Integrated Stability Monitoring<a class="headerlink" href="#example-2-integrated-stability-monitoring" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.monitoring import (
+LyapunovDecreaseMonitor,
+SaturationMonitor
+)</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-stability-monitors">
+<h1>Create stability monitors<a class="headerlink" href="#create-stability-monitors" title="Link to this heading">¶</a></h1>
+<p>lyapunov_monitor = LyapunovDecreaseMonitor()
+saturation_monitor = SaturationMonitor(max_force=100.0)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="simulation-with-stability-monitoring">
+<h1>Simulation with stability monitoring<a class="headerlink" href="#simulation-with-stability-monitoring" title="Link to this heading">¶</a></h1>
+<p>for k in range(1000):
+u = controller.compute_control(x, state_vars, history)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Check saturation
+saturation_ratio = saturation_monitor.check(u)
+if saturation_ratio &gt; 0.9:
+    print(f&quot;High saturation: {saturation_ratio:.2%}&quot;)
+
+# Check Lyapunov decrease
+is_stable = lyapunov_monitor.check_decrease(x, V_function)
+if not is_stable:
+    print(f&quot;Lyapunov increase detected at step {k}&quot;)
+
+x = integrator.integrate(dynamics, x, u, t)
+t += 0.01
+</pre></div>
+</div>
+<p>```</p>
+<section id="example-3-diagnostic-analysis">
+<h2>Example 3: Diagnostic Analysis<a class="headerlink" href="#example-3-diagnostic-analysis" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.monitoring import DiagnosticChecklist</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-diagnostic-checklist">
+<h1>Create diagnostic checklist<a class="headerlink" href="#create-diagnostic-checklist" title="Link to this heading">¶</a></h1>
+<p>diagnostics = DiagnosticChecklist()</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-diagnostics-after-instability">
+<h1>Run diagnostics after instability<a class="headerlink" href="#run-diagnostics-after-instability" title="Link to this heading">¶</a></h1>
+<p>if not stable:
+results = diagnostics.run(
+state=x,
+control=u,
+controller=controller,
+dynamics=dynamics
+)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(f&quot;Instability type: {results.instability_type}&quot;)
+print(f&quot;Likely causes: {results.likely_causes}&quot;)
+print(f&quot;Recommended actions: {results.remediation}&quot;)
+</pre></div>
+</div>
+<p>```</p>
+<section id="example-4-memory-leak-detection">
+<h2>Example 4: Memory Leak Detection<a class="headerlink" href="#example-4-memory-leak-detection" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.monitoring import MemoryMonitor</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-memory-monitor">
+<h1>Create memory monitor<a class="headerlink" href="#create-memory-monitor" title="Link to this heading">¶</a></h1>
+<p>memory_monitor = MemoryMonitor(threshold_mb=500)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="monitor-long-running-simulation">
+<h1>Monitor long-running simulation<a class="headerlink" href="#monitor-long-running-simulation" title="Link to this heading">¶</a></h1>
+<p>for trial in range(1000):
+result = run_simulation(trial)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Check memory usage
+memory_mb = memory_monitor.check()
+if memory_mb &gt; 450:
+    print(f&quot;High memory usage: {memory_mb:.1f} MB&quot;)
+
+# Periodic cleanup
+if trial % 100 == 99:
+    memory_monitor.force_gc()
+</pre></div>
+</div>
+<p>```</p>
+<section id="example-5-comprehensive-monitoring-pipeline">
+<h2>Example 5: Comprehensive Monitoring Pipeline<a class="headerlink" href="#example-5-comprehensive-monitoring-pipeline" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.monitoring import StabilityMonitoringSystem</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-integrated-monitoring-system">
+<h1>Create integrated monitoring system<a class="headerlink" href="#create-integrated-monitoring-system" title="Link to this heading">¶</a></h1>
+<p>monitoring = StabilityMonitoringSystem(
+dt=0.01,
+enable_latency=True,
+enable_stability=True,
+enable_diagnostics=True,
+enable_memory=True
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-monitored-simulation">
+<h1>Run monitored simulation<a class="headerlink" href="#run-monitored-simulation" title="Link to this heading">¶</a></h1>
+<p>result = monitoring.run_monitored_simulation(
+controller=controller,
+dynamics=dynamics,
+x_initial=x_initial,
+duration=10.0
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="get-comprehensive-report">
+<h1>Get comprehensive report<a class="headerlink" href="#get-comprehensive-report" title="Link to this heading">¶</a></h1>
+<p>report = monitoring.generate_report()
+print(f”Performance: {report[‘performance’]}”)
+print(f”Stability: {report[‘stability’]}”)
+print(f”Diagnostics: {report[‘diagnostics’]}”)
+print(f”Memory: {report[‘memory’]}”)
+```</p>
+<section id="id1">
+<h2>Architecture Diagram<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="id2">
+<h2>Usage Examples<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.utils.monitoring import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>```python
+component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+</section>
+<section id="example-3-integration-with-simulation">
+<h3>Example 3: Integration with Simulation<a class="headerlink" href="#example-3-integration-with-simulation" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>for k in range(num_steps):
+result = component.process(x)
+x = update(x, result)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python
+component = Component(enable_caching=True)
+```</p>
+</section>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python
+try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
+</section>
 </section>
 
         </article>
@@ -562,7 +880,7 @@ latency tracking, stability monitoring, and real-time constraint verification.</
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -587,6 +905,58 @@ latency tracking, stability monitoring, and real-time constraint verification.</
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#real-time-monitoring-infrastructure">Real-Time Monitoring Infrastructure</a><ul>
+<li><a class="reference internal" href="#monitoring-hierarchy">Monitoring Hierarchy</a></li>
+<li><a class="reference internal" href="#performance-metrics">Performance Metrics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#monitoring-integration">Monitoring Integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-latency-monitoring">Example 1: Basic Latency Monitoring</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-latency-monitor">Create latency monitor</a></li>
+<li><a class="reference internal" href="#monitor-control-loop">Monitor control loop</a></li>
+<li><a class="reference internal" href="#get-statistics">Get statistics</a><ul>
+<li><a class="reference internal" href="#example-2-integrated-stability-monitoring">Example 2: Integrated Stability Monitoring</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-stability-monitors">Create stability monitors</a></li>
+<li><a class="reference internal" href="#simulation-with-stability-monitoring">Simulation with stability monitoring</a><ul>
+<li><a class="reference internal" href="#example-3-diagnostic-analysis">Example 3: Diagnostic Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-diagnostic-checklist">Create diagnostic checklist</a></li>
+<li><a class="reference internal" href="#run-diagnostics-after-instability">Run diagnostics after instability</a><ul>
+<li><a class="reference internal" href="#example-4-memory-leak-detection">Example 4: Memory Leak Detection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-memory-monitor">Create memory monitor</a></li>
+<li><a class="reference internal" href="#monitor-long-running-simulation">Monitor long-running simulation</a><ul>
+<li><a class="reference internal" href="#example-5-comprehensive-monitoring-pipeline">Example 5: Comprehensive Monitoring Pipeline</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-integrated-monitoring-system">Create integrated monitoring system</a></li>
+<li><a class="reference internal" href="#run-monitored-simulation">Run monitored simulation</a></li>
+<li><a class="reference internal" href="#get-comprehensive-report">Get comprehensive report</a><ul>
+<li><a class="reference internal" href="#id1">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#id2">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-simulation">Example 3: Integration with Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 </ul>
@@ -605,6 +975,8 @@ latency tracking, stability monitoring, and real-time constraint verification.</
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

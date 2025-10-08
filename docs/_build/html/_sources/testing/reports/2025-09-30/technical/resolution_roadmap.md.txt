@@ -53,6 +53,9 @@ result = "FAULT"          # False positive
 
 #### **Implementation Strategy**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/utils/monitoring/fault_detection.py
 class AdaptiveFaultDetection:
     """Enhanced FDI with time-varying thresholds and statistical validation."""
@@ -85,6 +88,9 @@ class AdaptiveFaultDetection:
 
 #### **Testing Requirements**
 ```python
+# example-metadata:
+# runnable: false
+
 # Test file: tests/test_monitoring/test_adaptive_fault_detection.py
 def test_transient_handling():
     """Verify FDI handles initial transients correctly."""
@@ -138,6 +144,9 @@ def test_false_positive_reduction():
 
 ##### **1. Memory-Efficient Controller Design**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/base/memory_efficient_controller.py
 class MemoryEfficientController(ABC):
     """Base class with automatic memory management."""
@@ -181,6 +190,9 @@ class MemoryEfficientController(ABC):
 
 ##### **2. Numpy Memory Optimization**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/utils/memory/numpy_optimizer.py
 class NumpyMemoryOptimizer:
     """Optimized numpy operations to minimize allocations."""
@@ -220,6 +232,9 @@ class MemoryPoolContext:
 
 ##### **3. Controller Factory Memory Management**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/factory/memory_managed_factory.py
 class MemoryManagedFactory:
     """Controller factory with automatic memory management."""
@@ -261,6 +276,9 @@ class MemoryManagedFactory:
 
 #### **Testing Requirements**
 ```python
+# example-metadata:
+# runnable: false
+
 # Test file: tests/test_memory/test_memory_management.py
 def test_memory_leak_prevention():
     """Verify no memory leaks in controller lifecycle."""
@@ -320,6 +338,9 @@ def test_numpy_memory_optimization():
 
 ##### **1. Robust Matrix Operations**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/utils/numerical/robust_matrix_ops.py
 class RobustMatrixOperations:
     """Numerically stable matrix operations for control systems."""
@@ -369,6 +390,9 @@ class RobustMatrixOperations:
 
 ##### **2. Numerically Stable Controllers**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/base/numerically_stable_controller.py
 class NumericallyStableController(ABC):
     """Base class for numerically robust control implementations."""
@@ -434,6 +458,9 @@ class NumericallyStableController(ABC):
 
 ##### **3. Gain Validation and Bounding**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/utils/validation/gain_validator.py
 class GainValidator:
     """Comprehensive gain validation for numerical stability."""
@@ -485,6 +512,9 @@ class GainValidator:
 
 #### **Testing Requirements**
 ```python
+# example-metadata:
+# runnable: false
+
 # Test file: tests/test_numerical/test_numerical_stability.py
 def test_matrix_conditioning_robustness():
     """Test matrix operations with ill-conditioned matrices."""
@@ -553,6 +583,9 @@ def test_controller_numerical_stability():
 
 #### **Implementation Strategy**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: pytest.ini
 [tool:pytest]
 markers =

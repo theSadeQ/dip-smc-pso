@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,6 +517,139 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Memory-efficient PSO optimizer with production-grade memory management.</p>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="memory-efficient-pso-design">
+<h3>Memory-Efficient PSO Design<a class="headerlink" href="#memory-efficient-pso-design" title="Link to this heading">¶</a></h3>
+<p><strong>Memory complexity</strong> for standard PSO:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M_{total} = M_{particles} + M_{history} + M_{best} = O(N \cdot d) + O(T \cdot N \cdot d) + O(d)\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(N\)</span> is population size, <span class="math notranslate nohighlight">\(d\)</span> is dimensions, <span class="math notranslate nohighlight">\(T\)</span> is iterations.</p>
+<p><strong>Problem:</strong> Unbounded history growth <span class="math notranslate nohighlight">\(O(T \cdot N \cdot d)\)</span> causes memory leaks.</p>
+</section>
+<section id="bounded-collection-strategy">
+<h3>Bounded Collection Strategy<a class="headerlink" href="#bounded-collection-strategy" title="Link to this heading">¶</a></h3>
+<p><strong>Circular buffer</strong> for history with max size <span class="math notranslate nohighlight">\(H\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M_{history} = O(H \cdot N \cdot d), \quad H \ll T\]</div>
+</div>
+<p><strong>Maintains constant memory</strong> regardless of iteration count.</p>
+</section>
+<section id="adaptive-memory-cleanup">
+<h3>Adaptive Memory Cleanup<a class="headerlink" href="#adaptive-memory-cleanup" title="Link to this heading">¶</a></h3>
+<p><strong>Cleanup trigger</strong> based on memory usage:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Cleanup if } M_{current} &gt; \alpha M_{max}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\alpha \in (0.7, 0.9)\)</span> is safety threshold.</p>
+<p><strong>Cleanup operations:</strong></p>
+<ol class="arabic simple">
+<li><p>Trim history to last <span class="math notranslate nohighlight">\(H\)</span> iterations</p></li>
+<li><p>Remove dominated solutions</p></li>
+<li><p>Compress archive via clustering</p></li>
+</ol>
+</section>
+<section id="memory-leak-prevention">
+<h3>Memory Leak Prevention<a class="headerlink" href="#memory-leak-prevention" title="Link to this heading">¶</a></h3>
+<p><strong>Weak references</strong> for large objects:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Store: } \{(i, \text{weakref}(obj_i)) : i \in \text{Archive}\}\]</div>
+</div>
+<p>Automatic garbage collection when reference count = 0.</p>
+</section>
+<section id="production-memory-monitoring">
+<h3>Production Memory Monitoring<a class="headerlink" href="#production-memory-monitoring" title="Link to this heading">¶</a></h3>
+<p><strong>Real-time tracking:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+M_{RSS}(t) &amp;= \text{Resident Set Size at iteration } t \\
+\Delta M &amp;= M_{RSS}(t) - M_{RSS}(t-1) \\
+\text{Alert if } \Delta M &gt; \epsilon_{leak}
+\end{align}\end{split}\]</div>
+</div>
+<p>Detects memory leaks early.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[PSO Iteration] --&gt; B[Memory Check]
+    B --&gt; C{Memory Usage}
+    C --&gt;|&lt; 70% Max| D[Continue Normal]
+    C --&gt;|70-90%| E[Trigger Cleanup]
+    C --&gt;|&gt; 90%| F[Emergency Cleanup]
+
+    E --&gt; G[Trim History]
+    F --&gt; G
+    G --&gt; H[Remove Dominated]
+    H --&gt; I[Compress Archive]
+
+    D --&gt; J[Update Population]
+    I --&gt; J
+
+    J --&gt; K[Memory Tracking]
+    K --&gt; L{Leak Detected?}
+    L --&gt;|Yes| M[Alert &amp; Cleanup]
+    L --&gt;|No| N[Continue]
+
+    M --&gt; N
+    N --&gt; A
+
+    style C fill:#ff9
+    style G fill:#9cf
+    style K fill:#f9c
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-optimization">
+<h3>Example 3: Integration with Optimization<a class="headerlink" href="#example-3-integration-with-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete optimization loop</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">create_optimizer</span><span class="p">(</span><span class="n">opt_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best fitness: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">best_fitness</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This module provides a memory-optimized version of the PSO optimizer specifically
 designed to handle large-scale optimization runs without memory leaks or excessive
 memory consumption. Implements bounded collections, automatic cleanup, and
@@ -503,6 +662,7 @@ real-time memory monitoring for production deployment.</p>
 <li><p>Graceful degradation under memory pressure</p></li>
 <li><p>Comprehensive memory usage statistics</p></li>
 </ul>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -532,8 +692,8 @@ real-time memory monitoring for production deployment.</p>
 <span class="linenos"> 24</span><span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
 <span class="linenos"> 25</span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="linenos"> 26</span><span class="kn">import</span><span class="w"> </span><span class="nn">weakref</span>
-<span class="linenos"> 27</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
-<span class="linenos"> 28</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="linenos"> 27</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="linenos"> 28</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 <span class="linenos"> 29</span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
 <span class="linenos"> 30</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 31</span>
@@ -822,7 +982,7 @@ real-time memory monitoring for production deployment.</p>
 <span class="linenos">314</span>
 <span class="linenos">315</span>            <span class="k">return</span> <span class="n">result</span>
 <span class="linenos">316</span>
-<span class="linenos">317</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">317</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">318</span>            <span class="c1"># Emergency cleanup on failure</span>
 <span class="linenos">319</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_config</span><span class="o">.</span><span class="n">emergency_recovery_enabled</span><span class="p">:</span>
 <span class="linenos">320</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_emergency_memory_cleanup</span><span class="p">()</span>
@@ -1493,7 +1653,7 @@ runs efficiently.</p>
 <span class="linenos">101</span>
 <span class="linenos">102</span>            <span class="k">return</span> <span class="n">result</span>
 <span class="linenos">103</span>
-<span class="linenos">104</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">104</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">105</span>            <span class="c1"># Emergency cleanup on failure</span>
 <span class="linenos">106</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_config</span><span class="o">.</span><span class="n">emergency_recovery_enabled</span><span class="p">:</span>
 <span class="linenos">107</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_emergency_memory_cleanup</span><span class="p">()</span>
@@ -1862,7 +2022,7 @@ runs efficiently.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1885,6 +2045,23 @@ runs efficiently.</p>
             <ul>
 <li><a class="reference internal" href="#">optimization.algorithms.memory_efficient_pso</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#memory-efficient-pso-design">Memory-Efficient PSO Design</a></li>
+<li><a class="reference internal" href="#bounded-collection-strategy">Bounded Collection Strategy</a></li>
+<li><a class="reference internal" href="#adaptive-memory-cleanup">Adaptive Memory Cleanup</a></li>
+<li><a class="reference internal" href="#memory-leak-prevention">Memory Leak Prevention</a></li>
+<li><a class="reference internal" href="#production-memory-monitoring">Production Memory Monitoring</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-optimization">Example 3: Integration with Optimization</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#memoryconfig"><code class="docutils literal notranslate"><span class="pre">MemoryConfig</span></code></a><ul>
@@ -1960,6 +2137,10 @@ runs efficiently.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -587,7 +613,10 @@
 </section>
 <section id="implementation-strategy">
 <h4><strong>Implementation Strategy</strong><a class="headerlink" href="#implementation-strategy" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: src/utils/monitoring/fault_detection.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: src/utils/monitoring/fault_detection.py</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveFaultDetection</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enhanced FDI with time-varying thresholds and statistical validation.&quot;&quot;&quot;</span>
 
@@ -620,7 +649,10 @@
 </section>
 <section id="testing-requirements">
 <h4><strong>Testing Requirements</strong><a class="headerlink" href="#testing-requirements" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test file: tests/test_monitoring/test_adaptive_fault_detection.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Test file: tests/test_monitoring/test_adaptive_fault_detection.py</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_transient_handling</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify FDI handles initial transients correctly.&quot;&quot;&quot;</span>
     <span class="n">fdi</span> <span class="o">=</span> <span class="n">AdaptiveFaultDetection</span><span class="p">(</span><span class="n">FDIConfig</span><span class="p">())</span>
@@ -681,7 +713,10 @@
 <h4><strong>Implementation Strategy</strong><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 <section id="memory-efficient-controller-design">
 <h5><strong>1. Memory-Efficient Controller Design</strong><a class="headerlink" href="#memory-efficient-controller-design" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: src/controllers/base/memory_efficient_controller.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: src/controllers/base/memory_efficient_controller.py</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MemoryEfficientController</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class with automatic memory management.&quot;&quot;&quot;</span>
 
@@ -725,7 +760,10 @@
 </section>
 <section id="numpy-memory-optimization">
 <h5><strong>2. Numpy Memory Optimization</strong><a class="headerlink" href="#numpy-memory-optimization" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: src/utils/memory/numpy_optimizer.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: src/utils/memory/numpy_optimizer.py</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">NumpyMemoryOptimizer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Optimized numpy operations to minimize allocations.&quot;&quot;&quot;</span>
 
@@ -765,7 +803,10 @@
 </section>
 <section id="controller-factory-memory-management">
 <h5><strong>3. Controller Factory Memory Management</strong><a class="headerlink" href="#controller-factory-memory-management" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: src/controllers/factory/memory_managed_factory.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: src/controllers/factory/memory_managed_factory.py</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MemoryManagedFactory</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Controller factory with automatic memory management.&quot;&quot;&quot;</span>
 
@@ -808,7 +849,10 @@
 </section>
 <section id="id3">
 <h4><strong>Testing Requirements</strong><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test file: tests/test_memory/test_memory_management.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Test file: tests/test_memory/test_memory_management.py</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_memory_leak_prevention</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify no memory leaks in controller lifecycle.&quot;&quot;&quot;</span>
     <span class="n">initial_memory</span> <span class="o">=</span> <span class="n">get_memory_usage</span><span class="p">()</span>
@@ -875,7 +919,10 @@
 <h4><strong>Implementation Strategy</strong><a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
 <section id="robust-matrix-operations">
 <h5><strong>1. Robust Matrix Operations</strong><a class="headerlink" href="#robust-matrix-operations" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: src/utils/numerical/robust_matrix_ops.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: src/utils/numerical/robust_matrix_ops.py</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">RobustMatrixOperations</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Numerically stable matrix operations for control systems.&quot;&quot;&quot;</span>
 
@@ -925,7 +972,10 @@
 </section>
 <section id="numerically-stable-controllers">
 <h5><strong>2. Numerically Stable Controllers</strong><a class="headerlink" href="#numerically-stable-controllers" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: src/controllers/base/numerically_stable_controller.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: src/controllers/base/numerically_stable_controller.py</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">NumericallyStableController</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for numerically robust control implementations.&quot;&quot;&quot;</span>
 
@@ -991,7 +1041,10 @@
 </section>
 <section id="gain-validation-and-bounding">
 <h5><strong>3. Gain Validation and Bounding</strong><a class="headerlink" href="#gain-validation-and-bounding" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: src/utils/validation/gain_validator.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: src/utils/validation/gain_validator.py</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">GainValidator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive gain validation for numerical stability.&quot;&quot;&quot;</span>
 
@@ -1044,7 +1097,10 @@
 </section>
 <section id="id8">
 <h4><strong>Testing Requirements</strong><a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test file: tests/test_numerical/test_numerical_stability.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Test file: tests/test_numerical/test_numerical_stability.py</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_conditioning_robustness</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test matrix operations with ill-conditioned matrices.&quot;&quot;&quot;</span>
     <span class="n">matrix_ops</span> <span class="o">=</span> <span class="n">RobustMatrixOperations</span><span class="p">()</span>
@@ -1120,7 +1176,10 @@
 <h3><strong>P1-A: Test Quality Infrastructure</strong> ⏱️ <strong>1-2 Days</strong><a class="headerlink" href="#p1-a-test-quality-infrastructure-1-2-days" title="Link to this heading">¶</a></h3>
 <section id="id11">
 <h4><strong>Implementation Strategy</strong><a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: pytest.ini</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: pytest.ini</span>
 <span class="p">[</span><span class="n">tool</span><span class="p">:</span><span class="n">pytest</span><span class="p">]</span>
 <span class="n">markers</span> <span class="o">=</span>
     <span class="n">integration</span><span class="p">:</span> <span class="n">Integration</span> <span class="n">tests</span> <span class="n">requiring</span> <span class="n">full</span> <span class="n">system</span>
@@ -1343,7 +1402,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

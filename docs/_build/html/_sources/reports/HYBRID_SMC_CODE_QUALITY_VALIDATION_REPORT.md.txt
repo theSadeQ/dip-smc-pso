@@ -27,6 +27,9 @@
 All hybrid SMC files conform to the required 90-character ASCII header standard:
 
 ```python
+# example-metadata:
+# runnable: false
+
 #=======================================================================================\\\
 #================== src/controllers/smc/algorithms/hybrid/controller.py =================\\\
 #=======================================================================================\\\
@@ -90,6 +93,9 @@ else:
 The hybrid controller implements **comprehensive error handling**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Multi-level error handling
 try:
     # Main control computation
@@ -129,6 +135,9 @@ except Exception as e:
 The hybrid controller provides **exceptional documentation**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Modular Hybrid SMC Controller.
 

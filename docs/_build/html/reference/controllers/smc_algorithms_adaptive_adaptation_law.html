@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.smc.algorithms.adaptive.config" href="smc_algorithms_adaptive_config.html" /><link rel="prev" title="controllers.smc.core.init" href="smc_core___init__.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -499,6 +525,149 @@ The adaptation law adjusts switching gain K(t) to handle unknown uncertainties.<
 <li><p>Lyapunov stability: V̇ = sṡ + (K̃/γ)K̇ ≤ 0</p></li>
 <li><p>Bounded adaptation: K_min ≤ K(t) ≤ K_max</p></li>
 </ul>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="lyapunov-based-adaptation">
+<h3>Lyapunov-Based Adaptation<a class="headerlink" href="#lyapunov-based-adaptation" title="Link to this heading">¶</a></h3>
+<p><strong>Adaptation law with leakage:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{K} = \gamma |s| - \sigma K\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>: Adaptation rate</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma \geq 0\)</span>: Leakage coefficient (prevents unbounded growth)</p></li>
+</ul>
+</section>
+<section id="lyapunov-stability-analysis">
+<h3>Lyapunov Stability Analysis<a class="headerlink" href="#lyapunov-stability-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Candidate Lyapunov function:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V(s, \tilde{K}) = \frac{1}{2} s^2 + \frac{1}{2\gamma} \tilde{K}^2\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\tilde{K} = K - K^*\)</span> is gain error.</p>
+<p><strong>Time derivative:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{V} = s \dot{s} + \frac{1}{\gamma} \tilde{K} \dot{K}\]</div>
+</div>
+<p>With control <span class="math notranslate nohighlight">\(u = -K \, \text{sign}(s)\)</span> and adaptation law:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{V} \leq -\eta |s| - \frac{\sigma}{\gamma} \tilde{K}^2 &lt; 0\]</div>
+</div>
+<p>Ensures <strong>asymptotic stability</strong>.</p>
+</section>
+<section id="parameter-update-laws">
+<h3>Parameter Update Laws<a class="headerlink" href="#parameter-update-laws" title="Link to this heading">¶</a></h3>
+<p><strong>Gradient adaptation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{\vec{K}} = -\Gamma \frac{\partial V}{\partial \vec{K}} = \Gamma \vec{\phi}(\vec{x}) |s|\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\vec{\phi}\)</span> is regressor vector.</p>
+<p><strong>Sigma modification:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{K} = \gamma |s| - \sigma K - \mu (K - K_0)\]</div>
+</div>
+<p>Adds centering term to prevent drift.</p>
+</section>
+<section id="bounded-adaptation">
+<h3>Bounded Adaptation<a class="headerlink" href="#bounded-adaptation" title="Link to this heading">¶</a></h3>
+<p><strong>Hard limits:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[K_{min} \leq K(t) \leq K_{max}\]</div>
+</div>
+<p><strong>Rate limiting:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[|\dot{K}| \leq \dot{K}_{max}\]</div>
+</div>
+</section>
+<section id="dead-zone">
+<h3>Dead Zone<a class="headerlink" href="#dead-zone" title="Link to this heading">¶</a></h3>
+<p>Avoid adaptation in small-<span class="math notranslate nohighlight">\(|s|\)</span> region:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{K} = \begin{cases}
+\gamma |s| - \sigma K, &amp; |s| &gt; \delta \\
+-\sigma K, &amp; |s| \leq \delta
+\end{cases}\end{split}\]</div>
+</div>
+</section>
+<section id="convergence-analysis">
+<h3>Convergence Analysis<a class="headerlink" href="#convergence-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Barbalat’s Lemma:</strong> If <span class="math notranslate nohighlight">\(V\)</span> is bounded below, <span class="math notranslate nohighlight">\(\dot{V} \leq 0\)</span>, and <span class="math notranslate nohighlight">\(\ddot{V}\)</span> bounded, then <span class="math notranslate nohighlight">\(\dot{V} \to 0\)</span>.</p>
+<p><strong>Conclusion:</strong> <span class="math notranslate nohighlight">\(s \to 0\)</span> and <span class="math notranslate nohighlight">\(\tilde{K} \to 0\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</span>.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Sliding Surface |s|] --&gt; B[Adaptation: K̇ = γ|s| - σK]
+    B --&gt; C[Integrate]
+    C --&gt; D{K Bounds}
+    D --&gt;|K &lt; K_min| E[Clip to K_min]
+    D --&gt;|K &gt; K_max| F[Clip to K_max]
+    D --&gt;|K_min ≤ K ≤ K_max| G[Updated Gain K]
+
+    E --&gt; G
+    F --&gt; G
+    G --&gt; H[To Controller]
+
+    style B fill:#9cf
+    style G fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.algorithms.adaptive</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-controller">
+<h3>Example 3: Integration with Controller<a class="headerlink" href="#example-3-integration-with-controller" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete control loop</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ITAE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">itae</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -1280,7 +1449,7 @@ sliding surface behavior to handle uncertain disturbances.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1303,6 +1472,24 @@ sliding surface behavior to handle uncertain disturbances.</p>
             <ul>
 <li><a class="reference internal" href="#">controllers.smc.algorithms.adaptive.adaptation_law</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#lyapunov-based-adaptation">Lyapunov-Based Adaptation</a></li>
+<li><a class="reference internal" href="#lyapunov-stability-analysis">Lyapunov Stability Analysis</a></li>
+<li><a class="reference internal" href="#parameter-update-laws">Parameter Update Laws</a></li>
+<li><a class="reference internal" href="#bounded-adaptation">Bounded Adaptation</a></li>
+<li><a class="reference internal" href="#dead-zone">Dead Zone</a></li>
+<li><a class="reference internal" href="#convergence-analysis">Convergence Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-controller">Example 3: Integration with Controller</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#adaptationlaw"><code class="docutils literal notranslate"><span class="pre">AdaptationLaw</span></code></a><ul>
@@ -1352,6 +1539,10 @@ sliding surface behavior to handle uncertain disturbances.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -54,6 +54,9 @@ This comprehensive guide documents the complete integration between the Enhanced
 **Specialized interface providing PSO-optimized controller creation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOFactoryInterface:
     """
     High-performance interface for PSO optimization workflows.
@@ -102,6 +105,9 @@ class PSOFactoryInterface:
 **Optimized wrapper providing PSO-compatible interface:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """
     PSO-optimized controller wrapper with comprehensive validation.
@@ -350,6 +356,9 @@ def optimize_smc_controller_pso(
 **Advanced workflow for simultaneous optimization of multiple objectives:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def multi_objective_pso_optimization(
     controller_types: List[str],
     simulation_config: Any,
@@ -402,6 +411,9 @@ def multi_objective_pso_optimization(
 **Advanced PSO with self-tuning parameters:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def adaptive_pso_optimization(
     controller_type: str,
     simulation_config: Any,
@@ -511,6 +523,9 @@ def parallel_fitness_evaluation(
 **Intelligent caching to avoid redundant simulations:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SimulationCache:
     """
     Intelligent caching system for PSO optimization.
@@ -624,6 +639,9 @@ def gpu_accelerated_pso_evaluation(
 **Mathematically-derived bounds for optimal PSO performance:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_optimized_pso_bounds(controller_type: str, plant_params: Dict[str, Any]) -> Tuple[List[float], List[float]]:
     """
     Compute optimized PSO bounds based on plant parameters and control theory.
@@ -1017,6 +1035,9 @@ class PSO_ProductionMonitor:
 **Centralized configuration system for PSO workflows:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 from dataclasses import dataclass
 from typing import Optional
 import yaml

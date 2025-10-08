@@ -1,0 +1,9 @@
+# Example from: docs\reference\optimization\validation_enhanced_convergence_analyzer.md
+# Index: 4
+# Runnable: True
+# Hash: 1f439055
+
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,216 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Batch simulation orchestrator for vectorized execution.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="batch-simulation-orchestration">
+<h3>Batch Simulation Orchestration<a class="headerlink" href="#batch-simulation-orchestration" title="Link to this heading">¶</a></h3>
+<p>Efficient processing of multiple independent simulation runs.</p>
+</section>
+<section id="batch-processing-model">
+<h3>Batch Processing Model<a class="headerlink" href="#batch-processing-model" title="Link to this heading">¶</a></h3>
+<p><strong>Vectorized execution:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathbf{X}_{k+1} = \mathbf{X}_k + \Delta t \cdot \mathbf{F}(\mathbf{X}_k, \mathbf{U}_k, t_k)\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{X}_k \in \mathbb{R}^{B \times n}\)</span>: Batch of <span class="math notranslate nohighlight">\(B\)</span> state vectors</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{U}_k \in \mathbb{R}^{B \times m}\)</span>: Batch of control inputs</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{F}\)</span>: Vectorized dynamics function</p></li>
+</ul>
+</section>
+<section id="vectorization-benefits">
+<h3>Vectorization Benefits<a class="headerlink" href="#vectorization-benefits" title="Link to this heading">¶</a></h3>
+<p><strong>SIMD (Single Instruction Multiple Data):</strong></p>
+<ul class="simple">
+<li><p>Modern CPUs process multiple data elements in one instruction</p></li>
+<li><p>Typical: 256-bit AVX2 (4 doubles), 512-bit AVX-512 (8 doubles)</p></li>
+</ul>
+<p><strong>Cache efficiency:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Cache hits} = \frac{\text{Sequential accesses}}{\text{Total accesses}} \times 100\%\]</div>
+</div>
+<p>Batch processing: 90-95% cache hit rate vs 60-70% for scattered access</p>
+</section>
+<section id="numpy-vectorization">
+<h3>NumPy Vectorization<a class="headerlink" href="#numpy-vectorization" title="Link to this heading">¶</a></h3>
+<p><strong>Broadcasting rules:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Batch state update (B × n)</span>
+<span class="n">x_new</span> <span class="o">=</span> <span class="n">x_batch</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">x_batch</span><span class="p">,</span> <span class="n">u_batch</span><span class="p">)</span>  <span class="c1"># Element-wise operations</span>
+</pre></div>
+</div>
+<p><strong>Performance gain:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Speedup}_{\text{vectorized}} = 10-100\times \text{ vs naive Python loops}\]</div>
+</div>
+</section>
+<section id="numba-jit-compilation">
+<h3>Numba JIT Compilation<a class="headerlink" href="#numba-jit-compilation" title="Link to this heading">¶</a></h3>
+<p><strong>Just-In-Time compilation:</strong></p>
+<ul class="simple">
+<li><p>Compiles Python → LLVM → machine code</p></li>
+<li><p>Type specialization</p></li>
+<li><p>Loop optimization</p></li>
+<li><p>SIMD auto-vectorization</p></li>
+</ul>
+<p><strong>&#64;njit decorator:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_simulate</span><span class="p">(</span><span class="n">x0_batch</span><span class="p">,</span> <span class="n">u_batch</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">steps</span><span class="p">):</span>
+    <span class="c1"># Compiled to optimized machine code</span>
+</pre></div>
+</div>
+</section>
+<section id="parallel-batch-processing">
+<h3>Parallel Batch Processing<a class="headerlink" href="#parallel-batch-processing" title="Link to this heading">¶</a></h3>
+<p><strong>Two-level parallelism:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Batch-level:</strong> Multiple batches processed in parallel</p></li>
+</ol>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Batches} = \lceil \frac{M}{B} \rceil\]</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Within-batch:</strong> SIMD vectorization</p></li>
+</ol>
+<p><strong>Total parallelism:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Parallelism} = N_{\text{cores}} \times \text{SIMD width}\]</div>
+</div>
+</section>
+<section id="memory-layout-optimization">
+<h3>Memory Layout Optimization<a class="headerlink" href="#memory-layout-optimization" title="Link to this heading">¶</a></h3>
+<p><strong>Array-of-Structures (AoS):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">states</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x1</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span> <span class="o">...</span><span class="p">]</span>  <span class="c1"># Poor cache locality</span>
+</pre></div>
+</div>
+<p><strong>Structure-of-Arrays (SoA):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">xB</span><span class="p">]</span>           <span class="c1"># Excellent cache locality</span>
+<span class="n">theta1</span> <span class="o">=</span> <span class="p">[</span><span class="n">θ1_1</span><span class="p">,</span> <span class="n">θ1_2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">θ1_B</span><span class="p">]</span>  <span class="c1"># Contiguous memory</span>
+</pre></div>
+</div>
+<p><strong>Cache line utilization:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\eta_{\text{cache}} = \frac{\text{Useful bytes loaded}}{64 \text{ bytes (cache line)}} \times 100\%\]</div>
+</div>
+<p>SoA: <span class="math notranslate nohighlight">\(\eta_{\text{cache}} \approx 100\%\)</span> vs AoS: <span class="math notranslate nohighlight">\(\eta_{\text{cache}} \approx 16.7\%\)</span> (for <span class="math notranslate nohighlight">\(n=6\)</span> DIP)</p>
+</section>
+<section id="load-balancing">
+<h3>Load Balancing<a class="headerlink" href="#load-balancing" title="Link to this heading">¶</a></h3>
+<p><strong>Dynamic batch sizing:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[B_{\text{optimal}} = \arg\max_B \frac{\text{Throughput}(B)}{\text{Memory}(B)}\]</div>
+</div>
+<p><strong>Typical optimal batch size:</strong> <span class="math notranslate nohighlight">\(B = 32-256\)</span> for DIP system</p>
+</section>
+<section id="performance-metrics">
+<h3>Performance Metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Throughput:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Theta = \frac{\text{Simulations completed}}{\text{Wall-clock time}} \quad [\text{sims/s}]\]</div>
+</div>
+<p><strong>Latency per simulation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[L = \frac{T_{\text{batch}}}{B}\]</div>
+</div>
+<p><strong>Efficiency:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[E = \frac{\Theta_{\text{actual}}}{\Theta_{\text{theoretical}}}\]</div>
+</div>
+</section>
+<section id="use-cases">
+<h3>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h3>
+<p><strong>Ideal for:</strong></p>
+<ul class="simple">
+<li><p>Monte Carlo analysis (thousands of runs)</p></li>
+<li><p>Parameter sweeps (grid search)</p></li>
+<li><p>Ensemble simulations (uncertainty quantification)</p></li>
+<li><p>PSO optimization (population evaluation)</p></li>
+</ul>
+<p><strong>Performance example:</strong></p>
+<ul class="simple">
+<li><p>Sequential: 100 sims × 1.0 s = 100 s</p></li>
+<li><p>Parallel (8 cores): 100 sims ÷ 8 = 12.5 s (8× speedup)</p></li>
+<li><p>Batch (8 cores + vectorization): 100 sims = 2.5 s (40× speedup)</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph LR
+    A[Input] --&gt; B[Orchestrators Processing]
+    B --&gt; C[Output]
+
+    style B fill:#9cf
+    style C fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.orchestrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrchestratorsBatch</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">OrchestratorsBatch</span><span class="p">()</span>
+
+<span class="c1"># Execute</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">OrchestratorsBatch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-profiling">
+<h3>Example 4: Performance Profiling<a class="headerlink" href="#example-4-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-other-components">
+<h3>Example 5: Integration with Other Components<a class="headerlink" href="#example-5-integration-with-other-components" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine with other simulation components</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -503,7 +739,7 @@
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
 <span class="linenos">  9</span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseOrchestrator</span>
@@ -1098,7 +1334,7 @@ Batch state trajectories - shape (batch_size, horizon+1, state_dim)</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1121,6 +1357,28 @@ Batch state trajectories - shape (batch_size, horizon+1, state_dim)</p>
             <ul>
 <li><a class="reference internal" href="#">simulation.orchestrators.batch</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#batch-simulation-orchestration">Batch Simulation Orchestration</a></li>
+<li><a class="reference internal" href="#batch-processing-model">Batch Processing Model</a></li>
+<li><a class="reference internal" href="#vectorization-benefits">Vectorization Benefits</a></li>
+<li><a class="reference internal" href="#numpy-vectorization">NumPy Vectorization</a></li>
+<li><a class="reference internal" href="#numba-jit-compilation">Numba JIT Compilation</a></li>
+<li><a class="reference internal" href="#parallel-batch-processing">Parallel Batch Processing</a></li>
+<li><a class="reference internal" href="#memory-layout-optimization">Memory Layout Optimization</a></li>
+<li><a class="reference internal" href="#load-balancing">Load Balancing</a></li>
+<li><a class="reference internal" href="#performance-metrics">Performance Metrics</a></li>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-profiling">Example 4: Performance Profiling</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-other-components">Example 5: Integration with Other Components</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#batchorchestrator"><code class="docutils literal notranslate"><span class="pre">BatchOrchestrator</span></code></a><ul>
@@ -1162,6 +1420,10 @@ Batch state trajectories - shape (batch_size, horizon+1, state_dim)</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

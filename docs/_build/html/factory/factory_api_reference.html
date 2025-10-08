@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -597,7 +623,10 @@
 </section>
 <section id="examples">
 <h4>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic controller creation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Basic controller creation</span>
 <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
     <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
     <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">35.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
@@ -619,7 +648,10 @@
 <p><strong>Returns list of available controller types.</strong></p>
 <section id="id1">
 <h4>Signature<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">list_available_controllers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">list_available_controllers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -641,7 +673,10 @@
 <p><strong>Returns default gains for a controller type.</strong></p>
 <section id="id3">
 <h4>Signature<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_default_gains</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_default_gains</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -691,7 +726,10 @@
 <section id="controllerprotocol">
 <h3><code class="docutils literal notranslate"><span class="pre">ControllerProtocol</span></code><a class="headerlink" href="#controllerprotocol" title="Link to this heading">¶</a></h3>
 <p><strong>Protocol defining the standard controller interface.</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControllerProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">state</span><span class="p">:</span> <span class="n">StateVector</span><span class="p">,</span>
@@ -818,7 +856,10 @@
 <h3>Adaptive SMC Configuration<a class="headerlink" href="#adaptive-smc-configuration" title="Link to this heading">¶</a></h3>
 <section id="id12">
 <h4>Required Parameters<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adaptive_params</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">adaptive_params</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>           <span class="c1"># [k1, k2, λ1, λ2, γ] - 5 elements</span>
     <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>             <span class="c1"># Maximum control force [N]</span>
     <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>                    <span class="c1"># Time step [s]</span>
@@ -850,7 +891,10 @@
 </section>
 <section id="id14">
 <h4>Example<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
     <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">,</span>
     <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">25.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span>
     <span class="n">max_force</span><span class="o">=</span><span class="mf">150.0</span><span class="p">,</span>
@@ -976,7 +1020,10 @@
 <p><strong>Returns PSO optimization bounds for controller type.</strong></p>
 <section id="id22">
 <h4>Signature<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_gain_bounds_for_pso</span><span class="p">(</span><span class="n">smc_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_gain_bounds_for_pso</span><span class="p">(</span><span class="n">smc_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span>
 </pre></div>
 </div>
 </section>
@@ -1053,7 +1100,10 @@
 <p><strong>Validates gains for controller type.</strong></p>
 <section id="id26">
 <h4>Signature<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_smc_gains</span><span class="p">(</span><span class="n">smc_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_smc_gains</span><span class="p">(</span><span class="n">smc_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 </div>
 </section>
@@ -1224,7 +1274,10 @@
 <p><strong>Returns migration guide for controller type.</strong></p>
 <section id="id35">
 <h4>Signature<a class="headerlink" href="#id35" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_controller_migration_guide</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_controller_migration_guide</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -1308,7 +1361,10 @@
 <h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">¶</a></h2>
 <section id="exception-hierarchy">
 <h3>Exception Hierarchy<a class="headerlink" href="#exception-hierarchy" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Factory-specific exceptions</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Factory-specific exceptions</span>
 <span class="ne">ValueError</span><span class="p">:</span>
   <span class="err">├──</span> <span class="n">Unknown</span> <span class="n">controller</span> <span class="nb">type</span>
   <span class="err">├──</span> <span class="n">Invalid</span> <span class="n">parameter</span> <span class="n">count</span>
@@ -1529,7 +1585,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,201 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Constraint definitions and checking for simulation safety.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="safety-constraints">
+<h3>Safety Constraints<a class="headerlink" href="#safety-constraints" title="Link to this heading">¶</a></h3>
+<p>Hard constraints and violation handling for safe simulation.</p>
+</section>
+<section id="constraint-types">
+<h3>Constraint Types<a class="headerlink" href="#constraint-types" title="Link to this heading">¶</a></h3>
+<section id="state-constraints">
+<h4><strong>1. State Constraints</strong><a class="headerlink" href="#state-constraints" title="Link to this heading">¶</a></h4>
+<p><strong>Box constraints:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{X}_{\text{safe}} = \{\vec{x} \in \mathbb{R}^n : \vec{x}_{\min} \leq \vec{x} \leq \vec{x}_{\max}\}\]</div>
+</div>
+<p><strong>Nonlinear constraints:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[g_i(\vec{x}) \leq 0, \quad i = 1, \ldots, m\]</div>
+</div>
+</section>
+<section id="control-constraints">
+<h4><strong>2. Control Constraints</strong><a class="headerlink" href="#control-constraints" title="Link to this heading">¶</a></h4>
+<p><strong>Input saturation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{U}_{\text{safe}} = \{\vec{u} \in \mathbb{R}^m : u_{\min} \leq u \leq u_{\max}\}\]</div>
+</div>
+<p><strong>Rate limits:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\left|\frac{du}{dt}\right| \leq \dot{u}_{\max}\]</div>
+</div>
+</section>
+<section id="joint-constraints">
+<h4><strong>3. Joint Constraints</strong><a class="headerlink" href="#joint-constraints" title="Link to this heading">¶</a></h4>
+<p><strong>State-control coupling:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[h(\vec{x}, \vec{u}) \leq 0\]</div>
+</div>
+<p><strong>Example: Energy constraint</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[E(\vec{x}) + \frac{1}{2} u^2 \leq E_{\max}\]</div>
+</div>
+</section>
+</section>
+<section id="control-barrier-functions-cbf">
+<h3>Control Barrier Functions (CBF)<a class="headerlink" href="#control-barrier-functions-cbf" title="Link to this heading">¶</a></h3>
+<p><strong>Safety certificate:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[B(\vec{x}) \geq 0 \Leftrightarrow \vec{x} \in \mathcal{X}_{\text{safe}}\]</div>
+</div>
+<p><strong>Forward invariance condition:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{B}(\vec{x}) \geq -\alpha(B(\vec{x}))\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\alpha(\cdot)\)</span> is a class-<span class="math notranslate nohighlight">\(\mathcal{K}\)</span> function (e.g., <span class="math notranslate nohighlight">\(\alpha(B) = kB\)</span>)</p>
+<p><strong>Control law modification:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u^* = \arg\min_{u \in \mathcal{U}} \|u - u_{\text{nom}}\|^2 \quad \text{s.t.} \quad \dot{B}(\vec{x}, u) \geq -\alpha(B)\]</div>
+</div>
+</section>
+<section id="constraint-violation-handling">
+<h3>Constraint Violation Handling<a class="headerlink" href="#constraint-violation-handling" title="Link to this heading">¶</a></h3>
+<p><strong>Soft constraints</strong> (penalties):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[J = J_{\text{performance}} + \lambda \sum_{i} \max(0, g_i(\vec{x}))^2\]</div>
+</div>
+<p><strong>Hard constraints</strong> (clipping):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{\text{safe}} = \Pi_{\mathcal{X}_{\text{safe}}}(\vec{x}) = \arg\min_{\tilde{\vec{x}} \in \mathcal{X}_{\text{safe}}} \|\tilde{\vec{x}} - \vec{x}\|\]</div>
+</div>
+<p><strong>Emergency stop:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Violation}(\vec{x}) \Rightarrow \text{STOP}\]</div>
+</div>
+</section>
+<section id="constraint-propagation">
+<h3>Constraint Propagation<a class="headerlink" href="#constraint-propagation" title="Link to this heading">¶</a></h3>
+<p><strong>Forward reachability:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{R}_{[t_0, t_f]} = \{\vec{x}(t) : \vec{x}_0 \in \mathcal{X}_0, \vec{u}(\cdot) \in \mathcal{U}, t \in [t_0, t_f]\}\]</div>
+</div>
+<p><strong>Backward reachability (invariant set):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{I} = \{\vec{x}_0 : \vec{x}(t) \in \mathcal{X}_{\text{safe}} \quad \forall t \geq 0\}\]</div>
+</div>
+</section>
+<section id="penalty-methods">
+<h3>Penalty Methods<a class="headerlink" href="#penalty-methods" title="Link to this heading">¶</a></h3>
+<p><strong>Quadratic penalty:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[p(\vec{x}) = \sum_{i=1}^{m} \rho_i \cdot \max(0, g_i(\vec{x}))^2\]</div>
+</div>
+<p><strong>Exponential penalty:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[p(\vec{x}) = \sum_{i=1}^{m} e^{\kappa g_i(\vec{x})} - 1\]</div>
+</div>
+</section>
+<section id="lagrange-multipliers">
+<h3>Lagrange Multipliers<a class="headerlink" href="#lagrange-multipliers" title="Link to this heading">¶</a></h3>
+<p><strong>KKT conditions for constrained optimization:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_u L(\vec{u}^*, \vec{\lambda}^*) &amp;= 0 \\
+g_i(\vec{u}^*) &amp;\leq 0 \\
+\lambda_i^* &amp;\geq 0 \\
+\lambda_i^* g_i(\vec{u}^*) &amp;= 0
+\end{align}\end{split}\]</div>
+</div>
+</section>
+<section id="safety-monitoring-dashboard">
+<h3>Safety Monitoring Dashboard<a class="headerlink" href="#safety-monitoring-dashboard" title="Link to this heading">¶</a></h3>
+<p><strong>Real-time violation metrics:</strong></p>
+<ul class="simple">
+<li><p><strong>Constraint violation count:</strong> <span class="math notranslate nohighlight">\(N_{\text{violations}}\)</span></p></li>
+<li><p><strong>Severity:</strong> <span class="math notranslate nohighlight">\(\max_i |g_i(\vec{x})|\)</span></p></li>
+<li><p><strong>Duration:</strong> Time spent in violation</p></li>
+<li><p><strong>Recovery time:</strong> Time to return to safe set</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph LR
+    A[Input] --&gt; B[Safety Processing]
+    B --&gt; C[Output]
+
+    style B fill:#9cf
+    style C fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.safety</span><span class="w"> </span><span class="kn">import</span> <span class="n">SafetyConstraints</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">SafetyConstraints</span><span class="p">()</span>
+
+<span class="c1"># Execute</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">SafetyConstraints</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-profiling">
+<h3>Example 4: Performance Profiling<a class="headerlink" href="#example-4-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-other-components">
+<h3>Example 5: Integration with Other Components<a class="headerlink" href="#example-5-integration-with-other-components" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine with other simulation components</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -503,7 +724,7 @@
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
 <span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span>
@@ -917,7 +1138,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -940,6 +1161,31 @@
             <ul>
 <li><a class="reference internal" href="#">simulation.safety.constraints</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#safety-constraints">Safety Constraints</a></li>
+<li><a class="reference internal" href="#constraint-types">Constraint Types</a><ul>
+<li><a class="reference internal" href="#state-constraints"><strong>1. State Constraints</strong></a></li>
+<li><a class="reference internal" href="#control-constraints"><strong>2. Control Constraints</strong></a></li>
+<li><a class="reference internal" href="#joint-constraints"><strong>3. Joint Constraints</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#control-barrier-functions-cbf">Control Barrier Functions (CBF)</a></li>
+<li><a class="reference internal" href="#constraint-violation-handling">Constraint Violation Handling</a></li>
+<li><a class="reference internal" href="#constraint-propagation">Constraint Propagation</a></li>
+<li><a class="reference internal" href="#penalty-methods">Penalty Methods</a></li>
+<li><a class="reference internal" href="#lagrange-multipliers">Lagrange Multipliers</a></li>
+<li><a class="reference internal" href="#safety-monitoring-dashboard">Safety Monitoring Dashboard</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-profiling">Example 4: Performance Profiling</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-other-components">Example 5: Integration with Other Components</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#constraint"><code class="docutils literal notranslate"><span class="pre">Constraint</span></code></a><ul>
@@ -1010,6 +1256,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

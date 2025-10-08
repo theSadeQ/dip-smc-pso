@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.smc.algorithms.adaptive.parameter_estimation" href="smc_algorithms_adaptive_parameter_estimation.html" /><link rel="prev" title="controllers.smc.algorithms.adaptive.config" href="smc_algorithms_adaptive_config.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -500,8 +526,142 @@
 </ul>
 <p>Replaces the monolithic 427-line controller with composition of focused modules.</p>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="adaptive-smc-structure">
+<h3>Adaptive SMC Structure<a class="headerlink" href="#adaptive-smc-structure" title="Link to this heading">¶</a></h3>
+<p><strong>Control law:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u = -\hat{K}(t) \, \text{sat}(s/\epsilon)\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\hat{K}(t)\)</span> is adapted online.</p>
+</section>
+<section id="complete-lyapunov-analysis">
+<h3>Complete Lyapunov Analysis<a class="headerlink" href="#complete-lyapunov-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Augmented Lyapunov function:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V = \frac{1}{2} s^2 + \frac{1}{2\gamma} \tilde{K}^2\]</div>
+</div>
+<p><strong>Derivative on sliding surface (<span class="math notranslate nohighlight">\(s = 0\)</span>):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{V} = s \dot{s} + \frac{1}{\gamma} \tilde{K} \dot{K}\]</div>
+</div>
+<p><strong>With adaptation law</strong> <span class="math notranslate nohighlight">\(\dot{K} = \gamma |s| - \sigma K\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{V} = s \dot{s} + \tilde{K} (|s| - \frac{\sigma}{\gamma} K)\]</div>
+</div>
+<p>If <span class="math notranslate nohighlight">\(\dot{s} = -\Delta - \hat{K} \text{sign}(s)\)</span>, then:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s \dot{s} = -s \Delta - \hat{K} |s| = -s \Delta - K^* |s| - \tilde{K} |s|\]</div>
+</div>
+<p>Substituting:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{V} \leq -K^* |s| - s \Delta - \frac{\sigma}{\gamma} \tilde{K} K\]</div>
+</div>
+</section>
+<section id="robustness-to-parametric-uncertainty">
+<h3>Robustness to Parametric Uncertainty<a class="headerlink" href="#robustness-to-parametric-uncertainty" title="Link to this heading">¶</a></h3>
+<p><strong>Model with uncertainty:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{s} = f_0(\vec{x}) + \Delta f(\vec{x}, \vec{\theta}) + u\]</div>
+</div>
+<p><strong>Adaptive control ensures:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\lim_{t \to \infty} |s(t)| \leq \delta_{residual}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\delta_{residual}\)</span> depends on <span class="math notranslate nohighlight">\(\epsilon_{max}\)</span> (unmodeled dynamics).</p>
+</section>
+<section id="transient-performance">
+<h3>Transient Performance<a class="headerlink" href="#transient-performance" title="Link to this heading">¶</a></h3>
+<p><strong>Overshoot bound:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\max_{t \geq 0} |s(t)| \leq \sqrt{2 V(0)}\]</div>
+</div>
+</section>
+<section id="steady-state-error">
+<h3>Steady-State Error<a class="headerlink" href="#steady-state-error" title="Link to this heading">¶</a></h3>
+<p><strong>Ultimate bound:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[|s|_{ss} \leq \frac{\epsilon_{max}}{K_{min} - |\Delta|_{max}}\]</div>
+</div>
+</section>
+</section>
 <section id="architecture-diagram">
 <h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[State x] --&gt; B[Sliding Surface s]
+    B --&gt; C[Adaptation Law: K̇ = γ|s|]
+    C --&gt; D[Gain K_t_]
+    B --&gt; E[Control: u = -K sat_s/ε_]
+    D --&gt; E
+
+    E --&gt; F[Saturation]
+    F --&gt; G[Control Output u]
+
+    B --&gt; H[Feedback to Adaptation]
+    H --&gt; C
+
+    style C fill:#9cf
+    style G fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.algorithms.adaptive</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-controller">
+<h3>Example 3: Integration with Controller<a class="headerlink" href="#example-3-integration-with-controller" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete control loop</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ITAE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">itae</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id1">
+<h2>Architecture Diagram<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <div class="mermaid">
             graph TD
     A[State Input] --&gt; B[Sliding Surface]
@@ -716,7 +876,7 @@
 <span class="linenos">153</span>                        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="linenos">154</span>                    <span class="k">else</span><span class="p">:</span>  <span class="c1"># 3-DOF or DIP system</span>
 <span class="linenos">155</span>                        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="linenos">156</span>                <span class="k">except</span><span class="p">:</span>
+<span class="linenos">156</span>                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">157</span>                    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># Default to 3-DOF</span>
 <span class="linenos">158</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">159</span>                <span class="c1"># Standard interface: return error dictionary</span>
@@ -1024,7 +1184,7 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
 <span class="linenos">126</span>                        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="linenos">127</span>                    <span class="k">else</span><span class="p">:</span>  <span class="c1"># 3-DOF or DIP system</span>
 <span class="linenos">128</span>                        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="linenos">129</span>                <span class="k">except</span><span class="p">:</span>
+<span class="linenos">129</span>                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">130</span>                    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># Default to 3-DOF</span>
 <span class="linenos">131</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">132</span>                <span class="c1"># Standard interface: return error dictionary</span>
@@ -1210,8 +1370,8 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
 <section id="adaptivesmc">
 <h3><code class="docutils literal notranslate"><span class="pre">AdaptiveSMC</span></code><a class="headerlink" href="#adaptivesmc" title="Link to this heading">¶</a></h3>
 <p>Backward-compatible facade for the modular Adaptive SMC.</p>
-<section id="id1">
-<h4>Source Code<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<section id="id2">
+<h4>Source Code<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMC</span><span class="p">:</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Backward-compatible facade for the modular Adaptive SMC.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -1276,18 +1436,18 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
 <p>Compute control (delegates to modular controller).</p>
 <p><a class="reference internal" href="#method-adaptivesmc-compute_control"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id2">
-<h5><code class="docutils literal notranslate"><span class="pre">gains(self)</span></code><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h5>
+<section id="id3">
+<h5><code class="docutils literal notranslate"><span class="pre">gains(self)</span></code><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h5>
 <p>Return controller gains.</p>
 <p><a class="reference internal" href="#method-adaptivesmc-gains"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id3">
-<h5><code class="docutils literal notranslate"><span class="pre">get_adaptive_gain(self)</span></code><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h5>
+<section id="id4">
+<h5><code class="docutils literal notranslate"><span class="pre">get_adaptive_gain(self)</span></code><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h5>
 <p>Get current adaptive gain.</p>
 <p><a class="reference internal" href="#method-adaptivesmc-get_adaptive_gain"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id4">
-<h5><code class="docutils literal notranslate"><span class="pre">reset(self)</span></code><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h5>
+<section id="id5">
+<h5><code class="docutils literal notranslate"><span class="pre">reset(self)</span></code><a class="headerlink" href="#id5" title="Link to this heading">¶</a></h5>
 <p>Reset controller to initial state.</p>
 <p><a class="reference internal" href="#method-adaptivesmc-reset"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1296,8 +1456,8 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
 <p>Reset adaptation state.</p>
 <p><a class="reference internal" href="#method-adaptivesmc-reset_adaptation"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id5">
-<h5><code class="docutils literal notranslate"><span class="pre">get_parameters(self)</span></code><a class="headerlink" href="#id5" title="Link to this heading">¶</a></h5>
+<section id="id6">
+<h5><code class="docutils literal notranslate"><span class="pre">get_parameters(self)</span></code><a class="headerlink" href="#id6" title="Link to this heading">¶</a></h5>
 <p>Get controller parameters.</p>
 <p><a class="reference internal" href="#method-adaptivesmc-get_parameters"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1319,8 +1479,8 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.config</span> <span class="pre">import</span> <span class="pre">AdaptiveSMCConfig</span></code></p></li>
 </ul>
 </section>
-<section id="usage-examples">
-<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h2>Usage Examples<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <section id="basic-instantiation">
 <h3>Basic Instantiation<a class="headerlink" href="#basic-instantiation" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.algorithms.adaptive</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModularAdaptiveSMC</span>
@@ -1443,7 +1603,7 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1466,7 +1626,24 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
             <ul>
 <li><a class="reference internal" href="#">controllers.smc.algorithms.adaptive.controller</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#adaptive-smc-structure">Adaptive SMC Structure</a></li>
+<li><a class="reference internal" href="#complete-lyapunov-analysis">Complete Lyapunov Analysis</a></li>
+<li><a class="reference internal" href="#robustness-to-parametric-uncertainty">Robustness to Parametric Uncertainty</a></li>
+<li><a class="reference internal" href="#transient-performance">Transient Performance</a></li>
+<li><a class="reference internal" href="#steady-state-error">Steady-State Error</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-controller">Example 3: Integration with Controller</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Architecture Diagram</a></li>
 <li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
 <li><a class="reference internal" href="#adaptive-sliding-mode-control">Adaptive Sliding Mode Control</a></li>
 <li><a class="reference internal" href="#stability-with-adaptation">Stability with Adaptation</a></li>
@@ -1494,15 +1671,15 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#adaptivesmc"><code class="docutils literal notranslate"><span class="pre">AdaptiveSMC</span></code></a><ul>
-<li><a class="reference internal" href="#id1">Source Code</a></li>
+<li><a class="reference internal" href="#id2">Source Code</a></li>
 <li><a class="reference internal" href="#methods-7">Methods (7)</a><ul>
 <li><a class="reference internal" href="#init-self-gains-dt-max-force"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">gains,</span> <span class="pre">dt,</span> <span class="pre">max_force)</span></code></a></li>
 <li><a class="reference internal" href="#compute-control-self-state-state-vars-history"><code class="docutils literal notranslate"><span class="pre">compute_control(self,</span> <span class="pre">state,</span> <span class="pre">state_vars,</span> <span class="pre">history)</span></code></a></li>
-<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">gains(self)</span></code></a></li>
-<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">get_adaptive_gain(self)</span></code></a></li>
-<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">reset(self)</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">gains(self)</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">get_adaptive_gain(self)</span></code></a></li>
+<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">reset(self)</span></code></a></li>
 <li><a class="reference internal" href="#reset-adaptation-self"><code class="docutils literal notranslate"><span class="pre">reset_adaptation(self)</span></code></a></li>
-<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">get_parameters(self)</span></code></a></li>
+<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">get_parameters(self)</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1510,7 +1687,7 @@ Where K(t) adapts online: K̇ = γ|s| - σK</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#id7">Usage Examples</a><ul>
 <li><a class="reference internal" href="#basic-instantiation">Basic Instantiation</a></li>
 <li><a class="reference internal" href="#simulation-with-online-adaptation">Simulation with Online Adaptation</a></li>
 <li><a class="reference internal" href="#pso-optimization-of-adaptive-parameters">PSO Optimization of Adaptive Parameters</a></li>

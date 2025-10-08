@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,8 +517,176 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Model-based residual generation for fault detection.</p>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="residual-generation-algorithms">
+<h3>Residual Generation Algorithms<a class="headerlink" href="#residual-generation-algorithms" title="Link to this heading">¶</a></h3>
+<p><strong>General form:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{r}(t) = g(\vec{y}(t), \vec{u}(t), \hat{\vec{x}}(t))\]</div>
+</div>
+</section>
+<section id="observer-based-residuals">
+<h3>Observer-Based Residuals<a class="headerlink" href="#observer-based-residuals" title="Link to this heading">¶</a></h3>
+<p><strong>Full-order observer:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dot{\hat{\vec{x}}} &amp;= A\hat{\vec{x}} + B\vec{u} + L(\vec{y} - C\hat{\vec{x}}) \\
+\vec{r} &amp;= \vec{y} - C\hat{\vec{x}}
+\end{align}\end{split}\]</div>
+</div>
+<p><strong>Error dynamics:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{\vec{e}} = (A - LC)\vec{e} + E\vec{f}\]</div>
+</div>
+<p>Choose <span class="math notranslate nohighlight">\(L\)</span> for stable <span class="math notranslate nohighlight">\(A - LC\)</span> and fault sensitivity.</p>
+</section>
+<section id="reduced-order-observer">
+<h3>Reduced-Order Observer<a class="headerlink" href="#reduced-order-observer" title="Link to this heading">¶</a></h3>
+<p><strong>For observable pair <span class="math notranslate nohighlight">\((A, C)\)</span> with <span class="math notranslate nohighlight">\(C\)</span> full rank:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dot{\vec{z}} &amp;= F\vec{z} + GB\vec{u} + GLC\vec{y} \\
+\hat{\vec{x}} &amp;= T^{-1}(\vec{z} + L\vec{y})
+\end{align}\end{split}\]</div>
+</div>
+<p>Dimension: <span class="math notranslate nohighlight">\(n - p\)</span> instead of <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</section>
+<section id="parity-space-residuals">
+<h3>Parity Space Residuals<a class="headerlink" href="#parity-space-residuals" title="Link to this heading">¶</a></h3>
+<p><strong>Temporal parity equations</strong> (over window <span class="math notranslate nohighlight">\([t-s, t]\)</span>):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{r} = W \begin{bmatrix} y(t-s) \\ \vdots \\ y(t) \\ u(t-s) \\ \vdots \\ u(t) \end{bmatrix}\end{split}\]</div>
+</div>
+<p><strong>Null space:</strong> <span class="math notranslate nohighlight">\(W\)</span> chosen so <span class="math notranslate nohighlight">\(W^T H = 0\)</span> where <span class="math notranslate nohighlight">\(H\)</span> contains system matrices.</p>
+</section>
+<section id="unknown-input-observer">
+<h3>Unknown Input Observer<a class="headerlink" href="#unknown-input-observer" title="Link to this heading">¶</a></h3>
+<p><strong>For disturbances <span class="math notranslate nohighlight">\(\vec{d}\)</span>:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dot{\vec{x}} &amp;= A\vec{x} + B\vec{u} + E_d\vec{d} + E_f\vec{f} \\
+\vec{y} &amp;= C\vec{x}
+\end{align}\end{split}\]</div>
+</div>
+<p><strong>UIO design:</strong> Decouple disturbance, retain fault sensitivity.</p>
+<p><strong>Conditions:</strong> <span class="math notranslate nohighlight">\(\text{rank}(CE_d) = \text{rank}(E_d)\)</span></p>
+</section>
+<section id="dedicated-residuals">
+<h3>Dedicated Residuals<a class="headerlink" href="#dedicated-residuals" title="Link to this heading">¶</a></h3>
+<p><strong>Dedicated observer scheme (DOS):</strong></p>
+<p>Design <span class="math notranslate nohighlight">\(m\)</span> observers, each insensitive to fault <span class="math notranslate nohighlight">\(f_i\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[r_i = 0 \text{ if fault } f_i, \quad r_i \neq 0 \text{ otherwise}\]</div>
+</div>
+<p><strong>Generalized observer scheme (GOS):</strong></p>
+<p>Each <span class="math notranslate nohighlight">\(r_i\)</span> sensitive only to <span class="math notranslate nohighlight">\(f_i\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[r_i \neq 0 \text{ iff fault } f_i\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[System Model] --&gt; B{Residual Type}
+
+    B --&gt;|Observer| C[Full-Order Observer]
+    B --&gt;|Parity| D[Parity Equations]
+    B --&gt;|UIO| E[Unknown Input Observer]
+
+    C --&gt; F[State Estimate]
+    F --&gt; G[r = y - Cx̂]
+
+    D --&gt; H[Null Space W]
+    H --&gt; I[r = W[y; u]]
+
+    E --&gt; J[Disturbance Decoupling]
+    J --&gt; K[r_UIO]
+
+    G --&gt; L[Residual Vector]
+    I --&gt; L
+    K --&gt; L
+
+    L --&gt; M[Sensitivity Analysis]
+    M --&gt; N{Fault Sensitive?}
+    N --&gt;|Yes| O[Good Residual]
+    N --&gt;|No| P[Redesign]
+
+    style M fill:#9cf
+    style N fill:#ff9
+    style O fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span>
+
+<span class="c1"># Initialize component</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure with custom parameters</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;adaptive&#39;</span>
+<span class="p">}</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-workflow">
+<h3>Example 3: Integration Workflow<a class="headerlink" href="#example-3-integration-workflow" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete analysis workflow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">analyze</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">sensor_data</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;enhanced&#39;</span><span class="p">,</span>
+    <span class="n">visualization</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-fault-detection-example">
+<h3>Example 4: Fault Detection Example<a class="headerlink" href="#example-4-fault-detection-example" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># FDI system usage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.fault_detection</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDISystem</span>
+
+<span class="n">fdi</span> <span class="o">=</span> <span class="n">FDISystem</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">generate_residual</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="n">fault</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">residual</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-visualization-example">
+<h3>Example 5: Visualization Example<a class="headerlink" href="#example-5-visualization-example" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate analysis plots</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnalysisPlotter</span>
+
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">AnalysisPlotter</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;professional&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plotter</span><span class="o">.</span><span class="n">plot_time_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;analysis.pdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This module provides various residual generation methods for fault detection
 including observer-based, parity-based, and parameter estimation approaches.</p>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -508,11 +702,11 @@ including observer-based, parity-based, and parameter estimation approaches.</p>
 <span class="linenos"> 10</span>
 <span class="linenos"> 11</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos"> 12</span>
-<span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Protocol</span>
 <span class="linenos"> 14</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span><span class="p">,</span> <span class="n">signal</span>
 <span class="linenos"> 16</span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-<span class="linenos"> 17</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="linenos"> 17</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 <span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="linenos"> 19</span>
 <span class="linenos"> 20</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataProtocol</span>
@@ -836,9 +1030,9 @@ including observer-based, parity-based, and parameter estimation approaches.</p>
 <span class="linenos">338</span>        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">339</span>
 <span class="linenos">340</span>        <span class="c1"># Build observability matrix</span>
-<span class="linenos">341</span>        <span class="n">O</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">n</span><span class="p">))</span>
+<span class="linenos">341</span>        <span class="n">observability_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">n</span><span class="p">))</span>
 <span class="linenos">342</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-<span class="linenos">343</span>            <span class="n">O</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">m</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">@</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="linenos">343</span>            <span class="n">observability_matrix</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">m</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">@</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 <span class="linenos">344</span>
 <span class="linenos">345</span>        <span class="c1"># Build control influence matrix</span>
 <span class="linenos">346</span>        <span class="n">Gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">p</span> <span class="o">*</span> <span class="n">s</span><span class="p">))</span>
@@ -849,12 +1043,12 @@ including observer-based, parity-based, and parameter estimation approaches.</p>
 <span class="linenos">351</span>                <span class="n">col_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span>
 <span class="linenos">352</span>                <span class="n">col_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span>
 <span class="linenos">353</span>
-<span class="linenos">354</span>                <span class="k">if</span> <span class="n">row_start</span> <span class="o">&lt;</span> <span class="n">O</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">col_start</span> <span class="o">&lt;</span> <span class="n">Gamma</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+<span class="linenos">354</span>                <span class="k">if</span> <span class="n">row_start</span> <span class="o">&lt;</span> <span class="n">observability_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">col_start</span> <span class="o">&lt;</span> <span class="n">Gamma</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
 <span class="linenos">355</span>                    <span class="n">Gamma</span><span class="p">[</span><span class="n">row_start</span><span class="p">:</span><span class="n">row_end</span><span class="p">,</span> <span class="n">col_start</span><span class="p">:</span><span class="n">col_end</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">@</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
 <span class="linenos">356</span>
 <span class="linenos">357</span>        <span class="c1"># Compute parity vector (left null space of observability matrix)</span>
 <span class="linenos">358</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">359</span>            <span class="n">U</span><span class="p">,</span> <span class="n">s_vals</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">O</span><span class="p">)</span>
+<span class="linenos">359</span>            <span class="n">U</span><span class="p">,</span> <span class="n">s_vals</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">observability_matrix</span><span class="p">)</span>
 <span class="linenos">360</span>
 <span class="linenos">361</span>            <span class="c1"># Find null space</span>
 <span class="linenos">362</span>            <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-10</span>
@@ -1011,7 +1205,7 @@ including observer-based, parity-based, and parameter estimation approaches.</p>
 <span class="linenos">513</span>
 <span class="linenos">514</span>        <span class="c1"># Compute state derivatives using finite differences</span>
 <span class="linenos">515</span>        <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
-<span class="linenos">516</span>        <span class="n">state_derivatives</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">516</span>        <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="linenos">517</span>
 <span class="linenos">518</span>        <span class="c1"># Simple linear regression for demonstration</span>
 <span class="linenos">519</span>        <span class="c1"># This would be replaced with proper system identification</span>
@@ -1657,9 +1851,9 @@ including observer-based, parity-based, and parameter estimation approaches.</p>
 <span class="linenos"> 26</span>        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos"> 27</span>
 <span class="linenos"> 28</span>        <span class="c1"># Build observability matrix</span>
-<span class="linenos"> 29</span>        <span class="n">O</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">n</span><span class="p">))</span>
+<span class="linenos"> 29</span>        <span class="n">observability_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">n</span><span class="p">))</span>
 <span class="linenos"> 30</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-<span class="linenos"> 31</span>            <span class="n">O</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">m</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">@</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="linenos"> 31</span>            <span class="n">observability_matrix</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">m</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">@</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 <span class="linenos"> 32</span>
 <span class="linenos"> 33</span>        <span class="c1"># Build control influence matrix</span>
 <span class="linenos"> 34</span>        <span class="n">Gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">p</span> <span class="o">*</span> <span class="n">s</span><span class="p">))</span>
@@ -1670,12 +1864,12 @@ including observer-based, parity-based, and parameter estimation approaches.</p>
 <span class="linenos"> 39</span>                <span class="n">col_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span>
 <span class="linenos"> 40</span>                <span class="n">col_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span>
 <span class="linenos"> 41</span>
-<span class="linenos"> 42</span>                <span class="k">if</span> <span class="n">row_start</span> <span class="o">&lt;</span> <span class="n">O</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">col_start</span> <span class="o">&lt;</span> <span class="n">Gamma</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+<span class="linenos"> 42</span>                <span class="k">if</span> <span class="n">row_start</span> <span class="o">&lt;</span> <span class="n">observability_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">col_start</span> <span class="o">&lt;</span> <span class="n">Gamma</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
 <span class="linenos"> 43</span>                    <span class="n">Gamma</span><span class="p">[</span><span class="n">row_start</span><span class="p">:</span><span class="n">row_end</span><span class="p">,</span> <span class="n">col_start</span><span class="p">:</span><span class="n">col_end</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">@</span> <span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
 <span class="linenos"> 44</span>
 <span class="linenos"> 45</span>        <span class="c1"># Compute parity vector (left null space of observability matrix)</span>
 <span class="linenos"> 46</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos"> 47</span>            <span class="n">U</span><span class="p">,</span> <span class="n">s_vals</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">O</span><span class="p">)</span>
+<span class="linenos"> 47</span>            <span class="n">U</span><span class="p">,</span> <span class="n">s_vals</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">observability_matrix</span><span class="p">)</span>
 <span class="linenos"> 48</span>
 <span class="linenos"> 49</span>            <span class="c1"># Find null space</span>
 <span class="linenos"> 50</span>            <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-10</span>
@@ -1864,7 +2058,7 @@ including observer-based, parity-based, and parameter estimation approaches.</p>
 <span class="linenos"> 81</span>
 <span class="linenos"> 82</span>        <span class="c1"># Compute state derivatives using finite differences</span>
 <span class="linenos"> 83</span>        <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
-<span class="linenos"> 84</span>        <span class="n">state_derivatives</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 84</span>        <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="linenos"> 85</span>
 <span class="linenos"> 86</span>        <span class="c1"># Simple linear regression for demonstration</span>
 <span class="linenos"> 87</span>        <span class="c1"># This would be replaced with proper system identification</span>
@@ -2221,7 +2415,7 @@ Configured residual generator</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -2244,6 +2438,24 @@ Configured residual generator</p>
             <ul>
 <li><a class="reference internal" href="#">analysis.fault_detection.residual_generators</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#residual-generation-algorithms">Residual Generation Algorithms</a></li>
+<li><a class="reference internal" href="#observer-based-residuals">Observer-Based Residuals</a></li>
+<li><a class="reference internal" href="#reduced-order-observer">Reduced-Order Observer</a></li>
+<li><a class="reference internal" href="#parity-space-residuals">Parity Space Residuals</a></li>
+<li><a class="reference internal" href="#unknown-input-observer">Unknown Input Observer</a></li>
+<li><a class="reference internal" href="#dedicated-residuals">Dedicated Residuals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-workflow">Example 3: Integration Workflow</a></li>
+<li><a class="reference internal" href="#example-4-fault-detection-example">Example 4: Fault Detection Example</a></li>
+<li><a class="reference internal" href="#example-5-visualization-example">Example 5: Visualization Example</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#systemmodel"><code class="docutils literal notranslate"><span class="pre">SystemModel</span></code></a><ul>
@@ -2363,6 +2575,10 @@ Configured residual generator</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

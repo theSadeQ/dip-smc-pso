@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.smc.core.init" href="smc_core___init__.html" /><link rel="prev" title="controllers.smc.core.sliding_surface" href="smc_core_sliding_surface.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -499,6 +525,288 @@ These functions reduce chattering while maintaining the robustness properties of
 <li><p>Continuous approximations smooth the switching to reduce high-frequency oscillations</p></li>
 <li><p>Trade-off: smoother switching reduces chattering but may increase steady-state error</p></li>
 </ul>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="chattering-reduction-in-smc">
+<h3>Chattering Reduction in SMC<a class="headerlink" href="#chattering-reduction-in-smc" title="Link to this heading">¶</a></h3>
+<p><strong>Chattering</strong> is high-frequency oscillation around the sliding surface caused by discontinuous control.</p>
+</section>
+<section id="sign-function-ideal-smc">
+<h3>Sign Function (Ideal SMC)<a class="headerlink" href="#sign-function-ideal-smc" title="Link to this heading">¶</a></h3>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u_{sw} = -K \, \text{sign}(s)\]</div>
+</div>
+<p><strong>Problems:</strong></p>
+<ul class="simple">
+<li><p>Infinite switching frequency (theory)</p></li>
+<li><p>Actuator wear and heat (practice)</p></li>
+<li><p>Excites unmodeled dynamics</p></li>
+<li><p>Measurement noise amplification</p></li>
+</ul>
+</section>
+<section id="boundary-layer-method">
+<h3>Boundary Layer Method<a class="headerlink" href="#boundary-layer-method" title="Link to this heading">¶</a></h3>
+<p>Replace sign with continuous approximation within layer <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{sat}(s/\epsilon) = \begin{cases}
+1, &amp; s &gt; \epsilon \\
+s/\epsilon, &amp; |s| \leq \epsilon \\
+-1, &amp; s &lt; -\epsilon
+\end{cases}\end{split}\]</div>
+</div>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Continuous everywhere</p></li>
+<li><p>Lipschitz continuous: <span class="math notranslate nohighlight">\(|\text{sat}(s/\epsilon) - \text{sat}(s'/\epsilon)| \leq |s - s'|/\epsilon\)</span></p></li>
+<li><p>Reduces chattering to bounded oscillation: <span class="math notranslate nohighlight">\(|s| \leq \epsilon\)</span></p></li>
+</ul>
+</section>
+<section id="tanh-smoothing">
+<h3>Tanh Smoothing<a class="headerlink" href="#tanh-smoothing" title="Link to this heading">¶</a></h3>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{tanh}\left(\frac{\beta s}{\epsilon}\right)\]</div>
+</div>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Smooth (infinitely differentiable)</p></li>
+<li><p>Slope parameter <span class="math notranslate nohighlight">\(\beta\)</span> controls sharpness</p></li>
+<li><p>Better frequency response than saturation</p></li>
+</ul>
+<p><strong>Slope selection:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta = 3\)</span> (default): Smooth transition, minimal chattering</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta = 10\)</span>: Sharper transition, closer to sign function</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta &lt; 2\)</span>: Too smooth, tracking degrades</p></li>
+</ul>
+</section>
+<section id="frequency-analysis">
+<h3>Frequency Analysis<a class="headerlink" href="#frequency-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Describing function</strong> for tanh switching:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[N(A) = \frac{4 \beta}{\pi \epsilon A} \int_0^{\pi/2} \tanh(\beta A \sin \phi) \sin \phi \, d\phi\]</div>
+</div>
+<p><strong>For small <span class="math notranslate nohighlight">\(A \ll \epsilon\)</span>:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[N(A) \approx \frac{\beta}{\epsilon}\]</div>
+</div>
+<p><strong>Chattering frequency estimate:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\omega_c \approx \sqrt{\frac{K \beta}{\epsilon m}}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(m\)</span> is effective inertia.</p>
+</section>
+<section id="trade-offs">
+<h3>Trade-offs<a class="headerlink" href="#trade-offs" title="Link to this heading">¶</a></h3>
+<p><strong>Larger <span class="math notranslate nohighlight">\(\epsilon\)</span>:</strong></p>
+<ul class="simple">
+<li><p>✅ Less chattering</p></li>
+<li><p>❌ Larger steady-state error: <span class="math notranslate nohighlight">\(|e_{ss}| \leq \epsilon \max_i \lambda_i\)</span></p></li>
+</ul>
+<p><strong>Smaller <span class="math notranslate nohighlight">\(\epsilon\)</span>:</strong></p>
+<ul class="simple">
+<li><p>✅ Better tracking accuracy</p></li>
+<li><p>❌ More chattering</p></li>
+</ul>
+<p><strong>Typical design:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\epsilon = 3 \sigma_{noise}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\sigma_{noise}\)</span> is measurement noise standard deviation.</p>
+</section>
+<section id="dead-zone">
+<h3>Dead Zone<a class="headerlink" href="#dead-zone" title="Link to this heading">¶</a></h3>
+<p>For very small surface values, use dead zone to avoid chattering:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}u_{sw} = \begin{cases}
+-K \, \text{tanh}(s/\epsilon), &amp; |s| &gt; \delta \\
+0, &amp; |s| \leq \delta
+\end{cases}\end{split}\]</div>
+</div>
+<p><strong>Typical:</strong> <span class="math notranslate nohighlight">\(\delta = 0.1 \epsilon\)</span></p>
+</section>
+<section id="higher-order-approximations">
+<h3>Higher-Order Approximations<a class="headerlink" href="#higher-order-approximations" title="Link to this heading">¶</a></h3>
+<p><strong>Sigmoid function:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{2}{1 + e^{-\beta s/\epsilon}} - 1\]</div>
+</div>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Smooth like tanh</p></li>
+<li><p>Symmetric around origin</p></li>
+<li><p>Computationally similar cost</p></li>
+</ul>
+</section>
+<section id="implementation-considerations">
+<h3>Implementation Considerations<a class="headerlink" href="#implementation-considerations" title="Link to this heading">¶</a></h3>
+<p><strong>Numerical precision:</strong></p>
+<ul class="simple">
+<li><p>Avoid <span class="math notranslate nohighlight">\(s/\epsilon\)</span> when <span class="math notranslate nohighlight">\(\epsilon \to 0\)</span></p></li>
+<li><p>Clamp tanh argument: <span class="math notranslate nohighlight">\(|\beta s/\epsilon| \leq 20\)</span> (prevents overflow)</p></li>
+</ul>
+<p><strong>Real-time constraints:</strong></p>
+<ul class="simple">
+<li><p>tanh: ~10-20 CPU cycles</p></li>
+<li><p>saturation: ~5 CPU cycles</p></li>
+<li><p>sign: ~1 CPU cycle</p></li>
+</ul>
+</section>
+<section id="chattering-index-metric">
+<h3>Chattering Index Metric<a class="headerlink" href="#chattering-index-metric" title="Link to this heading">¶</a></h3>
+<p>Quantify chattering via <strong>switching count</strong> in window <span class="math notranslate nohighlight">\(T\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[I_c = \frac{1}{T} \int_0^T |\dot{u}(t)| dt\]</div>
+</div>
+<p><strong>Goal:</strong> <span class="math notranslate nohighlight">\(I_c &lt; I_{max}\)</span> (e.g., <span class="math notranslate nohighlight">\(I_{max} = 100\)</span> N/s for actuator)</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Sliding Surface s] --&gt; B{Switching Method}
+    B --&gt;|sign| C[Discontinuous: sign_s_]
+    B --&gt;|saturation| D[Boundary Layer: sat_s/ε_]
+    B --&gt;|tanh| E[Smooth: tanh_βs/ε_]
+
+    C --&gt; F[High Chattering]
+    D --&gt; G[Reduced Chattering, Bounded |s| ≤ ε]
+    E --&gt; H[Minimal Chattering, Smooth]
+
+    E --&gt; I[Check: |βs/ε| &lt; 20]
+    I --&gt;|Yes| J[Compute tanh]
+    I --&gt;|No| K[Clamp Argument]
+    K --&gt; J
+
+    style C fill:#f99
+    style D fill:#ff9
+    style E fill:#9cf
+    style H fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-tanh-switching-function">
+<h3>Example 1: Tanh Switching Function<a class="headerlink" href="#example-1-tanh-switching-function" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control.saturation</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Sliding surface value</span>
+<span class="n">s</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># rad</span>
+
+<span class="c1"># Boundary layer parameters</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># rad</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">3.0</span>  <span class="c1"># Slope parameter</span>
+
+<span class="c1"># Compute tanh switching</span>
+<span class="n">u_sw</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Switching control: </span><span class="si">{</span><span class="n">u_sw</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># For s &gt;&gt; epsilon, u_sw → 1.0</span>
+<span class="c1"># For s &lt;&lt; -epsilon, u_sw → -1.0</span>
+<span class="c1"># For |s| &lt; epsilon, smooth transition</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-chattering-comparison">
+<h3>Example 2: Chattering Comparison<a class="headerlink" href="#example-2-chattering-comparison" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Time series</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+<span class="n">s_trajectory</span> <span class="o">=</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.005</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+<span class="c1"># Different switching methods</span>
+<span class="n">u_sign</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">s_trajectory</span><span class="p">)</span>
+<span class="n">u_sat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">s_trajectory</span> <span class="o">/</span> <span class="n">epsilon</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">u_tanh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">s_trajectory</span> <span class="o">/</span> <span class="n">epsilon</span><span class="p">)</span>
+
+<span class="c1"># Compute chattering index (control derivative)</span>
+<span class="n">chat_sign</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u_sign</span><span class="p">)))</span>
+<span class="n">chat_sat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u_sat</span><span class="p">)))</span>
+<span class="n">chat_tanh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u_tanh</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chattering index (sign):  </span><span class="si">{</span><span class="n">chat_sign</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chattering index (sat):   </span><span class="si">{</span><span class="n">chat_sat</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chattering index (tanh):  </span><span class="si">{</span><span class="n">chat_tanh</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Lowest</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-slope-parameter-tuning">
+<h3>Example 3: Slope Parameter Tuning<a class="headerlink" href="#example-3-slope-parameter-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test different slope parameters</span>
+<span class="n">slopes</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">beta</span> <span class="ow">in</span> <span class="n">slopes</span><span class="p">:</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+
+    <span class="c1"># Estimate effective switching sharpness</span>
+    <span class="n">s_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">epsilon</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">epsilon</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">u_test</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">s_test</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+    <span class="n">sharpness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u_test</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="n">epsilon</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;β=</span><span class="si">{</span><span class="n">beta</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2">: u=</span><span class="si">{</span><span class="n">u</span><span class="si">:</span><span class="s2">6.4f</span><span class="si">}</span><span class="s2">, sharpness=</span><span class="si">{</span><span class="n">sharpness</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-dead-zone-integration">
+<h3>Example 4: Dead Zone Integration<a class="headerlink" href="#example-4-dead-zone-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dead_zone_switching</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Switching with dead zone to avoid chattering near origin.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">delta</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">K</span> <span class="o">*</span> <span class="n">saturate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">)</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">epsilon</span>  <span class="c1"># Dead zone 10% of boundary layer</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mf">50.0</span>
+
+<span class="n">u_sw</span> <span class="o">=</span> <span class="n">dead_zone_switching</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Switching with dead zone: </span><span class="si">{</span><span class="n">u_sw</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> N&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-frequency-response">
+<h3>Example 5: Frequency Response<a class="headerlink" href="#example-5-frequency-response" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span>
+
+<span class="c1"># Create transfer function for tanh switching</span>
+<span class="c1"># Approximation: linearize around s=0</span>
+<span class="c1"># tanh(βs/ε) ≈ (β/ε)s for small s</span>
+<span class="n">gain_linear</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">/</span> <span class="n">epsilon</span>
+
+<span class="c1"># Frequency response</span>
+<span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># 0.1 to 1000 rad/s</span>
+<span class="n">w</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">bode</span><span class="p">((</span><span class="n">gain_linear</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">frequencies</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Magnitude (dB)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Tanh Switching (β=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, ε=</span><span class="si">{</span><span class="n">epsilon</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Phase (deg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (rad/s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -1365,7 +1673,7 @@ Power rate reaching law output</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1388,6 +1696,28 @@ Power rate reaching law output</p>
             <ul>
 <li><a class="reference internal" href="#">controllers.smc.core.switching_functions</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#chattering-reduction-in-smc">Chattering Reduction in SMC</a></li>
+<li><a class="reference internal" href="#sign-function-ideal-smc">Sign Function (Ideal SMC)</a></li>
+<li><a class="reference internal" href="#boundary-layer-method">Boundary Layer Method</a></li>
+<li><a class="reference internal" href="#tanh-smoothing">Tanh Smoothing</a></li>
+<li><a class="reference internal" href="#frequency-analysis">Frequency Analysis</a></li>
+<li><a class="reference internal" href="#trade-offs">Trade-offs</a></li>
+<li><a class="reference internal" href="#dead-zone">Dead Zone</a></li>
+<li><a class="reference internal" href="#higher-order-approximations">Higher-Order Approximations</a></li>
+<li><a class="reference internal" href="#implementation-considerations">Implementation Considerations</a></li>
+<li><a class="reference internal" href="#chattering-index-metric">Chattering Index Metric</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-tanh-switching-function">Example 1: Tanh Switching Function</a></li>
+<li><a class="reference internal" href="#example-2-chattering-comparison">Example 2: Chattering Comparison</a></li>
+<li><a class="reference internal" href="#example-3-slope-parameter-tuning">Example 3: Slope Parameter Tuning</a></li>
+<li><a class="reference internal" href="#example-4-dead-zone-integration">Example 4: Dead Zone Integration</a></li>
+<li><a class="reference internal" href="#example-5-frequency-response">Example 5: Frequency Response</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#switchingmethod"><code class="docutils literal notranslate"><span class="pre">SwitchingMethod</span></code></a><ul>
@@ -1453,6 +1783,10 @@ Power rate reaching law output</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

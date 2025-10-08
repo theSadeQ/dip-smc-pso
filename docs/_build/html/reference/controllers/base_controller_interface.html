@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.base.control_primitives" href="base_control_primitives.html" /><link rel="prev" title="controllers.init" href="__init__.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,349 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Abstract base controller interface for the double inverted pendulum system.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="protocol-oriented-design">
+<h3>Protocol-Oriented Design<a class="headerlink" href="#protocol-oriented-design" title="Link to this heading">¶</a></h3>
+<p><strong>Protocols</strong> define abstract interfaces without implementation inheritance.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Protocol}: \text{Interface Specification} \to \text{Type Constraints}\]</div>
+</div>
+</section>
+<section id="controller-protocol">
+<h3>Controller Protocol<a class="headerlink" href="#controller-protocol" title="Link to this heading">¶</a></h3>
+<p><strong>Minimal interface</strong> all controllers must implement:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">state_vars</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+        <span class="n">history</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="liskov-substitution-principle">
+<h3>Liskov Substitution Principle<a class="headerlink" href="#liskov-substitution-principle" title="Link to this heading">¶</a></h3>
+<p><strong>LSP:</strong> Subclasses must be substitutable for base class without breaking program.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\forall c \in \text{Controller}: \quad c.\text{compute\_control}(s, v, h) \to (u, v', h')\]</div>
+</div>
+<p><strong>Guarantees:</strong></p>
+<ul class="simple">
+<li><p>All controllers return same signature</p></li>
+<li><p>All controllers handle same state format</p></li>
+<li><p>Simulation engine doesn’t care about controller type</p></li>
+</ul>
+</section>
+<section id="type-variance">
+<h3>Type Variance<a class="headerlink" href="#type-variance" title="Link to this heading">¶</a></h3>
+<p><strong>Contravariant input types:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Controller</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>  <span class="c1"># Can accept more general types in subclasses</span>
+        <span class="o">...</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="o">...</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Covariant return types:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Controller</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>  <span class="c1"># Subclasses can return more specific types</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="abstract-base-class-pattern">
+<h3>Abstract Base Class Pattern<a class="headerlink" href="#abstract-base-class-pattern" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Controller</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Subclasses MUST implement this.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Default implementation (optional override).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_history</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Enforcement:</strong> Python raises <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> if abstract methods not implemented.</p>
+</section>
+<section id="duck-typing-vs-explicit-protocols">
+<h3>Duck Typing vs Explicit Protocols<a class="headerlink" href="#duck-typing-vs-explicit-protocols" title="Link to this heading">¶</a></h3>
+<p><strong>Duck Typing:</strong> “If it walks like a duck and quacks like a duck, it’s a duck.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># No type checking - relies on runtime behavior</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="n">controller</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>  <span class="c1"># Hope it works!</span>
+</pre></div>
+</div>
+<p><strong>Explicit Protocol:</strong> Type checker validates at compile time.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">ControllerProtocol</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>  <span class="c1"># Type-safe!</span>
+</pre></div>
+</div>
+</section>
+<section id="state-variable-pattern">
+<h3>State Variable Pattern<a class="headerlink" href="#state-variable-pattern" title="Link to this heading">¶</a></h3>
+<p><strong>Problem:</strong> Controllers need internal state (e.g., integral error, adaptation gains).</p>
+<p><strong>Solution:</strong> Return updated state variables:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">state_vars</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">history</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="c1"># Extract previous state</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">state_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_initial</span><span class="p">)</span>
+
+    <span class="c1"># Update state (e.g., adaptation)</span>
+    <span class="n">K_new</span> <span class="o">=</span> <span class="n">K</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+
+    <span class="c1"># Return new state</span>
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="n">K_new</span><span class="p">},</span> <span class="n">history</span>
+</pre></div>
+</div>
+<p><strong>Benefits:</strong></p>
+<ul class="simple">
+<li><p>Pure functional style (no hidden state)</p></li>
+<li><p>Simulation reproducible (state fully captured)</p></li>
+<li><p>Easy to checkpoint and resume</p></li>
+</ul>
+</section>
+<section id="history-pattern">
+<h3>History Pattern<a class="headerlink" href="#history-pattern" title="Link to this heading">¶</a></h3>
+<p><strong>Problem:</strong> Controllers may need trajectory history (e.g., for derivative estimation).</p>
+<p><strong>Solution:</strong> Return updated history dict:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+    <span class="c1"># Append to history</span>
+    <span class="n">history</span><span class="p">[</span><span class="s1">&#39;states&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">history</span><span class="p">[</span><span class="s1">&#39;times&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># Compute derivative from history</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;states&#39;</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">derivative</span> <span class="o">=</span> <span class="p">(</span><span class="n">state</span> <span class="o">-</span> <span class="n">history</span><span class="p">[</span><span class="s1">&#39;states&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span>
+</pre></div>
+</div>
+</section>
+<section id="polymorphism-depth">
+<h3>Polymorphism Depth<a class="headerlink" href="#polymorphism-depth" title="Link to this heading">¶</a></h3>
+<p><strong>Single-level polymorphism:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Controller</span> <span class="p">(</span><span class="n">abstract</span><span class="p">)</span>
+<span class="err">├─</span> <span class="n">ClassicalSMC</span>
+<span class="err">├─</span> <span class="n">AdaptiveSMC</span>
+<span class="err">├─</span> <span class="n">SuperTwistingSMC</span>
+<span class="err">└─</span> <span class="n">HybridAdaptiveSMC</span>
+</pre></div>
+</div>
+<p><strong>No deep hierarchies:</strong> Avoid fragile base class problem.</p>
+</section>
+<section id="method-resolution-order">
+<h3>Method Resolution Order<a class="headerlink" href="#method-resolution-order" title="Link to this heading">¶</a></h3>
+<p>Python uses <strong>C3 linearization</strong> for multiple inheritance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HybridAdaptiveSMC</span><span class="p">(</span><span class="n">AdaptiveSMC</span><span class="p">,</span> <span class="n">SuperTwistingSMC</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c1"># MRO: HybridAdaptiveSMC → AdaptiveSMC → SuperTwistingSMC → Controller → ABC</span>
+</pre></div>
+</div>
+<p><strong>Diamond problem:</strong> C3 ensures consistent method resolution.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[ControllerProtocol_ABC_] --&gt; B[compute_control: Abstract]
+    A --&gt; C[initialize_history: Abstract]
+    A --&gt; D[reset: Default Implementation]
+
+    B --&gt; E[ClassicalSMC.compute_control]
+    B --&gt; F[AdaptiveSMC.compute_control]
+    B --&gt; G[SuperTwistingSMC.compute_control]
+    B --&gt; H[HybridAdaptiveSMC.compute_control]
+
+    C --&gt; I[ClassicalSMC.initialize_history]
+    C --&gt; J[AdaptiveSMC.initialize_history]
+    C --&gt; K[SuperTwistingSMC.initialize_history]
+    C --&gt; L[HybridAdaptiveSMC.initialize_history]
+
+    E --&gt; M[Return: _u_ state_vars_ history_]
+    F --&gt; M
+    G --&gt; M
+    H --&gt; M
+
+    style A fill:#9cf
+    style B fill:#ff9
+    style M fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-controller-protocol-usage">
+<h3>Example 1: Basic Controller Protocol Usage<a class="headerlink" href="#example-1-basic-controller-protocol-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.base.controller_interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">ControllerProtocol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">ControllerProtocol</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate with any controller implementing the protocol.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Initialize</span>
+    <span class="n">state_vars</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_history</span><span class="p">()</span>
+
+    <span class="c1"># Simulation loop</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span>
+            <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span>
+        <span class="p">)</span>
+        <span class="c1"># ... integrate dynamics</span>
+
+    <span class="k">return</span> <span class="n">history</span>
+
+<span class="c1"># Works with ANY controller implementing ControllerProtocol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span><span class="p">,</span> <span class="n">AdaptiveSMC</span>
+
+<span class="n">classical</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
+<span class="n">adaptive</span> <span class="o">=</span> <span class="n">AdaptiveSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+
+<span class="n">result_classical</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="n">result_adaptive</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">adaptive</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-duck-typing-vs-explicit-protocol">
+<h3>Example 2: Duck Typing vs Explicit Protocol<a class="headerlink" href="#example-2-duck-typing-vs-explicit-protocol" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Duck typing (no type checking)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_duck</span><span class="p">(</span><span class="n">controller</span><span class="p">):</span>  <span class="c1"># No type hint</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>  <span class="c1"># Hope it works!</span>
+    <span class="k">return</span> <span class="n">u</span>
+
+<span class="c1"># Explicit protocol (type-safe)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_protocol</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">ControllerProtocol</span><span class="p">):</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>  <span class="c1"># mypy validates!</span>
+    <span class="k">return</span> <span class="n">u</span>
+
+<span class="c1"># mypy catches errors at compile time:</span>
+<span class="c1"># simulate_protocol(None)  # Error: None doesn&#39;t implement ControllerProtocol</span>
+<span class="c1"># simulate_protocol(&quot;foo&quot;)  # Error: str doesn&#39;t implement ControllerProtocol</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-liskov-substitution-principle">
+<h3>Example 3: Liskov Substitution Principle<a class="headerlink" href="#example-3-liskov-substitution-principle" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Base class behavior</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controller</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">reset_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">Controller</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Works with any Controller subclass.&quot;&quot;&quot;</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">history</span>
+
+<span class="c1"># Works for all subclasses</span>
+<span class="n">classical</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
+<span class="n">adaptive</span> <span class="o">=</span> <span class="n">AdaptiveSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+
+<span class="n">history_classical</span> <span class="o">=</span> <span class="n">reset_controller</span><span class="p">(</span><span class="n">classical</span><span class="p">)</span>  <span class="c1"># Works</span>
+<span class="n">history_adaptive</span> <span class="o">=</span> <span class="n">reset_controller</span><span class="p">(</span><span class="n">adaptive</span><span class="p">)</span>    <span class="c1"># Works</span>
+
+<span class="c1"># Substitutability guaranteed by LSP</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-state-variable-pattern">
+<h3>Example 4: State Variable Pattern<a class="headerlink" href="#example-4-state-variable-pattern" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Controller with internal state (e.g., adaptation)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+        <span class="c1"># Extract previous state</span>
+        <span class="n">K</span> <span class="o">=</span> <span class="n">state_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_initial</span><span class="p">)</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">state_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;integral&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="c1"># Compute control</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">K_new</span> <span class="o">=</span> <span class="n">K</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+        <span class="n">integral_new</span> <span class="o">=</span> <span class="n">integral</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+
+        <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">K_new</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">)</span>
+
+        <span class="c1"># Return updated state</span>
+        <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="n">K_new</span><span class="p">,</span> <span class="s1">&#39;integral&#39;</span><span class="p">:</span> <span class="n">integral_new</span><span class="p">},</span> <span class="n">history</span>
+
+<span class="c1"># State is fully captured in state_vars</span>
+<span class="n">state_vars</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
+    <span class="c1"># state_vars contains full controller state for reproducibility</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-custom-controller-implementation">
+<h3>Example 5: Custom Controller Implementation<a class="headerlink" href="#example-5-custom-controller-implementation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.base.controller_interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controller</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyCustomSMC</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom SMC implementation.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="n">gains</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">max_force</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+        <span class="c1"># Custom control law</span>
+        <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">theta1_dot</span><span class="p">,</span> <span class="n">theta2_dot</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+        <span class="c1"># Custom sliding surface</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">theta1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">theta1_dot</span>
+
+        <span class="c1"># Custom switching law</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;states&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;times&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+
+<span class="c1"># Use custom controller with existing simulation infrastructure</span>
+<span class="n">custom_controller</span> <span class="o">=</span> <span class="n">MyCustomSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">],</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">custom_controller</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>  <span class="c1"># Works!</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -501,7 +870,7 @@
 <span class="linenos">  5</span><span class="sd">&quot;&quot;&quot;Abstract base controller interface for the double inverted pendulum system.&quot;&quot;&quot;</span>
 <span class="linenos">  6</span>
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="linenos">  8</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="linenos">  8</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="linenos">  9</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 10</span>
 <span class="linenos"> 11</span>
@@ -789,7 +1158,7 @@ ensuring consistency and interoperability across different control algorithms.</
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -812,6 +1181,28 @@ ensuring consistency and interoperability across different control algorithms.</
             <ul>
 <li><a class="reference internal" href="#">controllers.base.controller_interface</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#protocol-oriented-design">Protocol-Oriented Design</a></li>
+<li><a class="reference internal" href="#controller-protocol">Controller Protocol</a></li>
+<li><a class="reference internal" href="#liskov-substitution-principle">Liskov Substitution Principle</a></li>
+<li><a class="reference internal" href="#type-variance">Type Variance</a></li>
+<li><a class="reference internal" href="#abstract-base-class-pattern">Abstract Base Class Pattern</a></li>
+<li><a class="reference internal" href="#duck-typing-vs-explicit-protocols">Duck Typing vs Explicit Protocols</a></li>
+<li><a class="reference internal" href="#state-variable-pattern">State Variable Pattern</a></li>
+<li><a class="reference internal" href="#history-pattern">History Pattern</a></li>
+<li><a class="reference internal" href="#polymorphism-depth">Polymorphism Depth</a></li>
+<li><a class="reference internal" href="#method-resolution-order">Method Resolution Order</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-controller-protocol-usage">Example 1: Basic Controller Protocol Usage</a></li>
+<li><a class="reference internal" href="#example-2-duck-typing-vs-explicit-protocol">Example 2: Duck Typing vs Explicit Protocol</a></li>
+<li><a class="reference internal" href="#example-3-liskov-substitution-principle">Example 3: Liskov Substitution Principle</a></li>
+<li><a class="reference internal" href="#example-4-state-variable-pattern">Example 4: State Variable Pattern</a></li>
+<li><a class="reference internal" href="#example-5-custom-controller-implementation">Example 5: Custom Controller Implementation</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#controllerinterface"><code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code></a><ul>
@@ -849,6 +1240,10 @@ ensuring consistency and interoperability across different control algorithms.</
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

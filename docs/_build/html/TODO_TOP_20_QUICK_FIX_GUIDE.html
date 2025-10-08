@@ -1,0 +1,1322 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Top 20 Documentation Fixes - Quick Reference Guide - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/TODO_TOP_20_QUICK_FIX_GUIDE.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/TODO_TOP_20_QUICK_FIX_GUIDE.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="top-20-documentation-fixes-quick-reference-guide">
+<h1>Top 20 Documentation Fixes - Quick Reference Guide<a class="headerlink" href="#top-20-documentation-fixes-quick-reference-guide" title="Link to this heading">¶</a></h1>
+<p><strong>Total Effort:</strong> 10 hours (can be completed in 2 days)
+<strong>Impact:</strong> Addresses 20 most critical API documentation gaps
+<strong>All items are P0 - Missing Class Docstrings</strong></p>
+<hr class="docutils" />
+<section id="quick-win-strategy">
+<h2>Quick Win Strategy<a class="headerlink" href="#quick-win-strategy" title="Link to this heading">¶</a></h2>
+<p>Focus on these 20 classes first - they are the most visible APIs with zero documentation.</p>
+<p><strong>Completion Order:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Analysis &amp; Validation</strong> (4 classes, 2h) - Blocks scientific validation workflows</p></li>
+<li><p><strong>Controller Factory</strong> (7 classes, 3.5h) - Core controller creation APIs</p></li>
+<li><p><strong>Interfaces &amp; Integration</strong> (5 classes, 2.5h) - HIL and network APIs</p></li>
+<li><p><strong>Plant &amp; Optimization</strong> (4 classes, 2h) - Physics models and optimization</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="analysis-validation-classes-2-hours">
+<h2>1. Analysis &amp; Validation Classes (2 hours)<a class="headerlink" href="#analysis-validation-classes-2-hours" title="Link to this heading">¶</a></h2>
+<section id="file-src-analysis-validation-cross-validation-py">
+<h3>File: <code class="docutils literal notranslate"><span class="pre">src/analysis/validation/cross_validation.py</span></code><a class="headerlink" href="#file-src-analysis-validation-cross-validation-py" title="Link to this heading">¶</a></h3>
+<section id="kfold-line-23-30-minutes">
+<h4>1.1 KFold (Line 23) - 30 minutes<a class="headerlink" href="#kfold-line-23-30-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">KFold</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;K-Fold cross-validation iterator.</span>
+
+<span class="sd">    Splits dataset into K consecutive folds for cross-validation. Each fold is used</span>
+<span class="sd">    once as validation while the K-1 remaining folds form the training set.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n_splits : int, default=5</span>
+<span class="sd">        Number of folds. Must be at least 2.</span>
+<span class="sd">    shuffle : bool, default=False</span>
+<span class="sd">        Whether to shuffle data before splitting into folds.</span>
+<span class="sd">    random_state : int, optional</span>
+<span class="sd">        Random seed for reproducibility when shuffle=True.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; kfold = KFold(n_splits=5, shuffle=True, random_state=42)</span>
+<span class="sd">    &gt;&gt;&gt; for train_idx, val_idx in kfold.split(data):</span>
+<span class="sd">    ...     train_data = data[train_idx]</span>
+<span class="sd">    ...     val_data = data[val_idx]</span>
+<span class="sd">    ...     # Train and validate model</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    StratifiedKFold : K-Fold with stratification for imbalanced datasets</span>
+<span class="sd">    TimeSeriesSplit : Time series cross-validation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="stratifiedkfold-line-45-30-minutes">
+<h4>1.2 StratifiedKFold (Line 45) - 30 minutes<a class="headerlink" href="#stratifiedkfold-line-45-30-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StratifiedKFold</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stratified K-Fold cross-validation iterator.</span>
+
+<span class="sd">    Ensures each fold has approximately the same percentage of samples from each class.</span>
+<span class="sd">    Useful for imbalanced classification tasks.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n_splits : int, default=5</span>
+<span class="sd">        Number of folds.</span>
+<span class="sd">    shuffle : bool, default=False</span>
+<span class="sd">        Whether to shuffle data before splitting.</span>
+<span class="sd">    random_state : int, optional</span>
+<span class="sd">        Random seed for reproducibility.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; labels = [0, 0, 0, 1, 1, 1, 1, 1]  # Imbalanced</span>
+<span class="sd">    &gt;&gt;&gt; skfold = StratifiedKFold(n_splits=3, shuffle=True)</span>
+<span class="sd">    &gt;&gt;&gt; for train_idx, val_idx in skfold.split(data, labels):</span>
+<span class="sd">    ...     # Each fold maintains class distribution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="timeseriessplit-line-56-30-minutes">
+<h4>1.3 TimeSeriesSplit (Line 56) - 30 minutes<a class="headerlink" href="#timeseriessplit-line-56-30-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TimeSeriesSplit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Time series cross-validation iterator.</span>
+
+<span class="sd">    Respects temporal ordering by using past data for training and future data</span>
+<span class="sd">    for validation. Prevents data leakage in time series forecasting tasks.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n_splits : int, default=5</span>
+<span class="sd">        Number of splits.</span>
+<span class="sd">    test_size : int, optional</span>
+<span class="sd">        Size of test set. If None, uses remaining data.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; ts_split = TimeSeriesSplit(n_splits=3)</span>
+<span class="sd">    &gt;&gt;&gt; for train_idx, test_idx in ts_split.split(time_series_data):</span>
+<span class="sd">    ...     # train_idx: [0, ..., t-1]</span>
+<span class="sd">    ...     # test_idx: [t, ..., T]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="leaveoneout-line-71-30-minutes">
+<h4>1.4 LeaveOneOut (Line 71) - 30 minutes<a class="headerlink" href="#leaveoneout-line-71-30-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">LeaveOneOut</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Leave-One-Out cross-validation iterator.</span>
+
+<span class="sd">    Each sample is used once as test set while remaining samples form training set.</span>
+<span class="sd">    Equivalent to KFold(n_splits=n) where n is number of samples.</span>
+
+<span class="sd">    Warning: Computationally expensive for large datasets.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; loo = LeaveOneOut()</span>
+<span class="sd">    &gt;&gt;&gt; for train_idx, test_idx in loo.split(data):</span>
+<span class="sd">    ...     assert len(test_idx) == 1  # Single sample test set</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="controller-factory-classes-3-5-hours">
+<h2>2. Controller Factory Classes (3.5 hours)<a class="headerlink" href="#controller-factory-classes-3-5-hours" title="Link to this heading">¶</a></h2>
+<section id="file-src-controllers-factory-py">
+<h3>File: <code class="docutils literal notranslate"><span class="pre">src/controllers/factory.py</span></code><a class="headerlink" href="#file-src-controllers-factory-py" title="Link to this heading">¶</a></h3>
+<section id="mpcconfig-line-227-30-minutes">
+<h4>2.1 MPCConfig (Line 227) - 30 minutes<a class="headerlink" href="#mpcconfig-line-227-30-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MPCConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for Model Predictive Control (MPC) controller.</span>
+
+<span class="sd">    Encapsulates MPC-specific parameters including prediction horizon,</span>
+<span class="sd">    control horizon, and cost function weights.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prediction_horizon : int</span>
+<span class="sd">        Number of future steps to predict (N).</span>
+<span class="sd">    control_horizon : int</span>
+<span class="sd">        Number of control moves to optimize (M). Must be &lt;= prediction_horizon.</span>
+<span class="sd">    Q : np.ndarray, shape (n_states, n_states)</span>
+<span class="sd">        State error cost matrix.</span>
+<span class="sd">    R : np.ndarray, shape (n_controls, n_controls)</span>
+<span class="sd">        Control effort cost matrix.</span>
+<span class="sd">    dt : float, default=0.01</span>
+<span class="sd">        Time step for discretization (seconds).</span>
+<span class="sd">    max_force : float, default=100.0</span>
+<span class="sd">        Maximum control force constraint (N).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; config = MPCConfig(</span>
+<span class="sd">    ...     prediction_horizon=20,</span>
+<span class="sd">    ...     control_horizon=5,</span>
+<span class="sd">    ...     Q=np.diag([10, 10, 5, 1, 1, 1]),</span>
+<span class="sd">    ...     R=np.array([[0.1]]),</span>
+<span class="sd">    ...     dt=0.01,</span>
+<span class="sd">    ...     max_force=100.0</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="unavailablempcconfig-line-247-20-minutes">
+<h4>2.2 UnavailableMPCConfig (Line 247) - 20 minutes<a class="headerlink" href="#unavailablempcconfig-line-247-20-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UnavailableMPCConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder configuration when MPC dependencies are unavailable.</span>
+
+<span class="sd">    Raises informative error messages when MPC is requested but required</span>
+<span class="sd">    libraries (CVXPY, OSQP) are not installed.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ImportError</span>
+<span class="sd">        When attempting to create MPC controller without required dependencies.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    To enable MPC: pip install cvxpy osqp</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="file-src-controllers-factory-core-registry-py">
+<h3>File: <code class="docutils literal notranslate"><span class="pre">src/controllers/factory/core/registry.py</span></code><a class="headerlink" href="#file-src-controllers-factory-core-registry-py" title="Link to this heading">¶</a></h3>
+<section id="modularclassicalsmc-line-24-20-minutes">
+<h4>2.3 ModularClassicalSMC (Line 24) - 20 minutes<a class="headerlink" href="#modularclassicalsmc-line-24-20-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ModularClassicalSMC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modular classical sliding mode control wrapper for factory instantiation.</span>
+
+<span class="sd">    Wraps ClassicalSMC with factory-compatible interface for centralized</span>
+<span class="sd">    controller creation and PSO optimization integration.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ClassicalSMC : Implementation in src/controllers/classic_smc.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="modularsupertwistingsmc-line-26-20-minutes">
+<h4>2.4 ModularSuperTwistingSMC (Line 26) - 20 minutes<a class="headerlink" href="#modularsupertwistingsmc-line-26-20-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ModularSuperTwistingSMC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modular super-twisting sliding mode control wrapper.</span>
+
+<span class="sd">    Wraps SuperTwistingSMC (2nd-order sliding mode) for factory integration.</span>
+<span class="sd">    Provides chattering reduction through continuous control law.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    SuperTwistingSMC : Implementation in src/controllers/sta_smc.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="modularadaptivesmc-line-28-20-minutes">
+<h4>2.5 ModularAdaptiveSMC (Line 28) - 20 minutes<a class="headerlink" href="#modularadaptivesmc-line-28-20-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ModularAdaptiveSMC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modular adaptive sliding mode control wrapper.</span>
+
+<span class="sd">    Wraps AdaptiveSMC with online parameter adaptation for uncertain systems.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    AdaptiveSMC : Implementation in src/controllers/adaptive_smc.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="modularhybridsmc-line-30-20-minutes">
+<h4>2.6 ModularHybridSMC (Line 30) - 20 minutes<a class="headerlink" href="#modularhybridsmc-line-30-20-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ModularHybridSMC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modular hybrid adaptive-STA sliding mode control wrapper.</span>
+
+<span class="sd">    Wraps HybridAdaptiveSTASMC combining adaptive control with super-twisting</span>
+<span class="sd">    algorithm for robust performance under parameter uncertainty.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    HybridAdaptiveSTASMC : Implementation in src/controllers/hybrid_adaptive_sta_smc.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="modularswingupsmc-line-32-20-minutes">
+<h4>2.7 ModularSwingUpSMC (Line 32) - 20 minutes<a class="headerlink" href="#modularswingupsmc-line-32-20-minutes" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ModularSwingUpSMC</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modular swing-up sliding mode control wrapper.</span>
+
+<span class="sd">    Wraps SwingUpSMC for energy-based swing-up of double-inverted pendulum</span>
+<span class="sd">    from hanging to upright position.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    SwingUpSMC : Implementation in src/controllers/swing_up_smc.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="interfaces-integration-classes-2-5-hours">
+<h2>3. Interfaces &amp; Integration Classes (2.5 hours)<a class="headerlink" href="#interfaces-integration-classes-2-5-hours" title="Link to this heading">¶</a></h2>
+<section id="basempccontroller-src-controllers-mpc-base-py-14-30-minutes">
+<h3>3.1 BaseMPCController (src/controllers/mpc/base.py:14) - 30 minutes<a class="headerlink" href="#basempccontroller-src-controllers-mpc-base-py-14-30-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseMPCController</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for Model Predictive Control implementations.</span>
+
+<span class="sd">    Provides common interface for MPC controllers with horizon-based optimization</span>
+<span class="sd">    and constraint handling.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prediction_horizon : int</span>
+<span class="sd">        Number of future steps to predict.</span>
+<span class="sd">    control_horizon : int</span>
+<span class="sd">        Number of control moves to optimize.</span>
+<span class="sd">    Q : np.ndarray</span>
+<span class="sd">        State cost matrix.</span>
+<span class="sd">    R : np.ndarray</span>
+<span class="sd">        Control cost matrix.</span>
+<span class="sd">    dt : float</span>
+<span class="sd">        Time step for discretization.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    solve_mpc(state, target) -&gt; np.ndarray</span>
+<span class="sd">        Solve MPC optimization problem for current state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="resilientdataexchange-src-interfaces-data-exchange-factory-py-22-30-minutes">
+<h3>3.2 ResilientDataExchange (src/interfaces/data_exchange/factory.py:22) - 30 minutes<a class="headerlink" href="#resilientdataexchange-src-interfaces-data-exchange-factory-py-22-30-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ResilientDataExchange</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resilient data exchange interface with fault tolerance.</span>
+
+<span class="sd">    Provides multi-source data exchange with automatic failover, retry logic,</span>
+<span class="sd">    and graceful degradation for hardware-in-the-loop systems.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    primary_source : str</span>
+<span class="sd">        Primary data source identifier.</span>
+<span class="sd">    fallback_sources : List[str], optional</span>
+<span class="sd">        Ordered list of fallback sources.</span>
+<span class="sd">    retry_attempts : int, default=3</span>
+<span class="sd">        Number of retry attempts before failover.</span>
+<span class="sd">    timeout : float, default=1.0</span>
+<span class="sd">        Timeout for each data exchange attempt (seconds).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; exchange = ResilientDataExchange(</span>
+<span class="sd">    ...     primary_source=&#39;udp://192.168.1.100:5000&#39;,</span>
+<span class="sd">    ...     fallback_sources=[&#39;serial:COM3&#39;, &#39;tcp://localhost:8000&#39;]</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="networkmessage-src-interfaces-network-base-py-19-20-minutes">
+<h3>3.3 NetworkMessage (src/interfaces/network/base.py:19) - 20 minutes<a class="headerlink" href="#networkmessage-src-interfaces-network-base-py-19-20-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NetworkMessage</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Network message container for control system communication.</span>
+
+<span class="sd">    Encapsulates state, control, and metadata for real-time HIL communication.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    timestamp : float</span>
+<span class="sd">        Message creation timestamp (seconds since epoch).</span>
+<span class="sd">    state : np.ndarray</span>
+<span class="sd">        System state vector.</span>
+<span class="sd">    control : float</span>
+<span class="sd">        Control input value.</span>
+<span class="sd">    metadata : Dict[str, Any]</span>
+<span class="sd">        Additional message metadata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="optimizationresult-src-optimization-core-base-py-13-30-minutes">
+<h3>3.4 OptimizationResult (src/optimization/core/base.py:13) - 30 minutes<a class="headerlink" href="#optimizationresult-src-optimization-core-base-py-13-30-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OptimizationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for optimization algorithm results.</span>
+
+<span class="sd">    Stores optimized parameters, convergence metrics, and optimization history.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    best_params : np.ndarray</span>
+<span class="sd">        Optimized parameter vector.</span>
+<span class="sd">    best_cost : float</span>
+<span class="sd">        Final cost function value.</span>
+<span class="sd">    converged : bool</span>
+<span class="sd">        Whether optimization converged to tolerance.</span>
+<span class="sd">    iterations : int</span>
+<span class="sd">        Number of iterations performed.</span>
+<span class="sd">    history : Dict[str, List]</span>
+<span class="sd">        Optimization history (cost, params per iteration).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; result = optimizer.optimize(objective_fn, bounds)</span>
+<span class="sd">    &gt;&gt;&gt; if result.converged:</span>
+<span class="sd">    ...     controller = create_controller(gains=result.best_params)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="unifiedcontrollerfactory-src-optimization-integration-controller-factory-bridge-py-23-30-minutes">
+<h3>3.5 UnifiedControllerFactory (src/optimization/integration/controller_factory_bridge.py:23) - 30 minutes<a class="headerlink" href="#unifiedcontrollerfactory-src-optimization-integration-controller-factory-bridge-py-23-30-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UnifiedControllerFactory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unified factory bridging controller creation and PSO optimization.</span>
+
+<span class="sd">    Provides single interface for creating controllers with optional PSO tuning,</span>
+<span class="sd">    supporting both manual configuration and automated optimization workflows.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    controller_type : str</span>
+<span class="sd">        Controller type (&#39;classical_smc&#39;, &#39;adaptive_smc&#39;, etc.).</span>
+<span class="sd">    use_pso : bool, default=False</span>
+<span class="sd">        Whether to use PSO optimization for parameter tuning.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; factory = UnifiedControllerFactory(</span>
+<span class="sd">    ...     controller_type=&#39;classical_smc&#39;,</span>
+<span class="sd">    ...     use_pso=True</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; controller = factory.create(initial_gains=[...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="plant-configuration-classes-2-hours">
+<h2>4. Plant &amp; Configuration Classes (2 hours)<a class="headerlink" href="#plant-configuration-classes-2-hours" title="Link to this heading">¶</a></h2>
+<section id="defaultphysicsconfig-src-plant-configurations-default-configs-py-15-30-minutes">
+<h3>4.1 DefaultPhysicsConfig (src/plant/configurations/default_configs.py:15) - 30 minutes<a class="headerlink" href="#defaultphysicsconfig-src-plant-configurations-default-configs-py-15-30-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DefaultPhysicsConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Default physics parameters for double-inverted pendulum.</span>
+
+<span class="sd">    Provides standard physical parameters based on Quanser hardware specifications.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    m1, m2 : float</span>
+<span class="sd">        Masses of first and second pendulum (kg).</span>
+<span class="sd">    L1, L2 : float</span>
+<span class="sd">        Lengths of pendulum links (m).</span>
+<span class="sd">    g : float</span>
+<span class="sd">        Gravitational acceleration (m/s²).</span>
+<span class="sd">    friction : float</span>
+<span class="sd">        Cart friction coefficient.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; config = DefaultPhysicsConfig()</span>
+<span class="sd">    &gt;&gt;&gt; dynamics = SimplifiedDynamicsModel(config)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="dynamicsmodelprotocol-src-plant-core-dynamics-interface-py-12-30-minutes">
+<h3>4.2 DynamicsModelProtocol (src/plant/core/dynamics_interface.py:12) - 30 minutes<a class="headerlink" href="#dynamicsmodelprotocol-src-plant-core-dynamics-interface-py-12-30-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DynamicsModelProtocol</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol defining interface for dynamics models.</span>
+
+<span class="sd">    All dynamics implementations (simplified, full, low-rank) must implement</span>
+<span class="sd">    this interface for compatibility with simulation engine.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    derivatives(state: np.ndarray, control: float) -&gt; np.ndarray</span>
+<span class="sd">        Compute state derivatives dx/dt = f(x, u).</span>
+<span class="sd">    linearize(state: np.ndarray) -&gt; Tuple[np.ndarray, np.ndarray]</span>
+<span class="sd">        Compute linearized A, B matrices at given state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="controlprimitives-src-utils-control-primitives-py-18-30-minutes">
+<h3>4.3 ControlPrimitives (src/utils/control/primitives.py:18) - 30 minutes<a class="headerlink" href="#controlprimitives-src-utils-control-primitives-py-18-30-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControlPrimitives</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Collection of control theory primitive functions.</span>
+
+<span class="sd">    Provides reusable control primitives: saturation, dead zone, rate limiting,</span>
+<span class="sd">    filtering, etc.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    saturate(value, limit) -&gt; float</span>
+<span class="sd">        Saturate value to [-limit, +limit].</span>
+<span class="sd">    dead_zone(value, threshold) -&gt; float</span>
+<span class="sd">        Apply dead zone (zero output if |value| &lt; threshold).</span>
+<span class="sd">    rate_limit(value, prev_value, max_rate, dt) -&gt; float</span>
+<span class="sd">        Limit rate of change.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; primitives = ControlPrimitives()</span>
+<span class="sd">    &gt;&gt;&gt; control = primitives.saturate(raw_control, max_force)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="controllerstate-src-utils-types-control-types-py-21-30-minutes">
+<h3>4.4 ControllerState (src/utils/types/control_types.py:21) - 30 minutes<a class="headerlink" href="#controllerstate-src-utils-types-control-types-py-21-30-minutes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerState</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for controller internal state.</span>
+
+<span class="sd">    Stores controller state variables for adaptive and hybrid controllers</span>
+<span class="sd">    that maintain internal state between control steps.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    adaptive_gains : np.ndarray, optional</span>
+<span class="sd">        Adaptive gain estimates.</span>
+<span class="sd">    integral_error : float</span>
+<span class="sd">        Accumulated integral error.</span>
+<span class="sd">    previous_control : float</span>
+<span class="sd">        Previous control output (for rate limiting).</span>
+<span class="sd">    history : Dict[str, List]</span>
+<span class="sd">        Controller history buffers.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; state = ControllerState()</span>
+<span class="sd">    &gt;&gt;&gt; control, state = controller.compute_control(system_state, state)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="batch-fix-script-template">
+<h2>Batch Fix Script Template<a class="headerlink" href="#batch-fix-script-template" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Batch add docstrings to top 20 priority classes.</span>
+<span class="sd">Run: python scripts/add_top20_docstrings.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ast</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">DOCSTRINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;src/analysis/validation/cross_validation.py&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;KFold&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;K-Fold cross-validation iterator.</span>
+
+<span class="s2">        Splits dataset into K consecutive folds for cross-validation. Each fold is used</span>
+<span class="s2">        once as validation while the K-1 remaining folds form the training set.</span>
+
+<span class="s2">        Parameters</span>
+<span class="s2">        ----------</span>
+<span class="s2">        n_splits : int, default=5</span>
+<span class="s2">            Number of folds. Must be at least 2.</span>
+<span class="s2">        shuffle : bool, default=False</span>
+<span class="s2">            Whether to shuffle data before splitting into folds.</span>
+<span class="s2">        random_state : int, optional</span>
+<span class="s2">            Random seed for reproducibility when shuffle=True.</span>
+
+<span class="s2">        Examples</span>
+<span class="s2">        --------</span>
+<span class="s2">        &gt;&gt;&gt; kfold = KFold(n_splits=5, shuffle=True, random_state=42)</span>
+<span class="s2">        &gt;&gt;&gt; for train_idx, val_idx in kfold.split(data):</span>
+<span class="s2">        ...     train_data = data[train_idx]</span>
+<span class="s2">        ...     val_data = data[val_idx]</span>
+
+<span class="s2">        See Also</span>
+<span class="s2">        --------</span>
+<span class="s2">        StratifiedKFold : K-Fold with stratification for imbalanced datasets</span>
+<span class="s2">        TimeSeriesSplit : Time series cross-validation</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span>
+        <span class="c1"># ... add other classes</span>
+    <span class="p">},</span>
+    <span class="c1"># ... add other files</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_docstrings</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">class_docstrings</span> <span class="ow">in</span> <span class="n">DOCSTRINGS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Read file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="c1"># Parse AST and insert docstrings</span>
+        <span class="c1"># (Implementation uses ast.parse + ast.unparse or direct string manipulation)</span>
+
+        <span class="c1"># Write back</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">updated_content</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">add_docstrings</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="progress-tracking-checklist">
+<h2>Progress Tracking Checklist<a class="headerlink" href="#progress-tracking-checklist" title="Link to this heading">¶</a></h2>
+<section id="analysis-validation-4-classes">
+<h3>Analysis &amp; Validation (4 classes)<a class="headerlink" href="#analysis-validation-4-classes" title="Link to this heading">¶</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> KFold</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> StratifiedKFold</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> TimeSeriesSplit</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> LeaveOneOut</p></li>
+</ul>
+</section>
+<section id="controller-factory-7-classes">
+<h3>Controller Factory (7 classes)<a class="headerlink" href="#controller-factory-7-classes" title="Link to this heading">¶</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> MPCConfig</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> UnavailableMPCConfig</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ModularClassicalSMC</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ModularSuperTwistingSMC</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ModularAdaptiveSMC</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ModularHybridSMC</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ModularSwingUpSMC</p></li>
+</ul>
+</section>
+<section id="interfaces-integration-5-classes">
+<h3>Interfaces &amp; Integration (5 classes)<a class="headerlink" href="#interfaces-integration-5-classes" title="Link to this heading">¶</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> BaseMPCController</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ResilientDataExchange</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> NetworkMessage</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> OptimizationResult</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> UnifiedControllerFactory</p></li>
+</ul>
+</section>
+<section id="plant-configuration-4-classes">
+<h3>Plant &amp; Configuration (4 classes)<a class="headerlink" href="#plant-configuration-4-classes" title="Link to this heading">¶</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> DefaultPhysicsConfig</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> DynamicsModelProtocol</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ControlPrimitives</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ControllerState</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading">¶</a></h2>
+<p>After adding docstrings, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check docstring presence</span>
+python<span class="w"> </span>-m<span class="w"> </span>pydocstyle<span class="w"> </span>src/analysis/validation/cross_validation.py
+python<span class="w"> </span>-m<span class="w"> </span>pydocstyle<span class="w"> </span>src/controllers/factory.py
+python<span class="w"> </span>-m<span class="w"> </span>pydocstyle<span class="w"> </span>src/controllers/factory/core/registry.py
+
+<span class="c1"># Verify with AST analyzer</span>
+python<span class="w"> </span>.test_artifacts/analyze_api_docs.py
+
+<span class="c1"># Expected: 20 fewer class_docstring_missing errors</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Quick Win Impact:</strong></p>
+<ul class="simple">
+<li><p>20 most critical API classes documented</p></li>
+<li><p>10 hours total effort (2 days)</p></li>
+<li><p>Immediate improvement in API usability</p></li>
+<li><p>Foundation for comprehensive API documentation coverage</p></li>
+</ul>
+<p><strong>Next Steps After Top 20:</strong></p>
+<ul class="simple">
+<li><p>Continue with remaining 8 class docstrings (4h)</p></li>
+<li><p>Add method docstrings for top 10 worst files (54h)</p></li>
+<li><p>Complete parameter documentation (166h)</p></li>
+</ul>
+<p><strong>Generated:</strong> 2025-10-07
+<strong>Source:</strong> <code class="docutils literal notranslate"><span class="pre">docs/TODO_ANALYSIS_BY_DOCTYPE_2025-10-07.json</span></code></p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 08, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Top 20 Documentation Fixes - Quick Reference Guide</a><ul>
+<li><a class="reference internal" href="#quick-win-strategy">Quick Win Strategy</a></li>
+<li><a class="reference internal" href="#analysis-validation-classes-2-hours">1. Analysis &amp; Validation Classes (2 hours)</a><ul>
+<li><a class="reference internal" href="#file-src-analysis-validation-cross-validation-py">File: <code class="docutils literal notranslate"><span class="pre">src/analysis/validation/cross_validation.py</span></code></a><ul>
+<li><a class="reference internal" href="#kfold-line-23-30-minutes">1.1 KFold (Line 23) - 30 minutes</a></li>
+<li><a class="reference internal" href="#stratifiedkfold-line-45-30-minutes">1.2 StratifiedKFold (Line 45) - 30 minutes</a></li>
+<li><a class="reference internal" href="#timeseriessplit-line-56-30-minutes">1.3 TimeSeriesSplit (Line 56) - 30 minutes</a></li>
+<li><a class="reference internal" href="#leaveoneout-line-71-30-minutes">1.4 LeaveOneOut (Line 71) - 30 minutes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#controller-factory-classes-3-5-hours">2. Controller Factory Classes (3.5 hours)</a><ul>
+<li><a class="reference internal" href="#file-src-controllers-factory-py">File: <code class="docutils literal notranslate"><span class="pre">src/controllers/factory.py</span></code></a><ul>
+<li><a class="reference internal" href="#mpcconfig-line-227-30-minutes">2.1 MPCConfig (Line 227) - 30 minutes</a></li>
+<li><a class="reference internal" href="#unavailablempcconfig-line-247-20-minutes">2.2 UnavailableMPCConfig (Line 247) - 20 minutes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-src-controllers-factory-core-registry-py">File: <code class="docutils literal notranslate"><span class="pre">src/controllers/factory/core/registry.py</span></code></a><ul>
+<li><a class="reference internal" href="#modularclassicalsmc-line-24-20-minutes">2.3 ModularClassicalSMC (Line 24) - 20 minutes</a></li>
+<li><a class="reference internal" href="#modularsupertwistingsmc-line-26-20-minutes">2.4 ModularSuperTwistingSMC (Line 26) - 20 minutes</a></li>
+<li><a class="reference internal" href="#modularadaptivesmc-line-28-20-minutes">2.5 ModularAdaptiveSMC (Line 28) - 20 minutes</a></li>
+<li><a class="reference internal" href="#modularhybridsmc-line-30-20-minutes">2.6 ModularHybridSMC (Line 30) - 20 minutes</a></li>
+<li><a class="reference internal" href="#modularswingupsmc-line-32-20-minutes">2.7 ModularSwingUpSMC (Line 32) - 20 minutes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#interfaces-integration-classes-2-5-hours">3. Interfaces &amp; Integration Classes (2.5 hours)</a><ul>
+<li><a class="reference internal" href="#basempccontroller-src-controllers-mpc-base-py-14-30-minutes">3.1 BaseMPCController (src/controllers/mpc/base.py:14) - 30 minutes</a></li>
+<li><a class="reference internal" href="#resilientdataexchange-src-interfaces-data-exchange-factory-py-22-30-minutes">3.2 ResilientDataExchange (src/interfaces/data_exchange/factory.py:22) - 30 minutes</a></li>
+<li><a class="reference internal" href="#networkmessage-src-interfaces-network-base-py-19-20-minutes">3.3 NetworkMessage (src/interfaces/network/base.py:19) - 20 minutes</a></li>
+<li><a class="reference internal" href="#optimizationresult-src-optimization-core-base-py-13-30-minutes">3.4 OptimizationResult (src/optimization/core/base.py:13) - 30 minutes</a></li>
+<li><a class="reference internal" href="#unifiedcontrollerfactory-src-optimization-integration-controller-factory-bridge-py-23-30-minutes">3.5 UnifiedControllerFactory (src/optimization/integration/controller_factory_bridge.py:23) - 30 minutes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#plant-configuration-classes-2-hours">4. Plant &amp; Configuration Classes (2 hours)</a><ul>
+<li><a class="reference internal" href="#defaultphysicsconfig-src-plant-configurations-default-configs-py-15-30-minutes">4.1 DefaultPhysicsConfig (src/plant/configurations/default_configs.py:15) - 30 minutes</a></li>
+<li><a class="reference internal" href="#dynamicsmodelprotocol-src-plant-core-dynamics-interface-py-12-30-minutes">4.2 DynamicsModelProtocol (src/plant/core/dynamics_interface.py:12) - 30 minutes</a></li>
+<li><a class="reference internal" href="#controlprimitives-src-utils-control-primitives-py-18-30-minutes">4.3 ControlPrimitives (src/utils/control/primitives.py:18) - 30 minutes</a></li>
+<li><a class="reference internal" href="#controllerstate-src-utils-types-control-types-py-21-30-minutes">4.4 ControllerState (src/utils/types/control_types.py:21) - 30 minutes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#batch-fix-script-template">Batch Fix Script Template</a></li>
+<li><a class="reference internal" href="#progress-tracking-checklist">Progress Tracking Checklist</a><ul>
+<li><a class="reference internal" href="#analysis-validation-4-classes">Analysis &amp; Validation (4 classes)</a></li>
+<li><a class="reference internal" href="#controller-factory-7-classes">Controller Factory (7 classes)</a></li>
+<li><a class="reference internal" href="#interfaces-integration-5-classes">Interfaces &amp; Integration (5 classes)</a></li>
+<li><a class="reference internal" href="#plant-configuration-4-classes">Plant &amp; Configuration (4 classes)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validation">Validation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=08e7b316"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/back-to-top.js?v=840797bb"></script>
+    <script src="_static/lazy-load.js?v=dc25293c"></script>
+    <script src="_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

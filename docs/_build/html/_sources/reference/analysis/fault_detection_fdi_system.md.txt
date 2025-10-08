@@ -6,6 +6,177 @@
 
 Enhanced fault detection and isolation system.
 
+
+
+## Advanced Mathematical Theory
+
+### Enhanced FDI System Design
+
+**Multi-method fusion:**
+
+```{math}
+\text{Decision} = \text{Fusion}(r_1, r_2, \ldots, r_m)
+```
+
+Where $r_i$ from different methods (observer, parity, Kalman).
+
+### Detection Methods
+
+**Observer-based:**
+
+```{math}
+r_{obs} = \vec{y} - C\hat{\vec{x}}
+```
+
+**Parity-based:**
+
+```{math}
+r_{par} = W \begin{bmatrix} \vec{y} \\ \vec{u} \end{bmatrix}
+```
+
+**Kalman filter:**
+
+```{math}
+r_{kf} = \vec{y}_k - C\hat{\vec{x}}_{k|k-1}
+```
+
+### Fault Signature Analysis
+
+**Normalized residual:**
+
+```{math}
+\bar{r}_i = \frac{r_i - \mu_i}{\sigma_i}
+```
+
+**Chi-square test:**
+
+```{math}
+\chi^2 = \sum_{i=1}^n \bar{r}_i^2 \sim \chi^2_n
+```
+
+Detect fault if $\chi^2 > \chi^2_{n, \alpha}$ (critical value).
+
+### Directional Residual Evaluation
+
+**Angle between residuals:**
+
+```{math}
+\cos(\theta) = \frac{\vec{r} \cdot \vec{r}_{sig}}{\|\vec{r}\| \|\vec{r}_{sig}\|}
+```
+
+Match to known fault signature $\vec{r}_{sig}$.
+
+### Fusion Strategies
+
+**Voting:**
+
+```{math}
+\text{Fault detected if } \sum_{i=1}^m \mathbb{1}_{|r_i| > \tau_i} \geq k
+```
+
+**Bayesian fusion:**
+
+```{math}
+P(f | r_1, \ldots, r_m) \propto P(r_1, \ldots, r_m | f) P(f)
+```
+
+### Diagnosis Confidence
+
+**Confidence score:**
+
+```{math}
+C = \max_i \frac{|\vec{r} \cdot \vec{r}_{sig,i}|}{\|\vec{r}\| \|\vec{r}_{sig,i}\|}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Sensor Data] --> B[Multi-Method FDI]
+
+    B --> C[Observer-Based]
+    B --> D[Parity-Based]
+    B --> E[Kalman Filter]
+
+    C --> F[r_obs]
+    D --> G[r_par]
+    E --> H[r_kf]
+
+    F --> I[Fusion Engine]
+    G --> I
+    H --> I
+
+    I --> J{Voting/Bayesian}
+    J --> K[Combined Decision]
+
+    K --> L[Signature Matching]
+    L --> M[Fault Isolation]
+
+    M --> N[Diagnosis]
+    N --> O[Fault Report]
+
+    style I fill:#9cf
+    style J fill:#ff9
+    style O fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.analysis import Component
+
+# Initialize component
+component = Component(config)
+result = component.process(data)
+```
+
+### Example 2: Advanced Configuration
+
+```python
+# Configure with custom parameters
+config = {
+    'threshold': 0.05,
+    'method': 'adaptive'
+}
+component = Component(config)
+```
+
+### Example 3: Integration Workflow
+
+```python
+# Complete analysis workflow
+from src.analysis import analyze
+
+results = analyze(
+    data=sensor_data,
+    method='enhanced',
+    visualization=True
+)
+```
+
+### Example 4: Fault Detection Example
+
+```python
+# FDI system usage
+from src.analysis.fault_detection import FDISystem
+
+fdi = FDISystem(config)
+residual = fdi.generate_residual(y, u)
+fault = fdi.detect(residual)
+```
+
+### Example 5: Visualization Example
+
+```python
+# Generate analysis plots
+from src.analysis.visualization import AnalysisPlotter
+
+plotter = AnalysisPlotter(style='professional')
+fig = plotter.plot_time_series(data)
+fig.savefig('analysis.pdf')
+```
 This module provides a comprehensive fault detection framework that extends
 the basic FDI system with advanced diagnostic capabilities, multiple fault
 detection methods, and statistical analysis.

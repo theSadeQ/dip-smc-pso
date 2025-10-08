@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -513,6 +539,14 @@
 <li class="toctree-l2"><a class="reference internal" href="control_analysis.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control_analysis.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control_analysis.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_analysis.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_analysis.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_analysis.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control_analysis.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control_analysis.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_analysis.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="seed.html">utils.seed</a><ul>
@@ -547,12 +581,28 @@
 <li class="toctree-l2"><a class="reference internal" href="analysis_statistics.html#id16">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="analysis_statistics.html#id17">Returns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="analysis_statistics.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis_statistics.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis_statistics.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis_statistics.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis_statistics.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis_statistics.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis_statistics.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="analysis___init__.html">utils.analysis.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="analysis___init__.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="analysis___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="analysis___init__.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis___init__.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis___init__.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis___init__.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis___init__.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="control_saturation.html">utils.control.saturation</a><ul>
@@ -561,12 +611,54 @@
 <li class="toctree-l2"><a class="reference internal" href="control_saturation.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control_saturation.html#notes">Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control_saturation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#scalar-saturation">Scalar saturation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#vector-saturation">Vector saturation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#example-2-smooth-saturation-for-chattering-reduction">Example 2: Smooth Saturation for Chattering Reduction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#smc-with-smooth-saturation">SMC with smooth saturation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#comparison-hard-vs-smooth">Comparison: hard vs smooth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#plot-to-show-smoothness">Plot to show smoothness</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#example-3-dead-zone-for-noise-filtering">Example 3: Dead Zone for Noise Filtering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#filter-small-control-signals">Filter small control signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#result-0-0-4-9-2-9-0-small-signals-removed">Result: [0, 0, 4.9, -2.9, 0] (small signals removed)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#application-pd-controller-with-dead-zone">Application: PD controller with dead zone</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#example-4-anti-windup-with-saturation">Example 4: Anti-Windup with Saturation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#use-pi-with-anti-windup">Use PI with anti-windup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#example-5-saturation-monitoring">Example 5: Saturation Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#track-saturation-during-simulation">Track saturation during simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#id3">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#id4">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control_saturation.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_saturation.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="control___init__.html">utils.control.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="control___init__.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control___init__.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control___init__.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control___init__.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control___init__.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control___init__.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="coverage_monitoring.html">utils.coverage.monitoring</a><ul>
@@ -583,11 +675,16 @@
 <li class="toctree-l2"><a class="reference internal" href="development_jupyter_tools.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development_jupyter_tools.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development_jupyter_tools.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development_jupyter_tools.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development_jupyter_tools.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="development___init__.html">utils.development.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="development___init__.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development___init__.html#complete-source-code">Complete Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development___init__.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="memory_memory_pool.html">utils.memory.memory_pool</a><ul>
@@ -610,6 +707,14 @@
 <li class="toctree-l2"><a class="reference internal" href="monitoring_diagnostics.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring_diagnostics.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring_diagnostics.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_diagnostics.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_diagnostics.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_diagnostics.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring_diagnostics.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_diagnostics.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_diagnostics.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="monitoring_latency.html">utils.monitoring.latency</a><ul>
@@ -618,6 +723,14 @@
 <li class="toctree-l2"><a class="reference internal" href="monitoring_latency.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring_latency.html#parameters">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring_latency.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_latency.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_latency.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_latency.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring_latency.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_latency.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_latency.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="monitoring_memory_monitor.html">utils.monitoring.memory_monitor</a><ul>
@@ -626,6 +739,14 @@
 <li class="toctree-l2"><a class="reference internal" href="monitoring_memory_monitor.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring_memory_monitor.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring_memory_monitor.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_memory_monitor.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_memory_monitor.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_memory_monitor.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring_memory_monitor.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_memory_monitor.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_memory_monitor.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="monitoring_stability.html">utils.monitoring.stability</a><ul>
@@ -633,12 +754,56 @@
 <li class="toctree-l2"><a class="reference internal" href="monitoring_stability.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring_stability.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring_stability.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_stability.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_stability.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_stability.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring_stability.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_stability.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring_stability.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html">utils.monitoring.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#create-latency-monitor">Create latency monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#monitor-control-loop">Monitor control loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#get-statistics">Get statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#example-2-integrated-stability-monitoring">Example 2: Integrated Stability Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#create-stability-monitors">Create stability monitors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#simulation-with-stability-monitoring">Simulation with stability monitoring</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#example-3-diagnostic-analysis">Example 3: Diagnostic Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#create-diagnostic-checklist">Create diagnostic checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#run-diagnostics-after-instability">Run diagnostics after instability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#example-4-memory-leak-detection">Example 4: Memory Leak Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#create-memory-monitor">Create memory monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#monitor-long-running-simulation">Monitor long-running simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#example-5-comprehensive-monitoring-pipeline">Example 5: Comprehensive Monitoring Pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#create-integrated-monitoring-system">Create integrated monitoring system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#run-monitored-simulation">Run monitored simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#get-comprehensive-report">Get comprehensive report</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#id1">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#id2">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring___init__.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring___init__.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="numerical_stability_safe_operations.html">utils.numerical_stability.safe_operations</a><ul>
@@ -646,12 +811,55 @@
 <li class="toctree-l2"><a class="reference internal" href="numerical_stability_safe_operations.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="numerical_stability_safe_operations.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="numerical_stability_safe_operations.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability_safe_operations.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability_safe_operations.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability_safe_operations.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability_safe_operations.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability_safe_operations.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability_safe_operations.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html">utils.numerical_stability.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#protect-against-divide-by-zero">Protect against divide-by-zero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#uses-epsilon-instead-of-b-returns-bounded-result">Uses epsilon instead of b, returns bounded result</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#vector-safe-division">Vector safe division</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#example-2-safe-square-root-for-negative-values">Example 2: Safe Square Root for Negative Values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#handle-numerical-noise-causing-negative-sqrt-arguments">Handle numerical noise causing negative sqrt arguments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#option-1-use-absolute-value">Option 1: Use absolute value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#option-2-clamp-to-zero">Option 2: Clamp to zero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#application-lyapunov-function">Application: Lyapunov function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#example-3-safe-log-and-exp-for-optimization">Example 3: Safe Log and Exp for Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#pso-optimization-with-safe-operations">PSO optimization with safe operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#example-values">Example values</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#example-4-matrix-conditioning-and-regularization">Example 4: Matrix Conditioning and Regularization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#check-matrix-conditioning">Check matrix conditioning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#example-5-comprehensive-numerical-safety-pipeline">Example 5: Comprehensive Numerical Safety Pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#use-in-simulation">Use in simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#id1">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#id2">Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_stability___init__.html#integration-example">Integration example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_stability___init__.html#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reproducibility_seed.html">utils.reproducibility.seed</a><ul>
@@ -669,6 +877,8 @@
 <li class="toctree-l2"><a class="reference internal" href="reproducibility_seed.html#returns">Returns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reproducibility_seed.html#id5">Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reproducibility_seed.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility_seed.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility_seed.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reproducibility___init__.html">utils.reproducibility.<strong>init</strong></a><ul>
@@ -676,6 +886,9 @@
 <li class="toctree-l2"><a class="reference internal" href="reproducibility___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reproducibility___init__.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reproducibility___init__.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility___init__.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="types_control_outputs.html">utils.types.control_outputs</a><ul>
@@ -688,12 +901,17 @@
 <li class="toctree-l2"><a class="reference internal" href="types_control_outputs.html#id3">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types_control_outputs.html#id5">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types_control_outputs.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types_control_outputs.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types_control_outputs.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="types___init__.html">utils.types.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="types___init__.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types___init__.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types___init__.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="validation_parameter_validators.html">utils.validation.parameter_validators</a><ul>
@@ -708,6 +926,8 @@
 <li class="toctree-l2"><a class="reference internal" href="validation_parameter_validators.html#id2">Returns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_parameter_validators.html#id3">Raises</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_parameter_validators.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_parameter_validators.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_parameter_validators.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="validation_range_validators.html">utils.validation.range_validators</a><ul>
@@ -722,12 +942,17 @@
 <li class="toctree-l2"><a class="reference internal" href="validation_range_validators.html#id2">Returns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_range_validators.html#id3">Raises</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_range_validators.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_range_validators.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_range_validators.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="validation___init__.html">utils.validation.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="validation___init__.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation___init__.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation___init__.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_animation.html">utils.visualization.animation</a><ul>
@@ -735,6 +960,8 @@
 <li class="toctree-l2"><a class="reference internal" href="visualization_animation.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_animation.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_animation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_animation.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_animation.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_legacy_visualizer.html">utils.visualization.legacy_visualizer</a><ul>
@@ -742,6 +969,8 @@
 <li class="toctree-l2"><a class="reference internal" href="visualization_legacy_visualizer.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_legacy_visualizer.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_legacy_visualizer.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_legacy_visualizer.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_legacy_visualizer.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_movie_generator.html">utils.visualization.movie_generator</a><ul>
@@ -749,6 +978,8 @@
 <li class="toctree-l2"><a class="reference internal" href="visualization_movie_generator.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_movie_generator.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_movie_generator.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_movie_generator.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_movie_generator.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_static_plots.html">utils.visualization.static_plots</a><ul>
@@ -756,12 +987,17 @@
 <li class="toctree-l2"><a class="reference internal" href="visualization_static_plots.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_static_plots.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_static_plots.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_static_plots.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_static_plots.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization___init__.html">utils.visualization.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#module-overview">Module Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -899,7 +1135,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -963,6 +1199,8 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -143,6 +143,9 @@ controller = create_controller(
 
 **PSO Optimization:**
 ```python
+# example-metadata:
+# runnable: false
+
 from src.controllers.factory import create_smc_for_pso, get_gain_bounds_for_pso
 from src.controllers.factory import SMCType
 

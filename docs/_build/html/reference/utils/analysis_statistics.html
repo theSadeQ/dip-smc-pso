@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -511,8 +537,8 @@ Monte Carlo analysis validation.</p>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos"> 14</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">chi2</span>
-<span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">f</span>
+<span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 <span class="linenos"> 17</span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="linenos"> 18</span>
 <span class="linenos"> 19</span><span class="k">def</span><span class="w"> </span><span class="nf">confidence_interval</span><span class="p">(</span>
@@ -705,7 +731,7 @@ Monte Carlo analysis validation.</p>
 <span class="linenos">206</span>    <span class="c1"># Degrees of freedom</span>
 <span class="linenos">207</span>    <span class="n">df_between</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>
 <span class="linenos">208</span>    <span class="n">df_within</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="n">k</span>
-<span class="linenos">209</span>    <span class="n">df_total</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">209</span>    <span class="c1"># Note: df_total = N - 1 available but not currently used in F-test</span>
 <span class="linenos">210</span>
 <span class="linenos">211</span>    <span class="c1"># Mean squares</span>
 <span class="linenos">212</span>    <span class="n">MSB</span> <span class="o">=</span> <span class="n">SSB</span> <span class="o">/</span> <span class="n">df_between</span>
@@ -1216,7 +1242,7 @@ ANOVA results including F-statistic, p-value, and effect size.</p>
 <span class="linenos">43</span>    <span class="c1"># Degrees of freedom</span>
 <span class="linenos">44</span>    <span class="n">df_between</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>
 <span class="linenos">45</span>    <span class="n">df_within</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="n">k</span>
-<span class="linenos">46</span>    <span class="n">df_total</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">46</span>    <span class="c1"># Note: df_total = N - 1 available but not currently used in F-test</span>
 <span class="linenos">47</span>
 <span class="linenos">48</span>    <span class="c1"># Mean squares</span>
 <span class="linenos">49</span>    <span class="n">MSB</span> <span class="o">=</span> <span class="n">SSB</span> <span class="o">/</span> <span class="n">df_between</span>
@@ -1515,6 +1541,80 @@ Required sample size per group.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">warnings</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="analysis-utilities-theory">
+<h3>Analysis Utilities Theory<a class="headerlink" href="#analysis-utilities-theory" title="Link to this heading">¶</a></h3>
+<p>(Detailed mathematical theory for analysis utilities to be added…)</p>
+<p><strong>Key concepts:</strong></p>
+<ul class="simple">
+<li><p>Mathematical foundations</p></li>
+<li><p>Algorithmic principles</p></li>
+<li><p>Performance characteristics</p></li>
+<li><p>Integration patterns</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.utils.analysis_statistics import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>```python
+component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+</section>
+<section id="example-3-integration-with-simulation">
+<h3>Example 3: Integration with Simulation<a class="headerlink" href="#example-3-integration-with-simulation" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>for k in range(num_steps):
+result = component.process(x)
+x = update(x, result)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python
+component = Component(enable_caching=True)
+```</p>
+</section>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python
+try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
+</section>
 </section>
 
         </article>
@@ -1534,7 +1634,7 @@ Required sample size per group.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1604,6 +1704,22 @@ Required sample size per group.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#analysis-utilities-theory">Analysis Utilities Theory</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-simulation">Example 3: Integration with Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 </ul>

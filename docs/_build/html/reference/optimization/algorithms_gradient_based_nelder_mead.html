@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,153 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Nelder-Mead simplex optimization algorithm.</p>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="nelder-mead-simplex-method">
+<h3>Nelder-Mead Simplex Method<a class="headerlink" href="#nelder-mead-simplex-method" title="Link to this heading">¶</a></h3>
+<p><strong>Simplex:</strong> Set of <span class="math notranslate nohighlight">\(n+1\)</span> vertices in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[S = \{\vec{x}_1, \ldots, \vec{x}_{n+1}\}\]</div>
+</div>
+<p><strong>Centroid</strong> of best <span class="math notranslate nohighlight">\(n\)</span> vertices:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\bar{\vec{x}} = \frac{1}{n} \sum_{i=1}^{n} \vec{x}_i \quad (\text{excluding worst})\]</div>
+</div>
+</section>
+<section id="simplex-operations">
+<h3>Simplex Operations<a class="headerlink" href="#simplex-operations" title="Link to this heading">¶</a></h3>
+<p><strong>Reflection:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_r = \bar{\vec{x}} + \alpha (\bar{\vec{x}} - \vec{x}_{n+1}), \quad \alpha = 1\]</div>
+</div>
+<p><strong>Expansion:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_e = \bar{\vec{x}} + \gamma (\vec{x}_r - \bar{\vec{x}}), \quad \gamma = 2\]</div>
+</div>
+<p><strong>Contraction (outside):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_c = \bar{\vec{x}} + \rho (\vec{x}_r - \bar{\vec{x}}), \quad \rho = 0.5\]</div>
+</div>
+<p><strong>Contraction (inside):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{cc} = \bar{\vec{x}} - \rho (\bar{\vec{x}} - \vec{x}_{n+1}), \quad \rho = 0.5\]</div>
+</div>
+<p><strong>Shrink:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_i = \vec{x}_1 + \sigma (\vec{x}_i - \vec{x}_1), \quad \sigma = 0.5, \, i = 2, \ldots, n+1\]</div>
+</div>
+</section>
+<section id="algorithm-flow">
+<h3>Algorithm Flow<a class="headerlink" href="#algorithm-flow" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Sort</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x_1</span><span class="p">)</span> <span class="err">≤</span> <span class="n">f</span><span class="p">(</span><span class="n">x_2</span><span class="p">)</span> <span class="err">≤</span> <span class="o">...</span> <span class="err">≤</span> <span class="n">f</span><span class="p">(</span><span class="n">x_</span><span class="p">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">})</span>
+<span class="mf">2.</span> <span class="n">Reflect</span><span class="p">:</span> <span class="n">x_r</span> <span class="o">=</span> <span class="n">centroid</span> <span class="o">+</span> <span class="n">α</span><span class="p">(</span><span class="n">centroid</span> <span class="o">-</span> <span class="n">x_</span><span class="p">{</span><span class="n">worst</span><span class="p">})</span>
+<span class="mf">3.</span> <span class="n">If</span> <span class="n">f</span><span class="p">(</span><span class="n">x_1</span><span class="p">)</span> <span class="err">≤</span> <span class="n">f</span><span class="p">(</span><span class="n">x_r</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">f</span><span class="p">(</span><span class="n">x_n</span><span class="p">):</span> <span class="n">Accept</span> <span class="n">reflection</span>
+<span class="mf">4.</span> <span class="n">If</span> <span class="n">f</span><span class="p">(</span><span class="n">x_r</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">f</span><span class="p">(</span><span class="n">x_1</span><span class="p">):</span> <span class="n">Try</span> <span class="n">expansion</span>
+<span class="mf">5.</span> <span class="n">If</span> <span class="n">f</span><span class="p">(</span><span class="n">x_r</span><span class="p">)</span> <span class="err">≥</span> <span class="n">f</span><span class="p">(</span><span class="n">x_n</span><span class="p">):</span> <span class="n">Try</span> <span class="n">contraction</span>
+<span class="mf">6.</span> <span class="n">If</span> <span class="n">contraction</span> <span class="n">fails</span><span class="p">:</span> <span class="n">Shrink</span> <span class="n">simplex</span>
+</pre></div>
+</div>
+</section>
+<section id="convergence-properties">
+<h3>Convergence Properties<a class="headerlink" href="#convergence-properties" title="Link to this heading">¶</a></h3>
+<p><strong>Theorem (Lagarias et al. 1998):</strong> For strictly convex <span class="math notranslate nohighlight">\(f\)</span> with bounded level sets:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} \text{diam}(S_k) = 0\]</div>
+</div>
+<p><strong>Limitation:</strong> May converge to non-stationary points for non-convex functions.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Simplex] --&gt; B[Sort Vertices]
+    B --&gt; C[Compute Centroid]
+    C --&gt; D[Reflection]
+
+    D --&gt; E{f(x_r) Quality}
+    E --&gt;|Best| F[Try Expansion]
+    E --&gt;|Good| G[Accept Reflection]
+    E --&gt;|Poor| H[Try Contraction]
+
+    F --&gt; I{f(x_e) &lt; f(x_r)?}
+    I --&gt;|Yes| J[Accept Expansion]
+    I --&gt;|No| G
+
+    H --&gt; K{Outside or Inside?}
+    K --&gt;|Outside| L[Contract Outside]
+    K --&gt;|Inside| M[Contract Inside]
+
+    L --&gt; N{Accept Contraction?}
+    M --&gt; N
+    N --&gt;|Yes| O[Update Simplex]
+    N --&gt;|No| P[Shrink All]
+
+    G --&gt; O
+    J --&gt; O
+    P --&gt; O
+
+    O --&gt; Q{Converged?}
+    Q --&gt;|No| B
+    Q --&gt;|Yes| R[Return Best]
+
+    style E fill:#ff9
+    style K fill:#9cf
+    style R fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-optimization">
+<h3>Example 3: Integration with Optimization<a class="headerlink" href="#example-3-integration-with-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete optimization loop</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">create_optimizer</span><span class="p">(</span><span class="n">opt_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best fitness: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">best_fitness</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -502,7 +675,7 @@
 <span class="linenos">  6</span>
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
-<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="linenos"> 10</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="linenos"> 12</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
@@ -951,7 +1124,7 @@
 <span class="linenos">455</span>
 <span class="linenos">456</span>            <span class="n">slope</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">log_y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="linenos">457</span>            <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">slope</span><span class="p">)</span>
-<span class="linenos">458</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">458</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">459</span>            <span class="k">return</span> <span class="mf">0.0</span>
 <span class="linenos">460</span>
 <span class="linenos">461</span>    <span class="k">def</span><span class="w"> </span><span class="nf">restart_simplex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perturbation_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">):</span>
@@ -1519,7 +1692,7 @@ the simplex shape and converge to the optimum.</p>
 <span class="linenos">347</span>
 <span class="linenos">348</span>            <span class="n">slope</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">log_y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="linenos">349</span>            <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">slope</span><span class="p">)</span>
-<span class="linenos">350</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">350</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">351</span>            <span class="k">return</span> <span class="mf">0.0</span>
 <span class="linenos">352</span>
 <span class="linenos">353</span>    <span class="k">def</span><span class="w"> </span><span class="nf">restart_simplex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perturbation_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">):</span>
@@ -1673,7 +1846,7 @@ the simplex shape and converge to the optimum.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1696,6 +1869,22 @@ the simplex shape and converge to the optimum.</p>
             <ul>
 <li><a class="reference internal" href="#">optimization.algorithms.gradient_based.nelder_mead</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#nelder-mead-simplex-method">Nelder-Mead Simplex Method</a></li>
+<li><a class="reference internal" href="#simplex-operations">Simplex Operations</a></li>
+<li><a class="reference internal" href="#algorithm-flow">Algorithm Flow</a></li>
+<li><a class="reference internal" href="#convergence-properties">Convergence Properties</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-optimization">Example 3: Integration with Optimization</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#neldermeadconfig"><code class="docutils literal notranslate"><span class="pre">NelderMeadConfig</span></code></a><ul>
@@ -1766,6 +1955,10 @@ the simplex shape and converge to the optimum.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -503,6 +529,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="__init__.html">analysis.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="__init__.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__init__.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="__init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="__init__.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="__init__.html#parameters">Parameters</a></li>
@@ -514,6 +543,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="core_data_structures.html">analysis.core.data_structures</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="core_data_structures.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_data_structures.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_data_structures.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_data_structures.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_data_structures.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_data_structures.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_data_structures.html#functions">Functions</a></li>
@@ -522,6 +554,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="core_interfaces.html">analysis.core.interfaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="core_interfaces.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_interfaces.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_interfaces.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_interfaces.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_interfaces.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_interfaces.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_interfaces.html#dependencies">Dependencies</a></li>
@@ -529,6 +564,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="core_metrics.html">analysis.core.metrics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="core_metrics.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_metrics.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_metrics.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_metrics.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_metrics.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_metrics.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_metrics.html#functions">Functions</a></li>
@@ -545,6 +583,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fault_detection_fdi.html">analysis.fault_detection.fdi</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi.html#attributes">Attributes</a></li>
@@ -555,6 +596,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fault_detection_fdi_system.html">analysis.fault_detection.fdi_system</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi_system.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi_system.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi_system.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi_system.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi_system.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi_system.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_fdi_system.html#functions">Functions</a></li>
@@ -565,6 +609,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fault_detection_residual_generators.html">analysis.fault_detection.residual_generators</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_residual_generators.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_residual_generators.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_residual_generators.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_residual_generators.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_residual_generators.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_residual_generators.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_residual_generators.html#functions">Functions</a></li>
@@ -575,6 +622,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fault_detection_threshold_adapters.html">analysis.fault_detection.threshold_adapters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_threshold_adapters.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_threshold_adapters.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_threshold_adapters.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection_threshold_adapters.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_threshold_adapters.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_threshold_adapters.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection_threshold_adapters.html#functions">Functions</a></li>
@@ -587,12 +637,18 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fault_detection___init__.html">analysis.fault_detection.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection___init__.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fault_detection___init__.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fault_detection___init__.html#dependencies">Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="performance_control_analysis.html">analysis.performance.control_analysis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="performance_control_analysis.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_control_analysis.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_control_analysis.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_control_analysis.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_control_analysis.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_control_analysis.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_control_analysis.html#functions">Functions</a></li>
@@ -609,6 +665,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="performance_control_metrics.html">analysis.performance.control_metrics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="performance_control_metrics.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_control_metrics.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_control_metrics.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_control_metrics.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_control_metrics.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_control_metrics.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_control_metrics.html#functions">Functions</a></li>
@@ -623,6 +682,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="performance_robustness.html">analysis.performance.robustness</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="performance_robustness.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_robustness.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_robustness.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_robustness.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_robustness.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_robustness.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_robustness.html#functions">Functions</a></li>
@@ -635,6 +697,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="performance_stability_analysis.html">analysis.performance.stability_analysis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="performance_stability_analysis.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_stability_analysis.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_stability_analysis.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_stability_analysis.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_stability_analysis.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_stability_analysis.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_stability_analysis.html#functions">Functions</a></li>
@@ -651,6 +716,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reports___init__.html">analysis.reports.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reports___init__.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reports___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reports___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reports___init__.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reports___init__.html#complete-source-code">Complete Source Code</a></li>
 </ul>
 </li>
@@ -674,6 +742,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="validation_cross_validation.html">analysis.validation.cross_validation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="validation_cross_validation.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_cross_validation.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_cross_validation.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_cross_validation.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_cross_validation.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_cross_validation.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_cross_validation.html#functions">Functions</a></li>
@@ -684,17 +755,23 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="validation_metrics.html">analysis.validation.metrics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#id1">Architecture Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#mathematical-foundation">Mathematical Foundation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_metrics.html#id9">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="validation_monte_carlo.html">analysis.validation.monte_carlo</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#id1">Architecture Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#mathematical-foundation">Mathematical Foundation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#classes">Classes</a></li>
@@ -702,30 +779,36 @@
 <li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#parameters">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#returns">Returns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_monte_carlo.html#id4">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="validation_statistical_benchmarks.html">analysis.validation.statistical_benchmarks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id1">Architecture Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#mathematical-foundation">Mathematical Foundation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#parameters">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#returns">Returns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id2">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id3">Returns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id5">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id6">Returns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id8">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id9">Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id11">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id12">Returns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_benchmarks.html#id14">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="validation_statistical_tests.html">analysis.validation.statistical_tests</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_tests.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_tests.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_tests.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_statistical_tests.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_tests.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_tests.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation_statistical_tests.html#functions">Functions</a></li>
@@ -749,6 +832,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_analysis_plots.html">analysis.visualization.analysis_plots</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visualization_analysis_plots.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_analysis_plots.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_analysis_plots.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_analysis_plots.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_analysis_plots.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_analysis_plots.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_analysis_plots.html#functions">Functions</a></li>
@@ -759,6 +845,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_diagnostic_plots.html">analysis.visualization.diagnostic_plots</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visualization_diagnostic_plots.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_diagnostic_plots.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_diagnostic_plots.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_diagnostic_plots.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_diagnostic_plots.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_diagnostic_plots.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_diagnostic_plots.html#dependencies">Dependencies</a></li>
@@ -766,6 +855,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_report_generator.html">analysis.visualization.report_generator</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visualization_report_generator.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_report_generator.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_report_generator.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_report_generator.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_report_generator.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_report_generator.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_report_generator.html#dependencies">Dependencies</a></li>
@@ -773,6 +865,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_statistical_plots.html">analysis.visualization.statistical_plots</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visualization_statistical_plots.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_statistical_plots.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_statistical_plots.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization_statistical_plots.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_statistical_plots.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_statistical_plots.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization_statistical_plots.html#dependencies">Dependencies</a></li>
@@ -780,6 +875,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualization___init__.html">analysis.visualization.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization___init__.html#dependencies">Dependencies</a></li>
 </ul>
@@ -877,7 +975,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

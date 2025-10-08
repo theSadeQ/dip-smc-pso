@@ -13,6 +13,9 @@
 ### 1. Controller-Dynamics Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_closed_loop_integration():
     """Test full closed-loop system"""
     controller = ClassicalSMC(gains=[77.62, 44.45, 17.31, 14.25, 18.66, 9.76])
@@ -42,6 +45,9 @@ def test_closed_loop_integration():
 ### 2. PSO-Controller Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_pso_tuning_workflow():
     """Test complete PSO tuning pipeline"""
     # Define optimization problem
@@ -71,6 +77,9 @@ def test_pso_tuning_workflow():
 ### 3. Configuration Loading Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_config_to_simulation_workflow():
     """Test configuration → controller → simulation pipeline"""
     # Load config
@@ -105,6 +114,9 @@ def test_config_to_simulation_workflow():
 ### Pattern 1: Factory-Based Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.fixture
 def integrated_system():
     """Fixture providing fully integrated system"""
@@ -127,6 +139,9 @@ def test_with_integrated_system(integrated_system):
 ### Pattern 2: Multi-Stage Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_multi_stage_integration():
     """Progressive integration testing"""
     # Stage 1: Unit level
@@ -156,6 +171,9 @@ def test_multi_stage_integration():
 ### Scenario 1: Nominal Operation
 
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.integration
 def test_nominal_stabilization():
     """Baseline integration test"""
@@ -176,6 +194,9 @@ def test_nominal_stabilization():
 ### Scenario 2: Disturbance Rejection
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_disturbance_rejection_integration():
     """Integration test with external disturbances"""
     state = [0, 0, 0, 0]

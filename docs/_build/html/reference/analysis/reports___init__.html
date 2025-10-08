@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -495,6 +521,113 @@ This module provides automated report generation capabilities for
 control system analysis including performance reports, benchmark summaries,
 and comprehensive analysis documentation.</p>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="report-generation-framework">
+<h3>Report Generation Framework<a class="headerlink" href="#report-generation-framework" title="Link to this heading">¶</a></h3>
+<p><strong>Template hierarchy:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Report} = \text{Base} + \text{Section}_1 + \cdots + \text{Section}_n\]</div>
+</div>
+</section>
+<section id="automated-content">
+<h3>Automated Content<a class="headerlink" href="#automated-content" title="Link to this heading">¶</a></h3>
+<p><strong>Dynamic table generation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T[i,j] = \text{format}(\text{data}[i][\text{metric}[j]])\]</div>
+</div>
+<p><strong>Figure placement optimization:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{minimize } \sum |\text{figure}_i - \text{reference}_i|\]</div>
+</div>
+<p>Subject to document flow constraints.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Report Framework] --&gt; B[Templates]
+    A --&gt; C[Generators]
+
+    B --&gt; D[Base Template]
+    B --&gt; E[Section Templates]
+
+    C --&gt; F[LaTeX Generator]
+    C --&gt; G[Markdown Generator]
+
+    D --&gt; H[Content Assembly]
+    E --&gt; H
+    F --&gt; H
+    G --&gt; H
+
+    H --&gt; I[Report Output]
+
+    style H fill:#9cf
+    style I fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span>
+
+<span class="c1"># Initialize component</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure with custom parameters</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;adaptive&#39;</span>
+<span class="p">}</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-workflow">
+<h3>Example 3: Integration Workflow<a class="headerlink" href="#example-3-integration-workflow" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete analysis workflow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">analyze</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">sensor_data</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;enhanced&#39;</span><span class="p">,</span>
+    <span class="n">visualization</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-fault-detection-example">
+<h3>Example 4: Fault Detection Example<a class="headerlink" href="#example-4-fault-detection-example" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># FDI system usage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.fault_detection</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDISystem</span>
+
+<span class="n">fdi</span> <span class="o">=</span> <span class="n">FDISystem</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">generate_residual</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="n">fault</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">residual</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-visualization-example">
+<h3>Example 5: Visualization Example<a class="headerlink" href="#example-5-visualization-example" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate analysis plots</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnalysisPlotter</span>
+
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">AnalysisPlotter</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;professional&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plotter</span><span class="o">.</span><span class="n">plot_time_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;analysis.pdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#======================================================================================\\\</span>
@@ -546,7 +679,7 @@ and comprehensive analysis documentation.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -569,6 +702,20 @@ and comprehensive analysis documentation.</p>
             <ul>
 <li><a class="reference internal" href="#">analysis.reports.<strong>init</strong></a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#report-generation-framework">Report Generation Framework</a></li>
+<li><a class="reference internal" href="#automated-content">Automated Content</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-workflow">Example 3: Integration Workflow</a></li>
+<li><a class="reference internal" href="#example-4-fault-detection-example">Example 4: Fault Detection Example</a></li>
+<li><a class="reference internal" href="#example-5-visualization-example">Example 5: Visualization Example</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 </ul>
 </li>
@@ -588,6 +735,10 @@ and comprehensive analysis documentation.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

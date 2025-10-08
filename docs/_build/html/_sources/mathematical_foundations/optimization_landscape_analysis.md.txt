@@ -241,6 +241,9 @@ for small perturbations ε.
 **Quantification:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_ruggedness(fitness_function, gains, epsilon=0.1, n_samples=100):
     """Estimate landscape ruggedness via random perturbations."""
     f_center = fitness_function(gains)
@@ -308,6 +311,9 @@ $$
 **Visualization - Convexity Test:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def check_convexity(fitness_func, g1, g2, n_points=20):
     """Test convexity between two points."""
     alphas = np.linspace(0, 1, n_points)
@@ -393,6 +399,9 @@ $$
 **Example Configuration:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 objective_weights = {
     'ise': 0.5,         # 50% - primary objective
     'chattering': 0.3,  # 30% - important for smoothness
@@ -410,6 +419,9 @@ reference_values = {
 **Fitness Calculation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_fitness(gains):
     result = simulate(gains)
 
@@ -592,6 +604,9 @@ where $\mu > 0$ is barrier parameter (typically 0.01-0.1).
 **Implementation:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def barrier_penalty(gains, mu=0.05):
     """Logarithmic barrier for stability constraints."""
     penalty = 0.0
@@ -782,6 +797,9 @@ plt.title('Fitness Landscape: K vs k1 Interaction')
 **Conservative Bounds (High Success Rate):**
 
 ```python
+# example-metadata:
+# runnable: false
+
 conservative_bounds = {
     'classical_smc': [
         (5.0, 30.0),    # k1 - narrow range
@@ -797,6 +815,9 @@ conservative_bounds = {
 **Exploration Bounds (Global Search):**
 
 ```python
+# example-metadata:
+# runnable: false
+
 exploration_bounds = {
     'classical_smc': [
         (0.1, 50.0),    # k1 - wide range
@@ -853,6 +874,9 @@ recommended_pso_config = {
 **Automated Diagnosis:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_convergence(fitness_history, diversity_history):
     """Identify convergence issues."""
     if len(fitness_history) < 20:

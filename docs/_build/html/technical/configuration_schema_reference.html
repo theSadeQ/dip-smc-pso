@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -556,7 +582,10 @@
 <section id="registry-structure">
 <h3>Registry Structure<a class="headerlink" href="#registry-structure" title="Link to this heading">¶</a></h3>
 <p>The controller registry (<code class="docutils literal notranslate"><span class="pre">CONTROLLER_REGISTRY</span></code>) provides metadata for all available controllers:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONTROLLER_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">CONTROLLER_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="n">ModularClassicalSMC</span><span class="p">,</span>
         <span class="s1">&#39;config_class&#39;</span><span class="p">:</span> <span class="n">ClassicalSMCConfig</span><span class="p">,</span>
@@ -620,7 +649,10 @@
 <h2>Classical SMC Configuration<a class="headerlink" href="#classical-smc-configuration" title="Link to this heading">¶</a></h2>
 <section id="schema-definition">
 <h3>Schema Definition<a class="headerlink" href="#schema-definition" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMCConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Type-safe configuration for Classical SMC controller.&quot;&quot;&quot;</span>
 
@@ -714,7 +746,10 @@
 <section id="validation-rules">
 <h3>Validation Rules<a class="headerlink" href="#validation-rules" title="Link to this heading">¶</a></h3>
 <p>The configuration automatically validates parameters based on SMC theory:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_validate_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate gain vector according to SMC theory.&quot;&quot;&quot;</span>
 
     <span class="c1"># Check gain count</span>
@@ -770,7 +805,10 @@
 <h2>Super-Twisting SMC Configuration<a class="headerlink" href="#super-twisting-smc-configuration" title="Link to this heading">¶</a></h2>
 <section id="id1">
 <h3>Schema Definition<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SuperTwistingSMCConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for Super-Twisting (STA) SMC controller.&quot;&quot;&quot;</span>
 
@@ -881,7 +919,10 @@
 <h2>Adaptive SMC Configuration<a class="headerlink" href="#adaptive-smc-configuration" title="Link to this heading">¶</a></h2>
 <section id="id5">
 <h3>Schema Definition<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMCConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for Adaptive SMC with parameter estimation.&quot;&quot;&quot;</span>
 
@@ -969,7 +1010,10 @@
 <h3>Configuration Examples<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <section id="robust-adaptation-configuration">
 <h4>Robust Adaptation Configuration<a class="headerlink" href="#robust-adaptation-configuration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robust_adaptive_config</span> <span class="o">=</span> <span class="n">AdaptiveSMCConfig</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">robust_adaptive_config</span> <span class="o">=</span> <span class="n">AdaptiveSMCConfig</span><span class="p">(</span>
     <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>  <span class="c1"># Conservative adaptation rate</span>
     <span class="n">max_force</span><span class="o">=</span><span class="mf">150.0</span><span class="p">,</span>
     <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
@@ -985,7 +1029,10 @@
 </section>
 <section id="fast-adaptation-configuration">
 <h4>Fast Adaptation Configuration<a class="headerlink" href="#fast-adaptation-configuration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fast_adaptive_config</span> <span class="o">=</span> <span class="n">AdaptiveSMCConfig</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">fast_adaptive_config</span> <span class="o">=</span> <span class="n">AdaptiveSMCConfig</span><span class="p">(</span>
     <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span>  <span class="c1"># Aggressive adaptation rate</span>
     <span class="n">max_force</span><span class="o">=</span><span class="mf">150.0</span><span class="p">,</span>
     <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
@@ -1006,7 +1053,10 @@
 <h2>Hybrid SMC Configuration<a class="headerlink" href="#hybrid-smc-configuration" title="Link to this heading">¶</a></h2>
 <section id="id9">
 <h3>Schema Definition<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HybridSMCConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for Hybrid Adaptive STA-SMC controller.&quot;&quot;&quot;</span>
 
@@ -1289,7 +1339,10 @@
 </section>
 <section id="configuration-validation-test">
 <h3>Configuration Validation Test<a class="headerlink" href="#configuration-validation-test" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_all_configurations</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_all_configurations</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test configuration validation for all controller types.&quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -1344,7 +1397,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

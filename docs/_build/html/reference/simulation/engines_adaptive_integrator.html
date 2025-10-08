@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -599,48 +625,73 @@ Section III of Shampine and Reichelt for details【313837333132264†L58-L82】
 <span class="linenos"> 83</span>    <span class="n">c7</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="linenos"> 84</span>
 <span class="linenos"> 85</span>    <span class="n">a21</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
-<span class="linenos"> 86</span>    <span class="n">a31</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">40</span><span class="p">;</span> <span class="n">a32</span> <span class="o">=</span> <span class="mi">9</span><span class="o">/</span><span class="mi">40</span>
-<span class="linenos"> 87</span>    <span class="n">a41</span> <span class="o">=</span> <span class="mi">44</span><span class="o">/</span><span class="mi">45</span><span class="p">;</span> <span class="n">a42</span> <span class="o">=</span> <span class="o">-</span><span class="mi">56</span><span class="o">/</span><span class="mi">15</span><span class="p">;</span> <span class="n">a43</span> <span class="o">=</span> <span class="mi">32</span><span class="o">/</span><span class="mi">9</span>
-<span class="linenos"> 88</span>    <span class="n">a51</span> <span class="o">=</span> <span class="mi">19372</span><span class="o">/</span><span class="mi">6561</span><span class="p">;</span> <span class="n">a52</span> <span class="o">=</span> <span class="o">-</span><span class="mi">25360</span><span class="o">/</span><span class="mi">2187</span><span class="p">;</span> <span class="n">a53</span> <span class="o">=</span> <span class="mi">64448</span><span class="o">/</span><span class="mi">6561</span><span class="p">;</span> <span class="n">a54</span> <span class="o">=</span> <span class="o">-</span><span class="mi">212</span><span class="o">/</span><span class="mi">729</span>
-<span class="linenos"> 89</span>    <span class="n">a61</span> <span class="o">=</span> <span class="mi">9017</span><span class="o">/</span><span class="mi">3168</span><span class="p">;</span> <span class="n">a62</span> <span class="o">=</span> <span class="o">-</span><span class="mi">355</span><span class="o">/</span><span class="mi">33</span><span class="p">;</span> <span class="n">a63</span> <span class="o">=</span> <span class="mi">46732</span><span class="o">/</span><span class="mi">5247</span><span class="p">;</span> <span class="n">a64</span> <span class="o">=</span> <span class="mi">49</span><span class="o">/</span><span class="mi">176</span><span class="p">;</span> <span class="n">a65</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5103</span><span class="o">/</span><span class="mi">18656</span>
-<span class="linenos"> 90</span>    <span class="n">a71</span> <span class="o">=</span> <span class="mi">35</span><span class="o">/</span><span class="mi">384</span><span class="p">;</span> <span class="n">a72</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="n">a73</span> <span class="o">=</span> <span class="mi">500</span><span class="o">/</span><span class="mi">1113</span><span class="p">;</span> <span class="n">a74</span> <span class="o">=</span> <span class="mi">125</span><span class="o">/</span><span class="mi">192</span><span class="p">;</span> <span class="n">a75</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span><span class="p">;</span> <span class="n">a76</span> <span class="o">=</span> <span class="mi">11</span><span class="o">/</span><span class="mi">84</span>
-<span class="linenos"> 91</span>
-<span class="linenos"> 92</span>    <span class="n">b4_1</span> <span class="o">=</span> <span class="mi">5179</span><span class="o">/</span><span class="mi">57600</span><span class="p">;</span> <span class="n">b4_3</span> <span class="o">=</span> <span class="mi">7571</span><span class="o">/</span><span class="mi">16695</span><span class="p">;</span> <span class="n">b4_4</span> <span class="o">=</span> <span class="mi">393</span><span class="o">/</span><span class="mi">640</span><span class="p">;</span> <span class="n">b4_5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">92097</span><span class="o">/</span><span class="mi">339200</span><span class="p">;</span> <span class="n">b4_6</span> <span class="o">=</span> <span class="mi">187</span><span class="o">/</span><span class="mi">2100</span><span class="p">;</span> <span class="n">b4_7</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">40</span>
-<span class="linenos"> 93</span>    <span class="n">b5_1</span> <span class="o">=</span> <span class="mi">35</span><span class="o">/</span><span class="mi">384</span><span class="p">;</span> <span class="n">b5_3</span> <span class="o">=</span> <span class="mi">500</span><span class="o">/</span><span class="mi">1113</span><span class="p">;</span> <span class="n">b5_4</span> <span class="o">=</span> <span class="mi">125</span><span class="o">/</span><span class="mi">192</span><span class="p">;</span> <span class="n">b5_5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span><span class="p">;</span> <span class="n">b5_6</span> <span class="o">=</span> <span class="mi">11</span><span class="o">/</span><span class="mi">84</span><span class="p">;</span> <span class="n">b5_7</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos"> 94</span>
-<span class="linenos"> 95</span>    <span class="c1"># Evaluate the stages</span>
-<span class="linenos"> 96</span>    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="linenos"> 97</span>    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c2</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a21</span><span class="o">*</span><span class="n">k1</span><span class="p">))</span>
-<span class="linenos"> 98</span>    <span class="n">k3</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c3</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a31</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a32</span><span class="o">*</span><span class="n">k2</span><span class="p">))</span>
-<span class="linenos"> 99</span>    <span class="n">k4</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c4</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a41</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a42</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a43</span><span class="o">*</span><span class="n">k3</span><span class="p">))</span>
-<span class="linenos">100</span>    <span class="n">k5</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a51</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a52</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a53</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a54</span><span class="o">*</span><span class="n">k4</span><span class="p">))</span>
-<span class="linenos">101</span>    <span class="n">k6</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c6</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a61</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a62</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a63</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a64</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">a65</span><span class="o">*</span><span class="n">k5</span><span class="p">))</span>
-<span class="linenos">102</span>    <span class="n">k7</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c7</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a71</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a72</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a73</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a74</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">a75</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">a76</span><span class="o">*</span><span class="n">k6</span><span class="p">))</span>
-<span class="linenos">103</span>
-<span class="linenos">104</span>    <span class="c1"># 4th‑order and 5th‑order solutions</span>
-<span class="linenos">105</span>    <span class="n">y4</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">b4_1</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">b4_3</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">b4_4</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">b4_5</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">b4_6</span><span class="o">*</span><span class="n">k6</span> <span class="o">+</span> <span class="n">b4_7</span><span class="o">*</span><span class="n">k7</span><span class="p">)</span>
-<span class="linenos">106</span>    <span class="n">y5</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">b5_1</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">b5_3</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">b5_4</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">b5_5</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">b5_6</span><span class="o">*</span><span class="n">k6</span> <span class="o">+</span> <span class="n">b5_7</span><span class="o">*</span><span class="n">k7</span><span class="p">)</span>
-<span class="linenos">107</span>
-<span class="linenos">108</span>    <span class="c1"># Estimate the local error</span>
-<span class="linenos">109</span>    <span class="n">err</span> <span class="o">=</span> <span class="n">y5</span> <span class="o">-</span> <span class="n">y4</span>
-<span class="linenos">110</span>    <span class="c1"># Compute norm relative to tolerances</span>
-<span class="linenos">111</span>    <span class="n">scale</span> <span class="o">=</span> <span class="n">abs_tol</span> <span class="o">+</span> <span class="n">rel_tol</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y5</span><span class="p">))</span>
-<span class="linenos">112</span>    <span class="n">error_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">err</span> <span class="o">/</span> <span class="n">scale</span><span class="p">)</span>
-<span class="linenos">113</span>
-<span class="linenos">114</span>    <span class="c1"># Determine whether to accept the step.  A typical tolerance for the</span>
-<span class="linenos">115</span>    <span class="c1"># error norm is 1.  See the cited source for rationale【313837333132264†L58-L82】.</span>
-<span class="linenos">116</span>    <span class="k">if</span> <span class="n">error_norm</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
-<span class="linenos">117</span>        <span class="c1"># Accept the step; propose new step size for next call</span>
-<span class="linenos">118</span>        <span class="c1"># Safety factors: shrink if error close to 1.0, grow if much smaller</span>
-<span class="linenos">119</span>        <span class="c1"># Use exponent 1/5 because the method is 5th order</span>
-<span class="linenos">120</span>        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">error_norm</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">)))</span>
-<span class="linenos">121</span>        <span class="k">return</span> <span class="n">y5</span><span class="p">,</span> <span class="n">dt_new</span>
-<span class="linenos">122</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">123</span>        <span class="c1"># Reject the step; suggest smaller dt and return None</span>
-<span class="linenos">124</span>        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">error_norm</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="p">))</span>
-<span class="linenos">125</span>        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dt_new</span>
-<span class="linenos">126</span>
-<span class="linenos">127</span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;rk45_step&quot;</span><span class="p">]</span>
+<span class="linenos"> 86</span>    <span class="n">a31</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">40</span>
+<span class="linenos"> 87</span>    <span class="n">a32</span> <span class="o">=</span> <span class="mi">9</span><span class="o">/</span><span class="mi">40</span>
+<span class="linenos"> 88</span>    <span class="n">a41</span> <span class="o">=</span> <span class="mi">44</span><span class="o">/</span><span class="mi">45</span>
+<span class="linenos"> 89</span>    <span class="n">a42</span> <span class="o">=</span> <span class="o">-</span><span class="mi">56</span><span class="o">/</span><span class="mi">15</span>
+<span class="linenos"> 90</span>    <span class="n">a43</span> <span class="o">=</span> <span class="mi">32</span><span class="o">/</span><span class="mi">9</span>
+<span class="linenos"> 91</span>    <span class="n">a51</span> <span class="o">=</span> <span class="mi">19372</span><span class="o">/</span><span class="mi">6561</span>
+<span class="linenos"> 92</span>    <span class="n">a52</span> <span class="o">=</span> <span class="o">-</span><span class="mi">25360</span><span class="o">/</span><span class="mi">2187</span>
+<span class="linenos"> 93</span>    <span class="n">a53</span> <span class="o">=</span> <span class="mi">64448</span><span class="o">/</span><span class="mi">6561</span>
+<span class="linenos"> 94</span>    <span class="n">a54</span> <span class="o">=</span> <span class="o">-</span><span class="mi">212</span><span class="o">/</span><span class="mi">729</span>
+<span class="linenos"> 95</span>    <span class="n">a61</span> <span class="o">=</span> <span class="mi">9017</span><span class="o">/</span><span class="mi">3168</span>
+<span class="linenos"> 96</span>    <span class="n">a62</span> <span class="o">=</span> <span class="o">-</span><span class="mi">355</span><span class="o">/</span><span class="mi">33</span>
+<span class="linenos"> 97</span>    <span class="n">a63</span> <span class="o">=</span> <span class="mi">46732</span><span class="o">/</span><span class="mi">5247</span>
+<span class="linenos"> 98</span>    <span class="n">a64</span> <span class="o">=</span> <span class="mi">49</span><span class="o">/</span><span class="mi">176</span>
+<span class="linenos"> 99</span>    <span class="n">a65</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5103</span><span class="o">/</span><span class="mi">18656</span>
+<span class="linenos">100</span>    <span class="n">a71</span> <span class="o">=</span> <span class="mi">35</span><span class="o">/</span><span class="mi">384</span>
+<span class="linenos">101</span>    <span class="n">a72</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">102</span>    <span class="n">a73</span> <span class="o">=</span> <span class="mi">500</span><span class="o">/</span><span class="mi">1113</span>
+<span class="linenos">103</span>    <span class="n">a74</span> <span class="o">=</span> <span class="mi">125</span><span class="o">/</span><span class="mi">192</span>
+<span class="linenos">104</span>    <span class="n">a75</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span>
+<span class="linenos">105</span>    <span class="n">a76</span> <span class="o">=</span> <span class="mi">11</span><span class="o">/</span><span class="mi">84</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span>    <span class="n">b4_1</span> <span class="o">=</span> <span class="mi">5179</span><span class="o">/</span><span class="mi">57600</span>
+<span class="linenos">108</span>    <span class="n">b4_3</span> <span class="o">=</span> <span class="mi">7571</span><span class="o">/</span><span class="mi">16695</span>
+<span class="linenos">109</span>    <span class="n">b4_4</span> <span class="o">=</span> <span class="mi">393</span><span class="o">/</span><span class="mi">640</span>
+<span class="linenos">110</span>    <span class="n">b4_5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">92097</span><span class="o">/</span><span class="mi">339200</span>
+<span class="linenos">111</span>    <span class="n">b4_6</span> <span class="o">=</span> <span class="mi">187</span><span class="o">/</span><span class="mi">2100</span>
+<span class="linenos">112</span>    <span class="n">b4_7</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">40</span>
+<span class="linenos">113</span>    <span class="n">b5_1</span> <span class="o">=</span> <span class="mi">35</span><span class="o">/</span><span class="mi">384</span>
+<span class="linenos">114</span>    <span class="n">b5_3</span> <span class="o">=</span> <span class="mi">500</span><span class="o">/</span><span class="mi">1113</span>
+<span class="linenos">115</span>    <span class="n">b5_4</span> <span class="o">=</span> <span class="mi">125</span><span class="o">/</span><span class="mi">192</span>
+<span class="linenos">116</span>    <span class="n">b5_5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span>
+<span class="linenos">117</span>    <span class="n">b5_6</span> <span class="o">=</span> <span class="mi">11</span><span class="o">/</span><span class="mi">84</span>
+<span class="linenos">118</span>    <span class="n">b5_7</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">119</span>
+<span class="linenos">120</span>    <span class="c1"># Evaluate the stages</span>
+<span class="linenos">121</span>    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="linenos">122</span>    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c2</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a21</span><span class="o">*</span><span class="n">k1</span><span class="p">))</span>
+<span class="linenos">123</span>    <span class="n">k3</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c3</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a31</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a32</span><span class="o">*</span><span class="n">k2</span><span class="p">))</span>
+<span class="linenos">124</span>    <span class="n">k4</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c4</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a41</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a42</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a43</span><span class="o">*</span><span class="n">k3</span><span class="p">))</span>
+<span class="linenos">125</span>    <span class="n">k5</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a51</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a52</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a53</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a54</span><span class="o">*</span><span class="n">k4</span><span class="p">))</span>
+<span class="linenos">126</span>    <span class="n">k6</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c6</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a61</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a62</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a63</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a64</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">a65</span><span class="o">*</span><span class="n">k5</span><span class="p">))</span>
+<span class="linenos">127</span>    <span class="n">k7</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c7</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a71</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a72</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a73</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a74</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">a75</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">a76</span><span class="o">*</span><span class="n">k6</span><span class="p">))</span>
+<span class="linenos">128</span>
+<span class="linenos">129</span>    <span class="c1"># 4th‑order and 5th‑order solutions</span>
+<span class="linenos">130</span>    <span class="n">y4</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">b4_1</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">b4_3</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">b4_4</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">b4_5</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">b4_6</span><span class="o">*</span><span class="n">k6</span> <span class="o">+</span> <span class="n">b4_7</span><span class="o">*</span><span class="n">k7</span><span class="p">)</span>
+<span class="linenos">131</span>    <span class="n">y5</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">b5_1</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">b5_3</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">b5_4</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">b5_5</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">b5_6</span><span class="o">*</span><span class="n">k6</span> <span class="o">+</span> <span class="n">b5_7</span><span class="o">*</span><span class="n">k7</span><span class="p">)</span>
+<span class="linenos">132</span>
+<span class="linenos">133</span>    <span class="c1"># Estimate the local error</span>
+<span class="linenos">134</span>    <span class="n">err</span> <span class="o">=</span> <span class="n">y5</span> <span class="o">-</span> <span class="n">y4</span>
+<span class="linenos">135</span>    <span class="c1"># Compute norm relative to tolerances</span>
+<span class="linenos">136</span>    <span class="n">scale</span> <span class="o">=</span> <span class="n">abs_tol</span> <span class="o">+</span> <span class="n">rel_tol</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y5</span><span class="p">))</span>
+<span class="linenos">137</span>    <span class="n">error_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">err</span> <span class="o">/</span> <span class="n">scale</span><span class="p">)</span>
+<span class="linenos">138</span>
+<span class="linenos">139</span>    <span class="c1"># Determine whether to accept the step.  A typical tolerance for the</span>
+<span class="linenos">140</span>    <span class="c1"># error norm is 1.  See the cited source for rationale【313837333132264†L58-L82】.</span>
+<span class="linenos">141</span>    <span class="k">if</span> <span class="n">error_norm</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+<span class="linenos">142</span>        <span class="c1"># Accept the step; propose new step size for next call</span>
+<span class="linenos">143</span>        <span class="c1"># Safety factors: shrink if error close to 1.0, grow if much smaller</span>
+<span class="linenos">144</span>        <span class="c1"># Use exponent 1/5 because the method is 5th order</span>
+<span class="linenos">145</span>        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">error_norm</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">)))</span>
+<span class="linenos">146</span>        <span class="k">return</span> <span class="n">y5</span><span class="p">,</span> <span class="n">dt_new</span>
+<span class="linenos">147</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">148</span>        <span class="c1"># Reject the step; suggest smaller dt and return None</span>
+<span class="linenos">149</span>        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">error_norm</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="p">))</span>
+<span class="linenos">150</span>        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dt_new</span>
+<span class="linenos">151</span>
+<span class="linenos">152</span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;rk45_step&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -685,95 +736,120 @@ rather than generated programmatically.  See the cited reference
 for the Butcher tableau【313837333132264†L58-L82】.</p>
 <section id="source-code">
 <h3>Source Code<a class="headerlink" href="#source-code" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">rk45_step</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-<span class="linenos"> 2</span>              <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 3</span>              <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos"> 4</span>              <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 5</span>              <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 6</span>              <span class="n">rel_tol</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="linenos"> 7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform a single Dormand–Prince 4(5) integration step.</span>
-<span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="sd">    Parameters</span>
-<span class="linenos">10</span><span class="sd">    ----------</span>
-<span class="linenos">11</span><span class="sd">    f : Callable[[float, np.ndarray], np.ndarray]</span>
-<span class="linenos">12</span><span class="sd">        Function computing the time derivative of the state ``y`` at time</span>
-<span class="linenos">13</span><span class="sd">        ``t``.  The derivative must be a one‑dimensional NumPy array.</span>
-<span class="linenos">14</span><span class="sd">    t : float</span>
-<span class="linenos">15</span><span class="sd">        Current integration time.</span>
-<span class="linenos">16</span><span class="sd">    y : np.ndarray</span>
-<span class="linenos">17</span><span class="sd">        Current state vector.</span>
-<span class="linenos">18</span><span class="sd">    dt : float</span>
-<span class="linenos">19</span><span class="sd">        Proposed step size.</span>
-<span class="linenos">20</span><span class="sd">    abs_tol : float</span>
-<span class="linenos">21</span><span class="sd">        Absolute tolerance for local error control.</span>
-<span class="linenos">22</span><span class="sd">    rel_tol : float</span>
-<span class="linenos">23</span><span class="sd">        Relative tolerance for local error control.</span>
-<span class="linenos">24</span>
-<span class="linenos">25</span><span class="sd">    Returns</span>
-<span class="linenos">26</span><span class="sd">    -------</span>
-<span class="linenos">27</span><span class="sd">    Tuple[Optional[np.ndarray], float]</span>
-<span class="linenos">28</span><span class="sd">        A tuple ``(y_new, dt_new)``.  If the step is accepted then</span>
-<span class="linenos">29</span><span class="sd">        ``y_new`` contains the 5th‑order solution at ``t + dt`` and</span>
-<span class="linenos">30</span><span class="sd">        ``dt_new`` is a suggested step size for the next step.  If the</span>
-<span class="linenos">31</span><span class="sd">        step is rejected then ``y_new`` is ``None`` and ``dt_new`` is a</span>
-<span class="linenos">32</span><span class="sd">        smaller step size to retry.</span>
-<span class="linenos">33</span>
-<span class="linenos">34</span><span class="sd">    Notes</span>
-<span class="linenos">35</span><span class="sd">    -----</span>
-<span class="linenos">36</span><span class="sd">    This implementation uses the Dormand–Prince coefficients for the</span>
-<span class="linenos">37</span><span class="sd">    classic `RK45` method.  The constants are hard‑coded for clarity</span>
-<span class="linenos">38</span><span class="sd">    rather than generated programmatically.  See the cited reference</span>
-<span class="linenos">39</span><span class="sd">    for the Butcher tableau【313837333132264†L58-L82】.</span>
-<span class="linenos">40</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">41</span>    <span class="c1"># Dormand–Prince coefficients (c, a&#39;s, b4, b5)</span>
-<span class="linenos">42</span>    <span class="n">c2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
-<span class="linenos">43</span>    <span class="n">c3</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">10</span>
-<span class="linenos">44</span>    <span class="n">c4</span> <span class="o">=</span> <span class="mi">4</span><span class="o">/</span><span class="mi">5</span>
-<span class="linenos">45</span>    <span class="n">c5</span> <span class="o">=</span> <span class="mi">8</span><span class="o">/</span><span class="mi">9</span>
-<span class="linenos">46</span>    <span class="n">c6</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="linenos">47</span>    <span class="n">c7</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="linenos">48</span>
-<span class="linenos">49</span>    <span class="n">a21</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
-<span class="linenos">50</span>    <span class="n">a31</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">40</span><span class="p">;</span> <span class="n">a32</span> <span class="o">=</span> <span class="mi">9</span><span class="o">/</span><span class="mi">40</span>
-<span class="linenos">51</span>    <span class="n">a41</span> <span class="o">=</span> <span class="mi">44</span><span class="o">/</span><span class="mi">45</span><span class="p">;</span> <span class="n">a42</span> <span class="o">=</span> <span class="o">-</span><span class="mi">56</span><span class="o">/</span><span class="mi">15</span><span class="p">;</span> <span class="n">a43</span> <span class="o">=</span> <span class="mi">32</span><span class="o">/</span><span class="mi">9</span>
-<span class="linenos">52</span>    <span class="n">a51</span> <span class="o">=</span> <span class="mi">19372</span><span class="o">/</span><span class="mi">6561</span><span class="p">;</span> <span class="n">a52</span> <span class="o">=</span> <span class="o">-</span><span class="mi">25360</span><span class="o">/</span><span class="mi">2187</span><span class="p">;</span> <span class="n">a53</span> <span class="o">=</span> <span class="mi">64448</span><span class="o">/</span><span class="mi">6561</span><span class="p">;</span> <span class="n">a54</span> <span class="o">=</span> <span class="o">-</span><span class="mi">212</span><span class="o">/</span><span class="mi">729</span>
-<span class="linenos">53</span>    <span class="n">a61</span> <span class="o">=</span> <span class="mi">9017</span><span class="o">/</span><span class="mi">3168</span><span class="p">;</span> <span class="n">a62</span> <span class="o">=</span> <span class="o">-</span><span class="mi">355</span><span class="o">/</span><span class="mi">33</span><span class="p">;</span> <span class="n">a63</span> <span class="o">=</span> <span class="mi">46732</span><span class="o">/</span><span class="mi">5247</span><span class="p">;</span> <span class="n">a64</span> <span class="o">=</span> <span class="mi">49</span><span class="o">/</span><span class="mi">176</span><span class="p">;</span> <span class="n">a65</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5103</span><span class="o">/</span><span class="mi">18656</span>
-<span class="linenos">54</span>    <span class="n">a71</span> <span class="o">=</span> <span class="mi">35</span><span class="o">/</span><span class="mi">384</span><span class="p">;</span> <span class="n">a72</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="n">a73</span> <span class="o">=</span> <span class="mi">500</span><span class="o">/</span><span class="mi">1113</span><span class="p">;</span> <span class="n">a74</span> <span class="o">=</span> <span class="mi">125</span><span class="o">/</span><span class="mi">192</span><span class="p">;</span> <span class="n">a75</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span><span class="p">;</span> <span class="n">a76</span> <span class="o">=</span> <span class="mi">11</span><span class="o">/</span><span class="mi">84</span>
-<span class="linenos">55</span>
-<span class="linenos">56</span>    <span class="n">b4_1</span> <span class="o">=</span> <span class="mi">5179</span><span class="o">/</span><span class="mi">57600</span><span class="p">;</span> <span class="n">b4_3</span> <span class="o">=</span> <span class="mi">7571</span><span class="o">/</span><span class="mi">16695</span><span class="p">;</span> <span class="n">b4_4</span> <span class="o">=</span> <span class="mi">393</span><span class="o">/</span><span class="mi">640</span><span class="p">;</span> <span class="n">b4_5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">92097</span><span class="o">/</span><span class="mi">339200</span><span class="p">;</span> <span class="n">b4_6</span> <span class="o">=</span> <span class="mi">187</span><span class="o">/</span><span class="mi">2100</span><span class="p">;</span> <span class="n">b4_7</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">40</span>
-<span class="linenos">57</span>    <span class="n">b5_1</span> <span class="o">=</span> <span class="mi">35</span><span class="o">/</span><span class="mi">384</span><span class="p">;</span> <span class="n">b5_3</span> <span class="o">=</span> <span class="mi">500</span><span class="o">/</span><span class="mi">1113</span><span class="p">;</span> <span class="n">b5_4</span> <span class="o">=</span> <span class="mi">125</span><span class="o">/</span><span class="mi">192</span><span class="p">;</span> <span class="n">b5_5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span><span class="p">;</span> <span class="n">b5_6</span> <span class="o">=</span> <span class="mi">11</span><span class="o">/</span><span class="mi">84</span><span class="p">;</span> <span class="n">b5_7</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">58</span>
-<span class="linenos">59</span>    <span class="c1"># Evaluate the stages</span>
-<span class="linenos">60</span>    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="linenos">61</span>    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c2</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a21</span><span class="o">*</span><span class="n">k1</span><span class="p">))</span>
-<span class="linenos">62</span>    <span class="n">k3</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c3</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a31</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a32</span><span class="o">*</span><span class="n">k2</span><span class="p">))</span>
-<span class="linenos">63</span>    <span class="n">k4</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c4</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a41</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a42</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a43</span><span class="o">*</span><span class="n">k3</span><span class="p">))</span>
-<span class="linenos">64</span>    <span class="n">k5</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a51</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a52</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a53</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a54</span><span class="o">*</span><span class="n">k4</span><span class="p">))</span>
-<span class="linenos">65</span>    <span class="n">k6</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c6</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a61</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a62</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a63</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a64</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">a65</span><span class="o">*</span><span class="n">k5</span><span class="p">))</span>
-<span class="linenos">66</span>    <span class="n">k7</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c7</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a71</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a72</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a73</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a74</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">a75</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">a76</span><span class="o">*</span><span class="n">k6</span><span class="p">))</span>
-<span class="linenos">67</span>
-<span class="linenos">68</span>    <span class="c1"># 4th‑order and 5th‑order solutions</span>
-<span class="linenos">69</span>    <span class="n">y4</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">b4_1</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">b4_3</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">b4_4</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">b4_5</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">b4_6</span><span class="o">*</span><span class="n">k6</span> <span class="o">+</span> <span class="n">b4_7</span><span class="o">*</span><span class="n">k7</span><span class="p">)</span>
-<span class="linenos">70</span>    <span class="n">y5</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">b5_1</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">b5_3</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">b5_4</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">b5_5</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">b5_6</span><span class="o">*</span><span class="n">k6</span> <span class="o">+</span> <span class="n">b5_7</span><span class="o">*</span><span class="n">k7</span><span class="p">)</span>
-<span class="linenos">71</span>
-<span class="linenos">72</span>    <span class="c1"># Estimate the local error</span>
-<span class="linenos">73</span>    <span class="n">err</span> <span class="o">=</span> <span class="n">y5</span> <span class="o">-</span> <span class="n">y4</span>
-<span class="linenos">74</span>    <span class="c1"># Compute norm relative to tolerances</span>
-<span class="linenos">75</span>    <span class="n">scale</span> <span class="o">=</span> <span class="n">abs_tol</span> <span class="o">+</span> <span class="n">rel_tol</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y5</span><span class="p">))</span>
-<span class="linenos">76</span>    <span class="n">error_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">err</span> <span class="o">/</span> <span class="n">scale</span><span class="p">)</span>
-<span class="linenos">77</span>
-<span class="linenos">78</span>    <span class="c1"># Determine whether to accept the step.  A typical tolerance for the</span>
-<span class="linenos">79</span>    <span class="c1"># error norm is 1.  See the cited source for rationale【313837333132264†L58-L82】.</span>
-<span class="linenos">80</span>    <span class="k">if</span> <span class="n">error_norm</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
-<span class="linenos">81</span>        <span class="c1"># Accept the step; propose new step size for next call</span>
-<span class="linenos">82</span>        <span class="c1"># Safety factors: shrink if error close to 1.0, grow if much smaller</span>
-<span class="linenos">83</span>        <span class="c1"># Use exponent 1/5 because the method is 5th order</span>
-<span class="linenos">84</span>        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">error_norm</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">)))</span>
-<span class="linenos">85</span>        <span class="k">return</span> <span class="n">y5</span><span class="p">,</span> <span class="n">dt_new</span>
-<span class="linenos">86</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">87</span>        <span class="c1"># Reject the step; suggest smaller dt and return None</span>
-<span class="linenos">88</span>        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">error_norm</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="p">))</span>
-<span class="linenos">89</span>        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dt_new</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="k">def</span><span class="w"> </span><span class="nf">rk45_step</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="linenos">  2</span>              <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">  3</span>              <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos">  4</span>              <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">  5</span>              <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">  6</span>              <span class="n">rel_tol</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">  7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform a single Dormand–Prince 4(5) integration step.</span>
+<span class="linenos">  8</span>
+<span class="linenos">  9</span><span class="sd">    Parameters</span>
+<span class="linenos"> 10</span><span class="sd">    ----------</span>
+<span class="linenos"> 11</span><span class="sd">    f : Callable[[float, np.ndarray], np.ndarray]</span>
+<span class="linenos"> 12</span><span class="sd">        Function computing the time derivative of the state ``y`` at time</span>
+<span class="linenos"> 13</span><span class="sd">        ``t``.  The derivative must be a one‑dimensional NumPy array.</span>
+<span class="linenos"> 14</span><span class="sd">    t : float</span>
+<span class="linenos"> 15</span><span class="sd">        Current integration time.</span>
+<span class="linenos"> 16</span><span class="sd">    y : np.ndarray</span>
+<span class="linenos"> 17</span><span class="sd">        Current state vector.</span>
+<span class="linenos"> 18</span><span class="sd">    dt : float</span>
+<span class="linenos"> 19</span><span class="sd">        Proposed step size.</span>
+<span class="linenos"> 20</span><span class="sd">    abs_tol : float</span>
+<span class="linenos"> 21</span><span class="sd">        Absolute tolerance for local error control.</span>
+<span class="linenos"> 22</span><span class="sd">    rel_tol : float</span>
+<span class="linenos"> 23</span><span class="sd">        Relative tolerance for local error control.</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span><span class="sd">    Returns</span>
+<span class="linenos"> 26</span><span class="sd">    -------</span>
+<span class="linenos"> 27</span><span class="sd">    Tuple[Optional[np.ndarray], float]</span>
+<span class="linenos"> 28</span><span class="sd">        A tuple ``(y_new, dt_new)``.  If the step is accepted then</span>
+<span class="linenos"> 29</span><span class="sd">        ``y_new`` contains the 5th‑order solution at ``t + dt`` and</span>
+<span class="linenos"> 30</span><span class="sd">        ``dt_new`` is a suggested step size for the next step.  If the</span>
+<span class="linenos"> 31</span><span class="sd">        step is rejected then ``y_new`` is ``None`` and ``dt_new`` is a</span>
+<span class="linenos"> 32</span><span class="sd">        smaller step size to retry.</span>
+<span class="linenos"> 33</span>
+<span class="linenos"> 34</span><span class="sd">    Notes</span>
+<span class="linenos"> 35</span><span class="sd">    -----</span>
+<span class="linenos"> 36</span><span class="sd">    This implementation uses the Dormand–Prince coefficients for the</span>
+<span class="linenos"> 37</span><span class="sd">    classic `RK45` method.  The constants are hard‑coded for clarity</span>
+<span class="linenos"> 38</span><span class="sd">    rather than generated programmatically.  See the cited reference</span>
+<span class="linenos"> 39</span><span class="sd">    for the Butcher tableau【313837333132264†L58-L82】.</span>
+<span class="linenos"> 40</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 41</span>    <span class="c1"># Dormand–Prince coefficients (c, a&#39;s, b4, b5)</span>
+<span class="linenos"> 42</span>    <span class="n">c2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
+<span class="linenos"> 43</span>    <span class="n">c3</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">10</span>
+<span class="linenos"> 44</span>    <span class="n">c4</span> <span class="o">=</span> <span class="mi">4</span><span class="o">/</span><span class="mi">5</span>
+<span class="linenos"> 45</span>    <span class="n">c5</span> <span class="o">=</span> <span class="mi">8</span><span class="o">/</span><span class="mi">9</span>
+<span class="linenos"> 46</span>    <span class="n">c6</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="linenos"> 47</span>    <span class="n">c7</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="linenos"> 48</span>
+<span class="linenos"> 49</span>    <span class="n">a21</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
+<span class="linenos"> 50</span>    <span class="n">a31</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">40</span>
+<span class="linenos"> 51</span>    <span class="n">a32</span> <span class="o">=</span> <span class="mi">9</span><span class="o">/</span><span class="mi">40</span>
+<span class="linenos"> 52</span>    <span class="n">a41</span> <span class="o">=</span> <span class="mi">44</span><span class="o">/</span><span class="mi">45</span>
+<span class="linenos"> 53</span>    <span class="n">a42</span> <span class="o">=</span> <span class="o">-</span><span class="mi">56</span><span class="o">/</span><span class="mi">15</span>
+<span class="linenos"> 54</span>    <span class="n">a43</span> <span class="o">=</span> <span class="mi">32</span><span class="o">/</span><span class="mi">9</span>
+<span class="linenos"> 55</span>    <span class="n">a51</span> <span class="o">=</span> <span class="mi">19372</span><span class="o">/</span><span class="mi">6561</span>
+<span class="linenos"> 56</span>    <span class="n">a52</span> <span class="o">=</span> <span class="o">-</span><span class="mi">25360</span><span class="o">/</span><span class="mi">2187</span>
+<span class="linenos"> 57</span>    <span class="n">a53</span> <span class="o">=</span> <span class="mi">64448</span><span class="o">/</span><span class="mi">6561</span>
+<span class="linenos"> 58</span>    <span class="n">a54</span> <span class="o">=</span> <span class="o">-</span><span class="mi">212</span><span class="o">/</span><span class="mi">729</span>
+<span class="linenos"> 59</span>    <span class="n">a61</span> <span class="o">=</span> <span class="mi">9017</span><span class="o">/</span><span class="mi">3168</span>
+<span class="linenos"> 60</span>    <span class="n">a62</span> <span class="o">=</span> <span class="o">-</span><span class="mi">355</span><span class="o">/</span><span class="mi">33</span>
+<span class="linenos"> 61</span>    <span class="n">a63</span> <span class="o">=</span> <span class="mi">46732</span><span class="o">/</span><span class="mi">5247</span>
+<span class="linenos"> 62</span>    <span class="n">a64</span> <span class="o">=</span> <span class="mi">49</span><span class="o">/</span><span class="mi">176</span>
+<span class="linenos"> 63</span>    <span class="n">a65</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5103</span><span class="o">/</span><span class="mi">18656</span>
+<span class="linenos"> 64</span>    <span class="n">a71</span> <span class="o">=</span> <span class="mi">35</span><span class="o">/</span><span class="mi">384</span>
+<span class="linenos"> 65</span>    <span class="n">a72</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos"> 66</span>    <span class="n">a73</span> <span class="o">=</span> <span class="mi">500</span><span class="o">/</span><span class="mi">1113</span>
+<span class="linenos"> 67</span>    <span class="n">a74</span> <span class="o">=</span> <span class="mi">125</span><span class="o">/</span><span class="mi">192</span>
+<span class="linenos"> 68</span>    <span class="n">a75</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span>
+<span class="linenos"> 69</span>    <span class="n">a76</span> <span class="o">=</span> <span class="mi">11</span><span class="o">/</span><span class="mi">84</span>
+<span class="linenos"> 70</span>
+<span class="linenos"> 71</span>    <span class="n">b4_1</span> <span class="o">=</span> <span class="mi">5179</span><span class="o">/</span><span class="mi">57600</span>
+<span class="linenos"> 72</span>    <span class="n">b4_3</span> <span class="o">=</span> <span class="mi">7571</span><span class="o">/</span><span class="mi">16695</span>
+<span class="linenos"> 73</span>    <span class="n">b4_4</span> <span class="o">=</span> <span class="mi">393</span><span class="o">/</span><span class="mi">640</span>
+<span class="linenos"> 74</span>    <span class="n">b4_5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">92097</span><span class="o">/</span><span class="mi">339200</span>
+<span class="linenos"> 75</span>    <span class="n">b4_6</span> <span class="o">=</span> <span class="mi">187</span><span class="o">/</span><span class="mi">2100</span>
+<span class="linenos"> 76</span>    <span class="n">b4_7</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">40</span>
+<span class="linenos"> 77</span>    <span class="n">b5_1</span> <span class="o">=</span> <span class="mi">35</span><span class="o">/</span><span class="mi">384</span>
+<span class="linenos"> 78</span>    <span class="n">b5_3</span> <span class="o">=</span> <span class="mi">500</span><span class="o">/</span><span class="mi">1113</span>
+<span class="linenos"> 79</span>    <span class="n">b5_4</span> <span class="o">=</span> <span class="mi">125</span><span class="o">/</span><span class="mi">192</span>
+<span class="linenos"> 80</span>    <span class="n">b5_5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span>
+<span class="linenos"> 81</span>    <span class="n">b5_6</span> <span class="o">=</span> <span class="mi">11</span><span class="o">/</span><span class="mi">84</span>
+<span class="linenos"> 82</span>    <span class="n">b5_7</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span>    <span class="c1"># Evaluate the stages</span>
+<span class="linenos"> 85</span>    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="linenos"> 86</span>    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c2</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a21</span><span class="o">*</span><span class="n">k1</span><span class="p">))</span>
+<span class="linenos"> 87</span>    <span class="n">k3</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c3</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a31</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a32</span><span class="o">*</span><span class="n">k2</span><span class="p">))</span>
+<span class="linenos"> 88</span>    <span class="n">k4</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c4</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a41</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a42</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a43</span><span class="o">*</span><span class="n">k3</span><span class="p">))</span>
+<span class="linenos"> 89</span>    <span class="n">k5</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a51</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a52</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a53</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a54</span><span class="o">*</span><span class="n">k4</span><span class="p">))</span>
+<span class="linenos"> 90</span>    <span class="n">k6</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c6</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a61</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a62</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a63</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a64</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">a65</span><span class="o">*</span><span class="n">k5</span><span class="p">))</span>
+<span class="linenos"> 91</span>    <span class="n">k7</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">c7</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">a71</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">a72</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="n">a73</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">a74</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">a75</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">a76</span><span class="o">*</span><span class="n">k6</span><span class="p">))</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span>    <span class="c1"># 4th‑order and 5th‑order solutions</span>
+<span class="linenos"> 94</span>    <span class="n">y4</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">b4_1</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">b4_3</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">b4_4</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">b4_5</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">b4_6</span><span class="o">*</span><span class="n">k6</span> <span class="o">+</span> <span class="n">b4_7</span><span class="o">*</span><span class="n">k7</span><span class="p">)</span>
+<span class="linenos"> 95</span>    <span class="n">y5</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">b5_1</span><span class="o">*</span><span class="n">k1</span> <span class="o">+</span> <span class="n">b5_3</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">b5_4</span><span class="o">*</span><span class="n">k4</span> <span class="o">+</span> <span class="n">b5_5</span><span class="o">*</span><span class="n">k5</span> <span class="o">+</span> <span class="n">b5_6</span><span class="o">*</span><span class="n">k6</span> <span class="o">+</span> <span class="n">b5_7</span><span class="o">*</span><span class="n">k7</span><span class="p">)</span>
+<span class="linenos"> 96</span>
+<span class="linenos"> 97</span>    <span class="c1"># Estimate the local error</span>
+<span class="linenos"> 98</span>    <span class="n">err</span> <span class="o">=</span> <span class="n">y5</span> <span class="o">-</span> <span class="n">y4</span>
+<span class="linenos"> 99</span>    <span class="c1"># Compute norm relative to tolerances</span>
+<span class="linenos">100</span>    <span class="n">scale</span> <span class="o">=</span> <span class="n">abs_tol</span> <span class="o">+</span> <span class="n">rel_tol</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y5</span><span class="p">))</span>
+<span class="linenos">101</span>    <span class="n">error_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">err</span> <span class="o">/</span> <span class="n">scale</span><span class="p">)</span>
+<span class="linenos">102</span>
+<span class="linenos">103</span>    <span class="c1"># Determine whether to accept the step.  A typical tolerance for the</span>
+<span class="linenos">104</span>    <span class="c1"># error norm is 1.  See the cited source for rationale【313837333132264†L58-L82】.</span>
+<span class="linenos">105</span>    <span class="k">if</span> <span class="n">error_norm</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+<span class="linenos">106</span>        <span class="c1"># Accept the step; propose new step size for next call</span>
+<span class="linenos">107</span>        <span class="c1"># Safety factors: shrink if error close to 1.0, grow if much smaller</span>
+<span class="linenos">108</span>        <span class="c1"># Use exponent 1/5 because the method is 5th order</span>
+<span class="linenos">109</span>        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">error_norm</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">)))</span>
+<span class="linenos">110</span>        <span class="k">return</span> <span class="n">y5</span><span class="p">,</span> <span class="n">dt_new</span>
+<span class="linenos">111</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">112</span>        <span class="c1"># Reject the step; suggest smaller dt and return None</span>
+<span class="linenos">113</span>        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">error_norm</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="p">))</span>
+<span class="linenos">114</span>        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dt_new</span>
 </pre></div>
 </div>
 </section>
@@ -787,6 +863,235 @@ for the Butcher tableau【313837333132264†L58-L82】.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">typing</span> <span class="pre">import</span> <span class="pre">Callable,</span> <span class="pre">Tuple,</span> <span class="pre">Optional</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></p></li>
 </ul>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="adaptive-step-size-control">
+<h3>Adaptive Step Size Control<a class="headerlink" href="#adaptive-step-size-control" title="Link to this heading">¶</a></h3>
+<p><strong>Error estimation (embedded RK pairs):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\epsilon_n = \|\vec{x}_{n+1}^{\text{high}} - \vec{x}_{n+1}^{\text{low}}\|\]</div>
+</div>
+<p><strong>Step size adaptation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[h_{\text{new}} = h \cdot \min\left(f_{\max}, \max\left(f_{\min}, f \cdot \left(\frac{\text{tol}}{\epsilon}\right)^{1/p}\right)\right)\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p\)</span> is the lower order of the embedded pair</p></li>
+<li><p><span class="math notranslate nohighlight">\(f, f_{\min}, f_{\max}\)</span> are safety factors</p></li>
+</ul>
+</section>
+<section id="runge-kutta-fehlberg-rk45">
+<h3>Runge-Kutta-Fehlberg (RK45)<a class="headerlink" href="#runge-kutta-fehlberg-rk45" title="Link to this heading">¶</a></h3>
+<p><strong>Fourth-order solution:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{n+1}^{(4)} = \vec{x}_n + h\sum_{i=1}^{6} b_i \vec{k}_i\]</div>
+</div>
+<p><strong>Fifth-order solution:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{n+1}^{(5)} = \vec{x}_n + h\sum_{i=1}^{6} b_i^* \vec{k}_i\]</div>
+</div>
+<p><strong>Butcher tableau coefficients:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{k}_i = \vec{f}\left(t_n + c_i h, \vec{x}_n + h\sum_{j=1}^{i-1} a_{ij}\vec{k}_j\right)\]</div>
+</div>
+</section>
+<section id="dormand-prince-method">
+<h3>Dormand-Prince Method<a class="headerlink" href="#dormand-prince-method" title="Link to this heading">¶</a></h3>
+<p><strong>Fifth-order accurate with fourth-order error estimate:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Solution:} \quad &amp;\vec{x}_{n+1} = \vec{x}_n + h\sum_{i=1}^{7} b_i \vec{k}_i \quad O(h^6) \\
+\text{Error Est:} \quad &amp;\epsilon_n = h\sum_{i=1}^{7} (b_i - b_i^*) \vec{k}_i \quad O(h^5)
+\end{align}\end{split}\]</div>
+</div>
+</section>
+<section id="step-acceptance-criteria">
+<h3>Step Acceptance Criteria<a class="headerlink" href="#step-acceptance-criteria" title="Link to this heading">¶</a></h3>
+<p><strong>Accept step if:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\epsilon_n \leq \text{tol} \cdot \max(\|\vec{x}_n\|, \|\vec{x}_{n+1}\|)\]</div>
+</div>
+<p><strong>Reject and retry with:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[h_{\text{retry}} = h \cdot \max\left(0.1, 0.9\left(\frac{\text{tol}}{\epsilon_n}\right)^{1/p}\right)\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[x_n, t_n, h] --&gt; B[Embedded RK Step]
+
+    B --&gt; C[High-Order Solution]
+    B --&gt; D[Low-Order Solution]
+
+    C --&gt; E[x_n+1^high_]
+    D --&gt; F[x_n+1^low_]
+
+    E --&gt; G[Error Estimate]
+    F --&gt; G
+
+    G --&gt; H[ε = ||x^high - x^low||]
+    H --&gt; I{ε ≤ tol?}
+
+    I --&gt;|Yes| J[Accept Step]
+    I --&gt;|No| K[Reject Step]
+
+    J --&gt; L[Update h_new]
+    L --&gt; M[h_new = h·_tol/ε_^1/p]
+
+    K --&gt; N[Reduce h]
+    N --&gt; O[h_new = 0.5·h]
+    O --&gt; B
+
+    M --&gt; P[x_n+1, t_n+1_]
+    P --&gt; Q{t &lt; T?}
+    Q --&gt;|Yes| A
+    Q --&gt;|No| R[Final Solution]
+
+    style J fill:#9f9
+    style K fill:#f99
+    style P fill:#9cf
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-simulation">
+<h3>Example 1: Basic Simulation<a class="headerlink" href="#example-1-basic-simulation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Initialize simulation engine</span>
+<span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">integrator</span><span class="o">=</span><span class="s1">&#39;rk4&#39;</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Run simulation</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
+    <span class="n">x0</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Extract trajectories</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">time</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">states</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">controls</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-adaptive-integration">
+<h3>Example 2: Adaptive Integration<a class="headerlink" href="#example-2-adaptive-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.integrators.adaptive</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveRK45Integrator</span>
+
+<span class="c1"># Create adaptive integrator</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">AdaptiveRK45Integrator</span><span class="p">(</span>
+    <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+    <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+    <span class="n">max_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">min_step</span><span class="o">=</span><span class="mf">1e-6</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulate with automatic step size control</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
+    <span class="n">x0</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">integrator</span><span class="o">=</span><span class="n">integrator</span>
+<span class="p">)</span>
+
+<span class="c1"># Check step size history</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steps taken: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">time</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average dt: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">time</span><span class="p">))</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-batch-simulation-numba">
+<h3>Example 3: Batch Simulation (Numba)<a class="headerlink" href="#example-3-batch-simulation-numba" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_batch_simulation</span>
+
+<span class="c1"># Define batch of initial conditions</span>
+<span class="n">x0_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># 100 initial states</span>
+
+<span class="c1"># Vectorized batch simulation</span>
+<span class="n">results_batch</span> <span class="o">=</span> <span class="n">run_batch_simulation</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">x0_batch</span><span class="o">=</span><span class="n">x0_batch</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Compute batch statistics</span>
+<span class="n">mean_trajectory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results_batch</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">std_trajectory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">results_batch</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-safety-guards">
+<h3>Example 4: Safety Guards<a class="headerlink" href="#example-4-safety-guards" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.context</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.safety</span><span class="w"> </span><span class="kn">import</span> <span class="n">SafetyGuards</span>
+
+<span class="c1"># Configure safety constraints</span>
+<span class="n">safety</span> <span class="o">=</span> <span class="n">SafetyGuards</span><span class="p">(</span>
+    <span class="n">state_bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">control_bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="n">deadline_ms</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">max_condition_number</span><span class="o">=</span><span class="mf">1e6</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulation with safety monitoring</span>
+<span class="k">with</span> <span class="n">SimulationContext</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">safety</span><span class="p">)</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+
+    <span class="c1"># Check safety violations</span>
+    <span class="n">violations</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_safety_violations</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">violations</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">violations</span><span class="p">)</span><span class="si">}</span><span class="s2"> safety events detected&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-profiling">
+<h3>Example 5: Performance Profiling<a class="headerlink" href="#example-5-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Profile different integrators</span>
+<span class="n">integrators</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;euler&#39;</span><span class="p">,</span> <span class="s1">&#39;rk4&#39;</span><span class="p">,</span> <span class="s1">&#39;rk45&#39;</span><span class="p">]</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">integrators</span><span class="p">:</span>
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+        <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+        <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+        <span class="n">integrator</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+    <span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+    <span class="n">times</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="n">elapsed</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">time</span><span class="p">)</span><span class="si">}</span><span class="s2"> steps)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compare speedup</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">RK4 vs Euler speedup: </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;euler&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;rk4&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -807,7 +1112,7 @@ for the Butcher tableau【313837333132264†L58-L82】.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -842,6 +1147,22 @@ for the Butcher tableau【313837333132264†L58-L82】.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#adaptive-step-size-control">Adaptive Step Size Control</a></li>
+<li><a class="reference internal" href="#runge-kutta-fehlberg-rk45">Runge-Kutta-Fehlberg (RK45)</a></li>
+<li><a class="reference internal" href="#dormand-prince-method">Dormand-Prince Method</a></li>
+<li><a class="reference internal" href="#step-acceptance-criteria">Step Acceptance Criteria</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-simulation">Example 1: Basic Simulation</a></li>
+<li><a class="reference internal" href="#example-2-adaptive-integration">Example 2: Adaptive Integration</a></li>
+<li><a class="reference internal" href="#example-3-batch-simulation-numba">Example 3: Batch Simulation (Numba)</a></li>
+<li><a class="reference internal" href="#example-4-safety-guards">Example 4: Safety Guards</a></li>
+<li><a class="reference internal" href="#example-5-performance-profiling">Example 5: Performance Profiling</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -860,6 +1181,10 @@ for the Butcher tableau【313837333132264†L58-L82】.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

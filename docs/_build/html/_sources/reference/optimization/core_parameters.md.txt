@@ -6,6 +6,290 @@
 
 Parameter space definitions and management.
 
+
+
+## Advanced Mathematical Theory
+
+### Parameter Space Design
+
+**Continuous parameter space** for $n$ optimization variables:
+
+```{math}
+\mathcal{X} = \prod_{i=1}^{n} [l_i, u_i] \subset \mathbb{R}^n
+```
+
+Where $l_i, u_i$ are lower and upper bounds for parameter $i$.
+
+### Latin Hypercube Sampling (LHS)
+
+**Stratified sampling** for better space coverage:
+
+```{math}
+x_{ij} = \frac{\pi_j(i) - u_{ij}}{N} \cdot (u_j - l_j) + l_j
+```
+
+Where:
+- $\pi_j$: Random permutation of $\{1, \ldots, N\}$
+- $u_{ij} \sim U(0,1)$: Uniform random sample
+- $N$: Number of samples
+
+**Advantages:**
+- Ensures uniform coverage in each dimension
+- Better than pure random sampling for small sample sizes
+- $O(N)$ complexity for $N$ samples
+
+### Sobol Sequences
+
+**Quasi-random low-discrepancy sequences:**
+
+```{math}
+D_N^* = \sup_{B \in \mathcal{B}} \left| \frac{\#\{x_i \in B\}}{N} - \lambda(B) \right|
+```
+
+Where $\lambda(B)$ is Lebesgue measure of box $B$.
+
+**Properties:**
+- Discrepancy $D_N^* = O(\frac{(\log N)^n}{N})$
+- Better convergence than Monte Carlo
+- Deterministic space-filling
+
+### Parameter Scaling
+
+**Normalization to unit hypercube:**
+
+```{math}
+x_{norm,i} = \frac{x_i - l_i}{u_i - l_i} \in [0, 1]
+```
+
+**Log scaling** for wide-range parameters:
+
+```{math}
+x_{log,i} = \log_{10}(x_i), \quad x_i = 10^{x_{log,i}}
+```
+
+### Constraint Handling
+
+**Penalty method** for constraints $g_j(\vec{x}) \leq 0$:
+
+```{math}
+f_{penalty}(\vec{x}) = f(\vec{x}) + \sum_{j} r_j \max(0, g_j(\vec{x}))^2
+```
+
+Where $r_j$ are penalty coefficients.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Parameter Definition] --> B{Parameter Type}
+    B -->|Continuous| C[Continuous Space]
+    B -->|Discrete| D[Discrete Space]
+    B -->|Mixed| E[Mixed Space]
+
+    C --> F[Sampling Strategy]
+    F -->|Random| G[Uniform Sampling]
+    F -->|LHS| H[Latin Hypercube]
+    F -->|Quasi-Random| I[Sobol Sequence]
+
+    G --> J[Validation]
+    H --> J
+    I --> J
+
+    J --> K{Valid?}
+    K -->|Yes| L[Sample Output]
+    K -->|No| M[Clip to Bounds]
+    M --> L
+
+    style B fill:#ff9
+    style J fill:#9cf
+    style L fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.core import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
+
+
+## Advanced Mathematical Theory
+
+### Parameter Space Design
+
+**Continuous parameter space** for $n$ optimization variables:
+
+```{math}
+\mathcal{X} = \prod_{i=1}^{n} [l_i, u_i] \subset \mathbb{R}^n
+```
+
+Where $l_i, u_i$ are lower and upper bounds for parameter $i$.
+
+### Latin Hypercube Sampling (LHS)
+
+**Stratified sampling** for better space coverage:
+
+```{math}
+x_{ij} = \frac{\pi_j(i) - u_{ij}}{N} \cdot (u_j - l_j) + l_j
+```
+
+Where:
+- $\pi_j$: Random permutation of $\{1, \ldots, N\}$
+- $u_{ij} \sim U(0,1)$: Uniform random sample
+- $N$: Number of samples
+
+**Advantages:**
+- Ensures uniform coverage in each dimension
+- Better than pure random sampling for small sample sizes
+- $O(N)$ complexity for $N$ samples
+
+### Sobol Sequences
+
+**Quasi-random low-discrepancy sequences:**
+
+```{math}
+D_N^* = \sup_{B \in \mathcal{B}} \left| \frac{\#\{x_i \in B\}}{N} - \lambda(B) \right|
+```
+
+Where $\lambda(B)$ is Lebesgue measure of box $B$.
+
+**Properties:**
+- Discrepancy $D_N^* = O(\frac{(\log N)^n}{N})$
+- Better convergence than Monte Carlo
+- Deterministic space-filling
+
+### Parameter Scaling
+
+**Normalization to unit hypercube:**
+
+```{math}
+x_{norm,i} = \frac{x_i - l_i}{u_i - l_i} \in [0, 1]
+```
+
+**Log scaling** for wide-range parameters:
+
+```{math}
+x_{log,i} = \log_{10}(x_i), \quad x_i = 10^{x_{log,i}}
+```
+
+### Constraint Handling
+
+**Penalty method** for constraints $g_j(\vec{x}) \leq 0$:
+
+```{math}
+f_{penalty}(\vec{x}) = f(\vec{x}) + \sum_{j} r_j \max(0, g_j(\vec{x}))^2
+```
+
+Where $r_j$ are penalty coefficients.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Parameter Definition] --> B{Parameter Type}
+    B -->|Continuous| C[Continuous Space]
+    B -->|Discrete| D[Discrete Space]
+    B -->|Mixed| E[Mixed Space]
+
+    C --> F[Sampling Strategy]
+    F -->|Random| G[Uniform Sampling]
+    F -->|LHS| H[Latin Hypercube]
+    F -->|Quasi-Random| I[Sobol Sequence]
+
+    G --> J[Validation]
+    H --> J
+    I --> J
+
+    J --> K{Valid?}
+    K -->|Yes| L[Sample Output]
+    K -->|No| M[Clip to Bounds]
+    M --> L
+
+    style B fill:#ff9
+    style J fill:#9cf
+    style L fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.core import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/optimization/core/parameters.py

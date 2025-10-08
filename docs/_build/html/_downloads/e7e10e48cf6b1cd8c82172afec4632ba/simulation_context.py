@@ -7,7 +7,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Optional, List, Any, Dict, Union
+from typing import Optional, List, Any, Dict
 
 # Import the necessary components
 from src.config import load_config, ConfigSchema

@@ -97,6 +97,9 @@ The controller factory serves as the central orchestration point for all SMC con
 #### Core Factory Components
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Factory Registry Architecture
 class ControllerRegistry:
     """Central registry for all SMC controller types."""
@@ -126,6 +129,9 @@ class ControllerRegistry:
 #### Factory Method Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller(
     controller_type: str,
     config: Optional[Dict[str, Any]] = None,
@@ -172,6 +178,9 @@ def create_controller(
 
 #### Configuration Bridge
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationBridge:
     """Bridge between YAML configuration and controller parameters."""
 
@@ -198,6 +207,9 @@ class ConfigurationBridge:
 
 #### Type Safety Enforcement
 ```python
+# example-metadata:
+# runnable: false
+
 class TypeSafetyValidator:
     """Comprehensive type safety validation for controller interfaces."""
 
@@ -253,6 +265,9 @@ The PSO (Particle Swarm Optimization) integration provides seamless parameter tu
 #### PSO Core Architecture
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOOptimizer:
     """
     Universal PSO optimizer for all SMC controller types.
@@ -305,6 +320,9 @@ class PSOOptimizer:
 #### Controller-Specific Fitness Functions
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FitnessEvaluator:
     """Controller-specific fitness evaluation strategies."""
 
@@ -361,6 +379,9 @@ class FitnessEvaluator:
 #### Optimization Pipeline Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 class OptimizationPipeline:
     """End-to-end optimization pipeline for SMC controllers."""
 
@@ -412,6 +433,9 @@ All system components adhere to standardized interfaces ensuring consistent beha
 #### Controller Interface Contract
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerInterface(Protocol):
     """Standardized interface for all SMC controllers."""
 
@@ -446,6 +470,9 @@ class ControllerInterface(Protocol):
 #### Configuration Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ConfigurationInterface:
     """Standardized configuration management across all components."""
 
@@ -481,6 +508,9 @@ class ConfigurationInterface:
 #### Hierarchical Error Handling
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ErrorHandlingFramework:
     """Comprehensive error handling with recovery strategies."""
 
@@ -541,6 +571,9 @@ class ErrorHandlingFramework:
 #### Graceful Degradation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class GracefulDegradationManager:
     """Manage system degradation under error conditions."""
 
@@ -584,6 +617,9 @@ class GracefulDegradationManager:
 ### Control Loop Data Flow
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Primary Control Flow
 def control_loop_data_flow():
     """
@@ -631,6 +667,9 @@ def control_loop_data_flow():
 ### PSO Optimization Data Flow
 
 ```python
+# example-metadata:
+# runnable: false
+
 def pso_optimization_data_flow():
     """
     Data flow through PSO optimization process.
@@ -734,6 +773,9 @@ class PerformanceOptimizedController:
 #### Memory Management
 
 ```python
+# example-metadata:
+# runnable: false
+
 class MemoryEfficientController:
     """Memory-efficient controller with bounded collections."""
 
@@ -772,6 +814,9 @@ class MemoryEfficientController:
 #### Horizontal Scaling Design
 
 ```python
+# example-metadata:
+# runnable: false
+
 class DistributedControllerManager:
     """Manager for distributed controller deployment."""
 
@@ -823,6 +868,9 @@ class DistributedControllerManager:
 #### Fail-Safe Mechanisms
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SafetyManager:
     """Comprehensive safety management for control systems."""
 
@@ -907,6 +955,9 @@ class SafetyManager:
 #### Security Hardening
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SecurityManager:
     """Security management for production deployment."""
 
@@ -972,6 +1023,9 @@ class SecurityManager:
 ### Real-Time Monitoring Framework
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SystemMonitor:
     """Comprehensive system monitoring and observability."""
 
@@ -1038,6 +1092,9 @@ class MetricsCollector:
 ### Performance Analytics
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PerformanceAnalyzer:
     """Advanced performance analysis and trend detection."""
 

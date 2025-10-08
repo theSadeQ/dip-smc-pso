@@ -1,0 +1,325 @@
+2025-10-08 10:48:38,457 [INFO] __main__: Loaded 31 claims for research
+2025-10-08 10:48:38,458 [INFO] research.checkpoint_manager: Created research session: session_20251008_071838
+2025-10-08 10:48:38,458 [INFO] research.checkpoint_manager: Queued 31 claims for processing
+2025-10-08 10:48:38,458 [INFO] __main__: Processing CODE-IMPL-220: ...
+2025-10-08 10:48:38,460 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-220
+2025-10-08 10:48:39,262 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 10:48:39,403 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:48:39,683 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 10:49:40,285 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:50:41,207 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:51:42,123 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 10:51:42,129 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 10:51:42,132 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 10:51:42,132 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-220: success (2 citations in 183.67s)
+2025-10-08 10:51:42,132 [INFO] __main__: Completed CODE-IMPL-220: 2 citations in 183.67s
+2025-10-08 10:51:42,132 [INFO] __main__: Processing CODE-IMPL-221: ...
+2025-10-08 10:51:42,132 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-221
+2025-10-08 10:51:42,696 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 10:51:43,007 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 10:51:43,744 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 10:51:43,747 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 10:51:43,749 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 10:51:43,749 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-221: success (2 citations in 1.62s)
+2025-10-08 10:51:43,749 [INFO] __main__: Completed CODE-IMPL-221: 2 citations in 1.62s
+2025-10-08 10:51:43,749 [INFO] __main__: Processing CODE-IMPL-222: ...
+2025-10-08 10:51:43,749 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-222
+2025-10-08 10:51:44,170 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 10:51:44,360 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 10:51:44,362 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 10:51:44,364 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 10:51:44,365 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 10:51:44,365 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-222: success (2 citations in 0.62s)
+2025-10-08 10:51:44,365 [INFO] __main__: Completed CODE-IMPL-222: 2 citations in 0.62s
+2025-10-08 10:51:44,366 [INFO] __main__: Processing CODE-IMPL-223: ...
+2025-10-08 10:51:44,366 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-223
+2025-10-08 10:51:44,791 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 10:51:44,907 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 10:51:44,927 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:52:45,812 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:53:46,661 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:54:47,521 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:55:48,467 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 10:55:48,469 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 10:55:48,472 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 10:55:48,472 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-223: success (2 citations in 244.11s)
+2025-10-08 10:55:48,472 [INFO] __main__: Completed CODE-IMPL-223: 2 citations in 244.11s
+2025-10-08 10:55:48,472 [INFO] __main__: Processing CODE-IMPL-224: ...
+2025-10-08 10:55:48,473 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-224
+2025-10-08 10:55:49,030 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:55:49,160 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 10:55:49,673 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 10:56:49,922 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:57:50,808 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 10:57:50,809 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 10:57:50,811 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 10:57:50,811 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-224: success (2 citations in 122.34s)
+2025-10-08 10:57:50,811 [INFO] __main__: Completed CODE-IMPL-224: 2 citations in 122.34s
+2025-10-08 10:57:50,811 [INFO] __main__: Processing CODE-IMPL-225: ...
+2025-10-08 10:57:50,811 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-225
+2025-10-08 10:57:51,373 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:57:51,513 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 10:57:51,977 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 10:58:52,247 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 10:59:53,131 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:00:54,048 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:01:54,905 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:01:54,907 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:01:54,909 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:01:54,909 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-225: success (2 citations in 244.10s)
+2025-10-08 11:01:54,909 [INFO] __main__: Completed CODE-IMPL-225: 2 citations in 244.10s
+2025-10-08 11:01:54,909 [INFO] __main__: Processing CODE-IMPL-226: ...
+2025-10-08 11:01:54,909 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-226
+2025-10-08 11:01:55,205 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:01:55,657 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:01:56,118 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:01:56,120 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:01:56,121 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:01:56,121 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-226: success (2 citations in 1.21s)
+2025-10-08 11:01:56,121 [INFO] __main__: Completed CODE-IMPL-226: 2 citations in 1.21s
+2025-10-08 11:01:56,121 [INFO] __main__: Processing CODE-IMPL-227: ...
+2025-10-08 11:01:56,121 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-227
+2025-10-08 11:01:56,529 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:01:56,675 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:01:56,696 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:02:57,591 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:02:57,593 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:02:57,594 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:02:57,594 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-227: success (2 citations in 61.47s)
+2025-10-08 11:02:57,594 [INFO] __main__: Completed CODE-IMPL-227: 2 citations in 61.47s
+2025-10-08 11:02:57,594 [INFO] __main__: Processing CODE-IMPL-228: ...
+2025-10-08 11:02:57,595 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-228
+2025-10-08 11:02:57,931 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:02:58,358 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:02:58,872 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:02:58,873 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:02:58,875 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:02:58,875 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-228: success (2 citations in 1.28s)
+2025-10-08 11:02:58,875 [INFO] __main__: Completed CODE-IMPL-228: 2 citations in 1.28s
+2025-10-08 11:02:58,875 [INFO] __main__: Processing CODE-IMPL-229: ...
+2025-10-08 11:02:58,875 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-229
+2025-10-08 11:02:59,263 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:02:59,345 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:02:59,432 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:02:59,434 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:02:59,435 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:02:59,435 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-229: success (2 citations in 0.56s)
+2025-10-08 11:02:59,436 [INFO] __main__: Completed CODE-IMPL-229: 2 citations in 0.56s
+2025-10-08 11:02:59,436 [INFO] __main__: Processing CODE-IMPL-230: ...
+2025-10-08 11:02:59,436 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-230
+2025-10-08 11:02:59,863 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:03:00,013 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:03:00,450 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:03:00,451 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:03:00,452 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:03:00,453 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-230: success (2 citations in 1.02s)
+2025-10-08 11:03:00,453 [INFO] __main__: Completed CODE-IMPL-230: 2 citations in 1.02s
+2025-10-08 11:03:00,453 [INFO] __main__: Processing CODE-IMPL-231: ...
+2025-10-08 11:03:00,453 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-231
+2025-10-08 11:03:00,910 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:03:01,030 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:03:01,398 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:04:01,932 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:04:01,935 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:04:01,939 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:04:01,939 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-231: success (2 citations in 61.49s)
+2025-10-08 11:04:01,940 [INFO] __main__: Completed CODE-IMPL-231: 2 citations in 61.49s
+2025-10-08 11:04:01,940 [INFO] __main__: Processing CODE-IMPL-232: ...
+2025-10-08 11:04:01,940 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-232
+2025-10-08 11:04:02,501 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:04:02,650 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:04:03,183 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:05:03,396 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:06:04,259 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:07:05,171 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:07:05,172 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:07:05,174 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:07:05,174 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-232: success (2 citations in 183.23s)
+2025-10-08 11:07:05,174 [INFO] __main__: Completed CODE-IMPL-232: 2 citations in 183.23s
+2025-10-08 11:07:05,174 [INFO] __main__: Processing CODE-IMPL-233: ...
+2025-10-08 11:07:05,175 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-233
+2025-10-08 11:07:05,468 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:07:05,890 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:07:06,381 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:07:06,385 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:07:06,388 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:07:06,388 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-233: success (2 citations in 1.21s)
+2025-10-08 11:07:06,389 [INFO] __main__: Completed CODE-IMPL-233: 2 citations in 1.21s
+2025-10-08 11:07:06,389 [INFO] __main__: Processing CODE-IMPL-234: ...
+2025-10-08 11:07:06,389 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-234
+2025-10-08 11:07:06,688 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:07:06,970 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:07:06,980 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:08:07,593 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:09:08,217 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:10:09,082 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:10:09,086 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:10:09,088 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:10:09,088 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-234: success (2 citations in 182.70s)
+2025-10-08 11:10:09,088 [INFO] __main__: Completed CODE-IMPL-234: 2 citations in 182.70s
+2025-10-08 11:10:09,088 [INFO] __main__: Processing CODE-IMPL-235: ...
+2025-10-08 11:10:09,089 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-235
+2025-10-08 11:10:09,643 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:10:09,786 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:10:10,448 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:10:10,451 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:10:10,455 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:10:10,455 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-235: success (2 citations in 1.37s)
+2025-10-08 11:10:10,455 [INFO] __main__: Completed CODE-IMPL-235: 2 citations in 1.37s
+2025-10-08 11:10:10,455 [INFO] __main__: Processing CODE-IMPL-236: ...
+2025-10-08 11:10:10,455 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-236
+2025-10-08 11:10:10,758 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:10:10,908 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:10:11,146 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:11:11,386 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:11:11,388 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:11:11,389 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:11:11,389 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-236: success (2 citations in 60.93s)
+2025-10-08 11:11:11,389 [INFO] __main__: Completed CODE-IMPL-236: 2 citations in 60.93s
+2025-10-08 11:11:11,389 [INFO] __main__: Processing CODE-IMPL-237: ...
+2025-10-08 11:11:11,389 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-237
+2025-10-08 11:11:11,960 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:11:12,108 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:11:12,950 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:11:12,953 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:11:12,956 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:11:12,956 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-237: success (2 citations in 1.57s)
+2025-10-08 11:11:12,956 [INFO] __main__: Completed CODE-IMPL-237: 2 citations in 1.57s
+2025-10-08 11:11:12,957 [INFO] __main__: Processing CODE-IMPL-238: ...
+2025-10-08 11:11:12,957 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-238
+2025-10-08 11:11:13,402 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:11:13,510 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:11:13,527 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:11:13,529 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:11:13,530 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:11:13,530 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-238: success (2 citations in 0.57s)
+2025-10-08 11:11:13,530 [INFO] __main__: Completed CODE-IMPL-238: 2 citations in 0.57s
+2025-10-08 11:11:13,530 [INFO] __main__: Processing CODE-IMPL-239: ...
+2025-10-08 11:11:13,530 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-239
+2025-10-08 11:11:13,945 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:11:14,007 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:11:14,102 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:11:14,104 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:11:14,105 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:11:14,105 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-239: success (2 citations in 0.57s)
+2025-10-08 11:11:14,105 [INFO] __main__: Completed CODE-IMPL-239: 2 citations in 0.57s
+2025-10-08 11:11:14,105 [INFO] __main__: Processing CODE-IMPL-240: ...
+2025-10-08 11:11:14,105 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-240
+2025-10-08 11:11:14,410 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:11:14,537 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:11:14,728 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:12:15,258 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:12:15,259 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:12:15,260 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:12:15,260 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-240: success (2 citations in 61.15s)
+2025-10-08 11:12:15,260 [INFO] __main__: Completed CODE-IMPL-240: 2 citations in 61.15s
+2025-10-08 11:12:15,260 [INFO] __main__: Processing CODE-IMPL-241: ...
+2025-10-08 11:12:15,260 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-241
+2025-10-08 11:12:16,026 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:12:16,758 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:12:18,045 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:13:16,941 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:13:16,943 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:13:16,946 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:13:16,946 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-241: success (2 citations in 61.69s)
+2025-10-08 11:13:16,946 [INFO] __main__: Completed CODE-IMPL-241: 2 citations in 61.69s
+2025-10-08 11:13:16,946 [INFO] __main__: Processing CODE-IMPL-242: ...
+2025-10-08 11:13:16,948 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-242
+2025-10-08 11:13:17,524 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:13:17,655 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:13:18,090 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:13:18,092 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:13:18,096 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:13:18,096 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-242: success (2 citations in 1.15s)
+2025-10-08 11:13:18,096 [INFO] __main__: Completed CODE-IMPL-242: 2 citations in 1.15s
+2025-10-08 11:13:18,096 [INFO] __main__: Processing CODE-IMPL-243: ...
+2025-10-08 11:13:18,096 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-243
+2025-10-08 11:13:18,393 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:13:18,507 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:13:19,596 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:13:19,598 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:13:19,599 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:13:19,599 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-243: success (2 citations in 1.50s)
+2025-10-08 11:13:19,601 [INFO] __main__: Completed CODE-IMPL-243: 2 citations in 1.50s
+2025-10-08 11:13:19,601 [INFO] __main__: Processing CODE-IMPL-244: ...
+2025-10-08 11:13:19,601 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-244
+2025-10-08 11:13:20,024 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:13:20,157 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:13:20,862 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:13:20,866 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:13:20,869 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:13:20,869 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-244: success (2 citations in 1.27s)
+2025-10-08 11:13:20,869 [INFO] __main__: Completed CODE-IMPL-244: 2 citations in 1.27s
+2025-10-08 11:13:20,869 [INFO] __main__: Processing CODE-IMPL-245: ...
+2025-10-08 11:13:20,869 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-245
+2025-10-08 11:13:21,276 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:13:21,442 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:13:21,625 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:13:21,629 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:13:21,630 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:13:21,630 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-245: success (2 citations in 0.76s)
+2025-10-08 11:13:21,630 [INFO] __main__: Completed CODE-IMPL-245: 2 citations in 0.76s
+2025-10-08 11:13:21,630 [INFO] __main__: Processing CODE-IMPL-246: ...
+2025-10-08 11:13:21,630 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-246
+2025-10-08 11:13:22,038 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:13:22,194 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:13:22,309 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:13:22,314 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:13:22,318 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:13:22,318 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-246: success (2 citations in 0.69s)
+2025-10-08 11:13:22,318 [INFO] __main__: Completed CODE-IMPL-246: 2 citations in 0.69s
+2025-10-08 11:13:22,318 [INFO] __main__: Processing CODE-IMPL-247: ...
+2025-10-08 11:13:22,318 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-247
+2025-10-08 11:13:22,614 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:13:22,736 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:13:22,911 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:14:23,487 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:15:24,401 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:15:24,403 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:15:24,405 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:15:24,405 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-247: success (2 citations in 122.09s)
+2025-10-08 11:15:24,405 [INFO] __main__: Completed CODE-IMPL-247: 2 citations in 122.09s
+2025-10-08 11:15:24,405 [INFO] __main__: Processing CODE-IMPL-248: ...
+2025-10-08 11:15:24,405 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-248
+2025-10-08 11:15:24,971 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:15:25,073 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:15:25,813 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:15:25,816 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:15:25,818 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:15:25,818 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-248: success (2 citations in 1.41s)
+2025-10-08 11:15:25,818 [INFO] __main__: Completed CODE-IMPL-248: 2 citations in 1.41s
+2025-10-08 11:15:25,818 [INFO] __main__: Processing CODE-IMPL-249: ...
+2025-10-08 11:15:25,818 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-249
+2025-10-08 11:15:26,240 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:15:26,290 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:15:26,392 [WARNING] research.api_clients: Rate limit exceeded, backing off...
+2025-10-08 11:16:28,299 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:16:28,302 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:16:28,306 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:16:28,306 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-249: success (2 citations in 62.49s)
+2025-10-08 11:16:28,306 [INFO] __main__: Completed CODE-IMPL-249: 2 citations in 62.49s
+2025-10-08 11:16:28,307 [INFO] __main__: Processing CODE-IMPL-250: ...
+2025-10-08 11:16:28,307 [DEBUG] __main__: Generated 1 queries for CODE-IMPL-250
+2025-10-08 11:16:29,638 [ERROR] research.api_clients: Semantic Scholar API error: 400, message='Bad Request', url='https://api.semanticscholar.org/graph/v1/paper/search?query=&limit=5&fields=title,authors,year,abstract,citationCount,venue,externalIds,url'
+2025-10-08 11:16:29,784 [INFO] research.api_clients: ArXiv: Found 0 papers for ''
+2025-10-08 11:16:30,397 [INFO] research.api_clients: CrossRef: Found 5 papers for ''
+2025-10-08 11:16:30,399 [INFO] research.api_clients: Unified search: 5 total \u2192 5 unique
+2025-10-08 11:16:30,401 [INFO] research.bibtex_generator: Generated 2 BibTeX entries
+2025-10-08 11:16:30,402 [INFO] research.checkpoint_manager: Recorded result for CODE-IMPL-250: success (2 citations in 2.10s)
+2025-10-08 11:16:30,402 [INFO] __main__: Completed CODE-IMPL-250: 2 citations in 2.10s
+2025-10-08 11:16:30,440 [INFO] research.checkpoint_manager: Checkpoint saved: session_20251008_071838_checkpoint_0031.json (100.0% complete)
+2025-10-08 11:16:30,442 [INFO] research.bibtex_generator: Saved 62 entries to artifacts\research\enhanced_bibliography.bib
+2025-10-08 11:16:30,468 [INFO] __main__: Research complete: 62 citations generated
+
+======================================================================
+RESEARCH PIPELINE COMPLETE
+======================================================================
+Session ID:          session_20251008_071838
+Claims Processed:    31 / 31
+Successful:          31
+Citations Generated: 62
+
+Outputs:
+  BibTeX:  artifacts\research\enhanced_bibliography.bib
+  Results: artifacts\research\research_results.json
+======================================================================

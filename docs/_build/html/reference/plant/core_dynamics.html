@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -487,6 +513,7 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="plant-core-dynamics">
 <h1>plant.core.dynamics<a class="headerlink" href="#plant-core-dynamics" title="Link to this heading">¶</a></h1>
+<!-- Enhanced by Week 8 Phase 2 -->
 <p><strong>Source:</strong> <code class="docutils literal notranslate"><span class="pre">src\plant\core\dynamics.py</span></code></p>
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
@@ -494,6 +521,305 @@
 <p>This module provides backward compatibility for test modules that expect
 plant dynamics components at src.plant.core.dynamics. All functionality
 is re-exported from the actual implementation locations.</p>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[State x, Control u] --&gt; B[Extract Coordinates]
+    B --&gt; C[q = x_0:3_]
+    B --&gt; D[q̇ = x_3:6_]
+    C --&gt; E[compute_mass_matrix_q_]
+    C --&gt; F[compute_gravity_vector_q_]
+    D --&gt; G[compute_coriolis_matrix_q, q̇_]
+    E --&gt; H[M_q_]
+    F --&gt; I[G_q_]
+    G --&gt; J[C_q, q̇_]
+    H --&gt; K[robust_inverse_M_]
+    K --&gt; L[M⁻¹]
+    L --&gt; M[Solve: q̈ = M⁻¹_Bu - Cq̇ - G_]
+    J --&gt; M
+    I --&gt; M
+    M --&gt; N[Assemble ẋ = _q̇ᵀ, q̈ᵀ_ᵀ]
+    N --&gt; O[validate_state_ẋ_]
+    O --&gt; P[Return State Derivative]
+
+    style E fill:#9cf
+    style F fill:#fcf
+    style G fill:#ff9
+    style K fill:#f9f
+    style M fill:#9f9
+        </div></section>
+<section id="enhanced-mathematical-foundation">
+<h2>Enhanced Mathematical Foundation<a class="headerlink" href="#enhanced-mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="lagrangian-mechanics-framework">
+<h3>Lagrangian Mechanics Framework<a class="headerlink" href="#lagrangian-mechanics-framework" title="Link to this heading">¶</a></h3>
+<p>The double inverted pendulum (DIP) dynamics are derived using <strong>Lagrangian mechanics</strong>, a powerful formalism for deriving equations of motion from energy principles.</p>
+<p><strong>Lagrangian Definition:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(q, \dot{q}) = T(q, \dot{q}) - V(q)
+\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T(q, \dot{q})\)</span> is the <strong>kinetic energy</strong> (function of positions and velocities)</p></li>
+<li><p><span class="math notranslate nohighlight">\(V(q)\)</span> is the <strong>potential energy</strong> (function of positions only)</p></li>
+<li><p><span class="math notranslate nohighlight">\(q = [x, \theta_1, \theta_2]^T\)</span> are the <strong>generalized coordinates</strong></p></li>
+</ul>
+<p><strong>Euler-Lagrange Equations:</strong></p>
+<p>The equations of motion are obtained from the Euler-Lagrange equation:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{q}_i}\right) - \frac{\partial \mathcal{L}}{\partial q_i} = \tau_i
+\]</div>
+</div>
+<p>for each generalized coordinate <span class="math notranslate nohighlight">\(q_i\)</span> and generalized force <span class="math notranslate nohighlight">\(\tau_i\)</span>.</p>
+</section>
+<section id="dynamics-in-standard-form">
+<h3>Dynamics in Standard Form<a class="headerlink" href="#dynamics-in-standard-form" title="Link to this heading">¶</a></h3>
+<p>After applying the Euler-Lagrange equations and symbolic differentiation, the DIP dynamics take the <strong>manipulator equation form</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+M(q)\ddot{q} + C(q,\dot{q})\dot{q} + G(q) = \tau
+\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(M(q) \in \mathbb{R}^{3 \times 3}\)</span> is the <strong>mass (inertia) matrix</strong> (symmetric positive-definite)</p></li>
+<li><p><span class="math notranslate nohighlight">\(C(q,\dot{q}) \in \mathbb{R}^{3 \times 3}\)</span> is the <strong>Coriolis matrix</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(G(q) \in \mathbb{R}^{3}\)</span> is the <strong>gravity vector</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau \in \mathbb{R}^{3}\)</span> is the <strong>generalized force vector</strong></p></li>
+</ul>
+<p><strong>Control Input Mapping:</strong></p>
+<p>For the DIP with horizontal force input <span class="math notranslate nohighlight">\(u\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\tau = B u, \quad B = [1, 0, 0]^T
+\]</div>
+</div>
+</section>
+<section id="properties-of-physics-matrices">
+<h3>Properties of Physics Matrices<a class="headerlink" href="#properties-of-physics-matrices" title="Link to this heading">¶</a></h3>
+<p><strong>Mass Matrix Properties:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Symmetric:</strong> <span class="math notranslate nohighlight">\(M(q) = M(q)^T\)</span> (follows from kinetic energy symmetry)</p></li>
+<li><p><strong>Positive-Definite:</strong> <span class="math notranslate nohighlight">\(x^T M(q) x &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(x \neq 0\)</span> (physical realizability)</p></li>
+<li><p><strong>Configuration-Dependent:</strong> <span class="math notranslate nohighlight">\(M(q)\)</span> varies with joint angles but not velocities</p></li>
+<li><p><strong>Bounded:</strong> <span class="math notranslate nohighlight">\(m_{\min} I \preceq M(q) \preceq m_{\max} I\)</span> for all <span class="math notranslate nohighlight">\(q\)</span></p></li>
+</ol>
+<p><strong>Coriolis Matrix Properties:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Velocity-Dependent:</strong> <span class="math notranslate nohighlight">\(C(q, \dot{q})\)</span> linear in <span class="math notranslate nohighlight">\(\dot{q}\)</span></p></li>
+<li><p><strong>Skew-Symmetry:</strong> <span class="math notranslate nohighlight">\(\dot{M}(q) - 2C(q, \dot{q})\)</span> is skew-symmetric</p></li>
+<li><p><strong>Energy Conservation:</strong> Ensures passivity of the mechanical system</p></li>
+</ol>
+<p><strong>Gravity Vector Properties:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Conservative:</strong> Derived from potential energy <span class="math notranslate nohighlight">\(G(q) = \nabla_q V(q)\)</span></p></li>
+<li><p><strong>Configuration-Only:</strong> Independent of velocities</p></li>
+<li><p><strong>Bounded:</strong> <span class="math notranslate nohighlight">\(\|G(q)\| \leq g_{\max}\)</span> for all <span class="math notranslate nohighlight">\(q\)</span></p></li>
+</ol>
+</section>
+<section id="state-space-representation">
+<h3>State-Space Representation<a class="headerlink" href="#state-space-representation" title="Link to this heading">¶</a></h3>
+<p>Convert second-order dynamics to first-order form:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\dot{x} = \begin{bmatrix} \dot{q} \\ \ddot{q} \end{bmatrix} = \begin{bmatrix} \dot{q} \\ M(q)^{-1}(Bu - C(q,\dot{q})\dot{q} - G(q)) \end{bmatrix}
+\end{split}\]</div>
+</div>
+<p>with state vector:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+x = [x, \theta_1, \theta_2, \dot{x}, \dot{\theta}_1, \dot{\theta}_2]^T \in \mathbb{R}^6
+\]</div>
+</div>
+</section>
+<section id="energy-conservation-ideal-system">
+<h3>Energy Conservation (Ideal System)<a class="headerlink" href="#energy-conservation-ideal-system" title="Link to this heading">¶</a></h3>
+<p>In the absence of control inputs and friction:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dt}E(x) = \frac{d}{dt}\left(\frac{1}{2}\dot{q}^T M(q) \dot{q} + V(q)\right) = 0
+\]</div>
+</div>
+<p>This <strong>total energy</strong> <span class="math notranslate nohighlight">\(E(x) = T + V\)</span> is conserved, providing a critical validation test for numerical integrators.</p>
+<p><strong>Numerical Drift Monitoring:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\Delta E = |E(x(t)) - E(x(0))| / E(x(0)) \ll 1
+\]</div>
+</div>
+<p>Typical threshold: <span class="math notranslate nohighlight">\(\Delta E &lt; 0.01\)</span> (1% energy drift over simulation duration).</p>
+</section>
+<section id="computational-workflow">
+<h3>Computational Workflow<a class="headerlink" href="#computational-workflow" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Extract Generalized Coordinates:</strong> <span class="math notranslate nohighlight">\(q = x[0:3]\)</span>, <span class="math notranslate nohighlight">\(\dot{q} = x[3:6]\)</span></p></li>
+<li><p><strong>Compute Physics Matrices:</strong> <span class="math notranslate nohighlight">\(M(q)\)</span>, <span class="math notranslate nohighlight">\(C(q, \dot{q})\)</span>, <span class="math notranslate nohighlight">\(G(q)\)</span></p></li>
+<li><p><strong>Apply Control Input:</strong> <span class="math notranslate nohighlight">\(\tau = Bu\)</span></p></li>
+<li><p><strong>Solve for Accelerations:</strong> <span class="math notranslate nohighlight">\(\ddot{q} = M(q)^{-1}(\tau - C(q,\dot{q})\dot{q} - G(q))\)</span></p></li>
+<li><p><strong>Assemble State Derivative:</strong> <span class="math notranslate nohighlight">\(\dot{x} = [\dot{q}^T, \ddot{q}^T]^T\)</span></p></li>
+</ol>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Murray, Li, Sastry</strong> (1994). <em>A Mathematical Introduction to Robotic Manipulation</em>. CRC Press. Chapter 4.</p></li>
+<li><p><strong>Spong, Hutchinson, Vidyasagar</strong> (2006). <em>Robot Modeling and Control</em>. Wiley. Chapter 7.</p></li>
+<li><p><strong>Khalil, Dombre</strong> (2004). <em>Modeling, Identification and Control of Robots</em>. Taylor &amp; Francis. Chapter 9.</p></li>
+</ol>
+</section>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>Initialize and use the Core Dynamics module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Basic initialization</span>
+<span class="c1"># Create dynamics model with standard parameters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDIPDynamics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.configurations</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_default_config</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">get_default_config</span><span class="p">()</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDIPDynamics</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Compute state derivative</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>  <span class="c1"># [x, θ1, θ2, ẋ, θ̇1, θ̇2]</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">])</span>  <span class="c1"># Force in Newtons</span>
+<span class="n">state_dot</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;State derivative: </span><span class="si">{</span><span class="n">state_dot</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>Configure with custom parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDIPDynamics</span>
+
+<span class="c1"># Enable numerical stability features</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDIPDynamics</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">enable_energy_monitoring</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">numerical_tolerance</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+    <span class="n">use_numba</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># JIT compilation for performance</span>
+<span class="p">)</span>
+
+<span class="c1"># Configure integration parameters</span>
+<span class="n">dynamics</span><span class="o">.</span><span class="n">set_integration_params</span><span class="p">(</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;rk45&#39;</span><span class="p">,</span>
+    <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+    <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-6</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<p>Robust error handling and recovery:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NumericalInstabilityError</span><span class="p">,</span>
+    <span class="n">StateValidationError</span><span class="p">,</span>
+    <span class="n">ConfigurationError</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Risky operation</span>
+    <span class="n">state_dot</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">NumericalInstabilityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Numerical instability detected: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: reduce timestep, increase regularization</span>
+    <span class="n">dynamics</span><span class="o">.</span><span class="n">reset_numerical_params</span><span class="p">(</span><span class="n">stronger_regularization</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">StateValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid state: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: clip state to valid bounds</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">clip_to_valid</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">ConfigurationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: use default configuration</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_default_config</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-optimization">
+<h3>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h3>
+<p>Optimize for computational efficiency:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
+
+<span class="c1"># Enable Numba JIT compilation for hot loops</span>
+<span class="nd">@njit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_dynamics_step</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Vectorized dynamics computation.&quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">state_dots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">state_dots</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dynamics_core_numba</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">controls</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">params</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state_dots</span>
+
+<span class="c1"># Benchmark</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">controls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">batch_dynamics_step</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processed </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2"> states in </span><span class="si">{</span><span class="n">elapsed</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">ms&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Throughput: </span><span class="si">{</span><span class="n">N</span><span class="o">/</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> states/sec&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-controllers">
+<h3>Example 5: Integration with Controllers<a class="headerlink" href="#example-5-integration-with-controllers" title="Link to this heading">¶</a></h3>
+<p>Integrate with control systems:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.core.simulation_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Create dynamics model</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDIPDynamics</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Create controller</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Run closed-loop simulation</span>
+<span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final state: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Settling time: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">settling_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control effort: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">control_effort</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -510,22 +836,22 @@ is re-exported from the actual implementation locations.</p>
 <span class="linenos">11</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos">12</span>
 <span class="linenos">13</span><span class="c1"># Import all dynamics functionality from existing locations</span>
-<span class="linenos">14</span><span class="kn">from</span><span class="w"> </span><span class="nn">...core.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="linenos">15</span><span class="kn">from</span><span class="w"> </span><span class="nn">..models.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">14</span><span class="kn">from</span><span class="w"> </span><span class="nn">...core.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa: F403 (re-export core dynamics)</span>
+<span class="linenos">15</span><span class="kn">from</span><span class="w"> </span><span class="nn">..models.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa: F403 (re-export model dynamics)</span>
 <span class="linenos">16</span>
 <span class="linenos">17</span><span class="c1"># Also import from specific model implementations</span>
 <span class="linenos">18</span><span class="k">try</span><span class="p">:</span>
-<span class="linenos">19</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">..models.full.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">19</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">..models.full.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa: F403 (re-export full dynamics)</span>
 <span class="linenos">20</span><span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
 <span class="linenos">21</span>    <span class="k">pass</span>
 <span class="linenos">22</span>
 <span class="linenos">23</span><span class="k">try</span><span class="p">:</span>
-<span class="linenos">24</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">..models.simplified.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">24</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">..models.simplified.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa: F403 (re-export simplified dynamics)</span>
 <span class="linenos">25</span><span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
 <span class="linenos">26</span>    <span class="k">pass</span>
 <span class="linenos">27</span>
 <span class="linenos">28</span><span class="k">try</span><span class="p">:</span>
-<span class="linenos">29</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">..models.lowrank.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">29</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">..models.lowrank.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa: F403 (re-export lowrank dynamics)</span>
 <span class="linenos">30</span><span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
 <span class="linenos">31</span>    <span class="k">pass</span>
 <span class="linenos">32</span>
@@ -569,7 +895,7 @@ is re-exported from the actual implementation locations.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -592,6 +918,25 @@ is re-exported from the actual implementation locations.</p>
             <ul>
 <li><a class="reference internal" href="#">plant.core.dynamics</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#lagrangian-mechanics-framework">Lagrangian Mechanics Framework</a></li>
+<li><a class="reference internal" href="#dynamics-in-standard-form">Dynamics in Standard Form</a></li>
+<li><a class="reference internal" href="#properties-of-physics-matrices">Properties of Physics Matrices</a></li>
+<li><a class="reference internal" href="#state-space-representation">State-Space Representation</a></li>
+<li><a class="reference internal" href="#energy-conservation-ideal-system">Energy Conservation (Ideal System)</a></li>
+<li><a class="reference internal" href="#computational-workflow">Computational Workflow</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-controllers">Example 5: Integration with Controllers</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
@@ -612,6 +957,10 @@ is re-exported from the actual implementation locations.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

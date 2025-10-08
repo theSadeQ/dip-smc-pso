@@ -379,6 +379,9 @@ python -m pytest -k "lyapunov or convergence" -v --tb=short
 
 2. **Mathematical Property Validation**
    ```python
+# example-metadata:
+# runnable: false
+
    # Enhanced stability test
    def test_lyapunov_stability_mathematical_proof():
        """Validate Lyapunov stability conditions with mathematical rigor."""
@@ -512,6 +515,9 @@ print(f'Process completed with exit code: {exit_code}')
 
 #### Component-Based Threshold Calculation
 ```python
+# example-metadata:
+# runnable: false
+
 # Calculate realistic thresholds based on component complexity
 def calculate_optimal_thresholds(codebase_analysis):
     """
@@ -636,6 +642,9 @@ else:
 ### Coverage Contribution to Production Score
 
 ```python
+# example-metadata:
+# runnable: false
+
 def calculate_coverage_production_score(gate_results):
     """
     Calculate coverage contribution to overall production readiness score.

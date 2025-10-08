@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -505,91 +531,90 @@
 <span class="linenos"> 9</span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 <span class="linenos">10</span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="linenos">11</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
-<span class="linenos">12</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos">12</span>
 <span class="linenos">13</span>
-<span class="linenos">14</span>
-<span class="linenos">15</span><span class="k">class</span><span class="w"> </span><span class="nc">CSVExporter</span><span class="p">:</span>
-<span class="linenos">16</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Export simulation results to CSV format.&quot;&quot;&quot;</span>
-<span class="linenos">17</span>
-<span class="linenos">18</span>    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result_container</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">19</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Export single simulation results to CSV.&quot;&quot;&quot;</span>
-<span class="linenos">20</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">result_container</span><span class="o">.</span><span class="n">get_states</span><span class="p">()</span>
-<span class="linenos">21</span>        <span class="n">times</span> <span class="o">=</span> <span class="n">result_container</span><span class="o">.</span><span class="n">get_times</span><span class="p">()</span>
-<span class="linenos">22</span>
-<span class="linenos">23</span>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
-<span class="linenos">24</span>            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
-<span class="linenos">25</span>
-<span class="linenos">26</span>            <span class="c1"># Write header</span>
-<span class="linenos">27</span>            <span class="n">state_cols</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;state_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
-<span class="linenos">28</span>            <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">state_cols</span>
-<span class="linenos">29</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result_container</span><span class="p">,</span> <span class="s1">&#39;controls&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result_container</span><span class="o">.</span><span class="n">controls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">30</span>                <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;control&#39;</span><span class="p">)</span>
-<span class="linenos">31</span>            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
-<span class="linenos">32</span>
-<span class="linenos">33</span>            <span class="c1"># Write data</span>
-<span class="linenos">34</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">states</span><span class="p">)):</span>
-<span class="linenos">35</span>                <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">state</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="linenos">36</span>                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result_container</span><span class="p">,</span> <span class="s1">&#39;controls&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result_container</span><span class="o">.</span><span class="n">controls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">37</span>                    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_container</span><span class="o">.</span><span class="n">controls</span><span class="p">):</span>
-<span class="linenos">38</span>                        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_container</span><span class="o">.</span><span class="n">controls</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="linenos">39</span>                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-<span class="linenos">40</span>
-<span class="linenos">41</span>    <span class="k">def</span><span class="w"> </span><span class="nf">export_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_container</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">42</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Export batch simulation results to CSV.&quot;&quot;&quot;</span>
-<span class="linenos">43</span>        <span class="n">base_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-<span class="linenos">44</span>
-<span class="linenos">45</span>        <span class="k">for</span> <span class="n">batch_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_container</span><span class="o">.</span><span class="n">get_batch_count</span><span class="p">()):</span>
-<span class="linenos">46</span>            <span class="n">batch_filepath</span> <span class="o">=</span> <span class="n">base_path</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_path</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">_batch_</span><span class="si">{</span><span class="n">batch_idx</span><span class="si">}{</span><span class="n">base_path</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="linenos">47</span>
-<span class="linenos">48</span>            <span class="c1"># Create a temporary container for this batch</span>
-<span class="linenos">49</span>            <span class="n">temp_container</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s1">&#39;TempContainer&#39;</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})()</span>
-<span class="linenos">50</span>            <span class="n">temp_container</span><span class="o">.</span><span class="n">get_states</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">batch_container</span><span class="o">.</span><span class="n">get_states</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">)</span>
-<span class="linenos">51</span>            <span class="n">temp_container</span><span class="o">.</span><span class="n">get_times</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">batch_container</span><span class="o">.</span><span class="n">get_times</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">)</span>
-<span class="linenos">52</span>            <span class="n">temp_container</span><span class="o">.</span><span class="n">controls</span> <span class="o">=</span> <span class="n">batch_container</span><span class="o">.</span><span class="n">batch_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">)</span>
-<span class="linenos">53</span>
-<span class="linenos">54</span>            <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">temp_container</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">batch_filepath</span><span class="p">))</span>
+<span class="linenos">14</span><span class="k">class</span><span class="w"> </span><span class="nc">CSVExporter</span><span class="p">:</span>
+<span class="linenos">15</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Export simulation results to CSV format.&quot;&quot;&quot;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result_container</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Export single simulation results to CSV.&quot;&quot;&quot;</span>
+<span class="linenos">19</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">result_container</span><span class="o">.</span><span class="n">get_states</span><span class="p">()</span>
+<span class="linenos">20</span>        <span class="n">times</span> <span class="o">=</span> <span class="n">result_container</span><span class="o">.</span><span class="n">get_times</span><span class="p">()</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+<span class="linenos">23</span>            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>            <span class="c1"># Write header</span>
+<span class="linenos">26</span>            <span class="n">state_cols</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;state_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="linenos">27</span>            <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">state_cols</span>
+<span class="linenos">28</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result_container</span><span class="p">,</span> <span class="s1">&#39;controls&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result_container</span><span class="o">.</span><span class="n">controls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">29</span>                <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;control&#39;</span><span class="p">)</span>
+<span class="linenos">30</span>            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>            <span class="c1"># Write data</span>
+<span class="linenos">33</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">states</span><span class="p">)):</span>
+<span class="linenos">34</span>                <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">state</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="linenos">35</span>                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result_container</span><span class="p">,</span> <span class="s1">&#39;controls&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result_container</span><span class="o">.</span><span class="n">controls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">36</span>                    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_container</span><span class="o">.</span><span class="n">controls</span><span class="p">):</span>
+<span class="linenos">37</span>                        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_container</span><span class="o">.</span><span class="n">controls</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos">38</span>                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span>    <span class="k">def</span><span class="w"> </span><span class="nf">export_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_container</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">41</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Export batch simulation results to CSV.&quot;&quot;&quot;</span>
+<span class="linenos">42</span>        <span class="n">base_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>        <span class="k">for</span> <span class="n">batch_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_container</span><span class="o">.</span><span class="n">get_batch_count</span><span class="p">()):</span>
+<span class="linenos">45</span>            <span class="n">batch_filepath</span> <span class="o">=</span> <span class="n">base_path</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_path</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">_batch_</span><span class="si">{</span><span class="n">batch_idx</span><span class="si">}{</span><span class="n">base_path</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span>            <span class="c1"># Create a temporary container for this batch</span>
+<span class="linenos">48</span>            <span class="n">temp_container</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s1">&#39;TempContainer&#39;</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})()</span>
+<span class="linenos">49</span>            <span class="n">temp_container</span><span class="o">.</span><span class="n">get_states</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">batch_container</span><span class="o">.</span><span class="n">get_states</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">)</span>
+<span class="linenos">50</span>            <span class="n">temp_container</span><span class="o">.</span><span class="n">get_times</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">batch_container</span><span class="o">.</span><span class="n">get_times</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">)</span>
+<span class="linenos">51</span>            <span class="n">temp_container</span><span class="o">.</span><span class="n">controls</span> <span class="o">=</span> <span class="n">batch_container</span><span class="o">.</span><span class="n">batch_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">)</span>
+<span class="linenos">52</span>
+<span class="linenos">53</span>            <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">temp_container</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">batch_filepath</span><span class="p">))</span>
+<span class="linenos">54</span>
 <span class="linenos">55</span>
-<span class="linenos">56</span>
-<span class="linenos">57</span><span class="k">class</span><span class="w"> </span><span class="nc">HDF5Exporter</span><span class="p">:</span>
-<span class="linenos">58</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Export simulation results to HDF5 format.&quot;&quot;&quot;</span>
-<span class="linenos">59</span>
-<span class="linenos">60</span>    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result_container</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">61</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Export single simulation results to HDF5.&quot;&quot;&quot;</span>
-<span class="linenos">62</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">63</span>            <span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
-<span class="linenos">64</span>        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-<span class="linenos">65</span>            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;h5py required for HDF5 export&quot;</span><span class="p">)</span>
-<span class="linenos">66</span>
-<span class="linenos">67</span>        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">68</span>            <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;times&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">result_container</span><span class="o">.</span><span class="n">get_times</span><span class="p">())</span>
-<span class="linenos">69</span>            <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">result_container</span><span class="o">.</span><span class="n">get_states</span><span class="p">())</span>
-<span class="linenos">70</span>
-<span class="linenos">71</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result_container</span><span class="p">,</span> <span class="s1">&#39;controls&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result_container</span><span class="o">.</span><span class="n">controls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">72</span>                <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">result_container</span><span class="o">.</span><span class="n">controls</span><span class="p">)</span>
-<span class="linenos">73</span>
-<span class="linenos">74</span>            <span class="c1"># Store metadata</span>
-<span class="linenos">75</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result_container</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">):</span>
-<span class="linenos">76</span>                <span class="n">metadata_group</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">)</span>
-<span class="linenos">77</span>                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result_container</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">78</span>                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
-<span class="linenos">79</span>                        <span class="n">metadata_group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-<span class="linenos">80</span>
-<span class="linenos">81</span>    <span class="k">def</span><span class="w"> </span><span class="nf">export_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_container</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">82</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Export batch simulation results to HDF5.&quot;&quot;&quot;</span>
-<span class="linenos">83</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">84</span>            <span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
-<span class="linenos">85</span>        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-<span class="linenos">86</span>            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;h5py required for HDF5 export&quot;</span><span class="p">)</span>
-<span class="linenos">87</span>
-<span class="linenos">88</span>        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">89</span>            <span class="k">for</span> <span class="n">batch_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_container</span><span class="o">.</span><span class="n">get_batch_count</span><span class="p">()):</span>
-<span class="linenos">90</span>                <span class="n">batch_group</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;batch_</span><span class="si">{</span><span class="n">batch_idx</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">91</span>                <span class="n">batch_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;times&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">batch_container</span><span class="o">.</span><span class="n">get_times</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">))</span>
-<span class="linenos">92</span>                <span class="n">batch_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">batch_container</span><span class="o">.</span><span class="n">get_states</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">))</span>
-<span class="linenos">93</span>
-<span class="linenos">94</span>                <span class="n">batch_data</span> <span class="o">=</span> <span class="n">batch_container</span><span class="o">.</span><span class="n">batch_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">,</span> <span class="p">{})</span>
-<span class="linenos">95</span>                <span class="k">if</span> <span class="n">batch_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">96</span>                    <span class="n">batch_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">batch_data</span><span class="p">[</span><span class="s1">&#39;controls&#39;</span><span class="p">])</span>
+<span class="linenos">56</span><span class="k">class</span><span class="w"> </span><span class="nc">HDF5Exporter</span><span class="p">:</span>
+<span class="linenos">57</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Export simulation results to HDF5 format.&quot;&quot;&quot;</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span>    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result_container</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">60</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Export single simulation results to HDF5.&quot;&quot;&quot;</span>
+<span class="linenos">61</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">62</span>            <span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+<span class="linenos">63</span>        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+<span class="linenos">64</span>            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;h5py required for HDF5 export&quot;</span><span class="p">)</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span>        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">67</span>            <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;times&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">result_container</span><span class="o">.</span><span class="n">get_times</span><span class="p">())</span>
+<span class="linenos">68</span>            <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">result_container</span><span class="o">.</span><span class="n">get_states</span><span class="p">())</span>
+<span class="linenos">69</span>
+<span class="linenos">70</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result_container</span><span class="p">,</span> <span class="s1">&#39;controls&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result_container</span><span class="o">.</span><span class="n">controls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">71</span>                <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">result_container</span><span class="o">.</span><span class="n">controls</span><span class="p">)</span>
+<span class="linenos">72</span>
+<span class="linenos">73</span>            <span class="c1"># Store metadata</span>
+<span class="linenos">74</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result_container</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">):</span>
+<span class="linenos">75</span>                <span class="n">metadata_group</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">)</span>
+<span class="linenos">76</span>                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result_container</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">77</span>                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+<span class="linenos">78</span>                        <span class="n">metadata_group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="linenos">79</span>
+<span class="linenos">80</span>    <span class="k">def</span><span class="w"> </span><span class="nf">export_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_container</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">81</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Export batch simulation results to HDF5.&quot;&quot;&quot;</span>
+<span class="linenos">82</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">83</span>            <span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+<span class="linenos">84</span>        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+<span class="linenos">85</span>            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;h5py required for HDF5 export&quot;</span><span class="p">)</span>
+<span class="linenos">86</span>
+<span class="linenos">87</span>        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">88</span>            <span class="k">for</span> <span class="n">batch_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_container</span><span class="o">.</span><span class="n">get_batch_count</span><span class="p">()):</span>
+<span class="linenos">89</span>                <span class="n">batch_group</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;batch_</span><span class="si">{</span><span class="n">batch_idx</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">90</span>                <span class="n">batch_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;times&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">batch_container</span><span class="o">.</span><span class="n">get_times</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">))</span>
+<span class="linenos">91</span>                <span class="n">batch_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">batch_container</span><span class="o">.</span><span class="n">get_states</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">))</span>
+<span class="linenos">92</span>
+<span class="linenos">93</span>                <span class="n">batch_data</span> <span class="o">=</span> <span class="n">batch_container</span><span class="o">.</span><span class="n">batch_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">,</span> <span class="p">{})</span>
+<span class="linenos">94</span>                <span class="k">if</span> <span class="n">batch_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">95</span>                    <span class="n">batch_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">batch_data</span><span class="p">[</span><span class="s1">&#39;controls&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </section>
@@ -734,6 +759,106 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<p>(Theory content to be added…)</p>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Result Exporters] –&gt; B[CSV Exporter]
+A –&gt; C[HDF5 Exporter]
+A –&gt; D[JSON Exporter]</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>E[Result Container] --&gt; F{Format Selection}
+
+F --&gt;|CSV| B
+F --&gt;|HDF5| C
+F --&gt;|JSON| D
+
+B --&gt; G[CSV Serialization]
+G --&gt; H[Time series → rows]
+G --&gt; I[Metadata → header]
+
+C --&gt; J[HDF5 Hierarchical]
+J --&gt; K[Groups: metadata, data]
+J --&gt; L[Datasets: time, state, control]
+J --&gt; M[Compression: gzip, lzf]
+
+D --&gt; N[JSON Serialization]
+N --&gt; O[NumPy → lists]
+N --&gt; P[Datetime → ISO 8601]
+
+H --&gt; Q[CSV File]
+M --&gt; R[HDF5 File]
+P --&gt; S[JSON File]
+
+style F fill:#fff4e1
+style Q fill:#e8f5e9
+style R fill:#e8f5e9
+style S fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="basic-usage-example">
+<h1>Basic usage example<a class="headerlink" href="#basic-usage-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation.results import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+<section id="example-2-advanced-configuration">
+<h2>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="advanced-configuration">
+<h1>Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Link to this heading">¶</a></h1>
+<p>component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+<section id="example-3-integration-with-framework">
+<h2>Example 3: Integration with Framework<a class="headerlink" href="#example-3-integration-with-framework" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation import SimulationRunner</p>
+<p>runner = SimulationRunner()
+runner.use_component(component)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="performance-optimized-usage">
+<h1>Performance-optimized usage<a class="headerlink" href="#performance-optimized-usage" title="Link to this heading">¶</a></h1>
+<p>component = Component(enable_caching=True)
+```</p>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="error-handling">
+<h1>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading">¶</a></h1>
+<p>try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
 </section>
 
         </article>
@@ -753,7 +878,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -799,8 +924,31 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage-example">Basic usage example</a><ul>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-configuration">Advanced configuration</a><ul>
+<li><a class="reference internal" href="#example-3-integration-with-framework">Example 3: Integration with Framework</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-optimized-usage">Performance-optimized usage</a><ul>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error handling</a></li>
 </ul>
 
           </div>

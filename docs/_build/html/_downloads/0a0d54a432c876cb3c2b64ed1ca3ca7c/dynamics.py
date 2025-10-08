@@ -18,8 +18,7 @@ import warnings
 from ..base import BaseDynamicsModel, DynamicsResult
 from ...core import (
     DIPStateValidator,
-    NumericalInstabilityError,
-    NumericalStabilityMonitor
+    NumericalInstabilityError
 )
 from .config import LowRankDIPConfig
 from .physics import LowRankPhysicsComputer

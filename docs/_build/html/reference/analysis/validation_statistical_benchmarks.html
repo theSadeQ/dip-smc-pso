@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,6 +517,186 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Statistical benchmarking utilities for the Double Inverted Pendulum project.</p>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="statistical-benchmarking">
+<h3>Statistical Benchmarking<a class="headerlink" href="#statistical-benchmarking" title="Link to this heading">¶</a></h3>
+<p><strong>Sample mean estimator:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i\]</div>
+</div>
+<p><strong>Sample variance:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2\]</div>
+</div>
+</section>
+<section id="confidence-intervals">
+<h3>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">¶</a></h3>
+<p><strong>t-distribution CI</strong> (unknown variance):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{CI}_{1-\alpha} = \bar{x} \pm t_{\alpha/2, n-1} \frac{s}{\sqrt{n}}\]</div>
+</div>
+<p><strong>Normal CI</strong> (known variance):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{CI}_{1-\alpha} = \bar{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}\]</div>
+</div>
+</section>
+<section id="bootstrap-confidence-intervals">
+<h3>Bootstrap Confidence Intervals<a class="headerlink" href="#bootstrap-confidence-intervals" title="Link to this heading">¶</a></h3>
+<p><strong>Bootstrap resampling:</strong></p>
+<ol class="arabic simple">
+<li><p>Draw <span class="math notranslate nohighlight">\(B\)</span> bootstrap samples: <span class="math notranslate nohighlight">\(\{x_1^*, \ldots, x_n^*\}_b, b=1,\ldots,B\)</span></p></li>
+<li><p>Compute statistic: <span class="math notranslate nohighlight">\(\theta_b^* = g(x_1^*, \ldots, x_n^*)\)</span></p></li>
+<li><p>CI from quantiles of <span class="math notranslate nohighlight">\(\{\theta_b^*\}\)</span></p></li>
+</ol>
+<p><strong>Percentile method:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{CI}_{1-\alpha} = [\theta_{(\alpha/2)}^*, \theta_{(1-\alpha/2)}^*]\]</div>
+</div>
+</section>
+<section id="hypothesis-testing">
+<h3>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">¶</a></h3>
+<p><strong>t-test statistic:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} \sim t_{n-1}\]</div>
+</div>
+<p><strong>Decision rule:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Reject } H_0 \text{ if } |t| &gt; t_{\alpha/2, n-1}\]</div>
+</div>
+</section>
+<section id="welch-s-t-test">
+<h3>Welch’s t-test<a class="headerlink" href="#welch-s-t-test" title="Link to this heading">¶</a></h3>
+<p><strong>For unequal variances:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}\]</div>
+</div>
+<p><strong>Degrees of freedom (Welch-Satterthwaite):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\nu = \frac{\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1} + \frac{(s_2^2/n_2)^2}{n_2-1}}\]</div>
+</div>
+</section>
+<section id="anova-f-test">
+<h3>ANOVA F-test<a class="headerlink" href="#anova-f-test" title="Link to this heading">¶</a></h3>
+<p><strong>F-statistic:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[F = \frac{\text{MSB}}{\text{MSW}} = \frac{\sum n_i(\bar{x}_i - \bar{x})^2/(k-1)}{\sum\sum(x_{ij} - \bar{x}_i)^2/(N-k)}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(k\)</span> is number of groups, <span class="math notranslate nohighlight">\(N\)</span> is total sample size.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[N Trials] --&gt; B[Simulation Loop]
+    B --&gt; C[Compute Metrics]
+    C --&gt; D[ISE, ITAE, etc]
+
+    D --&gt; E[Statistical Analysis]
+    E --&gt; F[Sample Mean]
+    E --&gt; G[Sample Variance]
+
+    F --&gt; H{Distribution Known?}
+    G --&gt; H
+
+    H --&gt;|Yes| I[t-Confidence Interval]
+    H --&gt;|No| J[Bootstrap CI]
+
+    J --&gt; K[B Bootstrap Samples]
+    K --&gt; L[Empirical Distribution]
+    L --&gt; M[Percentile CI]
+
+    I --&gt; N[Hypothesis Testing]
+    M --&gt; N
+
+    N --&gt; O[t-test]
+    N --&gt; P[ANOVA]
+
+    O --&gt; Q{p &lt; α?}
+    P --&gt; Q
+
+    Q --&gt;|Yes| R[Significant Difference]
+    Q --&gt;|No| S[No Evidence]
+
+    style E fill:#ff9
+    style J fill:#9cf
+    style Q fill:#fcf
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-analysis">
+<h3>Example 1: Basic Analysis<a class="headerlink" href="#example-1-basic-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span>
+
+<span class="c1"># Initialize analyzer</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">Analyzer</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-statistical-validation">
+<h3>Example 2: Statistical Validation<a class="headerlink" href="#example-2-statistical-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute confidence intervals</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_confidence_interval</span>
+
+<span class="n">ci</span> <span class="o">=</span> <span class="n">compute_confidence_interval</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95% CI: [</span><span class="si">{</span><span class="n">ci</span><span class="o">.</span><span class="n">lower</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci</span><span class="o">.</span><span class="n">upper</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-performance-metrics">
+<h3>Example 3: Performance Metrics<a class="headerlink" href="#example-3-performance-metrics" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute comprehensive metrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.performance</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_all_metrics</span>
+
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_all_metrics</span><span class="p">(</span>
+    <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+    <span class="n">control</span><span class="o">=</span><span class="n">u</span><span class="p">,</span>
+    <span class="n">reference</span><span class="o">=</span><span class="n">r</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">ise</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, ITAE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">itae</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-batch-analysis">
+<h3>Example 4: Batch Analysis<a class="headerlink" href="#example-4-batch-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze multiple trials</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trials</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">trial_seed</span><span class="o">=</span><span class="n">trial</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+<span class="c1"># Aggregate statistics</span>
+<span class="n">mean_performance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">performance</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-robustness-analysis">
+<h3>Example 5: Robustness Analysis<a class="headerlink" href="#example-5-robustness-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameter sensitivity analysis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.performance</span><span class="w"> </span><span class="kn">import</span> <span class="n">sensitivity_analysis</span>
+
+<span class="n">sensitivity</span> <span class="o">=</span> <span class="n">sensitivity_analysis</span><span class="p">(</span>
+    <span class="n">system</span><span class="o">=</span><span class="n">plant</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)},</span>
+    <span class="n">metric</span><span class="o">=</span><span class="n">compute_stability_margin</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Most sensitive: </span><span class="si">{</span><span class="n">sensitivity</span><span class="o">.</span><span class="n">most_sensitive_param</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This is the refactored version using modular architecture while maintaining
 full backward compatibility with the original statistical_benchmarks.py.</p>
 <p>The module now delegates to specialized submodules:</p>
@@ -513,8 +719,9 @@ from src.benchmarks.statistical_benchmarks_v2 import run_trials</p>
 </pre></div>
 </div>
 </section>
-<section id="architecture-diagram">
-<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+</section>
+<section id="id1">
+<h2>Architecture Diagram<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <div class="mermaid">
             graph TD
     A[Controller Factory] --&gt; B[Multi-Trial Execution]
@@ -559,8 +766,8 @@ from src.benchmarks.statistical_benchmarks_v2 import run_trials</p>
 <section id="statistical-performance-evaluation">
 <h3>Statistical Performance Evaluation<a class="headerlink" href="#statistical-performance-evaluation" title="Link to this heading">¶</a></h3>
 <p>Statistical benchmarking provides rigorous quantification of controller performance across multiple trials with uncertainty quantification.</p>
-<section id="confidence-intervals">
-<h4>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">¶</a></h4>
+<section id="id2">
+<h4>Confidence Intervals<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 <p>For a performance metric <span class="math notranslate nohighlight">\(m\)</span> measured across <span class="math notranslate nohighlight">\(n\)</span> trials, the <span class="math notranslate nohighlight">\((1-\alpha)\)</span> confidence interval estimates the true population mean <span class="math notranslate nohighlight">\(\mu_m\)</span>:</p>
 <p><strong>t-Distribution (Parametric)</strong>:</p>
 <div class="math-wrapper docutils container">
@@ -587,8 +794,8 @@ from src.benchmarks.statistical_benchmarks_v2 import run_trials</p>
 </ol>
 <p><strong>No assumptions</strong> about underlying distribution.</p>
 </section>
-<section id="hypothesis-testing">
-<h4>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">¶</a></h4>
+<section id="id3">
+<h4>Hypothesis Testing<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
 <p><strong>Welch’s t-test</strong> for comparing two controller means:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -1166,8 +1373,8 @@ constraint violations.</p>
 <p>dict
 Mapping of metric names to scalar values.  Each metric is averaged
 across the batch dimension.</p>
-<section id="id1">
-<h3>Source Code<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="id4">
+<h3>Source Code<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">compute_metrics</span><span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
 <span class="linenos"> 3</span>    <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
@@ -1221,8 +1428,8 @@ sample size of at least 25–30 trials is recommended to invoke the
 Central Limit Theorem for skewed distributions.</p>
 </section>
 </section>
-<section id="id2">
-<h2>Parameters<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h2>Parameters<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <p>controller_factory : Callable[[np.ndarray], Any]
 Factory function that returns a controller instance when provided
 with a gain vector.  The returned controller must define an
@@ -1243,14 +1450,14 @@ noise_std : float, optional
 Standard deviation of additive Gaussian noise applied to the state
 trajectories before metric computation.</p>
 </section>
-<section id="id3">
-<h2>Returns<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h2>Returns<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p>list of dict, dict
 A list containing the raw metrics for each trial and a dictionary
 mapping metric names to tuples <code class="docutils literal notranslate"><span class="pre">(mean,</span> <span class="pre">ci)</span></code> where <code class="docutils literal notranslate"><span class="pre">ci</span></code> is
 half the width of the 95 % confidence interval.</p>
-<section id="id4">
-<h3>Source Code<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<section id="id7">
+<h3>Source Code<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">run_trials</span><span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">controller_factory</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
 <span class="linenos"> 3</span>    <span class="n">cfg</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
@@ -1331,8 +1538,8 @@ half the width of the 95 % confidence interval.</p>
 statistical analysis options.</p>
 </section>
 </section>
-<section id="id5">
-<h2>Parameters<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id8">
+<h2>Parameters<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
 <p>controller_factory, cfg, n_trials, seed :
 Same as run_trials()
 confidence_level : float, optional
@@ -1342,12 +1549,12 @@ Whether to use bootstrap confidence intervals
 **kwargs :
 Additional arguments passed to trial runner</p>
 </section>
-<section id="id6">
-<h2>Returns<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h2>Returns<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
 <p>list of dict, dict
 Metrics list and comprehensive statistical analysis results</p>
-<section id="id7">
-<h3>Source Code<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<section id="id10">
+<h3>Source Code<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">run_trials_with_advanced_statistics</span><span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">controller_factory</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
 <span class="linenos"> 3</span>    <span class="n">cfg</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
@@ -1425,8 +1632,8 @@ Metrics list and comprehensive statistical analysis results</p>
 <p>Compare two controllers using statistical analysis.</p>
 </section>
 </section>
-<section id="id8">
-<h2>Parameters<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id11">
+<h2>Parameters<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
 <p>controller_factory_a, controller_factory_b : Callable
 Controller factories to compare
 cfg : Any
@@ -1438,12 +1645,12 @@ Base random seed
 **kwargs :
 Additional arguments</p>
 </section>
-<section id="id9">
-<h2>Returns<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<section id="id12">
+<h2>Returns<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
 <p>dict
 Comprehensive comparison results</p>
-<section id="id10">
-<h3>Source Code<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<section id="id13">
+<h3>Source Code<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">compare_controllers</span><span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">controller_factory_a</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
 <span class="linenos"> 3</span>    <span class="n">controller_factory_b</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
@@ -1504,8 +1711,8 @@ Comprehensive comparison results</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.statistics</span> <span class="pre">import</span> <span class="pre">compute_basic_confidence_intervals</span></code></p></li>
 </ul>
 </section>
-<section id="usage-examples">
-<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="id14">
+<h2>Usage Examples<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
 <section id="basic-statistical-benchmarking">
 <h3>Basic Statistical Benchmarking<a class="headerlink" href="#basic-statistical-benchmarking" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.benchmarks.statistical_benchmarks_v2</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_trials</span>
@@ -1646,7 +1853,7 @@ Comprehensive comparison results</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1669,11 +1876,29 @@ Comprehensive comparison results</p>
             <ul>
 <li><a class="reference internal" href="#">analysis.validation.statistical_benchmarks</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#statistical-benchmarking">Statistical Benchmarking</a></li>
+<li><a class="reference internal" href="#confidence-intervals">Confidence Intervals</a></li>
+<li><a class="reference internal" href="#bootstrap-confidence-intervals">Bootstrap Confidence Intervals</a></li>
+<li><a class="reference internal" href="#hypothesis-testing">Hypothesis Testing</a></li>
+<li><a class="reference internal" href="#welch-s-t-test">Welch’s t-test</a></li>
+<li><a class="reference internal" href="#anova-f-test">ANOVA F-test</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-analysis">Example 1: Basic Analysis</a></li>
+<li><a class="reference internal" href="#example-2-statistical-validation">Example 2: Statistical Validation</a></li>
+<li><a class="reference internal" href="#example-3-performance-metrics">Example 3: Performance Metrics</a></li>
+<li><a class="reference internal" href="#example-4-batch-analysis">Example 4: Batch Analysis</a></li>
+<li><a class="reference internal" href="#example-5-robustness-analysis">Example 5: Robustness Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Architecture Diagram</a></li>
 <li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
 <li><a class="reference internal" href="#statistical-performance-evaluation">Statistical Performance Evaluation</a><ul>
-<li><a class="reference internal" href="#confidence-intervals">Confidence Intervals</a></li>
-<li><a class="reference internal" href="#hypothesis-testing">Hypothesis Testing</a></li>
+<li><a class="reference internal" href="#id2">Confidence Intervals</a></li>
+<li><a class="reference internal" href="#id3">Hypothesis Testing</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#performance-metrics">Performance Metrics</a></li>
@@ -1699,29 +1924,29 @@ Comprehensive comparison results</p>
 </li>
 <li><a class="reference internal" href="#parameters">Parameters</a></li>
 <li><a class="reference internal" href="#returns">Returns</a><ul>
-<li><a class="reference internal" href="#id1">Source Code</a></li>
-<li><a class="reference internal" href="#run-trials-controller-factory-cfg-n-trials-seed-randomise-physics-noise-std"><code class="docutils literal notranslate"><span class="pre">run_trials(controller_factory,</span> <span class="pre">cfg,</span> <span class="pre">n_trials,</span> <span class="pre">seed,</span> <span class="pre">randomise_physics,</span> <span class="pre">noise_std)</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id2">Parameters</a></li>
-<li><a class="reference internal" href="#id3">Returns</a><ul>
 <li><a class="reference internal" href="#id4">Source Code</a></li>
-<li><a class="reference internal" href="#run-trials-with-advanced-statistics-controller-factory-cfg-n-trials-seed-confidence-level-use-bootstrap"><code class="docutils literal notranslate"><span class="pre">run_trials_with_advanced_statistics(controller_factory,</span> <span class="pre">cfg,</span> <span class="pre">n_trials,</span> <span class="pre">seed,</span> <span class="pre">confidence_level,</span> <span class="pre">use_bootstrap)</span></code></a></li>
+<li><a class="reference internal" href="#run-trials-controller-factory-cfg-n-trials-seed-randomise-physics-noise-std"><code class="docutils literal notranslate"><span class="pre">run_trials(controller_factory,</span> <span class="pre">cfg,</span> <span class="pre">n_trials,</span> <span class="pre">seed,</span> <span class="pre">randomise_physics,</span> <span class="pre">noise_std)</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#id5">Parameters</a></li>
 <li><a class="reference internal" href="#id6">Returns</a><ul>
 <li><a class="reference internal" href="#id7">Source Code</a></li>
-<li><a class="reference internal" href="#compare-controllers-controller-factory-a-controller-factory-b-cfg-n-trials-seed"><code class="docutils literal notranslate"><span class="pre">compare_controllers(controller_factory_a,</span> <span class="pre">controller_factory_b,</span> <span class="pre">cfg,</span> <span class="pre">n_trials,</span> <span class="pre">seed)</span></code></a></li>
+<li><a class="reference internal" href="#run-trials-with-advanced-statistics-controller-factory-cfg-n-trials-seed-confidence-level-use-bootstrap"><code class="docutils literal notranslate"><span class="pre">run_trials_with_advanced_statistics(controller_factory,</span> <span class="pre">cfg,</span> <span class="pre">n_trials,</span> <span class="pre">seed,</span> <span class="pre">confidence_level,</span> <span class="pre">use_bootstrap)</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#id8">Parameters</a></li>
 <li><a class="reference internal" href="#id9">Returns</a><ul>
 <li><a class="reference internal" href="#id10">Source Code</a></li>
+<li><a class="reference internal" href="#compare-controllers-controller-factory-a-controller-factory-b-cfg-n-trials-seed"><code class="docutils literal notranslate"><span class="pre">compare_controllers(controller_factory_a,</span> <span class="pre">controller_factory_b,</span> <span class="pre">cfg,</span> <span class="pre">n_trials,</span> <span class="pre">seed)</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">Parameters</a></li>
+<li><a class="reference internal" href="#id12">Returns</a><ul>
+<li><a class="reference internal" href="#id13">Source Code</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#id14">Usage Examples</a><ul>
 <li><a class="reference internal" href="#basic-statistical-benchmarking">Basic Statistical Benchmarking</a></li>
 <li><a class="reference internal" href="#advanced-bootstrap-confidence-intervals">Advanced: Bootstrap Confidence Intervals</a></li>
 <li><a class="reference internal" href="#controller-comparison-with-hypothesis-testing">Controller Comparison with Hypothesis Testing</a></li>

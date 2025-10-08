@@ -284,6 +284,9 @@ def compute_sliding_surface(state):
 #### 1.2 Adaptive Gain Update
 
 ```python
+# example-metadata:
+# runnable: false
+
 def update_adaptive_gain(sigma, prev_K, dt):
     """Update K with dead zone, leak, and rate limiting."""
 
@@ -316,6 +319,9 @@ def update_adaptive_gain(sigma, prev_K, dt):
 #### 1.3 Complete Control Law
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars, history):
     """Main adaptive SMC control computation."""
 
@@ -582,6 +588,9 @@ print(f"Best cost: {best_cost}")
 ### 3. Monitoring Adaptation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def monitor_adaptive_smc(controller, state, result):
     """Monitor adaptive SMC performance and gain evolution."""
 
@@ -869,6 +878,9 @@ gains: [10, 8, 15, 12, 0.3]  # Lower gamma
 #### 2.1 Adaptation Health Check
 
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_adaptation(controller, history):
     """Diagnose adaptive SMC health."""
 
@@ -911,6 +923,9 @@ def diagnose_adaptation(controller, history):
 #### 2.2 Parameter Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_adaptive_parameters(gains, config):
     """Validate adaptive SMC parameters."""
 

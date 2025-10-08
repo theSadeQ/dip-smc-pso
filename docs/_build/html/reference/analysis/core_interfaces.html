@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,9 +517,189 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Core interfaces for the analysis framework.</p>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="interface-design-principles">
+<h3>Interface Design Principles<a class="headerlink" href="#interface-design-principles" title="Link to this heading">¶</a></h3>
+<p><strong>Liskov Substitution Principle (LSP):</strong></p>
+<p>If <span class="math notranslate nohighlight">\(S &lt;: T\)</span>, then objects of type <span class="math notranslate nohighlight">\(T\)</span> may be replaced with objects of type <span class="math notranslate nohighlight">\(S\)</span> without altering program correctness.</p>
+</section>
+<section id="abstract-base-classes">
+<h3>Abstract Base Classes<a class="headerlink" href="#abstract-base-classes" title="Link to this heading">¶</a></h3>
+<p><strong>Protocol definition:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Analyzer</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Subtype relation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{ConcreteAnalyzer} &lt;: \text{Analyzer}\]</div>
+</div>
+</section>
+<section id="dependency-inversion">
+<h3>Dependency Inversion<a class="headerlink" href="#dependency-inversion" title="Link to this heading">¶</a></h3>
+<p><strong>High-level modules depend on abstractions:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Controller} \to \text{IController} \leftarrow \text{ConcreteController}\]</div>
+</div>
+</section>
+<section id="interface-segregation">
+<h3>Interface Segregation<a class="headerlink" href="#interface-segregation" title="Link to this heading">¶</a></h3>
+<p><strong>Minimize interface size:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[|\text{Interface}| = \min \{|I| : I \text{ satisfies requirements}\}\]</div>
+</div>
+</section>
+<section id="type-variance">
+<h3>Type Variance<a class="headerlink" href="#type-variance" title="Link to this heading">¶</a></h3>
+<p><strong>Covariance (return types):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[S &lt;: T \implies F[S] &lt;: F[T]\]</div>
+</div>
+<p><strong>Contravariance (parameter types):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[S &lt;: T \implies F[T] &lt;: F[S]\]</div>
+</div>
+</section>
+<section id="design-by-contract">
+<h3>Design by Contract<a class="headerlink" href="#design-by-contract" title="Link to this heading">¶</a></h3>
+<p><strong>Precondition:</strong> <span class="math notranslate nohighlight">\(P: \text{State} \to \text{Bool}\)</span>
+<strong>Postcondition:</strong> <span class="math notranslate nohighlight">\(Q: \text{State} \times \text{Result} \to \text{Bool}\)</span></p>
+<p><strong>Hoare triple:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\{P\} \, \text{method}() \, \{Q\}\]</div>
+</div>
+</section>
+<section id="adapter-pattern">
+<h3>Adapter Pattern<a class="headerlink" href="#adapter-pattern" title="Link to this heading">¶</a></h3>
+<p><strong>Interface adaptation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Adapter}: \text{SourceInterface} \to \text{TargetInterface}\]</div>
+</div>
+</section>
+<section id="factory-method">
+<h3>Factory Method<a class="headerlink" href="#factory-method" title="Link to this heading">¶</a></h3>
+<p><strong>Object creation abstraction:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{create}(\text{type}: T) \to \text{Instance}_T\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Abstract Interface] --&gt; B[Protocol Definition]
+    B --&gt; C[Method Signatures]
+    B --&gt; D[Type Contracts]
+
+    C --&gt; E[Concrete Impl 1]
+    C --&gt; F[Concrete Impl 2]
+    C --&gt; G[Concrete Impl N]
+
+    E --&gt; H[Dependency Injection]
+    F --&gt; H
+    G --&gt; H
+
+    H --&gt; I[Client Code]
+
+    D --&gt; J[Runtime Validation]
+    J --&gt; K{Type Check}
+    K --&gt;|Pass| L[Execute]
+    K --&gt;|Fail| M[Type Error]
+
+    A --&gt; N[Adapter Pattern]
+    N --&gt; O[Legacy Interface]
+    O --&gt; P[Adapt to New]
+
+    I --&gt; Q[Factory Method]
+    Q --&gt; R[Create Instance]
+
+    style B fill:#9cf
+    style H fill:#ff9
+    style L fill:#9f9
+    style M fill:#f99
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-analysis">
+<h3>Example 1: Basic Analysis<a class="headerlink" href="#example-1-basic-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span>
+
+<span class="c1"># Initialize analyzer</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">Analyzer</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-statistical-validation">
+<h3>Example 2: Statistical Validation<a class="headerlink" href="#example-2-statistical-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute confidence intervals</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_confidence_interval</span>
+
+<span class="n">ci</span> <span class="o">=</span> <span class="n">compute_confidence_interval</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95% CI: [</span><span class="si">{</span><span class="n">ci</span><span class="o">.</span><span class="n">lower</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci</span><span class="o">.</span><span class="n">upper</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-performance-metrics">
+<h3>Example 3: Performance Metrics<a class="headerlink" href="#example-3-performance-metrics" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute comprehensive metrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.performance</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_all_metrics</span>
+
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_all_metrics</span><span class="p">(</span>
+    <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+    <span class="n">control</span><span class="o">=</span><span class="n">u</span><span class="p">,</span>
+    <span class="n">reference</span><span class="o">=</span><span class="n">r</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">ise</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, ITAE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">itae</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-batch-analysis">
+<h3>Example 4: Batch Analysis<a class="headerlink" href="#example-4-batch-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze multiple trials</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trials</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">trial_seed</span><span class="o">=</span><span class="n">trial</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+<span class="c1"># Aggregate statistics</span>
+<span class="n">mean_performance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">performance</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-robustness-analysis">
+<h3>Example 5: Robustness Analysis<a class="headerlink" href="#example-5-robustness-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameter sensitivity analysis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.performance</span><span class="w"> </span><span class="kn">import</span> <span class="n">sensitivity_analysis</span>
+
+<span class="n">sensitivity</span> <span class="o">=</span> <span class="n">sensitivity_analysis</span><span class="p">(</span>
+    <span class="n">system</span><span class="o">=</span><span class="n">plant</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)},</span>
+    <span class="n">metric</span><span class="o">=</span><span class="n">compute_stability_margin</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Most sensitive: </span><span class="si">{</span><span class="n">sensitivity</span><span class="o">.</span><span class="n">most_sensitive_param</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This module defines abstract base classes and protocols that establish
 the contract for analysis components, ensuring consistency and extensibility
 across the framework.</p>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -1527,7 +1733,7 @@ across the framework.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1550,6 +1756,26 @@ across the framework.</p>
             <ul>
 <li><a class="reference internal" href="#">analysis.core.interfaces</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#interface-design-principles">Interface Design Principles</a></li>
+<li><a class="reference internal" href="#abstract-base-classes">Abstract Base Classes</a></li>
+<li><a class="reference internal" href="#dependency-inversion">Dependency Inversion</a></li>
+<li><a class="reference internal" href="#interface-segregation">Interface Segregation</a></li>
+<li><a class="reference internal" href="#type-variance">Type Variance</a></li>
+<li><a class="reference internal" href="#design-by-contract">Design by Contract</a></li>
+<li><a class="reference internal" href="#adapter-pattern">Adapter Pattern</a></li>
+<li><a class="reference internal" href="#factory-method">Factory Method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-analysis">Example 1: Basic Analysis</a></li>
+<li><a class="reference internal" href="#example-2-statistical-validation">Example 2: Statistical Validation</a></li>
+<li><a class="reference internal" href="#example-3-performance-metrics">Example 3: Performance Metrics</a></li>
+<li><a class="reference internal" href="#example-4-batch-analysis">Example 4: Batch Analysis</a></li>
+<li><a class="reference internal" href="#example-5-robustness-analysis">Example 5: Robustness Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#analysisstatus"><code class="docutils literal notranslate"><span class="pre">AnalysisStatus</span></code></a><ul>
@@ -1695,6 +1921,10 @@ across the framework.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

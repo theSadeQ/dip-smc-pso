@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -585,7 +611,10 @@
 <section id="ascii-header-analysis">
 <h3>ASCII Header Analysis<a class="headerlink" href="#ascii-header-analysis" title="Link to this heading">¶</a></h3>
 <p><strong>Fixed Headers</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#======================================================================================\\\</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1">#======================================================================================\\\</span>
 <span class="c1">#==================== src/optimization/algorithms/pso_optimizer.py ====================\\\</span>
 <span class="c1">#======================================================================================\\\</span>
 </pre></div>
@@ -638,7 +667,10 @@
 <ol class="arabic simple">
 <li><p><strong>ASCII Header Width Correction</strong>:</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#==========================================================================================\\\</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1">#==========================================================================================\\\</span>
 <span class="c1">#=================== src/optimization/algorithms/pso_optimizer.py ===================\\\</span>
 <span class="c1">#==========================================================================================\\\</span>
 </pre></div>
@@ -658,7 +690,10 @@
 <li><p><strong>Parameter Type Hints</strong>: 45/47 (95.7%)</p></li>
 </ul>
 <p><strong>Type System Quality</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✅ Excellent modern type hints</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># ✅ Excellent modern type hints</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_cost_from_traj</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">x_b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u_b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sigma_b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
@@ -687,7 +722,10 @@
 <li><p>✅ <strong>Error Handling</strong>: Documented exceptions and edge cases</p></li>
 </ul>
 <p><strong>Sample High-Quality Docstring</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Compute sliding mode control output for double-inverted pendulum.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;Compute sliding mode control output for double-inverted pendulum.</span>
 
 <span class="sd">Args:</span>
 <span class="sd">    state: 6-element state vector [x, θ1, θ2, ẋ, θ̇1, θ̇2]</span>
@@ -792,7 +830,10 @@
 <section id="import-structure-analysis">
 <h3>Import Structure Analysis<a class="headerlink" href="#import-structure-analysis" title="Link to this heading">¶</a></h3>
 <p><strong>Current Organization</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✅ Excellent grouping and ordering</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># ✅ Excellent grouping and ordering</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="c1"># Standard library imports (alphabetical)</span>
@@ -862,7 +903,10 @@
 <li><p><strong>Mock Testing</strong>: ✅ Isolation and dependency injection</p></li>
 </ul>
 <p><strong>Test Quality Features</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✅ Excellent comprehensive test structure</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># ✅ Excellent comprehensive test structure</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">TestPSOTuner</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_pso_tuner_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimal_config</span><span class="p">,</span> <span class="n">mock_controller_factory</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_deprecated_pso_config_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimal_config</span><span class="p">,</span> <span class="n">mock_controller_factory</span><span class="p">):</span>
@@ -962,7 +1006,10 @@
 <ol class="arabic simple">
 <li><p><strong>ASCII Header Width Correction</strong> ✅ COMPLETED:</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Current (91 chars - INCORRECT):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Current (91 chars - INCORRECT):</span>
 <span class="c1">#==================== src/optimization/algorithms/pso_optimizer.py ====================\\\</span>
 
 <span class="c1"># Corrected (90 chars - CORRECT):</span>
@@ -997,7 +1044,10 @@
 <ol class="arabic simple" start="4">
 <li><p><strong>Import Organization Enhancement</strong>:</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enhanced alphabetical ordering within groups</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Enhanced alphabetical ordering within groups</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
@@ -1067,7 +1117,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

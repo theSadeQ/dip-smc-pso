@@ -271,6 +271,9 @@ $$J_{\text{combined}}(\mathbf{G}) = w_{\text{mean}} \cdot \mathbb{E}_{\boldsymbo
 
 **Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Mathematical implementation in PSO cost function
 def _combine_costs(self, costs: np.ndarray) -> np.ndarray:
     """

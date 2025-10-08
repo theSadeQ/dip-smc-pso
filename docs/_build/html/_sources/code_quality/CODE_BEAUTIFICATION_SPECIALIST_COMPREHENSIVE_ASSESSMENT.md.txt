@@ -77,6 +77,9 @@ D:/Projects/main/
 
 **Header Quality Assessment**:
 ```python
+# example-metadata:
+# runnable: false
+
 #======================================================================================\\\
 #============================= src/controllers/factory.py =============================\\\
 #======================================================================================\\\
@@ -132,6 +135,9 @@ def create_controller(
 
 **Factory Import Structure** (Exemplary):
 ```python
+# example-metadata:
+# runnable: false
+
 # Standard library imports
 import logging
 import threading

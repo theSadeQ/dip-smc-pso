@@ -22,7 +22,7 @@ controllers/index
 
 ## Module Descriptions
 
-### [controllers](controllers/index)
+### [controllers](controllers/index.md)
 
 Sliding mode controllers and factory patterns
 

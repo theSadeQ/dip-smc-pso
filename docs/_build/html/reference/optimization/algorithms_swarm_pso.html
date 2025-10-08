@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,178 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Enhanced Particle Swarm Optimization with framework integration.</p>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="particle-swarm-optimization-pso">
+<h3>Particle Swarm Optimization (PSO)<a class="headerlink" href="#particle-swarm-optimization-pso" title="Link to this heading">¶</a></h3>
+<p><strong>Core PSO equations</strong> for particle <span class="math notranslate nohighlight">\(i\)</span> in dimension <span class="math notranslate nohighlight">\(d\)</span>:</p>
+<p><strong>Velocity update:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[v_{i,d}^{t+1} = w v_{i,d}^t + c_1 r_1 (p_{i,d} - x_{i,d}^t) + c_2 r_2 (g_d - x_{i,d}^t)\]</div>
+</div>
+<p><strong>Position update:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{i,d}^{t+1} = x_{i,d}^t + v_{i,d}^{t+1}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w\)</span>: Inertia weight</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_1, c_2\)</span>: Cognitive and social coefficients</p></li>
+<li><p><span class="math notranslate nohighlight">\(r_1, r_2 \sim U(0,1)\)</span>: Random numbers</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{i,d}\)</span>: Personal best position</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_d\)</span>: Global best position</p></li>
+</ul>
+</section>
+<section id="inertia-weight-strategies">
+<h3>Inertia Weight Strategies<a class="headerlink" href="#inertia-weight-strategies" title="Link to this heading">¶</a></h3>
+<p><strong>Linear decrease:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[w(t) = w_{max} - \frac{w_{max} - w_{min}}{T_{max}} \cdot t\]</div>
+</div>
+<p><strong>Adaptive (Clerc):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[w(t) = w_{min} + (w_{max} - w_{min}) \cdot \frac{f_{avg} - f_i}{f_{max} - f_{avg}}\]</div>
+</div>
+<p><strong>Chaotic:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[w(t) = w_{min} + (w_{max} - w_{min}) \cdot \frac{4 z_t (1 - z_t)}{1}, \quad z_{t+1} = 4 z_t (1 - z_t)\]</div>
+</div>
+</section>
+<section id="constriction-factor">
+<h3>Constriction Factor<a class="headerlink" href="#constriction-factor" title="Link to this heading">¶</a></h3>
+<p><strong>Clerc and Kennedy constriction:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\chi = \frac{2}{\left| 2 - \phi - \sqrt{\phi^2 - 4\phi} \right|}, \quad \phi = c_1 + c_2 &gt; 4\]</div>
+</div>
+<p><strong>Modified velocity update:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[v_{i,d}^{t+1} = \chi \left[ v_{i,d}^t + c_1 r_1 (p_{i,d} - x_{i,d}^t) + c_2 r_2 (g_d - x_{i,d}^t) \right]\]</div>
+</div>
+<p><strong>Ensures convergence</strong> with <span class="math notranslate nohighlight">\(\chi \approx 0.729, \phi = 4.1\)</span>.</p>
+</section>
+<section id="velocity-clamping">
+<h3>Velocity Clamping<a class="headerlink" href="#velocity-clamping" title="Link to this heading">¶</a></h3>
+<p><strong>Component-wise clamping:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}v_{i,d}^{t+1} = \begin{cases}
+v_{max,d}, &amp; v_{i,d}^{t+1} &gt; v_{max,d} \\
+v_{min,d}, &amp; v_{i,d}^{t+1} &lt; v_{min,d} \\
+v_{i,d}^{t+1}, &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+</div>
+<p>Typical: <span class="math notranslate nohighlight">\(v_{max,d} = 0.2(u_d - l_d)\)</span></p>
+</section>
+<section id="boundary-handling">
+<h3>Boundary Handling<a class="headerlink" href="#boundary-handling" title="Link to this heading">¶</a></h3>
+<p><strong>Reflecting boundary:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}x_{i,d}^{t+1} = \begin{cases}
+2l_d - x_{i,d}^{t+1}, &amp; x_{i,d}^{t+1} &lt; l_d \\
+2u_d - x_{i,d}^{t+1}, &amp; x_{i,d}^{t+1} &gt; u_d \\
+x_{i,d}^{t+1}, &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+</div>
+<p><strong>Absorbing boundary:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{i,d}^{t+1} = \max(l_d, \min(u_d, x_{i,d}^{t+1})), \quad v_{i,d}^{t+1} = 0\]</div>
+</div>
+</section>
+<section id="convergence-criteria">
+<h3>Convergence Criteria<a class="headerlink" href="#convergence-criteria" title="Link to this heading">¶</a></h3>
+<p><strong>Diversity-based:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Diversity} = \frac{1}{N} \sum_{i=1}^{N} \|\vec{x}_i - \bar{\vec{x}}\| &lt; \epsilon_d\]</div>
+</div>
+<p><strong>Fitness-based:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[|f(\vec{g}^{t+1}) - f(\vec{g}^t)| &lt; \epsilon_f\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Initialize Swarm] --&gt; B[Evaluate Fitness]
+    B --&gt; C[Update Personal Best]
+    C --&gt; D[Update Global Best]
+    D --&gt; E[Update Velocities]
+
+    E --&gt; F{Velocity Clamping}
+    F --&gt;|Exceed Max| G[Clamp Velocity]
+    F --&gt;|Within Bounds| H[Update Positions]
+    G --&gt; H
+
+    H --&gt; I{Boundary Check}
+    I --&gt;|Out of Bounds| J[Reflect/Absorb]
+    I --&gt;|Within Bounds| K[Convergence Check]
+    J --&gt; K
+
+    K --&gt; L{Converged?}
+    L --&gt;|No| B
+    L --&gt;|Yes| M[Return Best Particle]
+
+    style E fill:#9cf
+    style K fill:#ff9
+    style M fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.core</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-optimization">
+<h3>Example 3: Integration with Optimization<a class="headerlink" href="#example-3-integration-with-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete optimization loop</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">create_optimizer</span><span class="p">(</span><span class="n">opt_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best fitness: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">best_fitness</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -503,7 +701,7 @@
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
 <span class="linenos">  9</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">...core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -1332,7 +1530,7 @@ with advanced features for control engineering applications.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1355,6 +1553,24 @@ with advanced features for control engineering applications.</p>
             <ul>
 <li><a class="reference internal" href="#">optimization.algorithms.swarm.pso</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#particle-swarm-optimization-pso">Particle Swarm Optimization (PSO)</a></li>
+<li><a class="reference internal" href="#inertia-weight-strategies">Inertia Weight Strategies</a></li>
+<li><a class="reference internal" href="#constriction-factor">Constriction Factor</a></li>
+<li><a class="reference internal" href="#velocity-clamping">Velocity Clamping</a></li>
+<li><a class="reference internal" href="#boundary-handling">Boundary Handling</a></li>
+<li><a class="reference internal" href="#convergence-criteria">Convergence Criteria</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-optimization">Example 3: Integration with Optimization</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#particleswarmoptimizer"><code class="docutils literal notranslate"><span class="pre">ParticleSwarmOptimizer</span></code></a><ul>
@@ -1400,6 +1616,10 @@ with advanced features for control engineering applications.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

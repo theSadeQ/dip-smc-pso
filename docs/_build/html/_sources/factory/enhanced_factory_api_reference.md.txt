@@ -25,6 +25,9 @@ This comprehensive API reference documents the enhanced controller factory syste
 The factory maintains a comprehensive registry of all supported controllers:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,
@@ -66,6 +69,9 @@ with _factory_lock:  # RLock with 10-second timeout
 The factory supports multiple aliases for each controller type:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_ALIASES = {
     'classic_smc': 'classical_smc',
     'smc_classical': 'classical_smc',
@@ -103,6 +109,9 @@ Controller instance implementing the `ControllerProtocol`
 #### Examples
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Basic controller creation with explicit gains
 controller = create_controller(
     'classical_smc',
@@ -328,6 +337,9 @@ ensures finite-time convergence to sliding surface.
 
 #### Configuration Parameters
 ```python
+# example-metadata:
+# runnable: false
+
 adaptive_params = {
     'gains': [25.0, 18.0, 15.0, 10.0, 4.0],  # [k1, k2, λ1, λ2, γ]
     'max_force': 150.0,             # Maximum control force [N]
@@ -454,6 +466,9 @@ mpc_params = {
 **PSO-optimized interface for controller parameter tuning:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """Wrapper providing PSO-compatible interface for SMC controllers."""
 
@@ -503,6 +518,9 @@ def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]
 **Controller-Specific Bounds:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 PSO_BOUNDS = {
     SMCType.CLASSICAL: {
         'lower': [1.0, 1.0, 1.0, 1.0, 5.0, 0.1],     # [k1, k2, λ1, λ2, K, kd]
@@ -540,6 +558,9 @@ class ConfigValueError(ValueError):
 **Comprehensive gain validation with controller-specific rules:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_controller_gains(
     gains: List[float],
     controller_info: Dict[str, Any],
@@ -562,6 +583,9 @@ def _validate_controller_gains(
 ### Thread Safety Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Thread-safe factory operations
 _factory_lock = threading.RLock()
 _LOCK_TIMEOUT = 10.0  # seconds

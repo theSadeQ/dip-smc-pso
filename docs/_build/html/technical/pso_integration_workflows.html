@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -569,7 +595,10 @@
 <section id="pso-factory-configuration-psofactoryconfig">
 <h4>2. PSO Factory Configuration (<code class="docutils literal notranslate"><span class="pre">PSOFactoryConfig</span></code>)<a class="headerlink" href="#pso-factory-configuration-psofactoryconfig" title="Link to this heading">¶</a></h4>
 <p>Type-safe configuration for PSO optimization parameters:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">PSOFactoryConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for PSO-Factory integration.&quot;&quot;&quot;</span>
     <span class="n">controller_type</span><span class="p">:</span> <span class="n">ControllerType</span>                    <span class="c1"># Controller to optimize</span>
@@ -640,7 +669,10 @@
 </section>
 <section id="super-twisting-smc-optimization">
 <h4>Super-Twisting SMC Optimization<a class="headerlink" href="#super-twisting-smc-optimization" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize STA-SMC with Issue #2 considerations</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Optimize STA-SMC with Issue #2 considerations</span>
 <span class="n">pso_config</span> <span class="o">=</span> <span class="n">PSOFactoryConfig</span><span class="p">(</span>
     <span class="n">controller_type</span><span class="o">=</span><span class="n">ControllerType</span><span class="o">.</span><span class="n">STA_SMC</span><span class="p">,</span>
     <span class="n">population_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>    <span class="c1"># Larger population for better exploration</span>
@@ -667,7 +699,10 @@
 <section id="one-line-optimization-functions">
 <h3>2. One-Line Optimization Functions<a class="headerlink" href="#one-line-optimization-functions" title="Link to this heading">¶</a></h3>
 <p>For quick optimization, use the convenience functions:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.integration.pso_factory_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.integration.pso_factory_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">optimize_classical_smc</span><span class="p">,</span> <span class="n">optimize_adaptive_smc</span><span class="p">,</span> <span class="n">optimize_sta_smc</span>
 <span class="p">)</span>
 
@@ -700,7 +735,10 @@
 </section>
 <section id="custom-pso-configuration">
 <h3>3. Custom PSO Configuration<a class="headerlink" href="#custom-pso-configuration" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Advanced PSO configuration example</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Advanced PSO configuration example</span>
 <span class="n">custom_pso_config</span> <span class="o">=</span> <span class="n">PSOFactoryConfig</span><span class="p">(</span>
     <span class="n">controller_type</span><span class="o">=</span><span class="n">ControllerType</span><span class="o">.</span><span class="n">ADAPTIVE_SMC</span><span class="p">,</span>
     <span class="n">population_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>              <span class="c1"># Larger swarm for exploration</span>
@@ -745,7 +783,10 @@
 <h2>Advanced PSO Configuration<a class="headerlink" href="#advanced-pso-configuration" title="Link to this heading">¶</a></h2>
 <section id="multi-objective-optimization">
 <h3>1. Multi-Objective Optimization<a class="headerlink" href="#multi-objective-optimization" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure PSO for multi-objective optimization</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Configure PSO for multi-objective optimization</span>
 <span class="n">multi_objective_config</span> <span class="o">=</span> <span class="n">PSOFactoryConfig</span><span class="p">(</span>
     <span class="n">controller_type</span><span class="o">=</span><span class="n">ControllerType</span><span class="o">.</span><span class="n">CLASSICAL_SMC</span><span class="p">,</span>
     <span class="n">population_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>              <span class="c1"># Larger population for Pareto front</span>
@@ -804,7 +845,10 @@
 </section>
 <section id="adaptive-pso-parameters">
 <h3>3. Adaptive PSO Parameters<a class="headerlink" href="#adaptive-pso-parameters" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># PSO with adaptive parameters</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># PSO with adaptive parameters</span>
 <span class="n">adaptive_config</span> <span class="o">=</span> <span class="n">PSOFactoryConfig</span><span class="p">(</span>
     <span class="n">controller_type</span><span class="o">=</span><span class="n">ControllerType</span><span class="o">.</span><span class="n">STA_SMC</span><span class="p">,</span>
     <span class="n">population_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
@@ -838,7 +882,10 @@
 <section id="automatic-test-scenarios">
 <h3>1. Automatic Test Scenarios<a class="headerlink" href="#automatic-test-scenarios" title="Link to this heading">¶</a></h3>
 <p>The enhanced PSO factory evaluates controllers across multiple test scenarios:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Automatic test scenarios (built into enhanced fitness function):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Automatic test scenarios (built into enhanced fitness function):</span>
 <span class="n">test_scenarios</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
         <span class="s1">&#39;initial_state&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>  <span class="c1"># Small disturbance</span>
@@ -865,7 +912,10 @@
 <section id="fitness-function-components">
 <h3>2. Fitness Function Components<a class="headerlink" href="#fitness-function-components" title="Link to this heading">¶</a></h3>
 <p>The enhanced fitness function computes weighted costs:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_evaluate_controller_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_evaluate_controller_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Multi-scenario performance evaluation.&quot;&quot;&quot;</span>
 
     <span class="c1"># For each test scenario:</span>
@@ -886,7 +936,10 @@
 </section>
 <section id="robustness-evaluation">
 <h3>3. Robustness Evaluation<a class="headerlink" href="#robustness-evaluation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure PSO for robustness optimization</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Configure PSO for robustness optimization</span>
 <span class="n">robust_config</span> <span class="o">=</span> <span class="n">PSOFactoryConfig</span><span class="p">(</span>
     <span class="n">controller_type</span><span class="o">=</span><span class="n">ControllerType</span><span class="o">.</span><span class="n">ADAPTIVE_SMC</span><span class="p">,</span>
     <span class="n">population_size</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
@@ -920,7 +973,10 @@
 <h2>Optimization Diagnostics and Monitoring<a class="headerlink" href="#optimization-diagnostics-and-monitoring" title="Link to this heading">¶</a></h2>
 <section id="real-time-monitoring">
 <h3>1. Real-Time Monitoring<a class="headerlink" href="#real-time-monitoring" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.integration.pso_factory_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnhancedPSOFactory</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.integration.pso_factory_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnhancedPSOFactory</span>
 
 <span class="c1"># Create PSO factory with monitoring</span>
 <span class="n">pso_factory</span> <span class="o">=</span> <span class="n">EnhancedPSOFactory</span><span class="p">(</span><span class="n">pso_config</span><span class="p">)</span>
@@ -945,7 +1001,10 @@
 </section>
 <section id="convergence-analysis">
 <h3>2. Convergence Analysis<a class="headerlink" href="#convergence-analysis" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_convergence</span><span class="p">(</span><span class="n">optimization_result</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_convergence</span><span class="p">(</span><span class="n">optimization_result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze PSO convergence characteristics.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">optimization_result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]:</span>
@@ -991,7 +1050,10 @@
 </section>
 <section id="performance-diagnostics">
 <h3>3. Performance Diagnostics<a class="headerlink" href="#performance-diagnostics" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_diagnostics</span><span class="p">(</span><span class="n">pso_factory</span><span class="p">,</span> <span class="n">optimization_result</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_diagnostics</span><span class="p">(</span><span class="n">pso_factory</span><span class="p">,</span> <span class="n">optimization_result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate comprehensive optimization diagnostics.&quot;&quot;&quot;</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Comprehensive PSO Diagnostics ===&quot;</span><span class="p">)</span>
@@ -1145,7 +1207,10 @@
 </section>
 <section id="controller-performance-comparison">
 <h3>2. Controller Performance Comparison<a class="headerlink" href="#controller-performance-comparison" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compare_controller_performance</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_controller_performance</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compare optimized controllers across different types.&quot;&quot;&quot;</span>
 
     <span class="c1"># Optimize all controller types</span>
@@ -1337,7 +1402,10 @@
 </section>
 <section id="batch-optimization-workflow">
 <h3>2. Batch Optimization Workflow<a class="headerlink" href="#batch-optimization-workflow" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">batch_optimization_workflow</span><span class="p">(</span><span class="n">controller_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_optimization_workflow</span><span class="p">(</span><span class="n">controller_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                               <span class="n">optimization_configs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Batch optimization workflow for multiple controllers.&quot;&quot;&quot;</span>
 
@@ -1462,7 +1530,10 @@
 <h2>Integration Examples<a class="headerlink" href="#integration-examples" title="Link to this heading">¶</a></h2>
 <section id="complete-research-workflow">
 <h3>1. Complete Research Workflow<a class="headerlink" href="#complete-research-workflow" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">complete_research_workflow</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_research_workflow</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Complete research workflow demonstrating PSO-factory integration.&quot;&quot;&quot;</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Complete Research Workflow ===&quot;</span><span class="p">)</span>
@@ -1572,7 +1643,10 @@
 </section>
 <section id="real-time-optimization-integration">
 <h3>2. Real-Time Optimization Integration<a class="headerlink" href="#real-time-optimization-integration" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">real_time_optimization_integration</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">real_time_optimization_integration</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate real-time optimization with live feedback.&quot;&quot;&quot;</span>
 
     <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -1689,7 +1763,10 @@
 <h3>1. PSO Configuration Guidelines<a class="headerlink" href="#pso-configuration-guidelines" title="Link to this heading">¶</a></h3>
 <section id="population-size-selection">
 <h4>Population Size Selection<a class="headerlink" href="#population-size-selection" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Guidelines for population size selection:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Guidelines for population size selection:</span>
 <span class="n">population_guidelines</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;small_problems&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;gains_count&#39;</span><span class="p">:</span> <span class="s1">&#39;≤ 4&#39;</span><span class="p">,</span>
@@ -1731,7 +1808,10 @@
 </section>
 <section id="convergence-criteria">
 <h4>Convergence Criteria<a class="headerlink" href="#convergence-criteria" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">configure_convergence_criteria</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="n">ControllerType</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">configure_convergence_criteria</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="n">ControllerType</span><span class="p">,</span>
                                  <span class="n">optimization_goal</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PSOFactoryConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure convergence criteria based on optimization goals.&quot;&quot;&quot;</span>
 
@@ -1774,7 +1854,10 @@
 </section>
 <section id="error-handling-best-practices">
 <h3>2. Error Handling Best Practices<a class="headerlink" href="#error-handling-best-practices" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">robust_pso_optimization</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="n">ControllerType</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">robust_pso_optimization</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="n">ControllerType</span><span class="p">,</span>
                           <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Robust PSO optimization with automatic retry logic.&quot;&quot;&quot;</span>
 
@@ -1895,7 +1978,10 @@
 </section>
 <section id="validation-and-quality-assurance">
 <h3>4. Validation and Quality Assurance<a class="headerlink" href="#validation-and-quality-assurance" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_validation_workflow</span><span class="p">(</span><span class="n">optimization_result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_validation_workflow</span><span class="p">(</span><span class="n">optimization_result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive validation workflow for optimized controllers.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">optimization_result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]:</span>
@@ -2006,7 +2092,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

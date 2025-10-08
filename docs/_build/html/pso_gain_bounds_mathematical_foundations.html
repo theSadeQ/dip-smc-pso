@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -925,7 +951,10 @@ For ζ = 0.7 and maintaining reasonable natural frequency:</p>
 <h2>6. Bounds Validation and Safety Constraints<a class="headerlink" href="#bounds-validation-and-safety-constraints" title="Link to this heading">¶</a></h2>
 <section id="real-time-bounds-checking">
 <h3>6.1 Real-Time Bounds Checking<a class="headerlink" href="#real-time-bounds-checking" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_smc_stability_realtime</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_smc_stability_realtime</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Real-time stability validation for PSO-generated gains.</span>
 
@@ -985,7 +1014,10 @@ For ζ = 0.7 and maintaining reasonable natural frequency:</p>
 <li><p><strong>Control Rate Limits</strong>: Derivative gains prevent excessive chattering</p></li>
 </ol>
 <p><strong>Software Safety Checks:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SafetyBoundsEnforcer</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SafetyBoundsEnforcer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hardware and safety constraint enforcement for PSO optimization.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1030,7 +1062,10 @@ For ζ = 0.7 and maintaining reasonable natural frequency:</p>
 <h3>7.1 Search Space Design for PSO Efficiency<a class="headerlink" href="#search-space-design-for-pso-efficiency" title="Link to this heading">¶</a></h3>
 <p><strong>Logarithmic Scaling for Wide-Range Parameters:</strong>
 For parameters spanning multiple orders of magnitude, use log-space PSO:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_space_pso_bounds</span><span class="p">(</span><span class="n">linear_bounds</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_space_pso_bounds</span><span class="p">(</span><span class="n">linear_bounds</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert linear bounds to log-space for better PSO exploration.</span>
 
@@ -1079,7 +1114,10 @@ For parameters spanning multiple orders of magnitude, use log-space PSO:</p>
 <section id="constraint-handling-in-pso">
 <h3>7.2 Constraint Handling in PSO<a class="headerlink" href="#constraint-handling-in-pso" title="Link to this heading">¶</a></h3>
 <p><strong>Penalty Method for Constraint Violations:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_constraint_penalty</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_constraint_penalty</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute penalty for constraint violations in PSO fitness function.</span>
 
@@ -1158,7 +1196,10 @@ For the sliding surface dynamics ë + 2ζωₙė + ωₙ²e = 0:</p>
 </table>
 </div>
 <p><strong>Mathematical Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">verify_issue2_compliance</span><span class="p">(</span><span class="n">lambda1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">verify_issue2_compliance</span><span class="p">(</span><span class="n">lambda1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Verify Issue #2 overshoot compliance through theoretical analysis.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1196,7 +1237,10 @@ For the sliding surface dynamics ë + 2ζωₙė + ωₙ²e = 0:</p>
 </pre></div>
 </div>
 <p><strong>Constraint Functions for PSO:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">issue2_compliant_constraints</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">issue2_compliant_constraints</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Issue #2 specific constraints for STA-SMC optimization.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1224,7 +1268,10 @@ For the sliding surface dynamics ë + 2ζωₙė + ωₙ²e = 0:</p>
 <h2>9. Computational Implementation and Validation<a class="headerlink" href="#computational-implementation-and-validation" title="Link to this heading">¶</a></h2>
 <section id="efficient-bounds-checking-for-pso">
 <h3>9.1 Efficient Bounds Checking for PSO<a class="headerlink" href="#efficient-bounds-checking-for-pso" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VectorizedBoundsValidator</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">VectorizedBoundsValidator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Optimized bounds validation for PSO swarm evaluation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1424,7 +1471,7 @@ For the sliding surface dynamics ë + 2ζωₙė + ωₙ²e = 0:</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

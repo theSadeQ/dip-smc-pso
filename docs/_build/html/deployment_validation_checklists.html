@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -694,7 +720,10 @@ python<span class="w"> </span>validate_factory_system.py<span class="w"> </span>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Control Saturation</strong>: Signal limiting verified under all conditions</p></li>
 </ul>
 <p><strong>Safety Validation Protocol</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safety_validation_protocol</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">safety_validation_protocol</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute comprehensive safety validation.&quot;&quot;&quot;</span>
     <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;emergency_stop&#39;</span><span class="p">:</span> <span class="n">test_emergency_stop_response</span><span class="p">(),</span>
@@ -862,7 +891,10 @@ pytest<span class="w"> </span>tests/unit/test_basic/<span class="w"> </span>-x<s
 </section>
 <section id="test-environment-validation">
 <h4>Test Environment Validation<a class="headerlink" href="#test-environment-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_test_environment</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_test_environment</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate testing environment setup.&quot;&quot;&quot;</span>
     <span class="n">checks</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;test_data_available&#39;</span><span class="p">:</span> <span class="n">check_test_data_integrity</span><span class="p">(),</span>
@@ -938,7 +970,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 <h3>Controller Integration Validation<a class="headerlink" href="#controller-integration-validation" title="Link to this heading">¶</a></h3>
 <section id="factory-pattern-validation">
 <h4>Factory Pattern Validation<a class="headerlink" href="#factory-pattern-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_controller_factory_integration</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_controller_factory_integration</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test controller factory integration.&quot;&quot;&quot;</span>
     <span class="n">factory</span> <span class="o">=</span> <span class="n">ControllerFactory</span><span class="p">()</span>
 
@@ -964,7 +999,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 </section>
 <section id="pso-integration-validation">
 <h4>PSO Integration Validation<a class="headerlink" href="#pso-integration-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_pso_integration</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_pso_integration</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test PSO optimization integration.&quot;&quot;&quot;</span>
     <span class="n">optimizer</span> <span class="o">=</span> <span class="n">PSOOptimizer</span><span class="p">()</span>
     <span class="n">controller_factory</span> <span class="o">=</span> <span class="n">ControllerFactory</span><span class="p">()</span>
@@ -994,7 +1032,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 <h3>Configuration System Integration<a class="headerlink" href="#configuration-system-integration" title="Link to this heading">¶</a></h3>
 <section id="yaml-configuration-validation">
 <h4>YAML Configuration Validation<a class="headerlink" href="#yaml-configuration-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_configuration_integration</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_configuration_integration</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test configuration system integration.&quot;&quot;&quot;</span>
     <span class="c1"># Test configuration loading</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s1">&#39;config.yaml&#39;</span><span class="p">)</span>
@@ -1017,7 +1058,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 <h3>Monitoring System Integration<a class="headerlink" href="#monitoring-system-integration" title="Link to this heading">¶</a></h3>
 <section id="real-time-monitoring-validation">
 <h4>Real-Time Monitoring Validation<a class="headerlink" href="#real-time-monitoring-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_monitoring_integration</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_monitoring_integration</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test monitoring system integration.&quot;&quot;&quot;</span>
     <span class="n">monitor</span> <span class="o">=</span> <span class="n">SystemMonitor</span><span class="p">()</span>
 
@@ -1107,7 +1151,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 <h3>Reliability Testing Protocol<a class="headerlink" href="#reliability-testing-protocol" title="Link to this heading">¶</a></h3>
 <section id="fault-tolerance-validation">
 <h4>Fault Tolerance Validation<a class="headerlink" href="#fault-tolerance-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_fault_tolerance</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_fault_tolerance</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test system fault tolerance.&quot;&quot;&quot;</span>
     <span class="n">system</span> <span class="o">=</span> <span class="n">ControlSystem</span><span class="p">()</span>
 
@@ -1130,7 +1177,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 </section>
 <section id="load-testing-protocol">
 <h4>Load Testing Protocol<a class="headerlink" href="#load-testing-protocol" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_load_testing</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_load_testing</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute comprehensive load testing.&quot;&quot;&quot;</span>
     <span class="n">load_scenarios</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;normal_load&#39;</span><span class="p">,</span> <span class="s1">&#39;multiplier&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">},</span>
@@ -1185,7 +1235,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 <h3>Safety Validation Protocol<a class="headerlink" href="#safety-validation-protocol" title="Link to this heading">¶</a></h3>
 <section id="safety-critical-component-testing">
 <h4>Safety-Critical Component Testing<a class="headerlink" href="#safety-critical-component-testing" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_safety_testing</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_safety_testing</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute comprehensive safety validation.&quot;&quot;&quot;</span>
     <span class="n">safety_tests</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;emergency_stop&#39;</span><span class="p">:</span> <span class="n">test_emergency_stop_response</span><span class="p">,</span>
@@ -1214,7 +1267,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 </section>
 <section id="hardware-safety-integration">
 <h4>Hardware Safety Integration<a class="headerlink" href="#hardware-safety-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_hardware_safety_integration</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_hardware_safety_integration</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test hardware safety system integration.&quot;&quot;&quot;</span>
     <span class="n">safety_system</span> <span class="o">=</span> <span class="n">HardwareSafetySystem</span><span class="p">()</span>
 
@@ -1243,7 +1299,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 <h3>Smoke Testing Protocol<a class="headerlink" href="#smoke-testing-protocol" title="Link to this heading">¶</a></h3>
 <section id="immediate-post-deployment-tests">
 <h4>Immediate Post-Deployment Tests<a class="headerlink" href="#immediate-post-deployment-tests" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">execute_smoke_tests</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">execute_smoke_tests</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute smoke tests immediately after deployment.&quot;&quot;&quot;</span>
     <span class="n">smoke_tests</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">test_system_startup</span><span class="p">,</span>
@@ -1265,7 +1324,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 </section>
 <section id="health-check-validation">
 <h4>Health Check Validation<a class="headerlink" href="#health-check-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_system_health</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_system_health</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate system health after deployment.&quot;&quot;&quot;</span>
     <span class="n">health_metrics</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;cpu_usage&#39;</span><span class="p">:</span> <span class="n">get_cpu_usage</span><span class="p">(),</span>
@@ -1303,7 +1365,10 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 <h3>Performance Baseline Establishment<a class="headerlink" href="#performance-baseline-establishment" title="Link to this heading">¶</a></h3>
 <section id="baseline-metrics-collection">
 <h4>Baseline Metrics Collection<a class="headerlink" href="#baseline-metrics-collection" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">establish_performance_baselines</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">establish_performance_baselines</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Establish performance baselines for monitoring.&quot;&quot;&quot;</span>
     <span class="n">baseline_tests</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;control_loop_frequency&#39;</span><span class="p">,</span> <span class="n">measure_control_frequency</span><span class="p">),</span>
@@ -1393,7 +1458,10 @@ python<span class="w"> </span>scripts/verify_rollback_success.py
 </section>
 <section id="rollback-validation">
 <h4>Rollback Validation<a class="headerlink" href="#rollback-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_rollback_success</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_rollback_success</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate successful rollback to previous version.&quot;&quot;&quot;</span>
     <span class="c1"># Check system is running</span>
     <span class="k">assert</span> <span class="n">check_system_status</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;running&#39;</span>
@@ -1420,7 +1488,10 @@ python<span class="w"> </span>scripts/verify_rollback_success.py
 <h3>Recovery Procedures<a class="headerlink" href="#recovery-procedures" title="Link to this heading">¶</a></h3>
 <section id="data-recovery-protocol">
 <h4>Data Recovery Protocol<a class="headerlink" href="#data-recovery-protocol" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">execute_data_recovery</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">execute_data_recovery</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute data recovery procedure.&quot;&quot;&quot;</span>
     <span class="n">recovery_steps</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">validate_backup_integrity</span><span class="p">,</span>
@@ -1446,7 +1517,10 @@ python<span class="w"> </span>scripts/verify_rollback_success.py
 </section>
 <section id="service-recovery-protocol">
 <h4>Service Recovery Protocol<a class="headerlink" href="#service-recovery-protocol" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">execute_service_recovery</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">execute_service_recovery</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute service recovery procedure.&quot;&quot;&quot;</span>
     <span class="c1"># Identify failed services</span>
     <span class="n">failed_services</span> <span class="o">=</span> <span class="n">identify_failed_services</span><span class="p">()</span>
@@ -1609,7 +1683,7 @@ python<span class="w"> </span>scripts/verify_rollback_success.py
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

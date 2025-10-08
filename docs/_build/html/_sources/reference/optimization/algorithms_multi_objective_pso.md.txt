@@ -6,6 +6,148 @@
 
 Multi-Objective Particle Swarm Optimization (MOPSO) for Controller Tuning.
 
+
+
+## Advanced Mathematical Theory
+
+### Multi-Objective PSO (MOPSO)
+
+**Multi-objective optimization problem:**
+
+```{math}
+\min_{\vec{x} \in \mathcal{X}} \vec{F}(\vec{x}) = [f_1(\vec{x}), \ldots, f_k(\vec{x})]^T
+```
+
+**Pareto dominance:**
+
+```{math}
+\vec{x} \prec \vec{y} \iff f_i(\vec{x}) \leq f_i(\vec{y}) \, \forall i \land \exists j: f_j(\vec{x}) < f_j(\vec{y})
+```
+
+### Non-Dominated Sorting
+
+**Pareto rank assignment:**
+
+```{math}
+\begin{align}
+\text{Rank}(\vec{x}) &= 1 + |\{\vec{y} : \vec{y} \prec \vec{x}\}| \\
+\mathcal{P}_1 &= \{\vec{x} : \text{Rank}(\vec{x}) = 1\} \\
+\mathcal{P}_i &= \{\vec{x} : \text{Rank}(\vec{x}) = i\}
+\end{align}
+```
+
+**Complexity:** $O(M N^2 k)$ for $M$ objectives, $N$ solutions.
+
+### Archive Maintenance
+
+**Bounded external archive** $\mathcal{A}$ with max size $A_{max}$:
+
+```{math}
+\mathcal{A}^{t+1} = \text{Prune}(\mathcal{A}^t \cup \{\text{non-dominated from iteration } t\}, A_{max})
+```
+
+### Crowding Distance
+
+**Diversity metric** for archive pruning:
+
+```{math}
+CD_i = \sum_{m=1}^{M} \frac{f_m(\vec{x}_{i+1}) - f_m(\vec{x}_{i-1})}{f_m^{max} - f_m^{min}}
+```
+
+**Pruning strategy:** Remove solutions with smallest crowding distance.
+
+### Leader Selection
+
+**Roulette wheel selection** based on crowding distance:
+
+```{math}
+P(\vec{x}_i \text{ selected as leader}) = \frac{CD_i}{\sum_j CD_j}
+```
+
+Favors less crowded regions for better diversity.
+
+### MOPSO Velocity Update
+
+**Modified velocity update** with archive leader:
+
+```{math}
+v_{i,d}^{t+1} = w v_{i,d}^t + c_1 r_1 (p_{i,d} - x_{i,d}^t) + c_2 r_2 (l_d - x_{i,d}^t)
+```
+
+Where $\vec{l}$ is leader selected from archive $\mathcal{A}$.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Initialize Swarm] --> B[Evaluate Objectives]
+    B --> C[Non-Dominated Sorting]
+    C --> D[Update Archive]
+
+    D --> E{Archive Size}
+    E -->|< Max| F[Add All]
+    E -->|> Max| G[Prune by Crowding]
+
+    F --> H[Compute Crowding Distance]
+    G --> H
+
+    H --> I[Select Leaders]
+    I --> J[Update Velocities]
+    J --> K[Update Positions]
+
+    K --> L[Convergence Check]
+    L --> M{Converged?}
+    M -->|No| B
+    M -->|Yes| N[Return Pareto Front]
+
+    style C fill:#9cf
+    style H fill:#ff9
+    style N fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.algorithms import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 This module implements a production-ready multi-objective PSO algorithm specifically
 designed for control system parameter optimization. It provides Pareto front discovery,
 convergence analysis, and advanced optimization features.

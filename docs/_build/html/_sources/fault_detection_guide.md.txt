@@ -366,6 +366,9 @@ plt.show()
 When a fault is detected, implement appropriate safety measures:
 
 ```python
+# example-metadata:
+# runnable: false
+
 if status == "FAULT":
     # Log fault information
     logging.critical(f"FAULT at t={t:.3f}s: residual={residual_norm:.3f}")
@@ -388,6 +391,9 @@ if status == "FAULT":
 ### Controller Reconfiguration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Fault-tolerant control example
 class FaultTolerantController:
     def __init__(self, primary_controller, backup_controller, fdi_system):

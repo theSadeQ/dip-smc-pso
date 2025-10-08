@@ -156,6 +156,9 @@ T_reach ≤ 2(0.1)^0.5 / 25^0.5 ≈ 0.126 seconds
 
 **Factory Pattern:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Enterprise Factory
 controller = create_controller('classical_smc', config, gains=[...])
 

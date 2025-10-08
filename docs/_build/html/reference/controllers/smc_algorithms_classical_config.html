@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.smc.algorithms.classical.controller" href="smc_algorithms_classical_controller.html" /><link rel="prev" title="controllers.smc.algorithms.classical.boundary_layer" href="smc_algorithms_classical_boundary_layer.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -509,207 +535,206 @@ Replaces parameter validation scattered throughout the original 458-line control
 <span class="linenos"> 11</span>
 <span class="linenos"> 12</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Literal</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
-<span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">validator</span>
-<span class="linenos"> 15</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 14</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 15</span>
 <span class="linenos"> 16</span>
-<span class="linenos"> 17</span>
-<span class="linenos"> 18</span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos"> 19</span><span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMCConfig</span><span class="p">:</span>
-<span class="linenos"> 20</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos"> 21</span><span class="sd">    Type-safe configuration for Classical SMC controller.</span>
-<span class="linenos"> 22</span>
-<span class="linenos"> 23</span><span class="sd">    Based on SMC theory requirements:</span>
-<span class="linenos"> 24</span><span class="sd">    - Surface gains [k1, k2, λ1, λ2] must be positive for Hurwitz stability</span>
-<span class="linenos"> 25</span><span class="sd">    - Switching gain K must be positive for reaching condition</span>
-<span class="linenos"> 26</span><span class="sd">    - Derivative gain kd must be non-negative for damping</span>
-<span class="linenos"> 27</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos"> 28</span>
-<span class="linenos"> 29</span>    <span class="c1"># Required parameters (no defaults)</span>
-<span class="linenos"> 30</span>    <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>                           <span class="c1"># [k1, k2, lam1, lam2, K, kd]</span>
-<span class="linenos"> 31</span>    <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>                             <span class="c1"># Control saturation limit</span>
-<span class="linenos"> 32</span>    <span class="n">boundary_layer</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>                        <span class="c1"># Chattering reduction thickness</span>
-<span class="linenos"> 33</span>
-<span class="linenos"> 34</span>    <span class="c1"># Optional parameters (with defaults)</span>
-<span class="linenos"> 35</span>    <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>                       <span class="c1"># Control timestep with default</span>
-<span class="linenos"> 36</span>    <span class="n">boundary_layer_slope</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>      <span class="c1"># Adaptive boundary layer slope</span>
-<span class="linenos"> 37</span>
-<span class="linenos"> 38</span>    <span class="c1"># Switching function</span>
-<span class="linenos"> 39</span>    <span class="n">switch_method</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;sign&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
-<span class="linenos"> 40</span>
-<span class="linenos"> 41</span>    <span class="c1"># Numerical stability parameters (standardized with AdaptiveRegularizer)</span>
-<span class="linenos"> 42</span>    <span class="n">regularization_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>      <span class="c1"># Base regularization scaling factor</span>
-<span class="linenos"> 43</span>    <span class="n">min_regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>       <span class="c1"># Minimum regularization</span>
-<span class="linenos"> 44</span>    <span class="n">max_condition_number</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1e14</span><span class="p">)</span>      <span class="c1"># Maximum acceptable condition number</span>
-<span class="linenos"> 45</span>    <span class="n">use_adaptive_regularization</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Use adaptive vs fixed regularization</span>
-<span class="linenos"> 46</span>    <span class="n">controllability_threshold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># Equivalent control threshold</span>
-<span class="linenos"> 47</span>
-<span class="linenos"> 48</span>    <span class="c1"># Optional dynamics model</span>
-<span class="linenos"> 49</span>    <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compare</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos"> 50</span>
-<span class="linenos"> 51</span>    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="linenos"> 52</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate configuration after creation.&quot;&quot;&quot;</span>
-<span class="linenos"> 53</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_gains</span><span class="p">()</span>
-<span class="linenos"> 54</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">()</span>
-<span class="linenos"> 55</span>
-<span class="linenos"> 56</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos"> 57</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate gain vector according to SMC theory.&quot;&quot;&quot;</span>
-<span class="linenos"> 58</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
-<span class="linenos"> 59</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]&quot;</span><span class="p">)</span>
-<span class="linenos"> 60</span>
-<span class="linenos"> 61</span>        <span class="c1"># Check for NaN or infinite values first</span>
-<span class="linenos"> 62</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">):</span>
-<span class="linenos"> 63</span>            <span class="n">invalid_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">g</span><span class="p">)]</span>
-<span class="linenos"> 64</span>            <span class="n">gain_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;k1&#39;</span><span class="p">,</span> <span class="s1">&#39;k2&#39;</span><span class="p">,</span> <span class="s1">&#39;lam1&#39;</span><span class="p">,</span> <span class="s1">&#39;lam2&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;kd&#39;</span><span class="p">]</span>
-<span class="linenos"> 65</span>            <span class="n">invalid_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">gain_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">invalid_indices</span><span class="p">]</span>
-<span class="linenos"> 66</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gains contain NaN or infinite values: </span><span class="si">{</span><span class="n">invalid_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos"> 67</span>
-<span class="linenos"> 68</span>        <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span>
-<span class="linenos"> 69</span>
-<span class="linenos"> 70</span>        <span class="c1"># Surface gains must be positive for Hurwitz stability</span>
-<span class="linenos"> 71</span>        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">]):</span>
-<span class="linenos"> 72</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains [k1, k2, λ1, λ2] must be positive for stability&quot;</span><span class="p">)</span>
-<span class="linenos"> 73</span>
-<span class="linenos"> 74</span>        <span class="c1"># Check for very small gains that might cause numerical issues</span>
-<span class="linenos"> 75</span>        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;</span> <span class="mf">1e-12</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">]):</span>
-<span class="linenos"> 76</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains are too small (minimum: 1e-12) which may cause numerical instability&quot;</span><span class="p">)</span>
-<span class="linenos"> 77</span>
-<span class="linenos"> 78</span>        <span class="c1"># Check for extremely large gains that might cause numerical issues</span>
-<span class="linenos"> 79</span>        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&gt;</span> <span class="mf">1e5</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">]):</span>
-<span class="linenos"> 80</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains are too large (maximum: 1e5) which may cause numerical instability&quot;</span><span class="p">)</span>
-<span class="linenos"> 81</span>
-<span class="linenos"> 82</span>        <span class="c1"># Switching gain must be positive for reaching condition</span>
-<span class="linenos"> 83</span>        <span class="k">if</span> <span class="n">K</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos"> 84</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Switching gain K must be positive&quot;</span><span class="p">)</span>
-<span class="linenos"> 85</span>        <span class="k">if</span> <span class="n">K</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-<span class="linenos"> 86</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Switching gain K is too small (minimum: 1e-12) which may cause numerical instability&quot;</span><span class="p">)</span>
-<span class="linenos"> 87</span>        <span class="k">if</span> <span class="n">K</span> <span class="o">&gt;</span> <span class="mf">1e5</span><span class="p">:</span>
-<span class="linenos"> 88</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Switching gain K is too large (maximum: 1e5) which may cause numerical instability&quot;</span><span class="p">)</span>
-<span class="linenos"> 89</span>
-<span class="linenos"> 90</span>        <span class="c1"># Derivative gain must be non-negative</span>
-<span class="linenos"> 91</span>        <span class="k">if</span> <span class="n">kd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos"> 92</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Derivative gain kd must be non-negative&quot;</span><span class="p">)</span>
-<span class="linenos"> 93</span>
-<span class="linenos"> 94</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos"> 95</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate other configuration parameters.&quot;&quot;&quot;</span>
-<span class="linenos"> 96</span>        <span class="c1"># Check for NaN/infinite values in critical parameters</span>
-<span class="linenos"> 97</span>        <span class="n">params_to_check</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos"> 98</span>            <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span>
-<span class="linenos"> 99</span>            <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span>
-<span class="linenos">100</span>            <span class="s1">&#39;boundary_layer&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span>
-<span class="linenos">101</span>            <span class="s1">&#39;boundary_layer_slope&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer_slope</span><span class="p">,</span>
-<span class="linenos">102</span>            <span class="s1">&#39;regularization_alpha&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">regularization_alpha</span><span class="p">,</span>
-<span class="linenos">103</span>            <span class="s1">&#39;min_regularization&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_regularization</span><span class="p">,</span>
-<span class="linenos">104</span>            <span class="s1">&#39;max_condition_number&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_condition_number</span>
-<span class="linenos">105</span>        <span class="p">}</span>
-<span class="linenos">106</span>
-<span class="linenos">107</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params_to_check</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">108</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="linenos">109</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parameter &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; contains NaN or infinite value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">110</span>
-<span class="linenos">111</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">112</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;max_force must be positive&quot;</span><span class="p">)</span>
-<span class="linenos">113</span>
-<span class="linenos">114</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">115</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt must be positive&quot;</span><span class="p">)</span>
-<span class="linenos">116</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
-<span class="linenos">117</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt is too small (minimum: 1e-6) which may cause numerical instability&quot;</span><span class="p">)</span>
-<span class="linenos">118</span>
-<span class="linenos">119</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">120</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;boundary_layer must be positive&quot;</span><span class="p">)</span>
-<span class="linenos">121</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-<span class="linenos">122</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;boundary_layer is too small (minimum: 1e-12) which may cause division by zero&quot;</span><span class="p">)</span>
-<span class="linenos">123</span>
-<span class="linenos">124</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer_slope</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">125</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;boundary_layer_slope must be non-negative&quot;</span><span class="p">)</span>
-<span class="linenos">126</span>
-<span class="linenos">127</span>        <span class="c1"># Validate regularization parameters</span>
-<span class="linenos">128</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regularization_alpha</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">129</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;regularization_alpha must be positive&quot;</span><span class="p">)</span>
-<span class="linenos">130</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_regularization</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">131</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;min_regularization must be positive&quot;</span><span class="p">)</span>
-<span class="linenos">132</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_condition_number</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">133</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;max_condition_number must be positive&quot;</span><span class="p">)</span>
-<span class="linenos">134</span>
-<span class="linenos">135</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">136</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span><span class="p">):</span>
-<span class="linenos">137</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;controllability_threshold contains NaN or infinite value&quot;</span><span class="p">)</span>
-<span class="linenos">138</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">139</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;controllability_threshold must be positive when specified&quot;</span><span class="p">)</span>
-<span class="linenos">140</span>
-<span class="linenos">141</span>    <span class="nd">@property</span>
-<span class="linenos">142</span>    <span class="k">def</span><span class="w"> </span><span class="nf">k1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">143</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Joint 1 position gain.&quot;&quot;&quot;</span>
-<span class="linenos">144</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="linenos">145</span>
-<span class="linenos">146</span>    <span class="nd">@property</span>
-<span class="linenos">147</span>    <span class="k">def</span><span class="w"> </span><span class="nf">k2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">148</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Joint 2 position gain.&quot;&quot;&quot;</span>
-<span class="linenos">149</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">150</span>
-<span class="linenos">151</span>    <span class="nd">@property</span>
-<span class="linenos">152</span>    <span class="k">def</span><span class="w"> </span><span class="nf">lam1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">153</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Joint 1 velocity gain (λ₁).&quot;&quot;&quot;</span>
-<span class="linenos">154</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="linenos">155</span>
-<span class="linenos">156</span>    <span class="nd">@property</span>
-<span class="linenos">157</span>    <span class="k">def</span><span class="w"> </span><span class="nf">lam2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">158</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Joint 2 velocity gain (λ₂).&quot;&quot;&quot;</span>
-<span class="linenos">159</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-<span class="linenos">160</span>
-<span class="linenos">161</span>    <span class="nd">@property</span>
-<span class="linenos">162</span>    <span class="k">def</span><span class="w"> </span><span class="nf">K</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">163</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Switching gain.&quot;&quot;&quot;</span>
-<span class="linenos">164</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-<span class="linenos">165</span>
-<span class="linenos">166</span>    <span class="nd">@property</span>
-<span class="linenos">167</span>    <span class="k">def</span><span class="w"> </span><span class="nf">kd</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">168</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Derivative gain.&quot;&quot;&quot;</span>
-<span class="linenos">169</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-<span class="linenos">170</span>
-<span class="linenos">171</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_surface_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">172</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get sliding surface gains [k1, k2, λ1, λ2].&quot;&quot;&quot;</span>
-<span class="linenos">173</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
-<span class="linenos">174</span>
-<span class="linenos">175</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_effective_controllability_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">176</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get effective controllability threshold.&quot;&quot;&quot;</span>
-<span class="linenos">177</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">178</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span>
-<span class="linenos">179</span>        <span class="c1"># Default: scale with surface gains</span>
-<span class="linenos">180</span>        <span class="k">return</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="p">)</span>
-<span class="linenos">181</span>
-<span class="linenos">182</span>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="linenos">183</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert configuration to dictionary.&quot;&quot;&quot;</span>
-<span class="linenos">184</span>        <span class="k">return</span> <span class="p">{</span>
-<span class="linenos">185</span>            <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">),</span>
-<span class="linenos">186</span>            <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span>
-<span class="linenos">187</span>            <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span>
-<span class="linenos">188</span>            <span class="s1">&#39;boundary_layer&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span>
-<span class="linenos">189</span>            <span class="s1">&#39;boundary_layer_slope&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer_slope</span><span class="p">,</span>
-<span class="linenos">190</span>            <span class="s1">&#39;switch_method&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_method</span><span class="p">,</span>
-<span class="linenos">191</span>            <span class="s1">&#39;regularization_alpha&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">regularization_alpha</span><span class="p">,</span>
-<span class="linenos">192</span>            <span class="s1">&#39;min_regularization&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_regularization</span><span class="p">,</span>
-<span class="linenos">193</span>            <span class="s1">&#39;max_condition_number&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_condition_number</span><span class="p">,</span>
-<span class="linenos">194</span>            <span class="s1">&#39;use_adaptive_regularization&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_adaptive_regularization</span><span class="p">,</span>
-<span class="linenos">195</span>            <span class="s1">&#39;controllability_threshold&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span>
-<span class="linenos">196</span>        <span class="p">}</span>
-<span class="linenos">197</span>
-<span class="linenos">198</span>    <span class="nd">@classmethod</span>
-<span class="linenos">199</span>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">dynamics_model</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ClassicalSMCConfig&#39;</span><span class="p">:</span>
-<span class="linenos">200</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create configuration from dictionary.&quot;&quot;&quot;</span>
-<span class="linenos">201</span>        <span class="n">config_dict</span> <span class="o">=</span> <span class="n">config_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="linenos">202</span>        <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;dynamics_model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dynamics_model</span>
-<span class="linenos">203</span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
-<span class="linenos">204</span>
-<span class="linenos">205</span>    <span class="nd">@classmethod</span>
-<span class="linenos">206</span>    <span class="k">def</span><span class="w"> </span><span class="nf">create_default</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span>
-<span class="linenos">207</span>                      <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ClassicalSMCConfig&#39;</span><span class="p">:</span>
-<span class="linenos">208</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create configuration with sensible defaults.&quot;&quot;&quot;</span>
-<span class="linenos">209</span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-<span class="linenos">210</span>            <span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span>
-<span class="linenos">211</span>            <span class="n">max_force</span><span class="o">=</span><span class="n">max_force</span><span class="p">,</span>
-<span class="linenos">212</span>            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
-<span class="linenos">213</span>            <span class="n">boundary_layer</span><span class="o">=</span><span class="n">boundary_layer</span><span class="p">,</span>
-<span class="linenos">214</span>        <span class="p">)</span>
+<span class="linenos"> 17</span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 18</span><span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMCConfig</span><span class="p">:</span>
+<span class="linenos"> 19</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 20</span><span class="sd">    Type-safe configuration for Classical SMC controller.</span>
+<span class="linenos"> 21</span>
+<span class="linenos"> 22</span><span class="sd">    Based on SMC theory requirements:</span>
+<span class="linenos"> 23</span><span class="sd">    - Surface gains [k1, k2, λ1, λ2] must be positive for Hurwitz stability</span>
+<span class="linenos"> 24</span><span class="sd">    - Switching gain K must be positive for reaching condition</span>
+<span class="linenos"> 25</span><span class="sd">    - Derivative gain kd must be non-negative for damping</span>
+<span class="linenos"> 26</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 27</span>
+<span class="linenos"> 28</span>    <span class="c1"># Required parameters (no defaults)</span>
+<span class="linenos"> 29</span>    <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>                           <span class="c1"># [k1, k2, lam1, lam2, K, kd]</span>
+<span class="linenos"> 30</span>    <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>                             <span class="c1"># Control saturation limit</span>
+<span class="linenos"> 31</span>    <span class="n">boundary_layer</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>                        <span class="c1"># Chattering reduction thickness</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span>    <span class="c1"># Optional parameters (with defaults)</span>
+<span class="linenos"> 34</span>    <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>                       <span class="c1"># Control timestep with default</span>
+<span class="linenos"> 35</span>    <span class="n">boundary_layer_slope</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>      <span class="c1"># Adaptive boundary layer slope</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span>    <span class="c1"># Switching function</span>
+<span class="linenos"> 38</span>    <span class="n">switch_method</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;sign&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span>
+<span class="linenos"> 40</span>    <span class="c1"># Numerical stability parameters (standardized with AdaptiveRegularizer)</span>
+<span class="linenos"> 41</span>    <span class="n">regularization_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>      <span class="c1"># Base regularization scaling factor</span>
+<span class="linenos"> 42</span>    <span class="n">min_regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>       <span class="c1"># Minimum regularization</span>
+<span class="linenos"> 43</span>    <span class="n">max_condition_number</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1e14</span><span class="p">)</span>      <span class="c1"># Maximum acceptable condition number</span>
+<span class="linenos"> 44</span>    <span class="n">use_adaptive_regularization</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Use adaptive vs fixed regularization</span>
+<span class="linenos"> 45</span>    <span class="n">controllability_threshold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># Equivalent control threshold</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span>    <span class="c1"># Optional dynamics model</span>
+<span class="linenos"> 48</span>    <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compare</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos"> 49</span>
+<span class="linenos"> 50</span>    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 51</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate configuration after creation.&quot;&quot;&quot;</span>
+<span class="linenos"> 52</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_gains</span><span class="p">()</span>
+<span class="linenos"> 53</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">()</span>
+<span class="linenos"> 54</span>
+<span class="linenos"> 55</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 56</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate gain vector according to SMC theory.&quot;&quot;&quot;</span>
+<span class="linenos"> 57</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+<span class="linenos"> 58</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Classical SMC requires exactly 6 gains: [k1, k2, lam1, lam2, K, kd]&quot;</span><span class="p">)</span>
+<span class="linenos"> 59</span>
+<span class="linenos"> 60</span>        <span class="c1"># Check for NaN or infinite values first</span>
+<span class="linenos"> 61</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">):</span>
+<span class="linenos"> 62</span>            <span class="n">invalid_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">g</span><span class="p">)]</span>
+<span class="linenos"> 63</span>            <span class="n">gain_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;k1&#39;</span><span class="p">,</span> <span class="s1">&#39;k2&#39;</span><span class="p">,</span> <span class="s1">&#39;lam1&#39;</span><span class="p">,</span> <span class="s1">&#39;lam2&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;kd&#39;</span><span class="p">]</span>
+<span class="linenos"> 64</span>            <span class="n">invalid_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">gain_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">invalid_indices</span><span class="p">]</span>
+<span class="linenos"> 65</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gains contain NaN or infinite values: </span><span class="si">{</span><span class="n">invalid_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 66</span>
+<span class="linenos"> 67</span>        <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span>
+<span class="linenos"> 68</span>
+<span class="linenos"> 69</span>        <span class="c1"># Surface gains must be positive for Hurwitz stability</span>
+<span class="linenos"> 70</span>        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">]):</span>
+<span class="linenos"> 71</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains [k1, k2, λ1, λ2] must be positive for stability&quot;</span><span class="p">)</span>
+<span class="linenos"> 72</span>
+<span class="linenos"> 73</span>        <span class="c1"># Check for very small gains that might cause numerical issues</span>
+<span class="linenos"> 74</span>        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;</span> <span class="mf">1e-12</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">]):</span>
+<span class="linenos"> 75</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains are too small (minimum: 1e-12) which may cause numerical instability&quot;</span><span class="p">)</span>
+<span class="linenos"> 76</span>
+<span class="linenos"> 77</span>        <span class="c1"># Check for extremely large gains that might cause numerical issues</span>
+<span class="linenos"> 78</span>        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&gt;</span> <span class="mf">1e5</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">]):</span>
+<span class="linenos"> 79</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains are too large (maximum: 1e5) which may cause numerical instability&quot;</span><span class="p">)</span>
+<span class="linenos"> 80</span>
+<span class="linenos"> 81</span>        <span class="c1"># Switching gain must be positive for reaching condition</span>
+<span class="linenos"> 82</span>        <span class="k">if</span> <span class="n">K</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 83</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Switching gain K must be positive&quot;</span><span class="p">)</span>
+<span class="linenos"> 84</span>        <span class="k">if</span> <span class="n">K</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+<span class="linenos"> 85</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Switching gain K is too small (minimum: 1e-12) which may cause numerical instability&quot;</span><span class="p">)</span>
+<span class="linenos"> 86</span>        <span class="k">if</span> <span class="n">K</span> <span class="o">&gt;</span> <span class="mf">1e5</span><span class="p">:</span>
+<span class="linenos"> 87</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Switching gain K is too large (maximum: 1e5) which may cause numerical instability&quot;</span><span class="p">)</span>
+<span class="linenos"> 88</span>
+<span class="linenos"> 89</span>        <span class="c1"># Derivative gain must be non-negative</span>
+<span class="linenos"> 90</span>        <span class="k">if</span> <span class="n">kd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 91</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Derivative gain kd must be non-negative&quot;</span><span class="p">)</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 94</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate other configuration parameters.&quot;&quot;&quot;</span>
+<span class="linenos"> 95</span>        <span class="c1"># Check for NaN/infinite values in critical parameters</span>
+<span class="linenos"> 96</span>        <span class="n">params_to_check</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 97</span>            <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span>
+<span class="linenos"> 98</span>            <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span>
+<span class="linenos"> 99</span>            <span class="s1">&#39;boundary_layer&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span>
+<span class="linenos">100</span>            <span class="s1">&#39;boundary_layer_slope&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer_slope</span><span class="p">,</span>
+<span class="linenos">101</span>            <span class="s1">&#39;regularization_alpha&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">regularization_alpha</span><span class="p">,</span>
+<span class="linenos">102</span>            <span class="s1">&#39;min_regularization&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_regularization</span><span class="p">,</span>
+<span class="linenos">103</span>            <span class="s1">&#39;max_condition_number&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_condition_number</span>
+<span class="linenos">104</span>        <span class="p">}</span>
+<span class="linenos">105</span>
+<span class="linenos">106</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params_to_check</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">107</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="linenos">108</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parameter &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; contains NaN or infinite value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">109</span>
+<span class="linenos">110</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">111</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;max_force must be positive&quot;</span><span class="p">)</span>
+<span class="linenos">112</span>
+<span class="linenos">113</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">114</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt must be positive&quot;</span><span class="p">)</span>
+<span class="linenos">115</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+<span class="linenos">116</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt is too small (minimum: 1e-6) which may cause numerical instability&quot;</span><span class="p">)</span>
+<span class="linenos">117</span>
+<span class="linenos">118</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">119</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;boundary_layer must be positive&quot;</span><span class="p">)</span>
+<span class="linenos">120</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+<span class="linenos">121</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;boundary_layer is too small (minimum: 1e-12) which may cause division by zero&quot;</span><span class="p">)</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer_slope</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">124</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;boundary_layer_slope must be non-negative&quot;</span><span class="p">)</span>
+<span class="linenos">125</span>
+<span class="linenos">126</span>        <span class="c1"># Validate regularization parameters</span>
+<span class="linenos">127</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regularization_alpha</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">128</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;regularization_alpha must be positive&quot;</span><span class="p">)</span>
+<span class="linenos">129</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_regularization</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">130</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;min_regularization must be positive&quot;</span><span class="p">)</span>
+<span class="linenos">131</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_condition_number</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">132</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;max_condition_number must be positive&quot;</span><span class="p">)</span>
+<span class="linenos">133</span>
+<span class="linenos">134</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">135</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span><span class="p">):</span>
+<span class="linenos">136</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;controllability_threshold contains NaN or infinite value&quot;</span><span class="p">)</span>
+<span class="linenos">137</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">138</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;controllability_threshold must be positive when specified&quot;</span><span class="p">)</span>
+<span class="linenos">139</span>
+<span class="linenos">140</span>    <span class="nd">@property</span>
+<span class="linenos">141</span>    <span class="k">def</span><span class="w"> </span><span class="nf">k1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">142</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Joint 1 position gain.&quot;&quot;&quot;</span>
+<span class="linenos">143</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">144</span>
+<span class="linenos">145</span>    <span class="nd">@property</span>
+<span class="linenos">146</span>    <span class="k">def</span><span class="w"> </span><span class="nf">k2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">147</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Joint 2 position gain.&quot;&quot;&quot;</span>
+<span class="linenos">148</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span>    <span class="nd">@property</span>
+<span class="linenos">151</span>    <span class="k">def</span><span class="w"> </span><span class="nf">lam1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">152</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Joint 1 velocity gain (λ₁).&quot;&quot;&quot;</span>
+<span class="linenos">153</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">154</span>
+<span class="linenos">155</span>    <span class="nd">@property</span>
+<span class="linenos">156</span>    <span class="k">def</span><span class="w"> </span><span class="nf">lam2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">157</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Joint 2 velocity gain (λ₂).&quot;&quot;&quot;</span>
+<span class="linenos">158</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">159</span>
+<span class="linenos">160</span>    <span class="nd">@property</span>
+<span class="linenos">161</span>    <span class="k">def</span><span class="w"> </span><span class="nf">K</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">162</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Switching gain.&quot;&quot;&quot;</span>
+<span class="linenos">163</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos">164</span>
+<span class="linenos">165</span>    <span class="nd">@property</span>
+<span class="linenos">166</span>    <span class="k">def</span><span class="w"> </span><span class="nf">kd</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">167</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Derivative gain.&quot;&quot;&quot;</span>
+<span class="linenos">168</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="linenos">169</span>
+<span class="linenos">170</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_surface_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">171</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get sliding surface gains [k1, k2, λ1, λ2].&quot;&quot;&quot;</span>
+<span class="linenos">172</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos">173</span>
+<span class="linenos">174</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_effective_controllability_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">175</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get effective controllability threshold.&quot;&quot;&quot;</span>
+<span class="linenos">176</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">177</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span>
+<span class="linenos">178</span>        <span class="c1"># Default: scale with surface gains</span>
+<span class="linenos">179</span>        <span class="k">return</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="p">)</span>
+<span class="linenos">180</span>
+<span class="linenos">181</span>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="linenos">182</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert configuration to dictionary.&quot;&quot;&quot;</span>
+<span class="linenos">183</span>        <span class="k">return</span> <span class="p">{</span>
+<span class="linenos">184</span>            <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gains</span><span class="p">),</span>
+<span class="linenos">185</span>            <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span>
+<span class="linenos">186</span>            <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span>
+<span class="linenos">187</span>            <span class="s1">&#39;boundary_layer&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span>
+<span class="linenos">188</span>            <span class="s1">&#39;boundary_layer_slope&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer_slope</span><span class="p">,</span>
+<span class="linenos">189</span>            <span class="s1">&#39;switch_method&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_method</span><span class="p">,</span>
+<span class="linenos">190</span>            <span class="s1">&#39;regularization_alpha&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">regularization_alpha</span><span class="p">,</span>
+<span class="linenos">191</span>            <span class="s1">&#39;min_regularization&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_regularization</span><span class="p">,</span>
+<span class="linenos">192</span>            <span class="s1">&#39;max_condition_number&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_condition_number</span><span class="p">,</span>
+<span class="linenos">193</span>            <span class="s1">&#39;use_adaptive_regularization&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_adaptive_regularization</span><span class="p">,</span>
+<span class="linenos">194</span>            <span class="s1">&#39;controllability_threshold&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span>
+<span class="linenos">195</span>        <span class="p">}</span>
+<span class="linenos">196</span>
+<span class="linenos">197</span>    <span class="nd">@classmethod</span>
+<span class="linenos">198</span>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">dynamics_model</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ClassicalSMCConfig&#39;</span><span class="p">:</span>
+<span class="linenos">199</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create configuration from dictionary.&quot;&quot;&quot;</span>
+<span class="linenos">200</span>        <span class="n">config_dict</span> <span class="o">=</span> <span class="n">config_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">201</span>        <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;dynamics_model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dynamics_model</span>
+<span class="linenos">202</span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
+<span class="linenos">203</span>
+<span class="linenos">204</span>    <span class="nd">@classmethod</span>
+<span class="linenos">205</span>    <span class="k">def</span><span class="w"> </span><span class="nf">create_default</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span>
+<span class="linenos">206</span>                      <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ClassicalSMCConfig&#39;</span><span class="p">:</span>
+<span class="linenos">207</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create configuration with sensible defaults.&quot;&quot;&quot;</span>
+<span class="linenos">208</span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+<span class="linenos">209</span>            <span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span>
+<span class="linenos">210</span>            <span class="n">max_force</span><span class="o">=</span><span class="n">max_force</span><span class="p">,</span>
+<span class="linenos">211</span>            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+<span class="linenos">212</span>            <span class="n">boundary_layer</span><span class="o">=</span><span class="n">boundary_layer</span><span class="p">,</span>
+<span class="linenos">213</span>        <span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -1050,7 +1075,7 @@ Replaces parameter validation scattered throughout the original 458-line control
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

@@ -481,6 +481,9 @@ Bandwidth: Very narrow (0-50 Hz)
 **Classical SMC**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control_classical(state):
     # 1. Sliding surface (6 multiplications, 3 additions)
     sigma = lam1*th1 + lam2*th2 + k1*dth1 + k2*dth2  # ~10 ops
@@ -501,6 +504,9 @@ def compute_control_classical(state):
 **Adaptive SMC**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control_adaptive(state, K_prev):
     # 1. Sliding surface
     sigma = ...  # ~10 ops
@@ -527,6 +533,9 @@ def compute_control_adaptive(state, K_prev):
 **STA SMC**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control_sta(state, u_int_prev):
     # 1. Sliding surface
     sigma = ...  # ~10 ops
@@ -552,6 +561,9 @@ def compute_control_sta(state, u_int_prev):
 **Hybrid Adaptive STA-SMC**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control_hybrid(state, k1_prev, k2_prev, u_int_prev):
     # 1. Sliding surface (with cart recentering)
     sigma = c1*(dth1+lam1*th1) + c2*(dth2+lam2*th2) + kc*(dx+lamc*x)  # ~18 ops

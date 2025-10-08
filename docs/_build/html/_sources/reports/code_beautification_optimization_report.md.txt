@@ -15,6 +15,9 @@ Comprehensive codebase beautification and optimization analysis for the DIP-SMC-
 
 ### ASCII Header Format Validation
 ```python
+# example-metadata:
+# runnable: false
+
 #==========================================================================================\\\
 #============================== src/controllers/factory.py =============================\\\
 #==========================================================================================\\\

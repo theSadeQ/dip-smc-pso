@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -510,24 +536,38 @@
 <p><strong>Mathematical Properties Validated:</strong></p>
 <ol class="arabic">
 <li><p><strong>Linearity Property</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_sliding_surface_linearity</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that sliding surface is linear in state.&quot;&quot;&quot;</span>
-    <span class="n">surface</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-
-    <span class="n">state1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
-    <span class="n">state2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
-
-    <span class="n">s1</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state1</span><span class="p">)</span>
-    <span class="n">s2</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
-    <span class="n">s_combined</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state1</span> <span class="o">+</span> <span class="n">state2</span><span class="p">)</span>
-
-    <span class="c1"># Linearity: s(x1 + x2) = s(x1) + s(x2)</span>
-    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s_combined</span> <span class="o">-</span> <span class="p">(</span><span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-10</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
-<li><p><strong>Homogeneity Property</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_sliding_surface_homogeneity</span><span class="p">():</span>
+</ol>
+</section>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false">
+<h1>runnable: false<a class="headerlink" href="#runnable-false" title="Link to this heading">¶</a></h1>
+<p>def test_sliding_surface_linearity():
+“””Test that sliding surface is linear in state.”””
+surface = LinearSlidingSurface(gains=[5, 3, 4, 2])</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   state1 = np.array([0.1, 0.1, 0.1, 0.05, 0.05, 0.05])
+   state2 = np.array([0.2, 0.2, 0.2, 0.1, 0.1, 0.1])
+
+   s1 = surface.compute(state1)
+   s2 = surface.compute(state2)
+   s_combined = surface.compute(state1 + state2)
+
+   # Linearity: s(x1 + x2) = s(x1) + s(x2)
+   assert abs(s_combined - (s1 + s2)) &lt; 1e-10
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Homogeneity</span> <span class="n">Property</span><span class="o">**</span><span class="p">:</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_sliding_surface_homogeneity</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that sliding surface is homogeneous of degree 1.&quot;&quot;&quot;</span>
     <span class="n">surface</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 
@@ -541,35 +581,48 @@
     <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s_scaled</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">s_original</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span>
 </pre></div>
 </div>
-</li>
+<ol class="arabic" start="3">
 <li><p><strong>Gain Sensitivity</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_sliding_surface_gain_sensitivity</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that surface responds correctly to gain changes.&quot;&quot;&quot;</span>
-    <span class="n">gains1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-    <span class="n">gains2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>  <span class="c1"># Doubled gains</span>
-
-    <span class="n">surface1</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">gains1</span><span class="p">)</span>
-    <span class="n">surface2</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">gains2</span><span class="p">)</span>
-
-    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
-
-    <span class="n">s1</span> <span class="o">=</span> <span class="n">surface1</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="n">s2</span> <span class="o">=</span> <span class="n">surface2</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-    <span class="c1"># Surface value should double with doubled gains</span>
-    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">s1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
 </ol>
 </section>
-<section id="boundary-layer-properties">
-<h4>2.1.2 Boundary Layer Properties<a class="headerlink" href="#boundary-layer-properties" title="Link to this heading">¶</a></h4>
-<p><strong>Test Suite:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_controllers/smc/algorithms/classical/test_boundary_layer.py</span></code></p>
-<p><strong>Mathematical Properties Validated:</strong></p>
-<ol class="arabic">
-<li><p><strong>Continuity</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_boundary_layer_continuity</span><span class="p">():</span>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>example-metadata:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>runnable: false<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+<p>def test_sliding_surface_gain_sensitivity():
+“””Test that surface responds correctly to gain changes.”””
+gains1 = [5, 3, 4, 2]
+gains2 = [10, 6, 8, 4]  # Doubled gains</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   surface1 = LinearSlidingSurface(gains1)
+   surface2 = LinearSlidingSurface(gains2)
+
+   state = np.array([0.1, 0.1, 0.1, 0.05, 0.05, 0.05])
+
+   s1 = surface1.compute(state)
+   s2 = surface2.compute(state)
+
+   # Surface value should double with doubled gains
+   assert abs(s2 - 2 * s1) &lt; 1e-10
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1">#### 2.1.2 Boundary Layer Properties</span>
+
+<span class="o">**</span><span class="n">Test</span> <span class="n">Suite</span><span class="p">:</span><span class="o">**</span> <span class="err">`</span><span class="n">tests</span><span class="o">/</span><span class="n">test_controllers</span><span class="o">/</span><span class="n">smc</span><span class="o">/</span><span class="n">algorithms</span><span class="o">/</span><span class="n">classical</span><span class="o">/</span><span class="n">test_boundary_layer</span><span class="o">.</span><span class="n">py</span><span class="err">`</span>
+
+<span class="o">**</span><span class="n">Mathematical</span> <span class="n">Properties</span> <span class="n">Validated</span><span class="p">:</span><span class="o">**</span>
+
+<span class="mf">1.</span> <span class="o">**</span><span class="n">Continuity</span><span class="o">**</span><span class="p">:</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_boundary_layer_continuity</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that boundary layer provides continuous switching.&quot;&quot;&quot;</span>
     <span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">BoundaryLayer</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">switch_method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
 
@@ -584,7 +637,7 @@
     <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">switch_right</span> <span class="o">-</span> <span class="n">switch_center</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>
 </pre></div>
 </div>
-</li>
+<ol class="arabic" start="2">
 <li><p><strong>Monotonicity</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_boundary_layer_monotonicity</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that switching function is monotonic.&quot;&quot;&quot;</span>
@@ -615,14 +668,15 @@
 </div>
 </li>
 </ol>
-</section>
-</section>
 <section id="configuration-validation-tests">
-<h3>2.2 Configuration Validation Tests<a class="headerlink" href="#configuration-validation-tests" title="Link to this heading">¶</a></h3>
+<h2>2.2 Configuration Validation Tests<a class="headerlink" href="#configuration-validation-tests" title="Link to this heading">¶</a></h2>
 <p><strong>Test Suite:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_controllers/smc/algorithms/classical/test_config_validation.py</span></code></p>
 <section id="parameter-validation">
-<h4>2.2.1 Parameter Validation<a class="headerlink" href="#parameter-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestClassicalSMCConfigValidation</span><span class="p">:</span>
+<h3>2.2.1 Parameter Validation<a class="headerlink" href="#parameter-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestClassicalSMCConfigValidation</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test configuration parameter validation.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_positive_gain_requirement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -664,8 +718,11 @@
 </div>
 </section>
 <section id="stability-analysis-tests">
-<h4>2.2.2 Stability Analysis Tests<a class="headerlink" href="#stability-analysis-tests" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_hurwitz_stability_check</span><span class="p">():</span>
+<h3>2.2.2 Stability Analysis Tests<a class="headerlink" href="#stability-analysis-tests" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_hurwitz_stability_check</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that gain combinations satisfy Hurwitz stability.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">check_stability</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">):</span>
@@ -692,10 +749,13 @@
 </section>
 </section>
 <section id="numerical-accuracy-tests">
-<h3>2.3 Numerical Accuracy Tests<a class="headerlink" href="#numerical-accuracy-tests" title="Link to this heading">¶</a></h3>
+<h2>2.3 Numerical Accuracy Tests<a class="headerlink" href="#numerical-accuracy-tests" title="Link to this heading">¶</a></h2>
 <section id="floating-point-precision">
-<h4>2.3.1 Floating Point Precision<a class="headerlink" href="#floating-point-precision" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestNumericalAccuracy</span><span class="p">:</span>
+<h3>2.3.1 Floating Point Precision<a class="headerlink" href="#floating-point-precision" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestNumericalAccuracy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test numerical accuracy and precision.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_floating_point_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -771,7 +831,7 @@
 </section>
 </section>
 <section id="property-based-testing">
-<h3>2.4 Property-Based Testing<a class="headerlink" href="#property-based-testing" title="Link to this heading">¶</a></h3>
+<h2>2.4 Property-Based Testing<a class="headerlink" href="#property-based-testing" title="Link to this heading">¶</a></h2>
 <p>Using Hypothesis for comprehensive property testing:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">given</span><span class="p">,</span> <span class="n">strategies</span> <span class="k">as</span> <span class="n">st</span>
 
@@ -843,8 +903,11 @@
 </div>
 </section>
 <section id="integration-and-system-level-tests">
-<h3>2.5 Integration and System-Level Tests<a class="headerlink" href="#integration-and-system-level-tests" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestSystemLevelMathematics</span><span class="p">:</span>
+<h2>2.5 Integration and System-Level Tests<a class="headerlink" href="#integration-and-system-level-tests" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestSystemLevelMathematics</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test mathematical consistency across system components.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_control_law_decomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -943,7 +1006,6 @@
 </pre></div>
 </div>
 </section>
-</section>
 <section id="test-organization-and-execution">
 <h2>3. Test Organization and Execution<a class="headerlink" href="#test-organization-and-execution" title="Link to this heading">¶</a></h2>
 <section id="test-hierarchy">
@@ -1014,7 +1076,10 @@ pytest<span class="w"> </span>tests/test_integration/<span class="w"> </span>-k<
 <h2>4. Automated Test Generation<a class="headerlink" href="#automated-test-generation" title="Link to this heading">¶</a></h2>
 <section id="mathematical-property-templates">
 <h3>4.1 Mathematical Property Templates<a class="headerlink" href="#mathematical-property-templates" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_linearity_test</span><span class="p">(</span><span class="n">component_class</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_linearity_test</span><span class="p">(</span><span class="n">component_class</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate linearity test for any mathematical component.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_linearity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1048,7 +1113,10 @@ pytest<span class="w"> </span>tests/test_integration/<span class="w"> </span>-k<
 </section>
 <section id="configuration-test-generation">
 <h3>4.2 Configuration Test Generation<a class="headerlink" href="#configuration-test-generation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_validation_tests</span><span class="p">(</span><span class="n">config_class</span><span class="p">,</span> <span class="n">parameter_specs</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_validation_tests</span><span class="p">(</span><span class="n">config_class</span><span class="p">,</span> <span class="n">parameter_specs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate comprehensive validation tests for configuration classes.&quot;&quot;&quot;</span>
 
     <span class="n">tests</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1089,7 +1157,10 @@ pytest<span class="w"> </span>tests/test_integration/<span class="w"> </span>-k<
 </section>
 <section id="automated-error-reporting">
 <h3>5.2 Automated Error Reporting<a class="headerlink" href="#automated-error-reporting" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MathematicalValidationReporter</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MathematicalValidationReporter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Automated reporting for mathematical validation results.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1161,7 +1232,10 @@ pytest<span class="w"> </span>tests/test_controllers/smc/algorithms/classical/te
 </section>
 <section id="regression-detection">
 <h3>6.2 Regression Detection<a class="headerlink" href="#regression-detection" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MathematicalRegressionDetector</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MathematicalRegressionDetector</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect regressions in mathematical computations.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline_file</span><span class="p">):</span>
@@ -1223,7 +1297,7 @@ pytest<span class="w"> </span>tests/test_controllers/smc/algorithms/classical/te
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1249,9 +1323,16 @@ pytest<span class="w"> </span>tests/test_controllers/smc/algorithms/classical/te
 <li><a class="reference internal" href="#test-categories-and-structure">2. Test Categories and Structure</a><ul>
 <li><a class="reference internal" href="#mathematical-property-tests">2.1 Mathematical Property Tests</a><ul>
 <li><a class="reference internal" href="#sliding-surface-properties">2.1.1 Sliding Surface Properties</a></li>
-<li><a class="reference internal" href="#boundary-layer-properties">2.1.2 Boundary Layer Properties</a></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false">runnable: false</a></li>
+<li><a class="reference internal" href="#id1">example-metadata:</a></li>
+<li><a class="reference internal" href="#id2">runnable: false</a><ul>
 <li><a class="reference internal" href="#configuration-validation-tests">2.2 Configuration Validation Tests</a><ul>
 <li><a class="reference internal" href="#parameter-validation">2.2.1 Parameter Validation</a></li>
 <li><a class="reference internal" href="#stability-analysis-tests">2.2.2 Stability Analysis Tests</a></li>
@@ -1263,8 +1344,6 @@ pytest<span class="w"> </span>tests/test_controllers/smc/algorithms/classical/te
 </li>
 <li><a class="reference internal" href="#property-based-testing">2.4 Property-Based Testing</a></li>
 <li><a class="reference internal" href="#integration-and-system-level-tests">2.5 Integration and System-Level Tests</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#test-organization-and-execution">3. Test Organization and Execution</a><ul>
 <li><a class="reference internal" href="#test-hierarchy">3.1 Test Hierarchy</a></li>
 <li><a class="reference internal" href="#test-execution-strategy">3.2 Test Execution Strategy</a><ul>

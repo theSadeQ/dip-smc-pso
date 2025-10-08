@@ -303,6 +303,9 @@ python scripts/batch_pso_optimization.py \
 #### 2.2 Custom Batch Script
 
 ```python
+# example-metadata:
+# runnable: false
+
 # scripts/custom_batch_optimization.py
 from src.optimizer.pso_optimizer import PSOTuner
 from src.controllers.factory import get_controller_types
@@ -380,6 +383,9 @@ def multi_objective_optimization():
 #### 3.2 Adaptive PSO Parameters
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Adaptive PSO with time-varying parameters
 pso_config = {
     'n_particles': 25,
@@ -483,6 +489,9 @@ if __name__ == "__main__":
 #### 2.1 Monte Carlo Performance Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Statistical validation of controller performance
 from src.utils.statistics import MonteCarloAnalyzer
 
@@ -742,6 +751,9 @@ python scripts/production_validation.py \
 #### 1.2 Safety System Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Validate safety systems
 from src.safety import SafetyValidator
 
@@ -821,6 +833,9 @@ optimization:
 #### 2.2 Production Deployment Script
 
 ```python
+# example-metadata:
+# runnable: false
+
 # scripts/deploy_production.py
 import argparse
 import logging
@@ -1002,6 +1017,9 @@ class HealthMonitoringWorkflow:
 #### 1.1 New Controller Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Template for new controller development
 from src.controllers.base import BaseController
 from typing import Tuple, Dict, Any, List
@@ -1123,6 +1141,9 @@ class TestNewController:
 #### 2.1 End-to-End Integration Tests
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Comprehensive integration testing
 from src.testing import IntegrationTestSuite
 

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -551,7 +577,10 @@
 <section id="header-format-validation">
 <h3>2.1 Header Format Validation<a class="headerlink" href="#header-format-validation" title="Link to this heading">¶</a></h3>
 <p>All PSO modules now comply with the 90-character ASCII header standard:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#==========================================================================================\\\</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1">#==========================================================================================\\\</span>
 <span class="c1">#======================== src/optimization/algorithms/pso_optimizer.py =================\\\</span>
 <span class="c1">#==========================================================================================\\\</span>
 </pre></div>
@@ -741,7 +770,10 @@
 </section>
 <section id="id2">
 <h4>After Optimization<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard library imports (alphabetical)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Standard library imports (alphabetical)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
@@ -862,7 +894,10 @@
 </section>
 <section id="test-quality-metrics">
 <h3>6.3 Test Quality Metrics<a class="headerlink" href="#test-quality-metrics" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example high-quality test with comprehensive coverage</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Example high-quality test with comprehensive coverage</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_pso_tuner_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimal_config</span><span class="p">,</span> <span class="n">mock_controller_factory</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test PSOTuner initialization with comprehensive validation.&quot;&quot;&quot;</span>
     <span class="n">tuner</span> <span class="o">=</span> <span class="n">PSOTuner</span><span class="p">(</span>
@@ -933,26 +968,44 @@
 <h3>8.1 High-Priority Optimizations<a class="headerlink" href="#high-priority-optimizations" title="Link to this heading">¶</a></h3>
 <ol class="arabic">
 <li><p><strong>Function Decomposition</strong> (Legacy PSOTuner):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># BEFORE: High complexity __init__ method (CC=42)</span>
-<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller_factory</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
-    <span class="c1"># 150+ lines of complex initialization</span>
-
-<span class="c1"># RECOMMENDED: Break into focused methods</span>
-<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller_factory</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_validate_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_setup_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_cost_function</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_configure_optimization_parameters</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
-<li><p><strong>Memory Optimization</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reduce copy operations in critical paths</span>
+</ol>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false">
+<h1>runnable: false<a class="headerlink" href="#runnable-false" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="before-high-complexity-init-method-cc-42">
+<h1>BEFORE: High complexity <strong>init</strong> method (CC=42)<a class="headerlink" href="#before-high-complexity-init-method-cc-42" title="Link to this heading">¶</a></h1>
+<p>def <strong>init</strong>(self, controller_factory, config, seed=None, …):
+# 150+ lines of complex initialization</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="recommended-break-into-focused-methods">
+<h1>RECOMMENDED: Break into focused methods<a class="headerlink" href="#recommended-break-into-focused-methods" title="Link to this heading">¶</a></h1>
+<p>def <strong>init</strong>(self, controller_factory, config, seed=None, …):
+self._validate_config(config)
+self._setup_random_state(seed)
+self._initialize_cost_function()
+self._configure_optimization_parameters()</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Memory</span> <span class="n">Optimization</span><span class="o">**</span><span class="p">:</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Reduce copy operations in critical paths</span>
 <span class="c1"># Implement object pooling for frequently allocated arrays</span>
 <span class="c1"># Use in-place operations where possible</span>
 </pre></div>
 </div>
-</li>
+<ol class="arabic" start="3">
 <li><p><strong>Caching Strategy</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cache expensive computations</span>
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
@@ -962,9 +1015,8 @@
 </div>
 </li>
 </ol>
-</section>
 <section id="algorithm-performance">
-<h3>8.2 Algorithm Performance<a class="headerlink" href="#algorithm-performance" title="Link to this heading">¶</a></h3>
+<h2>8.2 Algorithm Performance<a class="headerlink" href="#algorithm-performance" title="Link to this heading">¶</a></h2>
 <p><strong>Numba Optimization Opportunities:</strong></p>
 <ul class="simple">
 <li><p>✅ Identified vectorizable fitness evaluation loops</p></li>
@@ -980,7 +1032,6 @@
     <span class="c1"># Parallelized inner loops for large batch processing</span>
 </pre></div>
 </div>
-</section>
 </section>
 <hr class="docutils" />
 <section id="security-and-validation-enhancement">
@@ -1197,7 +1248,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1272,9 +1323,15 @@
 </li>
 <li><a class="reference internal" href="#performance-optimization-recommendations">8. Performance Optimization Recommendations</a><ul>
 <li><a class="reference internal" href="#high-priority-optimizations">8.1 High-Priority Optimizations</a></li>
-<li><a class="reference internal" href="#algorithm-performance">8.2 Algorithm Performance</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false">runnable: false</a></li>
+<li><a class="reference internal" href="#before-high-complexity-init-method-cc-42">BEFORE: High complexity <strong>init</strong> method (CC=42)</a></li>
+<li><a class="reference internal" href="#recommended-break-into-focused-methods">RECOMMENDED: Break into focused methods</a><ul>
+<li><a class="reference internal" href="#algorithm-performance">8.2 Algorithm Performance</a></li>
 <li><a class="reference internal" href="#security-and-validation-enhancement">9. Security and Validation Enhancement</a><ul>
 <li><a class="reference internal" href="#input-validation-strengthening">9.1 Input Validation Strengthening</a></li>
 <li><a class="reference internal" href="#configuration-security">9.2 Configuration Security</a></li>

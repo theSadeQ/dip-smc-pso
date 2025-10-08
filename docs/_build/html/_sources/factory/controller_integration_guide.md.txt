@@ -30,6 +30,9 @@ This guide provides comprehensive instructions for integrating SMC controllers w
 ### Enhanced Factory Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 class EnterpriseControllerFactory:
     """
     Enterprise-grade controller factory with comprehensive integration support.
@@ -73,6 +76,9 @@ class EnterpriseControllerFactory:
 ### Classical SMC Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def integrate_classical_smc(
     gains: List[float],
     plant_config: Any,
@@ -130,6 +136,9 @@ result = integrate_classical_smc(
 ### Adaptive SMC Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def integrate_adaptive_smc(
     gains: List[float],
     plant_config: Any,
@@ -208,6 +217,9 @@ result = integrate_adaptive_smc(
 ### Super-Twisting SMC Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def integrate_super_twisting_smc(
     gains: List[float],
     plant_config: Any,
@@ -662,6 +674,9 @@ class PSOControllerWrapper:
 ### PSO Factory Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_pso_optimized_controller(
     controller_type: str,
     gains: GainsArray,
@@ -751,6 +766,9 @@ def get_pso_optimization_bounds(controller_type: str) -> Tuple[List[float], List
 ### Comprehensive Integration Test Suite
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerIntegrationValidator:
     """Comprehensive validation of controller-factory-plant integration."""
 

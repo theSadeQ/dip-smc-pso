@@ -95,6 +95,9 @@ Each factory component handles one specific concern:
 
 #### 2. Type Safety and Protocol Design
 ```python
+# example-metadata:
+# runnable: false
+
 from typing import Protocol
 import numpy as np
 
@@ -207,6 +210,9 @@ with mode switching based on performance metrics.
 The factory includes built-in stability validation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def verify_lyapunov_stability(controller_type: SMCType,
                              gains: List[float]) -> bool:
     """
@@ -233,6 +239,9 @@ def verify_lyapunov_stability(controller_type: SMCType,
 ### Core Factory Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SMCFactory:
     """
     Type-safe factory for creating SMC controllers.
@@ -280,6 +289,9 @@ class SMCFactory:
 ### PSO-Optimized Factory Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_smc_for_pso(smc_type: SMCType,
                       gains: List[float],
                       max_force: float = 100.0,
@@ -339,6 +351,9 @@ def create_smc_for_pso(smc_type: SMCType,
 The factory provides mathematically-derived parameter bounds for PSO optimization:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_gain_bounds_for_pso(smc_type: SMCType) -> List[Tuple[float, float]]:
     """
     Get PSO optimization bounds based on control theory.
@@ -536,6 +551,9 @@ def optimize_smc_with_factory(controller_type: str,
 The factory integration includes comprehensive performance evaluation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control_performance_metrics(simulation_result: Dict[str, Any],
                                       objectives: List[str]) -> float:
     """
@@ -665,6 +683,9 @@ class SMCType(Enum):
 
 #### SMCConfig Configuration Class
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SMCConfig:
     """
@@ -703,6 +724,9 @@ class SMCConfig:
 
 #### SMCFactory Main Factory Class
 ```python
+# example-metadata:
+# runnable: false
+
 class SMCFactory:
     """
     Main factory class for creating SMC controllers.
@@ -730,6 +754,9 @@ class SMCFactory:
 
 #### create_smc_for_pso
 ```python
+# example-metadata:
+# runnable: false
+
 def create_smc_for_pso(smc_type: SMCType,
                       gains: List[float],
                       max_force: float = 100.0,
@@ -763,6 +790,9 @@ def create_smc_for_pso(smc_type: SMCType,
 
 #### get_gain_bounds_for_pso
 ```python
+# example-metadata:
+# runnable: false
+
 def get_gain_bounds_for_pso(smc_type: SMCType) -> List[Tuple[float, float]]:
     """
     Get mathematically-derived PSO bounds for controller type.
@@ -788,6 +818,9 @@ def get_gain_bounds_for_pso(smc_type: SMCType) -> List[Tuple[float, float]]:
 
 #### validate_smc_gains
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_smc_gains(smc_type: SMCType, gains: List[float]) -> bool:
     """
     Validate gains against mathematical constraints.
@@ -822,6 +855,9 @@ def validate_smc_gains(smc_type: SMCType, gains: List[float]) -> bool:
 ### PSOControllerWrapper Class
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """
     PSO-optimized wrapper for SMC controllers.
@@ -1276,6 +1312,9 @@ optimized_controller = create_smc_for_pso(
 
 **Before (Legacy)**:
 ```python
+# example-metadata:
+# runnable: false
+
 def fitness_function(gains_array):
     # Manual controller creation with error handling
     try:
@@ -1308,6 +1347,9 @@ def fitness_function(gains_array):
 
 **Before (Legacy)**:
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controllers_from_config(config_dict):
     controllers = {}
     for controller_type, params in config_dict['controllers'].items():
@@ -1370,6 +1412,9 @@ The factory integration includes comprehensive mathematical validation to ensure
 #### Lyapunov Stability Verification
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_lyapunov_stability_conditions():
     """
     Verify that factory-created controllers satisfy Lyapunov stability conditions.
@@ -1456,6 +1501,9 @@ class StabilityResult:
 #### Constraint Satisfaction Verification
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_mathematical_constraints():
     """
     Verify that factory enforces all mathematical constraints correctly.

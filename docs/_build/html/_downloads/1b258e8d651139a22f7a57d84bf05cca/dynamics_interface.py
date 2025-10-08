@@ -10,7 +10,7 @@ across different dynamics implementations (simplified, full, low-rank).
 """
 
 from __future__ import annotations
-from typing import Protocol, Tuple, Optional, Dict, Any, NamedTuple
+from typing import Protocol, Tuple, Dict, Any, NamedTuple
 from abc import ABC, abstractmethod
 from enum import Enum
 import numpy as np
@@ -189,6 +189,16 @@ class BaseDynamicsModel(ABC):
     def get_control_dimension(self) -> int:
         """Get control input dimension (default: 1 for DIP)."""
         return 1
+
+    @property
+    def state_dim(self) -> int:
+        """State vector dimension (property interface for benchmarking compatibility)."""
+        return self.get_state_dimension()
+
+    @property
+    def control_dim(self) -> int:
+        """Control input dimension (property interface for benchmarking compatibility)."""
+        return self.get_control_dimension()
 
     def reset_monitoring(self) -> None:
         """Reset monitoring statistics."""

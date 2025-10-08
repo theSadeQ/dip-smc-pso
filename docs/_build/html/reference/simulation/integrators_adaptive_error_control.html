@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,6 +517,211 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Error control and step size adaptation for adaptive integration.</p>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="adaptive-error-control">
+<h3>Adaptive Error Control<a class="headerlink" href="#adaptive-error-control" title="Link to this heading">¶</a></h3>
+<p>Automatic adjustment of integration step size based on local error estimates.</p>
+</section>
+<section id="error-metrics">
+<h3>Error Metrics<a class="headerlink" href="#error-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Absolute Error:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[e_{\text{abs}} = |y_{\text{exact}}(t_{n+1}) - y_{n+1}|\]</div>
+</div>
+<p><strong>Relative Error:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[e_{\text{rel}} = \frac{|y_{\text{exact}}(t_{n+1}) - y_{n+1}|}{|y_{\text{exact}}(t_{n+1})|}\]</div>
+</div>
+<p><strong>Mixed Error (Scaled):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[e_{\text{scaled}} = \frac{|\hat{y}_{n+1} - y_{n+1}|}{\text{atol} + |y_{n+1}| \cdot \text{rtol}}\]</div>
+</div>
+</section>
+<section id="error-tolerance">
+<h3>Error Tolerance<a class="headerlink" href="#error-tolerance" title="Link to this heading">¶</a></h3>
+<p><strong>Absolute tolerance (<code class="docutils literal notranslate"><span class="pre">atol</span></code>):</strong> Minimum acceptable accuracy
+<strong>Relative tolerance (<code class="docutils literal notranslate"><span class="pre">rtol</span></code>):</strong> Proportional accuracy requirement</p>
+<p><strong>Combined tolerance:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau_i = \text{atol} + |y_i| \cdot \text{rtol}\]</div>
+</div>
+<p><strong>Typical values:</strong></p>
+<ul class="simple">
+<li><p>High accuracy: <code class="docutils literal notranslate"><span class="pre">atol=1e-9</span></code>, <code class="docutils literal notranslate"><span class="pre">rtol=1e-6</span></code></p></li>
+<li><p>Standard: <code class="docutils literal notranslate"><span class="pre">atol=1e-6</span></code>, <code class="docutils literal notranslate"><span class="pre">rtol=1e-3</span></code></p></li>
+<li><p>Low accuracy: <code class="docutils literal notranslate"><span class="pre">atol=1e-3</span></code>, <code class="docutils literal notranslate"><span class="pre">rtol=1e-2</span></code></p></li>
+</ul>
+</section>
+<section id="step-size-selection-strategies">
+<h3>Step Size Selection Strategies<a class="headerlink" href="#step-size-selection-strategies" title="Link to this heading">¶</a></h3>
+<section id="elementary-controller">
+<h4><strong>1. Elementary Controller</strong><a class="headerlink" href="#elementary-controller" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta t_{n+1} = \Delta t_n \cdot \left(\frac{\text{tol}}{\text{err}_n}\right)^{1/p}\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(p\)</span> is the lower order of the embedded pair.</p>
+</section>
+<section id="pi-controller-industry-standard">
+<h4><strong>2. PI Controller (Industry Standard)</strong><a class="headerlink" href="#pi-controller-industry-standard" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta t_{n+1} = \Delta t_n \cdot \left(\frac{\text{tol}}{\text{err}_n}\right)^{k_P} \cdot \left(\frac{\text{err}_{n-1}}{\text{err}_n}\right)^{k_I}\]</div>
+</div>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Smoother step size changes</p></li>
+<li><p>Better rejection handling</p></li>
+<li><p>Reduced oscillations</p></li>
+</ul>
+</section>
+<section id="pid-controller-advanced">
+<h4><strong>3. PID Controller (Advanced)</strong><a class="headerlink" href="#pid-controller-advanced" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta t_{n+1} = \Delta t_n \cdot \left(\frac{\text{tol}}{\text{err}_n}\right)^{k_P} \cdot \left(\frac{\text{err}_{n-1}}{\text{err}_n}\right)^{k_I} \cdot \left(\frac{\text{err}_{n-1}^2}{\text{err}_n \cdot \text{err}_{n-2}}\right)^{k_D}\]</div>
+</div>
+</section>
+</section>
+<section id="safety-mechanisms">
+<h3>Safety Mechanisms<a class="headerlink" href="#safety-mechanisms" title="Link to this heading">¶</a></h3>
+<p><strong>Safety factor:</strong> Prevent aggressive step size changes</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{fac}_{\text{min}} \leq \frac{\Delta t_{n+1}}{\Delta t_n} \leq \text{fac}_{\text{max}}\]</div>
+</div>
+<p>Typical: <span class="math notranslate nohighlight">\(\text{fac}_{\min} = 0.2\)</span>, <span class="math notranslate nohighlight">\(\text{fac}_{\max} = 10.0\)</span></p>
+<p><strong>Step bounds:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta t_{\min} \leq \Delta t_{n+1} \leq \Delta t_{\max}\]</div>
+</div>
+<p><strong>Maximum step rejections:</strong> Prevent infinite loops</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[N_{\text{reject}} &lt; N_{\max} \quad (\text{typically } N_{\max} = 10)\]</div>
+</div>
+</section>
+<section id="stiffness-detection">
+<h3>Stiffness Detection<a class="headerlink" href="#stiffness-detection" title="Link to this heading">¶</a></h3>
+<p><strong>Stiffness ratio:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[S = \frac{|\lambda_{\max}|}{|\lambda_{\min}|}\]</div>
+</div>
+<p><strong>Heuristic stiffness indicator:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Stiff} \Leftrightarrow \frac{\Delta t_{\text{explicit}}}{\Delta t_{\text{implicit}}} &gt; 100\]</div>
+</div>
+</section>
+<section id="error-control-algorithm">
+<h3>Error Control Algorithm<a class="headerlink" href="#error-control-algorithm" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_final</span><span class="p">:</span>
+    <span class="c1"># Attempt integration step</span>
+    <span class="n">y_new</span><span class="p">,</span> <span class="n">y_hat</span> <span class="o">=</span> <span class="n">integrate_step</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+    <span class="c1"># Estimate error</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">norm</span><span class="p">((</span><span class="n">y_new</span> <span class="o">-</span> <span class="n">y_hat</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">atol</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y_new</span><span class="p">)</span> <span class="o">*</span> <span class="n">rtol</span><span class="p">))</span>
+
+    <span class="c1"># Acceptance decision</span>
+    <span class="k">if</span> <span class="n">error</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="c1"># Accept step</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y_new</span>
+
+        <span class="c1"># Increase step size for next step</span>
+        <span class="n">dt_new</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">error</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Reject step</span>
+        <span class="c1"># Decrease step size and retry</span>
+        <span class="n">dt_new</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">error</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="c1"># Apply safety bounds</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">dt_new</span><span class="p">,</span> <span class="n">dt_min</span><span class="p">,</span> <span class="n">dt_max</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-metrics">
+<h3>Performance Metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Efficiency:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\eta = \frac{N_{\text{accepted}}}{N_{\text{accepted}} + N_{\text{rejected}}}\]</div>
+</div>
+<p>Target: <span class="math notranslate nohighlight">\(\eta &gt; 0.9\)</span> (90% acceptance rate)</p>
+<p><strong>Work-Precision Diagram:</strong>
+Plot accuracy vs computational cost for different tolerances.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph LR
+    A[Input] --&gt; B[Integrators Processing]
+    B --&gt; C[Output]
+
+    style B fill:#9cf
+    style C fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegratorsAdaptiveErrorControl</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">IntegratorsAdaptiveErrorControl</span><span class="p">()</span>
+
+<span class="c1"># Execute</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">IntegratorsAdaptiveErrorControl</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-profiling">
+<h3>Example 4: Performance Profiling<a class="headerlink" href="#example-4-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-other-components">
+<h3>Example 5: Integration with Other Components<a class="headerlink" href="#example-5-integration-with-other-components" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine with other simulation components</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -1031,7 +1262,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1054,6 +1285,31 @@
             <ul>
 <li><a class="reference internal" href="#">simulation.integrators.adaptive.error_control</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#adaptive-error-control">Adaptive Error Control</a></li>
+<li><a class="reference internal" href="#error-metrics">Error Metrics</a></li>
+<li><a class="reference internal" href="#error-tolerance">Error Tolerance</a></li>
+<li><a class="reference internal" href="#step-size-selection-strategies">Step Size Selection Strategies</a><ul>
+<li><a class="reference internal" href="#elementary-controller"><strong>1. Elementary Controller</strong></a></li>
+<li><a class="reference internal" href="#pi-controller-industry-standard"><strong>2. PI Controller (Industry Standard)</strong></a></li>
+<li><a class="reference internal" href="#pid-controller-advanced"><strong>3. PID Controller (Advanced)</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#safety-mechanisms">Safety Mechanisms</a></li>
+<li><a class="reference internal" href="#stiffness-detection">Stiffness Detection</a></li>
+<li><a class="reference internal" href="#error-control-algorithm">Error Control Algorithm</a></li>
+<li><a class="reference internal" href="#performance-metrics">Performance Metrics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-profiling">Example 4: Performance Profiling</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-other-components">Example 5: Integration with Other Components</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#errorcontroller"><code class="docutils literal notranslate"><span class="pre">ErrorController</span></code></a><ul>
@@ -1105,6 +1361,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

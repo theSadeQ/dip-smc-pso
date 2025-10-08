@@ -30,6 +30,9 @@
 
 **Registry Structure:**
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,
@@ -112,6 +115,9 @@ hybrid_adaptive_sta_smc: FAILED - 'HybridSMCConfig' object has no attribute 'gai
 
 **Solution 1: Add gains property to HybridSMCConfig**
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class HybridSMCConfig:
     # ... existing fields ...
@@ -264,6 +270,9 @@ controllers:
 
 **Comprehensive Error Handling:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Graceful degradation on controller creation failure
 try:
     controller = controller_class(controller_config)
@@ -285,6 +294,9 @@ except Exception as e:
 
 **Multi-stage Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_controller_gains(gains, controller_info, controller_type):
     # 1. Basic validation
     if len(gains) != expected_count: raise ValueError(...)
@@ -377,6 +389,9 @@ def _validate_controller_gains(gains, controller_info, controller_type):
 
 **Priority 1: Critical Interface Fix**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/smc/algorithms/hybrid/config.py
 @dataclass(frozen=True)
 class HybridSMCConfig:
@@ -395,6 +410,9 @@ class HybridSMCConfig:
 
 **Priority 2: Test Registry Consistency**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/factory.py
 def list_available_controllers() -> list:
     """Get list of available controller types."""

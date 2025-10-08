@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,9 +517,173 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Enhanced fault detection and isolation system.</p>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="enhanced-fdi-system-design">
+<h3>Enhanced FDI System Design<a class="headerlink" href="#enhanced-fdi-system-design" title="Link to this heading">¶</a></h3>
+<p><strong>Multi-method fusion:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Decision} = \text{Fusion}(r_1, r_2, \ldots, r_m)\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(r_i\)</span> from different methods (observer, parity, Kalman).</p>
+</section>
+<section id="detection-methods">
+<h3>Detection Methods<a class="headerlink" href="#detection-methods" title="Link to this heading">¶</a></h3>
+<p><strong>Observer-based:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[r_{obs} = \vec{y} - C\hat{\vec{x}}\]</div>
+</div>
+<p><strong>Parity-based:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}r_{par} = W \begin{bmatrix} \vec{y} \\ \vec{u} \end{bmatrix}\end{split}\]</div>
+</div>
+<p><strong>Kalman filter:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[r_{kf} = \vec{y}_k - C\hat{\vec{x}}_{k|k-1}\]</div>
+</div>
+</section>
+<section id="fault-signature-analysis">
+<h3>Fault Signature Analysis<a class="headerlink" href="#fault-signature-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Normalized residual:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\bar{r}_i = \frac{r_i - \mu_i}{\sigma_i}\]</div>
+</div>
+<p><strong>Chi-square test:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\chi^2 = \sum_{i=1}^n \bar{r}_i^2 \sim \chi^2_n\]</div>
+</div>
+<p>Detect fault if <span class="math notranslate nohighlight">\(\chi^2 &gt; \chi^2_{n, \alpha}\)</span> (critical value).</p>
+</section>
+<section id="directional-residual-evaluation">
+<h3>Directional Residual Evaluation<a class="headerlink" href="#directional-residual-evaluation" title="Link to this heading">¶</a></h3>
+<p><strong>Angle between residuals:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\cos(\theta) = \frac{\vec{r} \cdot \vec{r}_{sig}}{\|\vec{r}\| \|\vec{r}_{sig}\|}\]</div>
+</div>
+<p>Match to known fault signature <span class="math notranslate nohighlight">\(\vec{r}_{sig}\)</span>.</p>
+</section>
+<section id="fusion-strategies">
+<h3>Fusion Strategies<a class="headerlink" href="#fusion-strategies" title="Link to this heading">¶</a></h3>
+<p><strong>Voting:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Fault detected if } \sum_{i=1}^m \mathbb{1}_{|r_i| &gt; \tau_i} \geq k\]</div>
+</div>
+<p><strong>Bayesian fusion:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[P(f | r_1, \ldots, r_m) \propto P(r_1, \ldots, r_m | f) P(f)\]</div>
+</div>
+</section>
+<section id="diagnosis-confidence">
+<h3>Diagnosis Confidence<a class="headerlink" href="#diagnosis-confidence" title="Link to this heading">¶</a></h3>
+<p><strong>Confidence score:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[C = \max_i \frac{|\vec{r} \cdot \vec{r}_{sig,i}|}{\|\vec{r}\| \|\vec{r}_{sig,i}\|}\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Sensor Data] --&gt; B[Multi-Method FDI]
+
+    B --&gt; C[Observer-Based]
+    B --&gt; D[Parity-Based]
+    B --&gt; E[Kalman Filter]
+
+    C --&gt; F[r_obs]
+    D --&gt; G[r_par]
+    E --&gt; H[r_kf]
+
+    F --&gt; I[Fusion Engine]
+    G --&gt; I
+    H --&gt; I
+
+    I --&gt; J{Voting/Bayesian}
+    J --&gt; K[Combined Decision]
+
+    K --&gt; L[Signature Matching]
+    L --&gt; M[Fault Isolation]
+
+    M --&gt; N[Diagnosis]
+    N --&gt; O[Fault Report]
+
+    style I fill:#9cf
+    style J fill:#ff9
+    style O fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span>
+
+<span class="c1"># Initialize component</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure with custom parameters</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;adaptive&#39;</span>
+<span class="p">}</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-workflow">
+<h3>Example 3: Integration Workflow<a class="headerlink" href="#example-3-integration-workflow" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete analysis workflow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">analyze</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">sensor_data</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;enhanced&#39;</span><span class="p">,</span>
+    <span class="n">visualization</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-fault-detection-example">
+<h3>Example 4: Fault Detection Example<a class="headerlink" href="#example-4-fault-detection-example" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># FDI system usage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.fault_detection</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDISystem</span>
+
+<span class="n">fdi</span> <span class="o">=</span> <span class="n">FDISystem</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">generate_residual</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="n">fault</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">residual</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-visualization-example">
+<h3>Example 5: Visualization Example<a class="headerlink" href="#example-5-visualization-example" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate analysis plots</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnalysisPlotter</span>
+
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">AnalysisPlotter</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;professional&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plotter</span><span class="o">.</span><span class="n">plot_time_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;analysis.pdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This module provides a comprehensive fault detection framework that extends
 the basic FDI system with advanced diagnostic capabilities, multiple fault
 detection methods, and statistical analysis.</p>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -510,16 +700,16 @@ detection methods, and statistical analysis.</p>
 <span class="linenos">  11</span>
 <span class="linenos">  12</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  13</span>
-<span class="linenos">  14</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="linenos">  14</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Protocol</span>
 <span class="linenos">  15</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos">  16</span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span><span class="p">,</span> <span class="n">stats</span>
 <span class="linenos">  17</span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="linenos">  18</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="linenos">  19</span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
 <span class="linenos">  20</span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
-<span class="linenos">  21</span>
-<span class="linenos">  22</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaultDetector</span><span class="p">,</span> <span class="n">AnalysisResult</span><span class="p">,</span> <span class="n">AnalysisStatus</span><span class="p">,</span> <span class="n">DataProtocol</span>
-<span class="linenos">  23</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaultDetectionResult</span><span class="p">,</span> <span class="n">StatisticalTestResult</span><span class="p">,</span> <span class="n">ConfidenceInterval</span>
+<span class="linenos">  21</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="linenos">  22</span>
+<span class="linenos">  23</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaultDetector</span><span class="p">,</span> <span class="n">AnalysisResult</span><span class="p">,</span> <span class="n">AnalysisStatus</span><span class="p">,</span> <span class="n">DataProtocol</span>
 <span class="linenos">  24</span>
 <span class="linenos">  25</span>
 <span class="linenos">  26</span><span class="k">class</span><span class="w"> </span><span class="nc">FaultType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -1069,7 +1259,7 @@ detection methods, and statistical analysis.</p>
 <span class="linenos"> 570</span>                <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_value</span><span class="p">),</span>
 <span class="linenos"> 571</span>                <span class="s1">&#39;is_normal&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="linenos"> 572</span>            <span class="p">}</span>
-<span class="linenos"> 573</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos"> 573</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos"> 574</span>            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;is_normal&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;test_statistic&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
 <span class="linenos"> 575</span>
 <span class="linenos"> 576</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_test_stationarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
@@ -1095,7 +1285,7 @@ detection methods, and statistical analysis.</p>
 <span class="linenos"> 596</span>                <span class="s1">&#39;is_stationary&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">),</span>
 <span class="linenos"> 597</span>                <span class="s1">&#39;chunk_variances&#39;</span><span class="p">:</span> <span class="n">variances</span>
 <span class="linenos"> 598</span>            <span class="p">}</span>
-<span class="linenos"> 599</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos"> 599</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos"> 600</span>            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;is_stationary&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}</span>
 <span class="linenos"> 601</span>
 <span class="linenos"> 602</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
@@ -1140,7 +1330,7 @@ detection methods, and statistical analysis.</p>
 <span class="linenos"> 641</span>                <span class="n">_</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">after</span><span class="p">)</span>
 <span class="linenos"> 642</span>                <span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">change_point_sensitivity</span><span class="p">:</span>
 <span class="linenos"> 643</span>                    <span class="n">change_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="linenos"> 644</span>            <span class="k">except</span><span class="p">:</span>
+<span class="linenos"> 644</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos"> 645</span>                <span class="k">continue</span>
 <span class="linenos"> 646</span>
 <span class="linenos"> 647</span>        <span class="k">return</span> <span class="n">change_points</span>
@@ -1539,175 +1729,171 @@ detection methods, and statistical analysis.</p>
 <span class="linenos">1040</span>    <span class="k">return</span> <span class="n">EnhancedFaultDetector</span><span class="p">(</span><span class="n">detection_config</span><span class="p">)</span>
 <span class="linenos">1041</span>
 <span class="linenos">1042</span>
-<span class="linenos">1043</span><span class="c1"># Legacy compatibility: Import the original FDIsystem class</span>
-<span class="linenos">1044</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span> <span class="k">as</span> <span class="n">TypingProtocol</span>
-<span class="linenos">1045</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="linenos">1046</span>
-<span class="linenos">1047</span>
-<span class="linenos">1048</span><span class="k">class</span><span class="w"> </span><span class="nc">DynamicsProtocol</span><span class="p">(</span><span class="n">TypingProtocol</span><span class="p">):</span>
-<span class="linenos">1049</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol defining the expected interface for dynamics models.&quot;&quot;&quot;</span>
-<span class="linenos">1050</span>    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="linenos">1051</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance the system dynamics by one timestep.&quot;&quot;&quot;</span>
-<span class="linenos">1052</span>        <span class="o">...</span>
-<span class="linenos">1053</span>
-<span class="linenos">1054</span>
-<span class="linenos">1055</span><span class="nd">@dataclass</span>
-<span class="linenos">1056</span><span class="k">class</span><span class="w"> </span><span class="nc">FDIsystem</span><span class="p">:</span>
-<span class="linenos">1057</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">1058</span><span class="sd">    Legacy fault detection and isolation system for backward compatibility.</span>
-<span class="linenos">1059</span>
-<span class="linenos">1060</span><span class="sd">    This is the original FDI system that provides basic fault detection</span>
-<span class="linenos">1061</span><span class="sd">    capabilities. For new applications, consider using EnhancedFaultDetector</span>
-<span class="linenos">1062</span><span class="sd">    which provides more advanced features and better integration with the</span>
-<span class="linenos">1063</span><span class="sd">    analysis framework.</span>
-<span class="linenos">1064</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">1065</span>
-<span class="linenos">1066</span>    <span class="n">residual_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="linenos">1067</span>    <span class="n">persistence_counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="linenos">1068</span>    <span class="n">use_ekf_residual</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="linenos">1069</span>    <span class="n">residual_states</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="linenos">1070</span>    <span class="n">residual_weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">1071</span>    <span class="n">adaptive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="linenos">1072</span>    <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="linenos">1073</span>    <span class="n">threshold_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span>
-<span class="linenos">1074</span>    <span class="n">cusum_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="linenos">1075</span>    <span class="n">cusum_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span>
-<span class="linenos">1076</span>
-<span class="linenos">1077</span>    <span class="c1"># Internal state</span>
-<span class="linenos">1078</span>    <span class="n">_counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos">1079</span>    <span class="n">_last_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos">1080</span>    <span class="n">tripped_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos">1081</span>    <span class="c1"># For adaptive thresholding and CUSUM</span>
-<span class="linenos">1082</span>    <span class="n">_residual_window</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos">1083</span>    <span class="n">_cusum</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">1043</span><span class="c1"># Legacy compatibility: Define protocol for dynamics models</span>
+<span class="linenos">1044</span><span class="k">class</span><span class="w"> </span><span class="nc">DynamicsProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="linenos">1045</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol defining the expected interface for dynamics models.&quot;&quot;&quot;</span>
+<span class="linenos">1046</span>    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="linenos">1047</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance the system dynamics by one timestep.&quot;&quot;&quot;</span>
+<span class="linenos">1048</span>        <span class="o">...</span>
+<span class="linenos">1049</span>
+<span class="linenos">1050</span>
+<span class="linenos">1051</span><span class="nd">@dataclass</span>
+<span class="linenos">1052</span><span class="k">class</span><span class="w"> </span><span class="nc">FDIsystem</span><span class="p">:</span>
+<span class="linenos">1053</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">1054</span><span class="sd">    Legacy fault detection and isolation system for backward compatibility.</span>
+<span class="linenos">1055</span>
+<span class="linenos">1056</span><span class="sd">    This is the original FDI system that provides basic fault detection</span>
+<span class="linenos">1057</span><span class="sd">    capabilities. For new applications, consider using EnhancedFaultDetector</span>
+<span class="linenos">1058</span><span class="sd">    which provides more advanced features and better integration with the</span>
+<span class="linenos">1059</span><span class="sd">    analysis framework.</span>
+<span class="linenos">1060</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">1061</span>
+<span class="linenos">1062</span>    <span class="n">residual_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos">1063</span>    <span class="n">persistence_counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="linenos">1064</span>    <span class="n">use_ekf_residual</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">1065</span>    <span class="n">residual_states</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="linenos">1066</span>    <span class="n">residual_weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">1067</span>    <span class="n">adaptive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">1068</span>    <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="linenos">1069</span>    <span class="n">threshold_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="linenos">1070</span>    <span class="n">cusum_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">1071</span>    <span class="n">cusum_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="linenos">1072</span>
+<span class="linenos">1073</span>    <span class="c1"># Internal state</span>
+<span class="linenos">1074</span>    <span class="n">_counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">1075</span>    <span class="n">_last_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">1076</span>    <span class="n">tripped_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">1077</span>    <span class="c1"># For adaptive thresholding and CUSUM</span>
+<span class="linenos">1078</span>    <span class="n">_residual_window</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">1079</span>    <span class="n">_cusum</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">1080</span>
+<span class="linenos">1081</span>    <span class="c1"># History for plotting/analysis</span>
+<span class="linenos">1082</span>    <span class="n">times</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">1083</span>    <span class="n">residuals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">1084</span>
-<span class="linenos">1085</span>    <span class="c1"># History for plotting/analysis</span>
-<span class="linenos">1086</span>    <span class="n">times</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos">1087</span>    <span class="n">residuals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos">1088</span>
-<span class="linenos">1089</span>    <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span>
-<span class="linenos">1090</span>        <span class="bp">self</span><span class="p">,</span>
-<span class="linenos">1091</span>        <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">1092</span>        <span class="n">meas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos">1093</span>        <span class="n">u</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">1094</span>        <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">1095</span>        <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsProtocol</span><span class="p">,</span>
-<span class="linenos">1096</span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">1097</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">1098</span><span class="sd">        Check for a fault at the current time step.</span>
-<span class="linenos">1099</span>
-<span class="linenos">1100</span><span class="sd">        Args:</span>
-<span class="linenos">1101</span><span class="sd">            t: Current simulation time</span>
-<span class="linenos">1102</span><span class="sd">            meas: Current state measurement</span>
-<span class="linenos">1103</span><span class="sd">            u: Control input applied</span>
-<span class="linenos">1104</span><span class="sd">            dt: Time step</span>
-<span class="linenos">1105</span><span class="sd">            dynamics_model: Model with step(state, u, dt) method for prediction</span>
-<span class="linenos">1106</span>
-<span class="linenos">1107</span><span class="sd">        Returns:</span>
-<span class="linenos">1108</span><span class="sd">            Tuple of (status, residual_norm) where status is &quot;OK&quot; or &quot;FAULT&quot;</span>
-<span class="linenos">1109</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">1110</span>        <span class="k">if</span> <span class="n">dt</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-<span class="linenos">1111</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt must be positive for FDI residual computation.&quot;</span><span class="p">)</span>
-<span class="linenos">1112</span>
-<span class="linenos">1113</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tripped_at</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">1114</span>            <span class="k">return</span> <span class="s2">&quot;FAULT&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+<span class="linenos">1085</span>    <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span>
+<span class="linenos">1086</span>        <span class="bp">self</span><span class="p">,</span>
+<span class="linenos">1087</span>        <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">1088</span>        <span class="n">meas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos">1089</span>        <span class="n">u</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">1090</span>        <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">1091</span>        <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsProtocol</span><span class="p">,</span>
+<span class="linenos">1092</span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">1093</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">1094</span><span class="sd">        Check for a fault at the current time step.</span>
+<span class="linenos">1095</span>
+<span class="linenos">1096</span><span class="sd">        Args:</span>
+<span class="linenos">1097</span><span class="sd">            t: Current simulation time</span>
+<span class="linenos">1098</span><span class="sd">            meas: Current state measurement</span>
+<span class="linenos">1099</span><span class="sd">            u: Control input applied</span>
+<span class="linenos">1100</span><span class="sd">            dt: Time step</span>
+<span class="linenos">1101</span><span class="sd">            dynamics_model: Model with step(state, u, dt) method for prediction</span>
+<span class="linenos">1102</span>
+<span class="linenos">1103</span><span class="sd">        Returns:</span>
+<span class="linenos">1104</span><span class="sd">            Tuple of (status, residual_norm) where status is &quot;OK&quot; or &quot;FAULT&quot;</span>
+<span class="linenos">1105</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">1106</span>        <span class="k">if</span> <span class="n">dt</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+<span class="linenos">1107</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt must be positive for FDI residual computation.&quot;</span><span class="p">)</span>
+<span class="linenos">1108</span>
+<span class="linenos">1109</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tripped_at</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">1110</span>            <span class="k">return</span> <span class="s2">&quot;FAULT&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+<span class="linenos">1111</span>
+<span class="linenos">1112</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">1113</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_last_state</span> <span class="o">=</span> <span class="n">meas</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">1114</span>            <span class="k">return</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="mf">0.0</span>
 <span class="linenos">1115</span>
-<span class="linenos">1116</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">1117</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_last_state</span> <span class="o">=</span> <span class="n">meas</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="linenos">1118</span>            <span class="k">return</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="linenos">1116</span>        <span class="c1"># One-step prediction using the dynamics model</span>
+<span class="linenos">1117</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">1118</span>            <span class="n">predicted_state</span> <span class="o">=</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_state</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
 <span class="linenos">1119</span>
-<span class="linenos">1120</span>        <span class="c1"># One-step prediction using the dynamics model</span>
-<span class="linenos">1121</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">1122</span>            <span class="n">predicted_state</span> <span class="o">=</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_state</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-<span class="linenos">1123</span>
-<span class="linenos">1124</span>            <span class="c1"># Check for numerical issues in prediction</span>
-<span class="linenos">1125</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">predicted_state</span><span class="p">)):</span>
-<span class="linenos">1126</span>                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-<span class="linenos">1127</span>                    <span class="sa">f</span><span class="s2">&quot;FDI check at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s: dynamics model returned non-finite values &quot;</span>
-<span class="linenos">1128</span>                    <span class="sa">f</span><span class="s2">&quot;(nan or inf). Skipping residual computation.&quot;</span>
-<span class="linenos">1129</span>                <span class="p">)</span>
-<span class="linenos">1130</span>                <span class="k">return</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="mf">0.0</span>
-<span class="linenos">1131</span>
-<span class="linenos">1132</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">1133</span>            <span class="c1"># If model fails, cannot compute residual; assume OK for now but log it</span>
-<span class="linenos">1134</span>            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-<span class="linenos">1135</span>                <span class="sa">f</span><span class="s2">&quot;FDI check at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s failed: dynamics model step raised &quot;</span>
-<span class="linenos">1136</span>                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">. Skipping residual computation.&quot;</span>
-<span class="linenos">1137</span>            <span class="p">)</span>
-<span class="linenos">1138</span>            <span class="k">return</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="mf">0.0</span>
-<span class="linenos">1139</span>
-<span class="linenos">1140</span>        <span class="c1"># Residual is the difference between prediction and measurement</span>
-<span class="linenos">1141</span>        <span class="n">residual</span> <span class="o">=</span> <span class="n">meas</span> <span class="o">-</span> <span class="n">predicted_state</span>
-<span class="linenos">1142</span>
-<span class="linenos">1143</span>        <span class="c1"># Compute weighted norm using specified indices and optional weights</span>
-<span class="linenos">1144</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">1145</span>            <span class="n">sub</span> <span class="o">=</span> <span class="n">residual</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">residual_states</span><span class="p">]</span>
-<span class="linenos">1146</span>            <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_weights</span>
-<span class="linenos">1147</span>            <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">1148</span>                <span class="n">sub</span> <span class="o">=</span> <span class="n">sub</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="linenos">1149</span>            <span class="n">residual_norm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">sub</span><span class="p">))</span>
-<span class="linenos">1150</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">1151</span>            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
-<span class="linenos">1152</span>                <span class="sa">f</span><span class="s2">&quot;FDI configuration error: residual_states </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">residual_states</span><span class="si">}</span><span class="s2"> or weights invalid &quot;</span>
-<span class="linenos">1153</span>                <span class="sa">f</span><span class="s2">&quot;for state vector of size </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">residual</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="linenos">1154</span>            <span class="p">)</span>
-<span class="linenos">1155</span>            <span class="n">residual_norm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">residual</span><span class="p">))</span>
+<span class="linenos">1120</span>            <span class="c1"># Check for numerical issues in prediction</span>
+<span class="linenos">1121</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">predicted_state</span><span class="p">)):</span>
+<span class="linenos">1122</span>                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+<span class="linenos">1123</span>                    <span class="sa">f</span><span class="s2">&quot;FDI check at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s: dynamics model returned non-finite values &quot;</span>
+<span class="linenos">1124</span>                    <span class="sa">f</span><span class="s2">&quot;(nan or inf). Skipping residual computation.&quot;</span>
+<span class="linenos">1125</span>                <span class="p">)</span>
+<span class="linenos">1126</span>                <span class="k">return</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="linenos">1127</span>
+<span class="linenos">1128</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">1129</span>            <span class="c1"># If model fails, cannot compute residual; assume OK for now but log it</span>
+<span class="linenos">1130</span>            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+<span class="linenos">1131</span>                <span class="sa">f</span><span class="s2">&quot;FDI check at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s failed: dynamics model step raised &quot;</span>
+<span class="linenos">1132</span>                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">. Skipping residual computation.&quot;</span>
+<span class="linenos">1133</span>            <span class="p">)</span>
+<span class="linenos">1134</span>            <span class="k">return</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="linenos">1135</span>
+<span class="linenos">1136</span>        <span class="c1"># Residual is the difference between prediction and measurement</span>
+<span class="linenos">1137</span>        <span class="n">residual</span> <span class="o">=</span> <span class="n">meas</span> <span class="o">-</span> <span class="n">predicted_state</span>
+<span class="linenos">1138</span>
+<span class="linenos">1139</span>        <span class="c1"># Compute weighted norm using specified indices and optional weights</span>
+<span class="linenos">1140</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">1141</span>            <span class="n">sub</span> <span class="o">=</span> <span class="n">residual</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">residual_states</span><span class="p">]</span>
+<span class="linenos">1142</span>            <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_weights</span>
+<span class="linenos">1143</span>            <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">1144</span>                <span class="n">sub</span> <span class="o">=</span> <span class="n">sub</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="linenos">1145</span>            <span class="n">residual_norm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">sub</span><span class="p">))</span>
+<span class="linenos">1146</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">1147</span>            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+<span class="linenos">1148</span>                <span class="sa">f</span><span class="s2">&quot;FDI configuration error: residual_states </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">residual_states</span><span class="si">}</span><span class="s2"> or weights invalid &quot;</span>
+<span class="linenos">1149</span>                <span class="sa">f</span><span class="s2">&quot;for state vector of size </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">residual</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos">1150</span>            <span class="p">)</span>
+<span class="linenos">1151</span>            <span class="n">residual_norm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">residual</span><span class="p">))</span>
+<span class="linenos">1152</span>
+<span class="linenos">1153</span>        <span class="c1"># Store history for analysis</span>
+<span class="linenos">1154</span>        <span class="bp">self</span><span class="o">.</span><span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">1155</span>        <span class="bp">self</span><span class="o">.</span><span class="n">residuals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">residual_norm</span><span class="p">)</span>
 <span class="linenos">1156</span>
-<span class="linenos">1157</span>        <span class="c1"># Store history for analysis</span>
-<span class="linenos">1158</span>        <span class="bp">self</span><span class="o">.</span><span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="linenos">1159</span>        <span class="bp">self</span><span class="o">.</span><span class="n">residuals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">residual_norm</span><span class="p">)</span>
-<span class="linenos">1160</span>
-<span class="linenos">1161</span>        <span class="c1"># Append to residual window for adaptive thresholding</span>
-<span class="linenos">1162</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">residual_norm</span><span class="p">)</span>
-<span class="linenos">1163</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">:</span>
-<span class="linenos">1164</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="linenos">1165</span>
-<span class="linenos">1166</span>        <span class="c1"># Compute adaptive threshold when enabled and enough samples collected</span>
-<span class="linenos">1167</span>        <span class="n">dynamic_threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_threshold</span>
-<span class="linenos">1168</span>        <span class="n">mu</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">1169</span>        <span class="n">sigma</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">1170</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">adaptive</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">:</span>
-<span class="linenos">1171</span>            <span class="n">mu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="p">))</span>
-<span class="linenos">1172</span>            <span class="n">sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="p">))</span>
-<span class="linenos">1173</span>            <span class="k">if</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-<span class="linenos">1174</span>                <span class="n">dynamic_threshold</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold_factor</span> <span class="o">*</span> <span class="n">sigma</span>
-<span class="linenos">1175</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">1176</span>                <span class="n">dynamic_threshold</span> <span class="o">=</span> <span class="n">mu</span>
-<span class="linenos">1177</span>
-<span class="linenos">1178</span>        <span class="c1"># CUSUM drift detection: update cumulative sum of deviations</span>
-<span class="linenos">1179</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cusum_enabled</span><span class="p">:</span>
-<span class="linenos">1180</span>            <span class="n">ref</span> <span class="o">=</span> <span class="n">mu</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adaptive</span> <span class="ow">and</span> <span class="n">mu</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_threshold</span>
-<span class="linenos">1181</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_cusum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cusum</span> <span class="o">+</span> <span class="p">(</span><span class="n">residual_norm</span> <span class="o">-</span> <span class="n">ref</span><span class="p">))</span>
-<span class="linenos">1182</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cusum</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cusum_threshold</span><span class="p">:</span>
-<span class="linenos">1183</span>                <span class="bp">self</span><span class="o">.</span><span class="n">tripped_at</span> <span class="o">=</span> <span class="n">t</span>
-<span class="linenos">1184</span>                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-<span class="linenos">1185</span>                    <span class="sa">f</span><span class="s2">&quot;FDI CUSUM fault detected at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s (cusum=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_cusum</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &gt; threshold=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cusum_threshold</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="linenos">1186</span>                <span class="p">)</span>
-<span class="linenos">1187</span>                <span class="k">return</span> <span class="s2">&quot;FAULT&quot;</span><span class="p">,</span> <span class="n">residual_norm</span>
-<span class="linenos">1188</span>
-<span class="linenos">1189</span>        <span class="c1"># Update persistence counter using dynamic threshold</span>
-<span class="linenos">1190</span>        <span class="k">if</span> <span class="n">residual_norm</span> <span class="o">&gt;</span> <span class="n">dynamic_threshold</span><span class="p">:</span>
-<span class="linenos">1191</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">1192</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">1193</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Reset on any good measurement</span>
-<span class="linenos">1194</span>
-<span class="linenos">1195</span>        <span class="c1"># Check for fault condition based on persistence count</span>
-<span class="linenos">1196</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">persistence_counter</span><span class="p">:</span>
-<span class="linenos">1197</span>            <span class="bp">self</span><span class="o">.</span><span class="n">tripped_at</span> <span class="o">=</span> <span class="n">t</span>
-<span class="linenos">1198</span>            <span class="n">threshold_used</span> <span class="o">=</span> <span class="n">dynamic_threshold</span>
-<span class="linenos">1199</span>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-<span class="linenos">1200</span>                <span class="sa">f</span><span class="s2">&quot;FDI fault detected at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s after </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_counter</span><span class="si">}</span><span class="s2"> consecutive &quot;</span>
-<span class="linenos">1201</span>                <span class="sa">f</span><span class="s2">&quot;violations (residual_norm=</span><span class="si">{</span><span class="n">residual_norm</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &gt; threshold=</span><span class="si">{</span><span class="n">threshold_used</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="linenos">1202</span>            <span class="p">)</span>
-<span class="linenos">1203</span>            <span class="k">return</span> <span class="s2">&quot;FAULT&quot;</span><span class="p">,</span> <span class="n">residual_norm</span>
+<span class="linenos">1157</span>        <span class="c1"># Append to residual window for adaptive thresholding</span>
+<span class="linenos">1158</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">residual_norm</span><span class="p">)</span>
+<span class="linenos">1159</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">:</span>
+<span class="linenos">1160</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">1161</span>
+<span class="linenos">1162</span>        <span class="c1"># Compute adaptive threshold when enabled and enough samples collected</span>
+<span class="linenos">1163</span>        <span class="n">dynamic_threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_threshold</span>
+<span class="linenos">1164</span>        <span class="n">mu</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">1165</span>        <span class="n">sigma</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">1166</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">adaptive</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">:</span>
+<span class="linenos">1167</span>            <span class="n">mu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="p">))</span>
+<span class="linenos">1168</span>            <span class="n">sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_residual_window</span><span class="p">))</span>
+<span class="linenos">1169</span>            <span class="k">if</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+<span class="linenos">1170</span>                <span class="n">dynamic_threshold</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold_factor</span> <span class="o">*</span> <span class="n">sigma</span>
+<span class="linenos">1171</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">1172</span>                <span class="n">dynamic_threshold</span> <span class="o">=</span> <span class="n">mu</span>
+<span class="linenos">1173</span>
+<span class="linenos">1174</span>        <span class="c1"># CUSUM drift detection: update cumulative sum of deviations</span>
+<span class="linenos">1175</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cusum_enabled</span><span class="p">:</span>
+<span class="linenos">1176</span>            <span class="n">ref</span> <span class="o">=</span> <span class="n">mu</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adaptive</span> <span class="ow">and</span> <span class="n">mu</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_threshold</span>
+<span class="linenos">1177</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_cusum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cusum</span> <span class="o">+</span> <span class="p">(</span><span class="n">residual_norm</span> <span class="o">-</span> <span class="n">ref</span><span class="p">))</span>
+<span class="linenos">1178</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cusum</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cusum_threshold</span><span class="p">:</span>
+<span class="linenos">1179</span>                <span class="bp">self</span><span class="o">.</span><span class="n">tripped_at</span> <span class="o">=</span> <span class="n">t</span>
+<span class="linenos">1180</span>                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+<span class="linenos">1181</span>                    <span class="sa">f</span><span class="s2">&quot;FDI CUSUM fault detected at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s (cusum=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_cusum</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &gt; threshold=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cusum_threshold</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="linenos">1182</span>                <span class="p">)</span>
+<span class="linenos">1183</span>                <span class="k">return</span> <span class="s2">&quot;FAULT&quot;</span><span class="p">,</span> <span class="n">residual_norm</span>
+<span class="linenos">1184</span>
+<span class="linenos">1185</span>        <span class="c1"># Update persistence counter using dynamic threshold</span>
+<span class="linenos">1186</span>        <span class="k">if</span> <span class="n">residual_norm</span> <span class="o">&gt;</span> <span class="n">dynamic_threshold</span><span class="p">:</span>
+<span class="linenos">1187</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">1188</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">1189</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Reset on any good measurement</span>
+<span class="linenos">1190</span>
+<span class="linenos">1191</span>        <span class="c1"># Check for fault condition based on persistence count</span>
+<span class="linenos">1192</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">persistence_counter</span><span class="p">:</span>
+<span class="linenos">1193</span>            <span class="bp">self</span><span class="o">.</span><span class="n">tripped_at</span> <span class="o">=</span> <span class="n">t</span>
+<span class="linenos">1194</span>            <span class="n">threshold_used</span> <span class="o">=</span> <span class="n">dynamic_threshold</span>
+<span class="linenos">1195</span>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+<span class="linenos">1196</span>                <span class="sa">f</span><span class="s2">&quot;FDI fault detected at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s after </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_counter</span><span class="si">}</span><span class="s2"> consecutive &quot;</span>
+<span class="linenos">1197</span>                <span class="sa">f</span><span class="s2">&quot;violations (residual_norm=</span><span class="si">{</span><span class="n">residual_norm</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &gt; threshold=</span><span class="si">{</span><span class="n">threshold_used</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="linenos">1198</span>            <span class="p">)</span>
+<span class="linenos">1199</span>            <span class="k">return</span> <span class="s2">&quot;FAULT&quot;</span><span class="p">,</span> <span class="n">residual_norm</span>
+<span class="linenos">1200</span>
+<span class="linenos">1201</span>        <span class="c1"># Update state for next prediction</span>
+<span class="linenos">1202</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_last_state</span> <span class="o">=</span> <span class="n">meas</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">1203</span>        <span class="k">return</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="n">residual_norm</span>
 <span class="linenos">1204</span>
-<span class="linenos">1205</span>        <span class="c1"># Update state for next prediction</span>
-<span class="linenos">1206</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_last_state</span> <span class="o">=</span> <span class="n">meas</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="linenos">1207</span>        <span class="k">return</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="n">residual_norm</span>
-<span class="linenos">1208</span>
-<span class="linenos">1209</span>
-<span class="linenos">1210</span><span class="c1"># Create alias for backward compatibility</span>
-<span class="linenos">1211</span><span class="n">FaultDetectionInterface</span> <span class="o">=</span> <span class="n">FDIsystem</span>
+<span class="linenos">1205</span>
+<span class="linenos">1206</span><span class="c1"># Create alias for backward compatibility</span>
+<span class="linenos">1207</span><span class="n">FaultDetectionInterface</span> <span class="o">=</span> <span class="n">FDIsystem</span>
 </pre></div>
 </div>
 </section>
@@ -2301,7 +2487,7 @@ detection methods, and statistical analysis.</p>
 <span class="linenos">478</span>                <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_value</span><span class="p">),</span>
 <span class="linenos">479</span>                <span class="s1">&#39;is_normal&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="linenos">480</span>            <span class="p">}</span>
-<span class="linenos">481</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">481</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">482</span>            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;is_normal&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;test_statistic&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
 <span class="linenos">483</span>
 <span class="linenos">484</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_test_stationarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
@@ -2327,7 +2513,7 @@ detection methods, and statistical analysis.</p>
 <span class="linenos">504</span>                <span class="s1">&#39;is_stationary&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">),</span>
 <span class="linenos">505</span>                <span class="s1">&#39;chunk_variances&#39;</span><span class="p">:</span> <span class="n">variances</span>
 <span class="linenos">506</span>            <span class="p">}</span>
-<span class="linenos">507</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">507</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">508</span>            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;is_stationary&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}</span>
 <span class="linenos">509</span>
 <span class="linenos">510</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
@@ -2372,7 +2558,7 @@ detection methods, and statistical analysis.</p>
 <span class="linenos">549</span>                <span class="n">_</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">after</span><span class="p">)</span>
 <span class="linenos">550</span>                <span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">change_point_sensitivity</span><span class="p">:</span>
 <span class="linenos">551</span>                    <span class="n">change_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="linenos">552</span>            <span class="k">except</span><span class="p">:</span>
+<span class="linenos">552</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">553</span>                <span class="k">continue</span>
 <span class="linenos">554</span>
 <span class="linenos">555</span>        <span class="k">return</span> <span class="n">change_points</span>
@@ -2937,7 +3123,7 @@ detection methods, and statistical analysis.</p>
 <p>Protocol defining the expected interface for dynamics models.</p>
 <section id="id5">
 <h4>Source Code<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span><span class="w"> </span><span class="nc">DynamicsProtocol</span><span class="p">(</span><span class="n">TypingProtocol</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span><span class="w"> </span><span class="nc">DynamicsProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
 <span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol defining the expected interface for dynamics models.&quot;&quot;&quot;</span>
 <span class="linenos">3</span>    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="linenos">4</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance the system dynamics by one timestep.&quot;&quot;&quot;</span>
@@ -3209,7 +3395,7 @@ Configured enhanced fault detector</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -3232,6 +3418,24 @@ Configured enhanced fault detector</p>
             <ul>
 <li><a class="reference internal" href="#">analysis.fault_detection.fdi_system</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#enhanced-fdi-system-design">Enhanced FDI System Design</a></li>
+<li><a class="reference internal" href="#detection-methods">Detection Methods</a></li>
+<li><a class="reference internal" href="#fault-signature-analysis">Fault Signature Analysis</a></li>
+<li><a class="reference internal" href="#directional-residual-evaluation">Directional Residual Evaluation</a></li>
+<li><a class="reference internal" href="#fusion-strategies">Fusion Strategies</a></li>
+<li><a class="reference internal" href="#diagnosis-confidence">Diagnosis Confidence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-workflow">Example 3: Integration Workflow</a></li>
+<li><a class="reference internal" href="#example-4-fault-detection-example">Example 4: Fault Detection Example</a></li>
+<li><a class="reference internal" href="#example-5-visualization-example">Example 5: Visualization Example</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#faulttype"><code class="docutils literal notranslate"><span class="pre">FaultType</span></code></a><ul>
@@ -3338,6 +3542,10 @@ Configured enhanced fault detector</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

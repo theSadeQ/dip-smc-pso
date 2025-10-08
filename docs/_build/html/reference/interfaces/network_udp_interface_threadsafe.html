@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -535,468 +561,467 @@ vulnerabilities identified in production readiness assessment.</p>
 <span class="linenos"> 27</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Callable</span>
 <span class="linenos"> 28</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="linenos"> 29</span><span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
-<span class="linenos"> 30</span><span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
-<span class="linenos"> 31</span>
-<span class="linenos"> 32</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.protocols</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommunicationProtocol</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">,</span> <span class="n">ConnectionState</span><span class="p">,</span> <span class="n">MessageType</span><span class="p">,</span> <span class="n">Priority</span>
-<span class="linenos"> 33</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.data_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">ConnectionInfo</span><span class="p">,</span> <span class="n">InterfaceConfig</span><span class="p">,</span> <span class="n">InterfaceType</span><span class="p">,</span> <span class="n">TransportType</span>
+<span class="linenos"> 30</span>
+<span class="linenos"> 31</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.protocols</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommunicationProtocol</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">,</span> <span class="n">ConnectionState</span><span class="p">,</span> <span class="n">MessageType</span><span class="p">,</span> <span class="n">Priority</span>
+<span class="linenos"> 32</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.data_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">InterfaceConfig</span>
+<span class="linenos"> 33</span>
 <span class="linenos"> 34</span>
-<span class="linenos"> 35</span>
-<span class="linenos"> 36</span><span class="k">class</span><span class="w"> </span><span class="nc">ThreadSafeUDPInterface</span><span class="p">(</span><span class="n">CommunicationProtocol</span><span class="p">):</span>
-<span class="linenos"> 37</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos"> 38</span><span class="sd">    THREAD-SAFE high-performance UDP communication interface.</span>
-<span class="linenos"> 39</span>
-<span class="linenos"> 40</span><span class="sd">    This version addresses all thread safety issues found in the original:</span>
-<span class="linenos"> 41</span><span class="sd">    - Race conditions in statistics updates</span>
-<span class="linenos"> 42</span><span class="sd">    - Sequence number races</span>
-<span class="linenos"> 43</span><span class="sd">    - Connection state races</span>
-<span class="linenos"> 44</span><span class="sd">    - Message handler races</span>
-<span class="linenos"> 45</span><span class="sd">    - Shared resource contention</span>
-<span class="linenos"> 46</span>
-<span class="linenos"> 47</span><span class="sd">    All operations are now thread-safe and production-ready.</span>
-<span class="linenos"> 48</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos"> 49</span>
-<span class="linenos"> 50</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">InterfaceConfig</span><span class="p">):</span>
-<span class="linenos"> 51</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize thread-safe UDP interface.&quot;&quot;&quot;</span>
-<span class="linenos"> 52</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">config</span>
-<span class="linenos"> 53</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos"> 54</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">DatagramTransport</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos"> 55</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;ThreadSafeUDPProtocol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos"> 56</span>
-<span class="linenos"> 57</span>        <span class="c1"># Thread-safe connection state</span>
-<span class="linenos"> 58</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">DISCONNECTED</span>
-<span class="linenos"> 59</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
-<span class="linenos"> 60</span>
-<span class="linenos"> 61</span>        <span class="c1"># Thread-safe statistics with atomic updates</span>
-<span class="linenos"> 62</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos"> 63</span>            <span class="s1">&#39;messages_sent&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 64</span>            <span class="s1">&#39;messages_received&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 65</span>            <span class="s1">&#39;bytes_sent&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 66</span>            <span class="s1">&#39;bytes_received&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 67</span>            <span class="s1">&#39;crc_errors&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 68</span>            <span class="s1">&#39;sequence_errors&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 69</span>            <span class="s1">&#39;timeouts&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 70</span>            <span class="s1">&#39;last_activity&#39;</span><span class="p">:</span> <span class="mf">0.0</span>
-<span class="linenos"> 71</span>        <span class="p">}</span>
-<span class="linenos"> 72</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
-<span class="linenos"> 73</span>
-<span class="linenos"> 74</span>        <span class="c1"># Thread-safe sequence management</span>
-<span class="linenos"> 75</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos"> 76</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos"> 77</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
-<span class="linenos"> 78</span>
-<span class="linenos"> 79</span>        <span class="c1"># Configuration</span>
-<span class="linenos"> 80</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_use_crc</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_setting</span><span class="p">(</span><span class="s1">&#39;use_crc&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="linenos"> 81</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_use_sequence</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_setting</span><span class="p">(</span><span class="s1">&#39;use_sequence&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="linenos"> 82</span>
-<span class="linenos"> 83</span>        <span class="c1"># Thread-safe message handlers</span>
-<span class="linenos"> 84</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">MessageType</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos"> 85</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_handlers_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
-<span class="linenos"> 86</span>
-<span class="linenos"> 87</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;threadsafe_udp_</span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos"> 88</span>
-<span class="linenos"> 89</span>        <span class="c1"># Thread pool for synchronous operations</span>
-<span class="linenos"> 90</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_thread_pool</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">thread_name_prefix</span><span class="o">=</span><span class="s2">&quot;udp_worker&quot;</span><span class="p">)</span>
-<span class="linenos"> 91</span>
-<span class="linenos"> 92</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="linenos"> 93</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Establish UDP connection with thread safety.&quot;&quot;&quot;</span>
-<span class="linenos"> 94</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
-<span class="linenos"> 95</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">==</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">CONNECTED</span><span class="p">:</span>
-<span class="linenos"> 96</span>                <span class="k">return</span> <span class="kc">True</span>
-<span class="linenos"> 97</span>
-<span class="linenos"> 98</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos"> 99</span>            <span class="n">host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_endpoint</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">endpoint</span><span class="p">))</span>
-<span class="linenos">100</span>            <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
-<span class="linenos">101</span>
-<span class="linenos">102</span>            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;server_mode&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<span class="linenos">103</span>                <span class="c1"># Server mode</span>
-<span class="linenos">104</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span> <span class="o">=</span> <span class="n">ThreadSafeUDPProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="linenos">105</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_datagram_endpoint</span><span class="p">(</span>
-<span class="linenos">106</span>                    <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="p">,</span>
-<span class="linenos">107</span>                    <span class="n">local_addr</span><span class="o">=</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
-<span class="linenos">108</span>                <span class="p">)</span>
-<span class="linenos">109</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thread-safe UDP server listening on </span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">110</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">111</span>                <span class="c1"># Client mode</span>
-<span class="linenos">112</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span> <span class="o">=</span> <span class="n">ThreadSafeUDPProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="linenos">113</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_datagram_endpoint</span><span class="p">(</span>
-<span class="linenos">114</span>                    <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="p">,</span>
-<span class="linenos">115</span>                    <span class="n">remote_addr</span><span class="o">=</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
-<span class="linenos">116</span>                <span class="p">)</span>
-<span class="linenos">117</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thread-safe UDP client connected to </span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">118</span>
-<span class="linenos">119</span>            <span class="c1"># Thread-safe state update</span>
-<span class="linenos">120</span>            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
-<span class="linenos">121</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">CONNECTED</span>
-<span class="linenos">122</span>
-<span class="linenos">123</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_activity_time</span><span class="p">()</span>
-<span class="linenos">124</span>            <span class="k">return</span> <span class="kc">True</span>
-<span class="linenos">125</span>
-<span class="linenos">126</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">127</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish UDP connection: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">128</span>            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
-<span class="linenos">129</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">ERROR</span>
-<span class="linenos">130</span>            <span class="k">return</span> <span class="kc">False</span>
-<span class="linenos">131</span>
-<span class="linenos">132</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="linenos">133</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Close UDP connection with thread safety.&quot;&quot;&quot;</span>
-<span class="linenos">134</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">135</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span>
-<span class="linenos">136</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="linenos">137</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">138</span>
-<span class="linenos">139</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">140</span>
-<span class="linenos">141</span>            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
-<span class="linenos">142</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">DISCONNECTED</span>
-<span class="linenos">143</span>
-<span class="linenos">144</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Thread-safe UDP connection closed&quot;</span><span class="p">)</span>
-<span class="linenos">145</span>            <span class="k">return</span> <span class="kc">True</span>
-<span class="linenos">146</span>
-<span class="linenos">147</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">148</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error closing UDP connection: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">149</span>            <span class="k">return</span> <span class="kc">False</span>
-<span class="linenos">150</span>
-<span class="linenos">151</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MessageMetadata</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="linenos">152</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Send data via UDP with thread safety.&quot;&quot;&quot;</span>
-<span class="linenos">153</span>        <span class="c1"># Check connection state safely</span>
-<span class="linenos">154</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
-<span class="linenos">155</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">!=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">CONNECTED</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span>
-<span class="linenos">156</span>                <span class="k">return</span> <span class="kc">False</span>
-<span class="linenos">157</span>
-<span class="linenos">158</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">159</span>            <span class="c1"># Create metadata if needed</span>
-<span class="linenos">160</span>            <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">161</span>                <span class="n">metadata</span> <span class="o">=</span> <span class="n">MessageMetadata</span><span class="p">(</span>
-<span class="linenos">162</span>                    <span class="n">message_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;udp_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000000</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-<span class="linenos">163</span>                    <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
-<span class="linenos">164</span>                    <span class="n">message_type</span><span class="o">=</span><span class="n">MessageType</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span>
-<span class="linenos">165</span>                    <span class="n">priority</span><span class="o">=</span><span class="n">Priority</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">,</span>
-<span class="linenos">166</span>                    <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">name</span>
-<span class="linenos">167</span>                <span class="p">)</span>
-<span class="linenos">168</span>
-<span class="linenos">169</span>            <span class="c1"># Serialize message</span>
-<span class="linenos">170</span>            <span class="n">message_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize_message</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
-<span class="linenos">171</span>
-<span class="linenos">172</span>            <span class="c1"># Add sequence number safely</span>
-<span class="linenos">173</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sequence</span><span class="p">:</span>
-<span class="linenos">174</span>                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span><span class="p">:</span>
-<span class="linenos">175</span>                    <span class="n">message_data</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;!I&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span><span class="p">)</span> <span class="o">+</span> <span class="n">message_data</span>
-<span class="linenos">176</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">177</span>
-<span class="linenos">178</span>            <span class="c1"># Add CRC if enabled</span>
-<span class="linenos">179</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_crc</span><span class="p">:</span>
-<span class="linenos">180</span>                <span class="n">crc</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">message_data</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span>
-<span class="linenos">181</span>                <span class="n">message_data</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;!I&#39;</span><span class="p">,</span> <span class="n">crc</span><span class="p">)</span> <span class="o">+</span> <span class="n">message_data</span>
-<span class="linenos">182</span>
-<span class="linenos">183</span>            <span class="c1"># Send via transport</span>
-<span class="linenos">184</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">message_data</span><span class="p">)</span>
-<span class="linenos">185</span>
-<span class="linenos">186</span>            <span class="c1"># Update statistics safely</span>
-<span class="linenos">187</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_send_stats</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">message_data</span><span class="p">))</span>
-<span class="linenos">188</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_activity_time</span><span class="p">()</span>
-<span class="linenos">189</span>
-<span class="linenos">190</span>            <span class="k">return</span> <span class="kc">True</span>
-<span class="linenos">191</span>
-<span class="linenos">192</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">193</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to send UDP message: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">194</span>            <span class="k">return</span> <span class="kc">False</span>
-<span class="linenos">195</span>
-<span class="linenos">196</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">]]:</span>
-<span class="linenos">197</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Receive data via UDP with timeout.&quot;&quot;&quot;</span>
-<span class="linenos">198</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
-<span class="linenos">199</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">!=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">CONNECTED</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="p">:</span>
-<span class="linenos">200</span>                <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">201</span>
-<span class="linenos">202</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">203</span>            <span class="c1"># Wait for message with timeout</span>
-<span class="linenos">204</span>            <span class="k">if</span> <span class="n">timeout</span><span class="p">:</span>
-<span class="linenos">205</span>                <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span>
-<span class="linenos">206</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="o">.</span><span class="n">get_next_message</span><span class="p">(),</span>
-<span class="linenos">207</span>                    <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span>
-<span class="linenos">208</span>                <span class="p">)</span>
-<span class="linenos">209</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">210</span>                <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="o">.</span><span class="n">get_next_message</span><span class="p">()</span>
-<span class="linenos">211</span>
-<span class="linenos">212</span>            <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
-<span class="linenos">213</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_update_activity_time</span><span class="p">()</span>
-<span class="linenos">214</span>                <span class="k">return</span> <span class="n">message</span>
-<span class="linenos">215</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">216</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_increment_stat</span><span class="p">(</span><span class="s1">&#39;timeouts&#39;</span><span class="p">)</span>
-<span class="linenos">217</span>                <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">218</span>
-<span class="linenos">219</span>        <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
-<span class="linenos">220</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_increment_stat</span><span class="p">(</span><span class="s1">&#39;timeouts&#39;</span><span class="p">)</span>
-<span class="linenos">221</span>            <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">222</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">223</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error receiving UDP message: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">224</span>            <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">225</span>
-<span class="linenos">226</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_connection_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConnectionState</span><span class="p">:</span>
-<span class="linenos">227</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current connection state safely.&quot;&quot;&quot;</span>
-<span class="linenos">228</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
-<span class="linenos">229</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span>
-<span class="linenos">230</span>
-<span class="linenos">231</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos">232</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get UDP communication statistics safely.&quot;&quot;&quot;</span>
-<span class="linenos">233</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
-<span class="linenos">234</span>            <span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span>
-<span class="linenos">235</span>
-<span class="linenos">236</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
-<span class="linenos">237</span>            <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;connection_state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span><span class="o">.</span><span class="n">value</span>
-<span class="linenos">238</span>
-<span class="linenos">239</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span><span class="p">:</span>
-<span class="linenos">240</span>            <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;sequence_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span>
-<span class="linenos">241</span>            <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;expected_sequence&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span>
-<span class="linenos">242</span>
-<span class="linenos">243</span>        <span class="k">return</span> <span class="n">stats</span>
-<span class="linenos">244</span>
-<span class="linenos">245</span>    <span class="k">def</span><span class="w"> </span><span class="nf">register_message_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_type</span><span class="p">:</span> <span class="n">MessageType</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">246</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Register handler for specific message type safely.&quot;&quot;&quot;</span>
-<span class="linenos">247</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handlers_lock</span><span class="p">:</span>
-<span class="linenos">248</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="p">[</span><span class="n">message_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">handler</span>
-<span class="linenos">249</span>
-<span class="linenos">250</span>    <span class="k">def</span><span class="w"> </span><span class="nf">unregister_message_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_type</span><span class="p">:</span> <span class="n">MessageType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="linenos">251</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Unregister message handler safely.&quot;&quot;&quot;</span>
-<span class="linenos">252</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handlers_lock</span><span class="p">:</span>
-<span class="linenos">253</span>            <span class="k">if</span> <span class="n">message_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="p">:</span>
-<span class="linenos">254</span>                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="p">[</span><span class="n">message_type</span><span class="p">]</span>
-<span class="linenos">255</span>                <span class="k">return</span> <span class="kc">True</span>
-<span class="linenos">256</span>            <span class="k">return</span> <span class="kc">False</span>
-<span class="linenos">257</span>
-<span class="linenos">258</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_update_send_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bytes_sent</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">259</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update send statistics atomically.&quot;&quot;&quot;</span>
-<span class="linenos">260</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
-<span class="linenos">261</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;messages_sent&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">262</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;bytes_sent&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">bytes_sent</span>
-<span class="linenos">263</span>
-<span class="linenos">264</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_update_receive_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bytes_received</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">265</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update receive statistics atomically.&quot;&quot;&quot;</span>
-<span class="linenos">266</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
-<span class="linenos">267</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;messages_received&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">268</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;bytes_received&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">bytes_received</span>
-<span class="linenos">269</span>
-<span class="linenos">270</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_increment_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">271</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Increment statistic atomically.&quot;&quot;&quot;</span>
-<span class="linenos">272</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
-<span class="linenos">273</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="n">stat_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">stat_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">amount</span>
-<span class="linenos">274</span>
-<span class="linenos">275</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_update_activity_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">276</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update last activity time atomically.&quot;&quot;&quot;</span>
-<span class="linenos">277</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
-<span class="linenos">278</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;last_activity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="linenos">279</span>
-<span class="linenos">280</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_next_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="linenos">281</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get next sequence number safely.&quot;&quot;&quot;</span>
-<span class="linenos">282</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span><span class="p">:</span>
-<span class="linenos">283</span>            <span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span>
-<span class="linenos">284</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">285</span>            <span class="k">return</span> <span class="n">seq</span>
-<span class="linenos">286</span>
-<span class="linenos">287</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_check_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">received_seq</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="linenos">288</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check sequence number safely.&quot;&quot;&quot;</span>
-<span class="linenos">289</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span><span class="p">:</span>
-<span class="linenos">290</span>            <span class="k">if</span> <span class="n">received_seq</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span><span class="p">:</span>
-<span class="linenos">291</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_increment_stat</span><span class="p">(</span><span class="s1">&#39;sequence_errors&#39;</span><span class="p">)</span>
-<span class="linenos">292</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sequence error: expected=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span><span class="si">}</span><span class="s2">, received=</span><span class="si">{</span><span class="n">received_seq</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">293</span>                <span class="c1"># Update expected sequence anyway</span>
-<span class="linenos">294</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span> <span class="o">=</span> <span class="n">received_seq</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="linenos">295</span>                <span class="k">return</span> <span class="kc">False</span>
-<span class="linenos">296</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">297</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span> <span class="o">=</span> <span class="n">received_seq</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="linenos">298</span>                <span class="k">return</span> <span class="kc">True</span>
-<span class="linenos">299</span>
-<span class="linenos">300</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_message_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_type</span><span class="p">:</span> <span class="n">MessageType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
-<span class="linenos">301</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get message handler safely.&quot;&quot;&quot;</span>
-<span class="linenos">302</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handlers_lock</span><span class="p">:</span>
-<span class="linenos">303</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">message_type</span><span class="p">)</span>
-<span class="linenos">304</span>
-<span class="linenos">305</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="linenos">306</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse endpoint string into host and port.&quot;&quot;&quot;</span>
-<span class="linenos">307</span>        <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">endpoint</span><span class="p">:</span>
-<span class="linenos">308</span>            <span class="n">host</span><span class="p">,</span> <span class="n">port_str</span> <span class="o">=</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="linenos">309</span>            <span class="k">return</span> <span class="n">host</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">port_str</span><span class="p">)</span>
-<span class="linenos">310</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">311</span>            <span class="k">return</span> <span class="n">endpoint</span><span class="p">,</span> <span class="mi">8080</span>
-<span class="linenos">312</span>
-<span class="linenos">313</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_serialize_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">MessageMetadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="linenos">314</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize message data and metadata.&quot;&quot;&quot;</span>
-<span class="linenos">315</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="linenos">316</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
-<span class="linenos">317</span>
-<span class="linenos">318</span>        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos">319</span>            <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{</span>
-<span class="linenos">320</span>                <span class="s1">&#39;message_id&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">message_id</span><span class="p">,</span>
-<span class="linenos">321</span>                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
-<span class="linenos">322</span>                <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">message_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-<span class="linenos">323</span>                <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">priority</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-<span class="linenos">324</span>                <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">source</span><span class="p">,</span>
-<span class="linenos">325</span>                <span class="s1">&#39;destination&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span>
-<span class="linenos">326</span>                <span class="s1">&#39;correlation_id&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">correlation_id</span>
-<span class="linenos">327</span>            <span class="p">},</span>
-<span class="linenos">328</span>            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span>
-<span class="linenos">329</span>        <span class="p">}</span>
-<span class="linenos">330</span>
-<span class="linenos">331</span>        <span class="c1"># Use JSON for simple data, pickle for complex objects</span>
-<span class="linenos">332</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">333</span>            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="linenos">334</span>        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-<span class="linenos">335</span>            <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-<span class="linenos">336</span>
-<span class="linenos">337</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_deserialize_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">]:</span>
-<span class="linenos">338</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize message data and metadata.&quot;&quot;&quot;</span>
-<span class="linenos">339</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="linenos">340</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
-<span class="linenos">341</span>
-<span class="linenos">342</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">343</span>            <span class="c1"># Try JSON first</span>
-<span class="linenos">344</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">345</span>                <span class="n">message</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-<span class="linenos">346</span>            <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">):</span>
-<span class="linenos">347</span>                <span class="c1"># Fall back to pickle</span>
-<span class="linenos">348</span>                <span class="n">message</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="linenos">349</span>
-<span class="linenos">350</span>            <span class="c1"># Extract metadata</span>
-<span class="linenos">351</span>            <span class="n">meta_dict</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]</span>
-<span class="linenos">352</span>            <span class="n">metadata</span> <span class="o">=</span> <span class="n">MessageMetadata</span><span class="p">(</span>
-<span class="linenos">353</span>                <span class="n">message_id</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">],</span>
-<span class="linenos">354</span>                <span class="n">timestamp</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">],</span>
-<span class="linenos">355</span>                <span class="n">message_type</span><span class="o">=</span><span class="n">MessageType</span><span class="p">(</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;message_type&#39;</span><span class="p">]),</span>
-<span class="linenos">356</span>                <span class="n">priority</span><span class="o">=</span><span class="n">Priority</span><span class="p">(</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">]),</span>
-<span class="linenos">357</span>                <span class="n">source</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>
-<span class="linenos">358</span>                <span class="n">destination</span><span class="o">=</span><span class="n">meta_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;destination&#39;</span><span class="p">),</span>
-<span class="linenos">359</span>                <span class="n">correlation_id</span><span class="o">=</span><span class="n">meta_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;correlation_id&#39;</span><span class="p">)</span>
-<span class="linenos">360</span>            <span class="p">)</span>
-<span class="linenos">361</span>
-<span class="linenos">362</span>            <span class="k">return</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">metadata</span>
-<span class="linenos">363</span>
-<span class="linenos">364</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">365</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to deserialize message: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">366</span>            <span class="k">raise</span>
-<span class="linenos">367</span>
-<span class="linenos">368</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_process_received_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">]]:</span>
-<span class="linenos">369</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process received UDP data packet with thread safety.&quot;&quot;&quot;</span>
-<span class="linenos">370</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">371</span>            <span class="n">original_data</span> <span class="o">=</span> <span class="n">data</span>
-<span class="linenos">372</span>
-<span class="linenos">373</span>            <span class="c1"># Check and remove CRC if enabled</span>
-<span class="linenos">374</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_crc</span><span class="p">:</span>
-<span class="linenos">375</span>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
-<span class="linenos">376</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Received packet too short for CRC&quot;</span><span class="p">)</span>
-<span class="linenos">377</span>                    <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">378</span>
-<span class="linenos">379</span>                <span class="n">received_crc</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;!I&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">[:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-<span class="linenos">380</span>                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
-<span class="linenos">381</span>                <span class="n">calculated_crc</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span>
-<span class="linenos">382</span>
-<span class="linenos">383</span>                <span class="k">if</span> <span class="n">received_crc</span> <span class="o">!=</span> <span class="n">calculated_crc</span><span class="p">:</span>
-<span class="linenos">384</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_increment_stat</span><span class="p">(</span><span class="s1">&#39;crc_errors&#39;</span><span class="p">)</span>
-<span class="linenos">385</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CRC mismatch: received=</span><span class="si">{</span><span class="n">received_crc</span><span class="si">:</span><span class="s2">08x</span><span class="si">}</span><span class="s2">, calculated=</span><span class="si">{</span><span class="n">calculated_crc</span><span class="si">:</span><span class="s2">08x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">386</span>                    <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">387</span>
-<span class="linenos">388</span>            <span class="c1"># Check and remove sequence number if enabled</span>
-<span class="linenos">389</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sequence</span><span class="p">:</span>
-<span class="linenos">390</span>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
-<span class="linenos">391</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Received packet too short for sequence number&quot;</span><span class="p">)</span>
-<span class="linenos">392</span>                    <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">393</span>
-<span class="linenos">394</span>                <span class="n">sequence</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;!I&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">[:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-<span class="linenos">395</span>                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
-<span class="linenos">396</span>
-<span class="linenos">397</span>                <span class="c1"># Check sequence safely</span>
-<span class="linenos">398</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_check_sequence</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
-<span class="linenos">399</span>
-<span class="linenos">400</span>            <span class="c1"># Deserialize message</span>
-<span class="linenos">401</span>            <span class="n">message_data</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize_message</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="linenos">402</span>
-<span class="linenos">403</span>            <span class="c1"># Update statistics safely</span>
-<span class="linenos">404</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_receive_stats</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">original_data</span><span class="p">))</span>
-<span class="linenos">405</span>
-<span class="linenos">406</span>            <span class="k">return</span> <span class="n">message_data</span><span class="p">,</span> <span class="n">metadata</span>
-<span class="linenos">407</span>
-<span class="linenos">408</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">409</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing received data: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">410</span>            <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">411</span>
-<span class="linenos">412</span>    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">413</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Cleanup resources safely.&quot;&quot;&quot;</span>
-<span class="linenos">414</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">415</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_thread_pool</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
-<span class="linenos">416</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">417</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error during cleanup: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 35</span><span class="k">class</span><span class="w"> </span><span class="nc">ThreadSafeUDPInterface</span><span class="p">(</span><span class="n">CommunicationProtocol</span><span class="p">):</span>
+<span class="linenos"> 36</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 37</span><span class="sd">    THREAD-SAFE high-performance UDP communication interface.</span>
+<span class="linenos"> 38</span>
+<span class="linenos"> 39</span><span class="sd">    This version addresses all thread safety issues found in the original:</span>
+<span class="linenos"> 40</span><span class="sd">    - Race conditions in statistics updates</span>
+<span class="linenos"> 41</span><span class="sd">    - Sequence number races</span>
+<span class="linenos"> 42</span><span class="sd">    - Connection state races</span>
+<span class="linenos"> 43</span><span class="sd">    - Message handler races</span>
+<span class="linenos"> 44</span><span class="sd">    - Shared resource contention</span>
+<span class="linenos"> 45</span>
+<span class="linenos"> 46</span><span class="sd">    All operations are now thread-safe and production-ready.</span>
+<span class="linenos"> 47</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 48</span>
+<span class="linenos"> 49</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">InterfaceConfig</span><span class="p">):</span>
+<span class="linenos"> 50</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize thread-safe UDP interface.&quot;&quot;&quot;</span>
+<span class="linenos"> 51</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">config</span>
+<span class="linenos"> 52</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 53</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">DatagramTransport</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 54</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;ThreadSafeUDPProtocol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 55</span>
+<span class="linenos"> 56</span>        <span class="c1"># Thread-safe connection state</span>
+<span class="linenos"> 57</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">DISCONNECTED</span>
+<span class="linenos"> 58</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+<span class="linenos"> 59</span>
+<span class="linenos"> 60</span>        <span class="c1"># Thread-safe statistics with atomic updates</span>
+<span class="linenos"> 61</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 62</span>            <span class="s1">&#39;messages_sent&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 63</span>            <span class="s1">&#39;messages_received&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 64</span>            <span class="s1">&#39;bytes_sent&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 65</span>            <span class="s1">&#39;bytes_received&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 66</span>            <span class="s1">&#39;crc_errors&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 67</span>            <span class="s1">&#39;sequence_errors&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 68</span>            <span class="s1">&#39;timeouts&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 69</span>            <span class="s1">&#39;last_activity&#39;</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="linenos"> 70</span>        <span class="p">}</span>
+<span class="linenos"> 71</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+<span class="linenos"> 72</span>
+<span class="linenos"> 73</span>        <span class="c1"># Thread-safe sequence management</span>
+<span class="linenos"> 74</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 75</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 76</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+<span class="linenos"> 77</span>
+<span class="linenos"> 78</span>        <span class="c1"># Configuration</span>
+<span class="linenos"> 79</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_use_crc</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_setting</span><span class="p">(</span><span class="s1">&#39;use_crc&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 80</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_use_sequence</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_setting</span><span class="p">(</span><span class="s1">&#39;use_sequence&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span>        <span class="c1"># Thread-safe message handlers</span>
+<span class="linenos"> 83</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">MessageType</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 84</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_handlers_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+<span class="linenos"> 85</span>
+<span class="linenos"> 86</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;threadsafe_udp_</span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 87</span>
+<span class="linenos"> 88</span>        <span class="c1"># Thread pool for synchronous operations</span>
+<span class="linenos"> 89</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_thread_pool</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">thread_name_prefix</span><span class="o">=</span><span class="s2">&quot;udp_worker&quot;</span><span class="p">)</span>
+<span class="linenos"> 90</span>
+<span class="linenos"> 91</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos"> 92</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Establish UDP connection with thread safety.&quot;&quot;&quot;</span>
+<span class="linenos"> 93</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
+<span class="linenos"> 94</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">==</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">CONNECTED</span><span class="p">:</span>
+<span class="linenos"> 95</span>                <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos"> 96</span>
+<span class="linenos"> 97</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 98</span>            <span class="n">host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_endpoint</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">endpoint</span><span class="p">))</span>
+<span class="linenos"> 99</span>            <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span>            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;server_mode&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<span class="linenos">102</span>                <span class="c1"># Server mode</span>
+<span class="linenos">103</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span> <span class="o">=</span> <span class="n">ThreadSafeUDPProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="linenos">104</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_datagram_endpoint</span><span class="p">(</span>
+<span class="linenos">105</span>                    <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="p">,</span>
+<span class="linenos">106</span>                    <span class="n">local_addr</span><span class="o">=</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+<span class="linenos">107</span>                <span class="p">)</span>
+<span class="linenos">108</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thread-safe UDP server listening on </span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">109</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">110</span>                <span class="c1"># Client mode</span>
+<span class="linenos">111</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span> <span class="o">=</span> <span class="n">ThreadSafeUDPProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="linenos">112</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_datagram_endpoint</span><span class="p">(</span>
+<span class="linenos">113</span>                    <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="p">,</span>
+<span class="linenos">114</span>                    <span class="n">remote_addr</span><span class="o">=</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+<span class="linenos">115</span>                <span class="p">)</span>
+<span class="linenos">116</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thread-safe UDP client connected to </span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">117</span>
+<span class="linenos">118</span>            <span class="c1"># Thread-safe state update</span>
+<span class="linenos">119</span>            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
+<span class="linenos">120</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">CONNECTED</span>
+<span class="linenos">121</span>
+<span class="linenos">122</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_activity_time</span><span class="p">()</span>
+<span class="linenos">123</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">124</span>
+<span class="linenos">125</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">126</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish UDP connection: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">127</span>            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
+<span class="linenos">128</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">ERROR</span>
+<span class="linenos">129</span>            <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">130</span>
+<span class="linenos">131</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">132</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Close UDP connection with thread safety.&quot;&quot;&quot;</span>
+<span class="linenos">133</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">134</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span>
+<span class="linenos">135</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">136</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">137</span>
+<span class="linenos">138</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">139</span>
+<span class="linenos">140</span>            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
+<span class="linenos">141</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">DISCONNECTED</span>
+<span class="linenos">142</span>
+<span class="linenos">143</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Thread-safe UDP connection closed&quot;</span><span class="p">)</span>
+<span class="linenos">144</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">145</span>
+<span class="linenos">146</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">147</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error closing UDP connection: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">148</span>            <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MessageMetadata</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">151</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Send data via UDP with thread safety.&quot;&quot;&quot;</span>
+<span class="linenos">152</span>        <span class="c1"># Check connection state safely</span>
+<span class="linenos">153</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
+<span class="linenos">154</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">!=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">CONNECTED</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span>
+<span class="linenos">155</span>                <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">156</span>
+<span class="linenos">157</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">158</span>            <span class="c1"># Create metadata if needed</span>
+<span class="linenos">159</span>            <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">160</span>                <span class="n">metadata</span> <span class="o">=</span> <span class="n">MessageMetadata</span><span class="p">(</span>
+<span class="linenos">161</span>                    <span class="n">message_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;udp_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000000</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="linenos">162</span>                    <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+<span class="linenos">163</span>                    <span class="n">message_type</span><span class="o">=</span><span class="n">MessageType</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span>
+<span class="linenos">164</span>                    <span class="n">priority</span><span class="o">=</span><span class="n">Priority</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">,</span>
+<span class="linenos">165</span>                    <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">name</span>
+<span class="linenos">166</span>                <span class="p">)</span>
+<span class="linenos">167</span>
+<span class="linenos">168</span>            <span class="c1"># Serialize message</span>
+<span class="linenos">169</span>            <span class="n">message_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize_message</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+<span class="linenos">170</span>
+<span class="linenos">171</span>            <span class="c1"># Add sequence number safely</span>
+<span class="linenos">172</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sequence</span><span class="p">:</span>
+<span class="linenos">173</span>                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span><span class="p">:</span>
+<span class="linenos">174</span>                    <span class="n">message_data</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;!I&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span><span class="p">)</span> <span class="o">+</span> <span class="n">message_data</span>
+<span class="linenos">175</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">176</span>
+<span class="linenos">177</span>            <span class="c1"># Add CRC if enabled</span>
+<span class="linenos">178</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_crc</span><span class="p">:</span>
+<span class="linenos">179</span>                <span class="n">crc</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">message_data</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span>
+<span class="linenos">180</span>                <span class="n">message_data</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;!I&#39;</span><span class="p">,</span> <span class="n">crc</span><span class="p">)</span> <span class="o">+</span> <span class="n">message_data</span>
+<span class="linenos">181</span>
+<span class="linenos">182</span>            <span class="c1"># Send via transport</span>
+<span class="linenos">183</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">message_data</span><span class="p">)</span>
+<span class="linenos">184</span>
+<span class="linenos">185</span>            <span class="c1"># Update statistics safely</span>
+<span class="linenos">186</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_send_stats</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">message_data</span><span class="p">))</span>
+<span class="linenos">187</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_activity_time</span><span class="p">()</span>
+<span class="linenos">188</span>
+<span class="linenos">189</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">190</span>
+<span class="linenos">191</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">192</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to send UDP message: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">193</span>            <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">194</span>
+<span class="linenos">195</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">]]:</span>
+<span class="linenos">196</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Receive data via UDP with timeout.&quot;&quot;&quot;</span>
+<span class="linenos">197</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
+<span class="linenos">198</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span> <span class="o">!=</span> <span class="n">ConnectionState</span><span class="o">.</span><span class="n">CONNECTED</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="p">:</span>
+<span class="linenos">199</span>                <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">200</span>
+<span class="linenos">201</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">202</span>            <span class="c1"># Wait for message with timeout</span>
+<span class="linenos">203</span>            <span class="k">if</span> <span class="n">timeout</span><span class="p">:</span>
+<span class="linenos">204</span>                <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span>
+<span class="linenos">205</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="o">.</span><span class="n">get_next_message</span><span class="p">(),</span>
+<span class="linenos">206</span>                    <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span>
+<span class="linenos">207</span>                <span class="p">)</span>
+<span class="linenos">208</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">209</span>                <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_protocol</span><span class="o">.</span><span class="n">get_next_message</span><span class="p">()</span>
+<span class="linenos">210</span>
+<span class="linenos">211</span>            <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
+<span class="linenos">212</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_update_activity_time</span><span class="p">()</span>
+<span class="linenos">213</span>                <span class="k">return</span> <span class="n">message</span>
+<span class="linenos">214</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">215</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_increment_stat</span><span class="p">(</span><span class="s1">&#39;timeouts&#39;</span><span class="p">)</span>
+<span class="linenos">216</span>                <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">217</span>
+<span class="linenos">218</span>        <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
+<span class="linenos">219</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_increment_stat</span><span class="p">(</span><span class="s1">&#39;timeouts&#39;</span><span class="p">)</span>
+<span class="linenos">220</span>            <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">221</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">222</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error receiving UDP message: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">223</span>            <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">224</span>
+<span class="linenos">225</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_connection_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConnectionState</span><span class="p">:</span>
+<span class="linenos">226</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current connection state safely.&quot;&quot;&quot;</span>
+<span class="linenos">227</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
+<span class="linenos">228</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span>
+<span class="linenos">229</span>
+<span class="linenos">230</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos">231</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get UDP communication statistics safely.&quot;&quot;&quot;</span>
+<span class="linenos">232</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
+<span class="linenos">233</span>            <span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span>
+<span class="linenos">234</span>
+<span class="linenos">235</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_lock</span><span class="p">:</span>
+<span class="linenos">236</span>            <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;connection_state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_state</span><span class="o">.</span><span class="n">value</span>
+<span class="linenos">237</span>
+<span class="linenos">238</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span><span class="p">:</span>
+<span class="linenos">239</span>            <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;sequence_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span>
+<span class="linenos">240</span>            <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;expected_sequence&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span>
+<span class="linenos">241</span>
+<span class="linenos">242</span>        <span class="k">return</span> <span class="n">stats</span>
+<span class="linenos">243</span>
+<span class="linenos">244</span>    <span class="k">def</span><span class="w"> </span><span class="nf">register_message_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_type</span><span class="p">:</span> <span class="n">MessageType</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">245</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Register handler for specific message type safely.&quot;&quot;&quot;</span>
+<span class="linenos">246</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handlers_lock</span><span class="p">:</span>
+<span class="linenos">247</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="p">[</span><span class="n">message_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">handler</span>
+<span class="linenos">248</span>
+<span class="linenos">249</span>    <span class="k">def</span><span class="w"> </span><span class="nf">unregister_message_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_type</span><span class="p">:</span> <span class="n">MessageType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">250</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Unregister message handler safely.&quot;&quot;&quot;</span>
+<span class="linenos">251</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handlers_lock</span><span class="p">:</span>
+<span class="linenos">252</span>            <span class="k">if</span> <span class="n">message_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="p">:</span>
+<span class="linenos">253</span>                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="p">[</span><span class="n">message_type</span><span class="p">]</span>
+<span class="linenos">254</span>                <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">255</span>            <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">256</span>
+<span class="linenos">257</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_update_send_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bytes_sent</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">258</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update send statistics atomically.&quot;&quot;&quot;</span>
+<span class="linenos">259</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
+<span class="linenos">260</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;messages_sent&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">261</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;bytes_sent&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">bytes_sent</span>
+<span class="linenos">262</span>
+<span class="linenos">263</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_update_receive_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bytes_received</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">264</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update receive statistics atomically.&quot;&quot;&quot;</span>
+<span class="linenos">265</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
+<span class="linenos">266</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;messages_received&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">267</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;bytes_received&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">bytes_received</span>
+<span class="linenos">268</span>
+<span class="linenos">269</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_increment_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">270</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Increment statistic atomically.&quot;&quot;&quot;</span>
+<span class="linenos">271</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
+<span class="linenos">272</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="n">stat_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">stat_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">amount</span>
+<span class="linenos">273</span>
+<span class="linenos">274</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_update_activity_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">275</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update last activity time atomically.&quot;&quot;&quot;</span>
+<span class="linenos">276</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stats_lock</span><span class="p">:</span>
+<span class="linenos">277</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_stats</span><span class="p">[</span><span class="s1">&#39;last_activity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="linenos">278</span>
+<span class="linenos">279</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_next_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">280</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get next sequence number safely.&quot;&quot;&quot;</span>
+<span class="linenos">281</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span><span class="p">:</span>
+<span class="linenos">282</span>            <span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span>
+<span class="linenos">283</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_number</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">284</span>            <span class="k">return</span> <span class="n">seq</span>
+<span class="linenos">285</span>
+<span class="linenos">286</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_check_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">received_seq</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">287</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check sequence number safely.&quot;&quot;&quot;</span>
+<span class="linenos">288</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_lock</span><span class="p">:</span>
+<span class="linenos">289</span>            <span class="k">if</span> <span class="n">received_seq</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span><span class="p">:</span>
+<span class="linenos">290</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_increment_stat</span><span class="p">(</span><span class="s1">&#39;sequence_errors&#39;</span><span class="p">)</span>
+<span class="linenos">291</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sequence error: expected=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span><span class="si">}</span><span class="s2">, received=</span><span class="si">{</span><span class="n">received_seq</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">292</span>                <span class="c1"># Update expected sequence anyway</span>
+<span class="linenos">293</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span> <span class="o">=</span> <span class="n">received_seq</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">294</span>                <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">295</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">296</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_expected_sequence</span> <span class="o">=</span> <span class="n">received_seq</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">297</span>                <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">298</span>
+<span class="linenos">299</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_message_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_type</span><span class="p">:</span> <span class="n">MessageType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
+<span class="linenos">300</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get message handler safely.&quot;&quot;&quot;</span>
+<span class="linenos">301</span>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handlers_lock</span><span class="p">:</span>
+<span class="linenos">302</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message_handlers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">message_type</span><span class="p">)</span>
+<span class="linenos">303</span>
+<span class="linenos">304</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="linenos">305</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse endpoint string into host and port.&quot;&quot;&quot;</span>
+<span class="linenos">306</span>        <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">endpoint</span><span class="p">:</span>
+<span class="linenos">307</span>            <span class="n">host</span><span class="p">,</span> <span class="n">port_str</span> <span class="o">=</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">308</span>            <span class="k">return</span> <span class="n">host</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">port_str</span><span class="p">)</span>
+<span class="linenos">309</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">310</span>            <span class="k">return</span> <span class="n">endpoint</span><span class="p">,</span> <span class="mi">8080</span>
+<span class="linenos">311</span>
+<span class="linenos">312</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_serialize_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">MessageMetadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="linenos">313</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize message data and metadata.&quot;&quot;&quot;</span>
+<span class="linenos">314</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="linenos">315</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="linenos">316</span>
+<span class="linenos">317</span>        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">318</span>            <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="linenos">319</span>                <span class="s1">&#39;message_id&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">message_id</span><span class="p">,</span>
+<span class="linenos">320</span>                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+<span class="linenos">321</span>                <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">message_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+<span class="linenos">322</span>                <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">priority</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+<span class="linenos">323</span>                <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">source</span><span class="p">,</span>
+<span class="linenos">324</span>                <span class="s1">&#39;destination&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span>
+<span class="linenos">325</span>                <span class="s1">&#39;correlation_id&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">correlation_id</span>
+<span class="linenos">326</span>            <span class="p">},</span>
+<span class="linenos">327</span>            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span>
+<span class="linenos">328</span>        <span class="p">}</span>
+<span class="linenos">329</span>
+<span class="linenos">330</span>        <span class="c1"># Use JSON for simple data, pickle for complex objects</span>
+<span class="linenos">331</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">332</span>            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos">333</span>        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="linenos">334</span>            <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="linenos">335</span>
+<span class="linenos">336</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_deserialize_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">]:</span>
+<span class="linenos">337</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize message data and metadata.&quot;&quot;&quot;</span>
+<span class="linenos">338</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="linenos">339</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="linenos">340</span>
+<span class="linenos">341</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">342</span>            <span class="c1"># Try JSON first</span>
+<span class="linenos">343</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">344</span>                <span class="n">message</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="linenos">345</span>            <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">):</span>
+<span class="linenos">346</span>                <span class="c1"># Fall back to pickle</span>
+<span class="linenos">347</span>                <span class="n">message</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos">348</span>
+<span class="linenos">349</span>            <span class="c1"># Extract metadata</span>
+<span class="linenos">350</span>            <span class="n">meta_dict</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]</span>
+<span class="linenos">351</span>            <span class="n">metadata</span> <span class="o">=</span> <span class="n">MessageMetadata</span><span class="p">(</span>
+<span class="linenos">352</span>                <span class="n">message_id</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">],</span>
+<span class="linenos">353</span>                <span class="n">timestamp</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">],</span>
+<span class="linenos">354</span>                <span class="n">message_type</span><span class="o">=</span><span class="n">MessageType</span><span class="p">(</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;message_type&#39;</span><span class="p">]),</span>
+<span class="linenos">355</span>                <span class="n">priority</span><span class="o">=</span><span class="n">Priority</span><span class="p">(</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">]),</span>
+<span class="linenos">356</span>                <span class="n">source</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>
+<span class="linenos">357</span>                <span class="n">destination</span><span class="o">=</span><span class="n">meta_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;destination&#39;</span><span class="p">),</span>
+<span class="linenos">358</span>                <span class="n">correlation_id</span><span class="o">=</span><span class="n">meta_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;correlation_id&#39;</span><span class="p">)</span>
+<span class="linenos">359</span>            <span class="p">)</span>
+<span class="linenos">360</span>
+<span class="linenos">361</span>            <span class="k">return</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">metadata</span>
+<span class="linenos">362</span>
+<span class="linenos">363</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">364</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to deserialize message: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">365</span>            <span class="k">raise</span>
+<span class="linenos">366</span>
+<span class="linenos">367</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_process_received_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">]]:</span>
+<span class="linenos">368</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process received UDP data packet with thread safety.&quot;&quot;&quot;</span>
+<span class="linenos">369</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">370</span>            <span class="n">original_data</span> <span class="o">=</span> <span class="n">data</span>
+<span class="linenos">371</span>
+<span class="linenos">372</span>            <span class="c1"># Check and remove CRC if enabled</span>
+<span class="linenos">373</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_crc</span><span class="p">:</span>
+<span class="linenos">374</span>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+<span class="linenos">375</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Received packet too short for CRC&quot;</span><span class="p">)</span>
+<span class="linenos">376</span>                    <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">377</span>
+<span class="linenos">378</span>                <span class="n">received_crc</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;!I&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">[:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">379</span>                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+<span class="linenos">380</span>                <span class="n">calculated_crc</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span>
+<span class="linenos">381</span>
+<span class="linenos">382</span>                <span class="k">if</span> <span class="n">received_crc</span> <span class="o">!=</span> <span class="n">calculated_crc</span><span class="p">:</span>
+<span class="linenos">383</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_increment_stat</span><span class="p">(</span><span class="s1">&#39;crc_errors&#39;</span><span class="p">)</span>
+<span class="linenos">384</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CRC mismatch: received=</span><span class="si">{</span><span class="n">received_crc</span><span class="si">:</span><span class="s2">08x</span><span class="si">}</span><span class="s2">, calculated=</span><span class="si">{</span><span class="n">calculated_crc</span><span class="si">:</span><span class="s2">08x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">385</span>                    <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">386</span>
+<span class="linenos">387</span>            <span class="c1"># Check and remove sequence number if enabled</span>
+<span class="linenos">388</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_sequence</span><span class="p">:</span>
+<span class="linenos">389</span>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+<span class="linenos">390</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Received packet too short for sequence number&quot;</span><span class="p">)</span>
+<span class="linenos">391</span>                    <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">392</span>
+<span class="linenos">393</span>                <span class="n">sequence</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;!I&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">[:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">394</span>                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+<span class="linenos">395</span>
+<span class="linenos">396</span>                <span class="c1"># Check sequence safely</span>
+<span class="linenos">397</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_check_sequence</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+<span class="linenos">398</span>
+<span class="linenos">399</span>            <span class="c1"># Deserialize message</span>
+<span class="linenos">400</span>            <span class="n">message_data</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize_message</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos">401</span>
+<span class="linenos">402</span>            <span class="c1"># Update statistics safely</span>
+<span class="linenos">403</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_receive_stats</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">original_data</span><span class="p">))</span>
+<span class="linenos">404</span>
+<span class="linenos">405</span>            <span class="k">return</span> <span class="n">message_data</span><span class="p">,</span> <span class="n">metadata</span>
+<span class="linenos">406</span>
+<span class="linenos">407</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">408</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing received data: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">409</span>            <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">410</span>
+<span class="linenos">411</span>    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">412</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Cleanup resources safely.&quot;&quot;&quot;</span>
+<span class="linenos">413</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">414</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_thread_pool</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="linenos">415</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">416</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error during cleanup: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">417</span>
 <span class="linenos">418</span>
-<span class="linenos">419</span>
-<span class="linenos">420</span><span class="k">class</span><span class="w"> </span><span class="nc">ThreadSafeUDPProtocol</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">DatagramProtocol</span><span class="p">):</span>
-<span class="linenos">421</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Thread-safe asyncio UDP protocol handler.&quot;&quot;&quot;</span>
-<span class="linenos">422</span>
-<span class="linenos">423</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">):</span>
-<span class="linenos">424</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_interface</span> <span class="o">=</span> <span class="n">interface</span>
-<span class="linenos">425</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_message_queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Bounded queue</span>
-<span class="linenos">426</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">DatagramTransport</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">427</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_handler_semaphore</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Limit concurrent handlers</span>
-<span class="linenos">428</span>
-<span class="linenos">429</span>    <span class="k">def</span><span class="w"> </span><span class="nf">connection_made</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transport</span><span class="p">:</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">DatagramTransport</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">430</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Called when connection is established.&quot;&quot;&quot;</span>
-<span class="linenos">431</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span> <span class="o">=</span> <span class="n">transport</span>
-<span class="linenos">432</span>
-<span class="linenos">433</span>    <span class="k">def</span><span class="w"> </span><span class="nf">datagram_received</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">434</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Called when datagram is received.&quot;&quot;&quot;</span>
-<span class="linenos">435</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">436</span>            <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interface</span><span class="o">.</span><span class="n">_process_received_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
-<span class="linenos">437</span>            <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
-<span class="linenos">438</span>                <span class="c1"># Try to put message in queue (non-blocking)</span>
-<span class="linenos">439</span>                <span class="k">try</span><span class="p">:</span>
-<span class="linenos">440</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_message_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-<span class="linenos">441</span>                <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">QueueFull</span><span class="p">:</span>
-<span class="linenos">442</span>                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Message queue full, dropping message&quot;</span><span class="p">)</span>
-<span class="linenos">443</span>                    <span class="k">return</span>
-<span class="linenos">444</span>
-<span class="linenos">445</span>                <span class="c1"># Call registered handlers safely</span>
-<span class="linenos">446</span>                <span class="n">message_data</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="n">message</span>
-<span class="linenos">447</span>                <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interface</span><span class="o">.</span><span class="n">_get_message_handler</span><span class="p">(</span><span class="n">metadata</span><span class="o">.</span><span class="n">message_type</span><span class="p">)</span>
-<span class="linenos">448</span>                <span class="k">if</span> <span class="n">handler</span><span class="p">:</span>
-<span class="linenos">449</span>                    <span class="c1"># Use semaphore to limit concurrent handler calls</span>
-<span class="linenos">450</span>                    <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_call_handler_safely</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">message_data</span><span class="p">,</span> <span class="n">metadata</span><span class="p">))</span>
-<span class="linenos">451</span>
-<span class="linenos">452</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">453</span>            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing received datagram: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">454</span>
-<span class="linenos">455</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_call_handler_safely</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">MessageMetadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">456</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Call message handler safely with concurrency control.&quot;&quot;&quot;</span>
-<span class="linenos">457</span>        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler_semaphore</span><span class="p">:</span>
-<span class="linenos">458</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">459</span>                <span class="k">if</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
-<span class="linenos">460</span>                    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">handler</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metadata</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
-<span class="linenos">461</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">462</span>                    <span class="c1"># Run sync handler in thread pool</span>
-<span class="linenos">463</span>                    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
-<span class="linenos">464</span>                        <span class="bp">self</span><span class="o">.</span><span class="n">_interface</span><span class="o">.</span><span class="n">_thread_pool</span><span class="p">,</span> <span class="n">handler</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">metadata</span>
-<span class="linenos">465</span>                    <span class="p">)</span>
-<span class="linenos">466</span>            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
-<span class="linenos">467</span>                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Message handler timed out&quot;</span><span class="p">)</span>
-<span class="linenos">468</span>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">469</span>                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in message handler: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">470</span>
-<span class="linenos">471</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_next_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">]]:</span>
-<span class="linenos">472</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get next message from queue.&quot;&quot;&quot;</span>
-<span class="linenos">473</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">474</span>            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="linenos">475</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">476</span>            <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">477</span>
-<span class="linenos">478</span>    <span class="k">def</span><span class="w"> </span><span class="nf">error_received</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">479</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Called when error is received.&quot;&quot;&quot;</span>
-<span class="linenos">480</span>        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;UDP protocol error: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">419</span><span class="k">class</span><span class="w"> </span><span class="nc">ThreadSafeUDPProtocol</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">DatagramProtocol</span><span class="p">):</span>
+<span class="linenos">420</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Thread-safe asyncio UDP protocol handler.&quot;&quot;&quot;</span>
+<span class="linenos">421</span>
+<span class="linenos">422</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">):</span>
+<span class="linenos">423</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_interface</span> <span class="o">=</span> <span class="n">interface</span>
+<span class="linenos">424</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_message_queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Bounded queue</span>
+<span class="linenos">425</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">DatagramTransport</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">426</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_handler_semaphore</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Limit concurrent handlers</span>
+<span class="linenos">427</span>
+<span class="linenos">428</span>    <span class="k">def</span><span class="w"> </span><span class="nf">connection_made</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transport</span><span class="p">:</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">DatagramTransport</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">429</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Called when connection is established.&quot;&quot;&quot;</span>
+<span class="linenos">430</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span> <span class="o">=</span> <span class="n">transport</span>
+<span class="linenos">431</span>
+<span class="linenos">432</span>    <span class="k">def</span><span class="w"> </span><span class="nf">datagram_received</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">433</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Called when datagram is received.&quot;&quot;&quot;</span>
+<span class="linenos">434</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">435</span>            <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interface</span><span class="o">.</span><span class="n">_process_received_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+<span class="linenos">436</span>            <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
+<span class="linenos">437</span>                <span class="c1"># Try to put message in queue (non-blocking)</span>
+<span class="linenos">438</span>                <span class="k">try</span><span class="p">:</span>
+<span class="linenos">439</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">_message_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="linenos">440</span>                <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">QueueFull</span><span class="p">:</span>
+<span class="linenos">441</span>                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Message queue full, dropping message&quot;</span><span class="p">)</span>
+<span class="linenos">442</span>                    <span class="k">return</span>
+<span class="linenos">443</span>
+<span class="linenos">444</span>                <span class="c1"># Call registered handlers safely</span>
+<span class="linenos">445</span>                <span class="n">message_data</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="n">message</span>
+<span class="linenos">446</span>                <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interface</span><span class="o">.</span><span class="n">_get_message_handler</span><span class="p">(</span><span class="n">metadata</span><span class="o">.</span><span class="n">message_type</span><span class="p">)</span>
+<span class="linenos">447</span>                <span class="k">if</span> <span class="n">handler</span><span class="p">:</span>
+<span class="linenos">448</span>                    <span class="c1"># Use semaphore to limit concurrent handler calls</span>
+<span class="linenos">449</span>                    <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_call_handler_safely</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">message_data</span><span class="p">,</span> <span class="n">metadata</span><span class="p">))</span>
+<span class="linenos">450</span>
+<span class="linenos">451</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">452</span>            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing received datagram: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">453</span>
+<span class="linenos">454</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_call_handler_safely</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">MessageMetadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">455</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Call message handler safely with concurrency control.&quot;&quot;&quot;</span>
+<span class="linenos">456</span>        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler_semaphore</span><span class="p">:</span>
+<span class="linenos">457</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">458</span>                <span class="k">if</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+<span class="linenos">459</span>                    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">handler</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metadata</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="linenos">460</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">461</span>                    <span class="c1"># Run sync handler in thread pool</span>
+<span class="linenos">462</span>                    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
+<span class="linenos">463</span>                        <span class="bp">self</span><span class="o">.</span><span class="n">_interface</span><span class="o">.</span><span class="n">_thread_pool</span><span class="p">,</span> <span class="n">handler</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">metadata</span>
+<span class="linenos">464</span>                    <span class="p">)</span>
+<span class="linenos">465</span>            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
+<span class="linenos">466</span>                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Message handler timed out&quot;</span><span class="p">)</span>
+<span class="linenos">467</span>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">468</span>                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in message handler: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">469</span>
+<span class="linenos">470</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_next_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">MessageMetadata</span><span class="p">]]:</span>
+<span class="linenos">471</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get next message from queue.&quot;&quot;&quot;</span>
+<span class="linenos">472</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">473</span>            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="linenos">474</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">475</span>            <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">476</span>
+<span class="linenos">477</span>    <span class="k">def</span><span class="w"> </span><span class="nf">error_received</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">478</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Called when error is received.&quot;&quot;&quot;</span>
+<span class="linenos">479</span>        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;UDP protocol error: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">480</span>
 <span class="linenos">481</span>
-<span class="linenos">482</span>
-<span class="linenos">483</span><span class="c1"># Production-safe factory functions</span>
-<span class="linenos">484</span><span class="k">def</span><span class="w"> </span><span class="nf">create_threadsafe_udp_server</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">InterfaceConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">:</span>
-<span class="linenos">485</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create thread-safe UDP server.&quot;&quot;&quot;</span>
-<span class="linenos">486</span>    <span class="k">return</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="linenos">482</span><span class="c1"># Production-safe factory functions</span>
+<span class="linenos">483</span><span class="k">def</span><span class="w"> </span><span class="nf">create_threadsafe_udp_server</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">InterfaceConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">:</span>
+<span class="linenos">484</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create thread-safe UDP server.&quot;&quot;&quot;</span>
+<span class="linenos">485</span>    <span class="k">return</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="linenos">486</span>
 <span class="linenos">487</span>
-<span class="linenos">488</span>
-<span class="linenos">489</span><span class="k">def</span><span class="w"> </span><span class="nf">create_threadsafe_udp_client</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">InterfaceConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">:</span>
-<span class="linenos">490</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create thread-safe UDP client.&quot;&quot;&quot;</span>
-<span class="linenos">491</span>    <span class="k">return</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="linenos">488</span><span class="k">def</span><span class="w"> </span><span class="nf">create_threadsafe_udp_client</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">InterfaceConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">:</span>
+<span class="linenos">489</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create thread-safe UDP client.&quot;&quot;&quot;</span>
+<span class="linenos">490</span>    <span class="k">return</span> <span class="n">ThreadSafeUDPInterface</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -1683,7 +1708,7 @@ vulnerabilities identified in production readiness assessment.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

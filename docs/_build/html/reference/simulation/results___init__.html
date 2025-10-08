@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -527,6 +553,307 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.validators</span> <span class="pre">import</span> <span class="pre">ResultValidator</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="result-processing-infrastructure">
+<h3>Result Processing Infrastructure<a class="headerlink" href="#result-processing-infrastructure" title="Link to this heading">¶</a></h3>
+<p>The results subsystem provides structured data management for simulation output with validation, processing, and export capabilities.</p>
+<section id="result-container-hierarchy">
+<h4>Result Container Hierarchy<a class="headerlink" href="#result-container-hierarchy" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{ResultContainer} = \begin{cases}
+\text{Standard} &amp; \text{(Single simulation)} \\
+\text{Batch} &amp; \text{(Multiple trials)} \\
+\text{TimeSeries} &amp; \text{(Temporal data)}
+\end{cases}
+\end{split}\]</div>
+</div>
+</section>
+<section id="data-aggregation-theory">
+<h4>Data Aggregation Theory<a class="headerlink" href="#data-aggregation-theory" title="Link to this heading">¶</a></h4>
+<p><strong>Batch mean aggregation:</strong>
+$<span class="math notranslate nohighlight">\(
+\mu_{\text{batch}} = \frac{1}{N} \sum_{i=1}^N \mu_i
+\)</span>$</p>
+<p><strong>Variance pooling</strong> (combining variances from multiple trials):
+$<span class="math notranslate nohighlight">\(
+\sigma_{\text{pooled}}^2 = \frac{\sum_{i=1}^N (n_i - 1) \sigma_i^2}{\sum_{i=1}^N (n_i - 1)}
+\)</span>$</p>
+<p><strong>Standard error of the mean:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{SEM} = \frac{\sigma_{\text{pooled}}}{\sqrt{N}}
+\)</span>$</p>
+</section>
+<section id="result-validation">
+<h4>Result Validation<a class="headerlink" href="#result-validation" title="Link to this heading">¶</a></h4>
+<p><strong>Completeness check:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Complete} = \begin{cases}
+\text{True} &amp; \text{if } \forall_{\text{required fields}} : \text{field is present} \\
+\text{False} &amp; \text{otherwise}
+\end{cases}
+\)</span>$</p>
+<p><strong>Range validation:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Valid}(x) = (x_{\min} \leq x \leq x_{\max})
+\)</span>$</p>
+<p><strong>Consistency check</strong> (time series):
+$<span class="math notranslate nohighlight">\(
+\text{Consistent} = (t_{i+1} - t_i = \Delta t \pm \epsilon) \quad \forall i
+\)</span>$</p>
+</section>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Results Package] –&gt; B[Containers]
+A –&gt; C[Processors]
+A –&gt; D[Validators]
+A –&gt; E[Exporters]</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>B --&gt; F[StandardResultContainer]
+B --&gt; G[BatchResultContainer]
+B --&gt; H[TimeSeriesContainer]
+
+C --&gt; I[Aggregation]
+C --&gt; J[Transformation]
+C --&gt; K[Statistical Analysis]
+
+D --&gt; L[Completeness Check]
+D --&gt; M[Range Validation]
+D --&gt; N[Consistency Check]
+
+E --&gt; O[CSV Exporter]
+E --&gt; P[HDF5 Exporter]
+E --&gt; Q[JSON Exporter]
+
+R[Simulation Results] --&gt; B
+B --&gt; C
+C --&gt; D
+D --&gt; E
+E --&gt; S[Export Files]
+
+style A fill:#e1f5ff
+style D fill:#fff4e1
+style S fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-result-container">
+<h3>Example 1: Basic Result Container<a class="headerlink" href="#example-1-basic-result-container" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.simulation.results import StandardResultContainer</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-result-container">
+<h1>Create result container<a class="headerlink" href="#create-result-container" title="Link to this heading">¶</a></h1>
+<p>result = StandardResultContainer()</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="store-simulation-data">
+<h1>Store simulation data<a class="headerlink" href="#store-simulation-data" title="Link to this heading">¶</a></h1>
+<p>result.set_time_series(‘state’, t, x)
+result.set_time_series(‘control’, t, u)
+result.set_metadata(‘controller_type’, ‘classical_smc’)
+result.set_metadata(‘gains’, [10, 8, 15, 12, 50, 5])</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="access-data">
+<h1>Access data<a class="headerlink" href="#access-data" title="Link to this heading">¶</a></h1>
+<p>state_data = result.get_time_series(‘state’)
+metadata = result.get_metadata()</p>
+<p>print(f”Simulation duration: {result.duration}s”)
+print(f”Number of steps: {result.num_steps}”)
+```</p>
+<section id="example-2-batch-result-aggregation">
+<h2>Example 2: Batch Result Aggregation<a class="headerlink" href="#example-2-batch-result-aggregation" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.results import BatchResultContainer
+from src.simulation.results import ResultProcessor</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-batch-container">
+<h1>Create batch container<a class="headerlink" href="#create-batch-container" title="Link to this heading">¶</a></h1>
+<p>batch = BatchResultContainer()</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="add-multiple-trial-results">
+<h1>Add multiple trial results<a class="headerlink" href="#add-multiple-trial-results" title="Link to this heading">¶</a></h1>
+<p>for i in range(100):
+trial_result = run_single_simulation(seed=i)
+batch.add_result(trial_result)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="aggregate-results">
+<h1>Aggregate results<a class="headerlink" href="#aggregate-results" title="Link to this heading">¶</a></h1>
+<p>processor = ResultProcessor()
+aggregated = processor.aggregate_batch(batch)</p>
+<p>print(f”Mean ISE: {aggregated[‘ise’][‘mean’]:.4f} ± {aggregated[‘ise’][‘sem’]:.4f}”)
+print(f”95% CI: [{aggregated[‘ise’][‘ci_lower’]:.4f}, {aggregated[‘ise’][‘ci_upper’]:.4f}]”)
+print(f”Min/Max: [{aggregated[‘ise’][‘min’]:.4f}, {aggregated[‘ise’][‘max’]:.4f}]”)
+```</p>
+<section id="example-3-result-validation">
+<h2>Example 3: Result Validation<a class="headerlink" href="#example-3-result-validation" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.results import ResultValidator</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-validator">
+<h1>Create validator<a class="headerlink" href="#create-validator" title="Link to this heading">¶</a></h1>
+<p>validator = ResultValidator(
+required_fields=[‘time’, ‘state’, ‘control’],
+state_bounds=(-10.0, 10.0),
+control_bounds=(-100.0, 100.0)
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="validate-result">
+<h1>Validate result<a class="headerlink" href="#validate-result" title="Link to this heading">¶</a></h1>
+<p>is_valid, errors = validator.validate(result)</p>
+<p>if not is_valid:
+print(“Validation failed:”)
+for error in errors:
+print(f”  - {error}”)
+else:
+print(”✓ Result is valid”)
+```</p>
+<section id="example-4-export-to-multiple-formats">
+<h2>Example 4: Export to Multiple Formats<a class="headerlink" href="#example-4-export-to-multiple-formats" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.results import CSVExporter, HDF5Exporter, JSONExporter</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="export-to-csv">
+<h1>Export to CSV<a class="headerlink" href="#export-to-csv" title="Link to this heading">¶</a></h1>
+<p>csv_exporter = CSVExporter()
+csv_exporter.export(result, ‘simulation_result.csv’)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="export-to-hdf5-with-compression">
+<h1>Export to HDF5 (with compression)<a class="headerlink" href="#export-to-hdf5-with-compression" title="Link to this heading">¶</a></h1>
+<p>hdf5_exporter = HDF5Exporter(compression=’gzip’, compression_opts=9)
+hdf5_exporter.export(result, ‘simulation_result.h5’)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="export-to-json">
+<h1>Export to JSON<a class="headerlink" href="#export-to-json" title="Link to this heading">¶</a></h1>
+<p>json_exporter = JSONExporter(indent=2)
+json_exporter.export(result, ‘simulation_result.json’)</p>
+<p>print(“Results exported to 3 formats”)
+```</p>
+<section id="example-5-result-processing-pipeline">
+<h2>Example 5: Result Processing Pipeline<a class="headerlink" href="#example-5-result-processing-pipeline" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.results import (
+ResultValidator,
+ResultProcessor,
+CSVExporter
+)</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="define-processing-pipeline">
+<h1>Define processing pipeline<a class="headerlink" href="#define-processing-pipeline" title="Link to this heading">¶</a></h1>
+<p>def process_results_pipeline(raw_results, output_path):
+# 1. Validate
+validator = ResultValidator()
+valid_results = []</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for result in raw_results:
+    is_valid, errors = validator.validate(result)
+    if is_valid:
+        valid_results.append(result)
+    else:
+        print(f&quot;Skipping invalid result: {errors[0]}&quot;)
+
+# 2. Process
+processor = ResultProcessor()
+processed = processor.batch_process(valid_results)
+
+# 3. Export
+exporter = CSVExporter()
+exporter.export(processed, output_path)
+
+print(f&quot;Processed {len(valid_results)}/{len(raw_results)} results&quot;)
+return processed
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-pipeline">
+<h1>Run pipeline<a class="headerlink" href="#run-pipeline" title="Link to this heading">¶</a></h1>
+<p>results_batch = [run_simulation(i) for i in range(100)]
+processed = process_results_pipeline(results_batch, ‘output/batch_results.csv’)
+```</p>
+<section id="id1">
+<h2>Architecture Diagram<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="id2">
+<h2>Usage Examples<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="basic-usage-example">
+<h1>Basic usage example<a class="headerlink" href="#basic-usage-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation.results import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+<section id="example-2-advanced-configuration">
+<h2>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="advanced-configuration">
+<h1>Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Link to this heading">¶</a></h1>
+<p>component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+<section id="example-3-integration-with-framework">
+<h2>Example 3: Integration with Framework<a class="headerlink" href="#example-3-integration-with-framework" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation import SimulationRunner</p>
+<p>runner = SimulationRunner()
+runner.use_component(component)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="performance-optimized-usage">
+<h1>Performance-optimized usage<a class="headerlink" href="#performance-optimized-usage" title="Link to this heading">¶</a></h1>
+<p>component = Component(enable_caching=True)
+```</p>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="error-handling">
+<h1>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading">¶</a></h1>
+<p>try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
 </section>
 
         </article>
@@ -546,7 +873,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -571,8 +898,71 @@
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#result-processing-infrastructure">Result Processing Infrastructure</a><ul>
+<li><a class="reference internal" href="#result-container-hierarchy">Result Container Hierarchy</a></li>
+<li><a class="reference internal" href="#data-aggregation-theory">Data Aggregation Theory</a></li>
+<li><a class="reference internal" href="#result-validation">Result Validation</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-result-container">Example 1: Basic Result Container</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-result-container">Create result container</a></li>
+<li><a class="reference internal" href="#store-simulation-data">Store simulation data</a></li>
+<li><a class="reference internal" href="#access-data">Access data</a><ul>
+<li><a class="reference internal" href="#example-2-batch-result-aggregation">Example 2: Batch Result Aggregation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-batch-container">Create batch container</a></li>
+<li><a class="reference internal" href="#add-multiple-trial-results">Add multiple trial results</a></li>
+<li><a class="reference internal" href="#aggregate-results">Aggregate results</a><ul>
+<li><a class="reference internal" href="#example-3-result-validation">Example 3: Result Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-validator">Create validator</a></li>
+<li><a class="reference internal" href="#validate-result">Validate result</a><ul>
+<li><a class="reference internal" href="#example-4-export-to-multiple-formats">Example 4: Export to Multiple Formats</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#export-to-csv">Export to CSV</a></li>
+<li><a class="reference internal" href="#export-to-hdf5-with-compression">Export to HDF5 (with compression)</a></li>
+<li><a class="reference internal" href="#export-to-json">Export to JSON</a><ul>
+<li><a class="reference internal" href="#example-5-result-processing-pipeline">Example 5: Result Processing Pipeline</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#define-processing-pipeline">Define processing pipeline</a></li>
+<li><a class="reference internal" href="#run-pipeline">Run pipeline</a><ul>
+<li><a class="reference internal" href="#id1">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#id2">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage-example">Basic usage example</a><ul>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-configuration">Advanced configuration</a><ul>
+<li><a class="reference internal" href="#example-3-integration-with-framework">Example 3: Integration with Framework</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-optimized-usage">Performance-optimized usage</a><ul>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error handling</a></li>
 </ul>
 
           </div>
@@ -589,6 +979,8 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

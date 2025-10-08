@@ -74,6 +74,9 @@ tests/
 
 **Fixed Headers**:
 ```python
+# example-metadata:
+# runnable: false
+
 #======================================================================================\\\
 #==================== src/optimization/algorithms/pso_optimizer.py ====================\\\
 #======================================================================================\\\
@@ -99,6 +102,9 @@ tests/
 
 1. **ASCII Header Width Correction**:
 ```python
+# example-metadata:
+# runnable: false
+
 #==========================================================================================\\\
 #=================== src/optimization/algorithms/pso_optimizer.py ===================\\\
 #==========================================================================================\\\
@@ -118,6 +124,9 @@ tests/
 
 **Type System Quality**:
 ```python
+# example-metadata:
+# runnable: false
+
 # ✅ Excellent modern type hints
 def _compute_cost_from_traj(
     self, t: np.ndarray, x_b: np.ndarray, u_b: np.ndarray, sigma_b: np.ndarray
@@ -147,6 +156,9 @@ def optimise(
 
 **Sample High-Quality Docstring**:
 ```python
+# example-metadata:
+# runnable: false
+
 """Compute sliding mode control output for double-inverted pendulum.
 
 Args:
@@ -220,6 +232,9 @@ sigma_sq = np.sum((sigma_b ** 2 * dt_b) * time_mask, axis=1)
 
 **Current Organization**:
 ```python
+# example-metadata:
+# runnable: false
+
 # ✅ Excellent grouping and ordering
 from __future__ import annotations
 
@@ -264,6 +279,9 @@ from ...simulation.engines.vector_sim import simulate_system_batch
 
 **Test Quality Features**:
 ```python
+# example-metadata:
+# runnable: false
+
 # ✅ Excellent comprehensive test structure
 class TestPSOTuner:
     def test_pso_tuner_initialization(self, minimal_config, mock_controller_factory):
@@ -315,6 +333,9 @@ class TestPSOTunerProperties:
 
 1. **ASCII Header Width Correction** ✅ COMPLETED:
 ```python
+# example-metadata:
+# runnable: false
+
 # Current (91 chars - INCORRECT):
 #==================== src/optimization/algorithms/pso_optimizer.py ====================\\\
 
@@ -342,6 +363,9 @@ def _compute_cost_from_traj_numba(t, x_b, u_b, sigma_b, weights, norms):
 
 4. **Import Organization Enhancement**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Enhanced alphabetical ordering within groups
 from contextlib import contextmanager
 from pathlib import Path

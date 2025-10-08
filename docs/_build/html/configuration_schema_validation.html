@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -600,7 +626,10 @@
 <h3>Pydantic Schema Models<a class="headerlink" href="#pydantic-schema-models" title="Link to this heading">¶</a></h3>
 <section id="system-configuration-schema">
 <h4>System Configuration Schema<a class="headerlink" href="#system-configuration-schema" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">validator</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">validator</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -622,7 +651,10 @@
 </section>
 <section id="physics-configuration-schema">
 <h4>Physics Configuration Schema<a class="headerlink" href="#physics-configuration-schema" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PhysicsConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PhysicsConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Physical system parameters schema.&quot;&quot;&quot;</span>
     <span class="n">pendulum_length_1</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">gt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pendulum 1 length (m)&quot;</span><span class="p">)</span>
     <span class="n">pendulum_length_2</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">gt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pendulum 2 length (m)&quot;</span><span class="p">)</span>
@@ -653,7 +685,10 @@
 </section>
 <section id="controller-configuration-schema">
 <h4>Controller Configuration Schema<a class="headerlink" href="#controller-configuration-schema" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMCConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMCConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Classical SMC controller configuration schema.&quot;&quot;&quot;</span>
     <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">min_items</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_items</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;SMC gains [λ₁, λ₂, x, θ̇₁, θ̇₂, ẋ]&quot;</span><span class="p">)</span>
     <span class="n">saturation_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">gt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Control saturation limit&quot;</span><span class="p">)</span>
@@ -747,7 +782,10 @@
 </section>
 <section id="optimization-configuration-schema">
 <h4>Optimization Configuration Schema<a class="headerlink" href="#optimization-configuration-schema" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PSOConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PSOConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;PSO optimization configuration schema.&quot;&quot;&quot;</span>
     <span class="n">n_particles</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of particles in swarm&quot;</span><span class="p">)</span>
     <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum optimization iterations&quot;</span><span class="p">)</span>
@@ -816,7 +854,10 @@
 </section>
 <section id="simulation-configuration-schema">
 <h4>Simulation Configuration Schema<a class="headerlink" href="#simulation-configuration-schema" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimulationConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SimulationConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulation configuration schema.&quot;&quot;&quot;</span>
     <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">gt</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Integration time step (s)&quot;</span><span class="p">)</span>
     <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">gt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">3600.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Simulation duration (s)&quot;</span><span class="p">)</span>
@@ -884,7 +925,10 @@
 </section>
 <section id="hardware-in-the-loop-configuration-schema">
 <h4>Hardware-in-the-Loop Configuration Schema<a class="headerlink" href="#hardware-in-the-loop-configuration-schema" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HILConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HILConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Hardware-in-the-loop configuration schema.&quot;&quot;&quot;</span>
     <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Enable HIL communication&quot;</span><span class="p">)</span>
     <span class="n">plant_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plant server IP address&quot;</span><span class="p">)</span>
@@ -927,7 +971,10 @@
 <h2>Validation Rules and Constraints<a class="headerlink" href="#validation-rules-and-constraints" title="Link to this heading">¶</a></h2>
 <section id="master-configuration-schema">
 <h3>Master Configuration Schema<a class="headerlink" href="#master-configuration-schema" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MasterConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MasterConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Master configuration schema with cross-validation.&quot;&quot;&quot;</span>
     <span class="n">system</span><span class="p">:</span> <span class="n">SystemConfig</span>
     <span class="n">physics</span><span class="p">:</span> <span class="n">PhysicsConfig</span>
@@ -993,7 +1040,10 @@
 <h3>Control Theory Constraints<a class="headerlink" href="#control-theory-constraints" title="Link to this heading">¶</a></h3>
 <section id="lyapunov-stability-validation">
 <h4>Lyapunov Stability Validation<a class="headerlink" href="#lyapunov-stability-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_lyapunov_stability_constraints</span><span class="p">(</span><span class="n">controller_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">physics_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_lyapunov_stability_constraints</span><span class="p">(</span><span class="n">controller_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">physics_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate Lyapunov stability mathematical constraints.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">controller_config</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span>
@@ -1025,7 +1075,10 @@
 </section>
 <section id="pso-convergence-validation">
 <h4>PSO Convergence Validation<a class="headerlink" href="#pso-convergence-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_pso_convergence_constraints</span><span class="p">(</span><span class="n">pso_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_pso_convergence_constraints</span><span class="p">(</span><span class="n">pso_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate PSO convergence mathematical constraints.&quot;&quot;&quot;</span>
 
     <span class="n">w</span> <span class="o">=</span> <span class="n">pso_config</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">]</span>
@@ -1065,7 +1118,10 @@
 </section>
 <section id="numerical-stability-validation">
 <h4>Numerical Stability Validation<a class="headerlink" href="#numerical-stability-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_numerical_stability</span><span class="p">(</span><span class="n">simulation_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">controller_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_numerical_stability</span><span class="p">(</span><span class="n">simulation_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">controller_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate numerical stability constraints.&quot;&quot;&quot;</span>
 
     <span class="n">dt</span> <span class="o">=</span> <span class="n">simulation_config</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">]</span>
@@ -1102,7 +1158,10 @@
 <h3>Cross-Parameter Validation Rules<a class="headerlink" href="#cross-parameter-validation-rules" title="Link to this heading">¶</a></h3>
 <section id="physics-controller-compatibility">
 <h4>Physics-Controller Compatibility<a class="headerlink" href="#physics-controller-compatibility" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_physics_controller_compatibility</span><span class="p">(</span><span class="n">physics_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">controller_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_physics_controller_compatibility</span><span class="p">(</span><span class="n">physics_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">controller_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate compatibility between physics and controller parameters.&quot;&quot;&quot;</span>
 
     <span class="n">physics</span> <span class="o">=</span> <span class="n">PhysicsConfig</span><span class="p">(</span><span class="o">**</span><span class="n">physics_config</span><span class="p">)</span>
@@ -1137,7 +1196,10 @@
 </section>
 <section id="optimization-controller-compatibility">
 <h4>Optimization-Controller Compatibility<a class="headerlink" href="#optimization-controller-compatibility" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_optimization_controller_compatibility</span><span class="p">(</span><span class="n">opt_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">ctrl_configs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_optimization_controller_compatibility</span><span class="p">(</span><span class="n">opt_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">ctrl_configs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate optimization bounds with controller requirements.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="s1">&#39;pso&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">opt_config</span><span class="p">:</span>
@@ -1171,7 +1233,10 @@
 </section>
 <section id="simulation-system-compatibility">
 <h4>Simulation-System Compatibility<a class="headerlink" href="#simulation-system-compatibility" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_simulation_system_compatibility</span><span class="p">(</span><span class="n">sim_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">physics_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_simulation_system_compatibility</span><span class="p">(</span><span class="n">sim_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">physics_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate simulation parameters with physical system.&quot;&quot;&quot;</span>
 
     <span class="n">physics</span> <span class="o">=</span> <span class="n">PhysicsConfig</span><span class="p">(</span><span class="o">**</span><span class="n">physics_config</span><span class="p">)</span>
@@ -1302,7 +1367,10 @@
 </section>
 <section id="configuration-hot-reloading">
 <h4>Configuration Hot-Reloading<a class="headerlink" href="#configuration-hot-reloading" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationHotReloader</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationHotReloader</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Hot-reload configuration with validation.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -1370,7 +1438,10 @@
 <h3>Configuration Version Management<a class="headerlink" href="#configuration-version-management" title="Link to this heading">¶</a></h3>
 <section id="schema-migration-system">
 <h4>Schema Migration System<a class="headerlink" href="#schema-migration-system" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationMigrator</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationMigrator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle configuration schema migrations.&quot;&quot;&quot;</span>
 
     <span class="n">MIGRATIONS</span> <span class="o">=</span> <span class="p">{</span>
@@ -1470,7 +1541,10 @@
 </section>
 <section id="backward-compatibility-validation">
 <h4>Backward Compatibility Validation<a class="headerlink" href="#backward-compatibility-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_backward_compatibility</span><span class="p">(</span><span class="n">old_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">new_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_backward_compatibility</span><span class="p">(</span><span class="n">old_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">new_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate backward compatibility between configuration versions.&quot;&quot;&quot;</span>
 
     <span class="c1"># Core functionality must remain available</span>
@@ -1500,7 +1574,10 @@
 <h3>Automated Validation Testing<a class="headerlink" href="#automated-validation-testing" title="Link to this heading">¶</a></h3>
 <section id="configuration-test-suite">
 <h4>Configuration Test Suite<a class="headerlink" href="#configuration-test-suite" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationTestSuite</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationTestSuite</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive configuration validation test suite.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_valid_configurations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1758,7 +1835,7 @@ python<span class="w"> </span>scripts/validate_performance_requirements.py<span 
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

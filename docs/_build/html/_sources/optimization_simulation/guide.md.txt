@@ -227,6 +227,62 @@ print(f"Best cost: {best_cost:.4f}")
 print(f"Iterations to convergence: {len(cost_history)}")
 ```
 
+### PSO Convergence Visualization
+
+Interactive convergence plots show optimization progress for different SMC controllers:
+
+```{eval-rst}
+.. chartjs::
+   :type: line
+   :data: ../visualization/data/pso_comparison.json
+   :height: 450
+   :responsive:
+   :title: PSO Convergence Comparison Across Controllers
+```
+
+**Controller-Specific Convergence Analysis:**
+
+Classical SMC:
+```{eval-rst}
+.. chartjs::
+   :type: line
+   :data: ../visualization/data/pso_classical_smc_convergence.json
+   :height: 350
+   :responsive:
+   :title: Classical SMC PSO Convergence
+```
+
+Adaptive SMC:
+```{eval-rst}
+.. chartjs::
+   :type: line
+   :data: ../visualization/data/pso_adaptive_smc_convergence.json
+   :height: 350
+   :responsive:
+   :title: Adaptive SMC PSO Convergence
+```
+
+Hybrid Adaptive-STA SMC:
+```{eval-rst}
+.. chartjs::
+   :type: line
+   :data: ../visualization/data/pso_hybrid_adaptive_sta_smc_convergence.json
+   :height: 350
+   :responsive:
+   :title: Hybrid Adaptive-STA SMC PSO Convergence
+```
+
+**Convergence Statistics:**
+
+```{eval-rst}
+.. chartjs::
+   :type: bar
+   :data: ../visualization/data/convergence_statistics.json
+   :height: 300
+   :responsive:
+   :title: PSO Convergence Statistics Summary
+```
+
 **Memory Efficiency:** PSO uses local PRNGs and instance-level attributes to avoid cross-contamination between optimization runs.
 
 **Performance:** Vectorized batch simulation achieves **10-100×** speedup over sequential evaluation.
@@ -319,6 +375,9 @@ print(f"Max control: {np.max(np.abs(u_arr)):.2f} N")
 The runner supports real-time deadline monitoring:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def fallback_controller(t, x):
     """Simple PD controller as fallback."""
     return -10 * x[0] - 5 * x[3]  # Proportional to cart position and velocity
@@ -355,6 +414,9 @@ Vectorized batch simulation enables efficient parallel evaluation of multiple co
 ### API: `simulate_system_batch`
 
 ```python
+# example-metadata:
+# runnable: false
+
 def simulate_system_batch(
     *,
     controller_factory: Callable[[np.ndarray], Any],
@@ -1062,6 +1124,9 @@ dynamics = SimplifiedDIPDynamics(
 Always use batch simulation for PSO instead of sequential loops:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # FAST: Vectorized batch evaluation
 t, x_batch, u_batch, sigma_batch = simulate_system_batch(
     controller_factory=factory,
@@ -1102,6 +1167,9 @@ t, x_batch, u_batch, sigma_batch = simulate_system_batch(
 **Location:** [`src/optimization/algorithms/pso_optimizer.py`](../../src/optimization/algorithms/pso_optimizer.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOTuner:
     """High-throughput, vectorized tuner for sliding-mode controllers."""
 
@@ -1167,6 +1235,9 @@ class PSOTuner:
 **Location:** [`src/simulation/engines/simulation_runner.py`](../../src/simulation/engines/simulation_runner.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def run_simulation(
     *,
     controller: Any,
@@ -1217,6 +1288,9 @@ def run_simulation(
 **Location:** [`src/simulation/engines/vector_sim.py`](../../src/simulation/engines/vector_sim.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def simulate_system_batch(
     *,
     controller_factory: Callable[[np.ndarray], Any],
@@ -1275,6 +1349,9 @@ def simulate_system_batch(
 **Location:** [`src/simulation/core/simulation_context.py`](../../src/simulation/core/simulation_context.py)
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SimulationContext:
     """Enhanced simulation context with framework integration."""
 
@@ -1318,11 +1395,11 @@ class SimulationContext:
 
 ## Related Documentation
 
-- [**Controllers Implementation Guide**](../controllers/implementation_guide.md) - SMC controller details and usage
+- [**Controllers Implementation Guide**](../controllers/factory_system_guide.md) - SMC controller details and usage
 - [**Plant Models Guide**](../plant/models_guide.md) - Dynamics models and physics computation
 - [**Mathematical Foundations**](../mathematical_foundations/index.md) - Control theory and optimization theory
-- [**Configuration Reference**](../configuration/reference.md) - Complete configuration schema documentation
-- [**Performance Benchmarks**](../benchmarks/performance.md) - Integration method comparisons and performance analysis
+- [**Configuration Reference**](../guides/api/configuration.md) - Complete configuration schema documentation
+- [**Performance Benchmarks**](../benchmarks/controller_performance_benchmarks.md) - Integration method comparisons and performance analysis
 
 ---
 

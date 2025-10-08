@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "total_claims": 4,
+    "by_priority": {
+      "CRITICAL": 4
+    }
+  },
+  "research_queue": {
+    "CRITICAL": [
+      "FORMAL-THEOREM-016",
+      "FORMAL-THEOREM-019",
+      "FORMAL-THEOREM-020",
+      "FORMAL-THEOREM-023"
+    ],
+    "HIGH": [],
+    "MEDIUM": []
+  },
+  "claims": [
+    {
+      "id": "FORMAL-THEOREM-016",
+      "type": "theorem",
+      "number": 1,
+      "statement": "If all sliding surface parameters $c_i > 0$, then the sliding surface dynamics are exponentially stable with convergence rates determined by $c_i$.",
+      "proof": null,
+      "file_path": "docs/theory/smc_theory_complete.md",
+      "line_number": 71,
+      "has_citation": false,
+      "confidence": 0.9,
+      "suggested_keywords": [
+        "sliding mode",
+        "convergence",
+        "stability"
+      ],
+      "context": "\\dot{\\vec{e}}_p + \\mat{C}\\vec{e}_p = 0\n```\n\nwhere $\\mat{C} = \\text{diag}(c_x, c_{\\theta_1}, c_{\\theta_2})$.\n\n**Theorem 1 (Surface Stability)**: If all sliding surface parameters $c_i > 0$, then the sliding surface dynamics are exponentially stable with convergence rates determined by $c_i$.\n\n*Proof*: The characteristic polynomial of each error component is $s + c_i = 0$, yielding eigenvalues $\\lambda_i = -c_i < 0$ for $c_i > 0$. □\n\n## Classical Sliding Mode Control\n",
+      "category": "theoretical",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "FORMAL-THEOREM-019",
+      "type": "theorem",
+      "number": 2,
+      "statement": "Under the reaching condition {eq}`eq:reaching_condition`, the system reaches the sliding surface in finite time bounded by:",
+      "proof": null,
+      "file_path": "docs/theory/smc_theory_complete.md",
+      "line_number": 132,
+      "has_citation": false,
+      "confidence": 0.9,
+      "suggested_keywords": [
+        "reaching condition",
+        "finite-time"
+      ],
+      "context": "s \\cdot \\dot{s} \\leq -\\alpha |s|\n```\n\nfor some $\\alpha > 0$.\n\n**Theorem 2 (Finite-Time Reaching)**: Under the reaching condition {eq}`eq:reaching_condition`, the system reaches the sliding surface in finite time bounded by:\n\n```{math}\n:label: eq:reaching_time_bound\nt_{reach} \\leq \\frac{|s(0)|}{\\alpha}\n```",
+      "category": "theoretical",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "FORMAL-THEOREM-020",
+      "type": "theorem",
+      "number": 3,
+      "statement": "The classical SMC law {eq}`eq:classical_smc_structure` with switching gain $\\eta > \\rho$ (where $\\rho$ is the uncertainty bound) ensures global finite-time convergence to the sliding surface.",
+      "proof": null,
+      "file_path": "docs/theory/smc_theory_complete.md",
+      "line_number": 160,
+      "has_citation": false,
+      "confidence": 0.9,
+      "suggested_keywords": [
+        "uncertainty",
+        "convergence",
+        "SMC",
+        "stability",
+        "finite-time",
+        "Lyapunov"
+      ],
+      "context": "V(s) = \\frac{1}{2}s^2\n```\n\n### Stability Proof\n\n**Theorem 3 (Classical SMC Stability)**: The classical SMC law {eq}`eq:classical_smc_structure` with switching gain $\\eta > \\rho$ (where $\\rho$ is the uncertainty bound) ensures global finite-time convergence to the sliding surface.\n\n*Proof*: Consider the Lyapunov function derivative:\n\n```{math}\n:label: eq:lyapunov_derivative",
+      "category": "theoretical",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "FORMAL-THEOREM-023",
+      "type": "theorem",
+      "number": 6,
+      "statement": "With the boundary layer method, the tracking error is ultimately bounded by:",
+      "proof": null,
+      "file_path": "docs/theory/smc_theory_complete.md",
+      "line_number": 322,
+      "has_citation": false,
+      "confidence": 0.9,
+      "suggested_keywords": [
+        "convergence",
+        "boundary layer"
+      ],
+      "context": "s/\\epsilon & \\text{if } |s| \\leq \\epsilon \\\\\n\\text{sign}(s) & \\text{if } |s| > \\epsilon\n\\end{cases}\n```\n\n**Theorem 6 (Boundary Layer Convergence)**: With the boundary layer method, the tracking error is ultimately bounded by:\n\n```{math}\n:label: eq:boundary_layer_bound\n\\limsup_{t \\rightarrow \\infty} |\\vec{e}(t)| \\leq \\frac{\\epsilon}{\\lambda_{\\min}(\\mat{C})}\n```",
+      "category": "theoretical",
+      "priority": "CRITICAL"
+    }
+  ]
+}

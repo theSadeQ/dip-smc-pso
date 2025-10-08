@@ -226,7 +226,7 @@ python simulate.py --ctrl classical_smc --run-pso \
 
 ## 🔗 Navigation
 
-[⬅️ Back to Reports](../reports/) | [🏠 Testing Home](../../README.md) | [➡️ Technical Analysis](technical_analysis.md)
+[🏠 Testing Home](../../README.md) | [➡️ Technical Analysis](technical_analysis.md)
 
 ---
 

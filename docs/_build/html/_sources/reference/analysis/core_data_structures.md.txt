@@ -6,6 +6,192 @@
 
 Data structures for analysis framework.
 
+
+
+## Advanced Mathematical Theory
+
+### Time Series Data Structures
+
+**Discrete-time signal:**
+
+```{math}
+x[n] \in \mathbb{R}^d, \quad n = 0, 1, \ldots, N-1
+```
+
+**Sampling theorem:**
+
+```{math}
+f_s \geq 2f_{max} \quad \text{(Nyquist criterion)}
+```
+
+### Circular Buffer
+
+**Fixed-size buffer with wraparound:**
+
+```{math}
+\text{index} = (\text{head} + i) \bmod N
+```
+
+**Memory complexity:** $O(N)$, constant space.
+
+### Sliding Window
+
+**Window of size $W$:**
+
+```{math}
+x_w[n] = [x[n-W+1], \ldots, x[n]]
+```
+
+**Online mean update:**
+
+```{math}
+\mu_n = \mu_{n-1} + \frac{x[n] - x[n-W]}{W}
+```
+
+### Sparse Matrix Storage
+
+**Compressed Sparse Row (CSR):**
+
+```{math}
+A \in \mathbb{R}^{m \times n} \to (\text{values}, \text{col_indices}, \text{row_ptr})
+```
+
+**Memory:** $O(\text{nnz})$ vs $O(mn)$ for dense.
+
+### Ring Buffer for Convolution
+
+**Circular convolution:**
+
+```{math}
+y[n] = \sum_{k=0}^{M-1} h[k] x[(n-k) \bmod N]
+```
+
+### Priority Queue
+
+**Binary heap operations:**
+
+```{math}
+\begin{align}
+\text{Insert: } & O(\log n) \\
+\text{Extract-Min: } & O(\log n) \\
+\text{Peek: } & O(1)
+\end{align}
+```
+
+### State Vector Storage
+
+**Full state history:**
+
+```{math}
+\mathbf{X} \in \mathbb{R}^{N \times d}, \quad X[i, :] = \vec{x}(t_i)
+```
+
+**Memory:** $O(Nd)$ for $N$ timesteps, $d$ dimensions.
+
+### Downsampling Strategy
+
+**Decimation by factor $M$:**
+
+```{math}
+y[n] = x[Mn], \quad n = 0, 1, \ldots, \lfloor N/M \rfloor - 1
+```
+
+**Anti-aliasing filter** before decimation to prevent aliasing.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Data Stream] --> B{Storage Type}
+    B -->|Bounded| C[Circular Buffer]
+    B -->|Unbounded| D[Dynamic Array]
+    B -->|Sparse| E[CSR Matrix]
+
+    C --> F[Wraparound Index]
+    F --> G[Constant Memory]
+
+    D --> H[Resize Strategy]
+    H --> I[Amortized O(1)]
+
+    E --> J[Compressed Storage]
+    J --> K[O(nnz) Memory]
+
+    C --> L[Sliding Window]
+    L --> M[Online Statistics]
+    M --> N[Running Mean]
+    M --> O[Running Variance]
+
+    D --> P[Full History]
+    P --> Q[Post-Processing]
+
+    style B fill:#ff9
+    style G fill:#9f9
+    style K fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides standardized data structures for representing
 simulation data, analysis results, and configuration parameters.
 

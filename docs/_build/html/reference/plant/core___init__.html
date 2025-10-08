@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -487,6 +513,7 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="plant-core-init">
 <h1>plant.core.<strong>init</strong><a class="headerlink" href="#plant-core-init" title="Link to this heading">¶</a></h1>
+<!-- Enhanced by Week 8 Phase 2 -->
 <p><strong>Source:</strong> <code class="docutils literal notranslate"><span class="pre">src\plant\core\__init__.py</span></code></p>
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
@@ -500,6 +527,238 @@
 </ul>
 <p>These components are designed for reuse across different plant models
 while maintaining mathematical correctness and numerical robustness.</p>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TB
+    A[plant.core Package] --&gt; B[physics_matrices]
+    A --&gt; C[numerical_stability]
+    A --&gt; D[state_validation]
+    A --&gt; E[dynamics_compatibility_]
+    B --&gt; F[compute_mass_matrix]
+    B --&gt; G[compute_coriolis_matrix]
+    B --&gt; H[compute_gravity_vector]
+    C --&gt; I[robust_inverse]
+    C --&gt; J[analyze_conditioning]
+    D --&gt; K[StateValidator]
+    D --&gt; L[validate_state]
+    E --&gt; M[Re-export for tests]
+
+    style B fill:#9cf
+    style C fill:#fcf
+    style D fill:#ff9
+        </div></section>
+<section id="enhanced-mathematical-foundation">
+<h2>Enhanced Mathematical Foundation<a class="headerlink" href="#enhanced-mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="core-module-architecture">
+<h3>Core Module Architecture<a class="headerlink" href="#core-module-architecture" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">plant.core</span></code> module provides the <strong>foundational components</strong> for double inverted pendulum dynamics computation. It serves as the abstraction layer between:</p>
+<ol class="arabic simple">
+<li><p><strong>Physics Models</strong> (Lagrangian mechanics, matrix computation)</p></li>
+<li><p><strong>Numerical Methods</strong> (integration, linear algebra)</p></li>
+<li><p><strong>Controllers</strong> (SMC, MPC, adaptive control)</p></li>
+</ol>
+<p><strong>Separation of Concerns:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\text{Dynamics} = \underbrace{\text{Physics}}_\text{core.physics\_matrices} \circ \underbrace{\text{Numerical}}_\text{core.numerical\_stability} \circ \underbrace{\text{Validation}}_\text{core.state\_validation}
+\]</div>
+</div>
+</section>
+<section id="module-responsibilities">
+<h3>Module Responsibilities<a class="headerlink" href="#module-responsibilities" title="Link to this heading">¶</a></h3>
+<p><strong>Physics Computation (<code class="docutils literal notranslate"><span class="pre">physics_matrices</span></code>):</strong></p>
+<ul class="simple">
+<li><p>Mass matrix <span class="math notranslate nohighlight">\(M(q)\)</span> computation</p></li>
+<li><p>Coriolis matrix <span class="math notranslate nohighlight">\(C(q, \dot{q})\)</span> computation</p></li>
+<li><p>Gravity vector <span class="math notranslate nohighlight">\(G(q)\)</span> computation</p></li>
+<li><p>Christoffel symbol calculation</p></li>
+</ul>
+<p><strong>Numerical Stability (<code class="docutils literal notranslate"><span class="pre">numerical_stability</span></code>):</strong></p>
+<ul class="simple">
+<li><p>Matrix conditioning analysis (<span class="math notranslate nohighlight">\(\kappa(M)\)</span>)</p></li>
+<li><p>Tikhonov regularization (<span class="math notranslate nohighlight">\(\lambda\)</span> selection)</p></li>
+<li><p>SVD pseudo-inverse fallback</p></li>
+<li><p>Error bound monitoring</p></li>
+</ul>
+<p><strong>State Validation (<code class="docutils literal notranslate"><span class="pre">state_validation</span></code>):</strong></p>
+<ul class="simple">
+<li><p>Physical constraint checking</p></li>
+<li><p>Energy conservation monitoring</p></li>
+<li><p>NaN/Inf detection</p></li>
+<li><p>Runtime verification</p></li>
+</ul>
+<p><strong>Dynamics Interface (<code class="docutils literal notranslate"><span class="pre">dynamics</span></code>):</strong></p>
+<ul class="simple">
+<li><p>Backward compatibility layer</p></li>
+<li><p>Unified API for test modules</p></li>
+<li><p>Re-exports from implementation modules</p></li>
+</ul>
+</section>
+<section id="design-principles">
+<h3>Design Principles<a class="headerlink" href="#design-principles" title="Link to this heading">¶</a></h3>
+<p><strong>1. Modularity:</strong></p>
+<p>Each component has <strong>single responsibility</strong> and clear interfaces:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean separation</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">compute_mass_matrix</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>        <span class="c1"># Physics</span>
+<span class="n">M_inv</span> <span class="o">=</span> <span class="n">robust_inverse</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>                 <span class="c1"># Numerical</span>
+<span class="n">is_valid</span> <span class="o">=</span> <span class="n">validate_state</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>              <span class="c1"># Validation</span>
+</pre></div>
+</div>
+<p><strong>2. Composability:</strong></p>
+<p>Components combine to form complete dynamics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dynamics_step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">q</span><span class="p">,</span> <span class="n">q_dot</span> <span class="o">=</span> <span class="n">extract_coordinates</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">compute_mass_matrix</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">compute_coriolis_matrix</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">q_dot</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">compute_gravity_vector</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="n">M_inv</span> <span class="o">=</span> <span class="n">robust_inverse</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">q_ddot</span> <span class="o">=</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="p">(</span><span class="n">B</span> <span class="o">@</span> <span class="n">u</span> <span class="o">-</span> <span class="n">C</span> <span class="o">@</span> <span class="n">q_dot</span> <span class="o">-</span> <span class="n">G</span><span class="p">)</span>
+    <span class="n">x_dot</span> <span class="o">=</span> <span class="n">assemble_state_derivative</span><span class="p">(</span><span class="n">q_dot</span><span class="p">,</span> <span class="n">q_ddot</span><span class="p">)</span>
+    <span class="n">validate_state</span><span class="p">(</span><span class="n">x_dot</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_dot</span>
+</pre></div>
+</div>
+<p><strong>3. Performance:</strong></p>
+<p>Numba JIT compilation for critical paths:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_physics_matrices_numba</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">q_dot</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Hot loop - compiled to machine code</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Martin</strong> (2017). <em>Clean Architecture</em>. Prentice Hall. Chapter 7 (SRP).</p></li>
+<li><p><strong>Murray et al.</strong> (1994). <em>Robotic Manipulation</em>. CRC Press. Chapter 4.</p></li>
+</ol>
+</section>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>Initialize and use the Core   Init   module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.__init__</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Basic initialization</span>
+<span class="c1"># Initialize module</span>
+<span class="c1"># ... basic usage code ...</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>Configure with custom parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Advanced configuration</span>
+<span class="c1"># ... custom parameters ...</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<p>Robust error handling and recovery:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NumericalInstabilityError</span><span class="p">,</span>
+    <span class="n">StateValidationError</span><span class="p">,</span>
+    <span class="n">ConfigurationError</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Risky operation</span>
+    <span class="n">state_dot</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">NumericalInstabilityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Numerical instability detected: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: reduce timestep, increase regularization</span>
+    <span class="n">dynamics</span><span class="o">.</span><span class="n">reset_numerical_params</span><span class="p">(</span><span class="n">stronger_regularization</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">StateValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid state: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: clip state to valid bounds</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">clip_to_valid</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">ConfigurationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: use default configuration</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_default_config</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-optimization">
+<h3>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h3>
+<p>Optimize for computational efficiency:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Performance optimization</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cProfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pstats</span>
+
+<span class="c1"># Profile critical code path</span>
+<span class="n">profiler</span> <span class="o">=</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
+<span class="n">profiler</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="c1"># ... run intensive operations ...</span>
+
+<span class="n">profiler</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">pstats</span><span class="o">.</span><span class="n">Stats</span><span class="p">(</span><span class="n">profiler</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="s1">&#39;cumulative&#39;</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">print_stats</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Top 10 time consumers</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-controllers">
+<h3>Example 5: Integration with Controllers<a class="headerlink" href="#example-5-integration-with-controllers" title="Link to this heading">¶</a></h3>
+<p>Integrate with control systems:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.core.simulation_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Create dynamics model</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDIPDynamics</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Create controller</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Run closed-loop simulation</span>
+<span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final state: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Settling time: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">settling_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control effort: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">control_effort</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -592,7 +851,7 @@ while maintaining mathematical correctness and numerical robustness.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -615,6 +874,22 @@ while maintaining mathematical correctness and numerical robustness.</p>
             <ul>
 <li><a class="reference internal" href="#">plant.core.<strong>init</strong></a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#core-module-architecture">Core Module Architecture</a></li>
+<li><a class="reference internal" href="#module-responsibilities">Module Responsibilities</a></li>
+<li><a class="reference internal" href="#design-principles">Design Principles</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-controllers">Example 5: Integration with Controllers</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
@@ -635,6 +910,10 @@ while maintaining mathematical correctness and numerical robustness.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

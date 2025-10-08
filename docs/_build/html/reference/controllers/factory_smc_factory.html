@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.factory.thread_safety" href="factory_thread_safety.html" /><link rel="prev" title="controllers.factory.pso_integration" href="factory_pso_integration.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -507,6 +533,328 @@
 <li><p>Minimal: No unnecessary complexity</p></li>
 </ul>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="factory-design-pattern">
+<h3>Factory Design Pattern<a class="headerlink" href="#factory-design-pattern" title="Link to this heading">¶</a></h3>
+<p>The <strong>Factory Pattern</strong> encapsulates object creation logic, providing loose coupling between client code and concrete implementations.</p>
+</section>
+<section id="gang-of-four-definition">
+<h3>Gang of Four Definition<a class="headerlink" href="#gang-of-four-definition" title="Link to this heading">¶</a></h3>
+<p><strong>Intent:</strong> Define an interface for creating objects, but let subclasses decide which class to instantiate.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Factory}: \text{ProductType} \times \text{Parameters} \to \text{ConcreteProduct}\]</div>
+</div>
+</section>
+<section id="smc-controller-hierarchy">
+<h3>SMC Controller Hierarchy<a class="headerlink" href="#smc-controller-hierarchy" title="Link to this heading">¶</a></h3>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{SMC} &amp;\to \text{Controller} \quad \text{(abstract base)} \\
+&amp;\to \text{ClassicalSMC} \\
+&amp;\to \text{AdaptiveSMC} \\
+&amp;\to \text{SuperTwistingSMC} \\
+&amp;\to \text{HybridAdaptiveSMC}
+\end{align}\end{split}\]</div>
+</div>
+</section>
+<section id="enum-based-type-safety">
+<h3>Enum-Based Type Safety<a class="headerlink" href="#enum-based-type-safety" title="Link to this heading">¶</a></h3>
+<p><strong>Type-safe controller selection:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SMCType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">CLASSICAL</span> <span class="o">=</span> <span class="s2">&quot;classical&quot;</span>
+    <span class="n">ADAPTIVE</span> <span class="o">=</span> <span class="s2">&quot;adaptive&quot;</span>
+    <span class="n">SUPER_TWISTING</span> <span class="o">=</span> <span class="s2">&quot;sta&quot;</span>
+    <span class="n">HYBRID</span> <span class="o">=</span> <span class="s2">&quot;hybrid&quot;</span>
+</pre></div>
+</div>
+<p><strong>Compile-time validation:</strong> Python type checker (mypy) validates:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_controller</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Controller</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="registry-pattern">
+<h3>Registry Pattern<a class="headerlink" href="#registry-pattern" title="Link to this heading">¶</a></h3>
+<p><strong>Dynamic controller registration:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Registry}: \text{SMCType} \to (\text{Parameters} \to \text{Controller})\]</div>
+</div>
+<p><strong>Benefits:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Open/Closed Principle:</strong> Add new controllers without modifying factory</p></li>
+<li><p><strong>Plugin Architecture:</strong> Controllers can be registered at runtime</p></li>
+<li><p><strong>Testing:</strong> Mock controllers can be injected</p></li>
+</ol>
+</section>
+<section id="singleton-registry">
+<h3>Singleton Registry<a class="headerlink" href="#singleton-registry" title="Link to this heading">¶</a></h3>
+<p><strong>Single global registry</strong> avoids duplication:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_controller_registry</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">SMCType</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">register_controller</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span> <span class="n">factory_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+    <span class="n">_controller_registry</span><span class="p">[</span><span class="n">ctrl_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">factory_fn</span>
+</pre></div>
+</div>
+<p><strong>Thread safety:</strong> Use locks if multi-threaded:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_registry_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">_registry_lock</span><span class="p">:</span>
+    <span class="n">_controller_registry</span><span class="p">[</span><span class="n">ctrl_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">factory_fn</span>
+</pre></div>
+</div>
+</section>
+<section id="dependency-injection">
+<h3>Dependency Injection<a class="headerlink" href="#dependency-injection" title="Link to this heading">¶</a></h3>
+<p><strong>Inversion of Control:</strong> Factory receives dependencies rather than creating them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_controller</span><span class="p">(</span>
+    <span class="n">ctrl_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span>
+    <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DynamicsModel</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Injected</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Config</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Injected</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Controller</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Benefits:</strong></p>
+<ul class="simple">
+<li><p>Testability: Inject mock dynamics models</p></li>
+<li><p>Flexibility: Change models without factory changes</p></li>
+<li><p>Loose coupling: Factory doesn’t depend on concrete dynamics</p></li>
+</ul>
+</section>
+<section id="gain-specification-pattern">
+<h3>Gain Specification Pattern<a class="headerlink" href="#gain-specification-pattern" title="Link to this heading">¶</a></h3>
+<p><strong>Each controller type specifies gain requirements:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{GainSpec} = (n_{gains}, \text{bounds}, \text{names})\]</div>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GainSpecification</span><span class="p">:</span>
+    <span class="n">n_gains</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">bounds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span>
+    <span class="n">gain_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+</pre></div>
+</div>
+<p><strong>Runtime validation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_gains</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">get_gain_specification</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span> <span class="o">!=</span> <span class="n">spec</span><span class="o">.</span><span class="n">n_gains</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">lb</span> <span class="o">&lt;=</span> <span class="n">g</span> <span class="o">&lt;=</span> <span class="n">ub</span> <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">bounds</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-dataclass-pattern">
+<h3>Configuration Dataclass Pattern<a class="headerlink" href="#configuration-dataclass-pattern" title="Link to this heading">¶</a></h3>
+<p><strong>Type-safe configuration:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SMCConfig</span><span class="p">:</span>
+    <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">boundary_layer</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Validation logic</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;max_force must be positive&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Benefits:</strong></p>
+<ul class="simple">
+<li><p>Immutable (frozen=True)</p></li>
+<li><p>Type hints enforced</p></li>
+<li><p>Validation in <code class="docutils literal notranslate"><span class="pre">__post_init__</span></code></p></li>
+<li><p>Auto-generated <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> and <code class="docutils literal notranslate"><span class="pre">__eq__</span></code></p></li>
+</ul>
+</section>
+<section id="builder-pattern-variant">
+<h3>Builder Pattern Variant<a class="headerlink" href="#builder-pattern-variant" title="Link to this heading">¶</a></h3>
+<p>For complex configurations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SMCConfigBuilder</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s1">&#39;gains&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gains</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_max_force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">[</span><span class="s1">&#39;max_force&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_force</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SMCConfig</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SMCConfig</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">(</span><span class="n">SMCConfigBuilder</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">with_gains</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">with_max_force</span><span class="p">(</span><span class="mf">100.0</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">build</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-considerations">
+<h3>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h3>
+<p><strong>Factory overhead:</strong></p>
+<ul class="simple">
+<li><p>Type dispatch: <span class="math notranslate nohighlight">\(O(1)\)</span> hash table lookup</p></li>
+<li><p>Object construction: <span class="math notranslate nohighlight">\(O(n_{params})\)</span></p></li>
+<li><p>Validation: <span class="math notranslate nohighlight">\(O(n_{gains})\)</span></p></li>
+</ul>
+<p><strong>Total:</strong> Negligible compared to controller compute time (~<span class="math notranslate nohighlight">\(\mu\)</span>s vs ms).</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Client Request: SMCType, gains, config] --&gt; B[Factory.create_controller]
+    B --&gt; C{Validate Gains}
+    C --&gt;|Invalid| D[Raise ValueError]
+    C --&gt;|Valid| E{Type Dispatch}
+
+    E --&gt;|CLASSICAL| F[ClassicalSMC.__init__]
+    E --&gt;|ADAPTIVE| G[AdaptiveSMC.__init__]
+    E --&gt;|SUPER_TWISTING| H[SuperTwistingSMC.__init__]
+    E --&gt;|HYBRID| I[HybridAdaptiveSMC.__init__]
+
+    F --&gt; J[Return Controller Instance]
+    G --&gt; J
+    H --&gt; J
+    I --&gt; J
+
+    J --&gt; K[Client Uses: controller.compute_control]
+
+    style B fill:#9cf
+    style E fill:#ff9
+    style J fill:#9f9
+    style D fill:#f99
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-controller-creation">
+<h3>Example 1: Basic Controller Creation<a class="headerlink" href="#example-1-basic-controller-creation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMCType</span><span class="p">,</span> <span class="n">create_controller</span>
+
+<span class="c1"># Create classical SMC controller</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
+    <span class="n">ctrl_type</span><span class="o">=</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Use controller</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+<span class="n">u</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control output: </span><span class="si">{</span><span class="n">u</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> N&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-type-safe-factory-usage">
+<h3>Example 2: Type-Safe Factory Usage<a class="headerlink" href="#example-2-type-safe-factory-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMCFactory</span><span class="p">,</span> <span class="n">SMCConfig</span>
+
+<span class="c1"># Create configuration dataclass</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">SMCConfig</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Factory ensures type safety</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">SMCFactory</span><span class="o">.</span><span class="n">create_controller</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CLASSICAL</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># mypy validates this at compile time!</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-gain-specification-query">
+<h3>Example 3: Gain Specification Query<a class="headerlink" href="#example-3-gain-specification-query" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMCFactory</span><span class="p">,</span> <span class="n">SMCType</span>
+
+<span class="c1"># Get gain requirements for each controller type</span>
+<span class="k">for</span> <span class="n">ctrl_type</span> <span class="ow">in</span> <span class="n">SMCType</span><span class="p">:</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">SMCFactory</span><span class="o">.</span><span class="n">get_gain_specification</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">ctrl_type</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Number of gains: </span><span class="si">{</span><span class="n">spec</span><span class="o">.</span><span class="n">n_gains</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Gain names:      </span><span class="si">{</span><span class="n">spec</span><span class="o">.</span><span class="n">gain_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Bounds:          </span><span class="si">{</span><span class="n">spec</span><span class="o">.</span><span class="n">bounds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-dynamic-controller-registry">
+<h3>Example 4: Dynamic Controller Registry<a class="headerlink" href="#example-4-dynamic-controller-registry" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory.core.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">ControllerRegistry</span>
+
+<span class="c1"># View registered controllers</span>
+<span class="n">registry</span> <span class="o">=</span> <span class="n">ControllerRegistry</span><span class="p">()</span>
+<span class="n">registered_types</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">list_controllers</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Registered Controllers:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ctrl_type</span> <span class="ow">in</span> <span class="n">registered_types</span><span class="p">:</span>
+    <span class="n">factory_fn</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get_factory</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">ctrl_type</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">factory_fn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Register custom controller (plugin architecture)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_custom_smc</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">CustomSMC</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
+
+<span class="n">registry</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">SMCType</span><span class="o">.</span><span class="n">CUSTOM</span><span class="p">,</span> <span class="n">create_custom_smc</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-batch-controller-creation">
+<h3>Example 5: Batch Controller Creation<a class="headerlink" href="#example-5-batch-controller-creation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_all_smc_controllers</span>
+
+<span class="c1"># Gains for each controller type</span>
+<span class="n">gains_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;classical&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+    <span class="s2">&quot;adaptive&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="s2">&quot;sta&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+    <span class="s2">&quot;hybrid&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Create all controllers for comparison</span>
+<span class="n">controllers</span> <span class="o">=</span> <span class="n">create_all_smc_controllers</span><span class="p">(</span>
+    <span class="n">gains_dict</span><span class="p">,</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulate each controller</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">ctrl_name</span><span class="p">,</span> <span class="n">controller</span> <span class="ow">in</span> <span class="n">controllers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">ctrl_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ctrl_name</span><span class="si">}</span><span class="s2">: ITAE=</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">itae</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -534,7 +882,7 @@
 <span class="linenos"> 23</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos"> 24</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 <span class="linenos"> 25</span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-<span class="linenos"> 26</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="linenos"> 26</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 <span class="linenos"> 27</span>
 <span class="linenos"> 28</span><span class="c1"># Third-party imports</span>
 <span class="linenos"> 29</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1691,7 +2039,7 @@ return performance</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1714,6 +2062,29 @@ return performance</p>
             <ul>
 <li><a class="reference internal" href="#">controllers.factory.smc_factory</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#factory-design-pattern">Factory Design Pattern</a></li>
+<li><a class="reference internal" href="#gang-of-four-definition">Gang of Four Definition</a></li>
+<li><a class="reference internal" href="#smc-controller-hierarchy">SMC Controller Hierarchy</a></li>
+<li><a class="reference internal" href="#enum-based-type-safety">Enum-Based Type Safety</a></li>
+<li><a class="reference internal" href="#registry-pattern">Registry Pattern</a></li>
+<li><a class="reference internal" href="#singleton-registry">Singleton Registry</a></li>
+<li><a class="reference internal" href="#dependency-injection">Dependency Injection</a></li>
+<li><a class="reference internal" href="#gain-specification-pattern">Gain Specification Pattern</a></li>
+<li><a class="reference internal" href="#configuration-dataclass-pattern">Configuration Dataclass Pattern</a></li>
+<li><a class="reference internal" href="#builder-pattern-variant">Builder Pattern Variant</a></li>
+<li><a class="reference internal" href="#performance-considerations">Performance Considerations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-controller-creation">Example 1: Basic Controller Creation</a></li>
+<li><a class="reference internal" href="#example-2-type-safe-factory-usage">Example 2: Type-Safe Factory Usage</a></li>
+<li><a class="reference internal" href="#example-3-gain-specification-query">Example 3: Gain Specification Query</a></li>
+<li><a class="reference internal" href="#example-4-dynamic-controller-registry">Example 4: Dynamic Controller Registry</a></li>
+<li><a class="reference internal" href="#example-5-batch-controller-creation">Example 5: Batch Controller Creation</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#smctype"><code class="docutils literal notranslate"><span class="pre">SMCType</span></code></a><ul>
@@ -1808,6 +2179,10 @@ return performance</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -69,6 +69,9 @@ Factory Integration System
 The primary factory function provides a clean, type-safe interface for controller creation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller(
     controller_type: str,
     config: Optional[Any] = None,
@@ -98,6 +101,9 @@ def create_controller(
 The registry provides comprehensive metadata for each supported controller:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,
@@ -134,6 +140,9 @@ def create_controller(controller_type: str, config: Optional[Any] = None,
 Protocol-based design ensures type safety across the system:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerProtocol(Protocol):
     """Protocol defining the standard controller interface."""
 
@@ -165,6 +174,9 @@ class ControllerProtocol(Protocol):
 The factory system provides native PSO integration through specialized wrapper classes:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """Wrapper for SMC controllers to provide PSO-compatible interface."""
 
@@ -190,6 +202,9 @@ class PSOControllerWrapper:
 Specialized factory functions optimized for PSO workflows:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_smc_for_pso(
     smc_type: SMCType,
     gains: Union[list, np.ndarray],
@@ -211,6 +226,9 @@ def create_pso_controller_factory(
 PSO-specific gain bounds based on control theory principles:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]]:
     """Get PSO gain bounds for a controller type."""
     bounds_map = {
@@ -241,6 +259,9 @@ The factory system resolves configuration from multiple sources with priority:
 4. **Registry defaults** (lowest priority)
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _resolve_controller_gains(
     gains: Optional[Union[List[float], np.ndarray]],
     config: Optional[Any],
@@ -268,6 +289,9 @@ def _resolve_controller_gains(
 Type-safe configuration validation using Pydantic models:
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class ClassicalSMCConfig:
     """Type-safe configuration for Classical SMC controller."""
@@ -290,6 +314,9 @@ class ClassicalSMCConfig:
 Graceful handling of deprecated configuration parameters:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def check_deprecated_config(controller_type: str, params: Dict[str, Any]) -> Dict[str, Any]:
     """Check for deprecated parameters and apply migrations."""
 
@@ -318,6 +345,9 @@ def check_deprecated_config(controller_type: str, params: Dict[str, Any]) -> Dic
 The factory system implements multiple layers of fallback mechanisms:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller(controller_type: str, config: Optional[Any] = None,
                      gains: Optional[Union[list, np.ndarray]] = None) -> Any:
     """Create controller with graceful degradation."""
@@ -340,6 +370,9 @@ def create_controller(controller_type: str, config: Optional[Any] = None,
 Robust handling of optional dependencies:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Optional MPC controller import with graceful fallback
 try:
     from src.controllers.mpc.controller import MPCController
@@ -370,6 +403,9 @@ else:
 Comprehensive validation at multiple levels:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_controller_gains(
     gains: List[float],
     controller_info: Dict[str, Any]
@@ -739,6 +775,9 @@ TypeError: __init__() got an unexpected keyword argument
 **Solutions:**
 1. **Check configuration priority:**
    ```python
+# example-metadata:
+# runnable: false
+
    # Priority order (highest to lowest):
    # 1. Explicit gains parameter
    # 2. Configuration object attributes
@@ -827,6 +866,9 @@ Deadlock in concurrent controller creation
 #### Memory Usage Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Avoid creating unnecessary controllers
 def optimize_controller_creation():
     # ❌ Creates many controller instances
@@ -843,6 +885,9 @@ def optimize_controller_creation():
 #### Import Time Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # ❌ Imports all controllers at module level
 from src.controllers.factory import (
     create_controller,
@@ -879,6 +924,9 @@ Configuration resolution: ~0.2-0.5 ms
 ### Memory Usage Patterns
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Memory-efficient patterns:
 
 # 1. Reuse factory functions
@@ -897,6 +945,9 @@ controllers = create_all_smc_controllers(gains_dict)
 ### Concurrency Performance
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Thread-safe patterns:
 
 # 1. Pre-create factories for concurrent use
@@ -920,6 +971,9 @@ def parallel_fitness_evaluation(gains_batch):
 The factory system includes comprehensive testing:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Test controller creation
 def test_controller_creation():
     controller = create_controller('classical_smc')
@@ -941,6 +995,9 @@ def test_invalid_controller_type():
 ### Integration Testing
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Test PSO integration
 def test_pso_integration():
     factory = create_pso_controller_factory(SMCType.CLASSICAL)
@@ -977,6 +1034,9 @@ def benchmark_factory_performance():
 ### Scientific Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Validate control theory properties
 def test_controller_stability():
     controller = create_controller('classical_smc', gains=[10, 8, 15, 12, 50, 5])

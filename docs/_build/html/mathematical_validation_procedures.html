@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -515,7 +541,10 @@ For sliding mode controllers, stability is established through Lyapunov theory u
 The system is stable if:
 $<span class="math notranslate nohighlight">\(\dot{V}(s) = s \cdot \dot{s} &lt; 0 \quad \forall s \neq 0\)</span>$</p>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_lyapunov_stability</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_lyapunov_stability</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
                               <span class="n">test_scenarios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TestScenario</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">LyapunovValidationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate Lyapunov stability condition for SMC controller.</span>
@@ -619,7 +648,10 @@ The sliding surface must be reachable in finite time. For the surface <span clas
 </div>
 <p>where <span class="math notranslate nohighlight">\(\eta &gt; 0\)</span> is the reaching rate parameter.</p>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_sliding_surface_reachability</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_sliding_surface_reachability</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
                                         <span class="n">test_scenarios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TestScenario</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ReachabilityValidationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate sliding surface reachability condition.</span>
@@ -712,7 +744,10 @@ Chattering is quantified using the chattering index:</p>
 </div>
 <p>where <span class="math notranslate nohighlight">\(u_{avg}(t)\)</span> is the averaged control signal.</p>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_chattering_characteristics</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_chattering_characteristics</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">SMCController</span><span class="p">,</span>
                                       <span class="n">test_scenarios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TestScenario</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ChatteringValidationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Analyze and validate chattering characteristics.</span>
@@ -807,7 +842,10 @@ PSO convergence is analyzed using the <strong>Clerc-Kennedy constriction factor<
 </div>
 <p>where <span class="math notranslate nohighlight">\(\phi = c_1 + c_2 &gt; 4\)</span> ensures convergence.</p>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_pso_convergence_properties</span><span class="p">(</span><span class="n">pso_optimizer</span><span class="p">:</span> <span class="n">PSOOptimizer</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_pso_convergence_properties</span><span class="p">(</span><span class="n">pso_optimizer</span><span class="p">:</span> <span class="n">PSOOptimizer</span><span class="p">,</span>
                                        <span class="n">benchmark_functions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BenchmarkFunction</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">PSOConvergenceValidationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate PSO convergence properties using benchmark functions.</span>
@@ -899,7 +937,10 @@ For multi-objective PSO optimization, Pareto optimality is validated:</p>
 \[\text{Pareto Optimal: } \nexists x \text{ such that } f_i(x) \leq f_i(x^*) \forall i \text{ and } f_j(x) &lt; f_j(x^*) \text{ for some } j\]</div>
 </div>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_multi_objective_pso</span><span class="p">(</span><span class="n">multi_obj_optimizer</span><span class="p">:</span> <span class="n">MultiObjectivePSOOptimizer</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_multi_objective_pso</span><span class="p">(</span><span class="n">multi_obj_optimizer</span><span class="p">:</span> <span class="n">MultiObjectivePSOOptimizer</span><span class="p">,</span>
                                <span class="n">test_problems</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiObjectiveTestProblem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">MultiObjectiveValidationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate multi-objective PSO using standard test problems.</span>
@@ -967,7 +1008,10 @@ Numerical integration accuracy is validated using energy conservation and error 
 </div>
 <p>for conservative systems.</p>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_numerical_integration_stability</span><span class="p">(</span><span class="n">integrators</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">NumericalIntegrator</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_numerical_integration_stability</span><span class="p">(</span><span class="n">integrators</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">NumericalIntegrator</span><span class="p">],</span>
                                            <span class="n">test_scenarios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">IntegrationTestScenario</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NumericalStabilityResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate numerical integration stability and accuracy.</span>
@@ -1087,7 +1131,10 @@ Matrix conditioning analysis using condition number:</p>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\kappa(A) &gt; 10^{12}\)</span> indicates ill-conditioning for double precision.</p>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_matrix_conditioning</span><span class="p">(</span><span class="n">matrices</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_matrix_conditioning</span><span class="p">(</span><span class="n">matrices</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
                                <span class="n">operations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MatrixOperation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ConditioningValidationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate numerical conditioning of matrix operations.</span>
@@ -1177,7 +1224,10 @@ Real-time constraint satisfaction using schedulability analysis:</p>
 </div>
 <p>where <span class="math notranslate nohighlight">\(C_i\)</span> is execution time, <span class="math notranslate nohighlight">\(T_i\)</span> is period, and <span class="math notranslate nohighlight">\(U_{bound}\)</span> is utilization bound.</p>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_real_time_constraints</span><span class="p">(</span><span class="n">control_system</span><span class="p">:</span> <span class="n">ControlSystem</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_real_time_constraints</span><span class="p">(</span><span class="n">control_system</span><span class="p">:</span> <span class="n">ControlSystem</span><span class="p">,</span>
                                  <span class="n">timing_requirements</span><span class="p">:</span> <span class="n">TimingRequirements</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealTimeValidationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate real-time mathematical constraints.</span>
@@ -1266,7 +1316,10 @@ Statistical analysis of timing jitter using probability distributions:</p>
 \[P(\text{jitter} &gt; J_{max}) \leq \epsilon_{acceptable}\]</div>
 </div>
 <p><strong>Implementation Validation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_timing_jitter_and_latency</span><span class="p">(</span><span class="n">control_loop</span><span class="p">:</span> <span class="n">ControlLoop</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_timing_jitter_and_latency</span><span class="p">(</span><span class="n">control_loop</span><span class="p">:</span> <span class="n">ControlLoop</span><span class="p">,</span>
                                      <span class="n">jitter_requirements</span><span class="p">:</span> <span class="n">JitterRequirements</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JitterValidationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validate timing jitter and latency characteristics.</span>
@@ -1504,7 +1557,10 @@ Statistical analysis of timing jitter using probability distributions:</p>
 <h2>6. Comprehensive Mathematical Validation Framework<a class="headerlink" href="#comprehensive-mathematical-validation-framework" title="Link to this heading">¶</a></h2>
 <section id="integrated-mathematical-test-suite">
 <h3>6.1 Integrated Mathematical Test Suite<a class="headerlink" href="#integrated-mathematical-test-suite" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ComprehensiveMathematicalValidator</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ComprehensiveMathematicalValidator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive mathematical validation for control systems.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1606,7 +1662,7 @@ Statistical analysis of timing jitter using probability distributions:</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

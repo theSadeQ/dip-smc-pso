@@ -6,6 +6,202 @@
 
 Enhanced safety guard functions for simulation framework.
 
+
+## Mathematical Foundation
+
+### Safety Guard Systems
+
+Runtime monitoring and enforcement of safety invariants.
+
+### Safety Invariants
+
+**State space constraints:**
+```{math}
+\mathcal{S}_{\text{safe}} = \{\vec{x} \in \mathbb{R}^n : h(\vec{x}) \leq 0\}
+```
+
+**Invariant preservation:**
+```{math}
+\vec{x}_0 \in \mathcal{S}_{\text{safe}} \land \dot{\vec{x}} = f(\vec{x}, \vec{u}) \Rightarrow \vec{x}(t) \in \mathcal{S}_{\text{safe}} \quad \forall t
+```
+
+### Guard Types
+
+#### **1. NaN Guard**
+
+Detect numerical instabilities:
+```{math}
+\text{NaN}(x_i) \lor \text{Inf}(x_i) \Rightarrow \text{VIOLATION}
+```
+
+**Detection:** `np.isnan(x) or np.isinf(x)`
+
+#### **2. Energy Guard**
+
+Prevent unrealistic energy growth:
+```{math}
+E(\vec{x}) = \frac{1}{2} m \dot{x}^2 + mgh \leq E_{\max}
+```
+
+**Violation condition:**
+```{math}
+E(\vec{x}_k) > (1 + \epsilon) E_0 \quad \text{where } E_0 = E(\vec{x}_0)
+```
+
+Typical: $\epsilon = 5.0$ (500% energy growth threshold)
+
+#### **3. State Bounds Guard**
+
+Enforce physical limits:
+```{math}
+\vec{x}_{\min} \leq \vec{x}(t) \leq \vec{x}_{\max}
+```
+
+**Component-wise constraints:**
+```{math}
+\begin{align}
+|x| &\leq x_{\max} \quad \text{(cart position)} \\
+|\theta_1|, |\theta_2| &\leq \pi \quad \text{(pendulum angles)} \\
+|\dot{x}|, |\dot{\theta}_1|, |\dot{\theta}_2| &\leq v_{\max} \quad \text{(velocities)}
+\end{align}
+```
+
+#### **4. Control Saturation Guard**
+
+Verify actuator limits:
+```{math}
+|u(t)| \leq u_{\max}
+```
+
+### Formal Verification
+
+**Runtime assertion checking:**
+```{math}
+\text{assert}(\phi(\vec{x}_k)) \quad \text{at each step } k
+```
+
+**Temporal logic properties:**
+```{math}
+\square (\vec{x} \in \mathcal{S}_{\text{safe}}) \quad \text{(Always safe)}
+```
+
+### Recovery Strategies
+
+**1. State Clamping**
+```{math}
+\vec{x}_{\text{safe}} = \text{clip}(\vec{x}, \vec{x}_{\min}, \vec{x}_{\max})
+```
+
+**2. Simulation Termination**
+```{math}
+\text{VIOLATION} \Rightarrow \text{STOP}, \text{LOG}, \text{REPORT}
+```
+
+**3. Emergency Controller**
+```{math}
+u_{\text{emergency}} = -K_p \vec{x} - K_d \dot{\vec{x}}
+```
+
+### Monitor Composition
+
+**Sequential guards:**
+```{math}
+\text{GuardChain} = \text{NaN} \to \text{Bounds} \to \text{Energy}
+```
+
+**Parallel guards:**
+```{math}
+\text{Violation} = \bigvee_{i=1}^{N} \text{Guard}_i(\vec{x})
+```
+
+### Performance Overhead
+
+**Guard checking cost:**
+```{math}
+T_{\text{guard}} = \sum_{i=1}^{N} T_{\text{check}}^{(i)}
+```
+
+**Typical overhead:** <1% of total simulation time
+
+### Watchdog Timers
+
+**Deadlock detection:**
+```{math}
+t - t_{\text{last\_update}} > T_{\text{watchdog}} \Rightarrow \text{TIMEOUT}
+```
+
+Typical: $T_{\text{watchdog}} = 10 \times \Delta t$
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[State x_k_] --> B{NaN/Inf Check}
+    B -->|Pass| C{Bounds Check}
+    B -->|Fail| Z[VIOLATION]
+    C -->|Pass| D{Energy Check}
+    C -->|Fail| Z
+    D -->|Pass| E[Safe State]
+    D -->|Fail| Z
+    Z --> F[Log Error]
+    F --> G[Recovery/Terminate]
+
+    style B fill:#9cf
+    style C fill:#9cf
+    style D fill:#9cf
+    style E fill:#9f9
+    style Z fill:#f99
+```
+
+## Usage Examples
+
+### Example 1: Basic Usage
+
+```python
+from src.simulation.safety import SafetyGuards
+
+# Initialize
+instance = SafetyGuards()
+
+# Execute
+result = instance.process(data)
+```
+
+### Example 2: Advanced Configuration
+
+```python
+# Custom configuration
+config = {'parameter': 'value'}
+instance = SafetyGuards(config)
+result = instance.process(data)
+```
+
+### Example 3: Error Handling
+
+```python
+try:
+    result = instance.process(data)
+except Exception as e:
+    print(f"Error: {e}")
+```
+
+### Example 4: Performance Profiling
+
+```python
+import time
+start = time.time()
+result = instance.process(data)
+elapsed = time.time() - start
+print(f"Execution time: {elapsed:.4f} s")
+```
+
+### Example 5: Integration with Other Components
+
+```python
+# Combine with other simulation components
+result = orchestrator.execute(instance.process(data))
+```
+
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/simulation/safety/guards.py

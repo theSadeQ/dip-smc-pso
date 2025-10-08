@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -510,7 +536,10 @@
 <section id="pso-system-health-check">
 <h3>1.1 PSO System Health Check<a class="headerlink" href="#pso-system-health-check" title="Link to this heading">¶</a></h3>
 <p><strong>Comprehensive System Status Assessment:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1">#!/usr/bin/env python3</span>
 <span class="sd">&quot;&quot;&quot;PSO System Health Checker&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1114,7 +1143,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <li><p>System becomes unresponsive</p></li>
 </ul>
 <p><em>Diagnostic Steps:</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Profile optimization performance</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Profile optimization performance</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -1177,7 +1209,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <li><p>Optimization crashes with MemoryError</p></li>
 </ul>
 <p><em>Diagnostic Steps:</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gc</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">gc</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
@@ -1213,19 +1248,29 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <p><em>Solutions:</em></p>
 <ol class="arabic">
 <li><p><strong>Force Garbage Collection:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gc</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">cleanup_callback</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">iteration</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>  <span class="c1"># Force garbage collection</span>
-    <span class="k">return</span> <span class="kc">False</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">pso_tuner</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">callback</span><span class="o">=</span><span class="n">cleanup_callback</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
-<li><p><strong>Reduce Memory Footprint:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use smaller data types</span>
+</ol>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false">
+<h1>runnable: false<a class="headerlink" href="#runnable-false" title="Link to this heading">¶</a></h1>
+<p>import gc</p>
+<p>def cleanup_callback(iteration, **kwargs):
+if iteration % 20 == 0:
+gc.collect()  # Force garbage collection
+return False</p>
+<p>results = pso_tuner.optimize(callback=cleanup_callback, …)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Reduce</span> <span class="n">Memory</span> <span class="n">Footprint</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># Use smaller data types</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># In PSO configuration</span>
@@ -1236,7 +1281,7 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <span class="p">}</span>
 </pre></div>
 </div>
-</li>
+<ol class="arabic" start="3">
 <li><p><strong>Batch Processing:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process controllers sequentially instead of parallel</span>
 <span class="nv">controllers</span><span class="o">=(</span><span class="s2">&quot;classical_smc&quot;</span><span class="w"> </span><span class="s2">&quot;sta_smc&quot;</span><span class="w"> </span><span class="s2">&quot;adaptive_smc&quot;</span><span class="o">)</span>
@@ -1248,9 +1293,8 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </div>
 </li>
 </ol>
-</section>
 <section id="controller-specific-issues">
-<h3>2.3 Controller-Specific Issues<a class="headerlink" href="#controller-specific-issues" title="Link to this heading">¶</a></h3>
+<h2>2.3 Controller-Specific Issues<a class="headerlink" href="#controller-specific-issues" title="Link to this heading">¶</a></h2>
 <p><strong>Issue: Unstable Optimized Controllers</strong></p>
 <p><em>Symptoms:</em></p>
 <ul class="simple">
@@ -1300,32 +1344,44 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <p><em>Solutions:</em></p>
 <ol class="arabic">
 <li><p><strong>Constrain Gain Ratios:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_gain_ratios</span><span class="p">(</span><span class="n">particles</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enhanced gain validation with ratio constraints.&quot;&quot;&quot;</span>
-    <span class="n">valid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">particles</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">controller_type</span> <span class="o">==</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span>
-        <span class="n">c1</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">T</span>
-
-        <span class="c1"># Ratio constraints</span>
-        <span class="n">valid</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="n">lambda1</span> <span class="o">/</span> <span class="n">lambda2</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lambda1</span> <span class="o">/</span> <span class="n">lambda2</span> <span class="o">&lt;</span> <span class="mf">2.0</span><span class="p">)</span>
-        <span class="n">valid</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="n">K</span> <span class="o">/</span> <span class="n">lambda1</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">K</span> <span class="o">/</span> <span class="n">lambda1</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">)</span>
-        <span class="n">valid</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="n">kd</span> <span class="o">/</span> <span class="n">K</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">kd</span> <span class="o">/</span> <span class="n">K</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">valid</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
-<li><p><strong>Conservative Bounds:</strong></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># More conservative parameter bounds</span>
-<span class="nt">pso</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">bounds</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">classical_smc</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">lower</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">upper</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">15.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">75.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.0</span><span class="p p-Indicator">]</span>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>example-metadata:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>runnable: false<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+<p>def validate_gain_ratios(particles, controller_type):
+“””Enhanced gain validation with ratio constraints.”””
+valid = np.ones(particles.shape[0], dtype=bool)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   if controller_type == &#39;classical_smc&#39;:
+       c1, lambda1, c2, lambda2, K, kd = particles.T
+
+       # Ratio constraints
+       valid &amp;= (lambda1 / lambda2 &gt; 0.5) &amp; (lambda1 / lambda2 &lt; 2.0)
+       valid &amp;= (K / lambda1 &gt; 5) &amp; (K / lambda1 &lt; 50)
+       valid &amp;= (kd / K &gt; 0.01) &amp; (kd / K &lt; 0.5)
+
+   return valid
 </pre></div>
 </div>
-</li>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Conservative</span> <span class="n">Bounds</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">yaml</span>
+<span class="c1"># More conservative parameter bounds</span>
+<span class="n">pso</span><span class="p">:</span>
+  <span class="n">bounds</span><span class="p">:</span>
+    <span class="n">classical_smc</span><span class="p">:</span>
+      <span class="n">lower</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+      <span class="n">upper</span><span class="p">:</span> <span class="p">[</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">75.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic" start="3">
 <li><p><strong>Stability-Focused Cost Function:</strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cost_function</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">weights</span><span class="p">:</span>
@@ -1337,15 +1393,16 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </div>
 </li>
 </ol>
-</section>
-</section>
 <hr class="docutils" />
 <section id="performance-optimization">
 <h2>3. Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">¶</a></h2>
 <section id="pso-algorithm-tuning">
 <h3>3.1 PSO Algorithm Tuning<a class="headerlink" href="#pso-algorithm-tuning" title="Link to this heading">¶</a></h3>
 <p><strong>Convergence Speed Optimization:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">OptimizedPSOConfig</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OptimizedPSOConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Optimized PSO configurations for different scenarios.&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
@@ -1404,7 +1461,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </pre></div>
 </div>
 <p><strong>Adaptive PSO Implementation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AdaptivePSOTuner</span><span class="p">(</span><span class="n">PSOTuner</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptivePSOTuner</span><span class="p">(</span><span class="n">PSOTuner</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;PSO tuner with adaptive parameter adjustment.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1531,7 +1591,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </pre></div>
 </div>
 <p><strong>Memory-Efficient Implementation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryEfficientPSO</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MemoryEfficientPSO</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;PSO implementation optimized for memory usage.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_memory_mb</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
@@ -1608,7 +1671,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </pre></div>
 </div>
 <p><strong>Adaptive Time Step Control:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSimulation</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSimulation</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulation with adaptive time step for efficiency.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">max_dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">error_tolerance</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
@@ -2041,7 +2107,10 @@ restore_config_version<span class="o">()</span><span class="w"> </span><span cla
 <section id="database-and-log-management">
 <h3>4.3 Database and Log Management<a class="headerlink" href="#database-and-log-management" title="Link to this heading">¶</a></h3>
 <p><strong>Log Rotation and Cleanup:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging.handlers</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gzip</span>
@@ -2689,7 +2758,7 @@ python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -2720,9 +2789,17 @@ python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;
 <li><a class="reference internal" href="#common-issues-and-solutions">2. Common Issues and Solutions</a><ul>
 <li><a class="reference internal" href="#optimization-failures">2.1 Optimization Failures</a></li>
 <li><a class="reference internal" href="#performance-issues">2.2 Performance Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false">runnable: false</a><ul>
 <li><a class="reference internal" href="#controller-specific-issues">2.3 Controller-Specific Issues</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#id1">example-metadata:</a></li>
+<li><a class="reference internal" href="#id2">runnable: false</a><ul>
 <li><a class="reference internal" href="#performance-optimization">3. Performance Optimization</a><ul>
 <li><a class="reference internal" href="#pso-algorithm-tuning">3.1 PSO Algorithm Tuning</a></li>
 <li><a class="reference internal" href="#computational-optimization">3.2 Computational Optimization</a></li>

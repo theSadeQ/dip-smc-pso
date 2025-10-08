@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.smc.algorithms.super_twisting.init" href="smc_algorithms_super_twisting___init__.html" /><link rel="prev" title="controllers.smc.algorithms.super_twisting.controller" href="smc_algorithms_super_twisting_controller.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -500,6 +526,146 @@ The algorithm provides second-order sliding mode control with chattering reducti
 <li><p>u₂ = -K₂ ∫sign(s)dt</p></li>
 <li><p>Stability: K₁ &gt; K₂ &gt; 0 for finite-time convergence</p></li>
 </ul>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="super-twisting-control-law">
+<h3>Super-Twisting Control Law<a class="headerlink" href="#super-twisting-control-law" title="Link to this heading">¶</a></h3>
+<p><strong>Two-component structure:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u = u_1 + u_2 = -K_1 |s|^{\alpha} \text{sign}(s) - K_2 \int \text{sign}(s) dt\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(K_1, K_2 &gt; 0\)</span>: Gains</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span>: Exponent (typically 0.5)</p></li>
+<li><p><span class="math notranslate nohighlight">\(u_1\)</span>: Continuous feedback (no chattering)</p></li>
+<li><p><span class="math notranslate nohighlight">\(u_2\)</span>: Integral term (finite-time convergence)</p></li>
+</ul>
+</section>
+<section id="finite-time-convergence">
+<h3>Finite-Time Convergence<a class="headerlink" href="#finite-time-convergence" title="Link to this heading">¶</a></h3>
+<p><strong>Convergence time bound:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t_{conv} \leq \frac{2 |s(0)|^{1-\alpha/2}}{\eta (1 - \alpha/2)}\]</div>
+</div>
+<p><strong>Sliding variable and its derivative both reach zero:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s = \dot{s} = 0 \quad \text{in finite time}\]</div>
+</div>
+</section>
+<section id="gain-selection-criteria">
+<h3>Gain Selection Criteria<a class="headerlink" href="#gain-selection-criteria" title="Link to this heading">¶</a></h3>
+<p><strong>Sufficient conditions for finite-time stability:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+K_1 &amp;&gt; \frac{L_1}{\lambda_{min}^{1/2}} \\
+K_2 &amp;&gt; \frac{K_1 L_1}{\lambda_{min}} + \frac{L_0}{\lambda_{min}}
+\end{align}\end{split}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L_0, L_1\)</span>: Bounds on disturbance and its derivative</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_{min}\)</span>: Minimum eigenvalue of system matrix</p></li>
+</ul>
+</section>
+<section id="lyapunov-analysis">
+<h3>Lyapunov Analysis<a class="headerlink" href="#lyapunov-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Lyapunov function candidate:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V = \zeta^T \mathbf{P} \zeta, \quad \zeta = [|s|^{\alpha} \text{sign}(s), \, \dot{s}]^T\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathbf{P} = \mathbf{P}^T &gt; 0\)</span> is found via LMI.</p>
+<p><strong>Homogeneity property</strong> enables finite-time analysis.</p>
+</section>
+<section id="second-order-sliding-mode">
+<h3>Second-Order Sliding Mode<a class="headerlink" href="#second-order-sliding-mode" title="Link to this heading">¶</a></h3>
+<p><strong>Sliding manifold:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{S} = \{(s, \dot{s}) : s = \dot{s} = 0\}\]</div>
+</div>
+<p>Ensures both position and velocity errors converge.</p>
+</section>
+<section id="continuous-control">
+<h3>Continuous Control<a class="headerlink" href="#continuous-control" title="Link to this heading">¶</a></h3>
+<p><strong>No sign function in control:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(u_1\)</span> uses <span class="math notranslate nohighlight">\(|s|^{0.5} \text{sign}(s)\)</span> (continuous)</p></li>
+<li><p><span class="math notranslate nohighlight">\(u_2\)</span> is integral (smooth)</p></li>
+<li><p><strong>Result:</strong> Continuous control signal (minimal chattering)</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Sliding Surface s] --&gt; B[Continuous: u₁ = -K₁|s|^α sign_s_]
+    A --&gt; C[Integral: u₂ = -K₂ ∫sign_s_dt]
+
+    B --&gt; D[Combiner: u = u₁ + u₂]
+    C --&gt; D
+
+    C --&gt; E[Anti-Windup]
+    E --&gt;|Saturation Active| F[Halt Integration]
+    E --&gt;|No Saturation| G[Continue Integration]
+
+    D --&gt; H[Control Output u]
+
+    style B fill:#9cf
+    style C fill:#ff9
+    style H fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.algorithms.super_twisting</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-controller">
+<h3>Example 3: Integration with Controller<a class="headerlink" href="#example-3-integration-with-controller" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete control loop</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="n">ctrl_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ITAE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">itae</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -1183,7 +1349,7 @@ The algorithm provides second-order sliding mode control with chattering reducti
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1206,6 +1372,24 @@ The algorithm provides second-order sliding mode control with chattering reducti
             <ul>
 <li><a class="reference internal" href="#">controllers.smc.algorithms.super_twisting.twisting_algorithm</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#super-twisting-control-law">Super-Twisting Control Law</a></li>
+<li><a class="reference internal" href="#finite-time-convergence">Finite-Time Convergence</a></li>
+<li><a class="reference internal" href="#gain-selection-criteria">Gain Selection Criteria</a></li>
+<li><a class="reference internal" href="#lyapunov-analysis">Lyapunov Analysis</a></li>
+<li><a class="reference internal" href="#second-order-sliding-mode">Second-Order Sliding Mode</a></li>
+<li><a class="reference internal" href="#continuous-control">Continuous Control</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-controller">Example 3: Integration with Controller</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#supertwistingalgorithm"><code class="docutils literal notranslate"><span class="pre">SuperTwistingAlgorithm</span></code></a><ul>
@@ -1247,6 +1431,10 @@ The algorithm provides second-order sliding mode control with chattering reducti
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

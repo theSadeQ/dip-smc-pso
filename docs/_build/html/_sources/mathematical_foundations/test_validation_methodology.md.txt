@@ -26,6 +26,9 @@ These tests verify that implementations satisfy fundamental mathematical require
 
 1. **Linearity Property**:
    ```python
+# example-metadata:
+# runnable: false
+
    def test_sliding_surface_linearity():
        """Test that sliding surface is linear in state."""
        surface = LinearSlidingSurface(gains=[5, 3, 4, 2])
@@ -59,6 +62,9 @@ These tests verify that implementations satisfy fundamental mathematical require
 
 3. **Gain Sensitivity**:
    ```python
+# example-metadata:
+# runnable: false
+
    def test_sliding_surface_gain_sensitivity():
        """Test that surface responds correctly to gain changes."""
        gains1 = [5, 3, 4, 2]
@@ -84,6 +90,9 @@ These tests verify that implementations satisfy fundamental mathematical require
 
 1. **Continuity**:
    ```python
+# example-metadata:
+# runnable: false
+
    def test_boundary_layer_continuity():
        """Test that boundary layer provides continuous switching."""
        boundary_layer = BoundaryLayer(thickness=0.1, switch_method="tanh")
@@ -135,6 +144,9 @@ These tests verify that implementations satisfy fundamental mathematical require
 #### 2.2.1 Parameter Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestClassicalSMCConfigValidation:
     """Test configuration parameter validation."""
 
@@ -178,6 +190,9 @@ class TestClassicalSMCConfigValidation:
 #### 2.2.2 Stability Analysis Tests
 
 ```python
+# example-metadata:
+# runnable: false
+
 def test_hurwitz_stability_check():
     """Test that gain combinations satisfy Hurwitz stability."""
 
@@ -207,6 +222,9 @@ def test_hurwitz_stability_check():
 #### 2.3.1 Floating Point Precision
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestNumericalAccuracy:
     """Test numerical accuracy and precision."""
 
@@ -356,6 +374,9 @@ class TestPropertyBasedSMC:
 ### 2.5 Integration and System-Level Tests
 
 ```python
+# example-metadata:
+# runnable: false
+
 class TestSystemLevelMathematics:
     """Test mathematical consistency across system components."""
 
@@ -521,6 +542,9 @@ pytest tests/test_integration/ -k "smc" -v
 ### 4.1 Mathematical Property Templates
 
 ```python
+# example-metadata:
+# runnable: false
+
 def generate_linearity_test(component_class, property_name):
     """Generate linearity test for any mathematical component."""
 
@@ -555,6 +579,9 @@ def generate_monotonicity_test(function, domain):
 ### 4.2 Configuration Test Generation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def generate_validation_tests(config_class, parameter_specs):
     """Generate comprehensive validation tests for configuration classes."""
 
@@ -593,6 +620,9 @@ def generate_validation_tests(config_class, parameter_specs):
 ### 5.2 Automated Error Reporting
 
 ```python
+# example-metadata:
+# runnable: false
+
 class MathematicalValidationReporter:
     """Automated reporting for mathematical validation results."""
 
@@ -664,6 +694,9 @@ echo "Mathematical validation passed."
 ### 6.2 Regression Detection
 
 ```python
+# example-metadata:
+# runnable: false
+
 class MathematicalRegressionDetector:
     """Detect regressions in mathematical computations."""
 

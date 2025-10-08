@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -649,7 +675,7 @@ configuration with validation and type safety.</p>
 <span class="linenos">151</span>
 <span class="linenos">152</span>        <span class="c1"># Check positive lengths</span>
 <span class="linenos">153</span>        <span class="n">lengths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_length_properties</span><span class="p">()</span>
-<span class="linenos">154</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_lengths&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="linenos">154</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_lengths&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 <span class="linenos">155</span>
 <span class="linenos">156</span>        <span class="c1"># Check non-negative friction</span>
 <span class="linenos">157</span>        <span class="n">frictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_friction_properties</span><span class="p">()</span>
@@ -657,7 +683,7 @@ configuration with validation and type safety.</p>
 <span class="linenos">159</span>
 <span class="linenos">160</span>        <span class="c1"># Check positive inertias</span>
 <span class="linenos">161</span>        <span class="n">inertias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_inertia_properties</span><span class="p">()</span>
-<span class="linenos">162</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_inertias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">I</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="n">inertias</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="linenos">162</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_inertias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">inertia</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">inertia</span> <span class="ow">in</span> <span class="n">inertias</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 <span class="linenos">163</span>
 <span class="linenos">164</span>        <span class="k">return</span> <span class="n">checks</span>
 <span class="linenos">165</span>
@@ -669,149 +695,151 @@ configuration with validation and type safety.</p>
 <span class="linenos">171</span><span class="sd">            Dictionary with dimensionless parameter combinations</span>
 <span class="linenos">172</span><span class="sd">        &quot;&quot;&quot;</span>
 <span class="linenos">173</span>        <span class="n">scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimate_characteristic_scales</span><span class="p">()</span>
-<span class="linenos">174</span>        <span class="n">physical_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_physical_parameters</span><span class="p">()</span>
-<span class="linenos">175</span>
-<span class="linenos">176</span>        <span class="n">dimensionless</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">177</span>
-<span class="linenos">178</span>        <span class="c1"># Mass ratios</span>
-<span class="linenos">179</span>        <span class="n">masses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mass_properties</span><span class="p">()</span>
-<span class="linenos">180</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">masses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">181</span>            <span class="n">mass_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="linenos">182</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mass</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-<span class="linenos">183</span>                <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_mass&#39;</span><span class="p">]</span>
-<span class="linenos">184</span>
-<span class="linenos">185</span>        <span class="c1"># Length ratios</span>
-<span class="linenos">186</span>        <span class="n">lengths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_length_properties</span><span class="p">()</span>
-<span class="linenos">187</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">188</span>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">189</span>                <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_length&#39;</span><span class="p">]</span>
-<span class="linenos">190</span>
-<span class="linenos">191</span>        <span class="c1"># Friction numbers (dimensionless friction)</span>
-<span class="linenos">192</span>        <span class="n">frictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_friction_properties</span><span class="p">()</span>
-<span class="linenos">193</span>        <span class="n">char_damping</span> <span class="o">=</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_mass&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_time&#39;</span><span class="p">]</span>
-<span class="linenos">194</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">friction</span> <span class="ow">in</span> <span class="n">frictions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">195</span>            <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">friction</span> <span class="o">/</span> <span class="n">char_damping</span>
-<span class="linenos">196</span>
-<span class="linenos">197</span>        <span class="k">return</span> <span class="n">dimensionless</span>
+<span class="linenos">174</span>        <span class="c1"># Note: physical_params available but not currently used in dimensionless calculations</span>
+<span class="linenos">175</span>        <span class="c1"># physical_params = self.get_physical_parameters()</span>
+<span class="linenos">176</span>
+<span class="linenos">177</span>        <span class="n">dimensionless</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">178</span>
+<span class="linenos">179</span>        <span class="c1"># Mass ratios</span>
+<span class="linenos">180</span>        <span class="n">masses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mass_properties</span><span class="p">()</span>
+<span class="linenos">181</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">masses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">182</span>            <span class="c1"># Note: mass_values available but individual ratios computed directly</span>
+<span class="linenos">183</span>            <span class="c1"># mass_values = list(masses.values())</span>
+<span class="linenos">184</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mass</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+<span class="linenos">185</span>                <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_mass&#39;</span><span class="p">]</span>
+<span class="linenos">186</span>
+<span class="linenos">187</span>        <span class="c1"># Length ratios</span>
+<span class="linenos">188</span>        <span class="n">lengths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_length_properties</span><span class="p">()</span>
+<span class="linenos">189</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">190</span>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">191</span>                <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_length&#39;</span><span class="p">]</span>
+<span class="linenos">192</span>
+<span class="linenos">193</span>        <span class="c1"># Friction numbers (dimensionless friction)</span>
+<span class="linenos">194</span>        <span class="n">frictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_friction_properties</span><span class="p">()</span>
+<span class="linenos">195</span>        <span class="n">char_damping</span> <span class="o">=</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_mass&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_time&#39;</span><span class="p">]</span>
+<span class="linenos">196</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">friction</span> <span class="ow">in</span> <span class="n">frictions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">197</span>            <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">friction</span> <span class="o">/</span> <span class="n">char_damping</span>
 <span class="linenos">198</span>
-<span class="linenos">199</span>
-<span class="linenos">200</span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">201</span><span class="k">class</span><span class="w"> </span><span class="nc">BaseDIPConfig</span><span class="p">(</span><span class="n">BasePhysicsConfig</span><span class="p">):</span>
-<span class="linenos">202</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">203</span><span class="sd">    Base configuration class for Double Inverted Pendulum models.</span>
-<span class="linenos">204</span>
-<span class="linenos">205</span><span class="sd">    Provides common interface and validation for all DIP implementations</span>
-<span class="linenos">206</span><span class="sd">    (simplified, full, low-rank) with essential physical parameters.</span>
-<span class="linenos">207</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">208</span>
-<span class="linenos">209</span>    <span class="c1"># Essential physical parameters</span>
-<span class="linenos">210</span>    <span class="n">cart_mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="linenos">211</span>    <span class="n">pendulum1_mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="linenos">212</span>    <span class="n">pendulum2_mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="linenos">213</span>    <span class="n">pendulum1_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="linenos">214</span>    <span class="n">pendulum2_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="linenos">215</span>    <span class="n">gravity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">9.81</span>
-<span class="linenos">216</span>
-<span class="linenos">217</span>    <span class="c1"># Control limits</span>
-<span class="linenos">218</span>    <span class="n">force_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">20.0</span>
-<span class="linenos">219</span>
-<span class="linenos">220</span>    <span class="c1"># State bounds</span>
-<span class="linenos">221</span>    <span class="n">cart_position_limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">222</span>    <span class="n">cart_velocity_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span>
-<span class="linenos">223</span>    <span class="n">joint_velocity_limits</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">20.0</span>
-<span class="linenos">224</span>
-<span class="linenos">225</span>    <span class="c1"># Numerical parameters</span>
-<span class="linenos">226</span>    <span class="n">integration_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span>
-<span class="linenos">227</span>    <span class="n">max_condition_number</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span>
-<span class="linenos">228</span>    <span class="n">regularization_epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span>
-<span class="linenos">229</span>
-<span class="linenos">230</span>    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">231</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Post-initialization validation.&quot;&quot;&quot;</span>
-<span class="linenos">232</span>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
-<span class="linenos">233</span>            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s2">&quot;Configuration validation failed&quot;</span><span class="p">)</span>
-<span class="linenos">234</span>
-<span class="linenos">235</span>    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="linenos">236</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate DIP configuration parameters.&quot;&quot;&quot;</span>
-<span class="linenos">237</span>        <span class="n">checks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_physical_consistency</span><span class="p">()</span>
-<span class="linenos">238</span>        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">checks</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="linenos">239</span>
-<span class="linenos">240</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_physical_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">241</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get dictionary of physical parameters.&quot;&quot;&quot;</span>
-<span class="linenos">242</span>        <span class="k">return</span> <span class="p">{</span>
-<span class="linenos">243</span>            <span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_mass</span><span class="p">,</span>
-<span class="linenos">244</span>            <span class="s1">&#39;pendulum1_mass&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_mass</span><span class="p">,</span>
-<span class="linenos">245</span>            <span class="s1">&#39;pendulum2_mass&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_mass</span><span class="p">,</span>
-<span class="linenos">246</span>            <span class="s1">&#39;pendulum1_length&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_length</span><span class="p">,</span>
-<span class="linenos">247</span>            <span class="s1">&#39;pendulum2_length&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_length</span><span class="p">,</span>
-<span class="linenos">248</span>            <span class="s1">&#39;gravity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gravity</span><span class="p">,</span>
-<span class="linenos">249</span>            <span class="s1">&#39;force_limit&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_limit</span><span class="p">,</span>
-<span class="linenos">250</span>            <span class="s1">&#39;cart_velocity_limit&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_velocity_limit</span><span class="p">,</span>
-<span class="linenos">251</span>            <span class="s1">&#39;joint_velocity_limits&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">joint_velocity_limits</span><span class="p">,</span>
-<span class="linenos">252</span>        <span class="p">}</span>
-<span class="linenos">253</span>
-<span class="linenos">254</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_numerical_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">255</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get dictionary of numerical parameters.&quot;&quot;&quot;</span>
-<span class="linenos">256</span>        <span class="k">return</span> <span class="p">{</span>
-<span class="linenos">257</span>            <span class="s1">&#39;integration_tolerance&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">integration_tolerance</span><span class="p">,</span>
-<span class="linenos">258</span>            <span class="s1">&#39;max_condition_number&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_condition_number</span><span class="p">,</span>
-<span class="linenos">259</span>            <span class="s1">&#39;regularization_epsilon&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">regularization_epsilon</span><span class="p">,</span>
-<span class="linenos">260</span>        <span class="p">}</span>
-<span class="linenos">261</span>
-<span class="linenos">262</span>    <span class="nd">@classmethod</span>
-<span class="linenos">263</span>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;BaseDIPConfig&#39;</span><span class="p">:</span>
-<span class="linenos">264</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create configuration from dictionary.&quot;&quot;&quot;</span>
-<span class="linenos">265</span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
-<span class="linenos">266</span>
-<span class="linenos">267</span>    <span class="nd">@classmethod</span>
-<span class="linenos">268</span>    <span class="k">def</span><span class="w"> </span><span class="nf">create_default</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;BaseDIPConfig&#39;</span><span class="p">:</span>
-<span class="linenos">269</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create configuration with default parameters.&quot;&quot;&quot;</span>
-<span class="linenos">270</span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
-<span class="linenos">271</span>
-<span class="linenos">272</span>    <span class="k">def</span><span class="w"> </span><span class="nf">check_physical_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
-<span class="linenos">273</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check physical consistency of DIP parameters.&quot;&quot;&quot;</span>
-<span class="linenos">274</span>        <span class="n">checks</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">check_physical_consistency</span><span class="p">()</span>
-<span class="linenos">275</span>
-<span class="linenos">276</span>        <span class="c1"># Additional DIP-specific checks</span>
-<span class="linenos">277</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_gravity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gravity</span> <span class="o">&gt;</span> <span class="mi">0</span>
-<span class="linenos">278</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_force_limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_limit</span> <span class="o">&gt;</span> <span class="mi">0</span>
-<span class="linenos">279</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_velocity_limits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-<span class="linenos">280</span>            <span class="bp">self</span><span class="o">.</span><span class="n">cart_velocity_limit</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span>
-<span class="linenos">281</span>            <span class="bp">self</span><span class="o">.</span><span class="n">joint_velocity_limits</span> <span class="o">&gt;</span> <span class="mi">0</span>
-<span class="linenos">282</span>        <span class="p">)</span>
-<span class="linenos">283</span>
-<span class="linenos">284</span>        <span class="c1"># Check reasonable parameter ranges</span>
-<span class="linenos">285</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;reasonable_mass_ratios&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-<span class="linenos">286</span>            <span class="mf">0.01</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_mass</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_mass</span> <span class="o">&lt;=</span> <span class="mf">10.0</span> <span class="ow">and</span>
-<span class="linenos">287</span>            <span class="mf">0.01</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_mass</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_mass</span> <span class="o">&lt;=</span> <span class="mf">10.0</span>
-<span class="linenos">288</span>        <span class="p">)</span>
-<span class="linenos">289</span>
-<span class="linenos">290</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;reasonable_length_ratios&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-<span class="linenos">291</span>            <span class="mf">0.1</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_length</span> <span class="o">&lt;=</span> <span class="mf">5.0</span> <span class="ow">and</span>
-<span class="linenos">292</span>            <span class="mf">0.1</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_length</span> <span class="o">&lt;=</span> <span class="mf">5.0</span>
-<span class="linenos">293</span>        <span class="p">)</span>
-<span class="linenos">294</span>
-<span class="linenos">295</span>        <span class="k">return</span> <span class="n">checks</span>
+<span class="linenos">199</span>        <span class="k">return</span> <span class="n">dimensionless</span>
+<span class="linenos">200</span>
+<span class="linenos">201</span>
+<span class="linenos">202</span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">203</span><span class="k">class</span><span class="w"> </span><span class="nc">BaseDIPConfig</span><span class="p">(</span><span class="n">BasePhysicsConfig</span><span class="p">):</span>
+<span class="linenos">204</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">205</span><span class="sd">    Base configuration class for Double Inverted Pendulum models.</span>
+<span class="linenos">206</span>
+<span class="linenos">207</span><span class="sd">    Provides common interface and validation for all DIP implementations</span>
+<span class="linenos">208</span><span class="sd">    (simplified, full, low-rank) with essential physical parameters.</span>
+<span class="linenos">209</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">210</span>
+<span class="linenos">211</span>    <span class="c1"># Essential physical parameters</span>
+<span class="linenos">212</span>    <span class="n">cart_mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="linenos">213</span>    <span class="n">pendulum1_mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="linenos">214</span>    <span class="n">pendulum2_mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="linenos">215</span>    <span class="n">pendulum1_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos">216</span>    <span class="n">pendulum2_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos">217</span>    <span class="n">gravity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">9.81</span>
+<span class="linenos">218</span>
+<span class="linenos">219</span>    <span class="c1"># Control limits</span>
+<span class="linenos">220</span>    <span class="n">force_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="linenos">221</span>
+<span class="linenos">222</span>    <span class="c1"># State bounds</span>
+<span class="linenos">223</span>    <span class="n">cart_position_limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">224</span>    <span class="n">cart_velocity_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="linenos">225</span>    <span class="n">joint_velocity_limits</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="linenos">226</span>
+<span class="linenos">227</span>    <span class="c1"># Numerical parameters</span>
+<span class="linenos">228</span>    <span class="n">integration_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="linenos">229</span>    <span class="n">max_condition_number</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span>
+<span class="linenos">230</span>    <span class="n">regularization_epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span>
+<span class="linenos">231</span>
+<span class="linenos">232</span>    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">233</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Post-initialization validation.&quot;&quot;&quot;</span>
+<span class="linenos">234</span>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+<span class="linenos">235</span>            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s2">&quot;Configuration validation failed&quot;</span><span class="p">)</span>
+<span class="linenos">236</span>
+<span class="linenos">237</span>    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">238</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate DIP configuration parameters.&quot;&quot;&quot;</span>
+<span class="linenos">239</span>        <span class="n">checks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_physical_consistency</span><span class="p">()</span>
+<span class="linenos">240</span>        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">checks</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="linenos">241</span>
+<span class="linenos">242</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_physical_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">243</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get dictionary of physical parameters.&quot;&quot;&quot;</span>
+<span class="linenos">244</span>        <span class="k">return</span> <span class="p">{</span>
+<span class="linenos">245</span>            <span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_mass</span><span class="p">,</span>
+<span class="linenos">246</span>            <span class="s1">&#39;pendulum1_mass&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_mass</span><span class="p">,</span>
+<span class="linenos">247</span>            <span class="s1">&#39;pendulum2_mass&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_mass</span><span class="p">,</span>
+<span class="linenos">248</span>            <span class="s1">&#39;pendulum1_length&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_length</span><span class="p">,</span>
+<span class="linenos">249</span>            <span class="s1">&#39;pendulum2_length&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_length</span><span class="p">,</span>
+<span class="linenos">250</span>            <span class="s1">&#39;gravity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gravity</span><span class="p">,</span>
+<span class="linenos">251</span>            <span class="s1">&#39;force_limit&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_limit</span><span class="p">,</span>
+<span class="linenos">252</span>            <span class="s1">&#39;cart_velocity_limit&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_velocity_limit</span><span class="p">,</span>
+<span class="linenos">253</span>            <span class="s1">&#39;joint_velocity_limits&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">joint_velocity_limits</span><span class="p">,</span>
+<span class="linenos">254</span>        <span class="p">}</span>
+<span class="linenos">255</span>
+<span class="linenos">256</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_numerical_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">257</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get dictionary of numerical parameters.&quot;&quot;&quot;</span>
+<span class="linenos">258</span>        <span class="k">return</span> <span class="p">{</span>
+<span class="linenos">259</span>            <span class="s1">&#39;integration_tolerance&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">integration_tolerance</span><span class="p">,</span>
+<span class="linenos">260</span>            <span class="s1">&#39;max_condition_number&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_condition_number</span><span class="p">,</span>
+<span class="linenos">261</span>            <span class="s1">&#39;regularization_epsilon&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">regularization_epsilon</span><span class="p">,</span>
+<span class="linenos">262</span>        <span class="p">}</span>
+<span class="linenos">263</span>
+<span class="linenos">264</span>    <span class="nd">@classmethod</span>
+<span class="linenos">265</span>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;BaseDIPConfig&#39;</span><span class="p">:</span>
+<span class="linenos">266</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create configuration from dictionary.&quot;&quot;&quot;</span>
+<span class="linenos">267</span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">config_dict</span><span class="p">)</span>
+<span class="linenos">268</span>
+<span class="linenos">269</span>    <span class="nd">@classmethod</span>
+<span class="linenos">270</span>    <span class="k">def</span><span class="w"> </span><span class="nf">create_default</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;BaseDIPConfig&#39;</span><span class="p">:</span>
+<span class="linenos">271</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create configuration with default parameters.&quot;&quot;&quot;</span>
+<span class="linenos">272</span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+<span class="linenos">273</span>
+<span class="linenos">274</span>    <span class="k">def</span><span class="w"> </span><span class="nf">check_physical_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="linenos">275</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check physical consistency of DIP parameters.&quot;&quot;&quot;</span>
+<span class="linenos">276</span>        <span class="n">checks</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">check_physical_consistency</span><span class="p">()</span>
+<span class="linenos">277</span>
+<span class="linenos">278</span>        <span class="c1"># Additional DIP-specific checks</span>
+<span class="linenos">279</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_gravity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gravity</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="linenos">280</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_force_limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_limit</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="linenos">281</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_velocity_limits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="linenos">282</span>            <span class="bp">self</span><span class="o">.</span><span class="n">cart_velocity_limit</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span>
+<span class="linenos">283</span>            <span class="bp">self</span><span class="o">.</span><span class="n">joint_velocity_limits</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="linenos">284</span>        <span class="p">)</span>
+<span class="linenos">285</span>
+<span class="linenos">286</span>        <span class="c1"># Check reasonable parameter ranges</span>
+<span class="linenos">287</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;reasonable_mass_ratios&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="linenos">288</span>            <span class="mf">0.01</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_mass</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_mass</span> <span class="o">&lt;=</span> <span class="mf">10.0</span> <span class="ow">and</span>
+<span class="linenos">289</span>            <span class="mf">0.01</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_mass</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_mass</span> <span class="o">&lt;=</span> <span class="mf">10.0</span>
+<span class="linenos">290</span>        <span class="p">)</span>
+<span class="linenos">291</span>
+<span class="linenos">292</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;reasonable_length_ratios&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="linenos">293</span>            <span class="mf">0.1</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_length</span> <span class="o">&lt;=</span> <span class="mf">5.0</span> <span class="ow">and</span>
+<span class="linenos">294</span>            <span class="mf">0.1</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_length</span> <span class="o">&lt;=</span> <span class="mf">5.0</span>
+<span class="linenos">295</span>        <span class="p">)</span>
 <span class="linenos">296</span>
-<span class="linenos">297</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_system_scales</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">298</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get characteristic scales for the DIP system.&quot;&quot;&quot;</span>
-<span class="linenos">299</span>        <span class="n">scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimate_characteristic_scales</span><span class="p">()</span>
-<span class="linenos">300</span>
-<span class="linenos">301</span>        <span class="c1"># DIP-specific scales</span>
-<span class="linenos">302</span>        <span class="n">total_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_length</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_length</span>
-<span class="linenos">303</span>        <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;total_pendulum_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_length</span>
-<span class="linenos">304</span>        <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;pendulum_frequency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gravity</span> <span class="o">/</span> <span class="n">total_length</span><span class="p">)</span>
-<span class="linenos">305</span>
-<span class="linenos">306</span>        <span class="k">return</span> <span class="n">scales</span>
+<span class="linenos">297</span>        <span class="k">return</span> <span class="n">checks</span>
+<span class="linenos">298</span>
+<span class="linenos">299</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_system_scales</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">300</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get characteristic scales for the DIP system.&quot;&quot;&quot;</span>
+<span class="linenos">301</span>        <span class="n">scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimate_characteristic_scales</span><span class="p">()</span>
+<span class="linenos">302</span>
+<span class="linenos">303</span>        <span class="c1"># DIP-specific scales</span>
+<span class="linenos">304</span>        <span class="n">total_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum1_length</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pendulum2_length</span>
+<span class="linenos">305</span>        <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;total_pendulum_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_length</span>
+<span class="linenos">306</span>        <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;pendulum_frequency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gravity</span> <span class="o">/</span> <span class="n">total_length</span><span class="p">)</span>
 <span class="linenos">307</span>
-<span class="linenos">308</span>
-<span class="linenos">309</span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-<span class="linenos">310</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when configuration validation fails.&quot;&quot;&quot;</span>
-<span class="linenos">311</span>    <span class="k">pass</span>
-<span class="linenos">312</span>
-<span class="linenos">313</span>
-<span class="linenos">314</span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationWarning</span><span class="p">(</span><span class="ne">UserWarning</span><span class="p">):</span>
-<span class="linenos">315</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Issued when configuration parameters are unusual but valid.&quot;&quot;&quot;</span>
-<span class="linenos">316</span>    <span class="k">pass</span>
+<span class="linenos">308</span>        <span class="k">return</span> <span class="n">scales</span>
+<span class="linenos">309</span>
+<span class="linenos">310</span>
+<span class="linenos">311</span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+<span class="linenos">312</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when configuration validation fails.&quot;&quot;&quot;</span>
+<span class="linenos">313</span>    <span class="k">pass</span>
+<span class="linenos">314</span>
+<span class="linenos">315</span>
+<span class="linenos">316</span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationWarning</span><span class="p">(</span><span class="ne">UserWarning</span><span class="p">):</span>
+<span class="linenos">317</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Issued when configuration parameters are unusual but valid.&quot;&quot;&quot;</span>
+<span class="linenos">318</span>    <span class="k">pass</span>
 </pre></div>
 </div>
 </section>
@@ -988,7 +1016,7 @@ and parameter management across different physics models.</p>
 <span class="linenos">116</span>
 <span class="linenos">117</span>        <span class="c1"># Check positive lengths</span>
 <span class="linenos">118</span>        <span class="n">lengths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_length_properties</span><span class="p">()</span>
-<span class="linenos">119</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_lengths&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="linenos">119</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_lengths&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 <span class="linenos">120</span>
 <span class="linenos">121</span>        <span class="c1"># Check non-negative friction</span>
 <span class="linenos">122</span>        <span class="n">frictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_friction_properties</span><span class="p">()</span>
@@ -996,7 +1024,7 @@ and parameter management across different physics models.</p>
 <span class="linenos">124</span>
 <span class="linenos">125</span>        <span class="c1"># Check positive inertias</span>
 <span class="linenos">126</span>        <span class="n">inertias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_inertia_properties</span><span class="p">()</span>
-<span class="linenos">127</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_inertias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">I</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="n">inertias</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="linenos">127</span>        <span class="n">checks</span><span class="p">[</span><span class="s1">&#39;positive_inertias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">inertia</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">inertia</span> <span class="ow">in</span> <span class="n">inertias</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 <span class="linenos">128</span>
 <span class="linenos">129</span>        <span class="k">return</span> <span class="n">checks</span>
 <span class="linenos">130</span>
@@ -1008,30 +1036,32 @@ and parameter management across different physics models.</p>
 <span class="linenos">136</span><span class="sd">            Dictionary with dimensionless parameter combinations</span>
 <span class="linenos">137</span><span class="sd">        &quot;&quot;&quot;</span>
 <span class="linenos">138</span>        <span class="n">scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimate_characteristic_scales</span><span class="p">()</span>
-<span class="linenos">139</span>        <span class="n">physical_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_physical_parameters</span><span class="p">()</span>
-<span class="linenos">140</span>
-<span class="linenos">141</span>        <span class="n">dimensionless</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">142</span>
-<span class="linenos">143</span>        <span class="c1"># Mass ratios</span>
-<span class="linenos">144</span>        <span class="n">masses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mass_properties</span><span class="p">()</span>
-<span class="linenos">145</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">masses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">146</span>            <span class="n">mass_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="linenos">147</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mass</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-<span class="linenos">148</span>                <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_mass&#39;</span><span class="p">]</span>
-<span class="linenos">149</span>
-<span class="linenos">150</span>        <span class="c1"># Length ratios</span>
-<span class="linenos">151</span>        <span class="n">lengths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_length_properties</span><span class="p">()</span>
-<span class="linenos">152</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">153</span>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">154</span>                <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_length&#39;</span><span class="p">]</span>
-<span class="linenos">155</span>
-<span class="linenos">156</span>        <span class="c1"># Friction numbers (dimensionless friction)</span>
-<span class="linenos">157</span>        <span class="n">frictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_friction_properties</span><span class="p">()</span>
-<span class="linenos">158</span>        <span class="n">char_damping</span> <span class="o">=</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_mass&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_time&#39;</span><span class="p">]</span>
-<span class="linenos">159</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">friction</span> <span class="ow">in</span> <span class="n">frictions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">160</span>            <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">friction</span> <span class="o">/</span> <span class="n">char_damping</span>
-<span class="linenos">161</span>
-<span class="linenos">162</span>        <span class="k">return</span> <span class="n">dimensionless</span>
+<span class="linenos">139</span>        <span class="c1"># Note: physical_params available but not currently used in dimensionless calculations</span>
+<span class="linenos">140</span>        <span class="c1"># physical_params = self.get_physical_parameters()</span>
+<span class="linenos">141</span>
+<span class="linenos">142</span>        <span class="n">dimensionless</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">143</span>
+<span class="linenos">144</span>        <span class="c1"># Mass ratios</span>
+<span class="linenos">145</span>        <span class="n">masses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mass_properties</span><span class="p">()</span>
+<span class="linenos">146</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">masses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">147</span>            <span class="c1"># Note: mass_values available but individual ratios computed directly</span>
+<span class="linenos">148</span>            <span class="c1"># mass_values = list(masses.values())</span>
+<span class="linenos">149</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mass</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+<span class="linenos">150</span>                <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_mass&#39;</span><span class="p">]</span>
+<span class="linenos">151</span>
+<span class="linenos">152</span>        <span class="c1"># Length ratios</span>
+<span class="linenos">153</span>        <span class="n">lengths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_length_properties</span><span class="p">()</span>
+<span class="linenos">154</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">155</span>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">156</span>                <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_length&#39;</span><span class="p">]</span>
+<span class="linenos">157</span>
+<span class="linenos">158</span>        <span class="c1"># Friction numbers (dimensionless friction)</span>
+<span class="linenos">159</span>        <span class="n">frictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_friction_properties</span><span class="p">()</span>
+<span class="linenos">160</span>        <span class="n">char_damping</span> <span class="o">=</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_mass&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">scales</span><span class="p">[</span><span class="s1">&#39;characteristic_time&#39;</span><span class="p">]</span>
+<span class="linenos">161</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">friction</span> <span class="ow">in</span> <span class="n">frictions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">162</span>            <span class="n">dimensionless</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">friction</span> <span class="o">/</span> <span class="n">char_damping</span>
+<span class="linenos">163</span>
+<span class="linenos">164</span>        <span class="k">return</span> <span class="n">dimensionless</span>
 </pre></div>
 </div>
 </section>
@@ -1327,7 +1357,7 @@ and parameter management across different physics models.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

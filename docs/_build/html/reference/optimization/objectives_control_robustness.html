@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -502,7 +528,7 @@
 <span class="linenos">  6</span>
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
-<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span>
+<span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span>
 <span class="linenos"> 10</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 11</span><span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
 <span class="linenos"> 12</span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
@@ -831,133 +857,132 @@
 <span class="linenos">335</span>
 <span class="linenos">336</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_extreme_variations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
 <span class="linenos">337</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate extreme parameter variations for worst-case analysis.&quot;&quot;&quot;</span>
-<span class="linenos">338</span>        <span class="n">variations</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">339</span>
-<span class="linenos">340</span>        <span class="c1"># Generate all combinations of extreme values</span>
-<span class="linenos">341</span>        <span class="n">extreme_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cart_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend1_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend2_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend1_length&#39;</span><span class="p">,</span> <span class="s1">&#39;pend2_length&#39;</span><span class="p">]</span>
-<span class="linenos">342</span>
-<span class="linenos">343</span>        <span class="c1"># Test a few key extreme combinations (not all 2^5 = 32)</span>
-<span class="linenos">344</span>        <span class="n">extreme_combinations</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos">345</span>            <span class="p">{</span><span class="n">param</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">extreme_params</span><span class="p">},</span>  <span class="c1"># All high</span>
-<span class="linenos">346</span>            <span class="p">{</span><span class="n">param</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">extreme_params</span><span class="p">},</span>  <span class="c1"># All low</span>
-<span class="linenos">347</span>            <span class="c1"># Mixed combinations</span>
-<span class="linenos">348</span>            <span class="p">{</span><span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span> <span class="s1">&#39;pend1_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span>
-<span class="linenos">349</span>             <span class="s1">&#39;pend2_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span> <span class="s1">&#39;pend1_length&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span>
-<span class="linenos">350</span>             <span class="s1">&#39;pend2_length&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">},</span>
-<span class="linenos">351</span>        <span class="p">]</span>
-<span class="linenos">352</span>
-<span class="linenos">353</span>        <span class="k">return</span> <span class="n">extreme_combinations</span>
-<span class="linenos">354</span>
-<span class="linenos">355</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_simulate_with_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos">356</span>                               <span class="n">controller_params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos">357</span>                               <span class="n">parameter_variation</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">358</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate system with parameter variations and return performance metric.&quot;&quot;&quot;</span>
-<span class="linenos">359</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">360</span>            <span class="c1"># This is a simplified simulation - in practice, you would:</span>
-<span class="linenos">361</span>            <span class="c1"># 1. Create modified dynamics model with parameter variations</span>
-<span class="linenos">362</span>            <span class="c1"># 2. Add noise to measurements if specified</span>
-<span class="linenos">363</span>            <span class="c1"># 3. Add external disturbances</span>
-<span class="linenos">364</span>            <span class="c1"># 4. Run simulation with controller</span>
-<span class="linenos">365</span>            <span class="c1"># 5. Compute performance metric (tracking error, stability, etc.)</span>
-<span class="linenos">366</span>
-<span class="linenos">367</span>            <span class="c1"># For now, return a placeholder based on parameter variations</span>
-<span class="linenos">368</span>            <span class="c1"># This would be replaced with actual simulation code</span>
-<span class="linenos">369</span>
-<span class="linenos">370</span>            <span class="c1"># Simulate the impact of parameter variations on performance</span>
-<span class="linenos">371</span>            <span class="n">variation_impact</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">372</span>            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">variation_factor</span> <span class="ow">in</span> <span class="n">parameter_variation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">373</span>                <span class="c1"># Each parameter variation contributes to performance degradation</span>
-<span class="linenos">374</span>                <span class="n">impact</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">variation_factor</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
-<span class="linenos">375</span>                <span class="k">if</span> <span class="s1">&#39;mass&#39;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
-<span class="linenos">376</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">2.0</span>  <span class="c1"># Mass variations have larger impact</span>
-<span class="linenos">377</span>                <span class="k">elif</span> <span class="s1">&#39;length&#39;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
-<span class="linenos">378</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">3.0</span>  <span class="c1"># Length variations have largest impact</span>
-<span class="linenos">379</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">380</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">1.0</span>
-<span class="linenos">381</span>
-<span class="linenos">382</span>            <span class="c1"># Add noise impact</span>
-<span class="linenos">383</span>            <span class="n">noise_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_level</span> <span class="o">*</span> <span class="mf">5.0</span>
-<span class="linenos">384</span>
-<span class="linenos">385</span>            <span class="c1"># Add disturbance impact</span>
-<span class="linenos">386</span>            <span class="n">disturbance_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disturbance_magnitude</span> <span class="o">*</span> <span class="mf">2.0</span>
-<span class="linenos">387</span>
-<span class="linenos">388</span>            <span class="c1"># Total performance degradation</span>
-<span class="linenos">389</span>            <span class="n">total_performance</span> <span class="o">=</span> <span class="n">variation_impact</span> <span class="o">+</span> <span class="n">noise_impact</span> <span class="o">+</span> <span class="n">disturbance_impact</span>
-<span class="linenos">390</span>
-<span class="linenos">391</span>            <span class="k">return</span> <span class="n">total_performance</span>
-<span class="linenos">392</span>
-<span class="linenos">393</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">394</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation with variation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">395</span>            <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">396</span>
-<span class="linenos">397</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_estimate_settling_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">states</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">398</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate settling speed from trajectory.&quot;&quot;&quot;</span>
-<span class="linenos">399</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">400</span>            <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">401</span>
-<span class="linenos">402</span>        <span class="c1"># Look at cart position settling</span>
-<span class="linenos">403</span>        <span class="n">cart_pos</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
-<span class="linenos">404</span>
-<span class="linenos">405</span>        <span class="c1"># Find when system reaches 95% of steady state</span>
-<span class="linenos">406</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">[</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">)</span><span class="o">*</span><span class="mf">0.1</span><span class="p">):])</span>
-<span class="linenos">407</span>        <span class="n">target_value</span> <span class="o">=</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">final_value</span>
-<span class="linenos">408</span>
-<span class="linenos">409</span>        <span class="n">settling_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="linenos">410</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">):</span>
-<span class="linenos">411</span>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target_value</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">):</span>
-<span class="linenos">412</span>                <span class="n">settling_index</span> <span class="o">=</span> <span class="n">i</span>
-<span class="linenos">413</span>                <span class="k">break</span>
-<span class="linenos">414</span>
-<span class="linenos">415</span>        <span class="n">settling_time</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">settling_index</span><span class="p">]</span>
-<span class="linenos">416</span>
-<span class="linenos">417</span>        <span class="c1"># Convert to settling speed (inverse of settling time)</span>
-<span class="linenos">418</span>        <span class="c1"># Issue #13: Standardized division protection</span>
-<span class="linenos">419</span>        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">settling_time</span> <span class="o">+</span> <span class="n">EPSILON_DIV</span><span class="p">)</span>
-<span class="linenos">420</span>
-<span class="linenos">421</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_robustness_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos">422</span>                              <span class="n">controller_params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos">423</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get comprehensive robustness analysis.</span>
-<span class="linenos">424</span>
-<span class="linenos">425</span><span class="sd">        Parameters</span>
-<span class="linenos">426</span><span class="sd">        ----------</span>
-<span class="linenos">427</span><span class="sd">        controller_params : np.ndarray</span>
-<span class="linenos">428</span><span class="sd">            Controller parameters to analyze</span>
-<span class="linenos">429</span>
-<span class="linenos">430</span><span class="sd">        Returns</span>
-<span class="linenos">431</span><span class="sd">        -------</span>
-<span class="linenos">432</span><span class="sd">        dict</span>
-<span class="linenos">433</span><span class="sd">            Dictionary with detailed robustness metrics</span>
-<span class="linenos">434</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">435</span>        <span class="n">analysis</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">436</span>
-<span class="linenos">437</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">438</span>            <span class="c1"># Monte Carlo analysis</span>
-<span class="linenos">439</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;monte_carlo_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_monte_carlo_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
-<span class="linenos">440</span>
-<span class="linenos">441</span>            <span class="c1"># Sensitivity analysis</span>
-<span class="linenos">442</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;sensitivity_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_sensitivity_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
-<span class="linenos">443</span>
-<span class="linenos">444</span>            <span class="c1"># Worst-case analysis</span>
-<span class="linenos">445</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;worst_case_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_worst_case_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
-<span class="linenos">446</span>
-<span class="linenos">447</span>            <span class="c1"># Additional metrics</span>
-<span class="linenos">448</span>            <span class="n">variations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_parameter_variations</span><span class="p">()</span>
-<span class="linenos">449</span>            <span class="n">performances</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">450</span>            <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>  <span class="c1"># Sample a few for analysis</span>
-<span class="linenos">451</span>                <span class="n">perf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulate_with_variation</span><span class="p">(</span><span class="n">controller_params</span><span class="p">,</span> <span class="n">variation</span><span class="p">)</span>
-<span class="linenos">452</span>                <span class="k">if</span> <span class="n">perf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">453</span>                    <span class="n">performances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">perf</span><span class="p">)</span>
-<span class="linenos">454</span>
-<span class="linenos">455</span>            <span class="k">if</span> <span class="n">performances</span><span class="p">:</span>
-<span class="linenos">456</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
-<span class="linenos">457</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
-<span class="linenos">458</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
-<span class="linenos">459</span>
-<span class="linenos">460</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">461</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Robustness analysis failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">462</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="linenos">463</span>
-<span class="linenos">464</span>        <span class="k">return</span> <span class="n">analysis</span>
+<span class="linenos">338</span>
+<span class="linenos">339</span>        <span class="c1"># Generate all combinations of extreme values</span>
+<span class="linenos">340</span>        <span class="n">extreme_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cart_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend1_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend2_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend1_length&#39;</span><span class="p">,</span> <span class="s1">&#39;pend2_length&#39;</span><span class="p">]</span>
+<span class="linenos">341</span>
+<span class="linenos">342</span>        <span class="c1"># Test a few key extreme combinations (not all 2^5 = 32)</span>
+<span class="linenos">343</span>        <span class="n">extreme_combinations</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">344</span>            <span class="p">{</span><span class="n">param</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">extreme_params</span><span class="p">},</span>  <span class="c1"># All high</span>
+<span class="linenos">345</span>            <span class="p">{</span><span class="n">param</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">extreme_params</span><span class="p">},</span>  <span class="c1"># All low</span>
+<span class="linenos">346</span>            <span class="c1"># Mixed combinations</span>
+<span class="linenos">347</span>            <span class="p">{</span><span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span> <span class="s1">&#39;pend1_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span>
+<span class="linenos">348</span>             <span class="s1">&#39;pend2_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span> <span class="s1">&#39;pend1_length&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span>
+<span class="linenos">349</span>             <span class="s1">&#39;pend2_length&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">},</span>
+<span class="linenos">350</span>        <span class="p">]</span>
+<span class="linenos">351</span>
+<span class="linenos">352</span>        <span class="k">return</span> <span class="n">extreme_combinations</span>
+<span class="linenos">353</span>
+<span class="linenos">354</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_simulate_with_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos">355</span>                               <span class="n">controller_params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos">356</span>                               <span class="n">parameter_variation</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">357</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate system with parameter variations and return performance metric.&quot;&quot;&quot;</span>
+<span class="linenos">358</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">359</span>            <span class="c1"># This is a simplified simulation - in practice, you would:</span>
+<span class="linenos">360</span>            <span class="c1"># 1. Create modified dynamics model with parameter variations</span>
+<span class="linenos">361</span>            <span class="c1"># 2. Add noise to measurements if specified</span>
+<span class="linenos">362</span>            <span class="c1"># 3. Add external disturbances</span>
+<span class="linenos">363</span>            <span class="c1"># 4. Run simulation with controller</span>
+<span class="linenos">364</span>            <span class="c1"># 5. Compute performance metric (tracking error, stability, etc.)</span>
+<span class="linenos">365</span>
+<span class="linenos">366</span>            <span class="c1"># For now, return a placeholder based on parameter variations</span>
+<span class="linenos">367</span>            <span class="c1"># This would be replaced with actual simulation code</span>
+<span class="linenos">368</span>
+<span class="linenos">369</span>            <span class="c1"># Simulate the impact of parameter variations on performance</span>
+<span class="linenos">370</span>            <span class="n">variation_impact</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">371</span>            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">variation_factor</span> <span class="ow">in</span> <span class="n">parameter_variation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">372</span>                <span class="c1"># Each parameter variation contributes to performance degradation</span>
+<span class="linenos">373</span>                <span class="n">impact</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">variation_factor</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="linenos">374</span>                <span class="k">if</span> <span class="s1">&#39;mass&#39;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
+<span class="linenos">375</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">2.0</span>  <span class="c1"># Mass variations have larger impact</span>
+<span class="linenos">376</span>                <span class="k">elif</span> <span class="s1">&#39;length&#39;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
+<span class="linenos">377</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">3.0</span>  <span class="c1"># Length variations have largest impact</span>
+<span class="linenos">378</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">379</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">1.0</span>
+<span class="linenos">380</span>
+<span class="linenos">381</span>            <span class="c1"># Add noise impact</span>
+<span class="linenos">382</span>            <span class="n">noise_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_level</span> <span class="o">*</span> <span class="mf">5.0</span>
+<span class="linenos">383</span>
+<span class="linenos">384</span>            <span class="c1"># Add disturbance impact</span>
+<span class="linenos">385</span>            <span class="n">disturbance_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disturbance_magnitude</span> <span class="o">*</span> <span class="mf">2.0</span>
+<span class="linenos">386</span>
+<span class="linenos">387</span>            <span class="c1"># Total performance degradation</span>
+<span class="linenos">388</span>            <span class="n">total_performance</span> <span class="o">=</span> <span class="n">variation_impact</span> <span class="o">+</span> <span class="n">noise_impact</span> <span class="o">+</span> <span class="n">disturbance_impact</span>
+<span class="linenos">389</span>
+<span class="linenos">390</span>            <span class="k">return</span> <span class="n">total_performance</span>
+<span class="linenos">391</span>
+<span class="linenos">392</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">393</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation with variation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">394</span>            <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">395</span>
+<span class="linenos">396</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_estimate_settling_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">states</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">397</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate settling speed from trajectory.&quot;&quot;&quot;</span>
+<span class="linenos">398</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">399</span>            <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">400</span>
+<span class="linenos">401</span>        <span class="c1"># Look at cart position settling</span>
+<span class="linenos">402</span>        <span class="n">cart_pos</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
+<span class="linenos">403</span>
+<span class="linenos">404</span>        <span class="c1"># Find when system reaches 95% of steady state</span>
+<span class="linenos">405</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">[</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">)</span><span class="o">*</span><span class="mf">0.1</span><span class="p">):])</span>
+<span class="linenos">406</span>        <span class="n">target_value</span> <span class="o">=</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">final_value</span>
+<span class="linenos">407</span>
+<span class="linenos">408</span>        <span class="n">settling_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">409</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">):</span>
+<span class="linenos">410</span>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target_value</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">):</span>
+<span class="linenos">411</span>                <span class="n">settling_index</span> <span class="o">=</span> <span class="n">i</span>
+<span class="linenos">412</span>                <span class="k">break</span>
+<span class="linenos">413</span>
+<span class="linenos">414</span>        <span class="n">settling_time</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">settling_index</span><span class="p">]</span>
+<span class="linenos">415</span>
+<span class="linenos">416</span>        <span class="c1"># Convert to settling speed (inverse of settling time)</span>
+<span class="linenos">417</span>        <span class="c1"># Issue #13: Standardized division protection</span>
+<span class="linenos">418</span>        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">settling_time</span> <span class="o">+</span> <span class="n">EPSILON_DIV</span><span class="p">)</span>
+<span class="linenos">419</span>
+<span class="linenos">420</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_robustness_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos">421</span>                              <span class="n">controller_params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos">422</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get comprehensive robustness analysis.</span>
+<span class="linenos">423</span>
+<span class="linenos">424</span><span class="sd">        Parameters</span>
+<span class="linenos">425</span><span class="sd">        ----------</span>
+<span class="linenos">426</span><span class="sd">        controller_params : np.ndarray</span>
+<span class="linenos">427</span><span class="sd">            Controller parameters to analyze</span>
+<span class="linenos">428</span>
+<span class="linenos">429</span><span class="sd">        Returns</span>
+<span class="linenos">430</span><span class="sd">        -------</span>
+<span class="linenos">431</span><span class="sd">        dict</span>
+<span class="linenos">432</span><span class="sd">            Dictionary with detailed robustness metrics</span>
+<span class="linenos">433</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">434</span>        <span class="n">analysis</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">435</span>
+<span class="linenos">436</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">437</span>            <span class="c1"># Monte Carlo analysis</span>
+<span class="linenos">438</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;monte_carlo_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_monte_carlo_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
+<span class="linenos">439</span>
+<span class="linenos">440</span>            <span class="c1"># Sensitivity analysis</span>
+<span class="linenos">441</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;sensitivity_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_sensitivity_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
+<span class="linenos">442</span>
+<span class="linenos">443</span>            <span class="c1"># Worst-case analysis</span>
+<span class="linenos">444</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;worst_case_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_worst_case_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
+<span class="linenos">445</span>
+<span class="linenos">446</span>            <span class="c1"># Additional metrics</span>
+<span class="linenos">447</span>            <span class="n">variations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_parameter_variations</span><span class="p">()</span>
+<span class="linenos">448</span>            <span class="n">performances</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">449</span>            <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>  <span class="c1"># Sample a few for analysis</span>
+<span class="linenos">450</span>                <span class="n">perf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulate_with_variation</span><span class="p">(</span><span class="n">controller_params</span><span class="p">,</span> <span class="n">variation</span><span class="p">)</span>
+<span class="linenos">451</span>                <span class="k">if</span> <span class="n">perf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">452</span>                    <span class="n">performances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">perf</span><span class="p">)</span>
+<span class="linenos">453</span>
+<span class="linenos">454</span>            <span class="k">if</span> <span class="n">performances</span><span class="p">:</span>
+<span class="linenos">455</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
+<span class="linenos">456</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
+<span class="linenos">457</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
+<span class="linenos">458</span>
+<span class="linenos">459</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">460</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Robustness analysis failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">461</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="linenos">462</span>
+<span class="linenos">463</span>        <span class="k">return</span> <span class="n">analysis</span>
 </pre></div>
 </div>
 </section>
@@ -1298,133 +1323,132 @@ uncertainties and disturbances including:</p>
 <span class="linenos">318</span>
 <span class="linenos">319</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_extreme_variations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
 <span class="linenos">320</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate extreme parameter variations for worst-case analysis.&quot;&quot;&quot;</span>
-<span class="linenos">321</span>        <span class="n">variations</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">322</span>
-<span class="linenos">323</span>        <span class="c1"># Generate all combinations of extreme values</span>
-<span class="linenos">324</span>        <span class="n">extreme_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cart_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend1_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend2_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend1_length&#39;</span><span class="p">,</span> <span class="s1">&#39;pend2_length&#39;</span><span class="p">]</span>
-<span class="linenos">325</span>
-<span class="linenos">326</span>        <span class="c1"># Test a few key extreme combinations (not all 2^5 = 32)</span>
-<span class="linenos">327</span>        <span class="n">extreme_combinations</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos">328</span>            <span class="p">{</span><span class="n">param</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">extreme_params</span><span class="p">},</span>  <span class="c1"># All high</span>
-<span class="linenos">329</span>            <span class="p">{</span><span class="n">param</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">extreme_params</span><span class="p">},</span>  <span class="c1"># All low</span>
-<span class="linenos">330</span>            <span class="c1"># Mixed combinations</span>
-<span class="linenos">331</span>            <span class="p">{</span><span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span> <span class="s1">&#39;pend1_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span>
-<span class="linenos">332</span>             <span class="s1">&#39;pend2_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span> <span class="s1">&#39;pend1_length&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span>
-<span class="linenos">333</span>             <span class="s1">&#39;pend2_length&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">},</span>
-<span class="linenos">334</span>        <span class="p">]</span>
-<span class="linenos">335</span>
-<span class="linenos">336</span>        <span class="k">return</span> <span class="n">extreme_combinations</span>
-<span class="linenos">337</span>
-<span class="linenos">338</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_simulate_with_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos">339</span>                               <span class="n">controller_params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos">340</span>                               <span class="n">parameter_variation</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">341</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate system with parameter variations and return performance metric.&quot;&quot;&quot;</span>
-<span class="linenos">342</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">343</span>            <span class="c1"># This is a simplified simulation - in practice, you would:</span>
-<span class="linenos">344</span>            <span class="c1"># 1. Create modified dynamics model with parameter variations</span>
-<span class="linenos">345</span>            <span class="c1"># 2. Add noise to measurements if specified</span>
-<span class="linenos">346</span>            <span class="c1"># 3. Add external disturbances</span>
-<span class="linenos">347</span>            <span class="c1"># 4. Run simulation with controller</span>
-<span class="linenos">348</span>            <span class="c1"># 5. Compute performance metric (tracking error, stability, etc.)</span>
-<span class="linenos">349</span>
-<span class="linenos">350</span>            <span class="c1"># For now, return a placeholder based on parameter variations</span>
-<span class="linenos">351</span>            <span class="c1"># This would be replaced with actual simulation code</span>
-<span class="linenos">352</span>
-<span class="linenos">353</span>            <span class="c1"># Simulate the impact of parameter variations on performance</span>
-<span class="linenos">354</span>            <span class="n">variation_impact</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">355</span>            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">variation_factor</span> <span class="ow">in</span> <span class="n">parameter_variation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">356</span>                <span class="c1"># Each parameter variation contributes to performance degradation</span>
-<span class="linenos">357</span>                <span class="n">impact</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">variation_factor</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
-<span class="linenos">358</span>                <span class="k">if</span> <span class="s1">&#39;mass&#39;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
-<span class="linenos">359</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">2.0</span>  <span class="c1"># Mass variations have larger impact</span>
-<span class="linenos">360</span>                <span class="k">elif</span> <span class="s1">&#39;length&#39;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
-<span class="linenos">361</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">3.0</span>  <span class="c1"># Length variations have largest impact</span>
-<span class="linenos">362</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">363</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">1.0</span>
-<span class="linenos">364</span>
-<span class="linenos">365</span>            <span class="c1"># Add noise impact</span>
-<span class="linenos">366</span>            <span class="n">noise_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_level</span> <span class="o">*</span> <span class="mf">5.0</span>
-<span class="linenos">367</span>
-<span class="linenos">368</span>            <span class="c1"># Add disturbance impact</span>
-<span class="linenos">369</span>            <span class="n">disturbance_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disturbance_magnitude</span> <span class="o">*</span> <span class="mf">2.0</span>
-<span class="linenos">370</span>
-<span class="linenos">371</span>            <span class="c1"># Total performance degradation</span>
-<span class="linenos">372</span>            <span class="n">total_performance</span> <span class="o">=</span> <span class="n">variation_impact</span> <span class="o">+</span> <span class="n">noise_impact</span> <span class="o">+</span> <span class="n">disturbance_impact</span>
-<span class="linenos">373</span>
-<span class="linenos">374</span>            <span class="k">return</span> <span class="n">total_performance</span>
-<span class="linenos">375</span>
-<span class="linenos">376</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">377</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation with variation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">378</span>            <span class="k">return</span> <span class="kc">None</span>
-<span class="linenos">379</span>
-<span class="linenos">380</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_estimate_settling_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">states</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">381</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate settling speed from trajectory.&quot;&quot;&quot;</span>
-<span class="linenos">382</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">383</span>            <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">384</span>
-<span class="linenos">385</span>        <span class="c1"># Look at cart position settling</span>
-<span class="linenos">386</span>        <span class="n">cart_pos</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
-<span class="linenos">387</span>
-<span class="linenos">388</span>        <span class="c1"># Find when system reaches 95% of steady state</span>
-<span class="linenos">389</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">[</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">)</span><span class="o">*</span><span class="mf">0.1</span><span class="p">):])</span>
-<span class="linenos">390</span>        <span class="n">target_value</span> <span class="o">=</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">final_value</span>
-<span class="linenos">391</span>
-<span class="linenos">392</span>        <span class="n">settling_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="linenos">393</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">):</span>
-<span class="linenos">394</span>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target_value</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">):</span>
-<span class="linenos">395</span>                <span class="n">settling_index</span> <span class="o">=</span> <span class="n">i</span>
-<span class="linenos">396</span>                <span class="k">break</span>
-<span class="linenos">397</span>
-<span class="linenos">398</span>        <span class="n">settling_time</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">settling_index</span><span class="p">]</span>
-<span class="linenos">399</span>
-<span class="linenos">400</span>        <span class="c1"># Convert to settling speed (inverse of settling time)</span>
-<span class="linenos">401</span>        <span class="c1"># Issue #13: Standardized division protection</span>
-<span class="linenos">402</span>        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">settling_time</span> <span class="o">+</span> <span class="n">EPSILON_DIV</span><span class="p">)</span>
-<span class="linenos">403</span>
-<span class="linenos">404</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_robustness_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos">405</span>                              <span class="n">controller_params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos">406</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get comprehensive robustness analysis.</span>
-<span class="linenos">407</span>
-<span class="linenos">408</span><span class="sd">        Parameters</span>
-<span class="linenos">409</span><span class="sd">        ----------</span>
-<span class="linenos">410</span><span class="sd">        controller_params : np.ndarray</span>
-<span class="linenos">411</span><span class="sd">            Controller parameters to analyze</span>
-<span class="linenos">412</span>
-<span class="linenos">413</span><span class="sd">        Returns</span>
-<span class="linenos">414</span><span class="sd">        -------</span>
-<span class="linenos">415</span><span class="sd">        dict</span>
-<span class="linenos">416</span><span class="sd">            Dictionary with detailed robustness metrics</span>
-<span class="linenos">417</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">418</span>        <span class="n">analysis</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">419</span>
-<span class="linenos">420</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">421</span>            <span class="c1"># Monte Carlo analysis</span>
-<span class="linenos">422</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;monte_carlo_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_monte_carlo_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
-<span class="linenos">423</span>
-<span class="linenos">424</span>            <span class="c1"># Sensitivity analysis</span>
-<span class="linenos">425</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;sensitivity_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_sensitivity_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
-<span class="linenos">426</span>
-<span class="linenos">427</span>            <span class="c1"># Worst-case analysis</span>
-<span class="linenos">428</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;worst_case_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_worst_case_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
-<span class="linenos">429</span>
-<span class="linenos">430</span>            <span class="c1"># Additional metrics</span>
-<span class="linenos">431</span>            <span class="n">variations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_parameter_variations</span><span class="p">()</span>
-<span class="linenos">432</span>            <span class="n">performances</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">433</span>            <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>  <span class="c1"># Sample a few for analysis</span>
-<span class="linenos">434</span>                <span class="n">perf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulate_with_variation</span><span class="p">(</span><span class="n">controller_params</span><span class="p">,</span> <span class="n">variation</span><span class="p">)</span>
-<span class="linenos">435</span>                <span class="k">if</span> <span class="n">perf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">436</span>                    <span class="n">performances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">perf</span><span class="p">)</span>
-<span class="linenos">437</span>
-<span class="linenos">438</span>            <span class="k">if</span> <span class="n">performances</span><span class="p">:</span>
-<span class="linenos">439</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
-<span class="linenos">440</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
-<span class="linenos">441</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
-<span class="linenos">442</span>
-<span class="linenos">443</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">444</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Robustness analysis failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">445</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="linenos">446</span>
-<span class="linenos">447</span>        <span class="k">return</span> <span class="n">analysis</span>
+<span class="linenos">321</span>
+<span class="linenos">322</span>        <span class="c1"># Generate all combinations of extreme values</span>
+<span class="linenos">323</span>        <span class="n">extreme_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cart_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend1_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend2_mass&#39;</span><span class="p">,</span> <span class="s1">&#39;pend1_length&#39;</span><span class="p">,</span> <span class="s1">&#39;pend2_length&#39;</span><span class="p">]</span>
+<span class="linenos">324</span>
+<span class="linenos">325</span>        <span class="c1"># Test a few key extreme combinations (not all 2^5 = 32)</span>
+<span class="linenos">326</span>        <span class="n">extreme_combinations</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">327</span>            <span class="p">{</span><span class="n">param</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">extreme_params</span><span class="p">},</span>  <span class="c1"># All high</span>
+<span class="linenos">328</span>            <span class="p">{</span><span class="n">param</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">extreme_params</span><span class="p">},</span>  <span class="c1"># All low</span>
+<span class="linenos">329</span>            <span class="c1"># Mixed combinations</span>
+<span class="linenos">330</span>            <span class="p">{</span><span class="s1">&#39;cart_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span> <span class="s1">&#39;pend1_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span>
+<span class="linenos">331</span>             <span class="s1">&#39;pend2_mass&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span> <span class="s1">&#39;pend1_length&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">,</span>
+<span class="linenos">332</span>             <span class="s1">&#39;pend2_length&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_uncertainty</span><span class="p">},</span>
+<span class="linenos">333</span>        <span class="p">]</span>
+<span class="linenos">334</span>
+<span class="linenos">335</span>        <span class="k">return</span> <span class="n">extreme_combinations</span>
+<span class="linenos">336</span>
+<span class="linenos">337</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_simulate_with_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos">338</span>                               <span class="n">controller_params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos">339</span>                               <span class="n">parameter_variation</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">340</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate system with parameter variations and return performance metric.&quot;&quot;&quot;</span>
+<span class="linenos">341</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">342</span>            <span class="c1"># This is a simplified simulation - in practice, you would:</span>
+<span class="linenos">343</span>            <span class="c1"># 1. Create modified dynamics model with parameter variations</span>
+<span class="linenos">344</span>            <span class="c1"># 2. Add noise to measurements if specified</span>
+<span class="linenos">345</span>            <span class="c1"># 3. Add external disturbances</span>
+<span class="linenos">346</span>            <span class="c1"># 4. Run simulation with controller</span>
+<span class="linenos">347</span>            <span class="c1"># 5. Compute performance metric (tracking error, stability, etc.)</span>
+<span class="linenos">348</span>
+<span class="linenos">349</span>            <span class="c1"># For now, return a placeholder based on parameter variations</span>
+<span class="linenos">350</span>            <span class="c1"># This would be replaced with actual simulation code</span>
+<span class="linenos">351</span>
+<span class="linenos">352</span>            <span class="c1"># Simulate the impact of parameter variations on performance</span>
+<span class="linenos">353</span>            <span class="n">variation_impact</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">354</span>            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">variation_factor</span> <span class="ow">in</span> <span class="n">parameter_variation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">355</span>                <span class="c1"># Each parameter variation contributes to performance degradation</span>
+<span class="linenos">356</span>                <span class="n">impact</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">variation_factor</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="linenos">357</span>                <span class="k">if</span> <span class="s1">&#39;mass&#39;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
+<span class="linenos">358</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">2.0</span>  <span class="c1"># Mass variations have larger impact</span>
+<span class="linenos">359</span>                <span class="k">elif</span> <span class="s1">&#39;length&#39;</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
+<span class="linenos">360</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">3.0</span>  <span class="c1"># Length variations have largest impact</span>
+<span class="linenos">361</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">362</span>                    <span class="n">variation_impact</span> <span class="o">+=</span> <span class="n">impact</span> <span class="o">*</span> <span class="mf">1.0</span>
+<span class="linenos">363</span>
+<span class="linenos">364</span>            <span class="c1"># Add noise impact</span>
+<span class="linenos">365</span>            <span class="n">noise_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_level</span> <span class="o">*</span> <span class="mf">5.0</span>
+<span class="linenos">366</span>
+<span class="linenos">367</span>            <span class="c1"># Add disturbance impact</span>
+<span class="linenos">368</span>            <span class="n">disturbance_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disturbance_magnitude</span> <span class="o">*</span> <span class="mf">2.0</span>
+<span class="linenos">369</span>
+<span class="linenos">370</span>            <span class="c1"># Total performance degradation</span>
+<span class="linenos">371</span>            <span class="n">total_performance</span> <span class="o">=</span> <span class="n">variation_impact</span> <span class="o">+</span> <span class="n">noise_impact</span> <span class="o">+</span> <span class="n">disturbance_impact</span>
+<span class="linenos">372</span>
+<span class="linenos">373</span>            <span class="k">return</span> <span class="n">total_performance</span>
+<span class="linenos">374</span>
+<span class="linenos">375</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">376</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation with variation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">377</span>            <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">378</span>
+<span class="linenos">379</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_estimate_settling_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">states</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">380</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate settling speed from trajectory.&quot;&quot;&quot;</span>
+<span class="linenos">381</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">382</span>            <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">383</span>
+<span class="linenos">384</span>        <span class="c1"># Look at cart position settling</span>
+<span class="linenos">385</span>        <span class="n">cart_pos</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
+<span class="linenos">386</span>
+<span class="linenos">387</span>        <span class="c1"># Find when system reaches 95% of steady state</span>
+<span class="linenos">388</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">[</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">)</span><span class="o">*</span><span class="mf">0.1</span><span class="p">):])</span>
+<span class="linenos">389</span>        <span class="n">target_value</span> <span class="o">=</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">final_value</span>
+<span class="linenos">390</span>
+<span class="linenos">391</span>        <span class="n">settling_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">392</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cart_pos</span><span class="p">):</span>
+<span class="linenos">393</span>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target_value</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">):</span>
+<span class="linenos">394</span>                <span class="n">settling_index</span> <span class="o">=</span> <span class="n">i</span>
+<span class="linenos">395</span>                <span class="k">break</span>
+<span class="linenos">396</span>
+<span class="linenos">397</span>        <span class="n">settling_time</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">settling_index</span><span class="p">]</span>
+<span class="linenos">398</span>
+<span class="linenos">399</span>        <span class="c1"># Convert to settling speed (inverse of settling time)</span>
+<span class="linenos">400</span>        <span class="c1"># Issue #13: Standardized division protection</span>
+<span class="linenos">401</span>        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">settling_time</span> <span class="o">+</span> <span class="n">EPSILON_DIV</span><span class="p">)</span>
+<span class="linenos">402</span>
+<span class="linenos">403</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_robustness_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos">404</span>                              <span class="n">controller_params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos">405</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get comprehensive robustness analysis.</span>
+<span class="linenos">406</span>
+<span class="linenos">407</span><span class="sd">        Parameters</span>
+<span class="linenos">408</span><span class="sd">        ----------</span>
+<span class="linenos">409</span><span class="sd">        controller_params : np.ndarray</span>
+<span class="linenos">410</span><span class="sd">            Controller parameters to analyze</span>
+<span class="linenos">411</span>
+<span class="linenos">412</span><span class="sd">        Returns</span>
+<span class="linenos">413</span><span class="sd">        -------</span>
+<span class="linenos">414</span><span class="sd">        dict</span>
+<span class="linenos">415</span><span class="sd">            Dictionary with detailed robustness metrics</span>
+<span class="linenos">416</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">417</span>        <span class="n">analysis</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">418</span>
+<span class="linenos">419</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">420</span>            <span class="c1"># Monte Carlo analysis</span>
+<span class="linenos">421</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;monte_carlo_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_monte_carlo_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
+<span class="linenos">422</span>
+<span class="linenos">423</span>            <span class="c1"># Sensitivity analysis</span>
+<span class="linenos">424</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;sensitivity_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_sensitivity_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
+<span class="linenos">425</span>
+<span class="linenos">426</span>            <span class="c1"># Worst-case analysis</span>
+<span class="linenos">427</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;worst_case_robustness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_worst_case_robustness</span><span class="p">(</span><span class="n">controller_params</span><span class="p">)</span>
+<span class="linenos">428</span>
+<span class="linenos">429</span>            <span class="c1"># Additional metrics</span>
+<span class="linenos">430</span>            <span class="n">variations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_parameter_variations</span><span class="p">()</span>
+<span class="linenos">431</span>            <span class="n">performances</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">432</span>            <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>  <span class="c1"># Sample a few for analysis</span>
+<span class="linenos">433</span>                <span class="n">perf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulate_with_variation</span><span class="p">(</span><span class="n">controller_params</span><span class="p">,</span> <span class="n">variation</span><span class="p">)</span>
+<span class="linenos">434</span>                <span class="k">if</span> <span class="n">perf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">435</span>                    <span class="n">performances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">perf</span><span class="p">)</span>
+<span class="linenos">436</span>
+<span class="linenos">437</span>            <span class="k">if</span> <span class="n">performances</span><span class="p">:</span>
+<span class="linenos">438</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
+<span class="linenos">439</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
+<span class="linenos">440</span>                <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;performance_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">performances</span><span class="p">)</span>
+<span class="linenos">441</span>
+<span class="linenos">442</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">443</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Robustness analysis failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">444</span>            <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="linenos">445</span>
+<span class="linenos">446</span>        <span class="k">return</span> <span class="n">analysis</span>
 </pre></div>
 </div>
 </section>
@@ -1531,7 +1555,7 @@ uncertainties and disturbances including:</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

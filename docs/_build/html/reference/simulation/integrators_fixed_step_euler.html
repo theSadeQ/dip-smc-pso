@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,6 +517,153 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Euler integration methods (explicit and implicit).</p>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="euler-integration-method">
+<h3>Euler Integration Method<a class="headerlink" href="#euler-integration-method" title="Link to this heading">¶</a></h3>
+<p>The Euler method is the simplest first-order numerical integration scheme:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{k+1} = \vec{x}_k + \Delta t \cdot \vec{f}(\vec{x}_k, \vec{u}_k, t_k)\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{x}_k \in \mathbb{R}^n\)</span>: State vector at step <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{f}\)</span>: Dynamics function (derivatives)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta t\)</span>: Fixed time step</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{u}_k\)</span>: Control input</p></li>
+</ul>
+</section>
+<section id="local-truncation-error">
+<h3>Local Truncation Error<a class="headerlink" href="#local-truncation-error" title="Link to this heading">¶</a></h3>
+<p>Taylor series expansion shows first-order accuracy:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}(t_{k+1}) = \vec{x}(t_k) + \Delta t \vec{f}(\vec{x}_k, t_k) + \frac{\Delta t^2}{2} \vec{f}'(\vec{x}_k, t_k) + O(\Delta t^3)\]</div>
+</div>
+<p><strong>Local truncation error:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau_k = \frac{\Delta t^2}{2} \vec{f}'(\vec{x}_k, t_k) = O(\Delta t^2)\]</div>
+</div>
+<p><strong>Global error:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[e_N = O(\Delta t)\]</div>
+</div>
+</section>
+<section id="stability-analysis">
+<h3>Stability Analysis<a class="headerlink" href="#stability-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Absolute stability region</strong> for test equation <span class="math notranslate nohighlight">\(\dot{y} = \lambda y\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[y_{k+1} = (1 + \lambda \Delta t) y_k\]</div>
+</div>
+<p><strong>Stability condition:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[|1 + \lambda \Delta t| &lt; 1 \quad \Rightarrow \quad \Delta t &lt; \frac{2}{|\text{Re}(\lambda)|}\]</div>
+</div>
+<p>For the DIP system, characteristic frequencies determine maximum stable timestep.</p>
+</section>
+<section id="convergence">
+<h3>Convergence<a class="headerlink" href="#convergence" title="Link to this heading">¶</a></h3>
+<p><strong>Consistency:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\lim_{\Delta t \to 0} \frac{x_{k+1} - x_k}{\Delta t} = f(x_k, t_k)\]</div>
+</div>
+<p><strong>Stability + Consistency = Convergence</strong> (Lax Equivalence Theorem)</p>
+</section>
+<section id="computational-complexity">
+<h3>Computational Complexity<a class="headerlink" href="#computational-complexity" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Function evaluations per step:</strong> 1</p></li>
+<li><p><strong>Computational cost:</strong> <span class="math notranslate nohighlight">\(O(n)\)</span> per step</p></li>
+<li><p><strong>Memory:</strong> <span class="math notranslate nohighlight">\(O(n)\)</span> for state vector</p></li>
+<li><p><strong>Total cost for <span class="math notranslate nohighlight">\(N\)</span> steps:</strong> <span class="math notranslate nohighlight">\(O(Nn)\)</span></p></li>
+</ul>
+</section>
+<section id="use-cases">
+<h3>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h3>
+<p><strong>Suitable for:</strong></p>
+<ul class="simple">
+<li><p>Simple, non-stiff dynamics</p></li>
+<li><p>Fast prototyping</p></li>
+<li><p>Real-time applications (low computational cost)</p></li>
+</ul>
+<p><strong>Not suitable for:</strong></p>
+<ul class="simple">
+<li><p>Stiff equations (unstable)</p></li>
+<li><p>High-accuracy requirements</p></li>
+<li><p>Long-time integration (error accumulation)</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Initial State x_n] --&gt; B[Evaluate f_x_n_u_n_t_n_]
+    B --&gt; C[Compute x_n+1_ = x_n_ + Δt·f]
+    C --&gt; D{Converged?}
+    D --&gt;|No| A
+    D --&gt;|Yes| E[Final State x_N_]
+
+    style B fill:#9cf
+    style C fill:#ff9
+    style E fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegratorsFixedStepEuler</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">IntegratorsFixedStepEuler</span><span class="p">()</span>
+
+<span class="c1"># Execute</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">IntegratorsFixedStepEuler</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-profiling">
+<h3>Example 4: Performance Profiling<a class="headerlink" href="#example-4-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-other-components">
+<h3>Example 5: Integration with Other Components<a class="headerlink" href="#example-5-integration-with-other-components" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine with other simulation components</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -640,7 +813,7 @@
 <span class="linenos">144</span>
 <span class="linenos">145</span>            <span class="k">return</span> <span class="n">new_state</span>
 <span class="linenos">146</span>
-<span class="linenos">147</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">147</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">148</span>            <span class="c1"># Fallback to forward Euler if implicit solver fails</span>
 <span class="linenos">149</span>            <span class="n">new_state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dynamics_fn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
 <span class="linenos">150</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># One eval for forward Euler + one failed attempt</span>
@@ -869,7 +1042,7 @@
 <span class="linenos">79</span>
 <span class="linenos">80</span>            <span class="k">return</span> <span class="n">new_state</span>
 <span class="linenos">81</span>
-<span class="linenos">82</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">82</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">83</span>            <span class="c1"># Fallback to forward Euler if implicit solver fails</span>
 <span class="linenos">84</span>            <span class="n">new_state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dynamics_fn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
 <span class="linenos">85</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_update_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># One eval for forward Euler + one failed attempt</span>
@@ -1014,7 +1187,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1037,6 +1210,24 @@
             <ul>
 <li><a class="reference internal" href="#">simulation.integrators.fixed_step.euler</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#euler-integration-method">Euler Integration Method</a></li>
+<li><a class="reference internal" href="#local-truncation-error">Local Truncation Error</a></li>
+<li><a class="reference internal" href="#stability-analysis">Stability Analysis</a></li>
+<li><a class="reference internal" href="#convergence">Convergence</a></li>
+<li><a class="reference internal" href="#computational-complexity">Computational Complexity</a></li>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-profiling">Example 4: Performance Profiling</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-other-components">Example 5: Integration with Other Components</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#forwardeuler"><code class="docutils literal notranslate"><span class="pre">ForwardEuler</span></code></a><ul>
@@ -1091,6 +1282,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

@@ -249,6 +249,9 @@ CI = (1/T)∫₀ᵀ |du/dt| dt / |u_nominal|  [Normalized chattering index]
 
 #### **1. Enhanced Numerical Stability**
 ```python
+# example-metadata:
+# runnable: false
+
 # Implementation Priority: HIGH
 class NumericallyRobustController:
     def __init__(self, condition_threshold=1e6):
@@ -269,6 +272,9 @@ class NumericallyRobustController:
 
 #### **2. Adaptive Fault Detection**
 ```python
+# example-metadata:
+# runnable: false
+
 # Implementation Priority: HIGH
 class AdaptiveFaultDetection:
     def __init__(self, base_threshold=0.135, decay_rate=20.0):
@@ -287,6 +293,9 @@ class AdaptiveFaultDetection:
 
 #### **3. Memory-Efficient Control Implementation**
 ```python
+# example-metadata:
+# runnable: false
+
 # Implementation Priority: MEDIUM
 class MemoryEfficientController:
     def __init__(self, max_history=100):

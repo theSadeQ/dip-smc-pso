@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.smc.classic_smc" href="smc_classic_smc.html" /><link rel="prev" title="controllers.mpc.init" href="mpc___init__.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -607,410 +633,413 @@ Additional unused keyword arguments for forward compatibility.</p>
 <span class="linenos"> 59</span><span class="sd">    Additional unused keyword arguments for forward compatibility.</span>
 <span class="linenos"> 60</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos"> 61</span>
-<span class="linenos"> 62</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 63</span><span class="kn">import</span><span class="w"> </span><span class="nn">weakref</span>
-<span class="linenos"> 64</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="linenos"> 62</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="linenos"> 63</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 64</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
 <span class="linenos"> 65</span>
-<span class="linenos"> 66</span><span class="c1"># ---------------------------------------------------------------------------</span>
-<span class="linenos"> 67</span><span class="c1"># Structured output type</span>
-<span class="linenos"> 68</span><span class="c1">#</span>
-<span class="linenos"> 69</span><span class="c1"># Import the named‑tuple output type from the sibling utils package using a</span>
-<span class="linenos"> 70</span><span class="c1"># relative import.  Using relative imports avoids issues when the project</span>
-<span class="linenos"> 71</span><span class="c1"># package is nested under different root prefixes.  See the design notes</span>
-<span class="linenos"> 72</span><span class="c1"># regarding explicit interfaces and return contracts.</span>
-<span class="linenos"> 73</span><span class="c1"># Import from organized legacy package</span>
-<span class="linenos"> 74</span><span class="k">try</span><span class="p">:</span>
-<span class="linenos"> 75</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSMCOutput</span>  <span class="c1"># when repo root on sys.path</span>
-<span class="linenos"> 76</span><span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos"> 77</span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos"> 78</span>        <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSMCOutput</span>  <span class="c1"># when importing as src.controllers.*</span>
-<span class="linenos"> 79</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos"> 80</span>        <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSMCOutput</span>    <span class="c1"># when src itself on sys.path</span>
-<span class="linenos"> 81</span>
-<span class="linenos"> 82</span>
-<span class="linenos"> 83</span><span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMC</span><span class="p">:</span>
-<span class="linenos"> 84</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos"> 85</span><span class="sd">    Adaptive Sliding Mode Controller that adjusts gain K online.</span>
-<span class="linenos"> 86</span><span class="sd">    </span>
-<span class="linenos"> 87</span><span class="sd">    The controller prevents gain wind-up by using a dead zone around the sliding surface.</span>
-<span class="linenos"> 88</span><span class="sd">    When |σ| ≤ dead_zone, the gain K only decreases via the leak term, preventing</span>
-<span class="linenos"> 89</span><span class="sd">    uncontrolled growth during chattering.</span>
-<span class="linenos"> 90</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos"> 91</span>    <span class="n">n_gains</span> <span class="o">=</span> <span class="mi">5</span>  
-<span class="linenos"> 92</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-<span class="linenos"> 93</span>        <span class="bp">self</span><span class="p">,</span>
-<span class="linenos"> 94</span>        <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
-<span class="linenos"> 95</span>        <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 96</span>        <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 97</span>        <span class="n">leak_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 98</span>        <span class="n">adapt_rate_limit</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 99</span>        <span class="n">K_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">100</span>        <span class="n">K_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">101</span>        <span class="n">smooth_switch</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-<span class="linenos">102</span>        <span class="n">boundary_layer</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">103</span>        <span class="n">dead_zone</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">104</span>        <span class="n">K_init</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
-<span class="linenos">105</span>        <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
-<span class="linenos">106</span>        <span class="o">**</span><span class="n">kwargs</span>
-<span class="linenos">107</span>    <span class="p">):</span>
-<span class="linenos">108</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">109</span><span class="sd">        Initialize Adaptive SMC controller.</span>
-<span class="linenos">110</span><span class="sd">        </span>
-<span class="linenos">111</span><span class="sd">        Args:</span>
-<span class="linenos">112</span><span class="sd">            gains: Five gains in the order ``[k1, k2, lam1, lam2, gamma]``.</span>
-<span class="linenos">113</span><span class="sd">            dt: Integration timestep (s); must be strictly positive.</span>
-<span class="linenos">114</span><span class="sd">            max_force: Saturation limit for the control input.</span>
-<span class="linenos">115</span><span class="sd">            leak_rate: Non‑negative leak coefficient that pulls ``K`` back</span>
-<span class="linenos">116</span><span class="sd">                toward ``K_init``.</span>
-<span class="linenos">117</span><span class="sd">            adapt_rate_limit: Maximum rate of change for ``K``; must be</span>
-<span class="linenos">118</span><span class="sd">                non‑negative.</span>
-<span class="linenos">119</span><span class="sd">            K_min: Minimum permissible value of ``K`` (strictly</span>
-<span class="linenos">120</span><span class="sd">                positive).</span>
-<span class="linenos">121</span><span class="sd">            K_max: Maximum permissible value of ``K`` (≥ ``K_min``).</span>
-<span class="linenos">122</span><span class="sd">            smooth_switch: If ``True``, use a hyperbolic tangent for</span>
-<span class="linenos">123</span><span class="sd">                switching; otherwise use a linear saturation.</span>
-<span class="linenos">124</span><span class="sd">            boundary_layer: Positive boundary‑layer thickness ε for the</span>
-<span class="linenos">125</span><span class="sd">                switching function; see the class docstring.</span>
-<span class="linenos">126</span><span class="sd">            dead_zone: Width of the dead zone (≥ 0) within which</span>
-<span class="linenos">127</span><span class="sd">                adaptation is frozen.</span>
-<span class="linenos">128</span><span class="sd">            K_init: Initial and nominal value of the adaptive gain ``K``.</span>
-<span class="linenos">129</span><span class="sd">            alpha: Proportional term weighting the sliding surface.</span>
-<span class="linenos">130</span><span class="sd">            **kwargs: Additional unused keyword arguments (ignored).</span>
-<span class="linenos">131</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">132</span>        <span class="c1"># Keep the original gains for external visibility.  Accept</span>
-<span class="linenos">133</span>        <span class="c1"># additional gains by ignoring extras; this provides forward</span>
-<span class="linenos">134</span>        <span class="c1"># compatibility with tests that pass extra values.  Only the</span>
-<span class="linenos">135</span>        <span class="c1"># first five elements are used for controller parameters.</span>
-<span class="linenos">136</span>        <span class="c1">#</span>
-<span class="linenos">137</span>        <span class="c1"># Preserve the raw gains for introspection via a property.  Use</span>
-<span class="linenos">138</span>        <span class="c1"># a private attribute to guard against accidental mutation of</span>
-<span class="linenos">139</span>        <span class="c1"># controller parameters from the outside.  Tests assert that</span>
-<span class="linenos">140</span>        <span class="c1"># ``controller.gains`` returns the same sequence that was</span>
-<span class="linenos">141</span>        <span class="c1"># supplied at construction time, regardless of how many</span>
-<span class="linenos">142</span>        <span class="c1"># additional gains were provided.</span>
-<span class="linenos">143</span>        <span class="c1"># Validate the supplied gains early.  Use the static validator to</span>
-<span class="linenos">144</span>        <span class="c1"># mirror STA&#39;s feasibility check and fail fast if the wrong number of</span>
-<span class="linenos">145</span>        <span class="c1"># gains is provided.  This allows the factory or PSO tuner to</span>
-<span class="linenos">146</span>        <span class="c1"># reject invalid configurations before instantiating the controller.</span>
-<span class="linenos">147</span>        <span class="bp">self</span><span class="o">.</span><span class="n">validate_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
-<span class="linenos">148</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
-<span class="linenos">149</span>        <span class="c1"># Use only the first 5 gains for internal parameters</span>
-<span class="linenos">150</span>        <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">gains</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
-<span class="linenos">151</span>        <span class="c1"># Use centralised positivity checks for dt and max_force.  The</span>
-<span class="linenos">152</span>        <span class="c1"># ``require_positive`` helper enforces strictly positive values and</span>
-<span class="linenos">153</span>        <span class="c1"># provides consistent error messages across controllers.</span>
-<span class="linenos">154</span>        <span class="c1"># Import from new modular utils structure</span>
-<span class="linenos">155</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">156</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when repo root on sys.path</span>
-<span class="linenos">157</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">158</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">159</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when importing as src.controllers.*</span>
-<span class="linenos">160</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">161</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>    <span class="c1"># when src itself on sys.path</span>
-<span class="linenos">162</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="s2">&quot;dt&quot;</span><span class="p">)</span>
-<span class="linenos">163</span>        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">max_force</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">)</span>
-<span class="linenos">164</span>        <span class="c1"># Remove rate_weight.  The adaptive SMC controller adapts its gain</span>
-<span class="linenos">165</span>        <span class="c1"># solely based on the magnitude of the sliding surface, consistent with</span>
-<span class="linenos">166</span>        <span class="c1"># adaptive SMC theory.  Including a control‑rate term has no</span>
-<span class="linenos">167</span>        <span class="c1"># theoretical justification and can destabilise the adaptation law.  See</span>
-<span class="linenos">168</span>        <span class="c1"># Roy (2020) for an adaptation law that increases the gain outside a</span>
-<span class="linenos">169</span>        <span class="c1"># dead‑zone and decreases it within a neighbourhood of the sliding</span>
-<span class="linenos">170</span>        <span class="c1"># surface.</span>
-<span class="linenos">171</span>        <span class="c1"># Import from new modular utils structure</span>
-<span class="linenos">172</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">173</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when repo root on sys.path</span>
-<span class="linenos">174</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">175</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">176</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when importing as src.controllers.*</span>
-<span class="linenos">177</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">178</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>    <span class="c1"># when src itself on sys.path</span>
-<span class="linenos">179</span>        <span class="c1"># Use central positivity checks.  leak_rate and adapt_rate_limit may be zero</span>
-<span class="linenos">180</span>        <span class="c1"># according to design review but must not be negative.  Gains K_min and</span>
-<span class="linenos">181</span>        <span class="c1"># K_max must be strictly positive to ensure Lyapunov stability.</span>
-<span class="linenos">182</span>        <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">leak_rate</span><span class="p">,</span> <span class="s2">&quot;leak_rate&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">183</span>        <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">K_init</span><span class="p">)</span>
-<span class="linenos">184</span>        <span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">adapt_rate_limit</span><span class="p">,</span> <span class="s2">&quot;adapt_rate_limit&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">185</span>        <span class="bp">self</span><span class="o">.</span><span class="n">K_min</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">K_min</span><span class="p">,</span> <span class="s2">&quot;K_min&quot;</span><span class="p">)</span>
-<span class="linenos">186</span>        <span class="bp">self</span><span class="o">.</span><span class="n">K_max</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">K_max</span><span class="p">,</span> <span class="s2">&quot;K_max&quot;</span><span class="p">)</span>
-<span class="linenos">187</span>        <span class="bp">self</span><span class="o">.</span><span class="n">smooth_switch</span> <span class="o">=</span> <span class="n">smooth_switch</span>
-<span class="linenos">188</span>        <span class="c1"># Validate boundary layer via central utility</span>
-<span class="linenos">189</span>        <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="s2">&quot;boundary_layer&quot;</span><span class="p">)</span>
-<span class="linenos">190</span>
-<span class="linenos">191</span>        <span class="c1"># dead_zone can be zero or positive; enforce non‑negativity via helper</span>
-<span class="linenos">192</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">dead_zone</span><span class="p">,</span> <span class="s2">&quot;dead_zone&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">193</span>        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
-<span class="linenos">194</span>        <span class="c1"># Additional envelope / rate validations</span>
-<span class="linenos">195</span>        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K_min</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_max</span><span class="p">):</span>
-<span class="linenos">196</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Require K_min ≤ K_init ≤ K_max&quot;</span><span class="p">)</span>
-<span class="linenos">197</span>
-<span class="linenos">198</span>    <span class="c1"># ------------------------------------------------------------------</span>
-<span class="linenos">199</span>    <span class="c1"># Properties</span>
+<span class="linenos"> 66</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos"> 67</span>
+<span class="linenos"> 68</span><span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="linenos"> 69</span><span class="c1"># Structured output type</span>
+<span class="linenos"> 70</span><span class="c1">#</span>
+<span class="linenos"> 71</span><span class="c1"># Import the named‑tuple output type from the sibling utils package using a</span>
+<span class="linenos"> 72</span><span class="c1"># relative import.  Using relative imports avoids issues when the project</span>
+<span class="linenos"> 73</span><span class="c1"># package is nested under different root prefixes.  See the design notes</span>
+<span class="linenos"> 74</span><span class="c1"># regarding explicit interfaces and return contracts.</span>
+<span class="linenos"> 75</span><span class="c1"># Import from organized legacy package</span>
+<span class="linenos"> 76</span><span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 77</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSMCOutput</span>  <span class="c1"># when repo root on sys.path</span>
+<span class="linenos"> 78</span><span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos"> 79</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 80</span>        <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSMCOutput</span>  <span class="c1"># when importing as src.controllers.*</span>
+<span class="linenos"> 81</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos"> 82</span>        <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSMCOutput</span>    <span class="c1"># when src itself on sys.path</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span>
+<span class="linenos"> 85</span><span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMC</span><span class="p">:</span>
+<span class="linenos"> 86</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 87</span><span class="sd">    Adaptive Sliding Mode Controller that adjusts gain K online.</span>
+<span class="linenos"> 88</span><span class="sd">    </span>
+<span class="linenos"> 89</span><span class="sd">    The controller prevents gain wind-up by using a dead zone around the sliding surface.</span>
+<span class="linenos"> 90</span><span class="sd">    When |σ| ≤ dead_zone, the gain K only decreases via the leak term, preventing</span>
+<span class="linenos"> 91</span><span class="sd">    uncontrolled growth during chattering.</span>
+<span class="linenos"> 92</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 93</span>    <span class="n">n_gains</span> <span class="o">=</span> <span class="mi">5</span>  
+<span class="linenos"> 94</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+<span class="linenos"> 95</span>        <span class="bp">self</span><span class="p">,</span>
+<span class="linenos"> 96</span>        <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+<span class="linenos"> 97</span>        <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos"> 98</span>        <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos"> 99</span>        <span class="n">leak_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">100</span>        <span class="n">adapt_rate_limit</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">101</span>        <span class="n">K_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">102</span>        <span class="n">K_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">103</span>        <span class="n">smooth_switch</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos">104</span>        <span class="n">boundary_layer</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">105</span>        <span class="n">dead_zone</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">106</span>        <span class="n">K_init</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
+<span class="linenos">107</span>        <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="linenos">108</span>        <span class="o">**</span><span class="n">kwargs</span>
+<span class="linenos">109</span>    <span class="p">):</span>
+<span class="linenos">110</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">111</span><span class="sd">        Initialize Adaptive SMC controller.</span>
+<span class="linenos">112</span><span class="sd">        </span>
+<span class="linenos">113</span><span class="sd">        Args:</span>
+<span class="linenos">114</span><span class="sd">            gains: Five gains in the order ``[k1, k2, lam1, lam2, gamma]``.</span>
+<span class="linenos">115</span><span class="sd">            dt: Integration timestep (s); must be strictly positive.</span>
+<span class="linenos">116</span><span class="sd">            max_force: Saturation limit for the control input.</span>
+<span class="linenos">117</span><span class="sd">            leak_rate: Non‑negative leak coefficient that pulls ``K`` back</span>
+<span class="linenos">118</span><span class="sd">                toward ``K_init``.</span>
+<span class="linenos">119</span><span class="sd">            adapt_rate_limit: Maximum rate of change for ``K``; must be</span>
+<span class="linenos">120</span><span class="sd">                non‑negative.</span>
+<span class="linenos">121</span><span class="sd">            K_min: Minimum permissible value of ``K`` (strictly</span>
+<span class="linenos">122</span><span class="sd">                positive).</span>
+<span class="linenos">123</span><span class="sd">            K_max: Maximum permissible value of ``K`` (≥ ``K_min``).</span>
+<span class="linenos">124</span><span class="sd">            smooth_switch: If ``True``, use a hyperbolic tangent for</span>
+<span class="linenos">125</span><span class="sd">                switching; otherwise use a linear saturation.</span>
+<span class="linenos">126</span><span class="sd">            boundary_layer: Positive boundary‑layer thickness ε for the</span>
+<span class="linenos">127</span><span class="sd">                switching function; see the class docstring.</span>
+<span class="linenos">128</span><span class="sd">            dead_zone: Width of the dead zone (≥ 0) within which</span>
+<span class="linenos">129</span><span class="sd">                adaptation is frozen.</span>
+<span class="linenos">130</span><span class="sd">            K_init: Initial and nominal value of the adaptive gain ``K``.</span>
+<span class="linenos">131</span><span class="sd">            alpha: Proportional term weighting the sliding surface.</span>
+<span class="linenos">132</span><span class="sd">            **kwargs: Additional unused keyword arguments (ignored).</span>
+<span class="linenos">133</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">134</span>        <span class="c1"># Keep the original gains for external visibility.  Accept</span>
+<span class="linenos">135</span>        <span class="c1"># additional gains by ignoring extras; this provides forward</span>
+<span class="linenos">136</span>        <span class="c1"># compatibility with tests that pass extra values.  Only the</span>
+<span class="linenos">137</span>        <span class="c1"># first five elements are used for controller parameters.</span>
+<span class="linenos">138</span>        <span class="c1">#</span>
+<span class="linenos">139</span>        <span class="c1"># Preserve the raw gains for introspection via a property.  Use</span>
+<span class="linenos">140</span>        <span class="c1"># a private attribute to guard against accidental mutation of</span>
+<span class="linenos">141</span>        <span class="c1"># controller parameters from the outside.  Tests assert that</span>
+<span class="linenos">142</span>        <span class="c1"># ``controller.gains`` returns the same sequence that was</span>
+<span class="linenos">143</span>        <span class="c1"># supplied at construction time, regardless of how many</span>
+<span class="linenos">144</span>        <span class="c1"># additional gains were provided.</span>
+<span class="linenos">145</span>        <span class="c1"># Validate the supplied gains early.  Use the static validator to</span>
+<span class="linenos">146</span>        <span class="c1"># mirror STA&#39;s feasibility check and fail fast if the wrong number of</span>
+<span class="linenos">147</span>        <span class="c1"># gains is provided.  This allows the factory or PSO tuner to</span>
+<span class="linenos">148</span>        <span class="c1"># reject invalid configurations before instantiating the controller.</span>
+<span class="linenos">149</span>        <span class="bp">self</span><span class="o">.</span><span class="n">validate_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
+<span class="linenos">150</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
+<span class="linenos">151</span>        <span class="c1"># Use only the first 5 gains for internal parameters</span>
+<span class="linenos">152</span>        <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">gains</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="linenos">153</span>        <span class="c1"># Use centralised positivity checks for dt and max_force.  The</span>
+<span class="linenos">154</span>        <span class="c1"># ``require_positive`` helper enforces strictly positive values and</span>
+<span class="linenos">155</span>        <span class="c1"># provides consistent error messages across controllers.</span>
+<span class="linenos">156</span>        <span class="c1"># Import from new modular utils structure</span>
+<span class="linenos">157</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">158</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when repo root on sys.path</span>
+<span class="linenos">159</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">160</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">161</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when importing as src.controllers.*</span>
+<span class="linenos">162</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">163</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>    <span class="c1"># when src itself on sys.path</span>
+<span class="linenos">164</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="s2">&quot;dt&quot;</span><span class="p">)</span>
+<span class="linenos">165</span>        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">max_force</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">)</span>
+<span class="linenos">166</span>        <span class="c1"># Remove rate_weight.  The adaptive SMC controller adapts its gain</span>
+<span class="linenos">167</span>        <span class="c1"># solely based on the magnitude of the sliding surface, consistent with</span>
+<span class="linenos">168</span>        <span class="c1"># adaptive SMC theory.  Including a control‑rate term has no</span>
+<span class="linenos">169</span>        <span class="c1"># theoretical justification and can destabilise the adaptation law.  See</span>
+<span class="linenos">170</span>        <span class="c1"># Roy (2020) for an adaptation law that increases the gain outside a</span>
+<span class="linenos">171</span>        <span class="c1"># dead‑zone and decreases it within a neighbourhood of the sliding</span>
+<span class="linenos">172</span>        <span class="c1"># surface.</span>
+<span class="linenos">173</span>        <span class="c1"># Import from new modular utils structure</span>
+<span class="linenos">174</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">175</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when repo root on sys.path</span>
+<span class="linenos">176</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">177</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">178</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when importing as src.controllers.*</span>
+<span class="linenos">179</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">180</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>    <span class="c1"># when src itself on sys.path</span>
+<span class="linenos">181</span>        <span class="c1"># Use central positivity checks.  leak_rate and adapt_rate_limit may be zero</span>
+<span class="linenos">182</span>        <span class="c1"># according to design review but must not be negative.  Gains K_min and</span>
+<span class="linenos">183</span>        <span class="c1"># K_max must be strictly positive to ensure Lyapunov stability.</span>
+<span class="linenos">184</span>        <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">leak_rate</span><span class="p">,</span> <span class="s2">&quot;leak_rate&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">185</span>        <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">K_init</span><span class="p">)</span>
+<span class="linenos">186</span>        <span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">adapt_rate_limit</span><span class="p">,</span> <span class="s2">&quot;adapt_rate_limit&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">187</span>        <span class="bp">self</span><span class="o">.</span><span class="n">K_min</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">K_min</span><span class="p">,</span> <span class="s2">&quot;K_min&quot;</span><span class="p">)</span>
+<span class="linenos">188</span>        <span class="bp">self</span><span class="o">.</span><span class="n">K_max</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">K_max</span><span class="p">,</span> <span class="s2">&quot;K_max&quot;</span><span class="p">)</span>
+<span class="linenos">189</span>        <span class="bp">self</span><span class="o">.</span><span class="n">smooth_switch</span> <span class="o">=</span> <span class="n">smooth_switch</span>
+<span class="linenos">190</span>        <span class="c1"># Validate boundary layer via central utility</span>
+<span class="linenos">191</span>        <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="s2">&quot;boundary_layer&quot;</span><span class="p">)</span>
+<span class="linenos">192</span>
+<span class="linenos">193</span>        <span class="c1"># dead_zone can be zero or positive; enforce non‑negativity via helper</span>
+<span class="linenos">194</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">dead_zone</span><span class="p">,</span> <span class="s2">&quot;dead_zone&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">195</span>        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+<span class="linenos">196</span>        <span class="c1"># Additional envelope / rate validations</span>
+<span class="linenos">197</span>        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K_min</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_max</span><span class="p">):</span>
+<span class="linenos">198</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Require K_min ≤ K_init ≤ K_max&quot;</span><span class="p">)</span>
+<span class="linenos">199</span>
 <span class="linenos">200</span>    <span class="c1"># ------------------------------------------------------------------</span>
-<span class="linenos">201</span>    <span class="nd">@property</span>
-<span class="linenos">202</span>    <span class="k">def</span><span class="w"> </span><span class="nf">gains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">203</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">204</span><span class="sd">        Return a copy of the gain vector supplied to this controller.</span>
-<span class="linenos">205</span>
-<span class="linenos">206</span><span class="sd">        The returned list includes all elements that were passed in</span>
-<span class="linenos">207</span><span class="sd">        through the ``gains`` argument during initialization.  It is a</span>
-<span class="linenos">208</span><span class="sd">        shallow copy to prevent external callers from mutating the</span>
-<span class="linenos">209</span><span class="sd">        internal gain storage.  Tests use this property to verify that</span>
-<span class="linenos">210</span><span class="sd">        custom gains are accepted and stored correctly.</span>
-<span class="linenos">211</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">212</span>        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gains</span><span class="p">)</span>        
-<span class="linenos">213</span>
-<span class="linenos">214</span>    <span class="nd">@staticmethod</span>
-<span class="linenos">215</span>    <span class="k">def</span><span class="w"> </span><span class="nf">validate_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">216</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">217</span><span class="sd">        Validate that a suitable gain sequence has been provided.</span>
-<span class="linenos">218</span>
-<span class="linenos">219</span><span class="sd">        The adaptive sliding–mode controller uses exactly five gains</span>
-<span class="linenos">220</span><span class="sd">        (k1, k2, λ1, λ2, γ) for its sliding surface and adaptation law.</span>
-<span class="linenos">221</span><span class="sd">        Additional gains may be supplied for forward compatibility</span>
-<span class="linenos">222</span><span class="sd">        (they will be ignored), but fewer than five gains is considered</span>
-<span class="linenos">223</span><span class="sd">        an error.</span>
-<span class="linenos">224</span>
-<span class="linenos">225</span><span class="sd">        Raises</span>
-<span class="linenos">226</span><span class="sd">        ------</span>
-<span class="linenos">227</span><span class="sd">        ValueError</span>
-<span class="linenos">228</span><span class="sd">            If ``gains`` has fewer than five elements.</span>
-<span class="linenos">229</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">230</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
-<span class="linenos">231</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="linenos">232</span>                <span class="s2">&quot;AdaptiveSMC requires at least 5 gains: [k1, k2, lam1, lam2, gamma]&quot;</span>
-<span class="linenos">233</span>            <span class="p">)</span>
-<span class="linenos">234</span>        <span class="c1"># Enforce positive sliding‑surface gains and adaptation gain using a shared helper.</span>
-<span class="linenos">235</span>        <span class="c1"># The sliding surface is a linear combination of state variables with</span>
-<span class="linenos">236</span>        <span class="c1"># positive weights; choosing non‑positive values violates the</span>
-<span class="linenos">237</span>        <span class="c1"># conditions for sliding‑mode stability.</span>
-<span class="linenos">238</span>        <span class="c1"># Import from new modular utils structure</span>
-<span class="linenos">239</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">240</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when repo root on sys.path</span>
-<span class="linenos">241</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">242</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">243</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when importing as src.controllers.*</span>
-<span class="linenos">244</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">245</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>    <span class="c1"># when src itself on sys.path</span>
-<span class="linenos">246</span>        <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">gains</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
-<span class="linenos">247</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">((</span><span class="s2">&quot;k1&quot;</span><span class="p">,</span> <span class="s2">&quot;k2&quot;</span><span class="p">,</span> <span class="s2">&quot;lam1&quot;</span><span class="p">,</span> <span class="s2">&quot;lam2&quot;</span><span class="p">,</span> <span class="s2">&quot;gamma&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)):</span>
-<span class="linenos">248</span>            <span class="n">require_positive</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;AdaptiveSMC gain </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">249</span>    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="linenos">250</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize internal state: (K, last_u, time_in_sliding).&quot;&quot;&quot;</span>
-<span class="linenos">251</span>        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="linenos">252</span>        
-<span class="linenos">253</span>    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
-<span class="linenos">254</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize history dictionary.&quot;&quot;&quot;</span>
-<span class="linenos">255</span>        <span class="k">return</span> <span class="p">{</span>
-<span class="linenos">256</span>            <span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="p">[],</span>
-<span class="linenos">257</span>            <span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="p">[],</span>
-<span class="linenos">258</span>            <span class="s1">&#39;u_sw&#39;</span><span class="p">:</span> <span class="p">[],</span>
-<span class="linenos">259</span>            <span class="s1">&#39;dK&#39;</span><span class="p">:</span> <span class="p">[],</span>
-<span class="linenos">260</span>            <span class="s1">&#39;time_in_sliding&#39;</span><span class="p">:</span> <span class="p">[]</span>
-<span class="linenos">261</span>        <span class="p">}</span>
-<span class="linenos">262</span>        
-<span class="linenos">263</span>    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
-<span class="linenos">264</span>        <span class="bp">self</span><span class="p">,</span>
-<span class="linenos">265</span>        <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos">266</span>        <span class="n">state_vars</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
-<span class="linenos">267</span>        <span class="n">history</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
-<span class="linenos">268</span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AdaptiveSMCOutput</span><span class="p">:</span>  <span class="c1"># type: ignore[override]</span>
-<span class="linenos">269</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">270</span><span class="sd">        Compute the adaptive sliding–mode control law with unified anti‑windup.</span>
-<span class="linenos">271</span>
-<span class="linenos">272</span><span class="sd">        The controller constructs a sliding surface based on the joint</span>
-<span class="linenos">273</span><span class="sd">        velocities and positions and generates a switching control using</span>
-<span class="linenos">274</span><span class="sd">        either a hyperbolic tangent or a linear saturation function.  The</span>
-<span class="linenos">275</span><span class="sd">        adaptive gain ``K`` increases proportionally to the magnitude of the</span>
-<span class="linenos">276</span><span class="sd">        sliding surface whenever the system is outside a small dead‑zone and</span>
-<span class="linenos">277</span><span class="sd">        remains constant (or decays slowly toward its nominal value) inside</span>
-<span class="linenos">278</span><span class="sd">        the dead‑zone.  Unlike some earlier</span>
-<span class="linenos">279</span><span class="sd">        implementations, the adaptation law no longer depends on the rate of</span>
-<span class="linenos">280</span><span class="sd">        change of the control input; including such a term lacks theoretical</span>
-<span class="linenos">281</span><span class="sd">        justification and can destabilise the adaptation process.  A leak</span>
-<span class="linenos">282</span><span class="sd">        term pulls ``K`` back toward ``K_init`` over time to prevent</span>
-<span class="linenos">283</span><span class="sd">        unbounded growth.  The method returns the saturated control input,</span>
-<span class="linenos">284</span><span class="sd">        updated internal state variables, an updated history dictionary and</span>
-<span class="linenos">285</span><span class="sd">        the current sliding surface value packaged as a named tuple.  Using</span>
-<span class="linenos">286</span><span class="sd">        a structured return type formalises the contract and allows callers</span>
-<span class="linenos">287</span><span class="sd">        to access fields by name.</span>
-<span class="linenos">288</span>
-<span class="linenos">289</span><span class="sd">        Parameters</span>
-<span class="linenos">290</span><span class="sd">        ----------</span>
-<span class="linenos">291</span><span class="sd">        state : np.ndarray</span>
-<span class="linenos">292</span><span class="sd">            The full system state [x, θ1, θ2, ẋ, θ̇1, θ̇2].</span>
-<span class="linenos">293</span><span class="sd">        state_vars : Tuple[float, float, float]</span>
-<span class="linenos">294</span><span class="sd">            The internal controller state (K, last_u, time_in_sliding).</span>
-<span class="linenos">295</span><span class="sd">        history : Dict</span>
-<span class="linenos">296</span><span class="sd">            A dictionary storing time series of internal variables.  The</span>
-<span class="linenos">297</span><span class="sd">            entries &#39;K&#39;, &#39;sigma&#39;, &#39;u_sw&#39;, &#39;dK&#39;, and &#39;time_in_sliding&#39;</span>
-<span class="linenos">298</span><span class="sd">            will be appended in place.</span>
-<span class="linenos">299</span>
-<span class="linenos">300</span><span class="sd">        Returns</span>
-<span class="linenos">301</span><span class="sd">        -------</span>
-<span class="linenos">302</span><span class="sd">        AdaptiveSMCOutput</span>
-<span class="linenos">303</span><span class="sd">            A named tuple ``(u, state, history, sigma)`` containing the</span>
-<span class="linenos">304</span><span class="sd">            saturated control input, updated internal state variables,</span>
-<span class="linenos">305</span><span class="sd">            the updated history dictionary and the current sliding</span>
-<span class="linenos">306</span><span class="sd">            surface.  Using a named tuple formalises the return contract</span>
-<span class="linenos">307</span><span class="sd">            and allows callers to access fields by name rather than</span>
-<span class="linenos">308</span><span class="sd">            positional index.  This reduces ambiguity and</span>
-<span class="linenos">309</span><span class="sd">            preserves backward compatibility because named tuples are</span>
-<span class="linenos">310</span><span class="sd">            subclasses of ``tuple``.</span>
-<span class="linenos">311</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">312</span>        <span class="c1"># The tests may supply ``state_vars`` in various shapes (e.g., a</span>
-<span class="linenos">313</span>        <span class="c1"># single float instead of a 3‑tuple).  Robustly unpack the</span>
-<span class="linenos">314</span>        <span class="c1"># adaptive gain (prev_K), the previous control (last_u), and</span>
-<span class="linenos">315</span>        <span class="c1"># accumulated time in the sliding region.  Defaults are chosen</span>
-<span class="linenos">316</span>        <span class="c1"># to match ``initialize_state()`` when information is missing.</span>
-<span class="linenos">317</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">318</span>            <span class="c1"># Expecting a 3‑tuple: (K, last_u, time_in_sliding)</span>
-<span class="linenos">319</span>            <span class="n">prev_K</span><span class="p">,</span> <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="n">state_vars</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="linenos">320</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">321</span>            <span class="c1"># Fall back for legacy or malformed inputs.  Accept</span>
-<span class="linenos">322</span>            <span class="c1"># sequences of varying length or scalar values.  Coerce</span>
-<span class="linenos">323</span>            <span class="c1"># values to floats to avoid numpy scalar surprises.</span>
-<span class="linenos">324</span>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state_vars</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
-<span class="linenos">325</span>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">326</span>                    <span class="n">prev_K</span><span class="p">,</span> <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
-<span class="linenos">327</span>                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">328</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-<span class="linenos">329</span>                    <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
-<span class="linenos">330</span>                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">201</span>    <span class="c1"># Properties</span>
+<span class="linenos">202</span>    <span class="c1"># ------------------------------------------------------------------</span>
+<span class="linenos">203</span>    <span class="nd">@property</span>
+<span class="linenos">204</span>    <span class="k">def</span><span class="w"> </span><span class="nf">gains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">205</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">206</span><span class="sd">        Return a copy of the gain vector supplied to this controller.</span>
+<span class="linenos">207</span>
+<span class="linenos">208</span><span class="sd">        The returned list includes all elements that were passed in</span>
+<span class="linenos">209</span><span class="sd">        through the ``gains`` argument during initialization.  It is a</span>
+<span class="linenos">210</span><span class="sd">        shallow copy to prevent external callers from mutating the</span>
+<span class="linenos">211</span><span class="sd">        internal gain storage.  Tests use this property to verify that</span>
+<span class="linenos">212</span><span class="sd">        custom gains are accepted and stored correctly.</span>
+<span class="linenos">213</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">214</span>        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gains</span><span class="p">)</span>        
+<span class="linenos">215</span>
+<span class="linenos">216</span>    <span class="nd">@staticmethod</span>
+<span class="linenos">217</span>    <span class="k">def</span><span class="w"> </span><span class="nf">validate_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">218</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">219</span><span class="sd">        Validate that a suitable gain sequence has been provided.</span>
+<span class="linenos">220</span>
+<span class="linenos">221</span><span class="sd">        The adaptive sliding–mode controller uses exactly five gains</span>
+<span class="linenos">222</span><span class="sd">        (k1, k2, λ1, λ2, γ) for its sliding surface and adaptation law.</span>
+<span class="linenos">223</span><span class="sd">        Additional gains may be supplied for forward compatibility</span>
+<span class="linenos">224</span><span class="sd">        (they will be ignored), but fewer than five gains is considered</span>
+<span class="linenos">225</span><span class="sd">        an error.</span>
+<span class="linenos">226</span>
+<span class="linenos">227</span><span class="sd">        Raises</span>
+<span class="linenos">228</span><span class="sd">        ------</span>
+<span class="linenos">229</span><span class="sd">        ValueError</span>
+<span class="linenos">230</span><span class="sd">            If ``gains`` has fewer than five elements.</span>
+<span class="linenos">231</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">232</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+<span class="linenos">233</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="linenos">234</span>                <span class="s2">&quot;AdaptiveSMC requires at least 5 gains: [k1, k2, lam1, lam2, gamma]&quot;</span>
+<span class="linenos">235</span>            <span class="p">)</span>
+<span class="linenos">236</span>        <span class="c1"># Enforce positive sliding‑surface gains and adaptation gain using a shared helper.</span>
+<span class="linenos">237</span>        <span class="c1"># The sliding surface is a linear combination of state variables with</span>
+<span class="linenos">238</span>        <span class="c1"># positive weights; choosing non‑positive values violates the</span>
+<span class="linenos">239</span>        <span class="c1"># conditions for sliding‑mode stability.</span>
+<span class="linenos">240</span>        <span class="c1"># Import from new modular utils structure</span>
+<span class="linenos">241</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">242</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when repo root on sys.path</span>
+<span class="linenos">243</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">244</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">245</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>  <span class="c1"># when importing as src.controllers.*</span>
+<span class="linenos">246</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">247</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>    <span class="c1"># when src itself on sys.path</span>
+<span class="linenos">248</span>        <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">gains</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="linenos">249</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">((</span><span class="s2">&quot;k1&quot;</span><span class="p">,</span> <span class="s2">&quot;k2&quot;</span><span class="p">,</span> <span class="s2">&quot;lam1&quot;</span><span class="p">,</span> <span class="s2">&quot;lam2&quot;</span><span class="p">,</span> <span class="s2">&quot;gamma&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)):</span>
+<span class="linenos">250</span>            <span class="n">require_positive</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;AdaptiveSMC gain </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">251</span>    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">252</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize internal state: (K, last_u, time_in_sliding).&quot;&quot;&quot;</span>
+<span class="linenos">253</span>        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">254</span>        
+<span class="linenos">255</span>    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="linenos">256</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize history dictionary.&quot;&quot;&quot;</span>
+<span class="linenos">257</span>        <span class="k">return</span> <span class="p">{</span>
+<span class="linenos">258</span>            <span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="linenos">259</span>            <span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="linenos">260</span>            <span class="s1">&#39;u_sw&#39;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="linenos">261</span>            <span class="s1">&#39;dK&#39;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="linenos">262</span>            <span class="s1">&#39;time_in_sliding&#39;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="linenos">263</span>        <span class="p">}</span>
+<span class="linenos">264</span>        
+<span class="linenos">265</span>    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
+<span class="linenos">266</span>        <span class="bp">self</span><span class="p">,</span>
+<span class="linenos">267</span>        <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos">268</span>        <span class="n">state_vars</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+<span class="linenos">269</span>        <span class="n">history</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
+<span class="linenos">270</span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AdaptiveSMCOutput</span><span class="p">:</span>  <span class="c1"># type: ignore[override]</span>
+<span class="linenos">271</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">272</span><span class="sd">        Compute the adaptive sliding–mode control law with unified anti‑windup.</span>
+<span class="linenos">273</span>
+<span class="linenos">274</span><span class="sd">        The controller constructs a sliding surface based on the joint</span>
+<span class="linenos">275</span><span class="sd">        velocities and positions and generates a switching control using</span>
+<span class="linenos">276</span><span class="sd">        either a hyperbolic tangent or a linear saturation function.  The</span>
+<span class="linenos">277</span><span class="sd">        adaptive gain ``K`` increases proportionally to the magnitude of the</span>
+<span class="linenos">278</span><span class="sd">        sliding surface whenever the system is outside a small dead‑zone and</span>
+<span class="linenos">279</span><span class="sd">        remains constant (or decays slowly toward its nominal value) inside</span>
+<span class="linenos">280</span><span class="sd">        the dead‑zone.  Unlike some earlier</span>
+<span class="linenos">281</span><span class="sd">        implementations, the adaptation law no longer depends on the rate of</span>
+<span class="linenos">282</span><span class="sd">        change of the control input; including such a term lacks theoretical</span>
+<span class="linenos">283</span><span class="sd">        justification and can destabilise the adaptation process.  A leak</span>
+<span class="linenos">284</span><span class="sd">        term pulls ``K`` back toward ``K_init`` over time to prevent</span>
+<span class="linenos">285</span><span class="sd">        unbounded growth.  The method returns the saturated control input,</span>
+<span class="linenos">286</span><span class="sd">        updated internal state variables, an updated history dictionary and</span>
+<span class="linenos">287</span><span class="sd">        the current sliding surface value packaged as a named tuple.  Using</span>
+<span class="linenos">288</span><span class="sd">        a structured return type formalises the contract and allows callers</span>
+<span class="linenos">289</span><span class="sd">        to access fields by name.</span>
+<span class="linenos">290</span>
+<span class="linenos">291</span><span class="sd">        Parameters</span>
+<span class="linenos">292</span><span class="sd">        ----------</span>
+<span class="linenos">293</span><span class="sd">        state : np.ndarray</span>
+<span class="linenos">294</span><span class="sd">            The full system state [x, θ1, θ2, ẋ, θ̇1, θ̇2].</span>
+<span class="linenos">295</span><span class="sd">        state_vars : Tuple[float, float, float]</span>
+<span class="linenos">296</span><span class="sd">            The internal controller state (K, last_u, time_in_sliding).</span>
+<span class="linenos">297</span><span class="sd">        history : Dict</span>
+<span class="linenos">298</span><span class="sd">            A dictionary storing time series of internal variables.  The</span>
+<span class="linenos">299</span><span class="sd">            entries &#39;K&#39;, &#39;sigma&#39;, &#39;u_sw&#39;, &#39;dK&#39;, and &#39;time_in_sliding&#39;</span>
+<span class="linenos">300</span><span class="sd">            will be appended in place.</span>
+<span class="linenos">301</span>
+<span class="linenos">302</span><span class="sd">        Returns</span>
+<span class="linenos">303</span><span class="sd">        -------</span>
+<span class="linenos">304</span><span class="sd">        AdaptiveSMCOutput</span>
+<span class="linenos">305</span><span class="sd">            A named tuple ``(u, state, history, sigma)`` containing the</span>
+<span class="linenos">306</span><span class="sd">            saturated control input, updated internal state variables,</span>
+<span class="linenos">307</span><span class="sd">            the updated history dictionary and the current sliding</span>
+<span class="linenos">308</span><span class="sd">            surface.  Using a named tuple formalises the return contract</span>
+<span class="linenos">309</span><span class="sd">            and allows callers to access fields by name rather than</span>
+<span class="linenos">310</span><span class="sd">            positional index.  This reduces ambiguity and</span>
+<span class="linenos">311</span><span class="sd">            preserves backward compatibility because named tuples are</span>
+<span class="linenos">312</span><span class="sd">            subclasses of ``tuple``.</span>
+<span class="linenos">313</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">314</span>        <span class="c1"># The tests may supply ``state_vars`` in various shapes (e.g., a</span>
+<span class="linenos">315</span>        <span class="c1"># single float instead of a 3‑tuple).  Robustly unpack the</span>
+<span class="linenos">316</span>        <span class="c1"># adaptive gain (prev_K), the previous control (last_u), and</span>
+<span class="linenos">317</span>        <span class="c1"># accumulated time in the sliding region.  Defaults are chosen</span>
+<span class="linenos">318</span>        <span class="c1"># to match ``initialize_state()`` when information is missing.</span>
+<span class="linenos">319</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">320</span>            <span class="c1"># Expecting a 3‑tuple: (K, last_u, time_in_sliding)</span>
+<span class="linenos">321</span>            <span class="n">prev_K</span><span class="p">,</span> <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="n">state_vars</span>  <span class="c1"># type: ignore[misc]</span>
+<span class="linenos">322</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">323</span>            <span class="c1"># Fall back for legacy or malformed inputs.  Accept</span>
+<span class="linenos">324</span>            <span class="c1"># sequences of varying length or scalar values.  Coerce</span>
+<span class="linenos">325</span>            <span class="c1"># values to floats to avoid numpy scalar surprises.</span>
+<span class="linenos">326</span>            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard state unpacking failed, using legacy fallback: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">327</span>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state_vars</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+<span class="linenos">328</span>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">329</span>                    <span class="n">prev_K</span><span class="p">,</span> <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="linenos">330</span>                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 <span class="linenos">331</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-<span class="linenos">332</span>                    <span class="n">last_u</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="linenos">333</span>                    <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">334</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">335</span>                    <span class="c1"># More than 3 values: use the first three</span>
-<span class="linenos">336</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-<span class="linenos">337</span>                    <span class="n">last_u</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="linenos">338</span>                    <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="linenos">339</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">340</span>                <span class="c1"># Scalar or None: treat as K and initialize others to zero</span>
-<span class="linenos">341</span>                <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="k">if</span> <span class="n">state_vars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-<span class="linenos">342</span>                <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
-<span class="linenos">343</span>        <span class="n">x</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">theta1_dot</span><span class="p">,</span> <span class="n">theta2_dot</span> <span class="o">=</span> <span class="n">state</span>
-<span class="linenos">344</span>        
-<span class="linenos">345</span>        <span class="c1"># Compute sliding surface (consistent with classical SMC formulation)</span>
-<span class="linenos">346</span>        <span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta1_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span> <span class="o">*</span> <span class="n">theta1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta2_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span> <span class="o">*</span> <span class="n">theta2</span><span class="p">)</span>
+<span class="linenos">332</span>                    <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="linenos">333</span>                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">334</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
+<span class="linenos">335</span>                    <span class="n">last_u</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="linenos">336</span>                    <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">337</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">338</span>                    <span class="c1"># More than 3 values: use the first three</span>
+<span class="linenos">339</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
+<span class="linenos">340</span>                    <span class="n">last_u</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="linenos">341</span>                    <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="linenos">342</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">343</span>                <span class="c1"># Scalar or None: treat as K and initialize others to zero</span>
+<span class="linenos">344</span>                <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="k">if</span> <span class="n">state_vars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
+<span class="linenos">345</span>                <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>  <span class="c1"># noqa: F841 (last_u for future use)</span>
+<span class="linenos">346</span>        <span class="n">x</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">theta1_dot</span><span class="p">,</span> <span class="n">theta2_dot</span> <span class="o">=</span> <span class="n">state</span>
 <span class="linenos">347</span>        
-<span class="linenos">348</span>        <span class="c1"># Compute switching control with current adaptive gain.  Use the</span>
-<span class="linenos">349</span>        <span class="c1"># shared ``saturate`` helper to unify boundary layer behaviour</span>
-<span class="linenos">350</span>        <span class="c1"># across controllers.  ``saturate`` divides by epsilon internally.</span>
-<span class="linenos">351</span>        <span class="c1"># robust import for utils.* to support both import styles</span>
-<span class="linenos">352</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">353</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>  <span class="c1"># when repo root on sys.path</span>
-<span class="linenos">354</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">355</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">356</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>  <span class="c1"># when importing as src.controllers.*</span>
-<span class="linenos">357</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">358</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>    <span class="c1"># when src itself on sys.path</span>
-<span class="linenos">359</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">smooth_switch</span><span class="p">:</span>
-<span class="linenos">360</span>            <span class="n">switching</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
-<span class="linenos">361</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">362</span>            <span class="n">switching</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
-<span class="linenos">363</span>            
-<span class="linenos">364</span>        <span class="n">u_sw</span> <span class="o">=</span> <span class="o">-</span><span class="n">prev_K</span> <span class="o">*</span> <span class="n">switching</span>
-<span class="linenos">365</span>        
-<span class="linenos">366</span>        <span class="c1"># Total control with proportional term for improved convergence</span>
-<span class="linenos">367</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">u_sw</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">sigma</span>
-<span class="linenos">368</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-<span class="linenos">369</span>        
-<span class="linenos">370</span>        <span class="c1"># Update time in sliding mode</span>
-<span class="linenos">371</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">:</span>
-<span class="linenos">372</span>            <span class="n">new_time_in_sliding</span> <span class="o">=</span> <span class="n">time_in_sliding</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
-<span class="linenos">373</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">374</span>            <span class="n">new_time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">375</span>        
-<span class="linenos">376</span>        <span class="c1"># Adaptive law with unified anti‑windup logic.</span>
-<span class="linenos">377</span>        <span class="c1">#</span>
-<span class="linenos">378</span>        <span class="c1"># The adaptive sliding–mode controller adjusts the switching gain based</span>
-<span class="linenos">379</span>        <span class="c1"># solely on the magnitude of the sliding surface σ.  According to</span>
-<span class="linenos">380</span>        <span class="c1"># adaptive SMC theory, the gain should increase when the system is</span>
-<span class="linenos">381</span>        <span class="c1"># outside a small neighbourhood of the sliding manifold and should</span>
-<span class="linenos">382</span>        <span class="c1"># remain constant (or decay slowly toward its nominal value) inside</span>
-<span class="linenos">383</span>        <span class="c1"># this neighbourhood.  Including the rate of</span>
-<span class="linenos">384</span>        <span class="c1"># change of the control input in the adaptation law is not justified</span>
-<span class="linenos">385</span>        <span class="c1"># by standard analysis and may introduce unnecessary coupling.  We</span>
-<span class="linenos">386</span>        <span class="c1"># therefore remove the control‑rate term and implement the standard</span>
-<span class="linenos">387</span>        <span class="c1"># adaptation law:</span>
-<span class="linenos">388</span>        <span class="c1">#   dK = γ·|σ| − leak_rate·(K − K_init)   if |σ| &gt; dead_zone</span>
-<span class="linenos">389</span>        <span class="c1">#   dK = 0                                if |σ| ≤ dead_zone</span>
-<span class="linenos">390</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">:</span>
-<span class="linenos">391</span>            <span class="c1"># Inside dead zone: hold K constant (no growth or decay).  This</span>
-<span class="linenos">392</span>            <span class="c1"># prevents the gain from drifting downward due to the leak term</span>
-<span class="linenos">393</span>            <span class="c1"># when the sliding surface is small, preserving the learned</span>
-<span class="linenos">394</span>            <span class="c1"># disturbance bound.</span>
-<span class="linenos">395</span>            <span class="n">dK</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">396</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">397</span>            <span class="c1"># Outside dead zone: increase K proportional to |σ| and apply a</span>
-<span class="linenos">398</span>            <span class="c1"># leak term pulling K back toward its nominal value.  The leak</span>
-<span class="linenos">399</span>            <span class="c1"># term prevents unbounded growth once disturbances subside.</span>
-<span class="linenos">400</span>            <span class="n">growth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-<span class="linenos">401</span>            <span class="n">dK</span> <span class="o">=</span> <span class="n">growth</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">prev_K</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">)</span>
-<span class="linenos">402</span>        
-<span class="linenos">403</span>        <span class="c1"># Apply rate limit to prevent sudden jumps</span>
-<span class="linenos">404</span>        <span class="n">dK</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">dK</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">)</span>
+<span class="linenos">348</span>        <span class="c1"># Compute sliding surface (consistent with classical SMC formulation)</span>
+<span class="linenos">349</span>        <span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta1_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span> <span class="o">*</span> <span class="n">theta1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta2_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span> <span class="o">*</span> <span class="n">theta2</span><span class="p">)</span>
+<span class="linenos">350</span>        
+<span class="linenos">351</span>        <span class="c1"># Compute switching control with current adaptive gain.  Use the</span>
+<span class="linenos">352</span>        <span class="c1"># shared ``saturate`` helper to unify boundary layer behaviour</span>
+<span class="linenos">353</span>        <span class="c1"># across controllers.  ``saturate`` divides by epsilon internally.</span>
+<span class="linenos">354</span>        <span class="c1"># robust import for utils.* to support both import styles</span>
+<span class="linenos">355</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">356</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>  <span class="c1"># when repo root on sys.path</span>
+<span class="linenos">357</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">358</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">359</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>  <span class="c1"># when importing as src.controllers.*</span>
+<span class="linenos">360</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">361</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>    <span class="c1"># when src itself on sys.path</span>
+<span class="linenos">362</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">smooth_switch</span><span class="p">:</span>
+<span class="linenos">363</span>            <span class="n">switching</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
+<span class="linenos">364</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">365</span>            <span class="n">switching</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+<span class="linenos">366</span>            
+<span class="linenos">367</span>        <span class="n">u_sw</span> <span class="o">=</span> <span class="o">-</span><span class="n">prev_K</span> <span class="o">*</span> <span class="n">switching</span>
+<span class="linenos">368</span>        
+<span class="linenos">369</span>        <span class="c1"># Total control with proportional term for improved convergence</span>
+<span class="linenos">370</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">u_sw</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">sigma</span>
+<span class="linenos">371</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
+<span class="linenos">372</span>        
+<span class="linenos">373</span>        <span class="c1"># Update time in sliding mode</span>
+<span class="linenos">374</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">:</span>
+<span class="linenos">375</span>            <span class="n">new_time_in_sliding</span> <span class="o">=</span> <span class="n">time_in_sliding</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">376</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">377</span>            <span class="n">new_time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">378</span>        
+<span class="linenos">379</span>        <span class="c1"># Adaptive law with unified anti‑windup logic.</span>
+<span class="linenos">380</span>        <span class="c1">#</span>
+<span class="linenos">381</span>        <span class="c1"># The adaptive sliding–mode controller adjusts the switching gain based</span>
+<span class="linenos">382</span>        <span class="c1"># solely on the magnitude of the sliding surface σ.  According to</span>
+<span class="linenos">383</span>        <span class="c1"># adaptive SMC theory, the gain should increase when the system is</span>
+<span class="linenos">384</span>        <span class="c1"># outside a small neighbourhood of the sliding manifold and should</span>
+<span class="linenos">385</span>        <span class="c1"># remain constant (or decay slowly toward its nominal value) inside</span>
+<span class="linenos">386</span>        <span class="c1"># this neighbourhood.  Including the rate of</span>
+<span class="linenos">387</span>        <span class="c1"># change of the control input in the adaptation law is not justified</span>
+<span class="linenos">388</span>        <span class="c1"># by standard analysis and may introduce unnecessary coupling.  We</span>
+<span class="linenos">389</span>        <span class="c1"># therefore remove the control‑rate term and implement the standard</span>
+<span class="linenos">390</span>        <span class="c1"># adaptation law:</span>
+<span class="linenos">391</span>        <span class="c1">#   dK = γ·|σ| − leak_rate·(K − K_init)   if |σ| &gt; dead_zone</span>
+<span class="linenos">392</span>        <span class="c1">#   dK = 0                                if |σ| ≤ dead_zone</span>
+<span class="linenos">393</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">:</span>
+<span class="linenos">394</span>            <span class="c1"># Inside dead zone: hold K constant (no growth or decay).  This</span>
+<span class="linenos">395</span>            <span class="c1"># prevents the gain from drifting downward due to the leak term</span>
+<span class="linenos">396</span>            <span class="c1"># when the sliding surface is small, preserving the learned</span>
+<span class="linenos">397</span>            <span class="c1"># disturbance bound.</span>
+<span class="linenos">398</span>            <span class="n">dK</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">399</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">400</span>            <span class="c1"># Outside dead zone: increase K proportional to |σ| and apply a</span>
+<span class="linenos">401</span>            <span class="c1"># leak term pulling K back toward its nominal value.  The leak</span>
+<span class="linenos">402</span>            <span class="c1"># term prevents unbounded growth once disturbances subside.</span>
+<span class="linenos">403</span>            <span class="n">growth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+<span class="linenos">404</span>            <span class="n">dK</span> <span class="o">=</span> <span class="n">growth</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">prev_K</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">)</span>
 <span class="linenos">405</span>        
-<span class="linenos">406</span>        <span class="c1"># Update gain with saturation</span>
-<span class="linenos">407</span>        <span class="n">new_K</span> <span class="o">=</span> <span class="n">prev_K</span> <span class="o">+</span> <span class="n">dK</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
-<span class="linenos">408</span>        <span class="n">new_K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">new_K</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_max</span><span class="p">)</span>
-<span class="linenos">409</span>        
-<span class="linenos">410</span>        <span class="c1"># Update history in place.  Avoid allocating a new dictionary</span>
-<span class="linenos">411</span>        <span class="c1"># on every call; simply append to existing lists.  Initialize</span>
-<span class="linenos">412</span>        <span class="c1"># lists if they are missing to support callers passing in a</span>
-<span class="linenos">413</span>        <span class="c1"># partially filled history.  History accumulation can be</span>
-<span class="linenos">414</span>        <span class="c1"># disabled by passing in an empty dict, though the lists</span>
-<span class="linenos">415</span>        <span class="c1"># will be created on demand if needed.</span>
-<span class="linenos">416</span>        <span class="n">hist</span> <span class="o">=</span> <span class="n">history</span>
-<span class="linenos">417</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_K</span><span class="p">)</span>
-<span class="linenos">418</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-<span class="linenos">419</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;u_sw&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_sw</span><span class="p">)</span>
-<span class="linenos">420</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;dK&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dK</span><span class="p">)</span>
-<span class="linenos">421</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;time_in_sliding&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_time_in_sliding</span><span class="p">)</span>
-<span class="linenos">422</span>        <span class="c1"># Construct a structured return value.  Returning a named tuple</span>
-<span class="linenos">423</span>        <span class="c1"># clarifies the meaning of each element while preserving</span>
-<span class="linenos">424</span>        <span class="c1"># tuple‑like behaviour.</span>
-<span class="linenos">425</span>        <span class="k">return</span> <span class="n">AdaptiveSMCOutput</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">new_K</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">new_time_in_sliding</span><span class="p">),</span> <span class="n">hist</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-<span class="linenos">426</span>        
-<span class="linenos">427</span>    <span class="k">def</span><span class="w"> </span><span class="nf">set_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics_model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">428</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set dynamics model (for compatibility, not used in this implementation).&quot;&quot;&quot;</span>
-<span class="linenos">429</span>        <span class="k">pass</span>
-<span class="linenos">430</span>
-<span class="linenos">431</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">432</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset AdaptiveSMC controller state.</span>
+<span class="linenos">406</span>        <span class="c1"># Apply rate limit to prevent sudden jumps</span>
+<span class="linenos">407</span>        <span class="n">dK</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">dK</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">)</span>
+<span class="linenos">408</span>        
+<span class="linenos">409</span>        <span class="c1"># Update gain with saturation</span>
+<span class="linenos">410</span>        <span class="n">new_K</span> <span class="o">=</span> <span class="n">prev_K</span> <span class="o">+</span> <span class="n">dK</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">411</span>        <span class="n">new_K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">new_K</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_max</span><span class="p">)</span>
+<span class="linenos">412</span>        
+<span class="linenos">413</span>        <span class="c1"># Update history in place.  Avoid allocating a new dictionary</span>
+<span class="linenos">414</span>        <span class="c1"># on every call; simply append to existing lists.  Initialize</span>
+<span class="linenos">415</span>        <span class="c1"># lists if they are missing to support callers passing in a</span>
+<span class="linenos">416</span>        <span class="c1"># partially filled history.  History accumulation can be</span>
+<span class="linenos">417</span>        <span class="c1"># disabled by passing in an empty dict, though the lists</span>
+<span class="linenos">418</span>        <span class="c1"># will be created on demand if needed.</span>
+<span class="linenos">419</span>        <span class="n">hist</span> <span class="o">=</span> <span class="n">history</span>
+<span class="linenos">420</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_K</span><span class="p">)</span>
+<span class="linenos">421</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+<span class="linenos">422</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;u_sw&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_sw</span><span class="p">)</span>
+<span class="linenos">423</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;dK&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dK</span><span class="p">)</span>
+<span class="linenos">424</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;time_in_sliding&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_time_in_sliding</span><span class="p">)</span>
+<span class="linenos">425</span>        <span class="c1"># Construct a structured return value.  Returning a named tuple</span>
+<span class="linenos">426</span>        <span class="c1"># clarifies the meaning of each element while preserving</span>
+<span class="linenos">427</span>        <span class="c1"># tuple‑like behaviour.</span>
+<span class="linenos">428</span>        <span class="k">return</span> <span class="n">AdaptiveSMCOutput</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">new_K</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">new_time_in_sliding</span><span class="p">),</span> <span class="n">hist</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="linenos">429</span>        
+<span class="linenos">430</span>    <span class="k">def</span><span class="w"> </span><span class="nf">set_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics_model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">431</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set dynamics model (for compatibility, not used in this implementation).&quot;&quot;&quot;</span>
+<span class="linenos">432</span>        <span class="k">pass</span>
 <span class="linenos">433</span>
-<span class="linenos">434</span><span class="sd">        Resets the adaptive gain K to its initial value and clears</span>
-<span class="linenos">435</span><span class="sd">        any internal tracking variables.</span>
-<span class="linenos">436</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">437</span>        <span class="c1"># Reset adaptive gain to initial value</span>
-<span class="linenos">438</span>        <span class="c1"># Note: The controller uses state_vars parameter for persistence,</span>
-<span class="linenos">439</span>        <span class="c1"># so we don&#39;t maintain persistent internal state here.</span>
-<span class="linenos">440</span>        <span class="c1"># This method ensures interface compliance.</span>
-<span class="linenos">441</span>        <span class="k">pass</span>
-<span class="linenos">442</span>
-<span class="linenos">443</span>    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">444</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Clean up controller resources (Issue #15).</span>
+<span class="linenos">434</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">435</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset AdaptiveSMC controller state.</span>
+<span class="linenos">436</span>
+<span class="linenos">437</span><span class="sd">        Resets the adaptive gain K to its initial value and clears</span>
+<span class="linenos">438</span><span class="sd">        any internal tracking variables.</span>
+<span class="linenos">439</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">440</span>        <span class="c1"># Reset adaptive gain to initial value</span>
+<span class="linenos">441</span>        <span class="c1"># Note: The controller uses state_vars parameter for persistence,</span>
+<span class="linenos">442</span>        <span class="c1"># so we don&#39;t maintain persistent internal state here.</span>
+<span class="linenos">443</span>        <span class="c1"># This method ensures interface compliance.</span>
+<span class="linenos">444</span>        <span class="k">pass</span>
 <span class="linenos">445</span>
-<span class="linenos">446</span><span class="sd">        Explicitly releases any cached data to facilitate garbage</span>
-<span class="linenos">447</span><span class="sd">        collection and prevent memory leaks during repeated</span>
-<span class="linenos">448</span><span class="sd">        controller instantiation.</span>
-<span class="linenos">449</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">450</span>        <span class="c1"># AdaptiveSMC has no persistent internal state to clean</span>
-<span class="linenos">451</span>        <span class="c1"># This method is provided for interface compliance</span>
-<span class="linenos">452</span>        <span class="k">pass</span>
-<span class="linenos">453</span>
-<span class="linenos">454</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">455</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Destructor for automatic cleanup.</span>
+<span class="linenos">446</span>    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">447</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Clean up controller resources (Issue #15).</span>
+<span class="linenos">448</span>
+<span class="linenos">449</span><span class="sd">        Explicitly releases any cached data to facilitate garbage</span>
+<span class="linenos">450</span><span class="sd">        collection and prevent memory leaks during repeated</span>
+<span class="linenos">451</span><span class="sd">        controller instantiation.</span>
+<span class="linenos">452</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">453</span>        <span class="c1"># AdaptiveSMC has no persistent internal state to clean</span>
+<span class="linenos">454</span>        <span class="c1"># This method is provided for interface compliance</span>
+<span class="linenos">455</span>        <span class="k">pass</span>
 <span class="linenos">456</span>
-<span class="linenos">457</span><span class="sd">        Ensures cleanup is called when the controller is garbage collected.</span>
-<span class="linenos">458</span><span class="sd">        Catches all exceptions to prevent errors during finalization.</span>
-<span class="linenos">459</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">460</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">461</span>            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-<span class="linenos">462</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">463</span>            <span class="k">pass</span>  <span class="c1"># Prevent exceptions during cleanup</span>
-<span class="linenos">464</span>
-<span class="linenos">465</span><span class="c1">#===========================================================================================================\\\</span>
+<span class="linenos">457</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">458</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Destructor for automatic cleanup.</span>
+<span class="linenos">459</span>
+<span class="linenos">460</span><span class="sd">        Ensures cleanup is called when the controller is garbage collected.</span>
+<span class="linenos">461</span><span class="sd">        Catches all exceptions to prevent errors during finalization.</span>
+<span class="linenos">462</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">463</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">464</span>            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+<span class="linenos">465</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">466</span>            <span class="k">pass</span>  <span class="c1"># Prevent exceptions during cleanup</span>
+<span class="linenos">467</span>
+<span class="linenos">468</span><span class="c1">#===========================================================================================================\\\</span>
 </pre></div>
 </div>
 </section>
@@ -1262,150 +1291,151 @@ uncontrolled growth during chattering.</p>
 <span class="linenos">235</span>        <span class="k">try</span><span class="p">:</span>
 <span class="linenos">236</span>            <span class="c1"># Expecting a 3‑tuple: (K, last_u, time_in_sliding)</span>
 <span class="linenos">237</span>            <span class="n">prev_K</span><span class="p">,</span> <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="n">state_vars</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="linenos">238</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">238</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <span class="linenos">239</span>            <span class="c1"># Fall back for legacy or malformed inputs.  Accept</span>
 <span class="linenos">240</span>            <span class="c1"># sequences of varying length or scalar values.  Coerce</span>
 <span class="linenos">241</span>            <span class="c1"># values to floats to avoid numpy scalar surprises.</span>
-<span class="linenos">242</span>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state_vars</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
-<span class="linenos">243</span>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">244</span>                    <span class="n">prev_K</span><span class="p">,</span> <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
-<span class="linenos">245</span>                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">246</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-<span class="linenos">247</span>                    <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
-<span class="linenos">248</span>                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">249</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-<span class="linenos">250</span>                    <span class="n">last_u</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="linenos">251</span>                    <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">252</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">253</span>                    <span class="c1"># More than 3 values: use the first three</span>
-<span class="linenos">254</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-<span class="linenos">255</span>                    <span class="n">last_u</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="linenos">256</span>                    <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="linenos">257</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">258</span>                <span class="c1"># Scalar or None: treat as K and initialize others to zero</span>
-<span class="linenos">259</span>                <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="k">if</span> <span class="n">state_vars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-<span class="linenos">260</span>                <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
-<span class="linenos">261</span>        <span class="n">x</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">theta1_dot</span><span class="p">,</span> <span class="n">theta2_dot</span> <span class="o">=</span> <span class="n">state</span>
-<span class="linenos">262</span>        
-<span class="linenos">263</span>        <span class="c1"># Compute sliding surface (consistent with classical SMC formulation)</span>
-<span class="linenos">264</span>        <span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta1_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span> <span class="o">*</span> <span class="n">theta1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta2_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span> <span class="o">*</span> <span class="n">theta2</span><span class="p">)</span>
-<span class="linenos">265</span>        
-<span class="linenos">266</span>        <span class="c1"># Compute switching control with current adaptive gain.  Use the</span>
-<span class="linenos">267</span>        <span class="c1"># shared ``saturate`` helper to unify boundary layer behaviour</span>
-<span class="linenos">268</span>        <span class="c1"># across controllers.  ``saturate`` divides by epsilon internally.</span>
-<span class="linenos">269</span>        <span class="c1"># robust import for utils.* to support both import styles</span>
-<span class="linenos">270</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">271</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>  <span class="c1"># when repo root on sys.path</span>
-<span class="linenos">272</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">273</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">274</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>  <span class="c1"># when importing as src.controllers.*</span>
-<span class="linenos">275</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">276</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>    <span class="c1"># when src itself on sys.path</span>
-<span class="linenos">277</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">smooth_switch</span><span class="p">:</span>
-<span class="linenos">278</span>            <span class="n">switching</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
-<span class="linenos">279</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">280</span>            <span class="n">switching</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
-<span class="linenos">281</span>            
-<span class="linenos">282</span>        <span class="n">u_sw</span> <span class="o">=</span> <span class="o">-</span><span class="n">prev_K</span> <span class="o">*</span> <span class="n">switching</span>
-<span class="linenos">283</span>        
-<span class="linenos">284</span>        <span class="c1"># Total control with proportional term for improved convergence</span>
-<span class="linenos">285</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">u_sw</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">sigma</span>
-<span class="linenos">286</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-<span class="linenos">287</span>        
-<span class="linenos">288</span>        <span class="c1"># Update time in sliding mode</span>
-<span class="linenos">289</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">:</span>
-<span class="linenos">290</span>            <span class="n">new_time_in_sliding</span> <span class="o">=</span> <span class="n">time_in_sliding</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
-<span class="linenos">291</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">292</span>            <span class="n">new_time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">293</span>        
-<span class="linenos">294</span>        <span class="c1"># Adaptive law with unified anti‑windup logic.</span>
-<span class="linenos">295</span>        <span class="c1">#</span>
-<span class="linenos">296</span>        <span class="c1"># The adaptive sliding–mode controller adjusts the switching gain based</span>
-<span class="linenos">297</span>        <span class="c1"># solely on the magnitude of the sliding surface σ.  According to</span>
-<span class="linenos">298</span>        <span class="c1"># adaptive SMC theory, the gain should increase when the system is</span>
-<span class="linenos">299</span>        <span class="c1"># outside a small neighbourhood of the sliding manifold and should</span>
-<span class="linenos">300</span>        <span class="c1"># remain constant (or decay slowly toward its nominal value) inside</span>
-<span class="linenos">301</span>        <span class="c1"># this neighbourhood.  Including the rate of</span>
-<span class="linenos">302</span>        <span class="c1"># change of the control input in the adaptation law is not justified</span>
-<span class="linenos">303</span>        <span class="c1"># by standard analysis and may introduce unnecessary coupling.  We</span>
-<span class="linenos">304</span>        <span class="c1"># therefore remove the control‑rate term and implement the standard</span>
-<span class="linenos">305</span>        <span class="c1"># adaptation law:</span>
-<span class="linenos">306</span>        <span class="c1">#   dK = γ·|σ| − leak_rate·(K − K_init)   if |σ| &gt; dead_zone</span>
-<span class="linenos">307</span>        <span class="c1">#   dK = 0                                if |σ| ≤ dead_zone</span>
-<span class="linenos">308</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">:</span>
-<span class="linenos">309</span>            <span class="c1"># Inside dead zone: hold K constant (no growth or decay).  This</span>
-<span class="linenos">310</span>            <span class="c1"># prevents the gain from drifting downward due to the leak term</span>
-<span class="linenos">311</span>            <span class="c1"># when the sliding surface is small, preserving the learned</span>
-<span class="linenos">312</span>            <span class="c1"># disturbance bound.</span>
-<span class="linenos">313</span>            <span class="n">dK</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">314</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">315</span>            <span class="c1"># Outside dead zone: increase K proportional to |σ| and apply a</span>
-<span class="linenos">316</span>            <span class="c1"># leak term pulling K back toward its nominal value.  The leak</span>
-<span class="linenos">317</span>            <span class="c1"># term prevents unbounded growth once disturbances subside.</span>
-<span class="linenos">318</span>            <span class="n">growth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-<span class="linenos">319</span>            <span class="n">dK</span> <span class="o">=</span> <span class="n">growth</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">prev_K</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">)</span>
-<span class="linenos">320</span>        
-<span class="linenos">321</span>        <span class="c1"># Apply rate limit to prevent sudden jumps</span>
-<span class="linenos">322</span>        <span class="n">dK</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">dK</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">)</span>
-<span class="linenos">323</span>        
-<span class="linenos">324</span>        <span class="c1"># Update gain with saturation</span>
-<span class="linenos">325</span>        <span class="n">new_K</span> <span class="o">=</span> <span class="n">prev_K</span> <span class="o">+</span> <span class="n">dK</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
-<span class="linenos">326</span>        <span class="n">new_K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">new_K</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_max</span><span class="p">)</span>
-<span class="linenos">327</span>        
-<span class="linenos">328</span>        <span class="c1"># Update history in place.  Avoid allocating a new dictionary</span>
-<span class="linenos">329</span>        <span class="c1"># on every call; simply append to existing lists.  Initialize</span>
-<span class="linenos">330</span>        <span class="c1"># lists if they are missing to support callers passing in a</span>
-<span class="linenos">331</span>        <span class="c1"># partially filled history.  History accumulation can be</span>
-<span class="linenos">332</span>        <span class="c1"># disabled by passing in an empty dict, though the lists</span>
-<span class="linenos">333</span>        <span class="c1"># will be created on demand if needed.</span>
-<span class="linenos">334</span>        <span class="n">hist</span> <span class="o">=</span> <span class="n">history</span>
-<span class="linenos">335</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_K</span><span class="p">)</span>
-<span class="linenos">336</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-<span class="linenos">337</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;u_sw&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_sw</span><span class="p">)</span>
-<span class="linenos">338</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;dK&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dK</span><span class="p">)</span>
-<span class="linenos">339</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;time_in_sliding&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_time_in_sliding</span><span class="p">)</span>
-<span class="linenos">340</span>        <span class="c1"># Construct a structured return value.  Returning a named tuple</span>
-<span class="linenos">341</span>        <span class="c1"># clarifies the meaning of each element while preserving</span>
-<span class="linenos">342</span>        <span class="c1"># tuple‑like behaviour.</span>
-<span class="linenos">343</span>        <span class="k">return</span> <span class="n">AdaptiveSMCOutput</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">new_K</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">new_time_in_sliding</span><span class="p">),</span> <span class="n">hist</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-<span class="linenos">344</span>        
-<span class="linenos">345</span>    <span class="k">def</span><span class="w"> </span><span class="nf">set_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics_model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">346</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set dynamics model (for compatibility, not used in this implementation).&quot;&quot;&quot;</span>
-<span class="linenos">347</span>        <span class="k">pass</span>
-<span class="linenos">348</span>
-<span class="linenos">349</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">350</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset AdaptiveSMC controller state.</span>
-<span class="linenos">351</span>
-<span class="linenos">352</span><span class="sd">        Resets the adaptive gain K to its initial value and clears</span>
-<span class="linenos">353</span><span class="sd">        any internal tracking variables.</span>
-<span class="linenos">354</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">355</span>        <span class="c1"># Reset adaptive gain to initial value</span>
-<span class="linenos">356</span>        <span class="c1"># Note: The controller uses state_vars parameter for persistence,</span>
-<span class="linenos">357</span>        <span class="c1"># so we don&#39;t maintain persistent internal state here.</span>
-<span class="linenos">358</span>        <span class="c1"># This method ensures interface compliance.</span>
-<span class="linenos">359</span>        <span class="k">pass</span>
-<span class="linenos">360</span>
-<span class="linenos">361</span>    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">362</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Clean up controller resources (Issue #15).</span>
-<span class="linenos">363</span>
-<span class="linenos">364</span><span class="sd">        Explicitly releases any cached data to facilitate garbage</span>
-<span class="linenos">365</span><span class="sd">        collection and prevent memory leaks during repeated</span>
-<span class="linenos">366</span><span class="sd">        controller instantiation.</span>
-<span class="linenos">367</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">368</span>        <span class="c1"># AdaptiveSMC has no persistent internal state to clean</span>
-<span class="linenos">369</span>        <span class="c1"># This method is provided for interface compliance</span>
-<span class="linenos">370</span>        <span class="k">pass</span>
-<span class="linenos">371</span>
-<span class="linenos">372</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">373</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Destructor for automatic cleanup.</span>
-<span class="linenos">374</span>
-<span class="linenos">375</span><span class="sd">        Ensures cleanup is called when the controller is garbage collected.</span>
-<span class="linenos">376</span><span class="sd">        Catches all exceptions to prevent errors during finalization.</span>
-<span class="linenos">377</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">378</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">379</span>            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-<span class="linenos">380</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">381</span>            <span class="k">pass</span>  <span class="c1"># Prevent exceptions during cleanup</span>
+<span class="linenos">242</span>            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard state unpacking failed, using legacy fallback: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">243</span>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state_vars</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+<span class="linenos">244</span>                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">245</span>                    <span class="n">prev_K</span><span class="p">,</span> <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="linenos">246</span>                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">247</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
+<span class="linenos">248</span>                    <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="linenos">249</span>                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">250</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
+<span class="linenos">251</span>                    <span class="n">last_u</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="linenos">252</span>                    <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">253</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">254</span>                    <span class="c1"># More than 3 values: use the first three</span>
+<span class="linenos">255</span>                    <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
+<span class="linenos">256</span>                    <span class="n">last_u</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="linenos">257</span>                    <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="linenos">258</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">259</span>                <span class="c1"># Scalar or None: treat as K and initialize others to zero</span>
+<span class="linenos">260</span>                <span class="n">prev_K</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state_vars</span><span class="p">)</span> <span class="k">if</span> <span class="n">state_vars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
+<span class="linenos">261</span>                <span class="n">last_u</span><span class="p">,</span> <span class="n">time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>  <span class="c1"># noqa: F841 (last_u for future use)</span>
+<span class="linenos">262</span>        <span class="n">x</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">theta1_dot</span><span class="p">,</span> <span class="n">theta2_dot</span> <span class="o">=</span> <span class="n">state</span>
+<span class="linenos">263</span>        
+<span class="linenos">264</span>        <span class="c1"># Compute sliding surface (consistent with classical SMC formulation)</span>
+<span class="linenos">265</span>        <span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta1_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span> <span class="o">*</span> <span class="n">theta1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta2_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span> <span class="o">*</span> <span class="n">theta2</span><span class="p">)</span>
+<span class="linenos">266</span>        
+<span class="linenos">267</span>        <span class="c1"># Compute switching control with current adaptive gain.  Use the</span>
+<span class="linenos">268</span>        <span class="c1"># shared ``saturate`` helper to unify boundary layer behaviour</span>
+<span class="linenos">269</span>        <span class="c1"># across controllers.  ``saturate`` divides by epsilon internally.</span>
+<span class="linenos">270</span>        <span class="c1"># robust import for utils.* to support both import styles</span>
+<span class="linenos">271</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">272</span>            <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>  <span class="c1"># when repo root on sys.path</span>
+<span class="linenos">273</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">274</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">275</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>  <span class="c1"># when importing as src.controllers.*</span>
+<span class="linenos">276</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">277</span>                <span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>    <span class="c1"># when src itself on sys.path</span>
+<span class="linenos">278</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">smooth_switch</span><span class="p">:</span>
+<span class="linenos">279</span>            <span class="n">switching</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
+<span class="linenos">280</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">281</span>            <span class="n">switching</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+<span class="linenos">282</span>            
+<span class="linenos">283</span>        <span class="n">u_sw</span> <span class="o">=</span> <span class="o">-</span><span class="n">prev_K</span> <span class="o">*</span> <span class="n">switching</span>
+<span class="linenos">284</span>        
+<span class="linenos">285</span>        <span class="c1"># Total control with proportional term for improved convergence</span>
+<span class="linenos">286</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">u_sw</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">sigma</span>
+<span class="linenos">287</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
+<span class="linenos">288</span>        
+<span class="linenos">289</span>        <span class="c1"># Update time in sliding mode</span>
+<span class="linenos">290</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">:</span>
+<span class="linenos">291</span>            <span class="n">new_time_in_sliding</span> <span class="o">=</span> <span class="n">time_in_sliding</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">292</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">293</span>            <span class="n">new_time_in_sliding</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">294</span>        
+<span class="linenos">295</span>        <span class="c1"># Adaptive law with unified anti‑windup logic.</span>
+<span class="linenos">296</span>        <span class="c1">#</span>
+<span class="linenos">297</span>        <span class="c1"># The adaptive sliding–mode controller adjusts the switching gain based</span>
+<span class="linenos">298</span>        <span class="c1"># solely on the magnitude of the sliding surface σ.  According to</span>
+<span class="linenos">299</span>        <span class="c1"># adaptive SMC theory, the gain should increase when the system is</span>
+<span class="linenos">300</span>        <span class="c1"># outside a small neighbourhood of the sliding manifold and should</span>
+<span class="linenos">301</span>        <span class="c1"># remain constant (or decay slowly toward its nominal value) inside</span>
+<span class="linenos">302</span>        <span class="c1"># this neighbourhood.  Including the rate of</span>
+<span class="linenos">303</span>        <span class="c1"># change of the control input in the adaptation law is not justified</span>
+<span class="linenos">304</span>        <span class="c1"># by standard analysis and may introduce unnecessary coupling.  We</span>
+<span class="linenos">305</span>        <span class="c1"># therefore remove the control‑rate term and implement the standard</span>
+<span class="linenos">306</span>        <span class="c1"># adaptation law:</span>
+<span class="linenos">307</span>        <span class="c1">#   dK = γ·|σ| − leak_rate·(K − K_init)   if |σ| &gt; dead_zone</span>
+<span class="linenos">308</span>        <span class="c1">#   dK = 0                                if |σ| ≤ dead_zone</span>
+<span class="linenos">309</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">:</span>
+<span class="linenos">310</span>            <span class="c1"># Inside dead zone: hold K constant (no growth or decay).  This</span>
+<span class="linenos">311</span>            <span class="c1"># prevents the gain from drifting downward due to the leak term</span>
+<span class="linenos">312</span>            <span class="c1"># when the sliding surface is small, preserving the learned</span>
+<span class="linenos">313</span>            <span class="c1"># disturbance bound.</span>
+<span class="linenos">314</span>            <span class="n">dK</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">315</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">316</span>            <span class="c1"># Outside dead zone: increase K proportional to |σ| and apply a</span>
+<span class="linenos">317</span>            <span class="c1"># leak term pulling K back toward its nominal value.  The leak</span>
+<span class="linenos">318</span>            <span class="c1"># term prevents unbounded growth once disturbances subside.</span>
+<span class="linenos">319</span>            <span class="n">growth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+<span class="linenos">320</span>            <span class="n">dK</span> <span class="o">=</span> <span class="n">growth</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">prev_K</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">)</span>
+<span class="linenos">321</span>        
+<span class="linenos">322</span>        <span class="c1"># Apply rate limit to prevent sudden jumps</span>
+<span class="linenos">323</span>        <span class="n">dK</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">dK</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">)</span>
+<span class="linenos">324</span>        
+<span class="linenos">325</span>        <span class="c1"># Update gain with saturation</span>
+<span class="linenos">326</span>        <span class="n">new_K</span> <span class="o">=</span> <span class="n">prev_K</span> <span class="o">+</span> <span class="n">dK</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">327</span>        <span class="n">new_K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">new_K</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_max</span><span class="p">)</span>
+<span class="linenos">328</span>        
+<span class="linenos">329</span>        <span class="c1"># Update history in place.  Avoid allocating a new dictionary</span>
+<span class="linenos">330</span>        <span class="c1"># on every call; simply append to existing lists.  Initialize</span>
+<span class="linenos">331</span>        <span class="c1"># lists if they are missing to support callers passing in a</span>
+<span class="linenos">332</span>        <span class="c1"># partially filled history.  History accumulation can be</span>
+<span class="linenos">333</span>        <span class="c1"># disabled by passing in an empty dict, though the lists</span>
+<span class="linenos">334</span>        <span class="c1"># will be created on demand if needed.</span>
+<span class="linenos">335</span>        <span class="n">hist</span> <span class="o">=</span> <span class="n">history</span>
+<span class="linenos">336</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_K</span><span class="p">)</span>
+<span class="linenos">337</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+<span class="linenos">338</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;u_sw&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_sw</span><span class="p">)</span>
+<span class="linenos">339</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;dK&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dK</span><span class="p">)</span>
+<span class="linenos">340</span>        <span class="n">hist</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;time_in_sliding&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_time_in_sliding</span><span class="p">)</span>
+<span class="linenos">341</span>        <span class="c1"># Construct a structured return value.  Returning a named tuple</span>
+<span class="linenos">342</span>        <span class="c1"># clarifies the meaning of each element while preserving</span>
+<span class="linenos">343</span>        <span class="c1"># tuple‑like behaviour.</span>
+<span class="linenos">344</span>        <span class="k">return</span> <span class="n">AdaptiveSMCOutput</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">new_K</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">new_time_in_sliding</span><span class="p">),</span> <span class="n">hist</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="linenos">345</span>        
+<span class="linenos">346</span>    <span class="k">def</span><span class="w"> </span><span class="nf">set_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics_model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">347</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set dynamics model (for compatibility, not used in this implementation).&quot;&quot;&quot;</span>
+<span class="linenos">348</span>        <span class="k">pass</span>
+<span class="linenos">349</span>
+<span class="linenos">350</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">351</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset AdaptiveSMC controller state.</span>
+<span class="linenos">352</span>
+<span class="linenos">353</span><span class="sd">        Resets the adaptive gain K to its initial value and clears</span>
+<span class="linenos">354</span><span class="sd">        any internal tracking variables.</span>
+<span class="linenos">355</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">356</span>        <span class="c1"># Reset adaptive gain to initial value</span>
+<span class="linenos">357</span>        <span class="c1"># Note: The controller uses state_vars parameter for persistence,</span>
+<span class="linenos">358</span>        <span class="c1"># so we don&#39;t maintain persistent internal state here.</span>
+<span class="linenos">359</span>        <span class="c1"># This method ensures interface compliance.</span>
+<span class="linenos">360</span>        <span class="k">pass</span>
+<span class="linenos">361</span>
+<span class="linenos">362</span>    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">363</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Clean up controller resources (Issue #15).</span>
+<span class="linenos">364</span>
+<span class="linenos">365</span><span class="sd">        Explicitly releases any cached data to facilitate garbage</span>
+<span class="linenos">366</span><span class="sd">        collection and prevent memory leaks during repeated</span>
+<span class="linenos">367</span><span class="sd">        controller instantiation.</span>
+<span class="linenos">368</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">369</span>        <span class="c1"># AdaptiveSMC has no persistent internal state to clean</span>
+<span class="linenos">370</span>        <span class="c1"># This method is provided for interface compliance</span>
+<span class="linenos">371</span>        <span class="k">pass</span>
+<span class="linenos">372</span>
+<span class="linenos">373</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">374</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Destructor for automatic cleanup.</span>
+<span class="linenos">375</span>
+<span class="linenos">376</span><span class="sd">        Ensures cleanup is called when the controller is garbage collected.</span>
+<span class="linenos">377</span><span class="sd">        Catches all exceptions to prevent errors during finalization.</span>
+<span class="linenos">378</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">379</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">380</span>            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+<span class="linenos">381</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">382</span>            <span class="k">pass</span>  <span class="c1"># Prevent exceptions during cleanup</span>
 </pre></div>
 </div>
 </section>
@@ -1511,7 +1541,7 @@ uncontrolled growth during chattering.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

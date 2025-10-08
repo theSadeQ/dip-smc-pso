@@ -344,6 +344,9 @@ def _compute_sliding_surface(self, state: np.ndarray) -> float:
 #### 1.2 Equivalent Control Calculation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _compute_equivalent_control(self, state: np.ndarray) -> float:
     """Compute model-based u_eq with enhanced robustness."""
     if self.dyn is None:
@@ -396,6 +399,9 @@ def _compute_equivalent_control(self, state: np.ndarray) -> float:
 #### 1.3 Complete Control Law
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state: np.ndarray,
                    state_vars: tuple,
                    history: dict) -> ClassicalSMCOutput:
@@ -668,6 +674,9 @@ print(f"Best cost: {best_cost}")
 #### 2.2 Fitness Function Pattern
 
 ```python
+# example-metadata:
+# runnable: false
+
 def fitness_function(gains_array):
     """PSO fitness evaluation for classical SMC."""
     # Create controller with candidate gains
@@ -694,6 +703,9 @@ def fitness_function(gains_array):
 ### 3. Simulation Workflow Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Complete simulation with classical SMC
 def run_classical_smc_simulation():
     # Load configuration
@@ -726,6 +738,9 @@ def run_classical_smc_simulation():
 ### 4. Monitoring and Diagnostics
 
 ```python
+# example-metadata:
+# runnable: false
+
 def monitor_classical_smc(controller, state, result):
     """Monitor classical SMC performance indicators."""
 
@@ -947,6 +962,9 @@ boundary_layer: 0.005  # Smaller ε → smaller steady-state error
 
 **Option 2**: Use adaptive SMC instead
 ```python
+# example-metadata:
+# runnable: false
+
 controller = create_controller('adaptive_smc', ...)  # Can achieve zero error
 ```
 
@@ -960,6 +978,9 @@ gains: [10, 8, 15, 12, 100, 5]  # Higher K → tighter tracking
 #### 2.1 State Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_classical_smc(controller, state, result):
     """Comprehensive controller diagnostics."""
 
@@ -990,6 +1011,9 @@ def diagnose_classical_smc(controller, state, result):
 #### 2.2 Parameter Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_classical_parameters(gains, config):
     """Validate classical SMC parameters for stability."""
 

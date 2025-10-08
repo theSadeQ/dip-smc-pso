@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -487,18 +513,279 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="plant-core-physics-matrices">
 <h1>plant.core.physics_matrices<a class="headerlink" href="#plant-core-physics-matrices" title="Link to this heading">¶</a></h1>
+<!-- Enhanced by Week 8 Phase 2 -->
 <p><strong>Source:</strong> <code class="docutils literal notranslate"><span class="pre">src\plant\core\physics_matrices.py</span></code></p>
+<p><strong>Category:</strong> Plant Dynamics / Physics Computation
+<strong>Complexity:</strong> Advanced
+<strong>Prerequisites:</strong> Lagrangian mechanics, linear algebra, classical mechanics</p>
+<hr class="docutils" />
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+</section>
+<hr class="docutils" />
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Physics Matrix Computation for DIP Systems.</p>
-<p>Provides focused components for computing the fundamental physics matrices:</p>
+<p>This module provides the mathematical foundation for computing the three fundamental physics matrices that govern the dynamics of the double inverted pendulum:</p>
 <ul class="simple">
-<li><p>Inertia Matrix (M): Mass and inertial properties</p></li>
-<li><p>Coriolis Matrix (C): Velocity-dependent forces</p></li>
-<li><p>Gravity Vector (G): Gravitational forces</p></li>
+<li><p><strong>Inertia Matrix M(q)</strong>: Mass distribution and inertial coupling between degrees of freedom</p></li>
+<li><p><strong>Coriolis Matrix C(q,q̇)</strong>: Velocity-dependent forces (centrifugal and Coriolis effects)</p></li>
+<li><p><strong>Gravity Vector G(q)</strong>: Gravitational forces derived from potential energy</p></li>
 </ul>
-<p>Split from monolithic dynamics for clarity, testability, and reusability.</p>
+<p><strong>Design Principles:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Separation of Concerns</strong>: Physics computation isolated from integration methods</p></li>
+<li><p><strong>Performance</strong>: Numba JIT compilation for real-time control applications</p></li>
+<li><p><strong>Testability</strong>: Pure mathematical functions for rigorous validation</p></li>
+<li><p><strong>Reusability</strong>: Common interface for simplified and full dynamics models</p></li>
+</ol>
 </section>
+<hr class="docutils" />
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="lagrangian-mechanics-framework">
+<h3>Lagrangian Mechanics Framework<a class="headerlink" href="#lagrangian-mechanics-framework" title="Link to this heading">¶</a></h3>
+<p>The double inverted pendulum dynamics are derived using <strong>Lagrangian mechanics</strong>, where the equations of motion take the form:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+M(q)\ddot{q} + C(q,\dot{q})\dot{q} + G(q) = \tau
+\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(q = [x, \theta_1, \theta_2]^T\)</span> are the generalized coordinates</p></li>
+<li><p><span class="math notranslate nohighlight">\(M(q) \in \mathbb{R}^{3 \times 3}\)</span> is the <strong>inertia matrix</strong> (configuration-dependent)</p></li>
+<li><p><span class="math notranslate nohighlight">\(C(q,\dot{q}) \in \mathbb{R}^{3 \times 3}\)</span> is the <strong>Coriolis matrix</strong> (configuration and velocity-dependent)</p></li>
+<li><p><span class="math notranslate nohighlight">\(G(q) \in \mathbb{R}^3\)</span> is the <strong>gravity vector</strong> (configuration-dependent)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau = [F, 0, 0]^T\)</span> is the generalized force (only cart actuated)</p></li>
+</ul>
+<p><strong>Key Properties:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Symmetry</strong>: <span class="math notranslate nohighlight">\(M(q) = M(q)^T\)</span> (inertia matrix is symmetric)</p></li>
+<li><p><strong>Positive Definiteness</strong>: <span class="math notranslate nohighlight">\(M(q) \succ 0\)</span> for all valid configurations</p></li>
+<li><p><strong>Skew-Symmetry Property</strong>: <span class="math notranslate nohighlight">\(\dot{M}(q) - 2C(q,\dot{q})\)</span> is skew-symmetric (passivity-based control)</p></li>
+<li><p><strong>Energy Conservation</strong>: For unforced system, <span class="math notranslate nohighlight">\(\frac{d}{dt}(T + V) = -\dot{q}^T C \dot{q}\)</span> (dissipation only)</p></li>
+</ol>
+</section>
+<section id="inertia-matrix-m-q">
+<h3>Inertia Matrix M(q)<a class="headerlink" href="#inertia-matrix-m-q" title="Link to this heading">¶</a></h3>
+<p><strong>Physical Interpretation:</strong></p>
+<p>The inertia matrix represents the <strong>kinetic energy quadratic form</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+T = \frac{1}{2}\dot{q}^T M(q) \dot{q}
+\]</div>
+</div>
+<p><strong>Derivation from Kinetic Energy:</strong></p>
+<p>For the DIP system:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+T = \frac{1}{2}m_0\dot{x}^2 + \frac{1}{2}m_1\|\mathbf{v}_1\|^2 + \frac{1}{2}I_1\dot{\theta}_1^2 + \frac{1}{2}m_2\|\mathbf{v}_2\|^2 + \frac{1}{2}I_2\dot{\theta}_2^2
+\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{v}_1 = [\dot{x} + L_{c1}\dot{\theta}_1\cos\theta_1, L_{c1}\dot{\theta}_1\sin\theta_1]\)</span> (link 1 COM velocity)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{v}_2 = [\dot{x} + L_1\dot{\theta}_1\cos\theta_1 + L_{c2}\dot{\theta}_2\cos\theta_2, L_1\dot{\theta}_1\sin\theta_1 + L_{c2}\dot{\theta}_2\sin\theta_2]\)</span> (link 2 COM velocity)</p></li>
+</ul>
+<p><strong>Matrix Structure:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M(q) = \begin{bmatrix}
+M_{11} &amp; M_{12}(\theta_1, \theta_2) &amp; M_{13}(\theta_2) \\
+M_{21}(\theta_1, \theta_2) &amp; M_{22}(\theta_1, \theta_2) &amp; M_{23}(\theta_1, \theta_2) \\
+M_{31}(\theta_2) &amp; M_{32}(\theta_1, \theta_2) &amp; M_{33}
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(M_{11} = m_0 + m_1 + m_2\)</span> (total system mass - constant)</p></li>
+<li><p><span class="math notranslate nohighlight">\(M_{12} = (m_1 L_{c1} + m_2 L_1)\cos\theta_1 + m_2 L_{c2}\cos\theta_2\)</span> (cart-link coupling)</p></li>
+<li><p><span class="math notranslate nohighlight">\(M_{13} = m_2 L_{c2}\cos\theta_2\)</span> (cart-link2 coupling)</p></li>
+<li><p><span class="math notranslate nohighlight">\(M_{22} = m_1 L_{c1}^2 + m_2 L_1^2 + I_1 + m_2 L_{c2}^2 + I_2 + 2m_2 L_1 L_{c2}\cos(\theta_1 - \theta_2)\)</span> (link 1 inertia + coupling)</p></li>
+<li><p><span class="math notranslate nohighlight">\(M_{23} = m_2 L_{c2}^2 + I_2 + m_2 L_1 L_{c2}\cos(\theta_1 - \theta_2)\)</span> (inter-link coupling)</p></li>
+<li><p><span class="math notranslate nohighlight">\(M_{33} = m_2 L_{c2}^2 + I_2\)</span> (link 2 inertia - constant)</p></li>
+</ul>
+<p><strong>Coupling Analysis:</strong></p>
+<ul class="simple">
+<li><p><strong>Diagonal Terms</strong>: Individual link inertias (always positive)</p></li>
+<li><p><strong>Off-Diagonal Terms</strong>: Kinetic energy coupling (configuration-dependent)</p></li>
+<li><p><strong>Configuration Singularities</strong>: M(q) is non-singular for all physical configurations</p></li>
+</ul>
+</section>
+<section id="coriolis-matrix-c-q-q">
+<h3>Coriolis Matrix C(q,q̇)<a class="headerlink" href="#coriolis-matrix-c-q-q" title="Link to this heading">¶</a></h3>
+<p><strong>Physical Interpretation:</strong></p>
+<p>The Coriolis matrix captures <strong>velocity-dependent forces</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+C(q,\dot{q})\dot{q} = \text{Centrifugal Forces} + \text{Coriolis Forces} + \text{Friction}
+\]</div>
+</div>
+<p><strong>Derivation from Christoffel Symbols:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+C_{ij}(q,\dot{q}) = \sum_{k=1}^{3} c_{ijk}(q)\dot{q}_k + b_{ij}
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(c_{ijk}\)</span> are Christoffel symbols of the first kind:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+c_{ijk} = \frac{1}{2}\left(\frac{\partial M_{ij}}{\partial q_k} + \frac{\partial M_{ik}}{\partial q_j} - \frac{\partial M_{jk}}{\partial q_i}\right)
+\]</div>
+</div>
+<p>and <span class="math notranslate nohighlight">\(b_{ij}\)</span> are friction coefficients (diagonal only).</p>
+<p><strong>Matrix Structure:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C(q,\dot{q}) = \begin{bmatrix}
+c_0 &amp; -(m_1 L_{c1} + m_2 L_1)s_1\dot{\theta}_1 - m_2 L_{c2}s_2\dot{\theta}_2 &amp; -m_2 L_{c2}s_2\dot{\theta}_2 \\
+0 &amp; c_1 - m_2 L_1 L_{c2}s_{12}\dot{\theta}_2 &amp; -m_2 L_1 L_{c2}s_{12}\dot{\theta}_2 \\
+0 &amp; m_2 L_1 L_{c2}s_{12}\dot{\theta}_1 &amp; c_2
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s_1 = \sin\theta_1\)</span>, <span class="math notranslate nohighlight">\(s_2 = \sin\theta_2\)</span>, <span class="math notranslate nohighlight">\(s_{12} = \sin(\theta_1 - \theta_2)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c_0, c_1, c_2\)</span> are cart, joint1, joint2 friction coefficients</p></li>
+</ul>
+<p><strong>Skew-Symmetry Property:</strong></p>
+<p>For conservative systems (no friction), the matrix <span class="math notranslate nohighlight">\(\dot{M} - 2C\)</span> is skew-symmetric:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\dot{q}^T\left(\dot{M} - 2C\right)\dot{q} = 0 \quad \forall \dot{q}
+\]</div>
+</div>
+<p>This property is fundamental for <strong>passivity-based control</strong> and <strong>energy shaping</strong> methods.</p>
+</section>
+<section id="gravity-vector-g-q">
+<h3>Gravity Vector G(q)<a class="headerlink" href="#gravity-vector-g-q" title="Link to this heading">¶</a></h3>
+<p><strong>Physical Interpretation:</strong></p>
+<p>The gravity vector is the <strong>negative gradient of potential energy</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+G(q) = \frac{\partial V(q)}{\partial q}
+\]</div>
+</div>
+<p>where the potential energy is:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+V(q) = m_1 g L_{c1}\cos\theta_1 + m_2 g (L_1\cos\theta_1 + L_{c2}\cos\theta_2)
+\]</div>
+</div>
+<p><strong>Vector Components:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+G(q) = \begin{bmatrix}
+0 \\
+-(m_1 L_{c1} + m_2 L_1)g\sin\theta_1 - m_2 L_{c2}g\sin\theta_2 \\
+-m_2 L_{c2}g\sin\theta_2
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(G_1 = 0\)</span> (no gravity acts on horizontal cart motion)</p></li>
+<li><p><span class="math notranslate nohighlight">\(G_2, G_3 &lt; 0\)</span> for <span class="math notranslate nohighlight">\(\theta_1, \theta_2 &gt; 0\)</span> (gravitational restoring torques)</p></li>
+<li><p>Upright equilibrium: <span class="math notranslate nohighlight">\(G(0, 0) = 0\)</span></p></li>
+</ul>
+<p><strong>Linearization at Equilibrium:</strong></p>
+<p>Near <span class="math notranslate nohighlight">\(\theta_1 = \theta_2 = 0\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+G(q) \approx \begin{bmatrix}
+0 \\
+-(m_1 L_{c1} + m_2 L_1)g\theta_1 - m_2 L_{c2}g\theta_2 \\
+-m_2 L_{c2}g\theta_2
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+<p>This linear approximation is used in <strong>LQR control design</strong> and <strong>simplified dynamics models</strong>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Configuration q = _x, θ₁, θ₂_ᵀ] --&gt; B[Compute Trigonometric Terms]
+    B --&gt; C[sin_θ₁_, cos_θ₁_, sin_θ₂_, cos_θ₂_]
+    C --&gt; D[Assemble Mass Matrix M_q_]
+    C --&gt; E[Compute Partial Derivatives]
+    E --&gt; F[Christoffel Symbols c_ijk_]
+    F --&gt; G[Assemble Coriolis Matrix C_q, q̇_]
+    C --&gt; H[Compute Potential Gradients]
+    H --&gt; I[Assemble Gravity Vector G_q_]
+    D --&gt; J[Return M, C, G]
+    G --&gt; J
+    I --&gt; J
+
+    style D fill:#9cf
+    style G fill:#fcf
+    style I fill:#ff9
+        </div></section>
+<section id="implementation-architecture">
+<h2>Implementation Architecture<a class="headerlink" href="#implementation-architecture" title="Link to this heading">¶</a></h2>
+<section id="class-hierarchy">
+<h3>Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PhysicsMatrixComputer</span> <span class="p">(</span><span class="n">Protocol</span><span class="p">)</span>
+    <span class="err">↓</span> <span class="n">implements</span>
+<span class="n">DIPPhysicsMatrices</span> <span class="p">(</span><span class="n">Base</span><span class="p">)</span>
+    <span class="err">↓</span> <span class="n">extends</span>
+<span class="n">SimplifiedDIPPhysicsMatrices</span>
+</pre></div>
+</div>
+<p><strong>Design Rationale:</strong></p>
+<ul class="simple">
+<li><p><strong>Protocol</strong>: Defines contract for all physics matrix computers</p></li>
+<li><p><strong>Base Class</strong>: Full-fidelity physics computation with Numba optimization</p></li>
+<li><p><strong>Simplified Variant</strong>: Approximations for faster computation (control design)</p></li>
+</ul>
+</section>
+<section id="numba-jit-compilation">
+<h3>Numba JIT Compilation<a class="headerlink" href="#numba-jit-compilation" title="Link to this heading">¶</a></h3>
+<p><strong>Performance Optimization:</strong></p>
+<p>The module uses <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code> decorator for <strong>JIT (Just-In-Time) compilation</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@staticmethod</span>
+<span class="nd">@njit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_compute_inertia_matrix_numba</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;JIT-compiled inertia matrix computation.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p><strong>Benefits:</strong></p>
+<ul class="simple">
+<li><p><strong>10-100× speedup</strong> over pure Python for tight loops</p></li>
+<li><p><strong>Type specialization</strong> for NumPy operations</p></li>
+<li><p><strong>SIMD vectorization</strong> on modern CPUs</p></li>
+<li><p><strong>Compiled once</strong>, reused across simulations</p></li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul class="simple">
+<li><p>Cannot use Python objects (only NumPy arrays, scalars)</p></li>
+<li><p>Limited debugging (use <code class="docutils literal notranslate"><span class="pre">debug=True</span></code> during development)</p></li>
+<li><p>First call incurs compilation overhead (~1 second)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -800,14 +1087,10 @@
 </div>
 </section>
 <hr class="docutils" />
-<section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
-<section id="physicsmatrixcomputer">
-<h3><code class="docutils literal notranslate"><span class="pre">PhysicsMatrixComputer</span></code><a class="headerlink" href="#physicsmatrixcomputer" title="Link to this heading">¶</a></h3>
-<p><strong>Inherits from:</strong> <code class="docutils literal notranslate"><span class="pre">Protocol</span></code></p>
-<p>Protocol for physics matrix computation.</p>
-<section id="source-code">
-<h4>Source Code<a class="headerlink" href="#source-code" title="Link to this heading">¶</a></h4>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h2>
+<section id="protocol-physicsmatrixcomputer">
+<h3>Protocol: PhysicsMatrixComputer<a class="headerlink" href="#protocol-physicsmatrixcomputer" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">PhysicsMatrixComputer</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol for physics matrix computation.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -824,35 +1107,48 @@
 <span class="linenos">14</span>        <span class="o">...</span>
 </pre></div>
 </div>
+<p><strong>Purpose:</strong> Type-safe interface for all physics matrix implementations.</p>
+<p><strong>Required Methods:</strong></p>
+<section id="compute-inertia-matrix-state-np-ndarray-np-ndarray">
+<h4><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-inertia-matrix-state-np-ndarray-np-ndarray" title="Link to this heading">¶</a></h4>
+<p>Compute configuration-dependent inertia matrix M(q).</p>
+<p><strong>Mathematical Definition:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+M(q) = \frac{\partial^2 T}{\partial \dot{q}^2}
+\]</div>
+</div>
+<p><strong>Returns:</strong> Symmetric positive-definite 3×3 matrix</p>
 </section>
-<section id="methods-3">
-<h4>Methods (3)<a class="headerlink" href="#methods-3" title="Link to this heading">¶</a></h4>
-<section id="compute-inertia-matrix-self-state">
-<h5><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state)</span></code><a class="headerlink" href="#compute-inertia-matrix-self-state" title="Link to this heading">¶</a></h5>
-<p>Compute inertia matrix M(q).</p>
-<p><a class="reference internal" href="#method-physicsmatrixcomputer-compute_inertia_matrix"><span class="xref myst">View full source →</span></a></p>
+<section id="compute-coriolis-matrix-state-np-ndarray-np-ndarray">
+<h4><code class="docutils literal notranslate"><span class="pre">compute_coriolis_matrix(state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-coriolis-matrix-state-np-ndarray-np-ndarray" title="Link to this heading">¶</a></h4>
+<p>Compute velocity-dependent Coriolis matrix C(q,q̇).</p>
+<p><strong>Mathematical Definition:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+C_{ij}(q,\dot{q}) = \sum_{k=1}^{3} c_{ijk}(q)\dot{q}_k + b_{ij}
+\]</div>
+</div>
+<p><strong>Returns:</strong> 3×3 matrix (not necessarily symmetric)</p>
 </section>
-<section id="compute-coriolis-matrix-self-state">
-<h5><code class="docutils literal notranslate"><span class="pre">compute_coriolis_matrix(self,</span> <span class="pre">state)</span></code><a class="headerlink" href="#compute-coriolis-matrix-self-state" title="Link to this heading">¶</a></h5>
-<p>Compute Coriolis matrix C(q, q̇).</p>
-<p><a class="reference internal" href="#method-physicsmatrixcomputer-compute_coriolis_matrix"><span class="xref myst">View full source →</span></a></p>
-</section>
-<section id="compute-gravity-vector-self-state">
-<h5><code class="docutils literal notranslate"><span class="pre">compute_gravity_vector(self,</span> <span class="pre">state)</span></code><a class="headerlink" href="#compute-gravity-vector-self-state" title="Link to this heading">¶</a></h5>
-<p>Compute gravity vector G(q).</p>
-<p><a class="reference internal" href="#method-physicsmatrixcomputer-compute_gravity_vector"><span class="xref myst">View full source →</span></a></p>
-</section>
+<section id="compute-gravity-vector-state-np-ndarray-np-ndarray">
+<h4><code class="docutils literal notranslate"><span class="pre">compute_gravity_vector(state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-gravity-vector-state-np-ndarray-np-ndarray" title="Link to this heading">¶</a></h4>
+<p>Compute configuration-dependent gravity vector G(q).</p>
+<p><strong>Mathematical Definition:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+G(q) = \frac{\partial V(q)}{\partial q}
+\]</div>
+</div>
+<p><strong>Returns:</strong> 3×1 vector</p>
 </section>
 </section>
 <hr class="docutils" />
-<section id="dipphysicsmatrices">
-<h3><code class="docutils literal notranslate"><span class="pre">DIPPhysicsMatrices</span></code><a class="headerlink" href="#dipphysicsmatrices" title="Link to this heading">¶</a></h3>
-<p>Double Inverted Pendulum physics matrix computation.</p>
-<p>Encapsulates the mathematical computation of fundamental physics matrices
-for the DIP system. Uses numerical optimizations (JIT compilation) for
-performance while maintaining clear mathematical structure.</p>
-<section id="id1">
-<h4>Source Code<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<section id="class-dipphysicsmatrices">
+<h3>Class: DIPPhysicsMatrices<a class="headerlink" href="#class-dipphysicsmatrices" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="k">class</span><span class="w"> </span><span class="nc">DIPPhysicsMatrices</span><span class="p">:</span>
 <span class="linenos">  2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos">  3</span><span class="sd">    Double Inverted Pendulum physics matrix computation.</span>
@@ -1056,60 +1352,184 @@ performance while maintaining clear mathematical structure.</p>
 <span class="linenos">201</span>        <span class="k">return</span> <span class="n">G</span>
 </pre></div>
 </div>
+<p><strong>Full-fidelity physics matrix computation for double inverted pendulum.</strong></p>
+<section id="constructor">
+<h4>Constructor<a class="headerlink" href="#constructor" title="Link to this heading">¶</a></h4>
+<section id="init-self-parameters-any">
+<h5><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameters:</span> <span class="pre">Any)</span></code><a class="headerlink" href="#init-self-parameters-any" title="Link to this heading">¶</a></h5>
+<p>Initialize physics matrix computer with system parameters.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: Configuration object with fields:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cart_mass</span></code> (m₀): Cart mass [kg]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pendulum1_mass</span></code> (m₁): Link 1 mass [kg]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pendulum2_mass</span></code> (m₂): Link 2 mass [kg]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pendulum1_length</span></code> (L₁): Link 1 length [m]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pendulum2_length</span></code> (L₂): Link 2 length [m]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pendulum1_com</span></code> (Lc₁): Link 1 center of mass [m]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pendulum2_com</span></code> (Lc₂): Link 2 center of mass [m]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pendulum1_inertia</span></code> (I₁): Link 1 moment of inertia [kg·m²]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pendulum2_inertia</span></code> (I₂): Link 2 moment of inertia [kg·m²]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gravity</span></code> (g): Gravitational acceleration [m/s²]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cart_friction</span></code> (c₀): Cart damping coefficient [N·s/m]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint1_friction</span></code> (c₁): Joint 1 damping [N·m·s/rad]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint2_friction</span></code> (c₂): Joint 2 damping [N·m·s/rad]</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Raises:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>: If required parameters are missing</p></li>
+</ul>
 </section>
-<section id="methods-8">
-<h4>Methods (8)<a class="headerlink" href="#methods-8" title="Link to this heading">¶</a></h4>
-<section id="init-self-parameters">
-<h5><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameters)</span></code><a class="headerlink" href="#init-self-parameters" title="Link to this heading">¶</a></h5>
-<p>Initialize physics matrix computer.</p>
-<p><a class="reference internal" href="#method-dipphysicsmatrices-__init__"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id2">
-<h5><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state)</span></code><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h5>
+<section id="public-methods">
+<h4>Public Methods<a class="headerlink" href="#public-methods" title="Link to this heading">¶</a></h4>
+<section id="compute-inertia-matrix-self-state-np-ndarray-np-ndarray">
+<h5><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-inertia-matrix-self-state-np-ndarray-np-ndarray" title="Link to this heading">¶</a></h5>
 <p>Compute the inertia matrix M(q) for the DIP system.</p>
-<p><a class="reference internal" href="#method-dipphysicsmatrices-compute_inertia_matrix"><span class="xref myst">View full source →</span></a></p>
+<p><strong>Args:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: System state [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂] ∈ ℝ⁶</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code>: 3×3 symmetric positive-definite inertia matrix</p></li>
+</ul>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Symmetry: M = M^T</p></li>
+<li><p>Positive definiteness: x^T M x &gt; 0 for all x ≠ 0</p></li>
+<li><p>Configuration-dependent: M = M(θ₁, θ₂)</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DIPPhysicsMatrices</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.configurations</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnifiedDIPConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">UnifiedDIPConfig</span><span class="p">()</span>
+<span class="n">physics</span> <span class="o">=</span> <span class="n">DIPPhysicsMatrices</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Verify symmetry</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Verify positive definiteness</span>
+<span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">eigenvalues</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
-<section id="id3">
-<h5><code class="docutils literal notranslate"><span class="pre">compute_coriolis_matrix(self,</span> <span class="pre">state)</span></code><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h5>
-<p>Compute the Coriolis matrix C(q, q̇) for the DIP system.</p>
-<p><a class="reference internal" href="#method-dipphysicsmatrices-compute_coriolis_matrix"><span class="xref myst">View full source →</span></a></p>
+<section id="compute-coriolis-matrix-self-state-np-ndarray-np-ndarray">
+<h5><code class="docutils literal notranslate"><span class="pre">compute_coriolis_matrix(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-coriolis-matrix-self-state-np-ndarray-np-ndarray" title="Link to this heading">¶</a></h5>
+<p>Compute the Coriolis matrix C(q,q̇) for the DIP system.</p>
+<p><strong>Args:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: System state [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂] ∈ ℝ⁶</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">C</span></code>: 3×3 Coriolis matrix</p></li>
+</ul>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Velocity-dependent: C = C(θ₁, θ₂, θ̇₁, θ̇₂)</p></li>
+<li><p>Includes friction: diagonal elements contain damping coefficients</p></li>
+<li><p>Skew-symmetry (without friction): Ṁ - 2C is skew-symmetric</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_coriolis_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Extract velocity-dependent terms</span>
+<span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">theta1_dot</span><span class="p">,</span> <span class="n">theta2_dot</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="c1"># Verify friction is on diagonal</span>
+<span class="k">assert</span> <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">config</span><span class="o">.</span><span class="n">cart_friction</span>
+<span class="k">assert</span> <span class="n">C</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">config</span><span class="o">.</span><span class="n">joint1_friction</span>  <span class="c1"># May include velocity terms</span>
+</pre></div>
+</div>
 </section>
-<section id="id4">
-<h5><code class="docutils literal notranslate"><span class="pre">compute_gravity_vector(self,</span> <span class="pre">state)</span></code><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h5>
+<section id="compute-gravity-vector-self-state-np-ndarray-np-ndarray">
+<h5><code class="docutils literal notranslate"><span class="pre">compute_gravity_vector(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-gravity-vector-self-state-np-ndarray-np-ndarray" title="Link to this heading">¶</a></h5>
 <p>Compute the gravity vector G(q) for the DIP system.</p>
-<p><a class="reference internal" href="#method-dipphysicsmatrices-compute_gravity_vector"><span class="xref myst">View full source →</span></a></p>
+<p><strong>Args:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: System state [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂] ∈ ℝ⁶</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">G</span></code>: 3×1 gravity vector</p></li>
+</ul>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Configuration-dependent: G = G(θ₁, θ₂)</p></li>
+<li><p>Equilibrium: G(0, 0) = 0 (upright position)</p></li>
+<li><p>Restoring torques: G₂, G₃ &lt; 0 for small positive angles</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Upright equilibrium</span>
+<span class="n">state_upright</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">G_upright</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_gravity_vector</span><span class="p">(</span><span class="n">state_upright</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">G_upright</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+<span class="c1"># Small perturbation</span>
+<span class="n">state_perturbed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">G_perturbed</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_gravity_vector</span><span class="p">(</span><span class="n">state_perturbed</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">G_perturbed</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>  <span class="c1"># Restoring torque on link 1</span>
+<span class="k">assert</span> <span class="n">G_perturbed</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>  <span class="c1"># Restoring torque on link 2</span>
+</pre></div>
+</div>
 </section>
-<section id="compute-all-matrices-self-state">
-<h5><code class="docutils literal notranslate"><span class="pre">compute_all_matrices(self,</span> <span class="pre">state)</span></code><a class="headerlink" href="#compute-all-matrices-self-state" title="Link to this heading">¶</a></h5>
+<section id="compute-all-matrices-self-state-np-ndarray-tuple-np-ndarray-np-ndarray-np-ndarray">
+<h5><code class="docutils literal notranslate"><span class="pre">compute_all_matrices(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">Tuple[np.ndarray,</span> <span class="pre">np.ndarray,</span> <span class="pre">np.ndarray]</span></code><a class="headerlink" href="#compute-all-matrices-self-state-np-ndarray-tuple-np-ndarray-np-ndarray-np-ndarray" title="Link to this heading">¶</a></h5>
 <p>Compute all physics matrices in a single call for efficiency.</p>
-<p><a class="reference internal" href="#method-dipphysicsmatrices-compute_all_matrices"><span class="xref myst">View full source →</span></a></p>
+<p><strong>Args:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: System state [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂] ∈ ℝ⁶</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(M,</span> <span class="pre">C,</span> <span class="pre">G)</span></code>: Tuple of (inertia matrix, Coriolis matrix, gravity vector)</p></li>
+</ul>
+<p><strong>Performance Note:</strong> More efficient than calling individual methods due to reduced function call overhead.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">])</span>
+<span class="n">M</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_all_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Verify dynamics equation: M⁻¹(τ - C·q̇ - G) = q̈</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>  <span class="c1"># Control force</span>
+<span class="n">q_dot</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+<span class="n">q_ddot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">tau</span> <span class="o">-</span> <span class="n">C</span> <span class="o">@</span> <span class="n">q_dot</span> <span class="o">-</span> <span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
-<section id="compute-inertia-matrix-numba-theta1-theta2-m0-m1-m2-l1-l2-lc1-lc2-i1-i2">
-<h5><code class="docutils literal notranslate"><span class="pre">_compute_inertia_matrix_numba(theta1,</span> <span class="pre">theta2,</span> <span class="pre">m0,</span> <span class="pre">m1,</span> <span class="pre">m2,</span> <span class="pre">L1,</span> <span class="pre">L2,</span> <span class="pre">Lc1,</span> <span class="pre">Lc2,</span> <span class="pre">I1,</span> <span class="pre">I2)</span></code><a class="headerlink" href="#compute-inertia-matrix-numba-theta1-theta2-m0-m1-m2-l1-l2-lc1-lc2-i1-i2" title="Link to this heading">¶</a></h5>
+</section>
+<section id="static-methods-numba-optimized">
+<h4>Static Methods (Numba-Optimized)<a class="headerlink" href="#static-methods-numba-optimized" title="Link to this heading">¶</a></h4>
+<section id="compute-inertia-matrix-numba-np-ndarray">
+<h5><code class="docutils literal notranslate"><span class="pre">_compute_inertia_matrix_numba(...)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-inertia-matrix-numba-np-ndarray" title="Link to this heading">¶</a></h5>
 <p>JIT-compiled inertia matrix computation.</p>
-<p><a class="reference internal" href="#method-dipphysicsmatrices-_compute_inertia_matrix_numba"><span class="xref myst">View full source →</span></a></p>
+<p><strong>Performance:</strong> ~10× faster than pure Python implementation.</p>
+<p><strong>Note:</strong> Internal method, use <code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix()</span></code> for public API.</p>
 </section>
-<section id="compute-coriolis-matrix-numba-theta1-theta2-theta1-dot-theta2-dot-m1-m2-l1-l2-lc1-lc2-c0-c1-c2">
-<h5><code class="docutils literal notranslate"><span class="pre">_compute_coriolis_matrix_numba(theta1,</span> <span class="pre">theta2,</span> <span class="pre">theta1_dot,</span> <span class="pre">theta2_dot,</span> <span class="pre">m1,</span> <span class="pre">m2,</span> <span class="pre">L1,</span> <span class="pre">L2,</span> <span class="pre">Lc1,</span> <span class="pre">Lc2,</span> <span class="pre">c0,</span> <span class="pre">c1,</span> <span class="pre">c2)</span></code><a class="headerlink" href="#compute-coriolis-matrix-numba-theta1-theta2-theta1-dot-theta2-dot-m1-m2-l1-l2-lc1-lc2-c0-c1-c2" title="Link to this heading">¶</a></h5>
+<section id="compute-coriolis-matrix-numba-np-ndarray">
+<h5><code class="docutils literal notranslate"><span class="pre">_compute_coriolis_matrix_numba(...)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-coriolis-matrix-numba-np-ndarray" title="Link to this heading">¶</a></h5>
 <p>JIT-compiled Coriolis matrix computation.</p>
-<p><a class="reference internal" href="#method-dipphysicsmatrices-_compute_coriolis_matrix_numba"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="compute-gravity-vector-numba-theta1-theta2-m1-m2-l1-lc1-lc2-g">
-<h5><code class="docutils literal notranslate"><span class="pre">_compute_gravity_vector_numba(theta1,</span> <span class="pre">theta2,</span> <span class="pre">m1,</span> <span class="pre">m2,</span> <span class="pre">L1,</span> <span class="pre">Lc1,</span> <span class="pre">Lc2,</span> <span class="pre">g)</span></code><a class="headerlink" href="#compute-gravity-vector-numba-theta1-theta2-m1-m2-l1-lc1-lc2-g" title="Link to this heading">¶</a></h5>
+<section id="compute-gravity-vector-numba-np-ndarray">
+<h5><code class="docutils literal notranslate"><span class="pre">_compute_gravity_vector_numba(...)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#compute-gravity-vector-numba-np-ndarray" title="Link to this heading">¶</a></h5>
 <p>JIT-compiled gravity vector computation.</p>
-<p><a class="reference internal" href="#method-dipphysicsmatrices-_compute_gravity_vector_numba"><span class="xref myst">View full source →</span></a></p>
 </section>
 </section>
 </section>
 <hr class="docutils" />
-<section id="simplifieddipphysicsmatrices">
-<h3><code class="docutils literal notranslate"><span class="pre">SimplifiedDIPPhysicsMatrices</span></code><a class="headerlink" href="#simplifieddipphysicsmatrices" title="Link to this heading">¶</a></h3>
-<p><strong>Inherits from:</strong> <code class="docutils literal notranslate"><span class="pre">DIPPhysicsMatrices</span></code></p>
-<p>Simplified physics matrices for computational efficiency.</p>
-<p>Uses approximations and simplifications suitable for control design
-while maintaining essential dynamics characteristics.</p>
-<section id="id5">
-<h4>Source Code<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
+<section id="class-simplifieddipphysicsmatrices">
+<h3>Class: SimplifiedDIPPhysicsMatrices<a class="headerlink" href="#class-simplifieddipphysicsmatrices" title="Link to this heading">¶</a></h3>
+<p><strong>Inherits:</strong> <code class="docutils literal notranslate"><span class="pre">DIPPhysicsMatrices</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">SimplifiedDIPPhysicsMatrices</span><span class="p">(</span><span class="n">DIPPhysicsMatrices</span><span class="p">):</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span><span class="sd">    Simplified physics matrices for computational efficiency.</span>
@@ -1160,21 +1580,285 @@ while maintaining essential dynamics characteristics.</p>
 <span class="linenos">48</span>        <span class="k">return</span> <span class="n">M</span>
 </pre></div>
 </div>
-</section>
-<section id="methods-2">
-<h4>Methods (2)<a class="headerlink" href="#methods-2" title="Link to this heading">¶</a></h4>
-<section id="id6">
-<h5><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state)</span></code><a class="headerlink" href="#id6" title="Link to this heading">¶</a></h5>
+<p><strong>Simplified physics matrices for computational efficiency.</strong></p>
+<p><strong>Approximations:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Reduced Cross-Coupling:</strong> Off-diagonal inertia matrix elements scaled by 0.5-0.8</p></li>
+<li><p><strong>Diagonal-Dominant M(q):</strong> Faster matrix inversion</p></li>
+<li><p><strong>Same Coriolis/Gravity:</strong> Full-fidelity for C(q,q̇) and G(q)</p></li>
+</ol>
+<p><strong>Use Cases:</strong></p>
+<ul class="simple">
+<li><p><strong>Control Design:</strong> Linear controllers (LQR, pole placement)</p></li>
+<li><p><strong>Fast Simulation:</strong> Preliminary testing and validation</p></li>
+<li><p><strong>Real-Time Systems:</strong> When computational budget is limited</p></li>
+</ul>
+<p><strong>Accuracy vs Speed Trade-off:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model Type</p></th>
+<th class="head"><p>Computation Time</p></th>
+<th class="head"><p>Accuracy</p></th>
+<th class="head"><p>Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Full</p></td>
+<td><p>1.0× (baseline)</p></td>
+<td><p>100%</p></td>
+<td><p>Research, high-fidelity simulation</p></td>
+</tr>
+<tr class="row-odd"><td><p>Simplified</p></td>
+<td><p>0.6×</p></td>
+<td><p>95-98%</p></td>
+<td><p>Control design, real-time systems</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="overridden-methods">
+<h4>Overridden Methods<a class="headerlink" href="#overridden-methods" title="Link to this heading">¶</a></h4>
+<section id="id1">
+<h5><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h5>
 <p>Simplified inertia matrix with reduced coupling terms.</p>
-<p><a class="reference internal" href="#method-simplifieddipphysicsmatrices-compute_inertia_matrix"><span class="xref myst">View full source →</span></a></p>
+<p><strong>Approximation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+M_{12}^{\text{simp}} = 0.5 \cdot M_{12}^{\text{full}}, \quad M_{13}^{\text{simp}} = 0.5 \cdot M_{13}^{\text{full}}, \quad M_{23}^{\text{simp}} = 0.8 \cdot M_{23}^{\text{full}}
+\]</div>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDIPPhysicsMatrices</span>
+
+<span class="n">simplified_physics</span> <span class="o">=</span> <span class="n">SimplifiedDIPPhysicsMatrices</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">M_simp</span> <span class="o">=</span> <span class="n">simplified_physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Compare with full physics</span>
+<span class="n">M_full</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">relative_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">M_simp</span> <span class="o">-</span> <span class="n">M_full</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">M_full</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inertia matrix error: </span><span class="si">{</span><span class="n">relative_error</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>  <span class="c1"># Typically 2-5%</span>
+</pre></div>
+</div>
 </section>
-<section id="compute-simplified-inertia-matrix-numba-theta1-theta2-m0-m1-m2-l1-l2-lc1-lc2-i1-i2">
-<h5><code class="docutils literal notranslate"><span class="pre">_compute_simplified_inertia_matrix_numba(theta1,</span> <span class="pre">theta2,</span> <span class="pre">m0,</span> <span class="pre">m1,</span> <span class="pre">m2,</span> <span class="pre">L1,</span> <span class="pre">L2,</span> <span class="pre">Lc1,</span> <span class="pre">Lc2,</span> <span class="pre">I1,</span> <span class="pre">I2)</span></code><a class="headerlink" href="#compute-simplified-inertia-matrix-numba-theta1-theta2-m0-m1-m2-l1-l2-lc1-lc2-i1-i2" title="Link to this heading">¶</a></h5>
-<p>Simplified inertia matrix computation.</p>
-<p><a class="reference internal" href="#method-simplifieddipphysicsmatrices-_compute_simplified_inertia_matrix_numba"><span class="xref myst">View full source →</span></a></p>
 </section>
 </section>
 </section>
+<hr class="docutils" />
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="basic-physics-matrix-computation">
+<h3>Basic Physics Matrix Computation<a class="headerlink" href="#basic-physics-matrix-computation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DIPPhysicsMatrices</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.configurations</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnifiedDIPConfig</span>
+
+<span class="c1"># Setup</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">UnifiedDIPConfig</span><span class="p">()</span>
+<span class="n">physics</span> <span class="o">=</span> <span class="n">DIPPhysicsMatrices</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Define state: [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">])</span>
+
+<span class="c1"># Compute physics matrices</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_coriolis_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_gravity_vector</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inertia Matrix M:</span><span class="se">\n</span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Coriolis Matrix C:</span><span class="se">\n</span><span class="si">{</span><span class="n">C</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Gravity Vector G:</span><span class="se">\n</span><span class="si">{</span><span class="n">G</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="integration-with-dynamics-model">
+<h3>Integration with Dynamics Model<a class="headerlink" href="#integration-with-dynamics-model" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.full</span><span class="w"> </span><span class="kn">import</span> <span class="n">FullDIPDynamics</span>
+
+<span class="c1"># Create full dynamics model (uses DIPPhysicsMatrices internally)</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">FullDIPDynamics</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Simulate one timestep</span>
+<span class="n">control_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">])</span>  <span class="c1"># 5N force on cart</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">compute_dynamics</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control_input</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">state_derivative</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state_derivative</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;State derivative: </span><span class="si">{</span><span class="n">state_derivative</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Access physics matrices from dynamics model</span>
+    <span class="n">M</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">get_physics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-benchmarking">
+<h3>Performance Benchmarking<a class="headerlink" href="#performance-benchmarking" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Benchmark full physics</span>
+<span class="n">state_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_batch</span><span class="p">:</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">full_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="c1"># Benchmark simplified physics</span>
+<span class="n">simplified_physics</span> <span class="o">=</span> <span class="n">SimplifiedDIPPhysicsMatrices</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_batch</span><span class="p">:</span>
+    <span class="n">M_simp</span> <span class="o">=</span> <span class="n">simplified_physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">simplified_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Full physics: </span><span class="si">{</span><span class="n">full_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simplified physics: </span><span class="si">{</span><span class="n">simplified_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speedup: </span><span class="si">{</span><span class="n">full_time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">simplified_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">×&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="matrix-property-verification">
+<h3>Matrix Property Verification<a class="headerlink" href="#matrix-property-verification" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">verify_inertia_matrix_properties</span><span class="p">(</span><span class="n">physics</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify mathematical properties of M(q).&quot;&quot;&quot;</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># 1. Symmetry</span>
+    <span class="n">symmetry_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Symmetry error: </span><span class="si">{</span><span class="n">symmetry_error</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 2. Positive definiteness</span>
+    <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">min_eigenvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Minimum eigenvalue: </span><span class="si">{</span><span class="n">min_eigenvalue</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">min_eigenvalue</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;M(q) must be positive definite&quot;</span>
+
+    <span class="c1"># 3. Condition number</span>
+    <span class="n">cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Condition number: </span><span class="si">{</span><span class="n">cond</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cond</span> <span class="o">&gt;</span> <span class="mf">1e10</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Ill-conditioned matrix, consider regularization&quot;</span><span class="p">)</span>
+
+<span class="n">verify_inertia_matrix_properties</span><span class="p">(</span><span class="n">physics</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="energy-analysis">
+<h3>Energy Analysis<a class="headerlink" href="#energy-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_kinetic_energy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">physics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute kinetic energy using M(q).&quot;&quot;&quot;</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">q_dot</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>  <span class="c1"># Velocities</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">q_dot</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">M</span> <span class="o">@</span> <span class="n">q_dot</span>
+    <span class="k">return</span> <span class="n">T</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_potential_energy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute potential energy.&quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">pendulum1_mass</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">pendulum2_mass</span>
+    <span class="n">L1</span><span class="p">,</span> <span class="n">Lc1</span><span class="p">,</span> <span class="n">Lc2</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">pendulum1_length</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">pendulum1_com</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">pendulum2_com</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">gravity</span>
+
+    <span class="n">V</span> <span class="o">=</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">Lc1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">+</span> <span class="n">m2</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="p">(</span><span class="n">L1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">+</span> <span class="n">Lc2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">V</span>
+
+<span class="c1"># Total mechanical energy</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">compute_kinetic_energy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">physics</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">compute_potential_energy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">E_total</span> <span class="o">=</span> <span class="n">T</span> <span class="o">+</span> <span class="n">V</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total energy: </span><span class="si">{</span><span class="n">E_total</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> J&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="performance-considerations">
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h2>
+<section id="numba-compilation-overhead">
+<h3>Numba Compilation Overhead<a class="headerlink" href="#numba-compilation-overhead" title="Link to this heading">¶</a></h3>
+<p><strong>First call penalty:</strong> ~1 second for JIT compilation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># First call (includes compilation)</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">first_call</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First call: </span><span class="si">{</span><span class="n">first_call</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+
+<span class="c1"># Subsequent calls (compiled code)</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">subsequent_call</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Subsequent call: </span><span class="si">{</span><span class="n">subsequent_call</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speedup: </span><span class="si">{</span><span class="n">first_call</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">subsequent_call</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">×&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Mitigation:</strong> Warm up Numba functions during initialization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">warmup_physics_computer</span><span class="p">(</span><span class="n">physics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pre-compile Numba functions.&quot;&quot;&quot;</span>
+    <span class="n">dummy_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">dummy_state</span><span class="p">)</span>
+    <span class="n">physics</span><span class="o">.</span><span class="n">compute_coriolis_matrix</span><span class="p">(</span><span class="n">dummy_state</span><span class="p">)</span>
+    <span class="n">physics</span><span class="o">.</span><span class="n">compute_gravity_vector</span><span class="p">(</span><span class="n">dummy_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-computation">
+<h3>Batch Computation<a class="headerlink" href="#batch-computation" title="Link to this heading">¶</a></h3>
+<p>For <strong>vectorized simulation</strong> over multiple trajectories:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Efficient: Vectorize over states</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_inertia_batch</span><span class="p">(</span><span class="n">physics</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute M(q) for batch of states.&quot;&quot;&quot;</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">M_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">M_batch</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">M_batch</span>
+
+<span class="c1"># More efficient: Use Numba parallel loops (future enhancement)</span>
+</pre></div>
+</div>
+</section>
+<section id="memory-efficiency">
+<h3>Memory Efficiency<a class="headerlink" href="#memory-efficiency" title="Link to this heading">¶</a></h3>
+<p><strong>Avoid repeated allocations:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inefficient: Creates new arrays each call</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Efficient: Reuse pre-allocated arrays</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">M</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">physics</span><span class="o">.</span><span class="n">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>  <span class="c1"># In-place update</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="scientific-references">
+<h2>Scientific References<a class="headerlink" href="#scientific-references" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Murray, R.M., Li, Z., Sastry, S.S.</strong> (1994). <em>A Mathematical Introduction to Robotic Manipulation</em>. CRC Press. Chapter 4: Lagrangian Mechanics.</p></li>
+<li><p><strong>Spong, M.W., Hutchinson, S., Vidyasagar, M.</strong> (2006). <em>Robot Modeling and Control</em>. Wiley. Section 7.3: Dynamics of Multi-Link Systems.</p></li>
+<li><p><strong>Khalil, H.K., Grizzle, J.W.</strong> (2002). <em>Nonlinear Systems</em> (3rd ed.). Prentice Hall. Chapter 12: Mechanical Systems.</p></li>
+<li><p><strong>Featherstone, R.</strong> (2008). <em>Rigid Body Dynamics Algorithms</em>. Springer. Chapter 2: Spatial Notation for Rigid Body Dynamics.</p></li>
+<li><p><strong>Goldstein, H., Poole, C., Safko, J.</strong> (2002). <em>Classical Mechanics</em> (3rd ed.). Addison-Wesley. Chapter 1: Lagrangian and Hamiltonian Mechanics.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="related-documentation">
+<h2>Related Documentation<a class="headerlink" href="#related-documentation" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Mathematical Foundations</strong>: <a class="reference internal" href="../../mathematical_foundations/dynamics_derivations.html"><span class="std std-doc">docs/mathematical_foundations/dynamics_derivations.md</span></a></p></li>
+<li><p><strong>Numerical Stability</strong>: <a class="reference internal" href="core_numerical_stability.html"><span class="std std-doc">core_numerical_stability.md</span></a></p></li>
+<li><p><strong>Full Dynamics Model</strong>: <a class="reference internal" href="models_full_physics.html"><span class="std std-doc">models_full_physics.md</span></a></p></li>
+<li><p><strong>Simplified Dynamics</strong>: <a class="reference internal" href="models_simplified_physics.html"><span class="std std-doc">models_simplified_physics.md</span></a></p></li>
+</ul>
 </section>
 <hr class="docutils" />
 <section id="dependencies">
@@ -1184,6 +1868,7 @@ while maintaining essential dynamics characteristics.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span> <span class="pre">annotations</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">typing</span> <span class="pre">import</span> <span class="pre">Tuple,</span> <span class="pre">Protocol,</span> <span class="pre">Any</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">numba</span> <span class="pre">import</span> <span class="pre">njit</span></code> (optional, graceful fallback)</p></li>
 </ul>
 </section>
 </section>
@@ -1205,7 +1890,7 @@ while maintaining essential dynamics characteristics.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1227,45 +1912,74 @@ while maintaining essential dynamics characteristics.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">plant.core.physics_matrices</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#lagrangian-mechanics-framework">Lagrangian Mechanics Framework</a></li>
+<li><a class="reference internal" href="#inertia-matrix-m-q">Inertia Matrix M(q)</a></li>
+<li><a class="reference internal" href="#coriolis-matrix-c-q-q">Coriolis Matrix C(q,q̇)</a></li>
+<li><a class="reference internal" href="#gravity-vector-g-q">Gravity Vector G(q)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#implementation-architecture">Implementation Architecture</a><ul>
+<li><a class="reference internal" href="#class-hierarchy">Class Hierarchy</a></li>
+<li><a class="reference internal" href="#numba-jit-compilation">Numba JIT Compilation</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#physicsmatrixcomputer"><code class="docutils literal notranslate"><span class="pre">PhysicsMatrixComputer</span></code></a><ul>
-<li><a class="reference internal" href="#source-code">Source Code</a></li>
-<li><a class="reference internal" href="#methods-3">Methods (3)</a><ul>
-<li><a class="reference internal" href="#compute-inertia-matrix-self-state"><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state)</span></code></a></li>
-<li><a class="reference internal" href="#compute-coriolis-matrix-self-state"><code class="docutils literal notranslate"><span class="pre">compute_coriolis_matrix(self,</span> <span class="pre">state)</span></code></a></li>
-<li><a class="reference internal" href="#compute-gravity-vector-self-state"><code class="docutils literal notranslate"><span class="pre">compute_gravity_vector(self,</span> <span class="pre">state)</span></code></a></li>
+<li><a class="reference internal" href="#api-reference">API Reference</a><ul>
+<li><a class="reference internal" href="#protocol-physicsmatrixcomputer">Protocol: PhysicsMatrixComputer</a><ul>
+<li><a class="reference internal" href="#compute-inertia-matrix-state-np-ndarray-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
+<li><a class="reference internal" href="#compute-coriolis-matrix-state-np-ndarray-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute_coriolis_matrix(state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
+<li><a class="reference internal" href="#compute-gravity-vector-state-np-ndarray-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute_gravity_vector(state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-dipphysicsmatrices">Class: DIPPhysicsMatrices</a><ul>
+<li><a class="reference internal" href="#constructor">Constructor</a><ul>
+<li><a class="reference internal" href="#init-self-parameters-any"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameters:</span> <span class="pre">Any)</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#public-methods">Public Methods</a><ul>
+<li><a class="reference internal" href="#compute-inertia-matrix-self-state-np-ndarray-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
+<li><a class="reference internal" href="#compute-coriolis-matrix-self-state-np-ndarray-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute_coriolis_matrix(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
+<li><a class="reference internal" href="#compute-gravity-vector-self-state-np-ndarray-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute_gravity_vector(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
+<li><a class="reference internal" href="#compute-all-matrices-self-state-np-ndarray-tuple-np-ndarray-np-ndarray-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute_all_matrices(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">Tuple[np.ndarray,</span> <span class="pre">np.ndarray,</span> <span class="pre">np.ndarray]</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#static-methods-numba-optimized">Static Methods (Numba-Optimized)</a><ul>
+<li><a class="reference internal" href="#compute-inertia-matrix-numba-np-ndarray"><code class="docutils literal notranslate"><span class="pre">_compute_inertia_matrix_numba(...)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
+<li><a class="reference internal" href="#compute-coriolis-matrix-numba-np-ndarray"><code class="docutils literal notranslate"><span class="pre">_compute_coriolis_matrix_numba(...)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
+<li><a class="reference internal" href="#compute-gravity-vector-numba-np-ndarray"><code class="docutils literal notranslate"><span class="pre">_compute_gravity_vector_numba(...)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dipphysicsmatrices"><code class="docutils literal notranslate"><span class="pre">DIPPhysicsMatrices</span></code></a><ul>
-<li><a class="reference internal" href="#id1">Source Code</a></li>
-<li><a class="reference internal" href="#methods-8">Methods (8)</a><ul>
-<li><a class="reference internal" href="#init-self-parameters"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameters)</span></code></a></li>
-<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state)</span></code></a></li>
-<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">compute_coriolis_matrix(self,</span> <span class="pre">state)</span></code></a></li>
-<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">compute_gravity_vector(self,</span> <span class="pre">state)</span></code></a></li>
-<li><a class="reference internal" href="#compute-all-matrices-self-state"><code class="docutils literal notranslate"><span class="pre">compute_all_matrices(self,</span> <span class="pre">state)</span></code></a></li>
-<li><a class="reference internal" href="#compute-inertia-matrix-numba-theta1-theta2-m0-m1-m2-l1-l2-lc1-lc2-i1-i2"><code class="docutils literal notranslate"><span class="pre">_compute_inertia_matrix_numba(theta1,</span> <span class="pre">theta2,</span> <span class="pre">m0,</span> <span class="pre">m1,</span> <span class="pre">m2,</span> <span class="pre">L1,</span> <span class="pre">L2,</span> <span class="pre">Lc1,</span> <span class="pre">Lc2,</span> <span class="pre">I1,</span> <span class="pre">I2)</span></code></a></li>
-<li><a class="reference internal" href="#compute-coriolis-matrix-numba-theta1-theta2-theta1-dot-theta2-dot-m1-m2-l1-l2-lc1-lc2-c0-c1-c2"><code class="docutils literal notranslate"><span class="pre">_compute_coriolis_matrix_numba(theta1,</span> <span class="pre">theta2,</span> <span class="pre">theta1_dot,</span> <span class="pre">theta2_dot,</span> <span class="pre">m1,</span> <span class="pre">m2,</span> <span class="pre">L1,</span> <span class="pre">L2,</span> <span class="pre">Lc1,</span> <span class="pre">Lc2,</span> <span class="pre">c0,</span> <span class="pre">c1,</span> <span class="pre">c2)</span></code></a></li>
-<li><a class="reference internal" href="#compute-gravity-vector-numba-theta1-theta2-m1-m2-l1-lc1-lc2-g"><code class="docutils literal notranslate"><span class="pre">_compute_gravity_vector_numba(theta1,</span> <span class="pre">theta2,</span> <span class="pre">m1,</span> <span class="pre">m2,</span> <span class="pre">L1,</span> <span class="pre">Lc1,</span> <span class="pre">Lc2,</span> <span class="pre">g)</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#simplifieddipphysicsmatrices"><code class="docutils literal notranslate"><span class="pre">SimplifiedDIPPhysicsMatrices</span></code></a><ul>
-<li><a class="reference internal" href="#id5">Source Code</a></li>
-<li><a class="reference internal" href="#methods-2">Methods (2)</a><ul>
-<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state)</span></code></a></li>
-<li><a class="reference internal" href="#compute-simplified-inertia-matrix-numba-theta1-theta2-m0-m1-m2-l1-l2-lc1-lc2-i1-i2"><code class="docutils literal notranslate"><span class="pre">_compute_simplified_inertia_matrix_numba(theta1,</span> <span class="pre">theta2,</span> <span class="pre">m0,</span> <span class="pre">m1,</span> <span class="pre">m2,</span> <span class="pre">L1,</span> <span class="pre">L2,</span> <span class="pre">Lc1,</span> <span class="pre">Lc2,</span> <span class="pre">I1,</span> <span class="pre">I2)</span></code></a></li>
+<li><a class="reference internal" href="#class-simplifieddipphysicsmatrices">Class: SimplifiedDIPPhysicsMatrices</a><ul>
+<li><a class="reference internal" href="#overridden-methods">Overridden Methods</a><ul>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">compute_inertia_matrix(self,</span> <span class="pre">state:</span> <span class="pre">np.ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">np.ndarray</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#basic-physics-matrix-computation">Basic Physics Matrix Computation</a></li>
+<li><a class="reference internal" href="#integration-with-dynamics-model">Integration with Dynamics Model</a></li>
+<li><a class="reference internal" href="#performance-benchmarking">Performance Benchmarking</a></li>
+<li><a class="reference internal" href="#matrix-property-verification">Matrix Property Verification</a></li>
+<li><a class="reference internal" href="#energy-analysis">Energy Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-considerations">Performance Considerations</a><ul>
+<li><a class="reference internal" href="#numba-compilation-overhead">Numba Compilation Overhead</a></li>
+<li><a class="reference internal" href="#batch-computation">Batch Computation</a></li>
+<li><a class="reference internal" href="#memory-efficiency">Memory Efficiency</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#scientific-references">Scientific References</a></li>
+<li><a class="reference internal" href="#related-documentation">Related Documentation</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
 </li>
@@ -1285,6 +1999,10 @@ while maintaining essential dynamics characteristics.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

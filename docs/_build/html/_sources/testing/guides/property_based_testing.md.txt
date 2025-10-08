@@ -85,6 +85,9 @@ def test_control_never_exceeds_limits(theta1, theta2, velocity):
 **Definition**: System energy decreases or remains bounded
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(state=valid_states())
 def test_lyapunov_decrease(state):
     """Lyapunov function decreases along trajectories"""
@@ -108,6 +111,9 @@ def test_lyapunov_decrease(state):
 **Definition**: Small state changes → small control changes
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(
     state=valid_states(),
     perturbation=st.floats(min_value=-0.01, max_value=0.01)
@@ -132,6 +138,9 @@ def test_control_continuity(state, perturbation):
 **Definition**: Performance maintained under uncertainties
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(
     mass_error=st.floats(min_value=0.8, max_value=1.2),  # ±20%
     friction_error=st.floats(min_value=0.5, max_value=1.5),  # ±50%
@@ -204,6 +213,9 @@ def valid_states(
 ### Strategy 2: Gain Strategies
 
 ```python
+# example-metadata:
+# runnable: false
+
 def positive_gains(min_value=0.1, max_value=100):
     """Generate valid controller gains"""
     return st.floats(
@@ -289,6 +301,9 @@ def test_control_scaling_property(state, scale):
 ### Pattern 3: Regression Property Testing
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(state=valid_states())
 def test_no_regression_from_baseline(state):
     """Current controller performs at least as well as baseline"""
@@ -311,6 +326,9 @@ def test_no_regression_from_baseline(state):
 ### Example 1: Sliding Surface Property
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(state=valid_states())
 def test_sliding_surface_attractivity(state):
     """Sliding surface must be attractive from any state"""
@@ -336,6 +354,9 @@ def test_sliding_surface_attractivity(state):
 ### Example 2: Chattering Bound
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(
     state=valid_states(),
     boundary_layer=st.floats(min_value=0.01, max_value=1.0)
@@ -365,6 +386,9 @@ def test_chattering_bounded_by_boundary_layer(state, boundary_layer):
 ### 1. Use `assume()` for Preconditions
 
 ```python
+# example-metadata:
+# runnable: false
+
 @given(state=valid_states())
 def test_property(state):
     # Filter out uninteresting cases
@@ -402,6 +426,9 @@ def controller_with_valid_gains(draw):
 ### 4. Profile with `settings`
 
 ```python
+# example-metadata:
+# runnable: false
+
 from hypothesis import settings, HealthCheck
 
 @given(state=valid_states())

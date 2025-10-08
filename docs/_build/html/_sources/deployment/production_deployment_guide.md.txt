@@ -1081,6 +1081,9 @@ os.environ['OPENBLAS_NUM_THREADS'] = str(os.cpu_count())
 
 #### Performance Benchmark Script
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """
 Production performance benchmark script.

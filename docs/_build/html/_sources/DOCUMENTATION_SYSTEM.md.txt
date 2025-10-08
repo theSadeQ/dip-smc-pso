@@ -275,8 +275,8 @@ The system transforms the DIP_SMC_PSO project documentation from basic technical
 ## 📞 Support
 
 For questions about the documentation system:
-- Check the [GitHub Actions logs](../../actions) for build status
-- Review the [configuration files](dip_docs/docs/source/) for customization
+- Check the GitHub Actions logs for build status (see repository Actions tab)
+- Review the configuration files in `docs/` directory for customization
 - Consult the [Sphinx documentation](https://www.sphinx-doc.org/) for advanced features
 
 ---

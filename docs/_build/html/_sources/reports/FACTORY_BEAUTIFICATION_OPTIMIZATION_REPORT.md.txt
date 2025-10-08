@@ -29,6 +29,9 @@ The factory system has been comprehensively analyzed and demonstrates **enterpri
 All factory system files maintain the distinctive ASCII art header format:
 
 ```python
+# example-metadata:
+# runnable: false
+
 #==========================================================================================\\\
 #====================== src/controllers/factory/smc_factory.py =======================\\\
 #==========================================================================================\\\
@@ -182,6 +185,9 @@ src/controllers/
 
 **Best Practices Observed:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Standard library imports
 import logging
 import threading

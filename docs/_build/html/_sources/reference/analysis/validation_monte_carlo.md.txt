@@ -6,6 +6,203 @@
 
 Monte Carlo analysis tools for validation and uncertainty quantification.
 
+
+
+## Advanced Mathematical Theory
+
+### Monte Carlo Methods
+
+**Monte Carlo estimator:**
+
+```{math}
+\hat{\theta}_N = \frac{1}{N}\sum_{i=1}^N g(X_i), \quad X_i \sim p(x)
+```
+
+**Expectation:**
+
+```{math}
+E[g(X)] = \int g(x)p(x)dx \approx \hat{\theta}_N
+```
+
+### Convergence Analysis
+
+**Law of Large Numbers:**
+
+```{math}
+\hat{\theta}_N \xrightarrow{a.s.} E[g(X)] \quad \text{as } N \to \infty
+```
+
+**Central Limit Theorem:**
+
+```{math}
+\sqrt{N}(\hat{\theta}_N - \theta) \xrightarrow{d} \mathcal{N}(0, \sigma^2)
+```
+
+Where $\sigma^2 = \text{Var}(g(X))$.
+
+### Convergence Rate
+
+**Standard error:**
+
+```{math}
+\text{SE}(\hat{\theta}_N) = \frac{\sigma}{\sqrt{N}}
+```
+
+**Convergence rate:** $O(N^{-1/2})$, independent of dimension.
+
+### Variance Reduction
+
+**Importance sampling:**
+
+```{math}
+E[g(X)] = \int g(x)\frac{p(x)}{q(x)}q(x)dx \approx \frac{1}{N}\sum_{i=1}^N g(X_i)\frac{p(X_i)}{q(X_i)}
+```
+
+Where $X_i \sim q(x)$ (importance distribution).
+
+**Optimal importance distribution:**
+
+```{math}
+q^*(x) = \frac{|g(x)|p(x)}{\int|g(y)|p(y)dy}
+```
+
+### Antithetic Variates
+
+**Negative correlation sampling:**
+
+```{math}
+\hat{\theta}_{AV} = \frac{1}{2}\left[g(X) + g(F^{-1}(1-F(X)))\right]
+```
+
+**Variance reduction:**
+
+```{math}
+\text{Var}(\hat{\theta}_{AV}) \leq \frac{1}{2}\text{Var}(g(X))
+```
+
+### Control Variates
+
+**Control variate estimator:**
+
+```{math}
+\hat{\theta}_{CV} = g(X) - c[h(X) - E[h(X)]]
+```
+
+Where $h(X)$ has known expectation.
+
+**Optimal coefficient:**
+
+```{math}
+c^* = \frac{\text{Cov}(g(X), h(X))}{\text{Var}(h(X))}
+```
+
+### Markov Chain Monte Carlo (MCMC)
+
+**Metropolis-Hastings acceptance:**
+
+```{math}
+\alpha(x' | x) = \min\left(1, \frac{p(x')q(x|x')}{p(x)q(x'|x)}\right)
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Random Sampling] --> B{Sampling Method}
+    B -->|Simple| C[Direct MC]
+    B -->|Importance| D[Importance Sampling]
+    B -->|Antithetic| E[Antithetic Variates]
+    B -->|Control| F[Control Variates]
+
+    C --> G[N Samples]
+    D --> G
+    E --> G
+    F --> G
+
+    G --> H[Estimator: 1/N Σg(Xi)]
+    H --> I[Convergence Check]
+
+    I --> J{SE < ε?}
+    J -->|No| K[Increase N]
+    J -->|Yes| L[Final Estimate]
+
+    K --> A
+
+    I --> M[Variance Analysis]
+    M --> N{High Variance?}
+    N -->|Yes| O[Apply Variance Reduction]
+    N -->|No| L
+
+    O --> D
+
+    style B fill:#ff9
+    style J fill:#9cf
+    style L fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides comprehensive Monte Carlo simulation capabilities for
 analyzing system behavior under uncertainty, validating controller performance,
 and quantifying confidence in analysis results.
@@ -530,6 +727,9 @@ print(f"  Pole1 length range in failures: [{failure_params[:, 3].min():.3f}, {fa
 ### Robustness Comparison Across Controllers
 
 ```python
+# example-metadata:
+# runnable: false
+
 controllers = {
     'Classical': lambda: create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
     'Adaptive': lambda: create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]),

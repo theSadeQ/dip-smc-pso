@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -566,7 +592,10 @@
 <section id="registry-structure">
 <h3>Registry Structure<a class="headerlink" href="#registry-structure" title="Link to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">CONTROLLER_REGISTRY</span></code> provides a centralized mapping of controller types to their implementations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONTROLLER_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">CONTROLLER_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="n">ModularClassicalSMC</span><span class="p">,</span>
         <span class="s1">&#39;config_class&#39;</span><span class="p">:</span> <span class="n">ClassicalSMCConfig</span><span class="p">,</span>
@@ -594,7 +623,10 @@
 <section id="alias-management">
 <h3>Alias Management<a class="headerlink" href="#alias-management" title="Link to this heading">¶</a></h3>
 <p>The factory supports multiple naming conventions through the <code class="docutils literal notranslate"><span class="pre">ALIAS_MAP</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ALIAS_MAP</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">ALIAS_MAP</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;classic_smc&#39;</span><span class="p">:</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
     <span class="s1">&#39;smc_classical&#39;</span><span class="p">:</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
     <span class="s1">&#39;smc_v1&#39;</span><span class="p">:</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
@@ -678,7 +710,10 @@
 </section>
 <section id="configuration-resolution-algorithm">
 <h3>Configuration Resolution Algorithm<a class="headerlink" href="#configuration-resolution-algorithm" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resolve_configuration</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">resolve_configuration</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve configuration with fallback mechanisms.&quot;&quot;&quot;</span>
 
     <span class="c1"># 1. Resolve gains</span>
@@ -766,7 +801,10 @@
 <p>The factory implements comprehensive error handling at multiple levels:</p>
 <section id="input-validation">
 <h4>1. Input Validation<a class="headerlink" href="#input-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_inputs</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_inputs</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate factory inputs before processing.&quot;&quot;&quot;</span>
 
     <span class="c1"># Controller type validation</span>
@@ -801,7 +839,10 @@
 </section>
 <section id="graceful-fallback-mechanisms">
 <h4>3. Graceful Fallback Mechanisms<a class="headerlink" href="#graceful-fallback-mechanisms" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_fallback_configuration</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_fallback_configuration</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create minimal working configuration when full config fails.&quot;&quot;&quot;</span>
 
     <span class="n">fallback_params</span> <span class="o">=</span> <span class="p">{</span>
@@ -823,7 +864,10 @@
 </section>
 <section id="controller-instantiation-error-recovery">
 <h4>4. Controller Instantiation Error Recovery<a class="headerlink" href="#controller-instantiation-error-recovery" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_controller_creation</span><span class="p">(</span><span class="n">controller_class</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_controller_creation</span><span class="p">(</span><span class="n">controller_class</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create controller with error recovery.&quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -845,7 +889,10 @@
 <section id="error-classification">
 <h3>Error Classification<a class="headerlink" href="#error-classification" title="Link to this heading">¶</a></h3>
 <p>The factory defines specific error types for better error handling:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FactoryError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FactoryError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base factory error.&quot;&quot;&quot;</span>
     <span class="k">pass</span>
 
@@ -872,7 +919,10 @@
 <p>The factory provides specialized PSO integration through wrapper classes:</p>
 <section id="psocontrollerwrapper">
 <h4>PSOControllerWrapper<a class="headerlink" href="#psocontrollerwrapper" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PSOControllerWrapper</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PSOControllerWrapper</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for SMC controllers to provide PSO-compatible interface.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">n_gains</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -900,7 +950,10 @@
 </section>
 <section id="pso-factory-function">
 <h3>PSO Factory Function<a class="headerlink" href="#pso-factory-function" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_pso_controller_factory</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_pso_controller_factory</span><span class="p">(</span>
     <span class="n">smc_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span>
     <span class="n">plant_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">150.0</span><span class="p">,</span>
@@ -923,7 +976,10 @@
 </section>
 <section id="gain-bounds-specification">
 <h3>Gain Bounds Specification<a class="headerlink" href="#gain-bounds-specification" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_gain_bounds_for_pso</span><span class="p">(</span><span class="n">smc_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_gain_bounds_for_pso</span><span class="p">(</span><span class="n">smc_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get PSO gain bounds based on control theory constraints.&quot;&quot;&quot;</span>
 
     <span class="n">bounds_map</span> <span class="o">=</span> <span class="p">{</span>
@@ -993,7 +1049,10 @@
 </section>
 <section id="factory-memory-management">
 <h4>Factory Memory Management<a class="headerlink" href="#factory-memory-management" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControllerPool</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerPool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Memory-efficient controller instance pool.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_instances</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
@@ -1024,7 +1083,10 @@
 <h3>Validation Procedures<a class="headerlink" href="#validation-procedures" title="Link to this heading">¶</a></h3>
 <section id="performance-benchmarking">
 <h4>Performance Benchmarking<a class="headerlink" href="#performance-benchmarking" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">benchmark_factory_performance</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">benchmark_factory_performance</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Benchmark factory instantiation performance.&quot;&quot;&quot;</span>
 
     <span class="n">controller_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;sta_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">]</span>
@@ -1122,7 +1184,10 @@ K₁² &gt; 2α
 <section id="lyapunov-function-validation">
 <h4>Lyapunov Function Validation<a class="headerlink" href="#lyapunov-function-validation" title="Link to this heading">¶</a></h4>
 <p>The factory can optionally validate Lyapunov stability for created controllers:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_lyapunov_stability</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">test_states</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_lyapunov_stability</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">test_states</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate Lyapunov stability for controller.&quot;&quot;&quot;</span>
 
     <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">test_states</span><span class="p">:</span>
@@ -1147,7 +1212,10 @@ K₁² &gt; 2α
 <p>The factory provides mathematical tools for analyzing gain sensitivity:</p>
 <section id="sensitivity-matrix-computation">
 <h4>Sensitivity Matrix Computation<a class="headerlink" href="#sensitivity-matrix-computation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_gain_sensitivity_matrix</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">nominal_gains</span><span class="p">,</span> <span class="n">test_states</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_gain_sensitivity_matrix</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">nominal_gains</span><span class="p">,</span> <span class="n">test_states</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute sensitivity of control performance to gain variations.&quot;&quot;&quot;</span>
 
     <span class="n">n_gains</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nominal_gains</span><span class="p">)</span>
@@ -1179,7 +1247,10 @@ K₁² &gt; 2α
 </section>
 <section id="robustness-analysis">
 <h4>Robustness Analysis<a class="headerlink" href="#robustness-analysis" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_controller_robustness</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">uncertainty_bounds</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_controller_robustness</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">uncertainty_bounds</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze controller robustness to parameter uncertainties.&quot;&quot;&quot;</span>
 
     <span class="c1"># Create nominal controller</span>
@@ -1207,7 +1278,10 @@ K₁² &gt; 2α
 <h3>Performance Comparison Methodologies<a class="headerlink" href="#performance-comparison-methodologies" title="Link to this heading">¶</a></h3>
 <section id="statistical-performance-metrics">
 <h4>Statistical Performance Metrics<a class="headerlink" href="#statistical-performance-metrics" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compare_controller_performance</span><span class="p">(</span><span class="n">controller_types</span><span class="p">,</span> <span class="n">test_scenarios</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_controller_performance</span><span class="p">(</span><span class="n">controller_types</span><span class="p">,</span> <span class="n">test_scenarios</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Statistically compare performance of different controller types.&quot;&quot;&quot;</span>
 
     <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1301,7 +1375,7 @@ K₁² &gt; 2α
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -952,6 +978,196 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">..base</span> <span class="pre">import</span> <span class="pre">BaseIntegrator</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="zero-order-hold-zoh-discretization">
+<h3>Zero-Order Hold (ZOH) Discretization<a class="headerlink" href="#zero-order-hold-zoh-discretization" title="Link to this heading">¶</a></h3>
+<p><strong>Exact discretization for linear time-invariant systems:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{\vec{x}}(t) = A\vec{x}(t) + B\vec{u}(t)\]</div>
+</div>
+<p><strong>Discrete-time equivalent (ZOH):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{k+1} = A_d \vec{x}_k + B_d \vec{u}_k\]</div>
+</div>
+<p>where:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+A_d &amp;= e^{A\Delta t} \\
+B_d &amp;= \left(\int_0^{\Delta t} e^{A\tau}d\tau\right) B = A^{-1}(A_d - I)B
+\end{align}\end{split}\]</div>
+</div>
+</section>
+<section id="matrix-exponential-computation">
+<h3>Matrix Exponential Computation<a class="headerlink" href="#matrix-exponential-computation" title="Link to this heading">¶</a></h3>
+<p><strong>Padé approximation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[e^{A\Delta t} \approx \left(I - \frac{A\Delta t}{2}\right)^{-1}\left(I + \frac{A\Delta t}{2}\right)\]</div>
+</div>
+<p><strong>Eigenvalue decomposition (if <span class="math notranslate nohighlight">\(A\)</span> diagonalizable):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[A = V\Lambda V^{-1} \quad \Rightarrow \quad e^{A\Delta t} = Ve^{\Lambda\Delta t}V^{-1}\]</div>
+</div>
+<p><strong>Series expansion (small <span class="math notranslate nohighlight">\(\Delta t\)</span>):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[e^{A\Delta t} = I + A\Delta t + \frac{(A\Delta t)^2}{2!} + \frac{(A\Delta t)^3}{3!} + \cdots\]</div>
+</div>
+</section>
+<section id="numerical-stability">
+<h3>Numerical Stability<a class="headerlink" href="#numerical-stability" title="Link to this heading">¶</a></h3>
+<p><strong>Condition number:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\kappa(A_d) = \|A_d\| \cdot \|A_d^{-1}\|\]</div>
+</div>
+<p>For well-conditioned <span class="math notranslate nohighlight">\(A\)</span>, ZOH is numerically stable. For ill-conditioned systems, use scaling and squaring method.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Linear System A, B, dt] --&gt; B[Matrix Exponential]
+    B --&gt; C[Compute A_d = exp_A·dt_]
+
+    C --&gt; D[Integral Computation]
+    D --&gt; E[B_d = A^-1_·_A_d - I_·B]
+
+    E --&gt; F[ZOH Discrete System]
+    F --&gt; G[State Update]
+
+    G --&gt; H[x_k+1 = A_d·x_k + B_d·u_k]
+
+    H --&gt; I{Nonlinear?}
+    I --&gt;|Yes| J[Jacobian Linearization]
+    I --&gt;|No| K[Exact Discretization]
+
+    J --&gt; L[Re-compute A_d, B_d]
+    L --&gt; G
+
+    K --&gt; M[Next Step]
+
+    style C fill:#9cf
+    style E fill:#ff9
+    style H fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-integration">
+<h3>Example 1: Basic Integration<a class="headerlink" href="#example-1-basic-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_integrator</span>
+
+<span class="c1"># Create integrator</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">create_integrator</span><span class="p">(</span><span class="s1">&#39;rk4&#39;</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c1"># Integrate one step</span>
+<span class="n">x_next</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">dynamics_fn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-zero-order-hold-discretization">
+<h3>Example 2: Zero-Order Hold Discretization<a class="headerlink" href="#example-2-zero-order-hold-discretization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.integrators.discrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZeroOrderHold</span>
+
+<span class="c1"># Linear system matrices</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># Create ZOH integrator</span>
+<span class="n">zoh</span> <span class="o">=</span> <span class="n">ZeroOrderHold</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c1"># Discrete-time evolution</span>
+<span class="n">x_next</span> <span class="o">=</span> <span class="n">zoh</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+<span class="c1"># Access discrete matrices</span>
+<span class="n">A_d</span> <span class="o">=</span> <span class="n">zoh</span><span class="o">.</span><span class="n">A_d</span>
+<span class="n">B_d</span> <span class="o">=</span> <span class="n">zoh</span><span class="o">.</span><span class="n">B_d</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-real-time-monitoring">
+<h3>Example 3: Real-Time Monitoring<a class="headerlink" href="#example-3-real-time-monitoring" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.safety</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationPerformanceMonitor</span>
+
+<span class="c1"># Create monitor</span>
+<span class="n">monitor</span> <span class="o">=</span> <span class="n">SimulationPerformanceMonitor</span><span class="p">()</span>
+
+<span class="c1"># Simulation loop with monitoring</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_steps</span><span class="p">):</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">start_timing</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">dynamics</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">end_timing</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">elapsed</span> <span class="o">&gt;</span> <span class="n">deadline</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deadline violation at step </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get statistics</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95th percentile: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;p95&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-monte-carlo-simulation">
+<h3>Example 4: Monte Carlo Simulation<a class="headerlink" href="#example-4-monte-carlo-simulation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.strategies</span><span class="w"> </span><span class="kn">import</span> <span class="n">MonteCarloStrategy</span>
+
+<span class="c1"># Define parameter distributions</span>
+<span class="n">distributions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}),</span>
+    <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mf">1.1</span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1"># Create Monte Carlo strategy</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">MonteCarloStrategy</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Run Monte Carlo analysis</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span>
+    <span class="n">simulation_fn</span><span class="o">=</span><span class="n">run_simulation</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">distributions</span>
+<span class="p">)</span>
+
+<span class="c1"># Extract statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean ISE: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95% CI: [</span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;ci_lower&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">][</span><span class="s1">&#39;ci_upper&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-safety-recovery">
+<h3>Example 5: Safety Recovery<a class="headerlink" href="#example-5-safety-recovery" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.safety</span><span class="w"> </span><span class="kn">import</span> <span class="n">SafetyRecovery</span>
+
+<span class="c1"># Configure recovery</span>
+<span class="n">recovery</span> <span class="o">=</span> <span class="n">SafetyRecovery</span><span class="p">(</span>
+    <span class="n">state_bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">control_bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="n">recovery_mode</span><span class="o">=</span><span class="s1">&#39;qp&#39;</span>  <span class="c1"># or &#39;projection&#39;, &#39;fallback&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulation with safety recovery</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_steps</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Check for violations</span>
+    <span class="k">if</span> <span class="n">recovery</span><span class="o">.</span><span class="n">check_violation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+        <span class="n">x_safe</span><span class="p">,</span> <span class="n">u_safe</span> <span class="o">=</span> <span class="n">recovery</span><span class="o">.</span><span class="n">recover</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">dynamics</span><span class="p">,</span> <span class="n">x_safe</span><span class="p">,</span> <span class="n">u_safe</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">dynamics</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
         </article>
@@ -971,7 +1187,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1015,6 +1231,21 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#zero-order-hold-zoh-discretization">Zero-Order Hold (ZOH) Discretization</a></li>
+<li><a class="reference internal" href="#matrix-exponential-computation">Matrix Exponential Computation</a></li>
+<li><a class="reference internal" href="#numerical-stability">Numerical Stability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-integration">Example 1: Basic Integration</a></li>
+<li><a class="reference internal" href="#example-2-zero-order-hold-discretization">Example 2: Zero-Order Hold Discretization</a></li>
+<li><a class="reference internal" href="#example-3-real-time-monitoring">Example 3: Real-Time Monitoring</a></li>
+<li><a class="reference internal" href="#example-4-monte-carlo-simulation">Example 4: Monte Carlo Simulation</a></li>
+<li><a class="reference internal" href="#example-5-safety-recovery">Example 5: Safety Recovery</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1033,6 +1264,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>
