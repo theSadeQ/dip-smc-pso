@@ -339,6 +339,6 @@ if p_value < 0.05:
 ## Related Documentation
 
 - [PSO Optimization Theory](theory/pso_optimization_complete.md) - Cost function design
-- [Statistical Benchmarks Source](../src/benchmarks/statistical_benchmarks.py) - Implementation details
+- [Statistical Benchmarks API](reference/benchmarks/statistical_benchmarks_v2.md) - Implementation details
 - [Configuration Reference](api/index.md) - Benchmark configuration options
 - [Controller Comparison Results](results/index.md) - Benchmark result examples

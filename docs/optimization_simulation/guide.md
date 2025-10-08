@@ -1339,11 +1339,11 @@ class SimulationContext:
 
 ## Related Documentation
 
-- [**Controllers Implementation Guide**](../controllers/implementation_guide.md) - SMC controller details and usage
+- [**Controllers Implementation Guide**](../controllers/factory_system_guide.md) - SMC controller details and usage
 - [**Plant Models Guide**](../plant/models_guide.md) - Dynamics models and physics computation
 - [**Mathematical Foundations**](../mathematical_foundations/index.md) - Control theory and optimization theory
-- [**Configuration Reference**](../configuration/reference.md) - Complete configuration schema documentation
-- [**Performance Benchmarks**](../benchmarks/performance.md) - Integration method comparisons and performance analysis
+- [**Configuration Reference**](../guides/api/configuration.md) - Complete configuration schema documentation
+- [**Performance Benchmarks**](../benchmarks/controller_performance_benchmarks.md) - Integration method comparisons and performance analysis
 
 ---
 

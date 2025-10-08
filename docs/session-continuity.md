@@ -511,7 +511,7 @@ Potential improvements for future versions:
 ## Related Documentation
 
 - [Automated Backups](claude-backup.md) - Git backup system documentation
-- [CLAUDE.md](../CLAUDE.md) - Full project instructions for Claude
+- [CLAUDE.md](CLAUDE.md) - Full project instructions for Claude
 - [README.md](../README.md) - Project overview and quick start
 
 ---
