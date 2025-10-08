@@ -227,6 +227,62 @@ print(f"Best cost: {best_cost:.4f}")
 print(f"Iterations to convergence: {len(cost_history)}")
 ```
 
+### PSO Convergence Visualization
+
+Interactive convergence plots show optimization progress for different SMC controllers:
+
+```{eval-rst}
+.. chartjs::
+   :type: line
+   :data: ../visualization/data/pso_comparison.json
+   :height: 450
+   :responsive:
+   :title: PSO Convergence Comparison Across Controllers
+```
+
+**Controller-Specific Convergence Analysis:**
+
+Classical SMC:
+```{eval-rst}
+.. chartjs::
+   :type: line
+   :data: ../visualization/data/pso_classical_smc_convergence.json
+   :height: 350
+   :responsive:
+   :title: Classical SMC PSO Convergence
+```
+
+Adaptive SMC:
+```{eval-rst}
+.. chartjs::
+   :type: line
+   :data: ../visualization/data/pso_adaptive_smc_convergence.json
+   :height: 350
+   :responsive:
+   :title: Adaptive SMC PSO Convergence
+```
+
+Hybrid Adaptive-STA SMC:
+```{eval-rst}
+.. chartjs::
+   :type: line
+   :data: ../visualization/data/pso_hybrid_adaptive_sta_smc_convergence.json
+   :height: 350
+   :responsive:
+   :title: Hybrid Adaptive-STA SMC PSO Convergence
+```
+
+**Convergence Statistics:**
+
+```{eval-rst}
+.. chartjs::
+   :type: bar
+   :data: ../visualization/data/convergence_statistics.json
+   :height: 300
+   :responsive:
+   :title: PSO Convergence Statistics Summary
+```
+
 **Memory Efficiency:** PSO uses local PRNGs and instance-level attributes to avoid cross-contamination between optimization runs.
 
 **Performance:** Vectorized batch simulation achieves **10-100×** speedup over sequential evaluation.
