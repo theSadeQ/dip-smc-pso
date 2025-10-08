@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -560,53 +586,53 @@
 <span class="linenos"> 55</span>
 <span class="linenos"> 56</span><span class="c1"># Legacy imports from old structure (maintaining exact same interface)</span>
 <span class="linenos"> 57</span><span class="kn">from</span><span class="w"> </span><span class="nn">.orchestrators.sequential</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_step_fn</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">run_simulation</span>
-<span class="linenos"> 58</span><span class="kn">from</span><span class="w"> </span><span class="nn">.core.simulation_context</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationContext</span>
-<span class="linenos"> 59</span>
-<span class="linenos"> 60</span><span class="c1"># Legacy vector simulation interface</span>
-<span class="linenos"> 61</span><span class="kn">from</span><span class="w"> </span><span class="nn">.orchestrators.batch</span><span class="w"> </span><span class="kn">import</span> <span class="n">simulate_batch</span> <span class="k">as</span> <span class="n">simulate</span>
-<span class="linenos"> 62</span>
-<span class="linenos"> 63</span><span class="c1"># Legacy adaptive integration</span>
-<span class="linenos"> 64</span><span class="kn">from</span><span class="w"> </span><span class="nn">.integrators.adaptive.runge_kutta</span><span class="w"> </span><span class="kn">import</span> <span class="n">rk45_step</span>
-<span class="linenos"> 65</span>
-<span class="linenos"> 66</span><span class="c1"># Legacy safety guards (exact original interface)</span>
-<span class="linenos"> 67</span><span class="kn">from</span><span class="w"> </span><span class="nn">.safety.guards</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="linenos"> 68</span>    <span class="n">guard_no_nan</span> <span class="k">as</span> <span class="n">_guard_no_nan</span><span class="p">,</span>
-<span class="linenos"> 69</span>    <span class="n">guard_energy</span> <span class="k">as</span> <span class="n">_guard_energy</span><span class="p">,</span>
-<span class="linenos"> 70</span>    <span class="n">guard_bounds</span> <span class="k">as</span> <span class="n">_guard_bounds</span>
-<span class="linenos"> 71</span><span class="p">)</span>
-<span class="linenos"> 72</span>
-<span class="linenos"> 73</span><span class="c1"># =============================================================================</span>
-<span class="linenos"> 74</span><span class="c1"># EXPORTS</span>
-<span class="linenos"> 75</span><span class="c1"># =============================================================================</span>
-<span class="linenos"> 76</span>
-<span class="linenos"> 77</span><span class="c1"># New framework exports</span>
-<span class="linenos"> 78</span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos"> 79</span>    <span class="c1"># Core interfaces</span>
-<span class="linenos"> 80</span>    <span class="s2">&quot;SimulationEngine&quot;</span><span class="p">,</span> <span class="s2">&quot;Integrator&quot;</span><span class="p">,</span> <span class="s2">&quot;Orchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;SimulationStrategy&quot;</span><span class="p">,</span>
-<span class="linenos"> 81</span>    <span class="s2">&quot;SafetyGuard&quot;</span><span class="p">,</span> <span class="s2">&quot;ResultContainer&quot;</span><span class="p">,</span> <span class="s2">&quot;SimulationContext&quot;</span><span class="p">,</span>
-<span class="linenos"> 82</span>    <span class="s2">&quot;StateSpaceUtilities&quot;</span><span class="p">,</span> <span class="s2">&quot;TimeManager&quot;</span><span class="p">,</span>
-<span class="linenos"> 83</span>
-<span class="linenos"> 84</span>    <span class="c1"># Orchestrators</span>
-<span class="linenos"> 85</span>    <span class="s2">&quot;SequentialOrchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;BatchOrchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;ParallelOrchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;RealTimeOrchestrator&quot;</span><span class="p">,</span>
-<span class="linenos"> 86</span>
-<span class="linenos"> 87</span>    <span class="c1"># Integrators</span>
-<span class="linenos"> 88</span>    <span class="s2">&quot;ForwardEuler&quot;</span><span class="p">,</span> <span class="s2">&quot;RungeKutta4&quot;</span><span class="p">,</span> <span class="s2">&quot;DormandPrince45&quot;</span><span class="p">,</span> <span class="s2">&quot;ZeroOrderHold&quot;</span><span class="p">,</span>
-<span class="linenos"> 89</span>
-<span class="linenos"> 90</span>    <span class="c1"># Safety</span>
-<span class="linenos"> 91</span>    <span class="s2">&quot;apply_safety_guards&quot;</span><span class="p">,</span> <span class="s2">&quot;SafetyViolationError&quot;</span><span class="p">,</span> <span class="s2">&quot;SafetyMonitor&quot;</span><span class="p">,</span> <span class="s2">&quot;PerformanceMonitor&quot;</span><span class="p">,</span>
-<span class="linenos"> 92</span>
-<span class="linenos"> 93</span>    <span class="c1"># Results</span>
-<span class="linenos"> 94</span>    <span class="s2">&quot;StandardResultContainer&quot;</span><span class="p">,</span> <span class="s2">&quot;BatchResultContainer&quot;</span><span class="p">,</span> <span class="s2">&quot;ResultProcessor&quot;</span><span class="p">,</span>
-<span class="linenos"> 95</span>
-<span class="linenos"> 96</span>    <span class="c1"># Strategies</span>
-<span class="linenos"> 97</span>    <span class="s2">&quot;MonteCarloStrategy&quot;</span><span class="p">,</span>
-<span class="linenos"> 98</span>
-<span class="linenos"> 99</span>    <span class="c1"># Legacy compatibility (IMPORTANT: maintain exact same names)</span>
-<span class="linenos">100</span>    <span class="s2">&quot;get_step_fn&quot;</span><span class="p">,</span>           <span class="c1"># Original function from simulation_runner</span>
-<span class="linenos">101</span>    <span class="s2">&quot;step&quot;</span><span class="p">,</span>                  <span class="c1"># Original step function</span>
-<span class="linenos">102</span>    <span class="s2">&quot;run_simulation&quot;</span><span class="p">,</span>        <span class="c1"># Original simulation runner</span>
-<span class="linenos">103</span>    <span class="s2">&quot;simulate&quot;</span><span class="p">,</span>              <span class="c1"># Original vector simulation function</span>
-<span class="linenos">104</span>    <span class="s2">&quot;rk45_step&quot;</span><span class="p">,</span>             <span class="c1"># Original adaptive integration function</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span><span class="c1"># Legacy vector simulation interface</span>
+<span class="linenos"> 60</span><span class="kn">from</span><span class="w"> </span><span class="nn">.orchestrators.batch</span><span class="w"> </span><span class="kn">import</span> <span class="n">simulate_batch</span> <span class="k">as</span> <span class="n">simulate</span>
+<span class="linenos"> 61</span>
+<span class="linenos"> 62</span><span class="c1"># Legacy adaptive integration</span>
+<span class="linenos"> 63</span><span class="kn">from</span><span class="w"> </span><span class="nn">.integrators.adaptive.runge_kutta</span><span class="w"> </span><span class="kn">import</span> <span class="n">rk45_step</span>
+<span class="linenos"> 64</span>
+<span class="linenos"> 65</span><span class="c1"># Legacy safety guards (exact original interface)</span>
+<span class="linenos"> 66</span><span class="kn">from</span><span class="w"> </span><span class="nn">.safety.guards</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 67</span>    <span class="n">guard_no_nan</span> <span class="k">as</span> <span class="n">_guard_no_nan</span><span class="p">,</span>
+<span class="linenos"> 68</span>    <span class="n">guard_energy</span> <span class="k">as</span> <span class="n">_guard_energy</span><span class="p">,</span>
+<span class="linenos"> 69</span>    <span class="n">guard_bounds</span> <span class="k">as</span> <span class="n">_guard_bounds</span>
+<span class="linenos"> 70</span><span class="p">)</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span><span class="c1"># =============================================================================</span>
+<span class="linenos"> 73</span><span class="c1"># EXPORTS</span>
+<span class="linenos"> 74</span><span class="c1"># =============================================================================</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span><span class="c1"># New framework exports</span>
+<span class="linenos"> 77</span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 78</span>    <span class="c1"># Core interfaces</span>
+<span class="linenos"> 79</span>    <span class="s2">&quot;SimulationEngine&quot;</span><span class="p">,</span> <span class="s2">&quot;Integrator&quot;</span><span class="p">,</span> <span class="s2">&quot;Orchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;SimulationStrategy&quot;</span><span class="p">,</span>
+<span class="linenos"> 80</span>    <span class="s2">&quot;SafetyGuard&quot;</span><span class="p">,</span> <span class="s2">&quot;ResultContainer&quot;</span><span class="p">,</span> <span class="s2">&quot;SimulationContext&quot;</span><span class="p">,</span>
+<span class="linenos"> 81</span>    <span class="s2">&quot;StateSpaceUtilities&quot;</span><span class="p">,</span> <span class="s2">&quot;TimeManager&quot;</span><span class="p">,</span>
+<span class="linenos"> 82</span>
+<span class="linenos"> 83</span>    <span class="c1"># Orchestrators</span>
+<span class="linenos"> 84</span>    <span class="s2">&quot;SequentialOrchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;BatchOrchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;ParallelOrchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;RealTimeOrchestrator&quot;</span><span class="p">,</span>
+<span class="linenos"> 85</span>
+<span class="linenos"> 86</span>    <span class="c1"># Integrators</span>
+<span class="linenos"> 87</span>    <span class="s2">&quot;ForwardEuler&quot;</span><span class="p">,</span> <span class="s2">&quot;RungeKutta4&quot;</span><span class="p">,</span> <span class="s2">&quot;DormandPrince45&quot;</span><span class="p">,</span> <span class="s2">&quot;ZeroOrderHold&quot;</span><span class="p">,</span>
+<span class="linenos"> 88</span>
+<span class="linenos"> 89</span>    <span class="c1"># Safety</span>
+<span class="linenos"> 90</span>    <span class="s2">&quot;apply_safety_guards&quot;</span><span class="p">,</span> <span class="s2">&quot;SafetyViolationError&quot;</span><span class="p">,</span> <span class="s2">&quot;SafetyMonitor&quot;</span><span class="p">,</span> <span class="s2">&quot;PerformanceMonitor&quot;</span><span class="p">,</span>
+<span class="linenos"> 91</span>
+<span class="linenos"> 92</span>    <span class="c1"># Results</span>
+<span class="linenos"> 93</span>    <span class="s2">&quot;StandardResultContainer&quot;</span><span class="p">,</span> <span class="s2">&quot;BatchResultContainer&quot;</span><span class="p">,</span> <span class="s2">&quot;ResultProcessor&quot;</span><span class="p">,</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span>    <span class="c1"># Strategies</span>
+<span class="linenos"> 96</span>    <span class="s2">&quot;MonteCarloStrategy&quot;</span><span class="p">,</span>
+<span class="linenos"> 97</span>
+<span class="linenos"> 98</span>    <span class="c1"># Legacy compatibility (IMPORTANT: maintain exact same names)</span>
+<span class="linenos"> 99</span>    <span class="s2">&quot;get_step_fn&quot;</span><span class="p">,</span>           <span class="c1"># Original function from simulation_runner</span>
+<span class="linenos">100</span>    <span class="s2">&quot;step&quot;</span><span class="p">,</span>                  <span class="c1"># Original step function</span>
+<span class="linenos">101</span>    <span class="s2">&quot;run_simulation&quot;</span><span class="p">,</span>        <span class="c1"># Original simulation runner</span>
+<span class="linenos">102</span>    <span class="s2">&quot;simulate&quot;</span><span class="p">,</span>              <span class="c1"># Original vector simulation function</span>
+<span class="linenos">103</span>    <span class="s2">&quot;rk45_step&quot;</span><span class="p">,</span>             <span class="c1"># Original adaptive integration function</span>
+<span class="linenos">104</span>    <span class="s2">&quot;_guard_no_nan&quot;</span><span class="p">,</span> <span class="s2">&quot;_guard_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;_guard_bounds&quot;</span><span class="p">,</span>  <span class="c1"># Legacy safety guards</span>
 <span class="linenos">105</span><span class="p">]</span>
 <span class="linenos">106</span>
 <span class="linenos">107</span><span class="c1"># =============================================================================</span>
@@ -783,7 +809,7 @@ Monte Carlo analysis results</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

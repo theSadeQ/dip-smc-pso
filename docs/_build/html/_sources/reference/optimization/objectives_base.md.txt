@@ -6,6 +6,163 @@
 
 Base classes for optimization objective functions.
 
+
+
+## Advanced Mathematical Theory
+
+### Objective Function Design
+
+**General form:**
+
+```{math}
+f: \mathbb{R}^n \to \mathbb{R}, \quad f(\vec{x}) = g(h_1(\vec{x}), \ldots, h_k(\vec{x}))
+```
+
+Where $h_i$ are component functions, $g$ is aggregation.
+
+### Vectorization Strategies
+
+**Batch evaluation:**
+
+```{math}
+\vec{F} = f(\mathbf{X}), \quad \mathbf{X} \in \mathbb{R}^{N \times n}, \quad \vec{F} \in \mathbb{R}^N
+```
+
+**Computational complexity:** $O(N \cdot C_f)$ vs $N \times O(C_f)$ for loop.
+
+### Gradient Computation
+
+**Finite differences:**
+
+```{math}
+\frac{\partial f}{\partial x_i} \approx \frac{f(\vec{x} + h \vec{e}_i) - f(\vec{x})}{h}
+```
+
+**Central differences** (higher accuracy):
+
+```{math}
+\frac{\partial f}{\partial x_i} \approx \frac{f(\vec{x} + h \vec{e}_i) - f(\vec{x} - h \vec{e}_i)}{2h}
+```
+
+**Automatic differentiation** (exact):
+
+```{math}
+\nabla f(\vec{x}) = \text{AutoDiff}(f, \vec{x})
+```
+
+### Smoothness Analysis
+
+**Lipschitz continuity:**
+
+```{math}
+|f(\vec{x}) - f(\vec{y})| \leq L \|\vec{x} - \vec{y}\|
+```
+
+**Hessian condition number:**
+
+```{math}
+\kappa(\nabla^2 f) = \frac{\lambda_{max}}{\lambda_{min}}
+```
+
+High $\kappa$ indicates ill-conditioning.
+
+### Penalty Functions
+
+**Quadratic penalty:**
+
+```{math}
+P(\vec{x}) = \sum_{j} r_j \max(0, g_j(\vec{x}))^2
+```
+
+**Augmented Lagrangian:**
+
+```{math}
+\mathcal{L}_A(\vec{x}, \vec{\lambda}) = f(\vec{x}) + \sum_j \lambda_j g_j(\vec{x}) + \frac{\mu}{2} \sum_j g_j(\vec{x})^2
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Input Parameters] --> B{Vectorized?}
+    B -->|Yes| C[Batch Evaluation]
+    B -->|No| D[Sequential Evaluation]
+
+    C --> E[Parallel Compute]
+    D --> E
+
+    E --> F[Component Functions]
+    F --> G[h₁, h₂, ..., hₖ]
+
+    G --> H[Aggregation]
+    H --> I{Aggregation Type}
+    I -->|Weighted Sum| J[Σ wᵢhᵢ]
+    I -->|Max| K[max(hᵢ)]
+    I -->|Custom| L[g(h₁,...,hₖ)]
+
+    J --> M[Objective Value]
+    K --> M
+    L --> M
+
+    M --> N{Gradient Needed?}
+    N -->|Yes| O[Compute Gradient]
+    N -->|No| P[Return Value]
+
+    O --> Q{Method}
+    Q -->|FD| R[Finite Differences]
+    Q -->|AD| S[Auto Diff]
+
+    R --> P
+    S --> P
+
+    style B fill:#ff9
+    style I fill:#9cf
+    style P fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.algorithms import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/optimization/objectives/base.py

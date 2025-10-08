@@ -11,15 +11,14 @@ pendulum dynamics with numerical stability and performance optimizations.
 """
 
 from __future__ import annotations
-from typing import Tuple, Optional, Dict, Any, Union
+from typing import Tuple, Dict, Any, Union
 import numpy as np
 import warnings
 
 from ..base import BaseDynamicsModel, DynamicsResult
 from ...core import (
     DIPStateValidator,
-    NumericalInstabilityError,
-    NumericalStabilityMonitor
+    NumericalInstabilityError
 )
 from .config import SimplifiedDIPConfig
 from .physics import SimplifiedPhysicsComputer, compute_simplified_dynamics_numba
@@ -276,6 +275,38 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
             "mixed_2": np.array([0.0, np.pi, 0.0, 0.0, 0.0, 0.0])
         }
 
+    def step(self, state: np.ndarray, control_input: np.ndarray, dt: float) -> np.ndarray:
+        """
+        Single-step Euler integration (for batch simulation compatibility).
+
+        Args:
+            state: Current state vector (6D)
+            control_input: Control input (scalar or 1D array)
+            dt: Time step
+
+        Returns:
+            Next state using forward Euler integration
+
+        Note:
+            This method provides compatibility with batch simulation frameworks
+            that expect a step() interface. For higher accuracy, use compute_dynamics()
+            with your own integrator.
+        """
+        # Normalize control input to array format
+        if np.isscalar(control_input):
+            control_input = np.array([control_input])
+        elif isinstance(control_input, np.ndarray) and control_input.ndim == 0:
+            control_input = np.array([control_input.item()])
+
+        result = self.compute_dynamics(state, control_input)
+
+        if not result.success:
+            # Return current state on failure (simulation will detect via monitoring)
+            return state
+
+        # Forward Euler: x(t+dt) = x(t) + dt * dx/dt
+        return state + dt * result.state_derivative
+
     def _setup_validation(self) -> None:
         """Setup state validation for simplified DIP."""
         self._state_validator = DIPStateValidator(
@@ -322,12 +353,23 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
         )
 
     def _validate_control_input(self, control_input: np.ndarray) -> bool:
-        """Validate control input vector."""
+        """Validate control input (accepts scalar or array)."""
+        # Handle scalar inputs
+        if np.isscalar(control_input):
+            return np.isfinite(control_input) and abs(control_input) < 1000.0
+
+        # Handle array inputs
+        if not isinstance(control_input, np.ndarray):
+            return False
+
+        # Accept scalars wrapped as 0-d arrays or 1-d arrays
+        if control_input.ndim == 0:
+            return np.isfinite(control_input) and abs(control_input.item()) < 1000.0
+
         return (
-            isinstance(control_input, np.ndarray) and
-            control_input.shape == (1,) and
+            control_input.size >= 1 and
             np.all(np.isfinite(control_input)) and
-            abs(control_input[0]) < 1000.0  # Reasonable force bound
+            abs(float(control_input.flat[0])) < 1000.0  # Reasonable force bound
         )
 
     def _validate_state_derivative(self, state_derivative: np.ndarray) -> bool:
@@ -396,7 +438,7 @@ class SimplifiedDIPDynamics(BaseDynamicsModel):
         if hasattr(self, '_stability_monitor'):
             try:
                 cond_num = self.physics.get_matrix_conditioning(state)
-            except:
+            except Exception:
                 cond_num = np.inf
 
             self._stability_monitor.record_inversion(

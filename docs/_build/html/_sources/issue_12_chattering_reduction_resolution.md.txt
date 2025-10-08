@@ -76,6 +76,9 @@ def get_chattering_index(self, control_history, dt=0.01):
 
 #### 1.2 Comprehensive Performance Analysis (Lines 236-323)
 ```python
+# example-metadata:
+# runnable: false
+
 def analyze_performance(self, surface_history, control_history, dt, state_history):
     """Comprehensive chattering reduction metrics."""
     return {
@@ -98,6 +101,9 @@ def analyze_performance(self, surface_history, control_history, dt, state_histor
 
 #### 2.1 Optimized Tanh Switching (Lines 88-123)
 ```python
+# example-metadata:
+# runnable: false
+
 def _tanh_switching(self, s, epsilon, slope=3.0):
     """Configurable slope for tunable smoothness.
 
@@ -165,6 +171,9 @@ controllers:
 
 #### 4.1 Test Implementation (Lines 723-896)
 ```python
+# example-metadata:
+# runnable: false
+
 @pytest.mark.chattering_reduction
 @pytest.mark.parametrize("controller_type", [
     "classical_smc", "adaptive_smc", "sta_smc", "hybrid_adaptive_sta_smc"

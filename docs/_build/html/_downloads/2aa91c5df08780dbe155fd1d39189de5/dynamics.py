@@ -11,15 +11,14 @@ comprehensive physics modeling.
 """
 
 from __future__ import annotations
-from typing import Tuple, Optional, Dict, Any, Union
+from typing import Tuple, Dict, Any, Union
 import numpy as np
 import warnings
 
 from ..base import BaseDynamicsModel, DynamicsResult
 from ...core import (
     DIPStateValidator,
-    NumericalInstabilityError,
-    NumericalStabilityMonitor
+    NumericalInstabilityError
 )
 from .config import FullDIPConfig
 from .physics import FullFidelityPhysicsComputer

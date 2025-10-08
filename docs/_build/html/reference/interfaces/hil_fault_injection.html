@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -851,7 +877,7 @@ Multiple concurrent faults:</p>
 <span class="linenos"> 14</span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="linenos"> 15</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
-<span class="linenos"> 17</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span>
+<span class="linenos"> 17</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
 <span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
 <span class="linenos"> 19</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="linenos"> 20</span>
@@ -945,7 +971,7 @@ Multiple concurrent faults:</p>
 <span class="linenos">108</span><span class="sd">    control system robustness and fault tolerance.</span>
 <span class="linenos">109</span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos">110</span>
-<span class="linenos">111</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_manager</span><span class="p">:</span> <span class="s1">&#39;DeviceManager&#39;</span><span class="p">,</span>
+<span class="linenos">111</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_manager</span><span class="p">:</span> <span class="s1">&#39;DeviceManager&#39;</span><span class="p">,</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">112</span>                 <span class="n">communication_interfaces</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
 <span class="linenos">113</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize fault injector.&quot;&quot;&quot;</span>
 <span class="linenos">114</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_device_manager</span> <span class="o">=</span> <span class="n">device_manager</span>
@@ -1210,7 +1236,7 @@ Multiple concurrent faults:</p>
 <span class="linenos">373</span>            <span class="p">)</span>
 <span class="linenos">374</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_record_fault_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 <span class="linenos">375</span>
-<span class="linenos">376</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_fault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">376</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_fault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">377</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply specific fault to device.&quot;&quot;&quot;</span>
 <span class="linenos">378</span>        <span class="k">try</span><span class="p">:</span>
 <span class="linenos">379</span>            <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">fault_type</span> <span class="o">==</span> <span class="n">FaultType</span><span class="o">.</span><span class="n">SENSOR_BIAS</span><span class="p">:</span>
@@ -1235,38 +1261,38 @@ Multiple concurrent faults:</p>
 <span class="linenos">398</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <span class="linenos">399</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to apply fault </span><span class="si">{</span><span class="n">profile</span><span class="o">.</span><span class="n">fault_type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="linenos">400</span>
-<span class="linenos">401</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">401</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">402</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply sensor bias fault.&quot;&quot;&quot;</span>
 <span class="linenos">403</span>        <span class="c1"># This would modify sensor readings by adding a bias</span>
 <span class="linenos">404</span>        <span class="c1"># Implementation depends on device interface</span>
 <span class="linenos">405</span>        <span class="k">pass</span>
 <span class="linenos">406</span>
-<span class="linenos">407</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">407</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">408</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply sensor drift fault.&quot;&quot;&quot;</span>
 <span class="linenos">409</span>        <span class="c1"># This would implement gradual sensor drift over time</span>
 <span class="linenos">410</span>        <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">profile</span><span class="o">.</span><span class="n">start_time</span>
-<span class="linenos">411</span>        <span class="n">drift_value</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">*</span> <span class="n">elapsed_time</span> <span class="o">/</span> <span class="mf">3600.0</span>  <span class="c1"># per hour</span>
+<span class="linenos">411</span>        <span class="n">profile</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">*</span> <span class="n">elapsed_time</span> <span class="o">/</span> <span class="mf">3600.0</span>  <span class="c1"># per hour</span>
 <span class="linenos">412</span>        <span class="c1"># Apply drift to sensor readings</span>
 <span class="linenos">413</span>        <span class="k">pass</span>
 <span class="linenos">414</span>
-<span class="linenos">415</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">415</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">416</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply sensor noise fault.&quot;&quot;&quot;</span>
 <span class="linenos">417</span>        <span class="c1"># This would add random noise to sensor readings</span>
-<span class="linenos">418</span>        <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">noise_level</span><span class="p">)</span>
+<span class="linenos">418</span>        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">noise_level</span><span class="p">)</span>
 <span class="linenos">419</span>        <span class="c1"># Apply noise to sensor readings</span>
 <span class="linenos">420</span>        <span class="k">pass</span>
 <span class="linenos">421</span>
-<span class="linenos">422</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_stuck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">422</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_stuck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">423</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply sensor stuck fault.&quot;&quot;&quot;</span>
 <span class="linenos">424</span>        <span class="c1"># This would freeze sensor readings at current value</span>
 <span class="linenos">425</span>        <span class="k">pass</span>
 <span class="linenos">426</span>
-<span class="linenos">427</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_actuator_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">427</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_actuator_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">428</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply actuator bias fault.&quot;&quot;&quot;</span>
 <span class="linenos">429</span>        <span class="c1"># This would modify actuator commands by adding bias</span>
 <span class="linenos">430</span>        <span class="k">pass</span>
 <span class="linenos">431</span>
-<span class="linenos">432</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_actuator_stuck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">432</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_actuator_stuck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">433</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply actuator stuck fault.&quot;&quot;&quot;</span>
 <span class="linenos">434</span>        <span class="c1"># This would prevent actuator from responding to commands</span>
 <span class="linenos">435</span>        <span class="k">pass</span>
@@ -1355,7 +1381,7 @@ Multiple concurrent faults:</p>
 <span class="linenos">518</span>        <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">target_device</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_safety_limits</span><span class="p">:</span>
 <span class="linenos">519</span>            <span class="n">limits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_safety_limits</span><span class="p">[</span><span class="n">profile</span><span class="o">.</span><span class="n">target_device</span><span class="p">]</span>
 <span class="linenos">520</span>            <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">&gt;</span> <span class="n">limits</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_magnitude&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)):</span>
-<span class="linenos">521</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fault magnitude exceeds safety limits&quot;</span><span class="p">)</span>
+<span class="linenos">521</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Fault magnitude exceeds safety limits&quot;</span><span class="p">)</span>
 <span class="linenos">522</span>                <span class="k">return</span> <span class="kc">False</span>
 <span class="linenos">523</span>
 <span class="linenos">524</span>        <span class="k">return</span> <span class="kc">True</span>
@@ -1594,7 +1620,7 @@ control system robustness and fault tolerance.</p>
 <span class="linenos">  7</span><span class="sd">    control system robustness and fault tolerance.</span>
 <span class="linenos">  8</span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos">  9</span>
-<span class="linenos"> 10</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_manager</span><span class="p">:</span> <span class="s1">&#39;DeviceManager&#39;</span><span class="p">,</span>
+<span class="linenos"> 10</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_manager</span><span class="p">:</span> <span class="s1">&#39;DeviceManager&#39;</span><span class="p">,</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos"> 11</span>                 <span class="n">communication_interfaces</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
 <span class="linenos"> 12</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize fault injector.&quot;&quot;&quot;</span>
 <span class="linenos"> 13</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_device_manager</span> <span class="o">=</span> <span class="n">device_manager</span>
@@ -1859,7 +1885,7 @@ control system robustness and fault tolerance.</p>
 <span class="linenos">272</span>            <span class="p">)</span>
 <span class="linenos">273</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_record_fault_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 <span class="linenos">274</span>
-<span class="linenos">275</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_fault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">275</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_fault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">276</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply specific fault to device.&quot;&quot;&quot;</span>
 <span class="linenos">277</span>        <span class="k">try</span><span class="p">:</span>
 <span class="linenos">278</span>            <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">fault_type</span> <span class="o">==</span> <span class="n">FaultType</span><span class="o">.</span><span class="n">SENSOR_BIAS</span><span class="p">:</span>
@@ -1884,38 +1910,38 @@ control system robustness and fault tolerance.</p>
 <span class="linenos">297</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <span class="linenos">298</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to apply fault </span><span class="si">{</span><span class="n">profile</span><span class="o">.</span><span class="n">fault_type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="linenos">299</span>
-<span class="linenos">300</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">300</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">301</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply sensor bias fault.&quot;&quot;&quot;</span>
 <span class="linenos">302</span>        <span class="c1"># This would modify sensor readings by adding a bias</span>
 <span class="linenos">303</span>        <span class="c1"># Implementation depends on device interface</span>
 <span class="linenos">304</span>        <span class="k">pass</span>
 <span class="linenos">305</span>
-<span class="linenos">306</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">306</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">307</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply sensor drift fault.&quot;&quot;&quot;</span>
 <span class="linenos">308</span>        <span class="c1"># This would implement gradual sensor drift over time</span>
 <span class="linenos">309</span>        <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">profile</span><span class="o">.</span><span class="n">start_time</span>
-<span class="linenos">310</span>        <span class="n">drift_value</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">*</span> <span class="n">elapsed_time</span> <span class="o">/</span> <span class="mf">3600.0</span>  <span class="c1"># per hour</span>
+<span class="linenos">310</span>        <span class="n">profile</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">*</span> <span class="n">elapsed_time</span> <span class="o">/</span> <span class="mf">3600.0</span>  <span class="c1"># per hour</span>
 <span class="linenos">311</span>        <span class="c1"># Apply drift to sensor readings</span>
 <span class="linenos">312</span>        <span class="k">pass</span>
 <span class="linenos">313</span>
-<span class="linenos">314</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">314</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">315</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply sensor noise fault.&quot;&quot;&quot;</span>
 <span class="linenos">316</span>        <span class="c1"># This would add random noise to sensor readings</span>
-<span class="linenos">317</span>        <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">noise_level</span><span class="p">)</span>
+<span class="linenos">317</span>        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">noise_level</span><span class="p">)</span>
 <span class="linenos">318</span>        <span class="c1"># Apply noise to sensor readings</span>
 <span class="linenos">319</span>        <span class="k">pass</span>
 <span class="linenos">320</span>
-<span class="linenos">321</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_stuck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">321</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_sensor_stuck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">322</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply sensor stuck fault.&quot;&quot;&quot;</span>
 <span class="linenos">323</span>        <span class="c1"># This would freeze sensor readings at current value</span>
 <span class="linenos">324</span>        <span class="k">pass</span>
 <span class="linenos">325</span>
-<span class="linenos">326</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_actuator_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">326</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_actuator_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">327</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply actuator bias fault.&quot;&quot;&quot;</span>
 <span class="linenos">328</span>        <span class="c1"># This would modify actuator commands by adding bias</span>
 <span class="linenos">329</span>        <span class="k">pass</span>
 <span class="linenos">330</span>
-<span class="linenos">331</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_actuator_stuck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">331</span>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_actuator_stuck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="s1">&#39;DeviceDriver&#39;</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">FaultProfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">332</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply actuator stuck fault.&quot;&quot;&quot;</span>
 <span class="linenos">333</span>        <span class="c1"># This would prevent actuator from responding to commands</span>
 <span class="linenos">334</span>        <span class="k">pass</span>
@@ -2004,7 +2030,7 @@ control system robustness and fault tolerance.</p>
 <span class="linenos">417</span>        <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">target_device</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_safety_limits</span><span class="p">:</span>
 <span class="linenos">418</span>            <span class="n">limits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_safety_limits</span><span class="p">[</span><span class="n">profile</span><span class="o">.</span><span class="n">target_device</span><span class="p">]</span>
 <span class="linenos">419</span>            <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">&gt;</span> <span class="n">limits</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_magnitude&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)):</span>
-<span class="linenos">420</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fault magnitude exceeds safety limits&quot;</span><span class="p">)</span>
+<span class="linenos">420</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Fault magnitude exceeds safety limits&quot;</span><span class="p">)</span>
 <span class="linenos">421</span>                <span class="k">return</span> <span class="kc">False</span>
 <span class="linenos">422</span>
 <span class="linenos">423</span>        <span class="k">return</span> <span class="kc">True</span>
@@ -2303,7 +2329,7 @@ control system robustness and fault tolerance.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

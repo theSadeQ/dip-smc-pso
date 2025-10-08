@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,6 +517,288 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Parameter space definitions and management.</p>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="parameter-space-design">
+<h3>Parameter Space Design<a class="headerlink" href="#parameter-space-design" title="Link to this heading">¶</a></h3>
+<p><strong>Continuous parameter space</strong> for <span class="math notranslate nohighlight">\(n\)</span> optimization variables:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{X} = \prod_{i=1}^{n} [l_i, u_i] \subset \mathbb{R}^n\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(l_i, u_i\)</span> are lower and upper bounds for parameter <span class="math notranslate nohighlight">\(i\)</span>.</p>
+</section>
+<section id="latin-hypercube-sampling-lhs">
+<h3>Latin Hypercube Sampling (LHS)<a class="headerlink" href="#latin-hypercube-sampling-lhs" title="Link to this heading">¶</a></h3>
+<p><strong>Stratified sampling</strong> for better space coverage:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{ij} = \frac{\pi_j(i) - u_{ij}}{N} \cdot (u_j - l_j) + l_j\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pi_j\)</span>: Random permutation of <span class="math notranslate nohighlight">\(\{1, \ldots, N\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(u_{ij} \sim U(0,1)\)</span>: Uniform random sample</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Number of samples</p></li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Ensures uniform coverage in each dimension</p></li>
+<li><p>Better than pure random sampling for small sample sizes</p></li>
+<li><p><span class="math notranslate nohighlight">\(O(N)\)</span> complexity for <span class="math notranslate nohighlight">\(N\)</span> samples</p></li>
+</ul>
+</section>
+<section id="sobol-sequences">
+<h3>Sobol Sequences<a class="headerlink" href="#sobol-sequences" title="Link to this heading">¶</a></h3>
+<p><strong>Quasi-random low-discrepancy sequences:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[D_N^* = \sup_{B \in \mathcal{B}} \left| \frac{\#\{x_i \in B\}}{N} - \lambda(B) \right|\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\lambda(B)\)</span> is Lebesgue measure of box <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Discrepancy <span class="math notranslate nohighlight">\(D_N^* = O(\frac{(\log N)^n}{N})\)</span></p></li>
+<li><p>Better convergence than Monte Carlo</p></li>
+<li><p>Deterministic space-filling</p></li>
+</ul>
+</section>
+<section id="parameter-scaling">
+<h3>Parameter Scaling<a class="headerlink" href="#parameter-scaling" title="Link to this heading">¶</a></h3>
+<p><strong>Normalization to unit hypercube:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{norm,i} = \frac{x_i - l_i}{u_i - l_i} \in [0, 1]\]</div>
+</div>
+<p><strong>Log scaling</strong> for wide-range parameters:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{log,i} = \log_{10}(x_i), \quad x_i = 10^{x_{log,i}}\]</div>
+</div>
+</section>
+<section id="constraint-handling">
+<h3>Constraint Handling<a class="headerlink" href="#constraint-handling" title="Link to this heading">¶</a></h3>
+<p><strong>Penalty method</strong> for constraints <span class="math notranslate nohighlight">\(g_j(\vec{x}) \leq 0\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f_{penalty}(\vec{x}) = f(\vec{x}) + \sum_{j} r_j \max(0, g_j(\vec{x}))^2\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(r_j\)</span> are penalty coefficients.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Parameter Definition] --&gt; B{Parameter Type}
+    B --&gt;|Continuous| C[Continuous Space]
+    B --&gt;|Discrete| D[Discrete Space]
+    B --&gt;|Mixed| E[Mixed Space]
+
+    C --&gt; F[Sampling Strategy]
+    F --&gt;|Random| G[Uniform Sampling]
+    F --&gt;|LHS| H[Latin Hypercube]
+    F --&gt;|Quasi-Random| I[Sobol Sequence]
+
+    G --&gt; J[Validation]
+    H --&gt; J
+    I --&gt; J
+
+    J --&gt; K{Valid?}
+    K --&gt;|Yes| L[Sample Output]
+    K --&gt;|No| M[Clip to Bounds]
+    M --&gt; L
+
+    style B fill:#ff9
+    style J fill:#9cf
+    style L fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.core</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-optimization">
+<h3>Example 3: Integration with Optimization<a class="headerlink" href="#example-3-integration-with-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete optimization loop</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">create_optimizer</span><span class="p">(</span><span class="n">opt_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best fitness: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">best_fitness</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id1">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>Parameter Space Design<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p><strong>Continuous parameter space</strong> for <span class="math notranslate nohighlight">\(n\)</span> optimization variables:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{X} = \prod_{i=1}^{n} [l_i, u_i] \subset \mathbb{R}^n\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(l_i, u_i\)</span> are lower and upper bounds for parameter <span class="math notranslate nohighlight">\(i\)</span>.</p>
+</section>
+<section id="id3">
+<h3>Latin Hypercube Sampling (LHS)<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p><strong>Stratified sampling</strong> for better space coverage:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{ij} = \frac{\pi_j(i) - u_{ij}}{N} \cdot (u_j - l_j) + l_j\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pi_j\)</span>: Random permutation of <span class="math notranslate nohighlight">\(\{1, \ldots, N\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(u_{ij} \sim U(0,1)\)</span>: Uniform random sample</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Number of samples</p></li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Ensures uniform coverage in each dimension</p></li>
+<li><p>Better than pure random sampling for small sample sizes</p></li>
+<li><p><span class="math notranslate nohighlight">\(O(N)\)</span> complexity for <span class="math notranslate nohighlight">\(N\)</span> samples</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Sobol Sequences<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p><strong>Quasi-random low-discrepancy sequences:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[D_N^* = \sup_{B \in \mathcal{B}} \left| \frac{\#\{x_i \in B\}}{N} - \lambda(B) \right|\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\lambda(B)\)</span> is Lebesgue measure of box <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Discrepancy <span class="math notranslate nohighlight">\(D_N^* = O(\frac{(\log N)^n}{N})\)</span></p></li>
+<li><p>Better convergence than Monte Carlo</p></li>
+<li><p>Deterministic space-filling</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>Parameter Scaling<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p><strong>Normalization to unit hypercube:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{norm,i} = \frac{x_i - l_i}{u_i - l_i} \in [0, 1]\]</div>
+</div>
+<p><strong>Log scaling</strong> for wide-range parameters:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{log,i} = \log_{10}(x_i), \quad x_i = 10^{x_{log,i}}\]</div>
+</div>
+</section>
+<section id="id6">
+<h3>Constraint Handling<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p><strong>Penalty method</strong> for constraints <span class="math notranslate nohighlight">\(g_j(\vec{x}) \leq 0\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f_{penalty}(\vec{x}) = f(\vec{x}) + \sum_{j} r_j \max(0, g_j(\vec{x}))^2\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(r_j\)</span> are penalty coefficients.</p>
+</section>
+</section>
+<section id="id7">
+<h2>Architecture Diagram<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Parameter Definition] --&gt; B{Parameter Type}
+    B --&gt;|Continuous| C[Continuous Space]
+    B --&gt;|Discrete| D[Discrete Space]
+    B --&gt;|Mixed| E[Mixed Space]
+
+    C --&gt; F[Sampling Strategy]
+    F --&gt;|Random| G[Uniform Sampling]
+    F --&gt;|LHS| H[Latin Hypercube]
+    F --&gt;|Quasi-Random| I[Sobol Sequence]
+
+    G --&gt; J[Validation]
+    H --&gt; J
+    I --&gt; J
+
+    J --&gt; K{Valid?}
+    K --&gt;|Yes| L[Sample Output]
+    K --&gt;|No| M[Clip to Bounds]
+    M --&gt; L
+
+    style B fill:#ff9
+    style J fill:#9cf
+    style L fill:#9f9
+        </div></section>
+<section id="id8">
+<h2>Usage Examples<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.core</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3>Example 3: Integration with Optimization<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete optimization loop</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">create_optimizer</span><span class="p">(</span><span class="n">opt_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best fitness: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">best_fitness</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -986,8 +1294,8 @@
 <h3><code class="docutils literal notranslate"><span class="pre">ContinuousParameter</span></code><a class="headerlink" href="#continuousparameter" title="Link to this heading">¶</a></h3>
 <p><strong>Inherits from:</strong> <code class="docutils literal notranslate"><span class="pre">Parameter</span></code></p>
 <p>Continuous real-valued parameter.</p>
-<section id="id1">
-<h4>Source Code<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<section id="id14">
+<h4>Source Code<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">ContinuousParameter</span><span class="p">(</span><span class="n">Parameter</span><span class="p">):</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Continuous real-valued parameter.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -1051,30 +1359,30 @@
 </pre></div>
 </div>
 </section>
-<section id="id2">
-<h4>Methods (5)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
+<section id="id15">
+<h4>Methods (5)<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h4>
 <section id="init-self-name-lower-upper-description-log-scale">
 <h5><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">name,</span> <span class="pre">lower,</span> <span class="pre">upper,</span> <span class="pre">description,</span> <span class="pre">log_scale)</span></code><a class="headerlink" href="#init-self-name-lower-upper-description-log-scale" title="Link to this heading">¶</a></h5>
 <p>Initialize continuous parameter.</p>
 <p><a class="reference internal" href="#method-continuousparameter-__init__"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id3">
-<h5><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h5>
+<section id="id16">
+<h5><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code><a class="headerlink" href="#id16" title="Link to this heading">¶</a></h5>
 <p>Sample from uniform distribution.</p>
 <p><a class="reference internal" href="#method-continuousparameter-sample"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id4">
-<h5><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">value)</span></code><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h5>
+<section id="id17">
+<h5><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">value)</span></code><a class="headerlink" href="#id17" title="Link to this heading">¶</a></h5>
 <p>Check if value is within bounds.</p>
 <p><a class="reference internal" href="#method-continuousparameter-validate"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id5">
-<h5><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">value)</span></code><a class="headerlink" href="#id5" title="Link to this heading">¶</a></h5>
+<section id="id18">
+<h5><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">value)</span></code><a class="headerlink" href="#id18" title="Link to this heading">¶</a></h5>
 <p>Clip to bounds.</p>
 <p><a class="reference internal" href="#method-continuousparameter-clip"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id6">
-<h5><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code><a class="headerlink" href="#id6" title="Link to this heading">¶</a></h5>
+<section id="id19">
+<h5><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code><a class="headerlink" href="#id19" title="Link to this heading">¶</a></h5>
 <p>Parameter bounds.</p>
 <p><a class="reference internal" href="#method-continuousparameter-bounds"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1085,8 +1393,8 @@
 <h3><code class="docutils literal notranslate"><span class="pre">DiscreteParameter</span></code><a class="headerlink" href="#discreteparameter" title="Link to this heading">¶</a></h3>
 <p><strong>Inherits from:</strong> <code class="docutils literal notranslate"><span class="pre">Parameter</span></code></p>
 <p>Discrete parameter with finite set of values.</p>
-<section id="id7">
-<h4>Source Code<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<section id="id20">
+<h4>Source Code<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">DiscreteParameter</span><span class="p">(</span><span class="n">Parameter</span><span class="p">):</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Discrete parameter with finite set of values.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -1162,18 +1470,18 @@
 <p>Initialize discrete parameter.</p>
 <p><a class="reference internal" href="#method-discreteparameter-__init__"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id8">
-<h5><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code><a class="headerlink" href="#id8" title="Link to this heading">¶</a></h5>
+<section id="id21">
+<h5><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code><a class="headerlink" href="#id21" title="Link to this heading">¶</a></h5>
 <p>Sample from discrete values.</p>
 <p><a class="reference internal" href="#method-discreteparameter-sample"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id9">
-<h5><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">value)</span></code><a class="headerlink" href="#id9" title="Link to this heading">¶</a></h5>
+<section id="id22">
+<h5><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">value)</span></code><a class="headerlink" href="#id22" title="Link to this heading">¶</a></h5>
 <p>Check if value is in allowed set.</p>
 <p><a class="reference internal" href="#method-discreteparameter-validate"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id10">
-<h5><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">value)</span></code><a class="headerlink" href="#id10" title="Link to this heading">¶</a></h5>
+<section id="id23">
+<h5><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">value)</span></code><a class="headerlink" href="#id23" title="Link to this heading">¶</a></h5>
 <p>Find closest valid value.</p>
 <p><a class="reference internal" href="#method-discreteparameter-clip"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1182,8 +1490,8 @@
 <p>Find closest valid value.</p>
 <p><a class="reference internal" href="#method-discreteparameter-_find_closest"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id11">
-<h5><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code><a class="headerlink" href="#id11" title="Link to this heading">¶</a></h5>
+<section id="id24">
+<h5><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code><a class="headerlink" href="#id24" title="Link to this heading">¶</a></h5>
 <p>Bounds for discrete parameter (min and max values).</p>
 <p><a class="reference internal" href="#method-discreteparameter-bounds"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1194,8 +1502,8 @@
 <h3><code class="docutils literal notranslate"><span class="pre">ContinuousParameterSpace</span></code><a class="headerlink" href="#continuousparameterspace" title="Link to this heading">¶</a></h3>
 <p><strong>Inherits from:</strong> <code class="docutils literal notranslate"><span class="pre">ParameterSpace</span></code></p>
 <p>Continuous parameter space with box constraints.</p>
-<section id="id12">
-<h4>Source Code<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
+<section id="id25">
+<h4>Source Code<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">ContinuousParameterSpace</span><span class="p">(</span><span class="n">ParameterSpace</span><span class="p">):</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Continuous parameter space with box constraints.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -1275,8 +1583,8 @@
 <p>Initialize continuous parameter space.</p>
 <p><a class="reference internal" href="#method-continuousparameterspace-__init__"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id13">
-<h5><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code><a class="headerlink" href="#id13" title="Link to this heading">¶</a></h5>
+<section id="id26">
+<h5><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code><a class="headerlink" href="#id26" title="Link to this heading">¶</a></h5>
 <p>Sample uniformly from parameter space.</p>
 <p><a class="reference internal" href="#method-continuousparameterspace-sample"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1295,8 +1603,8 @@
 <p>Number of parameters.</p>
 <p><a class="reference internal" href="#method-continuousparameterspace-dimensions"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id14">
-<h5><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code><a class="headerlink" href="#id14" title="Link to this heading">¶</a></h5>
+<section id="id27">
+<h5><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code><a class="headerlink" href="#id27" title="Link to this heading">¶</a></h5>
 <p>Parameter bounds.</p>
 <p><a class="reference internal" href="#method-continuousparameterspace-bounds"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1312,8 +1620,8 @@
 <h3><code class="docutils literal notranslate"><span class="pre">MixedParameterSpace</span></code><a class="headerlink" href="#mixedparameterspace" title="Link to this heading">¶</a></h3>
 <p><strong>Inherits from:</strong> <code class="docutils literal notranslate"><span class="pre">ParameterSpace</span></code></p>
 <p>Mixed parameter space with continuous and discrete parameters.</p>
-<section id="id15">
-<h4>Source Code<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h4>
+<section id="id28">
+<h4>Source Code<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">MixedParameterSpace</span><span class="p">(</span><span class="n">ParameterSpace</span><span class="p">):</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mixed parameter space with continuous and discrete parameters.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -1384,35 +1692,35 @@
 </pre></div>
 </div>
 </section>
-<section id="id16">
-<h4>Methods (6)<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h4>
+<section id="id29">
+<h4>Methods (6)<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h4>
 <section id="init-self-parameters">
 <h5><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameters)</span></code><a class="headerlink" href="#init-self-parameters" title="Link to this heading">¶</a></h5>
 <p>Initialize mixed parameter space.</p>
 <p><a class="reference internal" href="#method-mixedparameterspace-__init__"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id17">
-<h5><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code><a class="headerlink" href="#id17" title="Link to this heading">¶</a></h5>
+<section id="id30">
+<h5><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code><a class="headerlink" href="#id30" title="Link to this heading">¶</a></h5>
 <p>Sample from mixed parameter space.</p>
 <p><a class="reference internal" href="#method-mixedparameterspace-sample"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id18">
-<h5><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">parameters)</span></code><a class="headerlink" href="#id18" title="Link to this heading">¶</a></h5>
+<section id="id31">
+<h5><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">parameters)</span></code><a class="headerlink" href="#id31" title="Link to this heading">¶</a></h5>
 <p>Validate mixed parameters.</p>
 <p><a class="reference internal" href="#method-mixedparameterspace-validate"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id19">
-<h5><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">parameters)</span></code><a class="headerlink" href="#id19" title="Link to this heading">¶</a></h5>
+<section id="id32">
+<h5><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">parameters)</span></code><a class="headerlink" href="#id32" title="Link to this heading">¶</a></h5>
 <p>Clip mixed parameters.</p>
 <p><a class="reference internal" href="#method-mixedparameterspace-clip"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id20">
-<h5><code class="docutils literal notranslate"><span class="pre">dimensions(self)</span></code><a class="headerlink" href="#id20" title="Link to this heading">¶</a></h5>
+<section id="id33">
+<h5><code class="docutils literal notranslate"><span class="pre">dimensions(self)</span></code><a class="headerlink" href="#id33" title="Link to this heading">¶</a></h5>
 <p>Number of parameters.</p>
 <p><a class="reference internal" href="#method-mixedparameterspace-dimensions"><span class="xref myst">View full source →</span></a></p>
 </section>
-<section id="id21">
-<h5><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code><a class="headerlink" href="#id21" title="Link to this heading">¶</a></h5>
+<section id="id34">
+<h5><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code><a class="headerlink" href="#id34" title="Link to this heading">¶</a></h5>
 <p>Parameter bounds.</p>
 <p><a class="reference internal" href="#method-mixedparameterspace-bounds"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1422,8 +1730,8 @@
 <section id="parameterbounds">
 <h3><code class="docutils literal notranslate"><span class="pre">ParameterBounds</span></code><a class="headerlink" href="#parameterbounds" title="Link to this heading">¶</a></h3>
 <p>Helper class for parameter bounds management.</p>
-<section id="id22">
-<h4>Source Code<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h4>
+<section id="id35">
+<h4>Source Code<a class="headerlink" href="#id35" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">ParameterBounds</span><span class="p">:</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper class for parameter bounds management.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -1475,8 +1783,8 @@
 <section id="parametermapping">
 <h3><code class="docutils literal notranslate"><span class="pre">ParameterMapping</span></code><a class="headerlink" href="#parametermapping" title="Link to this heading">¶</a></h3>
 <p>Maps between different parameter representations.</p>
-<section id="id23">
-<h4>Source Code<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h4>
+<section id="id36">
+<h4>Source Code<a class="headerlink" href="#id36" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">ParameterMapping</span><span class="p">:</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Maps between different parameter representations.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -1527,8 +1835,8 @@
 <section id="parametervalidator">
 <h3><code class="docutils literal notranslate"><span class="pre">ParameterValidator</span></code><a class="headerlink" href="#parametervalidator" title="Link to this heading">¶</a></h3>
 <p>Validates optimization parameters.</p>
-<section id="id24">
-<h4>Source Code<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h4>
+<section id="id37">
+<h4>Source Code<a class="headerlink" href="#id37" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">ParameterValidator</span><span class="p">:</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validates optimization parameters.&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span>
@@ -1569,10 +1877,10 @@
 </pre></div>
 </div>
 </section>
-<section id="id25">
-<h4>Methods (3)<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h4>
-<section id="id26">
-<h5><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameter_space)</span></code><a class="headerlink" href="#id26" title="Link to this heading">¶</a></h5>
+<section id="id38">
+<h4>Methods (3)<a class="headerlink" href="#id38" title="Link to this heading">¶</a></h4>
+<section id="id39">
+<h5><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameter_space)</span></code><a class="headerlink" href="#id39" title="Link to this heading">¶</a></h5>
 <p>Initialize parameter validator.</p>
 <p><a class="reference internal" href="#method-parametervalidator-__init__"><span class="xref myst">View full source →</span></a></p>
 </section>
@@ -1620,7 +1928,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1643,6 +1951,40 @@
             <ul>
 <li><a class="reference internal" href="#">optimization.core.parameters</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#parameter-space-design">Parameter Space Design</a></li>
+<li><a class="reference internal" href="#latin-hypercube-sampling-lhs">Latin Hypercube Sampling (LHS)</a></li>
+<li><a class="reference internal" href="#sobol-sequences">Sobol Sequences</a></li>
+<li><a class="reference internal" href="#parameter-scaling">Parameter Scaling</a></li>
+<li><a class="reference internal" href="#constraint-handling">Constraint Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-optimization">Example 3: Integration with Optimization</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#id2">Parameter Space Design</a></li>
+<li><a class="reference internal" href="#id3">Latin Hypercube Sampling (LHS)</a></li>
+<li><a class="reference internal" href="#id4">Sobol Sequences</a></li>
+<li><a class="reference internal" href="#id5">Parameter Scaling</a></li>
+<li><a class="reference internal" href="#id6">Constraint Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#id8">Usage Examples</a><ul>
+<li><a class="reference internal" href="#id9">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#id10">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#id11">Example 3: Integration with Optimization</a></li>
+<li><a class="reference internal" href="#id12">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#id13">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a><ul>
@@ -1658,59 +2000,59 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#continuousparameter"><code class="docutils literal notranslate"><span class="pre">ContinuousParameter</span></code></a><ul>
-<li><a class="reference internal" href="#id1">Source Code</a></li>
-<li><a class="reference internal" href="#id2">Methods (5)</a><ul>
+<li><a class="reference internal" href="#id14">Source Code</a></li>
+<li><a class="reference internal" href="#id15">Methods (5)</a><ul>
 <li><a class="reference internal" href="#init-self-name-lower-upper-description-log-scale"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">name,</span> <span class="pre">lower,</span> <span class="pre">upper,</span> <span class="pre">description,</span> <span class="pre">log_scale)</span></code></a></li>
-<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code></a></li>
-<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">value)</span></code></a></li>
-<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">value)</span></code></a></li>
-<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code></a></li>
+<li><a class="reference internal" href="#id16"><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code></a></li>
+<li><a class="reference internal" href="#id17"><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">value)</span></code></a></li>
+<li><a class="reference internal" href="#id18"><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">value)</span></code></a></li>
+<li><a class="reference internal" href="#id19"><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a class="reference internal" href="#discreteparameter"><code class="docutils literal notranslate"><span class="pre">DiscreteParameter</span></code></a><ul>
-<li><a class="reference internal" href="#id7">Source Code</a></li>
+<li><a class="reference internal" href="#id20">Source Code</a></li>
 <li><a class="reference internal" href="#methods-6">Methods (6)</a><ul>
 <li><a class="reference internal" href="#init-self-name-values-description"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">name,</span> <span class="pre">values,</span> <span class="pre">description)</span></code></a></li>
-<li><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code></a></li>
-<li><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">value)</span></code></a></li>
-<li><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">value)</span></code></a></li>
+<li><a class="reference internal" href="#id21"><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code></a></li>
+<li><a class="reference internal" href="#id22"><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">value)</span></code></a></li>
+<li><a class="reference internal" href="#id23"><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">value)</span></code></a></li>
 <li><a class="reference internal" href="#find-closest-self-value"><code class="docutils literal notranslate"><span class="pre">_find_closest(self,</span> <span class="pre">value)</span></code></a></li>
-<li><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code></a></li>
+<li><a class="reference internal" href="#id24"><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a class="reference internal" href="#continuousparameterspace"><code class="docutils literal notranslate"><span class="pre">ContinuousParameterSpace</span></code></a><ul>
-<li><a class="reference internal" href="#id12">Source Code</a></li>
+<li><a class="reference internal" href="#id25">Source Code</a></li>
 <li><a class="reference internal" href="#methods-7">Methods (7)</a><ul>
 <li><a class="reference internal" href="#init-self-lower-bounds-upper-bounds-names"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">lower_bounds,</span> <span class="pre">upper_bounds,</span> <span class="pre">names)</span></code></a></li>
-<li><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code></a></li>
+<li><a class="reference internal" href="#id26"><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code></a></li>
 <li><a class="reference internal" href="#validate-self-parameters"><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">parameters)</span></code></a></li>
 <li><a class="reference internal" href="#clip-self-parameters"><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">parameters)</span></code></a></li>
 <li><a class="reference internal" href="#dimensions-self"><code class="docutils literal notranslate"><span class="pre">dimensions(self)</span></code></a></li>
-<li><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code></a></li>
+<li><a class="reference internal" href="#id27"><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code></a></li>
 <li><a class="reference internal" href="#get-parameter-info-self"><code class="docutils literal notranslate"><span class="pre">get_parameter_info(self)</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a class="reference internal" href="#mixedparameterspace"><code class="docutils literal notranslate"><span class="pre">MixedParameterSpace</span></code></a><ul>
-<li><a class="reference internal" href="#id15">Source Code</a></li>
-<li><a class="reference internal" href="#id16">Methods (6)</a><ul>
+<li><a class="reference internal" href="#id28">Source Code</a></li>
+<li><a class="reference internal" href="#id29">Methods (6)</a><ul>
 <li><a class="reference internal" href="#init-self-parameters"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameters)</span></code></a></li>
-<li><a class="reference internal" href="#id17"><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code></a></li>
-<li><a class="reference internal" href="#id18"><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">parameters)</span></code></a></li>
-<li><a class="reference internal" href="#id19"><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">parameters)</span></code></a></li>
-<li><a class="reference internal" href="#id20"><code class="docutils literal notranslate"><span class="pre">dimensions(self)</span></code></a></li>
-<li><a class="reference internal" href="#id21"><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code></a></li>
+<li><a class="reference internal" href="#id30"><code class="docutils literal notranslate"><span class="pre">sample(self,</span> <span class="pre">n_samples,</span> <span class="pre">rng)</span></code></a></li>
+<li><a class="reference internal" href="#id31"><code class="docutils literal notranslate"><span class="pre">validate(self,</span> <span class="pre">parameters)</span></code></a></li>
+<li><a class="reference internal" href="#id32"><code class="docutils literal notranslate"><span class="pre">clip(self,</span> <span class="pre">parameters)</span></code></a></li>
+<li><a class="reference internal" href="#id33"><code class="docutils literal notranslate"><span class="pre">dimensions(self)</span></code></a></li>
+<li><a class="reference internal" href="#id34"><code class="docutils literal notranslate"><span class="pre">bounds(self)</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a class="reference internal" href="#parameterbounds"><code class="docutils literal notranslate"><span class="pre">ParameterBounds</span></code></a><ul>
-<li><a class="reference internal" href="#id22">Source Code</a></li>
+<li><a class="reference internal" href="#id35">Source Code</a></li>
 <li><a class="reference internal" href="#methods-4">Methods (4)</a><ul>
 <li><a class="reference internal" href="#init-self-lower-upper-names"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">lower,</span> <span class="pre">upper,</span> <span class="pre">names)</span></code></a></li>
 <li><a class="reference internal" href="#to-parameter-space-self"><code class="docutils literal notranslate"><span class="pre">to_parameter_space(self)</span></code></a></li>
@@ -1721,7 +2063,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#parametermapping"><code class="docutils literal notranslate"><span class="pre">ParameterMapping</span></code></a><ul>
-<li><a class="reference internal" href="#id23">Source Code</a></li>
+<li><a class="reference internal" href="#id36">Source Code</a></li>
 <li><a class="reference internal" href="#methods-3">Methods (3)</a><ul>
 <li><a class="reference internal" href="#init-self-parameter-space"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameter_space)</span></code></a></li>
 <li><a class="reference internal" href="#to-dict-self-parameters"><code class="docutils literal notranslate"><span class="pre">to_dict(self,</span> <span class="pre">parameters)</span></code></a></li>
@@ -1731,9 +2073,9 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#parametervalidator"><code class="docutils literal notranslate"><span class="pre">ParameterValidator</span></code></a><ul>
-<li><a class="reference internal" href="#id24">Source Code</a></li>
-<li><a class="reference internal" href="#id25">Methods (3)</a><ul>
-<li><a class="reference internal" href="#id26"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameter_space)</span></code></a></li>
+<li><a class="reference internal" href="#id37">Source Code</a></li>
+<li><a class="reference internal" href="#id38">Methods (3)</a><ul>
+<li><a class="reference internal" href="#id39"><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">parameter_space)</span></code></a></li>
 <li><a class="reference internal" href="#validate-single-self-parameters"><code class="docutils literal notranslate"><span class="pre">validate_single(self,</span> <span class="pre">parameters)</span></code></a></li>
 <li><a class="reference internal" href="#validate-batch-self-parameters"><code class="docutils literal notranslate"><span class="pre">validate_batch(self,</span> <span class="pre">parameters)</span></code></a></li>
 </ul>
@@ -1761,6 +2103,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

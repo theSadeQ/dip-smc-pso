@@ -57,6 +57,9 @@ Residual Norm: 0.1332 (exceeds threshold: 0.1000)
 
 #### **Root Cause Analysis**
 ```python
+# example-metadata:
+# runnable: false
+
 def analyze_fdi_failure():
     """Technical analysis of FDI threshold sensitivity."""
 
@@ -104,6 +107,9 @@ $$\text{Status} = \begin{cases}
 
 #### **Recommended Fixes**
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Adaptive Threshold with Hysteresis
 class AdaptiveThreshold:
     def __init__(self, base_threshold=0.135, hysteresis=0.02):
@@ -147,6 +153,9 @@ def compute_robust_residual(y_actual, y_predicted, outlier_threshold=3.0):
 
 #### **Failure Breakdown**
 ```python
+# example-metadata:
+# runnable: false
+
 # Three critical memory management failures identified:
 
 # Failure 1: Memory Leak Detection
@@ -173,6 +182,9 @@ def test_memory_pool_usage():
 
 #### **Memory Profiling Results**
 ```python
+# example-metadata:
+# runnable: false
+
 class MemoryAnalysis:
     """Detailed memory usage breakdown."""
 
@@ -350,6 +362,9 @@ def run_batch_simulation_memory_optimized(controller_factory, n_trials=1000):
 
 #### **Failure Categories**
 ```python
+# example-metadata:
+# runnable: false
+
 # 8 critical numerical stability failures identified:
 
 numerical_failures = {
@@ -390,6 +405,9 @@ numerical_failures = {
 
 **Matrix Conditioning Issues:**
 ```python
+# example-metadata:
+# runnable: false
+
 def analyze_matrix_conditioning():
     """Analysis of matrix conditioning problems."""
 
@@ -413,6 +431,9 @@ def analyze_matrix_conditioning():
 
 **Lyapunov Stability Analysis:**
 ```python
+# example-metadata:
+# runnable: false
+
 def verify_lyapunov_stability(A, Q):
     """Verify Lyapunov stability with robust numerical methods."""
 
@@ -441,6 +462,9 @@ def verify_lyapunov_stability(A, Q):
 
 #### **Robust Numerical Solutions**
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Enhanced Matrix Operations
 class RobustMatrixOps:
     """Numerically stable matrix operations."""
@@ -553,6 +577,9 @@ class AdaptivePrecisionController:
 
 ### **Test Execution Performance**
 ```python
+# example-metadata:
+# runnable: false
+
 performance_metrics = {
     'test_execution_time': {
         'total_duration': '45 minutes 23 seconds',
@@ -586,6 +613,9 @@ performance_metrics = {
 
 ### **Benchmark Comparison**
 ```python
+# example-metadata:
+# runnable: false
+
 # Current vs. Target Performance
 performance_comparison = {
     'test_suite_execution': {
@@ -744,6 +774,9 @@ echo "✅ Analysis complete. Reports available in docs/testing/pytest_reports/"
 
 ### **Pre-Production Checklist**
 ```python
+# example-metadata:
+# runnable: false
+
 validation_checklist = {
     'numerical_stability': {
         'matrix_conditioning': '✅ All matrices well-conditioned (cond < 1e10)',

@@ -6,6 +6,162 @@
 
 Differential Evolution optimization algorithm.
 
+
+
+## Advanced Mathematical Theory
+
+### Differential Evolution (DE)
+
+**Core DE algorithm:**
+
+```{math}
+\begin{align}
+\text{Mutation: } & \vec{v}_i = \vec{x}_{r1} + F \cdot (\vec{x}_{r2} - \vec{x}_{r3}) \\
+\text{Crossover: } & u_{i,j} = \begin{cases} v_{i,j}, & r_j \leq CR \lor j = j_{rand} \\ x_{i,j}, & \text{otherwise} \end{cases} \\
+\text{Selection: } & \vec{x}_i^{t+1} = \begin{cases} \vec{u}_i, & f(\vec{u}_i) < f(\vec{x}_i) \\ \vec{x}_i, & \text{otherwise} \end{cases}
+\end{align}
+```
+
+### Mutation Strategies
+
+**DE/rand/1:**
+
+```{math}
+\vec{v}_i = \vec{x}_{r1} + F \cdot (\vec{x}_{r2} - \vec{x}_{r3})
+```
+
+**DE/best/1:**
+
+```{math}
+\vec{v}_i = \vec{x}_{best} + F \cdot (\vec{x}_{r1} - \vec{x}_{r2})
+```
+
+**DE/current-to-best/1:**
+
+```{math}
+\vec{v}_i = \vec{x}_i + F \cdot (\vec{x}_{best} - \vec{x}_i) + F \cdot (\vec{x}_{r1} - \vec{x}_{r2})
+```
+
+**DE/rand/2:**
+
+```{math}
+\vec{v}_i = \vec{x}_{r1} + F \cdot (\vec{x}_{r2} - \vec{x}_{r3}) + F \cdot (\vec{x}_{r4} - \vec{x}_{r5})
+```
+
+### Control Parameters
+
+**Scaling factor** $F \in [0, 2]$:
+- Typical: $F = 0.5$
+- Controls mutation strength
+- Lower $F$: Local search
+- Higher $F$: Global exploration
+
+**Crossover rate** $CR \in [0, 1]$:
+- Typical: $CR = 0.9$
+- Controls parameter inheritance
+- Higher $CR$: More mutation components
+
+### Adaptive DE
+
+**Self-adaptive parameters:**
+
+```{math}
+\begin{align}
+F_i &= F_{min} + (F_{max} - F_{min}) \cdot \text{rand}() \\
+CR_i &= \text{rand}() \quad \text{or} \quad CR_i \sim \mathcal{N}(0.5, 0.1)
+\end{align}
+```
+
+### Convergence Properties
+
+**Theorem (Zaharie 2002):** DE converges to global optimum if:
+
+```{math}
+F \cdot \sqrt{2} < 1 \quad \text{and} \quad CR \text{ sufficiently large}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Population] --> B[For Each Individual]
+    B --> C[Select r1, r2, r3]
+
+    C --> D{Mutation Strategy}
+    D -->|rand/1| E[v = r1 + F(r2-r3)]
+    D -->|best/1| F[v = best + F(r1-r2)]
+    D -->|current-to-best| G[v = x + F(best-x) + F(r1-r2)]
+
+    E --> H[Crossover]
+    F --> H
+    G --> H
+
+    H --> I{Binomial CR}
+    I -->|Yes| J[Trial Vector u]
+    I -->|No| K[Original x]
+
+    J --> L[Selection]
+    K --> L
+
+    L --> M{f(u) < f(x)?}
+    M -->|Yes| N[Replace with u]
+    M -->|No| O[Keep x]
+
+    N --> P[Next Generation]
+    O --> P
+
+    P --> Q{Converged?}
+    Q -->|No| B
+    Q -->|Yes| R[Return Best]
+
+    style D fill:#ff9
+    style M fill:#9cf
+    style R fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.algorithms import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/optimization/algorithms/evolutionary/differential.py

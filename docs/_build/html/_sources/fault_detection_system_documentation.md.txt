@@ -176,6 +176,9 @@ FDIsystem
 The FDI system maintains crucial internal state for continuous operation:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FDIsystem:
     # Detection state
     _counter: int                    # Persistence violation counter
@@ -229,6 +232,9 @@ class FDIsystem:
 
 **Example Usage:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Initialize fault detector
 fdi = FDIsystem(
     residual_threshold=0.1,
@@ -273,6 +279,9 @@ for t, measurement in simulation_data:
 
 **Parameter Constraints:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Threshold parameters
 assert residual_threshold > 0, "Threshold must be positive"
 assert persistence_counter >= 1, "Persistence counter must be ≥ 1"
@@ -317,6 +326,9 @@ The FDI system validation follows rigorous scientific methodology:
 
 **Realistic Fault Scenarios:**
 ```python
+# example-metadata:
+# runnable: false
+
 fault_test_matrix = {
     "sensor_bias": {
         "magnitude": np.array([0.1, 0.0, 0.0, 0.0]),
@@ -340,6 +352,9 @@ fault_test_matrix = {
 
 #### **4.2.1 Monte Carlo Validation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_false_alarm_rate(n_trials=10000):
     """Validate false alarm rate under normal conditions."""
     false_alarms = 0
@@ -372,6 +387,9 @@ def validate_false_alarm_rate(n_trials=10000):
 
 **Property-Based Testing:**
 ```python
+# example-metadata:
+# runnable: false
+
 @given(residuals=arrays(float, min_size=10, max_size=1000))
 @assume(all(r >= 0 for r in residuals))
 def test_adaptive_threshold_monotonicity(residuals):
@@ -396,6 +414,9 @@ def test_adaptive_threshold_monotonicity(residuals):
 
 #### **5.1.1 Basic Integration Pattern:**
 ```python
+# example-metadata:
+# runnable: false
+
 class FaultTolerantController:
     def __init__(self, controller, dynamics_model):
         self.controller = controller
@@ -428,6 +449,9 @@ class FaultTolerantController:
 
 #### **5.1.2 Multi-Layer Safety Integration:**
 ```python
+# example-metadata:
+# runnable: false
+
 class SafetyManager:
     def __init__(self):
         # Primary fault detector (sensitive)
@@ -467,6 +491,9 @@ class SafetyManager:
 
 #### **5.2.2 Real-Time Constraints:**
 ```python
+# example-metadata:
+# runnable: false
+
 class RealTimeFDI:
     def __init__(self, max_execution_time_ms=1.0):
         self.fdi = FDIsystem()
@@ -490,6 +517,9 @@ class RealTimeFDI:
 
 #### **5.3.1 HIL Communication Protocol:**
 ```python
+# example-metadata:
+# runnable: false
+
 class HILFaultDetection:
     def __init__(self, plant_server_config):
         self.fdi = FDIsystem(
@@ -680,6 +710,9 @@ residual_norm = float(np.linalg.norm(sub))        # Then compute norm
 
 #### **6.1.3 Validation of Fix:**
 ```python
+# example-metadata:
+# runnable: false
+
 def test_weighted_residual_correction():
     """Verify weighted residual calculation is mathematically correct."""
     residual = np.array([0.1, 0.2, 0.3])
@@ -705,6 +738,9 @@ def test_weighted_residual_correction():
 
 #### **6.2.2 Fixed CUSUM Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 # CORRECTED CUSUM update logic
 if self.cusum_enabled:
     # Robust reference value selection
@@ -739,6 +775,9 @@ if self.cusum_enabled:
 
 #### **6.3.2 Complete History Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def check(self, t, meas, u, dt, dynamics_model):
     # ... validation and prediction logic ...
 
@@ -763,6 +802,9 @@ def check(self, t, meas, u, dt, dynamics_model):
 #### **6.4.1 End-to-End Safety Verification:**
 **Safety Test Protocol:**
 ```python
+# example-metadata:
+# runnable: false
+
 def test_safety_critical_fault_detection():
     """Verify FDI system meets safety requirements."""
 
@@ -877,6 +919,9 @@ OPERATIONAL_LIMITS = {
 
 **Diagnostic Steps:**
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_false_alarms(fdi_system):
     """Diagnostic procedure for false alarm investigation."""
 
@@ -918,6 +963,9 @@ def diagnose_false_alarms(fdi_system):
 
 **Diagnostic Steps:**
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_missed_faults(fault_injection_results):
     """Analyze fault detection performance."""
 
@@ -952,6 +1000,9 @@ def diagnose_missed_faults(fault_injection_results):
 
 **Performance Optimization:**
 ```python
+# example-metadata:
+# runnable: false
+
 def optimize_fdi_performance(fdi_system):
     """Performance optimization recommendations."""
 
@@ -980,6 +1031,9 @@ def optimize_fdi_performance(fdi_system):
 
 **Step 1: Baseline Characterization**
 ```python
+# example-metadata:
+# runnable: false
+
 def characterize_system_baseline(simulation_data):
     """Establish baseline noise characteristics."""
     residuals = []
@@ -1018,6 +1072,9 @@ def recommend_threshold(baseline_stats, target_far=0.01):
 
 **Step 3: Persistence Tuning**
 ```python
+# example-metadata:
+# runnable: false
+
 def tune_persistence_counter(fault_scenarios, detection_delay_target=20):
     """Tune persistence counter based on detection delay requirements."""
 

@@ -351,6 +351,9 @@ regularizer = AdaptiveRegularizer(
 ### 2. Monitor Regularization Frequency
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Track regularization in production
 from src.plant.core.numerical_stability import NumericalStabilityMonitor
 
@@ -375,6 +378,9 @@ test_matrices = [
 ### 4. Document Matrix Provenance
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Track where ill-conditioned matrices originate
 def compute_inertia_matrix(state):
     """

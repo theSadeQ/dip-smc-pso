@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.adaptive_smc" href="adaptive_smc.html" /><link rel="prev" title="SMC Controller Comparison Theory" href="../../mathematical_foundations/controller_comparison_theory.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -548,6 +574,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="base_controller_interface.html">controllers.base.controller_interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="base_controller_interface.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_controller_interface.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_controller_interface.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_controller_interface.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="base_controller_interface.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="base_controller_interface.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="base_controller_interface.html#dependencies">Dependencies</a></li>
@@ -555,6 +584,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="base_control_primitives.html">controllers.base.control_primitives</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="base_control_primitives.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_control_primitives.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_control_primitives.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_control_primitives.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="base_control_primitives.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="base_control_primitives.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="base_control_primitives.html#parameters">Parameters</a></li>
@@ -615,6 +647,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="factory_pso_integration.html">controllers.factory.pso_integration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="factory_pso_integration.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory_pso_integration.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory_pso_integration.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory_pso_integration.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_pso_integration.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_pso_integration.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_pso_integration.html#functions">Functions</a></li>
@@ -623,6 +658,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="factory_smc_factory.html">controllers.factory.smc_factory</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="factory_smc_factory.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory_smc_factory.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory_smc_factory.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory_smc_factory.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_smc_factory.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_smc_factory.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_smc_factory.html#functions">Functions</a></li>
@@ -755,6 +793,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_equivalent_control.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_equivalent_control.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_equivalent_control.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_equivalent_control.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_equivalent_control.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_equivalent_control.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_equivalent_control.html#dependencies">Dependencies</a></li>
@@ -762,6 +803,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_core_gain_validation.html">controllers.smc.core.gain_validation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_gain_validation.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_gain_validation.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_gain_validation.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_gain_validation.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_gain_validation.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_gain_validation.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_gain_validation.html#functions">Functions</a></li>
@@ -770,6 +814,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_sliding_surface.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_sliding_surface.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_sliding_surface.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_sliding_surface.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_sliding_surface.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_sliding_surface.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_sliding_surface.html#functions">Functions</a></li>
@@ -778,6 +825,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_core_switching_functions.html">controllers.smc.core.switching_functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_switching_functions.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_switching_functions.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_switching_functions.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_core_switching_functions.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_switching_functions.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_switching_functions.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_core_switching_functions.html#functions">Functions</a></li>
@@ -792,6 +842,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_adaptation_law.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_adaptation_law.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_adaptation_law.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_adaptation_law.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_adaptation_law.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_adaptation_law.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_adaptation_law.html#dependencies">Dependencies</a></li>
@@ -806,16 +859,22 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#id1">Architecture Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#mathematical-foundation">Mathematical Foundation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_controller.html#id7">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_parameter_estimation.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_parameter_estimation.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_parameter_estimation.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_parameter_estimation.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_parameter_estimation.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_parameter_estimation.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_adaptive_parameter_estimation.html#dependencies">Dependencies</a></li>
@@ -829,6 +888,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_boundary_layer.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_boundary_layer.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_boundary_layer.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_boundary_layer.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_boundary_layer.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_boundary_layer.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_boundary_layer.html#dependencies">Dependencies</a></li>
@@ -843,12 +905,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#id1">Architecture Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#mathematical-foundation">Mathematical Foundation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_classical_controller.html#id7">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a><ul>
@@ -866,16 +931,22 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#id1">Architecture Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#mathematical-foundation">Mathematical Foundation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_controller.html#id8">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_switching_logic.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_switching_logic.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_switching_logic.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_switching_logic.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_switching_logic.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_switching_logic.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_hybrid_switching_logic.html#dependencies">Dependencies</a></li>
@@ -896,16 +967,22 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#id1">Architecture Diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#mathematical-foundation">Mathematical Foundation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_controller.html#id7">Usage Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_twisting_algorithm.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_twisting_algorithm.html#advanced-mathematical-theory">Advanced Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_twisting_algorithm.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_twisting_algorithm.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_twisting_algorithm.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_twisting_algorithm.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_algorithms_super_twisting_twisting_algorithm.html#dependencies">Dependencies</a></li>
@@ -1073,7 +1150,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

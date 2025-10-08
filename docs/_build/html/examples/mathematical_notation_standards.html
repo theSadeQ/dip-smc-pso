@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -519,7 +545,10 @@
 <h2>2. Control Theory Notation Standards<a class="headerlink" href="#control-theory-notation-standards" title="Link to this heading">¶</a></h2>
 <section id="sliding-mode-control">
 <h3>2.1 Sliding Mode Control<a class="headerlink" href="#sliding-mode-control" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Classical SMC sliding surface definition:</span>
 
 <span class="sd">s = λ₁e₁ + λ₂e₂ + ė₁ + ė₂</span>
@@ -559,7 +588,10 @@
 </section>
 <section id="super-twisting-algorithm">
 <h3>2.3 Super-Twisting Algorithm<a class="headerlink" href="#super-twisting-algorithm" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Second-order sliding mode (Super-Twisting) control law:</span>
 
 <span class="sd">u = u₁ + u₂</span>
@@ -581,7 +613,10 @@
 <h2>3. Optimization Theory Notation<a class="headerlink" href="#optimization-theory-notation" title="Link to this heading">¶</a></h2>
 <section id="pso-dynamics">
 <h3>3.1 PSO Dynamics<a class="headerlink" href="#pso-dynamics" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Particle Swarm Optimization update equations:</span>
 
 <span class="sd">vᵢᵗ⁺¹ = w·vᵢᵗ + c₁r₁(pᵢ - xᵢᵗ) + c₂r₂(g - xᵢᵗ)</span>
@@ -603,7 +638,10 @@
 </section>
 <section id="cost-function-definition">
 <h3>3.2 Cost Function Definition<a class="headerlink" href="#cost-function-definition" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Multi-objective cost function for controller optimization:</span>
 
 <span class="sd">J(k) = w₁·ISE(k) + w₂·ITAE(k) + w₃·U_max(k) + w₄·Penalty(k)</span>
@@ -623,7 +661,10 @@
 <h2>4. Performance Metrics Notation<a class="headerlink" href="#performance-metrics-notation" title="Link to this heading">¶</a></h2>
 <section id="standard-control-metrics">
 <h3>4.1 Standard Control Metrics<a class="headerlink" href="#standard-control-metrics" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Performance Metrics for Control Systems:</span>
 
 <span class="sd">1. Integral Squared Error (ISE):</span>
@@ -652,7 +693,10 @@
 <h2>5. Statistical Analysis Notation<a class="headerlink" href="#statistical-analysis-notation" title="Link to this heading">¶</a></h2>
 <section id="monte-carlo-validation">
 <h3>5.1 Monte Carlo Validation<a class="headerlink" href="#monte-carlo-validation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Monte Carlo Uncertainty Quantification:</span>
 
 <span class="sd">Given N independent samples {J₁, J₂, ..., Jₙ} of the cost function:</span>
@@ -671,7 +715,10 @@
 </section>
 <section id="hypothesis-testing">
 <h3>5.2 Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Welch&#39;s t-test for comparing controller performance:</span>
 
 <span class="sd">H₀: μ₁ = μ₂ (no difference in mean performance)</span>
@@ -715,7 +762,10 @@
 <h2>7. Docstring Examples<a class="headerlink" href="#docstring-examples" title="Link to this heading">¶</a></h2>
 <section id="function-documentation-with-math">
 <h3>7.1 Function Documentation with Math<a class="headerlink" href="#function-documentation-with-math" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_sliding_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_sliding_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the sliding surface value for classical SMC.</span>
 
 <span class="sd">    The sliding surface is defined as:</span>
@@ -753,7 +803,10 @@
 </section>
 <section id="class-documentation-with-theory">
 <h3>7.2 Class Documentation with Theory<a class="headerlink" href="#class-documentation-with-theory" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Classical Sliding Mode Controller for double-inverted pendulum.</span>
 
 <span class="sd">    Implements the classical SMC algorithm with boundary layer for chattering</span>
@@ -850,7 +903,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

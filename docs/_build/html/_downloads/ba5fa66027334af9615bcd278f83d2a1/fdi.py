@@ -14,4 +14,10 @@ Usage:
 """
 
 # Import from the actual location
-from ..analysis.fault_detection.fdi import *
+from ..analysis.fault_detection.fdi import (
+    DynamicsProtocol,
+    FDIsystem,
+    FaultDetectionInterface,
+)
+
+__all__ = ["DynamicsProtocol", "FDIsystem", "FaultDetectionInterface"]

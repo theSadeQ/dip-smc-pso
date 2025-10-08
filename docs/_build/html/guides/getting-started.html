@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -487,22 +513,591 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
-<p>This guide shows how to run the CLI and Streamlit UI using real entry points.</p>
-<section id="command-line-cli">
-<h2>Command-line (CLI)<a class="headerlink" href="#command-line-cli" title="Link to this heading">¶</a></h2>
-<p>Examples using <code class="docutils literal notranslate"><span class="pre">simulate.py</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span class="w"> </span>classical_smc<span class="w"> </span>--plot
-python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span class="w"> </span>sta_smc<span class="w"> </span>--run-pso<span class="w"> </span>--save<span class="w"> </span>tuned_gains.json
-python<span class="w"> </span>simulate.py<span class="w"> </span>--print-config
+<p>Welcome to the DIP SMC PSO framework! This guide will help you get up and running with your first simulation in under 10 minutes.</p>
+<section id="what-is-the-dip-smc-pso-framework">
+<h2>What is the DIP SMC PSO Framework?<a class="headerlink" href="#what-is-the-dip-smc-pso-framework" title="Link to this heading">¶</a></h2>
+<p>This framework provides a complete research and development environment for:</p>
+<ul class="simple">
+<li><p><strong>Controlling a Double-Inverted Pendulum (DIP):</strong> A challenging control problem with two pendulums stacked on a cart</p></li>
+<li><p><strong>Sliding Mode Control (SMC):</strong> Advanced nonlinear control techniques with 4 controller variants</p></li>
+<li><p><strong>Particle Swarm Optimization (PSO):</strong> Automated gain tuning for optimal performance</p></li>
+<li><p><strong>Scientific Computing:</strong> High-fidelity simulations, analysis, and visualization</p></li>
+</ul>
+</section>
+<section id="who-should-use-this-framework">
+<h2>Who Should Use This Framework?<a class="headerlink" href="#who-should-use-this-framework" title="Link to this heading">¶</a></h2>
+<p>This framework is designed for:</p>
+<ul class="simple">
+<li><p><strong>Control Systems Researchers:</strong> Testing advanced SMC algorithms and optimization techniques</p></li>
+<li><p><strong>Graduate Students:</strong> Learning control theory through hands-on experimentation</p></li>
+<li><p><strong>Engineers:</strong> Prototyping control systems for underactuated mechanical systems</p></li>
+<li><p><strong>Educators:</strong> Teaching nonlinear control and optimization concepts</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<p>Before you begin, ensure you have:</p>
+<ul class="simple">
+<li><p>✅ <strong>Python 3.9 or newer</strong> (Python 3.11 recommended)</p></li>
+<li><p>✅ <strong>pip</strong> package manager</p></li>
+<li><p>✅ <strong>Git</strong> for cloning the repository</p></li>
+<li><p>✅ <strong>10 GB free disk space</strong> (for virtual environment and dependencies)</p></li>
+<li><p>✅ <strong>Basic Python knowledge</strong> (variables, functions, imports)</p></li>
+<li><p>⬜ <strong>Optional:</strong> CUDA-capable GPU for accelerated batch simulations</p></li>
+</ul>
+</section>
+<section id="what-you-ll-learn">
+<h2>What You’ll Learn<a class="headerlink" href="#what-you-ll-learn" title="Link to this heading">¶</a></h2>
+<p>By the end of this guide, you will be able to:</p>
+<ol class="arabic simple">
+<li><p>Install and verify the framework</p></li>
+<li><p>Run your first simulation with a classical SMC controller</p></li>
+<li><p>Understand simulation outputs and visualizations</p></li>
+<li><p>Explore different controller types</p></li>
+<li><p>Know where to go next for advanced topics</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<section id="step-1-verify-python-version">
+<h3>Step 1: Verify Python Version<a class="headerlink" href="#step-1-verify-python-version" title="Link to this heading">¶</a></h3>
+<p>Open a terminal and check your Python version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>--version
+<span class="c1"># OR on some systems:</span>
+python3<span class="w"> </span>--version
 </pre></div>
 </div>
+<p><strong>Expected output:</strong> <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.9.x</span></code> or higher (e.g., <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.11.5</span></code>)</p>
+<p><strong>Troubleshooting:</strong></p>
+<ul class="simple">
+<li><p><strong>“python: command not found”</strong> → Install Python from <a class="reference external" href="https://www.python.org/downloads/">python.org</a></p></li>
+<li><p><strong>Python 2.x.x shown</strong> → Use <code class="docutils literal notranslate"><span class="pre">python3</span></code> instead of <code class="docutils literal notranslate"><span class="pre">python</span></code> throughout this guide</p></li>
+<li><p><strong>Python 3.8 or older</strong> → Upgrade to Python 3.9+ for compatibility</p></li>
+</ul>
 </section>
-<section id="streamlit-ui">
-<h2>Streamlit UI<a class="headerlink" href="#streamlit-ui" title="Link to this heading">¶</a></h2>
-<p>Launch the dashboard:</p>
+<section id="step-2-clone-the-repository">
+<h3>Step 2: Clone the Repository<a class="headerlink" href="#step-2-clone-the-repository" title="Link to this heading">¶</a></h3>
+<p>Clone the project to your local machine:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/theSadeQ/dip-smc-pso.git
+
+<span class="c1"># Navigate to project directory</span>
+<span class="nb">cd</span><span class="w"> </span>dip-smc-pso
+
+<span class="c1"># Verify you&#39;re in the correct directory</span>
+ls
+<span class="c1"># You should see: simulate.py, config.yaml, src/, tests/, docs/, etc.</span>
+</pre></div>
+</div>
+<p><strong>Troubleshooting:</strong></p>
+<ul class="simple">
+<li><p><strong>“git: command not found”</strong> → Install Git from <a class="reference external" href="https://git-scm.com/downloads">git-scm.com</a></p></li>
+<li><p><strong>Permission denied</strong> → Check your SSH keys or use HTTPS URL instead</p></li>
+<li><p><strong>Slow clone</strong> → Large repository (~100 MB), be patient on slow connections</p></li>
+</ul>
+</section>
+<section id="step-3-create-virtual-environment-recommended">
+<h3>Step 3: Create Virtual Environment (Recommended)<a class="headerlink" href="#step-3-create-virtual-environment-recommended" title="Link to this heading">¶</a></h3>
+<p>A virtual environment isolates project dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create virtual environment</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+
+<span class="c1"># Activate virtual environment</span>
+<span class="c1"># On Linux/Mac:</span>
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+
+<span class="c1"># On Windows (Command Prompt):</span>
+venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate.bat
+
+<span class="c1"># On Windows (PowerShell):</span>
+venv<span class="se">\S</span>cripts<span class="se">\A</span>ctivate.ps1
+</pre></div>
+</div>
+<p><strong>Expected result:</strong> Your terminal prompt should now show <code class="docutils literal notranslate"><span class="pre">(venv)</span></code> prefix</p>
+<p><strong>Troubleshooting:</strong></p>
+<ul class="simple">
+<li><p><strong>“venv: command not found”</strong> → Install python3-venv: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">python3-venv</span></code> (Linux)</p></li>
+<li><p><strong>PowerShell execution policy error</strong> → Run: <code class="docutils literal notranslate"><span class="pre">Set-ExecutionPolicy</span> <span class="pre">-ExecutionPolicy</span> <span class="pre">RemoteSigned</span> <span class="pre">-Scope</span> <span class="pre">CurrentUser</span></code></p></li>
+<li><p><strong>Activation doesn’t change prompt</strong> → Try using full path to activate script</p></li>
+</ul>
+</section>
+<section id="step-4-install-dependencies">
+<h3>Step 4: Install Dependencies<a class="headerlink" href="#step-4-install-dependencies" title="Link to this heading">¶</a></h3>
+<p>Install all required Python packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure pip is up to date</span>
+pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+
+<span class="c1"># Install project dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p><strong>This will install (~50 packages, ~500 MB):</strong></p>
+<ul class="simple">
+<li><p>NumPy, SciPy (numerical computing)</p></li>
+<li><p>Matplotlib (visualization)</p></li>
+<li><p>PyYAML (configuration)</p></li>
+<li><p>Numba (performance acceleration)</p></li>
+<li><p>PySwarms (PSO optimization)</p></li>
+<li><p>Pytest (testing)</p></li>
+<li><p>Streamlit (web interface)</p></li>
+</ul>
+<p><strong>Installation takes:</strong> 2-5 minutes depending on internet speed</p>
+<p><strong>Troubleshooting:</strong></p>
+<ul class="simple">
+<li><p><strong>Compiler errors (Windows)</strong> → Install Visual C++ Build Tools</p></li>
+<li><p><strong>NumPy version conflicts</strong> → Use: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">numpy</span></code></p></li>
+<li><p><strong>Permission errors</strong> → Ensure virtual environment is activated, or use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--user</span></code></p></li>
+<li><p><strong>Slow download</strong> → Use mirror: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span> <span class="pre">-i</span> <span class="pre">https://pypi.tuna.tsinghua.edu.cn/simple</span></code></p></li>
+</ul>
+</section>
+<section id="step-5-verify-installation">
+<h3>Step 5: Verify Installation<a class="headerlink" href="#step-5-verify-installation" title="Link to this heading">¶</a></h3>
+<p>Test that everything is installed correctly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check simulate.py is accessible</span>
+python<span class="w"> </span>simulate.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<p><strong>Expected output:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">simulate</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">config</span> <span class="n">CONFIG</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">controller</span> <span class="n">CONTROLLER</span><span class="p">]</span>
+                   <span class="p">[</span><span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">gains</span> <span class="n">PATH</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">gains</span> <span class="n">PATH</span><span class="p">]</span>
+                   <span class="p">[</span><span class="o">--</span><span class="n">duration</span> <span class="n">DURATION</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">dt</span> <span class="n">DT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">plot</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="nb">print</span><span class="o">-</span><span class="n">config</span><span class="p">]</span>
+                   <span class="p">[</span><span class="o">--</span><span class="n">plot</span><span class="o">-</span><span class="n">fdi</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">run</span><span class="o">-</span><span class="n">hil</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">run</span><span class="o">-</span><span class="n">pso</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">seed</span> <span class="n">SEED</span><span class="p">]</span>
+
+<span class="n">CLI</span> <span class="k">for</span> <span class="n">PSO</span><span class="o">-</span><span class="n">tuned</span> <span class="n">Sliding</span><span class="o">-</span><span class="n">Mode</span> <span class="n">Control</span> <span class="ow">and</span> <span class="n">HIL</span> <span class="k">for</span> <span class="n">a</span> <span class="n">double</span><span class="o">-</span><span class="n">inverted</span> <span class="n">pendulum</span><span class="o">.</span>
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>              <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">--</span><span class="n">config</span> <span class="n">CONFIG</span>         <span class="n">Path</span> <span class="n">to</span> <span class="n">config</span> <span class="n">file</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">yaml</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">controller</span> <span class="n">CONTROLLER</span> <span class="n">Controller</span> <span class="nb">type</span> <span class="n">to</span> <span class="n">use</span> <span class="p">(</span><span class="n">classical_smc</span><span class="p">,</span> <span class="n">sta_smc</span><span class="p">,</span>
+                         <span class="n">adaptive_smc</span><span class="p">,</span> <span class="n">hybrid_adaptive_sta_smc</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">gains</span> <span class="n">PATH</span>       <span class="n">Save</span> <span class="n">gains</span> <span class="n">to</span> <span class="n">JSON</span> <span class="n">file</span>
+  <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">gains</span> <span class="n">PATH</span>       <span class="n">Load</span> <span class="n">gains</span> <span class="kn">from</span><span class="w"> </span><span class="nn">JSON</span> <span class="n">file</span>
+  <span class="o">--</span><span class="n">duration</span> <span class="n">DURATION</span>     <span class="n">Override</span> <span class="n">simulation</span> <span class="n">duration</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">dt</span> <span class="n">DT</span>                <span class="n">Override</span> <span class="n">simulation</span> <span class="n">timestep</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">plot</span>                  <span class="n">Display</span> <span class="n">plots</span> <span class="n">after</span> <span class="n">simulation</span>
+  <span class="o">--</span><span class="nb">print</span><span class="o">-</span><span class="n">config</span>          <span class="n">Print</span> <span class="n">current</span> <span class="n">configuration</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">--</span><span class="n">plot</span><span class="o">-</span><span class="n">fdi</span>             <span class="n">Show</span> <span class="n">FDI</span> <span class="n">residual</span> <span class="n">plots</span> <span class="p">(</span><span class="n">requires</span> <span class="n">FDI</span> <span class="n">enabled</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">run</span><span class="o">-</span><span class="n">hil</span>              <span class="n">Run</span> <span class="n">hardware</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">loop</span> <span class="n">simulation</span>
+  <span class="o">--</span><span class="n">run</span><span class="o">-</span><span class="n">pso</span>              <span class="n">Run</span> <span class="n">PSO</span> <span class="n">optimization</span> <span class="k">for</span> <span class="n">controller</span> <span class="n">gains</span>
+  <span class="o">--</span><span class="n">seed</span> <span class="n">SEED</span>            <span class="n">Random</span> <span class="n">seed</span> <span class="k">for</span> <span class="n">reproducibility</span>
+</pre></div>
+</div>
+<p><strong>✅ Installation Complete!</strong> You’re now ready to run your first simulation.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="your-first-simulation">
+<h2>Your First Simulation<a class="headerlink" href="#your-first-simulation" title="Link to this heading">¶</a></h2>
+<section id="run-the-classical-smc-controller">
+<h3>Run the Classical SMC Controller<a class="headerlink" href="#run-the-classical-smc-controller" title="Link to this heading">¶</a></h3>
+<p>Execute your first simulation with the classical sliding mode controller:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--plot
+</pre></div>
+</div>
+<p><strong>What happens:</strong></p>
+<ol class="arabic simple">
+<li><p>Framework loads configuration from <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code></p></li>
+<li><p>Creates a classical SMC controller with default gains</p></li>
+<li><p>Initializes the double-inverted pendulum dynamics model</p></li>
+<li><p>Runs a 5-second simulation with 0.001s timesteps (5,000 steps)</p></li>
+<li><p>Generates performance metrics</p></li>
+<li><p>Displays visualization plots</p></li>
+</ol>
+<p><strong>Expected terminal output:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="n">Provenance</span> <span class="n">configured</span><span class="p">:</span> <span class="n">commit</span><span class="o">=&lt;</span><span class="nb">hash</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">cfg_hash</span><span class="o">=&lt;</span><span class="nb">hash</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">D</span><span class="p">:</span>\<span class="n">Projects</span>\<span class="n">main</span>\<span class="n">src</span>\<span class="n">plant</span>\<span class="n">core</span>\<span class="n">state_validation</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">171</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">State</span> <span class="n">vector</span> <span class="n">was</span> <span class="n">modified</span> <span class="n">during</span> <span class="n">sanitization</span>
+  <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;State vector was modified during sanitization&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> The simulation runs with minimal terminal output. The provenance line confirms the simulation configuration is tracked for reproducibility. The state sanitization warning is normal and indicates the simulator is ensuring numerical stability.</p>
+<p><strong>⏱️ Simulation takes:</strong> 10-15 seconds on modern hardware (includes initialization and plotting)</p>
+</section>
+<section id="understanding-the-output">
+<h3>Understanding the Output<a class="headerlink" href="#understanding-the-output" title="Link to this heading">¶</a></h3>
+<section id="plot-window-1-state-trajectories">
+<h4>Plot Window 1: State Trajectories<a class="headerlink" href="#plot-window-1-state-trajectories" title="Link to this heading">¶</a></h4>
+<p>You’ll see a plot with 6 subplots showing:</p>
+<ol class="arabic simple">
+<li><p><strong>Cart Position (x):</strong> Should stabilize near initial displacement (~0.1 m)</p></li>
+<li><p><strong>Cart Velocity (dx):</strong> Should converge to 0 m/s</p></li>
+<li><p><strong>First Pendulum Angle (θ₁):</strong> Should converge to 0 rad (upright)</p></li>
+<li><p><strong>First Pendulum Velocity (dθ₁):</strong> Should converge to 0 rad/s</p></li>
+<li><p><strong>Second Pendulum Angle (θ₂):</strong> Should converge to 0 rad (upright)</p></li>
+<li><p><strong>Second Pendulum Velocity (dθ₂):</strong> Should converge to 0 rad/s</p></li>
+</ol>
+<p><strong>Key observations:</strong></p>
+<ul class="simple">
+<li><p><strong>Transient response:</strong> Initial oscillations as pendulums stabilize (0-3 seconds)</p></li>
+<li><p><strong>Steady state:</strong> Final values after settling (3-5 seconds)</p></li>
+<li><p><strong>Coupling effects:</strong> Notice how cart motion affects pendulum angles</p></li>
+</ul>
+</section>
+<section id="plot-window-2-control-input">
+<h4>Plot Window 2: Control Input<a class="headerlink" href="#plot-window-2-control-input" title="Link to this heading">¶</a></h4>
+<p>Shows the force applied to the cart over time:</p>
+<ul class="simple">
+<li><p><strong>Initial spike:</strong> Large force to counteract initial perturbation</p></li>
+<li><p><strong>Oscillations:</strong> Controller actively stabilizing during transient</p></li>
+<li><p><strong>Steady-state control:</strong> Small forces for regulation and disturbance rejection</p></li>
+<li><p><strong>Saturation:</strong> Control is limited to ±150 N (actuator limit)</p></li>
+</ul>
+</section>
+<section id="performance-metrics-explained">
+<h4>Performance Metrics Explained<a class="headerlink" href="#performance-metrics-explained" title="Link to this heading">¶</a></h4>
+<p><strong>Settling Time (2.45s):</strong></p>
+<ul class="simple">
+<li><p>Time until all state variables stay within 2% of final value</p></li>
+<li><p>Indicates how quickly the controller stabilizes the system</p></li>
+<li><p>Lower is better (faster response)</p></li>
+</ul>
+<p><strong>Max Overshoot (3.2%):</strong></p>
+<ul class="simple">
+<li><p>Maximum deviation beyond setpoint during transient</p></li>
+<li><p>Indicates damping quality</p></li>
+<li><p>Target: &lt;5% for well-tuned controllers</p></li>
+</ul>
+<p><strong>Steady-State Error (0.008 rad ≈ 0.46°):</strong></p>
+<ul class="simple">
+<li><p>Final tracking error after settling</p></li>
+<li><p>Indicates long-term accuracy</p></li>
+<li><p>Caused by model mismatch, friction, discretization</p></li>
+</ul>
+<p><strong>RMS Control Effort (12.4 N):</strong></p>
+<ul class="simple">
+<li><p>Root-mean-square of control input</p></li>
+<li><p>Indicates energy consumption and actuator wear</p></li>
+<li><p>Must stay below saturation limit (150 N)</p></li>
+</ul>
+</section>
+</section>
+<section id="what-just-happened">
+<h3>What Just Happened?<a class="headerlink" href="#what-just-happened" title="Link to this heading">¶</a></h3>
+<p>Let’s break down the simulation process:</p>
+<ol class="arabic simple">
+<li><p><strong>Controller Initialization</strong></p>
+<ul class="simple">
+<li><p>Classical SMC with default gains: <code class="docutils literal notranslate"><span class="pre">[k₁=5,</span> <span class="pre">k₂=5,</span> <span class="pre">λ₁=5,</span> <span class="pre">λ₂=0.5,</span> <span class="pre">K=0.5,</span> <span class="pre">ε=0.5]</span></code></p></li>
+<li><p>Sliding surface: <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">k₁·θ₁</span> <span class="pre">+</span> <span class="pre">k₂·dθ₁</span> <span class="pre">+</span> <span class="pre">λ₁·θ₂</span> <span class="pre">+</span> <span class="pre">λ₂·dθ₂</span></code></p></li>
+<li><p>Control law: <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">=</span> <span class="pre">-K·tanh(s/ε)</span></code> (smooth approximation to reduce chattering)</p></li>
+</ul>
+</li>
+<li><p><strong>Dynamics Model Selection</strong></p>
+<ul class="simple">
+<li><p>Simplified nonlinear model (faster computation)</p></li>
+<li><p>6-state system: <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">dx,</span> <span class="pre">θ₁,</span> <span class="pre">dθ₁,</span> <span class="pre">θ₂,</span> <span class="pre">dθ₂]</span></code></p></li>
+<li><p>Includes gravity, inertia, Coriolis effects</p></li>
+<li><p>Discretized with fixed-step integration (Euler or RK4)</p></li>
+</ul>
+</li>
+<li><p><strong>Integration Process</strong></p>
+<ul class="simple">
+<li><p>Time loop: 0 → 5 seconds with 0.001s timestep</p></li>
+<li><p>At each step:</p>
+<ul>
+<li><p>Controller computes force <code class="docutils literal notranslate"><span class="pre">u</span></code> based on current state</p></li>
+<li><p>Dynamics model predicts next state using <code class="docutils literal notranslate"><span class="pre">u</span></code></p></li>
+<li><p>State updated and logged</p></li>
+</ul>
+</li>
+<li><p>Total: 5,000 integration steps</p></li>
+</ul>
+</li>
+<li><p><strong>Visualization Generation</strong></p>
+<ul class="simple">
+<li><p>State trajectories plotted from logged data</p></li>
+<li><p>Control input history displayed</p></li>
+<li><p>Performance metrics computed from final results</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="modifying-initial-conditions">
+<h3>Modifying Initial Conditions<a class="headerlink" href="#modifying-initial-conditions" title="Link to this heading">¶</a></h3>
+<p>The initial state of the system is defined in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">simulation</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">initial_state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="c1"># [x, dx, θ₁, dθ₁, θ₂, dθ₂]</span>
+</pre></div>
+</div>
+<p><strong>Current setup:</strong></p>
+<ul class="simple">
+<li><p>Cart displaced 0.1 m to the right</p></li>
+<li><p>Both pendulums upright</p></li>
+<li><p>All velocities zero</p></li>
+</ul>
+<p><strong>Experiment:</strong> Try different initial conditions:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Perturb first pendulum</span>
+<span class="nt">initial_state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># θ₁ = 0.15 rad ≈ 8.6°</span>
+
+<span class="c1"># Example 2: Perturb second pendulum</span>
+<span class="nt">initial_state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-0.10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># θ₂ = -0.10 rad ≈ -5.7°</span>
+
+<span class="c1"># Example 3: Both pendulums perturbed</span>
+<span class="nt">initial_state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-0.08</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+
+<span class="c1"># Example 4: Moving cart</span>
+<span class="nt">initial_state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-0.05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Cart velocity = 0.5 m/s</span>
+</pre></div>
+</div>
+<p>After editing <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, re-run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--plot
+</pre></div>
+</div>
+<p>Observe how the controller responds to different perturbations!</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="exploring-other-controllers">
+<h2>Exploring Other Controllers<a class="headerlink" href="#exploring-other-controllers" title="Link to this heading">¶</a></h2>
+<p>The framework includes 4 SMC controller variants. Each has unique strengths:</p>
+<section id="super-twisting-smc-sta">
+<h3>1. Super-Twisting SMC (STA)<a class="headerlink" href="#super-twisting-smc-sta" title="Link to this heading">¶</a></h3>
+<p>Smooth, continuous control with reduced chattering:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>sta_smc<span class="w"> </span>--plot
+</pre></div>
+</div>
+<p><strong>Characteristics:</strong></p>
+<ul class="simple">
+<li><p>Second-order sliding mode (higher-order derivative compensation)</p></li>
+<li><p>Finite-time convergence guarantee</p></li>
+<li><p>Continuous control signal (no switching)</p></li>
+<li><p>Better for systems sensitive to chattering</p></li>
+</ul>
+</section>
+<section id="adaptive-smc">
+<h3>2. Adaptive SMC<a class="headerlink" href="#adaptive-smc" title="Link to this heading">¶</a></h3>
+<p>Automatically tunes gains online for uncertain systems:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>adaptive_smc<span class="w"> </span>--plot
+</pre></div>
+</div>
+<p><strong>Characteristics:</strong></p>
+<ul class="simple">
+<li><p>Adaptation law adjusts gains based on tracking error</p></li>
+<li><p>Robust to parameter variations and disturbances</p></li>
+<li><p>Slower initial response but learns over time</p></li>
+<li><p>Good for systems with unknown dynamics</p></li>
+</ul>
+</section>
+<section id="hybrid-adaptive-sta-smc">
+<h3>3. Hybrid Adaptive STA-SMC<a class="headerlink" href="#hybrid-adaptive-sta-smc" title="Link to this heading">¶</a></h3>
+<p>Combines adaptation with super-twisting for maximum performance:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>hybrid_adaptive_sta_smc<span class="w"> </span>--plot
+</pre></div>
+</div>
+<p><strong>Characteristics:</strong></p>
+<ul class="simple">
+<li><p>Best overall performance (fastest + smoothest)</p></li>
+<li><p>Most complex configuration</p></li>
+<li><p>Recommended for research applications</p></li>
+<li><p>Requires understanding of advanced SMC theory</p></li>
+</ul>
+<p><strong>Note:</strong> You may see a warning about “Large adaptation rate may cause instability” - this is advisory only and the default configuration has been validated for stability.</p>
+</section>
+<section id="quick-comparison">
+<h3>Quick Comparison<a class="headerlink" href="#quick-comparison" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Controller</p></th>
+<th class="head"><p>Chattering</p></th>
+<th class="head"><p>Speed</p></th>
+<th class="head"><p>Complexity</p></th>
+<th class="head"><p>Best For</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Classical</strong></p></td>
+<td><p>Moderate</p></td>
+<td><p>Good</p></td>
+<td><p>Low</p></td>
+<td><p>Learning, baseline</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>STA</strong></p></td>
+<td><p>Low</p></td>
+<td><p>Good</p></td>
+<td><p>Medium</p></td>
+<td><p>Smooth control</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Adaptive</strong></p></td>
+<td><p>Moderate</p></td>
+<td><p>Slower</p></td>
+<td><p>Medium</p></td>
+<td><p>Uncertain systems</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Hybrid</strong></p></td>
+<td><p>Very Low</p></td>
+<td><p>Fast</p></td>
+<td><p>High</p></td>
+<td><p>Research, max performance</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
+<section id="learn-more-tutorials">
+<h3>Learn More: Tutorials<a class="headerlink" href="#learn-more-tutorials" title="Link to this heading">¶</a></h3>
+<p>Progress through our comprehensive tutorial series:</p>
+<ol class="arabic simple">
+<li><p><strong><a class="reference internal" href="tutorials/tutorial-01-first-simulation.html"><span class="std std-doc">Tutorial 01: First Simulation</span></a></strong></p>
+<ul class="simple">
+<li><p>Deep dive into the DIP system</p></li>
+<li><p>Detailed explanation of simulation outputs</p></li>
+<li><p>Parameter experimentation guide</p></li>
+</ul>
+</li>
+<li><p><strong><a class="reference internal" href="tutorials/tutorial-02-controller-comparison.html"><span class="std std-doc">Tutorial 02: Controller Comparison</span></a></strong></p>
+<ul class="simple">
+<li><p>Side-by-side comparison of all 4 controllers</p></li>
+<li><p>Quantitative performance analysis</p></li>
+<li><p>How to choose the right controller</p></li>
+</ul>
+</li>
+<li><p><strong><a class="reference internal" href="tutorials/tutorial-03-pso-optimization.html"><span class="std std-doc">Tutorial 03: PSO Optimization</span></a></strong></p>
+<ul class="simple">
+<li><p>Automated gain tuning workflow</p></li>
+<li><p>Understanding PSO parameters</p></li>
+<li><p>Case study: Overshoot reduction</p></li>
+</ul>
+</li>
+<li><p><strong><a class="reference internal" href="tutorials/tutorial-04-custom-controller.html"><span class="std std-doc">Tutorial 04: Custom Controller</span></a></strong></p>
+<ul class="simple">
+<li><p>Implement your own controller</p></li>
+<li><p>Integrate with factory pattern</p></li>
+<li><p>Register for PSO optimization</p></li>
+</ul>
+</li>
+<li><p><strong><a class="reference internal" href="tutorials/tutorial-05-research-workflow.html"><span class="std std-doc">Tutorial 05: Research Workflow</span></a></strong></p>
+<ul class="simple">
+<li><p>Reproducible experiments</p></li>
+<li><p>Monte Carlo validation</p></li>
+<li><p>Publication-quality plots</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="how-to-guides">
+<h3>How-To Guides<a class="headerlink" href="#how-to-guides" title="Link to this heading">¶</a></h3>
+<p>Task-oriented recipes for specific workflows:</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="how-to/running-simulations.html"><span class="std std-doc">Running Simulations</span></a>:</strong> CLI, Streamlit, programmatic usage</p></li>
+<li><p><strong><a class="reference internal" href="how-to/optimization-workflows.html"><span class="std std-doc">Optimization Workflows</span></a>:</strong> PSO tuning, convergence analysis</p></li>
+<li><p><strong><a class="reference internal" href="how-to/result-analysis.html"><span class="std std-doc">Result Analysis</span></a>:</strong> Metrics interpretation, visualization</p></li>
+<li><p><strong><a class="reference internal" href="how-to/testing-validation.html"><span class="std std-doc">Testing &amp; Validation</span></a>:</strong> Test suite, validation, benchmarks</p></li>
+</ul>
+</section>
+<section id="advanced-topics">
+<h3>Advanced Topics<a class="headerlink" href="#advanced-topics" title="Link to this heading">¶</a></h3>
+<p>Ready for more? Explore:</p>
+<ul>
+<li><p><strong>PSO Gain Tuning:</strong> Automatically find optimal controller gains</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--run-pso<span class="w"> </span>--save-gains<span class="w"> </span>tuned_gains.json
+</pre></div>
+</div>
+</li>
+<li><p><strong>Streamlit Dashboard:</strong> Interactive parameter adjustment and real-time visualization</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>streamlit<span class="w"> </span>run<span class="w"> </span>streamlit_app.py
 </pre></div>
 </div>
+</li>
+<li><p><strong>Hardware-in-the-Loop (HIL):</strong> Connect to real hardware</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--run-hil<span class="w"> </span>--plot
+</pre></div>
+</div>
+</li>
+<li><p><strong>Batch Simulations:</strong> Monte Carlo validation for robustness analysis</p></li>
+</ul>
+</section>
+<section id="api-reference-guides">
+<h3>API Reference Guides<a class="headerlink" href="#api-reference-guides" title="Link to this heading">¶</a></h3>
+<p>Comprehensive module-by-module technical reference with practical examples:</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="api/controllers.html"><span class="std std-doc">Controllers API Guide</span></a></strong> - Factory system, SMC types, custom controllers</p></li>
+<li><p><strong><a class="reference internal" href="api/simulation.html"><span class="std std-doc">Simulation API Guide</span></a></strong> - SimulationRunner, dynamics models, batch processing</p></li>
+<li><p><strong><a class="reference internal" href="api/optimization.html"><span class="std std-doc">Optimization API Guide</span></a></strong> - PSOTuner, cost functions, convergence monitoring</p></li>
+<li><p><strong><a class="reference internal" href="api/configuration.html"><span class="std std-doc">Configuration API Guide</span></a></strong> - Loading config, validation, programmatic setup</p></li>
+<li><p><strong><a class="reference internal" href="api/plant-models.html"><span class="std std-doc">Plant Models API Guide</span></a></strong> - Physics models, parameter configuration</p></li>
+<li><p><strong><a class="reference internal" href="api/utilities.html"><span class="std std-doc">Utilities API Guide</span></a></strong> - Validation, monitoring, analysis tools</p></li>
+</ul>
+<p>For auto-generated technical reference, see: <a class="reference internal" href="../reference/index.html"><span class="std std-doc">docs/reference/</span></a></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-common-issues">
+<h2>Troubleshooting Common Issues<a class="headerlink" href="#troubleshooting-common-issues" title="Link to this heading">¶</a></h2>
+<section id="simulation-runs-but-no-plots-appear">
+<h3>Simulation Runs But No Plots Appear<a class="headerlink" href="#simulation-runs-but-no-plots-appear" title="Link to this heading">¶</a></h3>
+<p><strong>Cause:</strong> Matplotlib backend issue</p>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linux: Install Tkinter</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-tk
+
+<span class="c1"># macOS: Use different backend</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MPLBACKEND</span><span class="o">=</span>MacOSX
+
+<span class="c1"># Windows: Reinstall matplotlib</span>
+pip<span class="w"> </span>uninstall<span class="w"> </span>matplotlib
+pip<span class="w"> </span>install<span class="w"> </span>matplotlib
+</pre></div>
+</div>
+</section>
+<section id="numericalinstabilityerror-during-simulation">
+<h3>“NumericalInstabilityError” During Simulation<a class="headerlink" href="#numericalinstabilityerror-during-simulation" title="Link to this heading">¶</a></h3>
+<p><strong>Cause:</strong> Controller gains too aggressive or timestep too large</p>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li><p>Reduce controller gains (edit <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>)</p></li>
+<li><p>Decrease timestep: <code class="docutils literal notranslate"><span class="pre">dt:</span> <span class="pre">0.0005</span></code> (in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>)</p></li>
+<li><p>Use full dynamics model for better accuracy</p></li>
+</ul>
+</section>
+<section id="pso-optimization-very-slow">
+<h3>PSO Optimization Very Slow<a class="headerlink" href="#pso-optimization-very-slow" title="Link to this heading">¶</a></h3>
+<p><strong>Cause:</strong> Default settings evaluate 1,500 simulations (30 particles × 50 iterations)</p>
+<p><strong>Solution:</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml - Reduce PSO iterations for faster testing</span>
+<span class="nt">pso</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">           </span><span class="c1"># Reduced from 50</span>
+<span class="w">  </span><span class="nt">n_particles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">     </span><span class="c1"># Reduced from 30</span>
+</pre></div>
+</div>
+</section>
+<section id="import-errors-after-installation">
+<h3>Import Errors After Installation<a class="headerlink" href="#import-errors-after-installation" title="Link to this heading">¶</a></h3>
+<p><strong>Cause:</strong> Virtual environment not activated or wrong Python interpreter</p>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure virtual environment is activated</span>
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># Linux/Mac</span>
+venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate<span class="w">     </span><span class="c1"># Windows</span>
+
+<span class="c1"># Verify correct Python</span>
+which<span class="w"> </span>python<span class="w">              </span><span class="c1"># Should show path inside venv/</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import src.config; print(&#39;OK&#39;)&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="state-vector-was-modified-during-sanitization-warning">
+<h3>“State vector was modified during sanitization” Warning<a class="headerlink" href="#state-vector-was-modified-during-sanitization-warning" title="Link to this heading">¶</a></h3>
+<p><strong>Cause:</strong> Normal operation - the simulator ensures numerical stability by sanitizing input states</p>
+<p><strong>What it means:</strong> This is an informational warning, not an error. The simulation is working correctly and automatically correcting any potential numerical issues with the initial state.</p>
+<p><strong>Solution:</strong> No action required. This warning confirms the safety mechanisms are active. You can safely ignore it.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="get-help">
+<h2>Get Help<a class="headerlink" href="#get-help" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Documentation:</strong> <a class="reference external" href="https://dip-smc-pso.readthedocs.io/">https://dip-smc-pso.readthedocs.io/</a></p></li>
+<li><p><strong>GitHub Issues:</strong> <a class="reference external" href="https://github.com/theSadeQ/dip-smc-pso/issues">https://github.com/theSadeQ/dip-smc-pso/issues</a></p></li>
+<li><p><strong>Discussions:</strong> <a class="reference external" href="https://github.com/theSadeQ/dip-smc-pso/discussions">https://github.com/theSadeQ/dip-smc-pso/discussions</a></p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Congratulations! You’ve completed the getting started guide.</strong> 🎉</p>
+<p>You now have a working DIP SMC PSO installation and have run your first simulation. Continue with <a class="reference internal" href="tutorials/tutorial-01-first-simulation.html"><span class="std std-doc">Tutorial 01</span></a> for a deeper understanding.</p>
 </section>
 </section>
 
@@ -523,7 +1118,7 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--print-config
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -545,8 +1140,53 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--print-config
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Getting Started</a><ul>
-<li><a class="reference internal" href="#command-line-cli">Command-line (CLI)</a></li>
-<li><a class="reference internal" href="#streamlit-ui">Streamlit UI</a></li>
+<li><a class="reference internal" href="#what-is-the-dip-smc-pso-framework">What is the DIP SMC PSO Framework?</a></li>
+<li><a class="reference internal" href="#who-should-use-this-framework">Who Should Use This Framework?</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#what-you-ll-learn">What You’ll Learn</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#step-1-verify-python-version">Step 1: Verify Python Version</a></li>
+<li><a class="reference internal" href="#step-2-clone-the-repository">Step 2: Clone the Repository</a></li>
+<li><a class="reference internal" href="#step-3-create-virtual-environment-recommended">Step 3: Create Virtual Environment (Recommended)</a></li>
+<li><a class="reference internal" href="#step-4-install-dependencies">Step 4: Install Dependencies</a></li>
+<li><a class="reference internal" href="#step-5-verify-installation">Step 5: Verify Installation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#your-first-simulation">Your First Simulation</a><ul>
+<li><a class="reference internal" href="#run-the-classical-smc-controller">Run the Classical SMC Controller</a></li>
+<li><a class="reference internal" href="#understanding-the-output">Understanding the Output</a><ul>
+<li><a class="reference internal" href="#plot-window-1-state-trajectories">Plot Window 1: State Trajectories</a></li>
+<li><a class="reference internal" href="#plot-window-2-control-input">Plot Window 2: Control Input</a></li>
+<li><a class="reference internal" href="#performance-metrics-explained">Performance Metrics Explained</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-just-happened">What Just Happened?</a></li>
+<li><a class="reference internal" href="#modifying-initial-conditions">Modifying Initial Conditions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exploring-other-controllers">Exploring Other Controllers</a><ul>
+<li><a class="reference internal" href="#super-twisting-smc-sta">1. Super-Twisting SMC (STA)</a></li>
+<li><a class="reference internal" href="#adaptive-smc">2. Adaptive SMC</a></li>
+<li><a class="reference internal" href="#hybrid-adaptive-sta-smc">3. Hybrid Adaptive STA-SMC</a></li>
+<li><a class="reference internal" href="#quick-comparison">Quick Comparison</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#next-steps">Next Steps</a><ul>
+<li><a class="reference internal" href="#learn-more-tutorials">Learn More: Tutorials</a></li>
+<li><a class="reference internal" href="#how-to-guides">How-To Guides</a></li>
+<li><a class="reference internal" href="#advanced-topics">Advanced Topics</a></li>
+<li><a class="reference internal" href="#api-reference-guides">API Reference Guides</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting-common-issues">Troubleshooting Common Issues</a><ul>
+<li><a class="reference internal" href="#simulation-runs-but-no-plots-appear">Simulation Runs But No Plots Appear</a></li>
+<li><a class="reference internal" href="#numericalinstabilityerror-during-simulation">“NumericalInstabilityError” During Simulation</a></li>
+<li><a class="reference internal" href="#pso-optimization-very-slow">PSO Optimization Very Slow</a></li>
+<li><a class="reference internal" href="#import-errors-after-installation">Import Errors After Installation</a></li>
+<li><a class="reference internal" href="#state-vector-was-modified-during-sanitization-warning">“State vector was modified during sanitization” Warning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#get-help">Get Help</a></li>
 </ul>
 </li>
 </ul>

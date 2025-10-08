@@ -121,6 +121,9 @@ optimization:
 
 #### **✓ Excellent: Mathematical Foundations**
 ```python
+# example-metadata:
+# runnable: false
+
 """
 Particle Swarm Optimisation (PSO) tuner for sliding-mode controllers.
 
@@ -141,6 +144,9 @@ design-review report.
 
 #### **✓ Excellent: Parameter Documentation**
 ```python
+# example-metadata:
+# runnable: false
+
 def __init__(
     self,
     controller_factory: Callable[[np.ndarray], Any],
@@ -177,6 +183,9 @@ def __init__(
 
 #### **✓ Excellent: Scientific Method Documentation**
 ```python
+# example-metadata:
+# runnable: false
+
 def _compute_cost_from_traj(
     self, t: np.ndarray, x_b: np.ndarray, u_b: np.ndarray, sigma_b: np.ndarray
 ) -> np.ndarray:

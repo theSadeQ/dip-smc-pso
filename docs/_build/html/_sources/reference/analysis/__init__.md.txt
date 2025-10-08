@@ -6,6 +6,132 @@
 
 Professional analysis framework for control system evaluation and validation.
 
+
+
+## Advanced Mathematical Theory
+
+### Analysis Framework Architecture
+
+**Modular design:**
+
+```{math}
+\text{Framework} = \text{Performance} \cup \text{Validation} \cup \text{FDI} \cup \text{Visualization}
+```
+
+### Module Dependencies
+
+**Dependency graph:**
+
+```{math}
+\begin{align}
+\text{FDI} &\to \text{Validation} \to \text{Visualization} \\
+\text{Performance} &\to \text{Validation} \to \text{Visualization}
+\end{align}
+```
+
+### Workflow Integration
+
+**Complete analysis pipeline:**
+
+```{math}
+\text{Data} \xrightarrow{\text{Performance}} \text{Metrics} \xrightarrow{\text{Validation}} \text{Statistics} \xrightarrow{\text{Viz}} \text{Report}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Analysis Framework] --> B[Performance]
+    A --> C[Validation]
+    A --> D[FDI]
+    A --> E[Visualization]
+
+    B --> F[Stability]
+    B --> G[Robustness]
+    B --> H[Metrics]
+
+    C --> I[Statistical Tests]
+    C --> J[Monte Carlo]
+    C --> K[Cross-Validation]
+
+    D --> L[Residuals]
+    D --> M[Thresholds]
+
+    E --> N[Analysis Plots]
+    E --> O[Reports]
+
+    F --> P[Integration Layer]
+    G --> P
+    H --> P
+    I --> P
+    J --> P
+    K --> P
+    L --> P
+    M --> P
+    N --> P
+    O --> P
+
+    style P fill:#9cf
+    style A fill:#ff9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.analysis import Component
+
+# Initialize component
+component = Component(config)
+result = component.process(data)
+```
+
+### Example 2: Advanced Configuration
+
+```python
+# Configure with custom parameters
+config = {
+    'threshold': 0.05,
+    'method': 'adaptive'
+}
+component = Component(config)
+```
+
+### Example 3: Integration Workflow
+
+```python
+# Complete analysis workflow
+from src.analysis import analyze
+
+results = analyze(
+    data=sensor_data,
+    method='enhanced',
+    visualization=True
+)
+```
+
+### Example 4: Fault Detection Example
+
+```python
+# FDI system usage
+from src.analysis.fault_detection import FDISystem
+
+fdi = FDISystem(config)
+residual = fdi.generate_residual(y, u)
+fault = fdi.detect(residual)
+```
+
+### Example 5: Visualization Example
+
+```python
+# Generate analysis plots
+from src.analysis.visualization import AnalysisPlotter
+
+plotter = AnalysisPlotter(style='professional')
+fig = plotter.plot_time_series(data)
+fig.savefig('analysis.pdf')
+```
 This module provides a comprehensive analysis framework including:
 - Core analysis interfaces and data structures
 - Performance metrics and evaluation

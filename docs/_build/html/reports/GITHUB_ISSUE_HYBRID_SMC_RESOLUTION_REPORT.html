@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -523,7 +549,10 @@
 <h3>1. Code Structure Investigation<a class="headerlink" href="#code-structure-investigation" title="Link to this heading">¶</a></h3>
 <section id="problematic-implementation">
 <h4>Problematic Implementation<a class="headerlink" href="#problematic-implementation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: src/controllers/smc/hybrid_adaptive_sta_smc.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># File: src/controllers/smc/hybrid_adaptive_sta_smc.py</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HybridAdaptiveSTASMC</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute hybrid adaptive STA-SMC control action.&quot;&quot;&quot;</span>
@@ -599,7 +628,10 @@
 <h3>1. Primary Fix<a class="headerlink" href="#primary-fix" title="Link to this heading">¶</a></h3>
 <section id="code-changes-applied">
 <h4>Code Changes Applied<a class="headerlink" href="#code-changes-applied" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># FIXED IMPLEMENTATION</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># FIXED IMPLEMENTATION</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HybridAdaptiveSTASMC</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute hybrid adaptive STA-SMC control action.&quot;&quot;&quot;</span>
@@ -632,7 +664,10 @@
 <h3>2. Enhanced Error Handling<a class="headerlink" href="#enhanced-error-handling" title="Link to this heading">¶</a></h3>
 <section id="result-normalization-system">
 <h4>Result Normalization System<a class="headerlink" href="#result-normalization-system" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_normalize_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure result is properly formatted as HybridSTAOutput.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Emergency fallback for None returns</span>
@@ -668,7 +703,10 @@
 </section>
 <section id="emergency-reset-mechanisms">
 <h4>Emergency Reset Mechanisms<a class="headerlink" href="#emergency-reset-mechanisms" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_check_emergency_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_sat</span><span class="p">,</span> <span class="n">k1_new</span><span class="p">,</span> <span class="n">k2_new</span><span class="p">,</span> <span class="n">u_int_new</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_emergency_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_sat</span><span class="p">,</span> <span class="n">k1_new</span><span class="p">,</span> <span class="n">k2_new</span><span class="p">,</span> <span class="n">u_int_new</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check for numerical instability requiring emergency reset.&quot;&quot;&quot;</span>
     <span class="n">state_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># Position magnitudes</span>
     <span class="n">velocity_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>  <span class="c1"># Velocity magnitudes</span>
@@ -841,7 +879,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 <h3>3. Regression Testing<a class="headerlink" href="#regression-testing" title="Link to this heading">¶</a></h3>
 <section id="cross-controller-compatibility">
 <h4>Cross-Controller Compatibility<a class="headerlink" href="#cross-controller-compatibility" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_all_controllers_operational</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_all_controllers_operational</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify all 4 controllers remain operational after hybrid fix.&quot;&quot;&quot;</span>
     <span class="n">controllers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;adaptive_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;sta_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">]</span>
 
@@ -887,7 +928,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 </section>
 <section id="return-statement-validator">
 <h4>Return Statement Validator<a class="headerlink" href="#return-statement-validator" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># scripts/validate_return_statements.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># scripts/validate_return_statements.py</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_return_statements</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure methods with return type annotations have return statements.&quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -908,7 +952,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 <h3>2. Runtime Validation Framework<a class="headerlink" href="#runtime-validation-framework" title="Link to this heading">¶</a></h3>
 <section id="enhanced-type-checking">
 <h4>Enhanced Type Checking<a class="headerlink" href="#enhanced-type-checking" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HybridSTAOutput</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HybridSTAOutput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute control with runtime validation.&quot;&quot;&quot;</span>
 
     <span class="c1"># ... control algorithm implementation ...</span>
@@ -929,7 +976,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 </section>
 <section id="factory-level-validation">
 <h4>Factory-Level Validation<a class="headerlink" href="#factory-level-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_controller_with_validation</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_controller_with_validation</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create controller with enhanced output validation.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">_create_controller_impl</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -957,7 +1007,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 <h3>3. Comprehensive Testing Framework<a class="headerlink" href="#comprehensive-testing-framework" title="Link to this heading">¶</a></h3>
 <section id="return-type-test-suite">
 <h4>Return Type Test Suite<a class="headerlink" href="#return-type-test-suite" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestControllerReturnTypes</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestControllerReturnTypes</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive return type validation tests.&quot;&quot;&quot;</span>
 
     <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;controller_name&quot;</span><span class="p">,</span> <span class="p">[</span>
@@ -982,7 +1035,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 </section>
 <section id="integration-test-enhancement">
 <h4>Integration Test Enhancement<a class="headerlink" href="#integration-test-enhancement" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_pso_integration_no_errors</span><span class="p">(</span><span class="n">controller_name</span><span class="p">,</span> <span class="n">caplog</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_pso_integration_no_errors</span><span class="p">(</span><span class="n">controller_name</span><span class="p">,</span> <span class="n">caplog</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test PSO optimization produces no runtime errors.&quot;&quot;&quot;</span>
     <span class="n">tuner</span> <span class="o">=</span> <span class="n">PSOTuner</span><span class="p">(</span><span class="n">bounds</span><span class="o">=</span><span class="n">get_bounds</span><span class="p">(</span><span class="n">controller_name</span><span class="p">),</span> <span class="n">n_particles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
@@ -1010,7 +1066,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 <h3>1. Production Readiness Improvement<a class="headerlink" href="#production-readiness-improvement" title="Link to this heading">¶</a></h3>
 <section id="before-vs-after-metrics">
 <h4>Before vs. After Metrics<a class="headerlink" href="#before-vs-after-metrics" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">production_metrics</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">production_metrics</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;before_fix&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;controller_availability&#39;</span><span class="p">:</span> <span class="s1">&#39;3/4 (75%)&#39;</span><span class="p">,</span>
         <span class="s1">&#39;runtime_error_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;High (masked)&#39;</span><span class="p">,</span>
@@ -1093,7 +1152,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 <p><strong>Problem</strong>: Robust error handling can hide critical implementation bugs
 <strong>Learning</strong>: Distinguish between expected operational errors and unexpected implementation failures</p>
 <p><strong>Implementation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before (Problematic)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Before (Problematic)</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -1161,7 +1223,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 <h3>3. Prevention Framework<a class="headerlink" href="#prevention-framework" title="Link to this heading">¶</a></h3>
 <section id="proactive-error-detection">
 <h4>Proactive Error Detection<a class="headerlink" href="#proactive-error-detection" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enhanced development workflow</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Enhanced development workflow</span>
 <span class="n">development_workflow</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;pre_commit&#39;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s1">&#39;return_statement_validation&#39;</span><span class="p">,</span>
@@ -1216,7 +1281,10 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
 </section>
 <section id="advanced-testing-framework">
 <h4>Advanced Testing Framework<a class="headerlink" href="#advanced-testing-framework" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Property-based testing for controller interfaces</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Property-based testing for controller interfaces</span>
 <span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,),</span> <span class="n">elements</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_controller_always_returns_valid_output</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Property: Controllers always return valid control outputs.&quot;&quot;&quot;</span>
@@ -1403,7 +1471,7 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<sp
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

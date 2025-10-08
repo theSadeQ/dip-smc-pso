@@ -132,6 +132,9 @@ where η > 0 ensures convergence and σ represents bounded disturbances.
 ### 1. Modular Controller Structure
 
 ```python
+# example-metadata:
+# runnable: false
+
 class HybridAdaptiveSTASMC:
     """
     Modular hybrid controller with clear separation of concerns:
@@ -201,6 +204,9 @@ emergency_reset = (
 #### 1.1 Sliding Surface Computation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _compute_sliding_surface(self, state: np.ndarray) -> float:
     """Compute unified sliding surface with dual formulation support.
 
@@ -228,6 +234,9 @@ def _compute_sliding_surface(self, state: np.ndarray) -> float:
 #### 1.2 Adaptive Gain Update
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _update_adaptive_gains(self, abs_s: float, k1_prev: float, k2_prev: float):
     """Update adaptive gains with self-tapering and anti-windup.
 
@@ -273,6 +282,9 @@ dead_zone = 0.01   # Adaptation dead zone
 #### 2.2 PSO Fitness Function Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def fitness_function(gains_array):
     """PSO fitness evaluation for hybrid controller.
 
@@ -305,6 +317,9 @@ def fitness_function(gains_array):
 
 **Before Fix**:
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars, history):
     # ... 674 lines of controller logic ...
 
@@ -318,6 +333,9 @@ def reset(self) -> None:
 
 **After Fix**:
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars, history):
     # ... 674 lines of controller logic ...
 
@@ -345,6 +363,9 @@ This explains why PSO achieved 0.000000 cost despite runtime errors.
 #### 3.1 Static Analysis Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Add to pre-commit hooks:
 # mypy type checking for return type consistency
 def check_return_types():
@@ -523,6 +544,9 @@ print(f"Best cost: {best_cost}")
 #### 2.2 Simulation Workflow
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Complete simulation with PSO-optimized hybrid controller
 def run_hybrid_simulation():
     # Load configuration
@@ -551,6 +575,9 @@ def run_hybrid_simulation():
 #### 3.1 Real-Time Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 def monitor_hybrid_controller(controller, state, result):
     """Monitor hybrid controller performance indicators."""
 
@@ -694,6 +721,9 @@ uncertainties = {
 #### 3.1 Runtime Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Performance profiling results
 computation_times = {
     'sliding_surface': '12.3 μs',      # Fast
@@ -788,6 +818,9 @@ if condition_number > 1e12:
 #### 2.1 State Monitoring
 
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_hybrid_controller(controller, state, result):
     """Comprehensive controller diagnostics."""
 
@@ -816,6 +849,9 @@ def diagnose_hybrid_controller(controller, state, result):
 #### 2.2 Parameter Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_hybrid_parameters(gains, config):
     """Validate hybrid controller parameters for stability."""
 

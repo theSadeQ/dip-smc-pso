@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -509,7 +535,7 @@ including LDR monitoring, saturation tracking, and dynamics conditioning.</p>
 <span class="linenos"> 11</span>
 <span class="linenos"> 12</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos"> 13</span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="linenos"> 15</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
 <span class="linenos"> 17</span>
@@ -856,186 +882,187 @@ including LDR monitoring, saturation tracking, and dynamics conditioning.</p>
 <span class="linenos">358</span>                <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condition_num</span><span class="p">)</span>
 <span class="linenos">359</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">360</span>                <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)</span>  <span class="c1"># Very high for invalid matrices</span>
-<span class="linenos">361</span>        <span class="k">except</span><span class="p">:</span>
-<span class="linenos">362</span>            <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)</span>
-<span class="linenos">363</span>
-<span class="linenos">364</span>        <span class="c1"># Track fallback usage</span>
-<span class="linenos">365</span>        <span class="k">if</span> <span class="n">used_fallback</span><span class="p">:</span>
-<span class="linenos">366</span>            <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">367</span>
-<span class="linenos">368</span>        <span class="c1"># Analyze conditioning</span>
-<span class="linenos">369</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">370</span>            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;no_data&#39;</span><span class="p">}</span>
-<span class="linenos">371</span>
-<span class="linenos">372</span>        <span class="n">conditions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">))</span>
-<span class="linenos">373</span>        <span class="n">median_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span>
-<span class="linenos">374</span>        <span class="n">p99_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
-<span class="linenos">375</span>
-<span class="linenos">376</span>        <span class="c1"># Alert conditions</span>
-<span class="linenos">377</span>        <span class="n">median_alert</span> <span class="o">=</span> <span class="n">median_cond</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition_threshold</span>
-<span class="linenos">378</span>        <span class="n">spike_alert</span> <span class="o">=</span> <span class="n">p99_cond</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">spike_threshold</span>
-<span class="linenos">379</span>        <span class="n">fallback_alert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_threshold</span>
-<span class="linenos">380</span>
-<span class="linenos">381</span>        <span class="n">alert</span> <span class="o">=</span> <span class="n">median_alert</span> <span class="ow">or</span> <span class="n">spike_alert</span> <span class="ow">or</span> <span class="n">fallback_alert</span>
-<span class="linenos">382</span>
-<span class="linenos">383</span>        <span class="k">return</span> <span class="p">{</span>
-<span class="linenos">384</span>            <span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="n">alert</span><span class="p">,</span>
-<span class="linenos">385</span>            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;monitoring&#39;</span><span class="p">,</span>
-<span class="linenos">386</span>            <span class="s1">&#39;median_condition&#39;</span><span class="p">:</span> <span class="n">median_cond</span><span class="p">,</span>
-<span class="linenos">387</span>            <span class="s1">&#39;p99_condition&#39;</span><span class="p">:</span> <span class="n">p99_cond</span><span class="p">,</span>
-<span class="linenos">388</span>            <span class="s1">&#39;fallback_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span><span class="p">,</span>
-<span class="linenos">389</span>            <span class="s1">&#39;current_condition&#39;</span><span class="p">:</span> <span class="n">conditions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-<span class="linenos">390</span>            <span class="s1">&#39;median_alert&#39;</span><span class="p">:</span> <span class="n">median_alert</span><span class="p">,</span>
-<span class="linenos">391</span>            <span class="s1">&#39;spike_alert&#39;</span><span class="p">:</span> <span class="n">spike_alert</span><span class="p">,</span>
-<span class="linenos">392</span>            <span class="s1">&#39;fallback_alert&#39;</span><span class="p">:</span> <span class="n">fallback_alert</span>
-<span class="linenos">393</span>        <span class="p">}</span>
-<span class="linenos">394</span>
-<span class="linenos">395</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">396</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset monitoring state.&quot;&quot;&quot;</span>
-<span class="linenos">397</span>        <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-<span class="linenos">398</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">399</span>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">400</span>
+<span class="linenos">361</span>        <span class="k">except</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="linenos">362</span>            <span class="c1"># Handle singular matrices or invalid values</span>
+<span class="linenos">363</span>            <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)</span>
+<span class="linenos">364</span>
+<span class="linenos">365</span>        <span class="c1"># Track fallback usage</span>
+<span class="linenos">366</span>        <span class="k">if</span> <span class="n">used_fallback</span><span class="p">:</span>
+<span class="linenos">367</span>            <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">368</span>
+<span class="linenos">369</span>        <span class="c1"># Analyze conditioning</span>
+<span class="linenos">370</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">371</span>            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;no_data&#39;</span><span class="p">}</span>
+<span class="linenos">372</span>
+<span class="linenos">373</span>        <span class="n">conditions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">))</span>
+<span class="linenos">374</span>        <span class="n">median_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span>
+<span class="linenos">375</span>        <span class="n">p99_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
+<span class="linenos">376</span>
+<span class="linenos">377</span>        <span class="c1"># Alert conditions</span>
+<span class="linenos">378</span>        <span class="n">median_alert</span> <span class="o">=</span> <span class="n">median_cond</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition_threshold</span>
+<span class="linenos">379</span>        <span class="n">spike_alert</span> <span class="o">=</span> <span class="n">p99_cond</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">spike_threshold</span>
+<span class="linenos">380</span>        <span class="n">fallback_alert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_threshold</span>
+<span class="linenos">381</span>
+<span class="linenos">382</span>        <span class="n">alert</span> <span class="o">=</span> <span class="n">median_alert</span> <span class="ow">or</span> <span class="n">spike_alert</span> <span class="ow">or</span> <span class="n">fallback_alert</span>
+<span class="linenos">383</span>
+<span class="linenos">384</span>        <span class="k">return</span> <span class="p">{</span>
+<span class="linenos">385</span>            <span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="n">alert</span><span class="p">,</span>
+<span class="linenos">386</span>            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;monitoring&#39;</span><span class="p">,</span>
+<span class="linenos">387</span>            <span class="s1">&#39;median_condition&#39;</span><span class="p">:</span> <span class="n">median_cond</span><span class="p">,</span>
+<span class="linenos">388</span>            <span class="s1">&#39;p99_condition&#39;</span><span class="p">:</span> <span class="n">p99_cond</span><span class="p">,</span>
+<span class="linenos">389</span>            <span class="s1">&#39;fallback_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span><span class="p">,</span>
+<span class="linenos">390</span>            <span class="s1">&#39;current_condition&#39;</span><span class="p">:</span> <span class="n">conditions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="linenos">391</span>            <span class="s1">&#39;median_alert&#39;</span><span class="p">:</span> <span class="n">median_alert</span><span class="p">,</span>
+<span class="linenos">392</span>            <span class="s1">&#39;spike_alert&#39;</span><span class="p">:</span> <span class="n">spike_alert</span><span class="p">,</span>
+<span class="linenos">393</span>            <span class="s1">&#39;fallback_alert&#39;</span><span class="p">:</span> <span class="n">fallback_alert</span>
+<span class="linenos">394</span>        <span class="p">}</span>
+<span class="linenos">395</span>
+<span class="linenos">396</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">397</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset monitoring state.&quot;&quot;&quot;</span>
+<span class="linenos">398</span>        <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="linenos">399</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">400</span>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">401</span>
-<span class="linenos">402</span><span class="k">class</span><span class="w"> </span><span class="nc">StabilityMonitoringSystem</span><span class="p">:</span>
-<span class="linenos">403</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Integrated stability monitoring system for Issue #1 resolution.</span>
-<span class="linenos">404</span>
-<span class="linenos">405</span><span class="sd">    Combines LDR, saturation, and conditioning monitors for comprehensive</span>
-<span class="linenos">406</span><span class="sd">    stability assessment as specified in the resolution plan.</span>
-<span class="linenos">407</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">408</span>
-<span class="linenos">409</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="linenos">410</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize integrated monitoring system.</span>
-<span class="linenos">411</span>
-<span class="linenos">412</span><span class="sd">        Parameters</span>
-<span class="linenos">413</span><span class="sd">        ----------</span>
-<span class="linenos">414</span><span class="sd">        config : dict, optional</span>
-<span class="linenos">415</span><span class="sd">            Monitoring configuration parameters</span>
-<span class="linenos">416</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">417</span>        <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">418</span>            <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">419</span>
-<span class="linenos">420</span>        <span class="c1"># Extract configuration parameters</span>
-<span class="linenos">421</span>        <span class="n">dt</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-<span class="linenos">422</span>        <span class="n">max_force</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_force&#39;</span><span class="p">,</span> <span class="mf">150.0</span><span class="p">)</span>
-<span class="linenos">423</span>
-<span class="linenos">424</span>        <span class="c1"># Initialize sub-monitors</span>
-<span class="linenos">425</span>        <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span> <span class="o">=</span> <span class="n">LyapunovDecreaseMonitor</span><span class="p">(</span>
-<span class="linenos">426</span>            <span class="n">window_size_ms</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ldr_window_ms&#39;</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">),</span>
-<span class="linenos">427</span>            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
-<span class="linenos">428</span>            <span class="n">ldr_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ldr_threshold&#39;</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>
-<span class="linenos">429</span>            <span class="n">transient_time</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;transient_time&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-<span class="linenos">430</span>        <span class="p">)</span>
-<span class="linenos">431</span>
-<span class="linenos">432</span>        <span class="bp">self</span><span class="o">.</span><span class="n">saturation_monitor</span> <span class="o">=</span> <span class="n">SaturationMonitor</span><span class="p">(</span>
-<span class="linenos">433</span>            <span class="n">max_force</span><span class="o">=</span><span class="n">max_force</span><span class="p">,</span>
-<span class="linenos">434</span>            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
-<span class="linenos">435</span>            <span class="n">duty_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;duty_threshold&#39;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
-<span class="linenos">436</span>            <span class="n">rate_hit_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rate_hit_threshold&#39;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
-<span class="linenos">437</span>            <span class="n">transient_time</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;transient_time&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-<span class="linenos">438</span>        <span class="p">)</span>
-<span class="linenos">439</span>
-<span class="linenos">440</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conditioning_monitor</span> <span class="o">=</span> <span class="n">DynamicsConditioningMonitor</span><span class="p">(</span>
-<span class="linenos">441</span>            <span class="n">condition_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;condition_threshold&#39;</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">),</span>
-<span class="linenos">442</span>            <span class="n">spike_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;spike_threshold&#39;</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">),</span>
-<span class="linenos">443</span>            <span class="n">fallback_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fallback_threshold&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-<span class="linenos">444</span>            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span>
-<span class="linenos">445</span>        <span class="p">)</span>
-<span class="linenos">446</span>
-<span class="linenos">447</span>        <span class="c1"># System-wide monitoring state</span>
-<span class="linenos">448</span>        <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">449</span>        <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">450</span>
-<span class="linenos">451</span>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">452</span>               <span class="n">mass_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">used_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos">453</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update all monitors with current simulation data.</span>
-<span class="linenos">454</span>
-<span class="linenos">455</span><span class="sd">        Parameters</span>
-<span class="linenos">456</span><span class="sd">        ----------</span>
-<span class="linenos">457</span><span class="sd">        sigma : np.ndarray</span>
-<span class="linenos">458</span><span class="sd">            Sliding surface vector</span>
-<span class="linenos">459</span><span class="sd">        control_force : float</span>
-<span class="linenos">460</span><span class="sd">            Control force output</span>
-<span class="linenos">461</span><span class="sd">        mass_matrix : np.ndarray</span>
-<span class="linenos">462</span><span class="sd">            Current mass matrix</span>
-<span class="linenos">463</span><span class="sd">        used_fallback : bool</span>
-<span class="linenos">464</span><span class="sd">            Whether fallback dynamics inversion was used</span>
-<span class="linenos">465</span>
-<span class="linenos">466</span><span class="sd">        Returns</span>
-<span class="linenos">467</span><span class="sd">        -------</span>
-<span class="linenos">468</span><span class="sd">        dict</span>
-<span class="linenos">469</span><span class="sd">            Comprehensive monitoring results</span>
-<span class="linenos">470</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">471</span>        <span class="c1"># Update individual monitors</span>
-<span class="linenos">472</span>        <span class="n">ldr_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-<span class="linenos">473</span>        <span class="n">sat_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">saturation_monitor</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">control_force</span><span class="p">)</span>
-<span class="linenos">474</span>        <span class="n">cond_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conditioning_monitor</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mass_matrix</span><span class="p">,</span> <span class="n">used_fallback</span><span class="p">)</span>
-<span class="linenos">475</span>
-<span class="linenos">476</span>        <span class="c1"># Aggregate alerts</span>
-<span class="linenos">477</span>        <span class="n">any_alert</span> <span class="o">=</span> <span class="n">ldr_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">sat_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">cond_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span>
-<span class="linenos">478</span>
-<span class="linenos">479</span>        <span class="c1"># Record violations</span>
-<span class="linenos">480</span>        <span class="k">if</span> <span class="n">any_alert</span><span class="p">:</span>
-<span class="linenos">481</span>            <span class="n">violation</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos">482</span>                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
-<span class="linenos">483</span>                <span class="s1">&#39;sample&#39;</span><span class="p">:</span> <span class="n">ldr_result</span><span class="p">[</span><span class="s1">&#39;sample_count&#39;</span><span class="p">],</span>
-<span class="linenos">484</span>                <span class="s1">&#39;ldr_alert&#39;</span><span class="p">:</span> <span class="n">ldr_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">],</span>
-<span class="linenos">485</span>                <span class="s1">&#39;saturation_alert&#39;</span><span class="p">:</span> <span class="n">sat_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">],</span>
-<span class="linenos">486</span>                <span class="s1">&#39;conditioning_alert&#39;</span><span class="p">:</span> <span class="n">cond_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">],</span>
-<span class="linenos">487</span>                <span class="s1">&#39;ldr_value&#39;</span><span class="p">:</span> <span class="n">ldr_result</span><span class="p">[</span><span class="s1">&#39;ldr&#39;</span><span class="p">],</span>
-<span class="linenos">488</span>                <span class="s1">&#39;saturation_duty&#39;</span><span class="p">:</span> <span class="n">sat_result</span><span class="p">[</span><span class="s1">&#39;duty&#39;</span><span class="p">],</span>
-<span class="linenos">489</span>                <span class="s1">&#39;condition_number&#39;</span><span class="p">:</span> <span class="n">cond_result</span><span class="p">[</span><span class="s1">&#39;current_condition&#39;</span><span class="p">]</span>
-<span class="linenos">490</span>            <span class="p">}</span>
-<span class="linenos">491</span>            <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">violation</span><span class="p">)</span>
-<span class="linenos">492</span>
-<span class="linenos">493</span>        <span class="c1"># Compile comprehensive results</span>
-<span class="linenos">494</span>        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos">495</span>            <span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="n">any_alert</span><span class="p">,</span>
-<span class="linenos">496</span>            <span class="s1">&#39;ldr&#39;</span><span class="p">:</span> <span class="n">ldr_result</span><span class="p">,</span>
-<span class="linenos">497</span>            <span class="s1">&#39;saturation&#39;</span><span class="p">:</span> <span class="n">sat_result</span><span class="p">,</span>
-<span class="linenos">498</span>            <span class="s1">&#39;conditioning&#39;</span><span class="p">:</span> <span class="n">cond_result</span><span class="p">,</span>
-<span class="linenos">499</span>            <span class="s1">&#39;violation_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">),</span>
-<span class="linenos">500</span>            <span class="s1">&#39;episode&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span>
-<span class="linenos">501</span>        <span class="p">}</span>
-<span class="linenos">502</span>
-<span class="linenos">503</span>        <span class="k">return</span> <span class="n">result</span>
-<span class="linenos">504</span>
-<span class="linenos">505</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_stability_report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos">506</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate comprehensive stability report.&quot;&quot;&quot;</span>
-<span class="linenos">507</span>        <span class="n">recent_violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span> <span class="k">else</span> <span class="p">[]</span>
-<span class="linenos">508</span>
-<span class="linenos">509</span>        <span class="c1"># Compute stability metrics</span>
-<span class="linenos">510</span>        <span class="n">total_samples</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
-<span class="linenos">511</span>            <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span><span class="o">.</span><span class="n">sample_count</span><span class="p">,</span>
-<span class="linenos">512</span>            <span class="bp">self</span><span class="o">.</span><span class="n">saturation_monitor</span><span class="o">.</span><span class="n">sample_count</span><span class="p">,</span>
-<span class="linenos">513</span>            <span class="bp">self</span><span class="o">.</span><span class="n">conditioning_monitor</span><span class="o">.</span><span class="n">sample_count</span>
-<span class="linenos">514</span>        <span class="p">)</span>
-<span class="linenos">515</span>
-<span class="linenos">516</span>        <span class="n">violation_rate</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">total_samples</span><span class="p">)</span>
-<span class="linenos">517</span>
-<span class="linenos">518</span>        <span class="k">return</span> <span class="p">{</span>
-<span class="linenos">519</span>            <span class="s1">&#39;episode_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span><span class="p">,</span>
-<span class="linenos">520</span>            <span class="s1">&#39;total_violations&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">),</span>
-<span class="linenos">521</span>            <span class="s1">&#39;violation_rate&#39;</span><span class="p">:</span> <span class="n">violation_rate</span><span class="p">,</span>
-<span class="linenos">522</span>            <span class="s1">&#39;recent_violations&#39;</span><span class="p">:</span> <span class="n">recent_violations</span><span class="p">,</span>
-<span class="linenos">523</span>            <span class="s1">&#39;ldr_alert_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span><span class="o">.</span><span class="n">alert_count</span><span class="p">,</span>
-<span class="linenos">524</span>            <span class="s1">&#39;saturation_violations&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;saturation_alert&#39;</span><span class="p">]]),</span>
-<span class="linenos">525</span>            <span class="s1">&#39;conditioning_violations&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;conditioning_alert&#39;</span><span class="p">]]),</span>
-<span class="linenos">526</span>            <span class="s1">&#39;stability_score&#39;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">violation_rate</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># 0-1 scale</span>
-<span class="linenos">527</span>        <span class="p">}</span>
-<span class="linenos">528</span>
-<span class="linenos">529</span>    <span class="k">def</span><span class="w"> </span><span class="nf">start_new_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">530</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Start monitoring a new episode.&quot;&quot;&quot;</span>
-<span class="linenos">531</span>        <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">532</span>        <span class="c1"># Don&#39;t reset monitors - keep cumulative data for analysis</span>
-<span class="linenos">533</span>
-<span class="linenos">534</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">535</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset entire monitoring system.&quot;&quot;&quot;</span>
-<span class="linenos">536</span>        <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="linenos">537</span>        <span class="bp">self</span><span class="o">.</span><span class="n">saturation_monitor</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="linenos">538</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conditioning_monitor</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="linenos">539</span>        <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">540</span>        <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="linenos">402</span>
+<span class="linenos">403</span><span class="k">class</span><span class="w"> </span><span class="nc">StabilityMonitoringSystem</span><span class="p">:</span>
+<span class="linenos">404</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Integrated stability monitoring system for Issue #1 resolution.</span>
+<span class="linenos">405</span>
+<span class="linenos">406</span><span class="sd">    Combines LDR, saturation, and conditioning monitors for comprehensive</span>
+<span class="linenos">407</span><span class="sd">    stability assessment as specified in the resolution plan.</span>
+<span class="linenos">408</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">409</span>
+<span class="linenos">410</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos">411</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize integrated monitoring system.</span>
+<span class="linenos">412</span>
+<span class="linenos">413</span><span class="sd">        Parameters</span>
+<span class="linenos">414</span><span class="sd">        ----------</span>
+<span class="linenos">415</span><span class="sd">        config : dict, optional</span>
+<span class="linenos">416</span><span class="sd">            Monitoring configuration parameters</span>
+<span class="linenos">417</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">418</span>        <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">419</span>            <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">420</span>
+<span class="linenos">421</span>        <span class="c1"># Extract configuration parameters</span>
+<span class="linenos">422</span>        <span class="n">dt</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="linenos">423</span>        <span class="n">max_force</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_force&#39;</span><span class="p">,</span> <span class="mf">150.0</span><span class="p">)</span>
+<span class="linenos">424</span>
+<span class="linenos">425</span>        <span class="c1"># Initialize sub-monitors</span>
+<span class="linenos">426</span>        <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span> <span class="o">=</span> <span class="n">LyapunovDecreaseMonitor</span><span class="p">(</span>
+<span class="linenos">427</span>            <span class="n">window_size_ms</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ldr_window_ms&#39;</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">),</span>
+<span class="linenos">428</span>            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+<span class="linenos">429</span>            <span class="n">ldr_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ldr_threshold&#39;</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>
+<span class="linenos">430</span>            <span class="n">transient_time</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;transient_time&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="linenos">431</span>        <span class="p">)</span>
+<span class="linenos">432</span>
+<span class="linenos">433</span>        <span class="bp">self</span><span class="o">.</span><span class="n">saturation_monitor</span> <span class="o">=</span> <span class="n">SaturationMonitor</span><span class="p">(</span>
+<span class="linenos">434</span>            <span class="n">max_force</span><span class="o">=</span><span class="n">max_force</span><span class="p">,</span>
+<span class="linenos">435</span>            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+<span class="linenos">436</span>            <span class="n">duty_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;duty_threshold&#39;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+<span class="linenos">437</span>            <span class="n">rate_hit_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rate_hit_threshold&#39;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
+<span class="linenos">438</span>            <span class="n">transient_time</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;transient_time&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="linenos">439</span>        <span class="p">)</span>
+<span class="linenos">440</span>
+<span class="linenos">441</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conditioning_monitor</span> <span class="o">=</span> <span class="n">DynamicsConditioningMonitor</span><span class="p">(</span>
+<span class="linenos">442</span>            <span class="n">condition_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;condition_threshold&#39;</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">),</span>
+<span class="linenos">443</span>            <span class="n">spike_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;spike_threshold&#39;</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">),</span>
+<span class="linenos">444</span>            <span class="n">fallback_threshold</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fallback_threshold&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="linenos">445</span>            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span>
+<span class="linenos">446</span>        <span class="p">)</span>
+<span class="linenos">447</span>
+<span class="linenos">448</span>        <span class="c1"># System-wide monitoring state</span>
+<span class="linenos">449</span>        <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">450</span>        <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">451</span>
+<span class="linenos">452</span>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">453</span>               <span class="n">mass_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">used_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos">454</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update all monitors with current simulation data.</span>
+<span class="linenos">455</span>
+<span class="linenos">456</span><span class="sd">        Parameters</span>
+<span class="linenos">457</span><span class="sd">        ----------</span>
+<span class="linenos">458</span><span class="sd">        sigma : np.ndarray</span>
+<span class="linenos">459</span><span class="sd">            Sliding surface vector</span>
+<span class="linenos">460</span><span class="sd">        control_force : float</span>
+<span class="linenos">461</span><span class="sd">            Control force output</span>
+<span class="linenos">462</span><span class="sd">        mass_matrix : np.ndarray</span>
+<span class="linenos">463</span><span class="sd">            Current mass matrix</span>
+<span class="linenos">464</span><span class="sd">        used_fallback : bool</span>
+<span class="linenos">465</span><span class="sd">            Whether fallback dynamics inversion was used</span>
+<span class="linenos">466</span>
+<span class="linenos">467</span><span class="sd">        Returns</span>
+<span class="linenos">468</span><span class="sd">        -------</span>
+<span class="linenos">469</span><span class="sd">        dict</span>
+<span class="linenos">470</span><span class="sd">            Comprehensive monitoring results</span>
+<span class="linenos">471</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">472</span>        <span class="c1"># Update individual monitors</span>
+<span class="linenos">473</span>        <span class="n">ldr_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+<span class="linenos">474</span>        <span class="n">sat_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">saturation_monitor</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">control_force</span><span class="p">)</span>
+<span class="linenos">475</span>        <span class="n">cond_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conditioning_monitor</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mass_matrix</span><span class="p">,</span> <span class="n">used_fallback</span><span class="p">)</span>
+<span class="linenos">476</span>
+<span class="linenos">477</span>        <span class="c1"># Aggregate alerts</span>
+<span class="linenos">478</span>        <span class="n">any_alert</span> <span class="o">=</span> <span class="n">ldr_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">sat_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">cond_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span>
+<span class="linenos">479</span>
+<span class="linenos">480</span>        <span class="c1"># Record violations</span>
+<span class="linenos">481</span>        <span class="k">if</span> <span class="n">any_alert</span><span class="p">:</span>
+<span class="linenos">482</span>            <span class="n">violation</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">483</span>                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+<span class="linenos">484</span>                <span class="s1">&#39;sample&#39;</span><span class="p">:</span> <span class="n">ldr_result</span><span class="p">[</span><span class="s1">&#39;sample_count&#39;</span><span class="p">],</span>
+<span class="linenos">485</span>                <span class="s1">&#39;ldr_alert&#39;</span><span class="p">:</span> <span class="n">ldr_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">],</span>
+<span class="linenos">486</span>                <span class="s1">&#39;saturation_alert&#39;</span><span class="p">:</span> <span class="n">sat_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">],</span>
+<span class="linenos">487</span>                <span class="s1">&#39;conditioning_alert&#39;</span><span class="p">:</span> <span class="n">cond_result</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">],</span>
+<span class="linenos">488</span>                <span class="s1">&#39;ldr_value&#39;</span><span class="p">:</span> <span class="n">ldr_result</span><span class="p">[</span><span class="s1">&#39;ldr&#39;</span><span class="p">],</span>
+<span class="linenos">489</span>                <span class="s1">&#39;saturation_duty&#39;</span><span class="p">:</span> <span class="n">sat_result</span><span class="p">[</span><span class="s1">&#39;duty&#39;</span><span class="p">],</span>
+<span class="linenos">490</span>                <span class="s1">&#39;condition_number&#39;</span><span class="p">:</span> <span class="n">cond_result</span><span class="p">[</span><span class="s1">&#39;current_condition&#39;</span><span class="p">]</span>
+<span class="linenos">491</span>            <span class="p">}</span>
+<span class="linenos">492</span>            <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">violation</span><span class="p">)</span>
+<span class="linenos">493</span>
+<span class="linenos">494</span>        <span class="c1"># Compile comprehensive results</span>
+<span class="linenos">495</span>        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">496</span>            <span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="n">any_alert</span><span class="p">,</span>
+<span class="linenos">497</span>            <span class="s1">&#39;ldr&#39;</span><span class="p">:</span> <span class="n">ldr_result</span><span class="p">,</span>
+<span class="linenos">498</span>            <span class="s1">&#39;saturation&#39;</span><span class="p">:</span> <span class="n">sat_result</span><span class="p">,</span>
+<span class="linenos">499</span>            <span class="s1">&#39;conditioning&#39;</span><span class="p">:</span> <span class="n">cond_result</span><span class="p">,</span>
+<span class="linenos">500</span>            <span class="s1">&#39;violation_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">),</span>
+<span class="linenos">501</span>            <span class="s1">&#39;episode&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span>
+<span class="linenos">502</span>        <span class="p">}</span>
+<span class="linenos">503</span>
+<span class="linenos">504</span>        <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">505</span>
+<span class="linenos">506</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_stability_report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos">507</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate comprehensive stability report.&quot;&quot;&quot;</span>
+<span class="linenos">508</span>        <span class="n">recent_violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span> <span class="k">else</span> <span class="p">[]</span>
+<span class="linenos">509</span>
+<span class="linenos">510</span>        <span class="c1"># Compute stability metrics</span>
+<span class="linenos">511</span>        <span class="n">total_samples</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+<span class="linenos">512</span>            <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span><span class="o">.</span><span class="n">sample_count</span><span class="p">,</span>
+<span class="linenos">513</span>            <span class="bp">self</span><span class="o">.</span><span class="n">saturation_monitor</span><span class="o">.</span><span class="n">sample_count</span><span class="p">,</span>
+<span class="linenos">514</span>            <span class="bp">self</span><span class="o">.</span><span class="n">conditioning_monitor</span><span class="o">.</span><span class="n">sample_count</span>
+<span class="linenos">515</span>        <span class="p">)</span>
+<span class="linenos">516</span>
+<span class="linenos">517</span>        <span class="n">violation_rate</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">total_samples</span><span class="p">)</span>
+<span class="linenos">518</span>
+<span class="linenos">519</span>        <span class="k">return</span> <span class="p">{</span>
+<span class="linenos">520</span>            <span class="s1">&#39;episode_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span><span class="p">,</span>
+<span class="linenos">521</span>            <span class="s1">&#39;total_violations&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="p">),</span>
+<span class="linenos">522</span>            <span class="s1">&#39;violation_rate&#39;</span><span class="p">:</span> <span class="n">violation_rate</span><span class="p">,</span>
+<span class="linenos">523</span>            <span class="s1">&#39;recent_violations&#39;</span><span class="p">:</span> <span class="n">recent_violations</span><span class="p">,</span>
+<span class="linenos">524</span>            <span class="s1">&#39;ldr_alert_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span><span class="o">.</span><span class="n">alert_count</span><span class="p">,</span>
+<span class="linenos">525</span>            <span class="s1">&#39;saturation_violations&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;saturation_alert&#39;</span><span class="p">]]),</span>
+<span class="linenos">526</span>            <span class="s1">&#39;conditioning_violations&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;conditioning_alert&#39;</span><span class="p">]]),</span>
+<span class="linenos">527</span>            <span class="s1">&#39;stability_score&#39;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">violation_rate</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># 0-1 scale</span>
+<span class="linenos">528</span>        <span class="p">}</span>
+<span class="linenos">529</span>
+<span class="linenos">530</span>    <span class="k">def</span><span class="w"> </span><span class="nf">start_new_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">531</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Start monitoring a new episode.&quot;&quot;&quot;</span>
+<span class="linenos">532</span>        <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">533</span>        <span class="c1"># Don&#39;t reset monitors - keep cumulative data for analysis</span>
+<span class="linenos">534</span>
+<span class="linenos">535</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">536</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset entire monitoring system.&quot;&quot;&quot;</span>
+<span class="linenos">537</span>        <span class="bp">self</span><span class="o">.</span><span class="n">ldr_monitor</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="linenos">538</span>        <span class="bp">self</span><span class="o">.</span><span class="n">saturation_monitor</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="linenos">539</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conditioning_monitor</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="linenos">540</span>        <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">541</span>        <span class="bp">self</span><span class="o">.</span><span class="n">violation_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>
@@ -1399,105 +1426,106 @@ including LDR monitoring, saturation tracking, and dynamics conditioning.</p>
 </ul>
 <section id="id3">
 <h4>Source Code<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">DynamicsConditioningMonitor</span><span class="p">:</span>
-<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor dynamics matrix conditioning and inversion health.</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="sd">    Implements conditioning monitoring as specified in Issue #1 resolution:</span>
-<span class="linenos"> 5</span><span class="sd">    - Alert on sustained κ(M(q)) above threshold or spike in fallback inversions</span>
-<span class="linenos"> 6</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos"> 7</span>
-<span class="linenos"> 8</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e7</span><span class="p">,</span>
-<span class="linenos"> 9</span>                 <span class="n">spike_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">fallback_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-<span class="linenos">10</span>                 <span class="n">window_size_ms</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">):</span>
-<span class="linenos">11</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize conditioning monitor.</span>
-<span class="linenos">12</span>
-<span class="linenos">13</span><span class="sd">        Parameters</span>
-<span class="linenos">14</span><span class="sd">        ----------</span>
-<span class="linenos">15</span><span class="sd">        condition_threshold : float</span>
-<span class="linenos">16</span><span class="sd">            Median condition number threshold</span>
-<span class="linenos">17</span><span class="sd">        spike_threshold : float</span>
-<span class="linenos">18</span><span class="sd">            99th percentile condition number threshold</span>
-<span class="linenos">19</span><span class="sd">        fallback_threshold : int</span>
-<span class="linenos">20</span><span class="sd">            Maximum fallback inversions per episode</span>
-<span class="linenos">21</span><span class="sd">        window_size_ms : float</span>
-<span class="linenos">22</span><span class="sd">            Rolling window size</span>
-<span class="linenos">23</span><span class="sd">        dt : float</span>
-<span class="linenos">24</span><span class="sd">            Simulation timestep</span>
-<span class="linenos">25</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">condition_threshold</span> <span class="o">=</span> <span class="n">condition_threshold</span>
-<span class="linenos">27</span>        <span class="bp">self</span><span class="o">.</span><span class="n">spike_threshold</span> <span class="o">=</span> <span class="n">spike_threshold</span>
-<span class="linenos">28</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_threshold</span> <span class="o">=</span> <span class="n">fallback_threshold</span>
-<span class="linenos">29</span>
-<span class="linenos">30</span>        <span class="bp">self</span><span class="o">.</span><span class="n">window_samples</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">window_size_ms</span> <span class="o">/</span> <span class="mf">1000.0</span> <span class="o">/</span> <span class="n">dt</span><span class="p">))</span>
-<span class="linenos">31</span>
-<span class="linenos">32</span>        <span class="c1"># Condition number and fallback history</span>
-<span class="linenos">33</span>        <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">:</span> <span class="n">deque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">window_samples</span><span class="p">)</span>
-<span class="linenos">34</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">35</span>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">36</span>
-<span class="linenos">37</span>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mass_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">used_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos">38</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update monitor with dynamics matrix info.</span>
-<span class="linenos">39</span>
-<span class="linenos">40</span><span class="sd">        Parameters</span>
-<span class="linenos">41</span><span class="sd">        ----------</span>
-<span class="linenos">42</span><span class="sd">        mass_matrix : np.ndarray</span>
-<span class="linenos">43</span><span class="sd">            Current mass matrix M(q)</span>
-<span class="linenos">44</span><span class="sd">        used_fallback : bool</span>
-<span class="linenos">45</span><span class="sd">            Whether fallback inversion was used</span>
-<span class="linenos">46</span>
-<span class="linenos">47</span><span class="sd">        Returns</span>
-<span class="linenos">48</span><span class="sd">        -------</span>
-<span class="linenos">49</span><span class="sd">        dict</span>
-<span class="linenos">50</span><span class="sd">            Conditioning monitoring results</span>
-<span class="linenos">51</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">52</span>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">53</span>
-<span class="linenos">54</span>        <span class="c1"># Compute condition number</span>
-<span class="linenos">55</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">56</span>            <span class="n">condition_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">mass_matrix</span><span class="p">)</span>
-<span class="linenos">57</span>            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">condition_num</span><span class="p">):</span>
-<span class="linenos">58</span>                <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condition_num</span><span class="p">)</span>
-<span class="linenos">59</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">60</span>                <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)</span>  <span class="c1"># Very high for invalid matrices</span>
-<span class="linenos">61</span>        <span class="k">except</span><span class="p">:</span>
-<span class="linenos">62</span>            <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)</span>
-<span class="linenos">63</span>
-<span class="linenos">64</span>        <span class="c1"># Track fallback usage</span>
-<span class="linenos">65</span>        <span class="k">if</span> <span class="n">used_fallback</span><span class="p">:</span>
-<span class="linenos">66</span>            <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">67</span>
-<span class="linenos">68</span>        <span class="c1"># Analyze conditioning</span>
-<span class="linenos">69</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">70</span>            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;no_data&#39;</span><span class="p">}</span>
-<span class="linenos">71</span>
-<span class="linenos">72</span>        <span class="n">conditions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">))</span>
-<span class="linenos">73</span>        <span class="n">median_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span>
-<span class="linenos">74</span>        <span class="n">p99_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
-<span class="linenos">75</span>
-<span class="linenos">76</span>        <span class="c1"># Alert conditions</span>
-<span class="linenos">77</span>        <span class="n">median_alert</span> <span class="o">=</span> <span class="n">median_cond</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition_threshold</span>
-<span class="linenos">78</span>        <span class="n">spike_alert</span> <span class="o">=</span> <span class="n">p99_cond</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">spike_threshold</span>
-<span class="linenos">79</span>        <span class="n">fallback_alert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_threshold</span>
-<span class="linenos">80</span>
-<span class="linenos">81</span>        <span class="n">alert</span> <span class="o">=</span> <span class="n">median_alert</span> <span class="ow">or</span> <span class="n">spike_alert</span> <span class="ow">or</span> <span class="n">fallback_alert</span>
-<span class="linenos">82</span>
-<span class="linenos">83</span>        <span class="k">return</span> <span class="p">{</span>
-<span class="linenos">84</span>            <span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="n">alert</span><span class="p">,</span>
-<span class="linenos">85</span>            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;monitoring&#39;</span><span class="p">,</span>
-<span class="linenos">86</span>            <span class="s1">&#39;median_condition&#39;</span><span class="p">:</span> <span class="n">median_cond</span><span class="p">,</span>
-<span class="linenos">87</span>            <span class="s1">&#39;p99_condition&#39;</span><span class="p">:</span> <span class="n">p99_cond</span><span class="p">,</span>
-<span class="linenos">88</span>            <span class="s1">&#39;fallback_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span><span class="p">,</span>
-<span class="linenos">89</span>            <span class="s1">&#39;current_condition&#39;</span><span class="p">:</span> <span class="n">conditions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-<span class="linenos">90</span>            <span class="s1">&#39;median_alert&#39;</span><span class="p">:</span> <span class="n">median_alert</span><span class="p">,</span>
-<span class="linenos">91</span>            <span class="s1">&#39;spike_alert&#39;</span><span class="p">:</span> <span class="n">spike_alert</span><span class="p">,</span>
-<span class="linenos">92</span>            <span class="s1">&#39;fallback_alert&#39;</span><span class="p">:</span> <span class="n">fallback_alert</span>
-<span class="linenos">93</span>        <span class="p">}</span>
-<span class="linenos">94</span>
-<span class="linenos">95</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">96</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset monitoring state.&quot;&quot;&quot;</span>
-<span class="linenos">97</span>        <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-<span class="linenos">98</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">99</span>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="k">class</span><span class="w"> </span><span class="nc">DynamicsConditioningMonitor</span><span class="p">:</span>
+<span class="linenos">  2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor dynamics matrix conditioning and inversion health.</span>
+<span class="linenos">  3</span>
+<span class="linenos">  4</span><span class="sd">    Implements conditioning monitoring as specified in Issue #1 resolution:</span>
+<span class="linenos">  5</span><span class="sd">    - Alert on sustained κ(M(q)) above threshold or spike in fallback inversions</span>
+<span class="linenos">  6</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">  7</span>
+<span class="linenos">  8</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e7</span><span class="p">,</span>
+<span class="linenos">  9</span>                 <span class="n">spike_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">fallback_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="linenos"> 10</span>                 <span class="n">window_size_ms</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">):</span>
+<span class="linenos"> 11</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize conditioning monitor.</span>
+<span class="linenos"> 12</span>
+<span class="linenos"> 13</span><span class="sd">        Parameters</span>
+<span class="linenos"> 14</span><span class="sd">        ----------</span>
+<span class="linenos"> 15</span><span class="sd">        condition_threshold : float</span>
+<span class="linenos"> 16</span><span class="sd">            Median condition number threshold</span>
+<span class="linenos"> 17</span><span class="sd">        spike_threshold : float</span>
+<span class="linenos"> 18</span><span class="sd">            99th percentile condition number threshold</span>
+<span class="linenos"> 19</span><span class="sd">        fallback_threshold : int</span>
+<span class="linenos"> 20</span><span class="sd">            Maximum fallback inversions per episode</span>
+<span class="linenos"> 21</span><span class="sd">        window_size_ms : float</span>
+<span class="linenos"> 22</span><span class="sd">            Rolling window size</span>
+<span class="linenos"> 23</span><span class="sd">        dt : float</span>
+<span class="linenos"> 24</span><span class="sd">            Simulation timestep</span>
+<span class="linenos"> 25</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">condition_threshold</span> <span class="o">=</span> <span class="n">condition_threshold</span>
+<span class="linenos"> 27</span>        <span class="bp">self</span><span class="o">.</span><span class="n">spike_threshold</span> <span class="o">=</span> <span class="n">spike_threshold</span>
+<span class="linenos"> 28</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_threshold</span> <span class="o">=</span> <span class="n">fallback_threshold</span>
+<span class="linenos"> 29</span>
+<span class="linenos"> 30</span>        <span class="bp">self</span><span class="o">.</span><span class="n">window_samples</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">window_size_ms</span> <span class="o">/</span> <span class="mf">1000.0</span> <span class="o">/</span> <span class="n">dt</span><span class="p">))</span>
+<span class="linenos"> 31</span>
+<span class="linenos"> 32</span>        <span class="c1"># Condition number and fallback history</span>
+<span class="linenos"> 33</span>        <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">:</span> <span class="n">deque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">window_samples</span><span class="p">)</span>
+<span class="linenos"> 34</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 35</span>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mass_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">used_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos"> 38</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Update monitor with dynamics matrix info.</span>
+<span class="linenos"> 39</span>
+<span class="linenos"> 40</span><span class="sd">        Parameters</span>
+<span class="linenos"> 41</span><span class="sd">        ----------</span>
+<span class="linenos"> 42</span><span class="sd">        mass_matrix : np.ndarray</span>
+<span class="linenos"> 43</span><span class="sd">            Current mass matrix M(q)</span>
+<span class="linenos"> 44</span><span class="sd">        used_fallback : bool</span>
+<span class="linenos"> 45</span><span class="sd">            Whether fallback inversion was used</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="sd">        Returns</span>
+<span class="linenos"> 48</span><span class="sd">        -------</span>
+<span class="linenos"> 49</span><span class="sd">        dict</span>
+<span class="linenos"> 50</span><span class="sd">            Conditioning monitoring results</span>
+<span class="linenos"> 51</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 52</span>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 53</span>
+<span class="linenos"> 54</span>        <span class="c1"># Compute condition number</span>
+<span class="linenos"> 55</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 56</span>            <span class="n">condition_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">mass_matrix</span><span class="p">)</span>
+<span class="linenos"> 57</span>            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">condition_num</span><span class="p">):</span>
+<span class="linenos"> 58</span>                <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condition_num</span><span class="p">)</span>
+<span class="linenos"> 59</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 60</span>                <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)</span>  <span class="c1"># Very high for invalid matrices</span>
+<span class="linenos"> 61</span>        <span class="k">except</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+<span class="linenos"> 62</span>            <span class="c1"># Handle singular matrices or invalid values</span>
+<span class="linenos"> 63</span>            <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)</span>
+<span class="linenos"> 64</span>
+<span class="linenos"> 65</span>        <span class="c1"># Track fallback usage</span>
+<span class="linenos"> 66</span>        <span class="k">if</span> <span class="n">used_fallback</span><span class="p">:</span>
+<span class="linenos"> 67</span>            <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 68</span>
+<span class="linenos"> 69</span>        <span class="c1"># Analyze conditioning</span>
+<span class="linenos"> 70</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 71</span>            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;no_data&#39;</span><span class="p">}</span>
+<span class="linenos"> 72</span>
+<span class="linenos"> 73</span>        <span class="n">conditions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="p">))</span>
+<span class="linenos"> 74</span>        <span class="n">median_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span>
+<span class="linenos"> 75</span>        <span class="n">p99_cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
+<span class="linenos"> 76</span>
+<span class="linenos"> 77</span>        <span class="c1"># Alert conditions</span>
+<span class="linenos"> 78</span>        <span class="n">median_alert</span> <span class="o">=</span> <span class="n">median_cond</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition_threshold</span>
+<span class="linenos"> 79</span>        <span class="n">spike_alert</span> <span class="o">=</span> <span class="n">p99_cond</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">spike_threshold</span>
+<span class="linenos"> 80</span>        <span class="n">fallback_alert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_threshold</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span>        <span class="n">alert</span> <span class="o">=</span> <span class="n">median_alert</span> <span class="ow">or</span> <span class="n">spike_alert</span> <span class="ow">or</span> <span class="n">fallback_alert</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span>        <span class="k">return</span> <span class="p">{</span>
+<span class="linenos"> 85</span>            <span class="s1">&#39;alert&#39;</span><span class="p">:</span> <span class="n">alert</span><span class="p">,</span>
+<span class="linenos"> 86</span>            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;monitoring&#39;</span><span class="p">,</span>
+<span class="linenos"> 87</span>            <span class="s1">&#39;median_condition&#39;</span><span class="p">:</span> <span class="n">median_cond</span><span class="p">,</span>
+<span class="linenos"> 88</span>            <span class="s1">&#39;p99_condition&#39;</span><span class="p">:</span> <span class="n">p99_cond</span><span class="p">,</span>
+<span class="linenos"> 89</span>            <span class="s1">&#39;fallback_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span><span class="p">,</span>
+<span class="linenos"> 90</span>            <span class="s1">&#39;current_condition&#39;</span><span class="p">:</span> <span class="n">conditions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="linenos"> 91</span>            <span class="s1">&#39;median_alert&#39;</span><span class="p">:</span> <span class="n">median_alert</span><span class="p">,</span>
+<span class="linenos"> 92</span>            <span class="s1">&#39;spike_alert&#39;</span><span class="p">:</span> <span class="n">spike_alert</span><span class="p">,</span>
+<span class="linenos"> 93</span>            <span class="s1">&#39;fallback_alert&#39;</span><span class="p">:</span> <span class="n">fallback_alert</span>
+<span class="linenos"> 94</span>        <span class="p">}</span>
+<span class="linenos"> 95</span>
+<span class="linenos"> 96</span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 97</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset monitoring state.&quot;&quot;&quot;</span>
+<span class="linenos"> 98</span>        <span class="bp">self</span><span class="o">.</span><span class="n">condition_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="linenos"> 99</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">100</span>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </section>
@@ -1712,6 +1740,80 @@ stability assessment as specified in the resolution plan.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">collections</span> <span class="pre">import</span> <span class="pre">deque</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="monitoring-utilities-theory">
+<h3>Monitoring Utilities Theory<a class="headerlink" href="#monitoring-utilities-theory" title="Link to this heading">¶</a></h3>
+<p>(Detailed mathematical theory for monitoring utilities to be added…)</p>
+<p><strong>Key concepts:</strong></p>
+<ul class="simple">
+<li><p>Mathematical foundations</p></li>
+<li><p>Algorithmic principles</p></li>
+<li><p>Performance characteristics</p></li>
+<li><p>Integration patterns</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.utils.monitoring_stability import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>```python
+component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+</section>
+<section id="example-3-integration-with-simulation">
+<h3>Example 3: Integration with Simulation<a class="headerlink" href="#example-3-integration-with-simulation" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>for k in range(num_steps):
+result = component.process(x)
+x = update(x, result)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python
+component = Component(enable_caching=True)
+```</p>
+</section>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python
+try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
+</section>
 </section>
 
         </article>
@@ -1731,7 +1833,7 @@ stability assessment as specified in the resolution plan.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1802,6 +1904,22 @@ stability assessment as specified in the resolution plan.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#monitoring-utilities-theory">Monitoring Utilities Theory</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-simulation">Example 3: Integration with Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 </ul>

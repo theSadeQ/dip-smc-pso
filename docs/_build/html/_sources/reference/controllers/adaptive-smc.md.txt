@@ -187,6 +187,6 @@ Under persistent excitation conditions, the adaptive gain converges to the optim
 
 ## Related Documentation
 
-- [SMC Theory Complete](../theory/smc_theory_complete.md) - Mathematical foundations
+- [SMC Theory Complete](../../guides/theory/smc-theory.md) - Mathematical foundations
 - [Classical SMC](classical-smc.md) - Non-adaptive comparison
 - [Hybrid Adaptive STA](hybrid-adaptive-smc.md) - Advanced adaptive approach

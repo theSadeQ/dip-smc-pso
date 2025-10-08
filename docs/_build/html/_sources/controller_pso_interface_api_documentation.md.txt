@@ -21,6 +21,9 @@ This document provides comprehensive API documentation for the interface between
 
 **Function Signature:**
 ```python
+# example-metadata:
+# runnable: false
+
 def controller_factory(gains: np.ndarray, **kwargs) -> BaseController
 ```
 
@@ -171,6 +174,9 @@ class ControllerFactory:
 
 **Gain Vector Specification:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Classical SMC Gains: [c1, λ1, c2, λ2, K, kd] ∈ ℝ⁶
 CLASSICAL_SMC_GAINS = {
     'c1': 'Sliding surface gain for θ₁ error',
@@ -190,6 +196,9 @@ CLASSICAL_SMC_BOUNDS = {
 
 **Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 class ClassicalSMC(PSO_ControllerInterface):
     """Classical Sliding Mode Controller with PSO interface."""
 
@@ -287,6 +296,9 @@ class ClassicalSMC(PSO_ControllerInterface):
 
 **Gain Vector Specification:**
 ```python
+# example-metadata:
+# runnable: false
+
 # STA-SMC Gains: [K1, K2, k1, k2, λ1, λ2] ∈ ℝ⁶
 STA_SMC_GAINS = {
     'K1': 'First-order sliding mode gain',
@@ -306,6 +318,9 @@ STA_SMC_BOUNDS = {
 
 **Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 class STASMC(PSO_ControllerInterface):
     """Super-Twisting Algorithm Sliding Mode Controller."""
 
@@ -412,6 +427,9 @@ class STASMC(PSO_ControllerInterface):
 
 **Gain Vector Specification:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Adaptive SMC Gains: [c1, λ1, c2, λ2, γ] ∈ ℝ⁵
 ADAPTIVE_SMC_GAINS = {
     'c1': 'Sliding surface gain for θ₁',
@@ -429,6 +447,9 @@ ADAPTIVE_SMC_BOUNDS = {
 
 **Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 class AdaptiveSMC(PSO_ControllerInterface):
     """Adaptive Sliding Mode Controller with uncertainty estimation."""
 
@@ -524,6 +545,9 @@ class AdaptiveSMC(PSO_ControllerInterface):
 
 **Gain Vector Specification:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Hybrid Adaptive STA-SMC Gains: [c1, λ1, c2, λ2] ∈ ℝ⁴
 HYBRID_ADAPTIVE_STA_SMC_GAINS = {
     'c1': 'Proportional-like sliding surface gain',
@@ -540,6 +564,9 @@ HYBRID_ADAPTIVE_STA_SMC_BOUNDS = {
 
 **Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 class HybridAdaptiveSTASMC(PSO_ControllerInterface):
     """Hybrid Adaptive Super-Twisting SMC with dual adaptation."""
 
@@ -647,6 +674,9 @@ class HybridAdaptiveSTASMC(PSO_ControllerInterface):
 
 **Class Definition:**
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOTuner:
     """High-performance PSO tuner for SMC controllers."""
 
@@ -750,6 +780,9 @@ optimal_controller = create_classical_smc(optimal_gains)
 
 **Validation Framework:**
 ```python
+# example-metadata:
+# runnable: false
+
 from typing import List, Tuple
 from dataclasses import dataclass
 
@@ -822,6 +855,9 @@ class ParameterValidator:
 
 **Exception Hierarchy:**
 ```python
+# example-metadata:
+# runnable: false
+
 class PSO_ControllerError(Exception):
     """Base exception for PSO-controller interface errors."""
     pass
@@ -845,6 +881,9 @@ class SimulationError(PSO_ControllerError):
 
 **Error Recovery Strategies:**
 ```python
+# example-metadata:
+# runnable: false
+
 def robust_controller_factory(gains: np.ndarray,
                             controller_type: str,
                             fallback_gains: Optional[np.ndarray] = None) -> PSO_ControllerInterface:
@@ -947,6 +986,9 @@ class PerformanceMonitoredController:
 
 **Benchmark Suite:**
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerBenchmark:
     """Standardized controller benchmarking."""
 
@@ -1137,6 +1179,9 @@ def test_pso_optimization_integration(controller_type: str):
 
 **Basic PSO Optimization:**
 ```python
+# example-metadata:
+# runnable: false
+
 #!/usr/bin/env python3
 """Example: PSO optimization for Classical SMC."""
 
@@ -1263,6 +1308,9 @@ def optimize_custom_controller():
 
 **Backward Compatibility Layer:**
 ```python
+# example-metadata:
+# runnable: false
+
 def legacy_controller_adapter(legacy_controller_class):
     """Adapter for legacy controllers without PSO interface."""
 
@@ -1294,6 +1342,9 @@ def legacy_controller_adapter(legacy_controller_class):
 
 **API Version Checker:**
 ```python
+# example-metadata:
+# runnable: false
+
 def check_controller_api_version(controller_class: Type) -> str:
     """Check controller API version compatibility."""
 

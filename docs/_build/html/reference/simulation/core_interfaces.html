@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -503,7 +529,7 @@
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
 <span class="linenos">  9</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Callable</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span>
@@ -1137,6 +1163,221 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="simulation-engine-architecture">
+<h3>Simulation Engine Architecture<a class="headerlink" href="#simulation-engine-architecture" title="Link to this heading">¶</a></h3>
+<p><strong>Abstract interface design:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{SimulationEngine} = \{\text{step}, \text{reset}, \text{validate}\}\]</div>
+</div>
+</section>
+<section id="numerical-integration-interface">
+<h3>Numerical Integration Interface<a class="headerlink" href="#numerical-integration-interface" title="Link to this heading">¶</a></h3>
+<p><strong>Integration step contract:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{n+1} = \vec{x}_n + h \cdot \text{integrator}(\vec{f}, \vec{x}_n, t_n, h, u_n)\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{x}_n\)</span> is state at time <span class="math notranslate nohighlight">\(t_n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h\)</span> is time step</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{f}(\vec{x}, u, t)\)</span> is dynamics function</p></li>
+<li><p><span class="math notranslate nohighlight">\(u_n\)</span> is control input</p></li>
+</ul>
+</section>
+<section id="state-evolution-protocol">
+<h3>State Evolution Protocol<a class="headerlink" href="#state-evolution-protocol" title="Link to this heading">¶</a></h3>
+<p><strong>Continuous-time dynamics:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{d\vec{x}}{dt} = \vec{f}(\vec{x}, u, t)\]</div>
+</div>
+<p><strong>Discrete-time approximation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x}_{n+1} \approx \vec{x}_n + h \cdot \Phi(\vec{f}, \vec{x}_n, t_n, h)\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is the numerical method (Euler, RK4, etc.).</p>
+</section>
+<section id="error-propagation">
+<h3>Error Propagation<a class="headerlink" href="#error-propagation" title="Link to this heading">¶</a></h3>
+<p><strong>Local truncation error:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau_n = \vec{x}(t_{n+1}) - \vec{x}_{n+1} = O(h^{p+1})\]</div>
+</div>
+<p><strong>Global error accumulation:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[e_n = \vec{x}(t_n) - \vec{x}_n = O(h^p)\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(p\)</span> is the order of the method.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Simulation Request] --&gt; B{Engine Type}
+
+    B --&gt;|Fixed-Step| C[Fixed-Step Engine]
+    B --&gt;|Adaptive| D[Adaptive Engine]
+    B --&gt;|Discrete| E[Discrete Engine]
+
+    C --&gt; F[Integrator Interface]
+    D --&gt; F
+    E --&gt; G[Discrete Dynamics]
+
+    F --&gt; H[Euler]
+    F --&gt; I[RK4]
+    F --&gt; J[RK45]
+
+    H --&gt; K[State Update]
+    I --&gt; K
+    J --&gt; K
+    G --&gt; K
+
+    K --&gt; L[Validation]
+    L --&gt; M{Valid?}
+    M --&gt;|Yes| N[Next Step]
+    M --&gt;|No| O[Error Handler]
+
+    style F fill:#9cf
+    style K fill:#9f9
+    style O fill:#f99
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-simulation">
+<h3>Example 1: Basic Simulation<a class="headerlink" href="#example-1-basic-simulation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Initialize simulation engine</span>
+<span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">integrator</span><span class="o">=</span><span class="s1">&#39;rk4&#39;</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Run simulation</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
+    <span class="n">x0</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Extract trajectories</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">time</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">states</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">controls</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-adaptive-integration">
+<h3>Example 2: Adaptive Integration<a class="headerlink" href="#example-2-adaptive-integration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.integrators.adaptive</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveRK45Integrator</span>
+
+<span class="c1"># Create adaptive integrator</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">AdaptiveRK45Integrator</span><span class="p">(</span>
+    <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+    <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+    <span class="n">max_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">min_step</span><span class="o">=</span><span class="mf">1e-6</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulate with automatic step size control</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
+    <span class="n">x0</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">integrator</span><span class="o">=</span><span class="n">integrator</span>
+<span class="p">)</span>
+
+<span class="c1"># Check step size history</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steps taken: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">time</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average dt: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">time</span><span class="p">))</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-batch-simulation-numba">
+<h3>Example 3: Batch Simulation (Numba)<a class="headerlink" href="#example-3-batch-simulation-numba" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_batch_simulation</span>
+
+<span class="c1"># Define batch of initial conditions</span>
+<span class="n">x0_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># 100 initial states</span>
+
+<span class="c1"># Vectorized batch simulation</span>
+<span class="n">results_batch</span> <span class="o">=</span> <span class="n">run_batch_simulation</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">x0_batch</span><span class="o">=</span><span class="n">x0_batch</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Compute batch statistics</span>
+<span class="n">mean_trajectory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results_batch</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">std_trajectory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">results_batch</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-safety-guards">
+<h3>Example 4: Safety Guards<a class="headerlink" href="#example-4-safety-guards" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.context</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.safety</span><span class="w"> </span><span class="kn">import</span> <span class="n">SafetyGuards</span>
+
+<span class="c1"># Configure safety constraints</span>
+<span class="n">safety</span> <span class="o">=</span> <span class="n">SafetyGuards</span><span class="p">(</span>
+    <span class="n">state_bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">control_bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="n">deadline_ms</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">max_condition_number</span><span class="o">=</span><span class="mf">1e6</span>
+<span class="p">)</span>
+
+<span class="c1"># Simulation with safety monitoring</span>
+<span class="k">with</span> <span class="n">SimulationContext</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">safety</span><span class="p">)</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+
+    <span class="c1"># Check safety violations</span>
+    <span class="n">violations</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_safety_violations</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">violations</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">violations</span><span class="p">)</span><span class="si">}</span><span class="s2"> safety events detected&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-profiling">
+<h3>Example 5: Performance Profiling<a class="headerlink" href="#example-5-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Profile different integrators</span>
+<span class="n">integrators</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;euler&#39;</span><span class="p">,</span> <span class="s1">&#39;rk4&#39;</span><span class="p">,</span> <span class="s1">&#39;rk45&#39;</span><span class="p">]</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">integrators</span><span class="p">:</span>
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+        <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+        <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+        <span class="n">integrator</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+        <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+    <span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+    <span class="n">times</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="n">elapsed</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">time</span><span class="p">)</span><span class="si">}</span><span class="s2"> steps)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compare speedup</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">RK4 vs Euler speedup: </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;euler&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;rk4&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
         </article>
@@ -1156,7 +1397,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1257,6 +1498,22 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#simulation-engine-architecture">Simulation Engine Architecture</a></li>
+<li><a class="reference internal" href="#numerical-integration-interface">Numerical Integration Interface</a></li>
+<li><a class="reference internal" href="#state-evolution-protocol">State Evolution Protocol</a></li>
+<li><a class="reference internal" href="#error-propagation">Error Propagation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-simulation">Example 1: Basic Simulation</a></li>
+<li><a class="reference internal" href="#example-2-adaptive-integration">Example 2: Adaptive Integration</a></li>
+<li><a class="reference internal" href="#example-3-batch-simulation-numba">Example 3: Batch Simulation (Numba)</a></li>
+<li><a class="reference internal" href="#example-4-safety-guards">Example 4: Safety Guards</a></li>
+<li><a class="reference internal" href="#example-5-performance-profiling">Example 5: Performance Profiling</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1275,6 +1532,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

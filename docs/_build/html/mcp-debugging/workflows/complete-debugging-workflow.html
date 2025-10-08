@@ -1,0 +1,1272 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Complete MCP Debugging Workflow - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f5a89ef9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant/models_guide.html">Plant Models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../TESTING.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../test_protocols.html">5.x Test Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../context.html">2. Application Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference Documentation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography &amp; Academic References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/mcp-debugging/workflows/complete-debugging-workflow.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/mcp-debugging/workflows/complete-debugging-workflow.md" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="complete-mcp-debugging-workflow">
+<h1>Complete MCP Debugging Workflow<a class="headerlink" href="#complete-mcp-debugging-workflow" title="Link to this heading">¶</a></h1>
+<p><strong>Last Updated</strong>: 2025-10-06
+<strong>MCP Servers</strong>: 8 servers integrated
+<strong>Project</strong>: DIP-SMC-PSO</p>
+<hr class="docutils" />
+<section id="overview">
+<h2>📋 Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>This document provides comprehensive debugging workflows using the integrated MCP (Model Context Protocol) servers for the Double Inverted Pendulum Sliding Mode Control with PSO Optimization project.</p>
+<section id="available-mcp-servers">
+<h3>Available MCP Servers<a class="headerlink" href="#available-mcp-servers" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Server</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Tools</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>filesystem</strong></p></td>
+<td><p>File system operations</p></td>
+<td><p>read, write, search, list</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>github</strong></p></td>
+<td><p>Git operations</p></td>
+<td><p>commits, branches, issues, PRs</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sequential-thinking</strong></p></td>
+<td><p>Systematic problem-solving</p></td>
+<td><p>step-by-step reasoning</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>puppeteer</strong></p></td>
+<td><p>Browser automation</p></td>
+<td><p>dashboard testing, UI validation</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>mcp-debugger</strong></p></td>
+<td><p>API testing</p></td>
+<td><p>Postman collections, REST APIs</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>pytest-mcp</strong></p></td>
+<td><p>Test debugging</p></td>
+<td><p>pytest failures, test tracking</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>git-mcp</strong></p></td>
+<td><p>Advanced Git ops</p></td>
+<td><p>diff, log, merge, rebase</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sqlite-mcp</strong></p></td>
+<td><p>Database queries</p></td>
+<td><p>PSO results, convergence data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow-1-pso-convergence-debugging">
+<h2>🔧 Workflow 1: PSO Convergence Debugging<a class="headerlink" href="#workflow-1-pso-convergence-debugging" title="Link to this heading">¶</a></h2>
+<p><strong>Use Case</strong>: PSO optimization is converging slowly or getting stuck in local minima.</p>
+<section id="phase-1-data-collection-sqlite-mcp">
+<h3>Phase 1: Data Collection (sqlite-mcp)<a class="headerlink" href="#phase-1-data-collection-sqlite-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Query recent PSO runs</span>
+SELECT<span class="w"> </span>run_id,<span class="w"> </span>best_fitness,<span class="w"> </span>iterations,<span class="w"> </span>convergence_time
+FROM<span class="w"> </span>pso_runs
+ORDER<span class="w"> </span>BY<span class="w"> </span>timestamp<span class="w"> </span>DESC
+LIMIT<span class="w"> </span><span class="m">10</span><span class="p">;</span>
+
+<span class="c1"># Check parameter ranges</span>
+SELECT<span class="w"> </span>parameter_name,<span class="w"> </span>min_value,<span class="w"> </span>max_value,<span class="w"> </span>optimal_value
+FROM<span class="w"> </span>pso_parameters
+WHERE<span class="w"> </span><span class="nv">run_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&lt;latest_run_id&gt;&#39;</span><span class="p">;</span>
+
+<span class="c1"># Analyze convergence pattern</span>
+SELECT<span class="w"> </span>iteration,<span class="w"> </span>gbest_fitness,<span class="w"> </span>diversity_metric
+FROM<span class="w"> </span>pso_iterations
+WHERE<span class="w"> </span><span class="nv">run_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&lt;latest_run_id&gt;&#39;</span>
+ORDER<span class="w"> </span>BY<span class="w"> </span>iteration<span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-2-log-analysis-filesystem">
+<h3>Phase 2: Log Analysis (filesystem)<a class="headerlink" href="#phase-2-log-analysis-filesystem" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read PSO optimization logs</span>
+/analyze-pso-logs
+
+<span class="c1"># Key indicators to check:</span>
+<span class="c1"># - Swarm diversity collapse (&lt; 0.01 after 10 iterations)</span>
+<span class="c1"># - Fitness stagnation (no improvement for 20+ iterations)</span>
+<span class="c1"># - Parameter bound violations</span>
+<span class="c1"># - Particle velocity saturation</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-3-code-inspection-sequential-thinking">
+<h3>Phase 3: Code Inspection (sequential-thinking)<a class="headerlink" href="#phase-3-code-inspection-sequential-thinking" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Check</span> <span class="n">PSO</span> <span class="n">hyperparameters</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Swarm</span> <span class="n">size</span> <span class="p">(</span><span class="n">recommended</span><span class="p">:</span> <span class="mi">30</span><span class="o">-</span><span class="mi">50</span> <span class="k">for</span> <span class="mi">8</span><span class="n">D</span> <span class="n">problem</span><span class="p">)</span>
+   <span class="o">-</span> <span class="n">Inertia</span> <span class="n">weight</span> <span class="n">decay</span> <span class="p">(</span><span class="mf">0.9</span> <span class="err">→</span> <span class="mf">0.4</span><span class="p">)</span>
+   <span class="o">-</span> <span class="n">Cognitive</span><span class="o">/</span><span class="n">social</span> <span class="n">coefficients</span> <span class="p">(</span><span class="n">c1</span><span class="o">=</span><span class="mf">2.05</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">2.05</span><span class="p">)</span>
+
+<span class="mf">2.</span> <span class="n">Verify</span> <span class="n">objective</span> <span class="n">function</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Penalty</span> <span class="n">terms</span> <span class="n">properly</span> <span class="n">scaled</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Constraint</span> <span class="n">handling</span> <span class="n">robust</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Numerical</span> <span class="n">stability</span> <span class="n">checks</span><span class="err">?</span>
+
+<span class="mf">3.</span> <span class="n">Examine</span> <span class="n">initialization</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Latin</span> <span class="n">Hypercube</span> <span class="n">Sampling</span> <span class="n">used</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Parameter</span> <span class="n">bounds</span> <span class="n">appropriate</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Initial</span> <span class="n">diversity</span> <span class="n">sufficient</span><span class="err">?</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-4-fix-implementation-filesystem-git-mcp">
+<h3>Phase 4: Fix Implementation (filesystem + git-mcp)<a class="headerlink" href="#phase-4-fix-implementation-filesystem-git-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create feature branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>fix/pso-convergence-improvement
+
+<span class="c1"># Apply fixes to src/optimization/pso_optimizer.py</span>
+<span class="c1"># - Adjust hyperparameters</span>
+<span class="c1"># - Add diversity maintenance mechanism</span>
+<span class="c1"># - Implement adaptive velocity clamping</span>
+
+<span class="c1"># Commit changes</span>
+git<span class="w"> </span>add<span class="w"> </span>src/optimization/pso_optimizer.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Improve PSO convergence with adaptive parameters&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-5-validation-pytest-mcp">
+<h3>Phase 5: Validation (pytest-mcp)<a class="headerlink" href="#phase-5-validation-pytest-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run PSO unit tests</span>
+/test-controller
+
+<span class="c1"># Check specific tests:</span>
+<span class="c1"># - test_pso_convergence_rate</span>
+<span class="c1"># - test_pso_diversity_maintenance</span>
+<span class="c1"># - test_pso_constraint_handling</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow-2-controller-test-debugging">
+<h2>🧪 Workflow 2: Controller Test Debugging<a class="headerlink" href="#workflow-2-controller-test-debugging" title="Link to this heading">¶</a></h2>
+<p><strong>Use Case</strong>: Controller tests are failing with unexpected behavior.</p>
+<section id="phase-1-test-failure-analysis-pytest-mcp">
+<h3>Phase 1: Test Failure Analysis (pytest-mcp)<a class="headerlink" href="#phase-1-test-failure-analysis-pytest-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View recent test failures</span>
+pytest-mcp<span class="w"> </span>list-failures<span class="w"> </span>--last<span class="w"> </span><span class="m">5</span>
+
+<span class="c1"># Get detailed failure information</span>
+pytest-mcp<span class="w"> </span>analyze-failure<span class="w"> </span>--test-id<span class="w"> </span>&lt;failure_id&gt;
+
+<span class="c1"># Check failure patterns</span>
+pytest-mcp<span class="w"> </span>patterns<span class="w"> </span>--groupby<span class="w"> </span>test_name
+</pre></div>
+</div>
+</section>
+<section id="phase-2-log-examination-filesystem">
+<h3>Phase 2: Log Examination (filesystem)<a class="headerlink" href="#phase-2-log-examination-filesystem" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read pytest logs</span>
+cat<span class="w"> </span>tests/logs/pytest.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s2">&quot;FAILED&quot;</span>
+
+<span class="c1"># Check controller simulation logs</span>
+cat<span class="w"> </span>logs/simulation_&lt;timestamp&gt;.log
+
+<span class="c1"># Analyze numerical errors</span>
+/analyze-logs<span class="w"> </span>--filter<span class="w"> </span><span class="s2">&quot;LinAlgError|RuntimeWarning&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-3-code-debugging-sequential-thinking">
+<h3>Phase 3: Code Debugging (sequential-thinking)<a class="headerlink" href="#phase-3-code-debugging-sequential-thinking" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Identify</span> <span class="n">failure</span> <span class="n">location</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Stack</span> <span class="n">trace</span> <span class="n">analysis</span>
+   <span class="o">-</span> <span class="n">Line</span> <span class="n">number</span> <span class="n">where</span> <span class="n">assertion</span> <span class="n">failed</span>
+   <span class="o">-</span> <span class="n">Input</span> <span class="n">values</span> <span class="n">that</span> <span class="n">triggered</span> <span class="n">failure</span>
+
+<span class="mf">2.</span> <span class="n">Hypothesis</span> <span class="n">formation</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Numerical</span> <span class="n">instability</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Incorrect</span> <span class="n">state</span> <span class="n">initialization</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Controller</span> <span class="n">gains</span> <span class="n">out</span> <span class="n">of</span> <span class="n">bounds</span><span class="err">?</span>
+
+<span class="mf">3.</span> <span class="n">Reproduce</span> <span class="n">locally</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Create</span> <span class="n">minimal</span> <span class="n">test</span> <span class="n">case</span>
+   <span class="o">-</span> <span class="n">Add</span> <span class="n">debug</span> <span class="n">prints</span>
+   <span class="o">-</span> <span class="n">Step</span> <span class="n">through</span> <span class="k">with</span> <span class="n">debugpy</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-4-interactive-debugging-mcp-debugger">
+<h3>Phase 4: Interactive Debugging (mcp-debugger)<a class="headerlink" href="#phase-4-interactive-debugging-mcp-debugger" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up debugpy configuration</span>
+<span class="c1"># Launch test with debugging</span>
+python<span class="w"> </span>-m<span class="w"> </span>debugpy<span class="w"> </span>--listen<span class="w"> </span><span class="m">5678</span><span class="w"> </span>--wait-for-client<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_controllers.py::test_smc_stability
+
+<span class="c1"># Breakpoints to set:</span>
+<span class="c1"># 1. Controller initialization</span>
+<span class="c1"># 2. First control input computation</span>
+<span class="c1"># 3. State update loop</span>
+<span class="c1"># 4. Assertion location</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-5-fix-and-verify-git-mcp-pytest-mcp">
+<h3>Phase 5: Fix and Verify (git-mcp + pytest-mcp)<a class="headerlink" href="#phase-5-fix-and-verify-git-mcp-pytest-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create fix branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>fix/controller-test-failures
+
+<span class="c1"># Apply fixes</span>
+<span class="c1"># Run tests</span>
+pytest<span class="w"> </span>tests/test_controllers.py<span class="w"> </span>-v
+
+<span class="c1"># Commit if passing</span>
+git<span class="w"> </span>add<span class="w"> </span>tests/test_controllers.py<span class="w"> </span>src/controllers/
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Fix controller test failures with proper initialization&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow-3-numerical-error-analysis">
+<h2>🔢 Workflow 3: Numerical Error Analysis<a class="headerlink" href="#workflow-3-numerical-error-analysis" title="Link to this heading">¶</a></h2>
+<p><strong>Use Case</strong>: Getting <code class="docutils literal notranslate"><span class="pre">LinAlgError:</span> <span class="pre">Singular</span> <span class="pre">matrix</span></code> or numerical warnings.</p>
+<section id="phase-1-error-detection-filesystem">
+<h3>Phase 1: Error Detection (filesystem)<a class="headerlink" href="#phase-1-error-detection-filesystem" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Search for numerical errors in logs</span>
+/analyze-logs<span class="w"> </span>--pattern<span class="w"> </span><span class="s2">&quot;LinAlgError|ill-conditioned|singular matrix&quot;</span>
+
+<span class="c1"># Check simulation logs</span>
+grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;RuntimeWarning&quot;</span><span class="w"> </span>logs/
+
+<span class="c1"># Find affected files</span>
+grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;LinAlgError&quot;</span><span class="w"> </span>src/<span class="w"> </span>--include<span class="o">=</span><span class="s2">&quot;*.py&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-2-matrix-condition-analysis-sequential-thinking">
+<h3>Phase 2: Matrix Condition Analysis (sequential-thinking)<a class="headerlink" href="#phase-2-matrix-condition-analysis-sequential-thinking" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Identify</span> <span class="n">problematic</span> <span class="n">matrices</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Inertia</span> <span class="n">matrix</span> <span class="n">M</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+   <span class="o">-</span> <span class="n">Jacobian</span> <span class="n">matrices</span>
+   <span class="o">-</span> <span class="n">Control</span> <span class="n">gain</span> <span class="n">matrices</span>
+
+<span class="mf">2.</span> <span class="n">Check</span> <span class="n">condition</span> <span class="n">numbers</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Log</span> <span class="n">condition</span> <span class="n">numbers</span> <span class="n">before</span> <span class="n">inversion</span>
+   <span class="o">-</span> <span class="n">Typical</span> <span class="nb">range</span><span class="p">:</span> <span class="mf">1e6</span><span class="o">-</span><span class="mf">1e12</span> <span class="n">indicates</span> <span class="n">ill</span><span class="o">-</span><span class="n">conditioning</span>
+
+<span class="mf">3.</span> <span class="n">Locate</span> <span class="n">source</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Which</span> <span class="n">state</span> <span class="n">values</span> <span class="n">trigger</span> <span class="n">the</span> <span class="n">error</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Parameter</span> <span class="n">combinations</span> <span class="n">that</span> <span class="n">cause</span> <span class="n">singularity</span><span class="err">?</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-3-code-inspection-filesystem-git-mcp">
+<h3>Phase 3: Code Inspection (filesystem + git-mcp)<a class="headerlink" href="#phase-3-code-inspection-filesystem-git-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View recent changes to dynamics code</span>
+git-mcp<span class="w"> </span>diff<span class="w"> </span>--file<span class="w"> </span>src/models/dynamics.py<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 week ago&quot;</span>
+
+<span class="c1"># Check numerical stability utilities</span>
+cat<span class="w"> </span>src/utils/numerical_stability.py
+
+<span class="c1"># Review matrix operations</span>
+grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;np.linalg.inv\|np.linalg.solve&quot;</span><span class="w"> </span>src/models/dynamics.py
+</pre></div>
+</div>
+</section>
+<section id="phase-4-implement-regularization-filesystem">
+<h3>Phase 4: Implement Regularization (filesystem)<a class="headerlink" href="#phase-4-implement-regularization-filesystem" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Add to src/utils/numerical_stability.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_matrix_inverse</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute matrix inverse with regularization for ill-conditioned matrices.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        M: Input matrix</span>
+<span class="sd">        eps: Regularization parameter</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Regularized inverse</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cond_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cond_num</span> <span class="o">&gt;</span> <span class="mf">1e8</span><span class="p">:</span>
+        <span class="c1"># Use SVD-based pseudo-inverse</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Standard inversion with small ridge</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Phase 5: Validation (pytest-mcp)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run numerical stability tests</span>
+pytest<span class="w"> </span>tests/test_numerical_stability.py<span class="w"> </span>-v
+
+<span class="c1"># Check edge cases</span>
+pytest<span class="w"> </span>tests/test_dynamics.py::test_singular_configurations<span class="w"> </span>-v
+
+<span class="c1"># Verify no regressions</span>
+pytest<span class="w"> </span>tests/<span class="w"> </span>-k<span class="w"> </span><span class="s2">&quot;not slow&quot;</span><span class="w"> </span>--tb<span class="o">=</span>short
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow-4-code-quality-improvement">
+<h2>📊 Workflow 4: Code Quality Improvement<a class="headerlink" href="#workflow-4-code-quality-improvement" title="Link to this heading">¶</a></h2>
+<p><strong>Use Case</strong>: Improving code quality, finding bugs, and ensuring best practices.</p>
+<section id="phase-1-static-analysis-filesystem">
+<h3>Phase 1: Static Analysis (filesystem)<a class="headerlink" href="#phase-1-static-analysis-filesystem" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run ruff linter</span>
+ruff<span class="w"> </span>check<span class="w"> </span>src/<span class="w"> </span>tests/
+
+<span class="c1"># Check type hints</span>
+mypy<span class="w"> </span>src/<span class="w"> </span>--strict
+
+<span class="c1"># Find unused imports</span>
+vulture<span class="w"> </span>src/<span class="w"> </span>--min-confidence<span class="w"> </span><span class="m">80</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-2-code-review-git-mcp">
+<h3>Phase 2: Code Review (git-mcp)<a class="headerlink" href="#phase-2-code-review-git-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Review recent commits</span>
+git-mcp<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 week ago&quot;</span>
+
+<span class="c1"># Check specific file changes</span>
+git-mcp<span class="w"> </span>show<span class="w"> </span>&lt;commit-hash&gt;
+
+<span class="c1"># Compare branches</span>
+git-mcp<span class="w"> </span>diff<span class="w"> </span>main..feature/new-controller
+</pre></div>
+</div>
+</section>
+<section id="phase-3-test-coverage-pytest-mcp">
+<h3>Phase 3: Test Coverage (pytest-mcp)<a class="headerlink" href="#phase-3-test-coverage-pytest-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate coverage report</span>
+pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>html
+
+<span class="c1"># Find untested code</span>
+coverage<span class="w"> </span>report<span class="w"> </span>--show-missing
+
+<span class="c1"># Check critical paths</span>
+pytest<span class="w"> </span>tests/test_controllers.py<span class="w"> </span>--cov<span class="o">=</span>src/controllers<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+</pre></div>
+</div>
+</section>
+<section id="phase-4-documentation-review-filesystem">
+<h3>Phase 4: Documentation Review (filesystem)<a class="headerlink" href="#phase-4-documentation-review-filesystem" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check docstring coverage</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import ast; from pathlib import Path; count=0; for f in Path(&#39;src&#39;).rglob(&#39;*.py&#39;):</span>
+<span class="s2">    try:</span>
+<span class="s2">        tree = ast.parse(f.read_text(encoding=&#39;utf-8&#39;));</span>
+<span class="s2">        for node in ast.walk(tree):</span>
+<span class="s2">            if isinstance(node, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):</span>
+<span class="s2">                if ast.get_docstring(node): count += 1</span>
+<span class="s2">    except: pass</span>
+<span class="s2">print(f&#39;{count} docstrings found in src/&#39;)&quot;</span>
+
+<span class="c1"># Review API documentation</span>
+cat<span class="w"> </span>docs/api/controllers.md
+</pre></div>
+</div>
+</section>
+<section id="phase-5-refactoring-git-mcp-pytest-mcp">
+<h3>Phase 5: Refactoring (git-mcp + pytest-mcp)<a class="headerlink" href="#phase-5-refactoring-git-mcp-pytest-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create refactor branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>refactor/code-quality-improvements
+
+<span class="c1"># Apply fixes:</span>
+<span class="c1"># - Add missing type hints</span>
+<span class="c1"># - Remove unused imports</span>
+<span class="c1"># - Update docstrings</span>
+<span class="c1"># - Improve variable names</span>
+
+<span class="c1"># Run full test suite</span>
+pytest<span class="w"> </span>tests/<span class="w"> </span>-v
+
+<span class="c1"># Commit if all pass</span>
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Code quality improvements: type hints, docs, linting&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow-5-simulation-result-analysis">
+<h2>🎨 Workflow 5: Simulation Result Analysis<a class="headerlink" href="#workflow-5-simulation-result-analysis" title="Link to this heading">¶</a></h2>
+<p><strong>Use Case</strong>: Analyzing and validating simulation results for research publication.</p>
+<section id="phase-1-data-extraction-sqlite-mcp">
+<h3>Phase 1: Data Extraction (sqlite-mcp)<a class="headerlink" href="#phase-1-data-extraction-sqlite-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Extract best PSO results</span>
+<span class="k">SELECT</span>
+<span class="w">    </span><span class="n">controller_type</span><span class="p">,</span>
+<span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">settling_time</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_settling_time</span><span class="p">,</span>
+<span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">overshoot</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_overshoot</span><span class="p">,</span>
+<span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">steady_state_error</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_sse</span><span class="p">,</span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_trials</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">simulation_results</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;completed&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">controller_type</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">avg_settling_time</span><span class="p">;</span>
+
+<span class="c1">-- Get convergence statistics</span>
+<span class="k">SELECT</span>
+<span class="w">    </span><span class="n">run_id</span><span class="p">,</span>
+<span class="w">    </span><span class="k">MIN</span><span class="p">(</span><span class="n">gbest_fitness</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">best_fitness</span><span class="p">,</span>
+<span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">convergence_iteration</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_conv_iter</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">pso_runs</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">convergence_achieved</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">controller_type</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-2-validation-filesystem-sequential-thinking">
+<h3>Phase 2: Validation (filesystem + sequential-thinking)<a class="headerlink" href="#phase-2-validation-filesystem-sequential-thinking" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Check</span> <span class="n">control</span><span class="o">-</span><span class="n">theoretic</span> <span class="n">criteria</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Lyapunov</span> <span class="n">stability</span> <span class="n">verified</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Phase</span> <span class="n">margin</span> <span class="o">&gt;</span> <span class="mi">45</span> <span class="n">degrees</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Gain</span> <span class="n">margin</span> <span class="o">&gt;</span> <span class="mi">6</span> <span class="n">dB</span><span class="err">?</span>
+
+<span class="mf">2.</span> <span class="n">Verify</span> <span class="n">physical</span> <span class="n">feasibility</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Control</span> <span class="n">inputs</span> <span class="n">within</span> <span class="n">actuator</span> <span class="n">limits</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">State</span> <span class="n">trajectories</span> <span class="n">realistic</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Energy</span> <span class="n">consumption</span> <span class="n">reasonable</span><span class="err">?</span>
+
+<span class="mf">3.</span> <span class="n">Statistical</span> <span class="n">validation</span><span class="p">:</span>
+   <span class="o">-</span> <span class="n">Sample</span> <span class="n">size</span> <span class="n">sufficient</span> <span class="p">(</span><span class="n">n</span> <span class="err">≥</span> <span class="mi">30</span><span class="p">)</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Confidence</span> <span class="n">intervals</span> <span class="n">calculated</span><span class="err">?</span>
+   <span class="o">-</span> <span class="n">Significance</span> <span class="n">tests</span> <span class="n">performed</span><span class="err">?</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-3-visualization-puppeteer">
+<h3>Phase 3: Visualization (puppeteer)<a class="headerlink" href="#phase-3-visualization-puppeteer" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Launch Streamlit dashboard</span>
+streamlit<span class="w"> </span>run<span class="w"> </span>app.py
+
+<span class="c1"># Test dashboard with Puppeteer</span>
+/test-browser
+
+<span class="c1"># Verify plots:</span>
+<span class="c1"># - State trajectories</span>
+<span class="c1"># - Control inputs</span>
+<span class="c1"># - PSO convergence curves</span>
+<span class="c1"># - Performance metrics comparison</span>
+</pre></div>
+</div>
+</section>
+<section id="phase-4-documentation-filesystem">
+<h3>Phase 4: Documentation (filesystem)<a class="headerlink" href="#phase-4-documentation-filesystem" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate experiment report</span>
+python<span class="w"> </span>scripts/generate_experiment_report.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--run-id<span class="w"> </span>&lt;run_id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>docs/experiments/exp_&lt;date&gt;.md
+
+<span class="c1"># Update results summary</span>
+vim<span class="w"> </span>docs/results/README.md
+
+<span class="c1"># Create figures for paper</span>
+python<span class="w"> </span>scripts/generate_publication_figures.py<span class="w"> </span>--run-id<span class="w"> </span>&lt;run_id&gt;
+</pre></div>
+</div>
+</section>
+<section id="phase-5-commit-and-archive-git-mcp">
+<h3>Phase 5: Commit and Archive (git-mcp)<a class="headerlink" href="#phase-5-commit-and-archive-git-mcp" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Commit results</span>
+git<span class="w"> </span>add<span class="w"> </span>docs/experiments/<span class="w"> </span>docs/results/<span class="w"> </span>figures/
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add experiment results for &lt;controller_name&gt; on &lt;date&gt;&quot;</span>
+
+<span class="c1"># Tag milestone</span>
+git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>v1.0-results<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Complete simulation results for publication&quot;</span>
+
+<span class="c1"># Push to remote</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w"> </span>--tags
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quick-reference-commands">
+<h2>🚀 Quick Reference Commands<a class="headerlink" href="#quick-reference-commands" title="Link to this heading">¶</a></h2>
+<section id="slash-commands">
+<h3>Slash Commands<a class="headerlink" href="#slash-commands" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/analyze-logs</span></code></p></td>
+<td><p>Automated log analysis</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/analyze-pso-logs</span></code></p></td>
+<td><p>PSO convergence analysis</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/test-controller</span></code></p></td>
+<td><p>Run controller test suite</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/test-browser</span></code></p></td>
+<td><p>Test Streamlit dashboard</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/validate-simulation</span></code></p></td>
+<td><p>Validate against control criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/optimize-controller</span></code></p></td>
+<td><p>Launch PSO optimization</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/debug-with-mcp</span></code></p></td>
+<td><p>Integrated debugging session</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/inspect-server</span></code></p></td>
+<td><p>Launch MCP Inspector</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mcp-server-tools-quick-reference">
+<h3>MCP Server Tools Quick Reference<a class="headerlink" href="#mcp-server-tools-quick-reference" title="Link to this heading">¶</a></h3>
+<p><strong>filesystem</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">read_file(path)</span></code> - Read file contents</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_file(path,</span> <span class="pre">content)</span></code> - Write to file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list_directory(path)</span></code> - List directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search_files(pattern)</span></code> - Search by pattern</p></li>
+</ul>
+<p><strong>sqlite-mcp</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">query(sql)</span></code> - Execute SQL query</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">execute(sql)</span></code> - Execute SQL statement</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list_tables()</span></code> - Show all tables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">describe_table(name)</span></code> - Table schema</p></li>
+</ul>
+<p><strong>pytest-mcp</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list_failures()</span></code> - Recent test failures</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">analyze_failure(id)</span></code> - Detailed analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_patterns()</span></code> - Failure patterns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">track_test(name)</span></code> - Monitor specific test</p></li>
+</ul>
+<p><strong>git-mcp</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">log(options)</span></code> - Commit history</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diff(files)</span></code> - Show differences</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status()</span></code> - Working tree status</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">branch(name)</span></code> - Create/switch branch</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="additional-resources">
+<h2>📚 Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">¶</a></h2>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../README.html"><span class="std std-doc">MCP Debugging Quick Start</span></a></p></li>
+<li><p><a class="reference internal" href="../../testing/guides/control_systems_unit_testing.html"><span class="std std-doc">Controller Testing Guide</span></a></p></li>
+<li><p><a class="reference internal" href="../../guides/workflows/pso-optimization-workflow.html"><span class="std std-doc">PSO Optimization Workflow</span></a></p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Slash Commands<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><span class="xref myst">Analyze Logs</span></p></li>
+<li><p><span class="xref myst">Debug with MCP</span></p></li>
+<li><p><span class="xref myst">Test Controller</span></p></li>
+</ul>
+</section>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>MCP Configuration: See <code class="docutils literal notranslate"><span class="pre">.mcp.json</span></code> in project root</p></li>
+<li><p><a class="reference download internal" download="" href="../../_downloads/e2d7952b1f35eb6c27476be9f5f3aa29/pytest.ini"><span class="xref download myst">pytest.ini</span></a> - Test configuration</p></li>
+<li><p>Environment Variables: See <code class="docutils literal notranslate"><span class="pre">.env.example</span></code> in project root</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>🐛 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="mcp-server-not-responding">
+<h3>MCP Server Not Responding<a class="headerlink" href="#mcp-server-not-responding" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check server status</span>
+npx<span class="w"> </span>@modelcontextprotocol/inspector
+
+<span class="c1"># Verify paths in .mcp.json</span>
+cat<span class="w"> </span>.mcp.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.mcpServers&#39;</span>
+
+<span class="c1"># Test individual server</span>
+node<span class="w"> </span>&lt;server_path&gt;<span class="w"> </span>--test
+</pre></div>
+</div>
+</section>
+<section id="database-connection-issues">
+<h3>Database Connection Issues<a class="headerlink" href="#database-connection-issues" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check database exists</span>
+ls<span class="w"> </span>-la<span class="w"> </span>logs/pso_results.db
+
+<span class="c1"># Verify permissions</span>
+chmod<span class="w"> </span><span class="m">664</span><span class="w"> </span>logs/pso_results.db
+
+<span class="c1"># Test SQLite connection</span>
+sqlite3<span class="w"> </span>logs/pso_results.db<span class="w"> </span><span class="s2">&quot;SELECT sqlite_version();&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="test-failures">
+<h3>Test Failures<a class="headerlink" href="#test-failures" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear pytest cache</span>
+pytest<span class="w"> </span>--cache-clear
+
+<span class="c1"># Run with verbose output</span>
+pytest<span class="w"> </span>-vv<span class="w"> </span>--tb<span class="o">=</span>long
+
+<span class="c1"># Check for conflicts</span>
+pip<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>pytest
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Version</strong>: 1.0.0
+<strong>Last Updated</strong>: 2025-10-06
+<strong>Maintainer</strong>: DIP-SMC-PSO Team</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 08, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Complete MCP Debugging Workflow</a><ul>
+<li><a class="reference internal" href="#overview">📋 Overview</a><ul>
+<li><a class="reference internal" href="#available-mcp-servers">Available MCP Servers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#workflow-1-pso-convergence-debugging">🔧 Workflow 1: PSO Convergence Debugging</a><ul>
+<li><a class="reference internal" href="#phase-1-data-collection-sqlite-mcp">Phase 1: Data Collection (sqlite-mcp)</a></li>
+<li><a class="reference internal" href="#phase-2-log-analysis-filesystem">Phase 2: Log Analysis (filesystem)</a></li>
+<li><a class="reference internal" href="#phase-3-code-inspection-sequential-thinking">Phase 3: Code Inspection (sequential-thinking)</a></li>
+<li><a class="reference internal" href="#phase-4-fix-implementation-filesystem-git-mcp">Phase 4: Fix Implementation (filesystem + git-mcp)</a></li>
+<li><a class="reference internal" href="#phase-5-validation-pytest-mcp">Phase 5: Validation (pytest-mcp)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#workflow-2-controller-test-debugging">🧪 Workflow 2: Controller Test Debugging</a><ul>
+<li><a class="reference internal" href="#phase-1-test-failure-analysis-pytest-mcp">Phase 1: Test Failure Analysis (pytest-mcp)</a></li>
+<li><a class="reference internal" href="#phase-2-log-examination-filesystem">Phase 2: Log Examination (filesystem)</a></li>
+<li><a class="reference internal" href="#phase-3-code-debugging-sequential-thinking">Phase 3: Code Debugging (sequential-thinking)</a></li>
+<li><a class="reference internal" href="#phase-4-interactive-debugging-mcp-debugger">Phase 4: Interactive Debugging (mcp-debugger)</a></li>
+<li><a class="reference internal" href="#phase-5-fix-and-verify-git-mcp-pytest-mcp">Phase 5: Fix and Verify (git-mcp + pytest-mcp)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#workflow-3-numerical-error-analysis">🔢 Workflow 3: Numerical Error Analysis</a><ul>
+<li><a class="reference internal" href="#phase-1-error-detection-filesystem">Phase 1: Error Detection (filesystem)</a></li>
+<li><a class="reference internal" href="#phase-2-matrix-condition-analysis-sequential-thinking">Phase 2: Matrix Condition Analysis (sequential-thinking)</a></li>
+<li><a class="reference internal" href="#phase-3-code-inspection-filesystem-git-mcp">Phase 3: Code Inspection (filesystem + git-mcp)</a></li>
+<li><a class="reference internal" href="#phase-4-implement-regularization-filesystem">Phase 4: Implement Regularization (filesystem)</a></li>
+<li><a class="reference internal" href="#id1">Phase 5: Validation (pytest-mcp)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#workflow-4-code-quality-improvement">📊 Workflow 4: Code Quality Improvement</a><ul>
+<li><a class="reference internal" href="#phase-1-static-analysis-filesystem">Phase 1: Static Analysis (filesystem)</a></li>
+<li><a class="reference internal" href="#phase-2-code-review-git-mcp">Phase 2: Code Review (git-mcp)</a></li>
+<li><a class="reference internal" href="#phase-3-test-coverage-pytest-mcp">Phase 3: Test Coverage (pytest-mcp)</a></li>
+<li><a class="reference internal" href="#phase-4-documentation-review-filesystem">Phase 4: Documentation Review (filesystem)</a></li>
+<li><a class="reference internal" href="#phase-5-refactoring-git-mcp-pytest-mcp">Phase 5: Refactoring (git-mcp + pytest-mcp)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#workflow-5-simulation-result-analysis">🎨 Workflow 5: Simulation Result Analysis</a><ul>
+<li><a class="reference internal" href="#phase-1-data-extraction-sqlite-mcp">Phase 1: Data Extraction (sqlite-mcp)</a></li>
+<li><a class="reference internal" href="#phase-2-validation-filesystem-sequential-thinking">Phase 2: Validation (filesystem + sequential-thinking)</a></li>
+<li><a class="reference internal" href="#phase-3-visualization-puppeteer">Phase 3: Visualization (puppeteer)</a></li>
+<li><a class="reference internal" href="#phase-4-documentation-filesystem">Phase 4: Documentation (filesystem)</a></li>
+<li><a class="reference internal" href="#phase-5-commit-and-archive-git-mcp">Phase 5: Commit and Archive (git-mcp)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-reference-commands">🚀 Quick Reference Commands</a><ul>
+<li><a class="reference internal" href="#slash-commands">Slash Commands</a></li>
+<li><a class="reference internal" href="#mcp-server-tools-quick-reference">MCP Server Tools Quick Reference</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#additional-resources">📚 Additional Resources</a><ul>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#id2">Slash Commands</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">🐛 Troubleshooting</a><ul>
+<li><a class="reference internal" href="#mcp-server-not-responding">MCP Server Not Responding</a></li>
+<li><a class="reference internal" href="#database-connection-issues">Database Connection Issues</a></li>
+<li><a class="reference internal" href="#test-failures">Test Failures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

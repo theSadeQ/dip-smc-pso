@@ -6,6 +6,145 @@
 
 Memory-efficient PSO optimizer with production-grade memory management.
 
+
+
+## Advanced Mathematical Theory
+
+### Memory-Efficient PSO Design
+
+**Memory complexity** for standard PSO:
+
+```{math}
+M_{total} = M_{particles} + M_{history} + M_{best} = O(N \cdot d) + O(T \cdot N \cdot d) + O(d)
+```
+
+Where $N$ is population size, $d$ is dimensions, $T$ is iterations.
+
+**Problem:** Unbounded history growth $O(T \cdot N \cdot d)$ causes memory leaks.
+
+### Bounded Collection Strategy
+
+**Circular buffer** for history with max size $H$:
+
+```{math}
+M_{history} = O(H \cdot N \cdot d), \quad H \ll T
+```
+
+**Maintains constant memory** regardless of iteration count.
+
+### Adaptive Memory Cleanup
+
+**Cleanup trigger** based on memory usage:
+
+```{math}
+\text{Cleanup if } M_{current} > \alpha M_{max}
+```
+
+Where $\alpha \in (0.7, 0.9)$ is safety threshold.
+
+**Cleanup operations:**
+1. Trim history to last $H$ iterations
+2. Remove dominated solutions
+3. Compress archive via clustering
+
+### Memory Leak Prevention
+
+**Weak references** for large objects:
+
+```{math}
+\text{Store: } \{(i, \text{weakref}(obj_i)) : i \in \text{Archive}\}
+```
+
+Automatic garbage collection when reference count = 0.
+
+### Production Memory Monitoring
+
+**Real-time tracking:**
+
+```{math}
+\begin{align}
+M_{RSS}(t) &= \text{Resident Set Size at iteration } t \\
+\Delta M &= M_{RSS}(t) - M_{RSS}(t-1) \\
+\text{Alert if } \Delta M > \epsilon_{leak}
+\end{align}
+```
+
+Detects memory leaks early.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[PSO Iteration] --> B[Memory Check]
+    B --> C{Memory Usage}
+    C -->|< 70% Max| D[Continue Normal]
+    C -->|70-90%| E[Trigger Cleanup]
+    C -->|> 90%| F[Emergency Cleanup]
+
+    E --> G[Trim History]
+    F --> G
+    G --> H[Remove Dominated]
+    H --> I[Compress Archive]
+
+    D --> J[Update Population]
+    I --> J
+
+    J --> K[Memory Tracking]
+    K --> L{Leak Detected?}
+    L -->|Yes| M[Alert & Cleanup]
+    L -->|No| N[Continue]
+
+    M --> N
+    N --> A
+
+    style C fill:#ff9
+    style G fill:#9cf
+    style K fill:#f9c
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.algorithms import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 This module provides a memory-optimized version of the PSO optimizer specifically
 designed to handle large-scale optimization runs without memory leaks or excessive
 memory consumption. Implements bounded collections, automatic cleanup, and

@@ -65,6 +65,9 @@ u_derivative = -kd · ṡ
 
 **Validation Rules:**
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_gains(self) -> None:
     """Validate gain vector according to SMC theory."""
     if len(self.gains) != 6:
@@ -312,6 +315,9 @@ class DynamicsModel:
 The configuration provides convenient property accessors for individual gains:
 
 ```python
+# example-metadata:
+# runnable: false
+
 @property
 def k1(self) -> float:
     """Joint 1 position gain."""
@@ -346,6 +352,9 @@ def kd(self) -> float:
 Additional utility methods:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_surface_gains(self) -> List[float]:
     """Get sliding surface gains [k1, k2, λ1, λ2]."""
     return self.gains[:4]
@@ -426,6 +435,9 @@ if kd < 0:
 ### 5.1 Valid Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 config = ClassicalSMCConfig(
     gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0],  # All positive
     max_force=100.0,                          # Positive force limit
@@ -442,6 +454,9 @@ config = ClassicalSMCConfig(
 ### 5.2 Invalid Configurations
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Zero gain - should raise ValueError
 invalid_config = ClassicalSMCConfig(
     gains=[0.0, 3.0, 4.0, 2.0, 10.0, 1.0],  # k1 = 0!
@@ -482,6 +497,9 @@ The current configuration schema is designed to be backward compatible:
 For updating from older configurations:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_legacy_config(legacy_dict: dict) -> ClassicalSMCConfig:
     """Migrate legacy configuration format."""
 

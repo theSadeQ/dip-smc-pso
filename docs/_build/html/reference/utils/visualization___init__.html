@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -545,6 +571,236 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.legacy_visualizer</span> <span class="pre">import</span> <span class="pre">Visualizer</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="visualization-theory">
+<h3>Visualization Theory<a class="headerlink" href="#visualization-theory" title="Link to this heading">¶</a></h3>
+<p>Scientific visualization transforms numerical data into perceptual representations using mathematical principles.</p>
+<section id="frame-interpolation">
+<h4>Frame Interpolation<a class="headerlink" href="#frame-interpolation" title="Link to this heading">¶</a></h4>
+<p><strong>Linear interpolation</strong> for smooth animation:
+$<span class="math notranslate nohighlight">\(
+x(t) = x_i + \frac{t - t_i}{t_{i+1} - t_i} (x_{i+1} - x_i)
+\)</span>$</p>
+<p><strong>Cubic spline interpolation</strong> (C² continuous):
+$<span class="math notranslate nohighlight">\(
+s(t) = a_i + b_i(t - t_i) + c_i(t - t_i)^2 + d_i(t - t_i)^3
+\)</span>$</p>
+<p><strong>Animation frame rate:</strong>
+$<span class="math notranslate nohighlight">\(
+\Delta t_{\text{frame}} = \frac{1}{\text{fps}}
+\)</span>$</p>
+<p>For 30 FPS: <span class="math notranslate nohighlight">\(\Delta t = 33.33\)</span> ms</p>
+</section>
+<section id="color-theory">
+<h4>Color Theory<a class="headerlink" href="#color-theory" title="Link to this heading">¶</a></h4>
+<p><strong>RGB color space</strong> (device-dependent):
+$<span class="math notranslate nohighlight">\(
+C_{\text{RGB}} = (R, G, B), \quad R, G, B \in [0, 1]
+\)</span>$</p>
+<p><strong>HSV color space</strong> (perceptually intuitive):
+$<span class="math notranslate nohighlight">\(
+C_{\text{HSV}} = (H, S, V), \quad H \in [0, 360°), \, S, V \in [0, 1]
+\)</span>$</p>
+<p><strong>Perceptual color distance</strong> (CIE LAB):
+$<span class="math notranslate nohighlight">\(
+\Delta E = \sqrt{(\Delta L^*)^2 + (\Delta a^*)^2 + (\Delta b^*)^2}
+\)</span>$</p>
+<p>Just-noticeable difference: <span class="math notranslate nohighlight">\(\Delta E &lt; 2.3\)</span></p>
+</section>
+<section id="plot-composition">
+<h4>Plot Composition<a class="headerlink" href="#plot-composition" title="Link to this heading">¶</a></h4>
+<p><strong>Aspect ratio</strong> for physical accuracy:
+$<span class="math notranslate nohighlight">\(
+\text{Aspect} = \frac{\text{width}}{\text{height}}
+\)</span>$</p>
+<p><strong>Grid layout</strong> for subplots:
+$<span class="math notranslate nohighlight">\(
+\text{Grid} = (n_{\text{rows}}, n_{\text{cols}}), \quad n_{\text{total}} = n_{\text{rows}} \times n_{\text{cols}}
+\)</span>$</p>
+<p><strong>Margin calculation:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Plot Area} = (W - 2m_x) \times (H - 2m_y)
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(m_x, m_y\)</span> are horizontal and vertical margins.</p>
+</section>
+<section id="information-density">
+<h4>Information Density<a class="headerlink" href="#information-density" title="Link to this heading">¶</a></h4>
+<p><strong>Data-ink ratio</strong> (Tufte’s principle):
+$<span class="math notranslate nohighlight">\(
+\text{Data-Ink Ratio} = \frac{\text{Ink used for data}}{\text{Total ink used}}
+\)</span>$</p>
+<p>Target: &gt; 0.5 (prefer data over decoration)</p>
+<p><strong>Pixels per data point:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Resolution} = \frac{\text{Total pixels}}{\text{Number of data points}}
+\)</span>$</p>
+</section>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Visualization System] --&gt; B[Animation]
+    A --&gt; C[Static Plots]
+    A --&gt; D[Movie Generator]
+
+    B --&gt; E[Frame Interpolation]
+    E --&gt; F{Interpolation Method}
+    F --&gt;|Linear| G[Fast, C⁰]
+    F --&gt;|Spline| H[Smooth, C²]
+
+    C --&gt; I[Plot Composition]
+    I --&gt; J{Layout}
+    J --&gt;|Single| K[Full Figure]
+    J --&gt;|Grid| L[Subplots]
+
+    D --&gt; M[Scene Management]
+    M --&gt; N[Intro Scene]
+    M --&gt; O[Animation Scenes]
+    M --&gt; P[Comparison Scene]
+
+    N --&gt; Q[Video Encoder]
+    O --&gt; Q
+    P --&gt; Q
+
+    Q --&gt; R[Output MP4/GIF]
+
+    style F fill:#fff4e1
+    style J fill:#fff4e1
+    style R fill:#e8f5e9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-real-time-animation">
+<h3>Example 1: Real-Time Animation<a class="headerlink" href="#example-1-real-time-animation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">DIPAnimator</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Create animator</span>
+<span class="n">animator</span> <span class="o">=</span> <span class="n">DIPAnimator</span><span class="p">(</span>
+    <span class="n">L1</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">L2</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>  <span class="c1"># Pendulum lengths</span>
+    <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>  <span class="c1"># 30 frames per second</span>
+    <span class="n">trail_length</span><span class="o">=</span><span class="mi">50</span>  <span class="c1"># Show last 50 positions</span>
+<span class="p">)</span>
+
+<span class="c1"># Animate simulation results</span>
+<span class="n">animator</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>  <span class="c1"># Time vector</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>  <span class="c1"># State trajectories</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;simulation.mp4&quot;</span><span class="p">,</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Animation created at 30 FPS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Frame interval: </span><span class="si">{</span><span class="mi">1000</span><span class="o">/</span><span class="mi">30</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-static-performance-plots">
+<h3>Example 2: Static Performance Plots<a class="headerlink" href="#example-2-static-performance-plots" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">ControlPlotter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Create plotter</span>
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">ControlPlotter</span><span class="p">()</span>
+
+<span class="c1"># Create comprehensive plot layout</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plotter</span><span class="o">.</span><span class="n">plot_comprehensive</span><span class="p">(</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span>
+    <span class="n">reference</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Classical SMC Performance&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Customize appearance</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-paper&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">add_grid</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;performance.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-multi-system-comparison">
+<h3>Example 3: Multi-System Comparison<a class="headerlink" href="#example-3-multi-system-comparison" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiSystemAnimator</span>
+
+<span class="c1"># Create comparison animator</span>
+<span class="n">animator</span> <span class="o">=</span> <span class="n">MultiSystemAnimator</span><span class="p">(</span>
+    <span class="n">systems</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Classical SMC&#39;</span><span class="p">,</span> <span class="s1">&#39;Adaptive SMC&#39;</span><span class="p">,</span> <span class="s1">&#39;STA SMC&#39;</span><span class="p">],</span>
+    <span class="n">L1</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">L2</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span>  <span class="c1"># Side-by-side comparison</span>
+<span class="p">)</span>
+
+<span class="c1"># Animate multiple controllers</span>
+<span class="n">animator</span><span class="o">.</span><span class="n">animate_comparison</span><span class="p">(</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+    <span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="n">x_classical</span><span class="p">,</span> <span class="n">x_adaptive</span><span class="p">,</span> <span class="n">x_sta</span><span class="p">],</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;comparison.mp4&quot;</span><span class="p">,</span>
+    <span class="n">fps</span><span class="o">=</span><span class="mi">30</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-project-movie-generation">
+<h3>Example 4: Project Movie Generation<a class="headerlink" href="#example-4-project-movie-generation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectMovieGenerator</span><span class="p">,</span> <span class="n">MovieScene</span>
+
+<span class="c1"># Create movie generator</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="n">ProjectMovieGenerator</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;DIP SMC PSO Project&quot;</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;project_overview.mp4&quot;</span><span class="p">,</span>
+    <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Define scenes</span>
+<span class="n">scenes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">MovieScene</span><span class="p">(</span><span class="s1">&#39;intro&#39;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;Title and overview&quot;</span><span class="p">),</span>
+    <span class="n">MovieScene</span><span class="p">(</span><span class="s1">&#39;simulation&#39;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">simulation_results</span><span class="p">),</span>
+    <span class="n">MovieScene</span><span class="p">(</span><span class="s1">&#39;comparison&#39;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">comparison_data</span><span class="p">),</span>
+    <span class="n">MovieScene</span><span class="p">(</span><span class="s1">&#39;conclusion&#39;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;Summary&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Generate complete movie</span>
+<span class="n">generator</span><span class="o">.</span><span class="n">create_movie</span><span class="p">(</span><span class="n">scenes</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-custom-color-schemes">
+<h3>Example 5: Custom Color Schemes<a class="headerlink" href="#example-5-custom-color-schemes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">ControlPlotter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Define perceptually uniform color scheme</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span>  <span class="c1"># Blue</span>
+    <span class="s1">&#39;control&#39;</span><span class="p">:</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>  <span class="c1"># Orange</span>
+    <span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span>  <span class="c1"># Green</span>
+    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;#d62728&#39;</span>  <span class="c1"># Red</span>
+<span class="p">}</span>
+
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">ControlPlotter</span><span class="p">(</span><span class="n">color_scheme</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+
+<span class="c1"># Plot with consistent colors</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;θ₁&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">],</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Reference&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="s1">&#39;control&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Control&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
         </article>
@@ -564,7 +820,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -589,6 +845,25 @@
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#visualization-theory">Visualization Theory</a><ul>
+<li><a class="reference internal" href="#frame-interpolation">Frame Interpolation</a></li>
+<li><a class="reference internal" href="#color-theory">Color Theory</a></li>
+<li><a class="reference internal" href="#plot-composition">Plot Composition</a></li>
+<li><a class="reference internal" href="#information-density">Information Density</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-real-time-animation">Example 1: Real-Time Animation</a></li>
+<li><a class="reference internal" href="#example-2-static-performance-plots">Example 2: Static Performance Plots</a></li>
+<li><a class="reference internal" href="#example-3-multi-system-comparison">Example 3: Multi-System Comparison</a></li>
+<li><a class="reference internal" href="#example-4-project-movie-generation">Example 4: Project Movie Generation</a></li>
+<li><a class="reference internal" href="#example-5-custom-color-schemes">Example 5: Custom Color Schemes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -607,6 +882,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

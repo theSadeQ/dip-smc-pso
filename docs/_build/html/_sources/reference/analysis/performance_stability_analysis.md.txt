@@ -6,6 +6,181 @@
 
 Stability analysis tools for control systems.
 
+
+
+## Advanced Mathematical Theory
+
+### Lyapunov Stability Theory
+
+**Lyapunov function** for stability analysis:
+
+```{math}
+V: \mathbb{R}^n \to \mathbb{R}, \quad V(\vec{0}) = 0, \quad V(\vec{x}) > 0 \, \forall \vec{x} \neq \vec{0}
+```
+
+**Stability criterion:**
+
+```{math}
+\dot{V}(\vec{x}) = \frac{\partial V}{\partial \vec{x}} \cdot f(\vec{x}) < 0 \quad \forall \vec{x} \neq \vec{0}
+```
+
+If $\dot{V}(\vec{x}) < 0$, system is **asymptotically stable**.
+
+### Eigenvalue Analysis
+
+**Linearized system:**
+
+```{math}
+\dot{\vec{x}} = A\vec{x}, \quad A = \frac{\partial f}{\partial \vec{x}}\bigg|_{\vec{x}^*}
+```
+
+**Stability conditions:**
+
+```{math}
+\begin{align}
+\text{Asymptotically stable} &\iff \text{Re}(\lambda_i) < 0 \, \forall i \\
+\text{Marginally stable} &\iff \text{Re}(\lambda_i) \leq 0, \text{some } \text{Re}(\lambda_i) = 0 \\
+\text{Unstable} &\iff \exists i: \text{Re}(\lambda_i) > 0
+\end{align}
+```
+
+### Stability Margins
+
+**Gain margin:**
+
+```{math}
+GM = \frac{1}{|G(j\omega_{pc})|}
+```
+
+Where $\omega_{pc}$ is phase crossover frequency ($\angle G(j\omega_{pc}) = -180°$).
+
+**Phase margin:**
+
+```{math}
+PM = 180° + \angle G(j\omega_{gc})
+```
+
+Where $\omega_{gc}$ is gain crossover frequency ($|G(j\omega_{gc})| = 1$).
+
+### Lyapunov Equation
+
+**For linear system** $\dot{\vec{x}} = A\vec{x}$:
+
+```{math}
+A^T P + P A = -Q
+```
+
+System is stable if $P > 0$ for any $Q > 0$.
+
+### Quadratic Lyapunov Function
+
+**Common choice:**
+
+```{math}
+V(\vec{x}) = \vec{x}^T P \vec{x}
+```
+
+**Time derivative:**
+
+```{math}
+\dot{V} = \vec{x}^T (A^T P + P A) \vec{x} = -\vec{x}^T Q \vec{x} < 0
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[System State] --> B[Linearization]
+    B --> C[Jacobian Matrix]
+    C --> D[Eigenvalue Analysis]
+
+    D --> E{All Re(λ) < 0?}
+    E -->|Yes| F[Asymptotically Stable]
+    E -->|No| G{Some Re(λ) = 0?}
+
+    G -->|Yes| H[Marginally Stable]
+    G -->|No| I[Unstable]
+
+    A --> J[Lyapunov Function]
+    J --> K[Compute V̇]
+    K --> L{V̇ < 0?}
+
+    L -->|Yes| F
+    L -->|No| M[Check Conditions]
+
+    F --> N[Stability Margins]
+    N --> O[Gain Margin]
+    N --> P[Phase Margin]
+
+    style E fill:#ff9
+    style L fill:#ff9
+    style F fill:#9f9
+    style I fill:#f99
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides comprehensive stability analysis capabilities including
 Lyapunov analysis, eigenvalue analysis, and stability margin computation.
 

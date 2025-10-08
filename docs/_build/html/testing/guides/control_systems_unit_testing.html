@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -511,7 +537,10 @@
 <section id="basic-controller-initialization">
 <h3>1.1 Basic Controller Initialization<a class="headerlink" href="#basic-controller-initialization" title="Link to this heading">¶</a></h3>
 <p>Every SMC controller must pass basic initialization tests to ensure proper parameter handling:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_classical_smc_initialization</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_classical_smc_initialization</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test Classical SMC initialization with valid parameters.&quot;&quot;&quot;</span>
     <span class="c1"># Optimal gains from PSO optimization (report.log line 2)</span>
     <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">77.62</span><span class="p">,</span> <span class="mf">44.45</span><span class="p">,</span> <span class="mf">17.31</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">,</span> <span class="mf">18.66</span><span class="p">,</span> <span class="mf">9.76</span><span class="p">]</span>
@@ -551,7 +580,10 @@
 <section id="gain-validation-testing">
 <h3>1.2 Gain Validation Testing<a class="headerlink" href="#gain-validation-testing" title="Link to this heading">¶</a></h3>
 <p>Test enforcement of SMC theoretical constraints (F-4.SMCDesign.2 / RC-04):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_gain_positivity_enforcement</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_gain_positivity_enforcement</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test strict positivity requirements for SMC gains.&quot;&quot;&quot;</span>
     <span class="n">boundary_layer</span> <span class="o">=</span> <span class="mf">0.1</span>
     <span class="n">max_force</span> <span class="o">=</span> <span class="mf">20.0</span>
@@ -619,7 +651,10 @@
 <h2>2. State Space Validation<a class="headerlink" href="#state-space-validation" title="Link to this heading">¶</a></h2>
 <section id="state-vector-dimension-testing">
 <h3>2.1 State Vector Dimension Testing<a class="headerlink" href="#state-vector-dimension-testing" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_state_vector_validation</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_state_vector_validation</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test proper handling of state vectors with correct dimensions.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_test_controller</span><span class="p">()</span>
 
@@ -653,7 +688,10 @@
 </section>
 <section id="physical-state-bounds-testing">
 <h3>2.2 Physical State Bounds Testing<a class="headerlink" href="#physical-state-bounds-testing" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_physical_state_bounds</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_physical_state_bounds</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test controller behavior within and beyond physical limits.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_test_controller</span><span class="p">()</span>
 
@@ -693,7 +731,10 @@
 <section id="lyapunov-candidate-testing">
 <h3>3.1 Lyapunov Candidate Testing<a class="headerlink" href="#lyapunov-candidate-testing" title="Link to this heading">¶</a></h3>
 <p>Test that the Lyapunov candidate function <span class="math notranslate nohighlight">\(V = \frac{1}{2}\sigma^2\)</span> decreases along trajectories:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_lyapunov_decrease_property</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_lyapunov_decrease_property</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test Lyapunov decrease property: V̇ &lt; 0 when |σ| &gt; 0.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_test_controller</span><span class="p">()</span>
 
@@ -782,7 +823,10 @@
 <section id="understanding-pso-optimized-gains">
 <h3>4.1 Understanding PSO-Optimized Gains<a class="headerlink" href="#understanding-pso-optimized-gains" title="Link to this heading">¶</a></h3>
 <p>From <code class="docutils literal notranslate"><span class="pre">report.log</span></code> line 16, the optimal gains are: <code class="docutils literal notranslate"><span class="pre">[77.62,</span> <span class="pre">44.45,</span> <span class="pre">17.31,</span> <span class="pre">14.25,</span> <span class="pre">18.66,</span> <span class="pre">9.76]</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_optimal_gains_performance</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_optimal_gains_performance</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test performance characteristics of PSO-optimized gains.&quot;&quot;&quot;</span>
     <span class="c1"># PSO optimal gains</span>
     <span class="n">optimal_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">77.62</span><span class="p">,</span> <span class="mf">44.45</span><span class="p">,</span> <span class="mf">17.31</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">,</span> <span class="mf">18.66</span><span class="p">,</span> <span class="mf">9.76</span><span class="p">]</span>
@@ -830,7 +874,10 @@
 </section>
 <section id="chattering-analysis-with-optimal-gains">
 <h3>4.2 Chattering Analysis with Optimal Gains<a class="headerlink" href="#chattering-analysis-with-optimal-gains" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_chattering_reduction_with_large_boundary_layer</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_chattering_reduction_with_large_boundary_layer</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that large boundary layer (9.76) effectively reduces chattering.&quot;&quot;&quot;</span>
     <span class="n">optimal_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">77.62</span><span class="p">,</span> <span class="mf">44.45</span><span class="p">,</span> <span class="mf">17.31</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">,</span> <span class="mf">18.66</span><span class="p">,</span> <span class="mf">9.76</span><span class="p">]</span>
 
@@ -881,7 +928,10 @@
 <h2>5. Controller Interface Compliance<a class="headerlink" href="#controller-interface-compliance" title="Link to this heading">¶</a></h2>
 <section id="standard-interface-methods">
 <h3>5.1 Standard Interface Methods<a class="headerlink" href="#standard-interface-methods" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_controller_interface_compliance</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_controller_interface_compliance</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test compliance with BaseController interface.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_test_controller</span><span class="p">()</span>
 
@@ -908,7 +958,10 @@
 </section>
 <section id="history-tracking">
 <h3>5.2 History Tracking<a class="headerlink" href="#history-tracking" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_history_telemetry</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_history_telemetry</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that controller properly tracks telemetry in history.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_test_controller</span><span class="p">()</span>
 
@@ -939,7 +992,10 @@
 <h2>6. Production Testing Standards<a class="headerlink" href="#production-testing-standards" title="Link to this heading">¶</a></h2>
 <section id="performance-benchmarks">
 <h3>6.1 Performance Benchmarks<a class="headerlink" href="#performance-benchmarks" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">benchmark</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">benchmark</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_compute_control_performance</span><span class="p">(</span><span class="n">benchmark</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Benchmark control computation for real-time requirements.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_test_controller</span><span class="p">()</span>
@@ -961,7 +1017,10 @@
 </section>
 <section id="numerical-stability-testing">
 <h3>6.2 Numerical Stability Testing<a class="headerlink" href="#numerical-stability-testing" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_numerical_stability</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_numerical_stability</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test controller numerical stability under edge cases.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_test_controller</span><span class="p">()</span>
 
@@ -984,7 +1043,10 @@
 </section>
 <section id="monte-carlo-robustness-testing">
 <h3>6.3 Monte Carlo Robustness Testing<a class="headerlink" href="#monte-carlo-robustness-testing" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_monte_carlo_robustness</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_monte_carlo_robustness</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test controller robustness with random state sampling.&quot;&quot;&quot;</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_test_controller</span><span class="p">()</span>
 
@@ -1023,7 +1085,10 @@
 <hr class="docutils" />
 <section id="helper-functions">
 <h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_test_controller</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_test_controller</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create controller with optimal gains for testing.&quot;&quot;&quot;</span>
     <span class="n">optimal_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">77.62</span><span class="p">,</span> <span class="mf">44.45</span><span class="p">,</span> <span class="mf">17.31</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">,</span> <span class="mf">18.66</span><span class="p">,</span> <span class="mf">9.76</span><span class="p">]</span>
 
@@ -1080,7 +1145,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

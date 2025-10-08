@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -587,7 +613,10 @@ The reaching condition ensures finite-time convergence to the sliding surface:</
 <section id="factory-implementation-validation">
 <h3>Factory Implementation Validation<a class="headerlink" href="#factory-implementation-validation" title="Link to this heading">¶</a></h3>
 <p>The factory validates the following mathematical constraints:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_classical_smc_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_classical_smc_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate Classical SMC gains against mathematical requirements.&quot;&quot;&quot;</span>
 
     <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">gains</span>
@@ -662,7 +691,10 @@ The finite-time convergence is achieved in:</p>
 </section>
 <section id="factory-validation-for-super-twisting">
 <h3>Factory Validation for Super-Twisting<a class="headerlink" href="#factory-validation-for-super-twisting" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_super_twisting_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_super_twisting_gains</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate Super-Twisting SMC gains for finite-time stability.&quot;&quot;&quot;</span>
 
     <span class="n">K1</span><span class="p">,</span> <span class="n">K2</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">lam2</span> <span class="o">=</span> <span class="n">gains</span>
@@ -734,7 +766,10 @@ The finite-time convergence is achieved in:</p>
 </section>
 <section id="factory-implementation-for-adaptive-smc">
 <h3>Factory Implementation for Adaptive SMC<a class="headerlink" href="#factory-implementation-for-adaptive-smc" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_adaptive_smc_parameters</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_adaptive_smc_parameters</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate adaptive SMC parameters for stability.&quot;&quot;&quot;</span>
 
     <span class="c1"># Surface gains validation</span>
@@ -796,7 +831,10 @@ Ensure minimum dwell time τ_d between switches:</p>
 </section>
 <section id="factory-validation-for-hybrid-controllers">
 <h3>Factory Validation for Hybrid Controllers<a class="headerlink" href="#factory-validation-for-hybrid-controllers" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_hybrid_smc_configuration</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_hybrid_smc_configuration</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate hybrid SMC configuration for stability.&quot;&quot;&quot;</span>
 
     <span class="c1"># Validate sub-controller configurations</span>
@@ -837,7 +875,10 @@ Ensure minimum dwell time τ_d between switches:</p>
 <section id="stability-certificates">
 <h3>Stability Certificates<a class="headerlink" href="#stability-certificates" title="Link to this heading">¶</a></h3>
 <p>The factory generates stability certificates for each created controller:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StabilityCertificate</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StabilityCertificate</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mathematical stability certificate for factory-created controllers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]):</span>
@@ -890,7 +931,10 @@ Ensure minimum dwell time τ_d between switches:</p>
 </pre></div>
 </div>
 <p>where γ is the robustness margin.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_robustness_margin</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">uncertainty_model</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_robustness_margin</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">uncertainty_model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute robustness margin for controller.&quot;&quot;&quot;</span>
 
     <span class="c1"># Sample operating points</span>
@@ -987,7 +1031,10 @@ The PSO particle dynamics can be analyzed as a discrete-time system:</p>
 </section>
 <section id="factory-pso-integration">
 <h3>Factory-PSO Integration<a class="headerlink" href="#factory-pso-integration" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PSOOptimizedFactory</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PSOOptimizedFactory</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Factory with integrated PSO optimization.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -1074,7 +1121,10 @@ For numerical stability of discrete-time SMC:</p>
 </section>
 <section id="implementation-validation">
 <h3>Implementation Validation<a class="headerlink" href="#implementation-validation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_numerical_implementation</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">test_conditions</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_numerical_implementation</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">test_conditions</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate numerical properties of controller implementation.&quot;&quot;&quot;</span>
 
     <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
@@ -1108,7 +1158,10 @@ For numerical stability of discrete-time SMC:</p>
 <h3>Verification and Validation Framework<a class="headerlink" href="#verification-and-validation-framework" title="Link to this heading">¶</a></h3>
 <p><strong>Formal Verification:</strong>
 The factory implements formal verification of mathematical properties:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formal_verification_suite</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">formal_verification_suite</span><span class="p">(</span><span class="n">controller_type</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Formal verification of mathematical properties.&quot;&quot;&quot;</span>
 
     <span class="n">verification_results</span> <span class="o">=</span> <span class="p">{</span>
@@ -1177,7 +1230,7 @@ The factory implements formal verification of mathematical properties:</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

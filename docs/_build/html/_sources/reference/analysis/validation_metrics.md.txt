@@ -6,6 +6,196 @@
 
 Statistical and validation metrics for analysis systems.
 
+
+
+## Advanced Mathematical Theory
+
+### Validation Metrics
+
+**Mean Squared Error (MSE):**
+
+```{math}
+\text{MSE} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2
+```
+
+**Root Mean Squared Error (RMSE):**
+
+```{math}
+\text{RMSE} = \sqrt{\text{MSE}}
+```
+
+**Mean Absolute Error (MAE):**
+
+```{math}
+\text{MAE} = \frac{1}{n}\sum_{i=1}^n |y_i - \hat{y}_i|
+```
+
+### Coefficient of Determination
+
+**R-squared:**
+
+```{math}
+R^2 = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2} = 1 - \frac{\text{SSE}}{\text{SST}}
+```
+
+**Adjusted R-squared:**
+
+```{math}
+R_{adj}^2 = 1 - \frac{(1-R^2)(n-1)}{n-p-1}
+```
+
+Where $p$ is number of predictors.
+
+### Normalized Metrics
+
+**Normalized RMSE:**
+
+```{math}
+\text{NRMSE} = \frac{\text{RMSE}}{y_{max} - y_{min}} \times 100\%
+```
+
+**Mean Absolute Percentage Error:**
+
+```{math}
+\text{MAPE} = \frac{100\%}{n}\sum_{i=1}^n \left|\frac{y_i - \hat{y}_i}{y_i}\right|
+```
+
+### Theil's U Statistic
+
+**Inequality coefficient:**
+
+```{math}
+U = \frac{\sqrt{\frac{1}{n}\sum(y_i - \hat{y}_i)^2}}{\sqrt{\frac{1}{n}\sum y_i^2} + \sqrt{\frac{1}{n}\sum \hat{y}_i^2}}
+```
+
+Range: $U \in [0, 1]$, where 0 is perfect fit.
+
+### Tracking Signal
+
+**Cumulative error:**
+
+```{math}
+\text{TS} = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)}{\text{MAD}}
+```
+
+Where MAD is Mean Absolute Deviation.
+
+### Akaike Information Criterion (AIC)
+
+**Model selection criterion:**
+
+```{math}
+\text{AIC} = 2p - 2\ln(L)
+```
+
+Where $p$ is parameters, $L$ is likelihood.
+
+**Corrected AIC (small sample):**
+
+```{math}
+\text{AIC}_c = \text{AIC} + \frac{2p(p+1)}{n-p-1}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Predictions ŷ] --> B[Error Computation]
+    C[Actual y] --> B
+
+    B --> D[MSE: 1/n Σ(y-ŷ)²]
+    B --> E[MAE: 1/n Σ|y-ŷ|]
+    B --> F[MAPE: 100/n Σ|y-ŷ|/y]
+
+    D --> G[RMSE: √MSE]
+    D --> H[R²: 1-SSE/SST]
+
+    G --> I{Normalize?}
+    I -->|Yes| J[NRMSE]
+    I -->|No| K[Absolute RMSE]
+
+    H --> L{Adjust for p?}
+    L -->|Yes| M[Adjusted R²]
+    L -->|No| N[Raw R²]
+
+    E --> O[Model Selection]
+    F --> O
+    J --> O
+    K --> O
+    M --> O
+    N --> O
+
+    O --> P[AIC/BIC]
+    P --> Q[Best Model]
+
+    style B fill:#9cf
+    style O fill:#ff9
+    style Q fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides comprehensive metrics computation for validating
 control system performance, statistical analysis, and benchmarking.
 
@@ -439,6 +629,9 @@ for name, ci in chattering_results.items():
 ### Energy-Based Metrics
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Track energy conservation (for unforced natural dynamics)
 def compute_energy_drift(result, dynamics):
     """Measure energy drift as validation check."""

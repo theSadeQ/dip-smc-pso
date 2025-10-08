@@ -65,6 +65,9 @@ Factory System
 ### 2.1 Design Principles
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Single Responsibility - Each factory focuses on specific concerns
 Enterprise Factory: Comprehensive configuration, backwards compatibility
 Clean SMC Factory: PSO optimization, research benchmarking
@@ -90,6 +93,9 @@ def create_controller(
 The Enterprise Factory uses a **registry pattern** for dynamic controller lookup:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ClassicalSMC,
@@ -122,6 +128,9 @@ CONTROLLER_REGISTRY = {
 For PSO optimization, controllers are wrapped with a simplified interface:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """PSO-friendly wrapper that simplifies the control interface."""
 
@@ -157,6 +166,9 @@ from src.controllers.factory import (
 ### 3.2 Basic Usage
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Method 1: String-based creation
 controller = create_controller(
     controller_type='classical_smc',
@@ -179,6 +191,9 @@ controller = create_classical_smc_controller(config, gains=[...])
 The factory supports **multiple aliases** for backwards compatibility:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_ALIASES = {
     'classic_smc': 'classical_smc',
     'smc_classical': 'classical_smc',
@@ -198,6 +213,9 @@ create_controller('smc_classical', ...)
 ### 3.4 Thread-Safe Operations
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Thread-safe factory operations with timeout protection
 _factory_lock = threading.RLock()
 _LOCK_TIMEOUT = 10.0  # seconds
@@ -214,6 +232,9 @@ def create_controller(controller_type: str, ...) -> Any:
 The factory resolves gains from **multiple sources**:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Priority order:
 # 1. Explicitly provided gains parameter
 if gains is not None:
@@ -231,6 +252,9 @@ return controller_info['default_gains']
 ### 3.6 Validation Pipeline
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _validate_controller_gains(gains, controller_info, controller_type):
     """Validate controller gains with controller-specific rules."""
 
@@ -277,6 +301,9 @@ from src.controllers.factory.smc_factory import (
 **1. Frozen Configuration (Immutable)**
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SMCConfig:
     """Clean configuration for all SMC controllers."""
@@ -304,6 +331,9 @@ class SMCConfig:
 **2. Gain Specifications**
 
 ```python
+# example-metadata:
+# runnable: false
+
 @dataclass(frozen=True)
 class SMCGainSpec:
     """Specification of gain requirements for each SMC type."""
@@ -334,6 +364,9 @@ SMC_GAIN_SPECS = {
 **3. Simplified Creation**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Direct from gains array
 controller = SMCFactory.create_from_gains(
     smc_type=SMCType.CLASSICAL,
@@ -397,6 +430,9 @@ best_gains, best_cost = tuner.optimize(
 PSO requires factory functions with specific attributes:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_pso_controller_factory(smc_type: SMCType, **kwargs) -> Callable:
     """Create a PSO-optimized controller factory function."""
 
@@ -415,6 +451,9 @@ def create_pso_controller_factory(smc_type: SMCType, **kwargs) -> Callable:
 ### 5.3 PSO Wrapper Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """PSO-friendly wrapper that simplifies the control interface."""
 
@@ -449,6 +488,9 @@ class PSOControllerWrapper:
 ### 5.4 Gain Validation for PSO
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_smc_gains(smc_type: SMCType, gains: np.ndarray) -> bool:
     """Validate gains for PSO particle evaluation."""
 
@@ -501,6 +543,9 @@ controller = create_controller(
 ### 6.2 Parameter Extraction
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _extract_controller_parameters(config, controller_type, controller_info):
     """Extract controller-specific parameters from configuration."""
 
@@ -546,6 +591,9 @@ controller_params = check_deprecated_config(controller_type, controller_params)
 ### 7.1 Classical SMC Creation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Enterprise Factory
 controller = create_controller(
     controller_type='classical_smc',
@@ -574,6 +622,9 @@ controller = ClassicalSMC(
 ### 7.2 Adaptive SMC Creation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Clean SMC Factory
 controller = SMCFactory.create_from_gains(
     smc_type=SMCType.ADAPTIVE,
@@ -605,6 +656,9 @@ controller = AdaptiveSMC(
 ### 7.3 Super-Twisting SMC Creation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Clean SMC Factory
 controller = SMCFactory.create_from_gains(
     smc_type=SMCType.SUPER_TWISTING,
@@ -671,6 +725,9 @@ print(f"Count: {spec.n_gains}")
 ### 8.2 Automatic Gain Fixing
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Invalid default gains are automatically corrected
 controller_gains = [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
 
@@ -689,6 +746,9 @@ except ValueError as e:
 ### 8.3 Dynamics Model Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _create_dynamics_model(config: Any) -> Optional[Any]:
     """Create dynamics model from configuration."""
 
@@ -706,6 +766,9 @@ def _create_dynamics_model(config: Any) -> Optional[Any]:
 ### 8.4 Fallback Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # If config creation fails, use fallback with ALL required parameters
 try:
     controller_config = config_class(**config_params)
@@ -746,6 +809,9 @@ except Exception as e:
 ### 9.2 PSO Integration Best Practices
 
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Use create_pso_controller_factory for consistent interface
 factory = create_pso_controller_factory(SMCType.CLASSICAL, max_force=100.0, dt=0.01)
 
@@ -766,6 +832,9 @@ if smc_type == SMCType.SUPER_TWISTING:
 ### 9.3 Configuration Best Practices
 
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Use frozen dataclasses for immutable configuration
 @dataclass(frozen=True)
 class ControllerConfig:
@@ -785,6 +854,9 @@ dt: float = 0.01
 ### 9.4 Error Handling
 
 ```python
+# example-metadata:
+# runnable: false
+
 # 1. Specific exception types
 class FactoryConfigurationError(ValueError):
     pass
@@ -812,6 +884,9 @@ except Exception as e:
 **Issue: "Unknown controller type 'classic_smc'"**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Solution: Use canonical name or alias
 controller = create_controller('classical_smc', ...)  # Canonical
 controller = create_controller('classic_smc', ...)    # Alias (auto-normalized)
@@ -820,6 +895,9 @@ controller = create_controller('classic_smc', ...)    # Alias (auto-normalized)
 **Issue: "Super-Twisting stability requires K1 > K2 > 0"**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Solution: Ensure K1 > K2 in gain array
 gains = [25.0, 15.0, ...]  # K1=25 > K2=15 ✓
 gains = [15.0, 25.0, ...]  # K1=15 < K2=25 ✗
@@ -868,6 +946,9 @@ else:
 **Issue: "Could not extract controller parameters"**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Solution: Check configuration structure
 # Expected: config.controllers.classical_smc.gains
 # Or: config.controller_defaults.classical_smc.gains
@@ -902,7 +983,7 @@ For implementation examples, see:
 
 **Next Steps:**
 - Review [Control Primitives Reference](control_primitives_reference.md) for utility functions
-- Explore [PSO Optimization Guide](../optimization/pso_optimization_guide.md) for tuning workflows
+- Explore [PSO Optimization Workflow](../guides/workflows/pso-optimization-workflow.md) for tuning workflows
 - Study [Classical SMC Technical Guide](classical_smc_technical_guide.md) for controller details
 
 ---

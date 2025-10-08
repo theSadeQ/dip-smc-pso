@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -492,6 +518,183 @@
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Sequential simulation orchestrator for single-threaded execution.</p>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="sequential-simulation-orchestration">
+<h3>Sequential Simulation Orchestration<a class="headerlink" href="#sequential-simulation-orchestration" title="Link to this heading">¶</a></h3>
+<p>Single-threaded execution of simulation workflows.</p>
+</section>
+<section id="sequential-execution-model">
+<h3>Sequential Execution Model<a class="headerlink" href="#sequential-execution-model" title="Link to this heading">¶</a></h3>
+<p><strong>Deterministic linear execution:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Result} = \bigcup_{i=1}^{N} \text{Step}_i(x_i, u_i, t_i)\]</div>
+</div>
+<p><strong>Time complexity:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[T_{\text{total}} = \sum_{i=1}^{N} T_{\text{step}}(i)\]</div>
+</div>
+</section>
+<section id="simulation-loop">
+<h3>Simulation Loop<a class="headerlink" href="#simulation-loop" title="Link to this heading">¶</a></h3>
+<p><strong>Standard simulation algorithm:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Initialize:</strong> <span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(t_0\)</span>, controller state</p></li>
+<li><p><strong>Loop</strong> for <span class="math notranslate nohighlight">\(k = 0, 1, 2, \ldots, N-1\)</span>:</p>
+<ul class="simple">
+<li><p>Compute control: <span class="math notranslate nohighlight">\(u_k = \pi(x_k, t_k)\)</span></p></li>
+<li><p>Integrate dynamics: <span class="math notranslate nohighlight">\(x_{k+1} = x_k + \int_{t_k}^{t_{k+1}} f(x, u_k, t) dt\)</span></p></li>
+<li><p>Update time: <span class="math notranslate nohighlight">\(t_{k+1} = t_k + \Delta t\)</span></p></li>
+<li><p>Log data</p></li>
+<li><p>Check termination</p></li>
+</ul>
+</li>
+<li><p><strong>Return</strong> trajectory <span class="math notranslate nohighlight">\(\{(t_k, x_k, u_k)\}_{k=0}^{N}\)</span></p></li>
+</ol>
+</section>
+<section id="determinism">
+<h3>Determinism<a class="headerlink" href="#determinism" title="Link to this heading">¶</a></h3>
+<p><strong>Reproducibility guarantee:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Seed}(s) \Rightarrow \text{Result}(s, x_0, \text{config}) \text{ is deterministic}\]</div>
+</div>
+<p>Essential for:</p>
+<ul class="simple">
+<li><p>Scientific reproducibility</p></li>
+<li><p>Debugging</p></li>
+<li><p>Regression testing</p></li>
+<li><p>Continuous integration</p></li>
+</ul>
+</section>
+<section id="memory-access-pattern">
+<h3>Memory Access Pattern<a class="headerlink" href="#memory-access-pattern" title="Link to this heading">¶</a></h3>
+<p><strong>Temporal locality:</strong></p>
+<ul class="simple">
+<li><p>Sequential access to state history</p></li>
+<li><p>Cache-friendly</p></li>
+<li><p>Predictable memory usage</p></li>
+</ul>
+<p><strong>Memory complexity:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M = O(N \cdot n) \quad \text{where } n = \text{state dimension}\]</div>
+</div>
+</section>
+<section id="control-flow">
+<h3>Control Flow<a class="headerlink" href="#control-flow" title="Link to this heading">¶</a></h3>
+<p><strong>Linear dependency chain:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x_{k+1} = \Phi(x_k, u_k, \Delta t) \quad \Rightarrow \quad x_{k+1} \text{ depends on } x_k\]</div>
+</div>
+<p><strong>No parallelization opportunity</strong> within single simulation</p>
+</section>
+<section id="performance-characteristics">
+<h3>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Link to this heading">¶</a></h3>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>✅ Deterministic execution</p></li>
+<li><p>✅ Simple debugging</p></li>
+<li><p>✅ Low memory overhead</p></li>
+<li><p>✅ No thread synchronization overhead</p></li>
+<li><p>✅ Cache-friendly access patterns</p></li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul class="simple">
+<li><p>❌ Single-core utilization</p></li>
+<li><p>❌ No speedup for batch operations</p></li>
+<li><p>❌ Underutilizes modern multi-core CPUs</p></li>
+</ul>
+</section>
+<section id="computational-efficiency">
+<h3>Computational Efficiency<a class="headerlink" href="#computational-efficiency" title="Link to this heading">¶</a></h3>
+<p><strong>CPU utilization:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\eta_{\text{CPU}} = \frac{1}{N_{\text{cores}}} \times 100\%\]</div>
+</div>
+<p>For 8-core system: <span class="math notranslate nohighlight">\(\eta_{\text{CPU}} = 12.5\%\)</span></p>
+</section>
+<section id="use-cases">
+<h3>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h3>
+<p><strong>Ideal for:</strong></p>
+<ul class="simple">
+<li><p>Single simulation runs</p></li>
+<li><p>Debugging and validation</p></li>
+<li><p>Real-time applications (deterministic timing)</p></li>
+<li><p>Embedded systems (resource constraints)</p></li>
+</ul>
+<p><strong>Not ideal for:</strong></p>
+<ul class="simple">
+<li><p>Monte Carlo analysis (many independent runs)</p></li>
+<li><p>Parameter sweeps (embarrassingly parallel)</p></li>
+<li><p>Multi-objective optimization (parallel evaluations)</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph LR
+    A[Input] --&gt; B[Orchestrators Processing]
+    B --&gt; C[Output]
+
+    style B fill:#9cf
+    style C fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation.orchestrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrchestratorsSequential</span>
+
+<span class="c1"># Initialize</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">OrchestratorsSequential</span><span class="p">()</span>
+
+<span class="c1"># Execute</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">OrchestratorsSequential</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-profiling">
+<h3>Example 4: Performance Profiling<a class="headerlink" href="#example-4-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execution time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-other-components">
+<h3>Example 5: Integration with Other Components<a class="headerlink" href="#example-5-integration-with-other-components" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine with other simulation components</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -508,353 +711,352 @@
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseOrchestrator</span>
 <span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResultContainer</span>
-<span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">..results.containers</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardResultContainer</span>
-<span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">..safety.guards</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_safety_guards</span>
+<span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">..safety.guards</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_safety_guards</span>
+<span class="linenos"> 16</span>
 <span class="linenos"> 17</span>
-<span class="linenos"> 18</span>
-<span class="linenos"> 19</span><span class="k">class</span><span class="w"> </span><span class="nc">SequentialOrchestrator</span><span class="p">(</span><span class="n">BaseOrchestrator</span><span class="p">):</span>
-<span class="linenos"> 20</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequential simulation orchestrator for single-threaded execution.</span>
-<span class="linenos"> 21</span>
-<span class="linenos"> 22</span><span class="sd">    This orchestrator executes simulations step-by-step in a single thread,</span>
-<span class="linenos"> 23</span><span class="sd">    providing compatibility with the original simulation_runner functionality.</span>
-<span class="linenos"> 24</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos"> 25</span>
-<span class="linenos"> 26</span>    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos"> 27</span>               <span class="n">initial_state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos"> 28</span>               <span class="n">control_inputs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos"> 29</span>               <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 30</span>               <span class="n">horizon</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="linenos"> 31</span>               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResultContainer</span><span class="p">:</span>
-<span class="linenos"> 32</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute sequential simulation.</span>
-<span class="linenos"> 33</span>
-<span class="linenos"> 34</span><span class="sd">        Parameters</span>
-<span class="linenos"> 35</span><span class="sd">        ----------</span>
-<span class="linenos"> 36</span><span class="sd">        initial_state : np.ndarray</span>
-<span class="linenos"> 37</span><span class="sd">            Initial state vector</span>
-<span class="linenos"> 38</span><span class="sd">        control_inputs : np.ndarray</span>
-<span class="linenos"> 39</span><span class="sd">            Control input sequence (horizon,) or (horizon, m)</span>
-<span class="linenos"> 40</span><span class="sd">        dt : float</span>
-<span class="linenos"> 41</span><span class="sd">            Time step</span>
-<span class="linenos"> 42</span><span class="sd">        horizon : int</span>
-<span class="linenos"> 43</span><span class="sd">            Simulation horizon</span>
-<span class="linenos"> 44</span><span class="sd">        **kwargs</span>
-<span class="linenos"> 45</span><span class="sd">            Additional options (safety_guards, stop_fn, etc.)</span>
-<span class="linenos"> 46</span>
-<span class="linenos"> 47</span><span class="sd">        Returns</span>
-<span class="linenos"> 48</span><span class="sd">        -------</span>
-<span class="linenos"> 49</span><span class="sd">        ResultContainer</span>
-<span class="linenos"> 50</span><span class="sd">            Simulation results</span>
-<span class="linenos"> 51</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos"> 52</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_simulation_inputs</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">control_inputs</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span><span class="p">)</span>
-<span class="linenos"> 53</span>
-<span class="linenos"> 54</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="linenos"> 55</span>
-<span class="linenos"> 56</span>        <span class="c1"># Extract options</span>
-<span class="linenos"> 57</span>        <span class="n">safety_guards</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;safety_guards&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="linenos"> 58</span>        <span class="n">stop_fn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stop_fn&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="linenos"> 59</span>        <span class="n">t0</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="linenos"> 60</span>
-<span class="linenos"> 61</span>        <span class="c1"># Prepare arrays</span>
-<span class="linenos"> 62</span>        <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">horizon</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="linenos"> 63</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)))</span>
-<span class="linenos"> 64</span>        <span class="n">controls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">horizon</span><span class="p">)</span>
-<span class="linenos"> 65</span>        <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_state</span>
-<span class="linenos"> 66</span>
-<span class="linenos"> 67</span>        <span class="c1"># Ensure control inputs have correct shape</span>
-<span class="linenos"> 68</span>        <span class="k">if</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">control_inputs</span><span class="p">)</span> <span class="o">==</span> <span class="n">horizon</span><span class="p">:</span>
-<span class="linenos"> 69</span>            <span class="n">control_sequence</span> <span class="o">=</span> <span class="n">control_inputs</span>
-<span class="linenos"> 70</span>        <span class="k">elif</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">horizon</span><span class="p">:</span>
-<span class="linenos"> 71</span>            <span class="n">control_sequence</span> <span class="o">=</span> <span class="n">control_inputs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Take first column</span>
-<span class="linenos"> 72</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos"> 73</span>            <span class="c1"># Broadcast single control value</span>
-<span class="linenos"> 74</span>            <span class="n">control_sequence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">horizon</span><span class="p">,</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="linenos"> 75</span>
-<span class="linenos"> 76</span>        <span class="c1"># Main simulation loop</span>
-<span class="linenos"> 77</span>        <span class="n">current_state</span> <span class="o">=</span> <span class="n">initial_state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="linenos"> 78</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">horizon</span><span class="p">):</span>
-<span class="linenos"> 79</span>            <span class="c1"># Get control input</span>
-<span class="linenos"> 80</span>            <span class="n">control</span> <span class="o">=</span> <span class="n">control_sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos"> 81</span>            <span class="n">controls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">control</span>
-<span class="linenos"> 82</span>
-<span class="linenos"> 83</span>            <span class="c1"># Check stop condition</span>
-<span class="linenos"> 84</span>            <span class="k">if</span> <span class="n">stop_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">stop_fn</span><span class="p">(</span><span class="n">current_state</span><span class="p">):</span>
-<span class="linenos"> 85</span>                <span class="c1"># Truncate arrays and break</span>
-<span class="linenos"> 86</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos"> 87</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos"> 88</span>                <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos"> 89</span>                <span class="k">break</span>
-<span class="linenos"> 90</span>
-<span class="linenos"> 91</span>            <span class="c1"># Apply safety guards</span>
-<span class="linenos"> 92</span>            <span class="k">if</span> <span class="n">safety_guards</span><span class="p">:</span>
-<span class="linenos"> 93</span>                <span class="n">apply_safety_guards</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
-<span class="linenos"> 94</span>
-<span class="linenos"> 95</span>            <span class="c1"># Simulation step</span>
-<span class="linenos"> 96</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos"> 97</span>                <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">control</span><span class="p">]),</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="linenos"> 98</span>
-<span class="linenos"> 99</span>                <span class="c1"># Validate state</span>
-<span class="linenos">100</span>                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-<span class="linenos">101</span>                    <span class="c1"># Truncate on invalid state</span>
-<span class="linenos">102</span>                    <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">103</span>                    <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">104</span>                    <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">105</span>                    <span class="k">break</span>
-<span class="linenos">106</span>
-<span class="linenos">107</span>                <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_state</span>
-<span class="linenos">108</span>                <span class="n">current_state</span> <span class="o">=</span> <span class="n">next_state</span>
-<span class="linenos">109</span>
-<span class="linenos">110</span>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">111</span>                <span class="c1"># Simulation failed, truncate results</span>
-<span class="linenos">112</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">113</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">114</span>                <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">115</span>                <span class="k">break</span>
-<span class="linenos">116</span>
-<span class="linenos">117</span>        <span class="c1"># Update statistics</span>
-<span class="linenos">118</span>        <span class="n">execution_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
-<span class="linenos">119</span>        <span class="n">actual_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
-<span class="linenos">120</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_update_stats</span><span class="p">(</span><span class="n">actual_steps</span><span class="p">,</span> <span class="n">execution_time</span><span class="p">)</span>
-<span class="linenos">121</span>
-<span class="linenos">122</span>        <span class="c1"># Create result container</span>
-<span class="linenos">123</span>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_result_container</span><span class="p">()</span>
-<span class="linenos">124</span>        <span class="n">result</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">)</span>
-<span class="linenos">125</span>
-<span class="linenos">126</span>        <span class="k">return</span> <span class="n">result</span>
+<span class="linenos"> 18</span><span class="k">class</span><span class="w"> </span><span class="nc">SequentialOrchestrator</span><span class="p">(</span><span class="n">BaseOrchestrator</span><span class="p">):</span>
+<span class="linenos"> 19</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequential simulation orchestrator for single-threaded execution.</span>
+<span class="linenos"> 20</span>
+<span class="linenos"> 21</span><span class="sd">    This orchestrator executes simulations step-by-step in a single thread,</span>
+<span class="linenos"> 22</span><span class="sd">    providing compatibility with the original simulation_runner functionality.</span>
+<span class="linenos"> 23</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span>    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos"> 26</span>               <span class="n">initial_state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos"> 27</span>               <span class="n">control_inputs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos"> 28</span>               <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos"> 29</span>               <span class="n">horizon</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="linenos"> 30</span>               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResultContainer</span><span class="p">:</span>
+<span class="linenos"> 31</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute sequential simulation.</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span><span class="sd">        Parameters</span>
+<span class="linenos"> 34</span><span class="sd">        ----------</span>
+<span class="linenos"> 35</span><span class="sd">        initial_state : np.ndarray</span>
+<span class="linenos"> 36</span><span class="sd">            Initial state vector</span>
+<span class="linenos"> 37</span><span class="sd">        control_inputs : np.ndarray</span>
+<span class="linenos"> 38</span><span class="sd">            Control input sequence (horizon,) or (horizon, m)</span>
+<span class="linenos"> 39</span><span class="sd">        dt : float</span>
+<span class="linenos"> 40</span><span class="sd">            Time step</span>
+<span class="linenos"> 41</span><span class="sd">        horizon : int</span>
+<span class="linenos"> 42</span><span class="sd">            Simulation horizon</span>
+<span class="linenos"> 43</span><span class="sd">        **kwargs</span>
+<span class="linenos"> 44</span><span class="sd">            Additional options (safety_guards, stop_fn, etc.)</span>
+<span class="linenos"> 45</span>
+<span class="linenos"> 46</span><span class="sd">        Returns</span>
+<span class="linenos"> 47</span><span class="sd">        -------</span>
+<span class="linenos"> 48</span><span class="sd">        ResultContainer</span>
+<span class="linenos"> 49</span><span class="sd">            Simulation results</span>
+<span class="linenos"> 50</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 51</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_simulation_inputs</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">control_inputs</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span><span class="p">)</span>
+<span class="linenos"> 52</span>
+<span class="linenos"> 53</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="linenos"> 54</span>
+<span class="linenos"> 55</span>        <span class="c1"># Extract options</span>
+<span class="linenos"> 56</span>        <span class="n">safety_guards</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;safety_guards&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 57</span>        <span class="n">stop_fn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stop_fn&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 58</span>        <span class="n">t0</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos"> 59</span>
+<span class="linenos"> 60</span>        <span class="c1"># Prepare arrays</span>
+<span class="linenos"> 61</span>        <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">horizon</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 62</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)))</span>
+<span class="linenos"> 63</span>        <span class="n">controls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">horizon</span><span class="p">)</span>
+<span class="linenos"> 64</span>        <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_state</span>
+<span class="linenos"> 65</span>
+<span class="linenos"> 66</span>        <span class="c1"># Ensure control inputs have correct shape</span>
+<span class="linenos"> 67</span>        <span class="k">if</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">control_inputs</span><span class="p">)</span> <span class="o">==</span> <span class="n">horizon</span><span class="p">:</span>
+<span class="linenos"> 68</span>            <span class="n">control_sequence</span> <span class="o">=</span> <span class="n">control_inputs</span>
+<span class="linenos"> 69</span>        <span class="k">elif</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">horizon</span><span class="p">:</span>
+<span class="linenos"> 70</span>            <span class="n">control_sequence</span> <span class="o">=</span> <span class="n">control_inputs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Take first column</span>
+<span class="linenos"> 71</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 72</span>            <span class="c1"># Broadcast single control value</span>
+<span class="linenos"> 73</span>            <span class="n">control_sequence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">horizon</span><span class="p">,</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos"> 74</span>
+<span class="linenos"> 75</span>        <span class="c1"># Main simulation loop</span>
+<span class="linenos"> 76</span>        <span class="n">current_state</span> <span class="o">=</span> <span class="n">initial_state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos"> 77</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">horizon</span><span class="p">):</span>
+<span class="linenos"> 78</span>            <span class="c1"># Get control input</span>
+<span class="linenos"> 79</span>            <span class="n">control</span> <span class="o">=</span> <span class="n">control_sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos"> 80</span>            <span class="n">controls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">control</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span>            <span class="c1"># Check stop condition</span>
+<span class="linenos"> 83</span>            <span class="k">if</span> <span class="n">stop_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">stop_fn</span><span class="p">(</span><span class="n">current_state</span><span class="p">):</span>
+<span class="linenos"> 84</span>                <span class="c1"># Truncate arrays and break</span>
+<span class="linenos"> 85</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 86</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 87</span>                <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos"> 88</span>                <span class="k">break</span>
+<span class="linenos"> 89</span>
+<span class="linenos"> 90</span>            <span class="c1"># Apply safety guards</span>
+<span class="linenos"> 91</span>            <span class="k">if</span> <span class="n">safety_guards</span><span class="p">:</span>
+<span class="linenos"> 92</span>                <span class="n">apply_safety_guards</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+<span class="linenos"> 93</span>
+<span class="linenos"> 94</span>            <span class="c1"># Simulation step</span>
+<span class="linenos"> 95</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 96</span>                <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">control</span><span class="p">]),</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos"> 97</span>
+<span class="linenos"> 98</span>                <span class="c1"># Validate state</span>
+<span class="linenos"> 99</span>                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+<span class="linenos">100</span>                    <span class="c1"># Truncate on invalid state</span>
+<span class="linenos">101</span>                    <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">102</span>                    <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">103</span>                    <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">104</span>                    <span class="k">break</span>
+<span class="linenos">105</span>
+<span class="linenos">106</span>                <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_state</span>
+<span class="linenos">107</span>                <span class="n">current_state</span> <span class="o">=</span> <span class="n">next_state</span>
+<span class="linenos">108</span>
+<span class="linenos">109</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">110</span>                <span class="c1"># Simulation failed, truncate results</span>
+<span class="linenos">111</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">112</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">113</span>                <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">114</span>                <span class="k">break</span>
+<span class="linenos">115</span>
+<span class="linenos">116</span>        <span class="c1"># Update statistics</span>
+<span class="linenos">117</span>        <span class="n">execution_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="linenos">118</span>        <span class="n">actual_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
+<span class="linenos">119</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_update_stats</span><span class="p">(</span><span class="n">actual_steps</span><span class="p">,</span> <span class="n">execution_time</span><span class="p">)</span>
+<span class="linenos">120</span>
+<span class="linenos">121</span>        <span class="c1"># Create result container</span>
+<span class="linenos">122</span>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_result_container</span><span class="p">()</span>
+<span class="linenos">123</span>        <span class="n">result</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">)</span>
+<span class="linenos">124</span>
+<span class="linenos">125</span>        <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">126</span>
 <span class="linenos">127</span>
-<span class="linenos">128</span>
-<span class="linenos">129</span><span class="k">def</span><span class="w"> </span><span class="nf">get_step_fn</span><span class="p">():</span>
-<span class="linenos">130</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Legacy function for backward compatibility.</span>
-<span class="linenos">131</span>
-<span class="linenos">132</span><span class="sd">    Returns</span>
-<span class="linenos">133</span><span class="sd">    -------</span>
-<span class="linenos">134</span><span class="sd">    callable</span>
-<span class="linenos">135</span><span class="sd">        Step function that dispatches to appropriate dynamics model</span>
-<span class="linenos">136</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">137</span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos">138</span>        <span class="kn">from</span><span class="w"> </span><span class="nn">src.config.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
-<span class="linenos">139</span>        <span class="n">use_full</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s2">&quot;simulation&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;use_full_dynamics&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="linenos">140</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">141</span>        <span class="n">use_full</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="linenos">142</span>
-<span class="linenos">143</span>    <span class="k">if</span> <span class="n">use_full</span><span class="p">:</span>
-<span class="linenos">144</span>        <span class="k">return</span> <span class="n">_load_full_step</span><span class="p">()</span>
-<span class="linenos">145</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">146</span>        <span class="k">return</span> <span class="n">_load_lowrank_step</span><span class="p">()</span>
+<span class="linenos">128</span><span class="k">def</span><span class="w"> </span><span class="nf">get_step_fn</span><span class="p">():</span>
+<span class="linenos">129</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Legacy function for backward compatibility.</span>
+<span class="linenos">130</span>
+<span class="linenos">131</span><span class="sd">    Returns</span>
+<span class="linenos">132</span><span class="sd">    -------</span>
+<span class="linenos">133</span><span class="sd">    callable</span>
+<span class="linenos">134</span><span class="sd">        Step function that dispatches to appropriate dynamics model</span>
+<span class="linenos">135</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">136</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">137</span>        <span class="kn">from</span><span class="w"> </span><span class="nn">src.config.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+<span class="linenos">138</span>        <span class="n">use_full</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s2">&quot;simulation&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;use_full_dynamics&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="linenos">139</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">140</span>        <span class="n">use_full</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">141</span>
+<span class="linenos">142</span>    <span class="k">if</span> <span class="n">use_full</span><span class="p">:</span>
+<span class="linenos">143</span>        <span class="k">return</span> <span class="n">_load_full_step</span><span class="p">()</span>
+<span class="linenos">144</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">145</span>        <span class="k">return</span> <span class="n">_load_lowrank_step</span><span class="p">()</span>
+<span class="linenos">146</span>
 <span class="linenos">147</span>
-<span class="linenos">148</span>
-<span class="linenos">149</span><span class="k">def</span><span class="w"> </span><span class="nf">_load_full_step</span><span class="p">():</span>
-<span class="linenos">150</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load full dynamics step function.&quot;&quot;&quot;</span>
-<span class="linenos">151</span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos">152</span>        <span class="kn">from</span><span class="w"> </span><span class="nn">...plant.models.dip_full</span><span class="w"> </span><span class="kn">import</span> <span class="n">step</span>
-<span class="linenos">153</span>        <span class="k">return</span> <span class="n">step</span>
-<span class="linenos">154</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">155</span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-<span class="linenos">156</span>            <span class="s2">&quot;Full dynamics unavailable: module &#39;dynamics_full&#39; not found. &quot;</span>
-<span class="linenos">157</span>            <span class="s2">&quot;Set config.simulation.use_full_dynamics=false or provide src/core/dynamics_full.py&quot;</span>
-<span class="linenos">158</span>        <span class="p">)</span>
+<span class="linenos">148</span><span class="k">def</span><span class="w"> </span><span class="nf">_load_full_step</span><span class="p">():</span>
+<span class="linenos">149</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load full dynamics step function.&quot;&quot;&quot;</span>
+<span class="linenos">150</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">151</span>        <span class="kn">from</span><span class="w"> </span><span class="nn">...plant.models.dip_full</span><span class="w"> </span><span class="kn">import</span> <span class="n">step</span>
+<span class="linenos">152</span>        <span class="k">return</span> <span class="n">step</span>
+<span class="linenos">153</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">154</span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+<span class="linenos">155</span>            <span class="s2">&quot;Full dynamics unavailable: module &#39;dynamics_full&#39; not found. &quot;</span>
+<span class="linenos">156</span>            <span class="s2">&quot;Set config.simulation.use_full_dynamics=false or provide src/core/dynamics_full.py&quot;</span>
+<span class="linenos">157</span>        <span class="p">)</span>
+<span class="linenos">158</span>
 <span class="linenos">159</span>
-<span class="linenos">160</span>
-<span class="linenos">161</span><span class="k">def</span><span class="w"> </span><span class="nf">_load_lowrank_step</span><span class="p">():</span>
-<span class="linenos">162</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load low-rank dynamics step function.&quot;&quot;&quot;</span>
-<span class="linenos">163</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">...plant.models.dip_lowrank</span><span class="w"> </span><span class="kn">import</span> <span class="n">step</span>
-<span class="linenos">164</span>    <span class="k">return</span> <span class="n">step</span>
+<span class="linenos">160</span><span class="k">def</span><span class="w"> </span><span class="nf">_load_lowrank_step</span><span class="p">():</span>
+<span class="linenos">161</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load low-rank dynamics step function.&quot;&quot;&quot;</span>
+<span class="linenos">162</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">...plant.models.dip_lowrank</span><span class="w"> </span><span class="kn">import</span> <span class="n">step</span>
+<span class="linenos">163</span>    <span class="k">return</span> <span class="n">step</span>
+<span class="linenos">164</span>
 <span class="linenos">165</span>
-<span class="linenos">166</span>
-<span class="linenos">167</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-<span class="linenos">168</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Legacy step function for backward compatibility.</span>
-<span class="linenos">169</span>
-<span class="linenos">170</span><span class="sd">    Parameters</span>
-<span class="linenos">171</span><span class="sd">    ----------</span>
-<span class="linenos">172</span><span class="sd">    x : array-like</span>
-<span class="linenos">173</span><span class="sd">        Current state</span>
-<span class="linenos">174</span><span class="sd">    u : array-like</span>
-<span class="linenos">175</span><span class="sd">        Control input</span>
-<span class="linenos">176</span><span class="sd">    dt : float</span>
-<span class="linenos">177</span><span class="sd">        Time step</span>
-<span class="linenos">178</span>
-<span class="linenos">179</span><span class="sd">    Returns</span>
-<span class="linenos">180</span><span class="sd">    -------</span>
-<span class="linenos">181</span><span class="sd">    array-like</span>
-<span class="linenos">182</span><span class="sd">        Next state</span>
-<span class="linenos">183</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">184</span>    <span class="k">return</span> <span class="n">get_step_fn</span><span class="p">()(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos">166</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="linenos">167</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Legacy step function for backward compatibility.</span>
+<span class="linenos">168</span>
+<span class="linenos">169</span><span class="sd">    Parameters</span>
+<span class="linenos">170</span><span class="sd">    ----------</span>
+<span class="linenos">171</span><span class="sd">    x : array-like</span>
+<span class="linenos">172</span><span class="sd">        Current state</span>
+<span class="linenos">173</span><span class="sd">    u : array-like</span>
+<span class="linenos">174</span><span class="sd">        Control input</span>
+<span class="linenos">175</span><span class="sd">    dt : float</span>
+<span class="linenos">176</span><span class="sd">        Time step</span>
+<span class="linenos">177</span>
+<span class="linenos">178</span><span class="sd">    Returns</span>
+<span class="linenos">179</span><span class="sd">    -------</span>
+<span class="linenos">180</span><span class="sd">    array-like</span>
+<span class="linenos">181</span><span class="sd">        Next state</span>
+<span class="linenos">182</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">183</span>    <span class="k">return</span> <span class="n">get_step_fn</span><span class="p">()(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos">184</span>
 <span class="linenos">185</span>
-<span class="linenos">186</span>
-<span class="linenos">187</span><span class="k">def</span><span class="w"> </span><span class="nf">run_simulation</span><span class="p">(</span>
-<span class="linenos">188</span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos">189</span>    <span class="n">controller</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos">190</span>    <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos">191</span>    <span class="n">sim_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">192</span>    <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">193</span>    <span class="n">initial_state</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos">194</span>    <span class="n">u_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">195</span>    <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">196</span>    <span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">197</span>    <span class="n">latency_margin</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">198</span>    <span class="n">fallback_controller</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">199</span>    <span class="o">**</span><span class="n">_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos">200</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="linenos">201</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Legacy simulation runner for backward compatibility.</span>
-<span class="linenos">202</span>
-<span class="linenos">203</span><span class="sd">    This function maintains the exact interface and behavior of the original</span>
-<span class="linenos">204</span><span class="sd">    run_simulation function from simulation_runner.py.</span>
-<span class="linenos">205</span>
-<span class="linenos">206</span><span class="sd">    Parameters</span>
-<span class="linenos">207</span><span class="sd">    ----------</span>
-<span class="linenos">208</span><span class="sd">    controller : Any</span>
-<span class="linenos">209</span><span class="sd">        Controller object with __call__ or compute_control method</span>
-<span class="linenos">210</span><span class="sd">    dynamics_model : Any</span>
-<span class="linenos">211</span><span class="sd">        Dynamics model with step method</span>
-<span class="linenos">212</span><span class="sd">    sim_time : float</span>
-<span class="linenos">213</span><span class="sd">        Total simulation time</span>
-<span class="linenos">214</span><span class="sd">    dt : float</span>
-<span class="linenos">215</span><span class="sd">        Time step</span>
-<span class="linenos">216</span><span class="sd">    initial_state : array-like</span>
-<span class="linenos">217</span><span class="sd">        Initial state vector</span>
-<span class="linenos">218</span><span class="sd">    u_max : float, optional</span>
-<span class="linenos">219</span><span class="sd">        Control saturation limit</span>
-<span class="linenos">220</span><span class="sd">    seed : int, optional</span>
-<span class="linenos">221</span><span class="sd">        Random seed (deprecated, use rng)</span>
-<span class="linenos">222</span><span class="sd">    rng : np.random.Generator, optional</span>
-<span class="linenos">223</span><span class="sd">        Random number generator</span>
-<span class="linenos">224</span><span class="sd">    latency_margin : float, optional</span>
-<span class="linenos">225</span><span class="sd">        Unused (for future latency control)</span>
-<span class="linenos">226</span><span class="sd">    fallback_controller : callable, optional</span>
-<span class="linenos">227</span><span class="sd">        Fallback controller for deadline misses</span>
-<span class="linenos">228</span><span class="sd">    **_kwargs</span>
-<span class="linenos">229</span><span class="sd">        Additional arguments (ignored)</span>
-<span class="linenos">230</span>
-<span class="linenos">231</span><span class="sd">    Returns</span>
-<span class="linenos">232</span><span class="sd">    -------</span>
-<span class="linenos">233</span><span class="sd">    tuple</span>
-<span class="linenos">234</span><span class="sd">        (times, states, controls) arrays</span>
-<span class="linenos">235</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">236</span>    <span class="c1"># Input validation</span>
-<span class="linenos">237</span>    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
-<span class="linenos">238</span>    <span class="k">if</span> <span class="n">dt</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-<span class="linenos">239</span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt must be positive&quot;</span><span class="p">)</span>
-<span class="linenos">240</span>
-<span class="linenos">241</span>    <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sim_time</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span><span class="p">))</span> <span class="k">if</span> <span class="n">sim_time</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
-<span class="linenos">242</span>    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos">243</span>    <span class="n">state_dim</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="linenos">244</span>
-<span class="linenos">245</span>    <span class="c1"># Prepare output arrays</span>
-<span class="linenos">246</span>    <span class="n">t_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="linenos">247</span>    <span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="linenos">248</span>    <span class="n">u_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="linenos">249</span>
-<span class="linenos">250</span>    <span class="c1"># Set initial conditions</span>
-<span class="linenos">251</span>    <span class="n">t_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="linenos">252</span>    <span class="n">x_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span>
-<span class="linenos">253</span>
-<span class="linenos">254</span>    <span class="c1"># Determine control saturation</span>
-<span class="linenos">255</span>    <span class="n">u_lim</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">256</span>    <span class="k">if</span> <span class="n">u_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">257</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">258</span>            <span class="n">u_lim</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">u_max</span><span class="p">)</span>
-<span class="linenos">259</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">260</span>            <span class="n">u_lim</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">261</span>    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">):</span>
-<span class="linenos">262</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">263</span>            <span class="n">u_lim</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">))</span>
-<span class="linenos">264</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">265</span>            <span class="n">u_lim</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">266</span>
-<span class="linenos">267</span>    <span class="c1"># Setup random generator</span>
-<span class="linenos">268</span>    <span class="k">if</span> <span class="n">rng</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">269</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">270</span>            <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">))</span>
-<span class="linenos">271</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">272</span>            <span class="n">rng</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">273</span>
-<span class="linenos">274</span>    <span class="c1"># Initialize controller state</span>
-<span class="linenos">275</span>    <span class="n">ctrl_state</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">276</span>    <span class="n">history</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">277</span>
-<span class="linenos">278</span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos">279</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;initialize_state&quot;</span><span class="p">):</span>
-<span class="linenos">280</span>            <span class="n">ctrl_state</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_state</span><span class="p">()</span>
-<span class="linenos">281</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">282</span>        <span class="k">pass</span>
-<span class="linenos">283</span>
-<span class="linenos">284</span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos">285</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;initialize_history&quot;</span><span class="p">):</span>
-<span class="linenos">286</span>            <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_history</span><span class="p">()</span>
-<span class="linenos">287</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">288</span>        <span class="k">pass</span>
-<span class="linenos">289</span>
-<span class="linenos">290</span>    <span class="n">use_compute</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;compute_control&quot;</span><span class="p">)</span>
-<span class="linenos">291</span>    <span class="n">use_fallback</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="linenos">292</span>
-<span class="linenos">293</span>    <span class="c1"># Main simulation loop</span>
-<span class="linenos">294</span>    <span class="n">x_curr</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="linenos">295</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
-<span class="linenos">296</span>        <span class="n">t_now</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">dt</span>
-<span class="linenos">297</span>
-<span class="linenos">298</span>        <span class="c1"># Compute control</span>
-<span class="linenos">299</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="linenos">300</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">301</span>            <span class="k">if</span> <span class="n">use_fallback</span> <span class="ow">and</span> <span class="n">fallback_controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">302</span>                <span class="n">u_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fallback_controller</span><span class="p">(</span><span class="n">t_now</span><span class="p">,</span> <span class="n">x_curr</span><span class="p">))</span>
-<span class="linenos">303</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">304</span>                <span class="k">if</span> <span class="n">use_compute</span><span class="p">:</span>
-<span class="linenos">305</span>                    <span class="n">ret</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">x_curr</span><span class="p">,</span> <span class="n">ctrl_state</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
-<span class="linenos">306</span>                    <span class="k">try</span><span class="p">:</span>
-<span class="linenos">307</span>                        <span class="n">u_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="linenos">308</span>                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">309</span>                            <span class="n">ctrl_state</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">310</span>                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
-<span class="linenos">311</span>                            <span class="n">history</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="linenos">312</span>                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">313</span>                        <span class="n">u_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
-<span class="linenos">314</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">315</span>                    <span class="n">u_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">controller</span><span class="p">(</span><span class="n">t_now</span><span class="p">,</span> <span class="n">x_curr</span><span class="p">))</span>
-<span class="linenos">316</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">317</span>            <span class="c1"># Terminate on control exception</span>
-<span class="linenos">318</span>            <span class="n">t_arr</span> <span class="o">=</span> <span class="n">t_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">319</span>            <span class="n">x_arr</span> <span class="o">=</span> <span class="n">x_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">320</span>            <span class="n">u_arr</span> <span class="o">=</span> <span class="n">u_arr</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">321</span>            <span class="k">break</span>
-<span class="linenos">322</span>
-<span class="linenos">323</span>        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="linenos">324</span>        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">use_fallback</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fallback_controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">dt</span><span class="p">):</span>
-<span class="linenos">325</span>            <span class="n">use_fallback</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos">326</span>
-<span class="linenos">327</span>        <span class="c1"># Saturate control</span>
-<span class="linenos">328</span>        <span class="k">if</span> <span class="n">u_lim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">329</span>            <span class="n">u_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u_val</span><span class="p">,</span> <span class="o">-</span><span class="n">u_lim</span><span class="p">,</span> <span class="n">u_lim</span><span class="p">)</span>
-<span class="linenos">330</span>
-<span class="linenos">331</span>        <span class="n">u_arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_val</span>
-<span class="linenos">332</span>
-<span class="linenos">333</span>        <span class="c1"># Propagate dynamics</span>
-<span class="linenos">334</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">335</span>            <span class="n">x_next</span> <span class="o">=</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_curr</span><span class="p">,</span> <span class="n">u_val</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-<span class="linenos">336</span>            <span class="n">x_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_next</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos">337</span>
-<span class="linenos">338</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x_next</span><span class="p">)):</span>
-<span class="linenos">339</span>                <span class="n">t_arr</span> <span class="o">=</span> <span class="n">t_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">340</span>                <span class="n">x_arr</span> <span class="o">=</span> <span class="n">x_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">341</span>                <span class="n">u_arr</span> <span class="o">=</span> <span class="n">u_arr</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">342</span>                <span class="k">break</span>
-<span class="linenos">343</span>
-<span class="linenos">344</span>            <span class="n">t_arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
-<span class="linenos">345</span>            <span class="n">x_arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_next</span>
-<span class="linenos">346</span>            <span class="n">x_curr</span> <span class="o">=</span> <span class="n">x_next</span>
-<span class="linenos">347</span>
-<span class="linenos">348</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">349</span>            <span class="n">t_arr</span> <span class="o">=</span> <span class="n">t_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">350</span>            <span class="n">x_arr</span> <span class="o">=</span> <span class="n">x_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">351</span>            <span class="n">u_arr</span> <span class="o">=</span> <span class="n">u_arr</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">352</span>            <span class="k">break</span>
-<span class="linenos">353</span>
-<span class="linenos">354</span>    <span class="c1"># Store final history</span>
-<span class="linenos">355</span>    <span class="k">if</span> <span class="n">history</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">356</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">357</span>            <span class="nb">setattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;_last_history&quot;</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
-<span class="linenos">358</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">359</span>            <span class="k">pass</span>
-<span class="linenos">360</span>
-<span class="linenos">361</span>    <span class="k">return</span> <span class="n">t_arr</span><span class="p">,</span> <span class="n">x_arr</span><span class="p">,</span> <span class="n">u_arr</span>
+<span class="linenos">186</span><span class="k">def</span><span class="w"> </span><span class="nf">run_simulation</span><span class="p">(</span>
+<span class="linenos">187</span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos">188</span>    <span class="n">controller</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos">189</span>    <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos">190</span>    <span class="n">sim_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">191</span>    <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">192</span>    <span class="n">initial_state</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos">193</span>    <span class="n">u_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">194</span>    <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">195</span>    <span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">196</span>    <span class="n">latency_margin</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">197</span>    <span class="n">fallback_controller</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">198</span>    <span class="o">**</span><span class="n">_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos">199</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="linenos">200</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Legacy simulation runner for backward compatibility.</span>
+<span class="linenos">201</span>
+<span class="linenos">202</span><span class="sd">    This function maintains the exact interface and behavior of the original</span>
+<span class="linenos">203</span><span class="sd">    run_simulation function from simulation_runner.py.</span>
+<span class="linenos">204</span>
+<span class="linenos">205</span><span class="sd">    Parameters</span>
+<span class="linenos">206</span><span class="sd">    ----------</span>
+<span class="linenos">207</span><span class="sd">    controller : Any</span>
+<span class="linenos">208</span><span class="sd">        Controller object with __call__ or compute_control method</span>
+<span class="linenos">209</span><span class="sd">    dynamics_model : Any</span>
+<span class="linenos">210</span><span class="sd">        Dynamics model with step method</span>
+<span class="linenos">211</span><span class="sd">    sim_time : float</span>
+<span class="linenos">212</span><span class="sd">        Total simulation time</span>
+<span class="linenos">213</span><span class="sd">    dt : float</span>
+<span class="linenos">214</span><span class="sd">        Time step</span>
+<span class="linenos">215</span><span class="sd">    initial_state : array-like</span>
+<span class="linenos">216</span><span class="sd">        Initial state vector</span>
+<span class="linenos">217</span><span class="sd">    u_max : float, optional</span>
+<span class="linenos">218</span><span class="sd">        Control saturation limit</span>
+<span class="linenos">219</span><span class="sd">    seed : int, optional</span>
+<span class="linenos">220</span><span class="sd">        Random seed (deprecated, use rng)</span>
+<span class="linenos">221</span><span class="sd">    rng : np.random.Generator, optional</span>
+<span class="linenos">222</span><span class="sd">        Random number generator</span>
+<span class="linenos">223</span><span class="sd">    latency_margin : float, optional</span>
+<span class="linenos">224</span><span class="sd">        Unused (for future latency control)</span>
+<span class="linenos">225</span><span class="sd">    fallback_controller : callable, optional</span>
+<span class="linenos">226</span><span class="sd">        Fallback controller for deadline misses</span>
+<span class="linenos">227</span><span class="sd">    **_kwargs</span>
+<span class="linenos">228</span><span class="sd">        Additional arguments (ignored)</span>
+<span class="linenos">229</span>
+<span class="linenos">230</span><span class="sd">    Returns</span>
+<span class="linenos">231</span><span class="sd">    -------</span>
+<span class="linenos">232</span><span class="sd">    tuple</span>
+<span class="linenos">233</span><span class="sd">        (times, states, controls) arrays</span>
+<span class="linenos">234</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">235</span>    <span class="c1"># Input validation</span>
+<span class="linenos">236</span>    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="linenos">237</span>    <span class="k">if</span> <span class="n">dt</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+<span class="linenos">238</span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt must be positive&quot;</span><span class="p">)</span>
+<span class="linenos">239</span>
+<span class="linenos">240</span>    <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sim_time</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span><span class="p">))</span> <span class="k">if</span> <span class="n">sim_time</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="linenos">241</span>    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">242</span>    <span class="n">state_dim</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">243</span>
+<span class="linenos">244</span>    <span class="c1"># Prepare output arrays</span>
+<span class="linenos">245</span>    <span class="n">t_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="linenos">246</span>    <span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="linenos">247</span>    <span class="n">u_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="linenos">248</span>
+<span class="linenos">249</span>    <span class="c1"># Set initial conditions</span>
+<span class="linenos">250</span>    <span class="n">t_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">251</span>    <span class="n">x_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span>
+<span class="linenos">252</span>
+<span class="linenos">253</span>    <span class="c1"># Determine control saturation</span>
+<span class="linenos">254</span>    <span class="n">u_lim</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">255</span>    <span class="k">if</span> <span class="n">u_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">256</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">257</span>            <span class="n">u_lim</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">u_max</span><span class="p">)</span>
+<span class="linenos">258</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">259</span>            <span class="n">u_lim</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">260</span>    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">):</span>
+<span class="linenos">261</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">262</span>            <span class="n">u_lim</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">))</span>
+<span class="linenos">263</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">264</span>            <span class="n">u_lim</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">265</span>
+<span class="linenos">266</span>    <span class="c1"># Setup random generator</span>
+<span class="linenos">267</span>    <span class="k">if</span> <span class="n">rng</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">268</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">269</span>            <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">))</span>
+<span class="linenos">270</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">271</span>            <span class="n">rng</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">272</span>
+<span class="linenos">273</span>    <span class="c1"># Initialize controller state</span>
+<span class="linenos">274</span>    <span class="n">ctrl_state</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">275</span>    <span class="n">history</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">276</span>
+<span class="linenos">277</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">278</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;initialize_state&quot;</span><span class="p">):</span>
+<span class="linenos">279</span>            <span class="n">ctrl_state</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_state</span><span class="p">()</span>
+<span class="linenos">280</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">281</span>        <span class="k">pass</span>
+<span class="linenos">282</span>
+<span class="linenos">283</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">284</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;initialize_history&quot;</span><span class="p">):</span>
+<span class="linenos">285</span>            <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_history</span><span class="p">()</span>
+<span class="linenos">286</span>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">287</span>        <span class="k">pass</span>
+<span class="linenos">288</span>
+<span class="linenos">289</span>    <span class="n">use_compute</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;compute_control&quot;</span><span class="p">)</span>
+<span class="linenos">290</span>    <span class="n">use_fallback</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">291</span>
+<span class="linenos">292</span>    <span class="c1"># Main simulation loop</span>
+<span class="linenos">293</span>    <span class="n">x_curr</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">294</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+<span class="linenos">295</span>        <span class="n">t_now</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">296</span>
+<span class="linenos">297</span>        <span class="c1"># Compute control</span>
+<span class="linenos">298</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="linenos">299</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">300</span>            <span class="k">if</span> <span class="n">use_fallback</span> <span class="ow">and</span> <span class="n">fallback_controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">301</span>                <span class="n">u_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fallback_controller</span><span class="p">(</span><span class="n">t_now</span><span class="p">,</span> <span class="n">x_curr</span><span class="p">))</span>
+<span class="linenos">302</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">303</span>                <span class="k">if</span> <span class="n">use_compute</span><span class="p">:</span>
+<span class="linenos">304</span>                    <span class="n">ret</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">x_curr</span><span class="p">,</span> <span class="n">ctrl_state</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
+<span class="linenos">305</span>                    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">306</span>                        <span class="n">u_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">307</span>                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">308</span>                            <span class="n">ctrl_state</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">309</span>                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+<span class="linenos">310</span>                            <span class="n">history</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">311</span>                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">312</span>                        <span class="n">u_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+<span class="linenos">313</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">314</span>                    <span class="n">u_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">controller</span><span class="p">(</span><span class="n">t_now</span><span class="p">,</span> <span class="n">x_curr</span><span class="p">))</span>
+<span class="linenos">315</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">316</span>            <span class="c1"># Terminate on control exception</span>
+<span class="linenos">317</span>            <span class="n">t_arr</span> <span class="o">=</span> <span class="n">t_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">318</span>            <span class="n">x_arr</span> <span class="o">=</span> <span class="n">x_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">319</span>            <span class="n">u_arr</span> <span class="o">=</span> <span class="n">u_arr</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">320</span>            <span class="k">break</span>
+<span class="linenos">321</span>
+<span class="linenos">322</span>        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="linenos">323</span>        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">use_fallback</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fallback_controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">dt</span><span class="p">):</span>
+<span class="linenos">324</span>            <span class="n">use_fallback</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">325</span>
+<span class="linenos">326</span>        <span class="c1"># Saturate control</span>
+<span class="linenos">327</span>        <span class="k">if</span> <span class="n">u_lim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">328</span>            <span class="n">u_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u_val</span><span class="p">,</span> <span class="o">-</span><span class="n">u_lim</span><span class="p">,</span> <span class="n">u_lim</span><span class="p">)</span>
+<span class="linenos">329</span>
+<span class="linenos">330</span>        <span class="n">u_arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_val</span>
+<span class="linenos">331</span>
+<span class="linenos">332</span>        <span class="c1"># Propagate dynamics</span>
+<span class="linenos">333</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">334</span>            <span class="n">x_next</span> <span class="o">=</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_curr</span><span class="p">,</span> <span class="n">u_val</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos">335</span>            <span class="n">x_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_next</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">336</span>
+<span class="linenos">337</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x_next</span><span class="p">)):</span>
+<span class="linenos">338</span>                <span class="n">t_arr</span> <span class="o">=</span> <span class="n">t_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">339</span>                <span class="n">x_arr</span> <span class="o">=</span> <span class="n">x_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">340</span>                <span class="n">u_arr</span> <span class="o">=</span> <span class="n">u_arr</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">341</span>                <span class="k">break</span>
+<span class="linenos">342</span>
+<span class="linenos">343</span>            <span class="n">t_arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">344</span>            <span class="n">x_arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_next</span>
+<span class="linenos">345</span>            <span class="n">x_curr</span> <span class="o">=</span> <span class="n">x_next</span>
+<span class="linenos">346</span>
+<span class="linenos">347</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">348</span>            <span class="n">t_arr</span> <span class="o">=</span> <span class="n">t_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">349</span>            <span class="n">x_arr</span> <span class="o">=</span> <span class="n">x_arr</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">350</span>            <span class="n">u_arr</span> <span class="o">=</span> <span class="n">u_arr</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">351</span>            <span class="k">break</span>
+<span class="linenos">352</span>
+<span class="linenos">353</span>    <span class="c1"># Store final history</span>
+<span class="linenos">354</span>    <span class="k">if</span> <span class="n">history</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">355</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">356</span>            <span class="nb">setattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s2">&quot;_last_history&quot;</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
+<span class="linenos">357</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">358</span>            <span class="k">pass</span>
+<span class="linenos">359</span>
+<span class="linenos">360</span>    <span class="k">return</span> <span class="n">t_arr</span><span class="p">,</span> <span class="n">x_arr</span><span class="p">,</span> <span class="n">u_arr</span>
 </pre></div>
 </div>
 </section>
@@ -960,7 +1162,7 @@ providing compatibility with the original simulation_runner functionality.</p>
 <span class="linenos"> 89</span>                <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_state</span>
 <span class="linenos"> 90</span>                <span class="n">current_state</span> <span class="o">=</span> <span class="n">next_state</span>
 <span class="linenos"> 91</span>
-<span class="linenos"> 92</span>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 92</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos"> 93</span>                <span class="c1"># Simulation failed, truncate results</span>
 <span class="linenos"> 94</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos"> 95</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
@@ -1353,7 +1555,7 @@ Additional arguments (ignored)</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1376,6 +1578,27 @@ Additional arguments (ignored)</p>
             <ul>
 <li><a class="reference internal" href="#">simulation.orchestrators.sequential</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#sequential-simulation-orchestration">Sequential Simulation Orchestration</a></li>
+<li><a class="reference internal" href="#sequential-execution-model">Sequential Execution Model</a></li>
+<li><a class="reference internal" href="#simulation-loop">Simulation Loop</a></li>
+<li><a class="reference internal" href="#determinism">Determinism</a></li>
+<li><a class="reference internal" href="#memory-access-pattern">Memory Access Pattern</a></li>
+<li><a class="reference internal" href="#control-flow">Control Flow</a></li>
+<li><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a></li>
+<li><a class="reference internal" href="#computational-efficiency">Computational Efficiency</a></li>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-profiling">Example 4: Performance Profiling</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-other-components">Example 5: Integration with Other Components</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#sequentialorchestrator"><code class="docutils literal notranslate"><span class="pre">SequentialOrchestrator</span></code></a><ul>
@@ -1435,6 +1658,10 @@ Additional arguments (ignored)</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

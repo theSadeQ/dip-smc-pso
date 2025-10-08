@@ -63,6 +63,9 @@ class Controller:
 
 **Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 class Controller:
     def cleanup(self):
         """Explicit memory cleanup (call before deletion)."""
@@ -96,6 +99,9 @@ class Controller:
 ### Pattern 4: Enhanced Reset Method
 
 ```python
+# example-metadata:
+# runnable: false
+
 class Controller:
     def reset(self):
         """Reset controller state with memory cleanup."""

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -860,24 +886,7 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 </div>
 </li>
 <li><p><strong>Mathematical Property Validation</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enhanced stability test</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_lyapunov_stability_mathematical_proof</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate Lyapunov stability conditions with mathematical rigor.&quot;&quot;&quot;</span>
-    <span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-
-    <span class="c1"># Test multiple initial conditions</span>
-    <span class="n">initial_conditions</span> <span class="o">=</span> <span class="n">generate_stability_test_conditions</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">ic</span> <span class="ow">in</span> <span class="n">initial_conditions</span><span class="p">:</span>
-        <span class="c1"># Lyapunov function: V = 0.5 * s²</span>
-        <span class="n">trajectory</span> <span class="o">=</span> <span class="n">simulate_trajectory</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">ic</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
-        <span class="n">lyapunov_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-                         <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="p">]</span>
-
-        <span class="c1"># V̇ ≤ 0 (non-increasing Lyapunov function)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lyapunov_values</span><span class="p">)):</span>
-            <span class="k">assert</span> <span class="n">lyapunov_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lyapunov_values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-6</span><span class="p">,</span> \
-                <span class="sa">f</span><span class="s2">&quot;Lyapunov function not decreasing at step </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
@@ -885,33 +894,61 @@ python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> <
 </section>
 </section>
 </section>
-<hr class="docutils" />
-<section id="advanced-troubleshooting-techniques">
-<h2>🔧 Advanced Troubleshooting Techniques<a class="headerlink" href="#advanced-troubleshooting-techniques" title="Link to this heading">¶</a></h2>
-<section id="coverage-data-collection-issues">
-<h3>Coverage Data Collection Issues<a class="headerlink" href="#coverage-data-collection-issues" title="Link to this heading">¶</a></h3>
-<section id="issue-coverage-xml-not-generated">
-<h4>Issue: Coverage.xml Not Generated<a class="headerlink" href="#issue-coverage-xml-not-generated" title="Link to this heading">¶</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Diagnose coverage file generation</span>
-python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_sample.py<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>xml:debug_coverage.xml<span class="w"> </span>-v
-ls<span class="w"> </span>-la<span class="w"> </span>debug_coverage.xml
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false">
+<h1>runnable: false<a class="headerlink" href="#runnable-false" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="enhanced-stability-test">
+<h1>Enhanced stability test<a class="headerlink" href="#enhanced-stability-test" title="Link to this heading">¶</a></h1>
+<p>def test_lyapunov_stability_mathematical_proof():
+“””Validate Lyapunov stability conditions with mathematical rigor.”””
+controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5])</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   # Test multiple initial conditions
+   initial_conditions = generate_stability_test_conditions(n=100)
+
+   for ic in initial_conditions:
+       # Lyapunov function: V = 0.5 * s²
+       trajectory = simulate_trajectory(controller, ic, duration=5.0)
+       lyapunov_values = [0.5 * compute_sliding_surface(state)**2
+                        for state in trajectory]
+
+       # V̇ ≤ 0 (non-increasing Lyapunov function)
+       for i in range(1, len(lyapunov_values)):
+           assert lyapunov_values[i] &lt;= lyapunov_values[i-1] + 1e-6, \
+               f&quot;Lyapunov function not decreasing at step {i}&quot;
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
+
+<span class="c1">## 🔧 Advanced Troubleshooting Techniques</span>
+
+<span class="c1">### Coverage Data Collection Issues</span>
+
+<span class="c1">#### Issue: Coverage.xml Not Generated</span>
+<span class="err">```</span><span class="n">bash</span>
+<span class="c1"># Diagnose coverage file generation</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytest</span> <span class="n">tests</span><span class="o">/</span><span class="n">test_sample</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">cov</span><span class="o">=</span><span class="n">src</span> <span class="o">--</span><span class="n">cov</span><span class="o">-</span><span class="n">report</span><span class="o">=</span><span class="n">xml</span><span class="p">:</span><span class="n">debug_coverage</span><span class="o">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">v</span>
+<span class="n">ls</span> <span class="o">-</span><span class="n">la</span> <span class="n">debug_coverage</span><span class="o">.</span><span class="n">xml</span>
 
 <span class="c1"># Verify XML content</span>
-python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
-<span class="s2">import xml.etree.ElementTree as ET</span>
-<span class="s2">try:</span>
-<span class="s2">    tree = ET.parse(&#39;debug_coverage.xml&#39;)</span>
-<span class="s2">    print(&#39;✅ XML valid&#39;)</span>
-<span class="s2">    print(&#39;Root tag:&#39;, tree.getroot().tag)</span>
-<span class="s2">    print(&#39;Total lines:&#39;, tree.getroot().get(&#39;lines-valid&#39;))</span>
-<span class="s2">except Exception as e:</span>
-<span class="s2">    print(&#39;❌ XML error:&#39;, e)</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+<span class="k">try</span><span class="p">:</span>
+ <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;debug_coverage.xml&#39;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;✅ XML valid&#39;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Root tag:&#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total lines:&#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lines-valid&#39;</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;❌ XML error:&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 <span class="s2">&quot;</span>
 </pre></div>
 </div>
-</section>
 <section id="issue-inconsistent-coverage-results">
-<h4>Issue: Inconsistent Coverage Results<a class="headerlink" href="#issue-inconsistent-coverage-results" title="Link to this heading">¶</a></h4>
+<h2>Issue: Inconsistent Coverage Results<a class="headerlink" href="#issue-inconsistent-coverage-results" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean coverage data and regenerate</span>
 rm<span class="w"> </span>-f<span class="w"> </span>.coverage<span class="w"> </span>coverage.xml<span class="w"> </span>*.json
 python<span class="w"> </span>-m<span class="w"> </span>coverage<span class="w"> </span>erase
@@ -922,11 +959,10 @@ python<span class="w"> </span>scripts/coverage_validator.py<span class="w"> </sp
 </pre></div>
 </div>
 </section>
-</section>
 <section id="performance-issues">
-<h3>Performance Issues<a class="headerlink" href="#performance-issues" title="Link to this heading">¶</a></h3>
+<h2>Performance Issues<a class="headerlink" href="#performance-issues" title="Link to this heading">¶</a></h2>
 <section id="issue-slow-coverage-collection">
-<h4>Issue: Slow Coverage Collection<a class="headerlink" href="#issue-slow-coverage-collection" title="Link to this heading">¶</a></h4>
+<h3>Issue: Slow Coverage Collection<a class="headerlink" href="#issue-slow-coverage-collection" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Profile coverage collection performance</span>
 <span class="nb">time</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>xml<span class="w"> </span>-q
 
@@ -940,7 +976,7 @@ pip<span class="w"> </span>install<span class="w"> </span>pytest-xdist
 </div>
 </section>
 <section id="issue-memory-issues-with-large-test-suites">
-<h4>Issue: Memory Issues with Large Test Suites<a class="headerlink" href="#issue-memory-issues-with-large-test-suites" title="Link to this heading">¶</a></h4>
+<h3>Issue: Memory Issues with Large Test Suites<a class="headerlink" href="#issue-memory-issues-with-large-test-suites" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monitor memory usage during coverage</span>
 python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
 <span class="s2">import psutil</span>
@@ -965,9 +1001,9 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </section>
 </section>
 <section id="ci-cd-integration-issues">
-<h3>CI/CD Integration Issues<a class="headerlink" href="#ci-cd-integration-issues" title="Link to this heading">¶</a></h3>
+<h2>CI/CD Integration Issues<a class="headerlink" href="#ci-cd-integration-issues" title="Link to this heading">¶</a></h2>
 <section id="issue-coverage-reports-not-uploaded">
-<h4>Issue: Coverage Reports Not Uploaded<a class="headerlink" href="#issue-coverage-reports-not-uploaded" title="Link to this heading">¶</a></h4>
+<h3>Issue: Coverage Reports Not Uploaded<a class="headerlink" href="#issue-coverage-reports-not-uploaded" title="Link to this heading">¶</a></h3>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># GitHub Actions troubleshooting</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Debug coverage artifacts</span>
 <span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
@@ -997,7 +1033,6 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </div>
 </section>
 </section>
-</section>
 <hr class="docutils" />
 <section id="threshold-optimization-strategies">
 <h2>📈 Threshold Optimization Strategies<a class="headerlink" href="#threshold-optimization-strategies" title="Link to this heading">¶</a></h2>
@@ -1005,7 +1040,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <h3>Dynamic Threshold Adjustment<a class="headerlink" href="#dynamic-threshold-adjustment" title="Link to this heading">¶</a></h3>
 <section id="component-based-threshold-calculation">
 <h4>Component-Based Threshold Calculation<a class="headerlink" href="#component-based-threshold-calculation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate realistic thresholds based on component complexity</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Calculate realistic thresholds based on component complexity</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_optimal_thresholds</span><span class="p">(</span><span class="n">codebase_analysis</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate component-specific coverage thresholds based on:</span>
@@ -1134,7 +1172,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <h2>🚀 Production Readiness Assessment<a class="headerlink" href="#production-readiness-assessment" title="Link to this heading">¶</a></h2>
 <section id="coverage-contribution-to-production-score">
 <h3>Coverage Contribution to Production Score<a class="headerlink" href="#coverage-contribution-to-production-score" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_coverage_production_score</span><span class="p">(</span><span class="n">gate_results</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_coverage_production_score</span><span class="p">(</span><span class="n">gate_results</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate coverage contribution to overall production readiness score.</span>
 
@@ -1207,7 +1248,7 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1261,12 +1302,12 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#advanced-troubleshooting-techniques">🔧 Advanced Troubleshooting Techniques</a><ul>
-<li><a class="reference internal" href="#coverage-data-collection-issues">Coverage Data Collection Issues</a><ul>
-<li><a class="reference internal" href="#issue-coverage-xml-not-generated">Issue: Coverage.xml Not Generated</a></li>
-<li><a class="reference internal" href="#issue-inconsistent-coverage-results">Issue: Inconsistent Coverage Results</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false">runnable: false</a></li>
+<li><a class="reference internal" href="#enhanced-stability-test">Enhanced stability test</a><ul>
+<li><a class="reference internal" href="#issue-inconsistent-coverage-results">Issue: Inconsistent Coverage Results</a></li>
 <li><a class="reference internal" href="#performance-issues">Performance Issues</a><ul>
 <li><a class="reference internal" href="#issue-slow-coverage-collection">Issue: Slow Coverage Collection</a></li>
 <li><a class="reference internal" href="#issue-memory-issues-with-large-test-suites">Issue: Memory Issues with Large Test Suites</a></li>
@@ -1274,8 +1315,6 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 </li>
 <li><a class="reference internal" href="#ci-cd-integration-issues">CI/CD Integration Issues</a><ul>
 <li><a class="reference internal" href="#issue-coverage-reports-not-uploaded">Issue: Coverage Reports Not Uploaded</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#threshold-optimization-strategies">📈 Threshold Optimization Strategies</a><ul>

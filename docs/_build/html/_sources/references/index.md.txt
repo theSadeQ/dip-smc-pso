@@ -138,6 +138,9 @@ The bibliography system includes automatic validation:
 Each implementation module includes explicit citations to theoretical sources:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class SuperTwistingSMC:
     """
     Super-twisting sliding mode controller.

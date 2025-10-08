@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Swing-Up SMC Technical Guide" href="swing_up_smc_technical_guide.html" /><link rel="prev" title="Hybrid Adaptive Super-Twisting SMC Technical Guide" href="hybrid_smc_technical_guide.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -789,7 +815,10 @@
 <p><strong>Function</strong>: <code class="docutils literal notranslate"><span class="pre">_numeric_linearize_continuous(dyn,</span> <span class="pre">x_eq,</span> <span class="pre">u_eq)</span></code></p>
 <p><strong>Method</strong>: Central finite differences with adaptive perturbations</p>
 <p><strong>Implementation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_numeric_linearize_continuous</span><span class="p">(</span><span class="n">dyn</span><span class="p">,</span> <span class="n">x_eq</span><span class="p">,</span> <span class="n">u_eq</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_numeric_linearize_continuous</span><span class="p">(</span><span class="n">dyn</span><span class="p">,</span> <span class="n">x_eq</span><span class="p">,</span> <span class="n">u_eq</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute Jacobian matrices A, B around (x_eq, u_eq).</span>
 
@@ -835,7 +864,10 @@
 <h4>2.2 Discretization Module<a class="headerlink" href="#discretization-module" title="Link to this heading">¶</a></h4>
 <p><strong>Function</strong>: <code class="docutils literal notranslate"><span class="pre">_discretize_exact(A_c,</span> <span class="pre">B_c,</span> <span class="pre">dt)</span></code> (default)</p>
 <p><strong>Zero-Order Hold Method</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_discretize_exact</span><span class="p">(</span><span class="n">A_c</span><span class="p">,</span> <span class="n">B_c</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_discretize_exact</span><span class="p">(</span><span class="n">A_c</span><span class="p">,</span> <span class="n">B_c</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Exact ZOH discretization via matrix exponential.</span>
 
@@ -869,7 +901,10 @@
 <section id="qp-solver-integration-cvxpy">
 <h4>2.3 QP Solver Integration (cvxpy)<a class="headerlink" href="#qp-solver-integration-cvxpy" title="Link to this heading">¶</a></h4>
 <p><strong>Setup Phase</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Decision variables</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Decision variables</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># State trajectory</span>
 <span class="n">U</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>    <span class="c1"># Control sequence</span>
 
@@ -952,7 +987,10 @@
 </li>
 </ol>
 <p><strong>Fallback Logic</strong> (source: <code class="docutils literal notranslate"><span class="pre">mpc_controller.py:428-463</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_safe_fallback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="err">₀</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_safe_fallback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="err">₀</span><span class="p">):</span>
     <span class="c1"># Prefer SMC if instantiated</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fallback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
@@ -1005,7 +1043,10 @@
 <h3>1. Full Source Code Structure<a class="headerlink" href="#full-source-code-structure" title="Link to this heading">¶</a></h3>
 <p><strong>File</strong>: <code class="docutils literal notranslate"><span class="pre">src/controllers/mpc/mpc_controller.py</span></code> (487 lines)</p>
 <p><strong>Key Classes and Functions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MPCWeights</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Cost function weights for MPC optimization.&quot;&quot;&quot;</span>
     <span class="n">q_x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>          <span class="c1"># Cart position</span>
@@ -1048,7 +1089,10 @@
 <h3>2. Critical Code Sections<a class="headerlink" href="#critical-code-sections" title="Link to this heading">¶</a></h3>
 <section id="linearization-lines-72-131">
 <h4>2.1 Linearization (Lines 72-131)<a class="headerlink" href="#linearization-lines-72-131" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_numeric_linearize_continuous</span><span class="p">(</span><span class="n">dyn</span><span class="p">,</span> <span class="n">x_eq</span><span class="p">,</span> <span class="n">u_eq</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_numeric_linearize_continuous</span><span class="p">(</span><span class="n">dyn</span><span class="p">,</span> <span class="n">x_eq</span><span class="p">,</span> <span class="n">u_eq</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Central finite difference Jacobian computation.</span>
 
@@ -1108,7 +1152,10 @@
 </section>
 <section id="discretization-lines-142-153">
 <h4>2.2 Discretization (Lines 142-153)<a class="headerlink" href="#discretization-lines-142-153" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_discretize_exact</span><span class="p">(</span><span class="n">Ac</span><span class="p">,</span> <span class="n">Bc</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_discretize_exact</span><span class="p">(</span><span class="n">Ac</span><span class="p">,</span> <span class="n">Bc</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Zero-order hold discretization via matrix exponential.</span>
 
@@ -1150,7 +1197,10 @@
 </section>
 <section id="qp-formulation-lines-362-396">
 <h4>2.3 QP Formulation (Lines 362-396)<a class="headerlink" href="#qp-formulation-lines-362-396" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Decision variables</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Decision variables</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># States: 6 × (N+1)</span>
 <span class="n">U</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">((</span><span class="n">nu</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>    <span class="c1"># Controls: 1 × N</span>
 
@@ -1196,7 +1246,10 @@
 </section>
 <section id="solver-and-fallback-lines-407-463">
 <h4>2.4 Solver and Fallback (Lines 407-463)<a class="headerlink" href="#solver-and-fallback-lines-407-463" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve with warm start</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Solve with warm start</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">OSQP</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
@@ -1418,7 +1471,10 @@
 <h3>3. Configuration Examples<a class="headerlink" href="#configuration-examples" title="Link to this heading">¶</a></h3>
 <section id="high-performance-mpc">
 <h4>3.1 High-Performance MPC<a class="headerlink" href="#high-performance-mpc" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">MPCWeights</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">weights</span> <span class="o">=</span> <span class="n">MPCWeights</span><span class="p">(</span>
     <span class="n">q_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>          <span class="c1"># Less emphasis on cart position</span>
     <span class="n">q_theta</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>     <span class="c1"># Strong angle penalty</span>
     <span class="n">q_xdot</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
@@ -1439,7 +1495,10 @@
 </section>
 <section id="real-time-optimized-mpc">
 <h4>3.2 Real-Time Optimized MPC<a class="headerlink" href="#real-time-optimized-mpc" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">MPCWeights</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">weights</span> <span class="o">=</span> <span class="n">MPCWeights</span><span class="p">(</span>
     <span class="n">q_theta</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
     <span class="n">r_u</span><span class="o">=</span><span class="mf">1e-2</span>
 <span class="p">)</span>
@@ -1508,7 +1567,10 @@
 </section>
 <section id="control-loop-integration">
 <h4>1.2 Control Loop Integration<a class="headerlink" href="#control-loop-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation loop</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Simulation loop</span>
 <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.02</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>  <span class="c1"># Upright</span>
@@ -1898,7 +1960,10 @@
 </li>
 </ol>
 <p><strong>Solutions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Relax angle constraints</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Relax angle constraints</span>
 <span class="n">mpc</span> <span class="o">=</span> <span class="n">MPCController</span><span class="p">(</span>
     <span class="n">dynamics</span><span class="p">,</span>
     <span class="n">max_theta_dev</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>  <span class="c1"># Increase from 0.5</span>
@@ -2146,7 +2211,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

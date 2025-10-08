@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -578,6 +604,344 @@ stability and optimization algorithm convergence.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">src.utils.numerical_stability.safe_operations</span> <span class="pre">import</span> <span class="pre">safe_divide,</span> <span class="pre">safe_reciprocal,</span> <span class="pre">safe_sqrt,</span> <span class="pre">safe_log,</span> <span class="pre">safe_exp,</span> <span class="pre">safe_power,</span> <span class="pre">safe_norm,</span> <span class="pre">safe_normalize,</span> <span class="pre">EPSILON_DIV,</span> <span class="pre">EPSILON_SQRT,</span> <span class="pre">EPSILON_LOG,</span> <span class="pre">EPSILON_EXP,</span> <span class="pre">is_safe_denominator,</span> <span class="pre">clip_to_safe_range</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="numerical-stability-for-robust-computation">
+<h3>Numerical Stability for Robust Computation<a class="headerlink" href="#numerical-stability-for-robust-computation" title="Link to this heading">¶</a></h3>
+<p>Numerical stability utilities protect against common numerical errors in control systems and optimization algorithms.</p>
+<section id="division-by-zero-protection">
+<h4>Division by Zero Protection<a class="headerlink" href="#division-by-zero-protection" title="Link to this heading">¶</a></h4>
+<p><strong>Safe division:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{safe\_div}(a, b, \epsilon) = \frac{a}{\max(|b|, \epsilon)} \cdot \text{sign}(b)
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\epsilon = 10^{-10}\)</span> (default, configurable).</p>
+<p><strong>Reciprocal:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{safe\_reciprocal}(x, \epsilon) = \frac{1}{\max(|x|, \epsilon)} \cdot \text{sign}(x)
+\)</span>$</p>
+</section>
+<section id="square-root-protection">
+<h4>Square Root Protection<a class="headerlink" href="#square-root-protection" title="Link to this heading">¶</a></h4>
+<p><strong>Safe square root:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{safe\_sqrt}(x) = \begin{cases}
+\sqrt{x} &amp; \text{if } x \geq 0 \\
+\sqrt{|x|} &amp; \text{if allow\_negative} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\)</span>$</p>
+<p><strong>Normalized safe sqrt:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{safe\_sqrt}(x, \epsilon) = \sqrt{\max(x, \epsilon)}
+\)</span>$</p>
+</section>
+<section id="logarithm-and-exponential-protection">
+<h4>Logarithm and Exponential Protection<a class="headerlink" href="#logarithm-and-exponential-protection" title="Link to this heading">¶</a></h4>
+<p><strong>Safe logarithm:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{safe\_log}(x, \epsilon) = \log(\max(x, \epsilon))
+\)</span>$</p>
+<p>Default: <span class="math notranslate nohighlight">\(\epsilon_{\log} = 10^{-10}\)</span></p>
+<p><strong>Safe exponential:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{safe\_exp}(x) = \exp(\text{clip}(x, -\text{MAX\_EXP}, \text{MAX\_EXP}))
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\text{MAX\_EXP} = 700\)</span> to prevent overflow.</p>
+</section>
+<section id="matrix-conditioning">
+<h4>Matrix Conditioning<a class="headerlink" href="#matrix-conditioning" title="Link to this heading">¶</a></h4>
+<p><strong>Condition number:</strong>
+$<span class="math notranslate nohighlight">\(
+\kappa(A) = \|A\| \cdot \|A^{-1}\|
+\)</span>$</p>
+<p><strong>Ill-conditioned detection:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Ill-conditioned} = (\kappa(A) &gt; 10^{12})
+\)</span>$</p>
+<p><strong>Regularization:</strong>
+$<span class="math notranslate nohighlight">\(
+A_{\text{reg}} = A + \epsilon I
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is chosen to bring <span class="math notranslate nohighlight">\(\kappa(A_{\text{reg}}) \approx 10^6\)</span>.</p>
+</section>
+</section>
+<section id="numerical-error-analysis">
+<h3>Numerical Error Analysis<a class="headerlink" href="#numerical-error-analysis" title="Link to this heading">¶</a></h3>
+<p><strong>Machine epsilon:</strong>
+$<span class="math notranslate nohighlight">\(
+\epsilon_{\text{machine}} \approx 2.22 \times 10^{-16} \quad \text{(double precision)}
+\)</span>$</p>
+<p><strong>Relative error:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{RelError} = \frac{|x_{\text{computed}} - x_{\text{exact}}|}{|x_{\text{exact}}|}
+\)</span>$</p>
+<p><strong>Acceptable tolerance:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{RelError} &lt; 10^{-6} \quad \text{(typical for control systems)}
+\)</span>$</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Input Value] –&gt; B{Operation Type}</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>B --&gt;|Division| C[Check Denominator]
+B --&gt;|Sqrt| D[Check Non-negative]
+B --&gt;|Log| E[Check Positive]
+B --&gt;|Exp| F[Check Range]
+
+C --&gt; G{|b| &lt; ε?}
+G --&gt;|Yes| H[Use ε instead]
+G --&gt;|No| I[Normal Division]
+
+D --&gt; J{x &lt; 0?}
+J --&gt;|Yes| K[Use |x| or 0]
+J --&gt;|No| L[Normal Sqrt]
+
+E --&gt; M{x &lt; ε?}
+M --&gt;|Yes| N[Use ε instead]
+M --&gt;|No| O[Normal Log]
+
+F --&gt; P{|x| &gt; MAX?}
+P --&gt;|Yes| Q[Clip to ±MAX]
+P --&gt;|No| R[Normal Exp]
+
+H --&gt; S[Protected Result]
+I --&gt; S
+K --&gt; S
+L --&gt; S
+N --&gt; S
+O --&gt; S
+Q --&gt; S
+R --&gt; S
+
+style G fill:#fff4e1
+style J fill:#fff4e1
+style M fill:#fff4e1
+style P fill:#fff4e1
+style S fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-safe-division">
+<h3>Example 1: Safe Division<a class="headerlink" href="#example-1-safe-division" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.utils.numerical_stability import safe_divide</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="protect-against-divide-by-zero">
+<h1>Protect against divide-by-zero<a class="headerlink" href="#protect-against-divide-by-zero" title="Link to this heading">¶</a></h1>
+<p>a = 1.0
+b = 1e-15  # Near-zero denominator</p>
+<p>result = safe_divide(a, b, epsilon=1e-10)
+print(f”Safe division: {a}/{b} = {result}”)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="uses-epsilon-instead-of-b-returns-bounded-result">
+<h1>Uses epsilon instead of b, returns bounded result<a class="headerlink" href="#uses-epsilon-instead-of-b-returns-bounded-result" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="vector-safe-division">
+<h1>Vector safe division<a class="headerlink" href="#vector-safe-division" title="Link to this heading">¶</a></h1>
+<p>numerators = np.array([1.0, 2.0, 3.0])
+denominators = np.array([0.5, 1e-16, 2.0])</p>
+<p>results = safe_divide(numerators, denominators)
+print(f”Vector safe division: {results}”)
+```</p>
+<section id="example-2-safe-square-root-for-negative-values">
+<h2>Example 2: Safe Square Root for Negative Values<a class="headerlink" href="#example-2-safe-square-root-for-negative-values" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.numerical_stability import safe_sqrt</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="handle-numerical-noise-causing-negative-sqrt-arguments">
+<h1>Handle numerical noise causing negative sqrt arguments<a class="headerlink" href="#handle-numerical-noise-causing-negative-sqrt-arguments" title="Link to this heading">¶</a></h1>
+<p>x = -0.001  # Small negative due to numerical error</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="option-1-use-absolute-value">
+<h1>Option 1: Use absolute value<a class="headerlink" href="#option-1-use-absolute-value" title="Link to this heading">¶</a></h1>
+<p>result1 = safe_sqrt(x, allow_negative=True)
+print(f”Safe sqrt (abs): {result1}”)  # sqrt(0.001)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="option-2-clamp-to-zero">
+<h1>Option 2: Clamp to zero<a class="headerlink" href="#option-2-clamp-to-zero" title="Link to this heading">¶</a></h1>
+<p>result2 = safe_sqrt(x, allow_negative=False)
+print(f”Safe sqrt (clamp): {result2}”)  # 0.0</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="application-lyapunov-function">
+<h1>Application: Lyapunov function<a class="headerlink" href="#application-lyapunov-function" title="Link to this heading">¶</a></h1>
+<p>def lyapunov_analysis(x):
+V = x.T &#64; P &#64; x  # May be slightly negative due to numerics</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Safe sqrt for norm
+V_norm = safe_sqrt(V, allow_negative=True)
+
+return V_norm
+</pre></div>
+</div>
+<p>```</p>
+<section id="example-3-safe-log-and-exp-for-optimization">
+<h2>Example 3: Safe Log and Exp for Optimization<a class="headerlink" href="#example-3-safe-log-and-exp-for-optimization" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.numerical_stability import safe_log, safe_exp</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pso-optimization-with-safe-operations">
+<h1>PSO optimization with safe operations<a class="headerlink" href="#pso-optimization-with-safe-operations" title="Link to this heading">¶</a></h1>
+<p>def compute_fitness_safe(params):
+“””Fitness function with numerical protection.”””</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Ensure positive before log
+cost = compute_cost(params)
+log_cost = safe_log(cost, epsilon=1e-10)
+
+# Prevent exp overflow
+penalty = compute_penalty(params)
+exp_penalty = safe_exp(penalty)  # Clipped to prevent overflow
+
+fitness = log_cost + exp_penalty
+
+return fitness
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-values">
+<h1>Example values<a class="headerlink" href="#example-values" title="Link to this heading">¶</a></h1>
+<p>cost = 1e-15  # Very small cost
+penalty = 1000  # Large penalty</p>
+<p>fitness = compute_fitness_safe({‘k1’: 10, ‘k2’: 5})
+print(f”Safe fitness: {fitness}”)  # No overflow or log(0) error
+```</p>
+<section id="example-4-matrix-conditioning-and-regularization">
+<h2>Example 4: Matrix Conditioning and Regularization<a class="headerlink" href="#example-4-matrix-conditioning-and-regularization" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.numerical_stability import (
+compute_condition_number,
+adaptive_regularization
+)
+import numpy as np</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="check-matrix-conditioning">
+<h1>Check matrix conditioning<a class="headerlink" href="#check-matrix-conditioning" title="Link to this heading">¶</a></h1>
+<p>A = np.array([[1, 1], [1, 1.0001]])  # Near-singular</p>
+<p>kappa = compute_condition_number(A)
+print(f”Condition number: {kappa:.2e}”)</p>
+<p>if kappa &gt; 1e12:
+print(“Matrix is ill-conditioned, applying regularization…”)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Adaptive regularization
+A_reg, epsilon_used = adaptive_regularization(
+    A,
+    target_condition=1e6
+)
+
+kappa_reg = compute_condition_number(A_reg)
+print(f&quot;Regularized condition number: {kappa_reg:.2e}&quot;)
+print(f&quot;Epsilon used: {epsilon_used:.2e}&quot;)
+</pre></div>
+</div>
+<p>```</p>
+<section id="example-5-comprehensive-numerical-safety-pipeline">
+<h2>Example 5: Comprehensive Numerical Safety Pipeline<a class="headerlink" href="#example-5-comprehensive-numerical-safety-pipeline" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.numerical_stability import (
+safe_divide,
+safe_sqrt,
+safe_log,
+safe_normalize
+)</p>
+<p>def compute_control_with_safety(x, controller_gains):
+“””Control computation with comprehensive numerical safety.”””</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Safe normalization
+x_norm = safe_normalize(x, epsilon=1e-10)
+
+# Safe division in gain computation
+adaptive_gain = safe_divide(controller_gains[&#39;base&#39;], x_norm)
+
+# Safe sqrt for lyapunov-based gain
+V = x.T @ P @ x
+lyap_gain = safe_sqrt(V, allow_negative=True)
+
+# Safe log for barrier function
+barrier = safe_log(distance_to_constraint, epsilon=1e-10)
+
+# Combine safely
+u = adaptive_gain * x + lyap_gain * barrier_direction
+
+return u
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="use-in-simulation">
+<h1>Use in simulation<a class="headerlink" href="#use-in-simulation" title="Link to this heading">¶</a></h1>
+<p>for k in range(1000):
+u = compute_control_with_safety(x, gains)
+x = integrator.integrate(dynamics, x, u, t)
+# No numerical errors even at boundaries
+```</p>
+<section id="id1">
+<h2>Architecture Diagram<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="id2">
+<h2>Usage Examples<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.utils.numerical_stability import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>```python
+component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+</section>
+<section id="example-3-integration-with-simulation">
+<h3>Example 3: Integration with Simulation<a class="headerlink" href="#example-3-integration-with-simulation" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>for k in range(num_steps):
+result = component.process(x)
+x = update(x, result)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python
+component = Component(enable_caching=True)
+```</p>
+</section>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python
+try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
+</section>
 </section>
 
         </article>
@@ -597,7 +961,7 @@ stability and optimization algorithm convergence.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -622,6 +986,59 @@ stability and optimization algorithm convergence.</p>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#numerical-stability-for-robust-computation">Numerical Stability for Robust Computation</a><ul>
+<li><a class="reference internal" href="#division-by-zero-protection">Division by Zero Protection</a></li>
+<li><a class="reference internal" href="#square-root-protection">Square Root Protection</a></li>
+<li><a class="reference internal" href="#logarithm-and-exponential-protection">Logarithm and Exponential Protection</a></li>
+<li><a class="reference internal" href="#matrix-conditioning">Matrix Conditioning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-error-analysis">Numerical Error Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-safe-division">Example 1: Safe Division</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#protect-against-divide-by-zero">Protect against divide-by-zero</a></li>
+<li><a class="reference internal" href="#uses-epsilon-instead-of-b-returns-bounded-result">Uses epsilon instead of b, returns bounded result</a></li>
+<li><a class="reference internal" href="#vector-safe-division">Vector safe division</a><ul>
+<li><a class="reference internal" href="#example-2-safe-square-root-for-negative-values">Example 2: Safe Square Root for Negative Values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#handle-numerical-noise-causing-negative-sqrt-arguments">Handle numerical noise causing negative sqrt arguments</a></li>
+<li><a class="reference internal" href="#option-1-use-absolute-value">Option 1: Use absolute value</a></li>
+<li><a class="reference internal" href="#option-2-clamp-to-zero">Option 2: Clamp to zero</a></li>
+<li><a class="reference internal" href="#application-lyapunov-function">Application: Lyapunov function</a><ul>
+<li><a class="reference internal" href="#example-3-safe-log-and-exp-for-optimization">Example 3: Safe Log and Exp for Optimization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pso-optimization-with-safe-operations">PSO optimization with safe operations</a></li>
+<li><a class="reference internal" href="#example-values">Example values</a><ul>
+<li><a class="reference internal" href="#example-4-matrix-conditioning-and-regularization">Example 4: Matrix Conditioning and Regularization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#check-matrix-conditioning">Check matrix conditioning</a><ul>
+<li><a class="reference internal" href="#example-5-comprehensive-numerical-safety-pipeline">Example 5: Comprehensive Numerical Safety Pipeline</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-in-simulation">Use in simulation</a><ul>
+<li><a class="reference internal" href="#id1">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#id2">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-simulation">Example 3: Integration with Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 </ul>
@@ -640,6 +1057,8 @@ stability and optimization algorithm convergence.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

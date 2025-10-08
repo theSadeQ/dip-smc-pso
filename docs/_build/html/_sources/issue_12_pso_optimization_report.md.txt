@@ -24,6 +24,9 @@ Current chattering performance:
 ### Multi-Objective Fitness Function Design
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Primary Objective: Maintain tracking performance
 tracking_error_rms = sqrt(mean(theta1^2 + theta2^2))
 
@@ -107,6 +110,9 @@ weighted_rate = 0.01 * 0.5 = 0.005  # Negligible!
 Bypass PSOTuner and implement custom PSO with explicit chattering penalty:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # optimize_chattering_direct.py
 
 def simulate_and_evaluate(gains, controller_type, config, dynamics):
@@ -317,6 +323,9 @@ Nice to have:
 
 2. **Add Chattering Metric to PSOTuner:**
    ```python
+# example-metadata:
+# runnable: false
+
    # In pso_optimizer.py _compute_cost_from_traj
 
    # Add chattering index calculation

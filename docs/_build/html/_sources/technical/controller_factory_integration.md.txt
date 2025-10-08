@@ -77,6 +77,9 @@ graph TD
 The `CONTROLLER_REGISTRY` provides a centralized mapping of controller types to their implementations:
 
 ```python
+# example-metadata:
+# runnable: false
+
 CONTROLLER_REGISTRY = {
     'classical_smc': {
         'class': ModularClassicalSMC,
@@ -106,6 +109,9 @@ CONTROLLER_REGISTRY = {
 The factory supports multiple naming conventions through the `ALIAS_MAP`:
 
 ```python
+# example-metadata:
+# runnable: false
+
 ALIAS_MAP = {
     'classic_smc': 'classical_smc',
     'smc_classical': 'classical_smc',
@@ -187,6 +193,9 @@ class STASMCConfig:
 ### Configuration Resolution Algorithm
 
 ```python
+# example-metadata:
+# runnable: false
+
 def resolve_configuration(controller_type, config, gains):
     """Resolve configuration with fallback mechanisms."""
 
@@ -280,6 +289,9 @@ The factory implements comprehensive error handling at multiple levels:
 #### 1. Input Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_inputs(controller_type, config, gains):
     """Validate factory inputs before processing."""
 
@@ -315,6 +327,9 @@ def validate_configuration(config_obj):
 #### 3. Graceful Fallback Mechanisms
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_fallback_configuration(controller_type, gains):
     """Create minimal working configuration when full config fails."""
 
@@ -337,6 +352,9 @@ def create_fallback_configuration(controller_type, gains):
 #### 4. Controller Instantiation Error Recovery
 
 ```python
+# example-metadata:
+# runnable: false
+
 def safe_controller_creation(controller_class, config):
     """Create controller with error recovery."""
 
@@ -359,6 +377,9 @@ def safe_controller_creation(controller_class, config):
 The factory defines specific error types for better error handling:
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FactoryError(Exception):
     """Base factory error."""
     pass
@@ -387,6 +408,9 @@ The factory provides specialized PSO integration through wrapper classes:
 #### PSOControllerWrapper
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOControllerWrapper:
     """Wrapper for SMC controllers to provide PSO-compatible interface."""
 
@@ -414,6 +438,9 @@ class PSOControllerWrapper:
 ### PSO Factory Function
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_pso_controller_factory(
     smc_type: SMCType,
     plant_config: Optional[Any] = None,
@@ -437,6 +464,9 @@ def create_pso_controller_factory(
 ### Gain Bounds Specification
 
 ```python
+# example-metadata:
+# runnable: false
+
 def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]]:
     """Get PSO gain bounds based on control theory constraints."""
 
@@ -500,6 +530,9 @@ graph TD
 #### Factory Memory Management
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ControllerPool:
     """Memory-efficient controller instance pool."""
 
@@ -530,6 +563,9 @@ class ControllerPool:
 #### Performance Benchmarking
 
 ```python
+# example-metadata:
+# runnable: false
+
 def benchmark_factory_performance():
     """Benchmark factory instantiation performance."""
 
@@ -635,6 +671,9 @@ where α is the Lipschitz constant of the uncertainty.
 The factory can optionally validate Lyapunov stability for created controllers:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_lyapunov_stability(controller, test_states):
     """Validate Lyapunov stability for controller."""
 
@@ -660,6 +699,9 @@ The factory provides mathematical tools for analyzing gain sensitivity:
 #### Sensitivity Matrix Computation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_gain_sensitivity_matrix(controller_type, nominal_gains, test_states):
     """Compute sensitivity of control performance to gain variations."""
 
@@ -692,6 +734,9 @@ def compute_gain_sensitivity_matrix(controller_type, nominal_gains, test_states)
 #### Robustness Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 def analyze_controller_robustness(controller_type, gains, uncertainty_bounds):
     """Analyze controller robustness to parameter uncertainties."""
 
@@ -719,6 +764,9 @@ def analyze_controller_robustness(controller_type, gains, uncertainty_bounds):
 #### Statistical Performance Metrics
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compare_controller_performance(controller_types, test_scenarios):
     """Statistically compare performance of different controller types."""
 

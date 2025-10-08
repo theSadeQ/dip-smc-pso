@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Optimizer Module" href="../reference/optimizer/index.html" /><link rel="prev" title="Plant Models Guide" href="../plant/models_guide.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -752,6 +778,140 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iterations to convergence: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cost_history</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="pso-convergence-visualization">
+<h3>PSO Convergence Visualization<a class="headerlink" href="#pso-convergence-visualization" title="Link to this heading">¶</a></h3>
+<p>Interactive convergence plots show optimization progress for different SMC controllers:</p>
+
+<div class="chartjs-container" style="width: 100%; margin: 1em auto;">
+    <canvas id="chart-0" height="450"></canvas>
+</div>
+<script>
+(function() {
+    var ctx = document.getElementById('chart-0').getContext('2d');
+    var config = {
+  "type": "line",
+  "data": {},
+  "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "animation": true,
+    "plugins": {
+      "title": {
+        "display": true,
+        "text": "PSO Convergence Comparison Across Controllers"
+      }
+    }
+  }
+};
+    new Chart(ctx, config);
+})();
+</script>
+<p><strong>Controller-Specific Convergence Analysis:</strong></p>
+<p>Classical SMC:</p>
+
+<div class="chartjs-container" style="width: 100%; margin: 1em auto;">
+    <canvas id="chart-1" height="350"></canvas>
+</div>
+<script>
+(function() {
+    var ctx = document.getElementById('chart-1').getContext('2d');
+    var config = {
+  "type": "line",
+  "data": {},
+  "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "animation": true,
+    "plugins": {
+      "title": {
+        "display": true,
+        "text": "Classical SMC PSO Convergence"
+      }
+    }
+  }
+};
+    new Chart(ctx, config);
+})();
+</script>
+<p>Adaptive SMC:</p>
+
+<div class="chartjs-container" style="width: 100%; margin: 1em auto;">
+    <canvas id="chart-2" height="350"></canvas>
+</div>
+<script>
+(function() {
+    var ctx = document.getElementById('chart-2').getContext('2d');
+    var config = {
+  "type": "line",
+  "data": {},
+  "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "animation": true,
+    "plugins": {
+      "title": {
+        "display": true,
+        "text": "Adaptive SMC PSO Convergence"
+      }
+    }
+  }
+};
+    new Chart(ctx, config);
+})();
+</script>
+<p>Hybrid Adaptive-STA SMC:</p>
+
+<div class="chartjs-container" style="width: 100%; margin: 1em auto;">
+    <canvas id="chart-3" height="350"></canvas>
+</div>
+<script>
+(function() {
+    var ctx = document.getElementById('chart-3').getContext('2d');
+    var config = {
+  "type": "line",
+  "data": {},
+  "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "animation": true,
+    "plugins": {
+      "title": {
+        "display": true,
+        "text": "Hybrid Adaptive-STA SMC PSO Convergence"
+      }
+    }
+  }
+};
+    new Chart(ctx, config);
+})();
+</script>
+<p><strong>Convergence Statistics:</strong></p>
+
+<div class="chartjs-container" style="width: 100%; margin: 1em auto;">
+    <canvas id="chart-4" height="300"></canvas>
+</div>
+<script>
+(function() {
+    var ctx = document.getElementById('chart-4').getContext('2d');
+    var config = {
+  "type": "bar",
+  "data": {},
+  "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "animation": true,
+    "plugins": {
+      "title": {
+        "display": true,
+        "text": "PSO Convergence Statistics Summary"
+      }
+    }
+  }
+};
+    new Chart(ctx, config);
+})();
+</script>
 <p><strong>Memory Efficiency:</strong> PSO uses local PRNGs and instance-level attributes to avoid cross-contamination between optimization runs.</p>
 <p><strong>Performance:</strong> Vectorized batch simulation achieves <strong>10-100×</strong> speedup over sequential evaluation.</p>
 </section>
@@ -840,7 +1000,10 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <section id="latency-monitoring">
 <h4>Latency Monitoring<a class="headerlink" href="#latency-monitoring" title="Link to this heading">¶</a></h4>
 <p>The runner supports real-time deadline monitoring:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fallback_controller</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fallback_controller</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple PD controller as fallback.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">10</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># Proportional to cart position and velocity</span>
 
@@ -877,7 +1040,10 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 </section>
 <section id="api-simulate-system-batch">
 <h3>API: <code class="docutils literal notranslate"><span class="pre">simulate_system_batch</span></code><a class="headerlink" href="#api-simulate-system-batch" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_system_batch</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_system_batch</span><span class="p">(</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">controller_factory</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
     <span class="n">particles</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>          <span class="c1"># Shape: (B, G) for B particles, G gains</span>
@@ -1595,7 +1761,10 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <section id="id8">
 <h4>2. Vectorized Batch Simulation<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
 <p>Always use batch simulation for PSO instead of sequential loops:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAST: Vectorized batch evaluation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># FAST: Vectorized batch evaluation</span>
 <span class="n">t</span><span class="p">,</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">u_batch</span><span class="p">,</span> <span class="n">sigma_batch</span> <span class="o">=</span> <span class="n">simulate_system_batch</span><span class="p">(</span>
     <span class="n">controller_factory</span><span class="o">=</span><span class="n">factory</span><span class="p">,</span>
     <span class="n">particles</span><span class="o">=</span><span class="n">gain_array</span><span class="p">,</span>
@@ -1633,7 +1802,10 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <section id="psotuner">
 <h3>PSOTuner<a class="headerlink" href="#psotuner" title="Link to this heading">¶</a></h3>
 <p><strong>Location:</strong> <a class="reference download internal" download="" href="../_downloads/736b4f97b20cc56bd7440b56d5216a52/pso_optimizer.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/optimization/algorithms/pso_optimizer.py</span></code></span></a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PSOTuner</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PSOTuner</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;High-throughput, vectorized tuner for sliding-mode controllers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -1697,7 +1869,10 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <section id="run-simulation">
 <h3>run_simulation<a class="headerlink" href="#run-simulation" title="Link to this heading">¶</a></h3>
 <p><strong>Location:</strong> <a class="reference download internal" download="" href="../_downloads/2539b13573b6c59528227cc4dd7e2aab/simulation_runner.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/simulation/engines/simulation_runner.py</span></code></span></a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_simulation</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_simulation</span><span class="p">(</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">controller</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
@@ -1746,7 +1921,10 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <section id="simulate-system-batch">
 <h3>simulate_system_batch<a class="headerlink" href="#simulate-system-batch" title="Link to this heading">¶</a></h3>
 <p><strong>Location:</strong> <a class="reference download internal" download="" href="../_downloads/748699501d2b676c25813d0f4627fd37/vector_sim.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/simulation/engines/vector_sim.py</span></code></span></a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_system_batch</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_system_batch</span><span class="p">(</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">controller_factory</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
     <span class="n">particles</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
@@ -1803,7 +1981,10 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <section id="simulationcontext">
 <h3>SimulationContext<a class="headerlink" href="#simulationcontext" title="Link to this heading">¶</a></h3>
 <p><strong>Location:</strong> <a class="reference download internal" download="" href="../_downloads/e7e10e48cf6b1cd8c82172afec4632ba/simulation_context.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/simulation/core/simulation_context.py</span></code></span></a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimulationContext</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SimulationContext</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enhanced simulation context with framework integration.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;config.yaml&quot;</span><span class="p">):</span>
@@ -1848,11 +2029,11 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <section id="related-documentation">
 <h2>Related Documentation<a class="headerlink" href="#related-documentation" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#../controllers/implementation_guide.md"><span class="xref myst"><strong>Controllers Implementation Guide</strong></span></a> - SMC controller details and usage</p></li>
+<li><p><a class="reference internal" href="../controllers/factory_system_guide.html"><span class="std std-doc"><strong>Controllers Implementation Guide</strong></span></a> - SMC controller details and usage</p></li>
 <li><p><a class="reference internal" href="../plant/models_guide.html"><span class="std std-doc"><strong>Plant Models Guide</strong></span></a> - Dynamics models and physics computation</p></li>
 <li><p><a class="reference internal" href="../mathematical_foundations/index.html"><span class="std std-doc"><strong>Mathematical Foundations</strong></span></a> - Control theory and optimization theory</p></li>
-<li><p><a class="reference internal" href="#../configuration/reference.md"><span class="xref myst"><strong>Configuration Reference</strong></span></a> - Complete configuration schema documentation</p></li>
-<li><p><a class="reference internal" href="#../benchmarks/performance.md"><span class="xref myst"><strong>Performance Benchmarks</strong></span></a> - Integration method comparisons and performance analysis</p></li>
+<li><p><a class="reference internal" href="../guides/api/configuration.html"><span class="std std-doc"><strong>Configuration Reference</strong></span></a> - Complete configuration schema documentation</p></li>
+<li><p><a class="reference internal" href="../benchmarks/controller_performance_benchmarks.html"><span class="std std-doc"><strong>Performance Benchmarks</strong></span></a> - Integration method comparisons and performance analysis</p></li>
 </ul>
 <hr class="docutils" />
 <p><strong>Version:</strong> Phase 3
@@ -1896,7 +2077,7 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1930,6 +2111,7 @@ J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 <li><a class="reference internal" href="#uncertainty-evaluation">Uncertainty Evaluation</a></li>
 <li><a class="reference internal" href="#pso-configuration">PSO Configuration</a></li>
 <li><a class="reference internal" href="#typical-pso-workflow">Typical PSO Workflow</a></li>
+<li><a class="reference internal" href="#pso-convergence-visualization">PSO Convergence Visualization</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#simulation-infrastructure">Simulation Infrastructure</a><ul>

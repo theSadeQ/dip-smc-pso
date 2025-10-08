@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -528,6 +554,308 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.real_time</span> <span class="pre">import</span> <span class="pre">RealTimeOrchestrator</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="orchestration-architecture-theory">
+<h3>Orchestration Architecture Theory<a class="headerlink" href="#orchestration-architecture-theory" title="Link to this heading">¶</a></h3>
+<p>The orchestration subsystem provides multiple execution strategies for simulation campaigns with different performance characteristics.</p>
+<section id="orchestration-hierarchy">
+<h4>Orchestration Hierarchy<a class="headerlink" href="#orchestration-hierarchy" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{Orchestrator} = \begin{cases}
+\text{Sequential} &amp; \text{(Single-threaded, deterministic)} \\
+\text{Batch} &amp; \text{(Vectorized, data parallel)} \\
+\text{Parallel} &amp; \text{(Multi-threaded, task parallel)} \\
+\text{RealTime} &amp; \text{(Hard deadlines, priority-based)}
+\end{cases}
+\end{split}\]</div>
+</div>
+</section>
+<section id="performance-metrics">
+<h4>Performance Metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">¶</a></h4>
+<p><strong>Throughput</strong> (simulations per second):
+$<span class="math notranslate nohighlight">\(
+\lambda = \frac{N_{\text{sims}}}{T_{\text{total}}}
+\)</span>$</p>
+<p><strong>Latency</strong> (time per simulation):
+$<span class="math notranslate nohighlight">\(
+L = \frac{1}{\lambda} = \frac{T_{\text{total}}}{N_{\text{sims}}}
+\)</span>$</p>
+<p><strong>Speedup</strong> (parallel vs sequential):
+$<span class="math notranslate nohighlight">\(
+S(P) = \frac{T_{\text{seq}}}{T_{\text{par}}(P)}
+\)</span>$</p>
+<p><strong>Efficiency</strong>:
+$<span class="math notranslate nohighlight">\(
+E(P) = \frac{S(P)}{P}
+\)</span>$</p>
+</section>
+<section id="amdahl-s-law">
+<h4>Amdahl’s Law<a class="headerlink" href="#amdahl-s-law" title="Link to this heading">¶</a></h4>
+<p>For workload with parallelizable fraction <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+S(P) = \frac{1}{(1 - p) + \frac{p}{P}}
+\]</div>
+</div>
+<p><strong>Ideal case</strong> (<span class="math notranslate nohighlight">\(p = 1\)</span>): <span class="math notranslate nohighlight">\(S(P) = P\)</span> (linear speedup)
+<strong>Typical case</strong> (<span class="math notranslate nohighlight">\(p = 0.9\)</span>): <span class="math notranslate nohighlight">\(S(P) \approx 5.3\)</span> for <span class="math notranslate nohighlight">\(P = 10\)</span></p>
+</section>
+</section>
+<section id="load-balancing">
+<h3>Load Balancing<a class="headerlink" href="#load-balancing" title="Link to this heading">¶</a></h3>
+<p><strong>Static load balancing:</strong>
+$<span class="math notranslate nohighlight">\(
+N_i = \left\lfloor \frac{N}{P} \right\rfloor \quad \text{or} \quad \left\lceil \frac{N}{P} \right\rceil
+\)</span>$</p>
+<p><strong>Dynamic load balancing:</strong>
+Work queue with task stealing for uneven workloads.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Orchestrators Package] –&gt; B[Sequential]
+A –&gt; C[Batch]
+A –&gt; D[Parallel]
+A –&gt; E[RealTime]</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>B --&gt; F[Single-threaded&lt;br/&gt;Deterministic]
+C --&gt; G[Vectorized&lt;br/&gt;Data Parallel]
+D --&gt; H[Multi-threaded&lt;br/&gt;Task Parallel]
+E --&gt; I[Priority-based&lt;br/&gt;Hard Deadlines]
+
+J[Simulation Campaign] --&gt; A
+A --&gt; K[Results]
+
+L[Performance Metrics] --&gt; M[Throughput λ]
+L --&gt; N[Latency L]
+L --&gt; O[Speedup S_P_]
+L --&gt; P[Efficiency E_P_]
+
+style A fill:#e1f5ff
+style E fill:#fff4e1
+style K fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-sequential-orchestration">
+<h3>Example 1: Sequential Orchestration<a class="headerlink" href="#example-1-sequential-orchestration" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.simulation.orchestrators import SequentialOrchestrator
+from src.controllers import create_smc_for_pso, SMCType</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-orchestrator">
+<h1>Create orchestrator<a class="headerlink" href="#create-orchestrator" title="Link to this heading">¶</a></h1>
+<p>orchestrator = SequentialOrchestrator()</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="define-simulation-campaign">
+<h1>Define simulation campaign<a class="headerlink" href="#define-simulation-campaign" title="Link to this heading">¶</a></h1>
+<p>campaign = {
+‘controller_type’: SMCType.CLASSICAL,
+‘gain_sets’: [
+[10, 8, 15, 12, 50, 5],
+[12, 10, 18, 15, 60, 8],
+[15, 12, 20, 18, 70, 10]
+],
+‘duration’: 10.0,
+‘dt’: 0.01
+}</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-campaign-sequentially">
+<h1>Run campaign sequentially<a class="headerlink" href="#run-campaign-sequentially" title="Link to this heading">¶</a></h1>
+<p>results = orchestrator.run_campaign(campaign)
+print(f”Completed {len(results)} simulations sequentially”)
+```</p>
+<section id="example-2-parallel-orchestration">
+<h2>Example 2: Parallel Orchestration<a class="headerlink" href="#example-2-parallel-orchestration" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.orchestrators import ParallelOrchestrator
+import multiprocessing</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-parallel-orchestrator">
+<h1>Create parallel orchestrator<a class="headerlink" href="#create-parallel-orchestrator" title="Link to this heading">¶</a></h1>
+<p>num_workers = multiprocessing.cpu_count()
+orchestrator = ParallelOrchestrator(num_workers=num_workers)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="large-scale-campaign">
+<h1>Large-scale campaign<a class="headerlink" href="#large-scale-campaign" title="Link to this heading">¶</a></h1>
+<p>campaign = {
+‘controller_type’: SMCType.HYBRID,
+‘n_trials’: 1000,  # Monte Carlo analysis
+‘duration’: 5.0
+}</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-in-parallel">
+<h1>Run in parallel<a class="headerlink" href="#run-in-parallel" title="Link to this heading">¶</a></h1>
+<p>results = orchestrator.run_campaign(campaign)
+print(f”Parallel execution with {num_workers} workers”)
+print(f”Throughput: {len(results) / orchestrator.elapsed_time:.2f} sims/sec”)
+```</p>
+<section id="example-3-real-time-orchestration">
+<h2>Example 3: Real-Time Orchestration<a class="headerlink" href="#example-3-real-time-orchestration" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.orchestrators import RealTimeOrchestrator</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="real-time-orchestrator-with-deadline">
+<h1>Real-time orchestrator with deadline<a class="headerlink" href="#real-time-orchestrator-with-deadline" title="Link to this heading">¶</a></h1>
+<p>orchestrator = RealTimeOrchestrator(
+period=0.01,  # 100 Hz update rate
+deadline=0.009  # 90% of period
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="real-time-campaign">
+<h1>Real-time campaign<a class="headerlink" href="#real-time-campaign" title="Link to this heading">¶</a></h1>
+<p>campaign = {
+‘controller’: controller,
+‘duration’: 60.0,  # 1 minute real-time
+‘sync_mode’: ‘wall_clock’
+}</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-with-hard-deadlines">
+<h1>Run with hard deadlines<a class="headerlink" href="#run-with-hard-deadlines" title="Link to this heading">¶</a></h1>
+<p>results = orchestrator.run_campaign(campaign)
+print(f”Deadline violations: {orchestrator.missed_deadlines}”)
+print(f”Max jitter: {orchestrator.max_jitter:.6f}s”)
+```</p>
+<section id="example-4-performance-comparison">
+<h2>Example 4: Performance Comparison<a class="headerlink" href="#example-4-performance-comparison" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.orchestrators import (
+SequentialOrchestrator,
+BatchOrchestrator,
+ParallelOrchestrator
+)
+import time</p>
+<p>campaign = {‘n_trials’: 100, ‘duration’: 5.0}</p>
+<p>orchestrators = {
+‘sequential’: SequentialOrchestrator(),
+‘batch’: BatchOrchestrator(batch_size=10),
+‘parallel’: ParallelOrchestrator(num_workers=8)
+}</p>
+<p>for name, orch in orchestrators.items():
+start = time.perf_counter()
+results = orch.run_campaign(campaign)
+elapsed = time.perf_counter() - start</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(f&quot;{name:12s}: {elapsed:.2f}s, &quot;
+      f&quot;throughput={len(results)/elapsed:.1f} sims/sec&quot;)
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="example-5-custom-orchestration-strategy">
+<h2>Example 5: Custom Orchestration Strategy<a class="headerlink" href="#example-5-custom-orchestration-strategy" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.orchestrators import BaseOrchestrator</p>
+<p>class AdaptiveOrchestrator(BaseOrchestrator):
+“””Adaptive orchestrator that switches strategy based on load.”””</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def __init__(self):
+    super().__init__()
+    self.sequential = SequentialOrchestrator()
+    self.parallel = ParallelOrchestrator()
+    self.threshold = 10  # Switch to parallel above threshold
+
+def run_campaign(self, campaign):
+    n_trials = campaign.get(&#39;n_trials&#39;, 1)
+
+    if n_trials &lt; self.threshold:
+        print(f&quot;Using sequential (n={n_trials})&quot;)
+        return self.sequential.run_campaign(campaign)
+    else:
+        print(f&quot;Using parallel (n={n_trials})&quot;)
+        return self.parallel.run_campaign(campaign)
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="use-adaptive-orchestrator">
+<h1>Use adaptive orchestrator<a class="headerlink" href="#use-adaptive-orchestrator" title="Link to this heading">¶</a></h1>
+<p>adaptive = AdaptiveOrchestrator()
+results_small = adaptive.run_campaign({‘n_trials’: 5})
+results_large = adaptive.run_campaign({‘n_trials’: 100})
+```</p>
+<section id="id1">
+<h2>Architecture Diagram<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="id2">
+<h2>Usage Examples<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="basic-usage-example">
+<h1>Basic usage example<a class="headerlink" href="#basic-usage-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation.orchestrators import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+<section id="example-2-advanced-configuration">
+<h2>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="advanced-configuration">
+<h1>Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Link to this heading">¶</a></h1>
+<p>component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+<section id="example-3-integration-with-framework">
+<h2>Example 3: Integration with Framework<a class="headerlink" href="#example-3-integration-with-framework" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation import SimulationRunner</p>
+<p>runner = SimulationRunner()
+runner.use_component(component)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="performance-optimized-usage">
+<h1>Performance-optimized usage<a class="headerlink" href="#performance-optimized-usage" title="Link to this heading">¶</a></h1>
+<p>component = Component(enable_caching=True)
+```</p>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="error-handling">
+<h1>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading">¶</a></h1>
+<p>try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
 </section>
 
         </article>
@@ -547,7 +875,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -572,8 +900,67 @@
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#orchestration-architecture-theory">Orchestration Architecture Theory</a><ul>
+<li><a class="reference internal" href="#orchestration-hierarchy">Orchestration Hierarchy</a></li>
+<li><a class="reference internal" href="#performance-metrics">Performance Metrics</a></li>
+<li><a class="reference internal" href="#amdahl-s-law">Amdahl’s Law</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#load-balancing">Load Balancing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-sequential-orchestration">Example 1: Sequential Orchestration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-orchestrator">Create orchestrator</a></li>
+<li><a class="reference internal" href="#define-simulation-campaign">Define simulation campaign</a></li>
+<li><a class="reference internal" href="#run-campaign-sequentially">Run campaign sequentially</a><ul>
+<li><a class="reference internal" href="#example-2-parallel-orchestration">Example 2: Parallel Orchestration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-parallel-orchestrator">Create parallel orchestrator</a></li>
+<li><a class="reference internal" href="#large-scale-campaign">Large-scale campaign</a></li>
+<li><a class="reference internal" href="#run-in-parallel">Run in parallel</a><ul>
+<li><a class="reference internal" href="#example-3-real-time-orchestration">Example 3: Real-Time Orchestration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#real-time-orchestrator-with-deadline">Real-time orchestrator with deadline</a></li>
+<li><a class="reference internal" href="#real-time-campaign">Real-time campaign</a></li>
+<li><a class="reference internal" href="#run-with-hard-deadlines">Run with hard deadlines</a><ul>
+<li><a class="reference internal" href="#example-4-performance-comparison">Example 4: Performance Comparison</a></li>
+<li><a class="reference internal" href="#example-5-custom-orchestration-strategy">Example 5: Custom Orchestration Strategy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-adaptive-orchestrator">Use adaptive orchestrator</a><ul>
+<li><a class="reference internal" href="#id1">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#id2">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage-example">Basic usage example</a><ul>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-configuration">Advanced configuration</a><ul>
+<li><a class="reference internal" href="#example-3-integration-with-framework">Example 3: Integration with Framework</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-optimized-usage">Performance-optimized usage</a><ul>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error handling</a></li>
 </ul>
 
           </div>
@@ -590,6 +977,8 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

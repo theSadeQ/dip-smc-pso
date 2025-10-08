@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -487,6 +513,7 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="plant-models-simplified-config">
 <h1>plant.models.simplified.config<a class="headerlink" href="#plant-models-simplified-config" title="Link to this heading">¶</a></h1>
+<!-- Enhanced by Week 8 Phase 2 -->
 <p><strong>Source:</strong> <code class="docutils literal notranslate"><span class="pre">src\plant\models\simplified\config.py</span></code></p>
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
@@ -494,6 +521,230 @@
 <p>Type-safe configuration with validation for the simplified double
 inverted pendulum model. Ensures physical consistency and provides
 mathematical constraints based on mechanical engineering principles.</p>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[SimplifiedDIPConfig] --&gt; B[Validate Masses]
+    A --&gt; C[Validate Lengths]
+    A --&gt; D[Validate Gravity]
+    A --&gt; E[Validate Damping]
+    B --&gt; F{All Valid?}
+    C --&gt; F
+    D --&gt; F
+    E --&gt; F
+    F --&gt;|Yes| G[Create Config Object]
+    F --&gt;|No| H[Raise ValidationError]
+
+    style F fill:#ff9
+    style G fill:#9f9
+    style H fill:#f99
+        </div></section>
+<section id="enhanced-mathematical-foundation">
+<h2>Enhanced Mathematical Foundation<a class="headerlink" href="#enhanced-mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="configuration-parameter-space">
+<h3>Configuration Parameter Space<a class="headerlink" href="#configuration-parameter-space" title="Link to this heading">¶</a></h3>
+<p>The simplified DIP model configuration defines the <strong>parameter space</strong> <span class="math notranslate nohighlight">\(\Theta\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\Theta = \{\theta = (m_0, m_1, m_2, l_1, l_2, g, d_0, d_1, d_2) : \theta \in \mathcal{C}\}
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> is the set of <strong>physically realizable configurations</strong>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\mathcal{C} = \{\theta : m_i &gt; 0, l_i &gt; 0, g &gt; 0, d_i \geq 0\}
+\]</div>
+</div>
+<p><strong>Parameter Definitions:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m_0\)</span>: Cart mass (kg)</p></li>
+<li><p><span class="math notranslate nohighlight">\(m_1, m_2\)</span>: Link masses (kg)</p></li>
+<li><p><span class="math notranslate nohighlight">\(l_1, l_2\)</span>: Link lengths (m)</p></li>
+<li><p><span class="math notranslate nohighlight">\(g\)</span>: Gravitational acceleration (m/s²)</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_0, d_1, d_2\)</span>: Damping coefficients (N·s/m or N·m·s/rad)</p></li>
+</ul>
+</section>
+<section id="validation-constraints">
+<h3>Validation Constraints<a class="headerlink" href="#validation-constraints" title="Link to this heading">¶</a></h3>
+<p><strong>Physical Feasibility:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+0.1 &amp;\leq m_0 \leq 10.0 \quad \text{(kg)} \\
+0.05 &amp;\leq m_1, m_2 \leq 2.0 \quad \text{(kg)} \\
+0.1 &amp;\leq l_1, l_2 \leq 1.0 \quad \text{(m)} \\
+9.0 &amp;\leq g \leq 10.0 \quad \text{(m/s²)} \\
+0.0 &amp;\leq d_i \leq 1.0 \quad \text{(damping)}
+\end{aligned}
+\end{split}\]</div>
+</div>
+<p><strong>Stability Criteria:</strong></p>
+<p>For the inverted equilibrium to be stabilizable:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\frac{m_1 l_1^2 + m_2 (l_1^2 + l_2^2)}{m_0} &gt; \frac{g}{\omega_n^2}
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\omega_n\)</span> is the desired natural frequency.</p>
+</section>
+<section id="default-configuration">
+<h3>Default Configuration<a class="headerlink" href="#default-configuration" title="Link to this heading">¶</a></h3>
+<p><strong>Standard Laboratory DIP:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">default_config</span> <span class="o">=</span> <span class="n">SimplifiedDIPConfig</span><span class="p">(</span>
+    <span class="n">m0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>   <span class="c1"># 1 kg cart</span>
+    <span class="n">m1</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>   <span class="c1"># 200g link 1</span>
+    <span class="n">m2</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>   <span class="c1"># 100g link 2</span>
+    <span class="n">l1</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>   <span class="c1"># 30cm link 1</span>
+    <span class="n">l2</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>   <span class="c1"># 20cm link 2</span>
+    <span class="n">g</span><span class="o">=</span><span class="mf">9.81</span><span class="p">,</span>   <span class="c1"># Earth gravity</span>
+    <span class="n">d0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>   <span class="c1"># Light cart damping</span>
+    <span class="n">d1</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>  <span class="c1"># Light joint damping</span>
+    <span class="n">d2</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Block et al.</strong> (2007). “The reaction wheel pendulum.” <em>Synthesis Lectures on Control</em>. Morgan &amp; Claypool.</p></li>
+</ol>
+</section>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>Initialize and use the Models Simplified Config module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified.config</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Basic initialization</span>
+<span class="c1"># Load and validate configuration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDIPConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">SimplifiedDIPConfig</span><span class="p">(</span>
+    <span class="n">m0</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>  <span class="c1"># Cart mass (kg)</span>
+    <span class="n">m1</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>  <span class="c1"># Link 1 mass (kg)</span>
+    <span class="n">m2</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>  <span class="c1"># Link 2 mass (kg)</span>
+    <span class="n">l1</span><span class="o">=</span><span class="mf">0.35</span><span class="p">,</span>  <span class="c1"># Link 1 length (m)</span>
+    <span class="n">l2</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>  <span class="c1"># Link 2 length (m)</span>
+    <span class="n">g</span><span class="o">=</span><span class="mf">9.81</span>   <span class="c1"># Gravity (m/s²)</span>
+<span class="p">)</span>
+
+<span class="c1"># Validate physics constraints</span>
+<span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Configuration is physically valid&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>Configure with custom parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Advanced configuration</span>
+<span class="c1"># ... custom parameters ...</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-error-handling">
+<h3>Example 3: Error Handling<a class="headerlink" href="#example-3-error-handling" title="Link to this heading">¶</a></h3>
+<p>Robust error handling and recovery:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NumericalInstabilityError</span><span class="p">,</span>
+    <span class="n">StateValidationError</span><span class="p">,</span>
+    <span class="n">ConfigurationError</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Risky operation</span>
+    <span class="n">state_dot</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">NumericalInstabilityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Numerical instability detected: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: reduce timestep, increase regularization</span>
+    <span class="n">dynamics</span><span class="o">.</span><span class="n">reset_numerical_params</span><span class="p">(</span><span class="n">stronger_regularization</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">StateValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid state: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: clip state to valid bounds</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">clip_to_valid</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">ConfigurationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Fallback: use default configuration</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_default_config</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-optimization">
+<h3>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h3>
+<p>Optimize for computational efficiency:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Performance optimization</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cProfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pstats</span>
+
+<span class="c1"># Profile critical code path</span>
+<span class="n">profiler</span> <span class="o">=</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
+<span class="n">profiler</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="c1"># ... run intensive operations ...</span>
+
+<span class="n">profiler</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">pstats</span><span class="o">.</span><span class="n">Stats</span><span class="p">(</span><span class="n">profiler</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="s1">&#39;cumulative&#39;</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">print_stats</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Top 10 time consumers</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-integration-with-controllers">
+<h3>Example 5: Integration with Controllers<a class="headerlink" href="#example-5-integration-with-controllers" title="Link to this heading">¶</a></h3>
+<p>Integrate with control systems:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.core.simulation_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="c1"># Create dynamics model</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDIPDynamics</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Create controller</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
+    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span>
+    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Run closed-loop simulation</span>
+<span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">(</span>
+    <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">initial_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final state: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Settling time: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">settling_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control effort: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">control_effort</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -510,7 +761,7 @@ mathematical constraints based on mechanical engineering principles.</p>
 <span class="linenos"> 11</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-<span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 <span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="linenos"> 16</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 17</span>
@@ -1227,7 +1478,7 @@ mathematical constraints based on mechanical engineering principles.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1250,6 +1501,22 @@ mathematical constraints based on mechanical engineering principles.</p>
             <ul>
 <li><a class="reference internal" href="#">plant.models.simplified.config</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#configuration-parameter-space">Configuration Parameter Space</a></li>
+<li><a class="reference internal" href="#validation-constraints">Validation Constraints</a></li>
+<li><a class="reference internal" href="#default-configuration">Default Configuration</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-error-handling">Example 3: Error Handling</a></li>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-integration-with-controllers">Example 5: Integration with Controllers</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#simplifieddipconfig"><code class="docutils literal notranslate"><span class="pre">SimplifiedDIPConfig</span></code></a><ul>
@@ -1293,6 +1560,10 @@ mathematical constraints based on mechanical engineering principles.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

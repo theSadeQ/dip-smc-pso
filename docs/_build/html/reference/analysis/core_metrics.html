@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,9 +517,184 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Core metric computation framework.</p>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="core-performance-metrics">
+<h3>Core Performance Metrics<a class="headerlink" href="#core-performance-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Weighted performance index:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[J = \sum_{i=1}^n w_i m_i\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(w_i\)</span> are weights, <span class="math notranslate nohighlight">\(m_i\)</span> are individual metrics.</p>
+</section>
+<section id="metric-normalization">
+<h3>Metric Normalization<a class="headerlink" href="#metric-normalization" title="Link to this heading">¶</a></h3>
+<p><strong>Min-max normalization:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[m_{norm} = \frac{m - m_{min}}{m_{max} - m_{min}}\]</div>
+</div>
+<p><strong>Z-score normalization:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[m_{norm} = \frac{m - \mu_m}{\sigma_m}\]</div>
+</div>
+</section>
+<section id="composite-metrics">
+<h3>Composite Metrics<a class="headerlink" href="#composite-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Geometric mean:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M_g = \left(\prod_{i=1}^n m_i\right)^{1/n}\]</div>
+</div>
+<p><strong>Harmonic mean:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M_h = \frac{n}{\sum_{i=1}^n \frac{1}{m_i}}\]</div>
+</div>
+</section>
+<section id="time-domain-metrics">
+<h3>Time-Domain Metrics<a class="headerlink" href="#time-domain-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Peak time:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t_p = \arg\max_t |y(t) - y_{ss}|\]</div>
+</div>
+<p><strong>Rise time (10%-90%):</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[t_r = t_{90\%} - t_{10\%}\]</div>
+</div>
+</section>
+<section id="frequency-domain-metrics">
+<h3>Frequency-Domain Metrics<a class="headerlink" href="#frequency-domain-metrics" title="Link to this heading">¶</a></h3>
+<p><strong>Bandwidth:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\omega_B = \max\{\omega : |T(j\omega)| \geq \frac{1}{\sqrt{2}}|T(0)|\}\]</div>
+</div>
+<p><strong>Resonant peak:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[M_r = \max_\omega |T(j\omega)|\]</div>
+</div>
+</section>
+<section id="statistical-aggregation">
+<h3>Statistical Aggregation<a class="headerlink" href="#statistical-aggregation" title="Link to this heading">¶</a></h3>
+<p><strong>Weighted average:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\bar{m}_w = \frac{\sum w_i m_i}{\sum w_i}\]</div>
+</div>
+<p><strong>Confidence interval for metric:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{CI}_{1-\alpha} = \bar{m} \pm t_{\alpha/2, n-1}\frac{s_m}{\sqrt{n}}\]</div>
+</div>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Raw Metrics] --&gt; B{Normalization}
+    B --&gt;|Min-Max| C[Scale [0,1]]
+    B --&gt;|Z-score| D[Standardize]
+
+    C --&gt; E[Normalized Metrics]
+    D --&gt; E
+
+    E --&gt; F[Aggregation]
+    F --&gt; G[Weighted Sum]
+    F --&gt; H[Geometric Mean]
+    F --&gt; I[Harmonic Mean]
+
+    G --&gt; J[Composite Metric]
+    H --&gt; J
+    I --&gt; J
+
+    J --&gt; K{Uncertainty?}
+    K --&gt;|Yes| L[Compute CI]
+    K --&gt;|No| M[Point Estimate]
+
+    L --&gt; N[t-interval]
+    N --&gt; O[Final Metric ± CI]
+
+    M --&gt; O
+
+    style B fill:#ff9
+    style F fill:#9cf
+    style O fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-analysis">
+<h3>Example 1: Basic Analysis<a class="headerlink" href="#example-1-basic-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span>
+
+<span class="c1"># Initialize analyzer</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">Analyzer</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-statistical-validation">
+<h3>Example 2: Statistical Validation<a class="headerlink" href="#example-2-statistical-validation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute confidence intervals</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_confidence_interval</span>
+
+<span class="n">ci</span> <span class="o">=</span> <span class="n">compute_confidence_interval</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95% CI: [</span><span class="si">{</span><span class="n">ci</span><span class="o">.</span><span class="n">lower</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci</span><span class="o">.</span><span class="n">upper</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-performance-metrics">
+<h3>Example 3: Performance Metrics<a class="headerlink" href="#example-3-performance-metrics" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute comprehensive metrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.performance</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_all_metrics</span>
+
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_all_metrics</span><span class="p">(</span>
+    <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+    <span class="n">control</span><span class="o">=</span><span class="n">u</span><span class="p">,</span>
+    <span class="n">reference</span><span class="o">=</span><span class="n">r</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">ise</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, ITAE: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">itae</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-batch-analysis">
+<h3>Example 4: Batch Analysis<a class="headerlink" href="#example-4-batch-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze multiple trials</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trials</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="n">trial_seed</span><span class="o">=</span><span class="n">trial</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+<span class="c1"># Aggregate statistics</span>
+<span class="n">mean_performance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">performance</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-robustness-analysis">
+<h3>Example 5: Robustness Analysis<a class="headerlink" href="#example-5-robustness-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameter sensitivity analysis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis.performance</span><span class="w"> </span><span class="kn">import</span> <span class="n">sensitivity_analysis</span>
+
+<span class="n">sensitivity</span> <span class="o">=</span> <span class="n">sensitivity_analysis</span><span class="p">(</span>
+    <span class="n">system</span><span class="o">=</span><span class="n">plant</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)},</span>
+    <span class="n">metric</span><span class="o">=</span><span class="n">compute_stability_margin</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Most sensitive: </span><span class="si">{</span><span class="n">sensitivity</span><span class="o">.</span><span class="n">most_sensitive_param</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This module provides the foundation for computing various performance
 metrics from simulation data, with emphasis on control engineering
 applications and statistical rigor.</p>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -510,384 +711,383 @@ applications and statistical rigor.</p>
 <span class="linenos"> 11</span>
 <span class="linenos"> 12</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos"> 13</span>
-<span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
+<span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="linenos"> 15</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span><span class="p">,</span> <span class="n">integrate</span>
-<span class="linenos"> 17</span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-<span class="linenos"> 18</span>
-<span class="linenos"> 19</span><span class="kn">from</span><span class="w"> </span><span class="nn">.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricCalculator</span><span class="p">,</span> <span class="n">DataProtocol</span>
-<span class="linenos"> 20</span><span class="kn">from</span><span class="w"> </span><span class="nn">.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricResult</span><span class="p">,</span> <span class="n">PerformanceMetrics</span>
+<span class="linenos"> 16</span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="linenos"> 17</span>
+<span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricCalculator</span><span class="p">,</span> <span class="n">DataProtocol</span>
+<span class="linenos"> 19</span><span class="kn">from</span><span class="w"> </span><span class="nn">.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricResult</span><span class="p">,</span> <span class="n">PerformanceMetrics</span>
+<span class="linenos"> 20</span>
 <span class="linenos"> 21</span>
-<span class="linenos"> 22</span>
-<span class="linenos"> 23</span><span class="k">class</span><span class="w"> </span><span class="nc">BaseMetricCalculator</span><span class="p">(</span><span class="n">MetricCalculator</span><span class="p">):</span>
-<span class="linenos"> 24</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Base implementation of metric calculator with common functionality.&quot;&quot;&quot;</span>
-<span class="linenos"> 25</span>
-<span class="linenos"> 26</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validate_inputs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-<span class="linenos"> 27</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize base metric calculator.</span>
-<span class="linenos"> 28</span>
-<span class="linenos"> 29</span><span class="sd">        Parameters</span>
-<span class="linenos"> 30</span><span class="sd">        ----------</span>
-<span class="linenos"> 31</span><span class="sd">        validate_inputs : bool, optional</span>
-<span class="linenos"> 32</span><span class="sd">            Whether to validate inputs before computation</span>
-<span class="linenos"> 33</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos"> 34</span>        <span class="bp">self</span><span class="o">.</span><span class="n">validate_inputs</span> <span class="o">=</span> <span class="n">validate_inputs</span>
-<span class="linenos"> 35</span>
-<span class="linenos"> 36</span>    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="linenos"> 37</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute metrics from simulation data.&quot;&quot;&quot;</span>
-<span class="linenos"> 38</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_inputs</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-<span class="linenos"> 39</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid input data for metric calculation&quot;</span><span class="p">)</span>
-<span class="linenos"> 40</span>
-<span class="linenos"> 41</span>        <span class="n">metrics</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos"> 42</span>        <span class="k">for</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_metrics</span><span class="p">:</span>
-<span class="linenos"> 43</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos"> 44</span>                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="linenos"> 45</span>                <span class="n">metrics</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-<span class="linenos"> 46</span>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos"> 47</span>                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to compute metric </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos"> 48</span>                <span class="n">metrics</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-<span class="linenos"> 49</span>
-<span class="linenos"> 50</span>        <span class="k">return</span> <span class="n">metrics</span>
-<span class="linenos"> 51</span>
-<span class="linenos"> 52</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos"> 53</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute a specific metric. Override in subclasses.&quot;&quot;&quot;</span>
-<span class="linenos"> 54</span>        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metric </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2"> not implemented&quot;</span><span class="p">)</span>
-<span class="linenos"> 55</span>
-<span class="linenos"> 56</span>    <span class="nd">@property</span>
-<span class="linenos"> 57</span>    <span class="k">def</span><span class="w"> </span><span class="nf">supported_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="linenos"> 58</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;List of supported metrics.&quot;&quot;&quot;</span>
-<span class="linenos"> 59</span>        <span class="k">return</span> <span class="p">[]</span>
+<span class="linenos"> 22</span><span class="k">class</span><span class="w"> </span><span class="nc">BaseMetricCalculator</span><span class="p">(</span><span class="n">MetricCalculator</span><span class="p">):</span>
+<span class="linenos"> 23</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Base implementation of metric calculator with common functionality.&quot;&quot;&quot;</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validate_inputs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="linenos"> 26</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize base metric calculator.</span>
+<span class="linenos"> 27</span>
+<span class="linenos"> 28</span><span class="sd">        Parameters</span>
+<span class="linenos"> 29</span><span class="sd">        ----------</span>
+<span class="linenos"> 30</span><span class="sd">        validate_inputs : bool, optional</span>
+<span class="linenos"> 31</span><span class="sd">            Whether to validate inputs before computation</span>
+<span class="linenos"> 32</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 33</span>        <span class="bp">self</span><span class="o">.</span><span class="n">validate_inputs</span> <span class="o">=</span> <span class="n">validate_inputs</span>
+<span class="linenos"> 34</span>
+<span class="linenos"> 35</span>    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos"> 36</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute metrics from simulation data.&quot;&quot;&quot;</span>
+<span class="linenos"> 37</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_inputs</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="linenos"> 38</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid input data for metric calculation&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span>
+<span class="linenos"> 40</span>        <span class="n">metrics</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 41</span>        <span class="k">for</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_metrics</span><span class="p">:</span>
+<span class="linenos"> 42</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 43</span>                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="linenos"> 44</span>                <span class="n">metrics</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="linenos"> 45</span>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos"> 46</span>                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to compute metric </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 47</span>                <span class="n">metrics</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="linenos"> 48</span>
+<span class="linenos"> 49</span>        <span class="k">return</span> <span class="n">metrics</span>
+<span class="linenos"> 50</span>
+<span class="linenos"> 51</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos"> 52</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute a specific metric. Override in subclasses.&quot;&quot;&quot;</span>
+<span class="linenos"> 53</span>        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metric </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2"> not implemented&quot;</span><span class="p">)</span>
+<span class="linenos"> 54</span>
+<span class="linenos"> 55</span>    <span class="nd">@property</span>
+<span class="linenos"> 56</span>    <span class="k">def</span><span class="w"> </span><span class="nf">supported_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos"> 57</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;List of supported metrics.&quot;&quot;&quot;</span>
+<span class="linenos"> 58</span>        <span class="k">return</span> <span class="p">[]</span>
+<span class="linenos"> 59</span>
 <span class="linenos"> 60</span>
-<span class="linenos"> 61</span>
-<span class="linenos"> 62</span><span class="k">class</span><span class="w"> </span><span class="nc">ControlPerformanceMetrics</span><span class="p">(</span><span class="n">BaseMetricCalculator</span><span class="p">):</span>
-<span class="linenos"> 63</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculator for control performance metrics.&quot;&quot;&quot;</span>
-<span class="linenos"> 64</span>
-<span class="linenos"> 65</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.02</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="linenos"> 66</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize control performance metrics calculator.</span>
-<span class="linenos"> 67</span>
-<span class="linenos"> 68</span><span class="sd">        Parameters</span>
-<span class="linenos"> 69</span><span class="sd">        ----------</span>
-<span class="linenos"> 70</span><span class="sd">        reference_tolerance : float, optional</span>
-<span class="linenos"> 71</span><span class="sd">            Tolerance for settling time calculation (default 2%)</span>
-<span class="linenos"> 72</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos"> 73</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="linenos"> 74</span>        <span class="bp">self</span><span class="o">.</span><span class="n">reference_tolerance</span> <span class="o">=</span> <span class="n">reference_tolerance</span>
-<span class="linenos"> 75</span>
-<span class="linenos"> 76</span>    <span class="nd">@property</span>
-<span class="linenos"> 77</span>    <span class="k">def</span><span class="w"> </span><span class="nf">supported_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="linenos"> 78</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;List of supported control performance metrics.&quot;&quot;&quot;</span>
-<span class="linenos"> 79</span>        <span class="k">return</span> <span class="p">[</span>
-<span class="linenos"> 80</span>            <span class="s1">&#39;ise&#39;</span><span class="p">,</span>           <span class="c1"># Integral Square Error</span>
-<span class="linenos"> 81</span>            <span class="s1">&#39;iae&#39;</span><span class="p">,</span>           <span class="c1"># Integral Absolute Error</span>
-<span class="linenos"> 82</span>            <span class="s1">&#39;itae&#39;</span><span class="p">,</span>          <span class="c1"># Integral Time Absolute Error</span>
-<span class="linenos"> 83</span>            <span class="s1">&#39;mse&#39;</span><span class="p">,</span>           <span class="c1"># Mean Square Error</span>
-<span class="linenos"> 84</span>            <span class="s1">&#39;mae&#39;</span><span class="p">,</span>           <span class="c1"># Mean Absolute Error</span>
-<span class="linenos"> 85</span>            <span class="s1">&#39;rmse&#39;</span><span class="p">,</span>          <span class="c1"># Root Mean Square Error</span>
-<span class="linenos"> 86</span>            <span class="s1">&#39;settling_time&#39;</span><span class="p">,</span> <span class="c1"># Settling time</span>
-<span class="linenos"> 87</span>            <span class="s1">&#39;overshoot&#39;</span><span class="p">,</span>     <span class="c1"># Maximum overshoot</span>
-<span class="linenos"> 88</span>            <span class="s1">&#39;rise_time&#39;</span><span class="p">,</span>     <span class="c1"># Rise time</span>
-<span class="linenos"> 89</span>            <span class="s1">&#39;steady_state_error&#39;</span><span class="p">,</span>  <span class="c1"># Steady-state error</span>
-<span class="linenos"> 90</span>            <span class="s1">&#39;control_effort&#39;</span><span class="p">,</span>      <span class="c1"># RMS control effort</span>
-<span class="linenos"> 91</span>            <span class="s1">&#39;peak_control&#39;</span>         <span class="c1"># Peak control effort</span>
-<span class="linenos"> 92</span>        <span class="p">]</span>
-<span class="linenos"> 93</span>
-<span class="linenos"> 94</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos"> 95</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute specific control performance metric.&quot;&quot;&quot;</span>
-<span class="linenos"> 96</span>        <span class="n">reference</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="linenos"> 97</span>        <span class="n">output_indices</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;output_indices&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Default to first two states</span>
-<span class="linenos"> 98</span>
-<span class="linenos"> 99</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">,</span> <span class="s1">&#39;iae&#39;</span><span class="p">,</span> <span class="s1">&#39;itae&#39;</span><span class="p">,</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">]:</span>
-<span class="linenos">100</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_tracking_error_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">output_indices</span><span class="p">)</span>
-<span class="linenos">101</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;settling_time&#39;</span><span class="p">,</span> <span class="s1">&#39;overshoot&#39;</span><span class="p">,</span> <span class="s1">&#39;rise_time&#39;</span><span class="p">,</span> <span class="s1">&#39;steady_state_error&#39;</span><span class="p">]:</span>
-<span class="linenos">102</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_transient_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">output_indices</span><span class="p">)</span>
-<span class="linenos">103</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;control_effort&#39;</span><span class="p">,</span> <span class="s1">&#39;peak_control&#39;</span><span class="p">]:</span>
-<span class="linenos">104</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_control_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="linenos">105</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">106</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown metric: </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">107</span>
-<span class="linenos">108</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_tracking_error_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span>
-<span class="linenos">109</span>                                     <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-<span class="linenos">110</span>                                     <span class="n">output_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">111</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute tracking error metrics.&quot;&quot;&quot;</span>
-<span class="linenos">112</span>        <span class="c1"># Extract outputs</span>
-<span class="linenos">113</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">114</span>            <span class="n">outputs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="n">output_indices</span><span class="p">]</span>
-<span class="linenos">115</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">116</span>            <span class="n">outputs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="linenos">117</span>
-<span class="linenos">118</span>        <span class="c1"># Use reference if provided, otherwise assume zero reference</span>
-<span class="linenos">119</span>        <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">120</span>            <span class="k">if</span> <span class="n">reference</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">121</span>                <span class="n">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="linenos">122</span>            <span class="n">ref</span> <span class="o">=</span> <span class="n">reference</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">outputs</span><span class="p">),</span> <span class="p">:</span><span class="n">outputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-<span class="linenos">123</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">124</span>            <span class="n">ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
-<span class="linenos">125</span>
-<span class="linenos">126</span>        <span class="c1"># Compute error</span>
-<span class="linenos">127</span>        <span class="n">error</span> <span class="o">=</span> <span class="n">outputs</span> <span class="o">-</span> <span class="n">ref</span>
-<span class="linenos">128</span>        <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.01</span>
-<span class="linenos">129</span>
-<span class="linenos">130</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;ise&#39;</span><span class="p">:</span>
-<span class="linenos">131</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">error</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
-<span class="linenos">132</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;iae&#39;</span><span class="p">:</span>
-<span class="linenos">133</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
-<span class="linenos">134</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;itae&#39;</span><span class="p">:</span>
-<span class="linenos">135</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
-<span class="linenos">136</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;mse&#39;</span><span class="p">:</span>
-<span class="linenos">137</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">error</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
-<span class="linenos">138</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;mae&#39;</span><span class="p">:</span>
-<span class="linenos">139</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
-<span class="linenos">140</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span>
-<span class="linenos">141</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">error</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))))</span>
-<span class="linenos">142</span>
-<span class="linenos">143</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_transient_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span>
-<span class="linenos">144</span>                                <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-<span class="linenos">145</span>                                <span class="n">output_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">146</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute transient response metrics.&quot;&quot;&quot;</span>
-<span class="linenos">147</span>        <span class="c1"># For simplicity, use first output index</span>
-<span class="linenos">148</span>        <span class="n">output_idx</span> <span class="o">=</span> <span class="n">output_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">output_indices</span> <span class="k">else</span> <span class="mi">0</span>
-<span class="linenos">149</span>
-<span class="linenos">150</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">151</span>            <span class="n">output</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="n">output_idx</span><span class="p">]</span>
-<span class="linenos">152</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">153</span>            <span class="n">output</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-<span class="linenos">154</span>
-<span class="linenos">155</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;settling_time&#39;</span><span class="p">:</span>
-<span class="linenos">156</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_settling_time</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
-<span class="linenos">157</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;overshoot&#39;</span><span class="p">:</span>
-<span class="linenos">158</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_overshoot</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="linenos">159</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;rise_time&#39;</span><span class="p">:</span>
-<span class="linenos">160</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_rise_time</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
-<span class="linenos">161</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;steady_state_error&#39;</span><span class="p">:</span>
-<span class="linenos">162</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_steady_state_error</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>
-<span class="linenos">163</span>
-<span class="linenos">164</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_control_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">165</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute control effort metrics.&quot;&quot;&quot;</span>
-<span class="linenos">166</span>        <span class="n">controls</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">controls</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">controls</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">data</span><span class="o">.</span><span class="n">controls</span>
-<span class="linenos">167</span>
-<span class="linenos">168</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;control_effort&#39;</span><span class="p">:</span>
-<span class="linenos">169</span>            <span class="c1"># RMS control effort</span>
-<span class="linenos">170</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">controls</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
-<span class="linenos">171</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;peak_control&#39;</span><span class="p">:</span>
-<span class="linenos">172</span>            <span class="c1"># Peak control effort</span>
-<span class="linenos">173</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">controls</span><span class="p">)))</span>
-<span class="linenos">174</span>
-<span class="linenos">175</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_settling_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">176</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute settling time using percentage criteria.&quot;&quot;&quot;</span>
-<span class="linenos">177</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">178</span>        <span class="n">tolerance_band</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_tolerance</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">final_value</span><span class="p">)</span>
-<span class="linenos">179</span>
-<span class="linenos">180</span>        <span class="c1"># Find last time outside tolerance band</span>
-<span class="linenos">181</span>        <span class="n">outside_band</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">output</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance_band</span>
-<span class="linenos">182</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">outside_band</span><span class="p">):</span>
-<span class="linenos">183</span>            <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">184</span>
-<span class="linenos">185</span>        <span class="n">last_outside_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">outside_band</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">186</span>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">last_outside_index</span><span class="p">])</span>
-<span class="linenos">187</span>
-<span class="linenos">188</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_overshoot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">189</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute maximum overshoot percentage.&quot;&quot;&quot;</span>
-<span class="linenos">190</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">191</span>        <span class="k">if</span> <span class="n">final_value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">192</span>            <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">193</span>
-<span class="linenos">194</span>        <span class="n">max_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="linenos">195</span>        <span class="n">overshoot</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_value</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">final_value</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="linenos">196</span>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">overshoot</span><span class="p">))</span>
-<span class="linenos">197</span>
-<span class="linenos">198</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_rise_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">199</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute rise time (10% to 90% of final value).&quot;&quot;&quot;</span>
-<span class="linenos">200</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">201</span>        <span class="n">ten_percent</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">final_value</span>
-<span class="linenos">202</span>        <span class="n">ninety_percent</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">final_value</span>
-<span class="linenos">203</span>
-<span class="linenos">204</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">205</span>            <span class="n">idx_10</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">output</span> <span class="o">&gt;=</span> <span class="n">ten_percent</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="linenos">206</span>            <span class="n">idx_90</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">output</span> <span class="o">&gt;=</span> <span class="n">ninety_percent</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="linenos">207</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">idx_90</span><span class="p">]</span> <span class="o">-</span> <span class="n">times</span><span class="p">[</span><span class="n">idx_10</span><span class="p">])</span>
-<span class="linenos">208</span>        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-<span class="linenos">209</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Return total time if criteria not met</span>
-<span class="linenos">210</span>
-<span class="linenos">211</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_steady_state_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos">212</span>                                  <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">213</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute steady-state error.&quot;&quot;&quot;</span>
-<span class="linenos">214</span>        <span class="n">final_output</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">215</span>
-<span class="linenos">216</span>        <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">217</span>            <span class="n">final_reference</span> <span class="o">=</span> <span class="n">reference</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="s1">&#39;__len__&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">reference</span>
-<span class="linenos">218</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">final_reference</span> <span class="o">-</span> <span class="n">final_output</span><span class="p">))</span>
-<span class="linenos">219</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">220</span>            <span class="c1"># Assume zero reference</span>
-<span class="linenos">221</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">final_output</span><span class="p">))</span>
+<span class="linenos"> 61</span><span class="k">class</span><span class="w"> </span><span class="nc">ControlPerformanceMetrics</span><span class="p">(</span><span class="n">BaseMetricCalculator</span><span class="p">):</span>
+<span class="linenos"> 62</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculator for control performance metrics.&quot;&quot;&quot;</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.02</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="linenos"> 65</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize control performance metrics calculator.</span>
+<span class="linenos"> 66</span>
+<span class="linenos"> 67</span><span class="sd">        Parameters</span>
+<span class="linenos"> 68</span><span class="sd">        ----------</span>
+<span class="linenos"> 69</span><span class="sd">        reference_tolerance : float, optional</span>
+<span class="linenos"> 70</span><span class="sd">            Tolerance for settling time calculation (default 2%)</span>
+<span class="linenos"> 71</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 72</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="linenos"> 73</span>        <span class="bp">self</span><span class="o">.</span><span class="n">reference_tolerance</span> <span class="o">=</span> <span class="n">reference_tolerance</span>
+<span class="linenos"> 74</span>
+<span class="linenos"> 75</span>    <span class="nd">@property</span>
+<span class="linenos"> 76</span>    <span class="k">def</span><span class="w"> </span><span class="nf">supported_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos"> 77</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;List of supported control performance metrics.&quot;&quot;&quot;</span>
+<span class="linenos"> 78</span>        <span class="k">return</span> <span class="p">[</span>
+<span class="linenos"> 79</span>            <span class="s1">&#39;ise&#39;</span><span class="p">,</span>           <span class="c1"># Integral Square Error</span>
+<span class="linenos"> 80</span>            <span class="s1">&#39;iae&#39;</span><span class="p">,</span>           <span class="c1"># Integral Absolute Error</span>
+<span class="linenos"> 81</span>            <span class="s1">&#39;itae&#39;</span><span class="p">,</span>          <span class="c1"># Integral Time Absolute Error</span>
+<span class="linenos"> 82</span>            <span class="s1">&#39;mse&#39;</span><span class="p">,</span>           <span class="c1"># Mean Square Error</span>
+<span class="linenos"> 83</span>            <span class="s1">&#39;mae&#39;</span><span class="p">,</span>           <span class="c1"># Mean Absolute Error</span>
+<span class="linenos"> 84</span>            <span class="s1">&#39;rmse&#39;</span><span class="p">,</span>          <span class="c1"># Root Mean Square Error</span>
+<span class="linenos"> 85</span>            <span class="s1">&#39;settling_time&#39;</span><span class="p">,</span> <span class="c1"># Settling time</span>
+<span class="linenos"> 86</span>            <span class="s1">&#39;overshoot&#39;</span><span class="p">,</span>     <span class="c1"># Maximum overshoot</span>
+<span class="linenos"> 87</span>            <span class="s1">&#39;rise_time&#39;</span><span class="p">,</span>     <span class="c1"># Rise time</span>
+<span class="linenos"> 88</span>            <span class="s1">&#39;steady_state_error&#39;</span><span class="p">,</span>  <span class="c1"># Steady-state error</span>
+<span class="linenos"> 89</span>            <span class="s1">&#39;control_effort&#39;</span><span class="p">,</span>      <span class="c1"># RMS control effort</span>
+<span class="linenos"> 90</span>            <span class="s1">&#39;peak_control&#39;</span>         <span class="c1"># Peak control effort</span>
+<span class="linenos"> 91</span>        <span class="p">]</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos"> 94</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute specific control performance metric.&quot;&quot;&quot;</span>
+<span class="linenos"> 95</span>        <span class="n">reference</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 96</span>        <span class="n">output_indices</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;output_indices&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Default to first two states</span>
+<span class="linenos"> 97</span>
+<span class="linenos"> 98</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">,</span> <span class="s1">&#39;iae&#39;</span><span class="p">,</span> <span class="s1">&#39;itae&#39;</span><span class="p">,</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">]:</span>
+<span class="linenos"> 99</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_tracking_error_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">output_indices</span><span class="p">)</span>
+<span class="linenos">100</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;settling_time&#39;</span><span class="p">,</span> <span class="s1">&#39;overshoot&#39;</span><span class="p">,</span> <span class="s1">&#39;rise_time&#39;</span><span class="p">,</span> <span class="s1">&#39;steady_state_error&#39;</span><span class="p">]:</span>
+<span class="linenos">101</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_transient_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">output_indices</span><span class="p">)</span>
+<span class="linenos">102</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;control_effort&#39;</span><span class="p">,</span> <span class="s1">&#39;peak_control&#39;</span><span class="p">]:</span>
+<span class="linenos">103</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_control_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="linenos">104</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">105</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown metric: </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_tracking_error_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span>
+<span class="linenos">108</span>                                     <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="linenos">109</span>                                     <span class="n">output_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">110</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute tracking error metrics.&quot;&quot;&quot;</span>
+<span class="linenos">111</span>        <span class="c1"># Extract outputs</span>
+<span class="linenos">112</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">113</span>            <span class="n">outputs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="n">output_indices</span><span class="p">]</span>
+<span class="linenos">114</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">115</span>            <span class="n">outputs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span>        <span class="c1"># Use reference if provided, otherwise assume zero reference</span>
+<span class="linenos">118</span>        <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">119</span>            <span class="k">if</span> <span class="n">reference</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">120</span>                <span class="n">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">121</span>            <span class="n">ref</span> <span class="o">=</span> <span class="n">reference</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">outputs</span><span class="p">),</span> <span class="p">:</span><span class="n">outputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="linenos">122</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">123</span>            <span class="n">ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+<span class="linenos">124</span>
+<span class="linenos">125</span>        <span class="c1"># Compute error</span>
+<span class="linenos">126</span>        <span class="n">error</span> <span class="o">=</span> <span class="n">outputs</span> <span class="o">-</span> <span class="n">ref</span>
+<span class="linenos">127</span>        <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.01</span>
+<span class="linenos">128</span>
+<span class="linenos">129</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;ise&#39;</span><span class="p">:</span>
+<span class="linenos">130</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">error</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
+<span class="linenos">131</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;iae&#39;</span><span class="p">:</span>
+<span class="linenos">132</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
+<span class="linenos">133</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;itae&#39;</span><span class="p">:</span>
+<span class="linenos">134</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
+<span class="linenos">135</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;mse&#39;</span><span class="p">:</span>
+<span class="linenos">136</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">error</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+<span class="linenos">137</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;mae&#39;</span><span class="p">:</span>
+<span class="linenos">138</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+<span class="linenos">139</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span>
+<span class="linenos">140</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">error</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))))</span>
+<span class="linenos">141</span>
+<span class="linenos">142</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_transient_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span>
+<span class="linenos">143</span>                                <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="linenos">144</span>                                <span class="n">output_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">145</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute transient response metrics.&quot;&quot;&quot;</span>
+<span class="linenos">146</span>        <span class="c1"># For simplicity, use first output index</span>
+<span class="linenos">147</span>        <span class="n">output_idx</span> <span class="o">=</span> <span class="n">output_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">output_indices</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="linenos">148</span>
+<span class="linenos">149</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">150</span>            <span class="n">output</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="n">output_idx</span><span class="p">]</span>
+<span class="linenos">151</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">152</span>            <span class="n">output</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="linenos">153</span>
+<span class="linenos">154</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;settling_time&#39;</span><span class="p">:</span>
+<span class="linenos">155</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_settling_time</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="linenos">156</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;overshoot&#39;</span><span class="p">:</span>
+<span class="linenos">157</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_overshoot</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="linenos">158</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;rise_time&#39;</span><span class="p">:</span>
+<span class="linenos">159</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_rise_time</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="linenos">160</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;steady_state_error&#39;</span><span class="p">:</span>
+<span class="linenos">161</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_steady_state_error</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>
+<span class="linenos">162</span>
+<span class="linenos">163</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_control_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">164</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute control effort metrics.&quot;&quot;&quot;</span>
+<span class="linenos">165</span>        <span class="n">controls</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">controls</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">controls</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">data</span><span class="o">.</span><span class="n">controls</span>
+<span class="linenos">166</span>
+<span class="linenos">167</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;control_effort&#39;</span><span class="p">:</span>
+<span class="linenos">168</span>            <span class="c1"># RMS control effort</span>
+<span class="linenos">169</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">controls</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+<span class="linenos">170</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;peak_control&#39;</span><span class="p">:</span>
+<span class="linenos">171</span>            <span class="c1"># Peak control effort</span>
+<span class="linenos">172</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">controls</span><span class="p">)))</span>
+<span class="linenos">173</span>
+<span class="linenos">174</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_settling_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">175</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute settling time using percentage criteria.&quot;&quot;&quot;</span>
+<span class="linenos">176</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">177</span>        <span class="n">tolerance_band</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_tolerance</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">final_value</span><span class="p">)</span>
+<span class="linenos">178</span>
+<span class="linenos">179</span>        <span class="c1"># Find last time outside tolerance band</span>
+<span class="linenos">180</span>        <span class="n">outside_band</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">output</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance_band</span>
+<span class="linenos">181</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">outside_band</span><span class="p">):</span>
+<span class="linenos">182</span>            <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">183</span>
+<span class="linenos">184</span>        <span class="n">last_outside_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">outside_band</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">185</span>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">last_outside_index</span><span class="p">])</span>
+<span class="linenos">186</span>
+<span class="linenos">187</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_overshoot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">188</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute maximum overshoot percentage.&quot;&quot;&quot;</span>
+<span class="linenos">189</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">190</span>        <span class="k">if</span> <span class="n">final_value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">191</span>            <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">192</span>
+<span class="linenos">193</span>        <span class="n">max_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="linenos">194</span>        <span class="n">overshoot</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_value</span> <span class="o">-</span> <span class="n">final_value</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">final_value</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="linenos">195</span>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">overshoot</span><span class="p">))</span>
+<span class="linenos">196</span>
+<span class="linenos">197</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_rise_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">198</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute rise time (10% to 90% of final value).&quot;&quot;&quot;</span>
+<span class="linenos">199</span>        <span class="n">final_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">200</span>        <span class="n">ten_percent</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">final_value</span>
+<span class="linenos">201</span>        <span class="n">ninety_percent</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">final_value</span>
+<span class="linenos">202</span>
+<span class="linenos">203</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">204</span>            <span class="n">idx_10</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">output</span> <span class="o">&gt;=</span> <span class="n">ten_percent</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">205</span>            <span class="n">idx_90</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">output</span> <span class="o">&gt;=</span> <span class="n">ninety_percent</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">206</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">idx_90</span><span class="p">]</span> <span class="o">-</span> <span class="n">times</span><span class="p">[</span><span class="n">idx_10</span><span class="p">])</span>
+<span class="linenos">207</span>        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+<span class="linenos">208</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Return total time if criteria not met</span>
+<span class="linenos">209</span>
+<span class="linenos">210</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_steady_state_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos">211</span>                                  <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">212</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute steady-state error.&quot;&quot;&quot;</span>
+<span class="linenos">213</span>        <span class="n">final_output</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">214</span>
+<span class="linenos">215</span>        <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">216</span>            <span class="n">final_reference</span> <span class="o">=</span> <span class="n">reference</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="s1">&#39;__len__&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">reference</span>
+<span class="linenos">217</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">final_reference</span> <span class="o">-</span> <span class="n">final_output</span><span class="p">))</span>
+<span class="linenos">218</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">219</span>            <span class="c1"># Assume zero reference</span>
+<span class="linenos">220</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">final_output</span><span class="p">))</span>
+<span class="linenos">221</span>
 <span class="linenos">222</span>
-<span class="linenos">223</span>
-<span class="linenos">224</span><span class="k">class</span><span class="w"> </span><span class="nc">StabilityMetrics</span><span class="p">(</span><span class="n">BaseMetricCalculator</span><span class="p">):</span>
-<span class="linenos">225</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculator for stability-related metrics.&quot;&quot;&quot;</span>
-<span class="linenos">226</span>
-<span class="linenos">227</span>    <span class="nd">@property</span>
-<span class="linenos">228</span>    <span class="k">def</span><span class="w"> </span><span class="nf">supported_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="linenos">229</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;List of supported stability metrics.&quot;&quot;&quot;</span>
-<span class="linenos">230</span>        <span class="k">return</span> <span class="p">[</span>
-<span class="linenos">231</span>            <span class="s1">&#39;lyapunov_exponent&#39;</span><span class="p">,</span>
-<span class="linenos">232</span>            <span class="s1">&#39;phase_margin&#39;</span><span class="p">,</span>
-<span class="linenos">233</span>            <span class="s1">&#39;gain_margin&#39;</span><span class="p">,</span>
-<span class="linenos">234</span>            <span class="s1">&#39;stability_margin&#39;</span><span class="p">,</span>
-<span class="linenos">235</span>            <span class="s1">&#39;bounded_states&#39;</span>
-<span class="linenos">236</span>        <span class="p">]</span>
-<span class="linenos">237</span>
-<span class="linenos">238</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">239</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute specific stability metric.&quot;&quot;&quot;</span>
-<span class="linenos">240</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;lyapunov_exponent&#39;</span><span class="p">:</span>
-<span class="linenos">241</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_lyapunov_exponent</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="linenos">242</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;bounded_states&#39;</span><span class="p">:</span>
-<span class="linenos">243</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_bounded_states</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bounds&#39;</span><span class="p">))</span>
-<span class="linenos">244</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">245</span>            <span class="c1"># Frequency domain metrics require system model</span>
-<span class="linenos">246</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stability metric </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2"> requires system model&quot;</span><span class="p">)</span>
-<span class="linenos">247</span>            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-<span class="linenos">248</span>
-<span class="linenos">249</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_lyapunov_exponent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">250</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate largest Lyapunov exponent from time series.&quot;&quot;&quot;</span>
-<span class="linenos">251</span>        <span class="c1"># Simplified estimation - would need more sophisticated method for accurate results</span>
-<span class="linenos">252</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span>
-<span class="linenos">253</span>        <span class="k">if</span> <span class="n">states</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">254</span>            <span class="c1"># Use first state variable</span>
-<span class="linenos">255</span>            <span class="n">x</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="linenos">256</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">257</span>            <span class="n">x</span> <span class="o">=</span> <span class="n">states</span>
-<span class="linenos">258</span>
-<span class="linenos">259</span>        <span class="c1"># Compute divergence rate (simplified)</span>
-<span class="linenos">260</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">261</span>            <span class="n">log_divergence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
-<span class="linenos">262</span>            <span class="n">valid_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">log_divergence</span><span class="p">)</span>
-<span class="linenos">263</span>            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">valid_idx</span><span class="p">):</span>
-<span class="linenos">264</span>                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_divergence</span><span class="p">[</span><span class="n">valid_idx</span><span class="p">]))</span>
-<span class="linenos">265</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">266</span>                <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">267</span>        <span class="k">except</span><span class="p">:</span>
-<span class="linenos">268</span>            <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">269</span>
-<span class="linenos">270</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_bounded_states</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">271</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute fraction of time states remain within bounds.&quot;&quot;&quot;</span>
-<span class="linenos">272</span>        <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">273</span>            <span class="k">return</span> <span class="mf">1.0</span>  <span class="c1"># No bounds specified</span>
-<span class="linenos">274</span>
-<span class="linenos">275</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span>
-<span class="linenos">276</span>        <span class="n">total_violations</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">277</span>        <span class="n">total_checks</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">278</span>
-<span class="linenos">279</span>        <span class="k">for</span> <span class="n">state_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span> <span class="ow">in</span> <span class="n">bounds</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">280</span>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state_idx</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="linenos">281</span>                <span class="k">continue</span>  <span class="c1"># Skip non-numeric indices</span>
-<span class="linenos">282</span>
-<span class="linenos">283</span>            <span class="n">state_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">state_idx</span><span class="p">)</span>
-<span class="linenos">284</span>            <span class="k">if</span> <span class="n">state_idx</span> <span class="o">&lt;</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-<span class="linenos">285</span>                <span class="n">state_traj</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span> <span class="n">state_idx</span><span class="p">]</span>
-<span class="linenos">286</span>                <span class="n">violations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">state_traj</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">state_traj</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">))</span>
-<span class="linenos">287</span>                <span class="n">total_violations</span> <span class="o">+=</span> <span class="n">violations</span>
-<span class="linenos">288</span>                <span class="n">total_checks</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_traj</span><span class="p">)</span>
-<span class="linenos">289</span>
-<span class="linenos">290</span>        <span class="k">if</span> <span class="n">total_checks</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">291</span>            <span class="k">return</span> <span class="mf">1.0</span>
-<span class="linenos">292</span>
-<span class="linenos">293</span>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">total_violations</span> <span class="o">/</span> <span class="n">total_checks</span><span class="p">)</span>
+<span class="linenos">223</span><span class="k">class</span><span class="w"> </span><span class="nc">StabilityMetrics</span><span class="p">(</span><span class="n">BaseMetricCalculator</span><span class="p">):</span>
+<span class="linenos">224</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculator for stability-related metrics.&quot;&quot;&quot;</span>
+<span class="linenos">225</span>
+<span class="linenos">226</span>    <span class="nd">@property</span>
+<span class="linenos">227</span>    <span class="k">def</span><span class="w"> </span><span class="nf">supported_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos">228</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;List of supported stability metrics.&quot;&quot;&quot;</span>
+<span class="linenos">229</span>        <span class="k">return</span> <span class="p">[</span>
+<span class="linenos">230</span>            <span class="s1">&#39;lyapunov_exponent&#39;</span><span class="p">,</span>
+<span class="linenos">231</span>            <span class="s1">&#39;phase_margin&#39;</span><span class="p">,</span>
+<span class="linenos">232</span>            <span class="s1">&#39;gain_margin&#39;</span><span class="p">,</span>
+<span class="linenos">233</span>            <span class="s1">&#39;stability_margin&#39;</span><span class="p">,</span>
+<span class="linenos">234</span>            <span class="s1">&#39;bounded_states&#39;</span>
+<span class="linenos">235</span>        <span class="p">]</span>
+<span class="linenos">236</span>
+<span class="linenos">237</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">238</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute specific stability metric.&quot;&quot;&quot;</span>
+<span class="linenos">239</span>        <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;lyapunov_exponent&#39;</span><span class="p">:</span>
+<span class="linenos">240</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_lyapunov_exponent</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos">241</span>        <span class="k">elif</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;bounded_states&#39;</span><span class="p">:</span>
+<span class="linenos">242</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_bounded_states</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bounds&#39;</span><span class="p">))</span>
+<span class="linenos">243</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">244</span>            <span class="c1"># Frequency domain metrics require system model</span>
+<span class="linenos">245</span>            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stability metric </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2"> requires system model&quot;</span><span class="p">)</span>
+<span class="linenos">246</span>            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="linenos">247</span>
+<span class="linenos">248</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_lyapunov_exponent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">249</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate largest Lyapunov exponent from time series.&quot;&quot;&quot;</span>
+<span class="linenos">250</span>        <span class="c1"># Simplified estimation - would need more sophisticated method for accurate results</span>
+<span class="linenos">251</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span>
+<span class="linenos">252</span>        <span class="k">if</span> <span class="n">states</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">253</span>            <span class="c1"># Use first state variable</span>
+<span class="linenos">254</span>            <span class="n">x</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="linenos">255</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">256</span>            <span class="n">x</span> <span class="o">=</span> <span class="n">states</span>
+<span class="linenos">257</span>
+<span class="linenos">258</span>        <span class="c1"># Compute divergence rate (simplified)</span>
+<span class="linenos">259</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">260</span>            <span class="n">log_divergence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<span class="linenos">261</span>            <span class="n">valid_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">log_divergence</span><span class="p">)</span>
+<span class="linenos">262</span>            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">valid_idx</span><span class="p">):</span>
+<span class="linenos">263</span>                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_divergence</span><span class="p">[</span><span class="n">valid_idx</span><span class="p">]))</span>
+<span class="linenos">264</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">265</span>                <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">266</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">267</span>            <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">268</span>
+<span class="linenos">269</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_bounded_states</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">270</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute fraction of time states remain within bounds.&quot;&quot;&quot;</span>
+<span class="linenos">271</span>        <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">272</span>            <span class="k">return</span> <span class="mf">1.0</span>  <span class="c1"># No bounds specified</span>
+<span class="linenos">273</span>
+<span class="linenos">274</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">states</span>
+<span class="linenos">275</span>        <span class="n">total_violations</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">276</span>        <span class="n">total_checks</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">277</span>
+<span class="linenos">278</span>        <span class="k">for</span> <span class="n">state_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span> <span class="ow">in</span> <span class="n">bounds</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">279</span>            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state_idx</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="linenos">280</span>                <span class="k">continue</span>  <span class="c1"># Skip non-numeric indices</span>
+<span class="linenos">281</span>
+<span class="linenos">282</span>            <span class="n">state_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">state_idx</span><span class="p">)</span>
+<span class="linenos">283</span>            <span class="k">if</span> <span class="n">state_idx</span> <span class="o">&lt;</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+<span class="linenos">284</span>                <span class="n">state_traj</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span> <span class="n">state_idx</span><span class="p">]</span>
+<span class="linenos">285</span>                <span class="n">violations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">state_traj</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">state_traj</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">))</span>
+<span class="linenos">286</span>                <span class="n">total_violations</span> <span class="o">+=</span> <span class="n">violations</span>
+<span class="linenos">287</span>                <span class="n">total_checks</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_traj</span><span class="p">)</span>
+<span class="linenos">288</span>
+<span class="linenos">289</span>        <span class="k">if</span> <span class="n">total_checks</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">290</span>            <span class="k">return</span> <span class="mf">1.0</span>
+<span class="linenos">291</span>
+<span class="linenos">292</span>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">total_violations</span> <span class="o">/</span> <span class="n">total_checks</span><span class="p">)</span>
+<span class="linenos">293</span>
 <span class="linenos">294</span>
-<span class="linenos">295</span>
-<span class="linenos">296</span><span class="k">class</span><span class="w"> </span><span class="nc">RobustnessMetrics</span><span class="p">(</span><span class="n">BaseMetricCalculator</span><span class="p">):</span>
-<span class="linenos">297</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculator for robustness metrics.&quot;&quot;&quot;</span>
-<span class="linenos">298</span>
-<span class="linenos">299</span>    <span class="nd">@property</span>
-<span class="linenos">300</span>    <span class="k">def</span><span class="w"> </span><span class="nf">supported_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="linenos">301</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;List of supported robustness metrics.&quot;&quot;&quot;</span>
-<span class="linenos">302</span>        <span class="k">return</span> <span class="p">[</span>
-<span class="linenos">303</span>            <span class="s1">&#39;sensitivity_norm&#39;</span><span class="p">,</span>
-<span class="linenos">304</span>            <span class="s1">&#39;disturbance_rejection&#39;</span><span class="p">,</span>
-<span class="linenos">305</span>            <span class="s1">&#39;parameter_variation_tolerance&#39;</span>
-<span class="linenos">306</span>        <span class="p">]</span>
-<span class="linenos">307</span>
-<span class="linenos">308</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">309</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute specific robustness metric.&quot;&quot;&quot;</span>
-<span class="linenos">310</span>        <span class="c1"># Placeholder implementations - would need more sophisticated analysis</span>
-<span class="linenos">311</span>        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Robustness metric </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2"> requires advanced analysis&quot;</span><span class="p">)</span>
-<span class="linenos">312</span>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="linenos">295</span><span class="k">class</span><span class="w"> </span><span class="nc">RobustnessMetrics</span><span class="p">(</span><span class="n">BaseMetricCalculator</span><span class="p">):</span>
+<span class="linenos">296</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculator for robustness metrics.&quot;&quot;&quot;</span>
+<span class="linenos">297</span>
+<span class="linenos">298</span>    <span class="nd">@property</span>
+<span class="linenos">299</span>    <span class="k">def</span><span class="w"> </span><span class="nf">supported_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos">300</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;List of supported robustness metrics.&quot;&quot;&quot;</span>
+<span class="linenos">301</span>        <span class="k">return</span> <span class="p">[</span>
+<span class="linenos">302</span>            <span class="s1">&#39;sensitivity_norm&#39;</span><span class="p">,</span>
+<span class="linenos">303</span>            <span class="s1">&#39;disturbance_rejection&#39;</span><span class="p">,</span>
+<span class="linenos">304</span>            <span class="s1">&#39;parameter_variation_tolerance&#39;</span>
+<span class="linenos">305</span>        <span class="p">]</span>
+<span class="linenos">306</span>
+<span class="linenos">307</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">308</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute specific robustness metric.&quot;&quot;&quot;</span>
+<span class="linenos">309</span>        <span class="c1"># Placeholder implementations - would need more sophisticated analysis</span>
+<span class="linenos">310</span>        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Robustness metric </span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2"> requires advanced analysis&quot;</span><span class="p">)</span>
+<span class="linenos">311</span>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="linenos">312</span>
 <span class="linenos">313</span>
-<span class="linenos">314</span>
-<span class="linenos">315</span><span class="k">def</span><span class="w"> </span><span class="nf">create_comprehensive_metrics</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span>
-<span class="linenos">316</span>                               <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">317</span>                               <span class="n">include_stability</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="linenos">318</span>                               <span class="n">include_robustness</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="linenos">319</span>                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PerformanceMetrics</span><span class="p">:</span>
-<span class="linenos">320</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create comprehensive performance metrics from simulation data.</span>
-<span class="linenos">321</span>
-<span class="linenos">322</span><span class="sd">    Parameters</span>
-<span class="linenos">323</span><span class="sd">    ----------</span>
-<span class="linenos">324</span><span class="sd">    data : DataProtocol</span>
-<span class="linenos">325</span><span class="sd">        Simulation data</span>
-<span class="linenos">326</span><span class="sd">    reference : np.ndarray, optional</span>
-<span class="linenos">327</span><span class="sd">        Reference trajectory for tracking metrics</span>
-<span class="linenos">328</span><span class="sd">    include_stability : bool, optional</span>
-<span class="linenos">329</span><span class="sd">        Whether to include stability metrics</span>
-<span class="linenos">330</span><span class="sd">    include_robustness : bool, optional</span>
-<span class="linenos">331</span><span class="sd">        Whether to include robustness metrics</span>
-<span class="linenos">332</span><span class="sd">    **kwargs</span>
-<span class="linenos">333</span><span class="sd">        Additional parameters for metric calculation</span>
-<span class="linenos">334</span>
-<span class="linenos">335</span><span class="sd">    Returns</span>
-<span class="linenos">336</span><span class="sd">    -------</span>
-<span class="linenos">337</span><span class="sd">    PerformanceMetrics</span>
-<span class="linenos">338</span><span class="sd">        Comprehensive collection of performance metrics</span>
-<span class="linenos">339</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">340</span>    <span class="n">metrics</span> <span class="o">=</span> <span class="n">PerformanceMetrics</span><span class="p">()</span>
-<span class="linenos">341</span>
-<span class="linenos">342</span>    <span class="c1"># Control performance metrics</span>
-<span class="linenos">343</span>    <span class="n">control_calculator</span> <span class="o">=</span> <span class="n">ControlPerformanceMetrics</span><span class="p">()</span>
-<span class="linenos">344</span>    <span class="n">control_metrics</span> <span class="o">=</span> <span class="n">control_calculator</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="linenos">345</span>
-<span class="linenos">346</span>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">control_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">347</span>        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="linenos">348</span>            <span class="n">metric</span> <span class="o">=</span> <span class="n">MetricResult</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">_get_metric_unit</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-<span class="linenos">349</span>            <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
-<span class="linenos">350</span>
-<span class="linenos">351</span>    <span class="c1"># Stability metrics (if requested)</span>
-<span class="linenos">352</span>    <span class="k">if</span> <span class="n">include_stability</span><span class="p">:</span>
-<span class="linenos">353</span>        <span class="n">stability_calculator</span> <span class="o">=</span> <span class="n">StabilityMetrics</span><span class="p">()</span>
-<span class="linenos">354</span>        <span class="n">stability_metrics</span> <span class="o">=</span> <span class="n">stability_calculator</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="linenos">355</span>
-<span class="linenos">356</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stability_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">357</span>            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="linenos">358</span>                <span class="n">metric</span> <span class="o">=</span> <span class="n">MetricResult</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">_get_metric_unit</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-<span class="linenos">359</span>                <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
-<span class="linenos">360</span>
-<span class="linenos">361</span>    <span class="c1"># Robustness metrics (if requested)</span>
-<span class="linenos">362</span>    <span class="k">if</span> <span class="n">include_robustness</span><span class="p">:</span>
-<span class="linenos">363</span>        <span class="n">robustness_calculator</span> <span class="o">=</span> <span class="n">RobustnessMetrics</span><span class="p">()</span>
-<span class="linenos">364</span>        <span class="n">robustness_metrics</span> <span class="o">=</span> <span class="n">robustness_calculator</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="linenos">365</span>
-<span class="linenos">366</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">robustness_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">367</span>            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="linenos">368</span>                <span class="n">metric</span> <span class="o">=</span> <span class="n">MetricResult</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">_get_metric_unit</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-<span class="linenos">369</span>                <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
-<span class="linenos">370</span>
-<span class="linenos">371</span>    <span class="k">return</span> <span class="n">metrics</span>
+<span class="linenos">314</span><span class="k">def</span><span class="w"> </span><span class="nf">create_comprehensive_metrics</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span>
+<span class="linenos">315</span>                               <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">316</span>                               <span class="n">include_stability</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="linenos">317</span>                               <span class="n">include_robustness</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="linenos">318</span>                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PerformanceMetrics</span><span class="p">:</span>
+<span class="linenos">319</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create comprehensive performance metrics from simulation data.</span>
+<span class="linenos">320</span>
+<span class="linenos">321</span><span class="sd">    Parameters</span>
+<span class="linenos">322</span><span class="sd">    ----------</span>
+<span class="linenos">323</span><span class="sd">    data : DataProtocol</span>
+<span class="linenos">324</span><span class="sd">        Simulation data</span>
+<span class="linenos">325</span><span class="sd">    reference : np.ndarray, optional</span>
+<span class="linenos">326</span><span class="sd">        Reference trajectory for tracking metrics</span>
+<span class="linenos">327</span><span class="sd">    include_stability : bool, optional</span>
+<span class="linenos">328</span><span class="sd">        Whether to include stability metrics</span>
+<span class="linenos">329</span><span class="sd">    include_robustness : bool, optional</span>
+<span class="linenos">330</span><span class="sd">        Whether to include robustness metrics</span>
+<span class="linenos">331</span><span class="sd">    **kwargs</span>
+<span class="linenos">332</span><span class="sd">        Additional parameters for metric calculation</span>
+<span class="linenos">333</span>
+<span class="linenos">334</span><span class="sd">    Returns</span>
+<span class="linenos">335</span><span class="sd">    -------</span>
+<span class="linenos">336</span><span class="sd">    PerformanceMetrics</span>
+<span class="linenos">337</span><span class="sd">        Comprehensive collection of performance metrics</span>
+<span class="linenos">338</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">339</span>    <span class="n">metrics</span> <span class="o">=</span> <span class="n">PerformanceMetrics</span><span class="p">()</span>
+<span class="linenos">340</span>
+<span class="linenos">341</span>    <span class="c1"># Control performance metrics</span>
+<span class="linenos">342</span>    <span class="n">control_calculator</span> <span class="o">=</span> <span class="n">ControlPerformanceMetrics</span><span class="p">()</span>
+<span class="linenos">343</span>    <span class="n">control_metrics</span> <span class="o">=</span> <span class="n">control_calculator</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="linenos">344</span>
+<span class="linenos">345</span>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">control_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">346</span>        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="linenos">347</span>            <span class="n">metric</span> <span class="o">=</span> <span class="n">MetricResult</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">_get_metric_unit</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="linenos">348</span>            <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+<span class="linenos">349</span>
+<span class="linenos">350</span>    <span class="c1"># Stability metrics (if requested)</span>
+<span class="linenos">351</span>    <span class="k">if</span> <span class="n">include_stability</span><span class="p">:</span>
+<span class="linenos">352</span>        <span class="n">stability_calculator</span> <span class="o">=</span> <span class="n">StabilityMetrics</span><span class="p">()</span>
+<span class="linenos">353</span>        <span class="n">stability_metrics</span> <span class="o">=</span> <span class="n">stability_calculator</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="linenos">354</span>
+<span class="linenos">355</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stability_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">356</span>            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="linenos">357</span>                <span class="n">metric</span> <span class="o">=</span> <span class="n">MetricResult</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">_get_metric_unit</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="linenos">358</span>                <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+<span class="linenos">359</span>
+<span class="linenos">360</span>    <span class="c1"># Robustness metrics (if requested)</span>
+<span class="linenos">361</span>    <span class="k">if</span> <span class="n">include_robustness</span><span class="p">:</span>
+<span class="linenos">362</span>        <span class="n">robustness_calculator</span> <span class="o">=</span> <span class="n">RobustnessMetrics</span><span class="p">()</span>
+<span class="linenos">363</span>        <span class="n">robustness_metrics</span> <span class="o">=</span> <span class="n">robustness_calculator</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="linenos">364</span>
+<span class="linenos">365</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">robustness_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">366</span>            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="linenos">367</span>                <span class="n">metric</span> <span class="o">=</span> <span class="n">MetricResult</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">_get_metric_unit</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="linenos">368</span>                <span class="n">metrics</span><span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+<span class="linenos">369</span>
+<span class="linenos">370</span>    <span class="k">return</span> <span class="n">metrics</span>
+<span class="linenos">371</span>
 <span class="linenos">372</span>
-<span class="linenos">373</span>
-<span class="linenos">374</span><span class="k">def</span><span class="w"> </span><span class="nf">_get_metric_unit</span><span class="p">(</span><span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="linenos">375</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get appropriate unit for a metric.&quot;&quot;&quot;</span>
-<span class="linenos">376</span>    <span class="n">unit_map</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos">377</span>        <span class="s1">&#39;ise&#39;</span><span class="p">:</span> <span class="s1">&#39;rad²·s&#39;</span><span class="p">,</span>
-<span class="linenos">378</span>        <span class="s1">&#39;iae&#39;</span><span class="p">:</span> <span class="s1">&#39;rad·s&#39;</span><span class="p">,</span>
-<span class="linenos">379</span>        <span class="s1">&#39;itae&#39;</span><span class="p">:</span> <span class="s1">&#39;rad·s²&#39;</span><span class="p">,</span>
-<span class="linenos">380</span>        <span class="s1">&#39;mse&#39;</span><span class="p">:</span> <span class="s1">&#39;rad²&#39;</span><span class="p">,</span>
-<span class="linenos">381</span>        <span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="s1">&#39;rad&#39;</span><span class="p">,</span>
-<span class="linenos">382</span>        <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="s1">&#39;rad&#39;</span><span class="p">,</span>
-<span class="linenos">383</span>        <span class="s1">&#39;settling_time&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
-<span class="linenos">384</span>        <span class="s1">&#39;rise_time&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
-<span class="linenos">385</span>        <span class="s1">&#39;overshoot&#39;</span><span class="p">:</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>
-<span class="linenos">386</span>        <span class="s1">&#39;steady_state_error&#39;</span><span class="p">:</span> <span class="s1">&#39;rad&#39;</span><span class="p">,</span>
-<span class="linenos">387</span>        <span class="s1">&#39;control_effort&#39;</span><span class="p">:</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span>
-<span class="linenos">388</span>        <span class="s1">&#39;peak_control&#39;</span><span class="p">:</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span>
-<span class="linenos">389</span>        <span class="s1">&#39;bounded_states&#39;</span><span class="p">:</span> <span class="s1">&#39;fraction&#39;</span>
-<span class="linenos">390</span>    <span class="p">}</span>
-<span class="linenos">391</span>    <span class="k">return</span> <span class="n">unit_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">metric_name</span><span class="p">)</span>
+<span class="linenos">373</span><span class="k">def</span><span class="w"> </span><span class="nf">_get_metric_unit</span><span class="p">(</span><span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos">374</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get appropriate unit for a metric.&quot;&quot;&quot;</span>
+<span class="linenos">375</span>    <span class="n">unit_map</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">376</span>        <span class="s1">&#39;ise&#39;</span><span class="p">:</span> <span class="s1">&#39;rad²·s&#39;</span><span class="p">,</span>
+<span class="linenos">377</span>        <span class="s1">&#39;iae&#39;</span><span class="p">:</span> <span class="s1">&#39;rad·s&#39;</span><span class="p">,</span>
+<span class="linenos">378</span>        <span class="s1">&#39;itae&#39;</span><span class="p">:</span> <span class="s1">&#39;rad·s²&#39;</span><span class="p">,</span>
+<span class="linenos">379</span>        <span class="s1">&#39;mse&#39;</span><span class="p">:</span> <span class="s1">&#39;rad²&#39;</span><span class="p">,</span>
+<span class="linenos">380</span>        <span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="s1">&#39;rad&#39;</span><span class="p">,</span>
+<span class="linenos">381</span>        <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="s1">&#39;rad&#39;</span><span class="p">,</span>
+<span class="linenos">382</span>        <span class="s1">&#39;settling_time&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
+<span class="linenos">383</span>        <span class="s1">&#39;rise_time&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
+<span class="linenos">384</span>        <span class="s1">&#39;overshoot&#39;</span><span class="p">:</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>
+<span class="linenos">385</span>        <span class="s1">&#39;steady_state_error&#39;</span><span class="p">:</span> <span class="s1">&#39;rad&#39;</span><span class="p">,</span>
+<span class="linenos">386</span>        <span class="s1">&#39;control_effort&#39;</span><span class="p">:</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span>
+<span class="linenos">387</span>        <span class="s1">&#39;peak_control&#39;</span><span class="p">:</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span>
+<span class="linenos">388</span>        <span class="s1">&#39;bounded_states&#39;</span><span class="p">:</span> <span class="s1">&#39;fraction&#39;</span>
+<span class="linenos">389</span>    <span class="p">}</span>
+<span class="linenos">390</span>    <span class="k">return</span> <span class="n">unit_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">metric_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -1238,7 +1438,7 @@ applications and statistical rigor.</p>
 <span class="linenos">41</span>                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_divergence</span><span class="p">[</span><span class="n">valid_idx</span><span class="p">]))</span>
 <span class="linenos">42</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">43</span>                <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">44</span>        <span class="k">except</span><span class="p">:</span>
+<span class="linenos">44</span>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">45</span>            <span class="k">return</span> <span class="mf">0.0</span>
 <span class="linenos">46</span>
 <span class="linenos">47</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_bounded_states</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataProtocol</span><span class="p">,</span> <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -1483,7 +1683,7 @@ Comprehensive collection of performance metrics</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1506,6 +1706,24 @@ Comprehensive collection of performance metrics</p>
             <ul>
 <li><a class="reference internal" href="#">analysis.core.metrics</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#core-performance-metrics">Core Performance Metrics</a></li>
+<li><a class="reference internal" href="#metric-normalization">Metric Normalization</a></li>
+<li><a class="reference internal" href="#composite-metrics">Composite Metrics</a></li>
+<li><a class="reference internal" href="#time-domain-metrics">Time-Domain Metrics</a></li>
+<li><a class="reference internal" href="#frequency-domain-metrics">Frequency-Domain Metrics</a></li>
+<li><a class="reference internal" href="#statistical-aggregation">Statistical Aggregation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-analysis">Example 1: Basic Analysis</a></li>
+<li><a class="reference internal" href="#example-2-statistical-validation">Example 2: Statistical Validation</a></li>
+<li><a class="reference internal" href="#example-3-performance-metrics">Example 3: Performance Metrics</a></li>
+<li><a class="reference internal" href="#example-4-batch-analysis">Example 4: Batch Analysis</a></li>
+<li><a class="reference internal" href="#example-5-robustness-analysis">Example 5: Robustness Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#basemetriccalculator"><code class="docutils literal notranslate"><span class="pre">BaseMetricCalculator</span></code></a><ul>
@@ -1590,6 +1808,10 @@ Comprehensive collection of performance metrics</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

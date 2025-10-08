@@ -28,6 +28,7 @@ from typing import Any, Callable, Optional, Tuple
 
 from .simulation_runner import step as _step_fn  # dispatches on config flag
 from ..context.safety_guards import _guard_no_nan, _guard_energy, _guard_bounds
+from collections.abc import Iterable
 try:
     from src.config.schemas import config  # type: ignore
 except Exception:
@@ -384,12 +385,22 @@ def simulate_system_batch(
         try:
             if hasattr(ctrl, "initialize_state"):
                 state_vars[j] = ctrl.initialize_state()  # type: ignore[assignment]
-        except Exception:
+        except Exception as e:
+            # OK: initialize_state is optional - graceful fallback to None
+            import logging
+            logging.getLogger(__name__).debug(
+                f"Controller {j} ({type(ctrl).__name__}) doesn't support state initialization: {e}"
+            )
             state_vars[j] = None
         try:
             if hasattr(ctrl, "initialize_history"):
                 histories[j] = ctrl.initialize_history()  # type: ignore[assignment]
-        except Exception:
+        except Exception as e:
+            # OK: initialize_history is optional - graceful fallback to None
+            import logging
+            logging.getLogger(__name__).debug(
+                f"Controller {j} ({type(ctrl).__name__}) doesn't support history initialization: {e}"
+            )
             histories[j] = None
     # Determine per-particle saturation limits
     u_limits = _np.full(B, _np.inf, dtype=float)
@@ -437,8 +448,12 @@ def simulate_system_batch(
                 else:
                     u_val = float(ctrl(t_now, x_curr))
                     sigma_val = 0.0
-            except Exception:
-                # On error computing control, treat as instability and stop
+            except Exception as e:
+                # CRITICAL FIX: Don't catch Warning exceptions (pytest may convert warnings to errors)
+                # Re-raise warnings so they propagate normally and don't terminate simulation
+                if isinstance(e, Warning):
+                    raise
+                # On actual error computing control, treat as instability and stop
                 H = i
                 u_b = u_b[:, :i]
                 x_b = x_b[:, : i + 1]
@@ -450,8 +465,13 @@ def simulate_system_batch(
                     if hist is not None:
                         try:
                             setattr(c, "_last_history", hist)
-                        except Exception:
-                            pass
+                        except Exception as e:
+                            # OK: _last_history attachment is optional feature
+                            import logging
+                            logging.getLogger(__name__).debug(
+                                f"Could not attach history to controller {jj}: {e}"
+                            )
+                            # Continue without history attachment
                 if params_list is not None:
                     return [(_np.copy(times), _np.copy(x_b), _np.copy(u_b), _np.copy(sigma_b)) for _ in params_list]
                 return times, x_b, u_b, sigma_b

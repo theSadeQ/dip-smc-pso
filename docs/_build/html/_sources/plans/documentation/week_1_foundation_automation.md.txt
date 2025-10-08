@@ -322,6 +322,9 @@ Classical Sliding Mode Control implementation for DIP system.
 
 **Extensions to Enable**:
 ```python
+# example-metadata:
+# runnable: false
+
 extensions = [
     'sphinx.ext.autodoc',           # Existing
     'sphinx.ext.napoleon',          # Existing
@@ -339,6 +342,9 @@ extensions = [
 
 **Syntax Highlighting**:
 ```python
+# example-metadata:
+# runnable: false
+
 # docs/conf.py additions
 
 # Pygments style for code highlighting

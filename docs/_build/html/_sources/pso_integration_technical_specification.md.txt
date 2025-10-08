@@ -24,6 +24,9 @@ This document provides comprehensive technical specifications for the Particle S
 ### 1.1 Controller Factory Function Signature
 
 ```python
+# example-metadata:
+# runnable: false
+
 def controller_factory(gains: np.ndarray) -> Controller:
     """
     PSO-compatible controller factory interface.
@@ -64,6 +67,9 @@ controller_factory.n_gains = 6  # Controller-specific dimensionality
 ### 1.2 Factory Registration and Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Controller Registry with PSO Integration Metadata
 CONTROLLER_REGISTRY = {
     'classical_smc': {
@@ -98,6 +104,9 @@ CONTROLLER_REGISTRY = {
 ### 1.3 Controller Validation Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_controller_gains(controller_type: str, gains: np.ndarray) -> np.ndarray:
     """
     Validate gain vectors for controller-specific stability requirements.
@@ -207,6 +216,9 @@ sta_smc_bounds:
 ### 2.2 Bounds Validation and Enforcement
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_gain_bounds(controller_type: str, gains: np.ndarray) -> tuple[bool, str]:
     """
     Comprehensive gain bounds validation with mathematical reasoning.
@@ -290,6 +302,9 @@ pso:
 ### 3.3 Configuration Validation Schema
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSOConfigValidator:
     """
     Validates PSO configuration for mathematical consistency and stability.
@@ -370,6 +385,9 @@ graph TD
 ### 4.2 Fitness Function Mathematical Specification
 
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_fitness_cost(t: np.ndarray, x: np.ndarray, u: np.ndarray, sigma: np.ndarray) -> float:
     """
     Multi-objective fitness function for PSO optimization.
@@ -426,6 +444,9 @@ def compute_fitness_cost(t: np.ndarray, x: np.ndarray, u: np.ndarray, sigma: np.
 ### 4.3 Convergence Criteria and Early Stopping
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSO_ConvergenceMonitor:
     """
     Advanced convergence monitoring with multiple termination criteria.
@@ -478,6 +499,9 @@ class PSO_ConvergenceMonitor:
 ### 4.4 Uncertainty Quantification Protocol
 
 ```python
+# example-metadata:
+# runnable: false
+
 def robust_optimization_under_uncertainty(pso_tuner: PSOTuner,
                                         uncertainty_config: PhysicsUncertaintySchema) -> dict:
     """
@@ -525,6 +549,9 @@ def robust_optimization_under_uncertainty(pso_tuner: PSOTuner,
 ### 5.1 Test Suite Architecture
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSO_IntegrationTestSuite:
     """
     Comprehensive integration testing for PSO-controller system.
@@ -600,6 +627,9 @@ class PSO_IntegrationTestSuite:
 ### 5.3 Quality Gates Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSO_QualityGates:
     """
     Automated quality gates for PSO integration deployment.
@@ -686,6 +716,9 @@ pso:
 ### 6.2 Migration Validation Protocol
 
 ```python
+# example-metadata:
+# runnable: false
+
 def migrate_pso_configuration(legacy_config: dict) -> PSOConfig:
     """
     Migrate legacy PSO configuration to current schema with validation.
@@ -751,6 +784,9 @@ def migrate_pso_configuration(legacy_config: dict) -> PSOConfig:
 ### 7.2 Real-Time Monitoring Integration
 
 ```python
+# example-metadata:
+# runnable: false
+
 class PSO_PerformanceMonitor:
     """
     Real-time performance monitoring for PSO optimization process.

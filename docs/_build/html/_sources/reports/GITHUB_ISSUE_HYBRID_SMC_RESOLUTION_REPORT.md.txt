@@ -38,6 +38,9 @@ Impact: 1/4 controllers non-functional, PSO false positives
 
 #### Problematic Implementation
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/smc/hybrid_adaptive_sta_smc.py
 class HybridAdaptiveSTASMC:
     def compute_control(self, state, state_vars, history):
@@ -110,6 +113,9 @@ graph TD
 
 #### Code Changes Applied
 ```python
+# example-metadata:
+# runnable: false
+
 # FIXED IMPLEMENTATION
 class HybridAdaptiveSTASMC:
     def compute_control(self, state, state_vars, history):
@@ -141,6 +147,9 @@ class HybridAdaptiveSTASMC:
 
 #### Result Normalization System
 ```python
+# example-metadata:
+# runnable: false
+
 def _normalize_result(self, result):
     """Ensure result is properly formatted as HybridSTAOutput."""
     if result is None:
@@ -175,6 +184,9 @@ def _extract_control_value(self, active_result):
 
 #### Emergency Reset Mechanisms
 ```python
+# example-metadata:
+# runnable: false
+
 def _check_emergency_conditions(self, u_sat, k1_new, k2_new, u_int_new, s, state):
     """Check for numerical instability requiring emergency reset."""
     state_norm = np.linalg.norm(state[:3])  # Position magnitudes
@@ -323,6 +335,9 @@ python simulate.py --controller hybrid_adaptive_sta_smc --run-pso --seed 42
 
 #### Cross-Controller Compatibility
 ```python
+# example-metadata:
+# runnable: false
+
 def test_all_controllers_operational():
     """Verify all 4 controllers remain operational after hybrid fix."""
     controllers = ['classical_smc', 'adaptive_smc', 'sta_smc', 'hybrid_adaptive_sta_smc']
@@ -366,6 +381,9 @@ repos:
 
 #### Return Statement Validator
 ```python
+# example-metadata:
+# runnable: false
+
 # scripts/validate_return_statements.py
 def validate_return_statements(file_path):
     """Ensure methods with return type annotations have return statements."""
@@ -385,6 +403,9 @@ def validate_return_statements(file_path):
 
 #### Enhanced Type Checking
 ```python
+# example-metadata:
+# runnable: false
+
 def compute_control(self, state, state_vars=None, history=None) -> HybridSTAOutput:
     """Compute control with runtime validation."""
 
@@ -405,6 +426,9 @@ def compute_control(self, state, state_vars=None, history=None) -> HybridSTAOutp
 
 #### Factory-Level Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def create_controller_with_validation(controller_type: str, **kwargs):
     """Create controller with enhanced output validation."""
     controller = _create_controller_impl(controller_type, **kwargs)
@@ -431,6 +455,9 @@ def create_controller_with_validation(controller_type: str, **kwargs):
 
 #### Return Type Test Suite
 ```python
+# example-metadata:
+# runnable: false
+
 class TestControllerReturnTypes:
     """Comprehensive return type validation tests."""
 
@@ -455,6 +482,9 @@ class TestControllerReturnTypes:
 
 #### Integration Test Enhancement
 ```python
+# example-metadata:
+# runnable: false
+
 def test_pso_integration_no_errors(controller_name, caplog):
     """Test PSO optimization produces no runtime errors."""
     tuner = PSOTuner(bounds=get_bounds(controller_name), n_particles=5, iters=10)
@@ -481,6 +511,9 @@ def test_pso_integration_no_errors(controller_name, caplog):
 
 #### Before vs. After Metrics
 ```python
+# example-metadata:
+# runnable: false
+
 production_metrics = {
     'before_fix': {
         'controller_availability': '3/4 (75%)',
@@ -559,6 +592,9 @@ System Reliability Matrix:
 
 **Implementation**:
 ```python
+# example-metadata:
+# runnable: false
+
 # Before (Problematic)
 try:
     result = controller.compute_control(state)
@@ -615,6 +651,9 @@ except Exception as e:
 
 #### Proactive Error Detection
 ```python
+# example-metadata:
+# runnable: false
+
 # Enhanced development workflow
 development_workflow = {
     'pre_commit': [
@@ -665,6 +704,9 @@ static_analysis_stack = {
 
 #### Advanced Testing Framework
 ```python
+# example-metadata:
+# runnable: false
+
 # Property-based testing for controller interfaces
 @given(st.arrays(np.float64, shape=(6,), elements=st.floats(-10, 10)))
 def test_controller_always_returns_valid_output(state):

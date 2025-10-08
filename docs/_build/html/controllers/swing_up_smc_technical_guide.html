@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="SMC Controller Factory System Guide" href="factory_system_guide.html" /><link rel="prev" title="Model Predictive Control Technical Guide" href="mpc_technical_guide.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -796,7 +822,10 @@
 <h4>2.1 Energy Computation Module<a class="headerlink" href="#energy-computation-module" title="Link to this heading">¶</a></h4>
 <p><strong>Function</strong>: <code class="docutils literal notranslate"><span class="pre">dynamics_model.total_energy(state)</span></code></p>
 <p><strong>Implementation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">total_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">total_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute total mechanical energy.</span>
 
@@ -838,7 +867,10 @@
 <section id="mode-transition-logic">
 <h4>2.2 Mode Transition Logic<a class="headerlink" href="#mode-transition-logic" title="Link to this heading">¶</a></h4>
 <p><strong>Helper Functions</strong> (source: <code class="docutils literal notranslate"><span class="pre">swing_up_smc.py:127-152</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_should_switch_to_stabilize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">E_about_bottom</span><span class="p">,</span> <span class="n">θ</span><span class="err">₁</span><span class="p">,</span> <span class="n">θ</span><span class="err">₂</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_should_switch_to_stabilize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">E_about_bottom</span><span class="p">,</span> <span class="n">θ</span><span class="err">₁</span><span class="p">,</span> <span class="n">θ</span><span class="err">₂</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check if conditions met for swing → stabilize.</span>
 
@@ -868,7 +900,10 @@
 </pre></div>
 </div>
 <p><strong>Centralized Update</strong> (lines 154-181):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_update_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">E_about_bottom</span><span class="p">,</span> <span class="n">θ</span><span class="err">₁</span><span class="p">,</span> <span class="n">θ</span><span class="err">₂</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_update_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">E_about_bottom</span><span class="p">,</span> <span class="n">θ</span><span class="err">₁</span><span class="p">,</span> <span class="n">θ</span><span class="err">₂</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate and execute mode transitions.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">==</span> <span class="n">SWING_MODE</span><span class="p">:</span>
         <span class="n">should</span><span class="p">,</span> <span class="n">high_energy</span><span class="p">,</span> <span class="n">small_angles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_switch_to_stabilize</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -888,7 +923,10 @@
 <section id="control-computation">
 <h4>2.3 Control Computation<a class="headerlink" href="#control-computation" title="Link to this heading">¶</a></h4>
 <p><strong>Main Control Method</strong> (source: <code class="docutils literal notranslate"><span class="pre">swing_up_smc.py:185-233</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute control based on current mode.</span>
 
@@ -985,22 +1023,32 @@
 </div>
 </li>
 <li><p><strong>Optional Methods</strong> (for proper initialization):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">initialize_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return initial controller state.&quot;&quot;&quot;</span>
-    <span class="o">...</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">initialize_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return initial history dict.&quot;&quot;&quot;</span>
-    <span class="o">...</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Attributes</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># Force saturation limit (fallback to np.inf)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
 </ol>
+</section>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false">
+<h1>runnable: false<a class="headerlink" href="#runnable-false" title="Link to this heading">¶</a></h1>
+<p>def initialize_state(self) -&gt; Tuple:
+“””Return initial controller state.”””
+…</p>
+<p>def initialize_history(self) -&gt; Dict:
+“””Return initial history dict.”””
+…</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="mf">3.</span> <span class="o">**</span><span class="n">Attributes</span><span class="o">**</span><span class="p">:</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># Force saturation limit (fallback to np.inf)</span>
+</pre></div>
+</div>
 <p><strong>Compatible Controllers</strong>:</p>
 <ul class="simple">
 <li><p>✅ ClassicalSMC</p></li>
@@ -1009,10 +1057,8 @@
 <li><p>✅ HybridAdaptiveSTASMC</p></li>
 <li><p>✅ MPCController (with wrapper)</p></li>
 </ul>
-</section>
-</section>
 <section id="state-management">
-<h3>3. State Management<a class="headerlink" href="#state-management" title="Link to this heading">¶</a></h3>
+<h2>3. State Management<a class="headerlink" href="#state-management" title="Link to this heading">¶</a></h2>
 <p><strong>Controller State</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">_mode</span><span class="p">:</span> <span class="n">Mode</span>  <span class="c1"># &quot;swing&quot; or &quot;stabilize&quot;</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">_switch_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>  <span class="c1"># Time of last handoff</span>
@@ -1035,7 +1081,6 @@
 <li><p>1.0: At upright (target)</p></li>
 </ul>
 </section>
-</section>
 <hr class="docutils" />
 <section id="implementation-details">
 <h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Link to this heading">¶</a></h2>
@@ -1043,7 +1088,10 @@
 <h3>1. Full Source Code Structure<a class="headerlink" href="#full-source-code-structure" title="Link to this heading">¶</a></h3>
 <p><strong>File</strong>: <code class="docutils literal notranslate"><span class="pre">src/controllers/specialized/swing_up_smc.py</span></code> (242 lines)</p>
 <p><strong>Key Classes and Functions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SwingUpSMC</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SwingUpSMC</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Energy-based swing-up with hysteresis handoff.</span>
 
@@ -1140,7 +1188,10 @@
 </section>
 <section id="stabilizer-delegation-lines-220-233">
 <h4>2.3 Stabilizer Delegation (Lines 220-233)<a class="headerlink" href="#stabilizer-delegation-lines-220-233" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lazy initialization on first stabilize entry</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Lazy initialization on first stabilize entry</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stabilizer_initialized</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stabilizer</span><span class="p">,</span> <span class="s2">&quot;initialize_state&quot;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stab_state_vars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stabilizer</span><span class="o">.</span><span class="n">initialize_state</span><span class="p">()</span>
@@ -1177,7 +1228,10 @@
 </section>
 <section id="hysteresis-validation-lines-79-83">
 <h4>2.4 Hysteresis Validation (Lines 79-83)<a class="headerlink" href="#hysteresis-validation-lines-79-83" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Validate hysteresis band</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Validate hysteresis band</span>
 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exit_energy_factor</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_energy_factor</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
         <span class="s2">&quot;exit_energy_factor must be &lt; switch_energy_factor to create deadband&quot;</span>
@@ -1197,7 +1251,10 @@
 <li><p>Angle tolerance ordering prevents premature re-swing</p></li>
 </ul>
 <p><strong>Example Invalid Config</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This will raise ValueError:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># This will raise ValueError:</span>
 <span class="n">SwingUpSMC</span><span class="p">(</span>
     <span class="o">...</span><span class="p">,</span>
     <span class="n">switch_energy_factor</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
@@ -1311,7 +1368,10 @@
 <li><p>If specified: Must be ≥ <code class="docutils literal notranslate"><span class="pre">switch_angle_tolerance</span></code></p></li>
 </ul>
 <p><strong>Asymmetric Example</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SwingUpSMC</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">SwingUpSMC</span><span class="p">(</span>
     <span class="o">...</span><span class="p">,</span>
     <span class="n">switch_angle_tolerance</span><span class="o">=</span><span class="mf">0.35</span><span class="p">,</span>    <span class="c1"># 20° for handoff</span>
     <span class="n">reentry_angle_tolerance</span><span class="o">=</span><span class="mf">0.50</span>    <span class="c1"># 28.6° for re-swing (more forgiving)</span>
@@ -1364,7 +1424,10 @@
 <h4>2.2 Stabilizer Gain Tuning<a class="headerlink" href="#stabilizer-gain-tuning" title="Link to this heading">¶</a></h4>
 <p><strong>Important</strong>: Stabilizer must be robust near handoff region (±20°)</p>
 <p><strong>Classical SMC Example</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conservative gains for handoff robustness</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Conservative gains for handoff robustness</span>
 <span class="n">stabilizer</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span>
     <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>  <span class="c1"># [k1, k2, λ1, λ2, K, kd]</span>
     <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>          <span class="c1"># Smooth handoff</span>
@@ -1379,7 +1442,10 @@
 </pre></div>
 </div>
 <p><strong>Super-Twisting SMC Example</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aggressive finite-time convergence</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Aggressive finite-time convergence</span>
 <span class="n">stabilizer</span> <span class="o">=</span> <span class="n">SuperTwistingSMC</span><span class="p">(</span>
     <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>  <span class="c1"># [K1, K2, k1, k2, λ1, λ2]</span>
     <span class="n">max_force</span><span class="o">=</span><span class="n">max_force</span>
@@ -1487,7 +1553,10 @@
 </section>
 <section id="simulation-loop">
 <h4>1.2 Simulation Loop<a class="headerlink" href="#simulation-loop" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial state: down-down (fully inverted)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Initial state: down-down (fully inverted)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
 
 <span class="c1"># Initialize controller state</span>
@@ -1570,7 +1639,10 @@
 </section>
 <section id="wrapped-factory-method-custom">
 <h4>2.2 Wrapped Factory Method (Custom)<a class="headerlink" href="#wrapped-factory-method-custom" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_swing_up_controller</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_swing_up_controller</span><span class="p">(</span>
     <span class="n">stabilizer_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">stabilizer_gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">swing_up_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
@@ -1613,7 +1685,10 @@
 <section id="multi-stabilizer-strategy">
 <h4>3.1 Multi-Stabilizer Strategy<a class="headerlink" href="#multi-stabilizer-strategy" title="Link to this heading">¶</a></h4>
 <p><strong>Idea</strong>: Use different stabilizers for different regions</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aggressive stabilizer for near-upright</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Aggressive stabilizer for near-upright</span>
 <span class="n">stabilizer_near</span> <span class="o">=</span> <span class="n">SuperTwistingSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">],</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
 
 <span class="c1"># Conservative stabilizer for larger angles</span>
@@ -1901,7 +1976,10 @@
 <li><p><strong>Measurement Noise</strong>: Energy calculation noisy</p></li>
 </ol>
 <p><strong>Solutions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Widen hysteresis band</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># 1. Widen hysteresis band</span>
 <span class="n">swing_up</span><span class="o">.</span><span class="n">exit_energy_factor</span> <span class="o">=</span> <span class="mf">0.85</span>  <span class="c1"># From 0.90 (wider band)</span>
 
 <span class="c1"># 2. Use stronger stabilizer</span>
@@ -1927,7 +2005,10 @@
 <li><p><strong>Incorrect Stabilizer State</strong>: Not properly initialized</p></li>
 </ol>
 <p><strong>Solutions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Use smoother stabilizer</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># 1. Use smoother stabilizer</span>
 <span class="n">stabilizer</span> <span class="o">=</span> <span class="n">SuperTwistingSMC</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>  <span class="c1"># Continuous control</span>
 
 <span class="c1"># 2. Tighten handoff criteria</span>
@@ -1956,7 +2037,10 @@
 <li><p><strong>Numerical Issues</strong>: NaN/Inf in energy calculation</p></li>
 </ol>
 <p><strong>Solutions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Implement total_energy() in dynamics</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># 1. Implement total_energy() in dynamics</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MyDynamics</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
         <span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kinetic_energy</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -2001,7 +2085,10 @@
 <section id="diagnostic-tools">
 <h3>3. Diagnostic Tools<a class="headerlink" href="#diagnostic-tools" title="Link to this heading">¶</a></h3>
 <p><strong>Energy Monitoring</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">diagnose_energy</span><span class="p">(</span><span class="n">swing_up</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">diagnose_energy</span><span class="p">(</span><span class="n">swing_up</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Print detailed energy diagnostics.&quot;&quot;&quot;</span>
     <span class="n">E_current</span> <span class="o">=</span> <span class="n">swing_up</span><span class="o">.</span><span class="n">dyn</span><span class="o">.</span><span class="n">total_energy</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">E_about_bottom</span> <span class="o">=</span> <span class="n">swing_up</span><span class="o">.</span><span class="n">E_bottom</span> <span class="o">-</span> <span class="n">E_current</span>
@@ -2020,7 +2107,10 @@
 </pre></div>
 </div>
 <p><strong>Mode Transition Analysis</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_transitions</span><span class="p">(</span><span class="n">history_list</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_transitions</span><span class="p">(</span><span class="n">history_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze mode switching behavior.&quot;&quot;&quot;</span>
     <span class="n">transitions</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">prev_mode</span> <span class="o">=</span> <span class="n">history_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="s2">&quot;swing&quot;</span><span class="p">)</span>
@@ -2143,7 +2233,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -2196,9 +2286,13 @@
 <li><a class="reference internal" href="#stabilizer-integration">2.4 Stabilizer Integration</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#state-management">3. State Management</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false">runnable: false</a><ul>
+<li><a class="reference internal" href="#state-management">3. State Management</a></li>
 <li><a class="reference internal" href="#implementation-details">Implementation Details</a><ul>
 <li><a class="reference internal" href="#full-source-code-structure">1. Full Source Code Structure</a></li>
 <li><a class="reference internal" href="#critical-code-sections">2. Critical Code Sections</a><ul>

@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -503,312 +529,311 @@
 <span class="linenos">  7</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos">  8</span>
 <span class="linenos">  9</span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="linenos"> 10</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 <span class="linenos"> 11</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 12</span>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseOrchestrator</span>
 <span class="linenos"> 14</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResultContainer</span>
 <span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.time_domain</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealTimeScheduler</span>
-<span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">..results.containers</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardResultContainer</span>
+<span class="linenos"> 16</span>
 <span class="linenos"> 17</span>
-<span class="linenos"> 18</span>
-<span class="linenos"> 19</span><span class="k">class</span><span class="w"> </span><span class="nc">RealTimeOrchestrator</span><span class="p">(</span><span class="n">BaseOrchestrator</span><span class="p">):</span>
-<span class="linenos"> 20</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Real-time simulation orchestrator with timing constraints.</span>
-<span class="linenos"> 21</span>
-<span class="linenos"> 22</span><span class="sd">    This orchestrator executes simulations with real-time timing constraints,</span>
-<span class="linenos"> 23</span><span class="sd">    useful for hardware-in-the-loop testing and real-time control verification.</span>
-<span class="linenos"> 24</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos"> 25</span>
-<span class="linenos"> 26</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">real_time_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">):</span>
-<span class="linenos"> 27</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize real-time orchestrator.</span>
-<span class="linenos"> 28</span>
-<span class="linenos"> 29</span><span class="sd">        Parameters</span>
-<span class="linenos"> 30</span><span class="sd">        ----------</span>
-<span class="linenos"> 31</span><span class="sd">        context : SimulationContext</span>
-<span class="linenos"> 32</span><span class="sd">            Simulation context</span>
-<span class="linenos"> 33</span><span class="sd">        real_time_factor : float, optional</span>
-<span class="linenos"> 34</span><span class="sd">            Real-time scaling factor (1.0 = real-time, 0.5 = half-speed, etc.)</span>
-<span class="linenos"> 35</span><span class="sd">        tolerance : float, optional</span>
-<span class="linenos"> 36</span><span class="sd">            Timing tolerance in seconds</span>
-<span class="linenos"> 37</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos"> 38</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-<span class="linenos"> 39</span>        <span class="bp">self</span><span class="o">.</span><span class="n">real_time_factor</span> <span class="o">=</span> <span class="n">real_time_factor</span>
-<span class="linenos"> 40</span>        <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="n">tolerance</span>
-<span class="linenos"> 41</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos"> 42</span>
-<span class="linenos"> 43</span>    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos"> 44</span>               <span class="n">initial_state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos"> 45</span>               <span class="n">control_inputs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos"> 46</span>               <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos"> 47</span>               <span class="n">horizon</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="linenos"> 48</span>               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResultContainer</span><span class="p">:</span>
-<span class="linenos"> 49</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute real-time simulation.</span>
-<span class="linenos"> 50</span>
-<span class="linenos"> 51</span><span class="sd">        Parameters</span>
-<span class="linenos"> 52</span><span class="sd">        ----------</span>
-<span class="linenos"> 53</span><span class="sd">        initial_state : np.ndarray</span>
-<span class="linenos"> 54</span><span class="sd">            Initial state vector</span>
-<span class="linenos"> 55</span><span class="sd">        control_inputs : np.ndarray</span>
-<span class="linenos"> 56</span><span class="sd">            Control input sequence or controller function</span>
-<span class="linenos"> 57</span><span class="sd">        dt : float</span>
-<span class="linenos"> 58</span><span class="sd">            Time step</span>
-<span class="linenos"> 59</span><span class="sd">        horizon : int</span>
-<span class="linenos"> 60</span><span class="sd">            Simulation horizon</span>
-<span class="linenos"> 61</span><span class="sd">        **kwargs</span>
-<span class="linenos"> 62</span><span class="sd">            Additional options</span>
-<span class="linenos"> 63</span>
-<span class="linenos"> 64</span><span class="sd">        Returns</span>
-<span class="linenos"> 65</span><span class="sd">        -------</span>
-<span class="linenos"> 66</span><span class="sd">        ResultContainer</span>
-<span class="linenos"> 67</span><span class="sd">            Real-time simulation results</span>
-<span class="linenos"> 68</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos"> 69</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_simulation_inputs</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">control_inputs</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span><span class="p">)</span>
-<span class="linenos"> 70</span>
-<span class="linenos"> 71</span>        <span class="c1"># Adjust dt for real-time factor</span>
-<span class="linenos"> 72</span>        <span class="n">scaled_dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_time_factor</span>
-<span class="linenos"> 73</span>
-<span class="linenos"> 74</span>        <span class="c1"># Initialize real-time scheduler</span>
-<span class="linenos"> 75</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span> <span class="o">=</span> <span class="n">RealTimeScheduler</span><span class="p">(</span><span class="n">scaled_dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">)</span>
-<span class="linenos"> 76</span>
-<span class="linenos"> 77</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="linenos"> 78</span>
-<span class="linenos"> 79</span>        <span class="c1"># Extract options</span>
-<span class="linenos"> 80</span>        <span class="n">controller</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;controller&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="linenos"> 81</span>        <span class="n">safety_guards</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;safety_guards&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="linenos"> 82</span>        <span class="n">stop_fn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stop_fn&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="linenos"> 83</span>        <span class="n">t0</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="linenos"> 84</span>        <span class="n">deadline_miss_handler</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;deadline_miss_handler&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="linenos"> 85</span>
-<span class="linenos"> 86</span>        <span class="c1"># Prepare arrays</span>
-<span class="linenos"> 87</span>        <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">horizon</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="linenos"> 88</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)))</span>
-<span class="linenos"> 89</span>        <span class="n">controls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">horizon</span><span class="p">)</span>
-<span class="linenos"> 90</span>        <span class="n">deadline_misses</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos"> 91</span>
-<span class="linenos"> 92</span>        <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_state</span>
-<span class="linenos"> 93</span>
-<span class="linenos"> 94</span>        <span class="c1"># Main real-time simulation loop</span>
-<span class="linenos"> 95</span>        <span class="n">current_state</span> <span class="o">=</span> <span class="n">initial_state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="linenos"> 96</span>
-<span class="linenos"> 97</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">horizon</span><span class="p">):</span>
-<span class="linenos"> 98</span>            <span class="c1"># Start timing for this step</span>
-<span class="linenos"> 99</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">start_step</span><span class="p">()</span>
-<span class="linenos">100</span>
-<span class="linenos">101</span>            <span class="c1"># Check stop condition</span>
-<span class="linenos">102</span>            <span class="k">if</span> <span class="n">stop_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">stop_fn</span><span class="p">(</span><span class="n">current_state</span><span class="p">):</span>
-<span class="linenos">103</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">104</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">105</span>                <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">106</span>                <span class="k">break</span>
-<span class="linenos">107</span>
-<span class="linenos">108</span>            <span class="c1"># Apply safety guards</span>
-<span class="linenos">109</span>            <span class="k">if</span> <span class="n">safety_guards</span><span class="p">:</span>
-<span class="linenos">110</span>                <span class="k">try</span><span class="p">:</span>
-<span class="linenos">111</span>                    <span class="kn">from</span><span class="w"> </span><span class="nn">..safety.guards</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_safety_guards</span>
-<span class="linenos">112</span>                    <span class="n">apply_safety_guards</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
-<span class="linenos">113</span>                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">114</span>                    <span class="k">break</span>
-<span class="linenos">115</span>
-<span class="linenos">116</span>            <span class="c1"># Compute control input</span>
-<span class="linenos">117</span>            <span class="k">if</span> <span class="n">controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">118</span>                <span class="k">try</span><span class="p">:</span>
-<span class="linenos">119</span>                    <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_control</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">current_state</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-<span class="linenos">120</span>                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">121</span>                    <span class="k">if</span> <span class="n">deadline_miss_handler</span><span class="p">:</span>
-<span class="linenos">122</span>                        <span class="n">control</span> <span class="o">=</span> <span class="n">deadline_miss_handler</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">current_state</span><span class="p">)</span>
-<span class="linenos">123</span>                    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">124</span>                        <span class="n">control</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Safe fallback</span>
-<span class="linenos">125</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">126</span>                <span class="c1"># Use pre-computed control sequence</span>
-<span class="linenos">127</span>                <span class="k">if</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">128</span>                    <span class="n">control</span> <span class="o">=</span> <span class="n">control_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">control_inputs</span><span class="p">)</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="linenos">129</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">130</span>                    <span class="n">control</span> <span class="o">=</span> <span class="n">control_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="linenos">131</span>
-<span class="linenos">132</span>            <span class="n">controls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">control</span>
-<span class="linenos">133</span>
-<span class="linenos">134</span>            <span class="c1"># Execute simulation step</span>
-<span class="linenos">135</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">136</span>                <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">control</span><span class="p">]),</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="linenos">137</span>
-<span class="linenos">138</span>                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-<span class="linenos">139</span>                    <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">140</span>                    <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">141</span>                    <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">142</span>                    <span class="k">break</span>
-<span class="linenos">143</span>
-<span class="linenos">144</span>                <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_state</span>
-<span class="linenos">145</span>                <span class="n">current_state</span> <span class="o">=</span> <span class="n">next_state</span>
-<span class="linenos">146</span>
-<span class="linenos">147</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="linenos">148</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">149</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">150</span>                <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-<span class="linenos">151</span>                <span class="k">break</span>
-<span class="linenos">152</span>
-<span class="linenos">153</span>            <span class="c1"># Wait for next step deadline</span>
-<span class="linenos">154</span>            <span class="n">deadline_met</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">wait_for_next_step</span><span class="p">()</span>
-<span class="linenos">155</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">deadline_met</span><span class="p">:</span>
-<span class="linenos">156</span>                <span class="n">deadline_misses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="linenos">157</span>
-<span class="linenos">158</span>        <span class="c1"># Update statistics</span>
-<span class="linenos">159</span>        <span class="n">execution_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
-<span class="linenos">160</span>        <span class="n">actual_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
-<span class="linenos">161</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_update_stats</span><span class="p">(</span><span class="n">actual_steps</span><span class="p">,</span> <span class="n">execution_time</span><span class="p">)</span>
-<span class="linenos">162</span>
-<span class="linenos">163</span>        <span class="c1"># Create result container with timing information</span>
-<span class="linenos">164</span>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_result_container</span><span class="p">()</span>
-<span class="linenos">165</span>        <span class="n">result</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">)</span>
-<span class="linenos">166</span>
-<span class="linenos">167</span>        <span class="c1"># Add timing statistics</span>
-<span class="linenos">168</span>        <span class="n">timing_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">get_timing_stats</span><span class="p">()</span>
-<span class="linenos">169</span>        <span class="n">timing_stats</span><span class="p">[</span><span class="s1">&#39;deadline_misses&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deadline_misses</span>
-<span class="linenos">170</span>        <span class="n">timing_stats</span><span class="p">[</span><span class="s1">&#39;execution_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">execution_time</span>
-<span class="linenos">171</span>        <span class="n">timing_stats</span><span class="p">[</span><span class="s1">&#39;real_time_factor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_time_factor</span>
-<span class="linenos">172</span>
-<span class="linenos">173</span>        <span class="n">result</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{})</span>
-<span class="linenos">174</span>        <span class="n">result</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;timing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timing_stats</span>
-<span class="linenos">175</span>
-<span class="linenos">176</span>        <span class="k">return</span> <span class="n">result</span>
-<span class="linenos">177</span>
-<span class="linenos">178</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos">179</span>                        <span class="n">controller</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos">180</span>                        <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">181</span>                        <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="linenos">182</span>                        <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos">183</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute control input with timing measurement.&quot;&quot;&quot;</span>
-<span class="linenos">184</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="linenos">185</span>
-<span class="linenos">186</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">187</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;compute_control&#39;</span><span class="p">):</span>
-<span class="linenos">188</span>                <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="linenos">189</span>                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
-<span class="linenos">190</span>                    <span class="n">control</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="linenos">191</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">192</span>                    <span class="n">control</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="linenos">193</span>            <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="n">controller</span><span class="p">):</span>
-<span class="linenos">194</span>                <span class="n">control</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">controller</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
-<span class="linenos">195</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">196</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Controller must be callable or have compute_control method&quot;</span><span class="p">)</span>
-<span class="linenos">197</span>
-<span class="linenos">198</span>            <span class="n">computation_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
-<span class="linenos">199</span>
-<span class="linenos">200</span>            <span class="c1"># Check if computation exceeded time budget</span>
-<span class="linenos">201</span>            <span class="n">time_budget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">target_dt</span>
-<span class="linenos">202</span>            <span class="k">if</span> <span class="n">computation_time</span> <span class="o">&gt;</span> <span class="n">time_budget</span><span class="p">:</span>
-<span class="linenos">203</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Control computation at step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">computation_time</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s &quot;</span>
-<span class="linenos">204</span>                      <span class="sa">f</span><span class="s2">&quot;(budget: </span><span class="si">{</span><span class="n">time_budget</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s)&quot;</span><span class="p">)</span>
-<span class="linenos">205</span>
-<span class="linenos">206</span>            <span class="k">return</span> <span class="n">control</span>
-<span class="linenos">207</span>
-<span class="linenos">208</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">209</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control computation failed at step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">210</span>            <span class="k">raise</span>
-<span class="linenos">211</span>
-<span class="linenos">212</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_real_time_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="linenos">213</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get real-time execution statistics.&quot;&quot;&quot;</span>
-<span class="linenos">214</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">215</span>            <span class="k">return</span> <span class="p">{}</span>
-<span class="linenos">216</span>
-<span class="linenos">217</span>        <span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">get_timing_stats</span><span class="p">()</span>
-<span class="linenos">218</span>        <span class="n">stats</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_execution_statistics</span><span class="p">())</span>
-<span class="linenos">219</span>        <span class="k">return</span> <span class="n">stats</span>
-<span class="linenos">220</span>
-<span class="linenos">221</span>    <span class="k">def</span><span class="w"> </span><span class="nf">set_real_time_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">222</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set real-time scaling factor.</span>
-<span class="linenos">223</span>
-<span class="linenos">224</span><span class="sd">        Parameters</span>
-<span class="linenos">225</span><span class="sd">        ----------</span>
-<span class="linenos">226</span><span class="sd">        factor : float</span>
-<span class="linenos">227</span><span class="sd">            Real-time factor (1.0 = real-time, 0.5 = half-speed, etc.)</span>
-<span class="linenos">228</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">229</span>        <span class="bp">self</span><span class="o">.</span><span class="n">real_time_factor</span> <span class="o">=</span> <span class="n">factor</span>
-<span class="linenos">230</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="p">:</span>
-<span class="linenos">231</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">target_dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_dt</span> <span class="o">/</span> <span class="n">factor</span>
+<span class="linenos"> 18</span><span class="k">class</span><span class="w"> </span><span class="nc">RealTimeOrchestrator</span><span class="p">(</span><span class="n">BaseOrchestrator</span><span class="p">):</span>
+<span class="linenos"> 19</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Real-time simulation orchestrator with timing constraints.</span>
+<span class="linenos"> 20</span>
+<span class="linenos"> 21</span><span class="sd">    This orchestrator executes simulations with real-time timing constraints,</span>
+<span class="linenos"> 22</span><span class="sd">    useful for hardware-in-the-loop testing and real-time control verification.</span>
+<span class="linenos"> 23</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">real_time_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">):</span>
+<span class="linenos"> 26</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize real-time orchestrator.</span>
+<span class="linenos"> 27</span>
+<span class="linenos"> 28</span><span class="sd">        Parameters</span>
+<span class="linenos"> 29</span><span class="sd">        ----------</span>
+<span class="linenos"> 30</span><span class="sd">        context : SimulationContext</span>
+<span class="linenos"> 31</span><span class="sd">            Simulation context</span>
+<span class="linenos"> 32</span><span class="sd">        real_time_factor : float, optional</span>
+<span class="linenos"> 33</span><span class="sd">            Real-time scaling factor (1.0 = real-time, 0.5 = half-speed, etc.)</span>
+<span class="linenos"> 34</span><span class="sd">        tolerance : float, optional</span>
+<span class="linenos"> 35</span><span class="sd">            Timing tolerance in seconds</span>
+<span class="linenos"> 36</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 37</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+<span class="linenos"> 38</span>        <span class="bp">self</span><span class="o">.</span><span class="n">real_time_factor</span> <span class="o">=</span> <span class="n">real_time_factor</span>
+<span class="linenos"> 39</span>        <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="n">tolerance</span>
+<span class="linenos"> 40</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 41</span>
+<span class="linenos"> 42</span>    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos"> 43</span>               <span class="n">initial_state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos"> 44</span>               <span class="n">control_inputs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos"> 45</span>               <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos"> 46</span>               <span class="n">horizon</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="linenos"> 47</span>               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResultContainer</span><span class="p">:</span>
+<span class="linenos"> 48</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute real-time simulation.</span>
+<span class="linenos"> 49</span>
+<span class="linenos"> 50</span><span class="sd">        Parameters</span>
+<span class="linenos"> 51</span><span class="sd">        ----------</span>
+<span class="linenos"> 52</span><span class="sd">        initial_state : np.ndarray</span>
+<span class="linenos"> 53</span><span class="sd">            Initial state vector</span>
+<span class="linenos"> 54</span><span class="sd">        control_inputs : np.ndarray</span>
+<span class="linenos"> 55</span><span class="sd">            Control input sequence or controller function</span>
+<span class="linenos"> 56</span><span class="sd">        dt : float</span>
+<span class="linenos"> 57</span><span class="sd">            Time step</span>
+<span class="linenos"> 58</span><span class="sd">        horizon : int</span>
+<span class="linenos"> 59</span><span class="sd">            Simulation horizon</span>
+<span class="linenos"> 60</span><span class="sd">        **kwargs</span>
+<span class="linenos"> 61</span><span class="sd">            Additional options</span>
+<span class="linenos"> 62</span>
+<span class="linenos"> 63</span><span class="sd">        Returns</span>
+<span class="linenos"> 64</span><span class="sd">        -------</span>
+<span class="linenos"> 65</span><span class="sd">        ResultContainer</span>
+<span class="linenos"> 66</span><span class="sd">            Real-time simulation results</span>
+<span class="linenos"> 67</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 68</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_simulation_inputs</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">control_inputs</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span><span class="p">)</span>
+<span class="linenos"> 69</span>
+<span class="linenos"> 70</span>        <span class="c1"># Adjust dt for real-time factor</span>
+<span class="linenos"> 71</span>        <span class="n">scaled_dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_time_factor</span>
+<span class="linenos"> 72</span>
+<span class="linenos"> 73</span>        <span class="c1"># Initialize real-time scheduler</span>
+<span class="linenos"> 74</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span> <span class="o">=</span> <span class="n">RealTimeScheduler</span><span class="p">(</span><span class="n">scaled_dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">)</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="linenos"> 77</span>
+<span class="linenos"> 78</span>        <span class="c1"># Extract options</span>
+<span class="linenos"> 79</span>        <span class="n">controller</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;controller&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 80</span>        <span class="n">safety_guards</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;safety_guards&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 81</span>        <span class="n">stop_fn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stop_fn&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 82</span>        <span class="n">t0</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos"> 83</span>        <span class="n">deadline_miss_handler</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;deadline_miss_handler&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 84</span>
+<span class="linenos"> 85</span>        <span class="c1"># Prepare arrays</span>
+<span class="linenos"> 86</span>        <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">horizon</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 87</span>        <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)))</span>
+<span class="linenos"> 88</span>        <span class="n">controls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">horizon</span><span class="p">)</span>
+<span class="linenos"> 89</span>        <span class="n">deadline_misses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 90</span>
+<span class="linenos"> 91</span>        <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_state</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span>        <span class="c1"># Main real-time simulation loop</span>
+<span class="linenos"> 94</span>        <span class="n">current_state</span> <span class="o">=</span> <span class="n">initial_state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos"> 95</span>
+<span class="linenos"> 96</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">horizon</span><span class="p">):</span>
+<span class="linenos"> 97</span>            <span class="c1"># Start timing for this step</span>
+<span class="linenos"> 98</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">start_step</span><span class="p">()</span>
+<span class="linenos"> 99</span>
+<span class="linenos">100</span>            <span class="c1"># Check stop condition</span>
+<span class="linenos">101</span>            <span class="k">if</span> <span class="n">stop_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">stop_fn</span><span class="p">(</span><span class="n">current_state</span><span class="p">):</span>
+<span class="linenos">102</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">103</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">104</span>                <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">105</span>                <span class="k">break</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span>            <span class="c1"># Apply safety guards</span>
+<span class="linenos">108</span>            <span class="k">if</span> <span class="n">safety_guards</span><span class="p">:</span>
+<span class="linenos">109</span>                <span class="k">try</span><span class="p">:</span>
+<span class="linenos">110</span>                    <span class="kn">from</span><span class="w"> </span><span class="nn">..safety.guards</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_safety_guards</span>
+<span class="linenos">111</span>                    <span class="n">apply_safety_guards</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+<span class="linenos">112</span>                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">113</span>                    <span class="k">break</span>
+<span class="linenos">114</span>
+<span class="linenos">115</span>            <span class="c1"># Compute control input</span>
+<span class="linenos">116</span>            <span class="k">if</span> <span class="n">controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">117</span>                <span class="k">try</span><span class="p">:</span>
+<span class="linenos">118</span>                    <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_control</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">current_state</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="linenos">119</span>                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">120</span>                    <span class="k">if</span> <span class="n">deadline_miss_handler</span><span class="p">:</span>
+<span class="linenos">121</span>                        <span class="n">control</span> <span class="o">=</span> <span class="n">deadline_miss_handler</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">current_state</span><span class="p">)</span>
+<span class="linenos">122</span>                    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">123</span>                        <span class="n">control</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Safe fallback</span>
+<span class="linenos">124</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">125</span>                <span class="c1"># Use pre-computed control sequence</span>
+<span class="linenos">126</span>                <span class="k">if</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">127</span>                    <span class="n">control</span> <span class="o">=</span> <span class="n">control_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">control_inputs</span><span class="p">)</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="linenos">128</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">129</span>                    <span class="n">control</span> <span class="o">=</span> <span class="n">control_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">control_inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="linenos">130</span>
+<span class="linenos">131</span>            <span class="n">controls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">control</span>
+<span class="linenos">132</span>
+<span class="linenos">133</span>            <span class="c1"># Execute simulation step</span>
+<span class="linenos">134</span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos">135</span>                <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">control</span><span class="p">]),</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos">136</span>
+<span class="linenos">137</span>                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+<span class="linenos">138</span>                    <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">139</span>                    <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">140</span>                    <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">141</span>                    <span class="k">break</span>
+<span class="linenos">142</span>
+<span class="linenos">143</span>                <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_state</span>
+<span class="linenos">144</span>                <span class="n">current_state</span> <span class="o">=</span> <span class="n">next_state</span>
+<span class="linenos">145</span>
+<span class="linenos">146</span>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">147</span>                <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">148</span>                <span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">149</span>                <span class="n">controls</span> <span class="o">=</span> <span class="n">controls</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">150</span>                <span class="k">break</span>
+<span class="linenos">151</span>
+<span class="linenos">152</span>            <span class="c1"># Wait for next step deadline</span>
+<span class="linenos">153</span>            <span class="n">deadline_met</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">wait_for_next_step</span><span class="p">()</span>
+<span class="linenos">154</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">deadline_met</span><span class="p">:</span>
+<span class="linenos">155</span>                <span class="n">deadline_misses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="linenos">156</span>
+<span class="linenos">157</span>        <span class="c1"># Update statistics</span>
+<span class="linenos">158</span>        <span class="n">execution_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="linenos">159</span>        <span class="n">actual_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
+<span class="linenos">160</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_update_stats</span><span class="p">(</span><span class="n">actual_steps</span><span class="p">,</span> <span class="n">execution_time</span><span class="p">)</span>
+<span class="linenos">161</span>
+<span class="linenos">162</span>        <span class="c1"># Create result container with timing information</span>
+<span class="linenos">163</span>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_result_container</span><span class="p">()</span>
+<span class="linenos">164</span>        <span class="n">result</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">)</span>
+<span class="linenos">165</span>
+<span class="linenos">166</span>        <span class="c1"># Add timing statistics</span>
+<span class="linenos">167</span>        <span class="n">timing_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">get_timing_stats</span><span class="p">()</span>
+<span class="linenos">168</span>        <span class="n">timing_stats</span><span class="p">[</span><span class="s1">&#39;deadline_misses&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deadline_misses</span>
+<span class="linenos">169</span>        <span class="n">timing_stats</span><span class="p">[</span><span class="s1">&#39;execution_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">execution_time</span>
+<span class="linenos">170</span>        <span class="n">timing_stats</span><span class="p">[</span><span class="s1">&#39;real_time_factor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_time_factor</span>
+<span class="linenos">171</span>
+<span class="linenos">172</span>        <span class="n">result</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="linenos">173</span>        <span class="n">result</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;timing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timing_stats</span>
+<span class="linenos">174</span>
+<span class="linenos">175</span>        <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">176</span>
+<span class="linenos">177</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos">178</span>                        <span class="n">controller</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos">179</span>                        <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">180</span>                        <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="linenos">181</span>                        <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">182</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute control input with timing measurement.&quot;&quot;&quot;</span>
+<span class="linenos">183</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="linenos">184</span>
+<span class="linenos">185</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">186</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="s1">&#39;compute_control&#39;</span><span class="p">):</span>
+<span class="linenos">187</span>                <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos">188</span>                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+<span class="linenos">189</span>                    <span class="n">control</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">190</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">191</span>                    <span class="n">control</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="linenos">192</span>            <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="n">controller</span><span class="p">):</span>
+<span class="linenos">193</span>                <span class="n">control</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">controller</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
+<span class="linenos">194</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">195</span>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Controller must be callable or have compute_control method&quot;</span><span class="p">)</span>
+<span class="linenos">196</span>
+<span class="linenos">197</span>            <span class="n">computation_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="linenos">198</span>
+<span class="linenos">199</span>            <span class="c1"># Check if computation exceeded time budget</span>
+<span class="linenos">200</span>            <span class="n">time_budget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">target_dt</span>
+<span class="linenos">201</span>            <span class="k">if</span> <span class="n">computation_time</span> <span class="o">&gt;</span> <span class="n">time_budget</span><span class="p">:</span>
+<span class="linenos">202</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Control computation at step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">computation_time</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s &quot;</span>
+<span class="linenos">203</span>                      <span class="sa">f</span><span class="s2">&quot;(budget: </span><span class="si">{</span><span class="n">time_budget</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s)&quot;</span><span class="p">)</span>
+<span class="linenos">204</span>
+<span class="linenos">205</span>            <span class="k">return</span> <span class="n">control</span>
+<span class="linenos">206</span>
+<span class="linenos">207</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">208</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control computation failed at step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">209</span>            <span class="k">raise</span>
+<span class="linenos">210</span>
+<span class="linenos">211</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_real_time_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="linenos">212</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get real-time execution statistics.&quot;&quot;&quot;</span>
+<span class="linenos">213</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">214</span>            <span class="k">return</span> <span class="p">{}</span>
+<span class="linenos">215</span>
+<span class="linenos">216</span>        <span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">get_timing_stats</span><span class="p">()</span>
+<span class="linenos">217</span>        <span class="n">stats</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_execution_statistics</span><span class="p">())</span>
+<span class="linenos">218</span>        <span class="k">return</span> <span class="n">stats</span>
+<span class="linenos">219</span>
+<span class="linenos">220</span>    <span class="k">def</span><span class="w"> </span><span class="nf">set_real_time_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">221</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set real-time scaling factor.</span>
+<span class="linenos">222</span>
+<span class="linenos">223</span><span class="sd">        Parameters</span>
+<span class="linenos">224</span><span class="sd">        ----------</span>
+<span class="linenos">225</span><span class="sd">        factor : float</span>
+<span class="linenos">226</span><span class="sd">            Real-time factor (1.0 = real-time, 0.5 = half-speed, etc.)</span>
+<span class="linenos">227</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">228</span>        <span class="bp">self</span><span class="o">.</span><span class="n">real_time_factor</span> <span class="o">=</span> <span class="n">factor</span>
+<span class="linenos">229</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="p">:</span>
+<span class="linenos">230</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">target_dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_dt</span> <span class="o">/</span> <span class="n">factor</span>
+<span class="linenos">231</span>
 <span class="linenos">232</span>
-<span class="linenos">233</span>
-<span class="linenos">234</span><span class="k">class</span><span class="w"> </span><span class="nc">HardwareInLoopOrchestrator</span><span class="p">(</span><span class="n">RealTimeOrchestrator</span><span class="p">):</span>
-<span class="linenos">235</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Hardware-in-the-loop simulation orchestrator.</span>
-<span class="linenos">236</span>
-<span class="linenos">237</span><span class="sd">    Extends real-time orchestrator with hardware interface capabilities.</span>
-<span class="linenos">238</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos">239</span>
-<span class="linenos">240</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos">241</span>                 <span class="n">context</span><span class="p">,</span>
-<span class="linenos">242</span>                 <span class="n">hardware_interface</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="linenos">243</span>                 <span class="n">real_time_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-<span class="linenos">244</span>                 <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">):</span>
-<span class="linenos">245</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize HIL orchestrator.</span>
-<span class="linenos">246</span>
-<span class="linenos">247</span><span class="sd">        Parameters</span>
-<span class="linenos">248</span><span class="sd">        ----------</span>
-<span class="linenos">249</span><span class="sd">        context : SimulationContext</span>
-<span class="linenos">250</span><span class="sd">            Simulation context</span>
-<span class="linenos">251</span><span class="sd">        hardware_interface : Any, optional</span>
-<span class="linenos">252</span><span class="sd">            Hardware interface object with read_sensors/write_actuators methods</span>
-<span class="linenos">253</span><span class="sd">        real_time_factor : float, optional</span>
-<span class="linenos">254</span><span class="sd">            Real-time scaling factor</span>
-<span class="linenos">255</span><span class="sd">        tolerance : float, optional</span>
-<span class="linenos">256</span><span class="sd">            Timing tolerance</span>
-<span class="linenos">257</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">258</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">real_time_factor</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span>
-<span class="linenos">259</span>        <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span> <span class="o">=</span> <span class="n">hardware_interface</span>
-<span class="linenos">260</span>
-<span class="linenos">261</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_read_hardware_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="linenos">262</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read state from hardware sensors.&quot;&quot;&quot;</span>
-<span class="linenos">263</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span><span class="p">,</span> <span class="s1">&#39;read_sensors&#39;</span><span class="p">):</span>
-<span class="linenos">264</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span><span class="o">.</span><span class="n">read_sensors</span><span class="p">()</span>
-<span class="linenos">265</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">266</span>            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Hardware interface not available or missing read_sensors method&quot;</span><span class="p">)</span>
-<span class="linenos">267</span>
-<span class="linenos">268</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_write_hardware_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">269</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write control to hardware actuators.&quot;&quot;&quot;</span>
-<span class="linenos">270</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span><span class="p">,</span> <span class="s1">&#39;write_actuators&#39;</span><span class="p">):</span>
-<span class="linenos">271</span>            <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span><span class="o">.</span><span class="n">write_actuators</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
-<span class="linenos">272</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">273</span>            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Hardware interface not available or missing write_actuators method&quot;</span><span class="p">)</span>
-<span class="linenos">274</span>
-<span class="linenos">275</span>    <span class="k">def</span><span class="w"> </span><span class="nf">execute_hil</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos">276</span>                   <span class="n">controller</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos">277</span>                   <span class="n">horizon</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="linenos">278</span>                   <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="linenos">279</span>                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResultContainer</span><span class="p">:</span>
-<span class="linenos">280</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute hardware-in-the-loop simulation.</span>
-<span class="linenos">281</span>
-<span class="linenos">282</span><span class="sd">        Parameters</span>
-<span class="linenos">283</span><span class="sd">        ----------</span>
-<span class="linenos">284</span><span class="sd">        controller : Any</span>
-<span class="linenos">285</span><span class="sd">            Controller object</span>
-<span class="linenos">286</span><span class="sd">        horizon : int</span>
-<span class="linenos">287</span><span class="sd">            Number of simulation steps</span>
-<span class="linenos">288</span><span class="sd">        dt : float</span>
-<span class="linenos">289</span><span class="sd">            Time step</span>
-<span class="linenos">290</span><span class="sd">        **kwargs</span>
-<span class="linenos">291</span><span class="sd">            Additional options</span>
-<span class="linenos">292</span>
-<span class="linenos">293</span><span class="sd">        Returns</span>
-<span class="linenos">294</span><span class="sd">        -------</span>
-<span class="linenos">295</span><span class="sd">        ResultContainer</span>
-<span class="linenos">296</span><span class="sd">            HIL simulation results</span>
-<span class="linenos">297</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">298</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">299</span>            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Hardware interface required for HIL simulation&quot;</span><span class="p">)</span>
-<span class="linenos">300</span>
-<span class="linenos">301</span>        <span class="c1"># Read initial state from hardware</span>
-<span class="linenos">302</span>        <span class="n">initial_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_hardware_state</span><span class="p">()</span>
-<span class="linenos">303</span>
-<span class="linenos">304</span>        <span class="c1"># Create dummy control inputs (not used in HIL mode)</span>
-<span class="linenos">305</span>        <span class="n">control_inputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">horizon</span><span class="p">)</span>
-<span class="linenos">306</span>
-<span class="linenos">307</span>        <span class="c1"># Execute real-time simulation with hardware integration</span>
-<span class="linenos">308</span>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-<span class="linenos">309</span>            <span class="n">initial_state</span><span class="p">,</span> <span class="n">control_inputs</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span><span class="p">,</span>
-<span class="linenos">310</span>            <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
-<span class="linenos">311</span>            <span class="n">hardware_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos">312</span>            <span class="o">**</span><span class="n">kwargs</span>
-<span class="linenos">313</span>        <span class="p">)</span>
-<span class="linenos">314</span>
-<span class="linenos">315</span>        <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">233</span><span class="k">class</span><span class="w"> </span><span class="nc">HardwareInLoopOrchestrator</span><span class="p">(</span><span class="n">RealTimeOrchestrator</span><span class="p">):</span>
+<span class="linenos">234</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Hardware-in-the-loop simulation orchestrator.</span>
+<span class="linenos">235</span>
+<span class="linenos">236</span><span class="sd">    Extends real-time orchestrator with hardware interface capabilities.</span>
+<span class="linenos">237</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">238</span>
+<span class="linenos">239</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos">240</span>                 <span class="n">context</span><span class="p">,</span>
+<span class="linenos">241</span>                 <span class="n">hardware_interface</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="linenos">242</span>                 <span class="n">real_time_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="linenos">243</span>                 <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">):</span>
+<span class="linenos">244</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize HIL orchestrator.</span>
+<span class="linenos">245</span>
+<span class="linenos">246</span><span class="sd">        Parameters</span>
+<span class="linenos">247</span><span class="sd">        ----------</span>
+<span class="linenos">248</span><span class="sd">        context : SimulationContext</span>
+<span class="linenos">249</span><span class="sd">            Simulation context</span>
+<span class="linenos">250</span><span class="sd">        hardware_interface : Any, optional</span>
+<span class="linenos">251</span><span class="sd">            Hardware interface object with read_sensors/write_actuators methods</span>
+<span class="linenos">252</span><span class="sd">        real_time_factor : float, optional</span>
+<span class="linenos">253</span><span class="sd">            Real-time scaling factor</span>
+<span class="linenos">254</span><span class="sd">        tolerance : float, optional</span>
+<span class="linenos">255</span><span class="sd">            Timing tolerance</span>
+<span class="linenos">256</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">257</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">real_time_factor</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span>
+<span class="linenos">258</span>        <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span> <span class="o">=</span> <span class="n">hardware_interface</span>
+<span class="linenos">259</span>
+<span class="linenos">260</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_read_hardware_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="linenos">261</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Read state from hardware sensors.&quot;&quot;&quot;</span>
+<span class="linenos">262</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span><span class="p">,</span> <span class="s1">&#39;read_sensors&#39;</span><span class="p">):</span>
+<span class="linenos">263</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span><span class="o">.</span><span class="n">read_sensors</span><span class="p">()</span>
+<span class="linenos">264</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">265</span>            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Hardware interface not available or missing read_sensors method&quot;</span><span class="p">)</span>
+<span class="linenos">266</span>
+<span class="linenos">267</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_write_hardware_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">268</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Write control to hardware actuators.&quot;&quot;&quot;</span>
+<span class="linenos">269</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span><span class="p">,</span> <span class="s1">&#39;write_actuators&#39;</span><span class="p">):</span>
+<span class="linenos">270</span>            <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span><span class="o">.</span><span class="n">write_actuators</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+<span class="linenos">271</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">272</span>            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Hardware interface not available or missing write_actuators method&quot;</span><span class="p">)</span>
+<span class="linenos">273</span>
+<span class="linenos">274</span>    <span class="k">def</span><span class="w"> </span><span class="nf">execute_hil</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos">275</span>                   <span class="n">controller</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos">276</span>                   <span class="n">horizon</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="linenos">277</span>                   <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos">278</span>                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResultContainer</span><span class="p">:</span>
+<span class="linenos">279</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute hardware-in-the-loop simulation.</span>
+<span class="linenos">280</span>
+<span class="linenos">281</span><span class="sd">        Parameters</span>
+<span class="linenos">282</span><span class="sd">        ----------</span>
+<span class="linenos">283</span><span class="sd">        controller : Any</span>
+<span class="linenos">284</span><span class="sd">            Controller object</span>
+<span class="linenos">285</span><span class="sd">        horizon : int</span>
+<span class="linenos">286</span><span class="sd">            Number of simulation steps</span>
+<span class="linenos">287</span><span class="sd">        dt : float</span>
+<span class="linenos">288</span><span class="sd">            Time step</span>
+<span class="linenos">289</span><span class="sd">        **kwargs</span>
+<span class="linenos">290</span><span class="sd">            Additional options</span>
+<span class="linenos">291</span>
+<span class="linenos">292</span><span class="sd">        Returns</span>
+<span class="linenos">293</span><span class="sd">        -------</span>
+<span class="linenos">294</span><span class="sd">        ResultContainer</span>
+<span class="linenos">295</span><span class="sd">            HIL simulation results</span>
+<span class="linenos">296</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">297</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware_interface</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">298</span>            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Hardware interface required for HIL simulation&quot;</span><span class="p">)</span>
+<span class="linenos">299</span>
+<span class="linenos">300</span>        <span class="c1"># Read initial state from hardware</span>
+<span class="linenos">301</span>        <span class="n">initial_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_hardware_state</span><span class="p">()</span>
+<span class="linenos">302</span>
+<span class="linenos">303</span>        <span class="c1"># Create dummy control inputs (not used in HIL mode)</span>
+<span class="linenos">304</span>        <span class="n">control_inputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">horizon</span><span class="p">)</span>
+<span class="linenos">305</span>
+<span class="linenos">306</span>        <span class="c1"># Execute real-time simulation with hardware integration</span>
+<span class="linenos">307</span>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="linenos">308</span>            <span class="n">initial_state</span><span class="p">,</span> <span class="n">control_inputs</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">horizon</span><span class="p">,</span>
+<span class="linenos">309</span>            <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
+<span class="linenos">310</span>            <span class="n">hardware_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos">311</span>            <span class="o">**</span><span class="n">kwargs</span>
+<span class="linenos">312</span>        <span class="p">)</span>
+<span class="linenos">313</span>
+<span class="linenos">314</span>        <span class="k">return</span> <span class="n">result</span>
 </pre></div>
 </div>
 </section>
@@ -924,7 +949,7 @@ useful for hardware-in-the-loop testing and real-time control verification.</p>
 <span class="linenos"> 99</span>            <span class="k">if</span> <span class="n">controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos">100</span>                <span class="k">try</span><span class="p">:</span>
 <span class="linenos">101</span>                    <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_control</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">current_state</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-<span class="linenos">102</span>                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">102</span>                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <span class="linenos">103</span>                    <span class="k">if</span> <span class="n">deadline_miss_handler</span><span class="p">:</span>
 <span class="linenos">104</span>                        <span class="n">control</span> <span class="o">=</span> <span class="n">deadline_miss_handler</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">current_state</span><span class="p">)</span>
 <span class="linenos">105</span>                    <span class="k">else</span><span class="p">:</span>
@@ -1201,6 +1226,356 @@ useful for hardware-in-the-loop testing and real-time control verification.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">..results.containers</span> <span class="pre">import</span> <span class="pre">StandardResultContainer</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="real-time-scheduling-theory">
+<h3>Real-Time Scheduling Theory<a class="headerlink" href="#real-time-scheduling-theory" title="Link to this heading">¶</a></h3>
+<p>Real-time orchestration ensures simulations meet hard timing deadlines with predictable execution.</p>
+<section id="rate-monotonic-scheduling-rms">
+<h4>Rate Monotonic Scheduling (RMS)<a class="headerlink" href="#rate-monotonic-scheduling-rms" title="Link to this heading">¶</a></h4>
+<p><strong>Priority assignment:</strong> Higher rate → Higher priority</p>
+<p>For tasks with periods <span class="math notranslate nohighlight">\(T_i\)</span>, priorities ordered:
+$<span class="math notranslate nohighlight">\(
+T_1 &lt; T_2 &lt; \cdots &lt; T_n \quad \Rightarrow \quad P_1 &gt; P_2 &gt; \cdots &gt; P_n
+\)</span>$</p>
+<p><strong>Schedulability test</strong> (Liu &amp; Layland):
+$<span class="math notranslate nohighlight">\(
+\sum_{i=1}^n \frac{C_i}{T_i} \leq n(2^{1/n} - 1)
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(C_i\)</span> is worst-case execution time (WCET) and <span class="math notranslate nohighlight">\(T_i\)</span> is period.</p>
+<p>For large <span class="math notranslate nohighlight">\(n\)</span>: Bound approaches <span class="math notranslate nohighlight">\(\ln 2 \approx 0.693\)</span></p>
+</section>
+<section id="earliest-deadline-first-edf">
+<h4>Earliest Deadline First (EDF)<a class="headerlink" href="#earliest-deadline-first-edf" title="Link to this heading">¶</a></h4>
+<p><strong>Dynamic priority:</strong> Earliest deadline → Highest priority</p>
+<p><strong>Schedulability test:</strong>
+$<span class="math notranslate nohighlight">\(
+\sum_{i=1}^n \frac{C_i}{T_i} \leq 1
+\)</span>$</p>
+<p><strong>Optimal:</strong> If any algorithm can schedule tasks, EDF can.</p>
+</section>
+<section id="deadline-analysis">
+<h4>Deadline Analysis<a class="headerlink" href="#deadline-analysis" title="Link to this heading">¶</a></h4>
+<p><strong>Response time</strong> <span class="math notranslate nohighlight">\(R_i\)</span> for task <span class="math notranslate nohighlight">\(i\)</span>:
+$<span class="math notranslate nohighlight">\(
+R_i = C_i + \sum_{j \in hp(i)} \left\lceil \frac{R_i}{T_j} \right\rceil C_j
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(hp(i)\)</span> is set of higher-priority tasks.</p>
+<p><strong>Schedulability:</strong> <span class="math notranslate nohighlight">\(R_i \leq D_i\)</span> for all tasks</p>
+</section>
+<section id="jitter-analysis">
+<h4>Jitter Analysis<a class="headerlink" href="#jitter-analysis" title="Link to this heading">¶</a></h4>
+<p><strong>Jitter</strong> (variation in response time):
+$<span class="math notranslate nohighlight">\(
+J_i = R_i^{\max} - R_i^{\min}
+\)</span>$</p>
+<p><strong>Total jitter</strong> (including release jitter):
+$<span class="math notranslate nohighlight">\(
+J_i^{\text{total}} = J_i^{\text{release}} + J_i^{\text{response}}
+\)</span>$</p>
+</section>
+<section id="weakly-hard-real-time-constraints">
+<h4>Weakly-Hard Real-Time Constraints<a class="headerlink" href="#weakly-hard-real-time-constraints" title="Link to this heading">¶</a></h4>
+<p><strong><span class="math notranslate nohighlight">\((m, k)\)</span>-firm deadlines:</strong> At most <span class="math notranslate nohighlight">\(m\)</span> out of any <span class="math notranslate nohighlight">\(k\)</span> consecutive deadlines can be missed.</p>
+<p><strong>Constraint check:</strong>
+$<span class="math notranslate nohighlight">\(
+\sum_{i=n-k+1}^{n} \mathbb{1}_{\text{miss}}(i) \leq m
+\)</span>$</p>
+<p><strong>Example:</strong> <span class="math notranslate nohighlight">\((1, 10)\)</span>-firm means at most 1 miss in any 10 consecutive deadlines.</p>
+</section>
+</section>
+<section id="performance-guarantees">
+<h3>Performance Guarantees<a class="headerlink" href="#performance-guarantees" title="Link to this heading">¶</a></h3>
+<p><strong>Average-case guarantee:</strong>
+$<span class="math notranslate nohighlight">\(
+P(R_i \leq D_i) \geq 1 - \epsilon
+\)</span>$</p>
+<p>for small <span class="math notranslate nohighlight">\(\epsilon\)</span> (e.g., <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span> for 99% deadline guarantee).</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Real-Time Orchestrator] –&gt; B[Task Queue]
+B –&gt; C{Priority Scheduler}</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>C --&gt;|RMS| D[Rate-based Priority]
+C --&gt;|EDF| E[Deadline-based Priority]
+
+D --&gt; F[Execute Task]
+E --&gt; F
+
+F --&gt; G[Start Timer]
+G --&gt; H[Simulation Step]
+H --&gt; I[End Timer]
+
+I --&gt; J{Deadline Check}
+J --&gt;|t_exec ≤ deadline| K[Success]
+J --&gt;|t_exec &gt; deadline| L[Violation]
+
+K --&gt; M[Update Stats]
+L --&gt; M
+
+M --&gt; N{_m, k_-firm Check}
+N --&gt;|Pass| O[Continue]
+N --&gt;|Fail| P[Alert/Recovery]
+
+Q[Real-Time Clock] --&gt; R[Period Sync]
+R --&gt; B
+
+style C fill:#fff4e1
+style L fill:#ffebee
+style O fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-real-time-orchestration">
+<h3>Example 1: Basic Real-Time Orchestration<a class="headerlink" href="#example-1-basic-real-time-orchestration" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.simulation.orchestrators import RealTimeOrchestrator
+import time</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-real-time-orchestrator-100-hz">
+<h1>Create real-time orchestrator (100 Hz)<a class="headerlink" href="#create-real-time-orchestrator-100-hz" title="Link to this heading">¶</a></h1>
+<p>orchestrator = RealTimeOrchestrator(
+period=0.01,  # 10ms period
+deadline=0.009,  # 9ms deadline (90%)
+scheduler=’rms’  # Rate monotonic scheduling
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="real-time-simulation">
+<h1>Real-time simulation<a class="headerlink" href="#real-time-simulation" title="Link to this heading">¶</a></h1>
+<p>campaign = {
+‘controller’: controller,
+‘dynamics’: dynamics,
+‘duration’: 10.0
+}</p>
+<p>start = time.perf_counter()
+results = orchestrator.run_campaign(campaign)
+elapsed = time.perf_counter() - start</p>
+<p>print(f”Real-time execution: {elapsed:.2f}s (expected: 10.0s)”)
+print(f”Deadline violations: {orchestrator.stats[‘violations’]}”)
+print(f”Max jitter: {orchestrator.stats[‘max_jitter’]:.6f}s”)
+```</p>
+<section id="example-2-priority-based-scheduling">
+<h2>Example 2: Priority-Based Scheduling<a class="headerlink" href="#example-2-priority-based-scheduling" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.orchestrators import RealTimeOrchestrator</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="multiple-tasks-with-different-priorities">
+<h1>Multiple tasks with different priorities<a class="headerlink" href="#multiple-tasks-with-different-priorities" title="Link to this heading">¶</a></h1>
+<p>tasks = [
+{‘name’: ‘critical’, ‘period’: 0.01, ‘deadline’: 0.009, ‘priority’: 10},
+{‘name’: ‘normal’, ‘period’: 0.05, ‘deadline’: 0.045, ‘priority’: 5},
+{‘name’: ‘background’, ‘period’: 0.1, ‘deadline’: 0.09, ‘priority’: 1}
+]</p>
+<p>orchestrator = RealTimeOrchestrator(scheduler=’rms’)</p>
+<p>for task in tasks:
+orchestrator.add_task(
+name=task[‘name’],
+period=task[‘period’],
+deadline=task[‘deadline’],
+callback=lambda: run_simulation(task)
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-all-tasks-with-priority-scheduling">
+<h1>Run all tasks with priority scheduling<a class="headerlink" href="#run-all-tasks-with-priority-scheduling" title="Link to this heading">¶</a></h1>
+<p>orchestrator.start()</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="monitor-performance">
+<h1>Monitor performance<a class="headerlink" href="#monitor-performance" title="Link to this heading">¶</a></h1>
+<p>stats = orchestrator.get_statistics()
+for task_name, task_stats in stats.items():
+print(f”{task_name}:”)
+print(f”  Violations: {task_stats[‘violations’]}”)
+print(f”  Mean latency: {task_stats[‘mean_latency’]:.6f}s”)
+print(f”  95th percentile: {task_stats[‘p95_latency’]:.6f}s”)
+```</p>
+<section id="example-3-deadline-monitoring-and-recovery">
+<h2>Example 3: Deadline Monitoring and Recovery<a class="headerlink" href="#example-3-deadline-monitoring-and-recovery" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.orchestrators import RealTimeOrchestrator</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="real-time-with-recovery-callback">
+<h1>Real-time with recovery callback<a class="headerlink" href="#real-time-with-recovery-callback" title="Link to this heading">¶</a></h1>
+<p>def deadline_violation_handler(task_name, actual_time, deadline):
+print(f”WARNING: {task_name} missed deadline: “
+f”{actual_time:.6f}s &gt; {deadline:.6f}s”)
+# Trigger recovery action
+return ‘continue’  # or ‘abort’, ‘degrade’</p>
+<p>orchestrator = RealTimeOrchestrator(
+period=0.01,
+deadline=0.009,
+violation_handler=deadline_violation_handler
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="weakly-hard-1-10-firm-constraint">
+<h1>Weakly-hard (1, 10)-firm constraint<a class="headerlink" href="#weakly-hard-1-10-firm-constraint" title="Link to this heading">¶</a></h1>
+<p>orchestrator.set_weakly_hard_constraint(m=1, k=10)</p>
+<p>results = orchestrator.run_campaign(campaign)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="check-constraint-satisfaction">
+<h1>Check constraint satisfaction<a class="headerlink" href="#check-constraint-satisfaction" title="Link to this heading">¶</a></h1>
+<p>if orchestrator.check_weakly_hard():
+print(“(1, 10)-firm constraint satisfied!”)
+else:
+print(“Constraint violated - too many deadline misses”)
+```</p>
+<section id="example-4-jitter-analysis">
+<h2>Example 4: Jitter Analysis<a class="headerlink" href="#example-4-jitter-analysis" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.orchestrators import RealTimeOrchestrator
+import matplotlib.pyplot as plt</p>
+<p>orchestrator = RealTimeOrchestrator(period=0.01, deadline=0.009)</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-simulation-with-jitter-tracking">
+<h1>Run simulation with jitter tracking<a class="headerlink" href="#run-simulation-with-jitter-tracking" title="Link to this heading">¶</a></h1>
+<p>results = orchestrator.run_campaign(campaign, track_jitter=True)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="analyze-jitter">
+<h1>Analyze jitter<a class="headerlink" href="#analyze-jitter" title="Link to this heading">¶</a></h1>
+<p>jitter_data = orchestrator.get_jitter_data()</p>
+<p>print(f”Mean jitter: {jitter_data[‘mean’]:.6f}s”)
+print(f”Max jitter: {jitter_data[‘max’]:.6f}s”)
+print(f”Std dev jitter: {jitter_data[‘std’]:.6f}s”)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="plot-jitter-distribution">
+<h1>Plot jitter distribution<a class="headerlink" href="#plot-jitter-distribution" title="Link to this heading">¶</a></h1>
+<p>plt.figure(figsize=(10, 6))
+plt.hist(jitter_data[‘samples’], bins=50, density=True)
+plt.xlabel(‘Jitter (s)’)
+plt.ylabel(‘Probability Density’)
+plt.title(‘Response Time Jitter Distribution’)
+plt.axvline(jitter_data[‘mean’], color=’r’, linestyle=’–’, label=’Mean’)
+plt.axvline(jitter_data[‘p95’], color=’g’, linestyle=’–’, label=’95th percentile’)
+plt.legend()
+plt.grid(True)
+plt.show()
+```</p>
+<section id="example-5-schedulability-analysis">
+<h2>Example 5: Schedulability Analysis<a class="headerlink" href="#example-5-schedulability-analysis" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.orchestrators import RealTimeOrchestrator</p>
+<p>def check_schedulability(tasks):
+“””Check schedulability using Liu &amp; Layland bound.”””</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Sort tasks by period (Rate Monotonic)
+tasks_sorted = sorted(tasks, key=lambda t: t[&#39;period&#39;])
+
+# Compute utilization
+utilization = sum(t[&#39;wcet&#39;] / t[&#39;period&#39;] for t in tasks_sorted)
+
+# Liu &amp; Layland bound
+n = len(tasks_sorted)
+bound = n * (2**(1/n) - 1)
+
+print(f&quot;Utilization: {utilization:.4f}&quot;)
+print(f&quot;Liu &amp; Layland bound: {bound:.4f}&quot;)
+
+if utilization &lt;= bound:
+    print(&quot;✓ Schedulable by RMS (sufficient test)&quot;)
+    return True
+elif utilization &lt;= 1.0:
+    print(&quot;? May be schedulable (exact test required)&quot;)
+    return None
+else:
+    print(&quot;✗ Not schedulable (utilization &gt; 1)&quot;)
+    return False
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-task-set">
+<h1>Example task set<a class="headerlink" href="#example-task-set" title="Link to this heading">¶</a></h1>
+<p>tasks = [
+{‘period’: 0.01, ‘wcet’: 0.003},  # 30% utilization
+{‘period’: 0.05, ‘wcet’: 0.010},  # 20% utilization
+{‘period’: 0.1, ‘wcet’: 0.020}    # 20% utilization
+]</p>
+<p>is_schedulable = check_schedulability(tasks)</p>
+<p>if is_schedulable:
+orchestrator = RealTimeOrchestrator(scheduler=’rms’)
+# … configure and run
+```</p>
+<section id="id2">
+<h2>Architecture Diagram<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="id3">
+<h2>Usage Examples<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="basic-usage-example">
+<h1>Basic usage example<a class="headerlink" href="#basic-usage-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation.orchestrators import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+<section id="example-2-advanced-configuration">
+<h2>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="advanced-configuration">
+<h1>Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Link to this heading">¶</a></h1>
+<p>component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+<section id="example-3-integration-with-framework">
+<h2>Example 3: Integration with Framework<a class="headerlink" href="#example-3-integration-with-framework" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation import SimulationRunner</p>
+<p>runner = SimulationRunner()
+runner.use_component(component)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="performance-optimized-usage">
+<h1>Performance-optimized usage<a class="headerlink" href="#performance-optimized-usage" title="Link to this heading">¶</a></h1>
+<p>component = Component(enable_caching=True)
+```</p>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="error-handling">
+<h1>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading">¶</a></h1>
+<p>try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
 </section>
 
         </article>
@@ -1220,7 +1595,7 @@ useful for hardware-in-the-loop testing and real-time control verification.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1271,8 +1646,73 @@ useful for hardware-in-the-loop testing and real-time control verification.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#real-time-scheduling-theory">Real-Time Scheduling Theory</a><ul>
+<li><a class="reference internal" href="#rate-monotonic-scheduling-rms">Rate Monotonic Scheduling (RMS)</a></li>
+<li><a class="reference internal" href="#earliest-deadline-first-edf">Earliest Deadline First (EDF)</a></li>
+<li><a class="reference internal" href="#deadline-analysis">Deadline Analysis</a></li>
+<li><a class="reference internal" href="#jitter-analysis">Jitter Analysis</a></li>
+<li><a class="reference internal" href="#weakly-hard-real-time-constraints">Weakly-Hard Real-Time Constraints</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#performance-guarantees">Performance Guarantees</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-real-time-orchestration">Example 1: Basic Real-Time Orchestration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-real-time-orchestrator-100-hz">Create real-time orchestrator (100 Hz)</a></li>
+<li><a class="reference internal" href="#real-time-simulation">Real-time simulation</a><ul>
+<li><a class="reference internal" href="#example-2-priority-based-scheduling">Example 2: Priority-Based Scheduling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multiple-tasks-with-different-priorities">Multiple tasks with different priorities</a></li>
+<li><a class="reference internal" href="#run-all-tasks-with-priority-scheduling">Run all tasks with priority scheduling</a></li>
+<li><a class="reference internal" href="#monitor-performance">Monitor performance</a><ul>
+<li><a class="reference internal" href="#example-3-deadline-monitoring-and-recovery">Example 3: Deadline Monitoring and Recovery</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#real-time-with-recovery-callback">Real-time with recovery callback</a></li>
+<li><a class="reference internal" href="#weakly-hard-1-10-firm-constraint">Weakly-hard (1, 10)-firm constraint</a></li>
+<li><a class="reference internal" href="#check-constraint-satisfaction">Check constraint satisfaction</a><ul>
+<li><a class="reference internal" href="#example-4-jitter-analysis">Example 4: Jitter Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-simulation-with-jitter-tracking">Run simulation with jitter tracking</a></li>
+<li><a class="reference internal" href="#analyze-jitter">Analyze jitter</a></li>
+<li><a class="reference internal" href="#plot-jitter-distribution">Plot jitter distribution</a><ul>
+<li><a class="reference internal" href="#example-5-schedulability-analysis">Example 5: Schedulability Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-task-set">Example task set</a><ul>
+<li><a class="reference internal" href="#id2">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#id3">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage-example">Basic usage example</a><ul>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-configuration">Advanced configuration</a><ul>
+<li><a class="reference internal" href="#example-3-integration-with-framework">Example 3: Integration with Framework</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-optimized-usage">Performance-optimized usage</a><ul>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error handling</a></li>
 </ul>
 
           </div>
@@ -1289,6 +1729,8 @@ useful for hardware-in-the-loop testing and real-time control verification.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

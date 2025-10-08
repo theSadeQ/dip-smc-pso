@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -490,7 +516,7 @@
 #==========================================================================================\</p>
 <!-- Navigation Breadcrumb -->
 <p><strong>📍 Location</strong>: <a class="reference internal" href="#."><span class="xref myst">Testing Root</span></a> → Navigation Index
-<strong>📚 Quick Links</strong>: <a class="reference internal" href="README.html"><span class="std std-doc">README</span></a> | <a class="reference internal" href="#.quick_reference.md#guides"><span class="xref myst">Guides</span></a> | <a class="reference internal" href="#reports/"><span class="xref myst">Reports</span></a></p>
+<strong>📚 Quick Links</strong>: <a class="reference internal" href="README.html"><span class="std std-doc">README</span></a> | <a class="reference internal" href="#guides/"><span class="xref myst">Guides</span></a> | <a class="reference internal" href="#reports/"><span class="xref myst">Reports</span></a></p>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="testing-documentation-navigation-index">
 <h1>Testing Documentation Navigation Index<a class="headerlink" href="#testing-documentation-navigation-index" title="Link to this heading">¶</a></h1>
@@ -499,9 +525,9 @@
 <section id="current-status">
 <h3>📊 Current Status<a class="headerlink" href="#current-status" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong><a class="reference internal" href="#pytest_reports/2025-09-30/executive_summary.md"><span class="xref myst">Latest Test Results</span></a></strong> - Current test execution status</p></li>
-<li><p><strong><a class="reference internal" href="#pytest_reports/2025-09-30/failure_breakdown.md"><span class="xref myst">Failure Analysis</span></a></strong> - Detailed failure categorization</p></li>
-<li><p><strong><a class="reference internal" href="#pytest_reports/2025-09-30/technical_analysis.md"><span class="xref myst">Technical Deep-Dive</span></a></strong> - In-depth technical analysis</p></li>
+<li><p><strong><a class="reference internal" href="reports/2025-09-30/executive/executive_summary.html"><span class="std std-doc">Latest Test Results</span></a></strong> - Current test execution status</p></li>
+<li><p><strong><a class="reference internal" href="reports/2025-09-30/failure_breakdown.html"><span class="std std-doc">Failure Analysis</span></a></strong> - Detailed failure categorization</p></li>
+<li><p><strong><a class="reference internal" href="reports/2025-09-30/technical_analysis.html"><span class="std std-doc">Technical Deep-Dive</span></a></strong> - In-depth technical analysis</p></li>
 </ul>
 </section>
 <section id="standards-guidelines">
@@ -509,22 +535,22 @@
 <ul class="simple">
 <li><p><strong><a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a></strong> - Comprehensive testing guidelines</p></li>
 <li><p><strong><a class="reference download internal" download="" href="../_downloads/b4c62a804fd2d6732648252b415f04e7/test_template.py"><span class="xref download myst">Test Template</span></a></strong> - Standardized test file template</p></li>
-<li><p><strong><a class="reference internal" href="#coverage_quality_gates_runbook.md"><span class="xref myst">Coverage Quality Gates</span></a></strong> - Quality gate specifications</p></li>
+<li><p><strong><a class="reference internal" href="guides/coverage_quality_gates_runbook.html"><span class="std std-doc">Coverage Quality Gates</span></a></strong> - Quality gate specifications</p></li>
 </ul>
 </section>
 <section id="developer-resources">
 <h3>🔧 Developer Resources<a class="headerlink" href="#developer-resources" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong><a class="reference internal" href="#coverage_local_development_guide.md"><span class="xref myst">Local Development Guide</span></a></strong> - Developer testing setup</p></li>
-<li><p><strong><a class="reference internal" href="#test_infrastructure_guide.md"><span class="xref myst">Test Infrastructure Guide</span></a></strong> - Core testing infrastructure</p></li>
-<li><p><strong><a class="reference internal" href="#workflows/pytest_testing_workflow.md"><span class="xref myst">Pytest Workflow</span></a></strong> - Testing execution workflows</p></li>
+<li><p><strong><a class="reference internal" href="guides/coverage_local_development_guide.html"><span class="std std-doc">Local Development Guide</span></a></strong> - Developer testing setup</p></li>
+<li><p><strong><a class="reference internal" href="guides/test_infrastructure_guide.html"><span class="std std-doc">Test Infrastructure Guide</span></a></strong> - Core testing infrastructure</p></li>
+<li><p><strong><a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a></strong> - Testing execution workflows</p></li>
 </ul>
 </section>
 <section id="troubleshooting">
 <h3>🚨 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong><a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Quality Gates Troubleshooting</span></a></strong> - Common issue resolution</p></li>
-<li><p><strong><a class="reference internal" href="#coverage_integration_summary.md"><span class="xref myst">Integration Summary</span></a></strong> - High-level integration overview</p></li>
+<li><p><strong><a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Quality Gates Troubleshooting</span></a></strong> - Common issue resolution</p></li>
+<li><p><strong><a class="reference internal" href="guides/coverage_integration_summary.html"><span class="std std-doc">Integration Summary</span></a></strong> - High-level integration overview</p></li>
 </ul>
 </section>
 </section>
@@ -542,22 +568,22 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#pytest_reports/2025-09-30/executive_summary.md"><span class="xref myst">Executive Summary</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="reports/2025-09-30/executive/executive_summary.html"><span class="std std-doc">Executive Summary</span></a></p></td>
 <td><p>Report</p></td>
 <td><p>High-level test status</p></td>
 <td><p>2025-09-30</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pytest_reports/2025-09-30/technical_analysis.md"><span class="xref myst">Technical Analysis</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="reports/2025-09-30/technical_analysis.html"><span class="std std-doc">Technical Analysis</span></a></p></td>
 <td><p>Analysis</p></td>
 <td><p>Detailed failure analysis</p></td>
 <td><p>2025-09-30</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pytest_reports/2025-09-30/failure_breakdown.md"><span class="xref myst">Failure Breakdown</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="reports/2025-09-30/failure_breakdown.html"><span class="std std-doc">Failure Breakdown</span></a></p></td>
 <td><p>Analysis</p></td>
 <td><p>Categorized failure types</p></td>
 <td><p>2025-09-30</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pytest_reports/2025-09-30/test_failure_analysis.md"><span class="xref myst">Test Failure Analysis</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="reports/2025-09-30/test_failure_analysis.html"><span class="std std-doc">Test Failure Analysis</span></a></p></td>
 <td><p>Analysis</p></td>
 <td><p>Test-specific failures</p></td>
 <td><p>2025-09-30</p></td>
@@ -588,12 +614,12 @@
 <td><p>Standardized test structure</p></td>
 <td><p>Test Authors</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coverage_quality_gates_runbook.md"><span class="xref myst">Coverage Quality Gates Runbook</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="guides/coverage_quality_gates_runbook.html"><span class="std std-doc">Coverage Quality Gates Runbook</span></a></p></td>
 <td><p>Standard</p></td>
 <td><p>Quality gate specifications</p></td>
 <td><p>QA/DevOps</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#test_infrastructure_guide.md"><span class="xref myst">Test Infrastructure Guide</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="guides/test_infrastructure_guide.html"><span class="std std-doc">Test Infrastructure Guide</span></a></p></td>
 <td><p>Guide</p></td>
 <td><p>Core testing infrastructure</p></td>
 <td><p>Platform Team</p></td>
@@ -614,22 +640,22 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#workflows/pytest_testing_workflow.md"><span class="xref myst">Pytest Testing Workflow</span></a></p></td>
-<td><p>Workflow</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a></p></td>
+<td><p>Standard</p></td>
 <td><p>Test execution processes</p></td>
 <td><p>Daily Development</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coverage_local_development_guide.md"><span class="xref myst">Coverage Local Development Guide</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="guides/coverage_local_development_guide.html"><span class="std std-doc">Coverage Local Development Guide</span></a></p></td>
 <td><p>Guide</p></td>
 <td><p>Local testing setup</p></td>
 <td><p>Developer Onboarding</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Coverage Quality Gates Troubleshooting</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Coverage Quality Gates Troubleshooting</span></a></p></td>
 <td><p>Troubleshooting</p></td>
 <td><p>Issue resolution</p></td>
 <td><p>Problem Solving</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coverage_integration_summary.md"><span class="xref myst">Coverage Integration Summary</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="guides/coverage_integration_summary.html"><span class="std std-doc">Coverage Integration Summary</span></a></p></td>
 <td><p>Summary</p></td>
 <td><p>Integration overview</p></td>
 <td><p>System Understanding</p></td>
@@ -736,23 +762,23 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Configuration</strong></p></td>
-<td><p><a class="reference internal" href="#pytest_reports/2025-09-30/technical_analysis.md"><span class="xref myst">Technical Analysis</span></a></p></td>
-<td><p><a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Config Troubleshooting</span></a></p></td>
+<td><p><a class="reference internal" href="reports/2025-09-30/technical_analysis.html"><span class="std std-doc">Technical Analysis</span></a></p></td>
+<td><p><a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Config Troubleshooting</span></a></p></td>
 <td><p><a class="reference internal" href="standards/testing_standards.html#configuration-validation"><span class="std std-ref">Config Validation</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Import Errors</strong></p></td>
-<td><p><a class="reference internal" href="#pytest_reports/2025-09-30/failure_breakdown.md"><span class="xref myst">Failure Breakdown</span></a></p></td>
-<td><p><a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Import Resolution</span></a></p></td>
+<td><p><a class="reference internal" href="reports/2025-09-30/failure_breakdown.html"><span class="std std-doc">Failure Breakdown</span></a></p></td>
+<td><p><a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Import Resolution</span></a></p></td>
 <td><p><a class="reference internal" href="standards/testing_standards.html#import-validation"><span class="std std-ref">Import Standards</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Numerical</strong></p></td>
-<td><p><a class="reference internal" href="#pytest_reports/2025-09-30/technical_analysis.md"><span class="xref myst">Technical Analysis</span></a></p></td>
-<td><p><a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Numerical Stability</span></a></p></td>
+<td><p><a class="reference internal" href="reports/2025-09-30/technical_analysis.html"><span class="std std-doc">Technical Analysis</span></a></p></td>
+<td><p><a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Numerical Stability</span></a></p></td>
 <td><p><a class="reference internal" href="standards/testing_standards.html#numerical-accuracy"><span class="std std-ref">Numerical Testing</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Memory</strong></p></td>
-<td><p><a class="reference internal" href="#pytest_reports/2025-09-30/executive_summary.md"><span class="xref myst">Executive Summary</span></a></p></td>
-<td><p><a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Memory Debugging</span></a></p></td>
+<td><p><a class="reference internal" href="reports/2025-09-30/executive/executive_summary.html"><span class="std std-doc">Executive Summary</span></a></p></td>
+<td><p><a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Memory Debugging</span></a></p></td>
 <td><p><a class="reference internal" href="standards/testing_standards.html#memory-testing"><span class="std std-ref">Memory Standards</span></a></p></td>
 </tr>
 </tbody>
@@ -765,10 +791,10 @@
 <section id="daily-development-workflow">
 <h3>Daily Development Workflow<a class="headerlink" href="#daily-development-workflow" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
-<li><p><strong>Check Status</strong> → <a class="reference internal" href="#pytest_reports/2025-09-30/executive_summary.md"><span class="xref myst">Executive Summary</span></a></p></li>
-<li><p><strong>Local Testing</strong> → <a class="reference internal" href="#coverage_local_development_guide.md"><span class="xref myst">Local Development Guide</span></a></p></li>
-<li><p><strong>Run Tests</strong> → <a class="reference internal" href="#workflows/pytest_testing_workflow.md"><span class="xref myst">Pytest Workflow</span></a></p></li>
-<li><p><strong>Debug Issues</strong> → <a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Troubleshooting Guide</span></a></p></li>
+<li><p><strong>Check Status</strong> → <a class="reference internal" href="reports/2025-09-30/executive/executive_summary.html"><span class="std std-doc">Executive Summary</span></a></p></li>
+<li><p><strong>Local Testing</strong> → <a class="reference internal" href="guides/coverage_local_development_guide.html"><span class="std std-doc">Local Development Guide</span></a></p></li>
+<li><p><strong>Run Tests</strong> → <a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a></p></li>
+<li><p><strong>Debug Issues</strong> → <a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Troubleshooting Guide</span></a></p></li>
 </ol>
 </section>
 <section id="new-feature-development">
@@ -776,25 +802,25 @@
 <ol class="arabic simple">
 <li><p><strong>Review Standards</strong> → <a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a></p></li>
 <li><p><strong>Use Template</strong> → <a class="reference download internal" download="" href="../_downloads/b4c62a804fd2d6732648252b415f04e7/test_template.py"><span class="xref download myst">Test Template</span></a></p></li>
-<li><p><strong>Check Coverage</strong> → <a class="reference internal" href="#coverage_quality_gates_runbook.md"><span class="xref myst">Quality Gates</span></a></p></li>
+<li><p><strong>Check Coverage</strong> → <a class="reference internal" href="guides/coverage_quality_gates_runbook.html"><span class="std std-doc">Quality Gates</span></a></p></li>
 <li><p><strong>Validate Integration</strong> → <a class="reference internal" href="standards/testing_standards.html#integration-tests"><span class="std std-ref">Integration Testing</span></a></p></li>
 </ol>
 </section>
 <section id="issue-resolution-workflow">
 <h3>Issue Resolution Workflow<a class="headerlink" href="#issue-resolution-workflow" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
-<li><p><strong>Identify Issue</strong> → <a class="reference internal" href="#pytest_reports/2025-09-30/failure_breakdown.md"><span class="xref myst">Failure Breakdown</span></a></p></li>
-<li><p><strong>Understand Cause</strong> → <a class="reference internal" href="#pytest_reports/2025-09-30/technical_analysis.md"><span class="xref myst">Technical Analysis</span></a></p></li>
-<li><p><strong>Apply Fix</strong> → <a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Troubleshooting Guide</span></a></p></li>
+<li><p><strong>Identify Issue</strong> → <a class="reference internal" href="reports/2025-09-30/failure_breakdown.html"><span class="std std-doc">Failure Breakdown</span></a></p></li>
+<li><p><strong>Understand Cause</strong> → <a class="reference internal" href="reports/2025-09-30/technical_analysis.html"><span class="std std-doc">Technical Analysis</span></a></p></li>
+<li><p><strong>Apply Fix</strong> → <a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Troubleshooting Guide</span></a></p></li>
 <li><p><strong>Validate Solution</strong> → <a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a></p></li>
 </ol>
 </section>
 <section id="qa-devops-workflow">
 <h3>QA/DevOps Workflow<a class="headerlink" href="#qa-devops-workflow" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
-<li><p><strong>Monitor Gates</strong> → <a class="reference internal" href="#coverage_quality_gates_runbook.md"><span class="xref myst">Quality Gates Runbook</span></a></p></li>
-<li><p><strong>Review Results</strong> → <a class="reference internal" href="#pytest_reports/2025-09-30/executive_summary.md"><span class="xref myst">Executive Summary</span></a></p></li>
-<li><p><strong>Analyze Trends</strong> → <a class="reference internal" href="#pytest_reports/2025-09-30/technical_analysis.md"><span class="xref myst">Technical Analysis</span></a></p></li>
+<li><p><strong>Monitor Gates</strong> → <a class="reference internal" href="guides/coverage_quality_gates_runbook.html"><span class="std std-doc">Quality Gates Runbook</span></a></p></li>
+<li><p><strong>Review Results</strong> → <a class="reference internal" href="reports/2025-09-30/executive/executive_summary.html"><span class="std std-doc">Executive Summary</span></a></p></li>
+<li><p><strong>Analyze Trends</strong> → <a class="reference internal" href="reports/2025-09-30/technical_analysis.html"><span class="std std-doc">Technical Analysis</span></a></p></li>
 <li><p><strong>Update Standards</strong> → <a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a></p></li>
 </ol>
 </section>
@@ -814,24 +840,23 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span><span class="o">/</span><span class="n">testing</span><span class="o">/</span>
 <span class="err">├──</span> <span class="err">📄</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>                     <span class="c1"># Main index (this file)</span>
 <span class="err">├──</span> <span class="err">📄</span> <span class="n">navigation_index</span><span class="o">.</span><span class="n">md</span>           <span class="c1"># Cross-reference navigation</span>
-<span class="err">├──</span> <span class="err">📁</span> <span class="n">pytest_reports</span><span class="o">/</span>              <span class="c1"># Test execution reports</span>
+<span class="err">├──</span> <span class="err">📁</span> <span class="n">reports</span><span class="o">/</span>                     <span class="c1"># Test execution reports</span>
 <span class="err">│</span>   <span class="err">└──</span> <span class="err">📁</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">30</span><span class="o">/</span>             <span class="c1"># Date-organized results</span>
-<span class="err">│</span>       <span class="err">├──</span> <span class="err">📄</span> <span class="n">executive_summary</span><span class="o">.</span><span class="n">md</span>    <span class="c1"># Management summary</span>
+<span class="err">│</span>       <span class="err">├──</span> <span class="err">📁</span> <span class="n">executive</span><span class="o">/</span>              <span class="c1"># Management summaries</span>
+<span class="err">│</span>       <span class="err">│</span>   <span class="err">└──</span> <span class="err">📄</span> <span class="n">executive_summary</span><span class="o">.</span><span class="n">md</span>
 <span class="err">│</span>       <span class="err">├──</span> <span class="err">📄</span> <span class="n">technical_analysis</span><span class="o">.</span><span class="n">md</span>   <span class="c1"># Technical deep-dive</span>
 <span class="err">│</span>       <span class="err">├──</span> <span class="err">📄</span> <span class="n">failure_breakdown</span><span class="o">.</span><span class="n">md</span>    <span class="c1"># Failure categorization</span>
-<span class="err">│</span>       <span class="err">├──</span> <span class="err">📄</span> <span class="n">test_failure_analysis</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Test-specific analysis</span>
-<span class="err">│</span>       <span class="err">└──</span> <span class="err">📁</span> <span class="n">raw_output</span><span class="o">/</span>             <span class="c1"># Compressed raw logs</span>
+<span class="err">│</span>       <span class="err">└──</span> <span class="err">📄</span> <span class="n">test_failure_analysis</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Test-specific analysis</span>
 <span class="err">├──</span> <span class="err">📁</span> <span class="n">standards</span><span class="o">/</span>                   <span class="c1"># Testing standards and guidelines</span>
 <span class="err">│</span>   <span class="err">└──</span> <span class="err">📄</span> <span class="n">testing_standards</span><span class="o">.</span><span class="n">md</span>        <span class="c1"># Comprehensive standards</span>
 <span class="err">├──</span> <span class="err">📁</span> <span class="n">templates</span><span class="o">/</span>                   <span class="c1"># Reusable templates</span>
 <span class="err">│</span>   <span class="err">└──</span> <span class="err">📄</span> <span class="n">test_template</span><span class="o">.</span><span class="n">py</span>            <span class="c1"># Standard test file template</span>
-<span class="err">├──</span> <span class="err">📁</span> <span class="n">workflows</span><span class="o">/</span>                   <span class="c1"># Process documentation</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="err">📄</span> <span class="n">pytest_testing_workflow</span><span class="o">.</span><span class="n">md</span>  <span class="c1"># Testing workflows</span>
-<span class="err">├──</span> <span class="err">📄</span> <span class="n">coverage_quality_gates_runbook</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Quality gate specs</span>
-<span class="err">├──</span> <span class="err">📄</span> <span class="n">coverage_quality_gates_troubleshooting</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Issue resolution</span>
-<span class="err">├──</span> <span class="err">📄</span> <span class="n">coverage_integration_summary</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Integration overview</span>
-<span class="err">├──</span> <span class="err">📄</span> <span class="n">coverage_local_development_guide</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Developer guide</span>
-<span class="err">└──</span> <span class="err">📄</span> <span class="n">test_infrastructure_guide</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Infrastructure documentation</span>
+<span class="err">└──</span> <span class="err">📁</span> <span class="n">guides</span><span class="o">/</span>                      <span class="c1"># Testing guides and references</span>
+    <span class="err">├──</span> <span class="err">📄</span> <span class="n">coverage_quality_gates_runbook</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Quality gate specs</span>
+    <span class="err">├──</span> <span class="err">📄</span> <span class="n">coverage_quality_gates_troubleshooting</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Issue resolution</span>
+    <span class="err">├──</span> <span class="err">📄</span> <span class="n">coverage_integration_summary</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Integration overview</span>
+    <span class="err">├──</span> <span class="err">📄</span> <span class="n">coverage_local_development_guide</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Developer guide</span>
+    <span class="err">└──</span> <span class="err">📄</span> <span class="n">test_infrastructure_guide</span><span class="o">.</span><span class="n">md</span> <span class="c1"># Infrastructure documentation</span>
 </pre></div>
 </div>
 </section>
@@ -847,19 +872,19 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Developer</strong></p></td>
-<td><p><a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a> → <a class="reference internal" href="#coverage_local_development_guide.md"><span class="xref myst">Local Guide</span></a></p></td>
+<td><p><a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a> → <a class="reference internal" href="guides/coverage_local_development_guide.html"><span class="std std-doc">Local Guide</span></a></p></td>
 <td><p>Daily testing, debugging</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>QA Engineer</strong></p></td>
-<td><p><a class="reference internal" href="#pytest_reports/2025-09-30/executive_summary.md"><span class="xref myst">Executive Summary</span></a> → <a class="reference internal" href="#coverage_quality_gates_runbook.md"><span class="xref myst">Quality Gates</span></a></p></td>
+<td><p><a class="reference internal" href="reports/2025-09-30/executive/executive_summary.html"><span class="std std-doc">Executive Summary</span></a> → <a class="reference internal" href="guides/coverage_quality_gates_runbook.html"><span class="std std-doc">Quality Gates</span></a></p></td>
 <td><p>Quality monitoring, validation</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>DevOps</strong></p></td>
-<td><p><a class="reference internal" href="#coverage_integration_summary.md"><span class="xref myst">Integration Summary</span></a> → <a class="reference internal" href="#test_infrastructure_guide.md"><span class="xref myst">Infrastructure Guide</span></a></p></td>
+<td><p><a class="reference internal" href="guides/coverage_integration_summary.html"><span class="std std-doc">Integration Summary</span></a> → <a class="reference internal" href="guides/test_infrastructure_guide.html"><span class="std std-doc">Infrastructure Guide</span></a></p></td>
 <td><p>CI/CD, automation</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Research</strong></p></td>
-<td><p><a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a> → <a class="reference internal" href="#pytest_reports/2025-09-30/technical_analysis.md"><span class="xref myst">Technical Analysis</span></a></p></td>
+<td><p><a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Testing Standards</span></a> → <a class="reference internal" href="reports/2025-09-30/technical_analysis.html"><span class="std std-doc">Technical Analysis</span></a></p></td>
 <td><p>Scientific validation, analysis</p></td>
 </tr>
 </tbody>
@@ -876,16 +901,16 @@
 <li><p><strong>Quality Gates</strong>: Look for “quality_gates” in file names</p></li>
 <li><p><strong>Troubleshooting</strong>: Check documents with “troubleshooting” in title</p></li>
 <li><p><strong>Standards</strong>: Browse <code class="docutils literal notranslate"><span class="pre">standards/</span></code> directory</p></li>
-<li><p><strong>Current Issues</strong>: Check latest date in <code class="docutils literal notranslate"><span class="pre">pytest_reports/</span></code></p></li>
+<li><p><strong>Current Issues</strong>: Check latest date in <code class="docutils literal notranslate"><span class="pre">reports/</span></code></p></li>
 </ul>
 </section>
 <section id="find-by-error-type">
 <h3>Find by Error Type<a class="headerlink" href="#find-by-error-type" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong>Import Errors</strong>: <a class="reference internal" href="#pytest_reports/2025-09-30/technical_analysis.md"><span class="xref myst">Technical Analysis</span></a> §Import Issues</p></li>
-<li><p><strong>Configuration</strong>: <a class="reference internal" href="#coverage_quality_gates_troubleshooting.md"><span class="xref myst">Troubleshooting</span></a> §Configuration</p></li>
+<li><p><strong>Import Errors</strong>: <a class="reference internal" href="reports/2025-09-30/technical_analysis.html"><span class="std std-doc">Technical Analysis</span></a> §Import Issues</p></li>
+<li><p><strong>Configuration</strong>: <a class="reference internal" href="guides/coverage_quality_gates_troubleshooting.html"><span class="std std-doc">Troubleshooting</span></a> §Configuration</p></li>
 <li><p><strong>Performance</strong>: <a class="reference internal" href="standards/testing_standards.html"><span class="std std-doc">Standards</span></a> §Performance Tests</p></li>
-<li><p><strong>Memory</strong>: <a class="reference internal" href="#pytest_reports/2025-09-30/executive_summary.md"><span class="xref myst">Executive Summary</span></a> §Memory Issues</p></li>
+<li><p><strong>Memory</strong>: <a class="reference internal" href="reports/2025-09-30/executive/executive_summary.html"><span class="std std-doc">Executive Summary</span></a> §Memory Issues</p></li>
 </ul>
 </section>
 <section id="find-by-component">
@@ -927,7 +952,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

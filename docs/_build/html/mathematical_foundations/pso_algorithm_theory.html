@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -1057,7 +1083,10 @@ N \cdot T_{max} = \text{total fitness evaluations}
 </pre></div>
 </div>
 <p><strong>Adaptive Termination:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">200</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">max_iter</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">stagnation_limit</span> <span class="o">=</span> <span class="mi">20</span>
 
 <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -1243,7 +1272,10 @@ g_{min} \leq g \leq g_{max}
 <section id="fitness-evaluation">
 <h3>Fitness Evaluation<a class="headerlink" href="#fitness-evaluation" title="Link to this heading">¶</a></h3>
 <p><strong>Simulation-Based Fitness:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">evaluate_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate controller performance via simulation.&quot;&quot;&quot;</span>
     <span class="c1"># 1. Create controller</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">)</span>
@@ -1268,7 +1300,10 @@ g_{min} \leq g \leq g_{max}
 </pre></div>
 </div>
 <p><strong>Penalty for Constraint Violations:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">penalized_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">penalized_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Add large penalty for invalid gains.&quot;&quot;&quot;</span>
     <span class="n">base_fitness</span> <span class="o">=</span> <span class="n">evaluate_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
     <span class="n">penalty</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -1287,7 +1322,10 @@ g_{min} \leq g \leq g_{max}
 </section>
 <section id="typical-pso-configuration-for-smc">
 <h3>Typical PSO Configuration for SMC<a class="headerlink" href="#typical-pso-configuration-for-smc" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pso_config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">pso_config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;n_particles&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
     <span class="s1">&#39;max_iters&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="s1">&#39;inertia&#39;</span><span class="p">:</span> <span class="mf">0.7298</span><span class="p">,</span>         <span class="c1"># Constriction coefficient</span>
@@ -1368,7 +1406,10 @@ D(t) = \frac{1}{N \cdot n} \sum_{i=1}^N \|x_i^t - \bar{x}^t\|
 <section id="stagnation-detection">
 <h3>Stagnation Detection<a class="headerlink" href="#stagnation-detection" title="Link to this heading">¶</a></h3>
 <p><strong>No-Improvement Counter:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_fitness_history</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">best_fitness_history</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">no_improvement_count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">1e-6</span>
 
@@ -1783,7 +1824,7 @@ v_{max} = k \cdot (\text{upper bound} - \text{lower bound})
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

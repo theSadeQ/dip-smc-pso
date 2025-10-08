@@ -36,6 +36,9 @@ Successfully resolved failing test `test_lyapunov_stability_convergence` by appl
 Computed optimal control gains using scipy's Continuous Algebraic Riccati Equation (CARE) solver:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # System from test (lines 313-321)
 A = [[0, 0, 0, 1, 0, 0],
      [0, 0, 0, 0, 1, 0],

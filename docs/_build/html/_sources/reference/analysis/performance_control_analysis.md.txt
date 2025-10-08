@@ -6,6 +6,180 @@
 
 Linearisation and controllability/observability analysis utilities.
 
+
+
+## Advanced Mathematical Theory
+
+### Control System Performance
+
+**Closed-loop transfer function:**
+
+```{math}
+T(s) = \frac{G(s)C(s)}{1 + G(s)C(s)}
+```
+
+Where $G(s)$ is plant, $C(s)$ is controller.
+
+### Frequency Response Analysis
+
+**Bode plot analysis:**
+
+```{math}
+\begin{align}
+\text{Magnitude: } & |G(j\omega)| = \sqrt{\text{Re}^2(G(j\omega)) + \text{Im}^2(G(j\omega))} \\
+\text{Phase: } & \angle G(j\omega) = \arctan\left(\frac{\text{Im}(G(j\omega))}{\text{Re}(G(j\omega))}\right)
+\end{align}
+```
+
+### Bandwidth and Settling Time
+
+**Bandwidth** $\omega_B$: Frequency where $|T(j\omega)| = \frac{1}{\sqrt{2}}|T(0)|$
+
+**Relation to settling time:**
+
+```{math}
+t_s \approx \frac{4.6}{\zeta \omega_n} \approx \frac{3}{\omega_B}
+```
+
+### Sensitivity Functions
+
+**Sensitivity:**
+
+```{math}
+S(s) = \frac{1}{1 + G(s)C(s)}
+```
+
+**Complementary sensitivity:**
+
+```{math}
+T(s) = \frac{G(s)C(s)}{1 + G(s)C(s)}
+```
+
+**Fundamental relation:**
+
+```{math}
+S(s) + T(s) = 1
+```
+
+### Performance Bounds
+
+**Waterbed effect:**
+
+```{math}
+\int_0^\infty \ln|S(j\omega)| d\omega = \pi \sum \text{Re}(p_i)
+```
+
+Where $p_i$ are unstable poles of $G(s)C(s)$.
+
+### Rise Time and Overshoot
+
+**Second-order approximation:**
+
+```{math}
+\begin{align}
+t_r &\approx \frac{1.8}{\omega_n} \\
+M_p &= e^{-\frac{\pi \zeta}{\sqrt{1-\zeta^2}}} \times 100\%
+\end{align}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Closed-Loop System] --> B[Transfer Function]
+    B --> C[Frequency Response]
+
+    C --> D[Bode Plot]
+    D --> E[Gain Plot]
+    D --> F[Phase Plot]
+
+    E --> G[Bandwidth]
+    F --> H[Phase Margin]
+
+    B --> I[Sensitivity Analysis]
+    I --> J[S(s) = 1/(1+GC)]
+    I --> K[T(s) = GC/(1+GC)]
+
+    J --> L{||S||∞ Check}
+    K --> M{||T||∞ Check}
+
+    L --> N[Disturbance Rejection]
+    M --> O[Reference Tracking]
+
+    A --> P[Time Response]
+    P --> Q[Rise Time]
+    P --> R[Settling Time]
+    P --> S[Overshoot]
+
+    style D fill:#9cf
+    style I fill:#ff9
+    style N fill:#9f9
+    style O fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module exposes helper functions to linearise the double inverted
 pendulum dynamics at an equilibrium point and to construct the
 controllability and observability matrices for a linear time‑invariant

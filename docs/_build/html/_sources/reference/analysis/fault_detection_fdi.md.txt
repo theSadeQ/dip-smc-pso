@@ -6,6 +6,182 @@
 
 *No module docstring available.*
 
+
+
+## Advanced Mathematical Theory
+
+### Fault Detection & Isolation (FDI)
+
+**Fault detection problem:** Detect deviation from nominal behavior.
+
+**System model:**
+
+```{math}
+\begin{align}
+\dot{\vec{x}} &= A\vec{x} + B\vec{u} + E\vec{f} \\
+\vec{y} &= C\vec{x} + D\vec{u} + F\vec{f}
+\end{align}
+```
+
+Where $\vec{f}$ is fault vector (actuator, sensor, or component faults).
+
+### Observer-Based FDI
+
+**Luenberger observer:**
+
+```{math}
+\dot{\hat{\vec{x}}} = A\hat{\vec{x}} + B\vec{u} + L(\vec{y} - C\hat{\vec{x}})
+```
+
+**Residual:**
+
+```{math}
+\vec{r}(t) = \vec{y}(t) - \hat{\vec{y}}(t) = C(\vec{x} - \hat{\vec{x}})
+```
+
+**Fault-free:** $\vec{r}(t) \to 0$ as $t \to \infty$
+
+**Faulty:** $\vec{r}(t) \neq 0$
+
+### Parity Space Methods
+
+**Parity equation:**
+
+```{math}
+\vec{r} = W \begin{bmatrix} \vec{y} \\ \vec{u} \end{bmatrix}
+```
+
+**Orthogonality condition:**
+
+```{math}
+W^T \begin{bmatrix} C \\ D \end{bmatrix} = 0
+```
+
+Ensures $\vec{r} = 0$ when fault-free, $\vec{r} \neq 0$ when faulty.
+
+### Kalman Filter-Based FDI
+
+**Innovation residual:**
+
+```{math}
+\vec{r}_k = \vec{y}_k - C\hat{\vec{x}}_{k|k-1}
+```
+
+**Fault-free statistics:**
+
+```{math}
+E[\vec{r}_k] = 0, \quad \text{Cov}(\vec{r}_k) = C P_{k|k-1} C^T + R
+```
+
+### Fault Isolation
+
+**Structured residuals:** Design $r_i$ sensitive to fault $f_i$, insensitive to $f_j, j \neq i$
+
+**Fault signature matrix:**
+
+```{math}
+S = \begin{bmatrix}
+s_{11} & s_{12} & \cdots \\
+s_{21} & s_{22} & \cdots \\
+\vdots & \vdots & \ddots
+\end{bmatrix}
+```
+
+Where $s_{ij} = 1$ if residual $r_i$ sensitive to fault $f_j$, else $0$.
+
+### Model-Based vs Data-Driven
+
+**Model-based:** Uses physics equations, robust to unseen faults, requires accurate model.
+
+**Data-driven:** Machine learning, no model required, needs extensive training data.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[System] --> B[Sensors]
+    B --> C[Measurements y]
+
+    C --> D[Observer]
+    E[Control u] --> D
+    D --> F[State Estimate x̂]
+
+    C --> G[Residual Generator]
+    F --> G
+    G --> H[Residual r]
+
+    H --> I[Threshold Adapter]
+    I --> J{|r| > τ?}
+
+    J -->|Yes| K[Fault Detected]
+    J -->|No| L[Normal]
+
+    K --> M[Fault Isolation]
+    M --> N[Fault Identification]
+
+    style G fill:#9cf
+    style J fill:#ff9
+    style K fill:#f99
+    style L fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.analysis import Component
+
+# Initialize component
+component = Component(config)
+result = component.process(data)
+```
+
+### Example 2: Advanced Configuration
+
+```python
+# Configure with custom parameters
+config = {
+    'threshold': 0.05,
+    'method': 'adaptive'
+}
+component = Component(config)
+```
+
+### Example 3: Integration Workflow
+
+```python
+# Complete analysis workflow
+from src.analysis import analyze
+
+results = analyze(
+    data=sensor_data,
+    method='enhanced',
+    visualization=True
+)
+```
+
+### Example 4: Fault Detection Example
+
+```python
+# FDI system usage
+from src.analysis.fault_detection import FDISystem
+
+fdi = FDISystem(config)
+residual = fdi.generate_residual(y, u)
+fault = fdi.detect(residual)
+```
+
+### Example 5: Visualization Example
+
+```python
+# Generate analysis plots
+from src.analysis.visualization import AnalysisPlotter
+
+plotter = AnalysisPlotter(style='professional')
+fig = plotter.plot_time_series(data)
+fig.savefig('analysis.pdf')
+```
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/analysis/fault_detection/fdi.py

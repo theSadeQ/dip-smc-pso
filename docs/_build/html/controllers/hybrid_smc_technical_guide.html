@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Model Predictive Control Technical Guide" href="mpc_technical_guide.html" /><link rel="prev" title="Super-Twisting Sliding Mode Control Technical Guide" href="sta_smc_technical_guide.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -610,7 +636,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 <h2>Algorithm Architecture<a class="headerlink" href="#algorithm-architecture" title="Link to this heading">¶</a></h2>
 <section id="modular-controller-structure">
 <h3>1. Modular Controller Structure<a class="headerlink" href="#modular-controller-structure" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HybridAdaptiveSTASMC</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HybridAdaptiveSTASMC</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Modular hybrid controller with clear separation of concerns:</span>
 
@@ -704,7 +733,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 <h3>1. Core Algorithm Implementation<a class="headerlink" href="#core-algorithm-implementation" title="Link to this heading">¶</a></h3>
 <section id="sliding-surface-computation">
 <h4>1.1 Sliding Surface Computation<a class="headerlink" href="#sliding-surface-computation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_compute_sliding_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_compute_sliding_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute unified sliding surface with dual formulation support.</span>
 
 <span class="sd">    Mathematical Implementation:</span>
@@ -731,7 +763,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 </section>
 <section id="adaptive-gain-update">
 <h4>1.2 Adaptive Gain Update<a class="headerlink" href="#adaptive-gain-update" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_update_adaptive_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abs_s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k1_prev</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2_prev</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_update_adaptive_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abs_s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k1_prev</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2_prev</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update adaptive gains with self-tapering and anti-windup.</span>
 
 <span class="sd">    Implements:</span>
@@ -777,7 +812,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 </section>
 <section id="pso-fitness-function-integration">
 <h4>2.2 PSO Fitness Function Integration<a class="headerlink" href="#pso-fitness-function-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fitness_function</span><span class="p">(</span><span class="n">gains_array</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fitness_function</span><span class="p">(</span><span class="n">gains_array</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;PSO fitness evaluation for hybrid controller.</span>
 
 <span class="sd">    The hybrid controller&#39;s complexity requires careful fitness design:</span>
@@ -808,7 +846,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 <section id="code-analysis">
 <h4>1.1 Code Analysis<a class="headerlink" href="#code-analysis" title="Link to this heading">¶</a></h4>
 <p><strong>Before Fix</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
     <span class="c1"># ... 674 lines of controller logic ...</span>
 
     <span class="c1"># Missing return statement here!</span>
@@ -820,7 +861,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 </pre></div>
 </div>
 <p><strong>After Fix</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
     <span class="c1"># ... 674 lines of controller logic ...</span>
 
     <span class="k">return</span> <span class="n">HybridSTAOutput</span><span class="p">(</span><span class="n">u_sat</span><span class="p">,</span> <span class="p">(</span><span class="n">k1_new</span><span class="p">,</span> <span class="n">k2_new</span><span class="p">,</span> <span class="n">u_int_new</span><span class="p">),</span> <span class="n">history</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
@@ -848,7 +892,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 <h3>3. Prevention Measures<a class="headerlink" href="#prevention-measures" title="Link to this heading">¶</a></h3>
 <section id="static-analysis-integration">
 <h4>3.1 Static Analysis Integration<a class="headerlink" href="#static-analysis-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add to pre-commit hooks:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Add to pre-commit hooks:</span>
 <span class="c1"># mypy type checking for return type consistency</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">check_return_types</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify all controller methods return expected types.&quot;&quot;&quot;</span>
@@ -1118,7 +1165,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 </section>
 <section id="simulation-workflow">
 <h4>2.2 Simulation Workflow<a class="headerlink" href="#simulation-workflow" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete simulation with PSO-optimized hybrid controller</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Complete simulation with PSO-optimized hybrid controller</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">run_hybrid_simulation</span><span class="p">():</span>
     <span class="c1"># Load configuration</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s1">&#39;config.yaml&#39;</span><span class="p">)</span>
@@ -1147,7 +1197,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 <h3>3. Monitoring and Diagnostics<a class="headerlink" href="#monitoring-and-diagnostics" title="Link to this heading">¶</a></h3>
 <section id="real-time-monitoring">
 <h4>3.1 Real-Time Monitoring<a class="headerlink" href="#real-time-monitoring" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">monitor_hybrid_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">monitor_hybrid_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor hybrid controller performance indicators.&quot;&quot;&quot;</span>
 
     <span class="c1"># Extract monitoring data</span>
@@ -1369,7 +1422,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 <h3>3. Computational Performance<a class="headerlink" href="#computational-performance" title="Link to this heading">¶</a></h3>
 <section id="runtime-analysis">
 <h4>3.1 Runtime Analysis<a class="headerlink" href="#runtime-analysis" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Performance profiling results</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Performance profiling results</span>
 <span class="n">computation_times</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;sliding_surface&#39;</span><span class="p">:</span> <span class="s1">&#39;12.3 μs&#39;</span><span class="p">,</span>      <span class="c1"># Fast</span>
     <span class="s1">&#39;adaptive_gains&#39;</span><span class="p">:</span> <span class="s1">&#39;18.7 μs&#39;</span><span class="p">,</span>       <span class="c1"># Moderate</span>
@@ -1470,7 +1526,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 <h3>2. Diagnostic Tools<a class="headerlink" href="#diagnostic-tools" title="Link to this heading">¶</a></h3>
 <section id="state-monitoring">
 <h4>2.1 State Monitoring<a class="headerlink" href="#state-monitoring" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">diagnose_hybrid_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">diagnose_hybrid_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive controller diagnostics.&quot;&quot;&quot;</span>
 
     <span class="n">diagnostics</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1498,7 +1557,10 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 </section>
 <section id="parameter-validation">
 <h4>2.2 Parameter Validation<a class="headerlink" href="#parameter-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_hybrid_parameters</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_hybrid_parameters</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate hybrid controller parameters for stability.&quot;&quot;&quot;</span>
 
     <span class="n">c1</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">lambda2</span> <span class="o">=</span> <span class="n">gains</span>
@@ -1630,7 +1692,7 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

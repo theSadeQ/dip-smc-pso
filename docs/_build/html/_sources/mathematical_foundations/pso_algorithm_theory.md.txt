@@ -475,6 +475,9 @@ def check_convergence(fitness_history, window=10, tolerance=1e-6):
 **Adaptive Termination:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 max_iter = 200
 stagnation_limit = 20
 
@@ -666,6 +669,9 @@ $$
 **Simulation-Based Fitness:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def evaluate_fitness(gains):
     """Evaluate controller performance via simulation."""
     # 1. Create controller
@@ -693,6 +699,9 @@ def evaluate_fitness(gains):
 **Penalty for Constraint Violations:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 def penalized_fitness(gains):
     """Add large penalty for invalid gains."""
     base_fitness = evaluate_fitness(gains)
@@ -712,6 +721,9 @@ def penalized_fitness(gains):
 ### Typical PSO Configuration for SMC
 
 ```python
+# example-metadata:
+# runnable: false
+
 pso_config = {
     'n_particles': 30,
     'max_iters': 100,
@@ -791,6 +803,9 @@ def compute_diversity(swarm_positions):
 **No-Improvement Counter:**
 
 ```python
+# example-metadata:
+# runnable: false
+
 best_fitness_history = []
 no_improvement_count = 0
 tolerance = 1e-6

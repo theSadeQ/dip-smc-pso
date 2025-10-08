@@ -6,6 +6,187 @@
 
 Core metric computation framework.
 
+
+
+## Advanced Mathematical Theory
+
+### Core Performance Metrics
+
+**Weighted performance index:**
+
+```{math}
+J = \sum_{i=1}^n w_i m_i
+```
+
+Where $w_i$ are weights, $m_i$ are individual metrics.
+
+### Metric Normalization
+
+**Min-max normalization:**
+
+```{math}
+m_{norm} = \frac{m - m_{min}}{m_{max} - m_{min}}
+```
+
+**Z-score normalization:**
+
+```{math}
+m_{norm} = \frac{m - \mu_m}{\sigma_m}
+```
+
+### Composite Metrics
+
+**Geometric mean:**
+
+```{math}
+M_g = \left(\prod_{i=1}^n m_i\right)^{1/n}
+```
+
+**Harmonic mean:**
+
+```{math}
+M_h = \frac{n}{\sum_{i=1}^n \frac{1}{m_i}}
+```
+
+### Time-Domain Metrics
+
+**Peak time:**
+
+```{math}
+t_p = \arg\max_t |y(t) - y_{ss}|
+```
+
+**Rise time (10%-90%):**
+
+```{math}
+t_r = t_{90\%} - t_{10\%}
+```
+
+### Frequency-Domain Metrics
+
+**Bandwidth:**
+
+```{math}
+\omega_B = \max\{\omega : |T(j\omega)| \geq \frac{1}{\sqrt{2}}|T(0)|\}
+```
+
+**Resonant peak:**
+
+```{math}
+M_r = \max_\omega |T(j\omega)|
+```
+
+### Statistical Aggregation
+
+**Weighted average:**
+
+```{math}
+\bar{m}_w = \frac{\sum w_i m_i}{\sum w_i}
+```
+
+**Confidence interval for metric:**
+
+```{math}
+\text{CI}_{1-\alpha} = \bar{m} \pm t_{\alpha/2, n-1}\frac{s_m}{\sqrt{n}}
+```
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Raw Metrics] --> B{Normalization}
+    B -->|Min-Max| C[Scale [0,1]]
+    B -->|Z-score| D[Standardize]
+
+    C --> E[Normalized Metrics]
+    D --> E
+
+    E --> F[Aggregation]
+    F --> G[Weighted Sum]
+    F --> H[Geometric Mean]
+    F --> I[Harmonic Mean]
+
+    G --> J[Composite Metric]
+    H --> J
+    I --> J
+
+    J --> K{Uncertainty?}
+    K -->|Yes| L[Compute CI]
+    K -->|No| M[Point Estimate]
+
+    L --> N[t-interval]
+    N --> O[Final Metric ± CI]
+
+    M --> O
+
+    style B fill:#ff9
+    style F fill:#9cf
+    style O fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides the foundation for computing various performance
 metrics from simulation data, with emphasis on control engineering
 applications and statistical rigor.

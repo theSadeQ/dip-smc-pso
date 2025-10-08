@@ -23,6 +23,9 @@ Where:
 **Decoupled Coverage Collection**: Coverage measurement operates independently from test execution outcomes, preventing cascade failures when individual tests fail.
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Mathematical Model for Isolated Coverage
 def isolated_coverage_measurement(module_path: str) -> CoverageMetrics:
     """
@@ -81,6 +84,9 @@ Where:
 #### Strategy 1: Graduated Fallback Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 class FailureTolerantCoverageAnalyzer:
     """
     Multi-tier coverage analysis with progressive fallback.
@@ -123,6 +129,9 @@ Coverage for module $M$ is measured in isolation from $D(M)$ to prevent cascade 
 **Selective Coverage Aggregation**: Collect coverage data only from tests that execute successfully, while maintaining visibility into failed components.
 
 ```python
+# example-metadata:
+# runnable: false
+
 def selective_coverage_collection(test_suite: TestSuite) -> AggregatedCoverage:
     """
     Collect coverage from passing tests while isolating failures.
@@ -189,6 +198,9 @@ Where:
 
 **Gap Identification Matrix**:
 ```python
+# example-metadata:
+# runnable: false
+
 class ValidationGapMatrix:
     """
     Systematic gap identification across validation dimensions.

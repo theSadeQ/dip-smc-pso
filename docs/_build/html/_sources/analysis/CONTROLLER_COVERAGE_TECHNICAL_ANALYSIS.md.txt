@@ -22,6 +22,9 @@
 
 **Control Saturation Mechanisms** ✅ **100% Coverage**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/base/control_primitives.py
 # Lines: ALL COVERED - safety-critical saturation functions validated
 def saturate(sigma, epsilon, method="tanh"):
@@ -45,6 +48,9 @@ u_saturated = np.clip(u_total, -self.config.max_force, self.config.max_force)
 
 **Hybrid Switching Logic** ❌ **19% Coverage - CRITICAL GAP**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/smc/algorithms/hybrid/switching_logic.py
 # UNCOVERED CRITICAL LINES: 111-137, 151-170, 179-208, 212-258
 
@@ -62,6 +68,9 @@ def validate_transition_safety(self, from_controller, to_controller, state):
 
 **Adaptive Parameter Estimation** ❌ **48% Coverage - STABILITY RISK**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/smc/algorithms/adaptive/parameter_estimation.py
 # UNCOVERED CRITICAL LINES: 139-151, 155-160, 212, 235-248
 
@@ -79,6 +88,9 @@ def validate_stability_conditions(self, current_estimates):
 
 **STA Twisting Algorithm** ❌ **59% Coverage - CONVERGENCE RISK**
 ```python
+# example-metadata:
+# runnable: false
+
 # File: src/controllers/smc/algorithms/super_twisting/twisting_algorithm.py
 # UNCOVERED CRITICAL LINES: 134, 137, 139-144, 148-149
 
@@ -95,6 +107,9 @@ def compute_control(self, surface_value, dt, state_vars):
 
 **Required Test Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 # New test file: tests/test_controllers/safety/test_emergency_mechanisms.py
 
 class TestEmergencyStopMechanisms:
@@ -121,6 +136,9 @@ class TestEmergencyStopMechanisms:
 
 **Required Test Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 # Enhanced test file: tests/test_controllers/smc/algorithms/adaptive/test_stability_validation.py
 
 class TestAdaptiveStabilityValidation:
@@ -147,6 +165,9 @@ class TestAdaptiveStabilityValidation:
 
 **Required Test Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 # New test file: tests/test_controllers/smc/algorithms/hybrid/test_switching_integration.py
 
 class TestHybridSwitchingIntegration:
@@ -216,6 +237,9 @@ class TestHybridSwitchingIntegration:
 
 ### Property-Based Testing Integration
 ```python
+# example-metadata:
+# runnable: false
+
 # Enhanced hypothesis testing for controller stability:
 
 @given(state_vectors=valid_state_space(),
@@ -232,6 +256,9 @@ def test_stability_properties(state_vectors, controller_gains, disturbances):
 
 ### Real-Time Performance Testing
 ```python
+# example-metadata:
+# runnable: false
+
 # Real-time constraint validation:
 
 class TestRealTimeConstraints:
@@ -314,6 +341,9 @@ repos:
 
 ### Runtime Coverage Monitoring
 ```python
+# example-metadata:
+# runnable: false
+
 # Integration with production monitoring:
 
 class ControllerCoverageMonitor:

@@ -191,6 +191,9 @@ ValueError: All gains must be positive
 
 **Diagnosis:**
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_gain_values(gains):
     print(f"Diagnosing gain values: {gains}")
 
@@ -224,6 +227,9 @@ ValidationError: Missing required parameter 'boundary_layer' for classical_smc
 
 **Diagnosis:**
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_config_validation(controller_type, config_params):
     print(f"Diagnosing configuration for {controller_type}")
 
@@ -507,6 +513,9 @@ ImportError: MPC controller is not available. Check dependencies.
 
 **Diagnosis:**
 ```python
+# example-metadata:
+# runnable: false
+
 def diagnose_optional_dependencies():
     print("Checking optional dependencies")
 
@@ -645,6 +654,9 @@ diagnose_memory_usage()
 ### Step 1: Identify Problem Category
 
 ```python
+# example-metadata:
+# runnable: false
+
 def categorize_problem(error_message):
     """Categorize problem based on error message."""
 
@@ -722,6 +734,9 @@ for category, data in diagnostic_info.items():
 ### Step 3: Apply Category-Specific Solutions
 
 ```python
+# example-metadata:
+# runnable: false
+
 def apply_solutions(category, error_details):
     """Apply category-specific solutions."""
 
@@ -828,6 +843,9 @@ if not validation['valid']:
 ### 2. Robust Error Handling Patterns
 
 ```python
+# example-metadata:
+# runnable: false
+
 def robust_controller_creation(controller_type, gains=None, config=None, max_retries=3):
     """Robust controller creation with automatic error recovery."""
 
@@ -915,6 +933,9 @@ factory.create_controller = monitor_factory_operations(factory.create_controller
 ### Factory System Reset
 
 ```python
+# example-metadata:
+# runnable: false
+
 def emergency_factory_reset():
     """Emergency factory system reset procedure."""
 
@@ -962,6 +983,9 @@ def emergency_factory_reset():
 ### Fallback Controller Creation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def fallback_controller_creation(controller_type, gains=None):
     """Fallback controller creation using minimal dependencies."""
 

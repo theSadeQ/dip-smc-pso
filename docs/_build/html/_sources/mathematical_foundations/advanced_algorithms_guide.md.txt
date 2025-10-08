@@ -262,6 +262,9 @@ for iteration, w_val in enumerate(w_values):
 #### Uncertainty-Aware Optimization
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Configure physics uncertainty in config.yaml:
 # physics_uncertainty:
 #   n_evals: 5  # 5 perturbed models per evaluation
@@ -337,6 +340,9 @@ where:
 The `PSOTuner` implementation uses `simulate_system_batch()` to evaluate all particles simultaneously:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Vectorized evaluation (FAST)
 t, x_b, u_b, sigma_b = simulate_system_batch(
     controller_factory=controller_factory,
@@ -489,6 +495,9 @@ for t in time_array:
 #### Performance Analysis
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Run simulation and collect surface history
 surface_history = []
 
@@ -832,6 +841,9 @@ where variance is computed over the last $k$ iterations.
 #### Batch Simulation Example
 
 ```python
+# example-metadata:
+# runnable: false
+
 # SLOW: Sequential simulation (Python loop)
 def sequential_evaluation(particles, controller_factory):
     costs = []

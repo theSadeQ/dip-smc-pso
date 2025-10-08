@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -522,8 +548,356 @@ performance metrics, and real-time recording for analysis and debugging.</p>
 <span class="linenos">24</span><span class="c1"># from .analyzers import LogAnalyzer, DataProcessor</span>
 </pre></div>
 </div>
-<hr class="docutils" />
 </section>
+<hr class="docutils" />
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="structured-logging-theory">
+<h3>Structured Logging Theory<a class="headerlink" href="#structured-logging-theory" title="Link to this heading">¶</a></h3>
+<p>Structured logging provides comprehensive data recording for simulation analysis and debugging.</p>
+<section id="log-level-hierarchy">
+<h4>Log Level Hierarchy<a class="headerlink" href="#log-level-hierarchy" title="Link to this heading">¶</a></h4>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\text{Level} = \{\text{DEBUG} &lt; \text{INFO} &lt; \text{WARNING} &lt; \text{ERROR} &lt; \text{CRITICAL}\}
+\]</div>
+</div>
+<p><strong>Filtering rule:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Record}(\text{msg}) = \begin{cases}
+\text{True} &amp; \text{if } \text{msg.level} \geq \text{threshold} \\
+\text{False} &amp; \text{otherwise}
+\end{cases}
+\)</span>$</p>
+</section>
+<section id="ring-buffer-implementation">
+<h4>Ring Buffer Implementation<a class="headerlink" href="#ring-buffer-implementation" title="Link to this heading">¶</a></h4>
+<p><strong>Circular buffer</strong> for memory-bounded logging:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\text{index}(k) = k \mod N
+\]</div>
+</div>
+<p><strong>Write operation:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{buffer}[k \mod N] = \text{log}\_\text{entry}_k
+\)</span>$</p>
+<p><strong>Capacity:</strong> Fixed at <span class="math notranslate nohighlight">\(N\)</span> entries, overwrites oldest when full.</p>
+</section>
+<section id="log-rotation-policy">
+<h4>Log Rotation Policy<a class="headerlink" href="#log-rotation-policy" title="Link to this heading">¶</a></h4>
+<p><strong>Size-based rotation:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Rotate} = \begin{cases}
+\text{True} &amp; \text{if } \text{file\_size} \geq \text{max\_size} \\
+\text{False} &amp; \text{otherwise}
+\end{cases}
+\)</span>$</p>
+<p><strong>Time-based rotation:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Rotate} = (t_{\text{current}} - t_{\text{created}} \geq T_{\text{rotation}})
+\)</span>$</p>
+</section>
+<section id="performance-tracing">
+<h4>Performance Tracing<a class="headerlink" href="#performance-tracing" title="Link to this heading">¶</a></h4>
+<p><strong>Execution time measurement:</strong>
+$<span class="math notranslate nohighlight">\(
+t_{\text{exec}} = t_{\text{end}} - t_{\text{start}}
+\)</span>$</p>
+<p><strong>Overhead ratio:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{Overhead} = \frac{t_{\text{logging}}}{t_{\text{total}}} &lt; \epsilon_{\text{max}}
+\)</span>$</p>
+<p>Target: <span class="math notranslate nohighlight">\(\epsilon_{\text{max}} &lt; 0.01\)</span> (1% overhead)</p>
+</section>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Logging System] –&gt; B[Structured Logger]
+A –&gt; C[Performance Tracer]
+A –&gt; D[Ring Buffer]
+A –&gt; E[Log Rotator]</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>B --&gt; F{Log Level Filter}
+F --&gt;|Level ≥ threshold| G[Format Message]
+F --&gt;|Level &lt; threshold| H[Discard]
+
+G --&gt; I[Write to Buffer]
+I --&gt; D
+
+D --&gt; J{Buffer Full?}
+J --&gt;|Yes| K[Overwrite Oldest]
+J --&gt;|No| L[Append]
+
+C --&gt; M[Start Timer]
+M --&gt; N[Trace Event]
+N --&gt; O[End Timer]
+O --&gt; P[Log Performance]
+
+E --&gt; Q{Rotation Trigger?}
+Q --&gt;|Size| R[Size-based Rotation]
+Q --&gt;|Time| S[Time-based Rotation]
+
+R --&gt; T[Create New File]
+S --&gt; T
+T --&gt; U[Archive Old Log]
+
+style F fill:#fff4e1
+style J fill:#fff4e1
+style T fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-structured-logging">
+<h3>Example 1: Basic Structured Logging<a class="headerlink" href="#example-1-basic-structured-logging" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.simulation.logging import StructuredLogger</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-structured-logger">
+<h1>Create structured logger<a class="headerlink" href="#create-structured-logger" title="Link to this heading">¶</a></h1>
+<p>logger = StructuredLogger(
+name=’simulation’,
+level=’INFO’,
+format=’json’  # or ‘text’
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="log-simulation-events">
+<h1>Log simulation events<a class="headerlink" href="#log-simulation-events" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="http://logger.info">logger.info</a>(‘Simulation started’, extra={
+‘controller_type’: ‘classical_smc’,
+‘duration’: 10.0,
+‘dt’: 0.01
+})</p>
+<p>logger.debug(‘Control computed’, extra={
+‘step’: 100,
+‘state’: x.tolist(),
+‘control’: u.tolist()
+})</p>
+<p>logger.warning(‘High control effort’, extra={
+‘control_magnitude’: float(np.linalg.norm(u)),
+‘saturation’: 0.95
+})</p>
+<p><a class="reference external" href="http://logger.info">logger.info</a>(‘Simulation completed’, extra={
+‘final_state’: x_final.tolist(),
+‘num_steps’: 1000
+})
+```</p>
+<section id="example-2-performance-tracing">
+<h2>Example 2: Performance Tracing<a class="headerlink" href="#example-2-performance-tracing" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.logging import PerformanceTracer</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-performance-tracer">
+<h1>Create performance tracer<a class="headerlink" href="#create-performance-tracer" title="Link to this heading">¶</a></h1>
+<p>tracer = PerformanceTracer(overhead_limit=0.01)  # 1% max overhead</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="trace-simulation-loop">
+<h1>Trace simulation loop<a class="headerlink" href="#trace-simulation-loop" title="Link to this heading">¶</a></h1>
+<p>for k in range(num_steps):
+with tracer.trace(‘control_computation’):
+u = controller.compute_control(x, state_vars, history)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>with tracer.trace(&#39;integration&#39;):
+    x = integrator.integrate(dynamics.compute_dynamics, x, u, t)
+
+t += dt
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="get-performance-statistics">
+<h1>Get performance statistics<a class="headerlink" href="#get-performance-statistics" title="Link to this heading">¶</a></h1>
+<p>stats = tracer.get_statistics()</p>
+<p>for operation, op_stats in stats.items():
+print(f”{operation}:”)
+print(f”  Mean: {op_stats[‘mean’]:.6f}s”)
+print(f”  95th percentile: {op_stats[‘p95’]:.6f}s”)
+print(f”  Total time: {op_stats[‘total’]:.4f}s”)
+print(f”  Overhead: {op_stats[‘overhead’]:.2%}”)
+```</p>
+<section id="example-3-ring-buffer-logging">
+<h2>Example 3: Ring Buffer Logging<a class="headerlink" href="#example-3-ring-buffer-logging" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.logging import RingBufferLogger</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-memory-bounded-logger">
+<h1>Create memory-bounded logger<a class="headerlink" href="#create-memory-bounded-logger" title="Link to this heading">¶</a></h1>
+<p>logger = RingBufferLogger(capacity=1000)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="log-in-memory-circular-buffer">
+<h1>Log in memory (circular buffer)<a class="headerlink" href="#log-in-memory-circular-buffer" title="Link to this heading">¶</a></h1>
+<p>for k in range(10000):
+logger.log({
+‘step’: k,
+‘time’: k * 0.01,
+‘state’: x[k].tolist(),
+‘control’: u[k].tolist()
+})</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="only-last-1000-entries-are-kept">
+<h1>Only last 1000 entries are kept<a class="headerlink" href="#only-last-1000-entries-are-kept" title="Link to this heading">¶</a></h1>
+<p>recent_logs = logger.get_logs(last_n=100)
+print(f”Retrieved {len(recent_logs)} most recent log entries”)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dump-to-file-when-needed">
+<h1>Dump to file when needed<a class="headerlink" href="#dump-to-file-when-needed" title="Link to this heading">¶</a></h1>
+<p>logger.dump_to_file(‘simulation_log.json’)
+```</p>
+<section id="example-4-log-rotation">
+<h2>Example 4: Log Rotation<a class="headerlink" href="#example-4-log-rotation" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.logging import RotatingFileLogger</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-logger-with-rotation">
+<h1>Create logger with rotation<a class="headerlink" href="#create-logger-with-rotation" title="Link to this heading">¶</a></h1>
+<p>logger = RotatingFileLogger(
+filename=’simulation.log’,
+max_size_mb=10,  # Rotate at 10 MB
+max_files=5,  # Keep 5 backup files
+rotation_policy=’size’  # or ‘time’
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="long-running-simulation">
+<h1>Long-running simulation<a class="headerlink" href="#long-running-simulation" title="Link to this heading">¶</a></h1>
+<p>for trial in range(1000):
+<a class="reference external" href="http://logger.info">logger.info</a>(f’Trial {trial} started’)
+result = run_simulation()
+<a class="reference external" href="http://logger.info">logger.info</a>(f’Trial {trial} completed’, extra={‘result’: result.to_dict()})</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="logs-automatically-rotate-simulation-log-simulation-log-1-simulation-log-5">
+<h1>Logs automatically rotate: simulation.log, simulation.log.1, …, simulation.log.5<a class="headerlink" href="#logs-automatically-rotate-simulation-log-simulation-log-1-simulation-log-5" title="Link to this heading">¶</a></h1>
+<p>print(f”Log files: {logger.get_log_files()}”)
+```</p>
+<section id="example-5-integrated-logging-pipeline">
+<h2>Example 5: Integrated Logging Pipeline<a class="headerlink" href="#example-5-integrated-logging-pipeline" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.simulation.logging import (
+StructuredLogger,
+PerformanceTracer,
+RingBufferLogger
+)</p>
+<p>class SimulationWithLogging:
+def <strong>init</strong>(self):
+# Multiple logging strategies
+self.logger = StructuredLogger(name=’sim’, level=’INFO’)
+self.tracer = PerformanceTracer()
+self.debug_buffer = RingBufferLogger(capacity=100)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def run_simulation(self, controller, dynamics, duration, dt):
+    self.logger.info(&#39;Simulation started&#39;, extra={&#39;duration&#39;: duration})
+
+    x = initial_state
+    t = 0.0
+
+    while t &lt; duration:
+        # Performance tracing
+        with self.tracer.trace(&#39;step&#39;):
+            # Control computation with debug logging
+            self.debug_buffer.log({&#39;step&#39;: int(t/dt), &#39;state&#39;: x.tolist()})
+
+            u = controller.compute_control(x, state_vars, history)
+            x = integrator.integrate(dynamics.compute_dynamics, x, u, t)
+
+        t += dt
+
+    # Summary logging
+    perf_stats = self.tracer.get_statistics()
+    self.logger.info(&#39;Simulation completed&#39;, extra={
+        &#39;mean_step_time&#39;: perf_stats[&#39;step&#39;][&#39;mean&#39;],
+        &#39;overhead&#39;: perf_stats[&#39;step&#39;][&#39;overhead&#39;]
+    })
+
+    return x
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="use-integrated-logging">
+<h1>Use integrated logging<a class="headerlink" href="#use-integrated-logging" title="Link to this heading">¶</a></h1>
+<p>sim = SimulationWithLogging()
+result = sim.run_simulation(controller, dynamics, 10.0, 0.01)
+```</p>
+<section id="id1">
+<h2>Architecture Diagram<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="id2">
+<h2>Usage Examples<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="basic-usage-example">
+<h1>Basic usage example<a class="headerlink" href="#basic-usage-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation.logging import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+<section id="example-2-advanced-configuration">
+<h2>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="advanced-configuration">
+<h1>Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Link to this heading">¶</a></h1>
+<p>component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+<section id="example-3-integration-with-framework">
+<h2>Example 3: Integration with Framework<a class="headerlink" href="#example-3-integration-with-framework" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>from src.simulation import SimulationRunner</p>
+<p>runner = SimulationRunner()
+runner.use_component(component)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="performance-optimized-usage">
+<h1>Performance-optimized usage<a class="headerlink" href="#performance-optimized-usage" title="Link to this heading">¶</a></h1>
+<p>component = Component(enable_caching=True)
+```</p>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="error-handling">
+<h1>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading">¶</a></h1>
+<p>try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
 </section>
 
         </article>
@@ -543,7 +917,7 @@ performance metrics, and real-time recording for analysis and debugging.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -567,8 +941,72 @@ performance metrics, and real-time recording for analysis and debugging.</p>
 <li><a class="reference internal" href="#">simulation.logging.<strong>init</strong></a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#structured-logging-theory">Structured Logging Theory</a><ul>
+<li><a class="reference internal" href="#log-level-hierarchy">Log Level Hierarchy</a></li>
+<li><a class="reference internal" href="#ring-buffer-implementation">Ring Buffer Implementation</a></li>
+<li><a class="reference internal" href="#log-rotation-policy">Log Rotation Policy</a></li>
+<li><a class="reference internal" href="#performance-tracing">Performance Tracing</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-structured-logging">Example 1: Basic Structured Logging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-structured-logger">Create structured logger</a></li>
+<li><a class="reference internal" href="#log-simulation-events">Log simulation events</a><ul>
+<li><a class="reference internal" href="#example-2-performance-tracing">Example 2: Performance Tracing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-performance-tracer">Create performance tracer</a></li>
+<li><a class="reference internal" href="#trace-simulation-loop">Trace simulation loop</a></li>
+<li><a class="reference internal" href="#get-performance-statistics">Get performance statistics</a><ul>
+<li><a class="reference internal" href="#example-3-ring-buffer-logging">Example 3: Ring Buffer Logging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-memory-bounded-logger">Create memory-bounded logger</a></li>
+<li><a class="reference internal" href="#log-in-memory-circular-buffer">Log in memory (circular buffer)</a></li>
+<li><a class="reference internal" href="#only-last-1000-entries-are-kept">Only last 1000 entries are kept</a></li>
+<li><a class="reference internal" href="#dump-to-file-when-needed">Dump to file when needed</a><ul>
+<li><a class="reference internal" href="#example-4-log-rotation">Example 4: Log Rotation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-logger-with-rotation">Create logger with rotation</a></li>
+<li><a class="reference internal" href="#long-running-simulation">Long-running simulation</a></li>
+<li><a class="reference internal" href="#logs-automatically-rotate-simulation-log-simulation-log-1-simulation-log-5">Logs automatically rotate: simulation.log, simulation.log.1, …, simulation.log.5</a><ul>
+<li><a class="reference internal" href="#example-5-integrated-logging-pipeline">Example 5: Integrated Logging Pipeline</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-integrated-logging">Use integrated logging</a><ul>
+<li><a class="reference internal" href="#id1">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#id2">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage-example">Basic usage example</a><ul>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-configuration">Advanced configuration</a><ul>
+<li><a class="reference internal" href="#example-3-integration-with-framework">Example 3: Integration with Framework</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-optimized-usage">Performance-optimized usage</a><ul>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error handling</a></li>
 </ul>
 
           </div>
@@ -585,6 +1023,8 @@ performance metrics, and real-time recording for analysis and debugging.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

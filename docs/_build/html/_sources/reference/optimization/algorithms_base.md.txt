@@ -6,6 +6,148 @@
 
 Base classes for optimization algorithms.
 
+
+
+## Advanced Mathematical Theory
+
+### Base Algorithm Structure
+
+**Iterative optimization template:**
+
+```{math}
+\begin{align}
+& \text{Initialize: } \vec{x}^0 \in \mathcal{X} \\
+& \text{Repeat until convergence:} \\
+& \quad \vec{x}^{t+1} = \mathcal{U}(\vec{x}^t, \nabla f(\vec{x}^t), \ldots) \\
+& \quad \text{Check: } \|\vec{x}^{t+1} - \vec{x}^t\| < \epsilon
+\end{align}
+```
+
+Where $\mathcal{U}$ is algorithm-specific update rule.
+
+### Population-Based vs Gradient-Based
+
+**Population-based:**
+- Derivative-free
+- Global search capability
+- Parallel evaluation
+- No gradient information needed
+
+**Gradient-based:**
+- Local convergence guarantees
+- Fast convergence near optimum
+- Requires differentiability
+- Sequential evaluation
+
+### Convergence Analysis
+
+**Deterministic convergence:**
+
+```{math}
+\lim_{t \to \infty} \|\vec{x}^t - \vec{x}^*\| = 0
+```
+
+**Stochastic convergence (in probability):**
+
+```{math}
+\lim_{t \to \infty} P(\|\vec{x}^t - \vec{x}^*\| > \epsilon) = 0
+```
+
+### Exploration vs Exploitation
+
+**Diversity metric** for population $\vec{X}$:
+
+```{math}
+D(\vec{X}) = \frac{1}{N(N-1)} \sum_{i=1}^{N} \sum_{j \neq i}^{N} \|\vec{x}_i - \vec{x}_j\|
+```
+
+**Exploitation ratio:**
+
+```{math}
+R_{exploit} = \frac{\text{Iterations near } \vec{x}_{best}}{\text{Total iterations}}
+```
+
+### Performance Metrics
+
+**Convergence rate:**
+
+```{math}
+\rho = \frac{\log(f^t - f^*) - \log(f^{t+1} - f^*)}{1}
+```
+
+- $\rho > 1$: Superlinear
+- $\rho = 1$: Linear
+- $\rho < 1$: Sublinear
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Initialize Population] --> B[Evaluate Fitness]
+    B --> C[Update Personal Best]
+    C --> D[Update Global Best]
+    D --> E[Update Population]
+    E --> F[Convergence Check]
+
+    F --> G{Converged?}
+    G -->|No| B
+    G -->|Yes| H[Return Result]
+
+    F --> I{Max Iterations?}
+    I -->|Yes| H
+    I -->|No| J{Stagnation?}
+    J -->|Yes| K[Diversity Injection]
+    K --> B
+    J -->|No| B
+
+    style F fill:#ff9
+    style G fill:#9cf
+    style H fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Initialization
+
+```python
+from src.optimization.core import *
+
+# Initialize with configuration
+config = {'parameter': 'value'}
+instance = Component(config)
+```
+
+### Example 2: Performance Tuning
+
+```python
+# Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+# Use in complete optimization loop
+optimizer = create_optimizer(opt_type, config)
+result = optimize(optimizer, problem, max_iter=100)
+```
+
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+# Analyze metrics
+metrics = compute_metrics(result)
+print(f"Best fitness: {metrics.best_fitness:.3f}")
+```
 ## Complete Source Code
 
 ```{literalinclude} ../../../src/optimization/algorithms/base.py

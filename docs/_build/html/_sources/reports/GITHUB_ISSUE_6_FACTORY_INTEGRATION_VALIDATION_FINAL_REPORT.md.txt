@@ -53,6 +53,9 @@ GitHub Issue #6 Factory Integration has achieved **92.0% system health** with **
 **Status: ✅ COMPLETE**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Validated PSO Integration:
 - PSOTuner import: ✅ Successful
 - create_smc_for_pso(): ✅ Functional

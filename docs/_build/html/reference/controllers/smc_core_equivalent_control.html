@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="controllers.smc.core.gain_validation" href="smc_core_gain_validation.html" /><link rel="prev" title="controllers.smc.algorithms.init" href="smc_algorithms___init__.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -501,6 +527,257 @@ nominal performance when the model is accurate.</p>
 <li><p>Requires dynamics model and assumes controllability: |LM^{-1}B| &gt; threshold</p></li>
 </ul>
 </section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
+<section id="equivalent-control-method">
+<h3>Equivalent Control Method<a class="headerlink" href="#equivalent-control-method" title="Link to this heading">¶</a></h3>
+<p>The <strong>equivalent control</strong> <span class="math notranslate nohighlight">\(u_{eq}\)</span> maintains motion on the sliding surface <span class="math notranslate nohighlight">\(s = 0\)</span> when reached.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{d}{dt} s(\vec{x}, t) = 0 \quad \text{when} \quad s = 0\]</div>
+</div>
+</section>
+<section id="derivation-for-dip">
+<h3>Derivation for DIP<a class="headerlink" href="#derivation-for-dip" title="Link to this heading">¶</a></h3>
+<p>For sliding surface:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[s = \lambda_1 \dot{\theta}_1 + c_1 \theta_1 + \lambda_2 \dot{\theta}_2 + c_2 \theta_2\]</div>
+</div>
+<p>Differentiate:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\dot{s} = \lambda_1 \ddot{\theta}_1 + c_1 \dot{\theta}_1 + \lambda_2 \ddot{\theta}_2 + c_2 \dot{\theta}_2\]</div>
+</div>
+</section>
+<section id="manipulator-equation">
+<h3>Manipulator Equation<a class="headerlink" href="#manipulator-equation" title="Link to this heading">¶</a></h3>
+<p>DIP dynamics (manipulator form):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathbf{M}(\vec{q}) \ddot{\vec{q}} + \mathbf{C}(\vec{q}, \dot{\vec{q}}) \dot{\vec{q}} + \mathbf{G}(\vec{q}) = \mathbf{B} u\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{M}\)</span>: Mass/inertia matrix (3×3)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{C}\)</span>: Coriolis/centrifugal matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{G}\)</span>: Gravity vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{B}\)</span>: Control input matrix (maps force to generalized coords)</p></li>
+</ul>
+</section>
+<section id="solving-for-equivalent-control">
+<h3>Solving for Equivalent Control<a class="headerlink" href="#solving-for-equivalent-control" title="Link to this heading">¶</a></h3>
+<p>From <span class="math notranslate nohighlight">\(\dot{s} = 0\)</span> on sliding surface:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\lambda_1 \ddot{\theta}_1 + \lambda_2 \ddot{\theta}_2 = -(c_1 \dot{\theta}_1 + c_2 \dot{\theta}_2)\]</div>
+</div>
+<p>Express <span class="math notranslate nohighlight">\(\ddot{\vec{q}}\)</span> from manipulator equation:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\ddot{\vec{q}} = \mathbf{M}^{-1} (\mathbf{B} u - \mathbf{C} \dot{\vec{q}} - \mathbf{G})\]</div>
+</div>
+<p>Substitute into <span class="math notranslate nohighlight">\(\dot{s} = 0\)</span> and solve for <span class="math notranslate nohighlight">\(u\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u_{eq} = (\mathbf{\Lambda} \mathbf{M}^{-1} \mathbf{B})^{-1} \left[ -\mathbf{\Lambda} \mathbf{M}^{-1} (\mathbf{C} \dot{\vec{q}} + \mathbf{G}) - \mathbf{C}_s \dot{\vec{\theta}} \right]\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{\Lambda} = [\lambda_1, \lambda_2]\)</span>: Surface derivative gains</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{C}_s = [c_1, c_2]\)</span>: Surface position gains</p></li>
+</ul>
+</section>
+<section id="matrix-inversion-considerations">
+<h3>Matrix Inversion Considerations<a class="headerlink" href="#matrix-inversion-considerations" title="Link to this heading">¶</a></h3>
+<p><strong>Challenge:</strong> <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> can be <strong>ill-conditioned</strong> near singularities.</p>
+<p><strong>Regularization:</strong> Use <strong>Tikhonov regularization</strong> for numerical stability:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathbf{M}^{-1} \approx (\mathbf{M}^T \mathbf{M} + \alpha \mathbf{I})^{-1} \mathbf{M}^T\]</div>
+</div>
+<p><strong>Typical <span class="math notranslate nohighlight">\(\alpha\)</span>:</strong> <span class="math notranslate nohighlight">\(10^{-6}\)</span> to <span class="math notranslate nohighlight">\(10^{-4}\)</span> depending on conditioning.</p>
+</section>
+<section id="model-based-vs-model-free">
+<h3>Model-Based vs Model-Free<a class="headerlink" href="#model-based-vs-model-free" title="Link to this heading">¶</a></h3>
+<p><strong>Model-Based (Equivalent Control):</strong></p>
+<ul class="simple">
+<li><p>✅ Accurate on sliding surface</p></li>
+<li><p>✅ Smooth control</p></li>
+<li><p>❌ Requires accurate model</p></li>
+<li><p>❌ Computational cost <span class="math notranslate nohighlight">\(O(n^3)\)</span> for inversion</p></li>
+</ul>
+<p><strong>Model-Free (Pure Switching):</strong></p>
+<ul class="simple">
+<li><p>✅ Robust to model uncertainty</p></li>
+<li><p>✅ Low computational cost</p></li>
+<li><p>❌ High-frequency chattering</p></li>
+<li><p>❌ Actuator wear</p></li>
+</ul>
+</section>
+<section id="hybrid-approach">
+<h3>Hybrid Approach<a class="headerlink" href="#hybrid-approach" title="Link to this heading">¶</a></h3>
+<p>Combine both for practical SMC:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[u = u_{eq} + u_{sw}\]</div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(u_{eq}\)</span>: Model-based equivalent control (nominal performance)</p></li>
+<li><p><span class="math notranslate nohighlight">\(u_{sw} = -K \, \text{sign}(s)\)</span>: Switching term (robustness)</p></li>
+</ul>
+</section>
+<section id="computational-complexity">
+<h3>Computational Complexity<a class="headerlink" href="#computational-complexity" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Matrix multiplication:</strong> <span class="math notranslate nohighlight">\(O(n^3)\)</span></p></li>
+<li><p><strong>Matrix inversion:</strong> <span class="math notranslate nohighlight">\(O(n^3)\)</span> (dominant cost)</p></li>
+<li><p><strong>Total:</strong> <span class="math notranslate nohighlight">\(O(n^3)\)</span> per control cycle</p></li>
+<li><p><strong>For DIP:</strong> <span class="math notranslate nohighlight">\(n = 3\)</span>, so ~27 multiply-adds</p></li>
+</ul>
+</section>
+<section id="numerical-stability">
+<h3>Numerical Stability<a class="headerlink" href="#numerical-stability" title="Link to this heading">¶</a></h3>
+<p><strong>Condition number check:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\kappa(\mathbf{M}) = \frac{\sigma_{max}(\mathbf{M})}{\sigma_{min}(\mathbf{M})}\]</div>
+</div>
+<p><strong>Rule of thumb:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\kappa &lt; 10^3\)</span>: Well-conditioned</p></li>
+<li><p><span class="math notranslate nohighlight">\(10^3 \leq \kappa &lt; 10^6\)</span>: Moderate conditioning</p></li>
+<li><p><span class="math notranslate nohighlight">\(\kappa \geq 10^6\)</span>: Ill-conditioned (increase regularization)</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[State x, Dynamics Model] --&gt; B[Compute M_x_]
+    B --&gt; C[Compute C_x_ẋ_]
+    C --&gt; D[Compute G_x_]
+    D --&gt; E[Compute B Matrix]
+    E --&gt; F[Assemble: Λ M⁻¹ B]
+    F --&gt; G{Condition Number &lt; 10⁶?}
+    G --&gt;|Yes| H[Invert: _Λ M⁻¹ B_⁻¹]
+    G --&gt;|No| I[Apply Tikhonov Regularization]
+    I --&gt; H
+    H --&gt; J[Compute u_eq = _Λ M⁻¹ B_⁻¹ _-Λ M⁻¹_Cẋ + G_ - C_s θ̇_]
+    J --&gt; K[Return u_eq]
+
+    style F fill:#9cf
+    style H fill:#ff9
+    style I fill:#f99
+    style K fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-equivalent-control-computation">
+<h3>Example 1: Basic Equivalent Control Computation<a class="headerlink" href="#example-1-basic-equivalent-control-computation" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.core.equivalent_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">EquivalentControl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDIPDynamics</span>
+
+<span class="c1"># Initialize dynamics model</span>
+<span class="n">dynamics</span> <span class="o">=</span> <span class="n">SimplifiedDIPDynamics</span><span class="p">()</span>
+
+<span class="c1"># Initialize equivalent control module</span>
+<span class="n">eq_control</span> <span class="o">=</span> <span class="n">EquivalentControl</span><span class="p">(</span>
+    <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+    <span class="n">surface_gains</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">]</span>  <span class="c1"># λ1, c1, λ2, c2</span>
+<span class="p">)</span>
+
+<span class="c1"># Compute equivalent control for current state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+<span class="n">u_eq</span> <span class="o">=</span> <span class="n">eq_control</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Equivalent control: </span><span class="si">{</span><span class="n">u_eq</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> N&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-matrix-conditioning-check">
+<h3>Example 2: Matrix Conditioning Check<a class="headerlink" href="#example-2-matrix-conditioning-check" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check matrix conditioning before inversion</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">compute_mass_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">cond_number</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Condition number of M: </span><span class="si">{</span><span class="n">cond_number</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">cond_number</span> <span class="o">&gt;</span> <span class="mf">1e6</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Ill-conditioned matrix, increasing regularization&quot;</span><span class="p">)</span>
+    <span class="n">eq_control</span><span class="o">.</span><span class="n">set_regularization</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix well-conditioned&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-regularization-adjustment">
+<h3>Example 3: Regularization Adjustment<a class="headerlink" href="#example-3-regularization-adjustment" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Adaptive regularization based on conditioning</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">adaptive_regularization</span><span class="p">(</span><span class="n">cond_number</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">cond_number</span> <span class="o">&lt;</span> <span class="mf">1e3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">1e-6</span>  <span class="c1"># Minimal regularization</span>
+    <span class="k">elif</span> <span class="n">cond_number</span> <span class="o">&lt;</span> <span class="mf">1e6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">1e-5</span>  <span class="c1"># Moderate regularization</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">1e-4</span>  <span class="c1"># Strong regularization</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">adaptive_regularization</span><span class="p">(</span><span class="n">cond_number</span><span class="p">)</span>
+<span class="n">eq_control</span><span class="o">.</span><span class="n">set_regularization</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using regularization: α=</span><span class="si">{</span><span class="n">alpha</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-hybrid-control-equivalent-switching">
+<h3>Example 4: Hybrid Control (Equivalent + Switching)<a class="headerlink" href="#example-4-hybrid-control-equivalent-switching" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control.saturation</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>
+
+<span class="c1"># Compute equivalent control (model-based)</span>
+<span class="n">u_eq</span> <span class="o">=</span> <span class="n">eq_control</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Compute sliding surface</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Compute switching control (robustness)</span>
+<span class="n">K_sw</span> <span class="o">=</span> <span class="mf">50.0</span>  <span class="c1"># Switching gain</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># Boundary layer</span>
+<span class="n">u_sw</span> <span class="o">=</span> <span class="o">-</span><span class="n">K_sw</span> <span class="o">*</span> <span class="n">saturate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">)</span>
+
+<span class="c1"># Total control</span>
+<span class="n">u_total</span> <span class="o">=</span> <span class="n">u_eq</span> <span class="o">+</span> <span class="n">u_sw</span>
+
+<span class="c1"># Apply actuator limits</span>
+<span class="n">u_max</span> <span class="o">=</span> <span class="mf">100.0</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u_total</span><span class="p">,</span> <span class="o">-</span><span class="n">u_max</span><span class="p">,</span> <span class="n">u_max</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;u_eq=</span><span class="si">{</span><span class="n">u_eq</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, u_sw=</span><span class="si">{</span><span class="n">u_sw</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, u_total=</span><span class="si">{</span><span class="n">u</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-profiling">
+<h3>Example 5: Performance Profiling<a class="headerlink" href="#example-5-performance-profiling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Benchmark equivalent control computation</span>
+<span class="n">n_iterations</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">):</span>
+    <span class="n">u_eq</span> <span class="o">=</span> <span class="n">eq_control</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="n">time_per_call</span> <span class="o">=</span> <span class="p">(</span><span class="n">elapsed</span> <span class="o">/</span> <span class="n">n_iterations</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>  <span class="c1"># microseconds</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Equivalent control time: </span><span class="si">{</span><span class="n">time_per_call</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> μs per call&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can achieve ~</span><span class="si">{</span><span class="mf">1e6</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">time_per_call</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> Hz control rate&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">#======================================================================================\\\</span>
@@ -523,264 +800,263 @@ nominal performance when the model is accurate.</p>
 <span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="linenos"> 19</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 20</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="linenos"> 21</span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="linenos"> 22</span>
-<span class="linenos"> 23</span><span class="c1"># Import robust matrix inversion infrastructure</span>
-<span class="linenos"> 24</span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">MatrixInverter</span><span class="p">,</span> <span class="n">AdaptiveRegularizer</span>
+<span class="linenos"> 21</span>
+<span class="linenos"> 22</span><span class="c1"># Import robust matrix inversion infrastructure</span>
+<span class="linenos"> 23</span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">MatrixInverter</span><span class="p">,</span> <span class="n">AdaptiveRegularizer</span>
+<span class="linenos"> 24</span>
 <span class="linenos"> 25</span>
-<span class="linenos"> 26</span>
-<span class="linenos"> 27</span><span class="k">class</span><span class="w"> </span><span class="nc">EquivalentControl</span><span class="p">:</span>
-<span class="linenos"> 28</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos"> 29</span><span class="sd">    Model-based equivalent control computation for SMC.</span>
-<span class="linenos"> 30</span>
-<span class="linenos"> 31</span><span class="sd">    Computes the control input that would maintain the system exactly on the</span>
-<span class="linenos"> 32</span><span class="sd">    sliding surface if the model were perfect and no disturbances were present.</span>
-<span class="linenos"> 33</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos"> 34</span>
-<span class="linenos"> 35</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="linenos"> 36</span>                 <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos"> 37</span>                 <span class="n">regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span>
-<span class="linenos"> 38</span>                 <span class="n">regularization_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
-<span class="linenos"> 39</span>                 <span class="n">min_regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span>
-<span class="linenos"> 40</span>                 <span class="n">max_condition_number</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e14</span><span class="p">,</span>
-<span class="linenos"> 41</span>                 <span class="n">use_fixed_regularization</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="linenos"> 42</span>                 <span class="n">controllability_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">):</span>
-<span class="linenos"> 43</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos"> 44</span><span class="sd">        Initialize equivalent control computation.</span>
-<span class="linenos"> 45</span>
-<span class="linenos"> 46</span><span class="sd">        Args:</span>
-<span class="linenos"> 47</span><span class="sd">            dynamics_model: System dynamics model with get_dynamics() method</span>
-<span class="linenos"> 48</span><span class="sd">            regularization_alpha: Base regularization scaling factor (adaptive mode)</span>
-<span class="linenos"> 49</span><span class="sd">            min_regularization: Minimum regularization for numerical stability</span>
-<span class="linenos"> 50</span><span class="sd">            max_condition_number: Maximum acceptable condition number</span>
-<span class="linenos"> 51</span><span class="sd">            use_fixed_regularization: Use fixed rather than adaptive regularization</span>
-<span class="linenos"> 52</span><span class="sd">            controllability_threshold: Minimum |LM^{-1}B| for equivalent control</span>
-<span class="linenos"> 53</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos"> 54</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">dynamics_model</span>
-<span class="linenos"> 55</span>        <span class="bp">self</span><span class="o">.</span><span class="n">regularization</span> <span class="o">=</span> <span class="n">regularization</span>
-<span class="linenos"> 56</span>        <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="o">=</span> <span class="n">controllability_threshold</span>
-<span class="linenos"> 57</span>
-<span class="linenos"> 58</span>        <span class="c1"># Control input matrix for cart force [force affects cart position only]</span>
-<span class="linenos"> 59</span>        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="linenos"> 60</span>
-<span class="linenos"> 61</span>        <span class="c1"># Setup logging</span>
-<span class="linenos"> 62</span>        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
-<span class="linenos"> 63</span>
-<span class="linenos"> 64</span>        <span class="c1"># Initialize robust matrix inversion infrastructure with centralized AdaptiveRegularizer</span>
-<span class="linenos"> 65</span>        <span class="bp">self</span><span class="o">.</span><span class="n">adaptive_regularizer</span> <span class="o">=</span> <span class="n">AdaptiveRegularizer</span><span class="p">(</span>
-<span class="linenos"> 66</span>            <span class="n">regularization_alpha</span><span class="o">=</span><span class="n">regularization_alpha</span><span class="p">,</span>
-<span class="linenos"> 67</span>            <span class="n">max_condition_number</span><span class="o">=</span><span class="n">max_condition_number</span><span class="p">,</span>
-<span class="linenos"> 68</span>            <span class="n">min_regularization</span><span class="o">=</span><span class="n">min_regularization</span><span class="p">,</span>
-<span class="linenos"> 69</span>            <span class="n">use_fixed_regularization</span><span class="o">=</span><span class="n">use_fixed_regularization</span>
-<span class="linenos"> 70</span>        <span class="p">)</span>
-<span class="linenos"> 71</span>        <span class="bp">self</span><span class="o">.</span><span class="n">matrix_inverter</span> <span class="o">=</span> <span class="n">MatrixInverter</span><span class="p">(</span><span class="n">regularizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">adaptive_regularizer</span><span class="p">)</span>
-<span class="linenos"> 72</span>
-<span class="linenos"> 73</span>    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="p">,</span>
-<span class="linenos"> 74</span>                <span class="n">surface_derivative</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="linenos"> 75</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos"> 76</span><span class="sd">        Compute equivalent control input.</span>
-<span class="linenos"> 77</span>
-<span class="linenos"> 78</span><span class="sd">        Args:</span>
-<span class="linenos"> 79</span><span class="sd">            state: Current system state [x, x_dot, theta1, theta1_dot, theta2, theta2_dot]</span>
-<span class="linenos"> 80</span><span class="sd">            sliding_surface: SlidingSurface object with L matrix</span>
-<span class="linenos"> 81</span><span class="sd">            surface_derivative: Pre-computed surface derivative (optional)</span>
-<span class="linenos"> 82</span>
-<span class="linenos"> 83</span><span class="sd">        Returns:</span>
-<span class="linenos"> 84</span><span class="sd">            Equivalent control input u_eq</span>
-<span class="linenos"> 85</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos"> 86</span>        <span class="c1"># If no dynamics model, return zero equivalent control</span>
-<span class="linenos"> 87</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos"> 88</span>            <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos"> 89</span>
-<span class="linenos"> 90</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos"> 91</span>            <span class="c1"># Get system dynamics matrices</span>
-<span class="linenos"> 92</span>            <span class="n">M</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_dynamics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-<span class="linenos"> 93</span>            <span class="k">if</span> <span class="n">M</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">F</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos"> 94</span>                <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos"> 95</span>
-<span class="linenos"> 96</span>            <span class="c1"># Get surface gradient L from sliding surface</span>
-<span class="linenos"> 97</span>            <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_surface_gradient</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">)</span>
-<span class="linenos"> 98</span>
-<span class="linenos"> 99</span>            <span class="c1"># Compute controllability matrix LM^{-1}B using robust inversion</span>
-<span class="linenos">100</span>            <span class="n">M_inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix_inverter</span><span class="o">.</span><span class="n">invert_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="linenos">101</span>            <span class="n">LM_inv_B</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
-<span class="linenos">102</span>
-<span class="linenos">103</span>            <span class="c1"># Check controllability</span>
-<span class="linenos">104</span>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">LM_inv_B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span><span class="p">:</span>
-<span class="linenos">105</span>                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Poor controllability: |LM^</span><span class="se">{{</span><span class="s2">-1</span><span class="se">}}</span><span class="s2">B| = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">LM_inv_B</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">106</span>                <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">107</span>
-<span class="linenos">108</span>            <span class="c1"># Compute equivalent control: u_eq = -(LM^{-1}B)^{-1} * LM^{-1}F</span>
-<span class="linenos">109</span>            <span class="n">LM_inv_F</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="n">F</span>
-<span class="linenos">110</span>            <span class="n">u_eq</span> <span class="o">=</span> <span class="o">-</span><span class="n">LM_inv_F</span> <span class="o">/</span> <span class="n">LM_inv_B</span>
-<span class="linenos">111</span>
-<span class="linenos">112</span>            <span class="c1"># Validate result</span>
-<span class="linenos">113</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">u_eq</span><span class="p">):</span>
-<span class="linenos">114</span>                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Non-finite equivalent control computed&quot;</span><span class="p">)</span>
-<span class="linenos">115</span>                <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">116</span>
-<span class="linenos">117</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">u_eq</span><span class="p">)</span>
-<span class="linenos">118</span>
-<span class="linenos">119</span>        <span class="k">except</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">120</span>            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Equivalent control computation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">121</span>            <span class="k">return</span> <span class="mf">0.0</span>
-<span class="linenos">122</span>
-<span class="linenos">123</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_dynamics_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]:</span>
-<span class="linenos">124</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">125</span><span class="sd">        Extract inertia matrix M and force vector F from dynamics model.</span>
-<span class="linenos">126</span>
-<span class="linenos">127</span><span class="sd">        Args:</span>
-<span class="linenos">128</span><span class="sd">            state: System state vector</span>
-<span class="linenos">129</span>
-<span class="linenos">130</span><span class="sd">        Returns:</span>
-<span class="linenos">131</span><span class="sd">            Tuple of (M, F) matrices or (None, None) if extraction fails</span>
-<span class="linenos">132</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">133</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">134</span>            <span class="c1"># Try different common interfaces for dynamics models</span>
-<span class="linenos">135</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;get_dynamics&#39;</span><span class="p">):</span>
-<span class="linenos">136</span>                <span class="c1"># Standard interface: get_dynamics(state) -&gt; (M, F)</span>
-<span class="linenos">137</span>                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">get_dynamics</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-<span class="linenos">138</span>                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">139</span>                    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">140</span>
-<span class="linenos">141</span>            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">):</span>
-<span class="linenos">142</span>                <span class="c1"># Direct matrix access</span>
-<span class="linenos">143</span>                <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">M</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">M</span>
-<span class="linenos">144</span>                <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">F</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">F</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">F</span>
-<span class="linenos">145</span>                <span class="k">return</span> <span class="n">M</span><span class="p">,</span> <span class="n">F</span>
-<span class="linenos">146</span>
-<span class="linenos">147</span>            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;compute_dynamics&#39;</span><span class="p">):</span>
-<span class="linenos">148</span>                <span class="c1"># Alternative interface</span>
-<span class="linenos">149</span>                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">compute_dynamics</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-<span class="linenos">150</span>
-<span class="linenos">151</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">152</span>                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Dynamics model does not have recognized interface&quot;</span><span class="p">)</span>
-<span class="linenos">153</span>                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
-<span class="linenos">154</span>
-<span class="linenos">155</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">156</span>            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to extract dynamics matrices: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">157</span>            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
-<span class="linenos">158</span>
-<span class="linenos">159</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_surface_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="linenos">160</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">161</span><span class="sd">        Get surface gradient L from sliding surface object.</span>
-<span class="linenos">162</span>
-<span class="linenos">163</span><span class="sd">        Args:</span>
-<span class="linenos">164</span><span class="sd">            sliding_surface: SlidingSurface object</span>
-<span class="linenos">165</span>
-<span class="linenos">166</span><span class="sd">        Returns:</span>
-<span class="linenos">167</span><span class="sd">            Surface gradient vector L</span>
-<span class="linenos">168</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">169</span>        <span class="c1"># Try to get L matrix from sliding surface</span>
-<span class="linenos">170</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">):</span>
-<span class="linenos">171</span>            <span class="k">return</span> <span class="n">sliding_surface</span><span class="o">.</span><span class="n">L</span>
-<span class="linenos">172</span>        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">,</span> <span class="s1">&#39;get_gradient&#39;</span><span class="p">):</span>
-<span class="linenos">173</span>            <span class="k">return</span> <span class="n">sliding_surface</span><span class="o">.</span><span class="n">get_gradient</span><span class="p">()</span>
-<span class="linenos">174</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">175</span>            <span class="c1"># Default for double-inverted pendulum (affects joint dynamics only)</span>
-<span class="linenos">176</span>            <span class="c1"># L = [0, k1, k2] for reduced state [theta1_dot, theta1, theta2]</span>
-<span class="linenos">177</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">,</span> <span class="s1">&#39;k1&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">,</span> <span class="s1">&#39;k2&#39;</span><span class="p">):</span>
-<span class="linenos">178</span>                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="o">.</span><span class="n">k1</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="o">.</span><span class="n">k2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="linenos">179</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">180</span>                <span class="c1"># Fallback: assume unit gains</span>
-<span class="linenos">181</span>                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="linenos"> 26</span><span class="k">class</span><span class="w"> </span><span class="nc">EquivalentControl</span><span class="p">:</span>
+<span class="linenos"> 27</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 28</span><span class="sd">    Model-based equivalent control computation for SMC.</span>
+<span class="linenos"> 29</span>
+<span class="linenos"> 30</span><span class="sd">    Computes the control input that would maintain the system exactly on the</span>
+<span class="linenos"> 31</span><span class="sd">    sliding surface if the model were perfect and no disturbances were present.</span>
+<span class="linenos"> 32</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 33</span>
+<span class="linenos"> 34</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="linenos"> 35</span>                 <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos"> 36</span>                 <span class="n">regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span>
+<span class="linenos"> 37</span>                 <span class="n">regularization_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
+<span class="linenos"> 38</span>                 <span class="n">min_regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span>
+<span class="linenos"> 39</span>                 <span class="n">max_condition_number</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e14</span><span class="p">,</span>
+<span class="linenos"> 40</span>                 <span class="n">use_fixed_regularization</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="linenos"> 41</span>                 <span class="n">controllability_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">):</span>
+<span class="linenos"> 42</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 43</span><span class="sd">        Initialize equivalent control computation.</span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span><span class="sd">        Args:</span>
+<span class="linenos"> 46</span><span class="sd">            dynamics_model: System dynamics model with get_dynamics() method</span>
+<span class="linenos"> 47</span><span class="sd">            regularization_alpha: Base regularization scaling factor (adaptive mode)</span>
+<span class="linenos"> 48</span><span class="sd">            min_regularization: Minimum regularization for numerical stability</span>
+<span class="linenos"> 49</span><span class="sd">            max_condition_number: Maximum acceptable condition number</span>
+<span class="linenos"> 50</span><span class="sd">            use_fixed_regularization: Use fixed rather than adaptive regularization</span>
+<span class="linenos"> 51</span><span class="sd">            controllability_threshold: Minimum |LM^{-1}B| for equivalent control</span>
+<span class="linenos"> 52</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 53</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">dynamics_model</span>
+<span class="linenos"> 54</span>        <span class="bp">self</span><span class="o">.</span><span class="n">regularization</span> <span class="o">=</span> <span class="n">regularization</span>
+<span class="linenos"> 55</span>        <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="o">=</span> <span class="n">controllability_threshold</span>
+<span class="linenos"> 56</span>
+<span class="linenos"> 57</span>        <span class="c1"># Control input matrix for cart force [force affects cart position only]</span>
+<span class="linenos"> 58</span>        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="linenos"> 59</span>
+<span class="linenos"> 60</span>        <span class="c1"># Setup logging</span>
+<span class="linenos"> 61</span>        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos"> 62</span>
+<span class="linenos"> 63</span>        <span class="c1"># Initialize robust matrix inversion infrastructure with centralized AdaptiveRegularizer</span>
+<span class="linenos"> 64</span>        <span class="bp">self</span><span class="o">.</span><span class="n">adaptive_regularizer</span> <span class="o">=</span> <span class="n">AdaptiveRegularizer</span><span class="p">(</span>
+<span class="linenos"> 65</span>            <span class="n">regularization_alpha</span><span class="o">=</span><span class="n">regularization_alpha</span><span class="p">,</span>
+<span class="linenos"> 66</span>            <span class="n">max_condition_number</span><span class="o">=</span><span class="n">max_condition_number</span><span class="p">,</span>
+<span class="linenos"> 67</span>            <span class="n">min_regularization</span><span class="o">=</span><span class="n">min_regularization</span><span class="p">,</span>
+<span class="linenos"> 68</span>            <span class="n">use_fixed_regularization</span><span class="o">=</span><span class="n">use_fixed_regularization</span>
+<span class="linenos"> 69</span>        <span class="p">)</span>
+<span class="linenos"> 70</span>        <span class="bp">self</span><span class="o">.</span><span class="n">matrix_inverter</span> <span class="o">=</span> <span class="n">MatrixInverter</span><span class="p">(</span><span class="n">regularizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">adaptive_regularizer</span><span class="p">)</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span>    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="p">,</span>
+<span class="linenos"> 73</span>                <span class="n">surface_derivative</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos"> 74</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 75</span><span class="sd">        Compute equivalent control input.</span>
+<span class="linenos"> 76</span>
+<span class="linenos"> 77</span><span class="sd">        Args:</span>
+<span class="linenos"> 78</span><span class="sd">            state: Current system state [x, x_dot, theta1, theta1_dot, theta2, theta2_dot]</span>
+<span class="linenos"> 79</span><span class="sd">            sliding_surface: SlidingSurface object with L matrix</span>
+<span class="linenos"> 80</span><span class="sd">            surface_derivative: Pre-computed surface derivative (optional)</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span><span class="sd">        Returns:</span>
+<span class="linenos"> 83</span><span class="sd">            Equivalent control input u_eq</span>
+<span class="linenos"> 84</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 85</span>        <span class="c1"># If no dynamics model, return zero equivalent control</span>
+<span class="linenos"> 86</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 87</span>            <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos"> 88</span>
+<span class="linenos"> 89</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 90</span>            <span class="c1"># Get system dynamics matrices</span>
+<span class="linenos"> 91</span>            <span class="n">M</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_dynamics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="linenos"> 92</span>            <span class="k">if</span> <span class="n">M</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">F</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 93</span>                <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span>            <span class="c1"># Get surface gradient L from sliding surface</span>
+<span class="linenos"> 96</span>            <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_surface_gradient</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">)</span>
+<span class="linenos"> 97</span>
+<span class="linenos"> 98</span>            <span class="c1"># Compute controllability matrix LM^{-1}B using robust inversion</span>
+<span class="linenos"> 99</span>            <span class="n">M_inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix_inverter</span><span class="o">.</span><span class="n">invert_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="linenos">100</span>            <span class="n">LM_inv_B</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
+<span class="linenos">101</span>
+<span class="linenos">102</span>            <span class="c1"># Check controllability</span>
+<span class="linenos">103</span>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">LM_inv_B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span><span class="p">:</span>
+<span class="linenos">104</span>                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Poor controllability: |LM^</span><span class="se">{{</span><span class="s2">-1</span><span class="se">}}</span><span class="s2">B| = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">LM_inv_B</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">105</span>                <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span>            <span class="c1"># Compute equivalent control: u_eq = -(LM^{-1}B)^{-1} * LM^{-1}F</span>
+<span class="linenos">108</span>            <span class="n">LM_inv_F</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="n">F</span>
+<span class="linenos">109</span>            <span class="n">u_eq</span> <span class="o">=</span> <span class="o">-</span><span class="n">LM_inv_F</span> <span class="o">/</span> <span class="n">LM_inv_B</span>
+<span class="linenos">110</span>
+<span class="linenos">111</span>            <span class="c1"># Validate result</span>
+<span class="linenos">112</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">u_eq</span><span class="p">):</span>
+<span class="linenos">113</span>                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Non-finite equivalent control computed&quot;</span><span class="p">)</span>
+<span class="linenos">114</span>                <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">115</span>
+<span class="linenos">116</span>            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">u_eq</span><span class="p">)</span>
+<span class="linenos">117</span>
+<span class="linenos">118</span>        <span class="k">except</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">119</span>            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Equivalent control computation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">120</span>            <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">121</span>
+<span class="linenos">122</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_dynamics_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]:</span>
+<span class="linenos">123</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">124</span><span class="sd">        Extract inertia matrix M and force vector F from dynamics model.</span>
+<span class="linenos">125</span>
+<span class="linenos">126</span><span class="sd">        Args:</span>
+<span class="linenos">127</span><span class="sd">            state: System state vector</span>
+<span class="linenos">128</span>
+<span class="linenos">129</span><span class="sd">        Returns:</span>
+<span class="linenos">130</span><span class="sd">            Tuple of (M, F) matrices or (None, None) if extraction fails</span>
+<span class="linenos">131</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">132</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">133</span>            <span class="c1"># Try different common interfaces for dynamics models</span>
+<span class="linenos">134</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;get_dynamics&#39;</span><span class="p">):</span>
+<span class="linenos">135</span>                <span class="c1"># Standard interface: get_dynamics(state) -&gt; (M, F)</span>
+<span class="linenos">136</span>                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">get_dynamics</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="linenos">137</span>                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">138</span>                    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">139</span>
+<span class="linenos">140</span>            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">):</span>
+<span class="linenos">141</span>                <span class="c1"># Direct matrix access</span>
+<span class="linenos">142</span>                <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">M</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">M</span>
+<span class="linenos">143</span>                <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">F</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">F</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">F</span>
+<span class="linenos">144</span>                <span class="k">return</span> <span class="n">M</span><span class="p">,</span> <span class="n">F</span>
+<span class="linenos">145</span>
+<span class="linenos">146</span>            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="s1">&#39;compute_dynamics&#39;</span><span class="p">):</span>
+<span class="linenos">147</span>                <span class="c1"># Alternative interface</span>
+<span class="linenos">148</span>                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">compute_dynamics</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">151</span>                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Dynamics model does not have recognized interface&quot;</span><span class="p">)</span>
+<span class="linenos">152</span>                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+<span class="linenos">153</span>
+<span class="linenos">154</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">155</span>            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to extract dynamics matrices: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">156</span>            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+<span class="linenos">157</span>
+<span class="linenos">158</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_surface_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="linenos">159</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">160</span><span class="sd">        Get surface gradient L from sliding surface object.</span>
+<span class="linenos">161</span>
+<span class="linenos">162</span><span class="sd">        Args:</span>
+<span class="linenos">163</span><span class="sd">            sliding_surface: SlidingSurface object</span>
+<span class="linenos">164</span>
+<span class="linenos">165</span><span class="sd">        Returns:</span>
+<span class="linenos">166</span><span class="sd">            Surface gradient vector L</span>
+<span class="linenos">167</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">168</span>        <span class="c1"># Try to get L matrix from sliding surface</span>
+<span class="linenos">169</span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">):</span>
+<span class="linenos">170</span>            <span class="k">return</span> <span class="n">sliding_surface</span><span class="o">.</span><span class="n">L</span>
+<span class="linenos">171</span>        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">,</span> <span class="s1">&#39;get_gradient&#39;</span><span class="p">):</span>
+<span class="linenos">172</span>            <span class="k">return</span> <span class="n">sliding_surface</span><span class="o">.</span><span class="n">get_gradient</span><span class="p">()</span>
+<span class="linenos">173</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">174</span>            <span class="c1"># Default for double-inverted pendulum (affects joint dynamics only)</span>
+<span class="linenos">175</span>            <span class="c1"># L = [0, k1, k2] for reduced state [theta1_dot, theta1, theta2]</span>
+<span class="linenos">176</span>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">,</span> <span class="s1">&#39;k1&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">,</span> <span class="s1">&#39;k2&#39;</span><span class="p">):</span>
+<span class="linenos">177</span>                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="o">.</span><span class="n">k1</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="o">.</span><span class="n">k2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="linenos">178</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">179</span>                <span class="c1"># Fallback: assume unit gains</span>
+<span class="linenos">180</span>                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="linenos">181</span>
 <span class="linenos">182</span>
-<span class="linenos">183</span>
-<span class="linenos">184</span>    <span class="k">def</span><span class="w"> </span><span class="nf">check_controllability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="linenos">185</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">186</span><span class="sd">        Analyze system controllability at current state.</span>
-<span class="linenos">187</span>
-<span class="linenos">188</span><span class="sd">        Args:</span>
-<span class="linenos">189</span><span class="sd">            state: Current system state</span>
-<span class="linenos">190</span><span class="sd">            sliding_surface: SlidingSurface object</span>
-<span class="linenos">191</span>
-<span class="linenos">192</span><span class="sd">        Returns:</span>
-<span class="linenos">193</span><span class="sd">            Dictionary with controllability analysis</span>
-<span class="linenos">194</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">195</span>        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos">196</span>            <span class="s1">&#39;controllable&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-<span class="linenos">197</span>            <span class="s1">&#39;LM_inv_B&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-<span class="linenos">198</span>            <span class="s1">&#39;condition_number&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-<span class="linenos">199</span>            <span class="s1">&#39;rank_deficient&#39;</span><span class="p">:</span> <span class="kc">True</span>
-<span class="linenos">200</span>        <span class="p">}</span>
-<span class="linenos">201</span>
-<span class="linenos">202</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">203</span>            <span class="k">return</span> <span class="n">result</span>
-<span class="linenos">204</span>
-<span class="linenos">205</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">206</span>            <span class="n">M</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_dynamics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-<span class="linenos">207</span>            <span class="k">if</span> <span class="n">M</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">208</span>                <span class="k">return</span> <span class="n">result</span>
-<span class="linenos">209</span>
-<span class="linenos">210</span>            <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_surface_gradient</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">)</span>
-<span class="linenos">211</span>
-<span class="linenos">212</span>            <span class="c1"># Compute condition number</span>
-<span class="linenos">213</span>            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;condition_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="linenos">214</span>
-<span class="linenos">215</span>            <span class="c1"># Check rank</span>
-<span class="linenos">216</span>            <span class="n">rank</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="linenos">217</span>            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;rank_deficient&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rank</span> <span class="o">&lt;</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="linenos">218</span>
-<span class="linenos">219</span>            <span class="c1"># Compute controllability measure using robust inversion</span>
-<span class="linenos">220</span>            <span class="n">M_inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix_inverter</span><span class="o">.</span><span class="n">invert_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="linenos">221</span>            <span class="n">LM_inv_B</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
-<span class="linenos">222</span>            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;LM_inv_B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">LM_inv_B</span><span class="p">)</span>
-<span class="linenos">223</span>
-<span class="linenos">224</span>            <span class="c1"># Check controllability threshold</span>
-<span class="linenos">225</span>            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;controllable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">LM_inv_B</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span>
-<span class="linenos">226</span>
-<span class="linenos">227</span>            <span class="k">return</span> <span class="n">result</span>
-<span class="linenos">228</span>
-<span class="linenos">229</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">230</span>            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Controllability analysis failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">231</span>            <span class="k">return</span> <span class="n">result</span>
-<span class="linenos">232</span>
-<span class="linenos">233</span>    <span class="k">def</span><span class="w"> </span><span class="nf">set_controllability_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">234</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">235</span><span class="sd">        Update controllability threshold.</span>
-<span class="linenos">236</span>
-<span class="linenos">237</span><span class="sd">        Args:</span>
-<span class="linenos">238</span><span class="sd">            threshold: New threshold value (must be &gt; 0)</span>
-<span class="linenos">239</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">240</span>        <span class="k">if</span> <span class="n">threshold</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">241</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Controllability threshold must be positive&quot;</span><span class="p">)</span>
-<span class="linenos">242</span>        <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="o">=</span> <span class="n">threshold</span>
-<span class="linenos">243</span>
-<span class="linenos">244</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_dynamics_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="linenos">245</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos">246</span><span class="sd">        Get information about dynamics matrices at current state.</span>
-<span class="linenos">247</span>
-<span class="linenos">248</span><span class="sd">        Args:</span>
-<span class="linenos">249</span><span class="sd">            state: Current system state</span>
-<span class="linenos">250</span>
-<span class="linenos">251</span><span class="sd">        Returns:</span>
-<span class="linenos">252</span><span class="sd">            Dictionary with dynamics information</span>
-<span class="linenos">253</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos">254</span>        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos">255</span>            <span class="s1">&#39;has_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">256</span>            <span class="s1">&#39;M_shape&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">257</span>            <span class="s1">&#39;F_shape&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos">258</span>            <span class="s1">&#39;M_condition&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-<span class="linenos">259</span>            <span class="s1">&#39;M_determinant&#39;</span><span class="p">:</span> <span class="mf">0.0</span>
-<span class="linenos">260</span>        <span class="p">}</span>
-<span class="linenos">261</span>
-<span class="linenos">262</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">263</span>            <span class="k">return</span> <span class="n">info</span>
-<span class="linenos">264</span>
-<span class="linenos">265</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">266</span>            <span class="n">M</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_dynamics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-<span class="linenos">267</span>            <span class="k">if</span> <span class="n">M</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">268</span>                <span class="n">info</span><span class="p">[</span><span class="s1">&#39;M_shape&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span>
-<span class="linenos">269</span>                <span class="n">info</span><span class="p">[</span><span class="s1">&#39;M_condition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="linenos">270</span>                <span class="n">info</span><span class="p">[</span><span class="s1">&#39;M_determinant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="linenos">271</span>
-<span class="linenos">272</span>            <span class="k">if</span> <span class="n">F</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">273</span>                <span class="n">info</span><span class="p">[</span><span class="s1">&#39;F_shape&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">shape</span>
-<span class="linenos">274</span>
-<span class="linenos">275</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">276</span>            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to get dynamics info: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">277</span>
-<span class="linenos">278</span>        <span class="k">return</span> <span class="n">info</span>
+<span class="linenos">183</span>    <span class="k">def</span><span class="w"> </span><span class="nf">check_controllability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="linenos">184</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">185</span><span class="sd">        Analyze system controllability at current state.</span>
+<span class="linenos">186</span>
+<span class="linenos">187</span><span class="sd">        Args:</span>
+<span class="linenos">188</span><span class="sd">            state: Current system state</span>
+<span class="linenos">189</span><span class="sd">            sliding_surface: SlidingSurface object</span>
+<span class="linenos">190</span>
+<span class="linenos">191</span><span class="sd">        Returns:</span>
+<span class="linenos">192</span><span class="sd">            Dictionary with controllability analysis</span>
+<span class="linenos">193</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">194</span>        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">195</span>            <span class="s1">&#39;controllable&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="linenos">196</span>            <span class="s1">&#39;LM_inv_B&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+<span class="linenos">197</span>            <span class="s1">&#39;condition_number&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+<span class="linenos">198</span>            <span class="s1">&#39;rank_deficient&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="linenos">199</span>        <span class="p">}</span>
+<span class="linenos">200</span>
+<span class="linenos">201</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">202</span>            <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">203</span>
+<span class="linenos">204</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">205</span>            <span class="n">M</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_dynamics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="linenos">206</span>            <span class="k">if</span> <span class="n">M</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">207</span>                <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">208</span>
+<span class="linenos">209</span>            <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_surface_gradient</span><span class="p">(</span><span class="n">sliding_surface</span><span class="p">)</span>
+<span class="linenos">210</span>
+<span class="linenos">211</span>            <span class="c1"># Compute condition number</span>
+<span class="linenos">212</span>            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;condition_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="linenos">213</span>
+<span class="linenos">214</span>            <span class="c1"># Check rank</span>
+<span class="linenos">215</span>            <span class="n">rank</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="linenos">216</span>            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;rank_deficient&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rank</span> <span class="o">&lt;</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">217</span>
+<span class="linenos">218</span>            <span class="c1"># Compute controllability measure using robust inversion</span>
+<span class="linenos">219</span>            <span class="n">M_inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix_inverter</span><span class="o">.</span><span class="n">invert_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="linenos">220</span>            <span class="n">LM_inv_B</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
+<span class="linenos">221</span>            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;LM_inv_B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">LM_inv_B</span><span class="p">)</span>
+<span class="linenos">222</span>
+<span class="linenos">223</span>            <span class="c1"># Check controllability threshold</span>
+<span class="linenos">224</span>            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;controllable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">LM_inv_B</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span>
+<span class="linenos">225</span>
+<span class="linenos">226</span>            <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">227</span>
+<span class="linenos">228</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">229</span>            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Controllability analysis failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">230</span>            <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">231</span>
+<span class="linenos">232</span>    <span class="k">def</span><span class="w"> </span><span class="nf">set_controllability_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">233</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">234</span><span class="sd">        Update controllability threshold.</span>
+<span class="linenos">235</span>
+<span class="linenos">236</span><span class="sd">        Args:</span>
+<span class="linenos">237</span><span class="sd">            threshold: New threshold value (must be &gt; 0)</span>
+<span class="linenos">238</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">239</span>        <span class="k">if</span> <span class="n">threshold</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">240</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Controllability threshold must be positive&quot;</span><span class="p">)</span>
+<span class="linenos">241</span>        <span class="bp">self</span><span class="o">.</span><span class="n">controllability_threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+<span class="linenos">242</span>
+<span class="linenos">243</span>    <span class="k">def</span><span class="w"> </span><span class="nf">get_dynamics_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="linenos">244</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">245</span><span class="sd">        Get information about dynamics matrices at current state.</span>
+<span class="linenos">246</span>
+<span class="linenos">247</span><span class="sd">        Args:</span>
+<span class="linenos">248</span><span class="sd">            state: Current system state</span>
+<span class="linenos">249</span>
+<span class="linenos">250</span><span class="sd">        Returns:</span>
+<span class="linenos">251</span><span class="sd">            Dictionary with dynamics information</span>
+<span class="linenos">252</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">253</span>        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">254</span>            <span class="s1">&#39;has_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">255</span>            <span class="s1">&#39;M_shape&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">256</span>            <span class="s1">&#39;F_shape&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">257</span>            <span class="s1">&#39;M_condition&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+<span class="linenos">258</span>            <span class="s1">&#39;M_determinant&#39;</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="linenos">259</span>        <span class="p">}</span>
+<span class="linenos">260</span>
+<span class="linenos">261</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">262</span>            <span class="k">return</span> <span class="n">info</span>
+<span class="linenos">263</span>
+<span class="linenos">264</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">265</span>            <span class="n">M</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_dynamics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="linenos">266</span>            <span class="k">if</span> <span class="n">M</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">267</span>                <span class="n">info</span><span class="p">[</span><span class="s1">&#39;M_shape&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos">268</span>                <span class="n">info</span><span class="p">[</span><span class="s1">&#39;M_condition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="linenos">269</span>                <span class="n">info</span><span class="p">[</span><span class="s1">&#39;M_determinant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="linenos">270</span>
+<span class="linenos">271</span>            <span class="k">if</span> <span class="n">F</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">272</span>                <span class="n">info</span><span class="p">[</span><span class="s1">&#39;F_shape&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos">273</span>
+<span class="linenos">274</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">275</span>            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to get dynamics info: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">276</span>
+<span class="linenos">277</span>        <span class="k">return</span> <span class="n">info</span>
 </pre></div>
 </div>
 </section>
@@ -1138,7 +1414,7 @@ sliding surface if the model were perfect and no disturbances were present.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1161,6 +1437,27 @@ sliding surface if the model were perfect and no disturbances were present.</p>
             <ul>
 <li><a class="reference internal" href="#">controllers.smc.core.equivalent_control</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
+<li><a class="reference internal" href="#equivalent-control-method">Equivalent Control Method</a></li>
+<li><a class="reference internal" href="#derivation-for-dip">Derivation for DIP</a></li>
+<li><a class="reference internal" href="#manipulator-equation">Manipulator Equation</a></li>
+<li><a class="reference internal" href="#solving-for-equivalent-control">Solving for Equivalent Control</a></li>
+<li><a class="reference internal" href="#matrix-inversion-considerations">Matrix Inversion Considerations</a></li>
+<li><a class="reference internal" href="#model-based-vs-model-free">Model-Based vs Model-Free</a></li>
+<li><a class="reference internal" href="#hybrid-approach">Hybrid Approach</a></li>
+<li><a class="reference internal" href="#computational-complexity">Computational Complexity</a></li>
+<li><a class="reference internal" href="#numerical-stability">Numerical Stability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-equivalent-control-computation">Example 1: Basic Equivalent Control Computation</a></li>
+<li><a class="reference internal" href="#example-2-matrix-conditioning-check">Example 2: Matrix Conditioning Check</a></li>
+<li><a class="reference internal" href="#example-3-regularization-adjustment">Example 3: Regularization Adjustment</a></li>
+<li><a class="reference internal" href="#example-4-hybrid-control-equivalent-switching">Example 4: Hybrid Control (Equivalent + Switching)</a></li>
+<li><a class="reference internal" href="#example-5-performance-profiling">Example 5: Performance Profiling</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#equivalentcontrol"><code class="docutils literal notranslate"><span class="pre">EquivalentControl</span></code></a><ul>
@@ -1198,6 +1495,10 @@ sliding surface if the model were perfect and no disturbances were present.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

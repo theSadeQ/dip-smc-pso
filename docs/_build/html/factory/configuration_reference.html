@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -506,7 +532,10 @@
 <section id="thread-safety-implementation">
 <h3>Thread Safety Implementation<a class="headerlink" href="#thread-safety-implementation" title="Link to this heading">¶</a></h3>
 <p>The factory implements thread-safe operations using <code class="docutils literal notranslate"><span class="pre">threading.RLock()</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Thread-safe factory operations</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Thread-safe factory operations</span>
 <span class="n">_factory_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">create_controller</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -529,7 +558,10 @@
 <section id="controller-registry-structure">
 <h3>Controller Registry Structure<a class="headerlink" href="#controller-registry-structure" title="Link to this heading">¶</a></h3>
 <p>The factory maintains a comprehensive controller registry with standardized metadata:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONTROLLER_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">CONTROLLER_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="n">ModularClassicalSMC</span><span class="p">,</span>
         <span class="s1">&#39;config_class&#39;</span><span class="p">:</span> <span class="n">ClassicalSMCConfig</span><span class="p">,</span>
@@ -565,7 +597,10 @@
 <h3>Parameter Validation Framework<a class="headerlink" href="#parameter-validation-framework" title="Link to this heading">¶</a></h3>
 <section id="comprehensive-gain-validation">
 <h4>Comprehensive Gain Validation<a class="headerlink" href="#comprehensive-gain-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_validate_controller_gains</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_controller_gains</span><span class="p">(</span>
     <span class="n">gains</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">controller_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -604,7 +639,10 @@
 </section>
 <section id="adaptive-smc-configuration">
 <h4>Adaptive SMC Configuration<a class="headerlink" href="#adaptive-smc-configuration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adaptive SMC with parameter estimation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Adaptive SMC with parameter estimation</span>
 <span class="n">config_params</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">controller_gains</span><span class="p">,</span>           <span class="c1"># [k1, k2, λ1, λ2, γ]</span>
     <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="mf">150.0</span><span class="p">,</span>
@@ -622,7 +660,10 @@
 </section>
 <section id="super-twisting-smc-configuration">
 <h4>Super-Twisting SMC Configuration<a class="headerlink" href="#super-twisting-smc-configuration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Super-Twisting Algorithm (STA) SMC</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Super-Twisting Algorithm (STA) SMC</span>
 <span class="n">config_params</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">controller_gains</span><span class="p">,</span>           <span class="c1"># [K1, K2, k1, k2, λ1, λ2]</span>
     <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="mf">150.0</span><span class="p">,</span>
@@ -638,7 +679,10 @@
 </section>
 <section id="hybrid-adaptive-sta-smc-configuration">
 <h4>Hybrid Adaptive-STA SMC Configuration<a class="headerlink" href="#hybrid-adaptive-sta-smc-configuration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hybrid controller requires sub-configurations</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Hybrid controller requires sub-configurations</span>
 <span class="n">classical_config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
     <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
     <span class="n">max_force</span><span class="o">=</span><span class="mf">150.0</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.02</span>
@@ -710,7 +754,10 @@
 </section>
 <section id="validation-workflow">
 <h3>Validation Workflow<a class="headerlink" href="#validation-workflow" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_configuration</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_configuration</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive configuration validation.&quot;&quot;&quot;</span>
 
     <span class="c1"># 1. Check required parameters</span>
@@ -743,7 +790,10 @@
 <h2>Error Handling and Graceful Degradation<a class="headerlink" href="#error-handling-and-graceful-degradation" title="Link to this heading">¶</a></h2>
 <section id="configuration-fallback-mechanism">
 <h3>Configuration Fallback Mechanism<a class="headerlink" href="#configuration-fallback-mechanism" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">try</span><span class="p">:</span>
     <span class="c1"># Attempt full configuration</span>
     <span class="n">controller_config</span> <span class="o">=</span> <span class="n">config_class</span><span class="p">(</span><span class="o">**</span><span class="n">config_params</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -779,7 +829,10 @@
 </section>
 <section id="runtime-error-recovery">
 <h3>Runtime Error Recovery<a class="headerlink" href="#runtime-error-recovery" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_controller_with_recovery</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_controller_with_recovery</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">gains</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create controller with automatic error recovery.&quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -802,7 +855,10 @@
 <h2>Controller Aliasing and Normalization<a class="headerlink" href="#controller-aliasing-and-normalization" title="Link to this heading">¶</a></h2>
 <section id="backwards-compatibility-aliases">
 <h3>Backwards Compatibility Aliases<a class="headerlink" href="#backwards-compatibility-aliases" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONTROLLER_ALIASES</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">CONTROLLER_ALIASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;classic_smc&#39;</span><span class="p">:</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
     <span class="s1">&#39;smc_classical&#39;</span><span class="p">:</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
     <span class="s1">&#39;smc_v1&#39;</span><span class="p">:</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
@@ -827,7 +883,10 @@
 <h2>Dynamics Model Integration<a class="headerlink" href="#dynamics-model-integration" title="Link to this heading">¶</a></h2>
 <section id="optional-plant-model-support">
 <h3>Optional Plant Model Support<a class="headerlink" href="#optional-plant-model-support" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_create_dynamics_model</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_dynamics_model</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create dynamics model from configuration with fallback handling.&quot;&quot;&quot;</span>
 
     <span class="c1"># Priority order for dynamics model resolution</span>
@@ -937,7 +996,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

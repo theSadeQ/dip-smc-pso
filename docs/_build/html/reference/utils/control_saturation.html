@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -780,6 +806,348 @@ Signal with dead zone applied.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">typing</span> <span class="pre">import</span> <span class="pre">Literal,</span> <span class="pre">Union</span></code></p></li>
 </ul>
 </section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="saturation-functions-for-control-systems">
+<h3>Saturation Functions for Control Systems<a class="headerlink" href="#saturation-functions-for-control-systems" title="Link to this heading">¶</a></h3>
+<p>Saturation functions limit control outputs to physical actuator constraints while minimizing adverse effects like integrator windup and chattering.</p>
+<section id="hard-saturation">
+<h4>Hard Saturation<a class="headerlink" href="#hard-saturation" title="Link to this heading">¶</a></h4>
+<p><strong>Definition:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{sat}(u) = \begin{cases}
+u_{\max} &amp; \text{if } u &gt; u_{\max} \\
+u &amp; \text{if } u_{\min} \leq u \leq u_{\max} \\
+u_{\min} &amp; \text{if } u &lt; u_{\min}
+\end{cases}
+\)</span>$</p>
+<p><strong>Vector form:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{sat}(\vec{u})_i = \max(u_{i,\min}, \min(u_i, u_{i,\max}))
+\)</span>$</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Discontinuous at boundaries</p></li>
+<li><p>May cause chattering in sliding mode control</p></li>
+<li><p>Simple and computationally efficient</p></li>
+</ul>
+</section>
+<section id="smooth-saturation-tanh">
+<h4>Smooth Saturation (tanh)<a class="headerlink" href="#smooth-saturation-tanh" title="Link to this heading">¶</a></h4>
+<p><strong>Definition:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{sat}_{\text{smooth}}(u, u_{\max}) = u_{\max} \tanh\left(\frac{u}{u_{\max}}\right)
+\)</span>$</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Continuously differentiable everywhere</p></li>
+<li><p>Asymptotically approaches <span class="math notranslate nohighlight">\(\pm u_{\max}\)</span></p></li>
+<li><p>Derivative: <span class="math notranslate nohighlight">\(\frac{d}{du}\text{sat}_{\text{smooth}}(u) = \frac{1}{\cosh^2(u/u_{\max})}\)</span></p></li>
+<li><p>Reduces chattering in SMC</p></li>
+</ul>
+</section>
+<section id="dead-zone">
+<h4>Dead Zone<a class="headerlink" href="#dead-zone" title="Link to this heading">¶</a></h4>
+<p><strong>Definition:</strong>
+$<span class="math notranslate nohighlight">\(
+\text{dz}(u, \delta) = \begin{cases}
+u - \delta &amp; \text{if } u &gt; \delta \\
+0 &amp; \text{if } |u| \leq \delta \\
+u + \delta &amp; \text{if } u &lt; -\delta
+\end{cases}
+\)</span>$</p>
+<p><strong>Applications:</strong></p>
+<ul class="simple">
+<li><p>Noise filtering: Ignore small control signals below threshold</p></li>
+<li><p>Anti-windup: Prevent integrator accumulation for small errors</p></li>
+<li><p>Robustness: Reject sensor noise and quantization effects</p></li>
+</ul>
+</section>
+</section>
+<section id="saturation-effects-on-stability">
+<h3>Saturation Effects on Stability<a class="headerlink" href="#saturation-effects-on-stability" title="Link to this heading">¶</a></h3>
+<p><strong>Anti-windup compensation:</strong></p>
+<p>For PI controller with saturation:
+$<span class="math notranslate nohighlight">\(
+u = K_P e + K_I \int_0^t e(\tau) d\tau
+\)</span>$</p>
+<p>With anti-windup:
+$<span class="math notranslate nohighlight">\(
+\dot{x}_I = \begin{cases}
+e(t) &amp; \text{if not saturated} \\
+0 &amp; \text{if saturated}
+\end{cases}
+\)</span>$</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Control Signal u] –&gt; B{Saturation Type}</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>B --&gt;|Hard| C[Hard Saturation]
+B --&gt;|Smooth| D[Smooth tanh]
+B --&gt;|Dead Zone| E[Dead Zone]
+
+C --&gt; F[max_u_min, min_u, u_max__]
+D --&gt; G[u_max·tanh_u/u_max_]
+E --&gt; H[Remove |u| &lt; δ]
+
+F --&gt; I[Saturated Control]
+G --&gt; I
+H --&gt; I
+
+I --&gt; J{Anti-Windup?}
+J --&gt;|Yes| K[Stop Integrator]
+J --&gt;|No| L[Apply to Plant]
+
+K --&gt; L
+L --&gt; M[Plant Response]
+
+style B fill:#fff4e1
+style I fill:#e8f5e9
+style K fill:#ffebee
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-hard-saturation">
+<h3>Example 1: Basic Hard Saturation<a class="headerlink" href="#example-1-basic-hard-saturation" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.utils.control import saturate</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="scalar-saturation">
+<h1>Scalar saturation<a class="headerlink" href="#scalar-saturation" title="Link to this heading">¶</a></h1>
+<p>u = 150.0  # Exceeds limit
+u_sat = saturate(u, u_min=-100.0, u_max=100.0)
+print(f”Saturated: {u} -&gt; {u_sat}”)  # 150.0 -&gt; 100.0</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="vector-saturation">
+<h1>Vector saturation<a class="headerlink" href="#vector-saturation" title="Link to this heading">¶</a></h1>
+<p>u_vec = np.array([50, -120, 80])
+u_sat_vec = saturate(u_vec, u_min=-100.0, u_max=100.0)
+print(f”Vector saturation: {u_sat_vec}”)  # [50, -100, 80]
+```</p>
+<section id="example-2-smooth-saturation-for-chattering-reduction">
+<h2>Example 2: Smooth Saturation for Chattering Reduction<a class="headerlink" href="#example-2-smooth-saturation-for-chattering-reduction" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.control import smooth_sign
+import numpy as np</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="smc-with-smooth-saturation">
+<h1>SMC with smooth saturation<a class="headerlink" href="#smc-with-smooth-saturation" title="Link to this heading">¶</a></h1>
+<p>def smc_with_smooth_saturation(x, sliding_surface, K, epsilon=0.1):
+“””SMC using smooth sign function (tanh).”””
+s = sliding_surface(x)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Smooth sign instead of hard sign
+u = -K * smooth_sign(s, epsilon)
+
+return u
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="comparison-hard-vs-smooth">
+<h1>Comparison: hard vs smooth<a class="headerlink" href="#comparison-hard-vs-smooth" title="Link to this heading">¶</a></h1>
+<p>s_values = np.linspace(-1, 1, 100)
+hard_sign = np.sign(s_values)
+smooth = np.array([smooth_sign(s, 0.1) for s in s_values])</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="plot-to-show-smoothness">
+<h1>Plot to show smoothness<a class="headerlink" href="#plot-to-show-smoothness" title="Link to this heading">¶</a></h1>
+<p>import matplotlib.pyplot as plt
+plt.plot(s_values, hard_sign, label=’Hard sign’, linestyle=’–‘)
+plt.plot(s_values, smooth, label=’Smooth sign (tanh)’)
+plt.xlabel(‘Sliding Surface s’)
+plt.ylabel(‘Switching Function’)
+plt.legend()
+plt.grid(True)
+plt.show()
+```</p>
+<section id="example-3-dead-zone-for-noise-filtering">
+<h2>Example 3: Dead Zone for Noise Filtering<a class="headerlink" href="#example-3-dead-zone-for-noise-filtering" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.control import dead_zone</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="filter-small-control-signals">
+<h1>Filter small control signals<a class="headerlink" href="#filter-small-control-signals" title="Link to this heading">¶</a></h1>
+<p>u_noisy = np.array([0.05, -0.02, 5.0, -3.0, 0.08])
+threshold = 0.1</p>
+<p>u_filtered = dead_zone(u_noisy, threshold)
+print(f”Filtered: {u_filtered}”)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="result-0-0-4-9-2-9-0-small-signals-removed">
+<h1>Result: [0, 0, 4.9, -2.9, 0] (small signals removed)<a class="headerlink" href="#result-0-0-4-9-2-9-0-small-signals-removed" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="application-pd-controller-with-dead-zone">
+<h1>Application: PD controller with dead zone<a class="headerlink" href="#application-pd-controller-with-dead-zone" title="Link to this heading">¶</a></h1>
+<p>def pd_control_with_dead_zone(x, x_ref, Kp, Kd, dead_zone_threshold):
+error = x_ref - x
+error_dot = -np.gradient(x)  # Simplified</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>u_pd = Kp * error + Kd * error_dot
+
+# Apply dead zone to avoid actuator wear from small commands
+u = dead_zone(u_pd, dead_zone_threshold)
+
+return u
+</pre></div>
+</div>
+<p>```</p>
+<section id="example-4-anti-windup-with-saturation">
+<h2>Example 4: Anti-Windup with Saturation<a class="headerlink" href="#example-4-anti-windup-with-saturation" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.control import saturate</p>
+<p>class PIControllerWithAntiWindup:
+def <strong>init</strong>(self, Kp, Ki, u_min, u_max):
+<a class="reference external" href="http://self.Kp">self.Kp</a> = Kp
+<a class="reference external" href="http://self.Ki">self.Ki</a> = Ki
+self.u_min = u_min
+self.u_max = u_max
+self.integral = 0.0</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def compute(self, error, dt):
+    # Proportional term
+    u_p = self.Kp * error
+
+    # Integral term
+    u_i = self.Ki * self.integral
+
+    # Total control before saturation
+    u_total = u_p + u_i
+
+    # Apply saturation
+    u_sat = saturate(u_total, self.u_min, self.u_max)
+
+    # Anti-windup: only integrate if not saturated
+    if abs(u_total - u_sat) &lt; 1e-6:  # Not saturated
+        self.integral += error * dt
+    # else: stop integrating (anti-windup)
+
+    return u_sat
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="use-pi-with-anti-windup">
+<h1>Use PI with anti-windup<a class="headerlink" href="#use-pi-with-anti-windup" title="Link to this heading">¶</a></h1>
+<p>controller = PIControllerWithAntiWindup(Kp=10, Ki=5, u_min=-100, u_max=100)</p>
+<p>for k in range(100):
+error = x_ref - x
+u = controller.compute(error, dt=0.01)
+# Integral won’t wind up during saturation
+```</p>
+<section id="example-5-saturation-monitoring">
+<h2>Example 5: Saturation Monitoring<a class="headerlink" href="#example-5-saturation-monitoring" title="Link to this heading">¶</a></h2>
+<p>```python
+from src.utils.control import saturate
+import numpy as np</p>
+<p>def monitor_saturation(u_desired, u_min, u_max):
+“””Monitor saturation frequency and severity.”””</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>u_actual = saturate(u_desired, u_min, u_max)
+
+# Saturation indicator
+is_saturated = (np.abs(u_actual - u_desired) &gt; 1e-6)
+
+# Saturation ratio
+if np.linalg.norm(u_desired) &gt; 0:
+    ratio = np.linalg.norm(u_actual) / np.linalg.norm(u_desired)
+else:
+    ratio = 1.0
+
+return {
+    &#39;u_actual&#39;: u_actual,
+    &#39;is_saturated&#39;: is_saturated,
+    &#39;saturation_ratio&#39;: ratio
+}
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="track-saturation-during-simulation">
+<h1>Track saturation during simulation<a class="headerlink" href="#track-saturation-during-simulation" title="Link to this heading">¶</a></h1>
+<p>saturation_count = 0
+saturation_ratios = []</p>
+<p>for k in range(1000):
+u_desired = controller.compute_control(x, state_vars, history)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sat_info = monitor_saturation(u_desired, u_min=-100, u_max=100)
+
+if sat_info[&#39;is_saturated&#39;]:
+    saturation_count += 1
+
+saturation_ratios.append(sat_info[&#39;saturation_ratio&#39;])
+
+u = sat_info[&#39;u_actual&#39;]
+x = integrator.integrate(dynamics, x, u, t)
+t += dt
+</pre></div>
+</div>
+<p>print(f”Saturation frequency: {saturation_count/1000:.1%}”)
+print(f”Mean saturation ratio: {np.mean(saturation_ratios):.3f}”)
+```</p>
+<section id="id3">
+<h2>Architecture Diagram<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>```{mermaid}
+graph TD
+A[Component] –&gt; B[Subcomponent 1]
+A –&gt; C[Subcomponent 2]
+B –&gt; D[Output]
+C –&gt; D</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>style A fill:#e1f5ff
+style D fill:#e8f5e9
+</pre></div>
+</div>
+<p>```</p>
+</section>
+<section id="id4">
+<h2>Usage Examples<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<p>```python
+from src.utils.control_saturation import Component</p>
+<p>component = Component()
+result = component.process(data)
+```</p>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<p>```python
+component = Component(
+option1=value1,
+option2=value2
+)
+```</p>
+</section>
+<section id="example-3-integration-with-simulation">
+<h3>Example 3: Integration with Simulation<a class="headerlink" href="#example-3-integration-with-simulation" title="Link to this heading">¶</a></h3>
+<p>```python</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration example<a class="headerlink" href="#integration-example" title="Link to this heading">¶</a></h1>
+<p>for k in range(num_steps):
+result = component.process(x)
+x = update(x, result)
+```</p>
+<section id="example-4-performance-optimization">
+<h2>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h2>
+<p>```python
+component = Component(enable_caching=True)
+```</p>
+</section>
+<section id="example-5-error-handling">
+<h2>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h2>
+<p>```python
+try:
+result = component.process(data)
+except ComponentError as e:
+print(f”Error: {e}”)
+```</p>
+</section>
 </section>
 
         </article>
@@ -799,7 +1167,7 @@ Signal with dead zone applied.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -840,6 +1208,57 @@ Signal with dead zone applied.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#saturation-functions-for-control-systems">Saturation Functions for Control Systems</a><ul>
+<li><a class="reference internal" href="#hard-saturation">Hard Saturation</a></li>
+<li><a class="reference internal" href="#smooth-saturation-tanh">Smooth Saturation (tanh)</a></li>
+<li><a class="reference internal" href="#dead-zone">Dead Zone</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#saturation-effects-on-stability">Saturation Effects on Stability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-hard-saturation">Example 1: Basic Hard Saturation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#scalar-saturation">Scalar saturation</a></li>
+<li><a class="reference internal" href="#vector-saturation">Vector saturation</a><ul>
+<li><a class="reference internal" href="#example-2-smooth-saturation-for-chattering-reduction">Example 2: Smooth Saturation for Chattering Reduction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#smc-with-smooth-saturation">SMC with smooth saturation</a></li>
+<li><a class="reference internal" href="#comparison-hard-vs-smooth">Comparison: hard vs smooth</a></li>
+<li><a class="reference internal" href="#plot-to-show-smoothness">Plot to show smoothness</a><ul>
+<li><a class="reference internal" href="#example-3-dead-zone-for-noise-filtering">Example 3: Dead Zone for Noise Filtering</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#filter-small-control-signals">Filter small control signals</a></li>
+<li><a class="reference internal" href="#result-0-0-4-9-2-9-0-small-signals-removed">Result: [0, 0, 4.9, -2.9, 0] (small signals removed)</a></li>
+<li><a class="reference internal" href="#application-pd-controller-with-dead-zone">Application: PD controller with dead zone</a><ul>
+<li><a class="reference internal" href="#example-4-anti-windup-with-saturation">Example 4: Anti-Windup with Saturation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-pi-with-anti-windup">Use PI with anti-windup</a><ul>
+<li><a class="reference internal" href="#example-5-saturation-monitoring">Example 5: Saturation Monitoring</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#track-saturation-during-simulation">Track saturation during simulation</a><ul>
+<li><a class="reference internal" href="#id3">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#id4">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-simulation">Example 3: Integration with Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-example">Integration example</a><ul>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
 </ul>
 </li>
 </ul>
@@ -858,6 +1277,8 @@ Signal with dead zone applied.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

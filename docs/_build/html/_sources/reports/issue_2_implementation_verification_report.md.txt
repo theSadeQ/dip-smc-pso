@@ -130,6 +130,9 @@ Optimized: ζ₁ = 4.85/(2√12) = 0.700 (optimal)
 **VERIFIED**: All STA-SMC related files have **PROPER 90-CHARACTER ASCII HEADERS**
 
 ```python
+# example-metadata:
+# runnable: false
+
 #==========================================================================================\\\
 #========================== src/controllers/smc/sta_smc.py ===========================\\\
 #==========================================================================================\\\
@@ -153,6 +156,9 @@ Optimized: ζ₁ = 4.85/(2√12) = 0.700 (optimal)
 **VERIFIED**: All import paths **WORKING CORRECTLY**
 
 ```python
+# example-metadata:
+# runnable: false
+
 # All imports tested successfully:
 from src.controllers.smc.sta_smc import SuperTwistingSMC          # ✅ Direct import
 from src.controllers.sta_smc import SuperTwistingSMC             # ✅ Compatibility layer

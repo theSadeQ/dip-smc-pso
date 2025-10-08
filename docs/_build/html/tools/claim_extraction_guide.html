@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -934,7 +960,10 @@ The sliding surface $s = \lambda e + \dot{e}$ guarantees finite-time convergence
 <section id="assignment-algorithm">
 <h3>4.2 Assignment Algorithm<a class="headerlink" href="#assignment-algorithm" title="Link to this heading">¶</a></h3>
 <p><strong>Decision Tree:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">assign_priority</span><span class="p">(</span><span class="n">claim</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">assign_priority</span><span class="p">(</span><span class="n">claim</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Priority assignment based on claim attributes.&quot;&quot;&quot;</span>
 
     <span class="c1"># Rule 1: Formal theorems/lemmas without citations → CRITICAL</span>
@@ -1305,7 +1334,10 @@ The sliding surface $s = \lambda e + \dot{e}$ guarantees finite-time convergence
 \[\text{Recall} = \frac{\text{Extracted Claims}}{\text{Expected Claims}}\]</div>
 </div>
 <p><strong>Example Test:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_ground_truth_recall</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_ground_truth_recall</span><span class="p">():</span>
     <span class="c1"># Ground truth: docs/theory/smc_theory_complete.md</span>
     <span class="n">expected_claims</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;Theorem 1: Sliding surface convergence&quot;</span><span class="p">,</span>
@@ -1684,7 +1716,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <hr class="docutils" />
 <p><strong>Q: Can I customize priority assignments?</strong></p>
 <p>A: Yes. Edit <code class="docutils literal notranslate"><span class="pre">assign_priority()</span></code> function in <code class="docutils literal notranslate"><span class="pre">.dev_tools/claim_extraction/merge_claims.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">assign_priority</span><span class="p">(</span><span class="n">claim</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">assign_priority</span><span class="p">(</span><span class="n">claim</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="c1"># Example: Treat all controller claims as HIGH</span>
     <span class="k">if</span> <span class="s2">&quot;controller&quot;</span> <span class="ow">in</span> <span class="n">claim</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
         <span class="k">return</span> <span class="s2">&quot;HIGH&quot;</span>
@@ -1707,7 +1742,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <h3>10.2 Technical Questions<a class="headerlink" href="#technical-questions" title="Link to this heading">¶</a></h3>
 <p><strong>Q: How do I add new citation formats?</strong></p>
 <p>A: Add regex pattern to <code class="docutils literal notranslate"><span class="pre">CITATION_PATTERNS</span></code> in <code class="docutils literal notranslate"><span class="pre">code_extractor.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CITATION_PATTERNS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">CITATION_PATTERNS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Existing patterns...</span>
     <span class="s1">&#39;rfc&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;RFC\s+(\d</span><span class="si">{4}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">),</span>  <span class="c1"># New: RFC citations</span>
 <span class="p">}</span>
@@ -1724,7 +1762,10 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
 <hr class="docutils" />
 <p><strong>Q: Can I extract from Jupyter notebooks?</strong></p>
 <p>A: Current tools support <code class="docutils literal notranslate"><span class="pre">.py</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code> only. For <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> support:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add to code_extractor.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Add to code_extractor.py</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nbformat</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_from_notebook</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -1847,7 +1888,7 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;i
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

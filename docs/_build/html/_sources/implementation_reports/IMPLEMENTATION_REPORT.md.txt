@@ -89,6 +89,9 @@ scripts/check_citations.py # Citation health validation
 
 ### Advanced `linkcode_resolve` Function
 ```python
+# example-metadata:
+# runnable: false
+
 def linkcode_resolve(domain, info):
     # Handles: @property, @classmethod, @staticmethod, @functools.wraps
     # Module-level fallbacks for C-extensions
@@ -98,6 +101,9 @@ def linkcode_resolve(domain, info):
 
 ### Citation Health Monitoring
 ```python
+# example-metadata:
+# runnable: false
+
 # Automated checks for:
 # - Duplicate citation keys across .bib files
 # - Missing citations referenced in documentation

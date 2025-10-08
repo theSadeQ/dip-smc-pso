@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -794,7 +820,10 @@ python<span class="w"> </span>scripts/batch_pso_optimization.py<span class="w"> 
 </section>
 <section id="custom-batch-script">
 <h4>2.2 Custom Batch Script<a class="headerlink" href="#custom-batch-script" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># scripts/custom_batch_optimization.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># scripts/custom_batch_optimization.py</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.optimizer.pso_optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSOTuner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_controller_types</span>
 
@@ -872,7 +901,10 @@ python<span class="w"> </span>scripts/batch_pso_optimization.py<span class="w"> 
 </section>
 <section id="adaptive-pso-parameters">
 <h4>3.2 Adaptive PSO Parameters<a class="headerlink" href="#adaptive-pso-parameters" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adaptive PSO with time-varying parameters</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Adaptive PSO with time-varying parameters</span>
 <span class="n">pso_config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;n_particles&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
     <span class="s1">&#39;iters&#39;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
@@ -977,7 +1009,10 @@ python<span class="w"> </span>scripts/compare_all_controllers.py<span class="w">
 <h3>2. Statistical Analysis Workflows<a class="headerlink" href="#statistical-analysis-workflows" title="Link to this heading">¶</a></h3>
 <section id="monte-carlo-performance-analysis">
 <h4>2.1 Monte Carlo Performance Analysis<a class="headerlink" href="#monte-carlo-performance-analysis" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Statistical validation of controller performance</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Statistical validation of controller performance</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MonteCarloAnalyzer</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">statistical_performance_analysis</span><span class="p">():</span>
@@ -1240,7 +1275,10 @@ python<span class="w"> </span>scripts/production_validation.py<span class="w"> <
 </section>
 <section id="safety-system-validation">
 <h4>1.2 Safety System Validation<a class="headerlink" href="#safety-system-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Validate safety systems</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Validate safety systems</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.safety</span><span class="w"> </span><span class="kn">import</span> <span class="n">SafetyValidator</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_safety_systems</span><span class="p">():</span>
@@ -1320,7 +1358,10 @@ python<span class="w"> </span>scripts/production_validation.py<span class="w"> <
 </section>
 <section id="production-deployment-script">
 <h4>2.2 Production Deployment Script<a class="headerlink" href="#production-deployment-script" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># scripts/deploy_production.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># scripts/deploy_production.py</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.production</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProductionManager</span>
@@ -1504,7 +1545,10 @@ python<span class="w"> </span>scripts/diagnose_controller.py<span class="w"> </s
 <h3>1. Controller Development Workflow<a class="headerlink" href="#controller-development-workflow" title="Link to this heading">¶</a></h3>
 <section id="new-controller-implementation">
 <h4>1.1 New Controller Implementation<a class="headerlink" href="#new-controller-implementation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Template for new controller development</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Template for new controller development</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseController</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1626,7 +1670,10 @@ python<span class="w"> </span>scripts/diagnose_controller.py<span class="w"> </s
 <h3>2. Integration Testing Workflow<a class="headerlink" href="#integration-testing-workflow" title="Link to this heading">¶</a></h3>
 <section id="end-to-end-integration-tests">
 <h4>2.1 End-to-End Integration Tests<a class="headerlink" href="#end-to-end-integration-tests" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Comprehensive integration testing</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Comprehensive integration testing</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegrationTestSuite</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ComprehensiveIntegrationTests</span><span class="p">:</span>
@@ -1724,7 +1771,7 @@ python<span class="w"> </span>scripts/diagnose_controller.py<span class="w"> </s
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

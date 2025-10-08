@@ -28,6 +28,9 @@ The factory implements a multi-level parameter resolution system:
 ### Parameter Resolution Implementation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _resolve_controller_gains(
     gains: Optional[Union[List[float], np.ndarray]],
     config: Optional[Any],
@@ -80,6 +83,9 @@ def _resolve_controller_gains(
 ### Classical SMC Parameter Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Parameter Structure: [k1, k2, λ1, λ2, K, kd]
 ClassicalSMCParameters = {
     'gains': {
@@ -114,6 +120,9 @@ ClassicalSMCParameters = {
 The adaptive SMC controller uses `gamma` as the 5th element in the gains array, NOT as a separate parameter:
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Parameter Structure: [k1, k2, λ1, λ2, γ]
 AdaptiveSMCParameters = {
     'gains': {
@@ -149,6 +158,9 @@ AdaptiveSMCParameters = {
 ### Super-Twisting SMC Parameter Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Parameter Structure: [K1, K2, k1, k2, λ1, λ2]
 SuperTwistingSMCParameters = {
     'gains': {
@@ -181,6 +193,9 @@ SuperTwistingSMCParameters = {
 ### Hybrid Adaptive-STA SMC Parameter Interface
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Parameter Structure: [k1, k2, λ1, λ2] (surface gains only)
 HybridSMCParameters = {
     'gains': {
@@ -213,6 +228,9 @@ HybridSMCParameters = {
 ### Multi-Level Validation System
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ParameterValidator:
     """Comprehensive parameter validation for SMC controllers."""
 
@@ -288,6 +306,9 @@ class ParameterValidator:
 ### Parameter Range Validation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_parameter_ranges(
     gains: List[float],
     controller_type: str,
@@ -322,6 +343,9 @@ def get_default_bounds(controller_type: str) -> List[Tuple[float, float]]:
 ### Flexible Configuration Parsing
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _extract_controller_parameters(
     config: Optional[Any],
     controller_type: str,
@@ -414,6 +438,9 @@ def normalize_parameter_types(params: Dict[str, Any]) -> Dict[str, Any]:
 ### Parameter Resolution Errors
 
 ```python
+# example-metadata:
+# runnable: false
+
 class ParameterResolutionError(ValueError):
     """Raised when parameter resolution fails."""
     pass
@@ -456,6 +483,9 @@ def create_controller_with_parameter_recovery(
 ### Graceful Parameter Degradation
 
 ```python
+# example-metadata:
+# runnable: false
+
 def create_minimal_config(controller_type: str) -> Dict[str, Any]:
     """Create minimal viable configuration for controller type."""
 

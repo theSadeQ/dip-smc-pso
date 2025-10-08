@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -491,6 +517,142 @@
 <section id="module-overview">
 <h2>Module Overview<a class="headerlink" href="#module-overview" title="Link to this heading">¶</a></h2>
 <p>Multi-Objective Particle Swarm Optimization (MOPSO) for Controller Tuning.</p>
+</section>
+<section id="advanced-mathematical-theory">
+<h2>Advanced Mathematical Theory<a class="headerlink" href="#advanced-mathematical-theory" title="Link to this heading">¶</a></h2>
+<section id="multi-objective-pso-mopso">
+<h3>Multi-Objective PSO (MOPSO)<a class="headerlink" href="#multi-objective-pso-mopso" title="Link to this heading">¶</a></h3>
+<p><strong>Multi-objective optimization problem:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\min_{\vec{x} \in \mathcal{X}} \vec{F}(\vec{x}) = [f_1(\vec{x}), \ldots, f_k(\vec{x})]^T\]</div>
+</div>
+<p><strong>Pareto dominance:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\vec{x} \prec \vec{y} \iff f_i(\vec{x}) \leq f_i(\vec{y}) \, \forall i \land \exists j: f_j(\vec{x}) &lt; f_j(\vec{y})\]</div>
+</div>
+</section>
+<section id="non-dominated-sorting">
+<h3>Non-Dominated Sorting<a class="headerlink" href="#non-dominated-sorting" title="Link to this heading">¶</a></h3>
+<p><strong>Pareto rank assignment:</strong></p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Rank}(\vec{x}) &amp;= 1 + |\{\vec{y} : \vec{y} \prec \vec{x}\}| \\
+\mathcal{P}_1 &amp;= \{\vec{x} : \text{Rank}(\vec{x}) = 1\} \\
+\mathcal{P}_i &amp;= \{\vec{x} : \text{Rank}(\vec{x}) = i\}
+\end{align}\end{split}\]</div>
+</div>
+<p><strong>Complexity:</strong> <span class="math notranslate nohighlight">\(O(M N^2 k)\)</span> for <span class="math notranslate nohighlight">\(M\)</span> objectives, <span class="math notranslate nohighlight">\(N\)</span> solutions.</p>
+</section>
+<section id="archive-maintenance">
+<h3>Archive Maintenance<a class="headerlink" href="#archive-maintenance" title="Link to this heading">¶</a></h3>
+<p><strong>Bounded external archive</strong> <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> with max size <span class="math notranslate nohighlight">\(A_{max}\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{A}^{t+1} = \text{Prune}(\mathcal{A}^t \cup \{\text{non-dominated from iteration } t\}, A_{max})\]</div>
+</div>
+</section>
+<section id="crowding-distance">
+<h3>Crowding Distance<a class="headerlink" href="#crowding-distance" title="Link to this heading">¶</a></h3>
+<p><strong>Diversity metric</strong> for archive pruning:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[CD_i = \sum_{m=1}^{M} \frac{f_m(\vec{x}_{i+1}) - f_m(\vec{x}_{i-1})}{f_m^{max} - f_m^{min}}\]</div>
+</div>
+<p><strong>Pruning strategy:</strong> Remove solutions with smallest crowding distance.</p>
+</section>
+<section id="leader-selection">
+<h3>Leader Selection<a class="headerlink" href="#leader-selection" title="Link to this heading">¶</a></h3>
+<p><strong>Roulette wheel selection</strong> based on crowding distance:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[P(\vec{x}_i \text{ selected as leader}) = \frac{CD_i}{\sum_j CD_j}\]</div>
+</div>
+<p>Favors less crowded regions for better diversity.</p>
+</section>
+<section id="mopso-velocity-update">
+<h3>MOPSO Velocity Update<a class="headerlink" href="#mopso-velocity-update" title="Link to this heading">¶</a></h3>
+<p><strong>Modified velocity update</strong> with archive leader:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[v_{i,d}^{t+1} = w v_{i,d}^t + c_1 r_1 (p_{i,d} - x_{i,d}^t) + c_2 r_2 (l_d - x_{i,d}^t)\]</div>
+</div>
+<p>Where <span class="math notranslate nohighlight">\(\vec{l}\)</span> is leader selected from archive <span class="math notranslate nohighlight">\(\mathcal{A}\)</span>.</p>
+</section>
+</section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Initialize Swarm] --&gt; B[Evaluate Objectives]
+    B --&gt; C[Non-Dominated Sorting]
+    C --&gt; D[Update Archive]
+
+    D --&gt; E{Archive Size}
+    E --&gt;|&lt; Max| F[Add All]
+    E --&gt;|&gt; Max| G[Prune by Crowding]
+
+    F --&gt; H[Compute Crowding Distance]
+    G --&gt; H
+
+    H --&gt; I[Select Leaders]
+    I --&gt; J[Update Velocities]
+    J --&gt; K[Update Positions]
+
+    K --&gt; L[Convergence Check]
+    L --&gt; M{Converged?}
+    M --&gt;|No| B
+    M --&gt;|Yes| N[Return Pareto Front]
+
+    style C fill:#9cf
+    style H fill:#ff9
+    style N fill:#9f9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-initialization">
+<h3>Example 1: Basic Initialization<a class="headerlink" href="#example-1-basic-initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Initialize with configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-performance-tuning">
+<h3>Example 2: Performance Tuning<a class="headerlink" href="#example-2-performance-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust parameters for better performance</span>
+<span class="n">optimized_params</span> <span class="o">=</span> <span class="n">tune_parameters</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">target_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-optimization">
+<h3>Example 3: Integration with Optimization<a class="headerlink" href="#example-3-integration-with-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use in complete optimization loop</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">create_optimizer</span><span class="p">(</span><span class="n">opt_type</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-edge-case-handling">
+<h3>Example 4: Edge Case Handling<a class="headerlink" href="#example-4-edge-case-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">handle_edge_case</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-performance-analysis">
+<h3>Example 5: Performance Analysis<a class="headerlink" href="#example-5-performance-analysis" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best fitness: </span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">best_fitness</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This module implements a production-ready multi-objective PSO algorithm specifically
 designed for control system parameter optimization. It provides Pareto front discovery,
 convergence analysis, and advanced optimization features.</p>
@@ -510,6 +672,7 @@ IEEE Congress on Evolutionary Computation, 2002.</p></li>
 <li><p>Deb, K., et al. “A fast and elitist multiobjective genetic algorithm: NSGA-II.”
 IEEE Transactions on Evolutionary Computation, 2002.</p></li>
 </ul>
+</section>
 </section>
 <section id="complete-source-code">
 <h2>Complete Source Code<a class="headerlink" href="#complete-source-code" title="Link to this heading">¶</a></h2>
@@ -543,7 +706,7 @@ IEEE Transactions on Evolutionary Computation, 2002.</p></li>
 <span class="linenos"> 28</span>
 <span class="linenos"> 29</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="linenos"> 30</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 31</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="linenos"> 31</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="linenos"> 32</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 <span class="linenos"> 33</span><span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
 <span class="linenos"> 34</span><span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
@@ -1705,7 +1868,7 @@ Multi-objective optimization results</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1728,6 +1891,24 @@ Multi-objective optimization results</p>
             <ul>
 <li><a class="reference internal" href="#">optimization.algorithms.multi_objective_pso</a><ul>
 <li><a class="reference internal" href="#module-overview">Module Overview</a></li>
+<li><a class="reference internal" href="#advanced-mathematical-theory">Advanced Mathematical Theory</a><ul>
+<li><a class="reference internal" href="#multi-objective-pso-mopso">Multi-Objective PSO (MOPSO)</a></li>
+<li><a class="reference internal" href="#non-dominated-sorting">Non-Dominated Sorting</a></li>
+<li><a class="reference internal" href="#archive-maintenance">Archive Maintenance</a></li>
+<li><a class="reference internal" href="#crowding-distance">Crowding Distance</a></li>
+<li><a class="reference internal" href="#leader-selection">Leader Selection</a></li>
+<li><a class="reference internal" href="#mopso-velocity-update">MOPSO Velocity Update</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-initialization">Example 1: Basic Initialization</a></li>
+<li><a class="reference internal" href="#example-2-performance-tuning">Example 2: Performance Tuning</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-optimization">Example 3: Integration with Optimization</a></li>
+<li><a class="reference internal" href="#example-4-edge-case-handling">Example 4: Edge Case Handling</a></li>
+<li><a class="reference internal" href="#example-5-performance-analysis">Example 5: Performance Analysis</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#complete-source-code">Complete Source Code</a></li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#mopsoconfig"><code class="docutils literal notranslate"><span class="pre">MOPSOConfig</span></code></a><ul>
@@ -1800,6 +1981,10 @@ Multi-objective optimization results</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"tags": "all", "tagSide": "right", "macros": {"vec": ["\\boldsymbol{#1}", 1], "mat": ["\\boldsymbol{#1}", 1], "norm": ["\\left\\|#1\\right\\|", 1], "R": "\\mathbb{R}", "C": "\\mathbb{C}", "N": "\\mathbb{N}", "Z": "\\mathbb{Z}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

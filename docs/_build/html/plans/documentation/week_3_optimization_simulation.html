@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -841,7 +867,10 @@ Under certain parameter conditions, PSO converges to stationary points:</p>
 <section id="accuracy-metrics-100-lines">
 <h4>1.3.4 Accuracy Metrics (100 lines)<a class="headerlink" href="#accuracy-metrics-100-lines" title="Link to this heading">¶</a></h4>
 <p><strong>Convergence Order Estimation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Richardson extrapolation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Richardson extrapolation</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">estimate_convergence_order</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">dt_values</span><span class="p">):</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
@@ -1050,7 +1079,10 @@ velocity += social
 <li><p>Social: Learn from swarm’s best discovery</p></li>
 </ul>
 <p><strong>Lines 120-135: Fitness Evaluation</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">evaluate_fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
     <span class="c1"># Create controller from gains</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
 
@@ -1277,7 +1309,10 @@ velocity += social
 <section id="multi-objective-formulation-200-lines">
 <h4>2.3.2 Multi-Objective Formulation (200 lines)<a class="headerlink" href="#multi-objective-formulation-200-lines" title="Link to this heading">¶</a></h4>
 <p><strong>Weighted Sum Approach:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MultiObjectiveFitness</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MultiObjectiveFitness</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">w_ise</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">w_chattering</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="s1">&#39;chattering&#39;</span><span class="p">]</span>
@@ -1310,7 +1345,10 @@ velocity += social
 <section id="constraint-handling-150-lines">
 <h4>2.3.3 Constraint Handling (150 lines)<a class="headerlink" href="#constraint-handling-150-lines" title="Link to this heading">¶</a></h4>
 <p><strong>Penalty Methods:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">penalized_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">base_fitness</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">penalized_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">base_fitness</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Add penalty for constraint violations.&quot;&quot;&quot;</span>
     <span class="n">penalty</span> <span class="o">=</span> <span class="mf">0.0</span>
 
@@ -1329,7 +1367,10 @@ velocity += social
 <section id="fitness-landscape-visualization-100-lines">
 <h4>2.3.4 Fitness Landscape Visualization (100 lines)<a class="headerlink" href="#fitness-landscape-visualization-100-lines" title="Link to this heading">¶</a></h4>
 <p><strong>2D Slices:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_fitness_landscape</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">fixed_gains</span><span class="p">,</span> <span class="n">vary_indices</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_fitness_landscape</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">fixed_gains</span><span class="p">,</span> <span class="n">vary_indices</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Visualize fitness function in 2D slice.&quot;&quot;&quot;</span>
     <span class="n">k1_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
     <span class="n">k2_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
@@ -1402,7 +1443,10 @@ velocity += social
 <section id="workflows-200-lines">
 <h4>2.5.3 Workflows (200 lines)<a class="headerlink" href="#workflows-200-lines" title="Link to this heading">¶</a></h4>
 <p><strong>End-to-End Optimization:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Define optimization problem</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># 1. Define optimization problem</span>
 <span class="n">problem</span> <span class="o">=</span> <span class="n">OptimizationProblem</span><span class="p">(</span>
     <span class="n">controller_type</span><span class="o">=</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span>
     <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span>
@@ -1473,6 +1517,9 @@ velocity += social
 
 <span class="gs">**Main Simulation Loop (lines 120-180):**</span>
 ```python
+<span class="gh"># example-metadata:</span>
+<span class="gh"># runnable: false</span>
+
 def run(self, controller, dynamics, duration, dt):
     # Initialize state
     x = self.initial_state
@@ -1513,7 +1560,10 @@ def run(self, controller, dynamics, duration, dt):
 <section id="simulationcontext-200-lines">
 <h4>3.1.3 SimulationContext (200 lines)<a class="headerlink" href="#simulationcontext-200-lines" title="Link to this heading">¶</a></h4>
 <p><strong>Unified State Management:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimulationContext</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SimulationContext</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Centralized simulation state and configuration.&quot;&quot;&quot;</span>
 
     <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>           <span class="c1"># Current state [6,]</span>
@@ -1534,7 +1584,10 @@ def run(self, controller, dynamics, duration, dt):
 <section id="integration-patterns-150-lines">
 <h4>3.1.4 Integration Patterns (150 lines)<a class="headerlink" href="#integration-patterns-150-lines" title="Link to this heading">¶</a></h4>
 <p><strong>Standard Workflow:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Configure simulation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># 1. Configure simulation</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">SimulationConfig</span><span class="p">(</span>
     <span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
     <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
@@ -1609,6 +1662,9 @@ def compute_derivative(self, x, u):
 
 <span class="gs">**Mass Matrix Computation (lines 67-95):**</span>
 ```python
+<span class="gh"># example-metadata:</span>
+<span class="gh"># runnable: false</span>
+
 def compute_mass_matrix(self, q):
     &quot;&quot;&quot;
     M(q) ∈ ℝ³ˣ³ - Configuration-dependent mass matrix
@@ -1640,7 +1696,10 @@ def compute_mass_matrix(self, q):
 </pre></div>
 </div>
 <p><strong>Coriolis/Centrifugal Terms (lines 97-120):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_coriolis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">qdot</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_coriolis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">qdot</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    C(q,q̇)q̇ - Velocity-dependent forces</span>
 
@@ -1667,7 +1726,10 @@ def compute_mass_matrix(self, q):
 </pre></div>
 </div>
 <p><strong>Gravity Vector (lines 122-135):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_gravity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_gravity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    G(q) - Potential energy gradient</span>
 
@@ -1855,6 +1917,9 @@ def compute_mass_matrix(self, q):
 
 <span class="gs">**Key Optimization (lines 78-95):**</span>
 ```python
+<span class="gh"># example-metadata:</span>
+<span class="gh"># runnable: false</span>
+
 <span class="ni">@numba</span>.jit(nopython=True, parallel=True)
 def batch_integrate(x0_batch, gains_batch, duration, dt):
     &quot;&quot;&quot;
@@ -1952,7 +2017,10 @@ def batch_integrate(x0_batch, gains_batch, duration, dt):
 <li><p>Deploy gains: Save and test optimized controller</p></li>
 </ol>
 <p><strong>Working Example:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete runnable script</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Complete runnable script</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.optimization</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSOCore</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_controller</span>
 
@@ -2139,8 +2207,8 @@ controller_integration_patterns
 
 <span class="gu">## Mathematical Foundations</span>
 
-<span class="k">-</span><span class="w"> </span>[<span class="nt">PSO Algorithm Theory</span>](<span class="na">../mathematical_foundations/pso_algorithm_theory.md</span>)
-<span class="k">-</span><span class="w"> </span>[<span class="nt">Optimization Landscape Analysis</span>](<span class="na">../mathematical_foundations/optimization_landscape_analysis.md</span>)
+<span class="k">-</span><span class="w"> </span>[<span class="nt">PSO Algorithm Theory</span>](<span class="na">../../mathematical_foundations/pso_algorithm_theory.md</span>)
+<span class="k">-</span><span class="w"> </span>[<span class="nt">Optimization Landscape Analysis</span>](<span class="na">../../mathematical_foundations/pso_algorithm_theory.md#optimization-landscape</span>) (see PSO theory sections)
 
 <span class="gu">## Tutorials</span>
 
@@ -2156,10 +2224,10 @@ controller_integration_patterns
 
 <span class="gu">## Code Examples</span>
 
-<span class="k">-</span><span class="w"> </span>[<span class="nt">Basic PSO</span>](<span class="na">../examples/optimization/basic_pso.py</span>)
-<span class="k">-</span><span class="w"> </span>[<span class="nt">Multi-Objective PSO</span>](<span class="na">../examples/optimization/multi_objective_pso.py</span>)
-<span class="k">-</span><span class="w"> </span>[<span class="nt">Custom Fitness Functions</span>](<span class="na">../examples/optimization/custom_fitness.py</span>)
-<span class="k">-</span><span class="w"> </span>... (full list)
+See code examples in:
+<span class="k">-</span><span class="w"> </span><span class="sb">`src/optimization/algorithms/swarm/pso.py`</span> - Core PSO implementation
+<span class="k">-</span><span class="w"> </span><span class="sb">`tests/test_optimizer/test_pso_optimizer.py`</span> - PSO usage examples
+<span class="k">-</span><span class="w"> </span>[<span class="nt">PSO Optimization Workflow Guide</span>](<span class="na">../../guides/workflows/pso-optimization-workflow.md</span>) - Complete examples
 
 <span class="gu">## API Reference</span>
 
@@ -2186,17 +2254,17 @@ api/integration
 <h3>5.2 Cross-References<a class="headerlink" href="#cross-references" title="Link to this heading">¶</a></h3>
 <p><strong>Integration with Week 2 Controllers:</strong></p>
 <p><strong>In PSO documentation:</strong></p>
-<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>See [<span class="nt">Classical SMC Technical Guide</span>](<span class="na">../controllers/classical_smc_technical_guide.md</span>)
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>See [<span class="nt">Classical SMC Technical Guide</span>](<span class="na">../../controllers/classical_smc_technical_guide.md</span>)
 for controller-specific gain tuning requirements.
 </pre></div>
 </div>
 <p><strong>In Controllers documentation:</strong></p>
-<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>For automated gain tuning, see [<span class="nt">PSO Core Algorithm Guide</span>](<span class="na">../optimization/pso_core_algorithm_guide.md</span>).
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>For automated gain tuning, see [<span class="nt">PSO Core Algorithm Guide</span>](<span class="na">../../optimization/pso_core_algorithm_guide.md</span>).
 </pre></div>
 </div>
 <p><strong>Mathematical Foundations Links:</strong></p>
 <div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>The PSO convergence proof relies on Lyapunov theory, similar to
-[<span class="nt">SMC stability analysis</span>](<span class="na">./smc_complete_theory.md#lyapunov-stability</span>).
+[<span class="nt">SMC stability analysis</span>](<span class="na">../../theory/smc_theory_complete.md#lyapunov-stability</span>).
 </pre></div>
 </div>
 </section>
@@ -2400,7 +2468,7 @@ After completing this tutorial, you will be able to:
 
 <span class="gs">**Required Knowledge:**</span>
 <span class="k">-</span><span class="w"> </span>Basic Python programming
-<span class="k">-</span><span class="w"> </span>Understanding of SMC controllers (see [<span class="nt">Controllers Module</span>](<span class="na">../controllers/index.md</span>))
+<span class="k">-</span><span class="w"> </span>Understanding of SMC controllers (see [<span class="nt">Controllers Module</span>](<span class="na">../../controllers/index.md</span>))
 <span class="k">-</span><span class="w"> </span>Familiarity with optimization concepts
 
 <span class="gs">**Required Software:**</span>
@@ -2690,7 +2758,7 @@ bounds = [
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

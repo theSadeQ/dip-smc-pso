@@ -153,6 +153,9 @@ python simulate.py --controller classical_smc --run-pso --seed 42 --save-gains o
 #### Fitness Function Sophistication:
 
 ```python
+# example-metadata:
+# runnable: false
+
 def _compute_cost_from_traj(self, t, x_b, u_b, sigma_b):
     """Advanced multi-component fitness function"""
 

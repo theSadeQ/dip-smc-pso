@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -512,414 +538,413 @@ quality animations and analysis visualizations.</p>
 <span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 <span class="linenos"> 14</span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="linenos"> 15</span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">animation</span>
-<span class="linenos"> 16</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 17</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
-<span class="linenos"> 18</span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="linenos"> 19</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="linenos"> 20</span><span class="kn">from</span><span class="w"> </span><span class="nn">.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">DIPAnimator</span><span class="p">,</span> <span class="n">MultiSystemAnimator</span>
-<span class="linenos"> 21</span><span class="kn">from</span><span class="w"> </span><span class="nn">.static_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">ControlPlotter</span><span class="p">,</span> <span class="n">SystemVisualization</span>
-<span class="linenos"> 22</span>
-<span class="linenos"> 23</span><span class="nd">@dataclass</span>
-<span class="linenos"> 24</span><span class="k">class</span><span class="w"> </span><span class="nc">MovieScene</span><span class="p">:</span>
-<span class="linenos"> 25</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a movie scene.&quot;&quot;&quot;</span>
-<span class="linenos"> 26</span>    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
-<span class="linenos"> 27</span>    <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># seconds</span>
-<span class="linenos"> 28</span>    <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-<span class="linenos"> 29</span>    <span class="n">scene_type</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># &#39;animation&#39;, &#39;static&#39;, &#39;comparison&#39;, &#39;analysis&#39;</span>
-<span class="linenos"> 30</span>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
-<span class="linenos"> 31</span>
-<span class="linenos"> 32</span><span class="k">class</span><span class="w"> </span><span class="nc">ProjectMovieGenerator</span><span class="p">:</span>
-<span class="linenos"> 33</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos"> 34</span><span class="sd">    Complete visualization plan generator for the entire DIP control project.</span>
-<span class="linenos"> 35</span>
-<span class="linenos"> 36</span><span class="sd">    Creates professional-quality movies that document:</span>
-<span class="linenos"> 37</span><span class="sd">    - System dynamics and behavior</span>
-<span class="linenos"> 38</span><span class="sd">    - Control algorithm performance</span>
-<span class="linenos"> 39</span><span class="sd">    - Comparison studies</span>
-<span class="linenos"> 40</span><span class="sd">    - Optimization results</span>
-<span class="linenos"> 41</span><span class="sd">    - Statistical analysis</span>
-<span class="linenos"> 42</span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos"> 43</span>
-<span class="linenos"> 44</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;project_movies&quot;</span><span class="p">):</span>
-<span class="linenos"> 45</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize movie generator.&quot;&quot;&quot;</span>
-<span class="linenos"> 46</span>        <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">output_dir</span>
-<span class="linenos"> 47</span>        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos"> 48</span>
-<span class="linenos"> 49</span>        <span class="bp">self</span><span class="o">.</span><span class="n">animator</span> <span class="o">=</span> <span class="n">DIPAnimator</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-<span class="linenos"> 50</span>        <span class="bp">self</span><span class="o">.</span><span class="n">plotter</span> <span class="o">=</span> <span class="n">ControlPlotter</span><span class="p">()</span>
-<span class="linenos"> 51</span>        <span class="bp">self</span><span class="o">.</span><span class="n">system_viz</span> <span class="o">=</span> <span class="n">SystemVisualization</span><span class="p">()</span>
-<span class="linenos"> 52</span>
-<span class="linenos"> 53</span>    <span class="k">def</span><span class="w"> </span><span class="nf">create_complete_project_movie</span><span class="p">(</span>
-<span class="linenos"> 54</span>        <span class="bp">self</span><span class="p">,</span>
-<span class="linenos"> 55</span>        <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-<span class="linenos"> 56</span>        <span class="n">movie_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;DIP Control Engineering Project&quot;</span><span class="p">,</span>
-<span class="linenos"> 57</span>        <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="linenos"> 58</span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos"> 59</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="linenos"> 60</span><span class="sd">        Create a complete movie documenting the entire project.</span>
-<span class="linenos"> 61</span>
-<span class="linenos"> 62</span><span class="sd">        Movie Structure:</span>
-<span class="linenos"> 63</span><span class="sd">        1. Introduction and system overview</span>
-<span class="linenos"> 64</span><span class="sd">        2. Plant dynamics demonstration</span>
-<span class="linenos"> 65</span><span class="sd">        3. Controller implementations</span>
-<span class="linenos"> 66</span><span class="sd">        4. Comparative analysis</span>
-<span class="linenos"> 67</span><span class="sd">        5. Optimization results</span>
-<span class="linenos"> 68</span><span class="sd">        6. Statistical validation</span>
-<span class="linenos"> 69</span><span class="sd">        7. Conclusions and future work</span>
-<span class="linenos"> 70</span><span class="sd">        &quot;&quot;&quot;</span>
-<span class="linenos"> 71</span>
-<span class="linenos"> 72</span>        <span class="n">scenes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_movie_scenes</span><span class="p">(</span><span class="n">project_data</span><span class="p">)</span>
-<span class="linenos"> 73</span>        <span class="n">movie_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">movie_title</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.mp4&quot;</span><span class="p">)</span>
-<span class="linenos"> 74</span>
-<span class="linenos"> 75</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile_scenes_to_movie</span><span class="p">(</span><span class="n">scenes</span><span class="p">,</span> <span class="n">movie_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
-<span class="linenos"> 76</span>
-<span class="linenos"> 77</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_movie_scenes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MovieScene</span><span class="p">]:</span>
-<span class="linenos"> 78</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create all movie scenes for the complete project documentation.&quot;&quot;&quot;</span>
-<span class="linenos"> 79</span>
-<span class="linenos"> 80</span>        <span class="n">scenes</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos"> 81</span>
-<span class="linenos"> 82</span>        <span class="c1"># Scene 1: Project Introduction</span>
-<span class="linenos"> 83</span>        <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
-<span class="linenos"> 84</span>            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Project Introduction&quot;</span><span class="p">,</span>
-<span class="linenos"> 85</span>            <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
-<span class="linenos"> 86</span>            <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;overview&#39;</span><span class="p">,</span> <span class="p">{}),</span>
-<span class="linenos"> 87</span>            <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;static&#39;</span><span class="p">,</span>
-<span class="linenos"> 88</span>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Overview of the double inverted pendulum control project&quot;</span>
-<span class="linenos"> 89</span>        <span class="p">))</span>
-<span class="linenos"> 90</span>
-<span class="linenos"> 91</span>        <span class="c1"># Scene 2: System Dynamics</span>
-<span class="linenos"> 92</span>        <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
-<span class="linenos"> 93</span>            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;System Dynamics&quot;</span><span class="p">,</span>
-<span class="linenos"> 94</span>            <span class="n">duration</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
-<span class="linenos"> 95</span>            <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;plant_dynamics&#39;</span><span class="p">,</span> <span class="p">{}),</span>
-<span class="linenos"> 96</span>            <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;animation&#39;</span><span class="p">,</span>
-<span class="linenos"> 97</span>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Demonstration of uncontrolled system dynamics&quot;</span>
-<span class="linenos"> 98</span>        <span class="p">))</span>
-<span class="linenos"> 99</span>
-<span class="linenos">100</span>        <span class="c1"># Scene 3: Controller Implementations</span>
-<span class="linenos">101</span>        <span class="k">for</span> <span class="n">controller_name</span><span class="p">,</span> <span class="n">controller_data</span> <span class="ow">in</span> <span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controllers&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">102</span>            <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
-<span class="linenos">103</span>                <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">controller_name</span><span class="si">}</span><span class="s2"> Controller&quot;</span><span class="p">,</span>
-<span class="linenos">104</span>                <span class="n">duration</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
-<span class="linenos">105</span>                <span class="n">data</span><span class="o">=</span><span class="n">controller_data</span><span class="p">,</span>
-<span class="linenos">106</span>                <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;animation&#39;</span><span class="p">,</span>
-<span class="linenos">107</span>                <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Performance demonstration of </span><span class="si">{</span><span class="n">controller_name</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="linenos">108</span>            <span class="p">))</span>
-<span class="linenos">109</span>
-<span class="linenos">110</span>        <span class="c1"># Scene 4: Comparative Analysis</span>
-<span class="linenos">111</span>        <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
-<span class="linenos">112</span>            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Controller Comparison&quot;</span><span class="p">,</span>
-<span class="linenos">113</span>            <span class="n">duration</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span>
-<span class="linenos">114</span>            <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;comparison&#39;</span><span class="p">,</span> <span class="p">{}),</span>
-<span class="linenos">115</span>            <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;comparison&#39;</span><span class="p">,</span>
-<span class="linenos">116</span>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Side-by-side comparison of all controllers&quot;</span>
-<span class="linenos">117</span>        <span class="p">))</span>
-<span class="linenos">118</span>
-<span class="linenos">119</span>        <span class="c1"># Scene 5: Optimization Results</span>
-<span class="linenos">120</span>        <span class="k">if</span> <span class="s1">&#39;optimization&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
-<span class="linenos">121</span>            <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
-<span class="linenos">122</span>                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Parameter Optimization&quot;</span><span class="p">,</span>
-<span class="linenos">123</span>                <span class="n">duration</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
-<span class="linenos">124</span>                <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;optimization&#39;</span><span class="p">],</span>
-<span class="linenos">125</span>                <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;analysis&#39;</span><span class="p">,</span>
-<span class="linenos">126</span>                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;PSO optimization results and convergence&quot;</span>
-<span class="linenos">127</span>            <span class="p">))</span>
-<span class="linenos">128</span>
-<span class="linenos">129</span>        <span class="c1"># Scene 6: Statistical Analysis</span>
-<span class="linenos">130</span>        <span class="k">if</span> <span class="s1">&#39;statistics&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
-<span class="linenos">131</span>            <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
-<span class="linenos">132</span>                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Statistical Validation&quot;</span><span class="p">,</span>
-<span class="linenos">133</span>                <span class="n">duration</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
-<span class="linenos">134</span>                <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;statistics&#39;</span><span class="p">],</span>
-<span class="linenos">135</span>                <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;analysis&#39;</span><span class="p">,</span>
-<span class="linenos">136</span>                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Monte Carlo analysis and confidence intervals&quot;</span>
-<span class="linenos">137</span>            <span class="p">))</span>
-<span class="linenos">138</span>
-<span class="linenos">139</span>        <span class="c1"># Scene 7: Robustness Analysis</span>
-<span class="linenos">140</span>        <span class="k">if</span> <span class="s1">&#39;robustness&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
-<span class="linenos">141</span>            <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
-<span class="linenos">142</span>                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Robustness Analysis&quot;</span><span class="p">,</span>
-<span class="linenos">143</span>                <span class="n">duration</span><span class="o">=</span><span class="mf">18.0</span><span class="p">,</span>
-<span class="linenos">144</span>                <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;robustness&#39;</span><span class="p">],</span>
-<span class="linenos">145</span>                <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;analysis&#39;</span><span class="p">,</span>
-<span class="linenos">146</span>                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System performance under uncertainties&quot;</span>
-<span class="linenos">147</span>            <span class="p">))</span>
-<span class="linenos">148</span>
-<span class="linenos">149</span>        <span class="k">return</span> <span class="n">scenes</span>
-<span class="linenos">150</span>
-<span class="linenos">151</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compile_scenes_to_movie</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scenes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MovieScene</span><span class="p">],</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos">152</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compile all scenes into a single movie file.&quot;&quot;&quot;</span>
-<span class="linenos">153</span>
-<span class="linenos">154</span>        <span class="c1"># Create individual scene animations</span>
-<span class="linenos">155</span>        <span class="n">scene_files</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">156</span>
-<span class="linenos">157</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">scene</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scenes</span><span class="p">):</span>
-<span class="linenos">158</span>            <span class="n">scene_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;scene_</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.mp4&quot;</span><span class="p">)</span>
-<span class="linenos">159</span>
-<span class="linenos">160</span>            <span class="k">if</span> <span class="n">scene</span><span class="o">.</span><span class="n">scene_type</span> <span class="o">==</span> <span class="s1">&#39;animation&#39;</span><span class="p">:</span>
-<span class="linenos">161</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_create_animation_scene</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">scene_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
-<span class="linenos">162</span>            <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">scene_type</span> <span class="o">==</span> <span class="s1">&#39;static&#39;</span><span class="p">:</span>
-<span class="linenos">163</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_create_static_scene</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">scene_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
-<span class="linenos">164</span>            <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">scene_type</span> <span class="o">==</span> <span class="s1">&#39;comparison&#39;</span><span class="p">:</span>
-<span class="linenos">165</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_create_comparison_scene</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">scene_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
-<span class="linenos">166</span>            <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">scene_type</span> <span class="o">==</span> <span class="s1">&#39;analysis&#39;</span><span class="p">:</span>
-<span class="linenos">167</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_create_analysis_scene</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">scene_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
-<span class="linenos">168</span>
-<span class="linenos">169</span>            <span class="n">scene_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scene_path</span><span class="p">)</span>
-<span class="linenos">170</span>
-<span class="linenos">171</span>        <span class="c1"># Compile scenes using ffmpeg (if available)</span>
-<span class="linenos">172</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">173</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_merge_videos</span><span class="p">(</span><span class="n">scene_files</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
-<span class="linenos">174</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="linenos">175</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Video compilation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">176</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Individual scene files created successfully:&quot;</span><span class="p">)</span>
-<span class="linenos">177</span>            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">scene_files</span><span class="p">:</span>
-<span class="linenos">178</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">179</span>
-<span class="linenos">180</span>        <span class="k">return</span> <span class="n">output_path</span>
-<span class="linenos">181</span>
-<span class="linenos">182</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_animation_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scene</span><span class="p">:</span> <span class="n">MovieScene</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">183</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an animated scene.&quot;&quot;&quot;</span>
-<span class="linenos">184</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">data</span>
-<span class="linenos">185</span>
-<span class="linenos">186</span>        <span class="c1"># Extract simulation data</span>
-<span class="linenos">187</span>        <span class="n">time_history</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="p">[])</span>
-<span class="linenos">188</span>        <span class="n">state_history</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="p">[])</span>
-<span class="linenos">189</span>        <span class="n">control_history</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">,</span> <span class="p">[])</span>
-<span class="linenos">190</span>
-<span class="linenos">191</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">time_history</span><span class="p">,</span> <span class="n">state_history</span><span class="p">,</span> <span class="n">control_history</span><span class="p">]):</span>
-<span class="linenos">192</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Insufficient data for animation scene &#39;</span><span class="si">{</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-<span class="linenos">193</span>            <span class="k">return</span>
-<span class="linenos">194</span>
-<span class="linenos">195</span>        <span class="c1"># Create animation</span>
-<span class="linenos">196</span>        <span class="n">animator</span> <span class="o">=</span> <span class="n">DIPAnimator</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
-<span class="linenos">197</span>
-<span class="linenos">198</span>        <span class="c1"># Add title and description</span>
-<span class="linenos">199</span>        <span class="n">animator</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="linenos">200</span>        <span class="n">animator</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">scene</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">animator</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
-<span class="linenos">201</span>                        <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">))</span>
-<span class="linenos">202</span>
-<span class="linenos">203</span>        <span class="c1"># Save animation</span>
-<span class="linenos">204</span>        <span class="n">animator</span><span class="o">.</span><span class="n">save_animation</span><span class="p">(</span><span class="n">state_history</span><span class="p">,</span> <span class="n">control_history</span><span class="p">,</span> <span class="n">time_history</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
-<span class="linenos">205</span>
-<span class="linenos">206</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_static_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scene</span><span class="p">:</span> <span class="n">MovieScene</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">207</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a static information scene.&quot;&quot;&quot;</span>
-<span class="linenos">208</span>        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
-<span class="linenos">209</span>
-<span class="linenos">210</span>        <span class="c1"># Create informational slide</span>
-<span class="linenos">211</span>        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="linenos">212</span>        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">scene</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">213</span>
-<span class="linenos">214</span>        <span class="c1"># Add project information</span>
-<span class="linenos">215</span>        <span class="k">if</span> <span class="s1">&#39;project_info&#39;</span> <span class="ow">in</span> <span class="n">scene</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-<span class="linenos">216</span>            <span class="n">info_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_project_info</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;project_info&#39;</span><span class="p">])</span>
-<span class="linenos">217</span>            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">info_text</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="linenos">218</span>
-<span class="linenos">219</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="linenos">220</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="linenos">221</span>        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="linenos">222</span>
-<span class="linenos">223</span>        <span class="c1"># Save as static video (repeated frames)</span>
-<span class="linenos">224</span>        <span class="n">frames</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">fps</span><span class="p">)</span>
-<span class="linenos">225</span>
-<span class="linenos">226</span>        <span class="k">def</span><span class="w"> </span><span class="nf">animate_static</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
-<span class="linenos">227</span>            <span class="k">return</span> <span class="p">[]</span>
-<span class="linenos">228</span>
-<span class="linenos">229</span>        <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate_static</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span><span class="o">/</span><span class="n">fps</span><span class="p">)</span>
-<span class="linenos">230</span>        <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">&#39;pillow&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
-<span class="linenos">231</span>        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-<span class="linenos">232</span>
-<span class="linenos">233</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_comparison_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scene</span><span class="p">:</span> <span class="n">MovieScene</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">234</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a controller comparison scene.&quot;&quot;&quot;</span>
-<span class="linenos">235</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">data</span>
-<span class="linenos">236</span>        <span class="n">controllers</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controllers&#39;</span><span class="p">,</span> <span class="p">{})</span>
-<span class="linenos">237</span>
-<span class="linenos">238</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">239</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Not enough controllers for comparison scene &#39;</span><span class="si">{</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-<span class="linenos">240</span>            <span class="k">return</span>
-<span class="linenos">241</span>
-<span class="linenos">242</span>        <span class="c1"># Prepare data for multi-system animation</span>
-<span class="linenos">243</span>        <span class="n">systems_data</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">244</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">controller_data</span> <span class="ow">in</span> <span class="n">controllers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">245</span>            <span class="n">systems_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
-<span class="linenos">246</span>                <span class="n">name</span><span class="p">,</span>
-<span class="linenos">247</span>                <span class="n">controller_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="p">[]),</span>
-<span class="linenos">248</span>                <span class="n">controller_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">,</span> <span class="p">[]),</span>
-<span class="linenos">249</span>                <span class="n">controller_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="p">[])</span>
-<span class="linenos">250</span>            <span class="p">))</span>
-<span class="linenos">251</span>
-<span class="linenos">252</span>        <span class="c1"># Create multi-system animator</span>
-<span class="linenos">253</span>        <span class="n">multi_animator</span> <span class="o">=</span> <span class="n">MultiSystemAnimator</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">systems_data</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="linenos">254</span>
-<span class="linenos">255</span>        <span class="c1"># Add overall title</span>
-<span class="linenos">256</span>        <span class="n">multi_animator</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="linenos">257</span>
-<span class="linenos">258</span>        <span class="c1"># Create and save animation</span>
-<span class="linenos">259</span>        <span class="n">anim</span> <span class="o">=</span> <span class="n">multi_animator</span><span class="o">.</span><span class="n">create_comparison_animation</span><span class="p">(</span><span class="n">systems_data</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span><span class="o">//</span><span class="n">fps</span><span class="p">)</span>
-<span class="linenos">260</span>        <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">&#39;pillow&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
-<span class="linenos">261</span>        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">multi_animator</span><span class="o">.</span><span class="n">fig</span><span class="p">)</span>
-<span class="linenos">262</span>
-<span class="linenos">263</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_analysis_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scene</span><span class="p">:</span> <span class="n">MovieScene</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">264</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an analysis visualization scene.&quot;&quot;&quot;</span>
-<span class="linenos">265</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">data</span>
-<span class="linenos">266</span>
-<span class="linenos">267</span>        <span class="c1"># Create analysis plots</span>
-<span class="linenos">268</span>        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
-<span class="linenos">269</span>
-<span class="linenos">270</span>        <span class="k">if</span> <span class="n">scene</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="s2">&quot;Parameter Optimization&quot;</span><span class="p">:</span>
-<span class="linenos">271</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_create_optimization_analysis</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="linenos">272</span>        <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="s2">&quot;Statistical Validation&quot;</span><span class="p">:</span>
-<span class="linenos">273</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_create_statistical_analysis</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="linenos">274</span>        <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="s2">&quot;Robustness Analysis&quot;</span><span class="p">:</span>
-<span class="linenos">275</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_create_robustness_analysis</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="linenos">276</span>
-<span class="linenos">277</span>        <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="linenos">278</span>
-<span class="linenos">279</span>        <span class="c1"># Save as animated plot progression</span>
-<span class="linenos">280</span>        <span class="n">frames</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">fps</span><span class="p">)</span>
-<span class="linenos">281</span>
-<span class="linenos">282</span>        <span class="k">def</span><span class="w"> </span><span class="nf">animate_analysis</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
-<span class="linenos">283</span>            <span class="c1"># Gradually reveal analysis results</span>
-<span class="linenos">284</span>            <span class="n">alpha</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">frame</span> <span class="o">/</span> <span class="p">(</span><span class="n">frames</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">))</span>
-<span class="linenos">285</span>            <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">get_axes</span><span class="p">():</span>
-<span class="linenos">286</span>                <span class="k">for</span> <span class="n">artist</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_children</span><span class="p">():</span>
-<span class="linenos">287</span>                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="s1">&#39;set_alpha&#39;</span><span class="p">):</span>
-<span class="linenos">288</span>                        <span class="n">artist</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
-<span class="linenos">289</span>            <span class="k">return</span> <span class="n">fig</span><span class="o">.</span><span class="n">get_children</span><span class="p">()</span>
-<span class="linenos">290</span>
-<span class="linenos">291</span>        <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate_analysis</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span><span class="o">/</span><span class="n">fps</span><span class="p">)</span>
-<span class="linenos">292</span>        <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">&#39;pillow&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
-<span class="linenos">293</span>        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-<span class="linenos">294</span>
-<span class="linenos">295</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_optimization_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">296</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create PSO optimization analysis plots.&quot;&quot;&quot;</span>
-<span class="linenos">297</span>        <span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="linenos">298</span>
-<span class="linenos">299</span>        <span class="c1"># Convergence plot</span>
-<span class="linenos">300</span>        <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
-<span class="linenos">301</span>        <span class="k">if</span> <span class="s1">&#39;convergence&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<span class="linenos">302</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;convergence&#39;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="linenos">303</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;PSO Convergence&quot;</span><span class="p">)</span>
-<span class="linenos">304</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iteration&quot;</span><span class="p">)</span>
-<span class="linenos">305</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Best Fitness&quot;</span><span class="p">)</span>
-<span class="linenos">306</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="linenos">307</span>
-<span class="linenos">308</span>        <span class="c1"># Parameter evolution</span>
-<span class="linenos">309</span>        <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="linenos">310</span>        <span class="k">if</span> <span class="s1">&#39;parameter_evolution&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<span class="linenos">311</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">param_hist</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;parameter_evolution&#39;</span><span class="p">]):</span>
-<span class="linenos">312</span>                <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">param_hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Param </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">313</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Parameter Evolution&quot;</span><span class="p">)</span>
-<span class="linenos">314</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iteration&quot;</span><span class="p">)</span>
-<span class="linenos">315</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="linenos">316</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="linenos">317</span>
-<span class="linenos">318</span>        <span class="c1"># Final performance</span>
-<span class="linenos">319</span>        <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="linenos">320</span>        <span class="k">if</span> <span class="s1">&#39;final_performance&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<span class="linenos">321</span>            <span class="n">performance</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;final_performance&#39;</span><span class="p">]</span>
-<span class="linenos">322</span>            <span class="n">ax3</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">performance</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">performance</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="linenos">323</span>            <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Final Performance Metrics&quot;</span><span class="p">)</span>
-<span class="linenos">324</span>            <span class="n">ax3</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
-<span class="linenos">325</span>
-<span class="linenos">326</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_statistical_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">327</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create statistical analysis plots.&quot;&quot;&quot;</span>
-<span class="linenos">328</span>        <span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="linenos">329</span>
-<span class="linenos">330</span>        <span class="c1"># Performance distributions</span>
-<span class="linenos">331</span>        <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
-<span class="linenos">332</span>        <span class="k">if</span> <span class="s1">&#39;performance_distributions&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<span class="linenos">333</span>            <span class="k">for</span> <span class="n">controller</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;performance_distributions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">334</span>                <span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="linenos">335</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Performance Distributions&quot;</span><span class="p">)</span>
-<span class="linenos">336</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Performance Metric&quot;</span><span class="p">)</span>
-<span class="linenos">337</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
-<span class="linenos">338</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="linenos">339</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="linenos">340</span>
-<span class="linenos">341</span>        <span class="c1"># Confidence intervals</span>
-<span class="linenos">342</span>        <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="linenos">343</span>        <span class="k">if</span> <span class="s1">&#39;confidence_intervals&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<span class="linenos">344</span>            <span class="n">controllers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;confidence_intervals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="linenos">345</span>            <span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;confidence_intervals&#39;</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">]</span>
-<span class="linenos">346</span>            <span class="n">errors</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;confidence_intervals&#39;</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">]</span>
-<span class="linenos">347</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">)),</span> <span class="n">means</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="linenos">348</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">)))</span>
-<span class="linenos">349</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">controllers</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
-<span class="linenos">350</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Performance Confidence Intervals&quot;</span><span class="p">)</span>
-<span class="linenos">351</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="linenos">352</span>
-<span class="linenos">353</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_format_project_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos">354</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Format project information for display.&quot;&quot;&quot;</span>
-<span class="linenos">355</span>        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">356</span>        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">357</span>            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">358</span>        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
-<span class="linenos">359</span>
-<span class="linenos">360</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_merge_videos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">video_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">361</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Merge multiple video files using ffmpeg.&quot;&quot;&quot;</span>
-<span class="linenos">362</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-<span class="linenos">363</span>
-<span class="linenos">364</span>        <span class="c1"># Create file list for ffmpeg</span>
-<span class="linenos">365</span>        <span class="n">list_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;video_list.txt&quot;</span><span class="p">)</span>
-<span class="linenos">366</span>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">list_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">367</span>            <span class="k">for</span> <span class="n">video_file</span> <span class="ow">in</span> <span class="n">video_files</span><span class="p">:</span>
-<span class="linenos">368</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;file &#39;</span><span class="si">{</span><span class="n">video_file</span><span class="si">}</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">369</span>
-<span class="linenos">370</span>        <span class="c1"># Run ffmpeg</span>
-<span class="linenos">371</span>        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos">372</span>            <span class="s1">&#39;ffmpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;concat&#39;</span><span class="p">,</span> <span class="s1">&#39;-safe&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="n">list_file</span><span class="p">,</span>
-<span class="linenos">373</span>            <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;copy&#39;</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span>
-<span class="linenos">374</span>        <span class="p">]</span>
-<span class="linenos">375</span>
-<span class="linenos">376</span>        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">377</span>        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">list_file</span><span class="p">)</span>
-<span class="linenos">378</span>
-<span class="linenos">379</span>    <span class="k">def</span><span class="w"> </span><span class="nf">create_project_trailer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">60.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos">380</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a short trailer/summary of the project.&quot;&quot;&quot;</span>
-<span class="linenos">381</span>        <span class="n">trailer_data</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos">382</span>            <span class="s1">&#39;overview&#39;</span><span class="p">:</span> <span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;overview&#39;</span><span class="p">,</span> <span class="p">{}),</span>
-<span class="linenos">383</span>            <span class="s1">&#39;highlights&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_highlights</span><span class="p">(</span><span class="n">project_data</span><span class="p">),</span>
-<span class="linenos">384</span>            <span class="s1">&#39;results_summary&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_summarize_results</span><span class="p">(</span><span class="n">project_data</span><span class="p">)</span>
-<span class="linenos">385</span>        <span class="p">}</span>
-<span class="linenos">386</span>
-<span class="linenos">387</span>        <span class="n">trailer_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;project_trailer.mp4&quot;</span><span class="p">)</span>
-<span class="linenos">388</span>
-<span class="linenos">389</span>        <span class="c1"># Create condensed version of key scenes</span>
-<span class="linenos">390</span>        <span class="n">scenes</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos">391</span>            <span class="n">MovieScene</span><span class="p">(</span><span class="s2">&quot;Project Overview&quot;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">trailer_data</span><span class="p">[</span><span class="s1">&#39;overview&#39;</span><span class="p">],</span> <span class="s1">&#39;static&#39;</span><span class="p">,</span>
-<span class="linenos">392</span>                      <span class="s2">&quot;Brief introduction to the DIP control project&quot;</span><span class="p">),</span>
-<span class="linenos">393</span>            <span class="n">MovieScene</span><span class="p">(</span><span class="s2">&quot;Key Results&quot;</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="n">trailer_data</span><span class="p">[</span><span class="s1">&#39;highlights&#39;</span><span class="p">],</span> <span class="s1">&#39;comparison&#39;</span><span class="p">,</span>
-<span class="linenos">394</span>                      <span class="s2">&quot;Highlights of controller performance&quot;</span><span class="p">),</span>
-<span class="linenos">395</span>            <span class="n">MovieScene</span><span class="p">(</span><span class="s2">&quot;Summary&quot;</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="n">trailer_data</span><span class="p">[</span><span class="s1">&#39;results_summary&#39;</span><span class="p">],</span> <span class="s1">&#39;analysis&#39;</span><span class="p">,</span>
-<span class="linenos">396</span>                      <span class="s2">&quot;Summary of achievements and conclusions&quot;</span><span class="p">)</span>
-<span class="linenos">397</span>        <span class="p">]</span>
-<span class="linenos">398</span>
-<span class="linenos">399</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile_scenes_to_movie</span><span class="p">(</span><span class="n">scenes</span><span class="p">,</span> <span class="n">trailer_path</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="linenos">400</span>
-<span class="linenos">401</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_highlights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos">402</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract highlight results for trailer.&quot;&quot;&quot;</span>
-<span class="linenos">403</span>        <span class="c1"># Select best performing controllers and key results</span>
-<span class="linenos">404</span>        <span class="n">highlights</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">405</span>
-<span class="linenos">406</span>        <span class="k">if</span> <span class="s1">&#39;controllers&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
-<span class="linenos">407</span>            <span class="c1"># Select top 2-3 performing controllers</span>
-<span class="linenos">408</span>            <span class="n">controllers</span> <span class="o">=</span> <span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;controllers&#39;</span><span class="p">]</span>
-<span class="linenos">409</span>            <span class="n">highlights</span><span class="p">[</span><span class="s1">&#39;controllers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">controllers</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
-<span class="linenos">410</span>
-<span class="linenos">411</span>        <span class="k">return</span> <span class="n">highlights</span>
-<span class="linenos">412</span>
-<span class="linenos">413</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_summarize_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="linenos">414</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Summarize key project results.&quot;&quot;&quot;</span>
-<span class="linenos">415</span>        <span class="n">summary</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">416</span>
-<span class="linenos">417</span>        <span class="k">if</span> <span class="s1">&#39;final_metrics&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
-<span class="linenos">418</span>            <span class="n">summary</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;final_metrics&#39;</span><span class="p">]</span>
-<span class="linenos">419</span>
-<span class="linenos">420</span>        <span class="k">if</span> <span class="s1">&#39;conclusions&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
-<span class="linenos">421</span>            <span class="n">summary</span><span class="p">[</span><span class="s1">&#39;conclusions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;conclusions&#39;</span><span class="p">]</span>
-<span class="linenos">422</span>
-<span class="linenos">423</span>        <span class="k">return</span> <span class="n">summary</span>
+<span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="linenos"> 17</span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="linenos"> 19</span><span class="kn">from</span><span class="w"> </span><span class="nn">.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">DIPAnimator</span><span class="p">,</span> <span class="n">MultiSystemAnimator</span>
+<span class="linenos"> 20</span><span class="kn">from</span><span class="w"> </span><span class="nn">.static_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">ControlPlotter</span><span class="p">,</span> <span class="n">SystemVisualization</span>
+<span class="linenos"> 21</span>
+<span class="linenos"> 22</span><span class="nd">@dataclass</span>
+<span class="linenos"> 23</span><span class="k">class</span><span class="w"> </span><span class="nc">MovieScene</span><span class="p">:</span>
+<span class="linenos"> 24</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a movie scene.&quot;&quot;&quot;</span>
+<span class="linenos"> 25</span>    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+<span class="linenos"> 26</span>    <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># seconds</span>
+<span class="linenos"> 27</span>    <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<span class="linenos"> 28</span>    <span class="n">scene_type</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># &#39;animation&#39;, &#39;static&#39;, &#39;comparison&#39;, &#39;analysis&#39;</span>
+<span class="linenos"> 29</span>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+<span class="linenos"> 30</span>
+<span class="linenos"> 31</span><span class="k">class</span><span class="w"> </span><span class="nc">ProjectMovieGenerator</span><span class="p">:</span>
+<span class="linenos"> 32</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 33</span><span class="sd">    Complete visualization plan generator for the entire DIP control project.</span>
+<span class="linenos"> 34</span>
+<span class="linenos"> 35</span><span class="sd">    Creates professional-quality movies that document:</span>
+<span class="linenos"> 36</span><span class="sd">    - System dynamics and behavior</span>
+<span class="linenos"> 37</span><span class="sd">    - Control algorithm performance</span>
+<span class="linenos"> 38</span><span class="sd">    - Comparison studies</span>
+<span class="linenos"> 39</span><span class="sd">    - Optimization results</span>
+<span class="linenos"> 40</span><span class="sd">    - Statistical analysis</span>
+<span class="linenos"> 41</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 42</span>
+<span class="linenos"> 43</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;project_movies&quot;</span><span class="p">):</span>
+<span class="linenos"> 44</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize movie generator.&quot;&quot;&quot;</span>
+<span class="linenos"> 45</span>        <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">output_dir</span>
+<span class="linenos"> 46</span>        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 47</span>
+<span class="linenos"> 48</span>        <span class="bp">self</span><span class="o">.</span><span class="n">animator</span> <span class="o">=</span> <span class="n">DIPAnimator</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 49</span>        <span class="bp">self</span><span class="o">.</span><span class="n">plotter</span> <span class="o">=</span> <span class="n">ControlPlotter</span><span class="p">()</span>
+<span class="linenos"> 50</span>        <span class="bp">self</span><span class="o">.</span><span class="n">system_viz</span> <span class="o">=</span> <span class="n">SystemVisualization</span><span class="p">()</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span>    <span class="k">def</span><span class="w"> </span><span class="nf">create_complete_project_movie</span><span class="p">(</span>
+<span class="linenos"> 53</span>        <span class="bp">self</span><span class="p">,</span>
+<span class="linenos"> 54</span>        <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="linenos"> 55</span>        <span class="n">movie_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;DIP Control Engineering Project&quot;</span><span class="p">,</span>
+<span class="linenos"> 56</span>        <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="linenos"> 57</span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos"> 58</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 59</span><span class="sd">        Create a complete movie documenting the entire project.</span>
+<span class="linenos"> 60</span>
+<span class="linenos"> 61</span><span class="sd">        Movie Structure:</span>
+<span class="linenos"> 62</span><span class="sd">        1. Introduction and system overview</span>
+<span class="linenos"> 63</span><span class="sd">        2. Plant dynamics demonstration</span>
+<span class="linenos"> 64</span><span class="sd">        3. Controller implementations</span>
+<span class="linenos"> 65</span><span class="sd">        4. Comparative analysis</span>
+<span class="linenos"> 66</span><span class="sd">        5. Optimization results</span>
+<span class="linenos"> 67</span><span class="sd">        6. Statistical validation</span>
+<span class="linenos"> 68</span><span class="sd">        7. Conclusions and future work</span>
+<span class="linenos"> 69</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos"> 70</span>
+<span class="linenos"> 71</span>        <span class="n">scenes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_movie_scenes</span><span class="p">(</span><span class="n">project_data</span><span class="p">)</span>
+<span class="linenos"> 72</span>        <span class="n">movie_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">movie_title</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.mp4&quot;</span><span class="p">)</span>
+<span class="linenos"> 73</span>
+<span class="linenos"> 74</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile_scenes_to_movie</span><span class="p">(</span><span class="n">scenes</span><span class="p">,</span> <span class="n">movie_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_movie_scenes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MovieScene</span><span class="p">]:</span>
+<span class="linenos"> 77</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create all movie scenes for the complete project documentation.&quot;&quot;&quot;</span>
+<span class="linenos"> 78</span>
+<span class="linenos"> 79</span>        <span class="n">scenes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 80</span>
+<span class="linenos"> 81</span>        <span class="c1"># Scene 1: Project Introduction</span>
+<span class="linenos"> 82</span>        <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
+<span class="linenos"> 83</span>            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Project Introduction&quot;</span><span class="p">,</span>
+<span class="linenos"> 84</span>            <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+<span class="linenos"> 85</span>            <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;overview&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+<span class="linenos"> 86</span>            <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;static&#39;</span><span class="p">,</span>
+<span class="linenos"> 87</span>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Overview of the double inverted pendulum control project&quot;</span>
+<span class="linenos"> 88</span>        <span class="p">))</span>
+<span class="linenos"> 89</span>
+<span class="linenos"> 90</span>        <span class="c1"># Scene 2: System Dynamics</span>
+<span class="linenos"> 91</span>        <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
+<span class="linenos"> 92</span>            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;System Dynamics&quot;</span><span class="p">,</span>
+<span class="linenos"> 93</span>            <span class="n">duration</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+<span class="linenos"> 94</span>            <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;plant_dynamics&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+<span class="linenos"> 95</span>            <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;animation&#39;</span><span class="p">,</span>
+<span class="linenos"> 96</span>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Demonstration of uncontrolled system dynamics&quot;</span>
+<span class="linenos"> 97</span>        <span class="p">))</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span>        <span class="c1"># Scene 3: Controller Implementations</span>
+<span class="linenos">100</span>        <span class="k">for</span> <span class="n">controller_name</span><span class="p">,</span> <span class="n">controller_data</span> <span class="ow">in</span> <span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controllers&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">101</span>            <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
+<span class="linenos">102</span>                <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">controller_name</span><span class="si">}</span><span class="s2"> Controller&quot;</span><span class="p">,</span>
+<span class="linenos">103</span>                <span class="n">duration</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
+<span class="linenos">104</span>                <span class="n">data</span><span class="o">=</span><span class="n">controller_data</span><span class="p">,</span>
+<span class="linenos">105</span>                <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;animation&#39;</span><span class="p">,</span>
+<span class="linenos">106</span>                <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Performance demonstration of </span><span class="si">{</span><span class="n">controller_name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos">107</span>            <span class="p">))</span>
+<span class="linenos">108</span>
+<span class="linenos">109</span>        <span class="c1"># Scene 4: Comparative Analysis</span>
+<span class="linenos">110</span>        <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
+<span class="linenos">111</span>            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Controller Comparison&quot;</span><span class="p">,</span>
+<span class="linenos">112</span>            <span class="n">duration</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span>
+<span class="linenos">113</span>            <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;comparison&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+<span class="linenos">114</span>            <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;comparison&#39;</span><span class="p">,</span>
+<span class="linenos">115</span>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Side-by-side comparison of all controllers&quot;</span>
+<span class="linenos">116</span>        <span class="p">))</span>
+<span class="linenos">117</span>
+<span class="linenos">118</span>        <span class="c1"># Scene 5: Optimization Results</span>
+<span class="linenos">119</span>        <span class="k">if</span> <span class="s1">&#39;optimization&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
+<span class="linenos">120</span>            <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
+<span class="linenos">121</span>                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Parameter Optimization&quot;</span><span class="p">,</span>
+<span class="linenos">122</span>                <span class="n">duration</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
+<span class="linenos">123</span>                <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;optimization&#39;</span><span class="p">],</span>
+<span class="linenos">124</span>                <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;analysis&#39;</span><span class="p">,</span>
+<span class="linenos">125</span>                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;PSO optimization results and convergence&quot;</span>
+<span class="linenos">126</span>            <span class="p">))</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span>        <span class="c1"># Scene 6: Statistical Analysis</span>
+<span class="linenos">129</span>        <span class="k">if</span> <span class="s1">&#39;statistics&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
+<span class="linenos">130</span>            <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
+<span class="linenos">131</span>                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Statistical Validation&quot;</span><span class="p">,</span>
+<span class="linenos">132</span>                <span class="n">duration</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+<span class="linenos">133</span>                <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;statistics&#39;</span><span class="p">],</span>
+<span class="linenos">134</span>                <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;analysis&#39;</span><span class="p">,</span>
+<span class="linenos">135</span>                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Monte Carlo analysis and confidence intervals&quot;</span>
+<span class="linenos">136</span>            <span class="p">))</span>
+<span class="linenos">137</span>
+<span class="linenos">138</span>        <span class="c1"># Scene 7: Robustness Analysis</span>
+<span class="linenos">139</span>        <span class="k">if</span> <span class="s1">&#39;robustness&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
+<span class="linenos">140</span>            <span class="n">scenes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MovieScene</span><span class="p">(</span>
+<span class="linenos">141</span>                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Robustness Analysis&quot;</span><span class="p">,</span>
+<span class="linenos">142</span>                <span class="n">duration</span><span class="o">=</span><span class="mf">18.0</span><span class="p">,</span>
+<span class="linenos">143</span>                <span class="n">data</span><span class="o">=</span><span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;robustness&#39;</span><span class="p">],</span>
+<span class="linenos">144</span>                <span class="n">scene_type</span><span class="o">=</span><span class="s1">&#39;analysis&#39;</span><span class="p">,</span>
+<span class="linenos">145</span>                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;System performance under uncertainties&quot;</span>
+<span class="linenos">146</span>            <span class="p">))</span>
+<span class="linenos">147</span>
+<span class="linenos">148</span>        <span class="k">return</span> <span class="n">scenes</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_compile_scenes_to_movie</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scenes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MovieScene</span><span class="p">],</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos">151</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compile all scenes into a single movie file.&quot;&quot;&quot;</span>
+<span class="linenos">152</span>
+<span class="linenos">153</span>        <span class="c1"># Create individual scene animations</span>
+<span class="linenos">154</span>        <span class="n">scene_files</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">155</span>
+<span class="linenos">156</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">scene</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scenes</span><span class="p">):</span>
+<span class="linenos">157</span>            <span class="n">scene_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;scene_</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.mp4&quot;</span><span class="p">)</span>
+<span class="linenos">158</span>
+<span class="linenos">159</span>            <span class="k">if</span> <span class="n">scene</span><span class="o">.</span><span class="n">scene_type</span> <span class="o">==</span> <span class="s1">&#39;animation&#39;</span><span class="p">:</span>
+<span class="linenos">160</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_create_animation_scene</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">scene_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
+<span class="linenos">161</span>            <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">scene_type</span> <span class="o">==</span> <span class="s1">&#39;static&#39;</span><span class="p">:</span>
+<span class="linenos">162</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_create_static_scene</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">scene_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
+<span class="linenos">163</span>            <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">scene_type</span> <span class="o">==</span> <span class="s1">&#39;comparison&#39;</span><span class="p">:</span>
+<span class="linenos">164</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_create_comparison_scene</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">scene_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
+<span class="linenos">165</span>            <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">scene_type</span> <span class="o">==</span> <span class="s1">&#39;analysis&#39;</span><span class="p">:</span>
+<span class="linenos">166</span>                <span class="bp">self</span><span class="o">.</span><span class="n">_create_analysis_scene</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">scene_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">)</span>
+<span class="linenos">167</span>
+<span class="linenos">168</span>            <span class="n">scene_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scene_path</span><span class="p">)</span>
+<span class="linenos">169</span>
+<span class="linenos">170</span>        <span class="c1"># Compile scenes using ffmpeg (if available)</span>
+<span class="linenos">171</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">172</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_merge_videos</span><span class="p">(</span><span class="n">scene_files</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
+<span class="linenos">173</span>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">174</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Video compilation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">175</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Individual scene files created successfully:&quot;</span><span class="p">)</span>
+<span class="linenos">176</span>            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">scene_files</span><span class="p">:</span>
+<span class="linenos">177</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">178</span>
+<span class="linenos">179</span>        <span class="k">return</span> <span class="n">output_path</span>
+<span class="linenos">180</span>
+<span class="linenos">181</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_animation_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scene</span><span class="p">:</span> <span class="n">MovieScene</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">182</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an animated scene.&quot;&quot;&quot;</span>
+<span class="linenos">183</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">data</span>
+<span class="linenos">184</span>
+<span class="linenos">185</span>        <span class="c1"># Extract simulation data</span>
+<span class="linenos">186</span>        <span class="n">time_history</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="linenos">187</span>        <span class="n">state_history</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="linenos">188</span>        <span class="n">control_history</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="linenos">189</span>
+<span class="linenos">190</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">time_history</span><span class="p">,</span> <span class="n">state_history</span><span class="p">,</span> <span class="n">control_history</span><span class="p">]):</span>
+<span class="linenos">191</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Insufficient data for animation scene &#39;</span><span class="si">{</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="linenos">192</span>            <span class="k">return</span>
+<span class="linenos">193</span>
+<span class="linenos">194</span>        <span class="c1"># Create animation</span>
+<span class="linenos">195</span>        <span class="n">animator</span> <span class="o">=</span> <span class="n">DIPAnimator</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="linenos">196</span>
+<span class="linenos">197</span>        <span class="c1"># Add title and description</span>
+<span class="linenos">198</span>        <span class="n">animator</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="linenos">199</span>        <span class="n">animator</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">scene</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">animator</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+<span class="linenos">200</span>                        <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">))</span>
+<span class="linenos">201</span>
+<span class="linenos">202</span>        <span class="c1"># Save animation</span>
+<span class="linenos">203</span>        <span class="n">animator</span><span class="o">.</span><span class="n">save_animation</span><span class="p">(</span><span class="n">state_history</span><span class="p">,</span> <span class="n">control_history</span><span class="p">,</span> <span class="n">time_history</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
+<span class="linenos">204</span>
+<span class="linenos">205</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_static_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scene</span><span class="p">:</span> <span class="n">MovieScene</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">206</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a static information scene.&quot;&quot;&quot;</span>
+<span class="linenos">207</span>        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="linenos">208</span>
+<span class="linenos">209</span>        <span class="c1"># Create informational slide</span>
+<span class="linenos">210</span>        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="linenos">211</span>        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">scene</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">212</span>
+<span class="linenos">213</span>        <span class="c1"># Add project information</span>
+<span class="linenos">214</span>        <span class="k">if</span> <span class="s1">&#39;project_info&#39;</span> <span class="ow">in</span> <span class="n">scene</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+<span class="linenos">215</span>            <span class="n">info_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_project_info</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;project_info&#39;</span><span class="p">])</span>
+<span class="linenos">216</span>            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">info_text</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="linenos">217</span>
+<span class="linenos">218</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">219</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">220</span>        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="linenos">221</span>
+<span class="linenos">222</span>        <span class="c1"># Save as static video (repeated frames)</span>
+<span class="linenos">223</span>        <span class="n">frames</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">fps</span><span class="p">)</span>
+<span class="linenos">224</span>
+<span class="linenos">225</span>        <span class="k">def</span><span class="w"> </span><span class="nf">animate_static</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+<span class="linenos">226</span>            <span class="k">return</span> <span class="p">[]</span>
+<span class="linenos">227</span>
+<span class="linenos">228</span>        <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate_static</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span><span class="o">/</span><span class="n">fps</span><span class="p">)</span>
+<span class="linenos">229</span>        <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">&#39;pillow&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
+<span class="linenos">230</span>        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="linenos">231</span>
+<span class="linenos">232</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_comparison_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scene</span><span class="p">:</span> <span class="n">MovieScene</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">233</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a controller comparison scene.&quot;&quot;&quot;</span>
+<span class="linenos">234</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">data</span>
+<span class="linenos">235</span>        <span class="n">controllers</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controllers&#39;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="linenos">236</span>
+<span class="linenos">237</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">238</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Not enough controllers for comparison scene &#39;</span><span class="si">{</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="linenos">239</span>            <span class="k">return</span>
+<span class="linenos">240</span>
+<span class="linenos">241</span>        <span class="c1"># Prepare data for multi-system animation</span>
+<span class="linenos">242</span>        <span class="n">systems_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">243</span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">controller_data</span> <span class="ow">in</span> <span class="n">controllers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">244</span>            <span class="n">systems_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+<span class="linenos">245</span>                <span class="n">name</span><span class="p">,</span>
+<span class="linenos">246</span>                <span class="n">controller_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="p">[]),</span>
+<span class="linenos">247</span>                <span class="n">controller_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">,</span> <span class="p">[]),</span>
+<span class="linenos">248</span>                <span class="n">controller_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="linenos">249</span>            <span class="p">))</span>
+<span class="linenos">250</span>
+<span class="linenos">251</span>        <span class="c1"># Create multi-system animator</span>
+<span class="linenos">252</span>        <span class="n">multi_animator</span> <span class="o">=</span> <span class="n">MultiSystemAnimator</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">systems_data</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="linenos">253</span>
+<span class="linenos">254</span>        <span class="c1"># Add overall title</span>
+<span class="linenos">255</span>        <span class="n">multi_animator</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="linenos">256</span>
+<span class="linenos">257</span>        <span class="c1"># Create and save animation</span>
+<span class="linenos">258</span>        <span class="n">anim</span> <span class="o">=</span> <span class="n">multi_animator</span><span class="o">.</span><span class="n">create_comparison_animation</span><span class="p">(</span><span class="n">systems_data</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span><span class="o">//</span><span class="n">fps</span><span class="p">)</span>
+<span class="linenos">259</span>        <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">&#39;pillow&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
+<span class="linenos">260</span>        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">multi_animator</span><span class="o">.</span><span class="n">fig</span><span class="p">)</span>
+<span class="linenos">261</span>
+<span class="linenos">262</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_analysis_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scene</span><span class="p">:</span> <span class="n">MovieScene</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">263</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an analysis visualization scene.&quot;&quot;&quot;</span>
+<span class="linenos">264</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">data</span>
+<span class="linenos">265</span>
+<span class="linenos">266</span>        <span class="c1"># Create analysis plots</span>
+<span class="linenos">267</span>        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="linenos">268</span>
+<span class="linenos">269</span>        <span class="k">if</span> <span class="n">scene</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="s2">&quot;Parameter Optimization&quot;</span><span class="p">:</span>
+<span class="linenos">270</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_create_optimization_analysis</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="linenos">271</span>        <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="s2">&quot;Statistical Validation&quot;</span><span class="p">:</span>
+<span class="linenos">272</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_create_statistical_analysis</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="linenos">273</span>        <span class="k">elif</span> <span class="n">scene</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="s2">&quot;Robustness Analysis&quot;</span><span class="p">:</span>
+<span class="linenos">274</span>            <span class="bp">self</span><span class="o">.</span><span class="n">_create_robustness_analysis</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="linenos">275</span>
+<span class="linenos">276</span>        <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="linenos">277</span>
+<span class="linenos">278</span>        <span class="c1"># Save as animated plot progression</span>
+<span class="linenos">279</span>        <span class="n">frames</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">fps</span><span class="p">)</span>
+<span class="linenos">280</span>
+<span class="linenos">281</span>        <span class="k">def</span><span class="w"> </span><span class="nf">animate_analysis</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+<span class="linenos">282</span>            <span class="c1"># Gradually reveal analysis results</span>
+<span class="linenos">283</span>            <span class="n">alpha</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">frame</span> <span class="o">/</span> <span class="p">(</span><span class="n">frames</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">))</span>
+<span class="linenos">284</span>            <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">get_axes</span><span class="p">():</span>
+<span class="linenos">285</span>                <span class="k">for</span> <span class="n">artist</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_children</span><span class="p">():</span>
+<span class="linenos">286</span>                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="s1">&#39;set_alpha&#39;</span><span class="p">):</span>
+<span class="linenos">287</span>                        <span class="n">artist</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+<span class="linenos">288</span>            <span class="k">return</span> <span class="n">fig</span><span class="o">.</span><span class="n">get_children</span><span class="p">()</span>
+<span class="linenos">289</span>
+<span class="linenos">290</span>        <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate_analysis</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span><span class="o">/</span><span class="n">fps</span><span class="p">)</span>
+<span class="linenos">291</span>        <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">&#39;pillow&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
+<span class="linenos">292</span>        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="linenos">293</span>
+<span class="linenos">294</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_optimization_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">295</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create PSO optimization analysis plots.&quot;&quot;&quot;</span>
+<span class="linenos">296</span>        <span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">297</span>
+<span class="linenos">298</span>        <span class="c1"># Convergence plot</span>
+<span class="linenos">299</span>        <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="linenos">300</span>        <span class="k">if</span> <span class="s1">&#39;convergence&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<span class="linenos">301</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;convergence&#39;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">302</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;PSO Convergence&quot;</span><span class="p">)</span>
+<span class="linenos">303</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iteration&quot;</span><span class="p">)</span>
+<span class="linenos">304</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Best Fitness&quot;</span><span class="p">)</span>
+<span class="linenos">305</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="linenos">306</span>
+<span class="linenos">307</span>        <span class="c1"># Parameter evolution</span>
+<span class="linenos">308</span>        <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="linenos">309</span>        <span class="k">if</span> <span class="s1">&#39;parameter_evolution&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<span class="linenos">310</span>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">param_hist</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;parameter_evolution&#39;</span><span class="p">]):</span>
+<span class="linenos">311</span>                <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">param_hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Param </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">312</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Parameter Evolution&quot;</span><span class="p">)</span>
+<span class="linenos">313</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iteration&quot;</span><span class="p">)</span>
+<span class="linenos">314</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="linenos">315</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="linenos">316</span>
+<span class="linenos">317</span>        <span class="c1"># Final performance</span>
+<span class="linenos">318</span>        <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">319</span>        <span class="k">if</span> <span class="s1">&#39;final_performance&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<span class="linenos">320</span>            <span class="n">performance</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;final_performance&#39;</span><span class="p">]</span>
+<span class="linenos">321</span>            <span class="n">ax3</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">performance</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">performance</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="linenos">322</span>            <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Final Performance Metrics&quot;</span><span class="p">)</span>
+<span class="linenos">323</span>            <span class="n">ax3</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="linenos">324</span>
+<span class="linenos">325</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_create_statistical_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">326</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create statistical analysis plots.&quot;&quot;&quot;</span>
+<span class="linenos">327</span>        <span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">328</span>
+<span class="linenos">329</span>        <span class="c1"># Performance distributions</span>
+<span class="linenos">330</span>        <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="linenos">331</span>        <span class="k">if</span> <span class="s1">&#39;performance_distributions&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<span class="linenos">332</span>            <span class="k">for</span> <span class="n">controller</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;performance_distributions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">333</span>                <span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos">334</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Performance Distributions&quot;</span><span class="p">)</span>
+<span class="linenos">335</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Performance Metric&quot;</span><span class="p">)</span>
+<span class="linenos">336</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="linenos">337</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="linenos">338</span>            <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="linenos">339</span>
+<span class="linenos">340</span>        <span class="c1"># Confidence intervals</span>
+<span class="linenos">341</span>        <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="linenos">342</span>        <span class="k">if</span> <span class="s1">&#39;confidence_intervals&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<span class="linenos">343</span>            <span class="n">controllers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;confidence_intervals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="linenos">344</span>            <span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;confidence_intervals&#39;</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">]</span>
+<span class="linenos">345</span>            <span class="n">errors</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;confidence_intervals&#39;</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">]</span>
+<span class="linenos">346</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">)),</span> <span class="n">means</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">347</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">)))</span>
+<span class="linenos">348</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">controllers</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="linenos">349</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Performance Confidence Intervals&quot;</span><span class="p">)</span>
+<span class="linenos">350</span>            <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="linenos">351</span>
+<span class="linenos">352</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_format_project_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos">353</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Format project information for display.&quot;&quot;&quot;</span>
+<span class="linenos">354</span>        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">355</span>        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">356</span>            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">357</span>        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<span class="linenos">358</span>
+<span class="linenos">359</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_merge_videos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">video_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">360</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Merge multiple video files using ffmpeg.&quot;&quot;&quot;</span>
+<span class="linenos">361</span>        <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="linenos">362</span>
+<span class="linenos">363</span>        <span class="c1"># Create file list for ffmpeg</span>
+<span class="linenos">364</span>        <span class="n">list_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;video_list.txt&quot;</span><span class="p">)</span>
+<span class="linenos">365</span>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">list_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">366</span>            <span class="k">for</span> <span class="n">video_file</span> <span class="ow">in</span> <span class="n">video_files</span><span class="p">:</span>
+<span class="linenos">367</span>                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;file &#39;</span><span class="si">{</span><span class="n">video_file</span><span class="si">}</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">368</span>
+<span class="linenos">369</span>        <span class="c1"># Run ffmpeg</span>
+<span class="linenos">370</span>        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">371</span>            <span class="s1">&#39;ffmpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;concat&#39;</span><span class="p">,</span> <span class="s1">&#39;-safe&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="n">list_file</span><span class="p">,</span>
+<span class="linenos">372</span>            <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;copy&#39;</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span>
+<span class="linenos">373</span>        <span class="p">]</span>
+<span class="linenos">374</span>
+<span class="linenos">375</span>        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">376</span>        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">list_file</span><span class="p">)</span>
+<span class="linenos">377</span>
+<span class="linenos">378</span>    <span class="k">def</span><span class="w"> </span><span class="nf">create_project_trailer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">60.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos">379</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a short trailer/summary of the project.&quot;&quot;&quot;</span>
+<span class="linenos">380</span>        <span class="n">trailer_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">381</span>            <span class="s1">&#39;overview&#39;</span><span class="p">:</span> <span class="n">project_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;overview&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+<span class="linenos">382</span>            <span class="s1">&#39;highlights&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_highlights</span><span class="p">(</span><span class="n">project_data</span><span class="p">),</span>
+<span class="linenos">383</span>            <span class="s1">&#39;results_summary&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_summarize_results</span><span class="p">(</span><span class="n">project_data</span><span class="p">)</span>
+<span class="linenos">384</span>        <span class="p">}</span>
+<span class="linenos">385</span>
+<span class="linenos">386</span>        <span class="n">trailer_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;project_trailer.mp4&quot;</span><span class="p">)</span>
+<span class="linenos">387</span>
+<span class="linenos">388</span>        <span class="c1"># Create condensed version of key scenes</span>
+<span class="linenos">389</span>        <span class="n">scenes</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">390</span>            <span class="n">MovieScene</span><span class="p">(</span><span class="s2">&quot;Project Overview&quot;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">trailer_data</span><span class="p">[</span><span class="s1">&#39;overview&#39;</span><span class="p">],</span> <span class="s1">&#39;static&#39;</span><span class="p">,</span>
+<span class="linenos">391</span>                      <span class="s2">&quot;Brief introduction to the DIP control project&quot;</span><span class="p">),</span>
+<span class="linenos">392</span>            <span class="n">MovieScene</span><span class="p">(</span><span class="s2">&quot;Key Results&quot;</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="n">trailer_data</span><span class="p">[</span><span class="s1">&#39;highlights&#39;</span><span class="p">],</span> <span class="s1">&#39;comparison&#39;</span><span class="p">,</span>
+<span class="linenos">393</span>                      <span class="s2">&quot;Highlights of controller performance&quot;</span><span class="p">),</span>
+<span class="linenos">394</span>            <span class="n">MovieScene</span><span class="p">(</span><span class="s2">&quot;Summary&quot;</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="n">trailer_data</span><span class="p">[</span><span class="s1">&#39;results_summary&#39;</span><span class="p">],</span> <span class="s1">&#39;analysis&#39;</span><span class="p">,</span>
+<span class="linenos">395</span>                      <span class="s2">&quot;Summary of achievements and conclusions&quot;</span><span class="p">)</span>
+<span class="linenos">396</span>        <span class="p">]</span>
+<span class="linenos">397</span>
+<span class="linenos">398</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile_scenes_to_movie</span><span class="p">(</span><span class="n">scenes</span><span class="p">,</span> <span class="n">trailer_path</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos">399</span>
+<span class="linenos">400</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_highlights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos">401</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract highlight results for trailer.&quot;&quot;&quot;</span>
+<span class="linenos">402</span>        <span class="c1"># Select best performing controllers and key results</span>
+<span class="linenos">403</span>        <span class="n">highlights</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">404</span>
+<span class="linenos">405</span>        <span class="k">if</span> <span class="s1">&#39;controllers&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
+<span class="linenos">406</span>            <span class="c1"># Select top 2-3 performing controllers</span>
+<span class="linenos">407</span>            <span class="n">controllers</span> <span class="o">=</span> <span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;controllers&#39;</span><span class="p">]</span>
+<span class="linenos">408</span>            <span class="n">highlights</span><span class="p">[</span><span class="s1">&#39;controllers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">controllers</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+<span class="linenos">409</span>
+<span class="linenos">410</span>        <span class="k">return</span> <span class="n">highlights</span>
+<span class="linenos">411</span>
+<span class="linenos">412</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_summarize_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="linenos">413</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Summarize key project results.&quot;&quot;&quot;</span>
+<span class="linenos">414</span>        <span class="n">summary</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">415</span>
+<span class="linenos">416</span>        <span class="k">if</span> <span class="s1">&#39;final_metrics&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
+<span class="linenos">417</span>            <span class="n">summary</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;final_metrics&#39;</span><span class="p">]</span>
+<span class="linenos">418</span>
+<span class="linenos">419</span>        <span class="k">if</span> <span class="s1">&#39;conclusions&#39;</span> <span class="ow">in</span> <span class="n">project_data</span><span class="p">:</span>
+<span class="linenos">420</span>            <span class="n">summary</span><span class="p">[</span><span class="s1">&#39;conclusions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project_data</span><span class="p">[</span><span class="s1">&#39;conclusions&#39;</span><span class="p">]</span>
+<span class="linenos">421</span>
+<span class="linenos">422</span>        <span class="k">return</span> <span class="n">summary</span>
 </pre></div>
 </div>
 </section>
@@ -1448,6 +1473,68 @@ quality animations and analysis visualizations.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.static_plots</span> <span class="pre">import</span> <span class="pre">ControlPlotter,</span> <span class="pre">SystemVisualization</span></code></p></li>
 </ul>
 </section>
+<section id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Link to this heading">¶</a></h2>
+<div class="mermaid">
+            graph TD
+    A[Component] --&gt; B[Subcomponent 1]
+    A --&gt; C[Subcomponent 2]
+    B --&gt; D[Output]
+    C --&gt; D
+
+    style A fill:#e1f5ff
+    style D fill:#e8f5e9
+        </div></section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="example-1-basic-usage">
+<h3>Example 1: Basic Usage<a class="headerlink" href="#example-1-basic-usage" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic usage example</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span>
+
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-advanced-configuration">
+<h3>Example 2: Advanced Configuration<a class="headerlink" href="#example-2-advanced-configuration" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Advanced configuration</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span>
+    <span class="n">option1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span>
+    <span class="n">option2</span><span class="o">=</span><span class="n">value2</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-integration-with-framework">
+<h3>Example 3: Integration with Framework<a class="headerlink" href="#example-3-integration-with-framework" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integration example</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationRunner</span>
+
+<span class="n">runner</span> <span class="o">=</span> <span class="n">SimulationRunner</span><span class="p">()</span>
+<span class="n">runner</span><span class="o">.</span><span class="n">use_component</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-performance-optimization">
+<h3>Example 4: Performance Optimization<a class="headerlink" href="#example-4-performance-optimization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Performance-optimized usage</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">enable_caching</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-5-error-handling">
+<h3>Example 5: Error Handling<a class="headerlink" href="#example-5-error-handling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Error handling</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">ComponentError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
         </article>
@@ -1467,7 +1554,7 @@ quality animations and analysis visualizations.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1521,6 +1608,15 @@ quality animations and analysis visualizations.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#example-1-basic-usage">Example 1: Basic Usage</a></li>
+<li><a class="reference internal" href="#example-2-advanced-configuration">Example 2: Advanced Configuration</a></li>
+<li><a class="reference internal" href="#example-3-integration-with-framework">Example 3: Integration with Framework</a></li>
+<li><a class="reference internal" href="#example-4-performance-optimization">Example 4: Performance Optimization</a></li>
+<li><a class="reference internal" href="#example-5-error-handling">Example 5: Error Handling</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1539,6 +1635,8 @@ quality animations and analysis visualizations.</p>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'neutral'});</script>
     <script src="../../_static/back-to-top.js?v=840797bb"></script>
     <script src="../../_static/lazy-load.js?v=dc25293c"></script>
     <script src="../../_static/dark-mode.js?v=bf328970"></script>

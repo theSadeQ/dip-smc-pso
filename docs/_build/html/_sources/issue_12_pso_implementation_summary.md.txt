@@ -90,6 +90,9 @@ weighted_rate = 0.01 * 0.5 = 0.005        # Negligible!
 
 **Direct PSO Implementation:**
 ```python
+# example-metadata:
+# runnable: false
+
 def simulate_and_evaluate(gains, controller_type, config, dynamics):
     """Direct simulation with explicit chattering metrics."""
 

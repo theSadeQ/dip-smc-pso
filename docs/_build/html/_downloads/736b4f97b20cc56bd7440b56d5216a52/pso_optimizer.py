@@ -48,6 +48,9 @@ from ...simulation.engines.vector_sim import simulate_system_batch
 # remain as sensible defaults but are no longer altered by PSOTuner.
 NORMALISATION_THRESHOLD: float = 1e-12
 
+# Initialize module logger
+logger = logging.getLogger(__name__)
+
 
 def _normalise(val: np.ndarray, denom: float) -> np.ndarray:
     """Safely normalise an array by a scalar denominator.
@@ -87,7 +90,8 @@ def _seeded_global_numpy(seed: int | None):
     state = None
     try:
         state = np.random.get_state()
-    except Exception:
+    except (AttributeError, ValueError) as e:  # P2: Handle RNG state access failure
+        logging.getLogger(__name__).debug(f"Could not save RNG state: {e}")
         state = None
     try:
         np.random.seed(int(seed))
@@ -96,8 +100,8 @@ def _seeded_global_numpy(seed: int | None):
         if state is not None:
             try:
                 np.random.set_state(state)
-            except Exception:
-                pass
+            except (AttributeError, ValueError, TypeError) as e:  # P2: Handle RNG state restoration failure
+                logging.getLogger(__name__).debug(f"Could not restore RNG state: {e}")
 
 
 class PSOTuner:
@@ -210,7 +214,10 @@ class PSOTuner:
         if explicit_penalty is not None:
             try:
                 self.instability_penalty: float = float(explicit_penalty)
-            except Exception:
+            except (ValueError, TypeError) as e:  # P2: Handle invalid penalty value
+                logging.getLogger(__name__).warning(
+                    f"Invalid instability_penalty '{explicit_penalty}': {e}. Using default factor {self.instability_penalty_factor}"
+                )
                 self.instability_penalty = float(self.instability_penalty_factor)
         else:
             self.instability_penalty = None  # to be computed from norms
@@ -253,7 +260,10 @@ class PSOTuner:
                 try:
                     baseline_ctrl = controller_factory(baseline_particles[0])
                     u_max_val = float(getattr(baseline_ctrl, "max_force", 150.0))
-                except Exception:
+                except (TypeError, AttributeError, ValueError) as e:  # P2: Handle baseline controller creation failure
+                    logging.getLogger(__name__).debug(
+                        f"Could not create baseline controller for u_max extraction: {e}. Using default 150.0"
+                    )
                     u_max_val = 150.0
                 res = simulate_system_batch(
                     controller_factory=controller_factory,
@@ -285,8 +295,10 @@ class PSOTuner:
                 self.norm_u = max(u_sq_base, 1e-12)
                 self.norm_du = max(du_sq_base, 1e-12)
                 self.norm_sigma = max(sigma_sq_base, 1e-12)
-        except Exception:
-            pass
+        except (ValueError, IndexError, TypeError, AttributeError) as e:  # P2: Baseline normalization is optional
+            logging.getLogger(__name__).debug(
+                f"Automatic baseline normalization failed: {e}. Using default normalization constants."
+            )
 
         # Overrides for combine_weights and normalization_threshold
         # Instance-level combine weights and normalisation threshold.  Earlier
@@ -441,22 +453,22 @@ class PSOTuner:
             logger.debug("PSO Cost Component Analysis (Batch Statistics)")
             logger.debug("=" * 80)
             logger.debug(f"Batch size: {len(ise)}")
-            logger.debug(f"\nRaw Cost Components:")
+            logger.debug("\nRaw Cost Components:")
             logger.debug(f"  ISE        : mean={np.mean(ise):.4e}, std={np.std(ise):.4e}, min={np.min(ise):.4e}, max={np.max(ise):.4e}")
             logger.debug(f"  U²         : mean={np.mean(u_sq):.4e}, std={np.std(u_sq):.4e}, min={np.min(u_sq):.4e}, max={np.max(u_sq):.4e}")
             logger.debug(f"  (ΔU)²      : mean={np.mean(du_sq):.4e}, std={np.std(du_sq):.4e}, min={np.min(du_sq):.4e}, max={np.max(du_sq):.4e}")
             logger.debug(f"  σ²         : mean={np.mean(sigma_sq):.4e}, std={np.std(sigma_sq):.4e}, min={np.min(sigma_sq):.4e}, max={np.max(sigma_sq):.4e}")
-            logger.debug(f"\nNormalized Costs:")
+            logger.debug("\nNormalized Costs:")
             logger.debug(f"  ISE_norm   : mean={np.mean(ise_n):.4e}, std={np.std(ise_n):.4e}, min={np.min(ise_n):.4e}, max={np.max(ise_n):.4e}")
             logger.debug(f"  U_norm     : mean={np.mean(u_n):.4e}, std={np.std(u_n):.4e}, min={np.min(u_n):.4e}, max={np.max(u_n):.4e}")
             logger.debug(f"  DU_norm    : mean={np.mean(du_n):.4e}, std={np.std(du_n):.4e}, min={np.min(du_n):.4e}, max={np.max(du_n):.4e}")
             logger.debug(f"  σ_norm     : mean={np.mean(sigma_n):.4e}, std={np.std(sigma_n):.4e}, min={np.min(sigma_n):.4e}, max={np.max(sigma_n):.4e}")
-            logger.debug(f"\nWeighted Cost Contributions:")
+            logger.debug("\nWeighted Cost Contributions:")
             logger.debug(f"  w_state × ISE_n : mean={np.mean(self.weights.state_error * ise_n):.4e}")
             logger.debug(f"  w_ctrl  × U_n   : mean={np.mean(self.weights.control_effort * u_n):.4e}")
             logger.debug(f"  w_rate  × DU_n  : mean={np.mean(self.weights.control_rate * du_n):.4e}")
             logger.debug(f"  w_stab  × σ_n   : mean={np.mean(self.weights.stability * sigma_n):.4e}")
-            logger.debug(f"\nNormalization Constants:")
+            logger.debug("\nNormalization Constants:")
             logger.debug(f"  norm_ise={self.norm_ise:.4e}, norm_u={self.norm_u:.4e}, norm_du={self.norm_du:.4e}, norm_sigma={self.norm_sigma:.4e}")
 
         # Graded penalty for early failure

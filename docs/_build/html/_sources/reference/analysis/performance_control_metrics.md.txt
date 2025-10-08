@@ -6,6 +6,206 @@
 
 Enhanced control performance metrics and analysis.
 
+
+
+## Advanced Mathematical Theory
+
+### Integral Performance Indices
+
+**Integral of Squared Error (ISE):**
+
+```{math}
+\text{ISE} = \int_0^\infty e^2(t) dt
+```
+
+Penalizes large errors, emphasizes transient response.
+
+**Integral of Absolute Error (IAE):**
+
+```{math}
+\text{IAE} = \int_0^\infty |e(t)| dt
+```
+
+Linear penalty, balanced transient and steady-state.
+
+**Integral of Time-weighted Absolute Error (ITAE):**
+
+```{math}
+\text{ITAE} = \int_0^\infty t|e(t)| dt
+```
+
+Heavily penalizes long settling time.
+
+**Integral of Time-weighted Squared Error (ITSE):**
+
+```{math}
+\text{ITSE} = \int_0^\infty t e^2(t) dt
+```
+
+### Control Effort Metrics
+
+**Total Variation (TV):**
+
+```{math}
+\text{TV}(u) = \int_0^T \left|\frac{du}{dt}\right| dt
+```
+
+Measures control chattering.
+
+**Control Energy:**
+
+```{math}
+E_u = \int_0^T u^2(t) dt
+```
+
+### Overshoot and Settling Time
+
+**Percent overshoot:**
+
+```{math}
+M_p = \frac{y_{max} - y_{ss}}{y_{ss}} \times 100\%
+```
+
+**Settling time** (2% criterion):
+
+```{math}
+t_s = \min\{t : |y(\tau) - y_{ss}| \leq 0.02|y_{ss}|, \, \forall \tau \geq t\}
+```
+
+### Damping Ratio Estimation
+
+**From overshoot:**
+
+```{math}
+\zeta = \frac{-\ln(M_p/100)}{\sqrt{\pi^2 + \ln^2(M_p/100)}}
+```
+
+**From peak time:**
+
+```{math}
+\omega_d = \frac{\pi}{t_p}, \quad \omega_n = \frac{\omega_d}{\sqrt{1-\zeta^2}}
+```
+
+### RMS Performance
+
+**Root Mean Square error:**
+
+```{math}
+e_{RMS} = \sqrt{\frac{1}{T}\int_0^T e^2(t) dt}
+```
+
+### Weighted Performance Index
+
+**General form:**
+
+```{math}
+J = \int_0^\infty [q e^2(t) + r u^2(t)] dt
+```
+
+Where $q, r > 0$ are tuning weights.
+
+## Architecture Diagram
+
+```{mermaid}
+graph TD
+    A[Error Signal e(t)] --> B[Integral Metrics]
+    A --> C[Time-Weighted Metrics]
+
+    B --> D[ISE: ∫e²dt]
+    B --> E[IAE: ∫|e|dt]
+
+    C --> F[ITSE: ∫te²dt]
+    C --> G[ITAE: ∫t|e|dt]
+
+    A --> H[Response Analysis]
+    H --> I[Overshoot Mp]
+    H --> J[Settling Time ts]
+    H --> K[Rise Time tr]
+
+    L[Control Signal u(t)] --> M[Control Effort]
+    M --> N[Energy: ∫u²dt]
+    M --> O[Total Variation]
+
+    D --> P[Metric Aggregation]
+    E --> P
+    F --> P
+    G --> P
+    I --> P
+    J --> P
+    K --> P
+    N --> P
+
+    P --> Q[Weighted Sum]
+    Q --> R[Performance Index J]
+
+    style B fill:#9cf
+    style C fill:#fcf
+    style R fill:#9f9
+```
+
+## Usage Examples
+
+### Example 1: Basic Analysis
+
+```python
+from src.analysis import Analyzer
+
+# Initialize analyzer
+analyzer = Analyzer(config)
+result = analyzer.analyze(data)
+```
+
+### Example 2: Statistical Validation
+
+```python
+# Compute confidence intervals
+from src.analysis.validation import compute_confidence_interval
+
+ci = compute_confidence_interval(samples, confidence=0.95)
+print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
+```
+
+### Example 3: Performance Metrics
+
+```python
+# Compute comprehensive metrics
+from src.analysis.performance import compute_all_metrics
+
+metrics = compute_all_metrics(
+    time=t,
+    state=x,
+    control=u,
+    reference=r
+)
+print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
+```
+
+### Example 4: Batch Analysis
+
+```python
+# Analyze multiple trials
+results = []
+for trial in range(n_trials):
+    result = run_simulation(trial_seed=trial)
+    results.append(analyzer.analyze(result))
+
+# Aggregate statistics
+mean_performance = np.mean([r.performance for r in results])
+```
+
+### Example 5: Robustness Analysis
+
+```python
+# Parameter sensitivity analysis
+from src.analysis.performance import sensitivity_analysis
+
+sensitivity = sensitivity_analysis(
+    system=plant,
+    parameters={'mass': (0.8, 1.2), 'length': (0.9, 1.1)},
+    metric=compute_stability_margin
+)
+print(f"Most sensitive: {sensitivity.most_sensitive_param}")
+```
 This module provides comprehensive control performance analysis tools
 including advanced metrics, frequency domain analysis, and statistical
 evaluation of controller performance.

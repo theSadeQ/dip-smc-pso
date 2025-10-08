@@ -460,7 +460,7 @@ open _build/html/index.html
 - [LaTeX Math](https://en.wikibooks.org/wiki/LaTeX/Mathematics)
 
 ### Project Documentation
-- [CLAUDE.md](../../../CLAUDE.md) - Project conventions
+- [CLAUDE.md](../../CLAUDE.md) - Project conventions
 - [README.md](../../../README.md) - Project overview
 - [DOCUMENTATION_SYSTEM.md](../../DOCUMENTATION_SYSTEM.md) - Current docs
 

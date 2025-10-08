@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -753,7 +779,10 @@ Combines all Classical + Adaptive + STA parameters.</p>
 </li>
 </ol>
 <p><strong>Quantification:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_ruggedness</span><span class="p">(</span><span class="n">fitness_function</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_ruggedness</span><span class="p">(</span><span class="n">fitness_function</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate landscape ruggedness via random perturbations.&quot;&quot;&quot;</span>
     <span class="n">f_center</span> <span class="o">=</span> <span class="n">fitness_function</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
     <span class="n">variations</span> <span class="o">=</span> <span class="p">[]</span>
@@ -824,7 +853,10 @@ J(g) = w_1 \cdot \text{ISE}(g) + w_2 \cdot \text{Chattering}(g) + w_3 \cdot \tex
 <li><p><strong>But:</strong> Locally well-behaved in most regions</p></li>
 </ul>
 <p><strong>Visualization - Convexity Test:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">check_convexity</span><span class="p">(</span><span class="n">fitness_func</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_convexity</span><span class="p">(</span><span class="n">fitness_func</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test convexity between two points.&quot;&quot;&quot;</span>
     <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_points</span><span class="p">)</span>
     <span class="n">convex_bound</span> <span class="o">=</span> <span class="p">[]</span>
@@ -915,7 +947,10 @@ J(g) = w_1 \cdot \frac{J_1(g)}{J_1^{ref}} + w_2 \cdot \frac{J_2(g)}{J_2^{ref}} +
 <li><p>Ensures all objectives on similar scale</p></li>
 </ul>
 <p><strong>Example Configuration:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">objective_weights</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">objective_weights</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;ise&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>         <span class="c1"># 50% - primary objective</span>
     <span class="s1">&#39;chattering&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>  <span class="c1"># 30% - important for smoothness</span>
     <span class="s1">&#39;effort&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>      <span class="c1"># 20% - energy consideration</span>
@@ -930,7 +965,10 @@ J(g) = w_1 \cdot \frac{J_1(g)}{J_1^{ref}} + w_2 \cdot \frac{J_2(g)}{J_2^{ref}} +
 </pre></div>
 </div>
 <p><strong>Fitness Calculation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_fitness</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span>
 
     <span class="n">ise_norm</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">ise</span> <span class="o">/</span> <span class="n">reference_values</span><span class="p">[</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span>
@@ -1165,7 +1203,10 @@ J_{barrier}(g) = J(g) + \mu \cdot B(g)
 <li><p>Particles naturally avoid boundaries</p></li>
 </ul>
 <p><strong>Implementation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">barrier_penalty</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">barrier_penalty</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Logarithmic barrier for stability constraints.&quot;&quot;&quot;</span>
     <span class="n">penalty</span> <span class="o">=</span> <span class="mf">0.0</span>
 
@@ -1397,7 +1438,10 @@ S_{ij} = \frac{\text{Var}_{g_i, g_j}[\mathbb{E}_{g_{\sim ij}}[J \mid g_i, g_j]]}
 <section id="bound-selection">
 <h3>Bound Selection<a class="headerlink" href="#bound-selection" title="Link to this heading">¶</a></h3>
 <p><strong>Conservative Bounds (High Success Rate):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">conservative_bounds</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">conservative_bounds</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">),</span>    <span class="c1"># k1 - narrow range</span>
         <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">),</span>    <span class="c1"># k2</span>
@@ -1410,7 +1454,10 @@ S_{ij} = \frac{\text{Var}_{g_i, g_j}[\mathbb{E}_{g_{\sim ij}}[J \mid g_i, g_j]]}
 </pre></div>
 </div>
 <p><strong>Exploration Bounds (Global Search):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exploration_bounds</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">exploration_bounds</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;classical_smc&#39;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>    <span class="c1"># k1 - wide range</span>
         <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>    <span class="c1"># k2</span>
@@ -1487,7 +1534,10 @@ S_{ij} = \frac{\text{Var}_{g_i, g_j}[\mathbb{E}_{g_{\sim ij}}[J \mid g_i, g_j]]}
 <li><p>No improvement for 30 iterations → Local minimum trapped (restart or perturb)</p></li>
 </ul>
 <p><strong>Automated Diagnosis:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">diagnose_convergence</span><span class="p">(</span><span class="n">fitness_history</span><span class="p">,</span> <span class="n">diversity_history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">diagnose_convergence</span><span class="p">(</span><span class="n">fitness_history</span><span class="p">,</span> <span class="n">diversity_history</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Identify convergence issues.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fitness_history</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;Insufficient data&quot;</span>
@@ -1566,7 +1616,7 @@ S_{ij} = \frac{\text{Var}_{g_i, g_j}[\mathbb{E}_{g_{\sim ij}}[J \mid g_i, g_j]]}
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

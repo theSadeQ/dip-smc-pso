@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -527,7 +553,10 @@
 </section>
 <section id="deprecation-mapping-system">
 <h3>Deprecation Mapping System<a class="headerlink" href="#deprecation-mapping-system" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DeprecationMapping</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Complete deprecation specification for a parameter or feature.&quot;&quot;&quot;</span>
     <span class="n">old_name</span><span class="p">:</span> <span class="nb">str</span>                           <span class="c1"># Deprecated parameter name</span>
@@ -547,7 +576,10 @@
 <h2>Controller-Specific Deprecation Mappings<a class="headerlink" href="#controller-specific-deprecation-mappings" title="Link to this heading">¶</a></h2>
 <section id="classical-smc-deprecation-map">
 <h3>Classical SMC Deprecation Map<a class="headerlink" href="#classical-smc-deprecation-map" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CLASSICAL_SMC_DEPRECATIONS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">CLASSICAL_SMC_DEPRECATIONS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">DeprecationMapping</span><span class="p">(</span>
         <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;gamma&#39;</span><span class="p">,</span>
         <span class="n">new_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -611,7 +643,10 @@
 </section>
 <section id="adaptive-smc-deprecation-map">
 <h3>Adaptive SMC Deprecation Map<a class="headerlink" href="#adaptive-smc-deprecation-map" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ADAPTIVE_SMC_DEPRECATIONS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">ADAPTIVE_SMC_DEPRECATIONS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;boundary_layer_thickness&#39;</span><span class="p">:</span> <span class="n">DeprecationMapping</span><span class="p">(</span>
         <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;boundary_layer_thickness&#39;</span><span class="p">,</span>
         <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;boundary_layer&#39;</span><span class="p">,</span>
@@ -673,7 +708,10 @@
 </section>
 <section id="super-twisting-smc-deprecation-map">
 <h3>Super-Twisting SMC Deprecation Map<a class="headerlink" href="#super-twisting-smc-deprecation-map" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">STA_SMC_DEPRECATIONS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">STA_SMC_DEPRECATIONS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;K1&#39;</span><span class="p">:</span> <span class="n">DeprecationMapping</span><span class="p">(</span>
         <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;K1&#39;</span><span class="p">,</span>
         <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;gains[0]&#39;</span><span class="p">,</span>
@@ -736,7 +774,10 @@
 </section>
 <section id="hybrid-smc-deprecation-map">
 <h3>Hybrid SMC Deprecation Map<a class="headerlink" href="#hybrid-smc-deprecation-map" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">HYBRID_SMC_DEPRECATIONS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">HYBRID_SMC_DEPRECATIONS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="n">DeprecationMapping</span><span class="p">(</span>
         <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;mode&#39;</span><span class="p">,</span>
         <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;hybrid_mode&#39;</span><span class="p">,</span>
@@ -1391,54 +1432,68 @@
 </div>
 </li>
 <li><p><strong>Automatic Migration Safety:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Safe for automatic migration</span>
-<span class="n">simple_rename</span> <span class="o">=</span> <span class="n">DeprecationMapping</span><span class="p">(</span>
-    <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;old_name&#39;</span><span class="p">,</span>
-    <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;new_name&#39;</span><span class="p">,</span>
-    <span class="n">auto_migrate</span><span class="o">=</span><span class="kc">True</span>
-<span class="p">)</span>
-
-<span class="c1"># Requires manual migration</span>
-<span class="n">complex_change</span> <span class="o">=</span> <span class="n">DeprecationMapping</span><span class="p">(</span>
-    <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;complex_param&#39;</span><span class="p">,</span>
-    <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;restructured_config&#39;</span><span class="p">,</span>
-    <span class="n">auto_migrate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Semantic change requires manual intervention</span>
-    <span class="n">migration_guide</span><span class="o">=</span><span class="s2">&quot;See migration guide at docs/migration/v3.0.md&quot;</span>
-<span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </li>
 </ol>
 </section>
-<section id="usage-and-monitoring">
-<h3>Usage and Monitoring<a class="headerlink" href="#usage-and-monitoring" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Global deprecation warner instance</span>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false">
+<h1>runnable: false<a class="headerlink" href="#runnable-false" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="safe-for-automatic-migration">
+<h1>Safe for automatic migration<a class="headerlink" href="#safe-for-automatic-migration" title="Link to this heading">¶</a></h1>
+<p>simple_rename = DeprecationMapping(
+old_name=’old_name’,
+new_name=’new_name’,
+auto_migrate=True
+)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="requires-manual-migration">
+<h1>Requires manual migration<a class="headerlink" href="#requires-manual-migration" title="Link to this heading">¶</a></h1>
+<p>complex_change = DeprecationMapping(
+old_name=’complex_param’,
+new_name=’restructured_config’,
+auto_migrate=False,  # Semantic change requires manual intervention
+migration_guide=”See migration guide at docs/migration/v3.0.md”
+)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1">### Usage and Monitoring</span>
+
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Global deprecation warner instance</span>
 <span class="n">_deprecation_warner</span> <span class="o">=</span> <span class="n">ControllerDeprecationWarner</span><span class="p">()</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">check_deprecated_config</span><span class="p">(</span><span class="n">controller_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convenience function for checking and migrating deprecated parameters.</span>
+<span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> Convenience function for checking and migrating deprecated parameters.</span>
 
-<span class="sd">    Usage:</span>
-<span class="sd">        config_params = check_deprecated_config(&#39;classical_smc&#39;, raw_config)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">migrated_params</span><span class="p">,</span> <span class="n">warnings</span> <span class="o">=</span> <span class="n">_deprecation_warner</span><span class="o">.</span><span class="n">check_deprecated_parameters</span><span class="p">(</span>
-        <span class="n">controller_type</span><span class="p">,</span> <span class="n">config_params</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">migrated_params</span>
+<span class="sd"> Usage:</span>
+<span class="sd">     config_params = check_deprecated_config(&#39;classical_smc&#39;, raw_config)</span>
+<span class="sd"> &quot;&quot;&quot;</span>
+ <span class="n">migrated_params</span><span class="p">,</span> <span class="n">warnings</span> <span class="o">=</span> <span class="n">_deprecation_warner</span><span class="o">.</span><span class="n">check_deprecated_parameters</span><span class="p">(</span>
+     <span class="n">controller_type</span><span class="p">,</span> <span class="n">config_params</span>
+ <span class="p">)</span>
+ <span class="k">return</span> <span class="n">migrated_params</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_deprecation_statistics</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get current deprecation usage statistics.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_deprecation_warner</span><span class="o">.</span><span class="n">get_migration_statistics</span><span class="p">()</span>
+<span class="w"> </span><span class="sd">&quot;&quot;&quot;Get current deprecation usage statistics.&quot;&quot;&quot;</span>
+ <span class="k">return</span> <span class="n">_deprecation_warner</span><span class="o">.</span><span class="n">get_migration_statistics</span><span class="p">()</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_migration_report</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate comprehensive migration report for analysis.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_deprecation_warner</span><span class="o">.</span><span class="n">generate_deprecation_report</span><span class="p">()</span>
+<span class="w"> </span><span class="sd">&quot;&quot;&quot;Generate comprehensive migration report for analysis.&quot;&quot;&quot;</span>
+ <span class="k">return</span> <span class="n">_deprecation_warner</span><span class="o">.</span><span class="n">generate_deprecation_report</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>This comprehensive deprecation management system ensures smooth evolution of the SMC Controller Factory while maintaining backward compatibility and providing clear migration paths for users.</p>
-</section>
-</section>
 </section>
 
         </article>
@@ -1458,7 +1513,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1504,11 +1559,14 @@
 </li>
 <li><a class="reference internal" href="#best-practices-and-guidelines">Best Practices and Guidelines</a><ul>
 <li><a class="reference internal" href="#deprecation-implementation-guidelines">Deprecation Implementation Guidelines</a></li>
-<li><a class="reference internal" href="#usage-and-monitoring">Usage and Monitoring</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false">runnable: false</a></li>
+<li><a class="reference internal" href="#safe-for-automatic-migration">Safe for automatic migration</a></li>
+<li><a class="reference internal" href="#requires-manual-migration">Requires manual migration</a></li>
 </ul>
 
           </div>

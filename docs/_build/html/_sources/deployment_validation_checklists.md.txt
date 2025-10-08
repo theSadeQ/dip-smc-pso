@@ -169,6 +169,9 @@ python validate_factory_system.py --full-validation
 
 **Safety Validation Protocol**:
 ```python
+# example-metadata:
+# runnable: false
+
 def safety_validation_protocol():
     """Execute comprehensive safety validation."""
     results = {
@@ -318,6 +321,9 @@ echo "✅ Development environment validated"
 
 #### Test Environment Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_test_environment():
     """Validate testing environment setup."""
     checks = {
@@ -380,6 +386,9 @@ python -m pytest tests/staging/ --run-full-suite
 
 #### Factory Pattern Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def test_controller_factory_integration():
     """Test controller factory integration."""
     factory = ControllerFactory()
@@ -405,6 +414,9 @@ def test_controller_factory_integration():
 
 #### PSO Integration Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def test_pso_integration():
     """Test PSO optimization integration."""
     optimizer = PSOOptimizer()
@@ -433,6 +445,9 @@ def test_pso_integration():
 
 #### YAML Configuration Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def test_configuration_integration():
     """Test configuration system integration."""
     # Test configuration loading
@@ -454,6 +469,9 @@ def test_configuration_integration():
 
 #### Real-Time Monitoring Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def test_monitoring_integration():
     """Test monitoring system integration."""
     monitor = SystemMonitor()
@@ -540,6 +558,9 @@ class PerformanceBenchmarks:
 
 #### Fault Tolerance Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def test_fault_tolerance():
     """Test system fault tolerance."""
     system = ControlSystem()
@@ -562,6 +583,9 @@ def test_fault_tolerance():
 
 #### Load Testing Protocol
 ```python
+# example-metadata:
+# runnable: false
+
 def run_load_testing():
     """Execute comprehensive load testing."""
     load_scenarios = [
@@ -608,6 +632,9 @@ def run_load_testing():
 
 #### Safety-Critical Component Testing
 ```python
+# example-metadata:
+# runnable: false
+
 def comprehensive_safety_testing():
     """Execute comprehensive safety validation."""
     safety_tests = {
@@ -636,6 +663,9 @@ def comprehensive_safety_testing():
 
 #### Hardware Safety Integration
 ```python
+# example-metadata:
+# runnable: false
+
 def test_hardware_safety_integration():
     """Test hardware safety system integration."""
     safety_system = HardwareSafetySystem()
@@ -663,6 +693,9 @@ def test_hardware_safety_integration():
 
 #### Immediate Post-Deployment Tests
 ```python
+# example-metadata:
+# runnable: false
+
 def execute_smoke_tests():
     """Execute smoke tests immediately after deployment."""
     smoke_tests = [
@@ -684,6 +717,9 @@ def execute_smoke_tests():
 
 #### Health Check Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_system_health():
     """Validate system health after deployment."""
     health_metrics = {
@@ -720,6 +756,9 @@ def validate_system_health():
 
 #### Baseline Metrics Collection
 ```python
+# example-metadata:
+# runnable: false
+
 def establish_performance_baselines():
     """Establish performance baselines for monitoring."""
     baseline_tests = [
@@ -800,6 +839,9 @@ echo "✅ Rollback completed successfully"
 
 #### Rollback Validation
 ```python
+# example-metadata:
+# runnable: false
+
 def validate_rollback_success():
     """Validate successful rollback to previous version."""
     # Check system is running
@@ -825,6 +867,9 @@ def validate_rollback_success():
 
 #### Data Recovery Protocol
 ```python
+# example-metadata:
+# runnable: false
+
 def execute_data_recovery():
     """Execute data recovery procedure."""
     recovery_steps = [
@@ -850,6 +895,9 @@ def execute_data_recovery():
 
 #### Service Recovery Protocol
 ```python
+# example-metadata:
+# runnable: false
+
 def execute_service_recovery():
     """Execute service recovery procedure."""
     # Identify failed services

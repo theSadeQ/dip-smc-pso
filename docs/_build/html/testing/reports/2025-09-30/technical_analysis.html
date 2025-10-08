@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -545,7 +571,10 @@ Stability<span class="w"> </span>Tests:<span class="w">       </span><span class
 </section>
 <section id="root-cause-analysis">
 <h4><strong>Root Cause Analysis</strong><a class="headerlink" href="#root-cause-analysis" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_fdi_failure</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_fdi_failure</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Technical analysis of FDI threshold sensitivity.&quot;&quot;&quot;</span>
 
     <span class="c1"># Problem: Threshold too aggressive for operational conditions</span>
@@ -595,7 +624,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 </section>
 <section id="recommended-fixes">
 <h4><strong>Recommended Fixes</strong><a class="headerlink" href="#recommended-fixes" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Adaptive Threshold with Hysteresis</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># 1. Adaptive Threshold with Hysteresis</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveThreshold</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_threshold</span><span class="o">=</span><span class="mf">0.135</span><span class="p">,</span> <span class="n">hysteresis</span><span class="o">=</span><span class="mf">0.02</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base_threshold</span> <span class="o">=</span> <span class="n">base_threshold</span>
@@ -639,7 +671,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 <h3><strong>2. Memory Management Failures (test_memory_resource_deep.py)</strong><a class="headerlink" href="#memory-management-failures-test-memory-resource-deep-py" title="Link to this heading">¶</a></h3>
 <section id="failure-breakdown">
 <h4><strong>Failure Breakdown</strong><a class="headerlink" href="#failure-breakdown" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Three critical memory management failures identified:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Three critical memory management failures identified:</span>
 
 <span class="c1"># Failure 1: Memory Leak Detection</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_memory_leak_detection</span><span class="p">():</span>
@@ -666,7 +701,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 </section>
 <section id="memory-profiling-results">
 <h4><strong>Memory Profiling Results</strong><a class="headerlink" href="#memory-profiling-results" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryAnalysis</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MemoryAnalysis</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Detailed memory usage breakdown.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -845,7 +883,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 <h3><strong>3. Numerical Stability Failures (test_numerical_stability_deep.py)</strong><a class="headerlink" href="#numerical-stability-failures-test-numerical-stability-deep-py" title="Link to this heading">¶</a></h3>
 <section id="failure-categories">
 <h4><strong>Failure Categories</strong><a class="headerlink" href="#failure-categories" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 8 critical numerical stability failures identified:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># 8 critical numerical stability failures identified:</span>
 
 <span class="n">numerical_failures</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;matrix_conditioning&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -885,7 +926,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 <section id="mathematical-analysis">
 <h4><strong>Mathematical Analysis</strong><a class="headerlink" href="#mathematical-analysis" title="Link to this heading">¶</a></h4>
 <p><strong>Matrix Conditioning Issues:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_matrix_conditioning</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_matrix_conditioning</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Analysis of matrix conditioning problems.&quot;&quot;&quot;</span>
 
     <span class="c1"># Problem matrices encountered in testing</span>
@@ -907,7 +951,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 </pre></div>
 </div>
 <p><strong>Lyapunov Stability Analysis:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">verify_lyapunov_stability</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">verify_lyapunov_stability</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify Lyapunov stability with robust numerical methods.&quot;&quot;&quot;</span>
 
     <span class="c1"># Standard Lyapunov equation: A^T P + P A + Q = 0</span>
@@ -936,7 +983,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 </section>
 <section id="robust-numerical-solutions">
 <h4><strong>Robust Numerical Solutions</strong><a class="headerlink" href="#robust-numerical-solutions" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Enhanced Matrix Operations</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># 1. Enhanced Matrix Operations</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">RobustMatrixOps</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Numerically stable matrix operations.&quot;&quot;&quot;</span>
 
@@ -1050,7 +1100,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 <h2>🔬 Performance Impact Analysis<a class="headerlink" href="#performance-impact-analysis" title="Link to this heading">¶</a></h2>
 <section id="test-execution-performance">
 <h3><strong>Test Execution Performance</strong><a class="headerlink" href="#test-execution-performance" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">performance_metrics</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">performance_metrics</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;test_execution_time&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;total_duration&#39;</span><span class="p">:</span> <span class="s1">&#39;45 minutes 23 seconds&#39;</span><span class="p">,</span>
         <span class="s1">&#39;average_per_test&#39;</span><span class="p">:</span> <span class="s1">&#39;5.04 seconds&#39;</span><span class="p">,</span>
@@ -1084,7 +1137,10 @@ $<span class="math notranslate nohighlight">\(\text{Status} = \begin{cases}
 </section>
 <section id="benchmark-comparison">
 <h3><strong>Benchmark Comparison</strong><a class="headerlink" href="#benchmark-comparison" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Current vs. Target Performance</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Current vs. Target Performance</span>
 <span class="n">performance_comparison</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;test_suite_execution&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;current&#39;</span><span class="p">:</span> <span class="s1">&#39;45m 23s&#39;</span><span class="p">,</span>
@@ -1271,7 +1327,10 @@ python<span class="w"> </span>scripts/update_test_documentation.py
 <h2>🔍 Validation Checklist<a class="headerlink" href="#validation-checklist" title="Link to this heading">¶</a></h2>
 <section id="pre-production-checklist">
 <h3><strong>Pre-Production Checklist</strong><a class="headerlink" href="#pre-production-checklist" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validation_checklist</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="n">validation_checklist</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;numerical_stability&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;matrix_conditioning&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ All matrices well-conditioned (cond &lt; 1e10)&#39;</span><span class="p">,</span>
         <span class="s1">&#39;lyapunov_stability&#39;</span><span class="p">:</span> <span class="s1">&#39;✅ Stability verified for all controllers&#39;</span><span class="p">,</span>
@@ -1328,7 +1387,7 @@ python<span class="w"> </span>scripts/update_test_documentation.py
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

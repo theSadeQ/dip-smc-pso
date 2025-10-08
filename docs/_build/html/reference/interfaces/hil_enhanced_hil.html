@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -441,6 +459,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -815,12 +841,12 @@ for professional control system validation.</p>
 <span class="linenos"> 13</span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="linenos"> 14</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="linenos"> 15</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
-<span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span>
+<span class="linenos"> 16</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
 <span class="linenos"> 17</span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
 <span class="linenos"> 18</span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="linenos"> 19</span>
 <span class="linenos"> 20</span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.protocols</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommunicationProtocol</span>
-<span class="linenos"> 21</span><span class="kn">from</span><span class="w"> </span><span class="nn">..hardware.device_drivers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceDriver</span><span class="p">,</span> <span class="n">DeviceManager</span>
+<span class="linenos"> 21</span><span class="kn">from</span><span class="w"> </span><span class="nn">..hardware.device_drivers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceManager</span>
 <span class="linenos"> 22</span><span class="kn">from</span><span class="w"> </span><span class="nn">..network.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetworkInterfaceFactory</span>
 <span class="linenos"> 23</span>
 <span class="linenos"> 24</span>
@@ -927,16 +953,16 @@ for professional control system validation.</p>
 <span class="linenos">125</span>        <span class="c1"># Core components</span>
 <span class="linenos">126</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_device_manager</span> <span class="o">=</span> <span class="n">DeviceManager</span><span class="p">()</span>
 <span class="linenos">127</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_communication_interfaces</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CommunicationProtocol</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">128</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_bridge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;SimulationBridge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">128</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_bridge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;SimulationBridge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">129</span>
 <span class="linenos">130</span>        <span class="c1"># Real-time components</span>
-<span class="linenos">131</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_real_time_scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;RealTimeScheduler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">131</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_real_time_scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;RealTimeScheduler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">132</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_timing_monitor</span> <span class="o">=</span> <span class="n">TimingMonitor</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">timing</span><span class="p">)</span>
 <span class="linenos">133</span>
 <span class="linenos">134</span>        <span class="c1"># Testing and validation</span>
-<span class="linenos">135</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_fault_injector</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;FaultInjector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">136</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_test_framework</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;HILTestFramework&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">137</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_data_logger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;HILDataLogger&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">135</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_fault_injector</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;FaultInjector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
+<span class="linenos">136</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_test_framework</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;HILTestFramework&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
+<span class="linenos">137</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_data_logger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;HILDataLogger&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos">138</span>
 <span class="linenos">139</span>        <span class="c1"># Execution control</span>
 <span class="linenos">140</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_main_task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">Task</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1440,7 +1466,7 @@ for professional control system validation.</p>
 <span class="linenos">638</span>
 <span class="linenos">639</span>        <span class="c1"># Check expected results against tolerance</span>
 <span class="linenos">640</span>        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">scenario</span><span class="o">.</span><span class="n">expected_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">641</span>            <span class="n">tolerance</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">tolerance</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="linenos">641</span>            <span class="n">scenario</span><span class="o">.</span><span class="n">tolerance</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
 <span class="linenos">642</span>            <span class="c1"># Analysis logic would be implemented here based on requirements</span>
 <span class="linenos">643</span>
 <span class="linenos">644</span>        <span class="k">return</span> <span class="n">results</span>
@@ -1694,16 +1720,16 @@ and automated testing for professional control system validation.</p>
 <span class="linenos"> 16</span>        <span class="c1"># Core components</span>
 <span class="linenos"> 17</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_device_manager</span> <span class="o">=</span> <span class="n">DeviceManager</span><span class="p">()</span>
 <span class="linenos"> 18</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_communication_interfaces</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CommunicationProtocol</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos"> 19</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_bridge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;SimulationBridge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 19</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_bridge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;SimulationBridge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos"> 20</span>
 <span class="linenos"> 21</span>        <span class="c1"># Real-time components</span>
-<span class="linenos"> 22</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_real_time_scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;RealTimeScheduler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 22</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_real_time_scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;RealTimeScheduler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos"> 23</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_timing_monitor</span> <span class="o">=</span> <span class="n">TimingMonitor</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">timing</span><span class="p">)</span>
 <span class="linenos"> 24</span>
 <span class="linenos"> 25</span>        <span class="c1"># Testing and validation</span>
-<span class="linenos"> 26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_fault_injector</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;FaultInjector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos"> 27</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_test_framework</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;HILTestFramework&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos"> 28</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_data_logger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;HILDataLogger&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_fault_injector</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;FaultInjector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
+<span class="linenos"> 27</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_test_framework</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;HILTestFramework&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
+<span class="linenos"> 28</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_data_logger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;HILDataLogger&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># noqa: F821</span>
 <span class="linenos"> 29</span>
 <span class="linenos"> 30</span>        <span class="c1"># Execution control</span>
 <span class="linenos"> 31</span>        <span class="bp">self</span><span class="o">.</span><span class="n">_main_task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">Task</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -2207,7 +2233,7 @@ and automated testing for professional control system validation.</p>
 <span class="linenos">529</span>
 <span class="linenos">530</span>        <span class="c1"># Check expected results against tolerance</span>
 <span class="linenos">531</span>        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">scenario</span><span class="o">.</span><span class="n">expected_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos">532</span>            <span class="n">tolerance</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">tolerance</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="linenos">532</span>            <span class="n">scenario</span><span class="o">.</span><span class="n">tolerance</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
 <span class="linenos">533</span>            <span class="c1"># Analysis logic would be implemented here based on requirements</span>
 <span class="linenos">534</span>
 <span class="linenos">535</span>        <span class="k">return</span> <span class="n">results</span>
@@ -2556,7 +2582,7 @@ and automated testing for professional control system validation.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

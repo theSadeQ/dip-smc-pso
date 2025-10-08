@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -537,27 +563,48 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="core_dynamics.html">plant.core.dynamics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="core_dynamics.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_dynamics.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_dynamics.html#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_dynamics.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_dynamics.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_dynamics.html#dependencies">Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="core_numerical_stability.html">plant.core.numerical_stability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#implementation-architecture">Implementation Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#complete-source-code">Complete Source Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#classes">Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#api-reference">API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#scientific-references">Scientific References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#related-documentation">Related Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_numerical_stability.html#dependencies">Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="core_physics_matrices.html">plant.core.physics_matrices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#implementation-architecture">Implementation Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#complete-source-code">Complete Source Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#api-reference">API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#usage-examples">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#scientific-references">Scientific References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#related-documentation">Related Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_physics_matrices.html#dependencies">Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="core_state_validation.html">plant.core.state_validation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="core_state_validation.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_state_validation.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_state_validation.html#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_state_validation.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_state_validation.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_state_validation.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core_state_validation.html#dependencies">Dependencies</a></li>
@@ -565,6 +612,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="core___init__.html">plant.core.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="core___init__.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core___init__.html#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core___init__.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core___init__.html#dependencies">Dependencies</a></li>
 </ul>
@@ -588,6 +638,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="models_base_dynamics_interface.html">plant.models.base.dynamics_interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="models_base_dynamics_interface.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_base_dynamics_interface.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_base_dynamics_interface.html#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_base_dynamics_interface.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_base_dynamics_interface.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_base_dynamics_interface.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_base_dynamics_interface.html#dependencies">Dependencies</a></li>
@@ -595,6 +648,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="models_base___init__.html">plant.models.base.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="models_base___init__.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_base___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_base___init__.html#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_base___init__.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_base___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_base___init__.html#dependencies">Dependencies</a></li>
 </ul>
@@ -655,6 +711,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="models_simplified_config.html">plant.models.simplified.config</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified_config.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified_config.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified_config.html#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified_config.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified_config.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified_config.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified_config.html#dependencies">Dependencies</a></li>
@@ -672,6 +731,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="models_simplified_physics.html">plant.models.simplified.physics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified_physics.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified_physics.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified_physics.html#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified_physics.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified_physics.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified_physics.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified_physics.html#functions">Functions</a></li>
@@ -680,6 +742,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="models_simplified___init__.html">plant.models.simplified.<strong>init</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified___init__.html#module-overview">Module Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified___init__.html#architecture-diagram">Architecture Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified___init__.html#enhanced-mathematical-foundation">Enhanced Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models_simplified___init__.html#usage-examples">Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified___init__.html#complete-source-code">Complete Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models_simplified___init__.html#dependencies">Dependencies</a></li>
 </ul>
@@ -764,7 +829,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

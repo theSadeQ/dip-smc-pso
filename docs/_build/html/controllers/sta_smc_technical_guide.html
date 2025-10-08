@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Hybrid Adaptive Super-Twisting SMC Technical Guide" href="hybrid_smc_technical_guide.html" /><link rel="prev" title="Adaptive Sliding Mode Control Technical Guide" href="adaptive_smc_technical_guide.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -651,7 +677,10 @@
 <h2>Algorithm Architecture<a class="headerlink" href="#algorithm-architecture" title="Link to this heading">¶</a></h2>
 <section id="modular-controller-structure">
 <h3>1. Modular Controller Structure<a class="headerlink" href="#modular-controller-structure" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SuperTwistingSMC</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SuperTwistingSMC</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Second-order sliding mode controller (STA):</span>
 
@@ -778,7 +807,10 @@
 <h3>3. Numba Acceleration<a class="headerlink" href="#numba-acceleration" title="Link to this heading">¶</a></h3>
 <p><strong>Why Numba?</strong> STA SMC requires sqrt() and iterative updates → Numba provides 2-5× speedup</p>
 <p><strong>Accelerated Operations</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@numba</span><span class="o">.</span><span class="n">njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_sta_smc_core</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
     <span class="c1"># Sliding surface (inline)</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">k1</span><span class="o">*</span><span class="p">(</span><span class="n">th1dot</span> <span class="o">+</span> <span class="n">lam1</span><span class="o">*</span><span class="n">th1</span><span class="p">)</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="p">(</span><span class="n">th2dot</span> <span class="o">+</span> <span class="n">lam2</span><span class="o">*</span><span class="n">th2</span><span class="p">)</span>
@@ -805,7 +837,10 @@
 <h3>1. Core Algorithm (Numba-Accelerated)<a class="headerlink" href="#core-algorithm-numba-accelerated" title="Link to this heading">¶</a></h3>
 <section id="complete-numba-core">
 <h4>1.1 Complete Numba Core<a class="headerlink" href="#complete-numba-core" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@numba</span><span class="o">.</span><span class="n">njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_sta_smc_core</span><span class="p">(</span>
     <span class="n">z</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">sgn_sigma</span><span class="p">,</span>
     <span class="n">alg_gain_K1</span><span class="p">,</span> <span class="n">alg_gain_K2</span><span class="p">,</span> <span class="n">damping_gain</span><span class="p">,</span>
@@ -847,7 +882,10 @@
 </section>
 <section id="main-control-method">
 <h4>1.2 Main Control Method<a class="headerlink" href="#main-control-method" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute STA-SMC control with Numba acceleration.&quot;&quot;&quot;</span>
 
     <span class="c1"># Unpack integrator state</span>
@@ -1128,7 +1166,10 @@
 </section>
 <section id="monitoring-sta-specific-metrics">
 <h3>2. Monitoring STA-Specific Metrics<a class="headerlink" href="#monitoring-sta-specific-metrics" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">monitor_sta_performance</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">monitor_sta_performance</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor STA-specific performance indicators.&quot;&quot;&quot;</span>
 
     <span class="n">z_current</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1339,7 +1380,10 @@
 </section>
 <section id="diagnostic-tools">
 <h3>2. Diagnostic Tools<a class="headerlink" href="#diagnostic-tools" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">diagnose_sta_health</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">diagnose_sta_health</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Diagnose STA SMC health.&quot;&quot;&quot;</span>
 
     <span class="n">z_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">])</span>
@@ -1433,7 +1477,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             

@@ -240,6 +240,9 @@ else:
 ### 2. Advanced PSO Configuration
 
 ```python
+# example-metadata:
+# runnable: false
+
 # Enhanced PSO configuration with robust evaluation
 pso_config = PSOFactoryConfig(
     controller_type=ControllerType.STA_SMC,
@@ -542,6 +545,9 @@ print(f"Memory-efficient result: cost = {result['best_cost']:.6f}")
 ### 1. Research Workflow
 
 ```python
+# example-metadata:
+# runnable: false
+
 """Complete research workflow for controller comparison."""
 from src.controllers.factory import create_controller
 from src.optimization.integration.pso_factory_bridge import optimize_classical_smc, optimize_sta_smc

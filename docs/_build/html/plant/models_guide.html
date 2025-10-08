@@ -2,7 +2,23 @@
 <html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Optimization &amp; Simulation Guide" href="../optimization_simulation/guide.html" /><link rel="prev" title="Mathematical Foundations" href="../mathematical_foundations/index.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
@@ -219,6 +235,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
@@ -442,6 +460,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
+</ul>
 
 </div>
 </div>
@@ -643,7 +669,10 @@ M(\mathbf{q}) \ddot{\mathbf{q}} + C(\mathbf{q}, \dot{\mathbf{q}}) \dot{\mathbf{q
 <section id="base-interface-dynamicsmodel-protocol">
 <h3>Base Interface: DynamicsModel Protocol<a class="headerlink" href="#base-interface-dynamicsmodel-protocol" title="Link to this heading">¶</a></h3>
 <p>All dynamics models must implement this protocol:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Tuple</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">DynamicsModel</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
@@ -822,7 +851,10 @@ M(\mathbf{q}) \ddot{\mathbf{q}} + C(\mathbf{q}, \dot{\mathbf{q}}) \dot{\mathbf{q
 <section id="simplifieddipconfig">
 <h3>SimplifiedDIPConfig<a class="headerlink" href="#simplifieddipconfig" title="Link to this heading">¶</a></h3>
 <p><strong>Source:</strong> <a class="reference download internal" download="" href="../_downloads/0efdad39aa504c3de0d9800c25e6deea/config.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/plant/models/simplified/config.py</span></code></span></a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SimplifiedDIPConfig</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Type-safe configuration for simplified DIP.&quot;&quot;&quot;</span>
 
@@ -883,7 +915,10 @@ m_i \cdot L_{c,i}^2 \leq I_i \leq \frac{1}{3} m_i L_i^2
 <section id="factory-methods">
 <h3>Factory Methods<a class="headerlink" href="#factory-methods" title="Link to this heading">¶</a></h3>
 <p>Configurations provide convenient factory methods:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default parameters (balanced for general use)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="c1"># Default parameters (balanced for general use)</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">SimplifiedDIPConfig</span><span class="o">.</span><span class="n">create_default</span><span class="p">()</span>
 
 <span class="c1"># Benchmark parameters (standardized for comparisons)</span>
@@ -928,7 +963,10 @@ m_i \cdot L_{c,i}^2 \leq I_i \leq \frac{1}{3} m_i L_i^2
 <h3>Simplified Physics Computer<a class="headerlink" href="#simplified-physics-computer" title="Link to this heading">¶</a></h3>
 <p><strong>Source:</strong> <a class="reference download internal" download="" href="../_downloads/daec19628245e3950c8a24a2a755890a/physics.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/plant/models/simplified/physics.py</span></code></span></a></p>
 <p>The simplified physics computer handles matrix computation with numerical stability:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimplifiedPhysicsComputer</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SimplifiedPhysicsComputer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplified physics computation for DIP.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">SimplifiedDIPConfig</span><span class="p">):</span>
@@ -958,7 +996,10 @@ m_i \cdot L_{c,i}^2 \leq I_i \leq \frac{1}{3} m_i L_i^2
 <li><p><strong>State Derivative</strong>: <span class="math notranslate nohighlight">\(\frac{d\mathbf{q}}{dt} = [\dot{\mathbf{q}}, \ddot{\mathbf{q}}]^T\)</span></p></li>
 </ol>
 <p><strong>Implementation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_dynamics_rhs</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_dynamics_rhs</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">control_input</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
@@ -990,7 +1031,10 @@ m_i \cdot L_{c,i}^2 \leq I_i \leq \frac{1}{3} m_i L_i^2
 <section id="numba-optimization">
 <h3>Numba Optimization<a class="headerlink" href="#numba-optimization" title="Link to this heading">¶</a></h3>
 <p>For maximum performance, a JIT-compiled version is available:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
 
 <span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_simplified_dynamics_numba</span><span class="p">(</span>
@@ -1024,7 +1068,10 @@ M_{\text{reg}} = M + \alpha_{\text{adaptive}} \cdot I
 \]</div>
 </div>
 <p>Where <span class="math notranslate nohighlight">\(\alpha_{\text{adaptive}}\)</span> is computed based on matrix conditioning:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveRegularizer</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveRegularizer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adaptive regularization for matrix conditioning.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_regularization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -1046,7 +1093,10 @@ M_{\text{reg}} = M + \alpha_{\text{adaptive}} \cdot I
 <section id="matrix-inversion-with-recovery">
 <h3>Matrix Inversion with Recovery<a class="headerlink" href="#matrix-inversion-with-recovery" title="Link to this heading">¶</a></h3>
 <p>The matrix inverter provides robust inversion with error recovery:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MatrixInverter</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MatrixInverter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Robust matrix inversion with regularization.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">solve_linear_system</span><span class="p">(</span>
@@ -1076,7 +1126,10 @@ M_{\text{reg}} = M + \alpha_{\text{adaptive}} \cdot I
 <section id="conditioning-monitoring">
 <h3>Conditioning Monitoring<a class="headerlink" href="#conditioning-monitoring" title="Link to this heading">¶</a></h3>
 <p>Numerical stability is tracked for diagnostics:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NumericalStabilityMonitor</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NumericalStabilityMonitor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor numerical stability statistics.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">record_inversion</span><span class="p">(</span>
@@ -1276,7 +1329,10 @@ E_{total} = T + V = \text{constant}
 </section>
 <section id="example-4-model-comparison">
 <h3>Example 4: Model Comparison<a class="headerlink" href="#example-4-model-comparison" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDIPDynamics</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.simplified</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplifiedDIPDynamics</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.full</span><span class="w"> </span><span class="kn">import</span> <span class="n">FullDIPDynamics</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.models.lowrank</span><span class="w"> </span><span class="kn">import</span> <span class="n">LowRankDIPDynamics</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -1375,7 +1431,10 @@ E_{total} = T + V = \text{constant}
 <section id="simplifieddipdynamics">
 <h3>SimplifiedDIPDynamics<a class="headerlink" href="#simplifieddipdynamics" title="Link to this heading">¶</a></h3>
 <p><strong>Location:</strong> <a class="reference download internal" download="" href="../_downloads/1d0c186e0d2123e9cf675ca3a48984d7/dynamics.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/plant/models/simplified/dynamics.py</span></code></span></a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimplifiedDIPDynamics</span><span class="p">(</span><span class="n">BaseDynamicsModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SimplifiedDIPDynamics</span><span class="p">(</span><span class="n">BaseDynamicsModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplified DIP dynamics with balanced speed and accuracy.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -1423,7 +1482,10 @@ E_{total} = T + V = \text{constant}
 <section id="fulldipdynamics">
 <h3>FullDIPDynamics<a class="headerlink" href="#fulldipdynamics" title="Link to this heading">¶</a></h3>
 <p><strong>Location:</strong> <a class="reference download internal" download="" href="../_downloads/2aa91c5df08780dbe155fd1d39189de5/dynamics.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/plant/models/full/dynamics.py</span></code></span></a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FullDIPDynamics</span><span class="p">(</span><span class="n">BaseDynamicsModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FullDIPDynamics</span><span class="p">(</span><span class="n">BaseDynamicsModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Full-fidelity DIP dynamics with comprehensive physics.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -1457,7 +1519,10 @@ E_{total} = T + V = \text{constant}
 <section id="lowrankdipdynamics">
 <h3>LowRankDIPDynamics<a class="headerlink" href="#lowrankdipdynamics" title="Link to this heading">¶</a></h3>
 <p><strong>Location:</strong> <a class="reference download internal" download="" href="../_downloads/0a0d54a432c876cb3c2b64ed1ca3ca7c/dynamics.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">src/plant/models/lowrank/dynamics.py</span></code></span></a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LowRankDIPDynamics</span><span class="p">(</span><span class="n">BaseDynamicsModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">LowRankDIPDynamics</span><span class="p">(</span><span class="n">BaseDynamicsModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Low-rank DIP dynamics for fast prototyping.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -1500,8 +1565,8 @@ E_{total} = T + V = \text{constant}
 <ul class="simple">
 <li><p><a class="reference internal" href="../mathematical_foundations/dynamics_derivations.html"><span class="std std-doc"><strong>Dynamics Derivations</strong></span></a> - Complete Lagrangian mechanics derivation</p></li>
 <li><p><a class="reference internal" href="../mathematical_foundations/numerical_integration_theory.html"><span class="std std-doc"><strong>Numerical Integration Theory</strong></span></a> - Integration methods and energy conservation</p></li>
-<li><p><a class="reference internal" href="#configurations_guide.md"><span class="xref myst"><strong>Plant Configurations Guide</strong></span></a> - Configuration system details</p></li>
-<li><p><a class="reference internal" href="#validation_guide.md"><span class="xref myst"><strong>State Validation Guide</strong></span></a> - State validation and sanitization</p></li>
+<li><p><a class="reference internal" href="../reference/plant/configurations_base_config.html"><span class="std std-doc"><strong>Plant Configurations Reference</strong></span></a> - Configuration system details</p></li>
+<li><p><a class="reference internal" href="../reference/plant/core_state_validation.html"><span class="std std-doc"><strong>State Validation Reference</strong></span></a> - State validation and sanitization</p></li>
 <li><p><a class="reference internal" href="../controllers/index.html"><span class="std std-doc"><strong>Controller Integration</strong></span></a> - Using models with SMC controllers</p></li>
 </ul>
 <hr class="docutils" />
@@ -1546,7 +1611,7 @@ E_{total} = T + V = \text{constant}
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 04, 2025</div>
+              Last updated on Oct 08, 2025</div>
           </div>
           <div class="right-details">
             
