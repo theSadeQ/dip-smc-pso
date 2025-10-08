@@ -207,6 +207,41 @@ See [QUICK_REFERENCE.md](QUICK_REFERENCE.md) for full command reference.
 - Simplicity priority? → Classical
 - Best overall? → Hybrid Adaptive STA
 
+### Interactive Performance Comparison
+
+Visual comparison of controller performance across key metrics:
+
+```{eval-rst}
+.. chartjs::
+   :type: bar
+   :data: ../visualization/performance_charts/settling_time_comparison.json
+   :height: 350
+   :responsive:
+   :title: Settling Time Comparison with 95% Confidence Intervals
+```
+
+**Key Performance Metrics:**
+
+- **Settling Time:** Classical SMC leads with fastest convergence (lowest settling time)
+- **Computational Efficiency:** All controllers achieve real-time performance (<10ms per timestep)
+- **Stability:** Hybrid Adaptive-STA provides best robustness to disturbances
+- **Overshoot:** STA-SMC and Classical SMC show superior tracking performance
+
+```{eval-rst}
+.. chartjs::
+   :type: radar
+   :data: ../visualization/performance_charts/stability_scores.json
+   :height: 350
+   :responsive:
+   :title: Multi-Dimensional Controller Comparison
+```
+
+**Interactive Dashboards:**
+
+For detailed performance analysis with all 6 chart types, see:
+- [📊 Full Interactive Dashboard](../visualization/interactive_dashboard.html) - Comprehensive 6-chart performance overview
+- [📈 Individual Chart Pages](../visualization/) - Focused single-chart visualizations
+
 ---
 
 ## Key Concepts

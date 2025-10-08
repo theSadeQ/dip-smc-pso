@@ -1,0 +1,130 @@
+# <type>(<scope>): <subject>
+#
+# <body>
+#
+# <footer>
+
+# ═══════════════════════════════════════════════════════════════════════
+# Conventional Commits Template for DIP-SMC-PSO
+# ═══════════════════════════════════════════════════════════════════════
+#
+# Format:
+#   type(scope): subject
+#
+#   body
+#
+#   footer
+#
+# ───────────────────────────────────────────────────────────────────────
+# Valid Types:
+# ───────────────────────────────────────────────────────────────────────
+#   feat:     New feature
+#   fix:      Bug fix
+#   docs:     Documentation changes
+#   style:    Code style (formatting, semicolons, etc)
+#   refactor: Code refactoring (no functional changes)
+#   perf:     Performance improvement
+#   test:     Adding or updating tests
+#   chore:    Maintenance (dependencies, config, etc)
+#   ci:       CI/CD changes
+#   build:    Build system changes
+#   revert:   Revert previous commit
+#
+# ───────────────────────────────────────────────────────────────────────
+# Common Scopes:
+# ───────────────────────────────────────────────────────────────────────
+#   controllers:  SMC controller implementations
+#   pso:          PSO optimization
+#   simulation:   Simulation engine
+#   plant:        Plant dynamics models
+#   docs:         Documentation
+#   tests:        Test files
+#   ci:           CI/CD workflows
+#   config:       Configuration files
+#   validation:   Quality gates and validation scripts
+#
+# ───────────────────────────────────────────────────────────────────────
+# Examples:
+# ───────────────────────────────────────────────────────────────────────
+#   feat(controllers): add terminal sliding mode controller
+#
+#   Implements Terminal SMC with finite-time convergence guarantees.
+#   Includes PSO optimization integration and comprehensive tests.
+#
+#   Closes #42
+#
+# ─────────────
+#   fix(pso): resolve convergence issue in high-dimensional spaces
+#
+#   PSO was failing to converge for 8+ dimensional parameter spaces.
+#   Adjusted inertia weight decay schedule to improve exploration.
+#
+#   Related to #78
+#
+# ─────────────
+#   docs(api): update optimization module API reference
+#
+#   Added missing docstrings for PSOTuner methods.
+#   Updated parameter descriptions with units and ranges.
+#
+# ─────────────
+#   perf(simulation): vectorize state update computations
+#
+#   Replaced Python loops with NumPy vectorized operations.
+#   Benchmark shows 3.2x speedup for 1000-step simulations.
+#
+# ───────────────────────────────────────────────────────────────────────
+# Breaking Changes:
+# ───────────────────────────────────────────────────────────────────────
+#   For breaking changes, add "BREAKING CHANGE:" in the footer:
+#
+#   feat(controllers): redesign controller factory API
+#
+#   BREAKING CHANGE: create_controller() now requires explicit
+#   controller_type parameter. Previous positional argument syntax
+#   is no longer supported.
+#
+# ───────────────────────────────────────────────────────────────────────
+# Issue References:
+# ───────────────────────────────────────────────────────────────────────
+#   Closes #123          - Closes the issue
+#   Fixes #456           - Fixes the bug
+#   Resolves #789        - Resolves the issue
+#   Related to #101      - Related work
+#   See also #202        - Additional context
+#
+# ───────────────────────────────────────────────────────────────────────
+# Co-Authors:
+# ───────────────────────────────────────────────────────────────────────
+#   For AI-assisted or collaborative commits, add:
+#
+#   🤖 Generated with [Claude Code](https://claude.com/claude-code)
+#
+#   Co-Authored-By: Claude <noreply@anthropic.com>
+#   Co-Authored-By: Name <email@example.com>
+#
+# ───────────────────────────────────────────────────────────────────────
+# Guidelines:
+# ───────────────────────────────────────────────────────────────────────
+#   Subject (first line):
+#   - Use imperative mood ("add" not "added" or "adds")
+#   - Don't capitalize first letter
+#   - No period at the end
+#   - Keep under 72 characters
+#
+#   Body:
+#   - Wrap at 72 characters
+#   - Explain WHAT and WHY (not HOW)
+#   - Separate from subject with blank line
+#
+#   Footer:
+#   - Reference issues and breaking changes
+#   - Separate from body with blank line
+#
+# ═══════════════════════════════════════════════════════════════════════
+# Resources:
+# ═══════════════════════════════════════════════════════════════════════
+#   Conventional Commits: https://www.conventionalcommits.org/
+#   Git-cliff Config:     cliff.toml
+#   Commitlint Config:    .commitlintrc.json
+# ═══════════════════════════════════════════════════════════════════════
