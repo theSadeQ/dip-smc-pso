@@ -2,7 +2,7 @@
 
 ## Clean Root
 
-Keep visible items ≤ 12 (core files/dirs only). Hide dev/build clutter behind dot‑prefixed folders.
+Keep visible items ≤ 15 (core files/dirs only). Hide dev/build clutter behind dot‑prefixed folders.
 
 **Visible files**: `simulate.py`, `streamlit_app.py`, `config.yaml`, `requirements.txt`, `README.md`, `CHANGELOG.md`
 
@@ -51,7 +51,7 @@ docs/_static/
 echo "(create) .dev_tools/clean_view.sh to list essentials, key dirs, hidden tools"
 
 # Health checks
-ls | wc -l                                    # target ≤ 12
+ls | wc -l                                    # target ≤ 15
 find . -name "__pycache__" | wc -l            # target = 0
 find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 ```
@@ -104,16 +104,19 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 - Test artifacts: `.test_artifacts/{purpose}_{iteration}/`
 - Archived docs: `.archive/{category}_{YYYYMMDD}/`
 
-### Acceptable Root Items (≤12 visible)
+### Acceptable Root Items (≤15 visible)
 
 **Core Files (6):**
 - `simulate.py`, `streamlit_app.py`, `config.yaml`
 - `requirements.txt`, `README.md`, `CHANGELOG.md`
 
+**Additional Accepted:**
+- `CLAUDE.md`, `logs/`, `optimization_results/`
+
 **Core Dirs (6):**
 - `src/`, `tests/`, `docs/`, `notebooks/`, `benchmarks/`, `scripts/`
 
-**Total:** 12 items (target achieved)
+**Total:** ≤15 items (realistic target)
 
 **Hidden Dirs (acceptable):**
 - `.archive/`, `.test_artifacts/`, `.dev_tools/`, `.build/`, `.cache/`, `.coverage/`, `.artifacts/`
@@ -172,7 +175,7 @@ python scripts/optimization/tune_controller.py --save optimization_results/class
 **Session End Enforcement (Run Before EVERY Commit):**
 
 ```bash
-# Check root item count (must be ≤20)
+# Check root item count (must be ≤15)
 ls -1 | wc -l
 
 # Find any test files in root (should be empty)
@@ -296,70 +299,7 @@ rm -rf __pycache__ out
 
 ## Lessons Learned from Major Cleanups
 
-### October 2025 Cleanup: 370MB Recovery
-
-**Problem Areas Identified:**
-
-1. **Hidden Directory Bloat** (254MB recovered)
-   - `.test_artifacts/doc_screenshots/`: 234MB of PNG files
-   - `.test_artifacts/doc_examples/`: 20MB of temporary scripts
-   - **Root Cause**: Documentation generation created screenshots without cleanup
-   - **Lesson**: Monitor hidden dirs, not just root directory
-   - **Prevention**: `du -sh .test_artifacts/` weekly (target: <10MB)
-
-2. **Duplicate Directories** (confusion & wasted space)
-   - Found: `artifacts/` vs `.artifacts/`, `.notebooks/` vs `notebooks/`, `.optimization_results/` vs `optimization_results/`
-   - **Lesson**: Document the "single source of truth" for each artifact type
-   - **Solution**:
-     - Use `.artifacts/` for research/analysis artifacts
-     - Use `notebooks/` (visible) for active notebooks
-     - Use `optimization_results/` (visible) for optimization runs
-     - Archive old versions to `.archive/` immediately
-
-3. **Root Directory Creep** (23 → 15 items)
-   - **Culprits**: Config files, backup files, duplicate pytest.ini
-   - **Lesson**: Config files belong in `.config/`, not root
-   - **Actions Taken**:
-     - Moved cliff.toml, .commitlintrc.json, .cspell.json, .markdownlint.* → `.config/`
-     - Deleted config.yaml.backup (use git history)
-     - Consolidated pytest.ini and .pytest.ini → kept `.pytest.ini`
-   - **Target Updated**: ≤15 items (more realistic than original ≤12)
-
-4. **Rotating Log File Explosion** (100MB recovered)
-   - `.dev_validation/report.log.*`: 10 files at 10MB each
-   - **Root Cause**: Log rotation without cleanup
-   - **Lesson**: Rotating logs need active management
-   - **Prevention**:
-     - Added `*.log.*` and `report.log.*` to .gitignore
-     - Delete rotated logs immediately or archive to `.archive/logs_YYYYMMDD/`
-
-5. **Research Backup Chains** (15 backup CSVs archived)
-   - Pattern: `file_BACKUP_v1.csv`, `file_BACKUP_v2.csv`, `file_BACKUP_v3.csv`...
-   - **Lesson**: Don't create backup chains - archive original once
-   - **Correct Pattern**:
-     ```bash
-     # WRONG: Creating backup chains
-     cp data.csv data_BACKUP_20251009.csv
-     cp data.csv data_BACKUP_20251010.csv  # NO!
-
-     # CORRECT: Archive original, work on copy
-     mv data.csv .archive/research_YYYYMMDD/data_original.csv
-     # Now work on new data.csv, git tracks changes
-     ```
-
-6. **Documentation Proliferation** (50+ archived docs)
-   - Accumulated: Phase reports, validation reports, issue docs, TODO analyses
-   - **Lesson**: Archive completed documentation immediately
-   - **Archive Patterns**:
-     - Phase completion reports → `.archive/docs_archive_YYYYMMDD/phase_reports/`
-     - Validation reports → `.archive/docs_archive_YYYYMMDD/validation_reports/`
-     - Closed issue docs → `.archive/docs_archive_YYYYMMDD/issue_reports/`
-
-7. **Automation Gap** (Should have existed from day one)
-   - **Missing**: Automated workspace cleanup script
-   - **Created**: `scripts/cleanup/workspace_cleanup.py`
-   - **Lesson**: Prevention > Cure - automate from the start
-   - **Usage**: `python scripts/cleanup/workspace_cleanup.py --verbose` before every commit
+**Full cleanup analysis (370MB recovery):** `.claude/WORKSPACE_CLEANUP_2025-10-09.md`
 
 ### Red Flags (Check Weekly)
 
@@ -386,28 +326,13 @@ find . -name "*.log.*" | wc -l       # Target: 0
 
 ### Archive Immediately Patterns
 
-When you see these, move to `.archive/` right away:
-
-1. **Completed Phase Documentation**
-   - `PHASE_*_COMPLETION_REPORT.md` → `.archive/docs_archive_YYYYMMDD/phase_reports/`
-   - `WEEK*_VALIDATION*.md` → `.archive/docs_archive_YYYYMMDD/validation_reports/`
-
-2. **Closed Issue Documentation**
-   - `issue_*.md`, `GitHub_Issue_*.md` → `.archive/docs_archive_YYYYMMDD/issue_reports/`
-   - After issue is closed and merged
-
-3. **Research Artifacts**
-   - Backup CSVs → `.archive/research_YYYYMMDD/` (keep one, archive rest)
-   - Batch JSON files → `.archive/research_YYYYMMDD/`
-   - Research documentation → `.archive/research_YYYYMMDD/`
-
-4. **Failed Experiments**
-   - Experimental code → `.archive/experiments_YYYYMMDD/`
-   - Test configurations → `.archive/experiments_YYYYMMDD/`
-
-5. **Large Logs**
-   - PSO run logs > 1MB → `.archive/pso_logs_YYYYMMDD/`
-   - Test run directories → `.archive/test_logs_YYYYMMDD/`
+Archive to `.archive/` when you see:
+- `PHASE_*_COMPLETION_REPORT.md` → `docs_archive_YYYYMMDD/phase_reports/`
+- `WEEK*_VALIDATION*.md` → `docs_archive_YYYYMMDD/validation_reports/`
+- `issue_*.md`, `GitHub_Issue_*.md` → `docs_archive_YYYYMMDD/issue_reports/` (after closed)
+- Backup CSVs, batch JSONs → `research_YYYYMMDD/`
+- Experimental code → `experiments_YYYYMMDD/`
+- Logs > 1MB → `pso_logs_YYYYMMDD/` or `test_logs_YYYYMMDD/`
 
 ### Duplicate Directory Prevention
 
