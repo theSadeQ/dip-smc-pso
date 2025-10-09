@@ -1,68 +1,30 @@
-# PSO vs Grid Search Comparison
-
-**Status:** 🚧 Under Construction
-
-This document will provide a comprehensive comparison between Particle Swarm Optimization and traditional grid search methods for controller parameter tuning.
-
-## Planned Content
-
-### Methodology Comparison
+# PSO vs Grid Search Comparison **Status:** 🚧 Under Construction This document will provide a comparison between Particle Swarm Optimization and traditional grid search methods for controller parameter tuning. ## Planned Content ### Methodology Comparison
 - Search space exploration strategies
 - Computational complexity analysis
 - Convergence characteristics
 - Sample efficiency metrics
-- Scalability with parameter count
-
-### Theoretical Background
+- Scalability with parameter count ### Theoretical Background
 - Grid search: exhaustive vs coarse sampling
 - PSO: swarm intelligence principles
 - Curse of dimensionality impact
 - Local vs global optima handling
-- Computational cost models
-
-### Empirical Benchmarks
+- Computational cost models ### Empirical Benchmarks
 - Parameter sweep experiment design
-- Performance metrics comparison
-  - Time to convergence
-  - Solution quality
-  - Robustness to initialization
-  - Computational resource usage
+- Performance metrics comparison - Time to convergence - Solution quality - Robustness to initialization - Computational resource usage
 - Statistical significance testing
-- Visualization of search trajectories
-
-### Use Case Guidelines
-- When to use grid search:
-  - Low-dimensional problems (≤3 parameters)
-  - Exhaustive validation required
-  - Simple fitness landscapes
-  - Debugging and sanity checks
-- When to use PSO:
-  - High-dimensional problems (>4 parameters)
-  - Complex fitness landscapes
-  - Limited computational budget
-  - Continuous parameter spaces
-
-### Hybrid Approaches
+- Visualization of search trajectories ### Use Case Guidelines
+- When to use grid search: - Low-dimensional problems (≤3 parameters) - Exhaustive validation required - Simple fitness landscapes - Debugging and sanity checks
+- When to use PSO: - High-dimensional problems (>4 parameters) - Complex fitness landscapes - Limited computational budget - Continuous parameter spaces ### Hybrid Approaches
 - Coarse grid + PSO refinement
 - PSO initialization with grid sampling
 - Sequential optimization strategies
-- Multi-stage parameter tuning
-
-### Best Practices
+- Multi-stage parameter tuning ### Best Practices
 - Parameter bounds selection
 - Resolution/granularity trade-offs
 - Computational resource planning
 - Results validation and verification
-- Documentation and reproducibility
-
-## Temporary References
-
-Until this document is complete, please refer to:
+- Documentation and reproducibility ## Temporary References Until this document is complete, please refer to:
 - [PSO Optimization Workflow](pso-optimization-workflow.md)
 - [Batch Simulation Workflow](batch-simulation-workflow.md)
-- [Statistical Benchmarks](../../reference/benchmarks/statistical_benchmarks_v2.md)
-
----
-
-**Last Updated:** 2025-10-07
+- [Statistical Benchmarks](../../reference/benchmarks/statistical_benchmarks_v2.md) --- **Last Updated:** 2025-10-07
 **Target Completion:** Phase 7
