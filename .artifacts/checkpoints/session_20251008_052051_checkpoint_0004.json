@@ -1,0 +1,545 @@
+{
+  "checkpoint_id": "session_20251008_052051_0004",
+  "progress": {
+    "session_id": "session_20251008_052051",
+    "started_at": "2025-10-08T05:20:51.619177",
+    "last_updated": "2025-10-08T05:29:05.389196",
+    "total_claims": 4,
+    "claims_processed": 4,
+    "claims_successful": 4,
+    "claims_failed": 0,
+    "current_batch": "CRITICAL",
+    "current_claim_id": null,
+    "errors": [],
+    "performance": {}
+  },
+  "results": [
+    {
+      "claim_id": "FORMAL-THEOREM-016",
+      "claim_text": "If all sliding surface parameters $c_i > 0$, then the sliding surface dynamics are exponentially stable with convergence rates determined by $c_i$.",
+      "queries_used": [
+        "all sliding surface parameters then sliding surface dynamics are exponentially stable convergence rates determined"
+      ],
+      "papers_found": [
+        {
+          "title": "Design of Sliding Mode PID Controller with Improved reaching laws for\n  Nonlinear Systems",
+          "authors": [
+            "Kirtiman Singh"
+          ],
+          "year": 2022,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/2207.11129v1",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        },
+        {
+          "title": "Indirect Sliding Mode Control with Double Integral Sliding Surface",
+          "authors": [],
+          "year": 2018,
+          "doi": "10.1201/9781315217796-13",
+          "url": "https://doi.org/10.1201/9781315217796-13",
+          "venue": "Sliding Mode Control of Switching Power Converters",
+          "citation_count": 0,
+          "source": "crossref"
+        },
+        {
+          "title": "Modified PSO based PID Sliding Mode Control using Improved Reaching Law\n  for Nonlinear systems",
+          "authors": [
+            "Kirtiman Singh",
+            "Prabin Kumar Padhy"
+          ],
+          "year": 2022,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/2209.09170v1",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        },
+        {
+          "title": "A co-design method of online learning SMC law via an input-mappping\n  strategy",
+          "authors": [
+            "Yaru Yu",
+            "Dewei Li",
+            "Dongya Zhao",
+            "Yugeng Xi"
+          ],
+          "year": 2022,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/2205.03652v1",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        },
+        {
+          "title": "Regularization and geometry of piecewise smooth systems with\n  intersecting discontinuity sets",
+          "authors": [
+            "P. Kaklamanos",
+            "K. Uldall Kristiansen"
+          ],
+          "year": 2019,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/1909.09810v1",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_singh2022_design_sliding_mode",
+          "entry": "@article{ref_singh2022_design_sliding_mode,\n    author = {Kirtiman Singh},\n    title = {{Design of Sliding Mode PID Controller with Improved reaching laws for Nonlinear Systems}},\n    journal = {arXiv},\n    year = {2022},\n    url = {http://arxiv.org/pdf/2207.11129v1},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Design of Sliding Mode PID Controller with Improved reaching laws for\n  Nonlinear Systems",
+            "authors": [
+              "Kirtiman Singh"
+            ],
+            "year": 2022,
+            "doi": null,
+            "url": "http://arxiv.org/pdf/2207.11129v1",
+            "abstract": "In this thesis, advanced design technique in sliding mode control (SMC) is\npresented with focus on PID (Proportional-Integral-Derivative) type Sliding\nsurfaces based Sliding mode control with improved power rate exponential\nreaching law for Non-linear systems using Modified Particle Swarm Optimization\n(MPSO). To handle large non-linearities directly, sliding mode controller based\non PID-type sliding surface has been designed in this work, where Integral term\nensures fast finite convergence time. The controller parameter for various\nmodified structures can be estimated using Modified PSO, which is used as an\noffline optimization technique. Various reaching law were implemented leading\nto the proposed improved exponential power rate reaching law, which also\nimproves the finite convergence time. To implement the proposed algorithm,\nnonlinear mathematical model has to be decrypted without linearizing, and used\nfor the simulation purposes. Their performance is studied using simulations to\nprove the proposed behavior. The problem of chattering has been overcome by\nusing boundary method and also second order sliding mode method. PI-type\nsliding surface based second order sliding mode controller with PD surface\nbased SMC compensation is also proposed and implemented. The proposed\nalgorithms have been analyzed using Lyapunov stability criteria. The robustness\nof the method is provided using simulation results including disturbance and\n10% variation in system parameters. Finally process control based hardware is\nimplemented (conical tank system).",
+            "venue": "arXiv",
+            "citation_count": 0,
+            "arxiv_id": "2207.11129v1",
+            "source": "arxiv",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_unknown2018_indirect_sliding_mode",
+          "entry": "@article{ref_unknown2018_indirect_sliding_mode,\n    author = {Anonymous},\n    title = {{Indirect Sliding Mode Control with Double Integral Sliding Surface}},\n    journal = {Unknown},\n    year = {2018},\n    doi = {10.1201/9781315217796-13},\n    url = {https://doi.org/10.1201/9781315217796-13},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Indirect Sliding Mode Control with Double Integral Sliding Surface",
+            "authors": [],
+            "year": 2018,
+            "doi": "10.1201/9781315217796-13",
+            "url": "https://doi.org/10.1201/9781315217796-13",
+            "abstract": null,
+            "venue": "Sliding Mode Control of Switching Power Converters",
+            "citation_count": 0,
+            "arxiv_id": null,
+            "source": "crossref",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T05:21:54.738992",
+      "processing_time_sec": 62.81000638008118,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-019",
+      "claim_text": "Under the reaching condition {eq}`eq:reaching_condition`, the system reaches the sliding surface in finite time bounded by:",
+      "queries_used": [
+        "Under reaching condition system reaches sliding surface finite time bounded by:"
+      ],
+      "papers_found": [
+        {
+          "title": "Adaptive Finite-Time Backstepping Integral Sliding Mode Control of Three-Degree-of-Freedom Stabilized System for Ship Propulsion-Assisted Sail Based on the Inverse System Method",
+          "authors": [
+            "Sheng Liu",
+            "Jian Song",
+            "Lanyong Zhang",
+            "Yinchao Tan"
+          ],
+          "year": 2024,
+          "doi": "10.3390/jmse12020348",
+          "url": "https://www.semanticscholar.org/paper/4a9c0b45011f6334cf66b29d8ff610ea70c3f5fc",
+          "venue": "Journal of Marine Science and Engineering",
+          "citation_count": 3,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Finite-Time Tracking Control With Fast Reaching Condition for Disturbed More Electric Aircraft Direct Current Microgrid With Constant Power Loads",
+          "authors": [
+            "Zhaoyang Zuo",
+            "N. Vafamand",
+            "Saleh Mobayen",
+            "T. Dragi\u010devi\u0107"
+          ],
+          "year": 2023,
+          "doi": "10.1109/TAES.2023.3276857",
+          "url": "https://www.semanticscholar.org/paper/1478e146d17de18e7226c6093903c566bf0062ec",
+          "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+          "citation_count": 6,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Sliding modes: from asymptoticity, to finite time and fixed time",
+          "authors": [
+            "Wenwu Yu",
+            "Xinghuo Yu",
+            "Hebin Wang"
+          ],
+          "year": 2023,
+          "doi": "10.1007/s11432-022-3837-7",
+          "url": "https://www.semanticscholar.org/paper/42897321a11ebdae3d2f2ea6f1f1c3f56428a18f",
+          "venue": "Science China Information Sciences",
+          "citation_count": 10,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Asynchronous Event-Triggered Sliding Mode Control for Semi-Markov Jump Systems Within a Finite-Time Interval",
+          "authors": [
+            "Jing Wang",
+            "Tingting Ru",
+            "Jianwei Xia",
+            "Hao Shen",
+            "V. Sreeram"
+          ],
+          "year": 2021,
+          "doi": "10.1109/TCSI.2020.3034650",
+          "url": "https://www.semanticscholar.org/paper/22249ba16f3cf298ad32b81374cb101b21824f7b",
+          "venue": "IEEE Transactions on Circuits and Systems Part 1: Regular Papers",
+          "citation_count": 98,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Security control for Markovian jump systems under fading channel: A finite\u2010time sliding\u2010mode method",
+          "authors": [
+            "Meng Zhao",
+            "Z. Cao",
+            "Yekai Yang",
+            "Y. Niu"
+          ],
+          "year": 2023,
+          "doi": "10.1002/rnc.6642",
+          "url": "https://www.semanticscholar.org/paper/de121b29fcc4fbe3b777cf1f5fe5b3714ad8bdf5",
+          "venue": "International Journal of Robust and Nonlinear Control",
+          "citation_count": 2,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_liu2024_adaptive_finitetime_backstepping",
+          "entry": "@article{ref_liu2024_adaptive_finitetime_backstepping,\n    author = {Sheng Liu and Jian Song and Lanyong Zhang and Yinchao Tan},\n    title = {{Adaptive Finite-Time Backstepping Integral Sliding Mode Control of Three-Degree-of-Freedom Stabilized System for Ship Propulsion-Assisted Sail Based on the Inverse System Method}},\n    journal = {Unknown},\n    year = {2024},\n    doi = {10.3390/jmse12020348},\n    url = {https://www.semanticscholar.org/paper/4a9c0b45011f6334cf66b29d8ff610ea70c3f5fc},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Adaptive Finite-Time Backstepping Integral Sliding Mode Control of Three-Degree-of-Freedom Stabilized System for Ship Propulsion-Assisted Sail Based on the Inverse System Method",
+            "authors": [
+              "Sheng Liu",
+              "Jian Song",
+              "Lanyong Zhang",
+              "Yinchao Tan"
+            ],
+            "year": 2024,
+            "doi": "10.3390/jmse12020348",
+            "url": "https://www.semanticscholar.org/paper/4a9c0b45011f6334cf66b29d8ff610ea70c3f5fc",
+            "abstract": "The three-degree-of-freedom (3-DOF) stabilized control system for ship propulsion-assisted sails is used to control the 3-DOF motion of sails to obtain offshore wind energy. The attitude of the sail is adjusted to ensure optimal thrust along the target course. An adaptive finite-time backstepping integral sliding mode control based on the inverse system method (ABISMC-ISM) is presented for attitude tracking of the sail. Considering the nonlinear dynamics and strong coupling of the system, a decoupling strategy is established using the inverse system method (ISM). Constructing inverse dynamics to eliminate internal coupling, the system is transformed into independent pseudolinear subsystems. For the decoupled open-loop subsystems, an adaptive finite-time backstepping integral sliding mode control is designed to achieve closed-loop control. A backstepping-based integral sliding surface is proposed to eliminate the phase-reaching stage of the sliding surface. Considering the unmodelled dynamics and external disturbances, an adaptive extreme learning machine (AELM) was designed to estimate the disturbances. Furthermore, a sliding mode reaching law based on finite-time theory was employed to ensure that the system returns to the sliding surface in a finite time under chattering conditions. Experiments on a principle prototype demonstrate the effectiveness and energy-saving performance of the proposed method.",
+            "venue": "Journal of Marine Science and Engineering",
+            "citation_count": 3,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_zuo2023_finitetime_tracking_control",
+          "entry": "@article{ref_zuo2023_finitetime_tracking_control,\n    author = {Zhaoyang Zuo and N. Vafamand and Saleh Mobayen and T. Dragi\u010devi\u0107},\n    title = {{Finite-Time Tracking Control With Fast Reaching Condition for Disturbed More Electric Aircraft Direct Current Microgrid With Constant Power Loads}},\n    journal = {Unknown},\n    year = {2023},\n    doi = {10.1109/TAES.2023.3276857},\n    url = {https://www.semanticscholar.org/paper/1478e146d17de18e7226c6093903c566bf0062ec},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Finite-Time Tracking Control With Fast Reaching Condition for Disturbed More Electric Aircraft Direct Current Microgrid With Constant Power Loads",
+            "authors": [
+              "Zhaoyang Zuo",
+              "N. Vafamand",
+              "Saleh Mobayen",
+              "T. Dragi\u010devi\u0107"
+            ],
+            "year": 2023,
+            "doi": "10.1109/TAES.2023.3276857",
+            "url": "https://www.semanticscholar.org/paper/1478e146d17de18e7226c6093903c566bf0062ec",
+            "abstract": "Future more electric aircraft (MEA) can be seen as a direct current microgrid (dc MG). While dc MG can generally achieve safe, efficient, and reliable operation of the system, constant power loads (CPLs), unknown resistive loads, dc source voltage variations, and disturbance inputs might degrade the overall stability and performance if they are not compensated in the control design procedure. In this article, a fast-reaching condition-based sliding mode control (SMC) is proposed for the dc MG. The fast-reaching law contains two terms that improve the transient performance by forcing the system states to reach a sliding surface with two different rates. This attribute enhances the speed of convergence of the states to the sliding surface compared to conventional SMC. Additionally, the suggested method is resilient to system parameter uncertainties, which is indispensable in practice. The proposed controller is implemented to a dc MG that is supplied by an uncertain dc source and feeds CPLs and resistive load with time-varying power and resistance. OPAL RT results illustrate the robustness and fast convergence of the planned SMC controller.",
+            "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+            "citation_count": 6,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T05:21:56.117871",
+      "processing_time_sec": 1.3778634071350098,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-020",
+      "claim_text": "The classical SMC law {eq}`eq:classical_smc_structure` with switching gain $\\eta > \\rho$ (where $\\rho$ is the uncertainty bound) ensures global finite-time convergence to the sliding surface.",
+      "queries_used": [
+        "classical sliding mode control finite-time",
+        "classical sliding mode control gain",
+        "classical sliding mode control switching gain"
+      ],
+      "papers_found": [
+        {
+          "title": "Finite-Time Reaching Law Based Sliding Mode Control of Quantum Systems",
+          "authors": [
+            "Eram Taslima",
+            "S. Kamal",
+            "R. K. Saket"
+          ],
+          "year": 2024,
+          "doi": "10.1109/VSS61690.2024.10753393",
+          "url": "https://www.semanticscholar.org/paper/700356767309c586fa0808197f5f5b78765c8a05",
+          "venue": "International Workshop on Variable Structure Systems",
+          "citation_count": 2,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Fault-tolerant control for Markov jump nonlinear systems based on an observer and finite-time fast integral terminal sliding mode control",
+          "authors": [
+            "Pu Yang",
+            "Ziwei Shen",
+            "Kejia Feng",
+            "Yu Ding"
+          ],
+          "year": 2024,
+          "doi": "10.1177/01423312241248258",
+          "url": "https://www.semanticscholar.org/paper/6442057ac40f7c11975344d0ac61d2e62113d2b5",
+          "venue": "Transactions of the Institute of Measurement and Control",
+          "citation_count": 4,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Nonsingular Fixed-time Sliding Mode Control for Second-order Systems with Unknown Disturbance",
+          "authors": [
+            "Ye Tian",
+            "P. Lu",
+            "Qing Jiang",
+            "Changkun Du",
+            "Haikuo Liu"
+          ],
+          "year": 2021,
+          "doi": "10.23919/CCC52363.2021.9550434",
+          "url": "https://www.semanticscholar.org/paper/080fe637ef2c6f06b4c1c39d3595091cab04ce4e",
+          "venue": "Cybersecurity and Cyberforensics Conference",
+          "citation_count": 1,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Robust higher order sliding mode control of grid\u2010forming converters with LCL filter in weak grid scenarios for fast frequency support",
+          "authors": [
+            "Tuhin S. Das",
+            "Udaya D. Annakkage",
+            "Dharshana Muthumuni",
+            "In Kwon Park"
+          ],
+          "year": 2024,
+          "doi": "10.1049/gtd2.13263",
+          "url": "https://www.semanticscholar.org/paper/c1f4f3b48b479bd46feb08eff73b5cb0689018ee",
+          "venue": "IET Generation, Transmission &amp; Distribution",
+          "citation_count": 1,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Sliding Mode Flight Control Law Design Requirements for Oblique Wing Aircraft Based on Perturbation Theory",
+          "authors": [
+            "Lixin Wang",
+            "Xun Sun",
+            "Hailiang Liu",
+            "Jingzhong Ma",
+            "Wenyuan Cheng",
+            "S. Tai",
+            "Yun Zhu",
+            "Ting Yue"
+          ],
+          "year": 2024,
+          "doi": "10.3390/aerospace11050366",
+          "url": "https://www.semanticscholar.org/paper/d5ce401e00cc6496bdcecf74564e9850681f4882",
+          "venue": "Aerospace",
+          "citation_count": 1,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_taslima2024_finitetime_reaching_law",
+          "entry": "@inproceedings{ref_taslima2024_finitetime_reaching_law,\n    author = {Eram Taslima and S. Kamal and R. K. Saket},\n    title = {{Finite-Time Reaching Law Based Sliding Mode Control of Quantum Systems}},\n    booktitle = {International Workshop on Variable Structure Systems},\n    year = {2024},\n    doi = {10.1109/VSS61690.2024.10753393},\n    url = {https://www.semanticscholar.org/paper/700356767309c586fa0808197f5f5b78765c8a05},\n}",
+          "type": "inproceedings",
+          "paper": {
+            "title": "Finite-Time Reaching Law Based Sliding Mode Control of Quantum Systems",
+            "authors": [
+              "Eram Taslima",
+              "S. Kamal",
+              "R. K. Saket"
+            ],
+            "year": 2024,
+            "doi": "10.1109/VSS61690.2024.10753393",
+            "url": "https://www.semanticscholar.org/paper/700356767309c586fa0808197f5f5b78765c8a05",
+            "abstract": "Robustness is a major issue in the stabilization control of quantum systems. A practical quantum system is often exposed to uncertainties and disturbances in external fields and system Hamiltonian. Sliding mode control is a powerful tool in designing robust control for classical systems to mitigate the effect of disturbances. This paper leverages the sliding mode control technique to design a finite-time reaching law for two-level quantum systems in the presence of uncertainties in the system Hamiltonian. A numerical example is presented to showcase the effectiveness of the theoretical results. This research contributes to advancing the robust control techniques for quantum systems, paving the way for enhanced stability in quantum computing and quantum information processing applications.",
+            "venue": "International Workshop on Variable Structure Systems",
+            "citation_count": 2,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_yang2024_faulttolerant_control_markov",
+          "entry": "@article{ref_yang2024_faulttolerant_control_markov,\n    author = {Pu Yang and Ziwei Shen and Kejia Feng and Yu Ding},\n    title = {{Fault-tolerant control for Markov jump nonlinear systems based on an observer and finite-time fast integral terminal sliding mode control}},\n    journal = {Unknown},\n    year = {2024},\n    doi = {10.1177/01423312241248258},\n    url = {https://www.semanticscholar.org/paper/6442057ac40f7c11975344d0ac61d2e62113d2b5},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Fault-tolerant control for Markov jump nonlinear systems based on an observer and finite-time fast integral terminal sliding mode control",
+            "authors": [
+              "Pu Yang",
+              "Ziwei Shen",
+              "Kejia Feng",
+              "Yu Ding"
+            ],
+            "year": 2024,
+            "doi": "10.1177/01423312241248258",
+            "url": "https://www.semanticscholar.org/paper/6442057ac40f7c11975344d0ac61d2e62113d2b5",
+            "abstract": "This paper develops a novel fault-tolerant control based on an observer for underactuated robot manipulators with unknown external disturbances, uncertainties, and actuator faults. First, unlike the traditional approach of treating the robot system as a parameter time-varying system, the underactuated robot manipulator with different drive modes can be considered as one of the classical Markov jump nonlinear systems (MJNSs). Second, an adaptive disturbance observer is designed to estimate the state and disturbances of the system. Finally, based on the observation results, a nonsingular fast integral terminal sliding mode controller (NFITSMC) is utilized to implement fault-tolerant control of the system. Compared with traditional observer and terminal sliding mode controller, the adoption of the novel controller and observer can improve response time and reduce chattering. Especially, in order to eliminate chattering, the integral term is introduced into the nonsingular fast terminal sliding mode controller. Structuring Lyapunov\u2013Krasovskii functional (LKF) and based on linear matrix inequalities (LMIs) techniques, the convergence of control strategy and tracking errors is proved. The simulation results show that the actuator faults can be observed successfully and the error system is finite-time stable.",
+            "venue": "Transactions of the Institute of Measurement and Control",
+            "citation_count": 4,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T05:22:59.613317",
+      "processing_time_sec": 63.49544596672058,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-023",
+      "claim_text": "With the boundary layer method, the tracking error is ultimately bounded by:",
+      "queries_used": [
+        "tracking ultimately bounded"
+      ],
+      "papers_found": [
+        {
+          "title": "Uniformly ultimately bounded tracking control of sandwich systems with nonsymmetric sandwiched dead-zone nonlinearity and input saturation constraint",
+          "authors": [
+            "M. Azhdari",
+            "T. Binazadeh"
+          ],
+          "year": 2021,
+          "doi": "10.1177/1077546320987940",
+          "url": "https://www.semanticscholar.org/paper/82dcce7a51d1ae69df5ed20491ea9c8d358f8e55",
+          "venue": "Journal of Vibration and Control",
+          "citation_count": 12,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Observer-Based Adaptive Time-Varying Formation-Containment Tracking for Multiagent System With Bounded Unknown Input",
+          "authors": [
+            "Xiaoyi Zhang",
+            "Jie Wu",
+            "Xisheng Zhan",
+            "Tao Han",
+            "Huaicheng Yan"
+          ],
+          "year": 2023,
+          "doi": "10.1109/TSMC.2022.3199410",
+          "url": "https://www.semanticscholar.org/paper/e64dc4e14cdaa51960f517ddb979321b6358ac94",
+          "venue": "IEEE Transactions on Systems, Man, and Cybernetics: Systems",
+          "citation_count": 34,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Real-time tracking on adaptive critic design with uniformly ultimately bounded condition",
+          "authors": [
+            "Zhen Ni",
+            "Xiao Fang",
+            "Haibo He",
+            "Dongbin Zhao",
+            "Xin Xu"
+          ],
+          "year": 2013,
+          "doi": "10.1109/ADPRL.2013.6614987",
+          "url": "https://www.semanticscholar.org/paper/4526ae7cd03dfc5d624e0285e3134d38b8640cdd",
+          "venue": "IEEE Symposium on Adaptive Dynamic Programming and Reinforcement Learning",
+          "citation_count": 13,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Uniformly ultimately bounded tracking control of linear differential inclusions with stochastic disturbance",
+          "authors": [
+            "Jun Huang",
+            "Zhengzhi Han",
+            "Xiushan Cai",
+            "Leipo Liu"
+          ],
+          "year": 2011,
+          "doi": "10.1016/j.matcom.2011.05.008",
+          "url": "https://www.semanticscholar.org/paper/382f3a382e7cd9b8f577c239fbb48d3ac89580fb",
+          "venue": "Mathematics and Computers in Simulation",
+          "citation_count": 17,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Distributed Model Reference Control for Cooperative Tracking of Vehicle Platoons Subjected to External Disturbances and Bounded Leader Input",
+          "authors": [
+            "A. Prayitno",
+            "I. Nilkhamhang"
+          ],
+          "year": 2022,
+          "doi": "10.1007/s12555-021-0171-4",
+          "url": "https://www.semanticscholar.org/paper/64c6d349183896afefc8f8d1c89936bfe14d9d46",
+          "venue": "International Journal of Control, Automation and Systems",
+          "citation_count": 4,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_azhdari2021_uniformly_ultimately_bounded",
+          "entry": "@article{ref_azhdari2021_uniformly_ultimately_bounded,\n    author = {M. Azhdari and T. Binazadeh},\n    title = {{Uniformly ultimately bounded tracking control of sandwich systems with nonsymmetric sandwiched dead-zone nonlinearity and input saturation constraint}},\n    journal = {Unknown},\n    year = {2021},\n    doi = {10.1177/1077546320987940},\n    url = {https://www.semanticscholar.org/paper/82dcce7a51d1ae69df5ed20491ea9c8d358f8e55},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Uniformly ultimately bounded tracking control of sandwich systems with nonsymmetric sandwiched dead-zone nonlinearity and input saturation constraint",
+            "authors": [
+              "M. Azhdari",
+              "T. Binazadeh"
+            ],
+            "year": 2021,
+            "doi": "10.1177/1077546320987940",
+            "url": "https://www.semanticscholar.org/paper/82dcce7a51d1ae69df5ed20491ea9c8d358f8e55",
+            "abstract": "This article studies the uniformly ultimately bounded output tracking problem of uncertain nonlinear sandwich systems with sandwiched dead-zone nonlinearity in the presence of some practical constraints such as nonsymmetric input saturation, model uncertainties, time-varying external disturbances, and unknown parameters. Due to the existence of both dead-zone and saturation nonlinearities, the design process is more complicated; therefore, to solve the design complexities, the designing process is divided into two phases. The proposed method leads to output tracking with acceptable accuracy. Moreover, all signals in the closed-loop system are ultimately bounded. Simulation results illustrate the applicability and effectiveness of the proposed method by its application on two practical sandwich systems (robotic system and electrohydraulic servo press system).",
+            "venue": "Journal of Vibration and Control",
+            "citation_count": 12,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_zhang2023_observerbased_adaptive_timevarying",
+          "entry": "@article{ref_zhang2023_observerbased_adaptive_timevarying,\n    author = {Xiaoyi Zhang and Jie Wu and Xisheng Zhan and Tao Han and Huaicheng Yan},\n    title = {{Observer-Based Adaptive Time-Varying Formation-Containment Tracking for Multiagent System With Bounded Unknown Input}},\n    journal = {Unknown},\n    year = {2023},\n    doi = {10.1109/TSMC.2022.3199410},\n    url = {https://www.semanticscholar.org/paper/e64dc4e14cdaa51960f517ddb979321b6358ac94},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Observer-Based Adaptive Time-Varying Formation-Containment Tracking for Multiagent System With Bounded Unknown Input",
+            "authors": [
+              "Xiaoyi Zhang",
+              "Jie Wu",
+              "Xisheng Zhan",
+              "Tao Han",
+              "Huaicheng Yan"
+            ],
+            "year": 2023,
+            "doi": "10.1109/TSMC.2022.3199410",
+            "url": "https://www.semanticscholar.org/paper/e64dc4e14cdaa51960f517ddb979321b6358ac94",
+            "abstract": "In this article, the time-varying formation (TVF)-containment tracking problem is investigated for linear multiagent systems (MASs), in which the input of tracking leader is unknown and bounded. A novel kind of adaptive discontinuous TVF-containment tracking protocol for linear MAS is proposed. Based on the Lyapunov stability theory, it is shown that under the appropriate assumptions the leaders can achieve an expected TVF and track the trajectory of the tracking leader, while the follower agents can move into the convex hull formed by leader agents. Furthermore, the continuous protocols are also presented to avoid undesirable chattering from the tracking leader\u2019s nonzero input, under which the errors are uniformly ultimately bounded and the upper bound of errors can be made arbitrarily small. In the end, simulation example verifies the feasibility of the desired theoretical results.",
+            "venue": "IEEE Transactions on Systems, Man, and Cybernetics: Systems",
+            "citation_count": 34,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T05:29:05.389196",
+      "processing_time_sec": 365.77587890625,
+      "status": "success",
+      "error_message": null
+    }
+  ],
+  "queued_claims": []
+}

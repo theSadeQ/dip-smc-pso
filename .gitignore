@@ -1,7 +1,9 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*.pyo
 
 # Cache directories
 .benchmarks/
@@ -9,6 +11,11 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .hypothesis/
+.mypy_cache/
+.tox/
+*.cover
+*.coverage
+.htmlcov/
 
 # Build and distribution
 build/
@@ -31,6 +38,8 @@ ENV/
 # OS specific
 .DS_Store
 Thumbs.db
+desktop.ini
+*.lnk
 
 # Backup files
 *.bak
@@ -40,6 +49,14 @@ Thumbs.db
 *.tmp
 *.temp
 tmp/
+*.log.1
+*.log.2
+*.log.*
+report.log.*
+
+# Test artifacts
+.test_artifacts/doc_screenshots/
+.test_artifacts/doc_examples/
 
 # Large project directories (for clean GitHub setup)
 SubAgent/

@@ -1,0 +1,972 @@
+{
+  "checkpoint_id": "session_20251008_062100_0007",
+  "progress": {
+    "session_id": "session_20251008_062100",
+    "started_at": "2025-10-08T06:21:00.772184",
+    "last_updated": "2025-10-08T06:29:21.216343",
+    "total_claims": 7,
+    "claims_processed": 7,
+    "claims_successful": 7,
+    "claims_failed": 0,
+    "current_batch": "CRITICAL",
+    "current_claim_id": null,
+    "errors": [],
+    "performance": {}
+  },
+  "results": [
+    {
+      "claim_id": "FORMAL-THEOREM-001",
+      "claim_text": "Hysteresis with deadband $\\delta$ prevents oscillation for residuals with bounded derivative.",
+      "queries_used": [
+        "Hysteresis deadband prevents oscillation for residuals bounded derivative."
+      ],
+      "papers_found": [
+        {
+          "title": "Predictability and Fairness in Load Aggregation with Deadband",
+          "authors": [
+            "F. V. Difonzo",
+            "M. Roubalik",
+            "J. Marecek"
+          ],
+          "year": 2023,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/2305.17725v2",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        },
+        {
+          "title": "Heat Transport Hysteresis Generated through Frequency Switching of a\n  Time-Dependent Temperature Gradient",
+          "authors": [
+            "Renai Chen",
+            "Galen T. Craven"
+          ],
+          "year": 2025,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/2501.12649v1",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        },
+        {
+          "title": "Online Convex Optimization with Binary Constraints",
+          "authors": [
+            "Antoine Lesage-Landry",
+            "Joshua A. Taylor",
+            "Duncan S. Callaway"
+          ],
+          "year": 2020,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/2005.02274v3",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        },
+        {
+          "title": "An ultra-narrow line width levitated nano-oscillator for testing\n  dissipative wavefunction collapse",
+          "authors": [
+            "A. Pontin",
+            "N. P. Bullier",
+            "M. Toro\u0161",
+            "P. F. Barker"
+          ],
+          "year": 2019,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/1907.06046v1",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        },
+        {
+          "title": "IoT-based Remote Control Study of a Robotic Trans-esophageal Ultrasound\n  Probe via LAN and 5G",
+          "authors": [
+            "Shuangyi Wang",
+            "Xilong Hou",
+            "Richard Housden",
+            "Zengguang Hou",
+            "Davinder Singh",
+            "Kawal Rhode"
+          ],
+          "year": 2020,
+          "doi": null,
+          "url": "http://arxiv.org/pdf/2005.13749v1",
+          "venue": "arXiv",
+          "citation_count": 0,
+          "source": "arxiv"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_difonzo2023_predictability_fairness_load",
+          "entry": "@article{ref_difonzo2023_predictability_fairness_load,\n    author = {F. V. Difonzo and M. Roubalik and J. Marecek},\n    title = {{Predictability and Fairness in Load Aggregation with Deadband}},\n    journal = {arXiv},\n    year = {2023},\n    url = {http://arxiv.org/pdf/2305.17725v2},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Predictability and Fairness in Load Aggregation with Deadband",
+            "authors": [
+              "F. V. Difonzo",
+              "M. Roubalik",
+              "J. Marecek"
+            ],
+            "year": 2023,
+            "doi": null,
+            "url": "http://arxiv.org/pdf/2305.17725v2",
+            "abstract": "Virtual power plants and load aggregation are becoming increasingly common.\nThere, one regulates the aggregate power output of an ensemble of distributed\nenergy resources (DERs). Marecek et al. [Automatica, Volume 147, January 2023,\n110743, arXiv:2110.03001] recently suggested that long-term averages of prices\nor incentives offered should exist and be independent of the initial states of\nthe operators of the DER, the aggregator, and the power grid. This can be seen\nas predictability, which underlies fairness. Unfortunately, the existence of\nsuch averages cannot be guaranteed with many traditional regulators, including\nthe proportional-integral (PI) regulator with or without deadband. Here, we\nconsider the effects of losses in the alternating current model and the\ndeadband in the controller. This yields a non-linear dynamical system (due to\nthe non-linear losses) exhibiting discontinuities (due to the deadband). We\nshow that Filippov invariant measures enable reasoning about predictability and\nfairness while considering non-linearity of the alternating-current model and\ndeadband.",
+            "venue": "arXiv",
+            "citation_count": 0,
+            "arxiv_id": "2305.17725v2",
+            "source": "arxiv",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_chen2025_heat_transport_hysteresis",
+          "entry": "@article{ref_chen2025_heat_transport_hysteresis,\n    author = {Renai Chen and Galen T. Craven},\n    title = {{Heat Transport Hysteresis Generated through Frequency Switching of a Time-Dependent Temperature Gradient}},\n    journal = {arXiv},\n    year = {2025},\n    url = {http://arxiv.org/pdf/2501.12649v1},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Heat Transport Hysteresis Generated through Frequency Switching of a\n  Time-Dependent Temperature Gradient",
+            "authors": [
+              "Renai Chen",
+              "Galen T. Craven"
+            ],
+            "year": 2025,
+            "doi": null,
+            "url": "http://arxiv.org/pdf/2501.12649v1",
+            "abstract": "A stochastic energetics framework is applied to examine how periodically\nshifting the frequency of a time-dependent oscillating temperature gradient\naffects heat transport in a nanoscale molecular model. We specifically examine\nthe effects that frequency switching, i.e., instantaneously changing the\noscillation frequency of the temperature gradient, has on the shape of the heat\ntransport hysteresis curves generated by a particle connected to two thermal\nbaths, each with a temperature that is oscillating in time. Analytical\nexpressions are derived for the energy fluxes in/out of the system and the\nbaths, with excellent agreement observed between the analytical expressions and\nthe results from nonequilibrium molecular dynamics simulations. We find that\nthe shape of the heat transport hysteresis curves can be significantly altered\nby shifting the frequency between fast and slow oscillation regimes. We also\nobserve the emergence of features in the hysteresis curves such as pinched\nloops and complex multi-loop patterns due to the frequency shifting. The\npresented results have implications in the design of thermal neuromorphic\ndevices such as thermal memristors and thermal memcapacitors.",
+            "venue": "arXiv",
+            "citation_count": 0,
+            "arxiv_id": "2501.12649v1",
+            "source": "arxiv",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T06:21:02.349923",
+      "processing_time_sec": 1.5757269859313965,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-004",
+      "claim_text": "The PSO-optimized gains ensure global asymptotic stability of the DIP system.",
+      "queries_used": [
+        "particle swarm optimization asymptotic",
+        "particle swarm optimization gain",
+        "particle swarm optimization stability"
+      ],
+      "papers_found": [
+        {
+          "title": "On the Global Convergence of Particle Swarm Optimization Methods",
+          "authors": [
+            "Hui Huang",
+            "Jinniao Qiu",
+            "Konstantin Riedl"
+          ],
+          "year": 2022,
+          "doi": "10.1007/s00245-023-09983-3",
+          "url": "https://www.semanticscholar.org/paper/01ee2c54444189b3f3cdedc851cf011db839a273",
+          "venue": "Applied Mathematics and Optimization",
+          "citation_count": 47,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Improved particle swarm optimizer for problems with variable evaluation time: Application to asymptotic homogenization",
+          "authors": [
+            "A. Argilaga",
+            "Ning Guo"
+          ],
+          "year": 2022,
+          "doi": "10.1002/nme.7111",
+          "url": "https://www.semanticscholar.org/paper/eec3a3f840f4061b13c3f8341c5420da020e23c8",
+          "venue": "International Journal for Numerical Methods in Engineering",
+          "citation_count": 2,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Improvement of an Adaptive Robot Control by Particle Swarm Optimization-Based Model Identification",
+          "authors": [
+            "H. Issa",
+            "J. Tar"
+          ],
+          "year": 2022,
+          "doi": "10.3390/math10193609",
+          "url": "https://www.semanticscholar.org/paper/d6deeaa84b0b6de4e6450ecb0b88c3a62c5a02c3",
+          "venue": "Mathematics",
+          "citation_count": 4,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Adaptive Particle Swarm Optimization of PID Gain Tuning for Lower-Limb Human Exoskeleton in Virtual Environment",
+          "authors": [
+            "M. Soleimani Amiri",
+            "R. Ramli",
+            "Mohd Faisal Ibrahim",
+            "Dzuraidah Abd Wahab",
+            "N. Aliman"
+          ],
+          "year": 2020,
+          "doi": "10.3390/math8112040",
+          "url": "https://www.semanticscholar.org/paper/66573ec22f53527d3f572b6ba3e056dacfb935b8",
+          "venue": "Mathematics",
+          "citation_count": 34,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Improving gain of real time PI controller using particle swarm optimization in active power filter",
+          "authors": [
+            "M. Reddy",
+            "P. S. Varma",
+            "D. Lenine"
+          ],
+          "year": 2023,
+          "doi": "10.1016/j.micpro.2023.104760",
+          "url": "https://www.semanticscholar.org/paper/8f0b4247960f0528a4d81326ca66c4d02bb84d44",
+          "venue": "Microprocessors and microsystems",
+          "citation_count": 12,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_huang2022_global_convergence_particle",
+          "entry": "@article{ref_huang2022_global_convergence_particle,\n    author = {Hui Huang and Jinniao Qiu and Konstantin Riedl},\n    title = {{On the Global Convergence of Particle Swarm Optimization Methods}},\n    journal = {Unknown},\n    year = {2022},\n    doi = {10.1007/s00245-023-09983-3},\n    url = {https://www.semanticscholar.org/paper/01ee2c54444189b3f3cdedc851cf011db839a273},\n}",
+          "type": "article",
+          "paper": {
+            "title": "On the Global Convergence of Particle Swarm Optimization Methods",
+            "authors": [
+              "Hui Huang",
+              "Jinniao Qiu",
+              "Konstantin Riedl"
+            ],
+            "year": 2022,
+            "doi": "10.1007/s00245-023-09983-3",
+            "url": "https://www.semanticscholar.org/paper/01ee2c54444189b3f3cdedc851cf011db839a273",
+            "abstract": "In this paper we provide a rigorous convergence analysis for the renowned particle swarm optimization method by using tools from stochastic calculus and the analysis of partial differential equations. Based on a continuous-time formulation of the particle dynamics as a system of stochastic differential equations, we establish convergence to a global minimizer of a possibly nonconvex and nonsmooth objective function in two steps. First, we prove consensus formation of an associated mean-field dynamics by analyzing the time-evolution of the variance of the particle distribution, which acts as Lyapunov function of the dynamics. We then show that this consensus is close to a global minimizer by employing the asymptotic Laplace principle and a tractability condition on the energy landscape of the objective function. These results allow for the usage of memory mechanisms, and hold for a rich class of objectives provided certain conditions of well-preparation of the hyperparameters and the initial datum. In a second step, at least for the case without memory effects, we provide a quantitative result about the mean-field approximation of particle swarm optimization, which specifies the convergence of the interacting particle system to the associated mean-field limit. Combining these two results allows for global convergence guarantees of the numerical particle swarm optimization method with provable polynomial complexity. To demonstrate the applicability of the method we propose an efficient and parallelizable implementation, which is tested in particular on a competitive and well-understood high-dimensional benchmark problem in machine learning.",
+            "venue": "Applied Mathematics and Optimization",
+            "citation_count": 47,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_argilaga2022_improved_particle_swarm",
+          "entry": "@inproceedings{ref_argilaga2022_improved_particle_swarm,\n    author = {A. Argilaga and Ning Guo},\n    title = {{Improved particle swarm optimizer for problems with variable evaluation time: Application to asymptotic homogenization}},\n    booktitle = {International Journal for Numerical Methods in Engineering},\n    year = {2022},\n    doi = {10.1002/nme.7111},\n    url = {https://www.semanticscholar.org/paper/eec3a3f840f4061b13c3f8341c5420da020e23c8},\n}",
+          "type": "inproceedings",
+          "paper": {
+            "title": "Improved particle swarm optimizer for problems with variable evaluation time: Application to asymptotic homogenization",
+            "authors": [
+              "A. Argilaga",
+              "Ning Guo"
+            ],
+            "year": 2022,
+            "doi": "10.1002/nme.7111",
+            "url": "https://www.semanticscholar.org/paper/eec3a3f840f4061b13c3f8341c5420da020e23c8",
+            "abstract": "This work presents a new particle swarm optimizer (PSO)\u2010based metaheuristic algorithm designed to reduce overall computational cost without compromising optimization's precision in functions with variable evaluation time. The algorithm exploits the evaluation time gradient in addition to the convergence gradient attempting to reach the same convergence precision following a more economical path. The particle's newly incorporated time information is usually in contradiction to the past memories of best function evaluations thus degrading convergence. A technique is proposed in order to modulate the new cognitive input that consists of progressive reducing of its weight in order to confer the algorithm the appropriate time\u2010convergence balance. Results show that the proposed algorithm not only provides computational economy, but also unexpectedly improves convergence per se due to a better exploration in the initial stages of optimization. Its application in asymptotic homogenization of a cracked poroelastic medium confirms its superior performance compared to a series of alternative optimization algorithms. The proposed algorithm improvement allows to extend the applicability of PSO and PSO\u2010based algorithms to problems that were previously thought to be too computationally expensive for population\u2010based approaches.",
+            "venue": "International Journal for Numerical Methods in Engineering",
+            "citation_count": 2,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T06:24:07.598797",
+      "processing_time_sec": 185.24786853790283,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-005",
+      "claim_text": "The PSO-optimized gains maintain Lyapunov stability for the closed-loop DIP system.",
+      "queries_used": [
+        "particle swarm optimization gain",
+        "particle swarm optimization Lyapunov",
+        "particle swarm optimization stability"
+      ],
+      "papers_found": [
+        {
+          "title": "A Method Combining Improved Particle Swarm Optimization and Lyapunov Optimization for Electric Vehicle Charging Scheduling",
+          "authors": [
+            "Jingwen Xu",
+            "Fei Chen",
+            "Jiawei Zhu",
+            "Weidong Lei",
+            "Yisheng An"
+          ],
+          "year": 2024,
+          "doi": "10.1007/978-981-97-5578-3_22",
+          "url": "https://www.semanticscholar.org/paper/fef98164cab3c81f2eee335d966d5c4356c51fa6",
+          "venue": "International Conference on Intelligent Computing",
+          "citation_count": 1,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Optimizing Internet of Things Fog Computing: Through Lyapunov-Based Long Short-Term Memory Particle Swarm Optimization Algorithm for Energy Consumption Optimization",
+          "authors": [
+            "Sheng Pan",
+            "Chenbin Huang",
+            "Jiajia Fan",
+            "Zheyan Shi",
+            "Junjie Tong",
+            "Hui Wang"
+          ],
+          "year": 2024,
+          "doi": "10.3390/s24041165",
+          "url": "https://www.semanticscholar.org/paper/90ae5533c93245f93c65732082da02b2969ad290",
+          "venue": "Italian National Conference on Sensors",
+          "citation_count": 4,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Robust Field Oriented Control of PMSM Using Lyapunov Theorem and Particle Swarm Optimization",
+          "authors": [
+            "Fadhil A. Hasan",
+            "Hawraa Q. Hameed",
+            "Lina J. Rashad"
+          ],
+          "year": 2024,
+          "doi": "10.18280/jesa.570218",
+          "url": "https://www.semanticscholar.org/paper/ea6dc496c2e19c6f8acda7c04d490b5e83ec5f19",
+          "venue": "Journal Europeen des Systemes Automatises",
+          "citation_count": 3,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Adaptive Particle Swarm Optimization of PID Gain Tuning for Lower-Limb Human Exoskeleton in Virtual Environment",
+          "authors": [
+            "M. Soleimani Amiri",
+            "R. Ramli",
+            "Mohd Faisal Ibrahim",
+            "Dzuraidah Abd Wahab",
+            "N. Aliman"
+          ],
+          "year": 2020,
+          "doi": "10.3390/math8112040",
+          "url": "https://www.semanticscholar.org/paper/66573ec22f53527d3f572b6ba3e056dacfb935b8",
+          "venue": "Mathematics",
+          "citation_count": 34,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Lyapunov control of finite-dimensional quantum systems based on bi-objective quantum-behaved particle swarm optimization algorithm",
+          "authors": [
+            "Song Liu",
+            "Shumin Zhou",
+            "Xiujuan Lu",
+            "Fang Gao",
+            "F. Shuang",
+            "S. Kuang"
+          ],
+          "year": 2023,
+          "doi": "10.1016/j.jfranklin.2023.01.012",
+          "url": "https://www.semanticscholar.org/paper/9c970620426a95c436d31f7d6dd2e39f51cf7b14",
+          "venue": "Journal of the Franklin Institute",
+          "citation_count": 2,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_xu2024_method_combining_improved",
+          "entry": "@inproceedings{ref_xu2024_method_combining_improved,\n    author = {Jingwen Xu and Fei Chen and Jiawei Zhu and Weidong Lei and Yisheng An},\n    title = {{A Method Combining Improved Particle Swarm Optimization and Lyapunov Optimization for Electric Vehicle Charging Scheduling}},\n    booktitle = {International Conference on Intelligent Computing},\n    year = {2024},\n    doi = {10.1007/978-981-97-5578-3_22},\n    url = {https://www.semanticscholar.org/paper/fef98164cab3c81f2eee335d966d5c4356c51fa6},\n}",
+          "type": "inproceedings",
+          "paper": {
+            "title": "A Method Combining Improved Particle Swarm Optimization and Lyapunov Optimization for Electric Vehicle Charging Scheduling",
+            "authors": [
+              "Jingwen Xu",
+              "Fei Chen",
+              "Jiawei Zhu",
+              "Weidong Lei",
+              "Yisheng An"
+            ],
+            "year": 2024,
+            "doi": "10.1007/978-981-97-5578-3_22",
+            "url": "https://www.semanticscholar.org/paper/fef98164cab3c81f2eee335d966d5c4356c51fa6",
+            "abstract": null,
+            "venue": "International Conference on Intelligent Computing",
+            "citation_count": 1,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_pan2024_optimizing_internet_things",
+          "entry": "@inproceedings{ref_pan2024_optimizing_internet_things,\n    author = {Sheng Pan and Chenbin Huang and Jiajia Fan and Zheyan Shi and Junjie Tong and Hui Wang},\n    title = {{Optimizing Internet of Things Fog Computing: Through Lyapunov-Based Long Short-Term Memory Particle Swarm Optimization Algorithm for Energy Consumption Optimization}},\n    booktitle = {Italian National Conference on Sensors},\n    year = {2024},\n    doi = {10.3390/s24041165},\n    url = {https://www.semanticscholar.org/paper/90ae5533c93245f93c65732082da02b2969ad290},\n}",
+          "type": "inproceedings",
+          "paper": {
+            "title": "Optimizing Internet of Things Fog Computing: Through Lyapunov-Based Long Short-Term Memory Particle Swarm Optimization Algorithm for Energy Consumption Optimization",
+            "authors": [
+              "Sheng Pan",
+              "Chenbin Huang",
+              "Jiajia Fan",
+              "Zheyan Shi",
+              "Junjie Tong",
+              "Hui Wang"
+            ],
+            "year": 2024,
+            "doi": "10.3390/s24041165",
+            "url": "https://www.semanticscholar.org/paper/90ae5533c93245f93c65732082da02b2969ad290",
+            "abstract": "In the era of continuous development in Internet of Things (IoT) technology, smart services are penetrating various facets of societal life, leading to a growing demand for interconnected devices. Many contemporary devices are no longer mere data producers but also consumers of data. As a result, massive amounts of data are transmitted to the cloud, but the latency generated in edge-to-cloud communication is unacceptable for many tasks. In response to this, this paper introduces a novel contribution\u2014a layered computing network built on the principles of fog computing, accompanied by a newly devised algorithm designed to optimize user tasks and allocate computing resources within rechargeable networks. The proposed algorithm, a synergy of Lyapunov-based, dynamic Long Short-Term Memory (LSTM) networks, and Particle Swarm Optimization (PSO), allows for predictive task allocation. The fog servers dynamically train LSTM networks to effectively forecast the data features of user tasks, facilitating proper unload decisions based on task priorities. In response to the challenge of slower hardware upgrades in edge devices compared to user demands, the algorithm optimizes the utilization of low-power devices and addresses performance limitations. Additionally, this paper considers the unique characteristics of rechargeable networks, where computing nodes acquire energy through charging. Utilizing Lyapunov functions for dynamic resource control enables nodes with abundant resources to maximize their potential, significantly reducing energy consumption and enhancing overall performance. The simulation results demonstrate that our algorithm surpasses traditional methods in terms of energy efficiency and resource allocation optimization. Despite the limitations of prediction accuracy in Fog Servers (FS), the proposed results significantly promote overall performance. The proposed approach improves the efficiency and the user experience of Internet of Things systems in terms of latency and energy consumption.",
+            "venue": "Italian National Conference on Sensors",
+            "citation_count": 4,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T06:27:12.645129",
+      "processing_time_sec": 185.04633259773254,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-008",
+      "claim_text": "The particle converges to a stable trajectory if:",
+      "queries_used": [
+        "particle converges stable trajectory if:"
+      ],
+      "papers_found": [
+        {
+          "title": "Quantum Particle Swarm Optimisation Proportional\u2013Derivative Control for Trajectory Tracking of a Car-like Mobile Robot",
+          "authors": [
+            "Joslin Numbi",
+            "N. Zioui",
+            "Mohamed Tadjine"
+          ],
+          "year": 2025,
+          "doi": "10.3390/electronics14050832",
+          "url": "https://www.semanticscholar.org/paper/2370414a9c4c4558df73b30b9e70f59f74916bec",
+          "venue": "Electronics",
+          "citation_count": 4,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "An Autonomous UAV Obstacle Avoidance Trajectory Planning Method Based on Convex Optimized Particle Swarm Algorithm",
+          "authors": [
+            "Jun Wang",
+            "Biao Zou",
+            "Songtao Zhu",
+            "Yubo Gao",
+            "Ziyan Zhao"
+          ],
+          "year": 2025,
+          "doi": "10.1142/s0129156425402463",
+          "url": "https://www.semanticscholar.org/paper/374e7216639345b809bf1f608bb0de50cc329681",
+          "venue": "International Journal of High Speed Electronics and Systems",
+          "citation_count": 1,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Trajectory-BERT: Trajectory Estimation Based on BERT Trajectory Pre-Training Model and Particle Filter Algorithm",
+          "authors": [
+            "You Wu",
+            "Hongyi Yu",
+            "Jianping Du",
+            "Chenglong Ge"
+          ],
+          "year": 2023,
+          "doi": "10.3390/s23229120",
+          "url": "https://doi.org/10.3390/s23229120",
+          "venue": "Sensors",
+          "citation_count": 0,
+          "source": "crossref"
+        },
+        {
+          "title": "Notice of Retraction: An analysis for particle trajectories of a discrete particle swarm optimization",
+          "authors": [
+            "Q. Tao",
+            "Huiyou Chang",
+            "Yang Yi",
+            "Chunqin Gu",
+            "Wen-jie Li"
+          ],
+          "year": 2010,
+          "doi": "10.1109/ICCSIT.2010.5564774",
+          "url": "https://www.semanticscholar.org/paper/e56dddb236b5dc77ca61763b6ebba7f6e32546ca",
+          "venue": "",
+          "citation_count": 3,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Scaling limits of anisotropic growth on logarithmic time-scales",
+          "authors": [
+            "George Liddle",
+            "Amanda G. Turner"
+          ],
+          "year": 2022,
+          "doi": "10.1214/23-ejp964",
+          "url": "https://www.semanticscholar.org/paper/4916a354b48ac2199392fd35213d9ed648aeab2c",
+          "venue": "Electronic Journal of Probability",
+          "citation_count": 0,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_numbi2025_quantum_particle_swarm",
+          "entry": "@article{ref_numbi2025_quantum_particle_swarm,\n    author = {Joslin Numbi and N. Zioui and Mohamed Tadjine},\n    title = {{Quantum Particle Swarm Optimisation Proportional\u2013Derivative Control for Trajectory Tracking of a Car-like Mobile Robot}},\n    journal = {Unknown},\n    year = {2025},\n    doi = {10.3390/electronics14050832},\n    url = {https://www.semanticscholar.org/paper/2370414a9c4c4558df73b30b9e70f59f74916bec},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Quantum Particle Swarm Optimisation Proportional\u2013Derivative Control for Trajectory Tracking of a Car-like Mobile Robot",
+            "authors": [
+              "Joslin Numbi",
+              "N. Zioui",
+              "Mohamed Tadjine"
+            ],
+            "year": 2025,
+            "doi": "10.3390/electronics14050832",
+            "url": "https://www.semanticscholar.org/paper/2370414a9c4c4558df73b30b9e70f59f74916bec",
+            "abstract": "The goal of this research is to formulate and compare two algorithms, classical particle swarm optimisation (PSO) and quantum PSO (QPSO), for optimising the motion of a car-like mobile robot. Both algorithms are evaluated on the basis of their reduction and stabilisation of the root mean square error (RMSE) between the robot\u2019s desired and actual trajectories. An implementation of the robot\u2019s dynamic motion is provided. The robot\u2019s mass and inertia are considered. The robot\u2019s settings and the viscosity of the surroundings present a few obstacles to following the specified path. For each algorithm, the proportional (Kp) and derivative (Kd) parameters of the controller are optimised, and the convergence speeds and stabilities of the controllers are compared. The results show that both algorithms perform comparably. However, the QPSO method converges faster and is more stable at optimal Kp and Kd values. The ramifications of this research extend beyond trajectory tracking. Enhanced optimisation approaches can lead to higher performance in a variety of robotic systems, including autonomous cars, drones, and automation systems, by employing advanced quantum algorithms, such as QPSO.",
+            "venue": "Electronics",
+            "citation_count": 4,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_wang2025_autonomous_uav_obstacle",
+          "entry": "@inproceedings{ref_wang2025_autonomous_uav_obstacle,\n    author = {Jun Wang and Biao Zou and Songtao Zhu and Yubo Gao and Ziyan Zhao},\n    title = {{An Autonomous UAV Obstacle Avoidance Trajectory Planning Method Based on Convex Optimized Particle Swarm Algorithm}},\n    booktitle = {International Journal of High Speed Electronics and Systems},\n    year = {2025},\n    doi = {10.1142/s0129156425402463},\n    url = {https://www.semanticscholar.org/paper/374e7216639345b809bf1f608bb0de50cc329681},\n}",
+          "type": "inproceedings",
+          "paper": {
+            "title": "An Autonomous UAV Obstacle Avoidance Trajectory Planning Method Based on Convex Optimized Particle Swarm Algorithm",
+            "authors": [
+              "Jun Wang",
+              "Biao Zou",
+              "Songtao Zhu",
+              "Yubo Gao",
+              "Ziyan Zhao"
+            ],
+            "year": 2025,
+            "doi": "10.1142/s0129156425402463",
+            "url": "https://www.semanticscholar.org/paper/374e7216639345b809bf1f608bb0de50cc329681",
+            "abstract": "The dynamics of unmanned aerial systems (UAS) are often nonlinear, especially at high speed and high maneuverability flight. The inherent nonlinearity of the system renders conventional linear control techniques inadequate for achieving optimal control outcomes. Consequently, unmanned aerial vehicle (UAV) trajectory planning is fundamentally a nonlinear optimal control challenge, characterized by the difficulty of swiftly obtaining a stable solution and the propensity to converge on suboptimal local solutions during the solving process. In response to this, a method for autonomous UAV obstacle avoidance trajectory planning is introduced, leveraging a convex optimization-based particle swarm algorithm. The UAV uses sensors to record the information about obstacles, adopts a one-dimensional time-parameterized polynomial trajectory to construct the obstacle avoidance control input, combines the safety penalty function between the navigation path and obstacles to generate the obstacle avoidance trajectory planning objective function, and obtains the path points in the obstacle avoidance trajectory; the particle swarm algorithm is used to solve the objective function, the parameters such as obstacle avoidance control input and safety penalty function are used as particles, and the optimal parameter values are obtained through the iterative updating process of position and speed. Aiming at the acquired obstacle avoidance trajectory path points, the convex optimization algorithm is used to construct a non-convex optimal control model that meets the requirements of energy optimization, and is rooted in the concave-convex process, so that the control model\u2019s objective function and inequality constraint are both convex, while the formula constraint is affine. By transforming the control model into a convex optimization problem, it aligns with the energy optimization requirements. The sequential convex optimization framework is employed to solve this problem, enabling the optimization of the UAV\u2019s trajectory for obstacle avoidance. Experimental outcomes demonstrate that this approach effectively captures the coordinate details of obstacles, navigates through various dense obstacle scenarios, and simultaneously guarantees an energy-efficient path to the target destination.",
+            "venue": "International Journal of High Speed Electronics and Systems",
+            "citation_count": 1,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T06:27:13.439069",
+      "processing_time_sec": 0.7929387092590332,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-010",
+      "claim_text": "Under the stability condition and with decreasing inertia weight, PSO converges to the global optimum with probability 1 for unimodal functions.",
+      "queries_used": [
+        "particle swarm optimization stability",
+        "stability"
+      ],
+      "papers_found": [
+        {
+          "title": "Aerosol and Surface Stability of SARS-CoV-2 as Compared with SARS-CoV-1",
+          "authors": [
+            "N. van Doremalen",
+            "T. Bushmaker",
+            "Dylan H. Morris",
+            "M. Holbrook",
+            "Amandine Gamble",
+            "Brandi N. Williamson",
+            "A. Tamin",
+            "J. Harcourt",
+            "N. Thornburg",
+            "S. Gerber",
+            "J. Lloyd-Smith",
+            "E. de Wit",
+            "V. Munster"
+          ],
+          "year": 2020,
+          "doi": "10.1056/NEJMc2004973",
+          "url": "https://www.semanticscholar.org/paper/901adc2c3705ba1d60117d6b9aa91cfa99a71a7a",
+          "venue": "New England Journal of Medicine",
+          "citation_count": 8249,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Stability and Complexity in Model Ecosystems",
+          "authors": [
+            "R. May"
+          ],
+          "year": 2019,
+          "doi": "10.2307/j.ctvs32rq4",
+          "url": "https://www.semanticscholar.org/paper/cd3333d19507d010eb7b9c20ec3a7bd9bc0a86f4",
+          "venue": "",
+          "citation_count": 6380,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Unobservable Selection and Coefficient Stability: Theory and Evidence",
+          "authors": [
+            "E. Oster"
+          ],
+          "year": 2019,
+          "doi": "10.1080/07350015.2016.1227711",
+          "url": "https://www.semanticscholar.org/paper/387a49a51ef3ed0ea5818769e2e413c9790182ee",
+          "venue": "",
+          "citation_count": 3408,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Progressive Growing of GANs for Improved Quality, Stability, and Variation",
+          "authors": [
+            "Tero Karras",
+            "Timo Aila",
+            "S. Laine",
+            "J. Lehtinen"
+          ],
+          "year": 2017,
+          "doi": null,
+          "url": "https://www.semanticscholar.org/paper/744fe47157477235032f7bb3777800f9f2f45e52",
+          "venue": "International Conference on Learning Representations",
+          "citation_count": 7655,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Particle Swarm Optimization: Stability Analysis using N-Informers under Arbitrary Coefficient Distributions",
+          "authors": [
+            "C. Cleghorn",
+            "Belinda Stapelberg"
+          ],
+          "year": 2020,
+          "doi": "10.1016/j.swevo.2022.101060",
+          "url": "https://www.semanticscholar.org/paper/b44d759ecd27ffc81d78685a4f32aecf371ccd27",
+          "venue": "Swarm and Evolutionary Computation",
+          "citation_count": 19,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_doremalen2020_aerosol_surface_stability",
+          "entry": "@article{ref_doremalen2020_aerosol_surface_stability,\n    author = {N. van Doremalen and T. Bushmaker and Dylan H. Morris and M. Holbrook and Amandine Gamble and Brandi N. Williamson and A. Tamin and J. Harcourt and N. Thornburg and S. Gerber},\n    title = {{Aerosol and Surface Stability of SARS-CoV-2 as Compared with SARS-CoV-1}},\n    journal = {Unknown},\n    year = {2020},\n    doi = {10.1056/NEJMc2004973},\n    url = {https://www.semanticscholar.org/paper/901adc2c3705ba1d60117d6b9aa91cfa99a71a7a},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Aerosol and Surface Stability of SARS-CoV-2 as Compared with SARS-CoV-1",
+            "authors": [
+              "N. van Doremalen",
+              "T. Bushmaker",
+              "Dylan H. Morris",
+              "M. Holbrook",
+              "Amandine Gamble",
+              "Brandi N. Williamson",
+              "A. Tamin",
+              "J. Harcourt",
+              "N. Thornburg",
+              "S. Gerber",
+              "J. Lloyd-Smith",
+              "E. de Wit",
+              "V. Munster"
+            ],
+            "year": 2020,
+            "doi": "10.1056/NEJMc2004973",
+            "url": "https://www.semanticscholar.org/paper/901adc2c3705ba1d60117d6b9aa91cfa99a71a7a",
+            "abstract": "Aerosol and Surface Stability of SARS-CoV-2 In this research letter, investigators report on the stability of SARS-CoV-2 and SARS-CoV-1 under experimental conditions. The viability of the two virus...",
+            "venue": "New England Journal of Medicine",
+            "citation_count": 8249,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_may2019_stability_complexity_model",
+          "entry": "@misc{ref_may2019_stability_complexity_model,\n    author = {R. May},\n    title = {{Stability and Complexity in Model Ecosystems}},\n    howpublished = {Online},\n    year = {2019},\n    doi = {10.2307/j.ctvs32rq4},\n    url = {https://www.semanticscholar.org/paper/cd3333d19507d010eb7b9c20ec3a7bd9bc0a86f4},\n}",
+          "type": "misc",
+          "paper": {
+            "title": "Stability and Complexity in Model Ecosystems",
+            "authors": [
+              "R. May"
+            ],
+            "year": 2019,
+            "doi": "10.2307/j.ctvs32rq4",
+            "url": "https://www.semanticscholar.org/paper/cd3333d19507d010eb7b9c20ec3a7bd9bc0a86f4",
+            "abstract": "What makes populations stabilize? What makes them fluctuate? Are populations in complex ecosystems more stable than populations in simple ecosystems? In \uf731\uf739\uf737\uf733, Robert May addressed these questions in this monograph that has since become a classic. Trained as a theoretical physicist, May used mathematical modeling to investigate the stability and complexity of a community of interacting plants and animals, following the food web as a clue. Contrary to general biological thinking, he showed in population dynamics models that population equilibrium was less likely to destabilize such ecosystems when the number of species is increased and species interactions are randomly added. In the quarter century since its publication, the book\u2019s message has grown in power. Stability and Complexity in Model Ecosystems played a key role in introducing nonlinear mathematical models, along with the study of deterministic chaos, to ecologists\u2014as science writer James Gleick would chronicle in his best-seller Chaos. Nonlinear models are now at the center of ecological thinking, and current threats to biodiversity have made questions about the role of ecosystem complexity more crucial than ever. This book launched a career of mathematical insight into some of life\u2019s biggest questions. Robert May has gone on to apply mathematical modeling to other biological problems. He has modeled the current state of biodiversity and extinction patterns, arguing for the necessity of responding immediately to this crisis. He has also developed mathematical models of infectious disease that are now used by governments and NGOs to tackle diseases like AIDS.",
+            "venue": "",
+            "citation_count": 6380,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T06:27:16.106682",
+      "processing_time_sec": 2.6676127910614014,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-021",
+      "claim_text": "The super-twisting algorithm ensures finite-time convergence to the second-order sliding set $\\{s = 0, \\dot{s} = 0\\}$ if the parameters satisfy:",
+      "queries_used": [
+        "super-twisting algorithm finite-time",
+        "super-twisting algorithm convergence",
+        "finite-time convergence"
+      ],
+      "papers_found": [
+        {
+          "title": "An Improved Adaptive Finite-Time Super-Twisting Sliding Mode Algorithm for Dc-Dc Buck Converters",
+          "authors": [
+            "Yun Zhang",
+            "Xiaoqian Zhu",
+            "Mingchen Luan",
+            "Shuang Zhai",
+            "Gang Shen",
+            "Huihui Min"
+          ],
+          "year": 2025,
+          "doi": "10.1587/transele.2024ecp5034",
+          "url": "https://www.semanticscholar.org/paper/570a9ad03687dc666bb748d6ec80c6859309d6fd",
+          "venue": "IEICE transactions on electronics",
+          "citation_count": 1,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "An Improved Adaptive Finite-Time Super-Twisting Sliding Mode Observer for the Sensorless Control of Permanent Magnet Synchronous Motors",
+          "authors": [
+            "Mingchen Luan",
+            "Jiuhong Ruan",
+            "Yun Zhang",
+            "Haitao Yan",
+            "Long Wang"
+          ],
+          "year": 2024,
+          "doi": "10.3390/act13100395",
+          "url": "https://www.semanticscholar.org/paper/c01ec6e1f46c18f5e4dd898d94eb2f74b21fb395",
+          "venue": "Actuators",
+          "citation_count": 5,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "On the Robustness of a Modified Super-Twisting Algorithm With Prescribed-Time Convergence",
+          "authors": [
+            "Jo\u00e3o F. Silva",
+            "Davi A. Santos"
+          ],
+          "year": 2024,
+          "doi": "10.1109/ACCESS.2024.3392274",
+          "url": "https://www.semanticscholar.org/paper/1f09208d41ad6aeaa7c021b3bd512b20351cef43",
+          "venue": "IEEE Access",
+          "citation_count": 2,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "A super-twisting algorithm combined zeroing neural network with noise tolerance and finite-time convergence for solving time-variant Sylvester equation",
+          "authors": [
+            "Jun Cai",
+            "Wenjing Zhang",
+            "Shitao Zhong",
+            "Chenfu Yi"
+          ],
+          "year": 2024,
+          "doi": "10.1016/j.eswa.2024.123380",
+          "url": "https://www.semanticscholar.org/paper/dfa92854929dd7beff142ad340e02fdb04694f14",
+          "venue": "Expert systems with applications",
+          "citation_count": 14,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Super-Twisting Algorithm Sliding Mode Observer-Based Multi-Vector Model-Free Predictive Control Method for PMSM",
+          "authors": [
+            "Ran Tao",
+            "Yufeng Jiang",
+            "Wei Wang"
+          ],
+          "year": 2024,
+          "doi": "10.23919/ICEMS60997.2024.10921251",
+          "url": "https://www.semanticscholar.org/paper/51a0d45910ff5c16bc4cfb278ef853b653213c5c",
+          "venue": "International Conference on Electrical Machines and Systems",
+          "citation_count": 1,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_zhang2025_improved_adaptive_finitetime",
+          "entry": "@article{ref_zhang2025_improved_adaptive_finitetime,\n    author = {Yun Zhang and Xiaoqian Zhu and Mingchen Luan and Shuang Zhai and Gang Shen and Huihui Min},\n    title = {{An Improved Adaptive Finite-Time Super-Twisting Sliding Mode Algorithm for Dc-Dc Buck Converters}},\n    journal = {Unknown},\n    year = {2025},\n    doi = {10.1587/transele.2024ecp5034},\n    url = {https://www.semanticscholar.org/paper/570a9ad03687dc666bb748d6ec80c6859309d6fd},\n}",
+          "type": "article",
+          "paper": {
+            "title": "An Improved Adaptive Finite-Time Super-Twisting Sliding Mode Algorithm for Dc-Dc Buck Converters",
+            "authors": [
+              "Yun Zhang",
+              "Xiaoqian Zhu",
+              "Mingchen Luan",
+              "Shuang Zhai",
+              "Gang Shen",
+              "Huihui Min"
+            ],
+            "year": 2025,
+            "doi": "10.1587/transele.2024ecp5034",
+            "url": "https://www.semanticscholar.org/paper/570a9ad03687dc666bb748d6ec80c6859309d6fd",
+            "abstract": "SUMMARY In order to improve the immunity and stability of dc-dc converters in industrial production, a discrete adaptive super-twisting sliding mode algorithm is proposed in this paper. Firstly, a linear gain term is introduced into the conventional algorithm to improve discrimination accuracy of the system. Secondly, for the complexity and constraints of the gain parameters in the sliding mode algorithm, this paper designs a voltage-based time-varying function instead of multiple gains in the model, and demonstrate the stability of the proposed finite-time observer algorithm through Liapunov stability theorem. Finally, simulations and experiments were conducted on the proposed algorithm, demonstrating that the finite time super twist sliding mode control algorithm proposed in this paper can effectively reduce the impact of load changes on the output voltage.",
+            "venue": "IEICE transactions on electronics",
+            "citation_count": 1,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_luan2024_improved_adaptive_finitetime",
+          "entry": "@article{ref_luan2024_improved_adaptive_finitetime,\n    author = {Mingchen Luan and Jiuhong Ruan and Yun Zhang and Haitao Yan and Long Wang},\n    title = {{An Improved Adaptive Finite-Time Super-Twisting Sliding Mode Observer for the Sensorless Control of Permanent Magnet Synchronous Motors}},\n    journal = {Unknown},\n    year = {2024},\n    doi = {10.3390/act13100395},\n    url = {https://www.semanticscholar.org/paper/c01ec6e1f46c18f5e4dd898d94eb2f74b21fb395},\n}",
+          "type": "article",
+          "paper": {
+            "title": "An Improved Adaptive Finite-Time Super-Twisting Sliding Mode Observer for the Sensorless Control of Permanent Magnet Synchronous Motors",
+            "authors": [
+              "Mingchen Luan",
+              "Jiuhong Ruan",
+              "Yun Zhang",
+              "Haitao Yan",
+              "Long Wang"
+            ],
+            "year": 2024,
+            "doi": "10.3390/act13100395",
+            "url": "https://www.semanticscholar.org/paper/c01ec6e1f46c18f5e4dd898d94eb2f74b21fb395",
+            "abstract": "In order to improve the observation accuracy of rotor positions in the sensorless control of permanent magnet synchronous motors and to simplify the parameter adjustment process, this paper proposes an improved finite-time adaptive super-twisting sliding mode observer. First, a linear gain term is introduced into the conventional super-twisting sliding mode observer model as a way of improving the identification accuracy of the observer. Then, for the multi-parameter variable problem in the traditional observer model, a rotational speed variable function design is presented, which simplifies the multi-variables into a single adaptive variable. This reduces the complexity of the observer model while further improving the observation accuracy and stability of the improved observer algorithm (which is verified using Lyapunov\u2019s stability theory). A new back EMF filter and an adaptive phase-locked loop are then used to improve the model\u2019s speed tracking capability. Finally, through simulation and experimental tests, the improved algorithm\u2019s ability to quickly observe changes in rotor position and speed, as well as its fast convergence, small jitter and high accuracy characteristics, are verified.",
+            "venue": "Actuators",
+            "citation_count": 5,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T06:28:19.225794",
+      "processing_time_sec": 63.11911177635193,
+      "status": "success",
+      "error_message": null
+    },
+    {
+      "claim_id": "FORMAL-THEOREM-022",
+      "claim_text": "The adaptive control law {eq}`eq:adaptive_smc_law` ensures:",
+      "queries_used": [
+        "control law"
+      ],
+      "papers_found": [
+        {
+          "title": "A Natural Adaptive Control Law for Robot Manipulators",
+          "authors": [
+            "Taeyoon Lee",
+            "Jaewoon Kwon",
+            "F. Park"
+          ],
+          "year": 2018,
+          "doi": "10.1109/IROS.2018.8593727",
+          "url": "https://www.semanticscholar.org/paper/aafe9955cb74fca015801cf3c9dabc3dbb363c65",
+          "venue": "IEEE/RJS International Conference on Intelligent RObots and Systems",
+          "citation_count": 39,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Maximum Torque Per Ampere (MTPA) Control for IPMSM Drives Based on a Variable-Equivalent-Parameter MTPA Control Law",
+          "authors": [
+            "Ke Li",
+            "Yi Wang"
+          ],
+          "year": 2019,
+          "doi": "10.1109/TPEL.2018.2877740",
+          "url": "https://www.semanticscholar.org/paper/431bea9e35553a9044bdff8c78220710aa3a5b3e",
+          "venue": "IEEE transactions on power electronics",
+          "citation_count": 108,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Parametric Stability Analysis of Active Magnetic Bearing Supported Rotor System With a Novel Control Law Subject to Periodic Base Motion",
+          "authors": [
+            "Tukesh Soni",
+            "J. K. Dutt",
+            "A. S. Das"
+          ],
+          "year": 2020,
+          "doi": "10.1109/TIE.2019.2898604",
+          "url": "https://www.semanticscholar.org/paper/b3842d7d23a8205d0609cf23f584763acf2f8a26",
+          "venue": "IEEE transactions on industrial electronics (1982. Print)",
+          "citation_count": 45,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Maximum Torque per Ampere (MTPA) Control for IPMSM Drives Using Signal Injection and an MTPA Control Law",
+          "authors": [
+            "Ke Li",
+            "Yi Wang"
+          ],
+          "year": 2019,
+          "doi": "10.1109/TII.2019.2905929",
+          "url": "https://www.semanticscholar.org/paper/8828faf18a30b5e00cc5d6e00750f992c4388f24",
+          "venue": "IEEE Transactions on Industrial Informatics",
+          "citation_count": 72,
+          "source": "semantic_scholar"
+        },
+        {
+          "title": "Tobacco control law implementation in a middle-income country: Transnational tobacco control network overcoming tobacco industry opposition in Colombia",
+          "authors": [
+            "R. Uang",
+            "E. Crosbie",
+            "S. Glantz"
+          ],
+          "year": 2018,
+          "doi": "10.1080/17441692.2017.1357188",
+          "url": "https://www.semanticscholar.org/paper/a4dc4bcc59eb56773037cc1fa7afcc84083ef41b",
+          "venue": "Global Public Health",
+          "citation_count": 44,
+          "source": "semantic_scholar"
+        }
+      ],
+      "selected_citations": [
+        {
+          "key": "ref_lee2018_natural_adaptive_control",
+          "entry": "@inproceedings{ref_lee2018_natural_adaptive_control,\n    author = {Taeyoon Lee and Jaewoon Kwon and F. Park},\n    title = {{A Natural Adaptive Control Law for Robot Manipulators}},\n    booktitle = {IEEE/RJS International Conference on Intelligent RObots and Systems},\n    year = {2018},\n    doi = {10.1109/IROS.2018.8593727},\n    url = {https://www.semanticscholar.org/paper/aafe9955cb74fca015801cf3c9dabc3dbb363c65},\n}",
+          "type": "inproceedings",
+          "paper": {
+            "title": "A Natural Adaptive Control Law for Robot Manipulators",
+            "authors": [
+              "Taeyoon Lee",
+              "Jaewoon Kwon",
+              "F. Park"
+            ],
+            "year": 2018,
+            "doi": "10.1109/IROS.2018.8593727",
+            "url": "https://www.semanticscholar.org/paper/aafe9955cb74fca015801cf3c9dabc3dbb363c65",
+            "abstract": "Existing adaptive robot control laws typically require an engineering choice of a constant adaptation gain matrix, which often involves repeated and time-consuming trial and error. Moreover, physical consistency of the estimated inertial parameters or the uniform positive definiteness of the estimated robot mass matrix cannot in general be guaranteed without nonsmooth corrections, e.g., projection to the boundary of the feasible parameter set. In this paper we present a natural adaptive control law that mitigates many of these difficulties, by exploiting the coordinate-invariant differential geometric structure of the space of physically consistent inertial parameters. Our approach provides a more generalizable and physically consistent adaptation law for the robot parameters without significant additional computations compared to existing methods. Simulation results showing markedly improved tracking error convergence over existing adaptive control laws are provided as validation.",
+            "venue": "IEEE/RJS International Conference on Intelligent RObots and Systems",
+            "citation_count": 39,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        },
+        {
+          "key": "ref_li2019_maximum_torque_per",
+          "entry": "@article{ref_li2019_maximum_torque_per,\n    author = {Ke Li and Yi Wang},\n    title = {{Maximum Torque Per Ampere (MTPA) Control for IPMSM Drives Based on a Variable-Equivalent-Parameter MTPA Control Law}},\n    journal = {Unknown},\n    year = {2019},\n    doi = {10.1109/TPEL.2018.2877740},\n    url = {https://www.semanticscholar.org/paper/431bea9e35553a9044bdff8c78220710aa3a5b3e},\n}",
+          "type": "article",
+          "paper": {
+            "title": "Maximum Torque Per Ampere (MTPA) Control for IPMSM Drives Based on a Variable-Equivalent-Parameter MTPA Control Law",
+            "authors": [
+              "Ke Li",
+              "Yi Wang"
+            ],
+            "year": 2019,
+            "doi": "10.1109/TPEL.2018.2877740",
+            "url": "https://www.semanticscholar.org/paper/431bea9e35553a9044bdff8c78220710aa3a5b3e",
+            "abstract": "This paper presents a maximum torque per ampere (MTPA) control method for interior permanent-magnet synchronous motor drives. The proposed method employs a variable-equivalent-parameter MTPA control law to calculate the MTPA current references. Different from conventional MTPA control laws, this novel MTPA control law equivalently considers both the influence of the motor parameter values as well as the influence of the derivatives of motor parameters with respect to d- and q-axis currents on the MTPA control. Therefore, the proposed method can achieve the accurate MTPA control under different load conditions. In addition, this novel MTPA control law avoids the computation of derivatives of motor parameters and the complicated computations that exist in conventional MTPA control laws. Thus, the proposed method can provide the MTPA current references easily and in real time, allowing for fast MTPA control to be achieved. Both simulation and experimental results confirm the effectiveness of the proposed MTPA method.",
+            "venue": "IEEE transactions on power electronics",
+            "citation_count": 108,
+            "arxiv_id": null,
+            "source": "semantic_scholar",
+            "relevance_score": 0.0
+          }
+        }
+      ],
+      "timestamp": "2025-10-08T06:29:21.216343",
+      "processing_time_sec": 61.9890239238739,
+      "status": "success",
+      "error_message": null
+    }
+  ],
+  "queued_claims": []
+}
