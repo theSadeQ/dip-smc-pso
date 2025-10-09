@@ -159,7 +159,7 @@ For comprehensive testing information, see:
 ### Research Scientists
 1. Focus on **[Scientific Validation](../test_execution_guide.md#scientific-validation-tests)** section
 2. Use **[Statistical Testing](../test_execution_guide.md#statistical-validation-tests)** for research validation
-3. Leverage **[Property-Based Testing](../test_execution_guide.md#property-based-testing)** for theoretical properties
+3. uses **[Property-Based Testing](../test_execution_guide.md#property-based-testing)** for theoretical properties
 
 ### CI/CD Engineers
 1. Review **[CI/CD Integration Examples](../test_execution_guide.md#cicd-integration-examples)**

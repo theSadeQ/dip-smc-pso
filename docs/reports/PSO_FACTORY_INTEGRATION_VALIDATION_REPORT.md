@@ -11,7 +11,7 @@ This report presents the comprehensive validation results for the PSO (Particle 
 ## Validation Objectives
 
 The validation focused on ensuring:
-1. **Seamless Integration**: PSO optimizer integration with factory-created controllers
+1. **integration**: PSO optimizer integration with factory-created controllers
 2. **Parameter Workflow Validation**: Optimization workflows for all controller types
 3. **Convergence Behavior**: PSO convergence with different controller configurations
 4. **Bounds Enforcement**: Parameter constraint handling and bounds validation
@@ -119,7 +119,7 @@ Hybrid SMC:    [2.0-30.0, 2.0-30.0, 1.0-20.0, 1.0-20.0]
 
 ### Factory Pattern Implementation
 
-The PSO integration leverages a sophisticated factory pattern:
+The PSO integration uses a sophisticated factory pattern:
 
 ```python
 # PSO-Optimized Controller Factory

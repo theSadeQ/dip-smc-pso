@@ -1136,4 +1136,4 @@ if __name__ == "__main__":
 
 ---
 
-This comprehensive API reference provides complete documentation for all factory methods, including detailed parameter specifications, return values, error handling, and practical examples. The documentation covers both basic usage patterns and advanced integration scenarios, ensuring developers can effectively utilize the factory system for their specific requirements.
+This comprehensive API reference provides complete documentation for all factory methods, including detailed parameter specifications, return values, error handling, and practical examples. The documentation covers both basic usage patterns and advanced integration scenarios, ensuring developers can effectively use the factory system for their specific requirements.

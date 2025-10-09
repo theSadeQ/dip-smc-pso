@@ -45,7 +45,7 @@ Each component demo provides CLI commands, ready for you to copy and run. Detail
 
 ## How To Contribute?
 
-Contributions are welcome! Check the [Open Issues](https://github.com/DavidHDev/react-bits/issues) to see how you can help or submit ideas using the [Feature Request template](https://github.com/DavidHDev/react-bits/issues/new?template=2-feature-request.yml).</br>
+Contributions are Check the [Open Issues](https://github.com/DavidHDev/react-bits/issues) to see how you can help or submit ideas using the [Feature Request template](https://github.com/DavidHDev/react-bits/issues/new?template=2-feature-request.yml).</br>
 Please review the [Contribution Guide](https://github.com/DavidHDev/react-bits/blob/main/CONTRIBUTING.md) and follow our standards. Thanks for your time!
 
 ## Contributors

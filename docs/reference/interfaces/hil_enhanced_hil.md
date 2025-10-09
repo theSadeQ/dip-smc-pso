@@ -475,7 +475,7 @@ Run specific test scenario.
 
 ##### `get_system_status(self)`
 
-Get comprehensive system status.
+Get system status.
 
 [View full source →](#method-enhancedhilsystem-get_system_status)
 
@@ -523,7 +523,7 @@ Setup data logging system.
 
 ##### `_system_self_test(self)`
 
-Perform comprehensive system self-test.
+Perform system self-test.
 
 [View full source →](#method-enhancedhilsystem-_system_self_test)
 

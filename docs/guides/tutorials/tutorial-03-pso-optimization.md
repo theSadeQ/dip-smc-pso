@@ -31,7 +31,7 @@ By the end of this tutorial, you will:
 
 1. **Derivative-free:** No need for gradient information (important for SMC with discontinuities)
 2. **Global search:** Explores parameter space to avoid local minima
-3. **Parallel evaluation:** Can leverage multi-core processors
+3. **Parallel evaluation:** Can uses multi-core processors
 4. **Few hyperparameters:** Swarm size and iterations are the main tuning knobs
 5. **Proven effectiveness:** Widely used in control engineering research
 

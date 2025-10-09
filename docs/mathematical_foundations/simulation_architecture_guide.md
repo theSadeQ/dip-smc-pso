@@ -730,7 +730,7 @@ states = simulate(x0, u, dt, stop_fn=soft_stop)
 # states.shape[0] may be < horizon + 1
 ```
 
-### 5. Leverage Vectorization
+### 5. uses Vectorization
 
 ```python
 # example-metadata:

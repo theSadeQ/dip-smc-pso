@@ -50,7 +50,7 @@ The **core** module encapsulates the physical model and simulation routines:
 
 - `simulation_runner.py` orchestrates simulations. It determines the number of integration steps deterministically by rounding the desired simulation time to an integer multiple of the time step, ensuring that the actual simulation duration matches the configuration. The runner injects faults (sensor freeze or actuator stuck) via a `FaultInjector`, calls the controller’s `compute_control` at each step, and accumulates time, state and control histories. By explicitly computing the number of steps and using consistent seeds for any randomness, the runner ensures that repeated simulations with the same configuration produce identical results.
 
-- `vector_sim.py` (used by the optimizer) performs batch simulations of many particles in parallel. It leverages NumPy array operations to evaluate hundreds of candidate gain sets simultaneously.
+- `vector_sim.py` (used by the optimizer) performs batch simulations of many particles in parallel. It uses NumPy array operations to evaluate hundreds of candidate gain sets simultaneously.
 
 ### 1.3 Optimizer subsystem (`src/optimizer`)
 

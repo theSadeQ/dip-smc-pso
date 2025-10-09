@@ -7,7 +7,7 @@
 Configuration compatibility utilities.
 
 This module provides compatibility between dictionary-based and object-based
-configuration access patterns, enabling seamless integration between different
+configuration access patterns, enabling integration between different
 configuration systems used throughout the project.
 
 ## Complete Source Code

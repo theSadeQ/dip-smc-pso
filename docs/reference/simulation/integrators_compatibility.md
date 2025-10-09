@@ -8,7 +8,7 @@ Integrator compatibility wrapper for simulation engine integration.
 
 This module provides compatibility wrappers to bridge the interface mismatch between
 simulation engines that expect dynamics_model.step(x, u, dt) and integrators that
-expect dynamics_fn(t, x, u) -> dx/dt. It ensures seamless integration of adaptive
+expect dynamics_fn(t, x, u) -> dx/dt. It ensures integration of adaptive
 and fixed-step integrators with the simulation framework.
 
 ## Complete Source Code

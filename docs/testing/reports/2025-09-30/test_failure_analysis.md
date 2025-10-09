@@ -150,7 +150,7 @@ The test suite reveals several critical areas requiring immediate attention. Whi
 
 1. **Immediate**: Focus on FDI threshold and memory leak fixes
 2. **Short-term**: Address numerical stability systematically
-3. **Long-term**: Implement comprehensive system hardening
+3. **Long-term**: Implement system hardening
 
 **Estimated Timeline**: 2-3 days for critical fixes, 2-4 weeks for comprehensive hardening.
 

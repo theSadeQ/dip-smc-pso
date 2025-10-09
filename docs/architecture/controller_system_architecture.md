@@ -1027,7 +1027,7 @@ class SecurityManager:
 # runnable: false
 
 class SystemMonitor:
-    """Comprehensive system monitoring and observability."""
+    """system monitoring and observability."""
 
     def __init__(self, monitoring_config: Dict[str, Any]):
         self.metrics_collector = MetricsCollector(monitoring_config)

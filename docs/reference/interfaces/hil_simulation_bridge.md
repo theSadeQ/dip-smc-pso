@@ -5,7 +5,7 @@
 ## Module Overview
 
 Simulation bridge for HIL systems.
-This module provides seamless integration between hardware components and
+This module provides integration between hardware components and
 simulation models, enabling hybrid testing where some components are real
 hardware and others are simulated models.
 

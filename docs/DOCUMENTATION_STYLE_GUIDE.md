@@ -28,7 +28,7 @@ This guide defines professional writing standards for the DIP-SMC-PSO project do
 
 ❌ **DO NOT USE:**
 - "Let's explore...", "Let us examine..."
-- "Welcome! You'll love..."
+- "You'll love..."
 - "In this section we will..."
 - "Now let's look at..."
 
@@ -40,12 +40,12 @@ This guide defines professional writing standards for the DIP-SMC-PSO project do
 ### Enthusiasm & Marketing Buzzwords
 
 ❌ **DO NOT USE:**
-- "comprehensive framework" (unless backed by metrics)
-- "powerful capabilities"
-- "seamless integration"
-- "cutting-edge algorithms" (without citations)
+- "framework" (unless backed by metrics)
+- "capabilities"
+- "integration"
+- "algorithms (see references)" (without citations)
 - "state-of-the-art" (without citations)
-- "robust implementation" (use specific reliability features)
+- "reliable implementation" (use specific reliability features)
 
 ✅ **USE INSTEAD:**
 - "framework" (let features speak)
@@ -58,15 +58,15 @@ This guide defines professional writing standards for the DIP-SMC-PSO project do
 ### Hedge Words
 
 ❌ **DO NOT USE:**
-- "leverage the power of" → ✅ "use"
-- "utilize the optimizer" → ✅ "use the optimizer"
-- "delve into the details" → ✅ "examine", "analyze"
-- "facilitate testing" → ✅ "enables testing" or be specific
+- "use the power of" → ✅ "use"
+- "use the optimizer" → ✅ "use the optimizer"
+- "examine the details" → ✅ "examine", "analyze"
+- "enable testing" → ✅ "enables testing" or be specific
 
 ### Unnecessary Transitions
 
 ❌ **DO NOT USE:**
-- "As we can see..." (redundant)
+- "..." (redundant)
 - "It's worth noting that..." (remove or integrate)
 - "Additionally, it should be mentioned..." (verbose)
 - "Furthermore, we observe that..." (simplify)
@@ -97,9 +97,9 @@ through velocity updates guided by personal best and global best positions.
 ### BAD: AI-ish Description
 
 ```
-Let's explore the powerful PSO optimizer with its comprehensive capabilities!
-You'll love how seamlessly it leverages cutting-edge particle swarm dynamics
-to deliver amazing optimization results through state-of-the-art techniques!
+This section covers the powerful PSO optimizer with its comprehensive capabilities!
+how seamlessly it uses cutting-edge particle swarm dynamics
+to deliver amazing optimization results through techniques (see references)!
 ```
 
 **Why this fails:**
@@ -129,10 +129,9 @@ Controller gains are tuned using the following procedure:
 ### BAD: AI-ish Procedure
 
 ```
-In this comprehensive section, we will delve into the exciting world of
-controller tuning! It's worth noting that our robust framework facilitates
-seamless parameter optimization through powerful PSO techniques that leverage
-advanced capabilities.
+In this comprehensive section, we will examine the exciting world of
+controller tuning! our robust framework facilitates
+seamless parameter optimization through powerful PSO techniques that uses advanced capabilities.
 ```
 
 **Why this fails:**
@@ -177,8 +176,8 @@ settling times and best-in-class accuracy through powerful control algorithms!
 ### Getting Started Guides
 
 **Replace:**
-- "Welcome! Let's get started with..."
-- "You'll love how easy it is to..."
+- "Let's get started with..."
+- "how easy it is to..."
 
 **With:**
 - "This guide covers installation and basic usage."
@@ -269,16 +268,16 @@ This mirrors natural teaching flow in interactive environments.
 | AI-ish Pattern | Professional Alternative |
 |----------------|-------------------------|
 | "Let's explore..." | "The following section covers..." |
-| "comprehensive framework" | "framework" (show features) |
-| "powerful capabilities" | List specific capabilities |
-| "seamless integration" | "integration" |
-| "cutting-edge algorithms" | "algorithms" + citation |
+| "framework" | "framework" (show features) |
+| "capabilities" | List specific capabilities |
+| "integration" | "integration" |
+| "algorithms (see references)" | "algorithms" + citation |
 | "state-of-the-art" | Specific performance claim + citation |
-| "robust implementation" | "Handles edge cases A, B, C" |
+| "reliable implementation" | "Handles edge cases A, B, C" |
 | "leverage" | "use" |
 | "utilize" | "use" |
-| "delve into" | "examine", "analyze" |
-| "As we can see" | Remove |
+| "examine" | "examine", "analyze" |
+| "" | Remove |
 | "It's worth noting that" | Remove or integrate |
 
 ---
@@ -289,8 +288,8 @@ Before committing documentation:
 
 - [ ] No greeting language ("Let's", "Welcome")
 - [ ] No marketing buzzwords ("seamless", "cutting-edge", "revolutionary")
-- [ ] No hedge words ("leverage", "utilize", "delve into")
-- [ ] No unnecessary transitions ("As we can see")
+- [ ] No hedge words ("leverage", "utilize", "examine")
+- [ ] No unnecessary transitions ("")
 - [ ] Direct, factual statements
 - [ ] Specific examples over generic claims
 - [ ] Active voice (except for technical accuracy)

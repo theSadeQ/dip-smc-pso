@@ -156,7 +156,7 @@ Best solution (classical_smc):
 
 ### Option C: Manual Expert Tuning
 **Approach:** Use control theory to hand-tune gains
-**Pros:** Leverages domain knowledge
+**Pros:** uses domain knowledge
 **Cons:**
 - Requires deep SMC expertise
 - Time-consuming trial-and-error
