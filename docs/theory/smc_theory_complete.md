@@ -4,7 +4,7 @@ This section provides comprehensive coverage of sliding mode control theory as a
 
 ## Introduction to Sliding Mode Control
 
-Sliding Mode Control (SMC) is a robust control methodology that provides finite-time convergence and inherent disturbance rejection capabilities {cite}`utkin1999sliding`. The fundamental principle is to constrain the system trajectory to evolve on a lower-dimensional sliding surface where desired dynamics are enforced.
+Sliding Mode Control (SMC) is a robust control methodology that provides finite-time convergence and inherent disturbance rejection capabilities {cite}`smc_utkin_1999_sliding_mode_foundations`. The fundamental principle is to constrain the system trajectory to evolve on a lower-dimensional sliding surface where desired dynamics are enforced.
 
 ### Fundamental Concepts
 
@@ -212,7 +212,7 @@ where $\alpha > 0$ and $\beta > 0$ are tuning parameters.
 
 where $\rho$ is the uncertainty bound and $\gamma$ is the lower bound on the control effectiveness.
 
-*Proof*: The proof uses a strict Lyapunov function from {cite}`moreno2012strict`:
+*Proof*: The proof uses a strict Lyapunov function from {cite}`smc_moreno_2012_strict_lyapunov`:
 
 ```{math}
 :label: eq:supertwisting_lyapunov
@@ -451,4 +451,4 @@ The next step is to apply these theoretical results to automated parameter optim
 
 ## References
 
-The theoretical development follows {cite}`utkin1999sliding`, {cite}`smc_edwards_spurgeon_1998_sliding_mode_control`, and {cite}`smc_shtessel_2014_sliding_mode_control_and_observation`, with super-twisting analysis from {cite}`smc_levant_2003_higher_order_smc` and {cite}`moreno2012strict`. Adaptive extensions are based on {cite}`smc_slotine_li_1991_applied_nonlinear_control` and {cite}`krstic1995nonlinear`.
+The theoretical development follows {cite}`smc_utkin_1999_sliding_mode_foundations`, {cite}`smc_edwards_spurgeon_1998_sliding_mode_control`, and {cite}`smc_shtessel_2014_sliding_mode_control_and_observation`, with super-twisting analysis from {cite}`smc_levant_2003_higher_order_smc` and {cite}`smc_moreno_2012_strict_lyapunov`. Adaptive extensions are based on {cite}`smc_slotine_li_1991_applied_nonlinear_control` and {cite}`smc_krstic_1995_nonlinear_adaptive`.

@@ -116,7 +116,7 @@ where $\vec{x}^*$ is the global optimum.
 
 ### No Free Lunch Theorem
 
-**Theorem 3 (No Free Lunch)**: Averaged over all possible optimization problems, no optimization algorithm performs better than random search {cite}`wolpert1997no`.
+**Theorem 3 (No Free Lunch)**: Averaged over all possible optimization problems, no optimization algorithm performs better than random search {cite}`pso_wolpert_1997_no_free_lunch`.
 
 **Implication**: PSO effectiveness depends on matching algorithm characteristics to problem structure.
 
@@ -547,4 +547,4 @@ The integration of PSO with sliding mode control theory, developed in {doc}`smc_
 
 ## References
 
-The theoretical development follows {cite}`pso_kennedy_1995_particle_swarm_optimization`, {cite}`pso_clerc_2002_particle_swarm`, and {cite}`zhang2015comprehensive`. Multi-objective extensions are based on {cite}`coello2007evolutionary` and {cite}`deb2001multi`. Convergence analysis follows {cite}`pso_jiang_2007_stochastic` and {cite}`pso_van_den_bergh_2006_trajectories`.
+The theoretical development follows {cite}`pso_kennedy_1995_particle_swarm_optimization`, {cite}`pso_clerc_2002_particle_swarm`, and {cite}`pso_zhang_2015_comprehensive_survey`. Multi-objective extensions are based on {cite}`pso_coello_2007_evolutionary_algorithms` and {cite}`pso_deb_2001_fast_elitist`. Convergence analysis follows {cite}`pso_jiang_2007_stochastic` and {cite}`pso_van_den_bergh_2006_trajectories`. The No Free Lunch theorems {cite}`pso_wolpert_1997_no_free_lunch` provide theoretical foundation for algorithm selection.

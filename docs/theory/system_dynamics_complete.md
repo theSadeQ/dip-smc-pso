@@ -429,7 +429,7 @@ The derived model has been validated through:
 
 ## References
 
-The derivation follows standard approaches in {cite}`goldstein2002classical` and {cite}`spong2006robot`, with specific application to inverted pendulums as discussed in {cite}`furuta2003swing` and {cite}`boubaker2013double`.
+The derivation follows standard approaches in {cite}`dip_goldstein_2002_classical_mechanics` and {cite}`dip_spong_2006_robot_modeling_control`, with specific application to inverted pendulums as discussed in {cite}`dip_furuta_2003_swing_up_control` and {cite}`dip_boubaker_2013_double_inverted_pendulum_benchmark`.
 
 ---
 
