@@ -675,7 +675,88 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 **Total:** 12 items (target achieved)
 
 **Hidden Dirs (acceptable):**
-- `.archive/`, `.test_artifacts/`, `.dev_tools/`, `.build/`, `.cache/`
+- `.archive/`, `.test_artifacts/`, `.dev_tools/`, `.build/`, `.cache/`, `.coverage/`, `.artifacts/`
+
+#### File Organization Enforcement (MANDATORY)
+
+**CRITICAL RULE**: NEVER create files in root directory except approved core files.
+
+**Before Creating ANY File - Ask:**
+1. Does this belong in root? (Answer: 99% NO)
+2. What is the proper directory for this file type?
+3. Does the target directory exist? If not, create it FIRST.
+4. Is this temporary? If yes → use hidden directory (`.test_artifacts/`, `.archive/`)
+
+**File Type Directory Map:**
+
+| File Pattern | Destination | Example |
+|-------------|-------------|---------|
+| `test_*.py` | `tests/debug/` | `test_my_feature.py` → `tests/debug/test_my_feature.py` |
+| `*.log`, `report.*` | `logs/` | `output.log` → `logs/script_20251009.log` |
+| `*_gains*.json`, `optimized_*.json` | `optimization_results/{controller}_{date}/` | `optimized_gains_smc.json` → `optimization_results/classical_smc_20251009/gains.json` |
+| `*_AUDIT.md`, `*_REPORT.md`, `INVESTIGATION_*.md` | `.archive/analysis_reports/` | `EXCEPTION_HANDLER_AUDIT.md` → `.archive/analysis_reports/EXCEPTION_HANDLER_AUDIT.md` |
+| `*.txt` (analysis results) | `.archive/analysis_reports/` or `logs/` | `phase5_stats.txt` → `.archive/analysis_reports/phase5_stats.txt` |
+| Coverage data | `.coverage/` or delete | `coverage.json` → `.coverage/coverage.json` or `rm coverage.json` |
+| Build artifacts | Delete immediately | `__pycache__/`, `out/` → `rm -rf __pycache__ out` |
+
+**Examples - WRONG vs. CORRECT:**
+
+```bash
+# WRONG: Creating test file in root
+touch test_my_feature.py
+python test_my_feature.py
+
+# CORRECT: Test files in tests/debug/
+mkdir -p tests/debug
+touch tests/debug/test_my_feature.py
+python tests/debug/test_my_feature.py
+```
+
+```bash
+# WRONG: Dumping logs in root
+python optimize.py > output.log
+
+# CORRECT: Logs in logs/ with timestamps
+python optimize.py > logs/optimize_$(date +%Y%m%d_%H%M%S).log
+```
+
+```bash
+# WRONG: Saving optimization results in root
+python scripts/optimization/tune_controller.py --save optimized_gains.json
+
+# CORRECT: Results in organized timestamped directories
+python scripts/optimization/tune_controller.py --save optimization_results/classical_smc_$(date +%Y%m%d)/gains.json
+```
+
+**Session End Enforcement (Run Before EVERY Commit):**
+
+```bash
+# Check root item count (must be ≤20)
+ls -1 | wc -l
+
+# Find any test files in root (should be empty)
+find . -maxdepth 1 -name "test_*.py"
+
+# Find any logs in root (should be empty)
+find . -maxdepth 1 -name "*.log"
+
+# Find any JSON results in root (should be empty except config.yaml)
+find . -maxdepth 1 -name "*.json"
+
+# Clean all caches
+find . -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null
+```
+
+**Auto-cleanup Command (run at session end):**
+
+```bash
+# Move misplaced files to proper locations
+mv test_*.py tests/debug/ 2>/dev/null || true
+mv *.log logs/ 2>/dev/null || true
+mv *_gains*.json *optimized*.json optimization_results/ 2>/dev/null || true
+mv *_AUDIT.md *_REPORT.md INVESTIGATION_*.md .archive/analysis_reports/ 2>/dev/null || true
+rm -rf __pycache__ out
+```
 
 ### 10.7 Long-Running Optimization Processes (PSO)
 
