@@ -82,6 +82,12 @@ Grouped by functional themes:
 
 **Total:** 9 aspects (3 from Section 1, 6 from Section 2)
 
+#### Related Files
+- `.git/` - Git repository directory
+- `CLAUDE.md` - Main project documentation
+- `.gitignore` - Git ignore patterns
+- Git configuration and hooks
+
 ---
 
 ### Category 2: Session Management (45+ aspects)
@@ -161,6 +167,12 @@ Grouped by functional themes:
 
 **Total:** 45+ aspects
 
+#### Related Files
+- `.dev_tools/session_state.json` - Session state storage (JSON format)
+- `.dev_tools/session_manager.py` - Python helper functions for session management
+- `.dev_tools/claude-backup.ps1` - PowerShell backup script (1-minute automation)
+- Task Scheduler configuration for automated backups
+
 ---
 
 ### Category 3: Technical Architecture (17 aspects)
@@ -193,6 +205,28 @@ Grouped by functional themes:
 7. Streamlit UI
 
 **Total:** 17 aspects (2 + 8 + 7)
+
+#### Related Files
+- `src/controllers/` - Controller implementations
+  - `classic_smc.py`, `sta_smc.py`, `adaptive_smc.py`
+  - `hybrid_adaptive_sta_smc.py`, `swing_up_smc.py`, `mpc_controller.py`
+  - `factory.py` - Controller factory
+- `src/core/` - Core simulation engine
+  - `dynamics.py`, `dynamics_full.py`
+  - `simulation_runner.py`, `simulation_context.py`, `vector_sim.py`
+- `src/plant/` - Plant models
+  - `models/simplified/`, `models/full/`, `models/lowrank/`
+  - `configurations/`, `core/`
+- `src/optimizer/` - Optimization algorithms
+  - `pso_optimizer.py`
+- `src/utils/` - Utility modules
+  - `validation/`, `control/`, `monitoring/`, `visualization/`, `analysis/`
+  - `types/`, `reproducibility/`, `development/`
+- `src/hil/` - Hardware-in-the-loop
+  - `plant_server.py`, `controller_client.py`
+- `simulate.py` - CLI entry point
+- `streamlit_app.py` - Web UI
+- `requirements.txt` - Dependencies
 
 ---
 
@@ -230,6 +264,15 @@ Grouped by functional themes:
 3. Configuration-first philosophy
 
 **Total:** 17 aspects (14 + 3)
+
+#### Related Files
+- `config.yaml` - Main configuration file (Pydantic-validated)
+- `simulate.py` - CLI entry point for all commands
+- `streamlit_app.py` - Web interface
+- `run_tests.py` - Test runner helper
+- `requirements.txt` - Dependency specifications
+- Custom configuration files (e.g., `custom_config.yaml`)
+- Tuned gains JSON files (e.g., `tuned_gains.json`, `gains_classical.json`)
 
 ---
 
@@ -278,6 +321,20 @@ Grouped by functional themes:
 
 **Total:** 23 aspects (10 + 13)
 
+#### Related Files
+- `src/controllers/` - Controller implementation directory
+  - `factory.py` - Controller factory registry
+- `src/core/vector_sim.py` - Batch simulation functions
+- `src/config.py` - Configuration loading utilities
+- `tests/` - All test directories
+  - `test_controllers/` - Controller-specific tests
+  - `test_benchmarks/` - Performance benchmarks
+  - `test_integration/` - Integration tests
+- `.gitignore` - Comprehensive ignore patterns
+- `pytest.ini` - pytest configuration (if exists)
+- `.hypothesis/` - Hypothesis framework data
+- Coverage configuration files
+
 ---
 
 ### Category 6: Analysis & Visualization (9 aspects)
@@ -298,6 +355,20 @@ Grouped by functional themes:
 9. Real-time control loop monitoring (latency, deadlines, weakly-hard constraints)
 
 **Total:** 9 aspects
+
+#### Related Files
+- `src/utils/visualization/` - Visualization utilities
+  - DIPAnimator class
+  - Plot generation modules
+  - Movie generator
+- `src/utils/analysis/` - Statistical analysis tools
+  - Bootstrap methods
+  - Statistical tests (t-test, ANOVA)
+  - Monte Carlo analysis
+- `src/utils/monitoring/` - Real-time monitoring
+  - `latency.py` - LatencyMonitor class
+  - Deadline tracking
+  - Weakly-hard constraint monitoring
 
 ---
 
@@ -357,6 +428,19 @@ Grouped by functional themes:
 4. Automated production memory monitoring available
 
 **Total:** 29 aspects (9 + 20)
+
+#### Related Files
+- `scripts/verify_dependencies.py` - Dependency verification script
+- `scripts/test_memory_leak_fixes.py` - Memory leak validation
+- `scripts/test_spof_fixes.py` - SPOF validation
+- `scripts/test_thread_safety_fixes.py` - Thread safety testing (currently failing)
+- `docs/memory_management_patterns.md` - Memory management comprehensive guide
+- `docs/memory_management_quick_reference.md` - Quick lookup reference
+- `tests/test_integration/test_memory_management/` - Memory leak tests
+  - `test_memory_resource_deep.py` - Deep memory validation
+- `src/controllers/` - All controllers with cleanup methods
+  - `smc.py` (ClassicalSMC with weakref and cleanup)
+  - `sta_smc.py`, `adaptive_smc.py`, `hybrid_adaptive_sta_smc.py`
 
 ---
 
@@ -457,6 +541,57 @@ Grouped by functional themes:
 
 **Total:** 70+ aspects
 
+#### Related Files
+**Core Directories (6 visible):**
+- `src/` - Source code
+- `tests/` - Test suites
+- `docs/` - Documentation
+- `notebooks/` - Jupyter notebooks
+- `benchmarks/` - Performance tests
+- `scripts/` - Utility scripts
+  - `scripts/optimization/` - PSO and optimization scripts
+  - `scripts/analysis/` - Analysis scripts
+  - `scripts/utils/` - Utility scripts
+
+**Core Files (6 visible):**
+- `simulate.py` - CLI entry
+- `streamlit_app.py` - Web UI
+- `config.yaml` - Configuration
+- `requirements.txt` - Dependencies
+- `README.md` - Documentation
+- `CHANGELOG.md` - Version history
+
+**Hidden Development Directories:**
+- `.archive/` - Historical files, backups
+  - `.archive/analysis_reports/` - Analysis and audit reports
+  - `.archive/docs_{date}/` - Archived documentation
+- `.test_artifacts/` - Temporary test runs (auto-cleanup)
+- `.dev_tools/` - Development utilities
+  - `.dev_tools/session_state.json`
+  - `.dev_tools/session_manager.py`
+  - `.dev_tools/clean_view.sh`
+- `.build/` - Build artifacts
+- `.coverage/` - Coverage data
+- `.artifacts/` - Temporary build outputs
+
+**Artifact Directories:**
+- `logs/` - All log files
+  - `logs/pso_runs_archive/` - Archived PSO runs
+- `optimization_results/` - Optimization artifacts
+  - `optimization_results/{controller}_{date}/` - Timestamped results
+
+**Cache Directories (to be cleaned):**
+- `__pycache__/` - Python bytecode cache
+- `.pytest_cache/` - pytest cache
+- `.ruff_cache/` - Ruff linter cache
+- `.numba_cache/` - Numba compilation cache
+- `.benchmarks/` - Benchmark cache
+- `.hypothesis/` - Hypothesis data
+
+**Configuration Files:**
+- `.gitignore` - Enhanced ignore patterns
+- `CLAUDE.md` - Project instructions (or `.CLAUDE.md`)
+
 ---
 
 ### Category 9: AI Orchestration (38 aspects)
@@ -523,6 +658,25 @@ Grouped by functional themes:
 
 **Total:** 38 aspects (24 + 3 + 3 + 4 + 4)
 
+#### Related Files
+- `prompt/` - Orchestration prompt specifications
+  - `prompt/integration_recheck_validation_prompt.md`
+  - `prompt/integration_critical_fixes_orchestration.md`
+- `validation/` - Validation artifacts from orchestration
+  - Test results
+  - System health scores
+  - Coverage reports
+- `patches/` - Integration improvement patches
+  - Controller fixes
+  - Optimization enhancements
+  - Configuration updates
+- `artifacts/` - Orchestration artifacts
+  - Configuration samples
+  - Optimization results
+  - Convergence plots
+  - Performance benchmarks
+- Orchestration JSON reports (structured data for CI/automation)
+
 ---
 
 ### Category 10: Quality Standards (9 aspects)
@@ -540,6 +694,16 @@ Grouped by functional themes:
 9. Reproducible experiments
 
 **Total:** 9 aspects
+
+#### Related Files
+- `config.yaml` - Validated configuration
+- `pytest.ini` - pytest configuration
+- `.coverage/` - Coverage data directory
+- `tests/` - Complete test suite
+- Coverage report outputs (`htmlcov/`, coverage.xml)
+- Benchmark results
+- CI/CD configuration files (e.g., `.github/workflows/`)
+- Quality gate scripts and validation tools
 
 ---
 
