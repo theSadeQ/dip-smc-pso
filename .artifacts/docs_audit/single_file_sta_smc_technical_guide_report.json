@@ -1,0 +1,18 @@
+{
+  "file": "D:\\Projects\\main\\docs\\controllers\\sta_smc_technical_guide.md",
+  "total_issues": 1,
+  "severity": "LOW",
+  "patterns": {
+    "hedge_words": [
+      {
+        "pattern": "\\benable\\b(?! flag| option| the| this| logging| monitoring| feature| caching)",
+        "line": 690,
+        "text": "Enable",
+        "context": "after disturbances\n\n**Solutions**:\n\n**Option 1**: Enable anti-windup\n```yaml\nanti_windup_gain: 0.5  # From",
+        "full_line": "**Option 1**: Enable anti-windup"
+      }
+    ]
+  },
+  "file_size": 20626,
+  "lines": 766
+}
