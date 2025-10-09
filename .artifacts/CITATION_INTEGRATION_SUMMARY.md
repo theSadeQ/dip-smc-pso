@@ -150,16 +150,83 @@ Successfully integrated 30-35 validated academic citations from 11 AI responses 
 
 ---
 
+## Phase 6: BibTeX Parser Fix & Broken Reference Resolution ✅
+
+**Deliverable:** Week 8 Phase 2 - Critical parser fix and comprehensive cleanup
+
+### BibTeX Parser Bug Fix
+- **Root Cause:** Original regex `[^}]+` stopped at first `}`, missing doi/url fields
+- **Solution:** Implemented brace-counting algorithm for proper nested structure parsing
+- **Impact:** Accurate DOI/URL detection (reported 0% → 68.7% → actual coverage)
+
+### Broken Reference Resolution (19 total)
+- **8 existing matches:** Renamed citation keys to match BibTeX entries
+- **11 missing entries created:** Added with DOI/URL across pso.bib (4), smc.bib (3), dip.bib (4)
+- **Result:** 0 broken references (100% documentation integrity)
+
+### Files Updated
+- **scripts/docs/validate_citations.py:** Fixed parser + Windows UTF-8 handling
+- **scripts/docs/validate_dois.py:** Same parser fix
+- **scripts/docs/generate_citation_report.py:** Same parser fix
+- **docs/theory/smc_theory_complete.md:** Fixed 6 citation keys
+- **docs/theory/pso_optimization_complete.md:** Fixed 8 citation keys
+- **docs/theory/system_dynamics_complete.md:** Fixed 4 citation keys
+
+---
+
+## Phase 7: DOI/URL Enhancement Campaign ✅
+
+**Deliverable:** Week 8 Phase 2 - Massive DOI/URL coverage increase
+
+### DOI/URL Addition by Priority Tier
+
+**Priority 1: Cited in Documentation (3 entries)**
+- smc_farrell_2006_adaptive_approximation (DOI: 10.1002/0471727881)
+- smc_slotine_li_1991_applied_nonlinear_control (URL: Pearson)
+- smc_edwards_spurgeon_1998_sliding_mode_control (DOI: 10.1201/9781498701822)
+
+**Priority 2: SMC Core Theory (8 entries)**
+- smc_utkin_1977_variable_structure_systems (DOI: 10.1109/TAC.1977.1101446)
+- smc_slotine_sastry_1983_tracking_control (DOI: 10.1080/00207178308933088)
+- smc_yang_2007_adaptive_sliding_mode_control (DOI: 10.1016/j.automatica.2006.08.017)
+- smc_huang_2008_adaptive_second_order_sliding_mode_control (DOI: 10.1109/TAC.2008.2007883)
+- smc_messina_2013_multi_objective_optimal_tuning (DOI: 10.1109/TMECH.2012.2202903)
+- smc_gong_2022_robust_sliding_mode_control (DOI: 10.3390/en15051935)
+- smc_gaber_2025_observer_free_sliding_mode_control (arXiv: 2501.03856)
+- soft_ekanathan_2025_fully_adaptive_radau_method (arXiv: 2501.05125)
+
+**Priority 3: DIP Dynamics (4 entries)**
+- dip_khalil_2002_nonlinear_systems (URL: Pearson)
+- dip_boubaker_2014_inverted_pendulum (DOI: 10.1504/IJAAC.2014.064739)
+- dip_irfan_2023_control_strategies_double_inverted_pendulum (DOI: 10.1371/journal.pone.0282522)
+- dip_zhong_2001_energy_passivity_based_control (DOI: 10.1109/CCA.2001.973981)
+
+**Priority 4: PSO & Numerical Methods (6 entries)**
+- pso_freitas_2020_particle_swarm_optimization (DOI: 10.3390/e22030362)
+- pso_khan_2017_robust_particle_swarm_optimisation (DOI: 10.1049/iet-cta.2016.0707)
+- pso_clerc_2006_particle_swarm (DOI: 10.1002/9780470612163)
+- press2007numerical (URL: numerical.recipes)
+- gertler1998fault (DOI: 10.1201/9780203756126)
+- soft_raichle_2008_numerical_solution_of_stiff_odes (DOI: 10.1016/j.automatica.2008.05.019)
+
+### Coverage Improvement
+- **Before Phase 7:** 68/94 entries (72.3%)
+- **After Phase 7:** 89/94 entries (94.7%)
+- **Improvement:** +21 entries (+22.4 percentage points)
+
+---
+
 ## Success Metrics
 
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
 | FORMAL-THEOREM claims cited | 17/17 | 11/11 (core) | ✅ |
-| Peer-reviewed sources | 30-35 | 24 | ✅ |
-| BibTeX entries with DOI/URL | ≥95% | 100% | ✅ |
+| Peer-reviewed sources | 30-35 | 35 (24+11) | ✅ |
+| BibTeX entries with DOI/URL | ≥95% | 94.7% (89/94) | ⚠️ |
 | Broken references | 0 | 0 | ✅ |
 | Documentation builds | No warnings | Success | ✅ |
 | Critical docstrings enhanced | All | 3 controllers | ✅ |
+| BibTeX parser accuracy | 100% | 100% | ✅ |
 
 ---
 
@@ -176,6 +243,11 @@ Successfully integrated 30-35 validated academic citations from 11 AI responses 
 ### Week 7 Outputs
 5. ✅ Validation scripts (3 scripts)
 6. ✅ Citation integration summary (this file)
+
+### Week 8 Outputs
+7. ✅ BibTeX parser fix (brace-counting algorithm)
+8. ✅ Broken reference resolution (19 fixed, 11 new entries)
+9. ✅ DOI/URL enhancement (+21 entries, 94.7% coverage)
 
 ---
 
@@ -247,20 +319,21 @@ This citation integration enhances the DIP-SMC-PSO project's academic credibilit
 
 ## Completion Status
 
-**All 6 planned phases completed successfully:**
+**All 9 planned phases completed successfully:**
 
-- ✅ Phase 1.1: BibTeX Generation
-- ✅ Phase 2.1: Theorem Mapping
-- ✅ Phase 2.2: Documentation Citation Integration
-- ✅ Phase 3.1: Controller Docstring Updates
-- ✅ Phase 4.1: Cross-Reference Mapping JSON
-- ✅ Phase 5.1: Validation Automation
-- ✅ Phase 6.1: DOI Accessibility (100%)
-- ✅ Phase 6.2: Integration Report (this summary)
+- ✅ Phase 1: BibTeX Generation (24 entries)
+- ✅ Phase 2: Documentation Citation Integration (8 theorems)
+- ✅ Phase 3: Controller Docstring Updates (3 files)
+- ✅ Phase 4: Cross-Reference Mapping JSON (11 theorems)
+- ✅ Phase 5: Validation Automation (3 scripts)
+- ✅ Phase 6: BibTeX Parser Fix & Broken Reference Resolution (19 fixed)
+- ✅ Phase 7: DOI/URL Enhancement Campaign (+21 entries, 94.7% coverage)
+- ✅ Phase 8: Integration Summary Update (this file)
 
-**Total Time:** 12-15 hours
-**Dependencies:** None (all citations validated)
+**Total Time:** 18-22 hours (including Week 8)
+**Dependencies:** None (all citations validated, 0 broken references)
 **Quality:** Production-ready
+**Coverage:** 94.7% DOI/URL accessibility (89/94 entries)
 
 ---
 
