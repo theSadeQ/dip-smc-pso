@@ -44,7 +44,13 @@ def _sta_smc_control_numba(
 
     Uses a saturated sign function for sigma to maintain full control authority
     outside the boundary layer and linear behavior inside it, which is required
-    for robust, finite‑time convergence of the super‑twisting algorithm.
+    for robust, finite‑time convergence of the super‑twisting algorithm. Levant
+    (2003) introduced the super-twisting controller to achieve second-order
+    sliding mode with continuous control【smc_levant_2003_higher_order
+    _introduction†L1-L24】. Moreno & Osorio (2008) provided the first Lyapunov
+    -based proof of finite-time convergence【smc_moreno_2008_lyapunov_sta†L2856
+    -L2861】. Seeber & Horn (2017) refined parameter conditions for lower gains
+    and reduced chattering【smc_seeber_2017_sta_parameter_setting†L241-L243】.
     """
     _, th1, th2, _, th1dot, th2dot = state
 
