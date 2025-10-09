@@ -252,49 +252,31 @@ python scripts/test_thread_safety_fixes.py  # currently failing
 
 ## 13) Workspace Organization & Hygiene
 
-**See:** `.claude/workspace_organization.md` for complete details.
+**Target:** ≤15 visible root items (currently: 15) ✓
 
-**Quick Reference:**
-- Clean root: ≤15 visible items (currently: 15) ✓ [Updated from ≤12 - more realistic]
-- Logs → `logs/`, Test artifacts → `.test_artifacts/`, Optimization → `optimization_results/`
-- NEVER create files in root except approved core files
-- Run cleanup script before every commit: `python scripts/cleanup/workspace_cleanup.py --verbose`
-
-**Latest Cleanup:** 2025-10-09 (370MB recovered, all targets met)
-- See `.claude/WORKSPACE_CLEANUP_2025-10-09.md` for full details
-
-**Common Bloat Sources (Monitor Weekly):**
-
-Hidden directory bloat is the #1 problem - these accumulate silently:
-- **Documentation screenshots** in `.test_artifacts/` (reached 234MB in Oct 2025!)
-- **Rotating log files** (`*.log.*`) in `.dev_validation/` (100MB of report.log.* files)
-- **Research backup chains** (15+ CSV backups instead of archiving once)
-- **Duplicate directories** (using both `artifacts/` and `.artifacts/`)
-
-**Quick Health Check:**
+**Weekly Health Check:**
 ```bash
-ls | wc -l                          # Target: ≤15
-du -sh .test_artifacts/             # Target: <10MB (was 256MB!)
-du -sh .dev_validation/             # Target: <5MB (was 100MB!)
-du -sh logs/                        # Target: <20MB
-find . -name "*.log.*" | wc -l      # Target: 0
+ls | wc -l                          # ≤15
+du -sh .test_artifacts/             # <10MB
+du -sh .dev_validation/             # <5MB
+du -sh logs/                        # <20MB
+find . -name "*.log.*" | wc -l      # 0
 ```
 
-**Prevention (Run Before Every Commit):**
+**Before Every Commit:**
 ```bash
-# Automated cleanup script
 python scripts/cleanup/workspace_cleanup.py --verbose
-
-# Manual verification
-ls | wc -l  # Verify ≤15 items
 ```
 
-**Learned from Oct 2025 Cleanup:**
-1. Config files belong in `.config/`, not root (moved 5 files)
-2. Use single source of truth: `.artifacts/` NOT `artifacts/`, `notebooks/` NOT `.notebooks/`
-3. Archive documentation immediately after phase/issue completion
-4. Delete backup file chains - archive original once, use git for history
-5. Automation prevents problems - cleanup script should exist from day one
+**Directory Rules (Single Source of Truth):**
+- Use `.artifacts/` NOT `artifacts/`
+- Use `notebooks/` NOT `.notebooks/`
+- Use `optimization_results/` NOT `.optimization_results/`
+- NEVER create files in root except: simulate.py, streamlit_app.py, config.yaml, requirements.txt, README.md, CHANGELOG.md, CLAUDE.md
+
+**Full Details:**
+- Comprehensive guide: `.claude/workspace_organization.md`
+- Oct 2025 cleanup lessons (370MB recovered): `.claude/WORKSPACE_CLEANUP_2025-10-09.md`
 
 ------
 
