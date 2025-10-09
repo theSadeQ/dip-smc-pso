@@ -4,7 +4,7 @@ This section provides comprehensive coverage of Particle Swarm Optimization (PSO
 
 ## Introduction to Particle Swarm Optimization
 
-Particle Swarm Optimization {cite}`kennedy1995particle` is a population-based metaheuristic inspired by the social behavior of bird flocking and fish schooling. In the context of control systems, PSO provides an effective framework for automated parameter tuning and multi-objective optimization.
+Particle Swarm Optimization {cite}`pso_kennedy_1995_particle_swarm_optimization` is a population-based metaheuristic inspired by the social behavior of bird flocking and fish schooling. In the context of control systems, PSO provides an effective framework for automated parameter tuning and multi-objective optimization.
 
 ### Biological Inspiration
 
@@ -201,7 +201,7 @@ with strict inequality for at least one objective.
 
 ### Constriction Factor PSO
 
-To ensure convergence, Clerc and Kennedy {cite}`clerc2002particle` introduced the constriction factor:
+To ensure convergence, Clerc and Kennedy {cite}`pso_clerc_2002_particle_swarm` introduced the constriction factor:
 
 ```{math}
 :label: eq:constriction_factor
@@ -547,4 +547,4 @@ The integration of PSO with sliding mode control theory, developed in {doc}`smc_
 
 ## References
 
-The theoretical development follows {cite}`kennedy1995particle`, {cite}`clerc2002particle`, and {cite}`zhang2015comprehensive`. Multi-objective extensions are based on {cite}`coello2007evolutionary` and {cite}`deb2001multi`. Convergence analysis follows {cite}`jiang2007stochastic` and {cite}`van2006analysis`.
+The theoretical development follows {cite}`pso_kennedy_1995_particle_swarm_optimization`, {cite}`pso_clerc_2002_particle_swarm`, and {cite}`zhang2015comprehensive`. Multi-objective extensions are based on {cite}`coello2007evolutionary` and {cite}`deb2001multi`. Convergence analysis follows {cite}`pso_jiang_2007_stochastic` and {cite}`pso_van_den_bergh_2006_trajectories`.
