@@ -40,26 +40,42 @@ def parse_bibtex_dois(bib_path: Path) -> List[Dict[str, str]]:
     entries = []
     content = bib_path.read_text(encoding='utf-8')
 
-    # Pattern: @type{key, ... }
-    entry_pattern = r'@(\w+)\{([^,]+),([^}]+)\}'
+    # Find all entry starts: @type{key,
+    entry_start_pattern = r'@(\w+)\{([^,]+),'
 
-    for match in re.finditer(entry_pattern, content, re.DOTALL):
-        entry_type, key, body = match.groups()
+    for match in re.finditer(entry_start_pattern, content):
+        entry_type = match.group(1)
+        key = match.group(2).strip()
+        start_pos = match.end()
 
-        # Extract DOI and URL
-        doi_match = re.search(r'doi\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
-        url_match = re.search(r'url\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
+        # Count braces to find matching closing brace
+        brace_count = 1  # We already have the opening brace from @type{
+        pos = start_pos
+        while pos < len(content) and brace_count > 0:
+            if content[pos] == '{':
+                brace_count += 1
+            elif content[pos] == '}':
+                brace_count -= 1
+            pos += 1
 
-        doi = doi_match.group(1).strip() if doi_match else None
-        url = url_match.group(1).strip() if url_match else None
+        if brace_count == 0:
+            # Extract entry body between opening and closing braces
+            body = content[start_pos:pos-1]
 
-        entries.append({
-            'key': key.strip(),
-            'type': entry_type,
-            'doi': doi,
-            'url': url,
-            'source_file': bib_path.name
-        })
+            # Extract DOI and URL from full entry body
+            doi_match = re.search(r'doi\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
+            url_match = re.search(r'url\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
+
+            doi = doi_match.group(1).strip() if doi_match else None
+            url = url_match.group(1).strip() if url_match else None
+
+            entries.append({
+                'key': key,
+                'type': entry_type,
+                'doi': doi,
+                'url': url,
+                'source_file': bib_path.name
+            })
 
     return entries
 
