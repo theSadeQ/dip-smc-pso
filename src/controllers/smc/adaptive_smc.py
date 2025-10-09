@@ -85,10 +85,15 @@ except Exception:
 class AdaptiveSMC:
     """
     Adaptive Sliding Mode Controller that adjusts gain K online.
-    
+
     The controller prevents gain wind-up by using a dead zone around the sliding surface.
     When |σ| ≤ dead_zone, the gain K only decreases via the leak term, preventing
-    uncontrolled growth during chattering.
+    uncontrolled growth during chattering. Plestan et al. (2010) propose adaptive
+    -gain SMC laws that achieve finite-time convergence without prior knowledge of
+    uncertainty bounds while ensuring bounded gain【smc_plestan_2010_adaptive
+    _methodologies†L1907-L1919】. Roy et al. (2020) prove uniform ultimate
+    boundedness without a priori bounded uncertainty【smc_roy_2020_adaptive
+    _unbounded†L108650】.
     """
     n_gains = 5  
     def __init__(

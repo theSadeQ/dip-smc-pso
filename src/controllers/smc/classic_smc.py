@@ -29,14 +29,17 @@ class ClassicalSMC:
     saturation) within a boundary layer of width ``epsilon`` to attenuate
     chattering.  Introducing a boundary layer around the switching surface
     replaces the discontinuous signum control with a continuous function,
-    thereby reducing high‑frequency oscillations.  A number of authors
-    note that the boundary‑layer approximation attenuates chattering at
-    the cost of introducing a finite steady‑state tracking error; for
-    example, a discussion of chattering reduction methods emphasises
-    that the boundary‑layer method "reduces chattering but leads to a finite
-    steady state error".  The user should therefore
-    select ``epsilon`` to balance chattering reduction against steady‑state
-    accuracy.
+    thereby reducing high‑frequency oscillations.  Edardar et al. (2015)
+    prove that boundary layer approximation achieves ultimate boundedness
+    with tracking error proportional to boundary layer thickness
+    【smc_edardar_2015_hysteresis_compensation†L598-L609】. Sahamijoo et al.
+    (2016) analyze the trade-off: increasing boundary layer width reduces
+    chattering but enlarges steady-state error【smc_sahamijoo_2016
+    _chattering_attenuation†L255-L264】. Burton & Zinober (1986) show that
+    continuous approximations preserve robustness while eliminating
+    high-frequency switching【smc_burton_1986_continuous†L875-L885】. The
+    user should therefore select ``epsilon`` to balance chattering
+    reduction against steady‑state accuracy.
 
     Two switching functions are available: ``tanh`` (smooth hyperbolic
     tangent) and ``linear`` (piecewise‑linear saturation).  The ``linear``
@@ -78,11 +81,13 @@ class ClassicalSMC:
 
     **Gain positivity (F‑4.SMCDesign.2 / RC‑04)** – Sliding‑mode theory
     requires that the sliding‑surface gains ``k1``, ``k2`` and the slope
-    coefficients ``lam1``, ``lam2`` be strictly positive.  Utkin and
-    Levant note that the discontinuous control gain ``k`` must be a
-    positive constant【Rhif2012†L563-L564】, and the slope ``λ`` of the
-    sliding function must be chosen positive to ensure Hurwitz
-    stability【ModelFreeSMC2018†L340-L345】.  The switching gain ``K`` must
+    coefficients ``lam1``, ``lam2`` be strictly positive.  Bucak (2020)
+    demonstrates that positive sliding surface parameters ensure Hurwitz
+    polynomial stability【smc_bucak_2020_analysis_robotics†L15-L16】, and
+    Edardar et al. (2015) prove that coefficients making the
+    characteristic polynomial Hurwitz yield exponential convergence on
+    the sliding manifold【smc_edardar_2015_hysteresis_compensation†L598
+    -L609】.  The switching gain ``K`` must
     also be strictly positive to drive the system to the sliding surface,
     while the derivative gain ``kd`` should be non‑negative to provide
     damping.  The constructor validates these constraints and raises
