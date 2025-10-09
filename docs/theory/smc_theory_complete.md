@@ -184,7 +184,7 @@ This establishes finite-time convergence. □
 
 ### Motivation for Higher-Order SMC
 
-Classical SMC suffers from chattering due to the discontinuous switching control. The super-twisting algorithm {cite}`levant2003higher` provides continuous control while maintaining finite-time convergence.
+Classical SMC suffers from chattering due to the discontinuous switching control. The super-twisting algorithm {cite}`smc_levant_2003_higher_order_smc` provides continuous control while maintaining finite-time convergence.
 
 ### Super-Twisting Control Law
 
@@ -451,4 +451,4 @@ The next step is to apply these theoretical results to automated parameter optim
 
 ## References
 
-The theoretical development follows {cite}`utkin1999sliding`, {cite}`edwards1998sliding`, and {cite}`shtessel2014sliding`, with super-twisting analysis from {cite}`levant2003higher` and {cite}`moreno2012strict`. Adaptive extensions are based on {cite}`slotine1991applied` and {cite}`krstic1995nonlinear`.
+The theoretical development follows {cite}`utkin1999sliding`, {cite}`smc_edwards_spurgeon_1998_sliding_mode_control`, and {cite}`smc_shtessel_2014_sliding_mode_control_and_observation`, with super-twisting analysis from {cite}`smc_levant_2003_higher_order_smc` and {cite}`moreno2012strict`. Adaptive extensions are based on {cite}`smc_slotine_li_1991_applied_nonlinear_control` and {cite}`krstic1995nonlinear`.
