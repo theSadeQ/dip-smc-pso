@@ -232,7 +232,7 @@ Chattering:     None (continuous + adaptive)
 | **Low computational resources** | Classical SMC | Minimal CPU/memory overhead |
 | **Noise-sensitive environments** | Super-Twisting | Continuous control reduces high-frequency content |
 | **Time-varying parameters** | Adaptive or Hybrid | Self-tuning compensates for changes |
-| **Research/publication** | Hybrid Adaptive STA | State-of-the-art performance |
+| **Research/publication** | Hybrid Adaptive STA | performance (see references) |
 | **Industrial deployment** | Super-Twisting | Good balance of performance and complexity |
 | **Educational purposes** | Classical SMC | Clear mathematical structure |
 

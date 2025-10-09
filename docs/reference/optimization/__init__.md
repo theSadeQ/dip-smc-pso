@@ -7,7 +7,7 @@
 Professional optimization framework for control engineering applications.
 
 This module provides a comprehensive optimization framework featuring:
-- Multiple state-of-the-art optimization algorithms (PSO, DE, GA, CMA-ES, Bayesian)
+- Multiple optimization (see references) algorithms (PSO, DE, GA, CMA-ES, Bayesian)
 - Professional objective functions for control performance metrics
 - Advanced convergence monitoring and analysis
 - Comprehensive result visualization and comparison tools

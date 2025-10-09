@@ -75,7 +75,7 @@ tests/
 │  ├─ factory/                 # Factory pattern tests
 │  │  └─ core/                 # Core factory validation
 │  ├─ mpc/                     # Model Predictive Control
-│  ├─ smc/                     # SMC comprehensive suite
+│  ├─ smc/                     # SMC suite
 │  │  ├─ algorithms/           # Algorithm-specific tests
 │  │  │  ├─ adaptive/          # Adaptive SMC tests
 │  │  │  ├─ classical/         # Classical SMC tests

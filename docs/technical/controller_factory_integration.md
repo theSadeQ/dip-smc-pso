@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides comprehensive technical documentation for the controller factory pattern implementation in the double-inverted pendulum sliding mode control (DIP-SMC) system. The factory pattern serves as the primary instantiation mechanism for all SMC variants, ensuring consistent interfaces, robust error handling, and seamless integration with optimization algorithms.
+This document provides comprehensive technical documentation for the controller factory pattern implementation in the double-inverted pendulum sliding mode control (DIP-SMC) system. The factory pattern serves as the primary instantiation mechanism for all SMC variants, ensuring consistent interfaces, robust error handling, and integration with optimization algorithms.
 
 ## Table of Contents
 
@@ -220,7 +220,7 @@ def resolve_configuration(controller_type, config, gains):
 
 ### Cross-Domain Integration Architecture
 
-The factory provides seamless integration between multiple system domains:
+The factory provides integration between multiple system domains:
 
 ```mermaid
 graph LR

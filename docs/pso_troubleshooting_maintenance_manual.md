@@ -24,7 +24,7 @@ This comprehensive manual provides detailed troubleshooting procedures, maintena
 
 ### 1.1 PSO System Health Check
 
-**Comprehensive System Status Assessment:**
+**System Status Assessment:**
 ```python
 # example-metadata:
 # runnable: false

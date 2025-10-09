@@ -59,6 +59,4 @@ python scripts/optimization/optimize_chattering_reduction.py --controller adapti
 
 ---
 
-**Note:** This tutorial is under development. Contributions welcome!
-
-**See Also:** [Optimization & Simulation Guide](../optimization_simulation/guide.md)
+**Note:** This tutorial is under development. Contributions **See Also:** [Optimization & Simulation Guide](../optimization_simulation/guide.md)

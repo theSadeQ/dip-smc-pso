@@ -25,7 +25,7 @@
 
 ## PSO Integration Overview
 
-The enhanced factory system provides seamless integration between Particle Swarm Optimization (PSO) and the controller factory pattern. This integration addresses fitness evaluation issues, parameter validation, and convergence diagnostics identified in GitHub Issue #6.
+The enhanced factory system provides integration between Particle Swarm Optimization (PSO) and the controller factory pattern. This integration addresses fitness evaluation issues, parameter validation, and convergence diagnostics identified in GitHub Issue #6.
 
 ### Key Integration Features
 

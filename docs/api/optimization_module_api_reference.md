@@ -1469,7 +1469,7 @@ class EnhancedPSOFactory:
     """
     Enhanced PSO-Factory integration with robust error handling.
 
-    Provides seamless integration between controller factory and PSO optimization
+    Provides integration between controller factory and PSO optimization
     with enhanced fitness functions and comprehensive error recovery.
     """
 ```

@@ -171,7 +171,7 @@ Create from dictionary.
 
 ##### `get_system_info(self)`
 
-Get comprehensive system information.
+Get system information.
 
 [View full source →](#method-unifiedconfiguration-get_system_info)
 

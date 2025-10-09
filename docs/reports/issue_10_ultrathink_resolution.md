@@ -331,7 +331,7 @@ THEN use:
 
 ### Speed Optimization
 - Reconnaissance before action (5 min investigation saves 20 min rework)
-- Leverage existing infrastructure first
+- uses existing infrastructure first
 - Focus testing on critical metrics
 
 ---

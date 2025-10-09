@@ -69,7 +69,7 @@ Result of a diagnostic check.
 
 ### `SystemProfile`
 
-Comprehensive system profiling data.
+system profiling data.
 
 #### Source Code
 
@@ -231,7 +231,7 @@ Run a specific diagnostic check by name.
 
 ##### `get_system_profile(self)`
 
-Get comprehensive system profiling data.
+Get system profiling data.
 
 [View full source →](#method-diagnosticengine-get_system_profile)
 
@@ -339,7 +339,7 @@ Get potential root causes for a category of issues.
 
 ### `run_comprehensive_diagnostics()`
 
-Run comprehensive system diagnostics.
+Run system diagnostics.
 
 #### Source Code
 

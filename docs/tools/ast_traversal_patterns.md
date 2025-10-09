@@ -24,7 +24,7 @@
 
 ### 1.1 Overview
 
-AST-based code claim extraction provides **scope-aware parsing** of Python source files to identify implementation claims, theoretical references, and citations embedded in docstrings. Unlike regex-based approaches that operate on raw text, AST traversal leverages Python's abstract syntax tree to maintain **hierarchical context** and avoid common pitfalls like:
+AST-based code claim extraction provides **scope-aware parsing** of Python source files to identify implementation claims, theoretical references, and citations embedded in docstrings. Unlike regex-based approaches that operate on raw text, AST traversal uses Python's abstract syntax tree to maintain **hierarchical context** and avoid common pitfalls like:
 
 - Misattributed scopes (class-level vs method-level claims)
 - Nested structure handling (inner classes, decorators, lambda expressions)

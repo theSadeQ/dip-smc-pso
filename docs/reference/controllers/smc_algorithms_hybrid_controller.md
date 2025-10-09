@@ -213,7 +213,7 @@ Combines model-based equivalent control with robust adaptive super-twisting:
 u = u_{eq} + u_{sta}
 ```
 
-- $u_{eq}$: Leverages system model when available
+- $u_{eq}$: uses system model when available
 - $u_{sta}$: Adaptive super-twisting for robustness
 
 ### Mode Switching Logic

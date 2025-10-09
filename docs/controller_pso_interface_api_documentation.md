@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-This document provides comprehensive API documentation for the interface between Particle Swarm Optimization (PSO) and Sliding Mode Control (SMC) controllers within the Double-Inverted Pendulum system. The interface ensures seamless integration between optimization algorithms and control implementations while maintaining type safety, performance, and mathematical rigor.
+This document provides comprehensive API documentation for the interface between Particle Swarm Optimization (PSO) and Sliding Mode Control (SMC) controllers within the Double-Inverted Pendulum system. The interface ensures integration between optimization algorithms and control implementations while maintaining type safety, performance, and mathematical rigor.
 
 **API Status**: ✅ **PRODUCTION READY** - All interfaces validated and operational
 **Type Safety**: 100% type-annotated with runtime validation

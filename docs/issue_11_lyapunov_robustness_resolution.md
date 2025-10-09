@@ -201,7 +201,7 @@ All negative (tol 1e-10): True  ✅
 
 ### Benchmark Results
 
-Compared naive vs. robust implementation:
+Compared naive vs. reliable implementation:
 
 | System | Naive (µs) | Robust (µs) | Overhead | Success Rate |
 |--------|------------|-------------|----------|--------------|
@@ -262,7 +262,7 @@ While overhead exceeds the 5% target, this is **acceptable** because:
 
 4. **`tests/benchmark_lyapunov_overhead.py`** (NEW)
    - Performance benchmarking suite
-   - Compares naive vs. robust implementation
+   - Compares naive vs. reliable implementation
 
 ### Documentation (1 file)
 

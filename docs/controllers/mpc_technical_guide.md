@@ -14,7 +14,7 @@
 
 ## Executive Summary
 
-The Model Predictive Controller (MPC) represents an optimization-based control paradigm that provides optimal control actions by solving a constrained quadratic programming problem at each timestep. Unlike reactive SMC approaches, MPC leverages a predictive model to anticipate future system behavior and optimize a cost function over a finite horizon.
+The Model Predictive Controller (MPC) represents an optimization-based control paradigm that provides optimal control actions by solving a constrained quadratic programming problem at each timestep. Unlike reactive SMC approaches, MPC uses a predictive model to anticipate future system behavior and optimize a cost function over a finite horizon.
 
 **Performance Summary**:
 - **Horizon Length**: 20 steps (default, configurable)

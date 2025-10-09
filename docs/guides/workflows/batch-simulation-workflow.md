@@ -55,7 +55,7 @@ This guide documents batch simulation capabilities for vectorized execution of m
 **Vectorization Benefits:**
 - ✅ **Performance**: 10-100× faster than sequential loops
 - ✅ **Memory Efficient**: Single allocation for batch
-- ✅ **NumPy Native**: Leverages BLAS/LAPACK
+- ✅ **NumPy Native**: uses BLAS/LAPACK
 - ✅ **Numba Acceleration**: JIT compilation for dynamics
 - ✅ **Safety Guards**: Per-simulation monitoring
 

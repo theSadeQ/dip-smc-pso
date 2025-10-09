@@ -379,7 +379,7 @@ Phase 3 will focus on:
 - Publish Phase 2 deliverables in peer-reviewed journal
 - Open-source validation framework for control systems community
 - Extend validation to experimental data from hardware
-- Benchmark against state-of-the-art controller tuning methods
+- Benchmark against controller (see references) tuning methods
 
 ---
 

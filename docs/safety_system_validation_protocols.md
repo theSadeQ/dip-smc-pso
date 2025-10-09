@@ -496,7 +496,7 @@ def runtime_safety_check(state, control_signal, parameters):
 
 #### Long-Term Response (1s+)
 1. **Root Cause Analysis**: Analyze fault conditions
-2. **System Diagnosis**: Comprehensive system health check
+2. **System Diagnosis**: system health check
 3. **Recovery Planning**: Develop safe restart procedure
 4. **Documentation**: Document incident for review
 
