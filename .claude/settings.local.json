@@ -36,7 +36,15 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nWeek 18 Phase 4D: Fix P2 optimization exception handlers\n\n- Fixed 6 P2 exception handlers with specific types and logging\n- pso_optimizer.py: RNG state, penalty conversion, baseline normalization\n- enhanced_convergence_analyzer.py: savgol filter, convergence prediction\n- Documented Phase 4C blocker (dynamics model incompatibility)\n- Created optimize_sta_lyapunov.py for future use\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(ruff check:*)",
       "Bash(sort:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(sed:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(do echo \"=== Checking: $file ===\")",
+      "Bash(do echo \"\")",
+      "Bash(echo \"File: $file\")",
+      "Bash(wc:*)",
+      "Bash(do echo \"File: $file\")",
+      "Bash(echo:*)"
     ],
     "deny": [],
     "ask": [],
