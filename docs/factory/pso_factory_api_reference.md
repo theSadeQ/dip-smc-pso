@@ -21,7 +21,7 @@
 
 ## API Overview
 
-The PSO Factory Integration API provides a comprehensive framework for optimizing sliding mode controllers using Particle Swarm Optimization. The API is designed with the following principles:
+The PSO Factory Integration API provides a framework for optimizing sliding mode controllers using Particle Swarm Optimization. The API is designed with the following principles:
 
 ### Design Philosophy
 - **Mathematical Rigor**: All functions incorporate control theory constraints

@@ -295,7 +295,7 @@ python simulate.py --controller hybrid_adaptive_sta_smc --run-pso --seed 42
 # ✅ No error messages
 ```
 
-### 2. Comprehensive System Testing
+### 2. System Testing
 
 #### Error Log Analysis
 **Before Fix**:
