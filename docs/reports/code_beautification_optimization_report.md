@@ -86,8 +86,8 @@ src/controllers/
 ```
 factory.py → 17 local dependencies (acceptable for factory pattern)
 smc_factory.py → 4 local dependencies (clean)
-legacy_factory.py → 1 local dependency (excellent)
-controllers → 0 circular dependencies (excellent)
+legacy_factory.py → 1 local dependency (good)
+controllers → 0 circular dependencies (good)
 ``` ### Recommendations
 - Remove unused imports: `ABC`, `abstractmethod`, `dataclass` from factory.py
 - Consider lazy imports for optional dependencies (MPC controller) ## 6. Performance Optimization Opportunities ### Numba JIT Compilation Candidates

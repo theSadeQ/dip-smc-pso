@@ -5,7 +5,7 @@
 ## Module Overview
 
 Real-time synchronization and scheduling for HIL systems.
-This module provides real-time capabilities including high-priority scheduling,
+This module provides real-time features including high-priority scheduling,
 deadline monitoring, and timing constraint enforcement for deterministic
 control system execution.
 

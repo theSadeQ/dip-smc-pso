@@ -41,8 +41,7 @@
 | **Real-time Capable** | 10kHz | 5kHz | 5kHz | 2kHz |
 | **Best For** | Prototyping | Unknown params | High precision | Max performance |
 
-**Legend**: ★ = Poor, ★★ = Fair, ★★★ = Good, ★★★★ = Very Good, ★★★★★ = Excellent
-
+**Legend**: ★ = Poor, ★★ = Fair, ★★★ = Good, ★★★★ = Very Good, ★★★★★ = 
 ### 1.2 Decision Tree
 
 ```
@@ -453,7 +452,7 @@ Bandwidth: Very narrow (0-50 Hz)
 **Practical Implications**:
 - **Classical**: May excite unmodeled high-frequency dynamics
 - **Adaptive**: Acceptable for most mechanical systems
-- **STA**: Excellent for precision applications
+- **STA**: for precision applications
 - **Hybrid**: Research-grade smoothness
 
 ### 4.4 Trade-offs: Chattering vs Tracking Error

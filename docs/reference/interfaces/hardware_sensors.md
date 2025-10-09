@@ -215,7 +215,7 @@ Read raw ADC value from channel.
 
 ##### `_add_analog_capabilities(self)`
 
-Add analog sensor capabilities.
+Add analog sensor support.
 
 [View full source →](#method-analogsensor-_add_analog_capabilities)
 
@@ -302,7 +302,7 @@ Apply debouncing to digital signal.
 
 ##### `_add_digital_capabilities(self)`
 
-Add digital sensor capabilities.
+Add digital sensor support.
 
 [View full source →](#method-digitalsensor-_add_digital_capabilities)
 
@@ -315,7 +315,7 @@ Add digital sensor capabilities.
 Inertial Measurement Unit sensor implementation.
 
 Provides accelerometer, gyroscope, and magnetometer readings
-with sensor fusion and orientation calculation capabilities.
+with sensor fusion and orientation calculation.
 
 #### Source Code
 
@@ -407,7 +407,7 @@ Update sensor fusion for orientation calculation.
 
 ##### `_add_imu_capabilities(self)`
 
-Add IMU sensor capabilities.
+Add IMU sensor support.
 
 [View full source →](#method-imusensor-_add_imu_capabilities)
 

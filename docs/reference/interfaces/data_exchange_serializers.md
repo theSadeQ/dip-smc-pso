@@ -7,7 +7,7 @@
 Core serialization framework with multiple format support.
 This module provides efficient serializers for various data formats
 including JSON, MessagePack, Pickle, and custom binary formats
-with compression and performance optimization capabilities.
+with compression and performance optimization features.
 
 ## Complete Source Code
 

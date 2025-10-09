@@ -86,7 +86,7 @@ dtheta2 = state[:, 5]
 - Emphasizes large errors more than small errors
 
 **Typical values:**
-- Excellent: ISE < 0.3
+- good: ISE < 0.3
 - Good: 0.3 ≤ ISE < 0.6
 - Acceptable: 0.6 ≤ ISE < 1.0
 - Poor: ISE ≥ 1.0
@@ -115,7 +115,7 @@ print(f"ISE (manual): {ise_manual:.4f}")
 - More realistic than ISE (considers time)
 
 **Typical values:**
-- Excellent: ITAE < 0.8
+- good: ITAE < 0.8
 - Good: 0.8 ≤ ITAE < 1.5
 - Acceptable: 1.5 ≤ ITAE < 3.0
 - Poor: ITAE ≥ 3.0
@@ -143,7 +143,7 @@ print(f"ITAE (manual): {itae_manual:.4f}")
 - Meeting performance specifications
 
 **Typical values:**
-- Excellent: < 2.0 s
+- good: < 2.0 s
 - Good: 2.0-3.5 s
 - Acceptable: 3.5-5.0 s
 - Poor: > 5.0 s

@@ -56,9 +56,10 @@ AI_PATTERNS = {
         r"\butilize\b",
         r"\bdelve into\b",
         r"\bfacilitate\b",
-        r"\benable\b(?! flag| option| the| this)",  # Exclude technical contexts
-        r"\bsolutions\b(?! to)",
-        r"\bcapabilities\b(?! of| include)",
+        r"\benable\b(?! flag| option| the| this| logging| monitoring| feature| caching)",  # Exclude technical contexts
+        # Removed "solutions" - causes false positives in mathematical/technical contexts
+        # (e.g., "N solutions", "non-dominated solutions", "boundary solutions")
+        r"\bcapabilities\b(?! of| include| are| :)",  # Exclude technical lists
         r"\bemploy\b",
         r"\bexploit\b(?! vulnerability)",  # Exclude security contexts
     ],
@@ -124,6 +125,12 @@ def scan_file(file_path: Path, single_file_mode: bool = False) -> Dict:
                 exclude_lines.add(i)
             # Exclude examples showing bad patterns (lines with ❌, BAD:, DO NOT USE:)
             elif any(marker in line for marker in ['❌', 'BAD:', 'DO NOT USE:', 'AI-ish']):
+                exclude_lines.add(i)
+            # Exclude lines with mathematical notation (inline $...$ or display $$...$$)
+            elif '$' in line and line.count('$') >= 2:
+                exclude_lines.add(i)
+            # Exclude lines starting with math directives (```{math})
+            elif stripped.startswith('```{math}') or stripped == '```':
                 exclude_lines.add(i)
 
         for category, patterns in AI_PATTERNS.items():

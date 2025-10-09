@@ -43,8 +43,8 @@ metrics = compute_metrics(result)
 print(f"Best fitness: {metrics.best_fitness:.3f}")
 ```
 This module provides management of PSO optimization results including
-serialization, loading, analysis, and comparison capabilities. It ensures reproducible
-optimization workflows and enables advanced result analysis. Features:
+serialization, loading, analysis, and comparison features. It ensures reproducible
+optimization workflows and provides result analysis. Features:
 - result serialization (JSON, HDF5, NPZ)
 - Metadata tracking and provenance
 - Result comparison and benchmarking

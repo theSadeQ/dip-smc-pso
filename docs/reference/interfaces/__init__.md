@@ -6,7 +6,7 @@
 
 Interfaces framework for control engineering applications.
 This module provides interface systems for network communication, hardware abstraction,
-HIL systems, data exchange, and monitoring capabilities designed for real-time
+HIL systems, data exchange, and monitoring features designed for real-time
 control systems and scientific computing applications.
 
 ## Complete Source Code

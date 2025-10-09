@@ -1,4 +1,4 @@
-# 📚 World-Class Documentation System for DIP_SMC_PSO ## 🌟 Overview This repository now features a **world-class technical documentation system** designed for research-grade publications. The system provides LaTeX-quality mathematical rendering, professional citation management, and cross-referencing capabilities. ## ✨ Features ### 🔬 Research-Grade Mathematics
+# 📚 World-Class Documentation System for DIP_SMC_PSO ## 🌟 Overview This repository now features a **world-class technical documentation system** designed for research-grade publications. The system provides LaTeX-quality mathematical rendering, professional citation management, and cross-referencing features. ## ✨ Features ### 🔬 Research-Grade Mathematics
 - **Numbered equations** with global cross-referencing using `{eq}` labels
 - **LaTeX-quality rendering** with MathJax 3.0 and custom macros
 - **Professional mathematical notation** with consistent symbols and formatting

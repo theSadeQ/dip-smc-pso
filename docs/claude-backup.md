@@ -2,8 +2,7 @@
 
 ## Overview
 
-The Claude Code Automated Backup System provides **frequent, automatic restore points** during coding sessions by committing and pushing repository changes at regular intervals (every 1 minute by default). This ensures work is never lost and provides granular rollback capabilities.
-
+The Claude Code Automated Backup System provides **frequent, automatic restore points** during coding sessions by committing and pushing repository changes at regular intervals (every 1 minute by default). This ensures work is never lost and provides granular rollback .
 ## How It Works
 
 ### Architecture
@@ -275,7 +274,7 @@ git push origin main
 - **CPU**: Negligible (<1% on modern systems)
 - **Frequency**: Every 1 minute (configurable via Task Scheduler)
 
-**Recommendation**: The 1-minute interval provides excellent granularity without noticeable system impact.
+**Recommendation**: The 1-minute interval provides granularity without noticeable system impact.
 
 ## Security Considerations
 

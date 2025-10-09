@@ -329,7 +329,7 @@ Update servo status.
 
 ##### `_add_servo_capabilities(self)`
 
-Add servo actuator capabilities.
+Add servo actuator support.
 
 [View full source →](#method-servoactuator-_add_servo_capabilities)
 
@@ -440,7 +440,7 @@ Step control loop.
 
 ##### `_add_stepper_capabilities(self)`
 
-Add stepper motor capabilities.
+Add stepper motor support.
 
 [View full source →](#method-steppermotor-_add_stepper_capabilities)
 
@@ -539,7 +539,7 @@ Move pneumatic actuator to home position.
 
 ##### `_add_pneumatic_capabilities(self)`
 
-Add pneumatic actuator capabilities.
+Add pneumatic actuator support.
 
 [View full source →](#method-pneumaticactuator-_add_pneumatic_capabilities)
 

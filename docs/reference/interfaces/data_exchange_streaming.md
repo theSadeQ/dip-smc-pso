@@ -5,7 +5,7 @@
 ## Module Overview
 
 Streaming serialization support for large datasets and real-time processing.
-This module provides efficient streaming serialization capabilities
+This module provides efficient streaming serialization features
 for processing large amounts of data, real-time data streams,
 and memory-efficient handling of continuous data flows.
 

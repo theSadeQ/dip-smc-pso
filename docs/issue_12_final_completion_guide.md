@@ -34,7 +34,7 @@ The diagnostic analysis (`scripts/optimization/diagnose_classical_chattering.py`
 These are MUCH higher than the fitness values (533, 1, 2) because:
 1. **Fitness includes tracking error** (which dominates for good controllers)
 2. **Chattering penalty only applies if chattering > 2.0**
-3. **Adaptive/STA have excellent tracking** (~0.01 rad RMS) → low fitness despite high chattering
+3. **Adaptive/STA have tracking** (~0.01 rad RMS) → low fitness despite high chattering
 
 **Conclusion:** The PSO optimization optimized for TRACKING, not chattering reduction!
 

@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This guide documents batch simulation capabilities for vectorized execution of multiple controller scenarios simultaneously. Batch simulation is essential for Monte Carlo analysis, parameter sweeps, and robustness validation.
+This guide documents batch simulation features for vectorized execution of multiple controller scenarios simultaneously. Batch simulation is essential for Monte Carlo analysis, parameter sweeps, and robustness validation.
 
 **Target Audience:**
 - Researchers performing Monte Carlo simulations

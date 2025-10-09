@@ -332,7 +332,7 @@ class MemoryEfficientController:
 
 ### Control Theory Validation:
 - **Lyapunov Stability**: Mathematically proven for all operating modes
-- **Robustness Margins**: Quantified uncertainty handling capabilities
+- **Robustness Margins**: Quantified uncertainty handling features
 - **Performance Bounds**: Guaranteed settling time and overshoot limits
 
 ---

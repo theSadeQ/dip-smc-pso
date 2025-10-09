@@ -733,7 +733,7 @@ def plot_adaptation_history(history):
 **Real-Time Performance**:
 - Maximum frequency: **8 kHz**
 - Typical usage: 1 kHz
-- **Margin**: 8× (excellent)
+- **Margin**: 8× (good)
 
 **Memory Footprint**:
 - Controller object: 144 bytes

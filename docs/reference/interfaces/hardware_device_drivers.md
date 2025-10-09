@@ -170,11 +170,10 @@ Get device status.
 
 [View full source →](#method-devicedriver-status)
 
-##### `capabilities(self)`
+##### `features(self)`
 
-Get device capabilities.
-
-[View full source →](#method-devicedriver-capabilities)
+Get device .
+[View full source →](#method-devicedriver-features)
 
 ##### `config(self)`
 

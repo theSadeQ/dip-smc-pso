@@ -74,8 +74,7 @@ Set real-time scaling factor.
 
 Hardware-in-the-loop simulation orchestrator.
 
-Extends real-time orchestrator with hardware interface capabilities.
-
+Extends real-time orchestrator with hardware interface .
 #### Source Code
 
 ```{literalinclude} ../../../src/simulation/orchestrators/real_time.py

@@ -1,7 +1,7 @@
 #==========================================================================================\\\
 #=================== docs/pso_integration_technical_specification.md ===================\\\
 #==========================================================================================\\\ # PSO Integration Technical Specification
-**Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This document provides technical specifications for the Particle Swarm Optimization (PSO) integration within the Double-Inverted Pendulum (DIP) Sliding Mode Control system. The PSO integration enables automated tuning of controller gains across multiple SMC variants with robust performance optimization and uncertainty handling capabilities. **Key Integration Components:**
+**Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This document provides technical specifications for the Particle Swarm Optimization (PSO) integration within the Double-Inverted Pendulum (DIP) Sliding Mode Control system. The PSO integration enables automated tuning of controller gains across multiple SMC variants with robust performance optimization and uncertainty handling features. **Key Integration Components:**
 - **PSO Tuner Engine**: Vectorized optimization with adaptive penalties (`src/optimization/algorithms/pso_optimizer.py`)
 - **Controller Factory Interface**: Unified controller instantiation with PSO compatibility (`src/controllers/factory.py`)
 - **Configuration Schema**: parameter validation and bounds management (`config.yaml`)

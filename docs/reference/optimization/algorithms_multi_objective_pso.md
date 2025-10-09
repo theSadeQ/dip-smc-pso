@@ -245,7 +245,7 @@ Get the current Pareto front.
 
 Multi-Objective Particle Swarm Optimization for Controller Tuning.
 
-This implementation provides advanced multi-objective optimization capabilities
+This implementation provides advanced multi-objective optimization features
 with Pareto front discovery and convergence analysis.
 
 #### Source Code

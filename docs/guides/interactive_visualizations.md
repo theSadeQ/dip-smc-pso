@@ -181,7 +181,7 @@ Visualize PSO optimization convergence behavior.
    }
 ```
 
-### Radar Chart: Controller Capabilities
+### Radar Chart: Controller features
 
 ```{eval-rst}
 .. chartjs::

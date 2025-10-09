@@ -107,7 +107,7 @@ flowchart LR
 
 **Underactuated**: 3 DOF, 1 control input
 - Cannot independently control all coordinates
-- Must exploit dynamic coupling
+- Must use dynamic coupling
 
 **Unstable Equilibrium**: Upright position
 - Small perturbations → pendulums fall

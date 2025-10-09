@@ -7,7 +7,7 @@
 Core benchmarking infrastructure for control system evaluation.
 
 This package provides the fundamental trial execution and orchestration
-capabilities for statistical benchmarking of control systems.
+features for statistical benchmarking of control systems.
 
 Key Components:
 - **Trial Runner**: Execute multiple independent simulation trials
