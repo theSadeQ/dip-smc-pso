@@ -2,7 +2,7 @@
 **Date:** 2025-10-07
 **Validator:** Claude Code (Automated + Manual)
 **Platform:** Windows (Python 3.12.6)
-**Tutorial:** `docs/guides/tutorials/tutorial-01-first-simulation.md` (738 lines) --- ## Executive Summary Tutorial 01 ("Your First Simulation") was validated against the actual implementation following the same methodology established in Phase 5.1. The tutorial provides guidance for running DIP SMC simulations, but contained **the same CLI parameter and expected output issues** identified in the Getting Started Guide. ### Key Findings ✅ **Tutorial structure is excellent** - Clear progression from theory to practice
+**Tutorial:** `docs/guides/tutorials/tutorial-01-first-simulation.md` (738 lines) --- ## Executive Summary Tutorial 01 ("Your First Simulation") was validated against the actual implementation following the same methodology established in Phase 5.1. The tutorial provides guidance for running DIP SMC simulations, but contained **the same CLI parameter and expected output issues** identified in the Getting Started Guide. ### Key Findings ✅ **Tutorial structure is good** - Clear progression from theory to practice
 ✅ **All 4 experiments are well-documented** - parameter modification guidance
 ✅ **Performance metrics education is thorough** - Detailed explanations of what metrics mean
 ✅ **Troubleshooting section is comprehensive** - Covers common issues ❌ **CLI parameter names incorrect** - Used `--ctrl` instead of `--controller` (5 occurrences)

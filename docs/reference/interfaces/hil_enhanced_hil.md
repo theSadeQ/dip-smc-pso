@@ -1,5 +1,5 @@
 # interfaces.hil.enhanced_hil **Source:** `src\interfaces\hil\enhanced_hil.py` ## Module Overview Enhanced Hardware-in-the-Loop (HIL) system for advanced control testing.
-This module provides a HIL framework with real-time capabilities,
+This module provides a HIL framework with real-time features,
 fault injection, automated testing, and integration with hardware interfaces
 for professional control system validation. ## Mathematical Foundation ### Enhanced HIL features Advanced HIL features beyond basic simulation: ```{math}
 \text{HIL}_{\text{enhanced}} = \text{HIL}_{\text{basic}} + \mathcal{F}_{\text{advanced}}

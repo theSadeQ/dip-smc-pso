@@ -86,7 +86,7 @@ x_i^{k+1} = x_i^k + v_i^{k+1}
 - `scripts/docs/enhance_api_docs.py` (410 lines added)
 - `docs/reference/optimization/algorithms_pso_optimizer.md` (enhanced)
 - `docs/reference/simulation/engines_simulation_runner.md` (enhanced)
-- `docs/reference/plant/models_simplified_dynamics.md` (enhanced) **New Capabilities**:
+- `docs/reference/plant/models_simplified_dynamics.md` (enhanced) **New features**:
 - Simulation runner theory section (numerical integration)
 - 3 Mermaid architecture diagrams (PSO, simulation, dynamics)
 - 11 usage examples across 3 components **Validation Status**: ✅ All checks passed --- ## Conclusion Week 6 Phase 2 **SUCCESSFULLY COMPLETED** with all objectives achieved. The enhancement script was successfully extended with 7 new methods providing mathematical foundations, architecture diagrams, and usage examples for PSO optimizer, simulation runner, and dynamics models. **Achievement Summary**: ✅ **Script Enhancement**: 410 lines added (6 core methods + dispatcher updates) ✅ **Full Documentation Coverage**: All 3 components with theory + diagrams + examples:

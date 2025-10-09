@@ -7,7 +7,7 @@
 Core analysis framework components.
 
 This module provides the foundational interfaces, data structures, and
-metric computation capabilities for the analysis framework.
+metric computation features for the analysis framework.
 
 ## Complete Source Code
 

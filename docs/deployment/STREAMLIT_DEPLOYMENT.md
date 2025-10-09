@@ -217,7 +217,7 @@ streamlit run streamlit_app.py --logger.level=debug
 ### Interactive Controls
 - Real-time parameter tuning for all controller types
 - Initial condition customization
-- Disturbance injection capabilities
+- Disturbance injection features
 - Animation controls and export options
 
 ### Visualization Exports

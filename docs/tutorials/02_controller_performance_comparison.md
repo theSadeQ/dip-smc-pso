@@ -4,7 +4,7 @@ This tutorial demonstrates how to compare different SMC controller variants usin
 
 ## Overview
 
-We'll compare four controller types:
+This guide will compare four controller types:
 - **Classical SMC**: Traditional sliding mode control
 - **Adaptive SMC**: Gain adaptation for uncertainty
 - **Hybrid STA-SMC**: Super-twisting algorithm with adaptation
@@ -186,11 +186,11 @@ Use radar charts to visualize multiple performance dimensions simultaneously:
    }
 ```
 
-**Rating Scale:** 1 (Poor) to 10 (Excellent)
+**Rating Scale:** 1 (Poor) to 10 (good)
 
 **Interpretation:**
 - **Hybrid STA-SMC**: Best overall performance but complex implementation
-- **Adaptive SMC**: Excellent robustness with good simplicity tradeoff
+- **Adaptive SMC**: robustness with good simplicity tradeoff
 - **Terminal SMC**: Fastest convergence, moderate robustness
 - **Classical SMC**: Simplest implementation, baseline performance
 

@@ -79,7 +79,7 @@ controllers:
 - **Self-tuning**: Adapts to system uncertainties automatically
 - **Fast convergence**: Combines finite-time convergence with adaptation
 - **Robust**: Maintains robustness under parameter variations
-- **Smooth control**: Excellent actuator compatibility
+- **Smooth control**: actuator compatibility
 
 ### Limitations
 - **Complexity**: Most complex controller in the suite
@@ -97,7 +97,7 @@ controllers:
 - **Chattering index**: 3.42 × 10³
 
 ### Analysis
-Remarkably, this controller achieves excellent performance even with default parameters:
+Remarkably, this controller achieves performance even with default parameters:
 - **Lowest RMSE**: By far the best tracking performance
 - **Minimal control effort**: Only 2.83 J compared to 10⁵ J for other controllers
 - **Good smoothness**: Moderate chattering index indicates acceptable control quality

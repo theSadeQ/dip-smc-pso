@@ -27,7 +27,7 @@ The Super-Twisting Sliding Mode Controller implements a second-order sliding mod
 - High-precision tracking applications
 - Systems requiring low chattering and actuator wear
 - Applications where finite-time convergence is critical
-- Moderate complexity acceptable for superior performance
+- Moderate complexity acceptable for good performance
 
 ---
 

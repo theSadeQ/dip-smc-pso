@@ -32,7 +32,7 @@ Count control input constraint violations.
 
 Physical actuators have finite capacity and cannot provide unlimited
 force or torque. Violations indicate control demands that exceed
-hardware capabilities, potentially leading to:
+hardware features, potentially leading to:
 - Actuator saturation and performance degradation
 - Hardware damage or safety hazards
 - Loss of control authority

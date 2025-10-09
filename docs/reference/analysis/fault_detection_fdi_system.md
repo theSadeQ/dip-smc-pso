@@ -45,7 +45,7 @@ fig = plotter.plot_time_series(data)
 fig.savefig('analysis.pdf')
 ```
 This module provides a fault detection framework that extends
-the basic FDI system with advanced diagnostic capabilities, multiple fault
+the basic FDI system with advanced diagnostic features, multiple fault
 detection methods, and statistical analysis. ## Complete Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 :language: python
 :linenos:

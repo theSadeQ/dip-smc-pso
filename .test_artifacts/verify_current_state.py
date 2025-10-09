@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify current documentation state - are files already cleaned?"""
 
+import json
 import re
 from pathlib import Path
 from collections import defaultdict
@@ -51,7 +52,6 @@ else:
     print("\nNo AI-ish patterns detected! Documentation appears clean.")
 
 # Save results
-import json
 output = {
     'total_patterns': total_patterns,
     'files_with_patterns': len(results),
@@ -60,4 +60,4 @@ output = {
 Path('.test_artifacts/current_state_verification.json').write_text(
     json.dumps(output, indent=2), encoding='utf-8'
 )
-print(f"\nResults saved to .test_artifacts/current_state_verification.json")
+print("\nResults saved to .test_artifacts/current_state_verification.json")

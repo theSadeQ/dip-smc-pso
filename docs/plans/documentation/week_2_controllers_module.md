@@ -259,7 +259,7 @@ K₁ > L, K₂ > K₁·C
 2. Prove finite-time convergence
 3. Document twisting algorithm implementation
 4. Add integral update mechanism details
-5. Compare with classical SMC (continuous vs discontinuous) ### 3.4 Enhance Hybrid SMC Guide (Day 8) **File**: `docs/controllers/hybrid_smc_technical_guide.md` (existing, enhance) **Current Lines**: 903 (already excellent) **Enhancement Tasks**:
+5. Compare with classical SMC (continuous vs discontinuous) ### 3.4 Enhance Hybrid SMC Guide (Day 8) **File**: `docs/controllers/hybrid_smc_technical_guide.md` (existing, enhance) **Current Lines**: 903 (already good) **Enhancement Tasks**:
 1. **Add Source Code Embeddings**: ```rst .. literalinclude:: ../../src/controllers/smc/hybrid_adaptive_sta_smc.py :language: python :pyobject: HybridAdaptiveSTASMC.compute_control :emphasize-lines: 20-30, 50-60 ``` 2. **Add Cross-References**: - Link to Classical SMC guide (boundary layer comparison) - Link to Adaptive SMC guide (adaptation law comparison) - Link to STA SMC guide (twisting algorithm comparison) 3. **Add Comparative Performance**: - Table comparing hybrid vs individual controllers - When to use hybrid vs specialized 4. **Update PSO Integration**: - Link to controller_pso_interface_api_documentation.md - Reference gain bounds from complete factory guide **Estimated Additional Lines**: 100-150 --- ## Phase 4: Factory & Infrastructure (Days 9-10) ### 4.1 Complete Factory System Guide (Day 9) **File**: `docs/factory/complete_factory_guide.md` **Estimated Lines**: 600 **Structure**:
 ```markdown
 # Complete Controller Factory System Guide ## 1. Executive Summary (50 lines)

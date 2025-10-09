@@ -29,8 +29,7 @@ This module imports:
 
 ### Result Processing Infrastructure
 
-The results subsystem provides structured data management for simulation output with validation, processing, and export capabilities.
-
+The results subsystem provides structured data management for simulation output with validation, processing, and export .
 #### Result Container Hierarchy
 
 $$

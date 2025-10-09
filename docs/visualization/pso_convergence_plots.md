@@ -5,7 +5,7 @@
 ## Quick Links
 
 - **[PSO Optimization Workflow](../guides/workflows/pso-optimization-workflow.md)** - PSO optimization guide with visualization examples
-- **[Interactive Visualizations](../guides/interactive_visualizations.md)** - Interactive plotting capabilities
+- **[Interactive Visualizations](../guides/interactive_visualizations.md)** - Interactive plotting features
 - **[Analysis Plots](../reference/analysis/visualization_analysis_plots.md)** - Analysis visualization API
 
 ## Creating PSO Convergence Plots

@@ -267,7 +267,7 @@ class CompatibilityIntegrator:
         pass
 ```
 
-**Method dispatch based on capabilities:**
+**Method dispatch based on features:**
 
 ```{math}
 \text{Method} = \begin{cases}

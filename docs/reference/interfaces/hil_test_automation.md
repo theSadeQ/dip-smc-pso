@@ -130,7 +130,7 @@ print(f"Final difficulty: {tester.current_difficulty:.2f}")
 :pyobject: TestResult
 :linenos:
 ``` --- ### `HILTestFramework` test automation framework for HIL systems. Provides automated test execution, assertion validation,
-performance testing, and report generation capabilities. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
+performance testing, and report generation features. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
 :language: python
 :pyobject: HILTestFramework
 :linenos:

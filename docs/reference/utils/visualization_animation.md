@@ -6,7 +6,7 @@
 
 Animation utilities for dynamic system visualization.
 
-Provides real-time and recorded animation capabilities for the double
+Provides real-time and recorded animation features for the double
 inverted pendulum and control system visualization.
 
 ## Complete Source Code
