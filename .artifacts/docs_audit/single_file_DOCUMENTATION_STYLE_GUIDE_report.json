@@ -1,0 +1,85 @@
+{
+  "file": "docs\\DOCUMENTATION_STYLE_GUIDE.md",
+  "total_issues": 10,
+  "severity": "MEDIUM",
+  "patterns": {
+    "greeting": [
+      {
+        "pattern": "\\bLet's\\b",
+        "line": 106,
+        "text": "Let's",
+        "context": "\n\n**Why this fails:**\n- Conversational greeting (\"Let's\")\n- Marketing buzzwords (\"powerful\", \"comprehensi",
+        "full_line": "- Conversational greeting (\"Let's\")"
+      },
+      {
+        "pattern": "\\bLet's\\b",
+        "line": 250,
+        "text": "Let's",
+        "context": "e. If it's marketing fluff, remove it.\n\n### When \"Let's\" Is Acceptable\n\nIn interactive tutorial contexts ",
+        "full_line": "### When \"Let's\" Is Acceptable"
+      }
+    ],
+    "enthusiasm": [
+      {
+        "pattern": "\\bpowerful\\b",
+        "line": 107,
+        "text": "powerful",
+        "context": "tional greeting (\"Let's\")\n- Marketing buzzwords (\"powerful\", \"comprehensive\", \"seamless\", \"cutting-edge\")\n- ",
+        "full_line": "- Marketing buzzwords (\"powerful\", \"comprehensive\", \"seamless\", \"cutting-edge\")"
+      },
+      {
+        "pattern": "\\bcomprehensive\\b",
+        "line": 11,
+        "text": "comprehensive",
+        "context": "oject documentation based on lessons learned from comprehensive quality audits. Following these standards ensures",
+        "full_line": "This guide defines professional writing standards for the DIP-SMC-PSO project documentation based on lessons learned from comprehensive quality audits. Following these standards ensures documentation sounds human-written, professional, and technically accurate."
+      },
+      {
+        "pattern": "\\bcomprehensive\\b",
+        "line": 107,
+        "text": "comprehensive",
+        "context": "ing (\"Let's\")\n- Marketing buzzwords (\"powerful\", \"comprehensive\", \"seamless\", \"cutting-edge\")\n- No specific techn",
+        "full_line": "- Marketing buzzwords (\"powerful\", \"comprehensive\", \"seamless\", \"cutting-edge\")"
+      },
+      {
+        "pattern": "\\bcomprehensive\\b",
+        "line": 244,
+        "text": "comprehensive",
+        "context": "rol theory term (H\u221e robustness, \u03bc-synthesis)\n- **\"comprehensive test coverage: 95%\"** - Backed by metrics\n- **\"en",
+        "full_line": "- **\"comprehensive test coverage: 95%\"** - Backed by metrics"
+      },
+      {
+        "pattern": "\\bseamless\\b",
+        "line": 107,
+        "text": "seamless",
+        "context": "arketing buzzwords (\"powerful\", \"comprehensive\", \"seamless\", \"cutting-edge\")\n- No specific technical informa",
+        "full_line": "- Marketing buzzwords (\"powerful\", \"comprehensive\", \"seamless\", \"cutting-edge\")"
+      },
+      {
+        "pattern": "\\bcutting-edge\\b",
+        "line": 107,
+        "text": "cutting-edge",
+        "context": "zwords (\"powerful\", \"comprehensive\", \"seamless\", \"cutting-edge\")\n- No specific technical information\n- Over-enth",
+        "full_line": "- Marketing buzzwords (\"powerful\", \"comprehensive\", \"seamless\", \"cutting-edge\")"
+      }
+    ],
+    "hedge_words": [
+      {
+        "pattern": "\\benable\\b(?! flag| option| the| this)",
+        "line": 245,
+        "text": "enable",
+        "context": "ve test coverage: 95%\"** - Backed by metrics\n- **\"enable logging\"** - Software configuration terminology\n-",
+        "full_line": "- **\"enable logging\"** - Software configuration terminology"
+      },
+      {
+        "pattern": "\\bcapabilities\\b(?! of| include)",
+        "line": 52,
+        "text": "capabilities",
+        "context": " \"framework\" (let features speak)\n- List specific capabilities\n- \"integration\" (describe, don't hype)\n- \"PSO opt",
+        "full_line": "- List specific capabilities"
+      }
+    ]
+  },
+  "file_size": 8960,
+  "lines": 336
+}

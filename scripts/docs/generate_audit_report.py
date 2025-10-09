@@ -10,6 +10,7 @@
 """
 
 import json
+import argparse
 from pathlib import Path
 from typing import Dict
 from datetime import datetime
@@ -205,7 +206,25 @@ def generate_markdown_report(json_data: Dict) -> str:
 
 
 def main():
-    json_path = Path("D:/Projects/main/.artifacts/docs_audit/ai_pattern_detection_report.json")
+    parser = argparse.ArgumentParser(
+        description="Generate human-readable markdown audit report from JSON"
+    )
+    parser.add_argument(
+        "--input",
+        type=Path,
+        default=Path("D:/Projects/main/.artifacts/docs_audit/ai_pattern_detection_report.json"),
+        help="Path to JSON audit report (default: ai_pattern_detection_report.json)"
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("D:/Projects/main/.artifacts/docs_audit/AI_PATTERN_AUDIT_REPORT.md"),
+        help="Output markdown report path (default: AI_PATTERN_AUDIT_REPORT.md)"
+    )
+
+    args = parser.parse_args()
+    json_path = args.input
+    output_path = args.output
 
     if not json_path.exists():
         print(f"Error: JSON report not found at {json_path}")
@@ -216,7 +235,7 @@ def main():
 
     md_report = generate_markdown_report(json_data)
 
-    output_path = Path("D:/Projects/main/.artifacts/docs_audit/AI_PATTERN_AUDIT_REPORT.md")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(md_report, encoding='utf-8')
 
     print("Markdown report generated successfully!")

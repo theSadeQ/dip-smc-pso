@@ -96,10 +96,45 @@ def scan_file(file_path: Path, single_file_mode: bool = False) -> Dict:
         content = file_path.read_text(encoding='utf-8')
         matches = defaultdict(list)
 
+        # Track code blocks and example sections to exclude from pattern matching
+        in_code_block = False
+        exclude_lines = set()
+
+        lines = content.split('\n')
+        for i, line in enumerate(lines, 1):
+            stripped = line.strip()
+
+            # Toggle code block state on triple backticks
+            if stripped.startswith('```'):
+                in_code_block = not in_code_block
+                exclude_lines.add(i)
+            elif in_code_block:
+                exclude_lines.add(i)
+            # Exclude markdown tables (lines starting with |)
+            elif stripped.startswith('|'):
+                exclude_lines.add(i)
+            # Exclude blockquotes (lines starting with >)
+            elif stripped.startswith('>'):
+                exclude_lines.add(i)
+            # Exclude checklist items (lines with - [ ])
+            elif '- [ ]' in line or '- [x]' in line or '- [X]' in line:
+                exclude_lines.add(i)
+            # Exclude quoted examples in bullet points (lines with - "...pattern...")
+            elif stripped.startswith('- "') and '"' in stripped[3:]:
+                exclude_lines.add(i)
+            # Exclude examples showing bad patterns (lines with ❌, BAD:, DO NOT USE:)
+            elif any(marker in line for marker in ['❌', 'BAD:', 'DO NOT USE:', 'AI-ish']):
+                exclude_lines.add(i)
+
         for category, patterns in AI_PATTERNS.items():
             for pattern in patterns:
                 for match in re.finditer(pattern, content, re.IGNORECASE):
                     line_num = content[:match.start()].count('\n') + 1
+
+                    # Skip if in excluded lines (code blocks, examples, checklists, etc.)
+                    if line_num in exclude_lines:
+                        continue
+
                     line_start = content.rfind('\n', 0, match.start()) + 1
                     line_end = content.find('\n', match.end())
                     if line_end == -1:
@@ -126,8 +161,16 @@ def scan_file(file_path: Path, single_file_mode: bool = False) -> Dict:
         else:
             severity = "LOW"
 
+        # Fix path resolution: try relative first, fall back to absolute
+        try:
+            relative_path = file_path.relative_to(Path.cwd())
+            file_str = str(relative_path)
+        except ValueError:
+            # File is outside cwd, use absolute path
+            file_str = str(file_path.absolute())
+
         return {
-            "file": str(file_path.relative_to(Path.cwd())),
+            "file": file_str,
             "total_issues": total_issues,
             "severity": severity,
             "patterns": dict(matches),
@@ -194,26 +237,36 @@ def scan_all_docs(docs_dir: Path) -> Dict:
 
 
 def print_single_file_report(result: Dict):
-    """Print detailed report for single file scan."""
-    print(f"\n{'='*80}")
-    print(f"File: {result['file']}")
-    print(f"{'='*80}")
-    print(f"Total Issues: {result['total_issues']}")
-    print(f"Severity: {result['severity']}")
-    print(f"File Size: {result.get('file_size', 'N/A')} bytes")
-    print(f"Lines: {result.get('lines', 'N/A')}\n")
+    """Print detailed report for single file scan with Unicode handling."""
+    def safe_print(text):
+        """Print with fallback for Windows cp1252 encoding."""
+        try:
+            print(text)
+        except UnicodeEncodeError:
+            # Fallback: encode to ASCII with replacement for Windows terminals
+            print(text.encode('ascii', errors='replace').decode('ascii'))
+
+    safe_print(f"\n{'='*80}")
+    safe_print(f"File: {result['file']}")
+    safe_print(f"{'='*80}")
+    safe_print(f"Total Issues: {result['total_issues']}")
+    safe_print(f"Severity: {result['severity']}")
+    safe_print(f"File Size: {result.get('file_size', 'N/A')} bytes")
+    safe_print(f"Lines: {result.get('lines', 'N/A')}\n")
 
     if result['total_issues'] > 0:
         for category, matches in result.get('patterns', {}).items():
-            print(f"\n{category.upper()} ({len(matches)} issues):")
-            print("-" * 80)
+            safe_print(f"\n{category.upper()} ({len(matches)} issues):")
+            safe_print("-" * 80)
             for match in matches[:10]:  # Show first 10 per category
-                print(f"  Line {match['line']}: {match['text']}")
-                print(f"    Full line: {match['full_line'][:100]}...")
+                safe_print(f"  Line {match['line']}: {match['text']}")
+                # Truncate and sanitize full line for display
+                full_line = match['full_line'][:100].replace('\u2192', '->').replace('\u2713', 'OK')
+                safe_print(f"    Full line: {full_line}...")
             if len(matches) > 10:
-                print(f"  ... and {len(matches) - 10} more")
+                safe_print(f"  ... and {len(matches) - 10} more")
     else:
-        print("No AI-ish patterns detected!")
+        safe_print("No AI-ish patterns detected!")
 
 
 def main():

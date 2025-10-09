@@ -98,7 +98,7 @@ through velocity updates guided by personal best and global best positions.
 
 ```
 This section covers the powerful PSO optimizer with its comprehensive capabilities!
-how seamlessly it uses cutting-edge particle swarm dynamics
+how seamlessly it uses particle swarm dynamics
 to deliver amazing optimization results through techniques (see references)!
 ```
 
@@ -131,7 +131,7 @@ Controller gains are tuned using the following procedure:
 ```
 In this comprehensive section, we will examine the exciting world of
 controller tuning! our robust framework facilitates
-seamless parameter optimization through powerful PSO techniques that uses advanced capabilities.
+parameter optimization through powerful PSO techniques that uses advanced capabilities.
 ```
 
 **Why this fails:**
@@ -160,8 +160,7 @@ Performance validated across 10,000 Monte Carlo trials.
 ### BAD: AI-ish Claims
 
 ```
-Our revolutionary adaptive SMC delivers amazing performance with industry-leading
-settling times and best-in-class accuracy through powerful control algorithms!
+Our novel adaptive SMC delivers amazing performance with settling times and accuracy through powerful control algorithms!
 ```
 
 **Why this fails:**
