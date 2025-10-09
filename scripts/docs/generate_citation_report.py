@@ -31,20 +31,39 @@ def parse_bibtex_file(bib_path: Path) -> Dict[str, Dict]:
     entries = {}
     content = bib_path.read_text(encoding='utf-8')
 
-    entry_pattern = r'@(\w+)\{([^,]+),([^}]+)\}'
-    for match in re.finditer(entry_pattern, content, re.DOTALL):
-        entry_type, key, body = match.groups()
+    # Find all entry starts: @type{key,
+    entry_start_pattern = r'@(\w+)\{([^,]+),'
 
-        doi_match = re.search(r'doi\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
-        url_match = re.search(r'url\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
-        note_match = re.search(r'note\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
+    for match in re.finditer(entry_start_pattern, content):
+        entry_type = match.group(1)
+        key = match.group(2).strip()
+        start_pos = match.end()
 
-        entries[key.strip()] = {
-            'type': entry_type,
-            'doi': doi_match.group(1) if doi_match else None,
-            'url': url_match.group(1) if url_match else None,
-            'note': note_match.group(1) if note_match else None,
-        }
+        # Count braces to find matching closing brace
+        brace_count = 1  # We already have the opening brace from @type{
+        pos = start_pos
+        while pos < len(content) and brace_count > 0:
+            if content[pos] == '{':
+                brace_count += 1
+            elif content[pos] == '}':
+                brace_count -= 1
+            pos += 1
+
+        if brace_count == 0:
+            # Extract entry body between opening and closing braces
+            body = content[start_pos:pos-1]
+
+            # Extract DOI and URL from full entry body
+            doi_match = re.search(r'doi\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
+            url_match = re.search(r'url\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
+            note_match = re.search(r'note\s*=\s*\{([^}]+)\}', body, re.IGNORECASE)
+
+            entries[key] = {
+                'type': entry_type,
+                'doi': doi_match.group(1).strip() if doi_match else None,
+                'url': url_match.group(1).strip() if url_match else None,
+                'note': note_match.group(1).strip() if note_match else None,
+            }
 
     return entries
 
