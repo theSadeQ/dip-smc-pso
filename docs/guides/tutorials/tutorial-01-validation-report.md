@@ -234,7 +234,7 @@ python scripts/validation/validate_tutorial_01_experiments.py --export results.j
 2. ✅ `validate_tutorial_01_experiments.py` - Experiment validation
 
 **Not Created (Time Constraints):**
-3. ⬜ `validate_tutorial_01.py` - Comprehensive suite integrating CLI + output + experiments
+3. ⬜ `validate_tutorial_01.py` - suite integrating CLI + output + experiments
 
 **Rationale:** The two scripts created provide the core functionality needed for Tutorial 01 validation. A comprehensive integration script can be created in a future phase if needed.
 
