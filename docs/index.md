@@ -229,4 +229,57 @@ For the complete bibliography, see the {doc}`bibliography` page.
 
 ## Project Links
 
+- **GitHub Repository**: [github.com/theSadeQ/dip-smc-pso](https://github.com/theSadeQ/dip-smc-pso)
+- **Issue Tracker**: [GitHub Issues](https://github.com/theSadeQ/dip-smc-pso/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/theSadeQ/dip-smc-pso/discussions)
+
+---
+
+## New Documentation (Phase 6+)
+
+### Getting Started & Tutorials
+
+- **[📘 Interactive Jupyter Notebook](../notebooks/01_getting_started.ipynb)** (NEW)
+  - 30-45 minute interactive tutorial
+  - All 4 controllers with comparisons
+  - PSO optimization walkthrough
+  - Phase portraits and energy analysis
+
+### Deployment & Production
+
+- **[🐳 Docker Deployment Guide](deployment/docker.md)** (NEW)
+  - Quick start with pre-built images
+  - Multi-stage build optimization (2GB → 400MB)
+  - Docker Compose for HIL
+  - GPU support and cloud deployment (AWS/GCP/Azure/K8s)
+  - Comprehensive troubleshooting
+
+### Advanced Topics
+
+- **[🔬 Numerical Stability Guide](advanced/numerical_stability.md)** (NEW)
+  - Matrix conditioning and regularization
+  - Adaptive parameter tuning
+  - Error analysis (truncation, round-off, Lyapunov)
+  - Implementation patterns and testing
+  - Essential for production deployments
+
+### Research & Workflow
+
+- **[📊 Research Workflow Guide](workflow/research_workflow.md)** (NEW)
+  - Complete lifecycle: hypothesis → publication
+  - 7-phase workflow with examples
+  - Statistical analysis and visualization
+  - Reproducibility checklist
+  - Publication preparation
+
+### Contributing
+
+- **[📝 Contributing Guide](../CONTRIBUTING.md)** (UPDATED)
+  - Development workflow with branch strategy
+  - Code standards (PEP 8, type hints ≥95%)
+  - Conventional commits format
+  - Pull request templates
+  - Quality gates and testing requirements
+
+---
 
