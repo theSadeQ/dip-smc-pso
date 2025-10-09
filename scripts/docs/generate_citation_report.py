@@ -191,7 +191,7 @@ def generate_report(
     report_lines.append("")
 
     if mapping_file.exists():
-        mapping_data = json.loads(mapping_file.read_text())
+        mapping_data = json.loads(mapping_file.read_text(encoding='utf-8'))
         report_lines.append(f"**Mapped theorems:** {len(mapping_data)}")
         report_lines.append("")
 
@@ -235,14 +235,14 @@ def generate_report(
     report_lines.append("")
 
     checks = [
-        ("BibTeX accessibility ≥95%", overall_accessibility >= 95),
+        ("BibTeX accessibility >=95%", overall_accessibility >= 95),
         ("All citations have BibTeX entries", True),  # Assumes validate_citations.py passed
         ("Documentation cites theory", total_refs > 0),
         ("Controller docstrings enhanced", total_controller_citations > 0),
     ]
 
     for check_name, passed in checks:
-        status = "✅ PASS" if passed else "❌ FAIL"
+        status = "[PASS]" if passed else "[FAIL]"
         report_lines.append(f"- {status}: {check_name}")
 
     report_lines.append("")
@@ -252,11 +252,11 @@ def generate_report(
     report_lines.append("---")
     report_lines.append("")
     if all_passed:
-        report_lines.append("## ✅ Citation Integration Complete")
+        report_lines.append("## [PASS] Citation Integration Complete")
         report_lines.append("")
         report_lines.append("All validation checks passed. Citations are properly integrated and accessible.")
     else:
-        report_lines.append("## ⚠️ Citation Integration Incomplete")
+        report_lines.append("## [WARN] Citation Integration Incomplete")
         report_lines.append("")
         report_lines.append("Some validation checks failed. Review the report above for details.")
 
@@ -266,6 +266,10 @@ def generate_report(
 
 
 def main():
+    # Fix Windows UTF-8 encoding
+    if sys.platform == 'win32':
+        sys.stdout.reconfigure(encoding='utf-8')
+
     parser = argparse.ArgumentParser(description='Generate citation integration report')
     parser.add_argument('--bibtex', type=Path, default=Path('docs/bib'),
                         help='Directory containing BibTeX files')
@@ -298,9 +302,9 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(report, encoding='utf-8')
 
-    print(f"✅ Report generated: {args.output}")
+    print(f"[PASS] Report generated: {args.output}")
     print()
-    print(f"   {len(report.splitlines())} lines written")
+    print(f"       {len(report.splitlines())} lines written")
     print()
 
     return 0

@@ -27,7 +27,7 @@ try:
     REQUESTS_AVAILABLE = True
 except ImportError:
     REQUESTS_AVAILABLE = False
-    print("⚠️  Warning: 'requests' module not available. Install with: pip install requests")
+    print("[WARN] 'requests' module not available. Install with: pip install requests")
 
 
 def parse_bibtex_dois(bib_path: Path) -> List[Dict[str, str]]:
@@ -123,6 +123,10 @@ def check_url_accessibility(url: str, timeout: int = 10) -> Tuple[bool, int, str
 
 
 def main():
+    # Fix Windows UTF-8 encoding
+    if sys.platform == 'win32':
+        sys.stdout.reconfigure(encoding='utf-8')
+
     parser = argparse.ArgumentParser(description='Validate DOI/URL accessibility')
     parser.add_argument('--bibtex', type=Path, default=Path('docs/bib'),
                         help='Directory containing BibTeX files')
@@ -138,8 +142,8 @@ def main():
     args = parser.parse_args()
 
     if not REQUESTS_AVAILABLE:
-        print("❌ Cannot validate DOI accessibility without 'requests' module")
-        print("   Install with: pip install requests")
+        print("[FAIL] Cannot validate DOI accessibility without 'requests' module")
+        print("       Install with: pip install requests")
         return 1
 
     print("=" * 80)
@@ -152,14 +156,14 @@ def main():
     bib_files = list(args.bibtex.glob('*.bib'))
 
     if not bib_files:
-        print(f"❌ No .bib files found in {args.bibtex}")
+        print(f"[FAIL] No .bib files found in {args.bibtex}")
         return 1
 
-    print(f"📚 Parsing BibTeX files from {args.bibtex}")
+    print(f"[BIB] Parsing BibTeX files from {args.bibtex}")
     for bib_file in bib_files:
         entries = parse_bibtex_dois(bib_file)
         all_entries.extend(entries)
-        print(f"  ✓ {bib_file.name}: {len(entries)} entries")
+        print(f"  [OK] {bib_file.name}: {len(entries)} entries")
 
     print(f"\n  Total entries: {len(all_entries)}")
     print()
@@ -215,10 +219,10 @@ def main():
         if accessible:
             accessible_count += 1
             if args.verbose:
-                print(f"  ✓ [{i}/{len(all_entries)}] {key} ({link_type}): {message}")
+                print(f"  [OK] [{i}/{len(all_entries)}] {key} ({link_type}): {message}")
         else:
             inaccessible_count += 1
-            print(f"  ❌ [{i}/{len(all_entries)}] {key} ({link_type}): {message}")
+            print(f"  [FAIL] [{i}/{len(all_entries)}] {key} ({link_type}): {message}")
 
         results.append({
             'key': key,
@@ -259,11 +263,11 @@ def main():
 
     # Exit code based on success rate
     if success_rate >= 95:
-        print("✅ VALIDATION PASSED (≥95% target)")
+        print("[PASS] VALIDATION PASSED (>=95% target)")
         return 0
     else:
-        print("❌ VALIDATION FAILED (<95% target)")
-        print(f"   Need {int((0.95 * total_with_links) - accessible_count)} more accessible link(s)")
+        print("[FAIL] VALIDATION FAILED (<95% target)")
+        print(f"       Need {int((0.95 * total_with_links) - accessible_count)} more accessible link(s)")
         return 1
 
 

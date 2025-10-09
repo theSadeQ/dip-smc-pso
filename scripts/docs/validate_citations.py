@@ -119,6 +119,10 @@ def validate_cross_references(
 
 
 def main():
+    # Fix Windows UTF-8 encoding
+    if sys.platform == 'win32':
+        sys.stdout.reconfigure(encoding='utf-8')
+
     parser = argparse.ArgumentParser(description='Validate citation integrity')
     parser.add_argument('--bibtex', type=Path, default=Path('docs/bib'),
                         help='Directory containing BibTeX files')
@@ -139,14 +143,14 @@ def main():
     bib_files = list(args.bibtex.glob('*.bib'))
 
     if not bib_files:
-        print(f"❌ No .bib files found in {args.bibtex}")
+        print(f"[FAIL] No .bib files found in {args.bibtex}")
         return 1
 
-    print(f"📚 Parsing BibTeX files from {args.bibtex}")
+    print(f"[BIB] Parsing BibTeX files from {args.bibtex}")
     for bib_file in bib_files:
         entries = parse_bibtex_file(bib_file)
         all_entries.update(entries)
-        print(f"  ✓ {bib_file.name}: {len(entries)} entries")
+        print(f"  [OK] {bib_file.name}: {len(entries)} entries")
 
     print(f"\n  Total BibTeX entries: {len(all_entries)}")
     print()
@@ -160,9 +164,9 @@ def main():
     accessibility_pct = 100 * (total - len(missing_access)) / total if total > 0 else 0
 
     if not missing_access:
-        print(f"✅ All {total} entries have DOI or URL (100%)")
+        print(f"[PASS] All {total} entries have DOI or URL (100%)")
     else:
-        print(f"⚠️  {len(missing_access)}/{total} entries missing DOI/URL ({accessibility_pct:.1f}% accessible)")
+        print(f"[WARN] {len(missing_access)}/{total} entries missing DOI/URL ({accessibility_pct:.1f}% accessible)")
         if args.verbose:
             print("\nMissing accessibility:")
             for item in missing_access[:10]:  # Show first 10
@@ -179,19 +183,19 @@ def main():
 
     doc_files = list(args.docs.glob('**/*.md'))
     if not doc_files:
-        print(f"❌ No .md files found in {args.docs}")
+        print(f"[FAIL] No .md files found in {args.docs}")
         return 1
 
     doc_references = {}
     total_refs = 0
 
-    print(f"📖 Scanning documentation in {args.docs}")
+    print(f"[DOC] Scanning documentation in {args.docs}")
     for doc_file in doc_files:
         refs = find_cite_references(doc_file)
         if refs:
             doc_references[doc_file] = refs
             total_refs += len(refs)
-            print(f"  ✓ {doc_file.name}: {len(refs)} citation(s)")
+            print(f"  [OK] {doc_file.name}: {len(refs)} citation(s)")
 
     print(f"\n  Total citation references: {total_refs}")
     print()
@@ -205,18 +209,18 @@ def main():
     orphaned, broken = validate_cross_references(bibtex_keys, doc_references)
 
     if not broken:
-        print(f"✅ All {total_refs} references have BibTeX entries (0 broken)")
+        print(f"[PASS] All {total_refs} references have BibTeX entries (0 broken)")
     else:
-        print(f"❌ {len(broken)} broken reference(s) found:")
+        print(f"[FAIL] {len(broken)} broken reference(s) found:")
         for item in broken:
             print(f"  - {item}")
 
     print()
 
     if not orphaned:
-        print(f"✅ All {len(bibtex_keys)} BibTeX entries are referenced (0 orphaned)")
+        print(f"[PASS] All {len(bibtex_keys)} BibTeX entries are referenced (0 orphaned)")
     else:
-        print(f"ℹ️  {len(orphaned)} orphaned citation(s) (in BibTeX but not referenced):")
+        print(f"[INFO] {len(orphaned)} orphaned citation(s) (in BibTeX but not referenced):")
         if args.verbose:
             for item in orphaned[:10]:
                 print(f"  - {item}")
@@ -238,15 +242,15 @@ def main():
 
     # Exit code
     if broken or accessibility_pct < 95:
-        print("❌ VALIDATION FAILED")
+        print("[FAIL] VALIDATION FAILED")
         print()
         if broken:
             print(f"  - Fix {len(broken)} broken reference(s)")
         if accessibility_pct < 95:
-            print(f"  - Add DOI/URL to {len(missing_access)} entry/entries (target: ≥95%)")
+            print(f"  - Add DOI/URL to {len(missing_access)} entry/entries (target: >=95%)")
         return 1
     else:
-        print("✅ VALIDATION PASSED")
+        print("[PASS] VALIDATION PASSED")
         print()
         print("All citations are properly formatted and accessible!")
         return 0
