@@ -2,6 +2,8 @@
 
 > This file contains project-specific instructions for Claude Code operations and automatic repository management.
 
+**Note:** This file uses ASCII text markers (e.g., [AI], [OK], [BLUE]) instead of Unicode emojis for Windows terminal compatibility. All documentation and scripts should follow this pattern to ensure proper display on Windows systems with cp1252 encoding.
+
 ------
 
 ## 1) Repository Information
@@ -31,7 +33,7 @@
 - <Detailed change 2>
 - <Additional context if needed>
 
-🤖 Generated with [Claude Code](https://claude.ai/code)
+[AI] Generated with [Claude Code](https://claude.ai/code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
@@ -79,7 +81,7 @@ git commit -m "$(cat <<'EOF'
 - <Change 2>
 - <Additional context>
 
-🤖 Generated with [Claude Code](https://claude.ai/code)
+[AI] Generated with [Claude Code](https://claude.ai/code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 EOF
@@ -278,12 +280,12 @@ finalize_session(summary: str) -> bool
 
 ### 3.8 Benefits
 
-✅ **Zero manual handoff** - No prompt writing when switching accounts
-✅ **Automatic resume** - Claude knows exactly where you left off
-✅ **Audit trail** - Full session history in git commits
-✅ **Reliability** - JSON schema with validation
-✅ **Transparency** - Human-readable state file
-✅ **Efficiency** - Resume work in seconds, not minutes
+[OK] **Zero manual handoff** - No prompt writing when switching accounts
+[OK] **Automatic resume** - Claude knows exactly where you left off
+[OK] **Audit trail** - Full session history in git commits
+[OK] **Reliability** - JSON schema with validation
+[OK] **Transparency** - Human-readable state file
+[OK] **Efficiency** - Resume work in seconds, not minutes
 
 ### 3.9 Example Usage
 
@@ -913,10 +915,10 @@ pytest tests/test_integration/test_memory_management/ -m stress -v
 ```
 
 ### Acceptance Criteria (Validated)
-✅ No memory leaks in 8-hour continuous operation
-✅ Memory growth < 1MB per 1000 controller instantiations
-✅ Explicit cleanup methods for all 4 controller types
-✅ Automated production memory monitoring available
+[PASS] No memory leaks in 8-hour continuous operation
+[PASS] Memory growth < 1MB per 1000 controller instantiations
+[PASS] Explicit cleanup methods for all 4 controller types
+[PASS] Automated production memory monitoring available
 
 **Full Documentation:** See `docs/memory_management_patterns.md` and `docs/memory_management_quick_reference.md`
 
@@ -956,20 +958,20 @@ This project employs an advanced **Ultimate Orchestrator** pattern for complex m
 
 ### 12.1 Core Agent Architecture
 
-**🔵 Ultimate Orchestrator (Blue)** - Master conductor and headless CI coordinator
+**[BLUE] Ultimate Orchestrator** - Master conductor and headless CI coordinator
 - Strategic planning and dependency-free task decomposition
 - Parallel delegation to 5 subordinate specialist agents
 - Integration of artifacts and interface reconciliation
 - Final verification, validation, and production readiness assessment
 
 **Subordinate Specialist Agents (Parallel Execution):**
-- 🌈 **Integration Coordinator** - Cross-domain orchestration, system health, configuration validation
-- 🔴 **Control Systems Specialist** - Controller factory, SMC logic, dynamics models, stability analysis
-- 🔵 **PSO Optimization Engineer** - Parameter tuning, optimization workflows, convergence validation
-- 🟢 **Control Systems Documentation Expert** - Specialized technical writing for control theory and optimization systems
-- 🟣 **Code Beautification & Directory Organization Specialist** - Advanced codebase aesthetic and structural optimization expert
+- [RAINBOW] **Integration Coordinator** - Cross-domain orchestration, system health, configuration validation
+- [RED] **Control Systems Specialist** - Controller factory, SMC logic, dynamics models, stability analysis
+- [BLUE] **PSO Optimization Engineer** - Parameter tuning, optimization workflows, convergence validation
+- [GREEN] **Control Systems Documentation Expert** - Specialized technical writing for control theory and optimization systems
+- [PURPLE] **Code Beautification & Directory Organization Specialist** - Advanced codebase aesthetic and structural optimization expert
 
-**🟢 Documentation Expert Capabilities:**
+**[GREEN] Documentation Expert Capabilities:**
   - **Mathematical Documentation**: Lyapunov stability proofs, sliding surface design theory, convergence analysis, PSO algorithmic foundations with LaTeX notation
   - **Controller Implementation Guides**: SMC variant documentation (classical, super-twisting, adaptive, hybrid STA-SMC), parameter tuning methodology, stability margin analysis
   - **Optimization Documentation**: PSO parameter bounds rationale, fitness function design, convergence criteria, multi-objective optimization strategies, benchmark interpretation
@@ -979,7 +981,7 @@ This project employs an advanced **Ultimate Orchestrator** pattern for complex m
   - **Performance Engineering Documentation**: Numba optimization guides, vectorized simulation scaling analysis, memory usage profiling, real-time constraint validation
   - **Testing Documentation**: Property-based test design for control laws, coverage analysis for safety-critical components, scientific test validation, benchmark regression analysis
 
-**🟣 Code Beautification & Directory Organization Specialist Capabilities:**
+**[PURPLE] Code Beautification & Directory Organization Specialist Capabilities:**
   - **ASCII Header Management**: Enforcement of 90-character wide ASCII banners with centered file paths, validation of `#===...===\\\` format compliance, automated header generation and correction across Python files
   - **Deep Internal Folder Organization**: Hierarchical restructuring of files within directories to match architectural patterns, test structure mirroring src/ layout, controller categorization by type (base/, factory/, mpc/, smc/, specialized/), utility organization into logical subdirectories (analysis/, control/, monitoring/, types/, validation/, visualization/), elimination of file dumping in favor of proper logical placement
   - **Advanced Static Analysis**: Cyclomatic complexity analysis, code duplication detection, dead code elimination, security vulnerability scanning, maintainability index calculation
