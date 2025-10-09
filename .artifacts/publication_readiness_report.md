@@ -1,7 +1,7 @@
 # Publication Readiness Report
 
 **Generated:** 2025-10-09
-**Validation Time:** 0.2 seconds
+**Validation Time:** 0.6 seconds
 
 ---
 
