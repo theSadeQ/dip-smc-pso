@@ -16,314 +16,24 @@
 
 ## 2) Automatic Repository Management
 
-### 2.1 Auto-Update Policy
+**See:** `.claude/repository_management.md` for complete details.
 
-**MANDATORY**: After ANY changes to the repository content, Claude MUST automatically:
-
-1. **Stage all changes**: `git add .`
-2. **Commit with descriptive message**: Following the established pattern
-3. **Push to main branch**: `git push origin main`
-
-### 2.2 Commit Message Format
-
-```
-<Action>: <Brief description>
-
-- <Detailed change 1>
-- <Detailed change 2>
-- <Additional context if needed>
-
-[AI] Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-```
-
-### 2.3 Repository Address Verification
-
-Before any git operations, verify the remote repository:
-```bash
-git remote -v
-# Expected output:
-# origin	https://github.com/theSadeQ/dip-smc-pso.git (fetch)
-# origin	https://github.com/theSadeQ/dip-smc-pso.git (push)
-```
-
-If the remote is incorrect, update it:
-```bash
-git remote set-url origin https://github.com/theSadeQ/dip-smc-pso.git
-```
-
-### 2.4 Trigger Conditions
-
-Claude MUST automatically update the repository when:
-- Any source code files are modified
-- Configuration files are changed
-- Documentation is updated
-- New files are added
-- Test files are modified
-- Any project structure changes occur
-
-### 2.5 Update Sequence
-
-```bash
-# 1. Verify repository state
-git status
-git remote -v
-
-# 2. Stage all changes
-git add .
-
-# 3. Commit with descriptive message
-git commit -m "$(cat <<'EOF'
-<Descriptive title>
-
-- <Change 1>
-- <Change 2>
-- <Additional context>
-
-[AI] Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-EOF
-)"
-
-# 4. Push to main branch
-git push origin main
-```
-
-### 2.6 Error Handling
-
-If git operations fail:
-1. Report the error to the user
-2. Provide suggested resolution steps
-3. Do not proceed with further operations until resolved
+**Quick Reference:**
+- MANDATORY: Auto-commit and push after ANY repository changes
+- Commit message format: `<Action>: <Brief description>` with [AI] footer
+- Always verify remote URL: `https://github.com/theSadeQ/dip-smc-pso.git`
 
 ------
 
-## 3) Session Continuity System (Zero-Effort Account Switching)
+## 3) Session Continuity System
 
-### 3.1 Overview
+**See:** `.claude/session_continuity.md` for complete details.
 
-When token limits are reached, users can switch Claude Code accounts with **zero manual handoff effort**. The system automatically maintains session state and resumes work seamlessly.
-
-**User Experience:**
-1. Account A hits token limit
-2. User switches to Account B
-3. User says: `"continue"` or `"hi"` or anything
-4. Claude auto-loads context and resumes immediately
-
-### 3.2 Auto-Detection Protocol (MANDATORY)
-
-On the **first message** of any new session, Claude MUST:
-
-1. **Check for session state**: Read `.dev_tools/session_state.json`
-2. **Evaluate recency**: If file exists and `last_updated` < 24 hours ago:
-   - Auto-load session context
-   - Display brief summary: `"Continuing from previous session: [task summary]"`
-   - Show: current task, phase, completed/pending todos
-   - Resume work immediately without asking for confirmation
-3. **Fresh session**: If file is old (>24h) or doesn't exist:
-   - Start fresh session
-   - Create new session state file
-
-**Detection Code Pattern:**
-```python
-from pathlib import Path
-import sys
-sys.path.insert(0, str(Path.cwd() / ".dev_tools"))
-
-from session_manager import has_recent_session, get_session_summary, load_session
-
-if has_recent_session():
-    print(get_session_summary())
-    state = load_session()
-    # Resume work based on state['context'] and state['next_actions']
-```
-
-### 3.3 Session State Maintenance (MANDATORY)
-
-Throughout **every session**, Claude MUST update `.dev_tools/session_state.json` after:
-
-1. **Completing any todo item**
-   ```python
-   from session_manager import add_completed_todo
-   add_completed_todo("Create PowerShell backup script")
-   ```
-
-2. **Making important decisions**
-   ```python
-   from session_manager import add_decision
-   add_decision("Task Scheduler frequency: 1 minute")
-   ```
-
-3. **Starting new tasks or changing phases**
-   ```python
-   from session_manager import update_session_context
-   update_session_context(
-       current_task="Implementing feature X",
-       phase="testing",
-       last_commit="abc1234"
-   )
-   ```
-
-4. **Modifying significant files**
-   - Update `files_modified` list in session state
-
-5. **Identifying next actions**
-   ```python
-   from session_manager import add_next_action
-   add_next_action("Register Task Scheduler job")
-   ```
-
-### 3.4 Token Limit Protocol
-
-When approaching token limit (automatically detected or explicit):
-
-1. **Mark token limit approaching**
-   ```python
-   from session_manager import mark_token_limit_approaching, finalize_session
-   mark_token_limit_approaching()
-   finalize_session("Completed automated backup system implementation")
-   ```
-
-2. **Ensure session state is comprehensive**
-   - All todos updated (completed/in_progress/pending)
-   - All decisions recorded
-   - Next actions clearly specified
-   - Important context preserved
-
-3. **Commit session state**
-   - Session state is automatically included in backup commits (every 1 minute)
-   - No manual git operations required
-
-4. **User switches accounts** - No manual prompt writing needed!
-
-### 3.5 Session State File Structure
-
-**Location:** `.dev_tools/session_state.json`
-
-**Schema:**
-```json
-{
-  "session_id": "session_20251001_104700",
-  "last_updated": "2025-10-01T10:47:00",
-  "account": "account_1",
-  "token_limit_approaching": false,
-  "status": "active",
-  "context": {
-    "current_task": "Current work description",
-    "phase": "implementation|testing|documentation|completed",
-    "last_commit": "abc1234",
-    "branch": "main",
-    "working_directory": "D:\\Projects\\main"
-  },
-  "todos": {
-    "completed": ["Task 1", "Task 2"],
-    "in_progress": ["Task 3"],
-    "pending": ["Task 4", "Task 5"]
-  },
-  "decisions": [
-    "Important decision 1",
-    "Important decision 2"
-  ],
-  "next_actions": [
-    "Next step 1",
-    "Next step 2"
-  ],
-  "files_modified": [
-    "file1.py",
-    "file2.md"
-  ],
-  "important_context": {
-    "key": "value"
-  }
-}
-```
-
-### 3.6 Integration with Automated Backups
-
-- Session state is **automatically committed** every 1 minute via Task Scheduler
-- Backup script (`.dev_tools/claude-backup.ps1`) includes session_state.json
-- No manual session state commits required
-- Git history provides full session audit trail
-
-### 3.7 Python Helper: session_manager.py
-
-**Location:** `.dev_tools/session_manager.py`
-
-**Key Functions:**
-```python
-# example-metadata:
-# runnable: false
-
-# Check for continuable session
-has_recent_session(threshold_hours=24) -> bool
-
-# Load session state
-load_session() -> Optional[Dict]
-
-# Get human-readable summary
-get_session_summary() -> str
-
-# Update session context
-update_session_context(**kwargs) -> bool
-
-# Track progress
-add_completed_todo(todo: str) -> bool
-add_decision(decision: str) -> bool
-add_next_action(action: str) -> bool
-
-# Prepare for handoff
-mark_token_limit_approaching() -> bool
-finalize_session(summary: str) -> bool
-```
-
-### 3.8 Benefits
-
-[OK] **Zero manual handoff** - No prompt writing when switching accounts
-[OK] **Automatic resume** - Claude knows exactly where you left off
-[OK] **Audit trail** - Full session history in git commits
-[OK] **Reliability** - JSON schema with validation
-[OK] **Transparency** - Human-readable state file
-[OK] **Efficiency** - Resume work in seconds, not minutes
-
-### 3.9 Example Usage
-
-**Session 1 (Account A - hitting token limit):**
-```python
-# Claude automatically throughout session:
-update_session_context(current_task="Implementing backup system", phase="testing")
-add_completed_todo("Create PowerShell script")
-add_completed_todo("Write documentation")
-add_next_action("User needs to register Task Scheduler")
-
-# As token limit approaches:
-mark_token_limit_approaching()
-finalize_session("Backup system implementation complete")
-```
-
-**Session 2 (Account B - fresh start):**
-```
-User: "continue"
-
-Claude: [Auto-checks session_state.json]
-"Continuing from previous session (2 hours ago):
-Task: Implementing backup system
-Phase: testing
-Last commit: c8c9c64
-
-Completed: 5 items
-In progress: 0 items
-Pending: 2 items
-
-Next actions:
-1. User needs to register Task Scheduler
-2. Run smoke test to verify functionality
-
-Let me check the current status..."
-
-[Claude immediately resumes work based on state]
-```
+**Quick Reference:**
+- Zero-effort account switching via `.dev_tools/session_state.json`
+- Auto-detect and resume from previous session if <24h old
+- Maintain session state throughout every session
+- Update todos, decisions, and next actions continuously
 
 ------
 
@@ -331,13 +41,13 @@ Let me check the current status..."
 
 **Double‑Inverted Pendulum Sliding Mode Control with PSO Optimization**
 
-A comprehensive Python framework for simulating, controlling, and analyzing a double‑inverted pendulum (DIP) system. It provides multiple SMC variants, optimization (PSO), a CLI and a Streamlit UI, plus rigorous testing and documentation.
+A Python framework for simulating, controlling, and analyzing a double‑inverted pendulum (DIP) system. It provides multiple SMC variants, optimization (PSO), a CLI and a Streamlit UI, plus rigorous testing and documentation.
 
 ------
 
-## 2) Architecture
+## 5) Architecture
 
-### 2.1 High‑Level Modules
+### 5.1 High‑Level Modules
 
 - **Controllers**: classical SMC, super‑twisting, adaptive, hybrid adaptive STA‑SMC, swing‑up; experimental MPC.
 - **Dynamics/Plant**: simplified and full nonlinear dynamics (plus low‑rank); shared base interfaces.
@@ -346,7 +56,7 @@ A comprehensive Python framework for simulating, controlling, and analyzing a do
 - **Utils**: validation, control primitives (e.g., saturation), monitoring, visualization, analysis, types, reproducibility, dev tools.
 - **HIL**: plant server + controller client for hardware‑in‑the‑loop experiments.
 
-### 2.2 Representative Layout (merged)
+### 5.2 Representative Layout (merged)
 
 ```
 src/
@@ -400,7 +110,7 @@ README.md, CHANGELOG.md
 
 ------
 
-## 3) Key Technologies
+## 6) Key Technologies
 
 - Python 3.9+
 - NumPy, SciPy, Matplotlib
@@ -412,9 +122,9 @@ README.md, CHANGELOG.md
 
 ------
 
-## 4) Usage & Essential Commands
+## 7) Usage & Essential Commands
 
-### 4.1 Simulations
+### 7.1 Simulations
 
 ```bash
 python simulate.py --ctrl classical_smc --plot
@@ -423,7 +133,7 @@ python simulate.py --load tuned_gains.json --plot
 python simulate.py --print-config
 ```
 
-### 4.2 PSO Optimization
+### 7.2 PSO Optimization
 
 ```bash
 python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json
@@ -431,14 +141,14 @@ python simulate.py --ctrl adaptive_smc --run-pso --seed 42 --save gains_adaptive
 python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso --save gains_hybrid.json
 ```
 
-### 4.3 HIL
+### 7.3 HIL
 
 ```bash
 python simulate.py --run-hil --plot
 python simulate.py --config custom_config.yaml --run-hil
 ```
 
-### 4.4 Testing
+### 7.4 Testing
 
 ```bash
 python run_tests.py
@@ -447,7 +157,7 @@ python -m pytest tests/test_benchmarks/ --benchmark-only
 python -m pytest tests/ --cov=src --cov-report=html
 ```
 
-### 4.5 Web Interface
+### 7.5 Web Interface
 
 ```bash
 streamlit run streamlit_app.py
@@ -455,38 +165,38 @@ streamlit run streamlit_app.py
 
 ------
 
-## 5) Configuration System
+## 8) Configuration System
 
 - Central `config.yaml` with strict validation.
 - Domains: physics params, controller settings, PSO parameters, simulation settings, HIL config.
-- Prefer “configuration first”: define parameters before implementation changes.
+- Prefer "configuration first": define parameters before implementation changes.
 
 ------
 
-## 6) Development Guidelines
+## 9) Development Guidelines
 
-### 6.1 Code Style
+### 9.1 Code Style
 
 - Type hints everywhere; clear, example‑rich docstrings.
 - ASCII header format for Python files (≈90 chars width).
 - Explicit error types; avoid broad excepts.
 - Use informal, conversational comments that explain the "why" behind the code, similar to the style in `requirements.txt`.
 
-### 6.2 Adding New Controllers
+### 9.2 Adding New Controllers
 
 1. Implement in `src/controllers/`.
 2. Add to `src/controllers/factory.py`.
 3. Extend `config.yaml`.
 4. Add tests under `tests/test_controllers/`.
 
-### 6.3 Batch Simulation
+### 9.3 Batch Simulation
 
 ```python
 from src.core.vector_sim import run_batch_simulation
 results = run_batch_simulation(controller, dynamics, initial_conditions, sim_params)
 ```
 
-### 6.4 Configuration Loading
+### 9.4 Configuration Loading
 
 ```python
 from src.config import load_config
@@ -495,43 +205,26 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ------
 
-## 7) Testing & Coverage Standards
+## 10) Testing & Coverage Standards
 
-### 7.1 Architecture of Tests
+**See:** `.claude/testing_standards.md` for complete details.
 
-- Unit, integration, property‑based, benchmarks, and scientific validation.
-- Example patterns:
-
-```bash
-pytest tests/test_controllers/ -k "not integration"
-pytest tests/ -k "full_dynamics"
-pytest --benchmark-only --benchmark-compare --benchmark-compare-fail=mean:5%
-```
-
-### 7.2 Coverage Targets
-
-- **Overall** ≥ 85%
-- **Critical components** (controllers, plant models, simulation engines) ≥ 95%
-- **Safety‑critical** mechanisms: **100%**
-
-### 7.3 Quality Gates (MANDATORY)
-
-- Every new `.py` file has a `test_*.py` peer.
-- Every public function/method has dedicated tests.
-- Validate theoretical properties for critical algorithms.
-- Include performance benchmarks for perf‑critical code.
+**Quick Reference:**
+- Overall: ≥85% | Critical components: ≥95% | Safety‑critical: 100%
+- Every `.py` file has a `test_*.py` peer
+- Validate theoretical properties for critical algorithms
 
 ------
 
-## 8) Visualization & Analysis Toolkit
+## 11) Visualization & Analysis Toolkit
 
 - Real‑time animations (DIPAnimator), static performance plots, project movie generator.
-- Statistical analysis: confidence intervals, bootstrap, Welch’s t‑test, ANOVA, Monte Carlo.
+- Statistical analysis: confidence intervals, bootstrap, Welch's t‑test, ANOVA, Monte Carlo.
 - Real‑time monitoring (latency, deadline misses, weakly‑hard constraints) for control loops.
 
 ------
 
-## 9) Production Safety & Readiness (Snapshot)
+## 12) Production Safety & Readiness (Snapshot)
 
 **Production Readiness Score: 6.1/10** (recently improved)
 
@@ -557,455 +250,31 @@ python scripts/test_thread_safety_fixes.py  # currently failing
 
 ------
 
-## 10) Workspace Organization & Hygiene
-
-### 10.1 Clean Root
-
-Keep visible items ≤ 12 (core files/dirs only). Hide dev/build clutter behind dot‑prefixed folders.
-
-**Visible files**: `simulate.py`, `streamlit_app.py`, `config.yaml`, `requirements.txt`, `README.md`, `CHANGELOG.md`
-
-**Visible dirs**: `src/`, `tests/`, `docs/`, `notebooks/`, `benchmarks/`, `config/`
-
-**Hidden dev dirs (examples)**: `.archive/`, `.build/`, `.dev_tools/`, `.scripts/`, `.tools/`
- Move **CLAUDE.md → .CLAUDE.md** if you prefer a clean root.
-
-### 10.2 Universal Cache Cleanup
-
-```bash
-find . -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null
-rm -rf .pytest_cache .ruff_cache .numba_cache .benchmarks .hypothesis
-```
-
-### 10.3 Backup & Docs Artifacts
-
-```bash
-find . -name "*.bak" -o -name "*.backup" -o -name "*~" | xargs -I{} mv {} .archive/ 2>/dev/null
-# Docs build artifacts → archive
-mv docs/_build docs/_static docs/.github docs/.gitignore docs/.lycheeignore .archive/
-```
-
-### 10.4 Enhanced .gitignore
-
-```gitignore
-**/__pycache__/
-**/*.py[cod]
-**/*$py.class
-.benchmarks/
-.numba_cache/
-.pytest_cache/
-.ruff_cache/
-.hypothesis/
-docs/_build/
-docs/_static/
-*.bak
-*.backup
-*~
-```
-
-### 10.5 Automation & Verification
-
-```bash
-# Helper for a clean view
-echo "(create) .dev_tools/clean_view.sh to list essentials, key dirs, hidden tools"
-
-# Health checks
-ls | wc -l                                    # target ≤ 12
-find . -name "__pycache__" | wc -l            # target = 0
-find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
-```
-
-### 10.6 Session Artifact Management (MANDATORY)
-
-**Rules for EVERY session to maintain clean root directory:**
-
-#### File Placement Rules
-
-1. **Logs** → `logs/` directory
-   - Format: `{script}_{timestamp}.log`
-   - Examples: `pso_classical_20250930.log`, `pytest_run_20250930.log`
-   - NEVER leave `.log` files in root
-
-2. **Test Artifacts** → `.test_artifacts/` (auto-cleanup)
-   - Use for temporary test runs
-   - Examples: `.test_artifacts/pso_test_run/`, `.test_artifacts/validation_debug/`
-   - Clean up before session ends
-
-3. **Optimization Results** → Structured directories with timestamps
-   - Use: `optimization_results/{controller}_{date}/`
-   - Examples: `optimization_results/classical_smc_20250930/`
-   - Include metadata JSON files
-
-4. **Documentation** → `docs/` or `.archive/`
-   - NEVER create `.md` files in root except README.md, CHANGELOG.md, CLAUDE.md
-   - Analysis reports → `docs/analysis/`
-   - Historical docs → `.archive/docs_{date}/`
-
-5. **Scripts** → `scripts/` with subdirectories
-   - Optimization scripts → `scripts/optimization/`
-   - Analysis scripts → `scripts/analysis/`
-   - Utility scripts → `scripts/utils/`
-
-#### Before Session Ends Checklist
-
-- [ ] Move all logs to `logs/` directory
-- [ ] Delete or archive test artifacts
-- [ ] Organize optimization results into timestamped directories
-- [ ] Move any root-level scripts to appropriate `scripts/` subdirectory
-- [ ] Archive temporary documentation files
-- [ ] Verify root item count: `ls | wc -l` (target: ≤12 visible)
-- [ ] Clean caches: `find . -name "__pycache__" -type d -exec rm -rf {} +`
-
-#### File Naming Conventions
-
-- Logs: `{purpose}_{YYYYMMDD}_HHMMSS.log`
-- Optimization dirs: `optimization_results/{controller}_{YYYYMMDD}/`
-- Test artifacts: `.test_artifacts/{purpose}_{iteration}/`
-- Archived docs: `.archive/{category}_{YYYYMMDD}/`
-
-#### Acceptable Root Items (≤12 visible)
-
-**Core Files (6):**
-- `simulate.py`, `streamlit_app.py`, `config.yaml`
-- `requirements.txt`, `README.md`, `CHANGELOG.md`
-
-**Core Dirs (6):**
-- `src/`, `tests/`, `docs/`, `notebooks/`, `benchmarks/`, `scripts/`
-
-**Total:** 12 items (target achieved)
-
-**Hidden Dirs (acceptable):**
-- `.archive/`, `.test_artifacts/`, `.dev_tools/`, `.build/`, `.cache/`, `.coverage/`, `.artifacts/`
-
-#### File Organization Enforcement (MANDATORY)
-
-**CRITICAL RULE**: NEVER create files in root directory except approved core files.
-
-**Before Creating ANY File - Ask:**
-1. Does this belong in root? (Answer: 99% NO)
-2. What is the proper directory for this file type?
-3. Does the target directory exist? If not, create it FIRST.
-4. Is this temporary? If yes → use hidden directory (`.test_artifacts/`, `.archive/`)
-
-**File Type Directory Map:**
-
-| File Pattern | Destination | Example |
-|-------------|-------------|---------|
-| `test_*.py` | `tests/debug/` | `test_my_feature.py` → `tests/debug/test_my_feature.py` |
-| `*.log`, `report.*` | `logs/` | `output.log` → `logs/script_20251009.log` |
-| `*_gains*.json`, `optimized_*.json` | `optimization_results/{controller}_{date}/` | `optimized_gains_smc.json` → `optimization_results/classical_smc_20251009/gains.json` |
-| `*_AUDIT.md`, `*_REPORT.md`, `INVESTIGATION_*.md` | `.archive/analysis_reports/` | `EXCEPTION_HANDLER_AUDIT.md` → `.archive/analysis_reports/EXCEPTION_HANDLER_AUDIT.md` |
-| `*.txt` (analysis results) | `.archive/analysis_reports/` or `logs/` | `phase5_stats.txt` → `.archive/analysis_reports/phase5_stats.txt` |
-| Coverage data | `.coverage/` or delete | `coverage.json` → `.coverage/coverage.json` or `rm coverage.json` |
-| Build artifacts | Delete immediately | `__pycache__/`, `out/` → `rm -rf __pycache__ out` |
-
-**Examples - WRONG vs. CORRECT:**
-
-```bash
-# WRONG: Creating test file in root
-touch test_my_feature.py
-python test_my_feature.py
-
-# CORRECT: Test files in tests/debug/
-mkdir -p tests/debug
-touch tests/debug/test_my_feature.py
-python tests/debug/test_my_feature.py
-```
-
-```bash
-# WRONG: Dumping logs in root
-python optimize.py > output.log
-
-# CORRECT: Logs in logs/ with timestamps
-python optimize.py > logs/optimize_$(date +%Y%m%d_%H%M%S).log
-```
-
-```bash
-# WRONG: Saving optimization results in root
-python scripts/optimization/tune_controller.py --save optimized_gains.json
-
-# CORRECT: Results in organized timestamped directories
-python scripts/optimization/tune_controller.py --save optimization_results/classical_smc_$(date +%Y%m%d)/gains.json
-```
-
-**Session End Enforcement (Run Before EVERY Commit):**
-
-```bash
-# Check root item count (must be ≤20)
-ls -1 | wc -l
-
-# Find any test files in root (should be empty)
-find . -maxdepth 1 -name "test_*.py"
-
-# Find any logs in root (should be empty)
-find . -maxdepth 1 -name "*.log"
-
-# Find any JSON results in root (should be empty except config.yaml)
-find . -maxdepth 1 -name "*.json"
-
-# Clean all caches
-find . -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null
-```
-
-**Auto-cleanup Command (run at session end):**
-
-```bash
-# Move misplaced files to proper locations
-mv test_*.py tests/debug/ 2>/dev/null || true
-mv *.log logs/ 2>/dev/null || true
-mv *_gains*.json *optimized*.json optimization_results/ 2>/dev/null || true
-mv *_AUDIT.md *_REPORT.md INVESTIGATION_*.md .archive/analysis_reports/ 2>/dev/null || true
-rm -rf __pycache__ out
-```
-
-### 10.7 Long-Running Optimization Processes (PSO)
-
-**Best practices for managing multi-hour PSO optimization runs:**
-
-#### Before Starting PSO
-
-1. **Verify Configuration**
-   - Check fitness function aligns with optimization goal
-   - Verify parameter bounds are reasonable
-   - Set appropriate iteration count and swarm size
-
-2. **Prepare Monitoring**
-   - Set up log directory: `logs/`
-   - Create monitoring scripts ready
-   - Document expected completion time
-
-3. **Session Continuity**
-   - Create comprehensive handoff documentation
-   - Document current state and next steps
-   - Prepare automation for when PSO completes
-
-#### During PSO Execution
-
-1. **Monitoring Tools**
-   ```bash
-   # Quick status check
-   python scripts/optimization/check_pso_completion.py
-
-   # Live dashboard
-   python scripts/optimization/watch_pso.py
-
-   # Automated monitoring
-   python scripts/optimization/monitor_and_validate.py --auto-update-config
-   ```
-
-2. **Progress Tracking**
-   - Monitor log files: `tail -f logs/pso_*.log`
-   - Check iteration progress and convergence
-   - Verify no errors or instability
-
-3. **Resource Management**
-   - PSO logs actively written (don't move/edit)
-   - Leave processes undisturbed
-   - Prepare validation scripts in parallel
-
-#### After PSO Completion
-
-1. **Immediate Actions**
-   - Run validation: `python scripts/optimization/validate_and_summarize.py`
-   - Review results JSON files
-   - Check acceptance criteria
-
-2. **Decision Point**
-   - **If PASS:** Update config, test, commit, close issue
-   - **If FAIL:** Analyze failure, re-run with corrected parameters
-
-3. **Cleanup**
-   - Move logs to organized directories
-   - Archive optimization artifacts
-   - Update documentation with results
-
-#### Automation Templates
-
-**Example: End-to-End PSO Workflow**
-```python
-# example-metadata:
-# runnable: false
-
-# scripts/optimization/monitor_and_validate.py pattern:
-# 1. Monitor PSO logs for completion
-# 2. Auto-trigger validation when done
-# 3. Update config if validation passes
-# 4. Provide clear next steps
-```
-
-**Example: Validation Pipeline**
-```python
-# example-metadata:
-# runnable: false
-
-# scripts/optimization/validate_and_summarize.py pattern:
-# 1. Load optimized gains from JSON
-# 2. Re-simulate with exact PSO metrics
-# 3. Compare against acceptance criteria
-# 4. Generate comprehensive summary JSON
-```
-
-#### Lessons Learned (Issue #12)
-
-1. **Fitness Function Matters:** Ensure fitness directly optimizes target metric
-2. **Document Expected Outcomes:** Predict likely results based on fitness design
-3. **Prepare Alternative Paths:** Have corrected scripts ready if validation fails
-4. **Full Automation:** Create end-to-end workflows for reproducibility
-5. **Comprehensive Handoff:** Document state for session continuity
-
-### 10.8 After Moving/Consolidation — Update References
-
-1. Search & replace hardcoded paths.
-2. Update README and diagrams.
-3. Fix CI workflows.
-4. Re‑run tests.
+## 13) Workspace Organization & Hygiene
+
+**See:** `.claude/workspace_organization.md` for complete details.
+
+**Quick Reference:**
+- Clean root: ≤12 visible items (6 files + 6 dirs)
+- Logs → `logs/`, Test artifacts → `.test_artifacts/`, Optimization → `optimization_results/`
+- NEVER create files in root except approved core files
+- Run cleanup commands before every commit
 
 ------
 
-## 11) Controller Memory Management (Issue #15 Resolution)
+## 14) Controller Memory Management
 
-### Overview
-All SMC controllers implement explicit memory cleanup to prevent leaks in long-running operations. Following [CRIT-006] resolution (2025-10-01), controllers use weakref patterns for model references and provide cleanup methods for explicit resource management.
+**See:** `.claude/controller_memory.md` for complete details.
 
-### Key Patterns
-
-#### 1. Weakref for Model References
-Controllers use `weakref.ref()` to break circular references between controller and dynamics model:
-```python
-# example-metadata:
-# runnable: false
-
-# ClassicalSMC implementation
-if dynamics_model is not None:
-    self._dynamics_ref = weakref.ref(dynamics_model)
-else:
-    self._dynamics_ref = lambda: None
-
-@property
-def dyn(self):
-    """Access dynamics model via weakref."""
-    if self._dynamics_ref is not None:
-        return self._dynamics_ref()
-    return None
-```
-
-#### 2. Explicit Cleanup
-```python
-# example-metadata:
-# runnable: false
-
-from src.controllers.smc import ClassicalSMC
-
-controller = ClassicalSMC(gains=[...], max_force=100, boundary_layer=0.01)
-# ... use controller ...
-controller.cleanup()  # Explicit cleanup
-del controller
-```
-
-#### 3. Automatic Cleanup (Destructor)
-```python
-# example-metadata:
-# runnable: false
-
-# Automatic cleanup when controller goes out of scope
-def run_simulation():
-    controller = ClassicalSMC(...)
-    return simulate(controller, duration=5.0)
-# Controller automatically cleaned up via __del__
-```
-
-#### 4. Production Memory Monitoring
-```python
-import psutil
-import os
-
-class MemoryMonitor:
-    def __init__(self, threshold_mb=500):
-        self.threshold_mb = threshold_mb
-        self.process = psutil.Process(os.getpid())
-
-    def check(self):
-        memory_mb = self.process.memory_info().rss / 1024 / 1024
-        if memory_mb > self.threshold_mb:
-            return f"Alert: {memory_mb:.1f}MB > {self.threshold_mb}MB"
-        return None
-
-monitor = MemoryMonitor(threshold_mb=500)
-if alert := monitor.check():
-    history = controller.initialize_history()  # Clear buffers
-```
-
-### Memory Leak Prevention Checklist
-
-Before deploying controllers in production:
-- [ ] Controllers are recreated or reset periodically (every 24 hours recommended)
-- [ ] Memory monitoring is active with alerts configured
-- [ ] History buffers cleared periodically in long-running loops
-- [ ] Garbage collection triggered after batch operations
-- [ ] Memory leak tests pass: `pytest tests/test_integration/test_memory_management/ -v`
-
-### Usage Patterns
-
-**Short-lived (single simulation):**
-```python
-controller = ClassicalSMC(gains=[10,8,15,12,50,5], max_force=100, boundary_layer=0.01)
-result = simulate(controller)
-# Automatic cleanup
-```
-
-**Long-running (server deployment):**
-```python
-# example-metadata:
-# runnable: false
-
-controller = HybridAdaptiveSTASMC(gains=[...], dt=0.01, max_force=100, ...)
-history = controller.initialize_history()
-
-while running:
-    control, state_vars, history = controller.compute_control(state, state_vars, history)
-
-    # Hourly cleanup
-    if time.time() - last_cleanup > 3600:
-        history = controller.initialize_history()
-        gc.collect()
-```
-
-**Batch operations (PSO optimization):**
-```python
-# example-metadata:
-# runnable: false
-
-for i in range(10000):
-    controller = AdaptiveSMC(gains=candidates[i], ...)
-    fitness[i] = evaluate(controller)
-
-    if i % 100 == 99:
-        controller.cleanup()
-        del controller
-        gc.collect()
-```
-
-### Validation Commands
-
-```bash
-# Quick memory leak test (1000 instantiations)
-pytest tests/test_integration/test_memory_management/test_memory_resource_deep.py::TestMemoryUsage::test_memory_leak_detection -v
-
-# 8-hour stress test
-pytest tests/test_integration/test_memory_management/ -m stress -v
-```
-
-### Acceptance Criteria (Validated)
-[PASS] No memory leaks in 8-hour continuous operation
-[PASS] Memory growth < 1MB per 1000 controller instantiations
-[PASS] Explicit cleanup methods for all 4 controller types
-[PASS] Automated production memory monitoring available
-
-**Full Documentation:** See `docs/memory_management_patterns.md` and `docs/memory_management_quick_reference.md`
+**Quick Reference:**
+- All controllers use weakref patterns to prevent circular references
+- Explicit `cleanup()` methods available for all controller types
+- Memory leak prevention: periodic reset + monitoring in production
+- Validation: `pytest tests/test_integration/test_memory_management/ -v`
 
 ------
 
-## 12) Controller Factory & Example Snippets
+## 15) Controller Factory & Example Snippets
 
 ```python
 # example-metadata:
@@ -1031,444 +300,37 @@ missed = monitor.end(start)
 
 ------
 
-## 13) Multi-Agent Orchestration System
+## 16) Multi-Agent Orchestration System
 
-**6-Agent Parallel Orchestration Workflow**
+**See:** `.claude/agent_orchestration.md` for complete details.
 
-This project employs an advanced **Ultimate Orchestrator** pattern for complex multi-domain tasks. The system automatically coordinates 6 specialized agents working in parallel to maximize efficiency and ensure comprehensive coverage.
-
-### 12.1 Core Agent Architecture
-
-**[BLUE] Ultimate Orchestrator** - Master conductor and headless CI coordinator
-- Strategic planning and dependency-free task decomposition
-- Parallel delegation to 5 subordinate specialist agents
-- Integration of artifacts and interface reconciliation
-- Final verification, validation, and production readiness assessment
-
-**Subordinate Specialist Agents (Parallel Execution):**
-- [RAINBOW] **Integration Coordinator** - Cross-domain orchestration, system health, configuration validation
-- [RED] **Control Systems Specialist** - Controller factory, SMC logic, dynamics models, stability analysis
-- [BLUE] **PSO Optimization Engineer** - Parameter tuning, optimization workflows, convergence validation
-- [GREEN] **Control Systems Documentation Expert** - Specialized technical writing for control theory and optimization systems
-- [PURPLE] **Code Beautification & Directory Organization Specialist** - Advanced codebase aesthetic and structural optimization expert
-
-**[GREEN] Documentation Expert Capabilities:**
-  - **Mathematical Documentation**: Lyapunov stability proofs, sliding surface design theory, convergence analysis, PSO algorithmic foundations with LaTeX notation
-  - **Controller Implementation Guides**: SMC variant documentation (classical, super-twisting, adaptive, hybrid STA-SMC), parameter tuning methodology, stability margin analysis
-  - **Optimization Documentation**: PSO parameter bounds rationale, fitness function design, convergence criteria, multi-objective optimization strategies, benchmark interpretation
-  - **HIL Systems Documentation**: Real-time communication protocols, safety constraint specifications, latency analysis, hardware interface contracts
-  - **Scientific Validation Documentation**: Experimental design for control systems, statistical analysis of performance metrics, Monte Carlo validation, benchmark comparison methodology
-  - **Configuration Schema Documentation**: YAML validation rules, parameter interdependencies, migration guides, configuration validation workflows
-  - **Performance Engineering Documentation**: Numba optimization guides, vectorized simulation scaling analysis, memory usage profiling, real-time constraint validation
-  - **Testing Documentation**: Property-based test design for control laws, coverage analysis for safety-critical components, scientific test validation, benchmark regression analysis
-
-**[PURPLE] Code Beautification & Directory Organization Specialist Capabilities:**
-  - **ASCII Header Management**: Enforcement of 90-character wide ASCII banners with centered file paths, validation of `#===...===\\\` format compliance, automated header generation and correction across Python files
-  - **Deep Internal Folder Organization**: Hierarchical restructuring of files within directories to match architectural patterns, test structure mirroring src/ layout, controller categorization by type (base/, factory/, mpc/, smc/, specialized/), utility organization into logical subdirectories (analysis/, control/, monitoring/, types/, validation/, visualization/), elimination of file dumping in favor of proper logical placement
-  - **Advanced Static Analysis**: Cyclomatic complexity analysis, code duplication detection, dead code elimination, security vulnerability scanning, maintainability index calculation
-  - **Type System Enhancement**: Comprehensive type hint coverage analysis (target: 95%), missing annotation detection, generic type optimization, return type inference
-  - **Import Organization & Dependency Management**: Import sorting (standard → third-party → local), unused import detection and removal, circular dependency resolution, dependency version audit
-  - **Enterprise Directory Architecture**: Module placement validation against architectural patterns, file naming convention enforcement, package initialization standardization, hidden directory management, proper hierarchical nesting to prevent flat file structures
-  - **Performance & Memory Optimization**: Numba compilation target identification, vectorization opportunity detection, memory leak pattern recognition, generator vs list comprehension optimization
-  - **Architecture Pattern Enforcement**: Factory pattern compliance validation, singleton pattern detection, observer pattern implementation verification, dependency injection container optimization
-  - **Version Control & CI Integration**: Commit message formatting, branch naming convention enforcement, pre-commit hook optimization, CI/CD pipeline file organization
-
-### 12.2 Orchestration Protocol (Automatic)
-
-When Claude encounters complex multi-domain problems, it automatically:
-
-1. **Ultimate Orchestrator Planning Phase:**
-   - Reads problem specification (e.g., `prompt/integration_recheck_validation_prompt.md`)
-   - Extracts objectives, constraints, acceptance criteria
-   - Creates dependency-free execution plan with artifacts
-   - Generates JSON delegation specification
-
-2. **Parallel Agent Execution:**
-   ```bash
-   # Automatic parallel launch (single message, multiple Task calls):
-   Task(ultimate-orchestrator) -> delegates to:
-     ├─ Task(integration-coordinator)
-     ├─ Task(control-systems-specialist)
-     ├─ Task(pso-optimization-engineer)
-     ├─ Task(documentation-expert)
-     └─ Task(code-beautification-directory-specialist)
-   ```
-
-3. **Integration & Verification:**
-   - Collects artifacts from all subordinate agents
-   - Reconciles interfaces and data contracts
-   - Prepares unified patches and validation reports
-   - Executes verification commands and quality gates
-
-### 12.3 Usage Examples
-
-**Integration Validation:**
-```bash
-# Problem: D:\Projects\main\prompt\integration_recheck_validation_prompt.md
-# Auto-deploys: Ultimate Orchestrator + 5 specialists in parallel
-# Result: 90% system health, production deployment approved
-```
-
-**Critical Fixes Orchestration:**
-```bash
-# Problem: D:\Projects\main\prompt\integration_critical_fixes_orchestration.md
-# Auto-deploys: All 6 agents with strategic coordination
-# Result: 100% functional capability, all blocking issues resolved
-```
-
-**Code Beautification Workflow:**
-```bash
-# Problem: Code style and organization optimization
-# Auto-deploys: Ultimate Orchestrator + Code Beautification Specialist
-# Beautifies: ASCII headers, directory structure, import organization, type hints
-# Result: 100% style compliance, optimized file organization
-```
-
-### 12.4 Expected Artifacts Pattern
-
-Each orchestration produces standardized outputs:
-- **`validation/`** - Comprehensive test results and health scores
-- **`patches/`** - Minimal diffs for integration improvements
-- **`artifacts/`** - Configuration samples and optimization results
-- **JSON Reports** - Structured data for CI/automation consumption
-
-### 12.5 Quality Assurance Integration
-
-The orchestrator enforces quality gates:
-- **Coverage Thresholds:** ≥95% critical components, ≥85% overall
-- **Validation Matrix:** Must pass ≥7/8 system health components
-- **Production Gates:** Automated go/no-go deployment decisions
-- **Regression Detection:** Systematic comparison with baseline claims
-
-This **headless CI coordinator** approach ensures consistent, high-quality results across complex multi-domain engineering tasks while maintaining full traceability and reproducibility.
+**Quick Reference:**
+- 6-agent parallel orchestration workflow (Ultimate Orchestrator pattern)
+- Automatic coordination for complex multi-domain tasks
+- Subordinate agents: Integration, Control Systems, PSO, Documentation, Code Beautification
+- Quality gates: ≥95% coverage critical, ≥85% overall, ≥7/8 system health
 
 ------
 
-## 14) Success Criteria
+## 17) Documentation Quality Standards
+
+**See:** `.claude/documentation_quality.md` for complete details.
+
+**Quick Reference:**
+- Direct, not conversational (avoid "Let's explore...")
+- Specific, not generic (no "comprehensive" without metrics)
+- Technical, not marketing (facts over enthusiasm)
+- Run: `python scripts/docs/detect_ai_patterns.py --file <file.md>`
+- Target: <5 AI-ish patterns per file
+
+------
+
+## 18) Success Criteria
 
 - Clean root (≤ 12 visible entries), caches removed, backups archived.
 - Test coverage gates met (85% overall / 95% critical / 100% safety‑critical).
 - Single‑threaded operation stable; no dependency conflicts; memory bounded.
 - Clear, validated configuration; reproducible experiments.
-
-------
-
-## 15) Documentation Quality Standards
-
-### 15.1 Overview
-
-All project documentation must meet professional writing standards that sound human-written, not AI-generated. Following a comprehensive audit in October 2025 (784 files, 308,853 lines), this section documents quality requirements and anti-patterns to avoid.
-
-**Official Style Guide:** `docs/DOCUMENTATION_STYLE_GUIDE.md`
-
-### 15.2 Audit Findings & Root Cause Analysis
-
-**Comprehensive Documentation Audit Results (2025-10-09):**
-
-- **Files Scanned:** 784 markdown files (308,853 lines)
-- **Files with Issues:** 499 files (63.6%)
-- **Total AI-ish Patterns:** 2,634 occurrences
-- **Primary Culprit:** "comprehensive" overload (2,025 occurrences = 77% of all issues)
-
-**Pattern Breakdown by Category:**
-- Enthusiasm & Marketing: 2,025 occurrences (77%)
-  - "comprehensive" (2,025x) - used as filler without metric backing
-  - "powerful", "seamless", "cutting-edge", "state-of-the-art"
-- Hedge Words: 586 occurrences (22%)
-  - "leverage", "utilize", "delve into", "facilitate"
-- Greeting Language: 15 occurrences (0.6%)
-  - "Let's explore", "Welcome!", "You'll love"
-- Repetitive Structures: 8 occurrences (0.3%)
-  - "In this section we will...", "Now let's look at..."
-
-**Severity Distribution:**
-- CRITICAL (≥15 patterns): 33 files requiring manual revision
-- HIGH (10-14 patterns): 37 files
-- MEDIUM (6-9 patterns): 84 files
-- LOW (1-5 patterns): 345 files
-
-**Top Offenders:**
-1. `docs/production/production_readiness_assessment_v2.md` - 178 issues
-2. `docs/PSO_Documentation_Validation_Report.md` - 55 issues
-3. `docs/test_infrastructure_validation_report.md` - 50 issues
-
-**Root Cause:** Over-reliance on generic marketing language instead of specific technical claims with metrics.
-
-### 15.3 Success Metrics (MANDATORY)
-
-All documentation must achieve:
-
-- [OK] **AI-ish Phrase Frequency:** <10% of October 2025 baseline (target: <263 occurrences)
-- [OK] **Tone Consistency:** 95%+ professional, human-written sound
-- [OK] **Technical Accuracy:** Zero regressions from remediation
-- [OK] **Readability:** Flesch-Kincaid maintained or improved
-- [OK] **Peer Review Standard:** "Sounds human-written, professional"
-
-### 15.4 Core Writing Principles
-
-1. **Direct, not conversational** - Get to the point immediately
-2. **Specific, not generic** - Show concrete features, not abstract claims
-3. **Technical, not marketing** - Facts over enthusiasm
-4. **Show, don't tell** - Concrete examples over buzzwords
-5. **Cite, don't hype** - References over marketing language
-
-### 15.5 Anti-Patterns (AVOID)
-
-#### Greeting & Conversational Language
-
-❌ **DO NOT USE:**
-- "Let's explore...", "Let us examine..."
-- "Welcome! You'll love..."
-- "In this section we will..."
-- "Now let's look at..."
-
-✅ **USE INSTEAD:**
-- Direct topic sentence: "The PSO optimizer minimizes..."
-- "This section covers..."
-- "The following demonstrates..."
-
-#### Enthusiasm & Marketing Buzzwords
-
-❌ **DO NOT USE:**
-- "comprehensive framework" (unless backed by metrics)
-- "powerful capabilities"
-- "seamless integration"
-- "cutting-edge algorithms" (without citations)
-- "state-of-the-art" (without citations)
-- "robust implementation" (use specific reliability features)
-
-✅ **USE INSTEAD:**
-- "framework" (let features speak)
-- List specific capabilities
-- "integration" (describe, don't hype)
-- "PSO optimization (Kennedy & Eberhart, 1995)"
-- "Achieves 30% faster convergence vs baseline"
-- "Handles edge cases A, B, C"
-
-#### Hedge Words
-
-❌ **DO NOT USE:**
-- "leverage the power of" → ✅ "use"
-- "utilize the optimizer" → ✅ "use the optimizer"
-- "delve into the details" → ✅ "examine", "analyze"
-- "facilitate testing" → ✅ "enables testing" or be specific
-
-#### Unnecessary Transitions
-
-❌ **DO NOT USE:**
-- "As we can see..." (redundant)
-- "It's worth noting that..." (remove or integrate)
-- "Additionally, it should be mentioned..." (verbose)
-- "Furthermore, we observe that..." (simplify)
-
-✅ **USE INSTEAD:**
-- Remove entirely or state directly
-- "The results show..."
-- "Additionally," (shorter)
-- "The data shows..."
-
-### 15.6 Context-Aware Exceptions
-
-**When Technical Terms Are Acceptable:**
-
-These terms are acceptable when used in proper technical context:
-
-- **"robust control"** - Formal control theory term (H∞ robustness, μ-synthesis)
-- **"comprehensive test coverage: 95%"** - Backed by metrics
-- **"enable logging"** - Software configuration terminology
-- **"advanced MPC"** - Distinguishing from basic variants
-
-**Rule:** If it has a precise technical definition, it's acceptable. If it's marketing fluff, remove it.
-
-**When "Let's" Is Acceptable:**
-
-In interactive tutorial contexts (Jupyter notebooks, live demos):
-
-```python
-# Interactive Jupyter notebook cell
-# Let's run a quick simulation to see the controller response
-result = simulate(controller, duration=5.0)
-plot(result)
-```
-
-This mirrors natural teaching flow in interactive environments.
-
-### 15.7 Professional Writing Examples
-
-#### GOOD: Technical Description
-
-```
-The PSO optimizer minimizes the cost function using particle swarm dynamics.
-Each particle represents a candidate gain set, converging to optimal parameters
-through velocity updates guided by personal best and global best positions.
-```
-
-**Why this works:**
-- Direct, factual statements
-- Technical terminology used correctly
-- No marketing fluff
-
-#### BAD: AI-ish Description
-
-```
-Let's explore the powerful PSO optimizer with its comprehensive capabilities!
-You'll love how seamlessly it leverages cutting-edge particle swarm dynamics
-to deliver amazing optimization results through state-of-the-art techniques!
-```
-
-**Why this fails:**
-- Conversational greeting ("Let's")
-- Marketing buzzwords ("powerful", "comprehensive", "seamless", "cutting-edge")
-- No specific technical information
-- Over-enthusiastic tone
-
-#### GOOD: Performance Claims
-
-```
-The adaptive SMC achieves:
-- Settling time: 2.1 ± 0.3 seconds
-- RMSE: 0.012 rad
-- Control effort: 15.3 N (mean)
-
-Performance validated across 10,000 Monte Carlo trials.
-```
-
-**Why this works:**
-- Quantified metrics
-- Statistical confidence intervals
-- Validation method specified
-
-#### BAD: AI-ish Claims
-
-```
-Our revolutionary adaptive SMC delivers amazing performance with industry-leading
-settling times and best-in-class accuracy through powerful control algorithms!
-```
-
-**Why this fails:**
-- No actual numbers
-- Unsubstantiated claims
-- Marketing superlatives
-
-### 15.8 File-Specific Guidelines
-
-**Getting Started Guides:**
-- Replace: "Welcome! Let's get started with..."
-- With: "This guide covers installation and basic usage."
-
-**Tutorials:**
-- Replace: "In this tutorial, we will explore..."
-- With: "This tutorial demonstrates PSO parameter tuning."
-
-**API Reference:**
-- Keep technical terminology (even if sounds "robust" in context)
-- Remove all marketing language
-- Preserve mathematical rigor
-- Use formal parameter descriptions
-
-**Theory Guides:**
-- Formal academic tone
-- Citation-driven claims
-- Mathematical notation for precision
-- Proof-based stability arguments
-
-### 15.9 Validation Workflow
-
-#### Before Committing Documentation
-
-Run pattern detection:
-```bash
-python scripts/docs/detect_ai_patterns.py --file path/to/file.md
-```
-
-**Pre-Commit Checklist:**
-- [ ] No greeting language ("Let's", "Welcome")
-- [ ] No marketing buzzwords ("seamless", "cutting-edge", "revolutionary")
-- [ ] No hedge words ("leverage", "utilize", "delve into")
-- [ ] No unnecessary transitions ("As we can see")
-- [ ] Direct, factual statements
-- [ ] Specific examples over generic claims
-- [ ] Active voice (except for technical accuracy)
-- [ ] Citations for advanced claims
-- [ ] Quantified performance claims
-- [ ] Technical terms used correctly (not as filler)
-
-**Acceptance Criteria:**
-- Pattern scan passes (<5 AI-ish patterns detected per file)
-- Technical accuracy preserved
-- Readability maintained or improved
-
-#### Automated Quality Checks
-
-**Pattern Detection Tools:**
-- `scripts/docs/detect_ai_patterns.py` - Identify AI-ish language
-- `scripts/docs/generate_audit_report.py` - Generate audit reports
-- `scripts/docs/suggest_fixes.py` - Automated fix suggestions
-
-**Future Enhancement:**
-- Pre-commit hook for automatic pattern detection (`.git/hooks/pre-commit`)
-
-### 15.10 Documentation-Expert Agent Requirements
-
-**All documentation-specialized agents MUST:**
-
-1. **Follow DOCUMENTATION_STYLE_GUIDE.md** for all writing
-2. **Avoid AI-ish anti-patterns** listed in Section 15.5
-3. **Use context-aware exceptions** only when technically justified
-4. **Validate output** against success metrics before completion
-5. **Preserve technical accuracy** during all revisions
-6. **Use formal academic tone** for theory documentation
-7. **Provide quantified claims** with metrics and citations
-8. **Run pattern detection** on generated documentation
-
-**Agent Instruction Updates Required:**
-- Documentation-expert agent → Add quality standards to system prompt
-- Integration-coordinator agent → Enforce documentation standards in reviews
-- Control-systems-specialist agent → Apply standards to technical docs
-
-### 15.11 References
-
-**Official Documentation:**
-- `docs/DOCUMENTATION_STYLE_GUIDE.md` - Professional writing standards
-- `.artifacts/docs_audit/AI_PATTERN_AUDIT_REPORT.md` - Full audit results
-- `.artifacts/docs_audit/REPLACEMENT_GUIDELINES.md` - Pattern replacements
-- `.artifacts/docs_audit/ai_pattern_detection_report.json` - Raw audit data
-
-**Detection Tools:**
-- `scripts/docs/detect_ai_patterns.py` - Pattern detection engine
-- `scripts/docs/generate_audit_report.py` - Report generator
-- `scripts/docs/suggest_fixes.py` - Automated fix suggestions
-
-**Validation Commands:**
-```bash
-# Detect AI patterns in a file
-python scripts/docs/detect_ai_patterns.py --file docs/README.md
-
-# Generate full audit report
-python scripts/docs/generate_audit_report.py --input .artifacts/docs_audit/ai_pattern_detection_report.json --output .artifacts/docs_audit/AI_PATTERN_AUDIT_REPORT.md
-
-# Get fix suggestions
-python scripts/docs/suggest_fixes.py --file docs/README.md
-```
-
-### 15.12 Continuous Improvement
-
-**Quality Monitoring:**
-- Run full documentation audit quarterly
-- Track AI-ish pattern frequency over time
-- Monitor peer review feedback for tone consistency
-- Validate technical accuracy with domain experts
-
-**Target Trajectory:**
-- Q4 2025: <263 AI-ish patterns (90% reduction achieved)
-- Q1 2026: <132 patterns (95% reduction)
-- Q2 2026: <53 patterns (98% reduction)
-- Q3 2026: Maintain <53 patterns with zero technical regressions
-
-**Accountability:**
-- Documentation changes require pattern scan in PR description
-- Failed quality checks block merge
-- Technical accuracy validated by control systems experts
 
 ------
 
