@@ -255,10 +255,13 @@ python scripts/test_thread_safety_fixes.py  # currently failing
 **See:** `.claude/workspace_organization.md` for complete details.
 
 **Quick Reference:**
-- Clean root: ≤12 visible items (6 files + 6 dirs)
+- Clean root: ≤15 visible items (currently: 15) ✓
 - Logs → `logs/`, Test artifacts → `.test_artifacts/`, Optimization → `optimization_results/`
 - NEVER create files in root except approved core files
-- Run cleanup commands before every commit
+- Run cleanup script before every commit: `python scripts/cleanup/workspace_cleanup.py`
+
+**Latest Cleanup:** 2025-10-09 (370MB recovered, all targets met)
+- See `.claude/WORKSPACE_CLEANUP_2025-10-09.md` for full details
 
 ------
 

@@ -1,0 +1,235 @@
+{
+  "plan_version": "1.0.0",
+  "created": "2025-10-08",
+  "phase": "Phase 2 - AI Research (HIGH Batch)",
+  "status": "READY",
+
+  "overview": {
+    "total_high_claims": 459,
+    "batch_strategy": "Domain-based grouping with incremental execution",
+    "estimated_duration": "2-3 weeks (20-30 hours)",
+    "target_completion": "Week 5 (end of Phase 2)"
+  },
+
+  "quality_targets": {
+    "citation_coverage": ">=75% (vs 85% for CRITICAL)",
+    "avg_citations_per_claim": ">=1.5 (vs 2.0 for CRITICAL)",
+    "doi_accessibility": ">=90% (vs 95% for CRITICAL)",
+    "bibtex_validation": "0 errors",
+    "note": "Adjusted targets reflect implementation claims being less critical than formal theorems"
+  },
+
+  "batch_grouping": {
+    "strategy": "Domain-based grouping for efficient API usage and query optimization",
+    "groups": [
+      {
+        "id": "group_1_smc_implementations",
+        "name": "SMC Implementations",
+        "claim_count_estimate": 150,
+        "description": "Implementation claims for classical SMC, adaptive SMC, super-twisting",
+        "priority": "HIGH",
+        "estimated_processing_time": "6-8 hours",
+        "api_calls_estimate": 450
+      },
+      {
+        "id": "group_2_pso_optimization",
+        "name": "PSO & Optimization",
+        "claim_count_estimate": 100,
+        "description": "PSO algorithm implementations, optimization objectives, convergence",
+        "priority": "HIGH",
+        "estimated_processing_time": "4-6 hours",
+        "api_calls_estimate": 300
+      },
+      {
+        "id": "group_3_numerical_methods",
+        "name": "Numerical Methods",
+        "claim_count_estimate": 80,
+        "description": "Integrators, adaptive step size, numerical stability, matrix operations",
+        "priority": "MEDIUM",
+        "estimated_processing_time": "3-4 hours",
+        "api_calls_estimate": 240
+      },
+      {
+        "id": "group_4_plant_dynamics",
+        "name": "Plant Models & Dynamics",
+        "claim_count_estimate": 70,
+        "description": "Simplified/full dynamics, physics matrices, state validation",
+        "priority": "MEDIUM",
+        "estimated_processing_time": "3-4 hours",
+        "api_calls_estimate": 210
+      },
+      {
+        "id": "group_5_miscellaneous",
+        "name": "Miscellaneous Utilities",
+        "claim_count_estimate": 59,
+        "description": "Visualization, monitoring, analysis, fault detection, benchmarking",
+        "priority": "LOW",
+        "estimated_processing_time": "2-3 hours",
+        "api_calls_estimate": 180
+      }
+    ],
+    "total_estimated_time": "18-25 hours",
+    "total_api_calls": "~1380 API calls"
+  },
+
+  "execution_workflow": {
+    "phase_1_preparation": {
+      "tasks": [
+        "Extract HIGH priority claims from claims_inventory.json",
+        "Group claims by domain (SMC, PSO, numerical, plant, misc)",
+        "Create batch input files for each group",
+        "Validate batch file formats"
+      ],
+      "estimated_time": "1 hour",
+      "deliverables": [
+        ".artifacts/high_batch_group_1_smc.json",
+        ".artifacts/high_batch_group_2_pso.json",
+        ".artifacts/high_batch_group_3_numerical.json",
+        ".artifacts/high_batch_group_4_plant.json",
+        ".artifacts/high_batch_group_5_misc.json"
+      ]
+    },
+
+    "phase_2_incremental_research": {
+      "approach": "Process one group at a time with checkpoints",
+      "sessions": [
+        {
+          "session": 1,
+          "group": "group_1_smc_implementations",
+          "claims": "50-75 (subset)",
+          "estimated_time": "3-4 hours",
+          "output": "artifacts/research/high_batch_smc_results.json"
+        },
+        {
+          "session": 2,
+          "group": "group_1_smc_implementations (continued)",
+          "claims": "75-100 (next subset)",
+          "estimated_time": "3-4 hours",
+          "output": "artifacts/research/high_batch_smc_results.json (appended)"
+        },
+        {
+          "session": 3,
+          "group": "group_2_pso_optimization",
+          "claims": "100 (all)",
+          "estimated_time": "4-6 hours",
+          "output": "artifacts/research/high_batch_pso_results.json"
+        },
+        {
+          "session": 4,
+          "group": "groups_3_4_5_combined",
+          "claims": "209 (all remaining)",
+          "estimated_time": "6-8 hours",
+          "output": "artifacts/research/high_batch_remaining_results.json"
+        }
+      ],
+      "total_sessions": "4-5 sessions",
+      "checkpoint_strategy": "Save every 50 claims, allow resume on interruption"
+    },
+
+    "phase_3_merge_and_validate": {
+      "tasks": [
+        "Merge all HIGH batch results into unified file",
+        "Deduplicate BibTeX entries across batches",
+        "Run validation (75% coverage, 90% DOI, 0 errors)",
+        "Generate HIGH batch completion report"
+      ],
+      "estimated_time": "1-2 hours",
+      "deliverables": [
+        "artifacts/research/high_batch_complete.json",
+        "artifacts/research/enhanced_bibliography_high.bib",
+        "artifacts/research/high_batch_validation_report.json"
+      ]
+    }
+  },
+
+  "risk_mitigation": {
+    "rate_limiting": {
+      "risk": "Semantic Scholar API rate limits (100 req/5min) exceeded",
+      "probability": "HIGH (80%)",
+      "impact": "MEDIUM (processing delays 2-4x longer)",
+      "mitigation": [
+        "Exponential backoff (already implemented)",
+        "Checkpoint recovery every 50 claims",
+        "Run during off-peak hours if possible",
+        "Consider splitting large batches into smaller chunks (25-50 claims)"
+      ]
+    },
+
+    "low_relevance_citations": {
+      "risk": "Implementation claims may yield less relevant academic papers",
+      "probability": "MEDIUM (40%)",
+      "impact": "LOW (still informative, but not optimal)",
+      "mitigation": [
+        "Adjust query generator to include implementation-specific keywords",
+        "Prioritize GitHub/software papers for implementation claims",
+        "Accept lower citation counts for utility/visualization claims"
+      ]
+    },
+
+    "time_budget_overrun": {
+      "risk": "20-30 hour estimate exceeded due to API delays",
+      "probability": "MEDIUM (30%)",
+      "impact": "MEDIUM (delays Phase 3 start)",
+      "mitigation": [
+        "Process highest-priority groups first (SMC, PSO)",
+        "Allow flexible completion timeline (Week 4-5)",
+        "Use parallel sessions if multiple accounts available"
+      ]
+    }
+  },
+
+  "success_criteria": {
+    "mandatory_gates": [
+      ">=75% HIGH claims have >=1.5 citations each",
+      ">=90% DOI or URL accessibility",
+      "BibTeX compiles without errors",
+      "0 duplicate entries in merged bibliography"
+    ],
+    "optional_enhancements": [
+      ">=80% citation coverage (stretch goal)",
+      ">=2.0 avg citations/claim (match CRITICAL batch)",
+      ">=95% DOI accessibility"
+    ]
+  },
+
+  "next_steps": [
+    "1. Extract and group HIGH claims by domain",
+    "2. Create batch input files (5 groups)",
+    "3. Begin Group 1 (SMC implementations) research",
+    "4. Monitor API usage and adjust batch sizes if needed",
+    "5. Validate after each group completion",
+    "6. Merge all results at end",
+    "7. Generate HIGH batch completion report"
+  ],
+
+  "dependencies": {
+    "required_tools": [
+      ".dev_tools/research/research_pipeline.py",
+      ".dev_tools/research/query_generator.py",
+      ".dev_tools/research/bibtex_generator.py",
+      ".dev_tools/research/validate_results.py"
+    ],
+    "required_inputs": [
+      ".artifacts/claims_inventory.json (source of HIGH claims)"
+    ],
+    "required_apis": [
+      "Semantic Scholar API (free tier)",
+      "ArXiv API (free)",
+      "CrossRef API (free)"
+    ]
+  },
+
+  "estimated_outcomes": {
+    "total_citations_generated": "690-920 (459 claims × 1.5-2.0 avg)",
+    "unique_bibtex_entries": "400-600 (after deduplication)",
+    "total_papers_reviewed": "2300-2750 (459 claims × 5 papers/claim)",
+    "phase_2_completion": "~942 total citations (22 CRITICAL + 920 HIGH)"
+  },
+
+  "notes": [
+    "This plan assumes CRITICAL batch learnings apply to HIGH batch",
+    "Query generator may need tuning for implementation vs. theoretical claims",
+    "Consider manual curation for top 50 most-cited implementation claims",
+    "Phase 2 target: 150-200 references (will exceed with 942 citations)"
+  ]
+}
