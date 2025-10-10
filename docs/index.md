@@ -214,3 +214,62 @@ For the complete bibliography, see the {doc}`bibliography` page.
 
 ---
 
+## Complete Documentation Structure
+
+```{toctree}
+:maxdepth: 2
+:caption: 📊 Analysis & Reports
+
+analysis/COMPLETE_CONTROLLER_COMPARISON_MATRIX
+reports/index
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 🚀 Production & Deployment
+
+production/index
+deployment/DEPLOYMENT_GUIDE
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 📽️ Presentation Materials
+
+presentation/index
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 🔬 Mathematical Foundations
+
+mathematical_foundations/index
+theory/index
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 🏭 Controller Factory & Integration
+
+factory/README
+controllers/index
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 📚 Testing & Validation
+
+testing/guides/coverage_quality_gates_runbook
+TESTING
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 📖 References & Bibliography
+
+bibliography
+references/index
+CITATIONS
+CITATIONS_ACADEMIC
+```
+

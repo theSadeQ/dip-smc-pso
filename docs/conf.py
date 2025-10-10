@@ -260,12 +260,17 @@ if os.environ.get('READTHEDOCS'):
     suppress_warnings = [
         'epub.unknown_project_files',
         'app.add_directive',  # Suppress deprecated extension warnings
+        'toc.not_included',  # Suppress orphaned document warnings during migration
     ]
 else:
     # Strict mode for local development
     suppress_warnings = [
         'app.add_directive',  # Suppress deprecated extension warnings (sphinxcontrib.autoclassdiag)
+        'toc.not_included',  # Suppress orphaned document warnings during migration
     ]
+
+# Parallel build configuration for faster builds
+parallel_jobs = 4  # Use 4 CPU cores for building (adjust based on your system)
 
 # Redirects for moved pages (disabled while sphinx_reredirects extension is unavailable)
 # redirects = {
