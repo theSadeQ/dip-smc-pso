@@ -18,7 +18,6 @@ CODE_BEAUTIFICATION_QUALITY_REPORT
 CODE_BEAUTIFICATION_QUALITY_POLISH_REPORT
 code_beautification_optimization_report
 CONTROLLER_TEST_VALIDATION_REPORT
-coverage_quality_report
 ```
 
 ### Controller Analysis Reports

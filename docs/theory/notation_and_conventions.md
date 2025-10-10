@@ -51,12 +51,14 @@ This page establishes the mathematical notation and conventions used throughout 
 
 ### Cart-Pendulum System
 
+<!-- Image not available - commented out to prevent Sphinx warning
 ```{figure} ../visual/coordinate_system.png
 :name: fig:coordinate_system
 :width: 600px
 
 Coordinate system for the double-inverted pendulum system.
 ```
+-->
 
 - **Origin**: Fixed at the initial cart position
 - **$x$-axis**: Horizontal, positive to the right
