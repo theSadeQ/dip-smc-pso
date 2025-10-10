@@ -10,7 +10,7 @@ All references organized by category, automatically generated from BibTeX files.
 :all:
 ```
 
----
+
 
 ## References by Category
 
@@ -22,7 +22,7 @@ Foundational and advanced SMC techniques including classical, super-twisting, ad
 :filter: key.startswith("smc_")
 ```
 
----
+
 
 ### PSO Optimization Theory
 
@@ -32,7 +32,7 @@ Particle swarm optimization theory, convergence analysis, and parameter tuning m
 :filter: key.startswith("pso_")
 ```
 
----
+
 
 ### Stability Theory
 
@@ -42,7 +42,7 @@ Lyapunov stability, finite-time stability, and fixed-time stability analysis.
 :filter: "khalil" in key or "lyapunov" in key or "bhat" in key or "moulay" in key or "polyakov" in key or "vidyasagar" in key
 ```
 
----
+
 
 ### Adaptive Control Theory
 
@@ -52,7 +52,7 @@ Model reference adaptive systems, robust adaptive laws, and parameter estimation
 :filter: "astrom" in key or "ioannou" in key or "narendra" in key or "slotine_1986" in key or "plestan" in key or "pomet" in key
 ```
 
----
+
 
 ### Fault Detection & Isolation
 
@@ -62,7 +62,7 @@ Threshold selection, hysteresis methods, and robust fault diagnosis techniques.
 :filter: "gertler" in key or "chen_1999" in key or "isermann" in key or "ding" in key
 ```
 
----
+
 
 ### Numerical Methods
 
@@ -72,7 +72,7 @@ Runge-Kutta integration, stiff ODE solvers, and numerical stability analysis.
 :filter: "press" in key or "hairer" in key or "butcher" in key or "ascher" in key
 ```
 
----
+
 
 ### Software & Tools
 
@@ -82,7 +82,7 @@ Python scientific computing libraries and numerical computation frameworks.
 :filter: key.startswith("soft_") or key.startswith("numpy") or key.startswith("scipy")
 ```
 
----
+
 
 ## See Also
 
@@ -93,7 +93,7 @@ For detailed attribution with exact page numbers and theorem references:
 - {doc}`../PATTERNS` - Design pattern attribution and architectural decisions
 - {doc}`../CITATIONS` - Master citation index and quick reference guide
 
----
+
 
 ## Citation Usage in Documentation
 
@@ -109,7 +109,7 @@ Multiple citations: {cite}`pso_kennedy_1995_particle_swarm_optimization,pso_cler
 
 See {cite}`smc_utkin_1992_sliding_modes` for the original sliding mode formulation.
 
----
+
 
 ## BibTeX Source Files
 

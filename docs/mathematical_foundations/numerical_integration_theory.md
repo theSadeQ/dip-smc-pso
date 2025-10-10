@@ -5,7 +5,7 @@
 **Complexity:** Advanced
 **Prerequisites:** Differential equations, numerical analysis, stability theory
 
----
+
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@
 :depth: 3
 ```
 
----
+
 
 ## Overview
 
@@ -41,7 +41,7 @@ For the double inverted pendulum (DIP) system, $x \in \mathbb{R}^6$ represents t
 | RK4 | 4 | 4 | 0.01 | Moderate | Development |
 | RK45 | 4/5 | 6 (adaptive) | Variable | Slow | Production |
 
----
+
 
 ## Fundamental Concepts
 
@@ -164,7 +164,7 @@ Sliding mode control creates **stiff systems**:
 
 Explicit methods (Euler, RK4) require tiny timesteps for stability.
 
----
+
 
 ## Explicit Euler Method
 
@@ -293,7 +293,7 @@ def euler_step(x, u, dynamics, dt):
 - **Use for:** PSO optimization (dt = 0.001-0.005)
 - **Avoid for:** Production simulations, research validation
 
----
+
 
 ## Runge-Kutta 4th Order (RK4)
 
@@ -448,7 +448,7 @@ def rk4_step(x, u, dynamics, dt):
 - **Use for:** Development, debugging, standard simulations (dt = 0.01)
 - **Avoid for:** Real-time systems, PSO fitness (too slow)
 
----
+
 
 ## Adaptive Runge-Kutta 45 (RK45)
 
@@ -613,7 +613,7 @@ def rk45_adaptive_step(x, u, dynamics, t, dt, tol=1e-6):
 - **Use for:** Production simulations, research validation
 - **Configuration:** rtol=1e-6, atol=1e-9
 
----
+
 
 ## Method Comparison
 
@@ -677,7 +677,7 @@ For T = 5 seconds:
 | RK4 | 0.01 | 0.0001 rad | 0.0001 rad | 0.5% |
 | RK45 | auto | < 1e-6 rad | < 1e-6 rad | < 0.01% |
 
----
+
 
 ## Stability Regions
 
@@ -719,7 +719,7 @@ $$
 
 Still restrictive for explicit methods.
 
----
+
 
 ## Practical Recommendations
 
@@ -802,7 +802,7 @@ simulation_config_prod = {
 }
 ```
 
----
+
 
 ## Energy Conservation Analysis
 
@@ -851,7 +851,7 @@ Examples: Verlet, Störmer, symplectic Euler
 - Conservative Hamiltonian systems
 - Not critical for SMC (dissipative control)
 
----
+
 
 ## Summary
 
@@ -884,7 +884,7 @@ Examples: Verlet, Störmer, symplectic Euler
 - {doc}`../simulation/numerical_integration_guide` - Implementation details
 - {doc}`../simulation/batch_simulation_guide` - Numba optimization
 
----
+
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-04

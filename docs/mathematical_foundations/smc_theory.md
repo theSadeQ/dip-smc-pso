@@ -74,6 +74,7 @@ sat(σ/ε) = tanh(σ/ε)
 ```latex
 ε = ε₀ + ε₁ ||σ||
 ```
+
 where:
 - `ε₀ > 0`: nominal boundary layer thickness
 - `ε₁ ≥ 0`: adaptive scaling factor
@@ -112,6 +113,7 @@ where:
 ```latex
 V̇ = σ(-K sign(σ) + d) ≤ -η|σ|
 ```
+
 where `η = K - ||d||_∞ > 0`.
 
 #### 3.2 Super-Twisting Lyapunov Analysis

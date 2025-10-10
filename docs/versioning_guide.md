@@ -2,7 +2,7 @@
 
 This guide explains how versioned documentation is managed for the DIP-SMC-PSO project.
 
----
+
 
 ## Overview
 
@@ -11,7 +11,7 @@ Documentation versioning ensures users can access docs for:
 - **Stable:** Latest release
 - **v1.0.x, v1.1.x:** Specific release versions
 
----
+
 
 ## Version Strategy
 
@@ -34,7 +34,7 @@ git push origin v1.0.0
 | `v1.0` | Version 1.0.x series | `/en/v1.0/` |
 | `v1.1` | Version 1.1.x series | `/en/v1.1/` |
 
----
+
 
 ## ReadTheDocs Configuration
 
@@ -52,7 +52,7 @@ ReadTheDocs automatically builds documentation when:
 3. Activate desired versions (e.g., v1.0, stable)
 4. Set default version (typically `stable`)
 
----
+
 
 ## Sphinx Version Configuration
 
@@ -88,7 +88,7 @@ html_context = {
 }
 ```
 
----
+
 
 ## Version Selector in Documentation
 
@@ -105,7 +105,7 @@ html_theme_options = {
 }
 ```
 
----
+
 
 ## Release Workflow
 
@@ -135,7 +135,7 @@ html_theme_options = {
    - Activate `v1.1` version
    - Optionally set as default
 
----
+
 
 ## Version Management Best Practices
 
@@ -168,7 +168,7 @@ Add version warnings for deprecated features:
    This feature is deprecated. Use :func:`new_feature` instead.
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -199,7 +199,7 @@ Add version warnings for deprecated features:
 2. Clear browser cache
 3. Rebuild on ReadTheDocs
 
----
+
 
 ## Automation
 
@@ -221,7 +221,7 @@ Documentation versions are automatically managed via:
     git push -f origin stable
 ```
 
----
+
 
 ## Documentation Version Support Policy
 
@@ -233,7 +233,7 @@ Documentation versions are automatically managed via:
 | **v1.0** | Maintenance | Security fixes only |
 | **<v1.0** | Unsupported | None |
 
----
+
 
 ## User-Facing Version Information
 
@@ -255,7 +255,7 @@ For old versions, display warning banner:
    for the most up-to-date information.
 ```
 
----
+
 
 ## ReadTheDocs Dashboard
 
@@ -267,7 +267,7 @@ For old versions, display warning banner:
 - **Build settings:** Python 3.12, Ubuntu 22.04
 - **Webhooks:** Enabled for auto-builds
 
----
+
 
 ## Testing Version Switching
 
@@ -295,7 +295,7 @@ sphinx-build -b html . _build/html-latest
 - Stable: https://dip-smc-pso.readthedocs.io/en/stable/
 - v1.0: https://dip-smc-pso.readthedocs.io/en/v1.0/
 
----
+
 
 ## Future Enhancements
 
@@ -305,7 +305,7 @@ sphinx-build -b html . _build/html-latest
 4. **Automated changelog generation:** From git commits
 5. **Version deprecation notices:** Automatic warnings for old versions
 
----
+
 
 **Last Updated:** 2025-10-07
 **Maintained By:** Documentation Team

@@ -1,4 +1,13 @@
-# Mathematical Foundations **Rigorous control theory and stability analysis for sliding mode controllers** --- ## Overview This section provides mathematical foundations for the sliding mode control strategies implemented in the DIP_SMC_PSO project. All proofs follow standard control theory literature with rigorous Lyapunov stability analysis. --- ## Complete SMC Theory ```{toctree}
+# Mathematical Foundations **Rigorous control theory and stability analysis for sliding mode controllers**
+
+---
+
+## Overview This section provides mathematical foundations for the sliding mode control strategies implemented in the DIP_SMC_PSO project. All proofs follow standard control theory literature with rigorous Lyapunov stability analysis.
+
+---
+
+## Complete SMC Theory ```{toctree}
+
 :maxdepth: 2 smc_complete_theory
 ``` **Unified Mathematical Theory for All SMC Variants** ### Topics Covered: #### 1. Classical Sliding Mode Control
 - Linear sliding surface design: $s = \lambda_1 \theta_1 + \lambda_2 \theta_2 + k_1 \dot{\theta}_1 + k_2 \dot{\theta}_2$
@@ -20,9 +29,14 @@
 - Adaptive gains: $k_1, k_2$ adapt online based on tracking error
 - Finite-time convergence inherited from STA component
 - Enhanced robustness from adaptive component
-- Unified Lyapunov analysis combining both strategies --- ## Controller Comparison ```{toctree}
+- Unified Lyapunov analysis combining both strategies
+
+---
+
+## Controller Comparison ```{toctree}
 :maxdepth: 2 controller_comparison_theory
 ``` **Systematic Comparison of All 4 SMC Controllers** ### Comparison Criteria: #### Performance Metrics:
+
 - **Convergence Time**: $T_{settle}$ from initial condition to $||e|| < \epsilon$
 - **Chattering Index**: $CI = \frac{1}{T}\int_0^T |\dot{u}(t)| dt$
 - **Control Effort**: $J_u = \int_0^T u^2(t) dt$
@@ -39,14 +53,24 @@
 | Classical SMC | ★★★☆☆ | ★★★★★ | 4.0/5 |
 | Adaptive SMC | ★★★★☆ | ★★★☆☆ | 3.5/5 |
 | Super-Twisting SMC | ★★★★☆ | ★★★★☆ | 4.5/5 |
-| Hybrid Adaptive-STA | ★★★★★ | ★★☆☆☆ | 4.0/5 | --- ## Mathematical Notation ### State Vector
+| Hybrid Adaptive-STA | ★★★★★ | ★★☆☆☆ | 4.0/5 |
+
+---
+
+## Mathematical Notation ### State Vector
+
 $$\vec{x} = [x, \theta_1, \theta_2, \dot{x}, \dot{\theta}_1, \dot{\theta}_2]^T \in \mathbb{R}^6$$ ### Sliding Surface
 $$s(\vec{x}) = \lambda_1 \theta_1 + \lambda_2 \theta_2 + k_1 \dot{\theta}_1 + k_2 \dot{\theta}_2$$ ### Control Law Structure
 $$u = u_{eq} + u_{sw}$$ where:
 - $u_{eq}$: Equivalent control (model-based)
 - $u_{sw}$: Switching control (robust term) ### Lyapunov Stability
 $$V(\vec{x}) \geq 0 \quad \forall \vec{x} \neq 0$$
-$$\dot{V}(\vec{x}) \leq -\alpha V(\vec{x}) \quad \alpha > 0$$ --- ## Key References ### Sliding Mode Control Theory **Foundational Texts:**
+$$\dot{V}(\vec{x}) \leq -\alpha V(\vec{x}) \quad \alpha > 0$$
+
+---
+
+## Key References ### Sliding Mode Control Theory **Foundational Texts:**
+
 - Utkin, V.I. "Sliding Modes in Control and Optimization" (1992)
 - Slotine, J.J. & Li, W. "Applied Nonlinear Control" (1991)
 - Edwards, C. & Spurgeon, S. "Sliding Mode Control: Theory and Applications" (1998) **Higher-Order Sliding Modes:**
@@ -55,15 +79,29 @@ $$\dot{V}(\vec{x}) \leq -\alpha V(\vec{x}) \quad \alpha > 0$$ --- ## Key Referen
 - Plestan, F. et al. "A new algorithm for high-order sliding mode control" (2010)
 - Shtessel, Y. et al. "Sliding Mode Control and Observation" (2014) ### Lyapunov Stability Theory
 - Khalil, H.K. "Nonlinear Systems" (3rd ed., 2002)
-- Slotine, J.J. & Li, W. "Applied Nonlinear Control" (1991) --- ## Practical Applications For implementation details and practical usage, see:
+- Slotine, J.J. & Li, W. "Applied Nonlinear Control" (1991)
+
+---
+
+## Practical Applications For implementation details and practical usage, see:
+
 - **{doc}`../controllers/classical_smc_technical_guide`** - Classical SMC implementation
 - **{doc}`../controllers/adaptive_smc_technical_guide`** - Adaptive SMC implementation
 - **{doc}`../controllers/sta_smc_technical_guide`** - Super-Twisting SMC implementation
 - **{doc}`../controllers/factory_system_guide`** - Factory system and PSO integration ### Plant Dynamics and Optimization - **{doc}`../plant/models_guide`** - Double inverted pendulum dynamics models with Lagrangian derivations
-- **{doc}`../optimization_simulation/guide`** - PSO optimization algorithms and simulation infrastructure --- ## Verification and Validation All theoretical results are validated through:
+- **{doc}`../optimization_simulation/guide`** - PSO optimization algorithms and simulation infrastructure
+
+---
+
+## Verification and Validation All theoretical results are validated through:
+
 - **Numerical simulations**: Monte Carlo with 1000+ trials
 - **PSO parameter optimization**: Systematic gain tuning
 - **Comparative benchmarking**: Statistical significance testing
-- **Robustness analysis**: Parameter uncertainty studies See **{doc}`../TESTING`** for validation protocols. --- **Documentation Version:** 1.0 (Week 2 Complete)
+- **Robustness analysis**: Parameter uncertainty studies See **{doc}`../TESTING`** for validation protocols.
+
+---
+
+**Documentation Version:** 1.0 (Week 2 Complete)
 **Last Updated:** 2025-10-04
 **Coverage:** 4 SMC variants with complete Lyapunov proofs, comparative analysis

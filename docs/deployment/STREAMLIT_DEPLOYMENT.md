@@ -5,6 +5,7 @@ This guide covers deploying the DIP_SMC_PSO Streamlit application locally and on
 ## Quick Start
 
 ### Local Development
+
 ```bash
 # Install Streamlit-specific dependencies
 pip install -r requirements-streamlit.txt
@@ -215,18 +216,21 @@ streamlit run streamlit_app.py --logger.level=debug
 ## Features Overview
 
 ### Interactive Controls
+
 - Real-time parameter tuning for all controller types
 - Initial condition customization
 - Disturbance injection features
 - Animation controls and export options
 
 ### Visualization Exports
+
 - High-resolution PNG plots (150 DPI)
 - Simulation data in JSON format
 - Complete results in downloadable ZIP files
 - Phase space plots and time series analysis
 
 ### Performance Features
+
 - Intelligent caching for expensive operations
 - Progress bars for long-running PSO optimizations
 - Responsive UI with immediate parameter feedback

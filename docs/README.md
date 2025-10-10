@@ -1,17 +1,24 @@
 # Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO [![Validate ResearchPlanSpec](https://github.com/theSadeQ/DIP_SMC_PSO/actions/workflows/validate.yml/badge.svg)](https://github.com/theSadeQ/DIP_SMC_PSO/actions/workflows/validate.yml) ## How to validate a ResearchPlan JSON Run the validator locally: ```bash
+
 python repo_validate.py plans/my_plan.json
 ``` **Exit codes:** 0 = no errors; 1 = validation errors present. **Output:** machine-readable JSON report with `errors[]` and `warnings[]`. ### Schema version policy Plans should include a schema version marker: ```json
 { "metadata": { "schema_version": "1.0", "...": "..." }, ... }
 ``` Currently missing or non-1.x versions produce a **WARNING** (accepted).
+
 To enforce as errors later, set: ```bash
 SCHEMA_VERSION_ENFORCE=error python repo_validate.py plans/my_plan.json
 ``` or use CLI flag: ```bash
 python repo_validate.py --schema-version-enforce error plans/my_plan.json
 ``` ### Performance limits For safety and resource management: ```bash
 # Set file size limit (default: 2MB) and timeout (default: 10s)
+
 python repo_validate.py --max-bytes 1000000 --timeout-s 5 plans/my_plan.json # Disable JSON Schema validation for faster processing
 python repo_validate.py --jsonschema-off plans/my_plan.json
-``` Keep examples in this README in sync with actual CLI output. --- This project provides a Python-based simulation environment for designing, tuning, and analyzing advanced sliding mode controllers (SMC) for a double-inverted pendulum on a cart. It features multiple controller types, automated gain tuning via Particle Swarm Optimization (PSO), and both command-line and interactive web-based interfaces. ## Key Features - **Advanced Controllers:** Implements three variants of Sliding Mode Control: - **Classical SMC:** With a boundary layer for chattering reduction. - **Super-Twisting SMC (STA):** A second-order SMC for continuous control and chattering elimination. - **Adaptive SMC:** An adaptive controller that tunes its gains online to handle uncertainties.
+``` Keep examples in this README in sync with actual CLI output.
+
+---
+
+This project provides a Python-based simulation environment for designing, tuning, and analyzing advanced sliding mode controllers (SMC) for a double-inverted pendulum on a cart. It features multiple controller types, automated gain tuning via Particle Swarm Optimization (PSO), and both command-line and interactive web-based interfaces. ## Key Features - **Advanced Controllers:** Implements three variants of Sliding Mode Control: - **Classical SMC:** With a boundary layer for chattering reduction. - **Super-Twisting SMC (STA):** A second-order SMC for continuous control and chattering elimination. - **Adaptive SMC:** An adaptive controller that tunes its gains online to handle uncertainties.
 - **Automated Gain Tuning:** Utilizes Particle Swarm Optimization (PSO) to automatically find optimal controller gains based on a multi-objective cost function.
 - **Dual Dynamics Models:** Includes both a simplified nonlinear model for rapid iteration and a full, high-fidelity nonlinear model for accurate final validation.
 - **Command-Line Interface:** A CLI (`simulate.py`) allows for running simulations, launching PSO optimizations, and saving/loading gains from the terminal.
@@ -27,10 +34,12 @@ python repo_validate.py --jsonschema-off plans/my_plan.json
 git clone <your-repository-url>
 cd <repository-directory-name>
 ``` Next, install the required Python dependencies from the `requirements.txt` file: ```bash
+
 pip install -r requirements.txt
 ``` ## Testing This project includes a and high-performance test suite to ensure correctness, stability, and scientific validity. ### Running the Tests To run the complete test suite, execute the main test runner script from the root of the project: ```bash
 python run_tests.py
 ``` This script will execute the full `pytest` suite located in the `tests/` directory. This includes the model comparison test, which checks for behavioral consistency between the simplified and full dynamics models. ### Test Suite Architecture The test suite is built for speed and robustness. Key features include: - **Numba Acceleration:** Core simulations are executed using a custom, Numba-accelerated batch simulation engine (`src/core/vector_sim.py`) for maximum performance.
+
 - **Batch Testing:** Many tests run simulations in large batches with randomized initial conditions to ensure controllers are robust.
 - **Coverage:** The suite includes unit tests for individual components, integration tests for system-wide behavior, and scientific validation tests for principles like Lyapunov stability and chattering reduction. ### CI lanes & selectors ```bash
 pytest -q -k "full_dynamics"
@@ -39,14 +48,17 @@ python dev/runner.py c1-03
 ``` ## Usage You can interact with the simulation environment in two primary ways: through the command-line interface or the interactive web application. ### Command-Line Interface (CLI) The `simulate.py` script is the main entry point for command-line operations. To run a basic simulation with the classical controller and plot the results: ```bash
 python simulate.py --ctrl classical --plot
 ``` To run a PSO optimization for the Super-Twisting controller: ```bash
+
 python simulate.py --ctrl sta --save tuned_sta_gains.json
 ``` To run a simulation using pre-tuned gains and the full dynamics model: ```bash
 python simulate.py --load tuned_sta_gains.json --full-dynamics --plot
 ``` For a full list of commands and options, run: ```bash
+
 python simulate.py --help
 ``` ### Interactive Web Application For a more visual and interactive experience, you can launch the Streamlit dashboard. To start the web application: ```bash
 streamlit run streamlit_app.py
 ``` This will open a new tab in your web browser where you can select different controllers, run simulations, and view plots of the results interactively. ## Project Structure The project is organized into several key directories: - `src/`: Contains all the main source code, including controllers and the core dynamics engine.
+
 - `tests/`: The Pytest test suite.
 - `scripts/`: Standalone scripts for tasks like re-optimization.
 - `docs/`: Detailed project documentation. For a complete overview of the project's layout, please see the Project Structure Documentation. ## Performance Benchmarks (pytest-benchmark) This project includes automated performance tests powered by **pytest-benchmark**. ### How to run
@@ -62,6 +74,7 @@ python repo_validate.py fixtures/valid_plan.json
 python repo_validate.py fixtures/invalid_plan.json
 ``` ### Using Make (if available) ```bash
 # Validate default fixture
+
 make validate # Validate specific file
 make validate FILE=fixtures/invalid_plan.json # Run all validation tests
 make test-validation

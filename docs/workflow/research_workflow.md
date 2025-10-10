@@ -2,7 +2,7 @@
 
 **Complete workflow for conducting research with the DIP-SMC-PSO framework: from hypothesis to publication.**
 
----
+
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 - [Phase 7: Publication](#phase-7-publication)
 - [Reproducibility Checklist](#reproducibility-checklist)
 
----
+
 
 ## Overview
 
@@ -36,7 +36,7 @@ Hypothesis → Design → Implementation → Experiments → Analysis → Valida
 - **Scalability**: Batch simulations, PSO optimization, Monte Carlo analysis
 - **Documentation**: Citation system, theorem validation, publication-ready exports
 
----
+
 
 ## Phase 1: Experiment Design
 
@@ -114,7 +114,7 @@ experiment:
         theta2: [-0.2, 0.2]
 ```
 
----
+
 
 ## Phase 2: Implementation
 
@@ -254,7 +254,7 @@ if __name__ == '__main__':
     df.to_csv('experiments/adaptive_vs_classical/results.csv', index=False)
 ```
 
----
+
 
 ## Phase 3: Data Collection
 
@@ -323,7 +323,7 @@ print(f"  Total trials: {len(df)}")
 print(f"  Valid data: {len(df) - len(failed)} ({100*(1-len(failed)/len(df)):.1f}%)")
 ```
 
----
+
 
 ## Phase 4: Analysis
 
@@ -429,7 +429,7 @@ plt.savefig('experiments/adaptive_vs_classical/figures/robustness.png', dpi=300)
 plt.show()
 ```
 
----
+
 
 ## Phase 5: Validation
 
@@ -511,7 +511,7 @@ python experiments/adaptive_vs_classical/generate_report.py
 python experiments/adaptive_vs_classical/create_verification_script.py
 ```
 
----
+
 
 ## Phase 6: Documentation
 
@@ -546,6 +546,7 @@ Hybrid Adaptive STA-SMC achieves 30% lower settling time than Classical SMC unde
 
 ## Reproducibility
 ```bash
+
 git clone https://github.com/theSadeQ/dip-smc-pso.git
 cd dip-smc-pso
 git checkout v1.0-publication-ready
@@ -577,7 +578,7 @@ python experiments/adaptive_vs_classical/run_experiment.py --seed 42
 }
 ```
 
----
+
 
 ## Phase 7: Publication
 
@@ -661,7 +662,7 @@ python scripts/publication/generate_arxiv_package.py
 - [ ] Suggested reviewers (3-5 experts)
 - [ ] ORCID iD and funding information
 
----
+
 
 ## Reproducibility Checklist
 
@@ -696,6 +697,7 @@ reproduction/
 
 ## Environment Setup
 ```bash
+
 conda create -n dip-reproduce python=3.9
 conda activate dip-reproduce
 pip install -r requirements.txt
@@ -703,6 +705,7 @@ pip install -r requirements.txt
 
 ## Run Experiments
 ```bash
+
 ./run_reproduction.sh
 ```
 
@@ -710,13 +713,14 @@ Expected runtime: ~2 hours on 4-core CPU
 
 ## Verify Results
 ```bash
+
 python verify_results.py --tolerance 1e-6
 ```
 
 Should output: ✓ All results match within tolerance
 ```
 
----
+
 
 ## Additional Resources
 
@@ -727,7 +731,7 @@ Should output: ✓ All results match within tolerance
 - **Version Control**: Git, GitHub, GitLab
 - **Citation Management**: Zotero, Mendeley, BibTeX
 
----
+
 
 **Last Updated:** 2025-10-09
 **Maintainer:** DIP-SMC-PSO Team

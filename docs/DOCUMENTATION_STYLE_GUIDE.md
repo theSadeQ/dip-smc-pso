@@ -4,13 +4,13 @@
 **Last Updated:** 2025-10-09
 **Status:** Official Project Standard
 
----
+
 
 ## Purpose
 
 This guide defines professional writing standards for the DIP-SMC-PSO project documentation based on lessons learned from comprehensive quality audits. Following these standards ensures documentation sounds human-written, professional, and technically accurate.
 
----
+
 
 ## Core Principles
 
@@ -20,7 +20,7 @@ This guide defines professional writing standards for the DIP-SMC-PSO project do
 4. **Show, don't tell** - Concrete examples over buzzwords
 5. **Cite, don't hype** - References over marketing language
 
----
+
 
 ## AI-ish Anti-Patterns (AVOID)
 
@@ -77,7 +77,7 @@ This guide defines professional writing standards for the DIP-SMC-PSO project do
 - "Additionally," (shorter)
 - "The data shows..."
 
----
+
 
 ## Professional Writing Examples
 
@@ -108,7 +108,7 @@ to deliver amazing optimization results through techniques (see references)!
 - No specific technical information
 - Over-enthusiastic tone
 
----
+
 
 ### GOOD: Procedure Documentation
 
@@ -139,7 +139,7 @@ parameter optimization through powerful PSO techniques that uses advanced capabi
 - All filler, no content
 - Marketing language instead of instructions
 
----
+
 
 ### GOOD: Performance Claims
 
@@ -168,7 +168,7 @@ Our novel adaptive SMC delivers amazing performance with settling times and accu
 - Unsubstantiated claims
 - Marketing superlatives
 
----
+
 
 ## File-Specific Guidelines
 
@@ -232,7 +232,7 @@ law u = -(K + Φ)|s| · sgn(s) guarantees reaching condition ṡ · s ≤ -η|s|
 for η > 0 (Utkin, 1992).
 ```
 
----
+
 
 ## Context-Aware Exceptions
 
@@ -260,7 +260,7 @@ plot(result)
 
 This mirrors natural teaching flow in interactive environments.
 
----
+
 
 ## Pattern Replacement Quick Reference
 
@@ -279,7 +279,7 @@ This mirrors natural teaching flow in interactive environments.
 | "" | Remove |
 | "It's worth noting that" | Remove or integrate |
 
----
+
 
 ## Pre-Commit Checklist
 
@@ -296,7 +296,7 @@ Before committing documentation:
 - [ ] Quantified performance claims
 - [ ] Technical terms used correctly (not as filler)
 
----
+
 
 ## Validation Workflow
 
@@ -309,7 +309,7 @@ Before committing documentation:
 4. **Verify technical accuracy** preserved
 5. **Commit only when** pattern scan passes (<5 AI-ish patterns detected)
 
----
+
 
 ## Success Metrics
 
@@ -321,7 +321,7 @@ Documentation must achieve:
 - ✅ Readability: Flesch-Kincaid maintained or improved
 - ✅ Peer review standard: "Sounds human-written, professional"
 
----
+
 
 ## Reference
 
@@ -329,7 +329,7 @@ Documentation must achieve:
 - **Replacement Guidelines:** `.artifacts/docs_audit/REPLACEMENT_GUIDELINES.md`
 - **Pattern Detection Tool:** `scripts/docs/detect_ai_patterns.py`
 
----
+
 
 **Maintained By:** Documentation Quality Team
 **Questions:** See CLAUDE.md Section 15: Documentation Quality Standards

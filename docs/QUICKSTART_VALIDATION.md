@@ -11,16 +11,18 @@ That's it! This will:
 - ✅ Update config.yaml if validation passes
 - ✅ Show clear next steps
 
----
+
 
 ## Alternative: Manual Workflow
 
 ### Step 1: Validate
+
 ```bash
 python scripts/optimization/validate_and_summarize.py
 ```
 
 ### Step 2: Check Results
+
 Look for output:
 ```
 Chattering target met: X/3
@@ -30,6 +32,7 @@ Chattering target met: X/3
 ```
 
 ### Step 3A: If ALL PASS
+
 ```bash
 # Update config
 python scripts/optimization/update_config_with_gains.py
@@ -44,6 +47,7 @@ git push origin main
 ```
 
 ### Step 3B: If ANY FAIL
+
 ```bash
 # Re-optimize with corrected fitness function
 python scripts/optimization/optimize_chattering_focused.py --controller classical_smc --iters 150
@@ -54,7 +58,7 @@ python scripts/optimization/optimize_chattering_focused.py --controller sta_smc 
 python scripts/optimization/validate_and_summarize.py
 ```
 
----
+
 
 ## Expected Outcome
 
@@ -64,14 +68,14 @@ python scripts/optimization/validate_and_summarize.py
 
 **Solution:** Re-run with `optimize_chattering_focused.py` (corrected fitness)
 
----
+
 
 ## Success Criteria
 
 ✅ **PASS if:** Chattering < 2.0 for all controllers
 ❌ **FAIL if:** Any controller has chattering >= 2.0
 
----
+
 
 ## Need Help?
 

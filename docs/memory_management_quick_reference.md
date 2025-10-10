@@ -2,7 +2,7 @@
 
 **Quick guide for developers using DIP-SMC-PSO controllers**
 
----
+
 
 ## The 3 Golden Rules
 
@@ -10,11 +10,12 @@
 2. **Long-running controllers:** Call `history = controller.initialize_history()` periodically (every hour)
 3. **Batch operations:** Call `controller.cleanup()` + `del controller` + `gc.collect()` every 100 iterations
 
----
+
 
 ## Pattern Quick Reference
 
 ### Pattern 1: Single Simulation (Simple)
+
 ```python
 from src.controllers.smc import ClassicalSMC
 
@@ -28,6 +29,7 @@ result = simulate(controller, duration=5.0)
 ```
 
 ### Pattern 2: Server Deployment (Production)
+
 ```python
 from src.controllers.smc import HybridAdaptiveSTASMC
 import gc
@@ -66,6 +68,7 @@ while running:
 ```
 
 ### Pattern 3: PSO Optimization (Batch)
+
 ```python
 from src.controllers.smc import AdaptiveSMC
 import gc
@@ -89,11 +92,12 @@ for i in range(10000):
         gc.collect()
 ```
 
----
+
 
 ## Memory Monitoring
 
 ### Quick Check
+
 ```python
 import psutil
 import os
@@ -104,6 +108,7 @@ print(f"Memory usage: {memory_mb:.1f}MB")
 ```
 
 ### Production Monitor
+
 ```python
 # example-metadata:
 # runnable: false
@@ -125,7 +130,7 @@ if alert := monitor.check():
     # Take action: clear history, reset controller, etc.
 ```
 
----
+
 
 ## Validation Command
 
@@ -140,35 +145,40 @@ pytest tests/test_integration/test_memory_management/ -m stress -v
 pytest tests/test_integration/test_memory_management/ -v
 ```
 
----
+
 
 ## Controller-Specific Notes
 
 ### ClassicalSMC
+
 - **Memory:** ~1KB per instance
 - **Cleanup:** Automatic (stateless)
 - **History:** External tracking only
 
 ### HybridAdaptiveSTASMC
+
 - **Memory:** ~5KB per instance
 - **Cleanup:** Clear history hourly
 - **History:** Tracks k1, k2, u_int, s
 
 ### AdaptiveSMC
+
 - **Memory:** ~4KB per instance
 - **Cleanup:** Clear gain history hourly
 - **History:** Tracks adaptive gains
 
 ### STASMC
+
 - **Memory:** ~2KB per instance
 - **Cleanup:** Reset integral state hourly
 - **History:** Tracks u_int, s
 
----
+
 
 ## Common Issues
 
 ### Issue: Memory grows despite cleanup
+
 **Solution:** Check external history tracking
 ```python
 # Clear history dict periodically
@@ -177,6 +187,7 @@ if iteration % 1000 == 999:
 ```
 
 ### Issue: PSO optimization OOM
+
 **Solution:** Cleanup every 100 evaluations
 ```python
 if i % 100 == 99:
@@ -186,6 +197,7 @@ if i % 100 == 99:
 ```
 
 ### Issue: Long server runs crash
+
 **Solution:** Hourly cleanup + monitoring
 ```python
 if time.time() - last_cleanup > 3600:
@@ -193,7 +205,7 @@ if time.time() - last_cleanup > 3600:
     gc.collect()
 ```
 
----
+
 
 ## Need Help?
 
@@ -201,6 +213,6 @@ if time.time() - last_cleanup > 3600:
 - **Test examples:** `tests/test_integration/test_memory_management/test_memory_resource_deep.py`
 - **Issue tracker:** GitHub Issue #15 (CRIT-006)
 
----
+
 
 **Last Updated:** 2025-10-01

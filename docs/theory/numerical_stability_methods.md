@@ -1,4 +1,5 @@
 # Numerical Stability Methods for Double-Inverted Pendulum Control
+
 ## Research-Grade Numerical Methods with Computational Validation
 
 **Status:** Research-Grade Computational Validation (Phase 2.3 Complete)
@@ -10,7 +11,7 @@
 - Implementation: [Numerical Stability Utilities](../../src/plant/core/numerical_stability.py)
 - Implementation: [PSO Bounds Validator](../../src/optimization/validation/pso_bounds_validator.py)
 
----
+
 
 ## Executive Summary
 
@@ -36,7 +37,7 @@ This document provides **research-grade analysis** of numerical methods with **c
 - **Regularization:** α = 10⁻⁴ × σ_max, adaptive scaling for κ > 10¹⁰
 - **PSO Bounds:** Normalized to [0, 1] with physical constraints
 
----
+
 
 ## 1. Integration Methods for DIP Dynamics
 
@@ -199,7 +200,7 @@ See `docs/theory/validation_scripts/validate_numerical_stability.py` for executa
 - Measured wall-clock time for 1000-step simulation
 - **Result:** RK4 is 3.5× slower per step but allows 5× larger steps → **net 40% speedup**
 
----
+
 
 ## 2. Matrix Conditioning and Inversion
 
@@ -359,19 +360,21 @@ The implementation uses a **multi-tier adaptive strategy**:
   - Direct inversion: $\|\delta \mathbf{x}\| / \|\mathbf{x}\| = 0.34$ (34% relative error)
   - With regularization ($\alpha = 10^{-4} \sigma_{\max}$): $\|\delta \mathbf{x}\| / \|\mathbf{x}\| = 2.1 \times 10^{-6}$ (0.0002%)
 
----
+
 
 ## 3. Floating-Point Precision Analysis
 
 ### 3.1 IEEE 754 Standard
 
 #### Float32 (Single Precision)
+
 - **Format:** 1 sign bit, 8 exponent bits, 23 mantissa bits
 - **Precision:** $\approx 7$ decimal digits
 - **Machine epsilon:** $\epsilon_{\text{float32}} = 2^{-23} \approx 1.2 \times 10^{-7}$
 - **Range:** $10^{-38}$ to $10^{38}$
 
 #### Float64 (Double Precision)
+
 - **Format:** 1 sign bit, 11 exponent bits, 52 mantissa bits
 - **Precision:** $\approx 15-16$ decimal digits
 - **Machine epsilon:** $\epsilon_{\text{float64}} = 2^{-52} \approx 2.2 \times 10^{-16}$
@@ -490,7 +493,7 @@ For a 1000-second simulation:
 - **Float32 error growth:** $\|\delta \mathbf{x}\| = 2.3 \times 10^{-4}$ after 1000 steps
 - **Float64 error growth:** $\|\delta \mathbf{x}\| = 8.9 \times 10^{-14}$ after 1000 steps
 
----
+
 
 ## 4. Discrete-Time SMC Stability
 
@@ -641,7 +644,7 @@ if abs(L_Minv_B) < self.eq_threshold:
   - RK4: Chattering frequency $f_c \approx 20$ Hz (smoother)
   - RK4 quasi-sliding band **4× narrower** than Euler
 
----
+
 
 ## 5. Regularization in PSO Optimization
 
@@ -771,7 +774,7 @@ From `pso_bounds_validator.py._classical_smc_constraints()` (lines 208-244):
   - Narrow bounds (theory-informed): 92% converged to near-global optimum
   - **Conclusion:** Domain knowledge in bounds design reduces search space by $10^6$ → dramatically improves success rate
 
----
+
 
 ## 6. Error Propagation and Uncertainty Quantification
 
@@ -901,7 +904,7 @@ $$
   - 95th percentile: $t_s = 3.8$ s
   - **Conclusion:** Controller robust to 20% parametric uncertainty
 
----
+
 
 ## 7. Design Guidelines for Numerical Robustness
 
@@ -1002,6 +1005,7 @@ if kappa_reg > 0.1 * kappa_original:
 ```python
 M_inv = np.linalg.inv(M_reg)
 ```
+
 **Pros:** Fastest (matrix pre-computed, reused for multiple RHS)
 **Cons:** Fails for $\kappa > 10^{14}$
 
@@ -1009,6 +1013,7 @@ M_inv = np.linalg.inv(M_reg)
 ```python
 accelerations = np.linalg.solve(M_reg, forcing)
 ```
+
 **Pros:** More numerically stable, faster than inversion + multiplication
 **Cons:** Must solve separately for each RHS
 
@@ -1019,6 +1024,7 @@ s_inv = np.where(s > 1e-10 * s[0], 1/s, 0)  # Threshold small singular values
 M_pinv = (Vt.T * s_inv) @ U.T
 accelerations = M_pinv @ forcing
 ```
+
 **Pros:** Handles arbitrarily ill-conditioned matrices
 **Cons:** 5-10× slower than direct methods
 
@@ -1076,7 +1082,7 @@ Before deploying controller:
 - [ ] **PSO convergence:** Check fitness vs iteration; confirm monotonic decrease after iteration 20
 - [ ] **Robustness:** Monte Carlo with 20% parameter uncertainty; require 90% success rate
 
----
+
 
 ## 8. Computational Validation Summary
 
@@ -1126,7 +1132,7 @@ All theoretical claims in this document have been validated with executable NumP
 | PSO bounds validation | `src/optimization/validation/pso_bounds_validator.py` | `PSOBoundsValidator.validate_bounds()` |
 | Parameter scaling | `src/optimization/validation/pso_bounds_validator.py` | `PSOBoundsValidator._estimate_convergence_difficulty()` |
 
----
+
 
 ## 9. References
 
@@ -1187,7 +1193,7 @@ All theoretical claims in this document have been validated with executable NumP
     - Lecture 8: Manipulator dynamics
     - Lecture 13: Numerical integration
 
----
+
 
 ## Appendix A: Validation Script Usage
 
@@ -1285,7 +1291,7 @@ N_PARTICLES = 30
 N_ITERATIONS = 50
 ```
 
----
+
 
 ## Appendix B: Numerical Stability Troubleshooting
 
@@ -1331,7 +1337,7 @@ if not result.is_valid:
     print("Recommended bounds:", result.adjusted_bounds)
 ```
 
----
+
 
 **Document Status:** Phase 2.3 Complete | Next: Phase 3 (Visualization & MCPs Integration)
 **Validation Status:** All 18 tests passed | Code executable | Results reproducible

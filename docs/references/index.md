@@ -1,4 +1,5 @@
 # References and Citations ```{toctree}
+
 :maxdepth: 2
 :hidden: bibliography
 citation_index
@@ -34,15 +35,19 @@ citation_index
 } @article{kennedy1995particle, title={Particle Swarm Optimization}, author={Kennedy, James and Eberhart, Russell}, journal={Proceedings of IEEE International Conference on Neural Networks}, volume={4}, pages={1942--1948}, year={1995}, doi={10.1109/ICNN.1995.488968}
 }
 ``` ### Citation Validation The bibliography system includes automatic validation: - **DOI verification** for journal articles
+
 - **ISBN checking** for books
 - **URL accessibility** for web sources
 - **Duplicate detection** across bibliography files ## Research Reproducibility ### Code-Citation Mapping Each implementation module includes explicit citations to theoretical sources: ```python
 # example-metadata:
+
 # runnable: false class SuperTwistingSMC: """ Super-twisting sliding mode controller. Based on the algorithm described in {cite}`levant2003higher` with finite-time convergence analysis from {cite}`moreno2012strict`. References ---------- .. bibliography:: :filter: key in ["levant2003higher", "moreno2012strict"] """
+
 ``` ### Experimental Reproducibility All experimental parameters and configurations are documented with literature justification: ```yaml
 # Controller parameters based on literature
 classical_smc: # Sliding surface gain - typical range from {cite}`utkin1999sliding` c: 5.0 # Switching gain - conservative choice per {cite}`edwards1998sliding` eta: 1.0
 ``` ## Related Software and Datasets ### Open Source Implementations - **OpenRAVE** - Robot simulation environment
+
 - **ACADO Toolkit** - Automatic control and dynamic optimization
 - **CasADi** - Symbolic framework for nonlinear optimization ### Benchmark Datasets - **IEEE Control Systems Society** - Standard benchmark problems
 - **IFAC Benchmark Collection** - International federation control benchmarks ## Contributing to Bibliography ### Adding New References 1. Add BibTeX entry to appropriate `.bib` file
@@ -57,7 +62,11 @@ classical_smc: # Sliding surface gain - typical range from {cite}`utkin1999slidi
 * - Conference Papers - 20 - 27%
 * - Books - 8 - 11%
 * - Technical Reports - 2 - 2%
-``` Total references: 75 entries (updated {sub-ref}`today`) --- **Quick Access:**
+``` Total references: 75 entries (updated {sub-ref}`today`)
+
+---
+
+**Quick Access:**
 - {doc}`bibliography` - Complete reference list
 - {doc}`citation_index` - Topical organization
 - [BibTeX Source](refs.bib) - Raw bibliography data

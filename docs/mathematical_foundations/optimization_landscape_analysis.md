@@ -5,7 +5,7 @@
 **Complexity:** Advanced
 **Prerequisites:** PSO algorithm theory, SMC control theory, convex optimization
 
----
+
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@
 :depth: 3
 ```
 
----
+
 
 ## Overview
 
@@ -41,7 +41,7 @@ For Classical SMC with 6 gains in ℝ⁶:
 - **Local minima:** Estimated 10-20 distinct basins of attraction
 - **Global optimum:** Typically achieves ISE < 5.0
 
----
+
 
 ## Gain Space Geometry
 
@@ -152,7 +152,7 @@ Combines all Classical + Adaptive + STA parameters.
 - Minimal: 4D (fastest optimization, ~10 minutes)
 - Full: 8D (most flexible, ~30 minutes)
 
----
+
 
 ## Landscape Characteristics
 
@@ -335,7 +335,7 @@ def check_convexity(fitness_func, g1, g2, n_points=20):
 
 **Result:** ~60% of random gain pairs satisfy convexity (partial convexity)
 
----
+
 
 ## Multi-Objective Formulation
 
@@ -547,7 +547,7 @@ pareto_set = result.X  # Pareto-optimal gains
 pareto_front = result.F  # Objective values
 ```
 
----
+
 
 ## Constraint-Bounded Regions
 
@@ -677,7 +677,7 @@ elif violation_rate < 0.05:
     mu *= 0.9  # Decrease penalty (may be too conservative)
 ```
 
----
+
 
 ## Sensitivity Analysis
 
@@ -788,7 +788,7 @@ plt.colorbar(surf)
 plt.title('Fitness Landscape: K vs k1 Interaction')
 ```
 
----
+
 
 ## Practical Recommendations
 
@@ -900,7 +900,7 @@ def diagnose_convergence(fitness_history, diversity_history):
     return "Healthy convergence"
 ```
 
----
+
 
 ## Summary
 
@@ -926,7 +926,7 @@ def diagnose_convergence(fitness_history, diversity_history):
 - {doc}`../optimization/fitness_function_design_guide` - Multi-objective design
 - {doc}`../optimization/pso_core_algorithm_guide` - Implementation details
 
----
+
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-04

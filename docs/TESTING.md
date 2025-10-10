@@ -52,32 +52,41 @@ The test suite expects:
 ### Common Failure Patterns
 
 #### 1. Configuration Issues
+
 ```
 ValidationError: 10 validation errors for ConfigSchema
 ```
+
 **Solution**: Run `python validate_config.py` and fix reported issues.
 
 #### 2. Missing Gains
+
 ```
 ValueError: Controller 'classical_smc': gains parameter is required
 ```
+
 **Solution**: Ensure tests provide gains parameter or use the session-scoped `config` fixture.
 
 #### 3. Fixture Conflicts
+
 ```
 pytest.fixture registered multiple times
 ```
+
 **Solution**: Use session-scoped fixtures from `tests/conftest.py` instead of defining new ones.
 
 #### 4. Import/Path Issues
+
 ```
 ModuleNotFoundError: No module named 'src'
 ```
+
 **Solution**: Ensure working directory is project root and `PYTHONPATH` includes `src/`.
 
 ### Test Architecture
 
 #### Fixtures (tests/conftest.py)
+
 - `config`: Session-scoped configuration loading
 - `physics_cfg`: Physics parameters from config
 - `dynamics`: Simplified DIP dynamics
@@ -86,6 +95,7 @@ ModuleNotFoundError: No module named 'src'
 - `make_hybrid`: Factory for hybrid controller testing
 
 #### Test Categories
+
 - **Unit tests**: Individual component testing (`tests/test_controllers/`)
 - **Integration tests**: End-to-end workflows (`tests/test_app/`)
 - **Property-based**: Hypothesis-driven testing (`tests/test_property_based.py`)
@@ -137,16 +147,19 @@ SIMULATION_DURATION=1.0
 ### Troubleshooting
 
 #### Tests Pass Locally but Fail in CI
+
 1. Check Python version compatibility
 2. Verify all dependencies are in `requirements.txt`
 3. Ensure no system-specific paths in tests
 
 #### Performance Regressions
+
 1. Run benchmarks: `pytest tests/test_benchmarks/ --benchmark-only`
 2. Compare with baseline: `pytest --benchmark-compare`
 3. Check for memory leaks or infinite loops
 
 #### Flaky Tests
+
 1. Add deterministic seeds to random components
 2. Use temporary directories for file operations
 3. Mock external dependencies and network calls

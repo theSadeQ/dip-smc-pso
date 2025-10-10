@@ -102,7 +102,11 @@ from src.utils.visualization import plot_results def main(): # Load validated co
 5. **Integration**: Add to factory and configuration system ### Code Style Requirements - **Type Hints**: All public methods must include type hints
 - **Docstrings**: NumPy style with mathematical context and equation references
 - **Validation**: Use Pydantic for parameter validation with theoretical constraints
-- **Testing**: Property-based tests that verify mathematical guarantees --- **Next Steps:**
+- **Testing**: Property-based tests that verify mathematical guarantees
+
+---
+
+**Next Steps:**
 - Browse individual module documentation in {doc}`api/index`
 - See practical examples in {doc}`examples/index`
 - Review theoretical foundations in {doc}`../theory/index`

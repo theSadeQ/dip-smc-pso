@@ -1,4 +1,5 @@
 # Results and Analysis ```{toctree}
+
 :maxdepth: 2
 :hidden: performance_analysis
 optimization_results
@@ -48,6 +49,7 @@ experimental_validation
 ## Benchmark Results
 
 ### Standard Test Scenarios The system has been evaluated against established control benchmarks: 1. **Step Response Tests** - Initial angle disturbances: ±10°, ±20°, ±30° - Cart position references: ±0.5m, ±1.0m - Combined disturbances with parameter uncertainties 2. **Tracking Performance** - Sinusoidal references at multiple frequencies - Square wave tracking with varying amplitudes - Chirp signals for frequency response analysis 3. **Robustness Studies** - Mass parameter variations: ±50% - Length uncertainties: ±30% - Friction coefficient changes: ±100% - External disturbance rejection ### Optimization Convergence ```{mermaid}
+
 flowchart TB subgraph "PSO Evolution" Init[Initial Population<br/>Random Parameters] Eval1[Generation 1<br/>J = 45.3 ± 12.1] Eval10[Generation 10<br/>J = 23.7 ± 8.4] Eval25[Generation 25<br/>J = 12.1 ± 3.2] Converged[Converged<br/>J = 8.9 ± 1.1] end subgraph "Performance Metrics" Tracking[Tracking Error<br/>Minimized] Control[Control Effort<br/>Optimized] Smooth[Smoothness<br/>Enhanced] end Init --> Eval1 Eval1 --> Eval10 Eval10 --> Eval25 Eval25 --> Converged Converged --> Tracking Converged --> Control Converged --> Smooth style Converged fill:#e8f5e8 style Tracking fill:#f3e5f5
 ``` ## Statistical Analysis ### Performance Distribution The following statistical analysis is based on 1000 Monte Carlo simulations with random initial conditions and parameter variations: **Settling Time Distribution:**
 - Mean: 1.57s
@@ -60,6 +62,7 @@ flowchart TB subgraph "PSO Evolution" Init[Initial Population<br/>Random Paramet
 - Zero Overshoot Rate: 23.1% ### Comparative Performance ```{mermaid}
 flowchart LR subgraph "Classical SMC" ClassicalPerf[Performance: 78%<br/>Robustness: 65%<br/>Efficiency: 72%] end subgraph "Super-Twisting" STAPerf[Performance: 85%<br/>Robustness: 82%<br/>Efficiency: 78%] end subgraph "Adaptive SMC" AdaptivePerf[Performance: 89%<br/>Robustness: 88%<br/>Efficiency: 81%] end subgraph "Hybrid STA" HybridPerf[Performance: 93%<br/>Robustness: 91%<br/>Efficiency: 86%] end ClassicalPerf --> STAPerf STAPerf --> AdaptivePerf AdaptivePerf --> HybridPerf style HybridPerf fill:#e8f5e8 style AdaptivePerf fill:#f3e5f5
 ``` ## Computational Performance ### Simulation Speed Benchmarks ```{list-table} Computational Performance
+
 :header-rows: 1
 :name: table:computational_performance * - Component - Single Run (ms) - Batch (1000 runs) - Speedup Factor
 * - Classical SMC - 12.3 - 2.1s - 5.9x
@@ -90,4 +93,8 @@ flowchart LR subgraph "Classical SMC" ClassicalPerf[Performance: 78%<br/>Robustn
 - **Educational Platforms**: Adopted by 12 universities
 - **Research Projects**: Used in 8 international collaborations
 - **Commercial Interest**: 3 companies exploring licensing
-- **Standards Development**: Contributing to IEEE control benchmarks --- **Data Availability**: All simulation data and analysis scripts are available in the `results/` directory of the repository. For reproduction instructions, see {doc}`../implementation/examples/reproduction_guide`. **Statistical Software**: Analysis performed using Python (SciPy, NumPy, pandas) with validation in MATLAB Control System Toolbox.
+- **Standards Development**: Contributing to IEEE control benchmarks
+
+---
+
+**Data Availability**: All simulation data and analysis scripts are available in the `results/` directory of the repository. For reproduction instructions, see {doc}`../implementation/examples/reproduction_guide`. **Statistical Software**: Analysis performed using Python (SciPy, NumPy, pandas) with validation in MATLAB Control System Toolbox.

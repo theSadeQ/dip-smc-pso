@@ -1,4 +1,5 @@
 # Controller Theory Reference **Status:** 🚧 Under Construction This document will contain controller theory documentation including: ## Planned Content ### Sliding Mode Control Theory
+
 - Classical SMC foundations
 - Super-Twisting Algorithm (STA)
 - Adaptive control laws
@@ -14,5 +15,9 @@
 - [Classical SMC Technical Guide](../controllers/classical_smc_technical_guide.md)
 - [Adaptive SMC Technical Guide](../controllers/adaptive_smc_technical_guide.md)
 - [STA SMC Technical Guide](../controllers/sta_smc_technical_guide.md)
-- [SMC Theory Complete](../theory/smc_theory_complete.md) --- **Last Updated:** 2025-10-07
+- [SMC Theory Complete](../theory/smc_theory_complete.md)
+
+---
+
+**Last Updated:** 2025-10-07
 **Target Completion:** Phase 7

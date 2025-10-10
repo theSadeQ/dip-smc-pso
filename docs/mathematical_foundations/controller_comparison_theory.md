@@ -1,4 +1,5 @@
 # SMC Controller Comparison Theory
+
 **Decision Support for Controller Selection**
 
 **Document Version**: 1.0
@@ -11,7 +12,7 @@
 - [Complete SMC Theory](smc_complete_theory.md) - Mathematical foundations
 - [Hybrid SMC Technical Guide](../controllers/hybrid_smc_technical_guide.md) - Implementation details
 
----
+
 
 ## Table of Contents
 
@@ -22,7 +23,7 @@
 5. [Computational Complexity](#5-computational-complexity)
 6. [Use Case Recommendations](#6-use-case-recommendations)
 
----
+
 
 ## 1. Executive Summary
 
@@ -75,7 +76,7 @@ START: Which SMC controller for DIP?
 - **When**: Maximum performance required, complex coupled systems (DIP), research applications
 - **Avoid**: Simple systems (overkill), tight computational budgets, rapid prototyping
 
----
+
 
 ## 2. Convergence Characteristics
 
@@ -205,7 +206,7 @@ Phase plane (σ, σ̇):
 - Fastest convergence to exact zero
 ```
 
----
+
 
 ## 3. Robustness Analysis
 
@@ -365,7 +366,7 @@ After adaptation: k₁(∞) ≈ 25, k₂(∞) ≈ 30
 - Dead zone + STA integral + self-tapering
 - Best noise rejection: effective floor ≈ 0.003-0.005 rad
 
----
+
 
 ## 4. Chattering Reduction Effectiveness
 
@@ -471,7 +472,7 @@ Bandwidth: Very narrow (0-50 Hz)
 - **STA**: Breaks the trade-off (low chattering + zero error)
 - **Hybrid**: Optimal point (minimal chattering + zero error + low effort)
 
----
+
 
 ## 5. Computational Complexity
 
@@ -632,7 +633,7 @@ def compute_control_hybrid(state, k1_prev, k2_prev, u_int_prev):
 - Parallelize independent computations (sigma, u_eq, adaptation)
 - Use SIMD instructions for vector operations
 
----
+
 
 ## 6. Use Case Recommendations
 
@@ -781,7 +782,7 @@ Q5: Maximum performance required?
 3. Consider **STA SMC** if chattering is problematic
 4. Reserve **Hybrid** for high-value applications
 
----
+
 
 ## References
 
@@ -795,7 +796,7 @@ See [Complete SMC Theory](smc_complete_theory.md) for detailed mathematical foun
 
 [3] **Messina, A., Lanzafame, R., and Tomarchio, S.** (2013). "Multi-objective optimal tuning of sliding mode controllers by evolutionary algorithms". IEEE/ASME Transactions on Mechatronics, 18(5):1446-1454.
 
----
+
 
 **Document Classification**: Research-Grade Comparative Analysis
 **Maintenance**: Update when new benchmarks are available

@@ -4,7 +4,7 @@
 
 **See:** [Numerical Stability Guide](../numerical_stability_guide.md)
 
----
+
 
 ## Quick Reference
 

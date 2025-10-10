@@ -5,7 +5,7 @@
 **Complexity:** Advanced
 **Prerequisites:** Classical mechanics, Lagrangian dynamics, linear algebra
 
----
+
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@
 :depth: 3
 ```
 
----
+
 
 ## Overview
 
@@ -65,7 +65,7 @@ where:
 - x_{pos}: Cart position on rail (m)
 - Upright equilibrium: θ₁ = θ₂ = 0
 
----
+
 
 ## Lagrangian Mechanics Fundamentals
 
@@ -97,7 +97,7 @@ Generalized coordinates: $q = [\theta_1, \theta_2, x_{pos}]^T$
 
 Generalized forces: $Q = [0, 0, u]^T$ (control force acts only on cart)
 
----
+
 
 ## Generalized Coordinates
 
@@ -135,7 +135,7 @@ $$
 
 **Note:** Positive angles measured clockwise from vertical (upright = 0).
 
----
+
 
 ## Kinetic Energy
 
@@ -227,7 +227,7 @@ $$
 
 where $M(q)$ is the **configuration-dependent mass matrix** (derived below).
 
----
+
 
 ## Potential Energy
 
@@ -273,7 +273,7 @@ $$
 V' = -g\left[\left(\frac{m_1}{2} + m_2\right)L_1(1 - \cos\theta_1) + \frac{m_2 L_2}{2}(1 - \cos\theta_2)\right]
 $$
 
----
+
 
 ## Lagrangian
 
@@ -287,7 +287,7 @@ $$
 L(q, \dot{q}) = \frac{1}{2}\dot{q}^T M(q) \dot{q} - V(q)
 $$
 
----
+
 
 ## Equations of Motion (Euler-Lagrange)
 
@@ -341,7 +341,7 @@ where:
 - $B \in \mathbb{R}^{3 \times 1}$: Input matrix $B = [0, 0, 1]^T$
 - $u \in \mathbb{R}$: Control force
 
----
+
 
 ## Mass Matrix M(q)
 
@@ -392,7 +392,7 @@ M_upright = [
 ]
 ```
 
----
+
 
 ## Coriolis and Centrifugal Terms
 
@@ -441,7 +441,7 @@ $$
 - **Centrifugal terms:** Velocity-dependent "fictitious forces"
 - **Example:** $c_{12}$ represents effect of $\dot{\theta}_2$ on $\theta_1$ equation
 
----
+
 
 ## Gravity Vector G(q)
 
@@ -485,7 +485,7 @@ $$
 
 Gravity creates **negative stiffness** (pushes away from θ = 0).
 
----
+
 
 ## Friction Terms
 
@@ -507,7 +507,7 @@ where:
 - $b_1 = b_2 = 0.01$ (small rotational friction)
 - $b_c = 0.1$ (moderate cart friction)
 
----
+
 
 ## Complete Equations of Motion
 
@@ -543,7 +543,7 @@ $$
 
 where $f: \mathbb{R}^6 \times \mathbb{R} \to \mathbb{R}^6$ is the full nonlinear dynamics.
 
----
+
 
 ## Simplified Dynamics Model
 
@@ -604,7 +604,7 @@ $$
 - Within 5% of full dynamics for |θ| < 15°
 - Degrades rapidly for larger angles
 
----
+
 
 ## Comparison: Simplified vs Full Dynamics
 
@@ -655,7 +655,7 @@ Initial condition: θ₁ = 10°, θ₂ = 5°
 - **Simplified:** PSO fitness evaluation only
 - **Full:** Final validation, research, production
 
----
+
 
 ## Implementation Guidelines
 
@@ -742,7 +742,7 @@ def compute_mass_matrix(theta1, theta2, params):
 
 **Speedup:** 10-50× for repeated calls
 
----
+
 
 ## Summary
 
@@ -800,7 +800,7 @@ physics_params = {
 - {doc}`../simulation/dynamics_models_guide` - Implementation details
 - {doc}`../controllers/classical_smc_technical_guide` - Control design
 
----
+
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-04

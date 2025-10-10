@@ -1,4 +1,5 @@
 # PSO Integration Guide ## Overview This guide documents the complete PSO (Particle Swarm Optimization) integration for SMC (Sliding Mode Controller) parameter tuning in the double-inverted pendulum control system. ## Quick Start ### Basic PSO Controller Creation ```python
+
 from src.controllers.factory import SMCType, create_smc_for_pso
 from src.plant.configurations import ConfigurationFactory # Create plant configuration
 plant_config = ConfigurationFactory.create_default_config("simplified") # Create controller with PSO-friendly interface
@@ -14,6 +15,7 @@ def fitness_function(gains): """PSO fitness function for controller tuning.""" #
 # bounds = (lower_bounds, upper_bounds)
 # optimizer.optimize(fitness_function, bounds=bounds)
 ``` ## Architecture ### PSO Integration Components 1. **PSOControllerWrapper**: Simplifies controller interface for PSO usage
+
 2. **create_smc_for_pso()**: Factory function optimized for PSO parameter tuning
 3. **get_gain_bounds_for_pso()**: Retrieves optimization bounds for each SMC type
 4. **validate_smc_gains()**: Validates gain vectors for stability and correctness ### Supported SMC Types | SMC Type | Gains Required | Description |
@@ -23,6 +25,7 @@ def fitness_function(gains): """PSO fitness function for controller tuning.""" #
 | SUPER_TWISTING | 6 | [K1, K2, k1, k2, lam1, lam2] - Super-twisting algorithm |
 | HYBRID | 4 | [c1, lambda1, c2, lambda2] - Hybrid adaptive super-twisting | ## Technical Details ### Interface Compatibility The `PSOControllerWrapper` supports both calling patterns: ```python
 # PSO-friendly simplified interface
+
 control = controller.compute_control(state) # Full interface (backward compatibility)
 control_output = controller.compute_control(state, state_vars, history)
 ``` ### Gain Bounds Specifications Default optimization bounds for each SMC type: ```python
@@ -33,9 +36,11 @@ CLASSICAL_BOUNDS = { 'k1': (0.1, 50.0), # Surface gain 1 'k2': (0.1, 50.0), # Su
 ADAPTIVE_BOUNDS = { 'k1': (0.1, 50.0), # Surface gain 1 'k2': (0.1, 50.0), # Surface gain 2 'lam1': (0.1, 50.0), # Sliding surface parameter 1 'lam2': (0.1, 50.0), # Sliding surface parameter 2 'gamma': (0.01, 10.0) # Adaptation rate
 }
 ``` ### Validation Rules Gain validation enforces SMC stability requirements: 1. **Positive Surface Gains**: First 4 gains must be positive for stability
+
 2. **Appropriate Ranges**: Gains must be within reasonable control engineering ranges
 3. **Type-Specific Rules**: Each SMC type has specific validation criteria ## Error Handling ### Common Issues and approaches 1. **TypeError: 'SimplifiedDIPConfig' object cannot be compared** - **Cause**: Passing plant_config as max_force parameter - **Solution**: Use `create_smc_for_pso(smc_type, gains, plant_config)` format 2. **ValueError: classical_smc requires at least 6 gains, got 4** - **Cause**: Insufficient gains provided for controller type - **Solution**: Provide correct number of gains per SMC type specification 3. **AttributeError: compute_control() missing required arguments** - **Cause**: Using full controller interface instead of PSO wrapper - **Solution**: Use `create_smc_for_pso()` which returns PSO-friendly wrapper ### Debugging Tips ```python
 # Check gain requirements
+
 from src.controllers.factory import SMC_GAIN_SPECS
 spec = SMC_GAIN_SPECS[SMCType.CLASSICAL]
 print(f"Required gains: {spec.n_gains}")
@@ -59,10 +64,12 @@ from src.controllers.factory import SMCFactory, SMCConfig config = SMCConfig(gai
 controller = SMCFactory.create_controller(SMCType.CLASSICAL, config) # New PSO interface provides simplified access
 controller = create_smc_for_pso(SMCType.CLASSICAL, gains, plant_config)
 ``` ### Migration Guide To migrate existing PSO code: 1. Replace direct factory calls with `create_smc_for_pso()`
+
 2. Update fitness functions to use simplified `compute_control(state)` interface
 3. Use `get_gain_bounds_for_pso()` for optimization bounds
 4. Add `validate_smc_gains()` checks in fitness functions ## Testing and Validation ### Unit Tests PSO integration includes tests: ```python
 # Run PSO integration tests
+
 python -m pytest tests/test_controllers/factory/test_controller_factory.py::TestPSOIntegration -v # Run end-to-end validation
 python test_pso_integration_workflow.py
 ``` ### Test Coverage - Controller creation with PSO interface
@@ -72,4 +79,8 @@ python test_pso_integration_workflow.py
 - Error handling and edge cases ## References 1. [SMC Controller Factory Documentation](./CONTROLLER_FACTORY.md)
 2. [PSO Optimizer Implementation](../src/optimization/algorithms/pso_optimizer.py)
 3. [Plant Configuration Guide](./PLANT_CONFIGURATION.md)
-4. [Testing Framework Documentation](./TESTING.md) --- **Generated with Claude Code - PSO Integration Resolution**
+4. [Testing Framework Documentation](./TESTING.md)
+
+---
+
+**Generated with Claude Code - PSO Integration Resolution**

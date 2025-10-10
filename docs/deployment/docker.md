@@ -2,7 +2,7 @@
 
 **Complete guide to containerizing and deploying the DIP-SMC-PSO framework using Docker.**
 
----
+
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@
 - [Production Deployment](#production-deployment)
 - [Troubleshooting](#troubleshooting)
 
----
+
 
 ## Quick Start
 
@@ -61,7 +61,7 @@ root@container:/app# python simulate.py --controller sta_smc --plot
 root@container:/app# pytest tests/ -v
 ```
 
----
+
 
 ## Building Images
 
@@ -106,7 +106,7 @@ docker build -t dip-smc-pso:dev .
 docker run -p 8501:8501 dip-smc-pso:dev
 ```
 
----
+
 
 ## Multi-Stage Builds
 
@@ -183,7 +183,7 @@ CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.add
 docker build -f Dockerfile.multistage -t dip-smc-pso:optimized .
 ```
 
----
+
 
 ## Docker Compose
 
@@ -283,7 +283,7 @@ docker-compose down
 docker-compose up -d --build
 ```
 
----
+
 
 ## Volume Mounting
 
@@ -331,7 +331,7 @@ docker run -p 8888:8888 \
   jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 ```
 
----
+
 
 ## GPU Support
 
@@ -401,7 +401,7 @@ services:
               capabilities: [gpu]
 ```
 
----
+
 
 ## Production Deployment
 
@@ -483,7 +483,7 @@ spec:
           limits:
             memory: "4Gi"
             cpu: "2"
----
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -504,7 +504,7 @@ kubectl apply -f deployment.yaml
 kubectl get services  # Get external IP
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -604,7 +604,7 @@ docker logs -f <container_id>
 docker history dip-smc-pso:latest
 ```
 
----
+
 
 ## Best Practices
 
@@ -650,7 +650,7 @@ docker history dip-smc-pso:latest
 3. **Document build process** - Include `Dockerfile` and `docker-compose.yml` in repo
 4. **Tag images with git commit** - `docker build -t dip-smc-pso:$(git rev-parse --short HEAD) .`
 
----
+
 
 ## Additional Resources
 
@@ -660,7 +660,7 @@ docker history dip-smc-pso:latest
 - [NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)
 - [Kubernetes Documentation](https://kubernetes.io/docs/)
 
----
+
 
 **Last Updated:** 2025-10-09
 **Maintainer:** DIP-SMC-PSO Team

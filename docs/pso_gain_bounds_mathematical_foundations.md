@@ -3,6 +3,7 @@
 #==========================================================================================\\\
 
 # PSO Gain Bounds Mathematical Foundations
+
 **Sliding Mode Control Parameter Optimization Theory**
 
 ## Executive Summary
@@ -11,7 +12,7 @@ This document establishes the rigorous mathematical foundations for PSO gain bou
 
 **Critical Achievement**: Issue #2 overshoot resolution through mathematically principled surface coefficient optimization, reducing overshoot from >20% to <5% via targeted damping ratio control.
 
----
+
 
 ## 1. Theoretical Framework and Control Theory Foundations
 
@@ -41,6 +42,7 @@ Where:
 ```
 s = Λe + ė
 ```
+
 Where:
 - **e** = x - x_ref (tracking error)
 - **Λ** = diag(λ₁, λ₂) (surface coefficient matrix)
@@ -50,6 +52,7 @@ Where:
 ```
 u = u_eq + u_sw
 ```
+
 - **u_eq**: Equivalent control (model-based feedforward)
 - **u_sw**: Switching control (robust discontinuous term)
 
@@ -63,7 +66,7 @@ u = u_eq + u_sw
 
 These conditions translate directly into mathematical bounds for PSO optimization.
 
----
+
 
 ## 2. Classical SMC Gain Bounds Derivation
 
@@ -133,7 +136,7 @@ For the switching control u_sw = -K·sign(s) - k_d·sign(ṡ):
 | K | K ≥ 55 N, K ≤ 140 N | Uncertainty coverage + actuator limit | [5.0, 150.0] |
 | k_d | k_d ≥ 1 N, k_d ≤ 10 N | Finite-time reaching + chattering reduction | [0.1, 10.0] |
 
----
+
 
 ## 3. Super-Twisting SMC Bounds (Issue #2 Resolution)
 
@@ -166,6 +169,7 @@ This requires the **fundamental STA stability condition**:
 ```
 K₁² > 4K₂L
 ```
+
 Where L is the Lipschitz constant of the uncertainty.
 
 ### 3.3 Issue #2 Root Cause Analysis and Resolution
@@ -236,7 +240,7 @@ def validate_sta_damping(lambda1, lambda2):
     return damping_ok and frequency_ok and overshoot_ok
 ```
 
----
+
 
 ## 4. Adaptive SMC Gain Bounds
 
@@ -259,6 +263,7 @@ Where:
 ```
 V = ½s² + ½γ⁻¹(K̂ - K*)²
 ```
+
 Where K* is the ideal gain.
 
 **Stability Condition:**
@@ -284,7 +289,7 @@ This leads to the **adaptation law constraints**:
 
 **Total Parameter Vector:** [c₁, λ₁, c₂, λ₂, γ] ∈ ℝ⁵
 
----
+
 
 ## 5. Hybrid Adaptive STA-SMC Bounds
 
@@ -322,7 +327,7 @@ The hybrid controller uses **shared surface coefficients**:
 
 **Total Parameter Vector:** [c₁, λ₁, c₂, λ₂] ∈ ℝ⁴
 
----
+
 
 ## 6. Bounds Validation and Safety Constraints
 
@@ -430,7 +435,7 @@ class SafetyBoundsEnforcer:
         return safe_gains
 ```
 
----
+
 
 ## 7. PSO-Specific Bounds Optimization
 
@@ -506,7 +511,7 @@ def compute_constraint_penalty(gains: np.ndarray, controller_type: str) -> float
     return penalty
 ```
 
----
+
 
 ## 8. Issue #2 Mathematical Validation and Verification
 
@@ -595,7 +600,7 @@ def issue2_compliant_constraints(gains: np.ndarray) -> bool:
     return True
 ```
 
----
+
 
 ## 9. Computational Implementation and Validation
 
@@ -661,7 +666,7 @@ class VectorizedBoundsValidator:
 - Validation workspace: ~4KB for 50 particles × 6 dimensions
 - **Total overhead**: <10KB (negligible)
 
----
+
 
 ## 10. Summary and Practical Guidelines
 
@@ -745,7 +750,7 @@ HYBRID_SMC_BOUNDS = {
 3. **Robustness Margins**: Include uncertainty-aware bounds with probabilistic constraints
 4. **Learning-Based Bounds**: Use ML to refine bounds based on historical optimization data
 
----
+
 
 ## Mathematical Appendix
 
@@ -773,7 +778,7 @@ The maximum overshoot occurs at time t_peak = π/(ωₙ√(1-ζ²)), giving:
 
 This formula was used to derive the ζ ≥ 0.69 constraint for <5% overshoot.
 
----
+
 
 **Document Information:**
 - **Author**: Documentation Expert Agent (Control Systems Specialist)

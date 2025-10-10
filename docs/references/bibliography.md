@@ -156,6 +156,7 @@ Mathematical results are directly linked to their theoretical sources:
 The Lyapunov stability condition from {cite}`moreno2012strict`:
 
 ```{math}
+
 :label: eq:lyapunov_stability_cited
 \dot{V}(\vec{x}) \leq -\alpha \|\vec{x}\|^{1/2}
 ```
@@ -283,6 +284,6 @@ The bibliography undergoes automated checking for:
 - **Link accessibility** for DOI and URL fields
 - **Required field** completeness
 
----
+
 
 **Bibliography Management**: This bibliography is maintained using BibTeX with automated validation and IEEE formatting standards. For questions about specific references or to suggest additions, please refer to the project contribution guidelines.

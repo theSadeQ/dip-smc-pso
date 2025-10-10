@@ -12,11 +12,12 @@ Expected results:
 - No critical violations
 - <5 serious violations across all pages
 
----
+
 
 ## Manual Verification Required
 
 ### ✅ Keyboard Navigation
+
 - [ ] All interactive elements reachable via Tab key
 - [ ] Focus indicators visible (2px solid outline minimum)
 - [ ] No keyboard traps (can navigate out of all components)
@@ -26,9 +27,10 @@ Expected results:
 
 **Test:** Navigate entire page using only keyboard (Tab, Shift+Tab, Enter, Escape)
 
----
+
 
 ### ✅ Color Contrast (WCAG AA)
+
 - [ ] Regular text: ≥ 4.5:1 contrast ratio
 - [ ] Large text (18pt+ or 14pt bold): ≥ 3:1 contrast ratio
 - [ ] UI components (buttons, borders): ≥ 3:1 contrast ratio
@@ -41,9 +43,10 @@ Expected results:
 - Dark mode: #e0e0e0 text on #1a1a1a (14.5:1) ✅
 - Links: #2962ff on white (8.6:1) ✅
 
----
+
 
 ### ✅ Screen Reader Testing
+
 - [ ] Test with NVDA (Windows) or VoiceOver (macOS)
 - [ ] Heading hierarchy logical (h1 → h2 → h3, no skipped levels)
 - [ ] ARIA labels present on interactive elements
@@ -64,9 +67,10 @@ Expected results:
 3. Use `VO+Right Arrow` to navigate
 4. Use `VO+Cmd+H` to jump between headings
 
----
+
 
 ### ✅ Semantic HTML
+
 - [ ] Proper use of `<nav>`, `<main>`, `<article>`, `<aside>`, `<header>`, `<footer>`
 - [ ] Buttons for actions (`<button>`), links for navigation (`<a>`)
 - [ ] Lists use `<ul>`, `<ol>`, `<li>` elements
@@ -75,9 +79,10 @@ Expected results:
 
 **Validate:** Use browser dev tools to inspect page structure
 
----
+
 
 ### ✅ Mobile Accessibility
+
 - [ ] Touch targets ≥ 44x44 pixels (minimum)
 - [ ] Text resizable to 200% without loss of functionality
 - [ ] No horizontal scrolling at 320px viewport width
@@ -86,24 +91,26 @@ Expected results:
 
 **Test:** Use browser responsive mode or actual mobile device
 
----
+
 
 ### ✅ Images and Media
+
 - [ ] All images have `alt` attributes
 - [ ] Decorative images have empty alt (`alt=""`) or aria-hidden
 - [ ] Complex images have detailed descriptions
 - [ ] Mermaid diagrams have text alternatives or detailed descriptions
 - [ ] Videos (if any) have captions and transcripts
 
----
+
 
 ### ✅ Forms (if applicable)
+
 - [ ] All form inputs have associated labels
 - [ ] Error messages clearly indicate which field has an error
 - [ ] Required fields indicated with more than just color
 - [ ] Form validation accessible to screen readers
 
----
+
 
 ## Current Implementation Status
 
@@ -144,7 +151,7 @@ Expected results:
 - ✅ Dark mode exceeds WCAG AA (14.5:1 for body text)
 - ✅ Links have sufficient contrast in both modes
 
----
+
 
 ### 🔧 May Need Manual Verification
 
@@ -164,26 +171,29 @@ Expected results:
 - ⚠️ Verify screen reader announces equations correctly
 - ⚠️ Consider adding alt text for complex equations
 
----
+
 
 ## Accessibility Testing Tools
 
 ### Browser Extensions
+
 - **axe DevTools** (Chrome/Firefox) - Free automated testing
 - **WAVE** (Chrome/Firefox) - Visual feedback on accessibility issues
 - **Lighthouse** (Chrome DevTools) - Built-in accessibility audit
 
 ### Online Tools
+
 - **WebAIM Contrast Checker** - https://webaim.org/resources/contrastchecker/
 - **WAVE Web Accessibility Evaluation Tool** - https://wave.webaim.org/
 - **achecker** - https://achecker.achecks.ca/checker/
 
 ### Screen Readers
+
 - **NVDA** (Windows, free) - https://www.nvaccess.org/
 - **JAWS** (Windows, paid) - https://www.freedomscientific.com/products/software/jaws/
 - **VoiceOver** (macOS/iOS, built-in) - Cmd+F5 to activate
 
----
+
 
 ## Reporting Issues
 
@@ -195,7 +205,7 @@ If accessibility violations are found:
 4. Prioritize by severity (critical > serious > moderate > minor)
 5. Create remediation plan with timeline
 
----
+
 
 ## Compliance Target
 

@@ -2,7 +2,7 @@
 
 **High-Performance Simulation System: Vector Engine, Safety Guards & Orchestration**
 
----
+
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 8. [Performance Optimization](#performance-optimization)
 9. [Best Practices](#best-practices)
 
----
+
 
 ## Introduction
 
@@ -39,7 +39,7 @@ The DIP-SMC-PSO simulation architecture provides a high-performance, production-
 - **Orchestration Strategies:** Batch, sequential, parallel, real-time
 - **Memory Efficient:** View-based operations, zero-copy when possible
 
----
+
 
 ## Architecture Overview
 
@@ -112,7 +112,7 @@ Initial state (D,) → simulate() → Safety guards → states (H+1, D)
 Initial states (B, D) → simulate() → Vectorized dynamics → states (B, H+1, D)
 ```
 
----
+
 
 ## Vector Simulation Engine
 
@@ -258,7 +258,7 @@ states = simulate(
 )
 ```
 
----
+
 
 ## Simulation Runner
 
@@ -346,7 +346,7 @@ print(f"States shape: {states.shape}")  # (1001, 6)
 print(f"Controls shape: {controls.shape}")  # (1000,)
 ```
 
----
+
 
 ## Simulation Context
 
@@ -414,7 +414,7 @@ t, states, controls = run_simulation(
 )
 ```
 
----
+
 
 ## Orchestrators
 
@@ -482,7 +482,7 @@ print(f"Execution time: {result.execution_time:.3f}s")
 
 **Conclusion:** Batch orchestration is optimal for homogeneous workloads (PSO, parameter sweeps)
 
----
+
 
 ## Safety System
 
@@ -558,7 +558,7 @@ for i in range(horizon):
     t += dt
 ```
 
----
+
 
 ## Performance Optimization
 
@@ -657,7 +657,7 @@ profiler.print_stats(sort='cumtime')
 # 4. array operations (10-20%)
 ```
 
----
+
 
 ## Best Practices
 
@@ -763,7 +763,7 @@ def fitness_vectorized(particles):
     return costs
 ```
 
----
+
 
 ## References
 
@@ -773,7 +773,7 @@ def fitness_vectorized(particles):
 4. **Batch Orchestrator:** `src/simulation/orchestrators/batch.py`
 5. **Safety Guards:** `src/simulation/context/safety_guards.py`
 
----
+
 
 **File Location:** `docs/mathematical_foundations/simulation_architecture_guide.md`
 **Lines:** 647

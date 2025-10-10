@@ -1,9 +1,10 @@
 # 4. Use Cases & Operating Modes
 
 ## Mode inventory
+
 Startup, Normal operation, Set‑point change, Shutdown, Fault handling.
 
----
+
 
 The system supports several operating modes: **Startup**, **Normal
 operation**, **Set‑point change**, **Shutdown** and **Fault handling**.  Each
@@ -11,6 +12,7 @@ use case below describes the mode, preconditions, sequence of steps,
 expected responses and acceptance criteria.
 
 ### Use Case: UC‑Start‑01 — Startup
+
 - **Mode:** Startup (swing‑up and stabilisation).
 - **Preconditions:** system powered on; all sensors calibrated; pendulums
   may be hanging down.  Controller gains are initialised to nominal
@@ -30,6 +32,7 @@ expected responses and acceptance criteria.
   no actuator saturation occurs.
 
 ### Use Case: UC‑Setpoint‑01 — Normal operation / set‑point change
+
 - **Mode:** Normal operation.
 - **Preconditions:** system stabilised in upright position; controller
   gains tuned.
@@ -46,6 +49,7 @@ expected responses and acceptance criteria.
 - **Acceptance criteria:** manoeuvre completes within 2 s; overshoot <10 %.
 
 ### Use Case: UC‑Fault‑01 — Fault handling (sensor dropout)
+
  - **Mode:** Fault handling.
  - **Preconditions:** the fault‑detection module (`FDIsystem`) is enabled and the system is
    running under a selected controller.

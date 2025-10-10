@@ -1,4 +1,5 @@
 # Fault Detection & Isolation (FDI) Guide ## Overview The DIP_SMC_PSO system includes a Fault Detection and Isolation (FDI) module that monitors system health in real-time. The FDI system compares model predictions with actual measurements to detect deviations that may indicate component failures, sensor faults, or unexpected disturbances. ## Architecture The FDI system uses a **model-based residual approach**: ```
+
 ┌─────────────┐ ┌─────────────┐
 │ Dynamics │ │ Measurement │
 │ Model │ │ (Actual) │
@@ -11,11 +12,13 @@
 5. **CUSUM Detection**: Detects slow parameter drifts over time ## Configuration ### Basic Configuration Add FDI configuration to your `config.yaml`: ```yaml
 fdi: enabled: true residual_threshold: 0.150 # Statistically calibrated threshold (Issue #18) persistence_counter: 10 # Consecutive violations required residual_states: [0, 1, 2] # State indices to monitor (x, θ₁, θ₂) residual_weights: null # Optional per-state weights # Hysteresis configuration (prevents oscillation near threshold) hysteresis_enabled: true hysteresis_upper: 0.165 # Upper threshold for fault detection hysteresis_lower: 0.135 # Lower threshold for recovery
 ``` **Note**: The default threshold of 0.150 was statistically calibrated based on P99 percentile analysis of 1,167 residual samples. See [FDI Threshold Calibration Methodology](fdi_threshold_calibration_methodology.md) for details. ### Advanced Configuration ```yaml
+
 fdi: enabled: true residual_threshold: 0.150 persistence_counter: 10 residual_states: [0, 1, 2, 3, 4, 5] # Monitor all 6 states residual_weights: [1.0, 2.0, 2.0, 0.5, 1.5, 1.5] # Weight angles more heavily # Hysteresis configuration (Issue #18 resolution) hysteresis_enabled: true hysteresis_upper: 0.165 hysteresis_lower: 0.135 # Adaptive thresholding adaptive: false # Disable when using hysteresis (pick one strategy) window_size: 50 # Samples for threshold estimation threshold_factor: 3.0 # σ multiplier for adaptive threshold # CUSUM drift detection cusum_enabled: false # Disable for basic operation cusum_threshold: 5.0 # Cumulative sum limit
 ``` ## Usage Examples ### Basic FDI Monitoring ```bash
 # FDI in config.yaml and run simulation
 python simulate.py --ctrl classical_smc --plot --plot-fdi
 ``` ### Programmatic Usage ```python
+
 from src.fault_detection.fdi import FDIsystem
 from src.core.dynamics import DoublePendulum
 import numpy as np # Create FDI system with calibrated threshold and hysteresis
@@ -42,6 +45,7 @@ for t in np.arange(0, 10, 0.001): # Get measurement (in practice, from sensors) 
 - Use 2-5× larger thresholds than position equivalents
 - Consider filtering or excluding from residual calculation **Recommended Practice**: Start with the calibrated threshold (0.150) and adjust based on your system's noise characteristics. See the calibration methodology document for statistical approaches. ### Adaptive Thresholds When `adaptive = true`, the threshold becomes:
 ```
+
 threshold(t) = μ + threshold_factor × σ
 ```
 Where μ and σ are estimated from the last `window_size` residuals. **Parameter Guidelines:**
@@ -49,21 +53,25 @@ Where μ and σ are estimated from the last `window_size` residuals. **Parameter
 - `threshold_factor = 2.0-4.0`: Corresponds to confidence levels - `factor = 2.0`: ~95% confidence (more sensitive) - `factor = 3.0`: ~99.7% confidence (balanced) - `factor = 4.0`: ~99.99% confidence (conservative) ## Persistence and False Alarm Management ### Persistence Counter The `persistence_counter` requires sustained threshold violations: ```
 FAULT declared if: violation_count ≥ persistence_counter
 ``` **Selection Guidelines:**
+
 - `persistence = 1`: Immediate detection, higher false alarm rate
 - `persistence = 5-10`: Balanced detection vs. false alarms
 - `persistence = 20-50`: Conservative, slower detection **Time-based Interpretation:**
 - At 1000 Hz sampling: `persistence = 10` → 10ms sustained fault
 - At 100 Hz sampling: `persistence = 10` → 100ms sustained fault ### State Weighting Use `residual_weights` to emphasize critical states: ```yaml
 # Example: Emphasize angular states for pendulum stability
+
 residual_states: [0, 1, 2] # x, θ₁, θ₂
 residual_weights: [0.5, 2.0, 2.0] # Weight angles 4× more than position
 ``` The weighted residual norm becomes:
 ```
+
 ||r||_weighted = √(w₁r₁² + w₂r₂² + w₃r₃²)
 ``` ## CUSUM Drift Detection CUSUM (Cumulative Sum) detection complements threshold-based monitoring by accumulating small deviations over time. ### Algorithm ```
 S(k) = max(0, S(k-1) + (r(k) - μ))
 FAULT if S(k) > cusum_threshold
 ``` Where:
+
 - `r(k)`: Current residual norm
 - `μ`: Running average of residual norm
 - `S(k)`: Cumulative sum statistic ### Configuration {#cusum-configuration} ```yaml
@@ -99,11 +107,13 @@ fdi: cusum_enabled: true cusum_threshold: 5.0 # Adjust based on expected drift m
 # Generate FDI plots with simulation
 python simulate.py --ctrl sta_smc --plot --plot-fdi
 ``` **Plot Elements:**
+
 - **Residual Time Series**: Shows r(t) evolution
 - **Threshold Lines**: Static and adaptive limits
 - **Fault Markers**: Indicates detection times
 - **CUSUM Trace**: Cumulative statistic (if enabled) ### Analysis Code ```python
 # Access FDI history for custom analysis
+
 import matplotlib.pyplot as plt # After simulation with FDI enabled
 times = fdi.times
 residuals = fdi.residuals # Plot residual statistics
@@ -126,7 +136,9 @@ plt.show()
 # runnable: false if status == "FAULT": # Log fault information logging.critical(f"FAULT at t={t:.3f}s: residual={residual_norm:.3f}") # Safety responses (choose appropriate action) # Option 1: Emergency stop u = 0.0 # Option 2: Switch to safe controller controller = safe_mode_controller # Option 3: Graceful shutdown target_state = safe_equilibrium # Option 4: Reduce performance controller.reduce_gains(factor=0.5)
 ``` ### Controller Reconfiguration ```python
 # example-metadata:
+
 # runnable: false # Fault-tolerant control example
+
 class FaultTolerantController: def __init__(self, primary_controller, backup_controller, fdi_system): self.primary = primary_controller self.backup = backup_controller self.fdi = fdi_system self.active_controller = primary_controller def compute_control(self, x, x_ref, t, u_prev, dt, dynamics): # FDI check status, residual = self.fdi.check(t, x, u_prev, dt, dynamics) # Switch controllers if fault detected if status == "FAULT" and self.active_controller == self.primary: logging.warning("Switching to backup controller due to fault") self.active_controller = self.backup return self.active_controller.compute_control(x, x_ref, t)
 ``` ## Performance Considerations ### Computational Cost FDI adds minimal overhead:
 - Model prediction: ~10 μs (for simplified dynamics)

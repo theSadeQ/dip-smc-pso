@@ -1,4 +1,5 @@
 # Citation System Implementation Plan ## Overview Implementation of a citation and bibliography system for the DIP_SMC_PSO documentation, based on ChatGPT's analysis and the existing strategy in CLAUDE.md. ## Source Analysis **Analyzed ChatGPT Implementation:**
+
 - Location: `D:\Projects\main\chatgpt_analysis_files\task1_citation_bibliography_system\chatgpt final task 1\`
 - Complete Sphinx-based citation system with `sphinxcontrib-bibtex`
 - Topical bibliography organization (SMC, PSO, DIP, Software)
@@ -7,6 +8,7 @@
 ```
 docs/ bib/ smc.bib # Sliding-mode control & nonlinear control refs pso.bib # PSO and related optimization refs dip.bib # Inverted-pendulum / system modeling refs software.bib # Packages, toolboxes, datasets
 ``` ### 2. Key Technologies & Configuration **Sphinx Extensions Required:**
+
 - `sphinxcontrib.bibtex` for bibliography support
 - Numeric citation style matching existing `[1]` format
 - Multiple .bib file loading capability **Configuration Updates for `docs/conf.py`:**
@@ -20,6 +22,7 @@ bibtex_reference_style = "label" # renders [1], [2], ...
 bibtex_tooltips = True
 bibtex_bibliography_header = ".. rubric:: References"
 ``` ### 3. Citation Key Naming Convention **Pattern:** `topic_authorYear_shortTitle` (snake_case, ASCII) **Topics:**
+
 - `smc` - Sliding Mode Control
 - `pso` - Particle Swarm Optimization
 - `dip` - Double Inverted Pendulum systems
@@ -32,6 +35,7 @@ bibtex_bibliography_header = ".. rubric:: References"
 { "1": "dip_khalil_2002_nonlinear_systems", "2": "dip_khalil_2002_nonlinear_systems", "3": "smc_utkin_2013_sliding_mode_control", "4": "smc_slotine_li_1991_applied_nonlinear_control", "5": "smc_slotine_li_1991_applied_nonlinear_control", "6": "smc_levant_2003_higher_order_smc", "7": "smc_shtessel_2014_sliding_mode_control_and_observation", "8": "dip_khalil_2002_nonlinear_systems"
 }
 ``` ### 5. Key Bibliography Entries **SMC Theory (`smc.bib`):**
+
 - Slotine & Li (1991) - Applied Nonlinear Control
 - Utkin et al. (2013) - Sliding Mode Control in Engineering
 - Levant (2003) - Higher-order sliding modes
@@ -46,6 +50,7 @@ bibtex_bibliography_header = ".. rubric:: References"
 Text with citation :cite:`smc_slotine_li_1991_applied_nonlinear_control`. .. rubric:: References
 .. bibliography::
 ``` **Replacement Process:**
+
 - Replace `\[([1-9]\d*)\]` with `:cite:`KEY`` using mapping
 - Add `.. bibliography::` sections to pages with citations ## Implementation Tasks ### ✅ Completed
 1. Examine ChatGPT's citation system implementation files
@@ -72,6 +77,10 @@ Text with citation :cite:`smc_slotine_li_1991_applied_nonlinear_control`. .. rub
 2. **Update Sphinx configuration** with bibtex settings
 3. **Implement citation replacement** using mapping file
 4. **Add bibliography sections** to documentation pages
-5. **Test complete build pipeline** and validate output --- **File:** `CITATION_SYSTEM_IMPLEMENTATION.md`
+5. **Test complete build pipeline** and validate output
+
+---
+
+**File:** `CITATION_SYSTEM_IMPLEMENTATION.md`
 **Created:** 2025-09-20
 **Purpose:** Implementation roadmap for citation system based on ChatGPT analysis

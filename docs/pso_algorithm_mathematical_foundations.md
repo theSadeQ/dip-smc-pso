@@ -6,7 +6,12 @@
 - Convergence analysis and stability conditions
 - Control engineering adaptations for SMC gain optimization
 - Vectorized implementation mathematical framework
-- Uncertainty-aware optimization mathematical extensions --- ## 1. Classical PSO Mathematical Formulation ### 1.1 Fundamental Algorithm Definition **Problem Statement:**
+- Uncertainty-aware optimization mathematical extensions
+
+---
+
+## 1. Classical PSO Mathematical Formulation ### 1.1 Fundamental Algorithm Definition **Problem Statement:**
+
 Given an objective function $f: \mathbb{R}^n \rightarrow \mathbb{R}$, find: $$\mathbf{x}^* = \arg\min_{\mathbf{x} \in \mathbb{R}^n} f(\mathbf{x})$$ subject to bounds constraints $\mathbf{x} \in [\mathbf{x}_{\text{min}}, \mathbf{x}_{\text{max}}]$. **Swarm Dynamics:**
 For a swarm of $N$ particles, each particle $i$ maintains:
 - Position vector: $\mathbf{x}_i^{(t)} \in \mathbb{R}^n$
@@ -22,7 +27,12 @@ $$\mathbf{g}^{(t)} = \arg\min_{i=1,\ldots,N} f(\mathbf{p}_i^{(t)})$$ ### 1.2 Vel
 $$\mathbf{x}_i^{(t+1)} = \max(\mathbf{x}_{\text{min}}, \min(\mathbf{x}_{\text{max}}, \mathbf{x}_i^{(t+1)}))$$ ### 1.4 Personal Best Update $$\mathbf{p}_i^{(t+1)} = \begin{cases}
 \mathbf{x}_i^{(t+1)} & \text{if } f(\mathbf{x}_i^{(t+1)}) < f(\mathbf{p}_i^{(t)}) \\
 \mathbf{p}_i^{(t)} & \text{otherwise}
-\end{cases}$$ --- ## 2. Convergence Analysis ### 2.1 Theoretical Convergence Conditions **Theorem 1 (Clerc-Kennedy Convergence):**
+\end{cases}$$
+
+---
+
+## 2. Convergence Analysis ### 2.1 Theoretical Convergence Conditions **Theorem 1 (Clerc-Kennedy Convergence):**
+
 For the simplified PSO model without stochastic components, convergence to a fixed point requires: $$\phi = c_1 + c_2 > 4$$
 $$w = \frac{2}{\phi - 2 + \sqrt{\phi^2 - 4\phi}} < 1$$ **Proof Sketch:**
 Consider the deterministic system:
@@ -38,7 +48,12 @@ Under mild regularity conditions on $f$, PSO converges in expectation if:
 3. The global best is updated infinitely often **Corollary (Convergence Rate):**
 For unimodal functions, the expected convergence rate is:
 $$\mathbb{E}[f(\mathbf{g}^{(t)}) - f(\mathbf{x}^*)] = O(e^{-\alpha t})$$
-where $\alpha$ depends on the problem conditioning and PSO parameters. --- ## 3. Control Engineering Adaptations ### 3.1 SMC Gain Optimization Problem Formulation **Optimization Variables:**
+where $\alpha$ depends on the problem conditioning and PSO parameters.
+
+---
+
+## 3. Control Engineering Adaptations ### 3.1 SMC Gain Optimization Problem Formulation **Optimization Variables:**
+
 For Classical SMC, the gain vector is:
 $$\mathbf{G} = [c_1, \lambda_1, c_2, \lambda_2, K, k_d]^T \in \mathbb{R}^6$$ where:
 - $c_1, c_2$: Sliding surface gains
@@ -60,7 +75,12 @@ $$\mathcal{I}_3 = \{t : |u(t)| \text{ exhibits high-frequency oscillations}\}$$ 
 $$P(\mathbf{G}) = \begin{cases}
 0 & \text{if } \mathcal{I}_1 \cup \mathcal{I}_2 \cup \mathcal{I}_3 = \emptyset \\
 P_{\text{base}} \cdot \frac{T - t_{\text{fail}}}{T} & \text{if failure at } t_{\text{fail}}
-\end{cases}$$ where $P_{\text{base}}$ is a large penalty constant. --- ## 4. Vectorized Implementation Mathematics ### 4.1 Batch Fitness Evaluation **Particle Matrix:**
+\end{cases}$$ where $P_{\text{base}}$ is a large penalty constant.
+
+---
+
+## 4. Vectorized Implementation Mathematics ### 4.1 Batch Fitness Evaluation **Particle Matrix:**
+
 $$\mathbf{X}^{(t)} = \begin{bmatrix}
 \mathbf{x}_1^{(t)T} \\
 \mathbf{x}_2^{(t)T} \\
@@ -78,7 +98,12 @@ Using Runge-Kutta 4th order:
 $$\mathbf{k}_1 = h \mathbf{f}(\mathbf{x}_i^{(k)}, u_i^{(k)})$$
 $$\mathbf{k}_2 = h \mathbf{f}(\mathbf{x}_i^{(k)} + \mathbf{k}_1/2, u_i^{(k+1/2)})$$
 $$\mathbf{k}_3 = h \mathbf{f}(\mathbf{x}_i^{(k)} + \mathbf{k}_2/2, u_i^{(k+1/2)})$$
-$$\mathbf{k}_4 = h \mathbf{f}(\mathbf{x}_i^{(k)} + \mathbf{k}_3, u_i^{(k+1)})$$ $$\mathbf{x}_i^{(k+1)} = \mathbf{x}_i^{(k)} + \frac{\mathbf{k}_1 + 2\mathbf{k}_2 + 2\mathbf{k}_3 + \mathbf{k}_4}{6}$$ --- ## 5. Adaptive PSO Extensions ### 5.1 Time-Varying Inertia Weight **Linear Decay Schedule:**
+$$\mathbf{k}_4 = h \mathbf{f}(\mathbf{x}_i^{(k)} + \mathbf{k}_3, u_i^{(k+1)})$$ $$\mathbf{x}_i^{(k+1)} = \mathbf{x}_i^{(k)} + \frac{\mathbf{k}_1 + 2\mathbf{k}_2 + 2\mathbf{k}_3 + \mathbf{k}_4}{6}$$
+
+---
+
+## 5. Adaptive PSO Extensions ### 5.1 Time-Varying Inertia Weight **Linear Decay Schedule:**
+
 $$w(t) = w_{\max} - \frac{w_{\max} - w_{\min}}{T_{\max}} \cdot t$$ **Typical Values:**
 - $w_{\max} = 0.9$ (exploration phase)
 - $w_{\min} = 0.4$ (exploitation phase)
@@ -91,7 +116,12 @@ v_{i,j}^{(t+1)} & \text{otherwise}
 $$v_{\max,j} = \alpha \cdot (x_{\max,j} - x_{\min,j})$$ where $\alpha \in [0.1, 0.5]$ is the velocity clamping factor. ### 5.3 Diversity-Based Adaptation **Swarm Diversity Measure:**
 $$D^{(t)} = \frac{1}{N} \sum_{i=1}^{N} \|\mathbf{x}_i^{(t)} - \bar{\mathbf{x}}^{(t)}\|$$ where $\bar{\mathbf{x}}^{(t)} = \frac{1}{N} \sum_{i=1}^{N} \mathbf{x}_i^{(t)}$ is the swarm centroid. **Adaptive Parameter Update:**
 $$c_1^{(t)} = c_{1,\text{base}} \cdot \left(1 + \frac{D^{(t)}}{D_{\max}}\right)$$
-$$c_2^{(t)} = c_{2,\text{base}} \cdot \left(2 - \frac{D^{(t)}}{D_{\max}}\right)$$ This increases cognitive attraction when diversity is high and social attraction when diversity is low. --- ## 6. Uncertainty-Aware Optimization ### 6.1 Robust Optimization Framework **Uncertain Parameter Model:**
+$$c_2^{(t)} = c_{2,\text{base}} \cdot \left(2 - \frac{D^{(t)}}{D_{\max}}\right)$$ This increases cognitive attraction when diversity is high and social attraction when diversity is low.
+
+---
+
+## 6. Uncertainty-Aware Optimization ### 6.1 Robust Optimization Framework **Uncertain Parameter Model:**
+
 Let $\boldsymbol{\theta} \in \Theta$ represent uncertain system parameters (masses, lengths, friction coefficients). **Robust Cost Function:**
 $$J_{\text{robust}}(\mathbf{G}) = \mathbb{E}_{\boldsymbol{\theta}}[J(\mathbf{G}, \boldsymbol{\theta})] + \beta \cdot \text{Var}_{\boldsymbol{\theta}}[J(\mathbf{G}, \boldsymbol{\theta})]$$ **Monte Carlo Approximation:**
 $$J_{\text{robust}}(\mathbf{G}) \approx \frac{1}{M} \sum_{m=1}^{M} J(\mathbf{G}, \boldsymbol{\theta}_m) + \beta \cdot \frac{1}{M-1} \sum_{m=1}^{M} (J(\mathbf{G}, \boldsymbol{\theta}_m) - \bar{J})^2$$ where $\boldsymbol{\theta}_m \sim p(\boldsymbol{\theta})$ are parameter samples. ### 6.2 Worst-Case and Mean Performance Trade-off **Bi-Objective Formulation:**
@@ -100,20 +130,35 @@ $$J_{\text{combined}}(\mathbf{G}) = w_{\text{mean}} \cdot \mathbb{E}_{\boldsymbo
 # example-metadata:
 # runnable: false # Mathematical implementation in PSO cost function
 def _combine_costs(self, costs: np.ndarray) -> np.ndarray: """ Combine costs across uncertainty draws. costs: Array of shape (n_draws, n_particles) Returns: Array of shape (n_particles,) """ mean_cost = np.mean(costs, axis=0) max_cost = np.max(costs, axis=0) return self.combine_weights[0] * mean_cost + self.combine_weights[1] * max_cost
-``` --- ## 7. Convergence Acceleration Techniques ### 7.1 Constriction Factor **Clerc-Kennedy Constriction Factor:**
+```
+
+---
+
+## 7. Convergence Acceleration Techniques ### 7.1 Constriction Factor **Clerc-Kennedy Constriction Factor:**
+
 $$\chi = \frac{2}{|\phi - 2 + \sqrt{\phi^2 - 4\phi}|}$$ where $\phi = c_1 + c_2 > 4$. **Modified Velocity Update:**
 $$\mathbf{v}_i^{(t+1)} = \chi \left[ \mathbf{v}_i^{(t)} + c_1 \mathbf{r}_1^{(t)} \odot (\mathbf{p}_i^{(t)} - \mathbf{x}_i^{(t)}) + c_2 \mathbf{r}_2^{(t)} \odot (\mathbf{g}^{(t)} - \mathbf{x}_i^{(t)}) \right]$$ ### 7.2 Neighborhood Topologies **Ring Topology:**
 Each particle $i$ communicates with neighbors $i-1$ and $i+1$ (modulo $N$). **Local Best Update:**
 $$\mathbf{l}_i^{(t)} = \arg\min_{j \in \mathcal{N}_i} f(\mathbf{p}_j^{(t)})$$ where $\mathcal{N}_i$ is the neighborhood of particle $i$. ### 7.3 Multi-Swarm Approaches **Cooperative PSO:**
 Divide the $n$-dimensional problem into $k$ subproblems of dimension $n/k$. **Swarm $j$ Optimization:**
-$$\mathbf{x}_j^* = \arg\min_{\mathbf{x}_j} f(\mathbf{x}_1^*, \ldots, \mathbf{x}_{j-1}^*, \mathbf{x}_j, \mathbf{x}_{j+1}^*, \ldots, \mathbf{x}_k^*)$$ --- ## 8. Numerical Stability and Implementation Considerations ### 8.1 Floating-Point Precision **Normalization for Numerical Stability:**
+$$\mathbf{x}_j^* = \arg\min_{\mathbf{x}_j} f(\mathbf{x}_1^*, \ldots, \mathbf{x}_{j-1}^*, \mathbf{x}_j, \mathbf{x}_{j+1}^*, \ldots, \mathbf{x}_k^*)$$
+
+---
+
+## 8. Numerical Stability and Implementation Considerations ### 8.1 Floating-Point Precision **Normalization for Numerical Stability:**
+
 To prevent overflow/underflow in cost computation:
 $$\tilde{J}_i(\mathbf{G}) = \frac{J_i(\mathbf{G})}{\max(N_i, \epsilon)}$$ where $N_i$ is a normalization constant and $\epsilon = 10^{-12}$ prevents division by zero. ### 8.2 Condition Number Monitoring **Matrix Condition Assessment:**
 For controllers involving matrix operations, monitor:
 $$\kappa(\mathbf{M}) = \|\mathbf{M}\| \cdot \|\mathbf{M}^{-1}\|$$ **Adaptive Regularization:**
 $$\mathbf{M}_{\text{reg}} = \mathbf{M} + \lambda \mathbf{I}$$ where $\lambda$ is chosen to maintain $\kappa(\mathbf{M}_{\text{reg}}) < \kappa_{\max}$. ### 8.3 Early Termination Criteria **Convergence Detection:**
 $$\frac{|f(\mathbf{g}^{(t)}) - f(\mathbf{g}^{(t-k)})|}{|f(\mathbf{g}^{(t)})| + \epsilon} < \tau$$ for $k$ consecutive iterations, with tolerance $\tau = 10^{-6}$. **Stagnation Detection:**
-$$\frac{1}{k} \sum_{i=t-k+1}^{t} |f(\mathbf{g}^{(i)}) - f(\mathbf{g}^{(i-1)})| < \tau_{\text{stag}}$$ --- ## 9. Theoretical Performance Bounds ### 9.1 No Free Lunch Theorem Implications **Theorem (Wolpert-Macready):**
+$$\frac{1}{k} \sum_{i=t-k+1}^{t} |f(\mathbf{g}^{(i)}) - f(\mathbf{g}^{(i-1)})| < \tau_{\text{stag}}$$
+
+---
+
+## 9. Theoretical Performance Bounds ### 9.1 No Free Lunch Theorem Implications **Theorem (Wolpert-Macready):**
+
 For any algorithm A1, there exists an algorithm A2 such that:
 $$\sum_{f} P(d_m^y | f, m, A1) = \sum_{f} P(d_m^y | f, m, A2)$$ **Implication for PSO:**
 PSO performance depends critically on problem structure. For SMC gain optimization, PSO is well-suited due to:
@@ -124,7 +169,12 @@ For strongly convex functions with Lipschitz gradient:
 $$\mathbb{E}[f(\mathbf{g}^{(t)}) - f(\mathbf{x}^*)] \leq C \rho^t$$ where $C$ is a problem-dependent constant and $\rho \in (0,1)$ depends on PSO parameters. **Practical Bounds for SMC Problems:**
 - Expected convergence: 50-200 iterations
 - Function evaluations: $O(N \times T)$ where $N$ is swarm size, $T$ is iterations
-- Memory complexity: $O(N \times n)$ --- ## 10. Mathematical Validation and Testing ### 10.1 Benchmark Functions **Test Function Suite:**
+- Memory complexity: $O(N \times n)$
+
+---
+
+## 10. Mathematical Validation and Testing ### 10.1 Benchmark Functions **Test Function Suite:**
+
 1. **Sphere Function:** $f(\mathbf{x}) = \sum_{i=1}^{n} x_i^2$
 2. **Rosenbrock Function:** $f(\mathbf{x}) = \sum_{i=1}^{n-1} [100(x_{i+1} - x_i^2)^2 + (1-x_i)^2]$
 3. **Rastrigin Function:** $f(\mathbf{x}) = A n + \sum_{i=1}^{n} [x_i^2 - A \cos(2\pi x_i)]$ **Expected Performance:**
@@ -137,7 +187,12 @@ $$\mathbb{E}[f(\mathbf{g}^{(t)}) - f(\mathbf{x}^*)] \leq C \rho^t$$ where $C$ is
 4. **Convergence Speed:** Iterations to achieve target accuracy **Statistical Tests:**
 - Wilcoxon signed-rank test for algorithm comparison
 - ANOVA for parameter sensitivity analysis
-- Bootstrap confidence intervals for performance estimates --- ## 11. Conclusion The mathematical foundations presented provide a rigorous theoretical framework for PSO implementation in SMC gain optimization. Key mathematical contributions include: 1. **Convergence Guarantees:** Theoretical conditions ensuring algorithm convergence
+- Bootstrap confidence intervals for performance estimates
+
+---
+
+## 11. Conclusion The mathematical foundations presented provide a rigorous theoretical framework for PSO implementation in SMC gain optimization. Key mathematical contributions include: 1. **Convergence Guarantees:** Theoretical conditions ensuring algorithm convergence
+
 2. **Stability Analysis:** Mathematical criteria for stable controller gain selection
 3. **Uncertainty Handling:** Robust optimization framework with provable properties
 4. **Numerical Stability:** Implementation techniques preventing numerical issues
