@@ -2,10 +2,12 @@
 # Contributing – ResearchPlanSpec Validation
 
 ## Policies
+
 - **Field order = WARNING**: When the relative order of present fields deviates from the declared `field_order`, the validator emits a `WARNING` and accepts the output.
 - **Unknown fields = ERROR**: When an undeclared field appears in a schema object where unknowns are disallowed, the validator emits `UNKNOWN_FIELD` (severity `error`) and rejects the output.
 
 ## Error Model
+
 Machine-readable schema:
 ```json
 {
@@ -25,6 +27,7 @@ Codes used:
 ## Examples
 
 ### Successful Validation (Valid Fixture)
+
 ```json
 {
   "errors": [],
@@ -33,6 +36,7 @@ Codes used:
 ```
 
 ### Failed Validation with Field Order Warning
+
 ```json
 {
   "errors": [
@@ -55,6 +59,7 @@ Codes used:
 ```
 
 ### Cross-Field Validation Errors
+
 ```json
 {
   "errors": [
@@ -76,6 +81,7 @@ Codes used:
 ```
 
 ## CLI Usage
+
 ```bash
 python repo_validate.py fixtures/valid_plan.json
 python repo_validate.py fixtures/invalid_plan.json
@@ -84,6 +90,7 @@ python repo_validate.py fixtures/invalid_plan.json
 Exit code is `0` on success, `1` when any `errors` are present.
 
 ## Cross-Field Validation Rules
+
 1. **Success Criteria Coverage**: Each `phases[*].success_criteria` item must be covered by at least one `acceptance[*].statement` (case-insensitive substring match)
 2. **Error Handling Coverage**: Each `contracts.errors` item must be covered by a `validation_steps.expected` message in the same phase (case-insensitive substring match)
 
@@ -92,11 +99,13 @@ Exit code is `0` on success, `1` when any `errors` are present.
 The validator follows **Semantic Versioning (SemVer)** for validation rules:
 
 ### Version Impact
+
 - **MAJOR** (e.g., 1.x → 2.x): Adds new error conditions or reclassifies warnings to errors (breaking changes)
 - **MINOR** (e.g., 1.1 → 1.2): Adds new warning codes or validation rules that default to WARNING (non-breaking)  
 - **PATCH** (e.g., 1.1.1 → 1.1.2): Bug fixes, message improvements, no rule changes
 
 ### Deprecation Path
+
 New validation rules follow a **warn-first deprecation path**:
 1. **Introduce** new rule as **WARNING** in MINOR release
 2. **Upgrade** to **ERROR** in next MAJOR release (with advance notice)
@@ -114,11 +123,13 @@ New validation rules follow a **warn-first deprecation path**:
 | `WARNING` | **Warning** | Policy-dependent | Field order, schema version |
 
 ### Schema Version Gating
+
 - **Current policy**: `metadata.schema_version` must be `"1.x"` (WARNING if missing/invalid)
 - **Future enforcement**: Can be upgraded to ERROR in MAJOR version with `--schema-version-enforce error`
 - **Migration path**: Update plans to include valid schema version before upgrading validator
 
 ### Policy Changes
+
 Major policy changes (e.g., field order becoming ERROR) will be:
 1. **Announced** in CHANGELOG with timeline
 2. **Available** via CLI flags for testing (`--strict-field-order`)  

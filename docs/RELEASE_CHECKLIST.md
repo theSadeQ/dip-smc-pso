@@ -1,4 +1,5 @@
 # Release Checklist Use this checklist when preparing a new release of the ResearchPlan validation system. ## Pre-Release ### Code & Documentation
+
 - [ ] All features implemented and tested
 - [ ] Update CHANGELOG.md with release date and final entries
 - [ ] Ensure fixtures and documentation examples reflect current validator outputs

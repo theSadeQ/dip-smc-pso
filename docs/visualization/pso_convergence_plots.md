@@ -27,6 +27,6 @@ results = tuner.optimize()
 # Convergence plotting examples in the workflow guide
 ```
 
----
+
 
 **Redirect:** See `guides/workflows/pso-optimization-workflow.md` for PSO visualization

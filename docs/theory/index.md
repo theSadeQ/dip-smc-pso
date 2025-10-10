@@ -1,4 +1,5 @@
 # Theoretical Foundations ```{toctree}
+
 :maxdepth: 2
 :hidden: notation_and_conventions
 mathematical_references

@@ -5,6 +5,7 @@ This page establishes the mathematical notation and conventions used throughout 
 ## General Notation
 
 ### Scalar Variables
+
 - $t \in \mathbb{R}$ - Time variable
 - $u \in \mathbb{R}$ - Control input (force applied to cart)
 - $m_0, m_1, m_2$ - Masses of cart and pendulums
@@ -12,12 +13,14 @@ This page establishes the mathematical notation and conventions used throughout 
 - $g$ - Gravitational acceleration
 
 ### Vector Variables
+
 - $\vec{q} = [x, \theta_1, \theta_2]^T \in \mathbb{R}^3$ - Generalized coordinates
 - $\vec{x} = [\vec{q}^T, \dot{\vec{q}}^T]^T \in \mathbb{R}^6$ - State vector
 - $\vec{e} \in \mathbb{R}^6$ - Tracking error vector
 - $\vec{s} \in \mathbb{R}^6$ - Sliding surface vector
 
 ### Matrix Variables
+
 - $\mat{M}(\vec{q}) \in \mathbb{R}^{3 \times 3}$ - Inertia matrix
 - $\mat{C}(\vec{q}, \dot{\vec{q}}) \in \mathbb{R}^{3 \times 3}$ - Coriolis matrix
 - $\vec{G}(\vec{q}) \in \mathbb{R}^3$ - Gravitational forces vector
@@ -27,16 +30,19 @@ This page establishes the mathematical notation and conventions used throughout 
 ## Mathematical Operators
 
 ### Norms and Inner Products
+
 - $\|\vec{x}\|$ - Euclidean norm of vector $\vec{x}$
 - $\|\mat{A}\|_F$ - Frobenius norm of matrix $\mat{A}$
 - $\langle \vec{x}, \vec{y} \rangle$ - Inner product of vectors $\vec{x}$ and $\vec{y}$
 
 ### Derivatives
+
 - $\dot{(\cdot)} = \frac{d(\cdot)}{dt}$ - Time derivative
 - $\ddot{(\cdot)} = \frac{d^2(\cdot)}{dt^2}$ - Second time derivative
 - $\frac{\partial(\cdot)}{\partial x}$ - Partial derivative with respect to $x$
 
 ### Special Functions
+
 - $\text{sign}(\cdot)$ - Sign function
 - $\text{sat}(\cdot)$ - Saturation function
 - $\text{tanh}(\cdot)$ - Hyperbolic tangent function
@@ -44,6 +50,7 @@ This page establishes the mathematical notation and conventions used throughout 
 ## Coordinate Systems
 
 ### Cart-Pendulum System
+
 ```{figure} ../visual/coordinate_system.png
 :name: fig:coordinate_system
 :width: 600px
@@ -57,6 +64,7 @@ Coordinate system for the double-inverted pendulum system.
 - **$\theta_2$**: Angle of second pendulum from vertical (positive counterclockwise)
 
 ### State Space Representation
+
 The complete state vector is defined as:
 
 ```{math}
@@ -74,6 +82,7 @@ x \\
 ## Control Theory Notation
 
 ### Sliding Mode Control
+
 - $s(\vec{x}, t)$ - Sliding surface
 - $u_{eq}$ - Equivalent control
 - $u_{sw}$ - Switching control
@@ -81,11 +90,13 @@ x \\
 - $\phi$ - Boundary layer thickness
 
 ### Lyapunov Analysis
+
 - $V(\vec{x})$ - Lyapunov function candidate
 - $\dot{V}(\vec{x})$ - Time derivative of Lyapunov function
 - $\alpha, \beta$ - Class $\mathcal{K}$ function parameters
 
 ### Adaptive Control
+
 - $\hat{\theta}$ - Parameter estimate
 - $\tilde{\theta} = \theta - \hat{\theta}$ - Parameter estimation error
 - $\Gamma$ - Adaptation gain matrix
@@ -93,6 +104,7 @@ x \\
 ## Optimization Notation
 
 ### PSO Parameters
+
 - $N$ - Number of particles in swarm
 - $\vec{x}_i^{(k)}$ - Position of particle $i$ at iteration $k$
 - $\vec{v}_i^{(k)}$ - Velocity of particle $i$ at iteration $k$
@@ -102,6 +114,7 @@ x \\
 - $c_1, c_2$ - Acceleration coefficients
 
 ### Cost Function
+
 - $J(\theta)$ - Objective function to minimize
 - $w_e, w_u, w_s$ - Weighting factors for error, control effort, and smoothness
 

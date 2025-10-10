@@ -14,6 +14,6 @@ The plant configuration system manages dynamics model parameters, physics consta
 
 For complete documentation, see: **[plant/models_guide.md](plant/models_guide.md)**
 
----
+
 
 **Redirect:** This file redirects to `plant/models_guide.md`

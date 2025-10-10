@@ -17,7 +17,7 @@
 - [Best Practices](#best-practices)
 - [Troubleshooting](#troubleshooting)
 
----
+
 
 ## Introduction
 
@@ -33,7 +33,7 @@ This guide provides practical instructions for common tasks in the DIP SMC PSO f
 - **Theory:** [Mathematical Background](../theory/) (coming soon)
 - **Source Code:** [Controllers Implementation](../../src/controllers/)
 
----
+
 
 ## Core Workflows
 
@@ -59,7 +59,7 @@ graph TD
 4. **Documentation:** Save configurations, commit results
 5. **Planning:** Prepare next iteration
 
----
+
 
 ## Configuration Management
 
@@ -166,7 +166,7 @@ ConfigurationError: Invalid controller gains
 - [Configuration API Guide](api/configuration.md) - Detailed config system reference
 - [Plant Models API Guide](api/plant-models.md) - Physics parameter configuration
 
----
+
 
 ## Running Simulations
 
@@ -253,7 +253,7 @@ python simulate.py --ctrl classical_smc --override "simulation.dt=0.02" --plot
 - [Simulation API Guide](api/simulation.md) - SimulationRunner, dynamics models, performance optimization
 - [Controllers API Guide](api/controllers.md) - Factory system, SMC types, custom controllers
 
----
+
 
 ## PSO Optimization
 
@@ -363,7 +363,7 @@ Optimization Complete!
 - [How-To: Optimization Workflows](how-to/optimization-workflows.md) - Advanced PSO tuning, custom cost functions, parallel execution
 - [Optimization API Guide](api/optimization.md) - PSOTuner, cost functions, gain bounds, convergence monitoring
 
----
+
 
 ## Result Analysis
 
@@ -490,7 +490,7 @@ print(df.to_markdown())  # Pretty table output
 - [How-To: Result Analysis](how-to/result-analysis.md) - Metrics interpretation, statistical analysis, visualization
 - [Utilities API Guide](api/utilities.md) - Validation, monitoring, analysis tools, performance profiling
 
----
+
 
 ## Hardware-in-the-Loop (HIL)
 
@@ -566,7 +566,7 @@ plt.grid(axis='y')
 plt.show()
 ```
 
----
+
 
 ## Batch Processing
 
@@ -651,7 +651,7 @@ print("Batch complete!")
 print(f"Generated {len(result_files)} result files")
 ```
 
----
+
 
 ## Web Interface
 
@@ -687,7 +687,7 @@ streamlit run streamlit_app.py --server.address 0.0.0.0
 - **Batch updates:** Change multiple parameters before clicking "Run"
 - **Download results:** Export JSON files for reproducibility
 
----
+
 
 ## Best Practices
 
@@ -720,7 +720,7 @@ streamlit run streamlit_app.py --server.address 0.0.0.0
 3. **Document environment:** Note Python version, OS, hardware
 4. **Version control:** Track all code, configs, and analysis scripts
 
----
+
 
 ## Troubleshooting
 
@@ -791,7 +791,7 @@ print(f"Simulation took {elapsed:.2f} seconds")
 4. **Try different seed:** `--seed 123`, `--seed 456`, etc.
 5. **Validate cost function:** Ensure fitness correlates with actual performance
 
----
+
 
 ## Quick Reference
 
@@ -840,7 +840,7 @@ streamlit run streamlit_app.py
 | Overshoot | % | Peak deviation beyond setpoint |
 | Control Effort | ∫‖u‖ dt | Lower = more efficient |
 
----
+
 
 ## Next Steps
 

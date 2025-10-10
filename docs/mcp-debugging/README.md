@@ -2,7 +2,7 @@
 
 Model Context Protocol (MCP) integration for systematic debugging of control systems, PSO optimization, and simulation workflows.
 
----
+
 
 ## 📦 Available MCP Servers
 
@@ -28,11 +28,12 @@ Model Context Protocol (MCP) integration for systematic debugging of control sys
    - UI validation
    - Screenshot capture
 
----
+
 
 ## 🔧 Quick Start
 
 ### 1. Verify MCP Installation
+
 ```bash
 npm list -g | grep mcp
 # Should show:
@@ -43,18 +44,20 @@ npm list -g | grep mcp
 ```
 
 ### 2. Test MCP Inspector
+
 ```bash
 /inspect-server
 # Launches MCP Inspector UI at localhost:6274
 ```
 
 ### 3. Run Debugging Command
+
 ```bash
 /debug-with-mcp
 # Starts integrated debugging workflow
 ```
 
----
+
 
 ## 📁 Directory Structure
 
@@ -74,31 +77,35 @@ docs/mcp-debugging/
     └── mcp-inspector-quickstart.md
 ```
 
----
+
 
 ## 🎯 Common Use Cases
 
 ### Debug PSO Convergence Issues
+
 ```bash
 /analyze-pso-logs pso_lyapunov_run.log
 ```
 
 ### Validate Simulation Results
+
 ```bash
 /validate-simulation results/sim_classical_smc.json classical_smc
 ```
 
 ### Run Controller Tests
+
 ```bash
 /test-controller classical_smc --coverage
 ```
 
 ### Optimize Controller Gains
+
 ```bash
 /optimize-controller adaptive_smc --swarm_size 50
 ```
 
----
+
 
 ## 📊 Slash Commands
 
@@ -113,7 +120,7 @@ docs/mcp-debugging/
 | `/validate-simulation` | Validate simulation results | Filesystem, Sequential Thinking |
 | `/optimize-controller` | PSO optimization workflow | Filesystem, Sequential Thinking, GitHub |
 
----
+
 
 ## 🔗 Configuration
 
@@ -128,7 +135,7 @@ setx GITHUB_TOKEN "your_personal_access_token"
 export GITHUB_TOKEN="your_personal_access_token"
 ```
 
----
+
 
 ## 📚 Further Reading
 
@@ -137,7 +144,7 @@ export GITHUB_TOKEN="your_personal_access_token"
 - GitHub Server: Configured via MCP server settings
 - MCP Inspector: Run `/inspect-server` slash command for interactive debugging
 
----
+
 
 **Created**: 2025-10-06
 **Purpose**: MCP-powered debugging for DIP-SMC-PSO project

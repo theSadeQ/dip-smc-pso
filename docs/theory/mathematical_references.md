@@ -10,6 +10,7 @@ This page serves as a central index of all numbered equations used throughout th
 :label: eq:lagrangian_dynamics
 \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) - \frac{\partial L}{\partial q_i} = Q_i
 ```
+
 **Context**: Lagrangian formulation of the double-inverted pendulum system.
 **Location**: {doc}`system_dynamics_complete`
 
@@ -21,6 +22,7 @@ m_1 l_1 c_1 + m_2(l_1 c_1 + l_2 c_{12}) & I_1 + m_1 l_1^2 + m_2 l_1^2 & m_2 l_1 
 m_2 l_2 c_{12} & m_2 l_1 l_2 c_2 & I_2 + m_2 l_2^2
 \end{bmatrix}
 ```
+
 **Context**: Inertia matrix for the three-degree-of-freedom system.
 **Location**: {doc}`system_dynamics_complete`
 
@@ -32,6 +34,7 @@ m_2 l_2 c_{12} & m_2 l_1 l_2 c_2 & I_2 + m_2 l_2^2
 0 & m_2 l_1 l_2 s_2 \dot{\theta_1} & 0
 \end{bmatrix}
 ```
+
 **Context**: Coriolis and centripetal forces matrix.
 **Location**: {doc}`system_dynamics_complete`
 
@@ -44,6 +47,7 @@ m_2 l_2 c_{12} & m_2 l_1 l_2 c_2 & I_2 + m_2 l_2^2
 \mat{M}^{-1}(\vec{q})[\vec{B}u - \mat{C}(\vec{q}, \dot{\vec{q}})\dot{\vec{q}} - \vec{G}(\vec{q})]
 \end{bmatrix}
 ```
+
 **Context**: Complete state-space representation of the nonlinear system.
 **Location**: {doc}`system_dynamics_complete`
 
@@ -55,6 +59,7 @@ m_2 l_2 c_{12} & m_2 l_1 l_2 c_2 & I_2 + m_2 l_2^2
 :label: eq:sliding_surface_design
 s(\vec{x}) = \mat{S}\vec{x} = \vec{c}^T \vec{e} + \dot{\vec{e}}
 ```
+
 **Context**: Linear sliding surface with tracking error dynamics.
 **Location**: {doc}`smc_theory_complete`
 
@@ -62,6 +67,7 @@ s(\vec{x}) = \mat{S}\vec{x} = \vec{c}^T \vec{e} + \dot{\vec{e}}
 :label: eq:reaching_condition_ref
 s \dot{s} \leq -\eta |s|
 ```
+
 **Context**: Reaching condition for finite-time convergence to sliding surface.
 **Location**: {doc}`smc_theory_complete`
 
@@ -71,6 +77,7 @@ s \dot{s} \leq -\eta |s|
 :label: eq:classical_smc
 u = u_{eq} + u_{sw} = -(\mat{S}\mat{B})^{-1}\mat{S}f(\vec{x}) - \eta \frac{s}{|s| + \epsilon}
 ```
+
 **Context**: Classical sliding mode control with boundary layer.
 **Location**: {doc}`smc_theory_complete`
 
@@ -82,6 +89,7 @@ u &= u_1 + u_2 \\
 u_2 &= -\beta \text{sign}(s)
 \end{aligned}
 ```
+
 **Context**: Super-twisting algorithm for chattering-free control.
 **Location**: {doc}`smc_theory_complete`
 
@@ -89,6 +97,7 @@ u_2 &= -\beta \text{sign}(s)
 :label: eq:adaptive_law
 \dot{\hat{\theta}} = \Gamma s \sigma(\vec{x})
 ```
+
 **Context**: Adaptive parameter estimation for uncertain systems.
 **Location**: {doc}`smc_theory_complete`
 
@@ -98,6 +107,7 @@ u_2 &= -\beta \text{sign}(s)
 :label: eq:lyapunov_candidate_ref
 V(\vec{x}) = \frac{1}{2}s^T s + \frac{1}{2}\tilde{\theta}^T \Gamma^{-1} \tilde{\theta}
 ```
+
 **Context**: Lyapunov function candidate for adaptive sliding mode control.
 **Location**: {doc}`smc_theory_complete`
 
@@ -105,6 +115,7 @@ V(\vec{x}) = \frac{1}{2}s^T s + \frac{1}{2}\tilde{\theta}^T \Gamma^{-1} \tilde{\
 :label: eq:lyapunov_stability
 \dot{V}(\vec{x}) = -\eta |s| \leq 0
 ```
+
 **Context**: Lyapunov stability condition ensuring finite-time convergence.
 **Location**: {doc}`smc_theory_complete`
 
@@ -112,6 +123,7 @@ V(\vec{x}) = \frac{1}{2}s^T s + \frac{1}{2}\tilde{\theta}^T \Gamma^{-1} \tilde{\
 :label: eq:finite_time_convergence
 t_{reach} \leq \frac{V(0)}{\eta}
 ```
+
 **Context**: Upper bound on reaching time to sliding surface.
 **Location**: {doc}`smc_theory_complete`
 
@@ -123,6 +135,7 @@ t_{reach} \leq \frac{V(0)}{\eta}
 :label: eq:pso_velocity_update_ref
 \vec{v}_i^{(k+1)} = w\vec{v}_i^{(k)} + c_1 r_1(\vec{p}_i - \vec{x}_i^{(k)}) + c_2 r_2(\vec{g} - \vec{x}_i^{(k)})
 ```
+
 **Context**: Velocity update equation for PSO particle motion.
 **Location**: {doc}`pso_optimization_complete`
 
@@ -130,6 +143,7 @@ t_{reach} \leq \frac{V(0)}{\eta}
 :label: eq:pso_position_update_ref
 \vec{x}_i^{(k+1)} = \vec{x}_i^{(k)} + \vec{v}_i^{(k+1)}
 ```
+
 **Context**: Position update equation for PSO particles.
 **Location**: {doc}`pso_optimization_complete`
 
@@ -139,6 +153,7 @@ t_{reach} \leq \frac{V(0)}{\eta}
 :label: eq:pso_objective
 J(\theta) = w_e \int_0^T \|\vec{e}(t)\|^2 dt + w_u \int_0^T u(t)^2 dt + w_s \int_0^T \dot{u}(t)^2 dt
 ```
+
 **Context**: Multi-objective cost function for controller optimization.
 **Location**: {doc}`pso_optimization_complete`
 
@@ -201,6 +216,7 @@ J(\theta) = w_e \int_0^T \|\vec{e}(t)\|^2 dt + w_u \int_0^T u(t)^2 dt + w_s \int
 ## Quick Reference
 
 ### Most Important Equations
+
 - System dynamics: {eq}`eq:state_space_form`
 - Sliding surface: {eq}`eq:sliding_surface_design`
 - Control law: {eq}`eq:classical_smc`
@@ -208,6 +224,7 @@ J(\theta) = w_e \int_0^T \|\vec{e}(t)\|^2 dt + w_u \int_0^T u(t)^2 dt + w_s \int
 - PSO update: {eq}`eq:pso_velocity_update`
 
 ### Cross-References
+
 - {doc}`notation_and_conventions` - Symbol definitions
 - {doc}`system_dynamics_complete` - Detailed derivations
 - {doc}`smc_theory_complete` - Control theory proofs

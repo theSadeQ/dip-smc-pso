@@ -1,4 +1,5 @@
 # Coverage Analysis & Quality Gates This document describes the coverage analysis system and quality gates implementation for the DIP-SMC-PSO project. ## Current Coverage Status **Overall Coverage**: 25.9% ➜ **Target**: 85%
+
 **Critical Components**: TBD ➜ **Target**: 95%
 **Safety-Critical**: TBD ➜ **Target**: 100% ## Coverage Categories ### Critical Components (95% Required)
 - **Controllers** (`src/controllers/`): Control system implementations - Classical SMC, STA-SMC, Adaptive SMC, Hybrid Adaptive STA-SMC - Controller factory and configuration management
@@ -11,16 +12,19 @@
 # Generate coverage reports
 python -m pytest tests/ \ --cov=src \ --cov-report=html:validation/htmlcov \ --cov-report=xml:validation/coverage.xml \ --cov-report=json:validation/coverage.json \ --cov-report=term-missing
 ``` ### Quality Gate Validation
+
 ```bash
 # Run all quality gates with threshold enforcement
 python scripts/run_quality_gates.py --output validation/quality_gates.json # Coverage-specific threshold validation
 python scripts/coverage_validator.py \ --coverage-xml validation/coverage.xml \ --fail-below-threshold \ --output-json validation/coverage_metrics.json
 ``` ### CI Integration
+
 ```bash
 # CI-ready validation sequence
 pytest tests/ --cov=src --cov-report=xml:coverage.xml --cov-fail-under=85
 python scripts/coverage_validator.py --coverage-xml coverage.xml --fail-below-threshold
 ``` ## Reports and Artifacts - **HTML Report**: `validation/htmlcov/index.html` - Interactive coverage visualization
+
 - **XML Report**: `validation/coverage.xml` - Machine-readable coverage data
 - **JSON Report**: `validation/coverage.json` - Detailed coverage metrics
 - **Quality Gates**: `validation/quality_gates.json` - Pass/fail status for all gates

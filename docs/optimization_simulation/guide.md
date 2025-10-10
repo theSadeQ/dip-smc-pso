@@ -1,4 +1,9 @@
-# Optimization & Simulation Guide **PSO Optimization and Simulation Infrastructure** > guide to particle swarm optimization, simulation engines, and the configuration system for the double inverted pendulum control framework. --- ## Table of Contents 1. [Overview](#overview)
+# Optimization & Simulation Guide **PSO Optimization and Simulation Infrastructure** > guide to particle swarm optimization, simulation engines, and the configuration system for the double inverted pendulum control framework.
+
+---
+
+## Table of Contents 1. [Overview](#overview)
+
 2. [PSO Optimization](#pso-optimization)
 3. [Simulation Infrastructure](#simulation-infrastructure)
 4. [Configuration System](#configuration-system)
@@ -7,7 +12,12 @@
 7. [Integration Methods](#integration-methods)
 8. [Usage Examples](#usage-examples)
 9. [Performance Optimization](#performance-optimization)
-10. [API Reference](#api-reference) --- ## Overview The optimization and simulation infrastructure provides: | Component | Purpose | Key Features |
+10. [API Reference](#api-reference)
+
+---
+
+## Overview The optimization and simulation infrastructure provides: | Component | Purpose | Key Features |
+
 |-----------|---------|--------------|
 | **PSO Optimizer** | Controller gain tuning | Vectorized evaluation, uncertainty handling, adaptive penalties |
 | **Simulation Runner** | Sequential integration | Explicit Euler, latency monitoring, state management |
@@ -18,7 +28,11 @@
 │ Configuration System │
 │ (Pydantic Schemas: Physics, Simulation, Controllers, PSO) │
 └────────────┬────────────────────────────────────┬───────────┘ │ │ ┌────────▼────────┐ ┌───────▼──────────┐ │ PSO Optimizer │◄─────────────────│ Vector Sim │ │ Cost Function │ batch evaluate │ Safety Guards │ │ Uncertainty │ │ Early Stopping │ └────────┬────────┘ └───────┬──────────┘ │ │ │ ┌───────────────────┐ │ └─────►│ Simulation Runner │◄────────┘ │ Euler Integration│ │ State Management │ └─────────┬─────────┘ │ ┌─────────▼──────────┐ │ Dynamics Models │ │ Simplified / Full │ └────────────────────┘
-``` --- ## PSO Optimization ### Overview The PSO (Particle Swarm Optimization) tuner provides high-throughput, vectorized controller gain optimization with robust handling of instabilities and uncertainties. **Source:** [`src/optimization/algorithms/pso_optimizer.py`](../../src/optimization/algorithms/pso_optimizer.py) ### Key Features - **Vectorized Evaluation**: Batch simulation of particle swarm for performance
+```
+
+---
+
+## PSO Optimization ### Overview The PSO (Particle Swarm Optimization) tuner provides high-throughput, vectorized controller gain optimization with robust handling of instabilities and uncertainties. **Source:** [`src/optimization/algorithms/pso_optimizer.py`](../../src/optimization/algorithms/pso_optimizer.py) ### Key Features - **Vectorized Evaluation**: Batch simulation of particle swarm for performance
 - **Uncertainty Handling**: Robustness evaluation with perturbed physics parameters
 - **Adaptive Penalties**: Dynamic instability penalties based on failure severity
 - **Cost Normalization**: Baseline-relative normalization for balanced optimization
@@ -32,6 +46,7 @@ config.physics_uncertainty.cart_mass = 0.1 # ±10% variation
 config.physics_uncertainty.pendulum1_mass = 0.1
 config.physics_uncertainty.pendulum2_mass = 0.1
 ``` **Uncertainty Sampling:**
+
 - Nominal model evaluated first
 - Subsequent draws perturb parameters within ±percent bounds
 - Ensures COM remains within pendulum length (safety constraint) **Cost Aggregation:**
@@ -61,19 +76,28 @@ cost_history = result['history']['cost'] print(f"Best gains: {best_gains}")
 print(f"Best cost: {best_cost:.4f}")
 print(f"Iterations to convergence: {len(cost_history)}")
 ``` ### PSO Convergence Visualization Interactive convergence plots show optimization progress for different SMC controllers: ```{eval-rst}
+
 .. chartjs:: :type: line :data: ../visualization/data/pso_comparison.json :height: 450 :responsive: :title: PSO Convergence Comparison Across Controllers
 ``` **Controller-Specific Convergence Analysis:** Classical SMC:
 ```{eval-rst}
+
 .. chartjs:: :type: line :data: ../visualization/data/pso_classical_smc_convergence.json :height: 350 :responsive: :title: Classical SMC PSO Convergence
 ``` Adaptive SMC:
 ```{eval-rst}
+
 .. chartjs:: :type: line :data: ../visualization/data/pso_adaptive_smc_convergence.json :height: 350 :responsive: :title: Adaptive SMC PSO Convergence
 ``` Hybrid Adaptive-STA SMC:
 ```{eval-rst}
+
 .. chartjs:: :type: line :data: ../visualization/data/pso_hybrid_adaptive_sta_smc_convergence.json :height: 350 :responsive: :title: Hybrid Adaptive-STA SMC PSO Convergence
 ``` **Convergence Statistics:** ```{eval-rst}
 .. chartjs:: :type: bar :data: ../visualization/data/convergence_statistics.json :height: 300 :responsive: :title: PSO Convergence Statistics Summary
-``` **Memory Efficiency:** PSO uses local PRNGs and instance-level attributes to avoid cross-contamination between optimization runs. **Performance:** Vectorized batch simulation achieves **10-100×** speedup over sequential evaluation. --- ## Simulation Infrastructure ### Simulation Runner The simulation runner provides sequential integration with explicit Euler method and state management. **Source:** [`src/simulation/engines/simulation_runner.py`](../../src/simulation/engines/simulation_runner.py) #### Key Features - **Explicit Euler Integration**: First-order forward integration
+``` **Memory Efficiency:** PSO uses local PRNGs and instance-level attributes to avoid cross-contamination between optimization runs. **Performance:** Vectorized batch simulation achieves **10-100×** speedup over sequential evaluation.
+
+---
+
+## Simulation Infrastructure ### Simulation Runner The simulation runner provides sequential integration with explicit Euler method and state management. **Source:** [`src/simulation/engines/simulation_runner.py`](../../src/simulation/engines/simulation_runner.py) #### Key Features - **Explicit Euler Integration**: First-order forward integration
+
 - **Controller Interface Flexibility**: Supports both `compute_control` and `__call__`
 - **State and History Management**: Automatic initialization and persistence
 - **Control Saturation**: Input limits via `u_max` or `controller.max_force`
@@ -96,9 +120,15 @@ print(f"Final state: {x_arr[-1]}")
 print(f"Max control: {np.max(np.abs(u_arr)):.2f} N")
 ``` #### Latency Monitoring The runner supports real-time deadline monitoring: ```python
 # example-metadata:
+
 # runnable: false def fallback_controller(t, x): """Simple PD controller as fallback.""" return -10 * x[0] - 5 * x[3] # Proportional to cart position and velocity t_arr, x_arr, u_arr = run_simulation( controller=main_controller, dynamics_model=dynamics, sim_time=5.0, dt=0.01, initial_state=x0, fallback_controller=fallback_controller # Activated on deadline miss
+
 )
-``` When a control computation exceeds `dt`, the fallback controller is used for all subsequent steps. --- ## Vectorized Batch Simulation ### Overview Vectorized batch simulation enables efficient parallel evaluation of multiple controllers, essential for PSO optimization. **Source:** [`src/simulation/engines/vector_sim.py`](../../src/simulation/engines/vector_sim.py) ### Key Features - **Unified Interface**: Supports both scalar and batch modes transparently
+``` When a control computation exceeds `dt`, the fallback controller is used for all subsequent steps.
+
+---
+
+## Vectorized Batch Simulation ### Overview Vectorized batch simulation enables efficient parallel evaluation of multiple controllers, essential for PSO optimization. **Source:** [`src/simulation/engines/vector_sim.py`](../../src/simulation/engines/vector_sim.py) ### Key Features - **Unified Interface**: Supports both scalar and batch modes transparently
 - **Safety Guards**: NaN detection, energy limits, state bounds
 - **Early Stopping**: Convergence detection and `stop_fn` callback
 - **Memory Efficient**: View-based array operations minimize copying ### API: `simulate_system_batch` ```python
@@ -106,6 +136,7 @@ print(f"Max control: {np.max(np.abs(u_arr)):.2f} N")
 # runnable: false def simulate_system_batch( *, controller_factory: Callable[[np.ndarray], Any], particles: np.ndarray, # Shape: (B, G) for B particles, G gains sim_time: float, dt: float, u_max: Optional[float] = None, params_list: Optional[List] = None, # Uncertainty evaluation convergence_tol: Optional[float] = None, # Early stopping threshold grace_period: float = 0.0
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]: """ Returns: ------- t : np.ndarray, shape (N+1,) Time vector x_b : np.ndarray, shape (B, N+1, D) State trajectories for B particles u_b : np.ndarray, shape (B, N) Control sequences sigma_b : np.ndarray, shape (B, N) Sliding surface values """
 ``` ### Batch Simulation Example ```python
+
 from src.simulation.engines.vector_sim import simulate_system_batch
 from src.controllers import create_smc_for_pso, SMCType
 import numpy as np # Define controller factory
@@ -122,16 +153,22 @@ print(f"Best particle: {best_particle_idx}, ISE: {ise[best_particle_idx]:.4f}")
 ``` ### Safety Guards The simulation framework includes automatic safety checks: #### 1. NaN Detection ```python
 def _guard_no_nan(state: np.ndarray, step_idx: int) -> None: """Raise error if state contains NaN or Inf values.""" if not np.all(np.isfinite(state)): raise ValueError(f"Non-finite state detected at step {step_idx}")
 ``` #### 2. Energy Bounds ```python
+
 def _guard_energy(state: np.ndarray, limits: dict) -> None: """Verify total energy within specified limits.""" energy = np.sum(state**2, axis=-1) max_energy = limits.get('max', np.inf) if np.any(energy > max_energy): raise ValueError(f"Energy {energy.max():.2f} exceeds limit {max_energy:.2f}")
 ``` #### 3. State Bounds ```python
 def _guard_bounds(state: np.ndarray, bounds: Tuple, t: float) -> None: """Verify state within per-dimension bounds.""" lower, upper = bounds if lower is not None and np.any(state < lower): raise ValueError(f"State below lower bound at t={t:.3f}") if upper is not None and np.any(state > upper): raise ValueError(f"State above upper bound at t={t:.3f}")
 ``` ### Early Convergence Detection Batch simulation supports early stopping when convergence is detected: ```python
+
 t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=factory, particles=particles, sim_time=10.0, dt=0.01, convergence_tol=0.001, # Stop when max(|σ|) < 0.001 grace_period=1.0 # Wait 1 second before checking
 ) print(f"Converged early: {len(t)} steps < {int(10.0/0.01)} max steps")
 ``` **Benefits:**
 - Reduces PSO computational cost by 30-70% for well-converged controllers
 - Avoids wasting computation on settled trajectories
-- Ensures minimum settling time via grace period --- ## Configuration System ### Overview The configuration system uses Pydantic for type-safe, validated parameter management. **Source:** [`src/config/schemas.py`](../../src/config/schemas.py) ### Architecture ```
+- Ensures minimum settling time via grace period
+
+---
+
+## Configuration System ### Overview The configuration system uses Pydantic for type-safe, validated parameter management. **Source:** [`src/config/schemas.py`](../../src/config/schemas.py) ### Architecture ```
 ConfigSchema
 ├── physics: PhysicsConfig
 │ ├── Mass parameters (cart, pendulums)
@@ -160,6 +197,7 @@ ConfigSchema
 │ └── combine_weights: (mean, max)
 └── physics_uncertainty: PhysicsUncertaintySchema ├── n_evals: Number of perturbed evaluations └── Parameter variation percentages
 ``` ### Type-Safe Configuration Pydantic provides compile-time type safety and runtime validation: ```python
+
 from src.config import load_config # Load and validate configuration
 config = load_config("config.yaml") # Access with full IDE autocomplete and type checking
 cart_mass: float = config.physics.cart_mass
@@ -172,12 +210,14 @@ except Exception: print("Type error prevented!")
 @field_validator("cart_mass", "pendulum1_mass", "pendulum2_mass")
 def _must_be_strictly_positive(cls, v: float, info) -> float: if v <= 0.0: raise ValueError(f"{info.field_name} must be > 0 (conservation of mass)") return v
 ``` #### 2. Center of Mass Within Length ```python
+
 @model_validator(mode="after")
 def _validate_com_within_length(self) -> "PhysicsConfig": if self.pendulum1_com >= self.pendulum1_length: raise ValueError( f"pendulum1_com must be < pendulum1_length (geometric requirement)" ) return self
 ``` #### 3. Simulation Duration Validity ```python
 @model_validator(mode="after")
 def _duration_at_least_dt(self): if self.duration < self.dt: raise ValueError("duration must be >= dt (temporal consistency)") return self
 ``` ### Configuration Loading ```python
+
 from src.config import load_config # Load with unknown field rejection (strict mode)
 config = load_config("config.yaml", allow_unknown=False) # Load with unknown field warning (permissive mode)
 config = load_config("config.yaml", allow_unknown=True) # Access nested configuration
@@ -191,7 +231,12 @@ simulation: duration: 5.0 dt: 0.01 use_full_dynamics: false sensor_latency: 0.0 
 pso: n_particles: 30 iters: 100 c1: 2.0 c2: 2.0 w: 0.9 velocity_clamp: [0.1, 0.5] w_schedule: [0.9, 0.4] bounds: classical_smc: min: [0.1, 0.1, 0.1, 0.1, 1.0, 0.0] max: [50.0, 50.0, 50.0, 50.0, 200.0, 50.0] # Cost function
 cost_function: weights: state_error: 1.0 control_effort: 0.01 control_rate: 0.001 stability: 0.5 norms: state_error: 1.0 control_effort: 1.0 control_rate: 1.0 sliding: 1.0 combine_weights: mean: 0.7 max: 0.3 # Controller defaults
 controller_defaults: classical_smc: gains: [10.0, 8.0, 15.0, 12.0, 50.0, 5.0] max_force: 100.0 boundary_layer: 0.01 dt: 0.01
-``` --- ## Simulation Context ### Overview The `SimulationContext` class provides centralized management of simulation framework components. **Source:** [`src/simulation/core/simulation_context.py`](../../src/simulation/core/simulation_context.py) ### Key Responsibilities 1. **Configuration Loading**: Unified config access
+```
+
+---
+
+## Simulation Context ### Overview The `SimulationContext` class provides centralized management of simulation framework components. **Source:** [`src/simulation/core/simulation_context.py`](../../src/simulation/core/simulation_context.py) ### Key Responsibilities 1. **Configuration Loading**: Unified config access
+
 2. **Dynamics Model Selection**: Full vs simplified dynamics based on config
 3. **Component Registration**: Framework integration (FDI, monitors, analyzers)
 4. **Controller Factory**: Simplified controller creation
@@ -210,7 +255,11 @@ monitor = context.get_component("performance_monitor")
 | `sequential` | Single-threaded development | Simple, debuggable |
 | `batch` | PSO optimization | Vectorized parallel evaluation |
 | `parallel` | Multi-core execution | Process-based parallelism |
-| `real_time` | HIL experiments | Real-time scheduling, deadline monitoring | --- ## Integration Methods ### Explicit Euler Integration The primary integration method is explicit (forward) Euler: $$
+| `real_time` | HIL experiments | Real-time scheduling, deadline monitoring |
+
+---
+
+## Integration Methods ### Explicit Euler Integration The primary integration method is explicit (forward) Euler: $$
 \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \cdot \dot{\mathbf{x}}(\mathbf{x}_k, u_k)
 $$ **Properties:**
 - **Order:** First-order accurate ($O(\Delta t)$)
@@ -221,6 +270,7 @@ config.simulation.dt = 0.001 # 1 ms timestep # Balanced (recommended)
 config.simulation.dt = 0.01 # 10 ms timestep # Fast prototyping (low accuracy)
 config.simulation.dt = 0.05 # 50 ms timestep
 ``` ### Alternative Integration Methods For research applications requiring higher accuracy, the framework supports: #### Runge-Kutta 4th Order (RK4) Available via `benchmarks/integration/numerical_methods.py`: ```python
+
 from benchmarks.integration import RK4Integrator
 from src.plant.models.simplified import SimplifiedDIPDynamics dynamics = SimplifiedDIPDynamics(config)
 integrator = RK4Integrator(dynamics) result = integrator.integrate( x0=initial_state, sim_time=5.0, dt=0.01, controller=controller
@@ -233,9 +283,15 @@ from benchmarks.integration import AdaptiveRK45Integrator integrator = AdaptiveR
 result = integrator.integrate( x0=initial_state, sim_time=5.0, rtol=1e-8, # Relative tolerance atol=1e-10, # Absolute tolerance controller=controller
 )
 ``` **Properties:**
+
 - **Order:** Adaptive 4th/5th order
 - **Step Size:** Automatically adjusted for error control
-- **Use Case:** Energy conservation validation, benchmark comparisons --- ## Usage Examples ### Example 1: PSO Optimization Workflow Complete workflow for optimizing classical SMC gains: ```python
+- **Use Case:** Energy conservation validation, benchmark comparisons
+
+---
+
+## Usage Examples ### Example 1: PSO Optimization Workflow Complete workflow for optimizing classical SMC gains: ```python
+
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.controllers import create_smc_for_pso, SMCType
 from src.config import load_config
@@ -287,6 +343,7 @@ axes[2].grid(True)
 plt.tight_layout()
 plt.savefig("controller_comparison.png", dpi=150)
 ``` ### Example 3: Uncertainty Robustness Analysis Evaluate controller performance under parametric uncertainty: ```python
+
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.config import load_config config = load_config("config.yaml") # Configure uncertainty evaluation
 config.physics_uncertainty = { "n_evals": 10, # 10 perturbed physics models "cart_mass": 0.15, # ±15% variation "pendulum1_mass": 0.15, "pendulum2_mass": 0.15, "pendulum1_length": 0.05, # ±5% variation "pendulum2_length": 0.05, "gravity": 0.01, # ±1% variation (altitude/latitude) "cart_friction": 0.20, # ±20% variation "joint1_friction": 0.20, "joint2_friction": 0.20,
@@ -297,12 +354,17 @@ tuner = PSOTuner( controller_factory=controller_factory, config=config, seed=42
 result = tuner.optimise() print(f"Robust gains optimized under {config.physics_uncertainty.n_evals} uncertainty scenarios")
 print(f"Best robust cost: {result['best_cost']:.4f}")
 print(f"Optimized gains: {result['best_pos']}")
-``` --- ## Performance Optimization ### Memory Efficiency The simulation infrastructure includes several memory optimizations: #### 1. View-Based Array Operations ```python
+```
+
+---
+
+## Performance Optimization ### Memory Efficiency The simulation infrastructure includes several memory optimizations: #### 1. View-Based Array Operations ```python
 # MEMORY OPTIMIZATION: asarray creates view when input is already ndarray
 x = np.asarray(initial_state, dtype=float) # View if already float64 ndarray # Unnecessary defensive copy eliminated
 x_curr = x0 # No copy needed, immediately overwritten
 ``` **Benefit:** Eliminates 423 unnecessary copies in a typical 5-second simulation. #### 2. Broadcast Instead of Copy ```python
 # MEMORY OPTIMIZATION: broadcast_to returns view
+
 init_b = np.broadcast_to(init, (B, init.shape[0])) # Only copy when writeable buffer needed
 init_b = init_b.copy()
 ``` **Benefit:** Reduces memory footprint for batch simulations with identical initial conditions. ### Computational Performance #### 1. Numba JIT Compilation For maximum performance, use Numba-optimized dynamics: ```python
@@ -310,32 +372,52 @@ from src.plant.models.simplified import SimplifiedDIPDynamics dynamics = Simplif
 )
 ``` **Speedup:** 10-100× for repeated evaluations (PSO optimization, batch simulation) **Trade-off:** First call has ~1s compilation overhead #### 2. Vectorized Batch Simulation Always use batch simulation for PSO instead of sequential loops: ```python
 # example-metadata:
+
 # runnable: false # FAST: Vectorized batch evaluation
+
 t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=factory, particles=gain_array, sim_time=5.0, dt=0.01
 ) # SLOW: Sequential loop (10-100× slower)
 for i, gains in enumerate(gain_array): controller = factory(gains) t, x, u = run_simulation(controller, dynamics, 5.0, 0.01, x0)
 ``` #### 3. Early Convergence Stopping convergence detection to reduce PSO computational cost: ```python
 t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=factory, particles=particles, sim_time=10.0, dt=0.01, convergence_tol=0.001, # Stop when converged grace_period=1.0 # Minimum settling time
 )
-``` **Benefit:** 30-70% reduction in computation time for well-tuned controllers --- ## API Reference ### PSOTuner **Location:** [`src/optimization/algorithms/pso_optimizer.py`](../../src/optimization/algorithms/pso_optimizer.py) ```python
+``` **Benefit:** 30-70% reduction in computation time for well-tuned controllers
+
+---
+
+## API Reference ### PSOTuner **Location:** [`src/optimization/algorithms/pso_optimizer.py`](../../src/optimization/algorithms/pso_optimizer.py) ```python
+
 # example-metadata:
+
 # runnable: false class PSOTuner: """High-throughput, vectorized tuner for sliding-mode controllers.""" def __init__( self, controller_factory: Callable[[np.ndarray], Any], config: Union[ConfigSchema, str, Path], seed: Optional[int] = None, rng: Optional[np.random.Generator] = None, *, instability_penalty_factor: float = 100.0 ): """ Initialize PSO tuner. Parameters ---------- controller_factory : callable Function returning controller given gain vector config : ConfigSchema or path Configuration object or path to YAML seed : int, optional Random seed for reproducibility rng : np.random.Generator, optional External PRNG (overrides seed if provided) instability_penalty_factor : float Scale factor for instability penalties (default: 100.0) """ def optimise( self, *args, iters_override: Optional[int] = None, n_particles_override: Optional[int] = None, options_override: Optional[Dict[str, float]] = None, **kwargs ) -> Dict[str, Any]: """ Run PSO optimization. Parameters ---------- iters_override : int, optional Override config iterations n_particles_override : int, optional Override config swarm size options_override : dict, optional Override PSO hyperparameters (c1, c2, w) Returns ------- dict { "best_cost": float, "best_pos": np.ndarray, "history": {"cost": np.ndarray, "pos": np.ndarray} } """
+
 ``` ### run_simulation **Location:** [`src/simulation/engines/simulation_runner.py`](../../src/simulation/engines/simulation_runner.py) ```python
 # example-metadata:
 # runnable: false def run_simulation( *, controller: Any, dynamics_model: Any, sim_time: float, dt: float, initial_state: Any, u_max: Optional[float] = None, seed: Optional[int] = None, rng: Optional[np.random.Generator] = None, latency_margin: Optional[float] = None, fallback_controller: Optional[Callable[[float, np.ndarray], float]] = None, **kwargs
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]: """ Simulate single controller trajectory using Euler integration. Parameters ---------- controller : Any Controller object (compute_control or __call__ interface) dynamics_model : Any Dynamics model with step(state, u, dt) method sim_time : float Total simulation duration (seconds) dt : float Integration timestep (seconds), must be > 0 initial_state : array-like Initial state vector u_max : float, optional Control saturation limit fallback_controller : callable, optional Fallback controller for deadline misses Returns ------- t_arr : np.ndarray, shape (N+1,) Time vector x_arr : np.ndarray, shape (N+1, D) State trajectory u_arr : np.ndarray, shape (N,) Control sequence """
 ``` ### simulate_system_batch **Location:** [`src/simulation/engines/vector_sim.py`](../../src/simulation/engines/vector_sim.py) ```python
 # example-metadata:
+
 # runnable: false def simulate_system_batch( *, controller_factory: Callable[[np.ndarray], Any], particles: np.ndarray, sim_time: float, dt: float, u_max: Optional[float] = None, params_list: Optional[List] = None, convergence_tol: Optional[float] = None, grace_period: float = 0.0, **kwargs
+
 ) -> Union[ Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray], List[Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]
 ]: """ Vectorized batch simulation of multiple controllers. Parameters ---------- controller_factory : callable Factory function: controller = factory(gains) particles : np.ndarray, shape (B, G) Gain vectors for B particles sim_time : float Total simulation duration dt : float Integration timestep u_max : float, optional Control saturation limit params_list : list, optional List of physics parameter objects for uncertainty evaluation convergence_tol : float, optional Early stopping threshold for max(|σ|) grace_period : float Duration before convergence checking begins Returns ------- If params_list is None: (t, x_batch, u_batch, sigma_batch) If params_list is provided: List of (t, x_batch, u_batch, sigma_batch) tuples Notes ----- - t: shape (N+1,) - x_batch: shape (B, N+1, D) - u_batch: shape (B, N) - sigma_batch: shape (B, N) """
 ``` ### SimulationContext **Location:** [`src/simulation/core/simulation_context.py`](../../src/simulation/core/simulation_context.py) ```python
 # example-metadata:
 # runnable: false class SimulationContext: """Enhanced simulation context with framework integration.""" def __init__(self, config_path: str = "config.yaml"): """Initialize simulation context.""" def get_dynamics_model(self) -> Any: """Return initialized dynamics model.""" def get_config(self) -> ConfigSchema: """Return validated configuration.""" def create_controller( self, name: Optional[str] = None, gains: Optional[List[float]] = None ) -> Any: """Create controller using configuration.""" def create_simulation_engine( self, engine_type: str = "sequential" ) -> SimulationEngine: """ Create simulation engine. Parameters ---------- engine_type : str Engine type: 'sequential', 'batch', 'parallel', 'real_time' """ def register_component(self, name: str, component: Any) -> None: """Register framework component.""" def get_component(self, name: str) -> Optional[Any]: """Get registered component."""
-``` --- ## Related Documentation - [**Controllers Implementation Guide**](../controllers/factory_system_guide.md) - SMC controller details and usage
+```
+
+---
+
+## Related Documentation - [**Controllers Implementation Guide**](../controllers/factory_system_guide.md) - SMC controller details and usage
+
 - [**Plant Models Guide**](../plant/models_guide.md) - Dynamics models and physics computation
 - [**Mathematical Foundations**](../mathematical_foundations/index.md) - Control theory and optimization theory
 - [**Configuration Reference**](../guides/api/configuration.md) - Complete configuration schema documentation
-- [**Performance Benchmarks**](../benchmarks/controller_performance_benchmarks.md) - Integration method comparisons and performance analysis --- **Version:** Phase 3
+- [**Performance Benchmarks**](../benchmarks/controller_performance_benchmarks.md) - Integration method comparisons and performance analysis
+
+---
+
+**Version:** Phase 3
 **Last Updated:** October 2025
 **Status:** Production-Ready ✓

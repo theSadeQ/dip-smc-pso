@@ -215,6 +215,7 @@ Select-String -Path .\.dev_tools\backup\backup.log -Pattern "ERROR"
 ### Common Issues
 
 #### "Authentication failed"
+
 ```powershell
 # Solution: Configure Git credential helper
 git config --global credential.helper manager-core
@@ -222,12 +223,14 @@ git push  # Authenticate when prompted
 ```
 
 #### "index.lock exists"
+
 ```bash
 # Solution: Remove stale lock file
 rm .git/index.lock
 ```
 
 #### "Not a git repository"
+
 ```powershell
 # Solution: Verify you're in the correct directory
 cd D:\Projects\main
@@ -235,6 +238,7 @@ git rev-parse --show-toplevel  # Should output repository root
 ```
 
 #### "Remote URL mismatch"
+
 ```bash
 # Solution: Script auto-corrects, but you can verify manually
 git remote -v
@@ -335,7 +339,7 @@ Potential improvements for future versions:
 - **Multi-repository**: Support backup across multiple projects
 - **Web dashboard**: Real-time backup status monitoring
 
----
+
 
 **Last Updated**: 2025-10-01
 **Author**: Claude Code Team

@@ -2,7 +2,7 @@
 
 **🚀 Quick access to common MCP debugging operations**
 
----
+
 
 ## 📋 Slash Commands
 
@@ -17,11 +17,12 @@
 | `/debug-with-mcp` | Integrated debugging session | Complex multi-domain issues |
 | `/inspect-server` | Launch MCP Inspector | Testing server connectivity |
 
----
+
 
 ## 🔧 MCP Server Tools
 
 ### filesystem (File Operations)
+
 ```javascript
 // Read file
 read_file({ path: "src/controllers/smc.py" })
@@ -37,6 +38,7 @@ search_files({ pattern: "*.log", query: "LinAlgError" })
 ```
 
 ### sqlite-mcp (Database Queries)
+
 ```sql
 -- List all tables
 list_tables()
@@ -52,6 +54,7 @@ query({ sql: "SELECT controller_type, AVG(settling_time) FROM results GROUP BY c
 ```
 
 ### pytest-mcp (Test Debugging)
+
 ```javascript
 // List recent failures
 list_failures({ last: 10 })
@@ -67,6 +70,7 @@ track_test({ name: "test_pso_convergence" })
 ```
 
 ### git-mcp (Version Control)
+
 ```bash
 # View commit history
 log({ options: "--oneline --since '1 week ago'" })
@@ -84,11 +88,12 @@ branch({ name: "fix/numerical-stability" })
 show({ commit: "<hash>" })
 ```
 
----
+
 
 ## 🐛 Common Debugging Scenarios
 
 ### Scenario 1: PSO Not Converging
+
 ```bash
 # 1. Check recent runs
 /analyze-pso-logs
@@ -104,6 +109,7 @@ filesystem: read_file("config/pso_config.yaml")
 ```
 
 ### Scenario 2: Test Failing
+
 ```bash
 # 1. List failures
 pytest-mcp: list_failures({ last: 5 })
@@ -119,6 +125,7 @@ filesystem: read_file("tests/test_<name>.py")
 ```
 
 ### Scenario 3: Numerical Error
+
 ```bash
 # 1. Search for errors
 filesystem: search_files({ pattern: "*.log", query: "LinAlgError" })
@@ -134,6 +141,7 @@ git-mcp: diff({ files: "src/models/" })
 ```
 
 ### Scenario 4: Dashboard Issue
+
 ```bash
 # 1. Launch dashboard
 streamlit run app.py
@@ -148,11 +156,12 @@ filesystem: read_file("logs/streamlit.log")
 sqlite: SELECT COUNT(*) FROM simulation_results;
 ```
 
----
+
 
 ## 📊 Quick Data Queries
 
 ### PSO Performance
+
 ```sql
 -- Best fitness by controller type
 SELECT controller_type, MIN(best_fitness) as best
@@ -174,6 +183,7 @@ LIMIT 5;
 ```
 
 ### Test Results
+
 ```sql
 -- Test success rate
 SELECT
@@ -192,6 +202,7 @@ LIMIT 10;
 ```
 
 ### Simulation Metrics
+
 ```sql
 -- Performance comparison
 SELECT
@@ -209,11 +220,12 @@ ORDER BY settling_time
 LIMIT 5;
 ```
 
----
+
 
 ## 🔍 Search Patterns
 
 ### Log Analysis Patterns
+
 ```bash
 # Numerical errors
 /analyze-logs --pattern "LinAlgError|RuntimeWarning|singular matrix"
@@ -229,6 +241,7 @@ LIMIT 5;
 ```
 
 ### Code Search Patterns
+
 ```bash
 # Find matrix inversions
 filesystem: search_files({ pattern: "*.py", query: "np.linalg.inv" })
@@ -243,11 +256,12 @@ filesystem: search_files({ pattern: "*.py", query: "type:.*ignore" })
 filesystem: search_files({ pattern: "*.py", query: "deprecated" })
 ```
 
----
+
 
 ## 🛠️ Configuration Files
 
 ### .mcp.json Structure
+
 ```json
 {
   "mcpServers": {
@@ -265,6 +279,7 @@ filesystem: search_files({ pattern: "*.py", query: "deprecated" })
 ```
 
 ### Server Paths
+
 ```
 mcp-debugger:
   C:\Users\sadeg\AppData\Roaming\npm\node_modules\mcp-debugger\bin\mcp-debugger.js
@@ -279,11 +294,12 @@ sqlite-mcp:
   C:\Users\sadeg\AppData\Roaming\npm\node_modules\mcp-sqlite\mcp-sqlite-server.js
 ```
 
----
+
 
 ## 🚨 Troubleshooting
 
 ### Server Not Responding
+
 ```bash
 # 1. Check server status
 npx @modelcontextprotocol/inspector
@@ -299,6 +315,7 @@ cat ~/.mcp/logs/<server-name>.log
 ```
 
 ### Database Connection Failed
+
 ```bash
 # 1. Verify database exists
 ls -la logs/pso_results.db
@@ -315,6 +332,7 @@ python scripts/create_pso_database.py
 ```
 
 ### Import Errors
+
 ```bash
 # 1. Check Python path
 echo $PYTHONPATH
@@ -329,36 +347,41 @@ pip install --force-reinstall <package>
 which python
 ```
 
----
+
 
 ## 📖 Documentation Links
 
 ### Workflows
+
 - [Complete Debugging Workflow](workflows/complete-debugging-workflow.md)
 - [PSO Optimization Workflow](../guides/workflows/pso-optimization-workflow.md)
 - [Controller Testing Guide](../testing/guides/control_systems_unit_testing.md)
 
 ### Configuration
+
 - MCP Configuration: See `.mcp.json` in project root
 - [Pytest Configuration](../../pytest.ini)
 - Environment Variables: See `.env.example` in project root
 
 ### Slash Commands
+
 - [Analyze Logs](../../.claude/commands/analyze-logs.md)
 - [Debug with MCP](../../.claude/commands/debug-with-mcp.md)
 - [Test Controller](../../.claude/commands/test-controller.md)
 
----
+
 
 ## 💡 Tips and Tricks
 
 ### 1. Parallel Debugging
+
 ```bash
 # Run multiple slash commands in sequence
 /analyze-logs && /test-controller && /validate-simulation
 ```
 
 ### 2. Custom Queries
+
 ```sql
 -- Create view for common queries
 CREATE VIEW recent_failures AS
@@ -372,6 +395,7 @@ SELECT * FROM recent_failures;
 ```
 
 ### 3. Batch Operations
+
 ```bash
 # Process multiple log files
 for log in logs/*.log; do
@@ -380,13 +404,14 @@ done
 ```
 
 ### 4. Integration with CI/CD
+
 ```bash
 # Add to pytest configuration
 [pytest]
 addopts = --mcp-server=pytest-mcp --track-failures
 ```
 
----
+
 
 **Last Updated**: 2025-10-06
 **Version**: 1.0.0

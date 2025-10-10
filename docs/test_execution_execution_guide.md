@@ -4,7 +4,7 @@
 
 **See:** [Testing Framework Technical Guide](./testing/testing_framework_technical_guide.md)
 
----
+
 
 ## Quick Start
 
@@ -17,11 +17,13 @@ For complete test execution workflows, refer to:
 ## Common Test Execution Commands
 
 ### Run All Tests
+
 ```bash
 pytest tests/ -v
 ```
 
 ### Run Specific Test Categories
+
 ```bash
 # Controllers only
 pytest tests/test_controllers/ -v
@@ -34,11 +36,13 @@ pytest tests/test_benchmarks/ --benchmark-only
 ```
 
 ### Coverage Analysis
+
 ```bash
 pytest tests/ --cov=src --cov-report=html
 ```
 
 ### Parallel Execution
+
 ```bash
 pytest tests/ -n auto
 ```

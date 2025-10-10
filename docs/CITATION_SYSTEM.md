@@ -1,5 +1,11 @@
 # Citation System Documentation **Status:** To be completed in Phase B (Citation System Implementation)
-**Est. Completion:** Week 10 of Phase B --- ## Overview This document will provide documentation of the citation system implementation, covering the automated extraction, research, integration, and validation processes. ## Planned Content ### 1. System Architecture
+
+**Est. Completion:** Week 10 of Phase B
+
+---
+
+## Overview This document will provide documentation of the citation system implementation, covering the automated extraction, research, integration, and validation processes. ## Planned Content ### 1. System Architecture
+
 - Citation extraction pipeline
 - AI-powered research automation
 - Citation integration workflow
@@ -48,4 +54,8 @@
 - [Phase 2 Plan](./plans/citation_system/03_phase2_ai_research.md)
 - [Phase 3 Plan](./plans/citation_system/04_phase3_citation_integration.md)
 - [Phase 4 Plan](./plans/citation_system/05_phase4_validation_quality.md)
-- [Phase 5 Plan](./plans/citation_system/06_phase5_final_review.md) --- **Note:** This documentation will be completed as part of the Citation System Implementation (Phase B of the strategic roadmap).
+- [Phase 5 Plan](./plans/citation_system/06_phase5_final_review.md)
+
+---
+
+**Note:** This documentation will be completed as part of the Citation System Implementation (Phase B of the strategic roadmap).

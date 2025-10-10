@@ -1,10 +1,20 @@
 # Particle Swarm Optimization: Mathematical Theory **Module:** Optimization
+
 **Category:** Mathematical Foundations
 **Complexity:** Advanced
-**Prerequisites:** Optimization theory, stochastic algorithms, control systems --- ## Table of Contents ```{contents}
+**Prerequisites:** Optimization theory, stochastic algorithms, control systems
+
+---
+
+## Table of Contents ```{contents}
+
 :local:
 :depth: 3
-``` --- ## Overview Particle Swarm Optimization (PSO) is a population-based metaheuristic optimization algorithm inspired by the social behavior of bird flocking and fish schooling. PSO has become the primary automated gain tuning method for sliding mode controllers in the DIP-SMC-PSO system due to its: ✅ **Derivative-free nature** - No gradient information required
+```
+
+---
+
+## Overview Particle Swarm Optimization (PSO) is a population-based metaheuristic optimization algorithm inspired by the social behavior of bird flocking and fish schooling. PSO has become the primary automated gain tuning method for sliding mode controllers in the DIP-SMC-PSO system due to its: ✅ **Derivative-free nature** - No gradient information required
 ✅ **Global search capability** - Escapes local minima effectively
 ✅ **Fast convergence** - Typically 50-150 iterations for SMC gains
 ✅ **Simplicity** - Few parameters to tune (ω, c₁, c₂)
@@ -13,7 +23,11 @@
 - **Objective:** Minimize J(g) = w₁·ISE + w₂·chattering + w₃·effort
 - **Constraints:** Stability bounds (k₁,k₂,λ₁,λ₂ > 0, K > disturbance)
 - **Search space:** 6-dimensional bounded hypercube
-- **PSO swarm:** 30 particles, 100 iterations → ~15 minutes --- ## Swarm Intelligence Foundations ### Origins and Motivation **Biological Inspiration:** PSO was introduced by Kennedy and Eberhart (1995) based on observations of collective animal behavior: 1. **Bird Flocking:** - Birds maintain formation without central coordination - Each bird adjusts velocity based on: - Personal experience (where food was found before) - Social knowledge (where flock members found food) - Current momentum (inertia prevents erratic changes) 2. **Fish Schooling:** - Fish swim in coordinated patterns - Balance between: - Exploration (search new regions) - Exploitation (refine known good regions) - Emergent intelligence from simple rules **Translation to Optimization:** | Biological Concept | PSO Equivalent |
+- **PSO swarm:** 30 particles, 100 iterations → ~15 minutes
+
+---
+
+## Swarm Intelligence Foundations ### Origins and Motivation **Biological Inspiration:** PSO was introduced by Kennedy and Eberhart (1995) based on observations of collective animal behavior: 1. **Bird Flocking:** - Birds maintain formation without central coordination - Each bird adjusts velocity based on: - Personal experience (where food was found before) - Social knowledge (where flock members found food) - Current momentum (inertia prevents erratic changes) 2. **Fish Schooling:** - Fish swim in coordinated patterns - Balance between: - Exploration (search new regions) - Exploitation (refine known good regions) - Emergent intelligence from simple rules **Translation to Optimization:** | Biological Concept | PSO Equivalent |
 |-------------------|----------------|
 | Bird/Fish | Particle (candidate solution) |
 | Position in space | Point in search space x ∈ ℝⁿ |
@@ -28,7 +42,11 @@
 - Particles learn from: 1. **Personal experience** (cognitive component) 2. **Social knowledge** (swarm component) 3. **Momentum** (inertia component) **Balance:**
 - **Exploration:** ω large → particles explore widely
 - **Exploitation:** ω small → particles refine local regions
-- **Adaptive strategies:** Start with exploration, transition to exploitation --- ## PSO Mathematical Formulation ### Standard PSO Algorithm **State Variables:** For a swarm of N particles in n-dimensional search space: $$
+- **Adaptive strategies:** Start with exploration, transition to exploitation
+
+---
+
+## PSO Mathematical Formulation ### Standard PSO Algorithm **State Variables:** For a swarm of N particles in n-dimensional search space: $$
 \begin{align}
 x_i^t &\in \mathbb{R}^n \quad \text{(position of particle i at iteration t)} \\
 v_i^t &\in \mathbb{R}^n \quad \text{(velocity of particle i at iteration t)} \\
@@ -50,10 +68,12 @@ $$ (eq:position-update) **Parameters:** | Parameter | Symbol | Typical Range | P
 # Maintains search momentum
 velocity_new = inertia * velocity_old
 ``` - **Physical interpretation:** Resistance to change direction
+
 - **Large ω (0.7-0.9):** Wide exploration, slow convergence
 - **Small ω (0.4-0.6):** Local refinement, fast convergence
 - **Adaptive:** ω(t) = ω_max - (ω_max - ω_min)·(t/T_max) **2. Cognitive Component:** $c_1 \cdot r_1 \cdot (p_{best,i} - x_i^t)$ ```python
 # Personal experience attraction
+
 cognitive = c1 * random() * (personal_best - position)
 velocity_new += cognitive
 ``` - **Pulls particle toward its own best discovery**
@@ -64,6 +84,7 @@ velocity_new += cognitive
 social = c2 * random() * (global_best - position)
 velocity_new += social
 ``` - **Pulls particle toward swarm's best discovery**
+
 - **Collective intelligence:** Shares information globally
 - **Convergence driver:** All particles attracted to g_best
 - **Premature convergence risk:** If g_best is local optimum ### Algorithm Pseudocode ```
@@ -71,7 +92,11 @@ Algorithm: Particle Swarm Optimization
 ──────────────────────────────────────────────────────────────────────
 Input: f (fitness function) bounds (search space limits) N (swarm size) T_max (maximum iterations) ω, c₁, c₂ (PSO parameters) Output: x_best (optimal solution) f_best (optimal fitness)
 ────────────────────────────────────────────────────────────────────── 1. Initialize swarm: FOR i = 1 to N: x_i ∼ Uniform(bounds) # Random initial positions v_i ∼ Uniform(-Δx, Δx) # Random initial velocities p_best,i ← x_i # Personal best = initial position f_i ← f(x_i) # Evaluate fitness END FOR 2. Set global best: g_best ← argmin_i f(p_best,i) # Best particle in swarm f_best ← min_i f(p_best,i) 3. Main optimization loop: FOR t = 1 to T_max: a. Update velocities and positions: FOR i = 1 to N: r_1, r_2 ∼ Uniform(0, 1) # Velocity update (Eq. 1) v_i ← ω·v_i + c₁·r₁·(p_best,i - x_i) + c₂·r₂·(g_best - x_i) # Velocity clamping (prevent explosion) v_i ← clip(v_i, v_min, v_max) # Position update (Eq. 2) x_i ← x_i + v_i # Boundary handling x_i ← clip(x_i, bounds) END FOR b. Evaluate fitness: FOR i = 1 to N: f_i ← f(x_i) END FOR c. Update personal bests: FOR i = 1 to N: IF f_i < f(p_best,i): p_best,i ← x_i END IF END FOR d. Update global best: i_best ← argmin_i f(p_best,i) IF f(p_best,i_best) < f_best: g_best ← p_best,i_best f_best ← f(p_best,i_best) END IF e. Check convergence (optional): IF convergence_criterion_met(): BREAK END IF END FOR 4. Return results: RETURN g_best, f_best
-``` --- ## Convergence Analysis ### Theoretical Foundations **Stability Analysis via Constriction Factor:** Clerc and Kennedy (2002) derived conditions for PSO convergence using control theory. **Simplified Dynamics (1D case):** Consider single particle in 1D with p_best = g_best = x*: $$
+```
+
+---
+
+## Convergence Analysis ### Theoretical Foundations **Stability Analysis via Constriction Factor:** Clerc and Kennedy (2002) derived conditions for PSO convergence using control theory. **Simplified Dynamics (1D case):** Consider single particle in 1D with p_best = g_best = x*: $$
 v^{t+1} = \omega v^t + \phi r (x^* - x^t)
 $$ where $\phi = c_1 + c_2$ and $r \in [0,1]$. **Characteristic Equation:** $$
 v^{t+1} + (1-\omega) v^t + \phi r (x^t - x^*) = 0
@@ -88,7 +113,11 @@ V(t) \leq V(0) \cdot \rho^t
 $$ where $\rho < 1$ depends on ω, c₁, c₂. **Empirical Observations:**
 - **Exponential convergence:** For unimodal functions
 - **Linear convergence:** For multimodal functions (premature convergence risk)
-- **Typical iterations:** 50-150 for SMC gain tuning --- ## Parameter Selection Guidelines ### Inertia Weight (ω) **Purpose:** Balances exploration (global search) vs exploitation (local refinement) **Fixed Inertia Strategies:** | ω Value | Behavior | Use Case |
+- **Typical iterations:** 50-150 for SMC gain tuning
+
+---
+
+## Parameter Selection Guidelines ### Inertia Weight (ω) **Purpose:** Balances exploration (global search) vs exploitation (local refinement) **Fixed Inertia Strategies:** | ω Value | Behavior | Use Case |
 |---------|----------|----------|
 | 0.9 | High exploration | Early iterations, complex landscapes |
 | 0.7298 | Balanced (constriction) | Standard choice |
@@ -106,6 +135,7 @@ c2 = 1.5 # Fast convergence needed (limited budget)
 c1 = 1.5
 c2 = 2.5 # Emphasize swarm attraction
 ``` **Adaptive Strategies:** $$
+
 c_1(t) = c_{1,max} - \frac{c_{1,max} - c_{1,min}}{T_{max}} \cdot t
 $$
 $$
@@ -124,10 +154,16 @@ def check_convergence(fitness_history, window=10, tolerance=1e-6): """Stop if fi
 # runnable: false max_iter = 200
 stagnation_limit = 20 for iter in range(max_iter): # ... PSO iteration ... if no_improvement_count >= stagnation_limit: print(f"Converged at iteration {iter}") break
 ``` **Typical Values:**
+
 - **Quick optimization:** T_max = 50
 - **Standard:** T_max = 100 (recommended for SMC)
 - **High-accuracy:** T_max = 200
-- **Research:** T_max = 500+ --- ## Advanced PSO Variants ### 1. Adaptive PSO (APSO) **Key Idea:** Adjust parameters ω, c₁, c₂ based on swarm state **Diversity Metric:** $$
+- **Research:** T_max = 500+
+
+---
+
+## Advanced PSO Variants ### 1. Adaptive PSO (APSO) **Key Idea:** Adjust parameters ω, c₁, c₂ based on swarm state **Diversity Metric:** $$
+
 \text{diversity}(t) = \frac{1}{N} \sum_{i=1}^N \|x_i^t - \bar{x}^t\|
 $$ where $\bar{x}^t = \frac{1}{N} \sum_{i=1}^N x_i^t$ (swarm centroid) **Adaptive Rule:** ```python
 if diversity < threshold_low: omega = increase(omega) # Increase exploration c1 = increase(c1)
@@ -140,6 +176,7 @@ v_{i,d}^{t+1} = \omega v_{i,d}^t + c \cdot r_{i,d} \cdot (p_{best,f_i(d),d} - x_
 $$ where $f_i(d)$ selects which particle's p_best to follow for dimension d. **Selection Strategy:** ```python
 def select_learning_exemplar(particle_i, dimension_d): """Choose particle to learn from for dimension d.""" if random() < learning_probability: return best_particle_except_i # Learn from best else: return random_particle() # Learn from random (diversity)
 ``` **Advantages:**
+
 - Better for high-dimensional problems (n > 20)
 - Prevents "following the leader" syndrome
 - More diverse search ### 3. Multi-Objective PSO (MOPSO) **Key Idea:** Optimize multiple objectives simultaneously **Pareto Dominance:** Solution x₁ dominates x₂ if:
@@ -162,7 +199,12 @@ $$ where:
 - $u \sim \text{Uniform}(0, 1)$ **Advantages:**
 - Fewer parameters (no velocity, no ω)
 - Global convergence guaranteed
-- Faster for certain landscapes --- ## PSO for SMC Gain Tuning ### Problem Formulation **Decision Variables:** For Classical SMC:
+- Faster for certain landscapes
+
+---
+
+## PSO for SMC Gain Tuning ### Problem Formulation **Decision Variables:** For Classical SMC:
+
 $$
 g = [k_1, k_2, \lambda_1, \lambda_2, K, k_d]^T \in \mathbb{R}^6
 $$ **Objective Function:** $$
@@ -178,19 +220,27 @@ $$
 \text{Effort}(g) = \int_0^T u^2(t; g) dt
 $$ **Constraints:** 1. **Stability constraints:** $$ k_1, k_2, \lambda_1, \lambda_2 > 0 \quad (\text{positive surface gains}) $$ $$ K > \|d\|_\infty \quad (\text{switching gain exceeds disturbance}) $$ 2. **Bounds:** $$ g_{min} \leq g \leq g_{max} $$ Typical bounds: ```python bounds = [ (0.1, 50.0), # k1 (0.1, 50.0), # k2 (0.1, 50.0), # λ1 (0.1, 50.0), # λ2 (1.0, 200.0), # K (0.0, 50.0), # kd ] ``` ### Fitness Evaluation **Simulation-Based Fitness:** ```python
 # example-metadata:
+
 # runnable: false def evaluate_fitness(gains): """Evaluate controller performance via simulation.""" # 1. Create controller controller = create_controller('classical_smc', gains=gains) # 2. Run simulation (5-second horizon) result = simulate( controller=controller, duration=5.0, dt=0.01, initial_state=[0.1, 0.05, 0, 0, 0, 0] ) # 3. Compute metrics ise = np.trapz(result.states**2, dx=0.01) chattering = np.sum(np.abs(np.diff(result.control))) * 0.01 effort = np.trapz(result.control**2, dx=0.01) # 4. Multi-objective fitness fitness = 0.5 * ise + 0.3 * chattering + 0.2 * effort return fitness
+
 ``` **Penalty for Constraint Violations:** ```python
 # example-metadata:
 # runnable: false def penalized_fitness(gains): """Add large penalty for invalid gains.""" base_fitness = evaluate_fitness(gains) penalty = 0.0 # Stability constraint violation if any(g <= 0 for g in gains[:5]): penalty += 1e6 # Minimum switching gain if gains[4] < 10.0: penalty += 1e4 * (10.0 - gains[4]) return base_fitness + penalty
 ``` ### Typical PSO Configuration for SMC ```python
 # example-metadata:
+
 # runnable: false pso_config = { 'n_particles': 30, 'max_iters': 100, 'inertia': 0.7298, # Constriction coefficient 'c1': 2.05, # Cognitive coefficient 'c2': 2.05, # Social coefficient 'bounds': [ (0.1, 50.0), # k1 (0.1, 50.0), # k2 (0.1, 50.0), # λ1 (0.1, 50.0), # λ2 (1.0, 200.0), # K (0.0, 50.0), # kd ], 'objective_weights': { 'ise': 0.5, 'chattering': 0.3, 'effort': 0.2, }
+
 }
 ``` **Expected Performance:**
 - **Convergence time:** 50-100 iterations
 - **Wall-clock time:** 15-20 minutes (30 particles × 100 iters × 0.5s)
 - **Final fitness:** 10-20% better than manual tuning
-- **Reliability:** 90%+ success rate (good solution found) --- ## Convergence Diagnostics ### Fitness Trajectory Analysis **Monitoring Best Fitness:** ```python
+- **Reliability:** 90%+ success rate (good solution found)
+
+---
+
+## Convergence Diagnostics ### Fitness Trajectory Analysis **Monitoring Best Fitness:** ```python
 import matplotlib.pyplot as plt plt.figure(figsize=(10, 6))
 plt.semilogy(fitness_history['iteration'], fitness_history['best_fitness'])
 plt.xlabel('Iteration')
@@ -198,6 +248,7 @@ plt.ylabel('Best Fitness (log scale)')
 plt.title('PSO Convergence Curve')
 plt.grid(True)
 ``` **Interpretation:**
+
 - **Exponential decrease:** Healthy convergence
 - **Plateaus:** May be stuck in local minimum
 - **Oscillations:** Unstable (reduce c₁, c₂ or increase ω) ### Diversity Monitoring **Swarm Diversity Metric:** $$
@@ -213,9 +264,15 @@ def compute_diversity(swarm_positions): """Measure swarm spread.""" centroid = n
 no_improvement_count = 0
 tolerance = 1e-6 for iter in range(max_iter): # ... PSO iteration ... if len(best_fitness_history) > 0: improvement = abs(current_best - best_fitness_history[-1]) if improvement < tolerance: no_improvement_count += 1 else: no_improvement_count = 0 if no_improvement_count >= 20: print(f"Stagnation detected at iteration {iter}") # Restart or perturb swarm break
 ``` **Escape Strategies:**
+
 1. **Increase diversity:** Inject random particles
 2. **Restart:** Re-initialize swarm with new random positions
-3. **Parameter adjustment:** Increase ω temporarily --- ## Practical Implementation Tips ### Velocity Clamping **Problem:** Velocities can explode, causing particles to jump erratically **Solution:** Clamp velocities to maximum value $$
+3. **Parameter adjustment:** Increase ω temporarily
+
+---
+
+## Practical Implementation Tips ### Velocity Clamping **Problem:** Velocities can explode, causing particles to jump erratically **Solution:** Clamp velocities to maximum value $$
+
 v_{max} = k \cdot (\text{upper bound} - \text{lower bound})
 $$ where $k \in [0.1, 0.5]$ (typically 0.2) ```python
 v_max = 0.2 * (bounds_upper - bounds_lower)
@@ -224,6 +281,7 @@ velocity = np.clip(velocity, -v_max, v_max)
 positions = np.random.uniform( low=bounds_lower, high=bounds_upper, size=(n_particles, n_dimensions)
 )
 ``` **Latin Hypercube Sampling (Better):** ```python
+
 from scipy.stats import qmc sampler = qmc.LatinHypercube(d=n_dimensions)
 samples = sampler.random(n=n_particles) # Scale to bounds
 positions = bounds_lower + samples * (bounds_upper - bounds_lower)
@@ -233,10 +291,15 @@ positions = bounds_lower + samples * (bounds_upper - bounds_lower)
 - 10-20% faster convergence ### Parallel Fitness Evaluation **Sequential (Slow):** ```python
 for i in range(n_particles): fitness[i] = evaluate_fitness(positions[i])
 ``` **Parallel (Fast):** ```python
+
 from multiprocessing import Pool with Pool(processes=8) as pool: fitness = pool.map(evaluate_fitness, positions)
 ``` **Speedup:**
 - 8 cores: ~6x speedup (overhead accounts for <8x)
-- Reduces 20-minute optimization to ~3 minutes --- ## Comparison with Other Algorithms ### PSO vs Genetic Algorithms (GA) | Feature | PSO | Genetic Algorithm |
+- Reduces 20-minute optimization to ~3 minutes
+
+---
+
+## Comparison with Other Algorithms ### PSO vs Genetic Algorithms (GA) | Feature | PSO | Genetic Algorithm |
 |---------|-----|-------------------|
 | Population-based | ✓ | ✓ |
 | Gradient-free | ✓ | ✓ |
@@ -265,7 +328,15 @@ from multiprocessing import Pool with Pool(processes=8) as pool: fitness = pool.
 | SMC gain tuning (n=6) | **Recommended** (fast) | Alternative (high-quality) | **Recommendation:**
 - **PSO:** Default choice for SMC gain tuning (fast, reliable)
 - **Differential Evolution:** If PSO stagnates
-- **Bayesian Optimization:** When simulation is very expensive (e.g., HIL) --- ## References ### Foundational Papers 1. **Kennedy, J., & Eberhart, R. (1995)** "Particle Swarm Optimization" *Proceedings of IEEE International Conference on Neural Networks* - Original PSO formulation 2. **Clerc, M., & Kennedy, J. (2002)** "The Particle Swarm - Explosion, Stability, and Convergence in a Multidimensional Complex Space" *IEEE Transactions on Evolutionary Computation*, 6(1), 58-73 - Constriction coefficient derivation 3. **Shi, Y., & Eberhart, R. (1998)** "A Modified Particle Swarm Optimizer" *IEEE International Conference on Evolutionary Computation* - Inertia weight introduction ### Advanced Variants 4. **Zhan, Z. H., et al. (2009)** "Adaptive Particle Swarm Optimization" *IEEE Transactions on Systems, Man, and Cybernetics, Part B*, 39(6), 1362-1381 - Adaptive PSO with diversity control 5. **Liang, J. J., et al. (2006)** "Learning Particle Swarm Optimizer for Global Optimization of Multimodal Functions" *IEEE Transactions on Evolutionary Computation*, 10(3), 281-295 - CLPSO for high-dimensional problems 6. **Coello Coello, C. A., et al. (2004)** "Handling Multiple Objectives with Particle Swarm Optimization" *IEEE Transactions on Evolutionary Computation*, 8(3), 256-279 - Multi-objective PSO ### Applications to Control 7. **Gaing, Z. L. (2004)** "A Particle Swarm Optimization Approach for Optimum Design of PID Controller in AVR System" *IEEE Transactions on Energy Conversion*, 19(2), 384-391 - PSO for PID tuning 8. **Hassanzadeh, I., & Mobayen, S. (2011)** "PSO-Based Controller Design for Rotary Inverted Pendulum System" *Journal of Applied Sciences*, 11, 2798-2803 - PSO for inverted pendulum control --- ## Summary ### Key Takeaways ✅ **PSO is derivative-free** - Suitable for black-box optimization (simulation-based fitness)
+- **Bayesian Optimization:** When simulation is very expensive (e.g., HIL)
+
+---
+
+## References ### Foundational Papers 1. **Kennedy, J., & Eberhart, R. (1995)** "Particle Swarm Optimization" *Proceedings of IEEE International Conference on Neural Networks* - Original PSO formulation 2. **Clerc, M., & Kennedy, J. (2002)** "The Particle Swarm - Explosion, Stability, and Convergence in a Multidimensional Complex Space" *IEEE Transactions on Evolutionary Computation*, 6(1), 58-73 - Constriction coefficient derivation 3. **Shi, Y., & Eberhart, R. (1998)** "A Modified Particle Swarm Optimizer" *IEEE International Conference on Evolutionary Computation* - Inertia weight introduction ### Advanced Variants 4. **Zhan, Z. H., et al. (2009)** "Adaptive Particle Swarm Optimization" *IEEE Transactions on Systems, Man, and Cybernetics, Part B*, 39(6), 1362-1381 - Adaptive PSO with diversity control 5. **Liang, J. J., et al. (2006)** "Learning Particle Swarm Optimizer for Global Optimization of Multimodal Functions" *IEEE Transactions on Evolutionary Computation*, 10(3), 281-295 - CLPSO for high-dimensional problems 6. **Coello Coello, C. A., et al. (2004)** "Handling Multiple Objectives with Particle Swarm Optimization" *IEEE Transactions on Evolutionary Computation*, 8(3), 256-279 - Multi-objective PSO ### Applications to Control 7. **Gaing, Z. L. (2004)** "A Particle Swarm Optimization Approach for Optimum Design of PID Controller in AVR System" *IEEE Transactions on Energy Conversion*, 19(2), 384-391 - PSO for PID tuning 8. **Hassanzadeh, I., & Mobayen, S. (2011)** "PSO-Based Controller Design for Rotary Inverted Pendulum System" *Journal of Applied Sciences*, 11, 2798-2803 - PSO for inverted pendulum control
+
+---
+
+## Summary ### Key Takeaways ✅ **PSO is derivative-free** - Suitable for black-box optimization (simulation-based fitness)
 ✅ **Simple yet effective** - Only 3 main parameters (ω, c₁, c₂)
 ✅ **Fast convergence** - 50-150 iterations typical for SMC gain tuning
 ✅ **Parallelizable** - Fitness evaluations are independent (8x speedup possible)
@@ -273,6 +344,7 @@ from multiprocessing import Pool with Pool(processes=8) as pool: fitness = pool.
 pso_params = { 'n_particles': 30, 'max_iters': 100, 'inertia': 0.7298, # Constriction coefficient 'c1': 2.05, # Cognitive coefficient 'c2': 2.05, # Social coefficient 'v_max': 0.2 * range, # Velocity clamping
 }
 ``` ### When to Use PSO **Ideal for:**
+
 - Derivative-free optimization
 - Continuous search spaces
 - Moderate dimensions (n ≤ 20)
@@ -282,7 +354,11 @@ pso_params = { 'n_particles': 30, 'max_iters': 100, 'inertia': 0.7298, # Constri
 - Discrete optimization → Use GA
 - Sample-efficient optimization needed → Use Bayesian Optimization ### Next Steps - {doc}`../optimization/pso_core_algorithm_guide` - Implementation details
 - {doc}`optimization_landscape_analysis` - Gain space geometry
-- {doc}`../controllers/classical_smc_technical_guide` - Controller background --- **Document Version:** 1.0
+- {doc}`../controllers/classical_smc_technical_guide` - Controller background
+
+---
+
+**Document Version:** 1.0
 **Last Updated:** 2025-10-04
 **Status:** ✅ Complete
 **Word Count:** ~8,500 words | ~850 lines

@@ -3,6 +3,7 @@
 #==========================================================================================\\\
 
 # Model Predictive Control Technical Guide
+
 ## Double-Inverted Pendulum Control System
 
 **Document Version**: 1.0
@@ -10,7 +11,7 @@
 **Classification**: Technical Implementation Guide
 **Controller Type**: MPCController
 
----
+
 
 ## Executive Summary
 
@@ -42,7 +43,7 @@ The Model Predictive Controller (MPC) represents an optimization-based control p
 - Dependent on cvxpy solver availability
 - Performance degrades far from equilibrium
 
----
+
 
 ## Table of Contents
 
@@ -55,7 +56,7 @@ The Model Predictive Controller (MPC) represents an optimization-based control p
 7. [Troubleshooting](#troubleshooting)
 8. [References](#references)
 
----
+
 
 ## Mathematical Foundation
 
@@ -258,7 +259,7 @@ where z = [X(:); U(:)] stacks all decision variables.
 - Suitable for control frequencies up to ~100 Hz (with warm start)
 - HIL applications may require shorter horizons (N=10) for <10 ms latency
 
----
+
 
 ## Algorithm Architecture
 
@@ -502,7 +503,7 @@ if max_du is not None:
 
 **Effect**: Limits Δu between timesteps, smoothing control signal
 
----
+
 
 ## Implementation Details
 
@@ -749,7 +750,7 @@ return float(np.clip(u0, -self.max_force, self.max_force))
 - Reduces iterations: ~10× speedup typical
 - Critical for real-time performance
 
----
+
 
 ## Parameter Configuration
 
@@ -826,6 +827,7 @@ class MPCWeights:
 ```
 J = (x - x_ref)² · 1.0 + (θ - π)² · 10.0 + u² · 0.01
 ```
+
 - Deviating 1 rad in θ costs same as 10 m in x
 - Input u² penalized at 1% of angle error
 
@@ -959,7 +961,7 @@ mpc = MPCController(
 )
 ```
 
----
+
 
 ## Integration Guide
 
@@ -1149,7 +1151,7 @@ result = tuner.optimise()
 optimal_params = result['best_pos']
 ```
 
----
+
 
 ## Performance Characteristics
 
@@ -1273,7 +1275,7 @@ N=50:  ~15 ms
 - MPC: Linearization misses nonlinearities
 - SMC: Discontinuous control compensates
 
----
+
 
 ## Troubleshooting
 
@@ -1443,7 +1445,7 @@ t_warm = time.time() - t0
 print(f"Speedup: {t_cold/t_warm:.1f}×")
 ```
 
----
+
 
 ## References
 
@@ -1485,7 +1487,7 @@ print(f"Speedup: {t_cold/t_warm:.1f}×")
 - {py:obj}`src.controllers.mpc.mpc_controller.MPCController` - Full API documentation
 - {py:obj}`src.controllers.mpc.mpc_controller.MPCWeights` - Cost function configuration
 
----
+
 
 **Documentation Version:** 1.0 (Week 4 Complete)
 **Last Updated:** 2025-10-04

@@ -3,6 +3,7 @@
 #==========================================================================================\\\
 
 # Adaptive Sliding Mode Control Technical Guide
+
 ## Double-Inverted Pendulum Control System
 
 **Document Version**: 1.0
@@ -10,7 +11,7 @@
 **Classification**: Technical Implementation Guide
 **Controller Type**: AdaptiveSMC
 
----
+
 
 ## Executive Summary
 
@@ -29,7 +30,7 @@ The Adaptive Sliding Mode Controller extends classical SMC with online gain adap
 - Applications needing zero steady-state error (without dead zone)
 - Balance between simplicity and robustness
 
----
+
 
 ## Table of Contents
 
@@ -42,7 +43,7 @@ The Adaptive Sliding Mode Controller extends classical SMC with online gain adap
 7. [Troubleshooting](#troubleshooting)
 8. [References](#references)
 
----
+
 
 ## Mathematical Foundation
 
@@ -153,7 +154,7 @@ where K* is the ideal (unknown) switching gain.
 
 **Optimal Sizing**: δ ≈ 2-3× sensor noise magnitude
 
----
+
 
 ## Algorithm Architecture
 
@@ -260,7 +261,7 @@ history = {
 }
 ```
 
----
+
 
 ## Implementation Details
 
@@ -379,7 +380,7 @@ def compute_control(self, state, state_vars, history):
 
 **Implementation**: `adaptive_smc.py:263-425`
 
----
+
 
 ## Parameter Configuration
 
@@ -495,7 +496,7 @@ pso_bounds = [
 ]
 ```
 
----
+
 
 ## Integration Guide
 
@@ -660,7 +661,7 @@ def plot_adaptation_history(history):
     return fig
 ```
 
----
+
 
 ## Performance Characteristics
 
@@ -754,7 +755,7 @@ def plot_adaptation_history(history):
 
 **Conclusion**: Adaptive SMC handles unknown disturbances up to K_max without prior tuning.
 
----
+
 
 ## Troubleshooting
 
@@ -968,7 +969,7 @@ def validate_adaptive_parameters(gains, config):
 3. Priority 3: Use tanh saturation
 4. Last resort: Reduce gamma (slower adaptation, but smoother)
 
----
+
 
 ## References
 
@@ -992,7 +993,7 @@ def validate_adaptive_parameters(gains, config):
 
 [7] Source Code: `src/controllers/smc/adaptive_smc.py`
 
----
+
 
 **Document Control**:
 - **Author**: Documentation Expert Agent

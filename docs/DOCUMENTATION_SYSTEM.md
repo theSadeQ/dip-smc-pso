@@ -1,4 +1,5 @@
 # 📚 World-Class Documentation System for DIP_SMC_PSO ## 🌟 Overview This repository now features a **world-class technical documentation system** designed for research-grade publications. The system provides LaTeX-quality mathematical rendering, professional citation management, and cross-referencing features. ## ✨ Features ### 🔬 Research-Grade Mathematics
+
 - **Numbered equations** with global cross-referencing using `{eq}` labels
 - **LaTeX-quality rendering** with MathJax 3.0 and custom macros
 - **Professional mathematical notation** with consistent symbols and formatting
@@ -23,6 +24,7 @@ make -f docs.mk install # Install dependencies
 make -f docs.mk build # Build documentation
 make -f docs.mk serve # Serve locally at http://localhost:8000
 ``` ### Option 2: Manual Setup
+
 ```bash
 # Install enhanced dependencies
 pip install -r dip_docs/docs/requirements-enhanced.txt # Build with enhanced configuration
@@ -31,6 +33,7 @@ cp conf_enhanced.py conf.py
 sphinx-build -b html source _build/html # Serve locally
 python -m http.server 8000 -d _build/html
 ``` ## 📁 Documentation Structure ```
+
 dip_docs/docs/
 ├── source/
 │ ├── conf_enhanced.py # World-class Sphinx configuration
@@ -56,6 +59,7 @@ dip_docs/docs/
 - **Dark mode support** and accessibility features
 - **Smooth animations** and micro-interactions ## 📊 Mathematical Features ### Equation Numbering and Cross-References
 ```rst
+
 .. math:: :label: eq:dip_dynamics M(q)\ddot{q} + C(q,\dot{q})\dot{q} + G(q) = Bu As shown in {eq}`eq:dip_dynamics`, the DIP dynamics...
 ``` ### Custom Mathematical Macros
 - `\vec{x}` for vectors
@@ -64,16 +68,19 @@ dip_docs/docs/
 - `\state`, `\control`, `\error` for control theory
 - And many more for consistent notation ### Professional Tables and Figures
 ```rst
+
 .. _table:controller_parameters: .. table:: Controller Parameters :name: table:controller_parameters +----------+--------------------+ | Parameter| Description | +==========+====================+ | λ₁ | Cart sliding gain | +----------+--------------------+
 ``` ## 🎯 Citation System ### Bibliography Organization
 - `refs_enhanced.bib` - bibliography with 40+ references
 - Organized by topics: Control Theory, SMC, PSO, Software
 - DOI links and complete metadata for all references ### In-Text Citations
 ```rst
+
 The sliding mode control approach :cite:`Edwards1998` provides
 robust performance for uncertain systems.
 ``` ## 📈 Mermaid Diagrams ### System Architecture
 ```mermaid
+
 graph TB Plant[Double Inverted Pendulum] --> Controller[SMC Controller] Controller --> PSO[PSO Optimizer] PSO --> Controller
 ``` ### Algorithm Flowcharts
 Professional flowcharts for PSO optimization, control algorithms, and system workflows. ## 🤖 GitHub Actions Workflow The documentation system includes a CI/CD pipeline: ### Automated Build Process
@@ -88,6 +95,7 @@ Professional flowcharts for PSO optimization, control algorithms, and system wor
 - Automated artifact generation and retention ## 🛠️ Development Workflow ### Daily Development
 ```bash
 # Start development server with auto-reload
+
 make -f docs.mk dev # Run quality checks
 make -f docs.mk quality # Clean and rebuild everything
 make -f docs.mk full-build
@@ -112,6 +120,7 @@ make -f docs.mk full-build
 - All figures and tables must have captions and numbers
 - All external links must be validated ## 🔍 Troubleshooting ### Common Issues **Build fails with import errors:**
 ```bash
+
 pip install -r dip_docs/docs/requirements-enhanced.txt
 ``` **Mermaid diagrams not rendering:**
 - Ensure `sphinxcontrib-mermaid` is installed
@@ -140,4 +149,8 @@ pip install -r dip_docs/docs/requirements-enhanced.txt
 5. **Advanced Search**: Implement semantic search features ## 📞 Support For questions about the documentation system:
 - Check the GitHub Actions logs for build status (see repository Actions tab)
 - Review the configuration files in `docs/` directory for customization
-- Consult the [Sphinx documentation](https://www.sphinx-doc.org/) for advanced features --- **Built with ❤️ using Sphinx, MyST, MathJax, and modern web technologies.**
+- Consult the [Sphinx documentation](https://www.sphinx-doc.org/) for advanced features
+
+---
+
+**Built with ❤️ using Sphinx, MyST, MathJax, and modern web technologies.**

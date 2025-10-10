@@ -1,11 +1,20 @@
-# Advanced Algorithms Guide **Technical Reference for Optimization, Numerical Stability, and Algorithm Comparison** --- ## Table of Contents 1. [Introduction](#introduction)
+# Advanced Algorithms Guide **Technical Reference for Optimization, Numerical Stability, and Algorithm Comparison**
+
+---
+
+## Table of Contents 1. [Introduction](#introduction)
+
 2. [Particle Swarm Optimization](#particle-swarm-optimization)
 3. [Super-Twisting Algorithm](#super-twisting-algorithm)
 4. [Numerical Stability Algorithms](#numerical-stability-algorithms)
 5. [Algorithm Comparison Framework](#algorithm-comparison-framework)
 6. [Performance Optimization Techniques](#performance-optimization-techniques)
 7. [Advanced Topics](#advanced-topics)
-8. [Best Practices](#best-practices) --- ## Introduction This guide provides technical documentation for the advanced algorithms implemented in the DIP-SMC-PSO project. These algorithms form the computational backbone of the system, enabling robust control, efficient optimization, and numerical stability.
+8. [Best Practices](#best-practices)
+
+---
+
+## Introduction This guide provides technical documentation for the advanced algorithms implemented in the DIP-SMC-PSO project. These algorithms form the computational backbone of the system, enabling robust control, efficient optimization, and numerical stability.
 
 ### Algorithm Categories
 
@@ -25,7 +34,12 @@
 2. **Reproducibility:** Explicit PRNG seeding for deterministic results
 3. **Vectorization:** NumPy-based batch operations for high throughput
 4. **Theoretical Grounding:** Each algorithm includes mathematical proofs and stability guarantees
-5. **Testing:** Unit tests, property-based tests, and scientific validation --- ## Particle Swarm Optimization ### Mathematical Foundation Particle Swarm Optimization (PSO) is a population-based metaheuristic inspired by social behavior of bird flocking and fish schooling. #### Core PSO Dynamics Each particle $i$ in the swarm has:
+5. **Testing:** Unit tests, property-based tests, and scientific validation
+
+---
+
+## Particle Swarm Optimization ### Mathematical Foundation Particle Swarm Optimization (PSO) is a population-based metaheuristic inspired by social behavior of bird flocking and fish schooling. #### Core PSO Dynamics Each particle $i$ in the swarm has:
+
 - **Position:** $\mathbf{x}_i^{(t)} \in \mathbb{R}^D$ (candidate solution)
 - **Velocity:** $\mathbf{v}_i^{(t)} \in \mathbb{R}^D$ (search direction and magnitude)
 - **Personal best:** $\mathbf{p}_i$ (best position found by particle $i$)
@@ -86,17 +100,27 @@ optimizer = GlobalBestPSO( n_particles=30, dimensions=6, options={'c1': 2.05, 'c
 w_values = np.linspace(0.9, 0.4, 100) for iteration, w_val in enumerate(w_values): optimizer.options['w'] = w_val step_cost, step_pos = optimizer.step(tuner._fitness) print(f"Iteration {iteration}: w={w_val:.3f}, cost={step_cost:.6f}")
 ``` #### Uncertainty-Aware Optimization ```python
 # example-metadata:
+
 # runnable: false # Configure physics uncertainty in config.yaml:
+
 # physics_uncertainty:
+
 # n_evals: 5 # 5 perturbed models per evaluation
+
 # cart_mass: 0.10 # ±10%
+
 # pendulum1_mass: 0.15 # ±15%
+
 # pendulum2_mass: 0.15 # ±15%
+
 # pendulum1_length: 0.05 # ±5%
+
 # pendulum2_length: 0.05 # ±5% tuner = PSOTuner( controller_factory=controller_factory, config=config, seed=42
+
 ) # PSO will automatically evaluate robustness across perturbed models
 result = tuner.optimise() # Each fitness evaluation runs 5 simulations (1 nominal + 4 perturbed)
 # Cost aggregation: 0.7 * mean + 0.3 * max
+
 ``` ### PSO Hyperparameter Tuning #### Recommended Ranges | Parameter | Symbol | Recommended Range | Default | Notes |
 |-----------|--------|-------------------|---------|-------|
 | Swarm size | $N$ | $[10, 50]$ | 30 | Larger swarms for high-dimensional problems |
@@ -129,7 +153,12 @@ t, x_b, u_b, sigma_b = simulate_system_batch( controller_factory=controller_fact
 # Returns: x_b.shape = (N, timesteps, 6) # Cost computation on entire batch
 costs = self._compute_cost_from_traj(t, x_b, u_b, sigma_b)
 # Returns: costs.shape = (N,)
-``` **Speedup vs sequential:** ~20-30x for typical swarm sizes --- ## Super-Twisting Algorithm ### Mathematical Foundation The Super-Twisting Algorithm (STA) is a second-order sliding mode control technique that achieves finite-time convergence while reducing chattering. #### Control Law Structure The STA consists of two components: $$
+``` **Speedup vs sequential:** ~20-30x for typical swarm sizes
+
+---
+
+## Super-Twisting Algorithm ### Mathematical Foundation The Super-Twisting Algorithm (STA) is a second-order sliding mode control technique that achieves finite-time convergence while reducing chattering. #### Control Law Structure The STA consists of two components: $$
+
 u = u_1 + u_2
 $$ **Continuous component:**
 $$
@@ -178,6 +207,7 @@ print(f" Final surface RMS: {analysis['convergence_metrics']['final_surface_rms'
 print(f" Integral state: {analysis['control_characteristics']['integral_state']:.3f}")
 print(f" Anti-windup active: {analysis['control_characteristics']['anti_windup_active']}")
 ``` ### Gain Tuning Guidelines #### Stability Constraint **Required:** $K_1 > K_2 > 0$ **Recommended:** $K_1 / K_2 \in [1.2, 3.0]$ - **Ratio too small ($< 1.2$):** Slower convergence, chattering
+
 - **Ratio too large ($> 3.0$):** Aggressive control, potential overshoot #### Performance Trade-offs **Increasing $K_1$:**
 - ✓ Faster convergence
 - ✓ Stronger disturbance rejection
@@ -197,7 +227,12 @@ print(f" Anti-windup active: {analysis['control_characteristics']['anti_windup_a
 | Implementation | Simple | Moderate (integral state) | **Recommendation:** Use STA for applications requiring:
 - Guaranteed finite-time convergence
 - Minimal chattering (e.g., mechanical systems)
-- Strong disturbance rejection --- ## Numerical Stability Algorithms ### IEEE 754 Floating-Point Considerations All numerical operations must account for: 1. **Machine epsilon:** $\epsilon_{\text{machine}} \approx 2.22 \times 10^{-16}$ (double precision)
+- Strong disturbance rejection
+
+---
+
+## Numerical Stability Algorithms ### IEEE 754 Floating-Point Considerations All numerical operations must account for: 1. **Machine epsilon:** $\epsilon_{\text{machine}} \approx 2.22 \times 10^{-16}$ (double precision)
+
 2. **Overflow threshold:** $\approx 1.79 \times 10^{308}$
 3. **Underflow threshold:** $\approx 2.23 \times 10^{-308}$
 4. **Subnormal numbers:** Gradual underflow region ### Safe Operations Library Located in `src/utils/numerical_stability/safe_operations.py`: #### 1. Safe Division **Problem:** Division by zero or near-zero denominators **Solution:** $$
@@ -211,6 +246,7 @@ from src.utils.numerical_stability import safe_divide # Control law with divisio
 error = state[0]
 velocity = state[1] # UNSAFE: division by zero if velocity = 0
 # control = error / velocity # SAFE: protected division
+
 control = safe_divide( error, velocity, epsilon=1e-12, # Minimum safe denominator fallback=0.0, # Value if velocity exactly zero warn=True # Issue warning for debugging
 )
 ``` **Epsilon Selection:** | Application | Recommended $\epsilon$ | Rationale |
@@ -226,6 +262,7 @@ squared_sum = x**2 + y**2 + z**2 # UNSAFE: if squared_sum slightly negative due 
 # norm = np.sqrt(squared_sum) # SAFE: clips to non-negative
 norm = safe_sqrt(squared_sum, min_value=1e-15)
 ``` #### 3. Safe Exponential **Problem:** Overflow for large exponents **Solution:** $$
+
 \text{safe\_exp}(x, x_{\max}) = \exp(\min(x, x_{\max}))
 $$ Default: $x_{\max} = 700$ (safe for double precision) **Usage in Control:** ```python
 from src.utils.numerical_stability import safe_exp # Exponential barrier function
@@ -239,10 +276,16 @@ gradient = compute_gradient(params) # UNSAFE: if gradient is exactly zero
 step_direction = safe_normalize( gradient, min_norm=1e-15, fallback=np.zeros_like(gradient)
 )
 ``` ### Adaptive Regularization For ill-conditioned matrix operations: $$
+
 \mathbf{M}_{\text{reg}} = \mathbf{M} + \lambda \mathbf{I}
 $$ where $\lambda$ is adaptively chosen based on condition number: $$
 \lambda = \max(\epsilon_{\text{min}}, \alpha \cdot \kappa(\mathbf{M}) \cdot \epsilon_{\text{machine}})
-$$ **Reference:** See `docs/mathematical_foundations/numerical_integration_theory.md` for matrix conditioning details --- ## Algorithm Comparison Framework ### Benchmark Functions Standard test functions for optimization algorithm validation: #### 1. Sphere Function (Unimodal) $$
+$$ **Reference:** See `docs/mathematical_foundations/numerical_integration_theory.md` for matrix conditioning details
+
+---
+
+## Algorithm Comparison Framework ### Benchmark Functions Standard test functions for optimization algorithm validation: #### 1. Sphere Function (Unimodal) $$
+
 f(\mathbf{x}) = \sum_{i=1}^D x_i^2
 $$ - **Global minimum:** $f(\mathbf{0}) = 0$
 - **Bounds:** $x_i \in [-5.12, 5.12]$
@@ -274,9 +317,16 @@ $$ **Interpretation:**
 r = \frac{f(\mathbf{x}_0) - f(\mathbf{x}_T)}{T}
 $$ **2. Convergence Speed:** Iterations to reach 90% of final improvement **3. Success Rate:** Fraction of runs achieving $f(\mathbf{x}_{\text{final}}) < \epsilon_{\text{tol}}$ **4. Stability Metric:** $$
 \text{Stability} = \frac{1}{1 + \text{Var}(f(\mathbf{x}_{T-k:T}))}
-$$ where variance is computed over the last $k$ iterations. --- ## Performance Optimization Techniques ### Vectorization Strategies **Key principle:** Minimize Python loops, maximize NumPy operations #### Batch Simulation Example ```python
+$$ where variance is computed over the last $k$ iterations.
+
+---
+
+## Performance Optimization Techniques ### Vectorization Strategies **Key principle:** Minimize Python loops, maximize NumPy operations #### Batch Simulation Example ```python
+
 # example-metadata:
+
 # runnable: false # SLOW: Sequential simulation (Python loop)
+
 def sequential_evaluation(particles, controller_factory): costs = [] for gains in particles: controller = controller_factory(gains) cost = simulate(controller, T, dt) costs.append(cost) return np.array(costs) # FAST: Vectorized simulation (NumPy operations)
 def vectorized_evaluation(particles, controller_factory): # Single call for entire batch t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=controller_factory, particles=particles, # Shape: (N, D) sim_time=T, dt=dt ) # Vectorized cost computation costs = compute_costs_batch(t, x_batch, u_batch, sigma_batch) return costs # Shape: (N,) # Speedup: ~20-30x for N=30 particles
 ``` ### Numba Just-In-Time Compilation For inner loops that cannot be vectorized: ```python
@@ -284,24 +334,34 @@ import numba @numba.jit(nopython=True, cache=True)
 def fast_dynamics_update(state, control, dt, params): """Compiled dynamics integration.""" # Pure NumPy operations, no Python objects M = compute_mass_matrix(state, params) C = compute_coriolis(state, params) G = compute_gravity(state, params) # Solve: M * qdd = tau - C * qd - G qdd = np.linalg.solve(M, control - C @ state[3:] - G) return state + dt * np.concatenate([state[3:], qdd]) # First call: ~100 ms (compilation overhead)
 # Subsequent calls: ~0.1 ms (compiled code)
 ``` **Speedup:** ~100-1000x for tight numerical loops ### Memory Management **Problem:** PSO creates thousands of controller instances **Solution:** Object pooling and explicit cleanup ```python
+
 from src.controllers.smc import ClassicalSMC # Create controller pool
 pool_size = 100
 controller_pool = [ ClassicalSMC(gains=default_gains, max_force=100, boundary_layer=0.01) for _ in range(pool_size)
 ] # Reuse controllers (update gains instead of creating new instances)
 for iteration in range(pso_iterations): for i, gains in enumerate(swarm_positions): controller = controller_pool[i % pool_size] controller.set_gains(gains) # Update in-place cost = evaluate(controller) # Explicit cleanup after optimization
 for controller in controller_pool: controller.cleanup()
-``` **Memory savings:** ~90% reduction vs creating new instances --- ## Advanced Topics ### Multi-Objective Optimization For problems with conflicting objectives: $$
+``` **Memory savings:** ~90% reduction vs creating new instances
+
+---
+
+## Advanced Topics ### Multi-Objective Optimization For problems with conflicting objectives: $$
 \min_{\mathbf{x}} \mathbf{f}(\mathbf{x}) = [f_1(\mathbf{x}), f_2(\mathbf{x}), \ldots, f_m(\mathbf{x})]
 $$ **Pareto dominance:** $\mathbf{x}_a$ dominates $\mathbf{x}_b$ if: $$
 \forall i: f_i(\mathbf{x}_a) \leq f_i(\mathbf{x}_b) \quad \land \quad \exists j: f_j(\mathbf{x}_a) < f_j(\mathbf{x}_b)
 $$ **Reference:** See `tests/test_optimization/test_algorithm_comparison.py` for multi-objective benchmarks (ZDT1, DTLZ2) ### Constraint Handling For optimization with constraints $g_i(\mathbf{x}) \leq 0$: **Penalty method:** $$
 f_{\text{penalized}}(\mathbf{x}) = f(\mathbf{x}) + \sum_{i=1}^m r_i \cdot \max(0, g_i(\mathbf{x}))^2
 $$ **Death penalty:** $f_{\text{penalized}}(\mathbf{x}) = \infty$ if any constraint violated ### Hybrid Algorithms Combining PSO with local search: 1. **Global phase:** PSO exploration (50 iterations)
-2. **Local phase:** Gradient descent from best PSO solution (refinement) **Reference:** `src/optimization/algorithms/pso_optimizer.py:632` for optimization hooks --- ## Best Practices ### 1. Reproducibility **Always specify seeds:** ```python
+2. **Local phase:** Gradient descent from best PSO solution (refinement) **Reference:** `src/optimization/algorithms/pso_optimizer.py:632` for optimization hooks
+
+---
+
+## Best Practices ### 1. Reproducibility **Always specify seeds:** ```python
 # Set global seed in config
 config.global_seed = 42 # PSO tuner uses this seed automatically
 tuner = PSOTuner(controller_factory, config, seed=42) # Results are now fully reproducible
 ``` ### 2. Numerical Stability **Use safe operations for all divisions:** ```python
+
 from src.utils.numerical_stability import safe_divide, safe_sqrt, safe_exp # Protect all potentially unstable operations
 result = safe_divide(numerator, denominator, epsilon=1e-12)
 norm = safe_sqrt(squared_sum, min_value=1e-15)
@@ -311,6 +371,7 @@ exponential = safe_exp(large_value, max_value=700.0)
 pytest tests/test_optimization/test_algorithm_comparison.py -v # Check statistical significance
 pytest tests/test_optimization/test_algorithm_comparison.py::TestAlgorithmComparison::test_statistical_significance_testing -v
 ``` ### 4. Performance Profiling **Measure optimization efficiency:** ```python
+
 import time start = time.time()
 result = tuner.optimise(iters_override=100, n_particles_override=30)
 elapsed = time.time() - start evaluations = 100 * 30 # iters * particles
@@ -327,7 +388,15 @@ plt.title('PSO Convergence History')
 plt.grid(True, alpha=0.3)
 plt.show() # Check for premature convergence
 if np.std(result['history']['cost'][-20:]) < 1e-6: print("Warning: PSO may have converged prematurely")
-``` --- ## References 1. **PSO Theory:** - Kennedy & Eberhart (1995). "Particle Swarm Optimization" - Clerc & Kennedy (2002). "The particle swarm - explosion, stability, and convergence in a multidimensional complex space" 2. **Super-Twisting Algorithm:** - Levant (1993). "Sliding order and sliding accuracy in sliding mode control" - Moreno & Osorio (2008). "A Lyapunov approach to second-order sliding mode controllers and observers" 3. **Numerical Algorithms:** - Golub & Van Loan (2013). "Matrix Computations", 4th edition - Higham (2002). "Accuracy and Stability of Numerical Algorithms", 2nd edition 4. **Algorithm Comparison:** - Derrac et al. (2011). "A practical tutorial on the use of nonparametric statistical tests" - García et al. (2009). "A study on the use of non-parametric tests for analyzing the evolutionary algorithms' behaviour" --- **File Location:** `docs/mathematical_foundations/advanced_algorithms_guide.md`
+```
+
+---
+
+## References 1. **PSO Theory:** - Kennedy & Eberhart (1995). "Particle Swarm Optimization" - Clerc & Kennedy (2002). "The particle swarm - explosion, stability, and convergence in a multidimensional complex space" 2. **Super-Twisting Algorithm:** - Levant (1993). "Sliding order and sliding accuracy in sliding mode control" - Moreno & Osorio (2008). "A Lyapunov approach to second-order sliding mode controllers and observers" 3. **Numerical Algorithms:** - Golub & Van Loan (2013). "Matrix Computations", 4th edition - Higham (2002). "Accuracy and Stability of Numerical Algorithms", 2nd edition 4. **Algorithm Comparison:** - Derrac et al. (2011). "A practical tutorial on the use of nonparametric statistical tests" - García et al. (2009). "A study on the use of non-parametric tests for analyzing the evolutionary algorithms' behaviour"
+
+---
+
+**File Location:** `docs/mathematical_foundations/advanced_algorithms_guide.md`
 **Lines:** 721
 **Cross-references:**
 - PSO implementation: `src/optimization/algorithms/pso_optimizer.py`

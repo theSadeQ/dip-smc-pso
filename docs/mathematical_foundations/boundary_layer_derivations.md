@@ -153,6 +153,7 @@ The dead-band modifies the convergence analysis:
 ```latex
 \epsilon_{safe} = \max(\epsilon, \epsilon_{min})
 ```
+
 where `εₘᵢₙ` is a small positive constant (e.g., 1e-6).
 
 #### 6.2 Real-Time Implementation
@@ -178,6 +179,7 @@ where `εₘᵢₙ` is a small positive constant (e.g., 1e-6).
 ```latex
 \epsilon_0 = \alpha \cdot \frac{\text{expected disturbance}}{K}
 ```
+
 where α ∈ [0.1, 1.0] is a design parameter.
 
 #### 7.2 Tuning Guidelines

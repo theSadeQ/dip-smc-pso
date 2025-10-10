@@ -5,7 +5,7 @@
 **Purpose:** Regex-based extraction of formal mathematical claims from markdown documentation
 **Target Files:** `docs/**/*.md` (259 files)
 
----
+
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@
 7. [Pattern Validation](#pattern-validation)
 8. [Recommendations for Codebase Authors](#recommendations-for-codebase-authors)
 
----
+
 
 ## Overview
 
@@ -34,7 +34,7 @@
 
 **Rationale:** Formal claims exhibit consistent structural patterns in well-documented scientific codebases. By detecting these patterns, we can automatically identify claims without deep semantic understanding.
 
----
+
 
 ## Pattern 1: Numbered Theorems
 
@@ -103,7 +103,7 @@ is asymptotically stable if all $c_i > 0$.
 
 **Confidence Score:** 1.0 (numbered + cited + likely has proof)
 
----
+
 
 #### Example 2: Unnumbered Lemma
 
@@ -123,7 +123,7 @@ is asymptotically stable if all $c_i > 0$.
 
 **Confidence Score:** 0.5 (base confidence only)
 
----
+
 
 #### Example 3: Proposition with Title (No Citation)
 
@@ -145,7 +145,7 @@ Under switching control, the system state reaches $x = 0$ in finite time $T \leq
 
 **Confidence Score:** 0.7-0.9 (numbered, likely has proof/math block)
 
----
+
 
 ### Examples NOT Matched
 
@@ -159,7 +159,7 @@ Theorem 1: The system converges.
 **Status:** ❌ **Rejected**
 **Reason:** Missing `**` markdown bold markers (not a formatted theorem)
 
----
+
 
 #### Case 2: Lowercase Type
 
@@ -171,7 +171,7 @@ Theorem 1: The system converges.
 **Status:** ❌ **Rejected**
 **Reason:** Type must be capitalized (`Theorem` not `theorem`)
 
----
+
 
 #### Case 3: Invalid Citation Syntax
 
@@ -183,7 +183,7 @@ Theorem 1: The system converges.
 **Status:** ❌ **Rejected**
 **Reason:** Citation must use MyST syntax `{cite}\`key\`` (not `[cite:key]`)
 
----
+
 
 #### Case 4: Header-Style Theorem
 
@@ -195,7 +195,7 @@ Theorem 1: The system converges.
 **Status:** ❌ **Rejected**
 **Reason:** Header format not supported (must use `**Theorem 1**` bold syntax)
 
----
+
 
 ## Pattern 2: Proof Blocks
 
@@ -241,7 +241,7 @@ Where $\qed \in \{□, ∎, \text{QED}\}$ (standardized end-of-proof markers)
 - `proof`: `"By Lyapunov stability analysis, we have $\dot{V} < 0$ for all $x \neq 0$."`
 - `qed`: `"□"`
 
----
+
 
 #### Without Colon
 
@@ -254,7 +254,7 @@ Where $\qed \in \{□, ∎, \text{QED}\}$ (standardized end-of-proof markers)
 - `proof`: `"Trivial by construction."`
 - `qed`: `"∎"`
 
----
+
 
 #### Multi-Paragraph Proof
 
@@ -276,7 +276,7 @@ This yields $\dot{V} \leq -k|s| < 0$ for all $s \neq 0$, establishing asymptotic
 - `proof`: `"Consider the Lyapunov candidate ... establishing asymptotic stability."`
 - `qed`: `"QED"`
 
----
+
 
 ### Purpose
 
@@ -287,7 +287,7 @@ This yields $\dot{V} \leq -k|s| < 0$ for all $s \neq 0$, establishing asymptotic
 2. Check if immediately followed by proof (Pattern 2)
 3. If matched → increase theorem confidence from 0.7 to 0.8
 
----
+
 
 ## Pattern 3: Math Blocks
 
@@ -313,6 +313,7 @@ MATH_BLOCK_PATTERN = re.compile(
 The Lyapunov function:
 
 ```{math}
+
 V(x) = \frac{1}{2}s^T s
 ```
 
@@ -323,7 +324,7 @@ satisfies $\dot{V} < 0$ when $|s| > \delta$.
 - Math block detected: `True`
 - Confidence boost: +0.1
 
----
+
 
 ## Confidence Scoring Algorithm
 
@@ -372,7 +373,7 @@ Based on codebase analysis of DIP-SMC-PSO project:
 | **Medium (0.5-0.8)** | 35% | ~175 claims | Manual review (stratified sample) |
 | **Low (0.0-0.5)** | 5% | ~25 claims | Exclude or deep verification |
 
----
+
 
 ## Performance Analysis
 
@@ -400,7 +401,7 @@ Where:
 
 **Linear scaling:** Time grows linearly with corpus size.
 
----
+
 
 #### Space Complexity
 
@@ -422,7 +423,7 @@ S_{\text{total}} = O(c)
 $$
 Linear in claim count (negligible for <10,000 claims).
 
----
+
 
 ### Optimization Strategy
 
@@ -438,7 +439,7 @@ def extract_theorems(file_content):
 
 **Time:** $O(N \cdot L \cdot P)$ where $L$ = lines per file, $P$ = pattern compilation cost
 
----
+
 
 **✅ Good Practice (optimal):**
 ```python
@@ -462,7 +463,7 @@ class FormalClaimExtractor:
 
 **Performance Gain:** 3x speedup on 259-file corpus (measured: 4.2s → 1.4s)
 
----
+
 
 ### Benchmark Results
 
@@ -483,7 +484,7 @@ class FormalClaimExtractor:
 
 **Acceptance Criterion:** ✅ **PASS** (target: <2.0 seconds for formal extractor)
 
----
+
 
 ## Pattern Validation
 
@@ -496,6 +497,7 @@ class FormalClaimExtractor:
 For all initial conditions $x_0 \in \mathbb{R}^6$ satisfying $\|x_0\| < R$, the closed-loop system:
 
 ```{math}
+
 \dot{x} = Ax + Bu + d(t)
 ```
 
@@ -529,7 +531,7 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 - Math: +0.1
 - **Total:** 1.0
 
----
+
 
 ### Test Case 2: Minimal Lemma
 
@@ -559,7 +561,7 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 - Base: 0.5
 - **Total:** 0.5 (no structural enhancements)
 
----
+
 
 ### Test Case 3: Corollary with Proof (No Citation)
 
@@ -593,7 +595,7 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 - Proof: +0.1
 - **Total:** 0.8
 
----
+
 
 ### Test Case 4: False Positive Detection
 
@@ -609,7 +611,7 @@ None  # Not matched (type must be Theorem/Lemma/Proposition/Corollary)
 
 **Reason:** `"Note"` not in allowed claim types → pattern rejection.
 
----
+
 
 ## Recommendations for Codebase Authors
 
@@ -631,7 +633,7 @@ To maximize extraction accuracy and confidence scores, follow these documentatio
 
 **Impact:** +0.2 confidence (0.5 → 0.7)
 
----
+
 
 #### 2. Include Citations Using MyST Syntax
 
@@ -647,7 +649,7 @@ To maximize extraction accuracy and confidence scores, follow these documentatio
 
 **Impact:** +0.2 confidence (0.7 → 0.9)
 
----
+
 
 #### 3. Provide Proofs with QED Symbols
 
@@ -663,7 +665,7 @@ Proof: By induction.  # No QED marker
 
 **Impact:** +0.1 confidence (0.9 → 1.0)
 
----
+
 
 #### 4. Use Math Blocks for Equations
 
@@ -674,6 +676,7 @@ Proof: By induction.  # No QED marker
 The control law:
 
 ```{math}
+
 u(t) = -k \cdot \text{sign}(s(t))
 ```
 
@@ -687,7 +690,7 @@ ensures stability.
 
 **Impact:** +0.1 confidence (better for LaTeX rendering + extraction)
 
----
+
 
 #### 5. Use Section Headers for Context
 
@@ -705,7 +708,7 @@ ensures stability.
 
 **Impact:** Helps with claim categorization and priority assignment.
 
----
+
 
 ### Example: Optimal Documentation Structure
 
@@ -717,6 +720,7 @@ ensures stability.
 Consider the closed-loop system with Lyapunov function:
 
 ```{math}
+
 V(x) = \frac{1}{2}x^T P x
 ```
 
@@ -730,7 +734,7 @@ where $P \succ 0$. If $\dot{V}(x) \leq -\alpha V(x)$ for all $x \neq 0$ and some
 - **Priority:** CRITICAL (stability theorem)
 - **Auto-validation:** Eligible for Phase 2 research (high confidence)
 
----
+
 
 ## Summary
 
@@ -756,7 +760,7 @@ where $P \succ 0$. If $\dot{V}(x) \leq -\alpha V(x)$ for all $x \neq 0$ and some
 - **Recall:** ≥95% (ground truth validation)
 - **High Confidence Claims:** ~60% (auto-validation eligible)
 
----
+
 
 **Next Steps:**
 1. Run formal extractor on full corpus: `python scripts/extract_formal_claims.py`

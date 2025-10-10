@@ -5,7 +5,7 @@
 **Status:** Research-Grade Mathematical Proof with Computational Validation
 **Version:** 1.0
 
----
+
 
 ## Executive Summary
 
@@ -17,7 +17,7 @@ This document provides rigorous Lyapunov stability analysis for the double inver
 - **Robustness:** Quantitative bounds derived for parametric uncertainty
 - **Computational Validation:** All eigenvalue and convergence claims verified
 
----
+
 
 ## 1. System Dynamics
 
@@ -149,7 +149,7 @@ def validate_mass_matrix_properties():
 
 **Validation Script:** `docs/theory/validation_scripts/validate_mass_matrix.py`
 
----
+
 
 ## 2. Sliding Surface Design
 
@@ -264,7 +264,7 @@ def design_sliding_surface(lambda1, lambda2, k1, k2):
 # Expected: stable=True, stability_margin > 0
 ```
 
----
+
 
 ## 3. Lyapunov Function for Classical SMC
 
@@ -339,7 +339,7 @@ where:
 
 $$\text{sat}(x) = \begin{cases} \tanh(x) & \text{(smooth)} \\ \text{clip}(x, -1, 1) & \text{(linear)} \end{cases}$$
 
----
+
 
 ## 4. Stability Proof for Classical SMC
 
@@ -454,7 +454,7 @@ def validate_reaching_time_bound(s0, eta, D_max, L, M_inv, B):
 # Expected: valid_reaching_condition=True, t_r_bound < 1.0 second
 ```
 
----
+
 
 ## 5. Super-Twisting Algorithm Stability
 
@@ -555,7 +555,7 @@ def validate_super_twisting_gains(K1, K2, L, lambda_min):
 # Expected: all_stability_conditions_met=True
 ```
 
----
+
 
 ## 6. Adaptive SMC Stability
 
@@ -652,7 +652,7 @@ def simulate_adaptive_gain_evolution(s_trajectory, gamma, alpha, K_init, K_min, 
 # Expected: gain_bounded=True, K_final near K_init (convergence to nominal)
 ```
 
----
+
 
 ## 7. Unified Stability Summary
 
@@ -681,7 +681,7 @@ def simulate_adaptive_gain_evolution(s_trajectory, gamma, alpha, K_init, K_min, 
 - Choose $\gamma$ large for fast adaptation, but $< 1/\epsilon$ to avoid high-frequency chatter
 - Use leak rate $\alpha \approx 0.1\gamma$ to prevent unbounded growth
 
----
+
 
 ## 8. References
 
@@ -697,7 +697,7 @@ def simulate_adaptive_gain_evolution(s_trajectory, gamma, alpha, K_init, K_min, 
 
 6. **Slotine, J.-J. E., & Li, W.** (1991). *Applied Nonlinear Control*. Prentice Hall.
 
----
+
 
 ## 9. Computational Validation Summary
 
@@ -717,7 +717,7 @@ All theoretical claims have been validated using NumPy:
 - Adaptive SMC: `src/controllers/smc/adaptive_smc.py`
 - Dynamics: `src/plant/models/simplified/dynamics.py`
 
----
+
 
 **Document Status:** COMPLETE - Research-grade mathematical rigor with computational validation
 

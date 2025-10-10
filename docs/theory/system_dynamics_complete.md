@@ -1,10 +1,12 @@
 # Complete System Dynamics This section provides a derivation of the double-inverted pendulum dynamics from first principles, including the complete mathematical development, linearization analysis, and state-space representation. ## Physical System Description The double-inverted pendulum consists of a cart of mass $m_0$ moving horizontally along a track, with two pendulum links of masses $m_1$ and $m_2$ and lengths $l_1$ and $l_2$ respectively, connected in series as shown in {numref}`fig:dip_system`. ```{figure} ../visual/dip_system_diagram.png
+
 :name: fig:dip_system
 :width: 600px Double-inverted pendulum system with coordinate definitions.
 ``` ### Coordinate System and Generalized Coordinates The system is described using the following generalized coordinates: ```{math}
 :label: eq:generalized_coordinates
 \vec{q} = \begin{bmatrix} x \\ \theta_1 \\ \theta_2 \end{bmatrix}
 ``` where:
+
 - $x$ - horizontal position of the cart (m)
 - $\theta_1$ - angle of first pendulum from vertical (rad)
 - $\theta_2$ - angle of second pendulum from vertical (rad) The complete state vector includes both positions and velocities: ```{math}
@@ -12,48 +14,59 @@
 \vec{x} = \begin{bmatrix} \vec{q} \\ \dot{\vec{q}} \end{bmatrix} = \begin{bmatrix} x \\ \theta_1 \\ \theta_2 \\ \dot{x} \\ \dot{\theta_1} \\ \dot{\theta_2} \end{bmatrix} \in \mathbb{R}^6
 ``` ### Position Vectors The position vectors for each component are derived using forward kinematics: **Cart position:**
 ```{math}
+
 :label: eq:cart_position
 \vec{r}_0 = \begin{bmatrix} x \\ 0 \end{bmatrix}
 ``` **First pendulum center of mass:**
 ```{math}
+
 :label: eq:pend1_position
 \vec{r}_1 = \begin{bmatrix} x + \frac{l_1}{2}\sin\theta_1 \\ \frac{l_1}{2}\cos\theta_1 \end{bmatrix}
 ``` **Second pendulum center of mass:**
 ```{math}
+
 :label: eq:pend2_position
 \vec{r}_2 = \begin{bmatrix} x + l_1\sin\theta_1 + \frac{l_2}{2}\sin\theta_2 \\ l_1\cos\theta_1 + \frac{l_2}{2}\cos\theta_2 \end{bmatrix}
 ``` ### Velocity Analysis Taking time derivatives of the position vectors: **Cart velocity:**
 ```{math}
+
 :label: eq:cart_velocity
 \dot{\vec{r}}_0 = \begin{bmatrix} \dot{x} \\ 0 \end{bmatrix}
 ``` **First pendulum velocity:**
 ```{math}
+
 :label: eq:pend1_velocity
 \dot{\vec{r}}_1 = \begin{bmatrix} \dot{x} + \frac{l_1}{2}\cos\theta_1 \cdot \dot{\theta_1} \\ -\frac{l_1}{2}\sin\theta_1 \cdot \dot{\theta_1} \end{bmatrix}
 ``` **Second pendulum velocity:**
 ```{math}
+
 :label: eq:pend2_velocity
 \dot{\vec{r}}_2 = \begin{bmatrix} \dot{x} + l_1\cos\theta_1 \cdot \dot{\theta_1} + \frac{l_2}{2}\cos\theta_2 \cdot \dot{\theta_2} \\ -l_1\sin\theta_1 \cdot \dot{\theta_1} - \frac{l_2}{2}\sin\theta_2 \cdot \dot{\theta_2} \end{bmatrix}
 ``` ## Lagrangian Formulation ### Kinetic Energy The total kinetic energy includes translational and rotational components: ```{math}
 :label: eq:kinetic_energy_total
 T = T_0 + T_1 + T_2
 ``` **Cart kinetic energy:**
+
 ```{math}
 :label: eq:cart_kinetic
 T_0 = \frac{1}{2}m_0\dot{x}^2
 ``` **First pendulum kinetic energy:**
+
 ```{math}
 :label: eq:pend1_kinetic
 T_1 = \frac{1}{2}m_1\|\dot{\vec{r}}_1\|^2 + \frac{1}{2}I_1\dot{\theta_1}^2
 ``` Expanding the translational component:
+
 ```{math}
 :label: eq:pend1_kinetic_expanded
 \frac{1}{2}m_1\|\dot{\vec{r}}_1\|^2 = \frac{1}{2}m_1\left[\dot{x}^2 + l_1\dot{x}\cos\theta_1 \cdot \dot{\theta_1} + \frac{l_1^2}{4}\dot{\theta_1}^2\right]
 ``` **Second pendulum kinetic energy:**
+
 ```{math}
 :label: eq:pend2_kinetic
 T_2 = \frac{1}{2}m_2\|\dot{\vec{r}}_2\|^2 + \frac{1}{2}I_2\dot{\theta_2}^2
 ``` Expanding:
+
 ```{math}
 :label: eq:pend2_kinetic_expanded
 \begin{aligned}
@@ -62,12 +75,14 @@ T_2 = \frac{1}{2}m_2\|\dot{\vec{r}}_2\|^2 + \frac{1}{2}I_2\dot{\theta_2}^2
 &\left.+ \frac{l_2^2}{4}\dot{\theta_2}^2\right]
 \end{aligned}
 ``` ### Potential Energy The potential energy is due to gravity acting on the pendulum masses: ```{math}
+
 :label: eq:potential_energy
 V = m_1g\frac{l_1}{2}\cos\theta_1 + m_2g\left(l_1\cos\theta_1 + \frac{l_2}{2}\cos\theta_2\right)
 ``` ### Lagrangian The Lagrangian is defined as: ```{math}
 :label: eq:lagrangian
 L = T - V
 ``` Collecting all terms and defining:
+
 - $m_{total} = m_0 + m_1 + m_2$
 - $I_1 = \frac{1}{12}m_1l_1^2$ (moment of inertia about center of mass)
 - $I_2 = \frac{1}{12}m_2l_2^2$ The complete Lagrangian becomes: ```{math}
@@ -83,12 +98,14 @@ L = &\frac{1}{2}m_{total}\dot{x}^2 + \frac{1}{2}m_1\frac{l_1}{2}\dot{x}\cos\thet
 :label: eq:euler_lagrange
 \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) - \frac{\partial L}{\partial q_i} = Q_i
 ``` where $Q_i$ are the generalized forces. ### Force Analysis The only external force is the control force $u$ applied to the cart: ```{math}
+
 :label: eq:generalized_forces
 \vec{Q} = \begin{bmatrix} u \\ 0 \\ 0 \end{bmatrix}
 ``` ### Derivation of Mass Matrix After applying the Euler-Lagrange equations and collecting terms, the system can be written in the standard form: ```{math}
 :label: eq:mass_matrix_form
 \mat{M}(\vec{q})\ddot{\vec{q}} + \mat{C}(\vec{q},\dot{\vec{q}})\dot{\vec{q}} + \mat{G}(\vec{q}) = \mat{B}\vec{u}
 ``` The **inertia matrix** $\mat{M}(\vec{q})$ is: ```{math}
+
 :label: eq:inertia_matrix
 \mat{M}(\vec{q}) = \begin{bmatrix}
 m_{total} & m_1\frac{l_1}{2}c_1 + m_2(l_1c_1 + \frac{l_2}{2}c_{12}) & m_2\frac{l_2}{2}c_{12} \\
@@ -106,6 +123,7 @@ m_2\frac{l_2}{2}c_{12} & m_2l_1\frac{l_2}{2}c_2 & I_2 + m_2\frac{l_2^2}{4}
 0 & m_2l_1\frac{l_2}{2}s_2\dot{\theta_1} & 0
 \end{bmatrix}
 ``` ### Gravitational Forces The **gravitational force vector** $\mat{G}(\vec{q})$ is: ```{math}
+
 :label: eq:gravitational_forces
 \mat{G}(\vec{q}) = \begin{bmatrix}
 0 \\
@@ -116,6 +134,7 @@ m_2\frac{l_2}{2}c_{12} & m_2l_1\frac{l_2}{2}c_2 & I_2 + m_2\frac{l_2^2}{4}
 :label: eq:input_matrix
 \mat{B} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
 ``` ## State-Space Representation ### Nonlinear State-Space Form Solving for the acceleration vector: ```{math}
+
 :label: eq:acceleration_solution
 \ddot{\vec{q}} = \mat{M}^{-1}(\vec{q})[\mat{B}u - \mat{C}(\vec{q},\dot{\vec{q}})\dot{\vec{q}} - \mat{G}(\vec{q})]
 ``` The complete nonlinear state-space representation is: ```{math}
@@ -125,6 +144,7 @@ m_2\frac{l_2}{2}c_{12} & m_2l_1\frac{l_2}{2}c_2 & I_2 + m_2\frac{l_2^2}{4}
 \mat{M}^{-1}(\vec{q})[\mat{B}u - \mat{C}(\vec{q},\dot{\vec{q}})\dot{\vec{q}} - \mat{G}(\vec{q})]
 \end{bmatrix}
 ``` ### Linearization About Upright Equilibrium For control design, we linearize about the unstable upright equilibrium: ```{math}
+
 :label: eq:equilibrium_point
 \vec{x}_{eq} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}, \quad u_{eq} = 0
 ``` At this equilibrium:
@@ -138,6 +158,7 @@ m_1\frac{l_1}{2} + m_2(l_1 + \frac{l_2}{2}) & I_1 + m_1\frac{l_1^2}{4} + m_2l_1^
 m_2\frac{l_2}{2} & m_2l_1\frac{l_2}{2} & I_2 + m_2\frac{l_2^2}{4}
 \end{bmatrix}
 ``` The linearized gravitational force becomes: ```{math}
+
 :label: eq:linearized_gravity
 \mat{G}_{lin} = \begin{bmatrix}
 0 \\
@@ -148,6 +169,7 @@ m_2\frac{l_2}{2} & m_2l_1\frac{l_2}{2} & I_2 + m_2\frac{l_2^2}{4}
 :label: eq:linear_state_space
 \dot{\vec{x}} = \mat{A}\vec{x} + \mat{B}u
 ``` where: ```{math}
+
 :label: eq:linear_matrices
 \mat{A} = \begin{bmatrix}
 \mat{0}_{3 \times 3} & \mat{I}_{3 \times 3} \\
@@ -165,12 +187,14 @@ m_2\frac{l_2}{2} & m_2l_1\frac{l_2}{2} & I_2 + m_2\frac{l_2^2}{4}
 0 & m_2g\frac{l_2}{2} & m_2g\frac{l_2}{2}
 \end{bmatrix}
 ``` ## System Properties ### Controllability Analysis The system controllability can be verified by examining the controllability matrix: ```{math}
+
 :label: eq:controllability_matrix
 \mathcal{C} = \begin{bmatrix} \mat{B} & \mat{A}\mat{B} & \mat{A}^2\mat{B} & \cdots & \mat{A}^{n-1}\mat{B} \end{bmatrix}
 ``` For the double-inverted pendulum, $\text{rank}(\mathcal{C}) = 6$, confirming full controllability. ### Observability Analysis Assuming position measurements are available: ```{math}
 :label: eq:output_equation
 y = \mat{C}\vec{x} = \begin{bmatrix} 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 0 & 0 \end{bmatrix}\vec{x}
 ``` The observability matrix confirms full observability. ### Stability Analysis The linearized system has eigenvalues:
+
 - 2 stable poles (at origin for cart position)
 - 4 unstable poles (corresponding to inverted pendulum instability) This confirms the inherent instability requiring active control. ## Physical Parameter Values Typical parameter values for simulation and control design: ```{list-table} System Parameters
 :header-rows: 1
@@ -189,4 +213,8 @@ y = \mat{C}\vec{x} = \begin{bmatrix} 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 & 0 
 3. **Integration**: Use appropriate numerical integration schemes (Runge-Kutta) for nonlinear simulation ### Model Validation The derived model has been validated through:
 - Energy conservation in free motion
 - Comparison with commercial simulation software
-- Experimental validation on physical hardware ## References The derivation follows standard approaches in {cite}`dip_goldstein_2002_classical_mechanics` and {cite}`dip_spong_2006_robot_modeling_control`, with specific application to inverted pendulums as discussed in {cite}`dip_furuta_2003_swing_up_control` and {cite}`dip_boubaker_2013_double_inverted_pendulum_benchmark`. --- **Next Steps**: This complete dynamics model serves as the foundation for sliding mode controller design in {doc}`smc_theory_complete` and optimization in {doc}`pso_optimization_complete`.
+- Experimental validation on physical hardware ## References The derivation follows standard approaches in {cite}`dip_goldstein_2002_classical_mechanics` and {cite}`dip_spong_2006_robot_modeling_control`, with specific application to inverted pendulums as discussed in {cite}`dip_furuta_2003_swing_up_control` and {cite}`dip_boubaker_2013_double_inverted_pendulum_benchmark`.
+
+---
+
+**Next Steps**: This complete dynamics model serves as the foundation for sliding mode controller design in {doc}`smc_theory_complete` and optimization in {doc}`pso_optimization_complete`.

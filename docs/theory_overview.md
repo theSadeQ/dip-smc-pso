@@ -1,6 +1,7 @@
 ﻿# 1. Theoretical Background â€” Overview
 
 ## 1.1 Control Problem
+
 - **Plant:** the system is a **doubleâ€‘inverted pendulum on a cart**.  Two
   rigid pendulums of lengths $l_1$ and $l_2$ are mounted on a cart of mass
   $m_0$.  The cart moves horizontally on a track and exerts a force $F$
@@ -20,6 +21,7 @@
   (cart tracking) and fault handling (sensor dropout, actuator saturation). [CIT-071]
 
 ## 1.2 Targets
+
 - **Bandwidth:** $\omega_{\mathrm{bw}} = 3\,\text{rad/s}$ (approximate).
 - **Overshoot:** $M_p < 10\%$. [CIT-075]
 - **Settling time:** $t_s < 2\,\text{s}$ (to 2Â % of the reference). [CIT-075]
@@ -29,6 +31,7 @@
 > Keep SI units; define every symbol in `symbols.md`.
 
 ## 1.3 References
+
 - Papers, books and datasheets relevant to slidingâ€‘mode control,
   doubleâ€‘inverted pendulum dynamics and PSO tuning.  See the repository
   README for citations and further reading.

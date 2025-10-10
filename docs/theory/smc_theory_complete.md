@@ -8,6 +8,7 @@ Sliding Mode Control (SMC) is a robust control methodology that provides finite-
 ``` where $s(\vec{x}, t): \mathbb{R}^n \times \mathbb{R}^+ \rightarrow \mathbb{R}$ is the sliding function. ```{note}
 **Implementation Note**: The sliding surface calculation is implemented in {py:obj}`src.controllers.classic_smc.ClassicalSMC.compute_sliding_surface` using the equations defined above.
 ``` **Definition 2 (Sliding Mode)**: The system is said to be in sliding mode when:
+
 1. The trajectory reaches the sliding surface: $s(\vec{x}, t) = 0$
 2. The trajectory remains on the surface: $\dot{s}(\vec{x}, t) = 0$ ## Sliding Surface Design for DIP System ### Error Dynamics For the double-inverted pendulum system with reference trajectory $\vec{x}_r(t)$, we define the tracking error: ```{math}
 :label: eq:tracking_error
@@ -16,6 +17,7 @@ Sliding Mode Control (SMC) is a robust control methodology that provides finite-
 :label: eq:linear_sliding_surface
 s(\vec{x}, t) = \mat{S}\vec{e}(t) = \vec{c}^T\vec{e}_p + \dot{\vec{e}}_p
 ``` where:
+
 - $\vec{e}_p = [e_x, e_{\theta_1}, e_{\theta_2}]^T$ - position errors
 - $\dot{\vec{e}}_p = [\dot{e}_x, \dot{e}_{\theta_1}, \dot{e}_{\theta_2}]^T$ - velocity errors
 - $\vec{c} = [c_x, c_{\theta_1}, c_{\theta_2}]^T$ - sliding surface parameters The sliding surface matrix is defined in equation {eq}`eq:linear_sliding_surface` and implemented in {py:obj}`src.controllers.classic_smc.ClassicalSMC.sliding_surface_matrix`: ```{math}
@@ -25,6 +27,7 @@ s(\vec{x}, t) = \mat{S}\vec{e}(t) = \vec{c}^T\vec{e}_p + \dot{\vec{e}}_p
 :label: eq:sliding_surface_dynamics
 \dot{\vec{e}}_p + \mat{C}\vec{e}_p = 0
 ``` where $\mat{C} = \text{diag}(c_x, c_{\theta_1}, c_{\theta_2})$. **Theorem 1 (Surface Stability)**: If all sliding surface parameters $c_i > 0$, then the sliding surface dynamics are exponentially stable with convergence rates determined by $c_i$ {cite}`smc_bucak_2020_analysis_robotics,smc_edardar_2015_hysteresis_compensation,smc_farrell_2006_adaptive_approximation`. *Proof*: The characteristic polynomial of each error component is $s + c_i = 0$, yielding eigenvalues $\lambda_i = -c_i < 0$ for $c_i > 0$. □ ## Classical Sliding Mode Control ### Control Law Structure The classical SMC law consists of two components: ```{math}
+
 :label: eq:classical_smc_structure
 u(t) = u_{eq}(t) + u_{sw}(t)
 ``` where:
@@ -33,12 +36,14 @@ u(t) = u_{eq}(t) + u_{sw}(t)
 :label: eq:sliding_surface_derivative
 \dot{s} = \mat{S}\dot{\vec{e}} = \mat{S}[\vec{f}(\vec{x}) + \vec{g}(\vec{x})u - \dot{\vec{x}}_r]
 ``` Setting $\dot{s} = 0$ and solving for $u_{eq}$: ```{math}
+
 :label: eq:equivalent_control
 u_{eq} = (\mat{S}\vec{g}(\vec{x}))^{-1}[\dot{\vec{x}}_r - \mat{S}\vec{f}(\vec{x})]
 ``` **Assumption 1**: The matrix $\mat{S}\vec{g}(\vec{x})$ is invertible for all $\vec{x}$ in the domain of interest. ### Switching Control Design The switching control provides robustness against uncertainties and disturbances: ```{math}
 :label: eq:switching_control
 u_{sw} = -\eta \frac{s}{|s| + \epsilon}
 ``` where:
+
 - $\eta > 0$ - switching gain
 - $\epsilon > 0$ - boundary layer thickness (chattering reduction) ### Reaching Condition **Definition 3 (Reaching Condition)**: The system trajectory reaches the sliding surface in finite time if: ```{math}
 :label: eq:reaching_condition
@@ -47,6 +52,7 @@ s \cdot \dot{s} \leq -\alpha |s|
 :label: eq:reaching_time_bound
 t_{reach} \leq \frac{|s(0)|}{\alpha}
 ``` *Proof*: From the reaching condition:
+
 $$\frac{d}{dt}(|s|) = \text{sign}(s) \cdot \dot{s} \leq -\alpha$$ Integrating from $0$ to $t_{reach}$:
 $$|s(t_{reach})| - |s(0)| \leq -\alpha t_{reach}$$ Setting $|s(t_{reach})| = 0$ yields the bound. □ ## Lyapunov Stability Analysis ### Lyapunov Function Candidate For stability analysis, we consider the Lyapunov function: ```{math}
 :label: eq:lyapunov_candidate
@@ -55,14 +61,17 @@ V(s) = \frac{1}{2}s^2
 :label: eq:lyapunov_derivative
 \dot{V} = s \cdot \dot{s} = s[\mat{S}\vec{f}(\vec{x}) + \mat{S}\vec{g}(\vec{x})u - \mat{S}\dot{\vec{x}}_r]
 ``` Substituting the control law:
+
 ```{math}
 :label: eq:lyapunov_with_control
 \dot{V} = s[\mat{S}\vec{f}(\vec{x}) + \mat{S}\vec{g}(\vec{x})(u_{eq} + u_{sw}) - \mat{S}\dot{\vec{x}}_r]
 ``` With perfect equivalent control, the first and third terms cancel. The switching term yields:
+
 ```{math}
 :label: eq:lyapunov_switching_term
 \dot{V} = s \cdot \mat{S}\vec{g}(\vec{x}) \cdot (-\eta \frac{s}{|s| + \epsilon}) = -\eta \frac{s^2}{|s| + \epsilon} \leq -\eta \frac{|s|}{1 + \epsilon} < 0
 ``` This establishes finite-time convergence. □ ## Super-Twisting Algorithm ### Motivation for Higher-Order SMC Classical SMC suffers from chattering due to the discontinuous switching control. The super-twisting algorithm {cite}`smc_levant_2003_higher_order_smc` provides continuous control while maintaining finite-time convergence. ### Super-Twisting Control Law The super-twisting algorithm is a second-order sliding mode controller: ```{math}
+
 :label: eq:supertwisting_control
 \begin{aligned}
 u &= u_1 + u_2 \\
@@ -73,12 +82,14 @@ u_2 &= -\beta \text{sign}(s)
 :label: eq:supertwisting_conditions
 \alpha > \frac{2\sqrt{2\rho}}{\sqrt{\gamma}}, \quad \beta > \frac{\rho}{\gamma}
 ``` where $\rho$ is the uncertainty bound and $\gamma$ is the lower bound on the control effectiveness. *Proof*: The proof uses a strict Lyapunov function from {cite}`smc_moreno_2012_strict_lyapunov`: ```{math}
+
 :label: eq:supertwisting_lyapunov
 V = \zeta^T \mat{P} \zeta
 ``` where $\zeta = [|s|^{1/2}\text{sign}(s), \dot{s}]^T$ and $\mat{P}$ is a positive definite matrix. The detailed proof shows $\dot{V} < 0$ outside the origin. □ ## Adaptive Sliding Mode Control ### Parameter Uncertainty Model Consider the DIP system with parametric uncertainties: ```{math}
 :label: eq:uncertain_system
 \mat{M}(\vec{q}, \vec{\theta})\ddot{\vec{q}} + \mat{C}(\vec{q}, \dot{\vec{q}}, \vec{\theta})\dot{\vec{q}} + \mat{G}(\vec{q}, \vec{\theta}) = \mat{B}u + \vec{d}(t)
 ``` where:
+
 - $\vec{\theta}$ - unknown parameter vector
 - $\vec{d}(t)$ - external disturbances ### Linear Parameterization The system can be linearly parameterized as: ```{math}
 :label: eq:linear_parameterization
@@ -92,6 +103,7 @@ u_{sw} &= -\eta \text{sign}(s) \\
 \dot{\hat{\vec{\theta}}} &= -\Gamma \mat{Y}^T \mat{S}^T s
 \end{aligned}
 ``` where:
+
 - $\hat{\vec{\theta}}$ - parameter estimates
 - $\Gamma > 0$ - adaptation gain matrix ### Adaptive Stability Analysis **Theorem 5 (Adaptive SMC Stability)**: The adaptive control law {eq}`eq:adaptive_smc_law` ensures {cite}`smc_plestan_2010_adaptive_methodologies,smc_roy_2020_adaptive_unbounded`:
 1. Global boundedness of all signals
@@ -101,6 +113,7 @@ u_{sw} &= -\eta \text{sign}(s) \\
 V = \frac{1}{2}s^2 + \frac{1}{2}\tilde{\vec{\theta}}^T \Gamma^{-1} \tilde{\vec{\theta}}
 ``` where $\tilde{\vec{\theta}} = \vec{\theta} - \hat{\vec{\theta}}$ is the parameter error. The derivative becomes:
 ```{math}
+
 :label: eq:adaptive_lyapunov_derivative
 \dot{V} = s\dot{s} + \tilde{\vec{\theta}}^T \Gamma^{-1} \dot{\tilde{\vec{\theta}}} = -\eta |s| \leq 0
 ``` This establishes Lyapunov stability and convergence of $s(t)$ to zero. □ ## Chattering Analysis and Mitigation ### Chattering Phenomenon Chattering occurs due to:
@@ -110,6 +123,7 @@ V = \frac{1}{2}s^2 + \frac{1}{2}\tilde{\vec{\theta}}^T \Gamma^{-1} \tilde{\vec{\
 :label: eq:chattering_index
 \mathcal{I}_{chat} = \frac{1}{T} \int_0^T |\dot{u}(t)| dt
 ``` ### Boundary Layer Method Replace the discontinuous sign function with a continuous approximation: ```{math}
+
 :label: eq:boundary_layer
 \text{sign}(s) \rightarrow \text{sat}(s/\epsilon) = \begin{cases}
 s/\epsilon & \text{if } |s| \leq \epsilon \\
@@ -119,10 +133,12 @@ s/\epsilon & \text{if } |s| \leq \epsilon \\
 :label: eq:boundary_layer_bound
 \limsup_{t \rightarrow \infty} |\vec{e}(t)| \leq \frac{\epsilon}{\lambda_{\min}(\mat{C})}
 ``` where $\lambda_{\min}(\mat{C})$ is the minimum eigenvalue of the sliding surface parameter matrix. ## Implementation Considerations ### Digital Implementation For discrete-time implementation with sampling period $T_s$: ```{math}
+
 :label: eq:discrete_smc
 u[k] = u_{eq}[k] + u_{sw}[k]
 ``` where:
 ```{math}
+
 :label: eq:discrete_components
 \begin{aligned}
 u_{eq}[k] &= (\mat{S}\mat{B})^{-1}[\dot{\vec{x}}_r[k] - \mat{S}\vec{f}(\vec{x}[k])] \\
@@ -134,6 +150,7 @@ u_{sw}[k] &= -\eta \text{sat}(s[k]/\epsilon)
 * - Classical SMC - 1 matrix inversion (3×3) - 6 sin/cos evaluations - * - Super-Twisting - 1 matrix inversion (3×3) - 6 sin/cos evaluations - * - Adaptive SMC - 1 matrix inversion (3×3) - 6 sin/cos evaluations - Good
 * - Hybrid STA - 2 matrix inversions (3×3) - 6 sin/cos evaluations - Good
 ``` ## Performance Analysis ### Convergence Properties **Classical SMC**:
+
 - Finite-time convergence to sliding surface
 - Exponential convergence on sliding surface
 - Chattering in control signal **Super-Twisting**:

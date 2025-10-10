@@ -237,4 +237,3 @@ For a given DIP application, the choice among these controllers should consider 
 
 \[10\] S. Li and M. Hibi, “Positive definiteness via off‑diagonal scaling of a symmetric indefinite matrix,” *Applied Mathematics and Computation*, vol. 371, p. 124959, 2020.
 
-------------------------------------------------------------------------

@@ -1,4 +1,5 @@
 # Research Presentation Materials :::{note}
+
 **View Presentation Formats** These pages are adapted from research presentation slides for web documentation. **Options:**
 - 📖 **Web Version**: Browse chapters below (optimized for online reading)
 - 📄 **PDF Export**: Use your browser's Print → Save as PDF for offline reading

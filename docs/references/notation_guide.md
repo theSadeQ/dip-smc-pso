@@ -4,13 +4,13 @@
 **Purpose:** Ensure consistent notation across cited papers, documentation, and code
 **Last Updated:** 2025-10-09
 
----
+
 
 ## Overview
 
 This guide establishes the canonical mathematical notation used in the DIP-SMC-PSO project and maps it to Python code variables. It resolves notation conflicts between cited papers and provides a unified reference for developers and reviewers.
 
----
+
 
 ## Notation Conventions
 
@@ -21,7 +21,7 @@ This guide establishes the canonical mathematical notation used in the DIP-SMC-P
 3. **Italic Lowercase**: Scalars (e.g., $s$, $t$, $\eta$)
 4. **Greek Letters**: Parameters and special quantities (e.g., $\alpha$, $\beta$, $\epsilon$)
 
----
+
 
 ## State Variables
 
@@ -55,7 +55,7 @@ OMEGA1 = 4     # First pendulum angular velocity θ̇₁
 OMEGA2 = 5     # Second pendulum angular velocity θ̇₂
 ```
 
----
+
 
 ## System Dynamics Matrices
 
@@ -74,7 +74,7 @@ OMEGA2 = 5     # Second pendulum angular velocity θ̇₂
 \mat{M}(\vec{q})\ddot{\vec{q}} + \mat{C}(\vec{q}, \dot{\vec{q}})\dot{\vec{q}} + \mat{G}(\vec{q}) = \mat{B}u
 ```
 
----
+
 
 ## Sliding Mode Control Notation
 
@@ -121,7 +121,7 @@ def sliding_surface_matrix(self, c_params):
 u = u_{eq} + u_{sw} = u_{eq} - \eta \frac{s}{|s| + \epsilon}
 ```
 
----
+
 
 ## Super-Twisting Algorithm
 
@@ -147,7 +147,7 @@ u_2 &= -\beta \text{sign}(s)
 \alpha > \frac{2\sqrt{2\rho}}{\sqrt{\gamma}}, \quad \beta > \frac{\rho}{\gamma}
 ```
 
----
+
 
 ## Adaptive Control Notation
 
@@ -164,7 +164,7 @@ u_2 &= -\beta \text{sign}(s)
 \dot{\hat{\vec{\theta}}} = -\Gamma \mat{Y}^T \mat{S}^T s
 ```
 
----
+
 
 ## PSO Optimization Notation
 
@@ -211,7 +211,7 @@ position = position + velocity
 0 < \phi < 4, \quad w = \frac{2}{\phi - 2 + \sqrt{\phi^2 - 4\phi}}
 ```
 
----
+
 
 ## Lyapunov Stability Notation
 
@@ -226,7 +226,7 @@ position = position + velocity
 - $V(\vec{x}) > 0$ for all $\vec{x} \neq 0$ (positive definite)
 - $\dot{V}(\vec{x}) < 0$ for all $\vec{x} \neq 0$ (negative definite)
 
----
+
 
 ## Physical Parameters
 
@@ -242,7 +242,7 @@ position = position + velocity
 | $g$ | Gravitational acceleration | `g` | `9.81` | `m/s²` |
 | $b$ | Cart friction coefficient | `b` | `0.1` | `N·s/m` |
 
----
+
 
 ## Notation Conflicts & Resolutions
 
@@ -257,7 +257,7 @@ position = position + velocity
 
 **Rationale:** Avoids confusion with eigenvalues ($\lambda$) and other parameters ($\alpha$)
 
----
+
 
 ### Conflict 2: Switching Gain Notation
 
@@ -270,7 +270,7 @@ position = position + velocity
 
 **Rationale:** Reserves $k$ for discrete time steps, $K$ for gain matrices
 
----
+
 
 ### Conflict 3: PSO Inertia Weight
 
@@ -283,7 +283,7 @@ position = position + velocity
 
 **Rationale:** Standard in PySwarms and modern PSO implementations
 
----
+
 
 ## Code Variable Naming Conventions
 
@@ -306,7 +306,7 @@ u: float  # scalar control input
 theta_hat: np.ndarray  # shape (n_params,) - parameter estimates
 ```
 
----
+
 
 ## LaTeX Rendering in Documentation
 
@@ -323,11 +323,12 @@ $$
 
 <!-- Labeled equations -->
 ```{math}
+
 :label: eq:sliding_surface
 s = \vec{c}^T\vec{e}_p + \dot{\vec{e}}_p
 ```
 
----
+
 
 ## Cross-Reference Table
 
@@ -344,7 +345,7 @@ s = \vec{c}^T\vec{e}_p + \dot{\vec{e}}_p
 | $\vec{p}_i$ | `pbest` | PSO personal best |
 | $w$ | `w` | PSO inertia weight |
 
----
+
 
 ## References
 
@@ -354,12 +355,12 @@ Primary sources for notation conventions:
 - Dynamics: {cite}`dip_goldstein_2002_classical_mechanics`, {cite}`dip_spong_2006_robot_modeling_control`
 - Stability: {cite}`khalil2002nonlinear`
 
----
+
 
 **Maintained By:** DIP-SMC-PSO Development Team
 **Review Frequency:** Before each major release or when new papers are cited
 
----
+
 
 **🤖 Generated with [Claude Code](https://claude.com/claude-code)**
 
