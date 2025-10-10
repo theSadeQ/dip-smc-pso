@@ -1,11 +1,32 @@
 ---
-description: Streamlit dashboard testing with Puppeteer server
-tags: [testing, streamlit, puppeteer, dashboard]
+description: Streamlit dashboard testing with Playwright/Puppeteer MCP servers
+tags: [testing, streamlit, playwright, puppeteer, dashboard, automation]
 ---
 
 # Streamlit Dashboard Testing
 
-I'll use the Puppeteer server to test your Streamlit dashboard.
+I'll use Playwright MCP server (recommended) or Puppeteer server to test your Streamlit dashboard.
+
+## MCP Server: Playwright ✅ Recommended
+
+**Installation:**
+```bash
+# Install Playwright browsers
+npm run playwright:install
+
+# Or directly
+npx playwright install
+```
+
+**Advantages:**
+- Modern browser automation (Chromium, Firefox, WebKit)
+- Better performance and reliability
+- Advanced features (screenshots, video recording, network interception)
+- Official MCP integration
+
+## MCP Server: Puppeteer (Legacy)
+
+Available as fallback if Playwright issues encountered.
 
 ## Available Tests
 
