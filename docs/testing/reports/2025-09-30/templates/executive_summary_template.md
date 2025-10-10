@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #===== docs/testing/pytest_reports/[DATE]/templates/executive_summary_template.md =======\\\
-#==========================================================================================\\\ # Executive Test Summary Report **Date**: [YYYY-MM-DD HH:MM]
+#==========================================================================================\\\
+
+# Executive Test Summary Report **Date**: [YYYY-MM-DD HH:MM]
 **Project**: Double Inverted Pendulum SMC PSO
 **Test Execution**: [Brief description of test scope]
 **Audience**: Executive Stakeholders, Project Management, Decision Makers

@@ -16,7 +16,7 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 
 ---
 
-### `ComponentType` **Inherits from:** `Enum` System component types for targeted assessment. #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+## `ComponentType` **Inherits from:** `Enum` System component types for targeted assessment. #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
 
 :language: python
 :pyobject: ComponentType

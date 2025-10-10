@@ -146,7 +146,7 @@ SIMULATION_DURATION=1.0
 
 ## Troubleshooting
 
-#### Tests Pass Locally but Fail in CI
+### Tests Pass Locally but Fail in CI
 
 1. Check Python version compatibility
 2. Verify all dependencies are in `requirements.txt`

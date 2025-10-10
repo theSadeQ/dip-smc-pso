@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #==================== docs/factory/troubleshooting_guide.md ========================\\\
-#==========================================================================================\\\ # Factory Troubleshooting and Diagnostics Guide
+#==========================================================================================\\\
+
+# Factory Troubleshooting and Diagnostics Guide
 ## GitHub Issue #6 Factory Integration Resolution ### Overview This troubleshooting guide addresses common issues, diagnostic procedures, and approaches for the enhanced controller factory system implemented in GitHub Issue #6 resolution. The guide is organized by symptom categories with systematic diagnostic workflows and validated solutions. ## Quick Diagnostic Checklist ### 🔍 **Immediate Health Check** Run this diagnostic script to quickly identify factory system status: ```python
 
 from src.controllers.factory import ( list_available_controllers, get_default_gains, create_controller

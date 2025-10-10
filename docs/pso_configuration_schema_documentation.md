@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================= docs/pso_configuration_schema_documentation.md ======================\\\
-#==========================================================================================\\\ # PSO Configuration Schema Documentation
+#==========================================================================================\\\
+
+# PSO Configuration Schema Documentation
 **Parameter Specification and Validation Framework** ## Executive Summary This document provides complete documentation for the PSO configuration schema, including parameter interdependencies, validation rules, and migration protocols. The schema ensures mathematical consistency, operational safety, and optimal performance across all supported SMC controller types. **Key Features:**
 - **Hierarchical Configuration**: Multi-level parameter organization with inheritance
 - **Controller-Specific Bounds**: Optimized parameter ranges for each SMC variant

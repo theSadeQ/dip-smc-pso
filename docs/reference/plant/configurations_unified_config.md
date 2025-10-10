@@ -16,7 +16,7 @@ and automatic configuration selection. ## Complete Source Code ```{literalinclud
 
 ---
 
-### `ConfigurationFactory` Factory for creating DIP configurations. Provides centralized creation and management of configurations
+## `ConfigurationFactory` Factory for creating DIP configurations. Provides centralized creation and management of configurations
 
 for different DIP model types with validation and consistency checking. #### Source Code ```{literalinclude} ../../../src/plant/configurations/unified_config.py
 :language: python

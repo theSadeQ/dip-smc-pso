@@ -17,7 +17,7 @@ including LDR monitoring, saturation tracking, and dynamics conditioning. ## Com
 
 ---
 
-### `SaturationMonitor` Monitor actuator saturation duty and rate-limit violations. Implements saturation monitoring as specified in Issue #1 resolution:
+## `SaturationMonitor` Monitor actuator saturation duty and rate-limit violations. Implements saturation monitoring as specified in Issue #1 resolution:
 
 - Alert when duty > 20-30% or rate hits > 1% beyond transient #### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
 :language: python

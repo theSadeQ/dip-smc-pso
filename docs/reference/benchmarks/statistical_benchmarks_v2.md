@@ -75,7 +75,7 @@ dict Mapping of metric names to scalar values. Each metric is averaged across th
 
 ---
 
-### `run_trials(controller_factory, cfg, n_trials, seed, randomise_physics, noise_std)` Run multiple simulations and return per‑trial metrics with confidence intervals. This function maintains exact compatibility with the original implementation
+## `run_trials(controller_factory, cfg, n_trials, seed, randomise_physics, noise_std)` Run multiple simulations and return per‑trial metrics with confidence intervals. This function maintains exact compatibility with the original implementation
 
 while using the new modular architecture under the hood. The function executes ``n_trials`` independent simulations of the
 double inverted pendulum under the supplied controller factory and

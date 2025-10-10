@@ -18,7 +18,7 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `AlertStatus` **Inherits from:** `Enum` Alert lifecycle status. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+## `AlertStatus` **Inherits from:** `Enum` Alert lifecycle status. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: AlertStatus

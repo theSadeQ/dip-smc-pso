@@ -498,7 +498,7 @@ q_ddot = np.linalg.solve(M, tau - C @ q_dot - G)
 
 ## Static Methods (Numba-Optimized)
 
-##### `_compute_inertia_matrix_numba(...) -> np.ndarray`
+### `_compute_inertia_matrix_numba(...) -> np.ndarray`
 
 JIT-compiled inertia matrix computation.
 
@@ -506,7 +506,7 @@ JIT-compiled inertia matrix computation.
 
 **Note:** Internal method, use `compute_inertia_matrix()` for public API.
 
-##### `_compute_coriolis_matrix_numba(...) -> np.ndarray`
+#### `_compute_coriolis_matrix_numba(...) -> np.ndarray`
 
 JIT-compiled Coriolis matrix computation.
 

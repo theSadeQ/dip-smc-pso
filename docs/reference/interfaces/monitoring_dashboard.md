@@ -18,7 +18,7 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `ChartConfig` Configuration for dashboard charts. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+## `ChartConfig` Configuration for dashboard charts. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 
 :language: python
 :pyobject: ChartConfig

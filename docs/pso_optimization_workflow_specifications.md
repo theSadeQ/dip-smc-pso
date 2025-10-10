@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================ docs/pso_optimization_workflow_specifications.md ======================\\\
-#==========================================================================================\\\ # PSO Optimization Workflow Specifications
+#==========================================================================================\\\
+
+# PSO Optimization Workflow Specifications
 **End-to-End Process Documentation and Validation Protocols** ## Executive Summary This document provides specifications for PSO optimization workflows within the Double-Inverted Pendulum Sliding Mode Control system. It covers the complete pipeline from configuration loading through result validation, including mathematical verification, performance monitoring, and quality assurance protocols. **Key Workflow Components:**
 - **Pre-Optimization Validation**: Configuration and bounds verification
 - **Optimization Execution**: PSO algorithm with real-time monitoring

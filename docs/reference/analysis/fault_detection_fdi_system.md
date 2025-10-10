@@ -70,7 +70,7 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 
 ---
 
-### `DetectionMethod` **Inherits from:** `Enum` Enumeration of detection methods. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
+## `DetectionMethod` **Inherits from:** `Enum` Enumeration of detection methods. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 
 :language: python
 :pyobject: DetectionMethod

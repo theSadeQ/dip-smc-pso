@@ -27,7 +27,7 @@ float ISE value averaged across batch dimension #### Source Code ```{literalincl
 
 ---
 
-### `compute_itae(t, x)` Compute Integral of Time-weighted Absolute Error (ITAE). The ITAE metric emphasizes errors that occur later in the trajectory:
+## `compute_itae(t, x)` Compute Integral of Time-weighted Absolute Error (ITAE). The ITAE metric emphasizes errors that occur later in the trajectory:
 
 ITAE = ∫₀ᵀ t·||x(t)||₁ dt This metric is particularly useful for evaluating settling behavior
 and penalizes persistent steady-state errors more heavily than

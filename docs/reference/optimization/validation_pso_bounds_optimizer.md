@@ -21,7 +21,7 @@ factory integration requirements. Features:
 
 ---
 
-### `ControllerBoundsSpec` Specification for controller parameter bounds. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+## `ControllerBoundsSpec` Specification for controller parameter bounds. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 
 :language: python
 :pyobject: ControllerBoundsSpec

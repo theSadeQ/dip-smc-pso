@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================== docs/pso_optimization_workflow_user_guide.md ====================\\\
-#==========================================================================================\\\ # PSO Optimization Workflow User Guide
+#==========================================================================================\\\
+
+# PSO Optimization Workflow User Guide
 **Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This user guide provides step-by-step instructions for using Particle Swarm Optimization (PSO) to optimize controller gains in the Double-Inverted Pendulum Sliding Mode Control system. The guide covers everything from basic optimization workflows to advanced uncertainty-aware tuning, ensuring users can effectively use the PSO integration system regardless of their expertise level. **Guide Scope:**
 - **Beginner**: Basic PSO optimization workflows with default settings
 - **Intermediate**: Custom parameter tuning and configuration optimization

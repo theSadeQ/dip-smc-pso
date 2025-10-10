@@ -24,7 +24,7 @@ SimulationEngine Configured simulation engine #### Source Code ```{literalinclud
 
 ---
 
-### `run_monte_carlo_analysis(simulation_fn, n_samples)` Run Monte Carlo analysis on simulation function. Parameters
+## `run_monte_carlo_analysis(simulation_fn, n_samples)` Run Monte Carlo analysis on simulation function. Parameters
 
 ----------
 simulation_fn : callable Simulation function to analyze

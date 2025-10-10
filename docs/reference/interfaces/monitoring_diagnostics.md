@@ -18,7 +18,7 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `DiagnosticCategory` **Inherits from:** `Enum` Categories of diagnostic checks. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+## `DiagnosticCategory` **Inherits from:** `Enum` Categories of diagnostic checks. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 
 :language: python
 :pyobject: DiagnosticCategory

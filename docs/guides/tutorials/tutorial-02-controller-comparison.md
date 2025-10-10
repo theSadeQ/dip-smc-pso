@@ -215,7 +215,7 @@ CLASSICAL SMC: ISE: 0.4523 ITAE: 1.2341 Settling Time: 3.18 s Peak Overshoot: 8.
 
 ---
 
-### 2.4 Chattering Analysis **What is Chattering?**
+## 2.4 Chattering Analysis **What is Chattering?**
 
 High-frequency oscillations in the control signal caused by imperfect sliding mode realization (discontinuous switching + finite sampling time). **Measure Chattering:**
 ```python

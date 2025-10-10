@@ -523,7 +523,7 @@ results = orchestrator.execute_parameter_sweep(param_grid)
 
 ---
 
-### 4.5 `RealTimeOrchestrator` **File:** `src/simulation/orchestrators/real_time.py` Real-time constraint enforcement for hardware-in-loop (HIL) applications. #### 4.5.1 Features - ✅ **Real-time timing** synchronized with wall clock
+## 4.5 `RealTimeOrchestrator` **File:** `src/simulation/orchestrators/real_time.py` Real-time constraint enforcement for hardware-in-loop (HIL) applications. #### 4.5.1 Features - ✅ **Real-time timing** synchronized with wall clock
 
 - ✅ **Deadline monitoring** with configurable tolerance
 - ✅ **Late execution detection** and logging

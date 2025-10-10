@@ -15,7 +15,7 @@ validation rules, and type-safe access patterns. ## Complete Source Code ```{lit
 
 ---
 
-### `canonicalize_controller_type(name)` Normalize and alias controller type names. Args: name: Controller type name to normalize Returns: Canonical controller type name Raises: ValueError: If name is not a string or is empty #### Source Code ```{literalinclude} ../../../src/controllers/factory/core/registry.py
+## `canonicalize_controller_type(name)` Normalize and alias controller type names. Args: name: Controller type name to normalize Returns: Canonical controller type name Raises: ValueError: If name is not a string or is empty #### Source Code ```{literalinclude} ../../../src/controllers/factory/core/registry.py
 
 :language: python
 :pyobject: canonicalize_controller_type

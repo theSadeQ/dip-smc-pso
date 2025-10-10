@@ -27,7 +27,7 @@ quality standards. Architecture:
 
 ---
 
-### `ControllerProtocol` **Inherits from:** `Protocol` Protocol defining the standard controller interface. #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
+## `ControllerProtocol` **Inherits from:** `Protocol` Protocol defining the standard controller interface. #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
 
 :language: python
 :pyobject: ControllerProtocol

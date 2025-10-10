@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================ docs/pso_troubleshooting_maintenance_manual.md ====================\\\
-#==========================================================================================\\\ # PSO Troubleshooting and Maintenance Manual
+#==========================================================================================\\\
+
+# PSO Troubleshooting and Maintenance Manual
 **Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This manual provides detailed troubleshooting procedures, maintenance guidelines, and diagnostic tools for the Particle Swarm Optimization (PSO) integration system within the Double-Inverted Pendulum Sliding Mode Control framework. The manual covers common issues, systematic debugging approaches, preventive maintenance, and performance optimization techniques to ensure reliable PSO operation. **Manual Scope:**
 - **Diagnostic Procedures**: Systematic issue identification and resolution
 - **Common Problems**: Frequently encountered issues with proven approaches - **Performance Optimization**: System tuning for optimal PSO performance

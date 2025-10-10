@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #============= docs/testing/pytest_reports/2025-09-30/executive/executive_summary.md ====\\\
-#==========================================================================================\\\ # Executive Test Summary Report **Date**: 2025-09-30 06:03
+#==========================================================================================\\\
+
+# Executive Test Summary Report **Date**: 2025-09-30 06:03
 **Project**: Double Inverted Pendulum SMC PSO
 **Test Execution**: System Validation
 **Audience**: Executive Stakeholders, Project Management, Decision Makers

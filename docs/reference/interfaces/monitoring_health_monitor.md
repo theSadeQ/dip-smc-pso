@@ -17,7 +17,7 @@ devices, and system services. ## Complete Source Code ```{literalinclude} ../../
 
 ---
 
-### `CheckResult` **Inherits from:** `Enum` Health check result enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/health_monitor.py
+## `CheckResult` **Inherits from:** `Enum` Health check result enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/health_monitor.py
 
 :language: python
 :pyobject: CheckResult

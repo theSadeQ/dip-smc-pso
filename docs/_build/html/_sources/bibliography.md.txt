@@ -6,11 +6,8 @@ Complete academic citations for all control theory, optimization theory, and mat
 
 All references organized by category, automatically generated from BibTeX files.
 
-```{bibliography}
-:all:
-```
-
-
+<!-- Complete bibliography section removed to prevent duplicate citations.
+     All citations are shown in their respective categories below. -->
 
 ## References by Category
 

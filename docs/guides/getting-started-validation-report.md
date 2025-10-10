@@ -124,7 +124,7 @@ the simulator is ensuring numerical stability.
 
 ---
 
-#### ✅ Controller Functionality **Status:** PASS
+### ✅ Controller Functionality **Status:** PASS
 
 **Test Command:** `python simulate.py --controller classical_smc --duration 2.0`
 **Result:** Simulation completed successfully (exit code 0)

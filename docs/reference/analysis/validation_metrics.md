@@ -118,7 +118,7 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-### `compute_performance_metrics(reference, actual)` Compute performance metrics comparing actual vs reference data. Args: reference: Reference/target data actual: Actual measured data Returns: Dictionary containing performance metrics #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+## `compute_performance_metrics(reference, actual)` Compute performance metrics comparing actual vs reference data. Args: reference: Reference/target data actual: Actual measured data Returns: Dictionary containing performance metrics #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_performance_metrics

@@ -15,7 +15,7 @@ mathematical correctness, physical realizability, and numerical stability. ## Co
 
 ---
 
-### `PhysicsParameterValidator` validator for physics parameters. Provides validation for common physics parameter types with
+## `PhysicsParameterValidator` validator for physics parameters. Provides validation for common physics parameter types with
 
 appropriate bounds checking and consistency verification. #### Source Code ```{literalinclude} ../../../src/plant/configurations/validation.py
 :language: python

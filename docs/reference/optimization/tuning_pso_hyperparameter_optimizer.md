@@ -22,7 +22,7 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 
 ---
 
-### `PSOParameterType` **Inherits from:** `Enum` Types of PSO parameters to optimize. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+## `PSOParameterType` **Inherits from:** `Enum` Types of PSO parameters to optimize. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 
 :language: python
 :pyobject: PSOParameterType

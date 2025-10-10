@@ -15,7 +15,7 @@ computing confidence intervals, and performing hypothesis testing. ## Complete S
 
 ---
 
-### `bootstrap_confidence_interval(data, statistic_func, confidence_level, n_bootstrap, random_seed)` Compute bootstrap confidence intervals. Args: data: Input data array statistic_func: Function to compute statistic (default: mean) confidence_level: Confidence level n_bootstrap: Number of bootstrap samples random_seed: Optional random seed Returns: Dictionary containing bootstrap confidence interval #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistics.py
+## `bootstrap_confidence_interval(data, statistic_func, confidence_level, n_bootstrap, random_seed)` Compute bootstrap confidence intervals. Args: data: Input data array statistic_func: Function to compute statistic (default: mean) confidence_level: Confidence level n_bootstrap: Number of bootstrap samples random_seed: Optional random seed Returns: Dictionary containing bootstrap confidence interval #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistics.py
 
 :language: python
 :pyobject: bootstrap_confidence_interval

@@ -63,7 +63,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\.dev_tools\claude-backup.p
 
 The Task Scheduler job `ClaudeCode-AutoBackup` runs **every 1 minute** automatically.
 
-#### Register Scheduled Task
+### Register Scheduled Task
 
 ```batch
 rem Delete existing task (if any)

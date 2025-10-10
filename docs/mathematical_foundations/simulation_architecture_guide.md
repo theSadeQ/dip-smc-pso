@@ -150,7 +150,7 @@ def simulate(
 
 **Key principle:** Output always includes initial state at index 0
 
-#### Usage Examples
+### Usage Examples
 
 **Scalar Simulation:**
 
@@ -290,7 +290,7 @@ x_next_lr = lowrank_step_fn(x, u, dt)
 
 High-level trajectory generation with controller integration.
 
-#### Signature
+### Signature
 
 ```python
 # example-metadata:
@@ -319,7 +319,7 @@ def run_simulation(
 3. **Latency Monitoring:** Switches to fallback if control computation exceeds `dt`
 4. **Graceful Degradation:** Truncates output on dynamics failure
 
-#### Usage Example
+### Usage Example
 
 ```python
 from src.simulation.engines.simulation_runner import run_simulation

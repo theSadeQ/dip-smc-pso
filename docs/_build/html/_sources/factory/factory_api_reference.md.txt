@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #==================== docs/factory/factory_api_reference.md ========================\\\
-#==========================================================================================\\\ # Factory API Reference
+#==========================================================================================\\\
+
+# Factory API Reference
 ## GitHub Issue #6 Enhanced Controller Factory System ### Overview This API reference documents the enhanced controller factory system implemented as part of GitHub Issue #6 resolution. The factory provides thread-safe, type-safe controller instantiation with advanced validation and PSO optimization support. ## Core Factory Functions ### `create_controller(controller_type, config=None, gains=None)` **Primary factory function for creating controller instances.** #### Signature
 
 ```python
