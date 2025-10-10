@@ -30,7 +30,10 @@ CATALOG_FILE = ARTIFACTS_DIR / 'extracted_examples.json'
 def load_examples() -> List[Dict[str, Any]]:
     """Load extracted code examples from catalog."""
     if not CATALOG_FILE.exists():
-        pytest.skip(f"Examples catalog not found: {CATALOG_FILE}")
+        pytest.skip(
+            f"Examples catalog not found: {CATALOG_FILE}",
+            allow_module_level=True
+        )
 
     with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
         examples = json.load(f)
@@ -236,7 +239,7 @@ def test_examples_coverage_adequate():
     assert runnable / total >= 0.50, \
         f"Too few runnable examples: {runnable}/{total} = {runnable/total:.1%} (expected ≥50%)"
 
-    print(f"\nCode Example Coverage:")
+    print("\nCode Example Coverage:")
     print(f"  Total examples: {total}")
     print(f"  Runnable: {runnable} ({runnable/total:.1%})")
     print(f"  Conceptual: {conceptual} ({conceptual/total:.1%})")
@@ -264,7 +267,7 @@ def test_examples_distributed_across_docs():
         f"Missing code examples in key sections: {missing}"
 
     # Print distribution
-    print(f"\nExample Distribution by Section:")
+    print("\nExample Distribution by Section:")
     for section, examples in sorted(sections.items(), key=lambda x: -len(x[1])):
         runnable_count = sum(1 for ex in examples if ex['is_runnable'])
         print(f"  {section}: {len(examples)} ({runnable_count} runnable)")
