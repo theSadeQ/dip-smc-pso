@@ -14,11 +14,11 @@ for mod in modules_to_reload:
         importlib.reload(sys.modules[mod])
 
 # Now import after reload
-import numpy as np
-from src.controllers.smc.sta_smc import SuperTwistingSMC
-from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
-from src.plant.models.simplified.config import SimplifiedDIPConfig
-from src.simulation.engines.vector_sim import simulate_system_batch
+import numpy as np  # noqa: E402
+from src.controllers.smc.sta_smc import SuperTwistingSMC  # noqa: E402
+from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics  # noqa: E402
+from src.plant.models.simplified.config import SimplifiedDIPConfig  # noqa: E402
+from src.simulation.engines.vector_sim import simulate_system_batch  # noqa: E402
 
 # Create dynamics
 config = SimplifiedDIPConfig.create_default()

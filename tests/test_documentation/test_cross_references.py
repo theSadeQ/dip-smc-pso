@@ -13,7 +13,6 @@ Usage:
 
 import json
 from pathlib import Path
-from typing import Dict, List, Any
 import pytest
 
 
@@ -44,7 +43,7 @@ def load_cross_reference_data():
 # Load data once at module level
 try:
     CROSS_REF_DB, BROKEN_LINKS, STATISTICS = load_cross_reference_data()
-except:
+except Exception:  # Catch pytest.skip or file errors
     CROSS_REF_DB = {'cross_references': {}, 'external_links': {}}
     BROKEN_LINKS = []
     STATISTICS = {}
@@ -126,7 +125,7 @@ def test_critical_docs_not_orphaned():
 
     if orphaned_critical:
         pytest.fail(
-            f"Critical documents are orphaned (no incoming links):\n" +
+            "Critical documents are orphaned (no incoming links):\n" +
             "\n".join(f"  - {doc}" for doc in orphaned_critical)
         )
 
@@ -215,23 +214,23 @@ def test_cross_reference_statistics_summary():
     print("Cross-Reference Statistics Summary")
     print("=" * 80)
 
-    print(f"\nDocumentation Coverage:")
+    print("\nDocumentation Coverage:")
     print(f"  Total documents: {stats.get('total_documents', 0)}")
     print(f"  Documents with links: {stats.get('documents_with_links', 0)} "
           f"({stats.get('documents_with_links', 0) / stats.get('total_documents', 1) * 100:.1f}%)")
 
-    print(f"\nLink Metrics:")
+    print("\nLink Metrics:")
     print(f"  Internal links: {stats.get('total_internal_links', 0)}")
     print(f"  External links: {stats.get('total_external_links', 0)}")
     print(f"  Link density: {stats.get('link_density', 0):.2f} links/document")
 
-    print(f"\nQuality Metrics:")
+    print("\nQuality Metrics:")
     print(f"  Broken links: {stats.get('broken_links', 0)} "
           f"({stats.get('broken_link_rate', 0) * 100:.1f}%)")
     print(f"  Orphaned documents: {stats.get('orphaned_documents', 0)}")
 
     if stats.get('most_linked_documents'):
-        print(f"\nTop 5 Most Referenced Documents:")
+        print("\nTop 5 Most Referenced Documents:")
         for item in stats['most_linked_documents'][:5]:
             print(f"  {item['doc']}: {item['incoming_links']} incoming links")
 
