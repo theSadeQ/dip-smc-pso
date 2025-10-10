@@ -6,6 +6,8 @@ This directory contains reusable, session-persistent debugging workflows using M
 
 ## Quick Start
 
+**[⚡ Quick Reference Guide](QUICK_REFERENCE.md)** - Fast lookup for common tasks and commands
+
 ### Available MCP Servers
 
 | Server | Purpose | Key Capabilities |
@@ -23,12 +25,11 @@ This directory contains reusable, session-persistent debugging workflows using M
 
 ### Workflows Available
 
-1. **[Complete Debugging Workflow](workflows/complete-debugging-workflow.md)** - Master 6-phase systematic debugging
-2. **[Code Quality Analysis](workflows/code-quality-analysis.md)** - RUFF + VULTURE code quality checks
-3. **[Streamlit Testing](workflows/streamlit-testing-workflow.md)** - Playwright browser automation
-4. **[Test Debugging](workflows/test-debugging-workflow.md)** - Pytest collection, execution, coverage
-5. **[Production Validation](workflows/production-validation-workflow.md)** - Readiness checks, dependencies, safety
-6. **[Performance Analysis](workflows/performance-analysis-workflow.md)** - Benchmarking, profiling, optimization
+1. **[Complete Debugging Workflow](workflows/complete-debugging-workflow.md)** - Master 6-phase systematic debugging (3 hours)
+2. **[Code Quality Analysis](workflows/code-quality-analysis.md)** - RUFF + VULTURE code quality checks (45 min)
+3. **[Streamlit Testing](workflows/streamlit-testing-workflow.md)** - Playwright browser automation (65 min)
+
+**Note:** Additional workflows (Test Debugging, Production Validation, Performance Analysis) are integrated within the Complete Debugging Workflow. Use that for comprehensive debugging or extract specific phases as needed.
 
 ## Usage Patterns
 
@@ -256,6 +257,8 @@ npx playwright --version
 
 ## References
 
+- **[Quick Reference Guide](QUICK_REFERENCE.md)** - Fast lookup for common tasks
+- **[MCP Server Capabilities](MCP_SERVER_CAPABILITIES_MATRIX.md)** - Complete server documentation
 - **MCP Documentation:** https://modelcontextprotocol.io/
 - **Playwright Docs:** https://playwright.dev/
 - **Project Repository:** https://github.com/theSadeQ/dip-smc-pso
