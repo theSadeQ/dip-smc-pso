@@ -2,15 +2,15 @@
 print("Starting imports...")
 
 print("1. Importing SuperTwistingSMC...")
-from src.controllers.smc.sta_smc import SuperTwistingSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC  # noqa: E402
 print("   Done")
 
 print("2. Importing SimplifiedDIPDynamics...")
-from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
+from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics  # noqa: E402
 print("   Done")
 
 print("3. Importing SimplifiedDIPConfig...")
-from src.plant.models.simplified.config import SimplifiedDIPConfig
+from src.plant.models.simplified.config import SimplifiedDIPConfig  # noqa: E402
 print("   Done")
 
 print("4. Creating config...")

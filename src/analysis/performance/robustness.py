@@ -476,9 +476,25 @@ class RobustnessAnalyzer(PerformanceAnalyzer):
         return (A_pert, B, C, D)
 
     def _simulate_perturbed_system(self, data: DataProtocol, perturbed_matrices: Tuple[np.ndarray, ...], **kwargs) -> Optional[DataProtocol]:
-        """Simulate system with perturbed parameters (placeholder)."""
-        # This would be implemented with actual simulation
-        # For now, return modified data as placeholder
+        """Simulate system with perturbed parameters (placeholder).
+
+        Args:
+            data: Nominal simulation data
+            perturbed_matrices: System matrices (A, B, C, D) with perturbations
+            **kwargs: Additional simulation parameters
+
+        Returns:
+            Perturbed simulation data (placeholder - currently returns nominal)
+
+        Note:
+            This is a placeholder implementation. In production, would:
+            1. Extract perturbed A, B, C, D matrices
+            2. Run simulation with perturbed dynamics
+            3. Return perturbed DataProtocol
+        """
+        # TODO: Implement actual perturbed simulation
+        # For now, acknowledge perturbed_matrices parameter to suppress warnings
+        _ = perturbed_matrices  # noqa: F841
         return data
 
     def _simulate_with_initial_conditions(self, data: DataProtocol, initial_conditions: np.ndarray, **kwargs) -> Optional[DataProtocol]:
