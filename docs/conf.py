@@ -50,6 +50,7 @@ exclude_patterns = [
     # 'examples/**',
     # 'factory/**',        # Re-included for testing - Step 2 of gradual re-inclusion
     'for_reviewers/**',  # TEMP: Re-exclude to isolate toctree issue
+    'optimization_simulation/**',  # TEMP: TOC generation issue
     # 'guides/**',
     # 'hil/**',
     # 'how-to/**',
@@ -256,10 +257,15 @@ latex_elements = {
 # Build configuration - strict mode for CI
 if os.environ.get('READTHEDOCS'):
     # Suppress some warnings on RTD
-    suppress_warnings = ['epub.unknown_project_files']
+    suppress_warnings = [
+        'epub.unknown_project_files',
+        'app.add_directive',  # Suppress deprecated extension warnings
+    ]
 else:
     # Strict mode for local development
-    suppress_warnings = []
+    suppress_warnings = [
+        'app.add_directive',  # Suppress deprecated extension warnings (sphinxcontrib.autoclassdiag)
+    ]
 
 # Redirects for moved pages (disabled while sphinx_reredirects extension is unavailable)
 # redirects = {

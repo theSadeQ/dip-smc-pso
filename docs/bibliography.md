@@ -19,7 +19,7 @@ All references organized by category, automatically generated from BibTeX files.
 Foundational and advanced SMC techniques including classical, super-twisting, adaptive, and hybrid controllers.
 
 ```{bibliography}
-:filter: key.startswith("smc_")
+:filter: key % "smc_"
 ```
 
 
@@ -29,7 +29,7 @@ Foundational and advanced SMC techniques including classical, super-twisting, ad
 Particle swarm optimization theory, convergence analysis, and parameter tuning methods.
 
 ```{bibliography}
-:filter: key.startswith("pso_")
+:filter: key % "pso_"
 ```
 
 
@@ -39,7 +39,7 @@ Particle swarm optimization theory, convergence analysis, and parameter tuning m
 Lyapunov stability, finite-time stability, and fixed-time stability analysis.
 
 ```{bibliography}
-:filter: "khalil" in key or "lyapunov" in key or "bhat" in key or "moulay" in key or "polyakov" in key or "vidyasagar" in key
+:filter: key % "khalil" or key % "lyapunov" or key % "bhat" or key % "moulay" or key % "polyakov" or key % "vidyasagar"
 ```
 
 
@@ -49,7 +49,7 @@ Lyapunov stability, finite-time stability, and fixed-time stability analysis.
 Model reference adaptive systems, robust adaptive laws, and parameter estimation.
 
 ```{bibliography}
-:filter: "astrom" in key or "ioannou" in key or "narendra" in key or "slotine_1986" in key or "plestan" in key or "pomet" in key
+:filter: key % "astrom" or key % "ioannou" or key % "narendra" or key % "slotine_1986" or key % "plestan" or key % "pomet"
 ```
 
 
@@ -59,7 +59,7 @@ Model reference adaptive systems, robust adaptive laws, and parameter estimation
 Threshold selection, hysteresis methods, and robust fault diagnosis techniques.
 
 ```{bibliography}
-:filter: "gertler" in key or "chen_1999" in key or "isermann" in key or "ding" in key
+:filter: key % "gertler" or key % "chen_1999" or key % "isermann" or key % "ding"
 ```
 
 
@@ -69,7 +69,7 @@ Threshold selection, hysteresis methods, and robust fault diagnosis techniques.
 Runge-Kutta integration, stiff ODE solvers, and numerical stability analysis.
 
 ```{bibliography}
-:filter: "press" in key or "hairer" in key or "butcher" in key or "ascher" in key
+:filter: key % "press" or key % "hairer" or key % "butcher" or key % "ascher"
 ```
 
 
@@ -79,7 +79,7 @@ Runge-Kutta integration, stiff ODE solvers, and numerical stability analysis.
 Python scientific computing libraries and numerical computation frameworks.
 
 ```{bibliography}
-:filter: key.startswith("soft_") or key.startswith("numpy") or key.startswith("scipy")
+:filter: key % "soft_" or key % "numpy" or key % "scipy"
 ```
 
 
